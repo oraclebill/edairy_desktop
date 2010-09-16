@@ -22,30 +22,30 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalId <em>Journal Id</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getReferenceNumber <em>Reference Number</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalDate <em>Journal Date</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getStatus <em>Status</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getDriver <em>Driver</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getVehicle <em>Vehicle</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getDriverTotal <em>Driver Total</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getRecordTotal <em>Record Total</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalEntries <em>Journal Entries</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#isSuspended <em>Suspended</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getEntryCount <em>Entry Count</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getSuspendedCount <em>Suspended Count</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getRejectedCount <em>Rejected Count</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalNumber <em>Journal Number</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getSession <em>Session</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getCollectionCenter <em>Collection Center</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getJournalId <em>Journal Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getReferenceNumber <em>Reference Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getJournalDate <em>Journal Date</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getStatus <em>Status</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getDriver <em>Driver</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getVehicle <em>Vehicle</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getDriverTotal <em>Driver Total</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getRecordTotal <em>Record Total</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getJournalEntries <em>Journal Entries</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#isSuspended <em>Suspended</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getEntryCount <em>Entry Count</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getSuspendedCount <em>Suspended Count</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getRejectedCount <em>Rejected Count</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getJournalNumber <em>Journal Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getSession <em>Session</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getCollectionCenter <em>Collection Center</em>}</li>
  * </ul>
  * </p>
  *
- * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage()
+ * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup()
  * @model
  * @generated
  */
-public interface CollectionJournalPage extends EObject {
+public interface CollectionGroup extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Journal Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -56,14 +56,14 @@ public interface CollectionJournalPage extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Journal Id</em>' attribute.
 	 * @see #setJournalId(Long)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_JournalId()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_JournalId()
 	 * @model id="true" dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID" required="true"
 	 * @generated
 	 */
 	Long getJournalId();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalId <em>Journal Id</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getJournalId <em>Journal Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Journal Id</em>' attribute.
@@ -83,7 +83,7 @@ public interface CollectionJournalPage extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Journal Entries</em>' containment reference list.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_JournalEntries()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_JournalEntries()
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getCollectionJournal
 	 * @model opposite="collectionJournal" containment="true"
 	 * @generated
@@ -100,14 +100,14 @@ public interface CollectionJournalPage extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Reference Number</em>' attribute.
 	 * @see #setReferenceNumber(String)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_ReferenceNumber()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_ReferenceNumber()
 	 * @model required="true"
 	 * @generated
 	 */
 	String getReferenceNumber();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getReferenceNumber <em>Reference Number</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getReferenceNumber <em>Reference Number</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Reference Number</em>' attribute.
@@ -126,14 +126,14 @@ public interface CollectionJournalPage extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Journal Date</em>' attribute.
 	 * @see #setJournalDate(Date)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_JournalDate()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_JournalDate()
 	 * @model required="true"
 	 * @generated
 	 */
 	Date getJournalDate();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalDate <em>Journal Date</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getJournalDate <em>Journal Date</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Journal Date</em>' attribute.
@@ -155,14 +155,14 @@ public interface CollectionJournalPage extends EObject {
 	 * @return the value of the '<em>Status</em>' attribute.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.JournalStatus
 	 * @see #setStatus(JournalStatus)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_Status()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_Status()
 	 * @model default="NEW" required="true"
 	 * @generated
 	 */
 	JournalStatus getStatus();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getStatus <em>Status</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getStatus <em>Status</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Status</em>' attribute.
@@ -182,14 +182,14 @@ public interface CollectionJournalPage extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Session</em>' reference.
 	 * @see #setSession(CollectionSession)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_Session()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_Session()
 	 * @model
 	 * @generated
 	 */
 	CollectionSession getSession();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getSession <em>Session</em>}' reference.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getSession <em>Session</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Session</em>' reference.
@@ -208,14 +208,14 @@ public interface CollectionJournalPage extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Collection Center</em>' reference.
 	 * @see #setCollectionCenter(DairyLocation)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_CollectionCenter()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_CollectionCenter()
 	 * @model
 	 * @generated
 	 */
 	DairyLocation getCollectionCenter();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getCollectionCenter <em>Collection Center</em>}' reference.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getCollectionCenter <em>Collection Center</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Collection Center</em>' reference.
@@ -234,14 +234,14 @@ public interface CollectionJournalPage extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Driver</em>' reference.
 	 * @see #setDriver(Employee)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_Driver()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_Driver()
 	 * @model required="true"
 	 * @generated
 	 */
 	Employee getDriver();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getDriver <em>Driver</em>}' reference.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getDriver <em>Driver</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Driver</em>' reference.
@@ -260,14 +260,14 @@ public interface CollectionJournalPage extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Vehicle</em>' reference.
 	 * @see #setVehicle(Vehicle)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_Vehicle()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_Vehicle()
 	 * @model
 	 * @generated
 	 */
 	Vehicle getVehicle();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getVehicle <em>Vehicle</em>}' reference.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getVehicle <em>Vehicle</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Vehicle</em>' reference.
@@ -286,14 +286,14 @@ public interface CollectionJournalPage extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Driver Total</em>' attribute.
 	 * @see #setDriverTotal(BigDecimal)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_DriverTotal()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_DriverTotal()
 	 * @model
 	 * @generated
 	 */
 	BigDecimal getDriverTotal();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getDriverTotal <em>Driver Total</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getDriverTotal <em>Driver Total</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Driver Total</em>' attribute.
@@ -313,14 +313,14 @@ public interface CollectionJournalPage extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Record Total</em>' attribute.
 	 * @see #setRecordTotal(BigDecimal)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_RecordTotal()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_RecordTotal()
 	 * @model default="0" derived="true"
 	 * @generated
 	 */
 	BigDecimal getRecordTotal();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getRecordTotal <em>Record Total</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getRecordTotal <em>Record Total</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Record Total</em>' attribute.
@@ -340,14 +340,14 @@ public interface CollectionJournalPage extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Suspended</em>' attribute.
 	 * @see #setSuspended(boolean)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_Suspended()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_Suspended()
 	 * @model default="false"
 	 * @generated
 	 */
 	boolean isSuspended();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#isSuspended <em>Suspended</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#isSuspended <em>Suspended</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Suspended</em>' attribute.
@@ -367,14 +367,14 @@ public interface CollectionJournalPage extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Entry Count</em>' attribute.
 	 * @see #setEntryCount(int)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_EntryCount()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_EntryCount()
 	 * @model default="0"
 	 * @generated
 	 */
 	int getEntryCount();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getEntryCount <em>Entry Count</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getEntryCount <em>Entry Count</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Entry Count</em>' attribute.
@@ -394,14 +394,14 @@ public interface CollectionJournalPage extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Suspended Count</em>' attribute.
 	 * @see #setSuspendedCount(int)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_SuspendedCount()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_SuspendedCount()
 	 * @model default="0"
 	 * @generated
 	 */
 	int getSuspendedCount();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getSuspendedCount <em>Suspended Count</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getSuspendedCount <em>Suspended Count</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Suspended Count</em>' attribute.
@@ -421,14 +421,14 @@ public interface CollectionJournalPage extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Rejected Count</em>' attribute.
 	 * @see #setRejectedCount(int)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_RejectedCount()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_RejectedCount()
 	 * @model default="0"
 	 * @generated
 	 */
 	int getRejectedCount();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getRejectedCount <em>Rejected Count</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getRejectedCount <em>Rejected Count</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Rejected Count</em>' attribute.
@@ -448,14 +448,14 @@ public interface CollectionJournalPage extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Journal Number</em>' attribute.
 	 * @see #setJournalNumber(String)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalPage_JournalNumber()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_JournalNumber()
 	 * @model default=""
 	 * @generated
 	 */
 	String getJournalNumber();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalNumber <em>Journal Number</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getJournalNumber <em>Journal Number</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Journal Number</em>' attribute.
@@ -464,4 +464,4 @@ public interface CollectionJournalPage extends EObject {
 	 */
 	void setJournalNumber(String value);
 
-} // CollectionJournalPage
+} // CollectionGroup

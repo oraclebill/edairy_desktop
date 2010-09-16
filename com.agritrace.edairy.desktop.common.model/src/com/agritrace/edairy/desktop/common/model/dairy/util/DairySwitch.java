@@ -126,9 +126,9 @@ public class DairySwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.COLLECTION_JOURNAL_PAGE: {
-				CollectionJournalPage collectionJournalPage = (CollectionJournalPage)theEObject;
-				T result = caseCollectionJournalPage(collectionJournalPage);
+			case DairyPackage.COLLECTION_GROUP: {
+				CollectionGroup collectionGroup = (CollectionGroup)theEObject;
+				T result = caseCollectionGroup(collectionGroup);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -321,17 +321,17 @@ public class DairySwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Collection Journal Page</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Collection Group</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Collection Journal Page</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Collection Group</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseCollectionJournalPage(CollectionJournalPage object) {
+	public T caseCollectionGroup(CollectionGroup object) {
 		return null;
 	}
 

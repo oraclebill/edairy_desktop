@@ -57,8 +57,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="ecore:EClass farm.ecore#//Farm"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="farmContainer" eType="ecore:EClass farm.ecore#//Container"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dairyContainer" eType="#//DairyContainer"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionJournal" eType="#//CollectionJournalPage"
-        eOpposite="#//CollectionJournalPage/journalEntries"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionJournal" eType="#//CollectionGroup"
+        eOpposite="#//CollectionGroup/journalEntries"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="rejected" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="rejectionReason" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="milkFatPercentage" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"
@@ -136,7 +136,7 @@
         eType="#//DairyFunction"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="containers" eType="#//DairyContainer"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CollectionJournalPage">
+  <eClassifiers xsi:type="ecore:EClass" name="CollectionGroup">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="journalId" lowerBound="1"
         eType="ecore:EDataType common.ecore#//UniqueID" iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="referenceNumber" lowerBound="1"
@@ -192,7 +192,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Trip">
     <eStructuralFeatures xsi:type="ecore:EReference" name="collections" lowerBound="1"
-        upperBound="-1" eType="#//CollectionJournalPage"/>
+        upperBound="-1" eType="#//CollectionGroup"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="deliveries" lowerBound="1"
         upperBound="-1" eType="#//DeliveryJournal"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="started" lowerBound="1"
@@ -255,7 +255,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="branchLocations" ordered="false"
         upperBound="-1" eType="#//DairyLocation" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="collectionJournals" ordered="false"
-        upperBound="-1" eType="#//CollectionJournalPage" containment="true" eKeys="#//CollectionJournalPage/referenceNumber"/>
+        upperBound="-1" eType="#//CollectionGroup" containment="true" eKeys="#//CollectionGroup/referenceNumber"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="deliveryJournals" ordered="false"
         upperBound="-1" eType="#//DeliveryJournal" containment="true" eKeys="#//DeliveryJournal/referenceNumber"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="suppliers" ordered="false"

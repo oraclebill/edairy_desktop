@@ -980,14 +980,14 @@ public interface DairyPackage extends EPackage {
 	int DAIRY_LOCATION_FEATURE_COUNT = 10;
 
 	/**
-	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl <em>Collection Journal Page</em>}' class.
+	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionGroupImpl <em>Collection Group</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getCollectionJournalPage()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionGroupImpl
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getCollectionGroup()
 	 * @generated
 	 */
-	int COLLECTION_JOURNAL_PAGE = 5;
+	int COLLECTION_GROUP = 5;
 
 	/**
 	 * The feature id for the '<em><b>Journal Id</b></em>' attribute.
@@ -996,7 +996,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__JOURNAL_ID = 0;
+	int COLLECTION_GROUP__JOURNAL_ID = 0;
 
 	/**
 	 * The feature id for the '<em><b>Reference Number</b></em>' attribute.
@@ -1005,7 +1005,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__REFERENCE_NUMBER = 1;
+	int COLLECTION_GROUP__REFERENCE_NUMBER = 1;
 
 	/**
 	 * The feature id for the '<em><b>Journal Date</b></em>' attribute.
@@ -1014,7 +1014,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__JOURNAL_DATE = 2;
+	int COLLECTION_GROUP__JOURNAL_DATE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -1023,7 +1023,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__STATUS = 3;
+	int COLLECTION_GROUP__STATUS = 3;
 
 	/**
 	 * The feature id for the '<em><b>Driver</b></em>' reference.
@@ -1032,7 +1032,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__DRIVER = 4;
+	int COLLECTION_GROUP__DRIVER = 4;
 
 	/**
 	 * The feature id for the '<em><b>Vehicle</b></em>' reference.
@@ -1041,7 +1041,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__VEHICLE = 5;
+	int COLLECTION_GROUP__VEHICLE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Driver Total</b></em>' attribute.
@@ -1050,7 +1050,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__DRIVER_TOTAL = 6;
+	int COLLECTION_GROUP__DRIVER_TOTAL = 6;
 
 	/**
 	 * The feature id for the '<em><b>Record Total</b></em>' attribute.
@@ -1059,7 +1059,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__RECORD_TOTAL = 7;
+	int COLLECTION_GROUP__RECORD_TOTAL = 7;
 
 	/**
 	 * The feature id for the '<em><b>Journal Entries</b></em>' containment reference list.
@@ -1068,7 +1068,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES = 8;
+	int COLLECTION_GROUP__JOURNAL_ENTRIES = 8;
 
 	/**
 	 * The feature id for the '<em><b>Suspended</b></em>' attribute.
@@ -1077,7 +1077,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__SUSPENDED = 9;
+	int COLLECTION_GROUP__SUSPENDED = 9;
 
 	/**
 	 * The feature id for the '<em><b>Entry Count</b></em>' attribute.
@@ -1086,7 +1086,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__ENTRY_COUNT = 10;
+	int COLLECTION_GROUP__ENTRY_COUNT = 10;
 
 	/**
 	 * The feature id for the '<em><b>Suspended Count</b></em>' attribute.
@@ -1095,7 +1095,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__SUSPENDED_COUNT = 11;
+	int COLLECTION_GROUP__SUSPENDED_COUNT = 11;
 
 	/**
 	 * The feature id for the '<em><b>Rejected Count</b></em>' attribute.
@@ -1104,7 +1104,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__REJECTED_COUNT = 12;
+	int COLLECTION_GROUP__REJECTED_COUNT = 12;
 
 	/**
 	 * The feature id for the '<em><b>Journal Number</b></em>' attribute.
@@ -1113,7 +1113,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__JOURNAL_NUMBER = 13;
+	int COLLECTION_GROUP__JOURNAL_NUMBER = 13;
 
 	/**
 	 * The feature id for the '<em><b>Session</b></em>' reference.
@@ -1122,7 +1122,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__SESSION = 14;
+	int COLLECTION_GROUP__SESSION = 14;
 
 	/**
 	 * The feature id for the '<em><b>Collection Center</b></em>' reference.
@@ -1131,16 +1131,16 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE__COLLECTION_CENTER = 15;
+	int COLLECTION_GROUP__COLLECTION_CENTER = 15;
 
 	/**
-	 * The number of structural features of the '<em>Collection Journal Page</em>' class.
+	 * The number of structural features of the '<em>Collection Group</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_PAGE_FEATURE_COUNT = 16;
+	int COLLECTION_GROUP_FEATURE_COUNT = 16;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl <em>Route</em>}' class.
@@ -3450,190 +3450,190 @@ public interface DairyPackage extends EPackage {
 	EReference getDairyLocation_Containers();
 
 	/**
-	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage <em>Collection Journal Page</em>}'.
+	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup <em>Collection Group</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Collection Journal Page</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage
+	 * @return the meta object for class '<em>Collection Group</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup
 	 * @generated
 	 */
-	EClass getCollectionJournalPage();
+	EClass getCollectionGroup();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalId <em>Journal Id</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getJournalId <em>Journal Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Journal Id</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalId()
-	 * @see #getCollectionJournalPage()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getJournalId()
+	 * @see #getCollectionGroup()
 	 * @generated
 	 */
-	EAttribute getCollectionJournalPage_JournalId();
+	EAttribute getCollectionGroup_JournalId();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalEntries <em>Journal Entries</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getJournalEntries <em>Journal Entries</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Journal Entries</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalEntries()
-	 * @see #getCollectionJournalPage()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getJournalEntries()
+	 * @see #getCollectionGroup()
 	 * @generated
 	 */
-	EReference getCollectionJournalPage_JournalEntries();
+	EReference getCollectionGroup_JournalEntries();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getReferenceNumber <em>Reference Number</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getReferenceNumber <em>Reference Number</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Reference Number</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getReferenceNumber()
-	 * @see #getCollectionJournalPage()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getReferenceNumber()
+	 * @see #getCollectionGroup()
 	 * @generated
 	 */
-	EAttribute getCollectionJournalPage_ReferenceNumber();
+	EAttribute getCollectionGroup_ReferenceNumber();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalDate <em>Journal Date</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getJournalDate <em>Journal Date</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Journal Date</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalDate()
-	 * @see #getCollectionJournalPage()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getJournalDate()
+	 * @see #getCollectionGroup()
 	 * @generated
 	 */
-	EAttribute getCollectionJournalPage_JournalDate();
+	EAttribute getCollectionGroup_JournalDate();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getStatus <em>Status</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getStatus <em>Status</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Status</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getStatus()
-	 * @see #getCollectionJournalPage()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getStatus()
+	 * @see #getCollectionGroup()
 	 * @generated
 	 */
-	EAttribute getCollectionJournalPage_Status();
+	EAttribute getCollectionGroup_Status();
 
 	/**
-	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getSession <em>Session</em>}'.
+	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getSession <em>Session</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Session</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getSession()
-	 * @see #getCollectionJournalPage()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getSession()
+	 * @see #getCollectionGroup()
 	 * @generated
 	 */
-	EReference getCollectionJournalPage_Session();
+	EReference getCollectionGroup_Session();
 
 	/**
-	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getCollectionCenter <em>Collection Center</em>}'.
+	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getCollectionCenter <em>Collection Center</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Collection Center</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getCollectionCenter()
-	 * @see #getCollectionJournalPage()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getCollectionCenter()
+	 * @see #getCollectionGroup()
 	 * @generated
 	 */
-	EReference getCollectionJournalPage_CollectionCenter();
+	EReference getCollectionGroup_CollectionCenter();
 
 	/**
-	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getDriver <em>Driver</em>}'.
+	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getDriver <em>Driver</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Driver</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getDriver()
-	 * @see #getCollectionJournalPage()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getDriver()
+	 * @see #getCollectionGroup()
 	 * @generated
 	 */
-	EReference getCollectionJournalPage_Driver();
+	EReference getCollectionGroup_Driver();
 
 	/**
-	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getVehicle <em>Vehicle</em>}'.
+	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getVehicle <em>Vehicle</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Vehicle</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getVehicle()
-	 * @see #getCollectionJournalPage()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getVehicle()
+	 * @see #getCollectionGroup()
 	 * @generated
 	 */
-	EReference getCollectionJournalPage_Vehicle();
+	EReference getCollectionGroup_Vehicle();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getDriverTotal <em>Driver Total</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getDriverTotal <em>Driver Total</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Driver Total</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getDriverTotal()
-	 * @see #getCollectionJournalPage()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getDriverTotal()
+	 * @see #getCollectionGroup()
 	 * @generated
 	 */
-	EAttribute getCollectionJournalPage_DriverTotal();
+	EAttribute getCollectionGroup_DriverTotal();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getRecordTotal <em>Record Total</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getRecordTotal <em>Record Total</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Record Total</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getRecordTotal()
-	 * @see #getCollectionJournalPage()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getRecordTotal()
+	 * @see #getCollectionGroup()
 	 * @generated
 	 */
-	EAttribute getCollectionJournalPage_RecordTotal();
+	EAttribute getCollectionGroup_RecordTotal();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#isSuspended <em>Suspended</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#isSuspended <em>Suspended</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Suspended</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#isSuspended()
-	 * @see #getCollectionJournalPage()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#isSuspended()
+	 * @see #getCollectionGroup()
 	 * @generated
 	 */
-	EAttribute getCollectionJournalPage_Suspended();
+	EAttribute getCollectionGroup_Suspended();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getEntryCount <em>Entry Count</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getEntryCount <em>Entry Count</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Entry Count</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getEntryCount()
-	 * @see #getCollectionJournalPage()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getEntryCount()
+	 * @see #getCollectionGroup()
 	 * @generated
 	 */
-	EAttribute getCollectionJournalPage_EntryCount();
+	EAttribute getCollectionGroup_EntryCount();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getSuspendedCount <em>Suspended Count</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getSuspendedCount <em>Suspended Count</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Suspended Count</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getSuspendedCount()
-	 * @see #getCollectionJournalPage()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getSuspendedCount()
+	 * @see #getCollectionGroup()
 	 * @generated
 	 */
-	EAttribute getCollectionJournalPage_SuspendedCount();
+	EAttribute getCollectionGroup_SuspendedCount();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getRejectedCount <em>Rejected Count</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getRejectedCount <em>Rejected Count</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Rejected Count</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getRejectedCount()
-	 * @see #getCollectionJournalPage()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getRejectedCount()
+	 * @see #getCollectionGroup()
 	 * @generated
 	 */
-	EAttribute getCollectionJournalPage_RejectedCount();
+	EAttribute getCollectionGroup_RejectedCount();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalNumber <em>Journal Number</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getJournalNumber <em>Journal Number</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Journal Number</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalNumber()
-	 * @see #getCollectionJournalPage()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getJournalNumber()
+	 * @see #getCollectionGroup()
 	 * @generated
 	 */
-	EAttribute getCollectionJournalPage_JournalNumber();
+	EAttribute getCollectionGroup_JournalNumber();
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.Route <em>Route</em>}'.
@@ -5534,14 +5534,14 @@ public interface DairyPackage extends EPackage {
 		EReference DAIRY_LOCATION__CONTAINERS = eINSTANCE.getDairyLocation_Containers();
 
 		/**
-		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl <em>Collection Journal Page</em>}' class.
+		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionGroupImpl <em>Collection Group</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl
-		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getCollectionJournalPage()
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionGroupImpl
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getCollectionGroup()
 		 * @generated
 		 */
-		EClass COLLECTION_JOURNAL_PAGE = eINSTANCE.getCollectionJournalPage();
+		EClass COLLECTION_GROUP = eINSTANCE.getCollectionGroup();
 
 		/**
 		 * The meta object literal for the '<em><b>Journal Id</b></em>' attribute feature.
@@ -5549,15 +5549,7 @@ public interface DairyPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute COLLECTION_JOURNAL_PAGE__JOURNAL_ID = eINSTANCE.getCollectionJournalPage_JournalId();
-
-		/**
-		 * The meta object literal for the '<em><b>Journal Entries</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES = eINSTANCE.getCollectionJournalPage_JournalEntries();
+		EAttribute COLLECTION_GROUP__JOURNAL_ID = eINSTANCE.getCollectionGroup_JournalId();
 
 		/**
 		 * The meta object literal for the '<em><b>Reference Number</b></em>' attribute feature.
@@ -5565,7 +5557,7 @@ public interface DairyPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute COLLECTION_JOURNAL_PAGE__REFERENCE_NUMBER = eINSTANCE.getCollectionJournalPage_ReferenceNumber();
+		EAttribute COLLECTION_GROUP__REFERENCE_NUMBER = eINSTANCE.getCollectionGroup_ReferenceNumber();
 
 		/**
 		 * The meta object literal for the '<em><b>Journal Date</b></em>' attribute feature.
@@ -5573,7 +5565,7 @@ public interface DairyPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute COLLECTION_JOURNAL_PAGE__JOURNAL_DATE = eINSTANCE.getCollectionJournalPage_JournalDate();
+		EAttribute COLLECTION_GROUP__JOURNAL_DATE = eINSTANCE.getCollectionGroup_JournalDate();
 
 		/**
 		 * The meta object literal for the '<em><b>Status</b></em>' attribute feature.
@@ -5581,23 +5573,7 @@ public interface DairyPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute COLLECTION_JOURNAL_PAGE__STATUS = eINSTANCE.getCollectionJournalPage_Status();
-
-		/**
-		 * The meta object literal for the '<em><b>Session</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COLLECTION_JOURNAL_PAGE__SESSION = eINSTANCE.getCollectionJournalPage_Session();
-
-		/**
-		 * The meta object literal for the '<em><b>Collection Center</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COLLECTION_JOURNAL_PAGE__COLLECTION_CENTER = eINSTANCE.getCollectionJournalPage_CollectionCenter();
+		EAttribute COLLECTION_GROUP__STATUS = eINSTANCE.getCollectionGroup_Status();
 
 		/**
 		 * The meta object literal for the '<em><b>Driver</b></em>' reference feature.
@@ -5605,7 +5581,7 @@ public interface DairyPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference COLLECTION_JOURNAL_PAGE__DRIVER = eINSTANCE.getCollectionJournalPage_Driver();
+		EReference COLLECTION_GROUP__DRIVER = eINSTANCE.getCollectionGroup_Driver();
 
 		/**
 		 * The meta object literal for the '<em><b>Vehicle</b></em>' reference feature.
@@ -5613,7 +5589,7 @@ public interface DairyPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference COLLECTION_JOURNAL_PAGE__VEHICLE = eINSTANCE.getCollectionJournalPage_Vehicle();
+		EReference COLLECTION_GROUP__VEHICLE = eINSTANCE.getCollectionGroup_Vehicle();
 
 		/**
 		 * The meta object literal for the '<em><b>Driver Total</b></em>' attribute feature.
@@ -5621,7 +5597,7 @@ public interface DairyPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute COLLECTION_JOURNAL_PAGE__DRIVER_TOTAL = eINSTANCE.getCollectionJournalPage_DriverTotal();
+		EAttribute COLLECTION_GROUP__DRIVER_TOTAL = eINSTANCE.getCollectionGroup_DriverTotal();
 
 		/**
 		 * The meta object literal for the '<em><b>Record Total</b></em>' attribute feature.
@@ -5629,7 +5605,15 @@ public interface DairyPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute COLLECTION_JOURNAL_PAGE__RECORD_TOTAL = eINSTANCE.getCollectionJournalPage_RecordTotal();
+		EAttribute COLLECTION_GROUP__RECORD_TOTAL = eINSTANCE.getCollectionGroup_RecordTotal();
+
+		/**
+		 * The meta object literal for the '<em><b>Journal Entries</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COLLECTION_GROUP__JOURNAL_ENTRIES = eINSTANCE.getCollectionGroup_JournalEntries();
 
 		/**
 		 * The meta object literal for the '<em><b>Suspended</b></em>' attribute feature.
@@ -5637,7 +5621,7 @@ public interface DairyPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute COLLECTION_JOURNAL_PAGE__SUSPENDED = eINSTANCE.getCollectionJournalPage_Suspended();
+		EAttribute COLLECTION_GROUP__SUSPENDED = eINSTANCE.getCollectionGroup_Suspended();
 
 		/**
 		 * The meta object literal for the '<em><b>Entry Count</b></em>' attribute feature.
@@ -5645,7 +5629,7 @@ public interface DairyPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute COLLECTION_JOURNAL_PAGE__ENTRY_COUNT = eINSTANCE.getCollectionJournalPage_EntryCount();
+		EAttribute COLLECTION_GROUP__ENTRY_COUNT = eINSTANCE.getCollectionGroup_EntryCount();
 
 		/**
 		 * The meta object literal for the '<em><b>Suspended Count</b></em>' attribute feature.
@@ -5653,7 +5637,7 @@ public interface DairyPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute COLLECTION_JOURNAL_PAGE__SUSPENDED_COUNT = eINSTANCE.getCollectionJournalPage_SuspendedCount();
+		EAttribute COLLECTION_GROUP__SUSPENDED_COUNT = eINSTANCE.getCollectionGroup_SuspendedCount();
 
 		/**
 		 * The meta object literal for the '<em><b>Rejected Count</b></em>' attribute feature.
@@ -5661,7 +5645,7 @@ public interface DairyPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute COLLECTION_JOURNAL_PAGE__REJECTED_COUNT = eINSTANCE.getCollectionJournalPage_RejectedCount();
+		EAttribute COLLECTION_GROUP__REJECTED_COUNT = eINSTANCE.getCollectionGroup_RejectedCount();
 
 		/**
 		 * The meta object literal for the '<em><b>Journal Number</b></em>' attribute feature.
@@ -5669,7 +5653,23 @@ public interface DairyPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute COLLECTION_JOURNAL_PAGE__JOURNAL_NUMBER = eINSTANCE.getCollectionJournalPage_JournalNumber();
+		EAttribute COLLECTION_GROUP__JOURNAL_NUMBER = eINSTANCE.getCollectionGroup_JournalNumber();
+
+		/**
+		 * The meta object literal for the '<em><b>Session</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COLLECTION_GROUP__SESSION = eINSTANCE.getCollectionGroup_Session();
+
+		/**
+		 * The meta object literal for the '<em><b>Collection Center</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COLLECTION_GROUP__COLLECTION_CENTER = eINSTANCE.getCollectionGroup_CollectionCenter();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl <em>Route</em>}' class.

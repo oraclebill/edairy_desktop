@@ -28,7 +28,7 @@ public class ScaleImportTool extends AbstractImportTool {
 			null, null, "given-name", "family-name" };
 
 	static final Entry[] fieldMap = { 
-//		new Entry(TRANSACTION_DATE , DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE ), 	// PAGE ATTR
+//		new Entry(TRANSACTION_DATE , DairyPackage.Literals.COLLECTION_GROUP__JOURNAL_DATE ), 	// PAGE ATTR
 		new Entry(TRANSACTION_TIME , DairyPackage.Literals.SCALE_IMPORT_RECORD__COLLECTION_TIME ),
 //		new Entry(DAIRY_CODE , DairyPackage.Literals.NO_MATCHING_ATTRIBUTE ),				// NO MATCHING ATTRIBUTE IN MODEL
 		new Entry(SCALE_SERIAL , DairyPackage.Literals.SCALE_IMPORT_RECORD__SCALE_SERIAL ),
@@ -40,7 +40,7 @@ public class ScaleImportTool extends AbstractImportTool {
 		new Entry(MEMBER_NUMBER , DairyPackage.Literals.COLLECTION_JOURNAL_LINE__RECORDED_MEMBER ),
 		new Entry(QUANTITY , DairyPackage.Literals.COLLECTION_JOURNAL_LINE__QUANTITY ),
 		new Entry(NUM_CANS , DairyPackage.Literals.SCALE_IMPORT_RECORD__NUM_CANS ),
-		new Entry(SCALE_TOTAL , DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__DRIVER_TOTAL ), // PAGE ATTR
+		new Entry(SCALE_TOTAL , DairyPackage.Literals.COLLECTION_GROUP__DRIVER_TOTAL ), // PAGE ATTR
 	};
 	
 	

@@ -425,7 +425,7 @@
 		<many-to-one name="dairyContainer" entity-name="DairyContainer" lazy="false" foreign-key="collectionjournalline_dairycontainer" insert="true" update="true" not-null="false">
 			<column not-null="false" unique="false" name="`dairycontainer_dairycontainer_containerid`"/>
 		</many-to-one>
-		<many-to-one name="collectionJournal" entity-name="CollectionJournalPage" lazy="false" foreign-key="collectionjournalline_collectionjournal" insert="false" update="false" not-null="false">
+		<many-to-one name="collectionJournal" entity-name="CollectionGroup" lazy="false" foreign-key="collectionjournalline_collectionjournal" insert="false" update="false" not-null="false">
 			<column not-null="false" unique="false" name="`collectionjournalline_collectionjournal_e_id`"/>
 		</many-to-one>
 		<property name="rejected" lazy="false" insert="true" update="true" not-null="false" unique="false" type="boolean">
@@ -531,15 +531,15 @@
 			<column not-null="false" unique="false" name="`dairycontainer_containers_containerid`"/>
 		</many-to-one>
 	</class>
-	<class name="com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalPageImpl" entity-name="CollectionJournalPage" abstract="false" lazy="false" discriminator-value="CollectionJournalPage" table="`collectionjournalpage`">
-		<meta attribute="eclassName">CollectionJournalPage</meta>
+	<class name="com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionGroupImpl" entity-name="CollectionGroup" abstract="false" lazy="false" discriminator-value="CollectionGroup" table="`CollectionGroup`">
+		<meta attribute="eclassName">CollectionGroup</meta>
 		<meta attribute="epackage">http://com.agritrace.edairy.desktop.common.model/dairy/</meta>
 		<id name="journalId" type="java.lang.Long">
 			<column not-null="true" unique="false" name="`journalid`"/>
 			<generator class="native"/>
 		</id>
 		<discriminator type="string">
-			<column name="dtype" index="collectionjournalpagedtype" length="255" not-null="true"/>
+			<column name="dtype" index="CollectionGroupdtype" length="255" not-null="true"/>
 		</discriminator>
 		<version name="e_version" column="e_version" access="org.eclipse.emf.teneo.hibernate.mapping.property.VersionPropertyHandler">
 			<meta attribute="syntheticVersion">true</meta>
@@ -548,7 +548,7 @@
 			<key update="true">
 				<column name="`collectionjournalline_collectionjournal_e_id`" not-null="false" unique="false"/>
 			</key>
-			<list-index column="`collectionjournalpage_journalentries_idx`"/>
+			<list-index column="`CollectionGroup_journalentries_idx`"/>
 			<one-to-many entity-name="CollectionJournalLine"/>
 		</list>
 		<property name="referenceNumber" lazy="false" insert="true" update="true" not-null="true" unique="false" type="java.lang.String">
@@ -565,13 +565,13 @@
 				<param name="epackage">http://com.agritrace.edairy.desktop.common.model/dairy/</param>
 			</type>
 		</property>
-		<many-to-one name="driver" entity-name="Employee" lazy="false" foreign-key="collectionjournalpage_driver" insert="true" update="true" not-null="true">
+		<many-to-one name="driver" entity-name="Employee" lazy="false" foreign-key="CollectionGroup_driver" insert="true" update="true" not-null="true">
 			<column not-null="true" unique="false" name="`employee_driver_personid`"/>
 		</many-to-one>
-		<many-to-one name="route" entity-name="Route" lazy="false" foreign-key="collectionjournalpage_route" insert="true" update="true" not-null="true">
+		<many-to-one name="route" entity-name="Route" lazy="false" foreign-key="CollectionGroup_route" insert="true" update="true" not-null="true">
 			<column not-null="true" unique="false" name="`route_route_id`"/>
 		</many-to-one>
-		<many-to-one name="vehicle" entity-name="Vehicle" lazy="false" foreign-key="collectionjournalpage_vehicle" insert="true" update="true" not-null="false">
+		<many-to-one name="vehicle" entity-name="Vehicle" lazy="false" foreign-key="CollectionGroup_vehicle" insert="true" update="true" not-null="false">
 			<column not-null="false" unique="false" name="`vehicle_vehicle_vehicleid`"/>
 		</many-to-one>
 		<property name="driverTotal" lazy="false" insert="true" update="true" not-null="false" unique="false" type="java.math.BigDecimal">
@@ -643,8 +643,8 @@
 				<column name="`trip_tripid`" not-null="true" unique="false"/>
 			</key>
 			<list-index column="`trip_collections_idx`"/>
-			<many-to-many entity-name="CollectionJournalPage" unique="true" foreign-key="trip_collections">
-				<column name="`collectionjournalpage_journalid`" not-null="true" unique="false"/>
+			<many-to-many entity-name="CollectionGroup" unique="true" foreign-key="trip_collections">
+				<column name="`CollectionGroup_journalid`" not-null="true" unique="false"/>
 			</many-to-many>
 		</list>
 		<list name="deliveries" table="`trip_deliveries`" lazy="true">
@@ -841,7 +841,7 @@
 				<column name="`dairy_collectionjournals_companyid`" not-null="false" unique="false"/>
 			</key>
 			<list-index column="`dairy_collectionjournals_idx`"/>
-			<one-to-many entity-name="CollectionJournalPage"/>
+			<one-to-many entity-name="CollectionGroup"/>
 		</list>
 		<list name="deliveryJournals" lazy="true" cascade="all,delete-orphan">
 			<key update="true" foreign-key="dairy_deliveryjournals">

@@ -12,7 +12,7 @@ import com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Asset;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
@@ -112,7 +112,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass collectionJournalPageEClass = null;
+	private EClass collectionGroupEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -965,8 +965,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getCollectionJournalPage() {
-		return collectionJournalPageEClass;
+	public EClass getCollectionGroup() {
+		return collectionGroupEClass;
 	}
 
 	/**
@@ -974,8 +974,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCollectionJournalPage_JournalId() {
-		return (EAttribute)collectionJournalPageEClass.getEStructuralFeatures().get(0);
+	public EAttribute getCollectionGroup_JournalId() {
+		return (EAttribute)collectionGroupEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -983,8 +983,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCollectionJournalPage_JournalEntries() {
-		return (EReference)collectionJournalPageEClass.getEStructuralFeatures().get(8);
+	public EReference getCollectionGroup_JournalEntries() {
+		return (EReference)collectionGroupEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -992,8 +992,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCollectionJournalPage_ReferenceNumber() {
-		return (EAttribute)collectionJournalPageEClass.getEStructuralFeatures().get(1);
+	public EAttribute getCollectionGroup_ReferenceNumber() {
+		return (EAttribute)collectionGroupEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1001,8 +1001,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCollectionJournalPage_JournalDate() {
-		return (EAttribute)collectionJournalPageEClass.getEStructuralFeatures().get(2);
+	public EAttribute getCollectionGroup_JournalDate() {
+		return (EAttribute)collectionGroupEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1010,8 +1010,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCollectionJournalPage_Status() {
-		return (EAttribute)collectionJournalPageEClass.getEStructuralFeatures().get(3);
+	public EAttribute getCollectionGroup_Status() {
+		return (EAttribute)collectionGroupEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1019,8 +1019,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCollectionJournalPage_Session() {
-		return (EReference)collectionJournalPageEClass.getEStructuralFeatures().get(14);
+	public EReference getCollectionGroup_Session() {
+		return (EReference)collectionGroupEClass.getEStructuralFeatures().get(14);
 	}
 
 	/**
@@ -1028,8 +1028,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCollectionJournalPage_CollectionCenter() {
-		return (EReference)collectionJournalPageEClass.getEStructuralFeatures().get(15);
+	public EReference getCollectionGroup_CollectionCenter() {
+		return (EReference)collectionGroupEClass.getEStructuralFeatures().get(15);
 	}
 
 	/**
@@ -1037,8 +1037,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCollectionJournalPage_Driver() {
-		return (EReference)collectionJournalPageEClass.getEStructuralFeatures().get(4);
+	public EReference getCollectionGroup_Driver() {
+		return (EReference)collectionGroupEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1046,8 +1046,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCollectionJournalPage_Vehicle() {
-		return (EReference)collectionJournalPageEClass.getEStructuralFeatures().get(5);
+	public EReference getCollectionGroup_Vehicle() {
+		return (EReference)collectionGroupEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -1055,8 +1055,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCollectionJournalPage_DriverTotal() {
-		return (EAttribute)collectionJournalPageEClass.getEStructuralFeatures().get(6);
+	public EAttribute getCollectionGroup_DriverTotal() {
+		return (EAttribute)collectionGroupEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -1064,8 +1064,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCollectionJournalPage_RecordTotal() {
-		return (EAttribute)collectionJournalPageEClass.getEStructuralFeatures().get(7);
+	public EAttribute getCollectionGroup_RecordTotal() {
+		return (EAttribute)collectionGroupEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -1073,8 +1073,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCollectionJournalPage_Suspended() {
-		return (EAttribute)collectionJournalPageEClass.getEStructuralFeatures().get(9);
+	public EAttribute getCollectionGroup_Suspended() {
+		return (EAttribute)collectionGroupEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -1082,8 +1082,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCollectionJournalPage_EntryCount() {
-		return (EAttribute)collectionJournalPageEClass.getEStructuralFeatures().get(10);
+	public EAttribute getCollectionGroup_EntryCount() {
+		return (EAttribute)collectionGroupEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -1091,8 +1091,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCollectionJournalPage_SuspendedCount() {
-		return (EAttribute)collectionJournalPageEClass.getEStructuralFeatures().get(11);
+	public EAttribute getCollectionGroup_SuspendedCount() {
+		return (EAttribute)collectionGroupEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
@@ -1100,8 +1100,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCollectionJournalPage_RejectedCount() {
-		return (EAttribute)collectionJournalPageEClass.getEStructuralFeatures().get(12);
+	public EAttribute getCollectionGroup_RejectedCount() {
+		return (EAttribute)collectionGroupEClass.getEStructuralFeatures().get(12);
 	}
 
 	/**
@@ -1109,8 +1109,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCollectionJournalPage_JournalNumber() {
-		return (EAttribute)collectionJournalPageEClass.getEStructuralFeatures().get(13);
+	public EAttribute getCollectionGroup_JournalNumber() {
+		return (EAttribute)collectionGroupEClass.getEStructuralFeatures().get(13);
 	}
 
 	/**
@@ -2320,23 +2320,23 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(dairyLocationEClass, DAIRY_LOCATION__FUNCTIONS);
 		createEReference(dairyLocationEClass, DAIRY_LOCATION__CONTAINERS);
 
-		collectionJournalPageEClass = createEClass(COLLECTION_JOURNAL_PAGE);
-		createEAttribute(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__JOURNAL_ID);
-		createEAttribute(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__REFERENCE_NUMBER);
-		createEAttribute(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__JOURNAL_DATE);
-		createEAttribute(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__STATUS);
-		createEReference(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__DRIVER);
-		createEReference(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__VEHICLE);
-		createEAttribute(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__DRIVER_TOTAL);
-		createEAttribute(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__RECORD_TOTAL);
-		createEReference(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__JOURNAL_ENTRIES);
-		createEAttribute(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__SUSPENDED);
-		createEAttribute(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__ENTRY_COUNT);
-		createEAttribute(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__SUSPENDED_COUNT);
-		createEAttribute(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__REJECTED_COUNT);
-		createEAttribute(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__JOURNAL_NUMBER);
-		createEReference(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__SESSION);
-		createEReference(collectionJournalPageEClass, COLLECTION_JOURNAL_PAGE__COLLECTION_CENTER);
+		collectionGroupEClass = createEClass(COLLECTION_GROUP);
+		createEAttribute(collectionGroupEClass, COLLECTION_GROUP__JOURNAL_ID);
+		createEAttribute(collectionGroupEClass, COLLECTION_GROUP__REFERENCE_NUMBER);
+		createEAttribute(collectionGroupEClass, COLLECTION_GROUP__JOURNAL_DATE);
+		createEAttribute(collectionGroupEClass, COLLECTION_GROUP__STATUS);
+		createEReference(collectionGroupEClass, COLLECTION_GROUP__DRIVER);
+		createEReference(collectionGroupEClass, COLLECTION_GROUP__VEHICLE);
+		createEAttribute(collectionGroupEClass, COLLECTION_GROUP__DRIVER_TOTAL);
+		createEAttribute(collectionGroupEClass, COLLECTION_GROUP__RECORD_TOTAL);
+		createEReference(collectionGroupEClass, COLLECTION_GROUP__JOURNAL_ENTRIES);
+		createEAttribute(collectionGroupEClass, COLLECTION_GROUP__SUSPENDED);
+		createEAttribute(collectionGroupEClass, COLLECTION_GROUP__ENTRY_COUNT);
+		createEAttribute(collectionGroupEClass, COLLECTION_GROUP__SUSPENDED_COUNT);
+		createEAttribute(collectionGroupEClass, COLLECTION_GROUP__REJECTED_COUNT);
+		createEAttribute(collectionGroupEClass, COLLECTION_GROUP__JOURNAL_NUMBER);
+		createEReference(collectionGroupEClass, COLLECTION_GROUP__SESSION);
+		createEReference(collectionGroupEClass, COLLECTION_GROUP__COLLECTION_CENTER);
 
 		routeEClass = createEClass(ROUTE);
 		createEAttribute(routeEClass, ROUTE__ID);
@@ -2557,7 +2557,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEReference(getCollectionJournalLine_From(), theTrackingPackage.getFarm(), null, "from", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCollectionJournalLine_FarmContainer(), theTrackingPackage.getContainer(), null, "farmContainer", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCollectionJournalLine_DairyContainer(), this.getDairyContainer(), null, "dairyContainer", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCollectionJournalLine_CollectionJournal(), this.getCollectionJournalPage(), this.getCollectionJournalPage_JournalEntries(), "collectionJournal", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCollectionJournalLine_CollectionJournal(), this.getCollectionGroup(), this.getCollectionGroup_JournalEntries(), "collectionJournal", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionJournalLine_Rejected(), ecorePackage.getEBoolean(), "rejected", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionJournalLine_RejectionReason(), ecorePackage.getEString(), "rejectionReason", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionJournalLine_MilkFatPercentage(), ecorePackage.getEBigDecimal(), "milkFatPercentage", "0.0", 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2600,23 +2600,23 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getDairyLocation_Functions(), this.getDairyFunction(), "functions", null, 0, -1, DairyLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDairyLocation_Containers(), this.getDairyContainer(), null, "containers", null, 0, 1, DairyLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(collectionJournalPageEClass, CollectionJournalPage.class, "CollectionJournalPage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCollectionJournalPage_JournalId(), theModelPackage.getUniqueID(), "journalId", null, 1, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCollectionJournalPage_ReferenceNumber(), ecorePackage.getEString(), "referenceNumber", null, 1, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCollectionJournalPage_JournalDate(), ecorePackage.getEDate(), "journalDate", null, 1, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCollectionJournalPage_Status(), this.getJournalStatus(), "status", "NEW", 1, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCollectionJournalPage_Driver(), this.getEmployee(), null, "driver", null, 1, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCollectionJournalPage_Vehicle(), this.getVehicle(), null, "vehicle", null, 0, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCollectionJournalPage_DriverTotal(), ecorePackage.getEBigDecimal(), "driverTotal", null, 0, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCollectionJournalPage_RecordTotal(), ecorePackage.getEBigDecimal(), "recordTotal", "0", 0, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getCollectionJournalPage_JournalEntries(), this.getCollectionJournalLine(), this.getCollectionJournalLine_CollectionJournal(), "journalEntries", null, 0, -1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCollectionJournalPage_Suspended(), ecorePackage.getEBoolean(), "suspended", "false", 0, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCollectionJournalPage_EntryCount(), ecorePackage.getEInt(), "entryCount", "0", 0, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCollectionJournalPage_SuspendedCount(), ecorePackage.getEInt(), "suspendedCount", "0", 0, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCollectionJournalPage_RejectedCount(), ecorePackage.getEInt(), "rejectedCount", "0", 0, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCollectionJournalPage_JournalNumber(), ecorePackage.getEString(), "journalNumber", "", 0, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCollectionJournalPage_Session(), this.getCollectionSession(), null, "session", null, 0, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCollectionJournalPage_CollectionCenter(), this.getDairyLocation(), null, "collectionCenter", null, 0, 1, CollectionJournalPage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(collectionGroupEClass, CollectionGroup.class, "CollectionGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCollectionGroup_JournalId(), theModelPackage.getUniqueID(), "journalId", null, 1, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCollectionGroup_ReferenceNumber(), ecorePackage.getEString(), "referenceNumber", null, 1, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCollectionGroup_JournalDate(), ecorePackage.getEDate(), "journalDate", null, 1, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCollectionGroup_Status(), this.getJournalStatus(), "status", "NEW", 1, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCollectionGroup_Driver(), this.getEmployee(), null, "driver", null, 1, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCollectionGroup_Vehicle(), this.getVehicle(), null, "vehicle", null, 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCollectionGroup_DriverTotal(), ecorePackage.getEBigDecimal(), "driverTotal", null, 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCollectionGroup_RecordTotal(), ecorePackage.getEBigDecimal(), "recordTotal", "0", 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getCollectionGroup_JournalEntries(), this.getCollectionJournalLine(), this.getCollectionJournalLine_CollectionJournal(), "journalEntries", null, 0, -1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCollectionGroup_Suspended(), ecorePackage.getEBoolean(), "suspended", "false", 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCollectionGroup_EntryCount(), ecorePackage.getEInt(), "entryCount", "0", 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCollectionGroup_SuspendedCount(), ecorePackage.getEInt(), "suspendedCount", "0", 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCollectionGroup_RejectedCount(), ecorePackage.getEInt(), "rejectedCount", "0", 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCollectionGroup_JournalNumber(), ecorePackage.getEString(), "journalNumber", "", 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCollectionGroup_Session(), this.getCollectionSession(), null, "session", null, 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCollectionGroup_CollectionCenter(), this.getDairyLocation(), null, "collectionCenter", null, 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(routeEClass, Route.class, "Route", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRoute_Id(), theModelPackage.getUniqueID(), "Id", null, 1, 1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2626,7 +2626,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEReference(getRoute_Vehicle(), this.getVehicle(), null, "vehicle", null, 0, 1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tripEClass, Trip.class, "Trip", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTrip_Collections(), this.getCollectionJournalPage(), null, "collections", null, 1, -1, Trip.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTrip_Collections(), this.getCollectionGroup(), null, "collections", null, 1, -1, Trip.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTrip_Deliveries(), this.getDeliveryJournal(), null, "deliveries", null, 1, -1, Trip.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTrip_Started(), ecorePackage.getEDate(), "started", null, 1, 1, Trip.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTrip_Ended(), ecorePackage.getEDate(), "ended", null, 1, 1, Trip.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2663,8 +2663,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEReference(getDairy_Employees(), this.getEmployee(), null, "employees", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getDairy_Memberships(), this.getMembership(), null, "memberships", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getDairy_BranchLocations(), this.getDairyLocation(), null, "branchLocations", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getDairy_CollectionJournals(), this.getCollectionJournalPage(), null, "collectionJournals", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		getDairy_CollectionJournals().getEKeys().add(this.getCollectionJournalPage_ReferenceNumber());
+		initEReference(getDairy_CollectionJournals(), this.getCollectionGroup(), null, "collectionJournals", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		getDairy_CollectionJournals().getEKeys().add(this.getCollectionGroup_ReferenceNumber());
 		initEReference(getDairy_DeliveryJournals(), this.getDeliveryJournal(), null, "deliveryJournals", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		getDairy_DeliveryJournals().getEKeys().add(this.getDeliveryJournal_ReferenceNumber());
 		initEReference(getDairy_Suppliers(), this.getSupplier(), null, "suppliers", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);

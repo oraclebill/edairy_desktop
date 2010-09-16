@@ -11,7 +11,7 @@ import org.eclipse.riena.ui.ridgets.databinding.DateToStringConverter;
 import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
 
@@ -154,7 +154,7 @@ public class JournalHeaderRidget extends AbstractCompositeRidget implements IJou
 	}
 
 	@Override
-	public void bindToModel(CollectionJournalPage newModel) {
+	public void bindToModel(CollectionGroup newModel) {
 		dateRidget.bindToModel(newModel, "journalDate");
 		centerRidget.bindToModel(newModel, "collectionCenter.code");
 		sessionRidget.bindToModel(newModel, "session.code");

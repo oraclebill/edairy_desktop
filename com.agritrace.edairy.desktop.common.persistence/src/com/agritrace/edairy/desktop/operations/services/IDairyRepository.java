@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
@@ -37,9 +37,9 @@ public interface IDairyRepository {
 
 	Container getFarmContainerById(String canId);
 
-	CollectionJournalPage getJournalPageById(Long pageId);
+	CollectionGroup getJournalPageById(Long pageId);
 
-	CollectionJournalPage getJournalPageById(String pageId);
+	CollectionGroup getJournalPageById(String pageId);
 
 	Dairy getLocalDairy();
 
@@ -51,7 +51,7 @@ public interface IDairyRepository {
 
 	void save(Object changedItem);
 
-	void saveNewJournalPage(CollectionJournalPage newJournal);
+	void saveNewJournalPage(CollectionGroup newJournal);
 
 	void updateDairy();
 
@@ -83,5 +83,5 @@ public interface IDairyRepository {
 
 	void save();
 
-	List<CollectionJournalPage> allCollectionJournalPages();
+	List<CollectionGroup> allCollectionGroups();
 }

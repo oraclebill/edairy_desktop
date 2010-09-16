@@ -26,7 +26,7 @@ import org.osgi.service.log.LogService;
 import com.agritrace.edairy.desktop.collections.scaledata.beans.ScaleRecord;
 import com.agritrace.edairy.desktop.collections.scaledata.importer.ScaleImporter;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
@@ -108,7 +108,7 @@ final class ScaleImportAction implements IActionListener {
 				if (monitor.isCanceled()) {
 					return false;
 				}
-				CollectionJournalPage journalPage = getJournalForScaleRecord(scaleRecord);
+				CollectionGroup journalPage = getJournalForScaleRecord(scaleRecord);
 				/* boolean journalConsistent = */validateJournalInfo(journalPage, scaleRecord);
 				ScaleImportRecord importRecord = DairyFactory.eINSTANCE.createScaleImportRecord();
 				try {
@@ -154,7 +154,7 @@ final class ScaleImportAction implements IActionListener {
 
 			setNote("Validating raw data...");
 
-			for (CollectionJournalPage page : pageMap.values()) {
+			for (CollectionGroup page : pageMap.values()) {
 				page.setStatus(JournalStatus.PENDING);
 				setPageJournalDate(page);
 				updateRollupValues(page);
@@ -176,7 +176,7 @@ final class ScaleImportAction implements IActionListener {
 			if (irDialog.open() == Dialog.OK) {
 				System.err.printf("Import completed with %d pages\n", pageMap.size());
 				int i = 0;
-				for (CollectionJournalPage page : pageMap.values()) {
+				for (CollectionGroup page : pageMap.values()) {
 					System.err.printf("  page %d: %s - %d entries\n", ++i, page, page.getJournalEntries().size());
 					System.err.printf("  page %d: %s\n", i, page);
 					// }
@@ -201,7 +201,7 @@ final class ScaleImportAction implements IActionListener {
 			
 			int allEntries = 0;
 			
-			for (CollectionJournalPage page : pageMap.values()) {
+			for (CollectionGroup page : pageMap.values()) {
 				allEntries += page.getEntryCount();
 			}
 			
@@ -210,7 +210,7 @@ final class ScaleImportAction implements IActionListener {
 
 			int i = 0;
 			
-			for (CollectionJournalPage page : pageMap.values()) {
+			for (CollectionGroup page : pageMap.values()) {
 				allEntries += page.getEntryCount();
 				msgList.add(++i, String.format("- Driver name: %s, journal date: %tF",
 						MemberUtil.formattedMemberName(page.getDriver()), page.getJournalDate()));
@@ -226,7 +226,7 @@ final class ScaleImportAction implements IActionListener {
 			errList.add(detail);
 		}
 
-		private void setPageJournalDate(CollectionJournalPage page) {
+		private void setPageJournalDate(CollectionGroup page) {
 			if (page.getJournalDate() == null) {
 				Date lowest = null, highest = null, journalDate = null;
 				for (CollectionJournalLine line : page.getJournalEntries()) {
@@ -263,7 +263,7 @@ final class ScaleImportAction implements IActionListener {
 			}
 		}
 
-		private void updateRollupValues(CollectionJournalPage page) {
+		private void updateRollupValues(CollectionGroup page) {
 			BigDecimal quantity = new BigDecimal(0);
 
 			int numSuspended = 0, numRejected = 0;
@@ -284,7 +284,7 @@ final class ScaleImportAction implements IActionListener {
 			page.setSuspendedCount(numSuspended);
 		}
 
-		private void setDriver(CollectionJournalPage page) {
+		private void setDriver(CollectionGroup page) {
 			if (page.getDriver() == null) {
 				LinkedList<String> codes = new LinkedList<String>();
 				for (CollectionJournalLine line : page.getJournalEntries()) {
@@ -318,7 +318,7 @@ final class ScaleImportAction implements IActionListener {
 		 */
 	private final MilkCollectionLogController milkCollectionLogController;
 	private IDairyRepository dairyRepo = RepositoryFactory.getDairyRepository();
-	private Map<String, CollectionJournalPage> pageMap = new HashMap<String, CollectionJournalPage>();
+	private Map<String, CollectionGroup> pageMap = new HashMap<String, CollectionGroup>();
 	Dairy localDairy;
 
 	public ScaleImportAction(MilkCollectionLogController milkCollectionLogController) {
@@ -374,18 +374,18 @@ final class ScaleImportAction implements IActionListener {
 	 * @param scaleRecord
 	 * @return
 	 */
-	private boolean validateJournalInfo(CollectionJournalPage journalPage, ScaleRecord scaleRecord) {
+	private boolean validateJournalInfo(CollectionGroup journalPage, ScaleRecord scaleRecord) {
 		boolean isConsistent = true;
 		// TODO: implement
 		return isConsistent;
 	}
 
-	private CollectionJournalPage getJournalForScaleRecord(ScaleRecord record) {
+	private CollectionGroup getJournalForScaleRecord(ScaleRecord record) {
 		String key = createGroupKey(record);
-		CollectionJournalPage page = pageMap.get(key);
+		CollectionGroup page = pageMap.get(key);
 		
 		if (page == null) {
-			page = DairyFactory.eINSTANCE.createCollectionJournalPage();
+			page = DairyFactory.eINSTANCE.createCollectionGroup();
 			page.setReferenceNumber(key);
 			page.setDriver(getDriverByCode(record.getOperatorCode()));
 			page.setJournalDate(record.getValidDate());

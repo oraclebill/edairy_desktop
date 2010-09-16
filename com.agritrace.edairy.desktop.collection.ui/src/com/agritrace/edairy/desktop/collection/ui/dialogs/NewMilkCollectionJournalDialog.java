@@ -35,7 +35,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewConstants;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
@@ -53,7 +53,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 	private final IDairyRepository dairyRepository = RepositoryFactory.getDairyRepository();
 	private DateTime datePicker;
 	private CCombo driverCombo;
-	private final CollectionJournalPage newJournalPage = DairyFactory.eINSTANCE.createCollectionJournalPage();
+	private final CollectionGroup newJournalPage = DairyFactory.eINSTANCE.createCollectionGroup();
 
 	private CCombo centerCombo;
 	private CCombo sessionCombo;
@@ -65,7 +65,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		super(parentShell);
 	}
 
-	public CollectionJournalPage getNewJournalPage() {
+	public CollectionGroup getNewJournalPage() {
 		final String refNum = newJournalPage.getReferenceNumber();
 		if (refNum == null || refNum.trim().length() == 0) {
 			newJournalPage.setReferenceNumber("REF-" + newJournalPage.hashCode()); 
@@ -149,7 +149,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		// bind ridgets
 
 		dateTime.bindToModel(EMFObservables.observeValue(newJournalPage,
-				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE));
+				DairyPackage.Literals.COLLECTION_GROUP__JOURNAL_DATE));
 
 		final Dairy localDairy = dairyRepository.getLocalDairy();
 
@@ -158,7 +158,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 			List<DairyLocation> centers = repo.allCollectionCenters();
 			center.bindToModel(new WritableList(centers, DairyLocation.class), DairyLocation.class, "getCode", 
 					PojoObservables.observeValue( newJournalPage,
-							DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__COLLECTION_CENTER.getName()));
+							DairyPackage.Literals.COLLECTION_GROUP__COLLECTION_CENTER.getName()));
 			center.setSelection(localDairy.getRoutes().get(0));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -169,7 +169,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 			
 			vehicle.bindToModel(new WritableList(vehicles, Vehicle.class), Vehicle.class, "getRegistrationNumber", 
 					PojoObservables.observeValue(newJournalPage, 
-							DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__VEHICLE.getName()));
+							DairyPackage.Literals.COLLECTION_GROUP__VEHICLE.getName()));
 			
 			vehicle.setSelection(localDairy.getVehicles().get(0));
 		} catch (Exception e) {
@@ -182,7 +182,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 			session.bindToModel(new WritableList(sessions, CollectionSession.class),
 					CollectionSession.class, "getCode",
 					PojoObservables.observeValue(newJournalPage,
-							DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SESSION.getName()));
+							DairyPackage.Literals.COLLECTION_GROUP__SESSION.getName()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -194,7 +194,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 					Employee.class,
 					"getFamilyName",
 					PojoObservables.observeValue(newJournalPage,
-							DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__DRIVER.getName()));
+							DairyPackage.Literals.COLLECTION_GROUP__DRIVER.getName()));
 			driver.setSelection(drivers.get(0));
 		} catch (Exception e) {
 			e.printStackTrace();

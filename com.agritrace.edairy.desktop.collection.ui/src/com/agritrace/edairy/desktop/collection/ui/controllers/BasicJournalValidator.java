@@ -7,7 +7,7 @@ import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
 
 public class BasicJournalValidator implements IValidator {
@@ -15,9 +15,9 @@ public class BasicJournalValidator implements IValidator {
 	@Override
 	public IStatus validate(Object value) {
 		IStatus status = ValidationStatus.OK_STATUS;
-		if (value instanceof CollectionJournalPage) {
+		if (value instanceof CollectionGroup) {
 			MultiStatus statusList = new MultiStatus(Activator.class.getName(), 0, "Validation Messages", null);
-			CollectionJournalPage journal = (CollectionJournalPage)value;
+			CollectionGroup journal = (CollectionGroup)value;
 			if (journal.getEntryCount() != journal.getJournalEntries().size()) {
 				statusList.add(ValidationStatus.cancel("System Error: entry count and number of entries don't match. Please contact support."));
 			}

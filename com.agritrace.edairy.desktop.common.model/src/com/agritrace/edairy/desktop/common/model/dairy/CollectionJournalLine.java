@@ -340,7 +340,7 @@ public interface CollectionJournalLine extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Collection Journal</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalEntries <em>Journal Entries</em>}'.
+	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getJournalEntries <em>Journal Entries</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Collection Journal</em>' container reference isn't clear,
@@ -348,13 +348,13 @@ public interface CollectionJournalLine extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Collection Journal</em>' container reference.
-	 * @see #setCollectionJournal(CollectionJournalPage)
+	 * @see #setCollectionJournal(CollectionGroup)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalLine_CollectionJournal()
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage#getJournalEntries
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getJournalEntries
 	 * @model opposite="journalEntries" transient="false"
 	 * @generated
 	 */
-	CollectionJournalPage getCollectionJournal();
+	CollectionGroup getCollectionJournal();
 
 	/**
 	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getCollectionJournal <em>Collection Journal</em>}' container reference.
@@ -364,7 +364,7 @@ public interface CollectionJournalLine extends EObject {
 	 * @see #getCollectionJournal()
 	 * @generated
 	 */
-	void setCollectionJournal(CollectionJournalPage value);
+	void setCollectionJournal(CollectionGroup value);
 
 	/**
 	 * Returns the value of the '<em><b>Rejected</b></em>' attribute.

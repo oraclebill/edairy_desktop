@@ -28,7 +28,7 @@ import com.agritrace.edairy.desktop.collection.ui.dialogs.JournalPersistenceDele
 import com.agritrace.edairy.desktop.collection.ui.dialogs.NewMilkCollectionJournalDialog;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.SessionEditDialog;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
@@ -40,19 +40,21 @@ import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryControll
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.agritrace.edairy.desktop.operations.services.dairylocation.IDairyLocationRepository;
 
 @PermissionRequired(Permission.VIEW_MILK_COLLECTIONS)
-public class MilkCollectionLogController extends BasicDirectoryController<CollectionJournalPage> {
+public class MilkCollectionLogController extends BasicDirectoryController<CollectionGroup> {
 
 	private final class CollectionLogJournalPersister implements JournalPersistenceDelegate {
 		private CollectionLogJournalPersister(BulkCollectionsEntryDialogController controller) {
 		}
 
 		@Override
-		public void saveJournal(CollectionJournalPage journal) {
-			RepositoryFactory.getDairyRepository().getLocalDairy().getCollectionJournals().add(journal);
-			RepositoryFactory.getDairyRepository().save(RepositoryFactory.getDairyRepository().getLocalDairy());
+		public void saveJournal(CollectionGroup journal) {
+			final IDairyRepository repo = RepositoryFactory.getDairyRepository();
+			repo.getLocalDairy().getCollectionJournals().add(journal);
+			repo.save(repo.getLocalDairy());
 			MilkCollectionLogController.this.refreshTableContents();
 		}
 	}
@@ -60,8 +62,8 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	private final class TotalColumnFormatter extends ColumnFormatter {
 		@Override
 		public String getText(Object element) {
-			if (element instanceof CollectionJournalPage) {
-				CollectionJournalPage page = (CollectionJournalPage) element;
+			if (element instanceof CollectionGroup) {
+				CollectionGroup page = (CollectionGroup) element;
 				JournalStatus status = page.getStatus();
 				switch (status) {
 				case NEW:
@@ -89,8 +91,8 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 
 		@Override
 		public Color getBackground(Object element) {
-			if (element instanceof CollectionJournalPage) {
-				CollectionJournalPage page = (CollectionJournalPage) element;
+			if (element instanceof CollectionGroup) {
+				CollectionGroup page = (CollectionGroup) element;
 				if (page.getDriverTotal() != page.getRecordTotal())
 					return TABLE_HIGHLIGHT_BACKGROUND;
 			}
@@ -108,26 +110,26 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	private IToggleButtonRidget rejected;
 
 	private final MilkCollectionLogFilterBean filterBean = new MilkCollectionLogFilterBean();
-	private final List<CollectionJournalPage> allJournals = RepositoryFactory.getDairyRepository().allCollectionJournalPages();
+	private final List<CollectionGroup> allJournals = RepositoryFactory.getDairyRepository().allCollectionGroups();
 	private final Color TABLE_HIGHLIGHT_BACKGROUND = PlatformUI.getWorkbench().getDisplay()
 			.getSystemColor(SWT.COLOR_YELLOW);
 	private List<DairyLocation> collectionCenters;
 
 	public MilkCollectionLogController() {
-		setEClass(DairyPackage.Literals.COLLECTION_JOURNAL_PAGE);
+		setEClass(DairyPackage.Literals.COLLECTION_GROUP);
 		
 		ICollectionJournalRepository journalRepo = new  MilkCollectionJournalRepository();		
 		setRepository(journalRepo);
 
-		addTableColumn("Date", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE);
+		addTableColumn("Date", DairyPackage.Literals.COLLECTION_GROUP__JOURNAL_DATE);
 		addTableColumn("Collection Center", "collectionCenter.code", String.class);
 		addTableColumn("Session", "session.code", String.class);
 		addTableColumn("Status", "status.name", String.class);
-		addTableColumn("Calculated Total", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__RECORD_TOTAL, new TotalColumnFormatter());
-		addTableColumn("Initial Total", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__DRIVER_TOTAL);
-		addTableColumn("# Members", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__ENTRY_COUNT);
-		addTableColumn("# Suspended", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SUSPENDED_COUNT);
-		addTableColumn("# Rejected", DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__REJECTED_COUNT);
+		addTableColumn("Calculated Total", DairyPackage.Literals.COLLECTION_GROUP__RECORD_TOTAL, new TotalColumnFormatter());
+		addTableColumn("Initial Total", DairyPackage.Literals.COLLECTION_GROUP__DRIVER_TOTAL);
+		addTableColumn("# Members", DairyPackage.Literals.COLLECTION_GROUP__ENTRY_COUNT);
+		addTableColumn("# Suspended", DairyPackage.Literals.COLLECTION_GROUP__SUSPENDED_COUNT);
+		addTableColumn("# Rejected", DairyPackage.Literals.COLLECTION_GROUP__REJECTED_COUNT);
 
 		final IDairyLocationRepository repo = RepositoryFactory.getRegisteredRepository(IDairyLocationRepository.class);
 		collectionCenters = new ArrayList<DairyLocation>();
@@ -196,7 +198,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	 * @param cj Journal page
 	 * @return Whether the page matches the conditions
 	 */
-	private static final boolean matches(MilkCollectionLogFilterBean bean, CollectionJournalPage cj) {
+	private static final boolean matches(MilkCollectionLogFilterBean bean, CollectionGroup cj) {
 		if (bean.getStartDate() != null && cj.getJournalDate().compareTo(bean.getStartDate()) < 0)
 			return false;
 		
@@ -246,10 +248,10 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 
 	// TODO: make this a query..
 	@Override
-	protected List<CollectionJournalPage> getFilteredResult() {
-		final List<CollectionJournalPage> filteredJournals = new ArrayList<CollectionJournalPage>();
+	protected List<CollectionGroup> getFilteredResult() {
+		final List<CollectionGroup> filteredJournals = new ArrayList<CollectionGroup>();
 
-		for (final CollectionJournalPage cj : allJournals) {
+		for (final CollectionGroup cj : allJournals) {
 			if (matches(filterBean, cj)) {
 				filteredJournals.add(cj);
 			}
@@ -259,7 +261,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	}
 
 	@Override
-	protected RecordDialog<CollectionJournalPage> getRecordDialog(Shell shell) {
+	protected RecordDialog<CollectionGroup> getRecordDialog(Shell shell) {
 		throw new UnsupportedOperationException("unsupported");
 	}
 
@@ -274,7 +276,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		final NewMilkCollectionJournalDialog dialog = new NewMilkCollectionJournalDialog(getShell());
 		final int returnCode = dialog.open();
 		if (Window.OK == returnCode) {
-			final CollectionJournalPage newPage = dialog.getNewJournalPage();			
+			final CollectionGroup newPage = dialog.getNewJournalPage();			
 			BulkCollectionsEntryDialog journalEntryDialog = new BulkCollectionsEntryDialog(shell);
 			final BulkCollectionsEntryDialogController controller = ( BulkCollectionsEntryDialogController)journalEntryDialog.getController(); 
 
@@ -294,7 +296,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 			final BulkCollectionsEntryDialogController controller = (BulkCollectionsEntryDialogController)journalEntryDialog.getController(); 
 
 			controller.setPersistenceDelegate(new CollectionLogJournalPersister(controller));
-			controller.setContextJournalPage((CollectionJournalPage) table.getSelection().get(0));		
+			controller.setContextJournalPage((CollectionGroup) table.getSelection().get(0));		
 			journalEntryDialog.open();
 		}
 	

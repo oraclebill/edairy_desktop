@@ -22,7 +22,7 @@ import org.eclipse.riena.ui.ridgets.controller.IController;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
@@ -50,7 +50,7 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 		@Override
 		public String getText(Object element) {
 			if (element instanceof CollectionJournalLine) {
-				final CollectionJournalPage journal = ((CollectionJournalLine) element).getCollectionJournal();
+				final CollectionGroup journal = ((CollectionJournalLine) element).getCollectionJournal();
 				if (journal != null) {
 					return journal.getSession().toString();
 				}
@@ -186,7 +186,7 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 			Date endDate) {
 		DateFilterUtil<CollectionJournalLine> filterUtil = new DateFilterUtil<CollectionJournalLine>(
 				CollectionJournalLine.class, DairyPackage.Literals.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL,
-				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE);
+				DairyPackage.Literals.COLLECTION_GROUP__JOURNAL_DATE);
 		return filterUtil.filterDate(inputRecords, startDate, endDate);		
 	}
 
@@ -258,8 +258,8 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 			final String selectedMemberId = "" + membership.getMemberId();
 			final EObject container = membership.eContainer();
 			if ((container != null) && (container instanceof Dairy)) {
-				final List<CollectionJournalPage> allRecords = ((Dairy) container).getCollectionJournals();
-				for (final CollectionJournalPage j : allRecords) {
+				final List<CollectionGroup> allRecords = ((Dairy) container).getCollectionJournals();
+				for (final CollectionGroup j : allRecords) {
 					final List<CollectionJournalLine> jEntries = j.getJournalEntries();
 					for (final CollectionJournalLine e : jEntries) {
 						if (selectedMemberId.equals(e.getRecordedMember())) {

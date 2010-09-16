@@ -16,7 +16,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewConstants;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
@@ -32,7 +32,7 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 	// header group ridgets
 	private ITextRidget book;
 	// working journal page
-	private CollectionJournalPage currentJournalPage;
+	private CollectionGroup currentJournalPage;
 	// journal page
 	private ISpinnerRidget currentPage;
 	private IDateTimeRidget date;
@@ -69,7 +69,7 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 		// important?
 		super.afterBind();
 		//
-		CollectionJournalPage currentJournalPage;
+		CollectionGroup currentJournalPage;
 		final INavigationNode<?> node = getNavigationNode();
 		final NavigationArgument argument = node.getNavigationArgument();
 		Object journalPage = argument.getParameter();
@@ -77,8 +77,8 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 
 			journalPage = node.getContext("JOURNAL_PAGE");
 		}
-		if ((journalPage != null) && (journalPage instanceof CollectionJournalPage)) {
-			currentJournalPage = (CollectionJournalPage) journalPage;
+		if ((journalPage != null) && (journalPage instanceof CollectionGroup)) {
+			currentJournalPage = (CollectionGroup) journalPage;
 		} else {
 			throw new IllegalStateException("Journal editor requires context setting 'JOURNAL_PAGE' with current page");
 		}

@@ -22,7 +22,7 @@ import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
@@ -278,7 +278,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 		return dairy;
 	}
 
-	public List<CollectionJournalPage> allCollectionJournalPages() {
+	public List<CollectionGroup> allCollectionGroups() {
 		// return collectionsRepository.getMemberships();
 		return localDairy.getCollectionJournals();
 	}
@@ -367,14 +367,14 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	}
 
 	@Override
-	public CollectionJournalPage getJournalPageById(Long pageId) {
+	public CollectionGroup getJournalPageById(Long pageId) {
 		return getJournalPageById(pageId.toString());
 	}
 
 	@Override
-	public CollectionJournalPage getJournalPageById(String pageId) {
-		CollectionJournalPage found = null;
-		for (CollectionJournalPage page : localDairy.getCollectionJournals()) {
+	public CollectionGroup getJournalPageById(String pageId) {
+		CollectionGroup found = null;
+		for (CollectionGroup page : localDairy.getCollectionJournals()) {
 			if (page.getReferenceNumber().equals(pageId)) {
 				found = page;
 				break;
@@ -482,7 +482,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	}
 
 	@Override
-	public void saveNewJournalPage(CollectionJournalPage newJournal) {
+	public void saveNewJournalPage(CollectionGroup newJournal) {
 		// collectionsRepository.saveNew(newJournal);
 		localDairy.getCollectionJournals().add(newJournal);
 		save();

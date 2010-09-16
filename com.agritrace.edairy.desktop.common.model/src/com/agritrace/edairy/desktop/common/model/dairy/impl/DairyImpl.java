@@ -8,7 +8,7 @@ package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
 import com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl;
 
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
@@ -294,7 +294,7 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<CollectionJournalPage> collectionJournals;
+	protected EList<CollectionGroup> collectionJournals;
 
 	/**
 	 * The cached value of the '{@link #getDeliveryJournals() <em>Delivery Journals</em>}' containment reference list.
@@ -586,9 +586,9 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<CollectionJournalPage> getCollectionJournals() {
+	public EList<CollectionGroup> getCollectionJournals() {
 		if (collectionJournals == null) {
-			collectionJournals = new EObjectContainmentEList<CollectionJournalPage>(CollectionJournalPage.class, this, DairyPackage.DAIRY__COLLECTION_JOURNALS);
+			collectionJournals = new EObjectContainmentEList<CollectionGroup>(CollectionGroup.class, this, DairyPackage.DAIRY__COLLECTION_JOURNALS);
 		}
 		return collectionJournals;
 	}
@@ -888,7 +888,7 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return;
 			case DairyPackage.DAIRY__COLLECTION_JOURNALS:
 				getCollectionJournals().clear();
-				getCollectionJournals().addAll((Collection<? extends CollectionJournalPage>)newValue);
+				getCollectionJournals().addAll((Collection<? extends CollectionGroup>)newValue);
 				return;
 			case DairyPackage.DAIRY__DELIVERY_JOURNALS:
 				getDeliveryJournals().clear();

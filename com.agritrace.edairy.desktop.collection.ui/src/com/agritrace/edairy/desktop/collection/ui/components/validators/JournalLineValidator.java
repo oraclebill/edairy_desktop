@@ -3,7 +3,7 @@ package com.agritrace.edairy.desktop.collection.ui.components.validators;
 import org.eclipse.jface.dialogs.MessageDialog;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 
 public class JournalLineValidator {
@@ -65,7 +65,7 @@ public class JournalLineValidator {
 	 * 
 	 * @return
 	 */
-	public boolean handleTotalsNotEqualOnSave(CollectionJournalPage workingJournalPage) {
+	public boolean handleTotalsNotEqualOnSave(CollectionGroup workingJournalPage) {
 		return false;
 	}
 

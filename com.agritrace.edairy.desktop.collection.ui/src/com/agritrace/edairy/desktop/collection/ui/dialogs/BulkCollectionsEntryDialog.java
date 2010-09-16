@@ -31,7 +31,7 @@ import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.collection.ui.components.collectionline.CollectionLineComposite;
 import com.agritrace.edairy.desktop.collection.ui.components.journalheader.JournalHeaderComposite;
 import com.agritrace.edairy.desktop.collection.ui.controllers.BulkCollectionsEntryDialogController;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
@@ -64,27 +64,27 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 			}
 
 			@Override
-			public void saveJournal(CollectionJournalPage journal) {
+			public void saveJournal(CollectionGroup journal) {
 				System.err.println(">> Saving journal : " + journal);
 				System.err.println(">>  controller : " + controller);
 			}
 		}
 
 		private final Shell shell;
-//		private CollectionJournalPage page;
+//		private CollectionGroup page;
 
 		private JournalEntryTestAction(Shell shell) {
 			this(shell, createCollectionJournal());
 		}
 
-		private JournalEntryTestAction(Shell shell, CollectionJournalPage page) {
+		private JournalEntryTestAction(Shell shell, CollectionGroup page) {
 			this.shell = shell;
 //			this.page = page;
 		}
 
-		private static CollectionJournalPage createCollectionJournal() {
+		private static CollectionGroup createCollectionJournal() {
 			Dairy dairy = RepositoryFactory.getDairyRepository().getLocalDairy();
-			CollectionJournalPage journal = DairyFactory.eINSTANCE.createCollectionJournalPage();
+			CollectionGroup journal = DairyFactory.eINSTANCE.createCollectionGroup();
 
 			journal.setJournalDate(new Date());
 			// journal.setSession(Session.EARLY_MORNING);

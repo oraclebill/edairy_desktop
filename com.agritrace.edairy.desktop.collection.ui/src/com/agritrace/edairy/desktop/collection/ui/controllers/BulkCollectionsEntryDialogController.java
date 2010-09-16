@@ -46,7 +46,7 @@ import com.agritrace.edairy.desktop.collection.ui.dialogs.JournalPersistenceDele
 import com.agritrace.edairy.desktop.collection.ui.dialogs.MemberCacheProvider;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.MemberLookupProvider;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
@@ -64,7 +64,7 @@ import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 public class BulkCollectionsEntryDialogController extends
-		BaseDialogController<CollectionJournalPage> {
+		BaseDialogController<CollectionGroup> {
 
 	private final class GenericMemberInfo implements IMemberInfoProvider {
 		// private final Route currentRoute;
@@ -148,7 +148,7 @@ public class BulkCollectionsEntryDialogController extends
 
 	// milk Entry group
 	private ITableRidget journalEntryTable;
-	// private CollectionJournalPage workingJournalPage;
+	// private CollectionGroup workingJournalPage;
 	private IJournalHeaderRidget journalHeaderRidget;
 	private ICollectionLineRidget collectionLineRidget;
 	private ILabelRidget totalLabelRidget;
@@ -194,15 +194,15 @@ public class BulkCollectionsEntryDialogController extends
 	/**
 	 * 
 	 */
-	public void setContextJournalPage(CollectionJournalPage newPage) {
+	public void setContextJournalPage(CollectionGroup newPage) {
 		setContext(CONTEXT_JOURNAL_PAGE, newPage);
 	}
 
 	/**
 	 * 
 	 */
-	public CollectionJournalPage getContextJournalPage() {
-		return (CollectionJournalPage) getContext(CONTEXT_JOURNAL_PAGE);
+	public CollectionGroup getContextJournalPage() {
+		return (CollectionGroup) getContext(CONTEXT_JOURNAL_PAGE);
 	}
 
 	/**
@@ -222,7 +222,7 @@ public class BulkCollectionsEntryDialogController extends
 	/**
 	 * 
 	 */
-	public IStatus validateJournal(CollectionJournalPage journal) {
+	public IStatus validateJournal(CollectionGroup journal) {
 		return journalPageValidators.validate(journal);
 	}
 
@@ -281,7 +281,7 @@ public class BulkCollectionsEntryDialogController extends
 					public void propertyChange(PropertyChangeEvent evt) {
 						log(LogService.LOG_DEBUG,
 								"CollectionLineRidget event: " + evt);
-						CollectionJournalPage workingJournalPage = getContextJournalPage();
+						CollectionGroup workingJournalPage = getContextJournalPage();
 						updateJournal(workingJournalPage,
 								(CollectionJournalLine) evt.getNewValue());
 						journalEntryTable.updateFromModel();
@@ -403,7 +403,7 @@ public class BulkCollectionsEntryDialogController extends
 					final List<Object> selectedRecords = journalEntryTable
 							.getSelection();
 					if (selectedRecords != null) {
-						final CollectionJournalPage page = getContextJournalPage();
+						final CollectionGroup page = getContextJournalPage();
 						page.getJournalEntries().removeAll(selectedRecords);
 					}
 					updateJournalTotals(); // todo: test
@@ -453,7 +453,7 @@ public class BulkCollectionsEntryDialogController extends
 		initValidators();
 		resetJournalEntryLine();
 		
-		CollectionJournalPage page = getContextJournalPage();
+		CollectionGroup page = getContextJournalPage();
 		int lineCount = page.getJournalEntries().size();
 		if (lineCount > 0) {
 			CollectionJournalLine lastLine, workingLine;
@@ -472,7 +472,7 @@ public class BulkCollectionsEntryDialogController extends
 	private void initValidators() {
 		// page relative config
 		//
-		CollectionJournalPage workingJournalPage = getContextJournalPage();
+		CollectionGroup workingJournalPage = getContextJournalPage();
 		// final Route currentRoute = workingJournalPage.getRoute();
 		final IMemberInfoProvider lookupProvider = new MemberLookupProvider(dairyRepo);
 
@@ -529,7 +529,7 @@ public class BulkCollectionsEntryDialogController extends
 	 * 
 	 */
 	protected void bindPageRidgets() {
-		CollectionJournalPage workingJournalPage = getContextJournalPage();
+		CollectionGroup workingJournalPage = getContextJournalPage();
 		journalHeaderRidget.bindToModel(workingJournalPage);
 
 		journalEntryTable.bindToModel(workingJournalPage, "journalEntries",
@@ -537,7 +537,7 @@ public class BulkCollectionsEntryDialogController extends
 				columnHeaderNames);
 
 		totalLabelRidget.bindToModel(workingJournalPage,
-				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__RECORD_TOTAL
+				DairyPackage.Literals.COLLECTION_GROUP__RECORD_TOTAL
 						.getName());
 		totalLabelRidget.setModelToUIControlConverter(NumberToStringConverter
 				.fromBigDecimal());
@@ -555,13 +555,13 @@ public class BulkCollectionsEntryDialogController extends
 	 * Set focus to the appropriate widget based on journal state
 	 */
 	private void setInitialFocus() {
-		CollectionJournalPage workingJournalPage = getContextJournalPage();
+		CollectionGroup workingJournalPage = getContextJournalPage();
 		if (workingJournalPage != null) {
 			final String refNum = workingJournalPage.getReferenceNumber();
 			if (refNum == null
 					|| refNum.trim().length() == 0
 					|| !workingJournalPage
-							.eIsSet(DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__DRIVER_TOTAL)) {
+							.eIsSet(DairyPackage.Literals.COLLECTION_GROUP__DRIVER_TOTAL)) {
 				collectionLineRidget.setEnabled(false);
 				journalHeaderRidget.setEnabled(true);
 				journalHeaderRidget.requestFocus();
@@ -580,7 +580,7 @@ public class BulkCollectionsEntryDialogController extends
 	 * @param journal
 	 * @param line
 	 */
-	protected void updateJournal(CollectionJournalPage journal,
+	protected void updateJournal(CollectionGroup journal,
 			CollectionJournalLine line) {
 		log(LogService.LOG_DEBUG, "updateJournal: " + journal);
 		journal.getJournalEntries().add(line);
@@ -636,7 +636,7 @@ public class BulkCollectionsEntryDialogController extends
 	 * 
 	 */
 	protected boolean handleCancelAction() {
-		CollectionJournalPage workingJournal = getContextJournalPage();
+		CollectionGroup workingJournal = getContextJournalPage();
 		if (workingJournal.getJournalEntries().size() > 0
 				|| workingJournal.getDriverTotal() != null) {
 			boolean ret = RienaMessageDialog
@@ -704,7 +704,7 @@ public class BulkCollectionsEntryDialogController extends
 		if (!ContainerValidator.validateContainer(this.journalHeaderRidget).isEmpty())
 			return false;
 
-		CollectionJournalPage workingJournal = getContextJournalPage();
+		CollectionGroup workingJournal = getContextJournalPage();
 		IStatus validationResult = validateJournal(workingJournal);
 		if (validationResult.matches(IStatus.CANCEL | IStatus.ERROR)) {
 			displayMessage(validationResult);
@@ -766,17 +766,17 @@ public class BulkCollectionsEntryDialogController extends
 	 * 
 	 */
 	private void refreshWorkingJournal() {
-		CollectionJournalPage oldPage = getContextJournalPage();
-		CollectionJournalPage newPage = DairyFactory.eINSTANCE
-				.createCollectionJournalPage();
+		CollectionGroup oldPage = getContextJournalPage();
+		CollectionGroup newPage = DairyFactory.eINSTANCE
+				.createCollectionGroup();
 
 		// copy some of the old stuff to the new guy
 		EStructuralFeature[] transferFeatures = new EStructuralFeature[] {
-				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__JOURNAL_DATE,
-				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__COLLECTION_CENTER,
-				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__SESSION,
-				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__VEHICLE,
-				DairyPackage.Literals.COLLECTION_JOURNAL_PAGE__DRIVER, };
+				DairyPackage.Literals.COLLECTION_GROUP__JOURNAL_DATE,
+				DairyPackage.Literals.COLLECTION_GROUP__COLLECTION_CENTER,
+				DairyPackage.Literals.COLLECTION_GROUP__SESSION,
+				DairyPackage.Literals.COLLECTION_GROUP__VEHICLE,
+				DairyPackage.Literals.COLLECTION_GROUP__DRIVER, };
 		for (EStructuralFeature feature : transferFeatures) {
 			newPage.eSet(feature, oldPage.eGet(feature));
 		}
@@ -804,7 +804,7 @@ public class BulkCollectionsEntryDialogController extends
 		int rejectedCount = 0;
 		BigDecimal total = BigDecimal.ZERO;
 
-		CollectionJournalPage workingJournalPage = getContextJournalPage();
+		CollectionGroup workingJournalPage = getContextJournalPage();
 		for (final CollectionJournalLine line : workingJournalPage
 				.getJournalEntries()) {
 			line.setLineNumber(++counter);
@@ -838,7 +838,7 @@ public class BulkCollectionsEntryDialogController extends
 		}
 	}
 
-	private boolean isClean(CollectionJournalPage page) {
+	private boolean isClean(CollectionGroup page) {
 		return page != null
 				&& page.getJournalEntries().size() == 0
 				&& (page.getDriverTotal() == BigDecimal.ZERO || page

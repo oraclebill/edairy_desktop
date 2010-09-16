@@ -122,23 +122,23 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//DairyLocation/functions"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//DairyLocation/containers"/>
     </genClasses>
-    <genClasses ecoreClass="dairy.ecore#//CollectionJournalPage">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalPage/journalId"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalPage/referenceNumber"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalPage/journalDate"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalPage/status"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//CollectionJournalPage/driver"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//CollectionJournalPage/vehicle"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalPage/driverTotal"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalPage/recordTotal"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dairy.ecore#//CollectionJournalPage/journalEntries"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalPage/suspended"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalPage/entryCount"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalPage/suspendedCount"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalPage/rejectedCount"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionJournalPage/journalNumber"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EReference dairy.ecore#//CollectionJournalPage/session"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//CollectionJournalPage/collectionCenter"/>
+    <genClasses ecoreClass="dairy.ecore#//CollectionGroup">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionGroup/journalId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionGroup/referenceNumber"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionGroup/journalDate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionGroup/status"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//CollectionGroup/driver"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//CollectionGroup/vehicle"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionGroup/driverTotal"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionGroup/recordTotal"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference dairy.ecore#//CollectionGroup/journalEntries"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionGroup/suspended"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionGroup/entryCount"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionGroup/suspendedCount"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionGroup/rejectedCount"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//CollectionGroup/journalNumber"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference dairy.ecore#//CollectionGroup/session"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//CollectionGroup/collectionCenter"/>
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//Route">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Route/Id"/>

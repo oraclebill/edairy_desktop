@@ -19,7 +19,7 @@ import org.osgi.service.log.LogService;
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.collection.ui.components.journalheader.IJournalHeaderRidget;
 import com.agritrace.edairy.desktop.collection.ui.components.journalheader.JournalHeaderRidget;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalPage;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord;
 import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
@@ -52,7 +52,7 @@ public class ScaleImportViewController extends SubModuleController {
 	
 	private final IDairyRepository dairyRepo;
 
-	private CollectionJournalPage importedData; 
+	private CollectionGroup importedData; 
 	private IJournalHeaderRidget journalHeaderRidget;
 	private ITableRidget table;
 	private ILabelRidget calculatedTotalRidget;
@@ -152,8 +152,8 @@ public class ScaleImportViewController extends SubModuleController {
 	/**
 	 * 
 	 */
-	protected CollectionJournalPage getContextData() {
-		CollectionJournalPage  scaleRecords = null;
+	protected CollectionGroup getContextData() {
+		CollectionGroup  scaleRecords = null;
 		Object contextObj = null;
 		final NavigationArgument navArg = getNavigationNode().getNavigationArgument();
 		if (navArg != null) {
@@ -163,8 +163,8 @@ public class ScaleImportViewController extends SubModuleController {
 			LOG.log(LogService.LOG_WARNING, "Failed to get page from navigation - falling back to context");
 			contextObj = getNavigationNode().getContext("IMPORTED_RECORDS");
 		}
-		if (contextObj instanceof CollectionJournalPage) {
-			scaleRecords = (CollectionJournalPage) contextObj;
+		if (contextObj instanceof CollectionGroup) {
+			scaleRecords = (CollectionGroup) contextObj;
 		} else {
 			LOG.log(LogService.LOG_ERROR, "Failed to get imported data from context.");
 			throw new IllegalStateException("ERROR: unable to get journal page from context.");
