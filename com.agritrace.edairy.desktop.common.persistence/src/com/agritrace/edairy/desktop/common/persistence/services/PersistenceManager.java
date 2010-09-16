@@ -27,6 +27,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.internal.common.persistence.Activator;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class PersistenceManager {
 
@@ -42,23 +44,31 @@ public class PersistenceManager {
 	
 	public static final String DEFAULT_DB_NAME = "dairytest";
 	public static final String DEFAULT_DB_TYPE = DB_TYPE_MYSQL;
+	
+	@Inject
+	private static Provider<PersistenceManager> PROVIDER;
 
-	private static PersistenceManager INSTANCE;
-
+	@Deprecated
+	private static PersistenceManager INSTANCE = null;
+	
+	@Deprecated
 	public static PersistenceManager getDefault() {
-		if (INSTANCE == null) {
-			INSTANCE = new PersistenceManager();
-		}
-		return INSTANCE;
+		if (INSTANCE != null)
+			return INSTANCE;
+		
+		return PROVIDER.get();
 	}
 
+	@Deprecated
 	public static void reset(PersistenceManager pm) {
 		if (!"true".equals(System.getProperty(RienaStatus.RIENA_TEST_SYSTEM_PROPERTY))) {
 			throw new IllegalStateException("This method is for testing only!!");
 		}
+		
 		INSTANCE = pm;
 	}
 
+	@Deprecated
 	public static void setDefault(PersistenceManager pm) {
 		if (INSTANCE == null) {
 			INSTANCE = pm;

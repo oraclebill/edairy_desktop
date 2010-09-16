@@ -49,7 +49,7 @@
    <extension
          point="org.eclipse.ui.splashHandlers">
       <splashHandler
-            class="com.agritrace.edairy.desktop.splashHandlers.EdairySplashHandler"
+            class="org.ops4j.peaberry.eclipse.GuiceExtensionFactory:com.agritrace.edairy.desktop.splashHandlers.EdairySplashHandler"
             id="com.agritrace.edairy.desktop.splashHandlers.edairy">
       </splashHandler>
       <splashHandlerProductBinding

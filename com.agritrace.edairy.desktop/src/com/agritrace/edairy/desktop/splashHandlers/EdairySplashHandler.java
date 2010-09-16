@@ -2,6 +2,7 @@ package com.agritrace.edairy.desktop.splashHandlers;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
+import java.util.Date;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -25,6 +26,7 @@ import org.eclipse.ui.internal.splash.EclipseSplashHandler;
 import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.ui.controllers.AuthController;
+import com.google.inject.Inject;
 
 @SuppressWarnings("restriction")
 public class EdairySplashHandler extends EclipseSplashHandler {
@@ -38,6 +40,11 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 	private Button buttonOK;
 	private Button buttonCancel;
 	private Font font;
+	
+	@Inject
+	public EdairySplashHandler(Date date) {
+		System.out.println("Date: " + date);
+	}
 	
 	@Override
 	public void init(Shell splash) {

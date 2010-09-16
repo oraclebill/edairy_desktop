@@ -1,11 +1,15 @@
 package com.agritrace.edairy.desktop;
 
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.riena.navigation.ApplicationNodeManager;
 import org.eclipse.riena.ui.swt.utils.ImageStore;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+
+import com.agritrace.edairy.desktop.common.persistence.services.IPersistenceService;
+import com.google.inject.Guice;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -17,6 +21,9 @@ public class EDairyActivator extends AbstractUIPlugin {
 
 	// The shared instance
 	private static EDairyActivator plugin;
+	
+	@Inject
+	private IPersistenceService persistenceService;
 	
 	/**
 	 * Returns the shared instance
@@ -70,9 +77,11 @@ public class EDairyActivator extends AbstractUIPlugin {
 	 */
 	@Override
 	public void start(BundleContext context) throws Exception {
+		final Injector injector = Guice.createInjector(new EDairyModule(context));
+		injector.injectMembers(this);
 		super.start(context);
 		plugin = this;
-		//initDatabase();
+		persistenceService.start();
 	}
 
 	/*
