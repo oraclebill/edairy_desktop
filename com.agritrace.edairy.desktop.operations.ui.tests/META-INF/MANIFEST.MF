@@ -10,6 +10,7 @@ Require-Bundle: com.agritrace.edairy.desktop.common.model;bundle-version="1.0.0"
  com.agritrace.edairy.desktop.common.ui;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.common.persistence;bundle-version="1.0.0",
  org.apache.oro;bundle-version="2.0.8",
- com.ibm.icu;bundle-version="4.2.1"
+ com.ibm.icu;bundle-version="4.2.1",
+ com.google.inject
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

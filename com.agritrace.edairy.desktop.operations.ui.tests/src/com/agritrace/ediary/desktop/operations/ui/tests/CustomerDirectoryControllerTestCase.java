@@ -8,18 +8,21 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
+import org.hibernate.Session;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
-import com.agritrace.edairy.desktop.common.persistence.services.HsqldbMemoryPersistenceManager;
-import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
+import com.agritrace.edairy.desktop.common.persistence.services.HsqlDbPersistenceManager;
 import com.agritrace.edairy.desktop.common.ui.reference.CompanyStatus;
 import com.agritrace.edairy.desktop.common.ui.reference.CustomerType;
 import com.agritrace.edairy.desktop.operations.ui.controllers.CustomerDirectoryController;
 import com.agritrace.edairy.desktop.operations.ui.views.CustomerDirectoryView;
+import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 /**
  * Test case for supplier list controller
@@ -31,6 +34,9 @@ public class CustomerDirectoryControllerTestCase extends AbstractSubModuleContro
 
 	// List<Supplier> supplier = new ArrayList<Supplier>();
 	private CustomerDirectoryController controller;
+	
+	@Inject
+	private IRepository<Customer> customerRepo;
 
 	@Override
 	protected CustomerDirectoryController createController(ISubModuleNode node) {
@@ -44,12 +50,19 @@ public class CustomerDirectoryControllerTestCase extends AbstractSubModuleContro
 	public void setUp() throws Exception {
 		// start with a new db
 		System.setProperty(RienaStatus.RIENA_TEST_SYSTEM_PROPERTY, "true");
-		PersistenceManager.reset(new HsqldbMemoryPersistenceManager());
-		IRepository<Customer> customerRepo = RepositoryFactory.getRepository(Customer.class);
+		Injector injector = Guice.createInjector(new AbstractModule() {
+			@Override
+			protected void configure() {
+				bind(Session.class).toProvider(HsqlDbPersistenceManager.class);
+			}
+		});
+		
+		injector.injectMembers(this);
 		
 		for (int i = 0; i < 10; i++) {
 			customerRepo.saveNew(createTestCustomer());
 		}
+		
 		super.setUp();
 	}
 

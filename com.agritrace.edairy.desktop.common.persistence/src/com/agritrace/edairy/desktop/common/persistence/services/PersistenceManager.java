@@ -15,7 +15,6 @@ import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.eclipse.emf.teneo.hibernate.HbHelper;
 import org.eclipse.riena.core.Log4r;
 import org.eclipse.riena.core.RienaLocations;
-import org.eclipse.riena.core.RienaStatus;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Environment;
@@ -49,33 +48,8 @@ public class PersistenceManager implements Provider<Session> {
 	private static Provider<PersistenceManager> PROVIDER;
 
 	@Deprecated
-	private static PersistenceManager INSTANCE = null;
-	
-	@Deprecated
 	public static PersistenceManager getDefault() {
-		if (INSTANCE != null)
-			return INSTANCE;
-		
 		return PROVIDER.get();
-	}
-
-	// TODO: Make tests inject PersistenceManager
-	@Deprecated
-	public static void reset(PersistenceManager pm) {
-		if (!"true".equals(System.getProperty(RienaStatus.RIENA_TEST_SYSTEM_PROPERTY))) {
-			throw new IllegalStateException("This method is for testing only!!");
-		}
-		
-		INSTANCE = pm;
-	}
-
-	@Deprecated
-	public static void setDefault(PersistenceManager pm) {
-		if (INSTANCE == null) {
-			INSTANCE = pm;
-		} else {
-			throw new IllegalStateException("default instance already set");
-		}
 	}
 
 	public static File getConfigFileArea() {
@@ -85,17 +59,6 @@ public class PersistenceManager implements Provider<Session> {
 		} catch (Exception e) {
 			ret = new File(".");
 			ret = ret.getAbsoluteFile();
-		}
-		return ret;
-	}
-
-	public static File getDatabaseFileArea() {
-		File ret = null;
-		try {
-			ret = RienaLocations.getDataArea(Activator.getDefault().getContext().getBundle());
-
-		} catch (Exception e) {
-			ret = new File("./db/");
 		}
 		return ret;
 	}
@@ -127,16 +90,11 @@ public class PersistenceManager implements Provider<Session> {
 			LOG.log(LogService.LOG_INFO, "Saved mapping file to " + file);
 		} catch (Exception e) {
 			LOG.log(LogService.LOG_ERROR, e.getMessage(), e);
-
 		}
 
 		postInit();
 
 		sessionFactory = hbds.getSessionFactory();
-	}
-
-	public HbDataStore getDataStore() {
-		return hbds;
 	}
 
 	/**
@@ -190,6 +148,17 @@ public class PersistenceManager implements Provider<Session> {
 		return props;
 	}
 	
+	protected static File getDatabaseFileArea() {
+		File ret = null;
+		try {
+			ret = RienaLocations.getDataArea(Activator.getDefault().getContext().getBundle());
+
+		} catch (Exception e) {
+			ret = new File("./db/");
+		}
+		return ret;
+	}
+
 	public final Properties getProperties() {
 		return hbds.getProperties();
 	}
@@ -201,12 +170,12 @@ public class PersistenceManager implements Provider<Session> {
 		properties.store(new FileOutputStream(propFile), "default properties, written on " + new Date());
 	}
 
-	protected EPackage[] getEPackages() {
+	private EPackage[] getEPackages() {
 		return new EPackage[] { TrackingPackage.eINSTANCE, DairyPackage.eINSTANCE, ModelPackage.eINSTANCE,
 				AccountPackage.eINSTANCE, RequestsPackage.eINSTANCE };
 	}
 
-	protected void postInit() {
+	private void postInit() {
 		LOG.log(LogService.LOG_DEBUG, ">>>>>> PersistenceManager[" + getClass().getName() + ":" + hashCode()
 				+ "] started on thread " + Thread.currentThread());
 		
@@ -221,13 +190,6 @@ public class PersistenceManager implements Provider<Session> {
 				LOG.log(LogService.LOG_WARNING, e.getMessage(), e);
 			}
 		}
-	}
-
-	/**
-	 * test only.
-	 */
-	void resetDefault() {
-		INSTANCE = null;
 	}
 
 	@Override

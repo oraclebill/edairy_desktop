@@ -2,10 +2,6 @@ package com.agritrace.edairy.desktop.common.persistence.services;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.util.List;
 import java.util.Map;
@@ -29,8 +25,6 @@ import com.google.inject.Scopes;
 public class PersistenceManagerTest {
 	@Inject
 	private Session testSession;
-	@Inject
-	private PersistenceManager testPM;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -97,54 +91,4 @@ public class PersistenceManagerTest {
 		assertEquals(0, containers.size());
 		
 	}
-	
-	@Test
-	public void testMultipleManagers() throws Exception {
-		PersistenceManager pm;
-		
-		// pm obtained from default constructor is system default
-		pm = new PersistenceManager();
-		assertTrue(pm instanceof com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager);
-		
-		testPM.resetDefault();
-				
-		// pm obtained from getDefault() is system default
-		pm = PersistenceManager.getDefault();
-		assertTrue(pm instanceof com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager);
-		
-		testPM.resetDefault();
-		
-		// pm, once set, is the only one you get
-		pm = new HsqldbMemoryPersistenceManager();
-		PersistenceManager.setDefault(pm);		
-		assertSame(pm, PersistenceManager.getDefault());
-		assertNotSame(pm, new PersistenceManager());
-		
-		// and once set, default won't change
-		assertSame(pm, PersistenceManager.getDefault());
-
-	}
-	
-	@Test
-	public void testSetDetaultPM() {
-		testPM.resetDefault();
-		PersistenceManager.setDefault(testPM);
-		assertEquals(testPM, PersistenceManager.getDefault());
-		
-		testPM = new HsqldbMemoryPersistenceManager();
-		assertNotSame(testPM, PersistenceManager.getDefault());
-		
-		try {
-			PersistenceManager.setDefault(testPM);
-			fail("Expected exception!!");
-		}
-		catch(Throwable t) {
-			;
-		}
-		
-		testPM.resetDefault();
-		PersistenceManager.setDefault(testPM);
-
-	}
-
 }
