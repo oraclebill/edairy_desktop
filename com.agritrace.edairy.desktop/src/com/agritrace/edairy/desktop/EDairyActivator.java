@@ -6,7 +6,10 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import com.agritrace.edairy.desktop.common.model.dairy.PreferenceKey;
+import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.google.inject.Guice;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 /**
@@ -19,6 +22,9 @@ public class EDairyActivator extends AbstractUIPlugin {
 
 	// The shared instance
 	private static EDairyActivator plugin;
+	
+	@Inject
+	private IRepository<PreferenceKey> keyRepository;
 	
 	/**
 	 * Returns the shared instance
@@ -76,6 +82,10 @@ public class EDairyActivator extends AbstractUIPlugin {
 		injector.injectMembers(this);
 		super.start(context);
 		plugin = this;
+		
+		for (PreferenceKey key: keyRepository.all()) {
+			System.out.println("Key: " + key.getName());
+		}
 	}
 
 	/*

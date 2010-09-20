@@ -4,7 +4,10 @@ import java.util.List;
 
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
+import com.agritrace.edairy.desktop.internal.member.services.farm.FarmRepository;
+import com.google.inject.ImplementedBy;
 
+@ImplementedBy(FarmRepository.class)
 public interface IFarmRepository extends IRepository<Farm> {
 	/**
 	 * Retrieves the list of all farms from the database. Unlike <code>all()</code>,

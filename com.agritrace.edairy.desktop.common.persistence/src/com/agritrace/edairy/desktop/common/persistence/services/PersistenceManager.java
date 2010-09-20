@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Properties;
 
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.eclipse.emf.teneo.hibernate.HbHelper;
 import org.eclipse.riena.core.Log4r;
@@ -20,11 +19,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Environment;
 import org.osgi.service.log.LogService;
 
-import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
-import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
-import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
+import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
 import com.agritrace.edairy.desktop.internal.common.persistence.Activator;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -77,7 +72,7 @@ public class PersistenceManager implements Provider<Session> {
 
 		hbds = HbHelper.INSTANCE.createRegisterDataStore(DEFAULT_DB_NAME);
 		hbds.setProperties(getDatastoreProperties());
-		hbds.setEPackages(getEPackages());
+		hbds.setEPackages(PersistenceModule.EPACKAGES);
 
 		hbds.initialize();
 		try {
@@ -168,11 +163,6 @@ public class PersistenceManager implements Provider<Session> {
 		LOG.log(LogService.LOG_INFO, "Saving properties to " + propFile);
 
 		properties.store(new FileOutputStream(propFile), "default properties, written on " + new Date());
-	}
-
-	private EPackage[] getEPackages() {
-		return new EPackage[] { TrackingPackage.eINSTANCE, DairyPackage.eINSTANCE, ModelPackage.eINSTANCE,
-				AccountPackage.eINSTANCE, RequestsPackage.eINSTANCE };
 	}
 
 	private void postInit() {

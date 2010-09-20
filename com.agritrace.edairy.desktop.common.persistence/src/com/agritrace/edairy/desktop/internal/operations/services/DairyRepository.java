@@ -86,20 +86,6 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 
 	/**
 	 * 
-	 */
-	private static class DairyRepositoryHolder {
-		private static final DairyRepository INSTANCE = new DairyRepository();
-	}
-
-	/**
-	 * 
-	 */
-	public static DairyRepository getInstance() {
-		return DairyRepositoryHolder.INSTANCE;
-	}
-
-	/**
-	 * 
 	 * @author bjones
 	 *
 	 */
@@ -216,7 +202,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 
 	private final Dairy localDairy;
 
-	private DairyRepository() {
+	public DairyRepository() {
 		Dairy myDairy = dairyRepository.findByKey(1L);
 		if (myDairy == null) {
 			myDairy = createLocalDairy();
