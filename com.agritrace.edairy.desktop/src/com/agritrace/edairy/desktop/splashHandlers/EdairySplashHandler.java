@@ -2,7 +2,6 @@ package com.agritrace.edairy.desktop.splashHandlers;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
-import java.util.Date;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -20,16 +19,22 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.internal.StartupThreading.StartupRunnable;
 import org.eclipse.ui.internal.splash.EclipseSplashHandler;
 
 import com.agritrace.edairy.desktop.member.ui.Activator;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.agritrace.edairy.desktop.ui.controllers.AuthController;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 @SuppressWarnings("restriction")
 public class EdairySplashHandler extends EclipseSplashHandler {
-	private static final int WAIT_MSEC = 5000;
+	@Inject
+	// It doesn't have to be IDairyRepository. Anything persistence-related will do.
+	private static Provider<IDairyRepository> PROVIDER;
 	
+	private static final int WAIT_MSEC = 5000;
 	private boolean authenticated = false;
 	private Label developerLabel;
 	private Text username;
@@ -37,11 +42,6 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 	private Button buttonOK;
 	private Button buttonCancel;
 	private Font font;
-	
-	@Inject
-	public EdairySplashHandler(Date date) {
-		System.out.println("Date: " + date);
-	}
 	
 	@Override
 	public void init(Shell splash) {
@@ -59,7 +59,14 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 		long endTime = System.currentTimeMillis() + WAIT_MSEC;
 		
 		final IProgressMonitor monitor = getBundleProgressMonitor();
-		monitor.beginTask("Loading", 0);
+		monitor.beginTask("Initializing database", 1);
+		splash.getDisplay().asyncExec(new StartupRunnable() {
+			@Override
+			public void runWithException() throws Throwable {
+				// Force initialization of the persistence layer
+				PROVIDER.get();
+			}
+		});
 		
 		while (System.currentTimeMillis() < endTime) {
 			if (splash.getDisplay().readAndDispatch() == false) {
