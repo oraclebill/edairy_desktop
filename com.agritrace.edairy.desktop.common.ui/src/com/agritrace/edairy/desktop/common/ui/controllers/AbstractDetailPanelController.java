@@ -28,7 +28,7 @@ public abstract class AbstractDetailPanelController<T extends EObject> {
 		
 		createMapper();
 		bindRidgets();
-		// bindMappedRidgets();
+		bindMappedRidgets();
 	}
 
 	public T getModel() {

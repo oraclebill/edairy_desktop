@@ -30,16 +30,17 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord;
 import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.ImportResultsDialog;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
+import com.agritrace.edairy.desktop.operations.services.dairylocation.IDairyLocationRepository;
 
 final class ScaleImportAction implements IActionListener {
 
@@ -219,19 +220,23 @@ final class ScaleImportAction implements IActionListener {
 
 		protected void addError(String message, Object detail) {
 			List<Object> errList = errMessages.get(message);
+			
 			if (errList == null) {
 				errList = new LinkedList<Object>();
 				errMessages.put(message, errList);
 			}
+			
 			errList.add(detail);
 		}
 
 		private void setPageJournalDate(CollectionGroup page) {
 			if (page.getJournalDate() == null) {
 				Date lowest = null, highest = null, journalDate = null;
+				
 				for (CollectionJournalLine line : page.getJournalEntries()) {
 					ScaleImportRecord record = (ScaleImportRecord) line;
 					Date collectionTime = record.getCollectionTime();
+					
 					if (collectionTime == null) {
 						addError("Record is missing collection time.", record);
 					} else {
@@ -243,11 +248,13 @@ final class ScaleImportAction implements IActionListener {
 						}
 					}
 				}
+				
 				if (lowest != null && highest != null) {
 					Calendar lowCal = Calendar.getInstance(), highCal = Calendar.getInstance();
 					lowCal.setTime(lowest);
 					highCal.setTime(highest);
 					long milliDiff = (highCal.getTimeInMillis() - lowCal.getTimeInMillis());
+					
 					if (milliDiff > MAX_COLLECTION_TIME_DIFFERENTIAL) {
 						addError("Difference between collection times exceeds threshold: " + milliDiff, page);
 					} else {
@@ -319,11 +326,13 @@ final class ScaleImportAction implements IActionListener {
 	private final MilkCollectionLogController milkCollectionLogController;
 	private IDairyRepository dairyRepo = RepositoryFactory.getDairyRepository();
 	private Map<String, CollectionGroup> pageMap = new HashMap<String, CollectionGroup>();
+	private Map<String, CollectionSession> sessionMap = new HashMap<String, CollectionSession>();
+	private Map<String, DairyLocation> centerMap = new HashMap<String, DairyLocation>();
 	Dairy localDairy;
 
 	public ScaleImportAction(MilkCollectionLogController milkCollectionLogController) {
 		this.milkCollectionLogController = milkCollectionLogController;
-
+		
 	}
 
 	@Override
@@ -338,8 +347,26 @@ final class ScaleImportAction implements IActionListener {
 		
 		final FileDialog fileDialog = new FileDialog(AbstractDirectoryController.getShell(), SWT.DIALOG_TRIM);
 		final String retVal = fileDialog.open();
+		
+		if (retVal == null) {
+			// user pressed Cancel
+			return;
+		}
+		
 		File importFile = new File(retVal);
 		pageMap.clear();
+		sessionMap.clear();
+		centerMap.clear();
+		
+		for (CollectionSession session: RepositoryFactory.getRepository(CollectionSession.class).all()) {
+			sessionMap.put(session.getCode(), session);
+		}
+		
+		for (DairyLocation loc: RepositoryFactory.getRegisteredRepository(IDairyLocationRepository.class).all()) {
+			if (loc.getCode() != null) {
+				centerMap.put(loc.getCode().toLowerCase(), loc);
+			}
+		}
 
 		UIProcess process = new ScaleImportProcess(importFile, navigationContext);
 		// job.setProperty(UIProcess.PROPERTY_CONTEXT, navigationContext);
@@ -382,6 +409,7 @@ final class ScaleImportAction implements IActionListener {
 
 	private CollectionGroup getJournalForScaleRecord(ScaleRecord record) {
 		String key = createGroupKey(record);
+		String centerCode = record.getRouteNumber() == null ? null : record.getRouteNumber().toLowerCase();
 		CollectionGroup page = pageMap.get(key);
 		
 		if (page == null) {
@@ -389,8 +417,8 @@ final class ScaleImportAction implements IActionListener {
 			page.setReferenceNumber(key);
 			page.setDriver(getDriverByCode(record.getOperatorCode()));
 			page.setJournalDate(record.getValidDate());
-			page.setSession(getSessionForCode(record.getSessionCode()));
-			// page.setRoute(getRouteForRouteCode(record.getRouteNumber()));
+			page.setSession(sessionMap.get(record.getSessionCode()));
+			page.setCollectionCenter(centerMap.get(centerCode));
 			
 			if (page.getDriver() == null || page.getJournalDate() == null || page.getSession() == null
 					/* || page.getRoute() == null */) {
@@ -404,35 +432,6 @@ final class ScaleImportAction implements IActionListener {
 		}
 		
 		return page;
-	}
-
-	private Route getRouteForRouteCode(String routeNumber) {
-		// TODO: Get feedback
-		/*
-		if (routeNumber != null) {
-			if (localDairy == null)
-				localDairy = dairyRepo.getLocalDairy();
-			for (Route route : localDairy.getRoutes()) {
-				if (route.getCode().equalsIgnoreCase(routeNumber.trim()))
-					return route;
-			}
-		}
-		*/
-		return null;
-	}
-
-	private CollectionSession getSessionForCode(String sessionCode) {
-		// TODO: Get feedback
-		/*
-		if (sessionCode != null) {
-			if (sessionCode.equals("AM")) {
-				return Session.MORNING;
-			} else if (sessionCode.equals("PM")) {
-				return Session.EVENING1;
-			}
-		}
-		*/
-		return null;
 	}
 
 	private Employee getDriverByCode(String operatorCode) {

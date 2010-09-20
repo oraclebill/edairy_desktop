@@ -37,5 +37,6 @@ public interface DairyLocationUIConstants {
 	public static final String RIDGET_ID_PHONE = "phone";
 	public static final String RIDGET_ID_ROUTE = "route";
 	public static final String RIDGET_ID_SAVE_ACTION = "saveAction";
+	public static final String RIDGET_ID_ROUTE_DETAIL_AREA = "routeDetailArea";
 
 }

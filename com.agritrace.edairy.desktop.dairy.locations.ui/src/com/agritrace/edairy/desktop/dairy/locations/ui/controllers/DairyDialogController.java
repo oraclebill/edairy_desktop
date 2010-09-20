@@ -6,6 +6,8 @@ import java.util.List;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.riena.ui.core.marker.ValidationTime;
+import org.eclipse.riena.ui.ridgets.IComboRidget;
+import org.eclipse.riena.ui.ridgets.ICompositeRidget;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
@@ -28,6 +30,9 @@ public class DairyDialogController extends RecordDialogController<DairyLocation>
 	private IMultipleChoiceRidget functions;
 	//private IComboRidget routeCombo;
 	private ITextRidget phone;
+	private ICompositeRidget detailArea;
+	private ITextRidget txtCode;
+	private IComboRidget comboRoute;
 
 	@Override
 	public void configureUserRidgets() {
@@ -36,6 +41,9 @@ public class DairyDialogController extends RecordDialogController<DairyLocation>
 		editLocation = getWorkingCopy();
 		assert (null != editLocation);
 
+		detailArea = getRidget(ICompositeRidget.class, DairyLocationUIConstants.RIDGET_ID_ROUTE_DETAIL_AREA);
+		txtCode = getRidget(ITextRidget.class, DairyLocationUIConstants.RIDGET_ID_CODE);
+		comboRoute = getRidget(IComboRidget.class, DairyLocationUIConstants.RIDGET_ID_ROUTE);
 
 		phone = getRidget(ITextRidget.class,DairyLocationUIConstants.RIDGET_ID_PHONE);
 		phone.addValidationRule(new PhoneNumberValidatiionRule(), ValidationTime.ON_UI_CONTROL_EDIT);
@@ -57,10 +65,9 @@ public class DairyDialogController extends RecordDialogController<DairyLocation>
 		functions.addSelectionListener(new ISelectionListener() {
 			@Override
 			public void ridgetSelected(SelectionEvent event) {
-				txtCode.setMandatory(editLocation.getFunctions().contains(DairyFunction.MILK_COLLECTION));
+				resetDetailArea();
 			}
 		});
-		
 		functions.updateFromModel();
 		
 		addTextMap(DairyLocationUIConstants.RIDGET_ID_DATEOPENED, DairyPackage.Literals.DAIRY_LOCATION__DATE_OPENED);
@@ -81,7 +88,7 @@ public class DairyDialogController extends RecordDialogController<DairyLocation>
 		mapController.setInputModel(editLocation.getLocation().getMapLocation());
 		mapController.updateBinding();
 	}
-
+	
 	@Override
 	public DairyLocation getWorkingCopy() {
 		return (DairyLocation) getContext("editObject");
@@ -90,10 +97,24 @@ public class DairyDialogController extends RecordDialogController<DairyLocation>
 	@Override
 	public void afterBind() {
 		super.afterBind();
+		resetDetailArea();
+
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Route> getRoutes(){
 		return (List<Route>)getContext("routes");
 	}
+
+	private void resetDetailArea() {		
+		final boolean isCollectionCenter = editLocation.getFunctions().contains(DairyFunction.MILK_COLLECTION);		
+		txtCode.setMandatory(isCollectionCenter);
+		detailArea.setEnabled(isCollectionCenter);
+		if (!isCollectionCenter) {
+			txtCode.setText(null);
+			comboRoute.setSelection(null);
+		}
+		detailArea.setVisible(isCollectionCenter);
+	}
+
 }

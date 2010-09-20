@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.internal.operations.services.dairylocation;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -55,7 +56,6 @@ public class DairyLocationRepository extends HibernateRepository<DairyLocation> 
 		super.save(changedItem);
 	}
 
-
 	@Override
 	public void delete(DairyLocation deletableEntity) {
 		final Route route = deletableEntity.getRoute();
@@ -85,16 +85,32 @@ public class DairyLocationRepository extends HibernateRepository<DairyLocation> 
 		runWithTransaction(routesQuery);
 		return routesQuery.getResults();
 	}
-
-	@Override
-	public void saveNew(DairyLocation newEntity) {
+	
+	private void prepareNew(DairyLocation newEntity) {
 		final Route route = newEntity.getRoute();
 		if (route != null) {
 			newEntity.setRoute((Route) get("Route", new Long(route.getId())));
 		}
 		Dairy dairy = (Dairy) get("Dairy", 1l);
 		dairy.getBranchLocations().add(newEntity);
+	}
+
+	@Override
+	public void saveNew(DairyLocation newEntity) {
+		prepareNew(newEntity);
 		super.saveNew(newEntity);
+	}
+	
+	@Override
+	public void saveAll(final Collection<? extends DairyLocation> locs) {
+		runWithTransaction(new SessionRunnable<Object>() {
+			@Override
+			public void run(Session session) {
+				for (DairyLocation loc: locs) {
+					session.save(loc);
+				}
+			}
+		});
 	}
 
 	public void saveNewRoute(final Route newRoute) {

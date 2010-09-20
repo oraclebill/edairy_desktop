@@ -44,8 +44,8 @@
       </command>
       <command
             categoryId="com.agritrace.edairy.desktop.install.commands.category"
-            id="com.agritrace.edairy.desktop.install.commands.importRouteData"
-            name="Import Route Data">
+            id="com.agritrace.edairy.desktop.install.commands.importCollectionCenterData"
+            name="Import Collection Center Data">
       </command>
       <command
             categoryId="com.agritrace.edairy.desktop.install.commands.category"
@@ -65,8 +65,8 @@
             commandId="com.agritrace.edairy.desktop.install.commands.importMembers">
       </handler>
       <handler
-            class="com.agritrace.edairy.desktop.install.handlers.ImportRoutesHandler"
-            commandId="com.agritrace.edairy.desktop.install.commands.importRouteData">
+            class="com.agritrace.edairy.desktop.install.handlers.ImportCollectionCentersHandler"
+            commandId="com.agritrace.edairy.desktop.install.commands.importCollectionCenterData">
       </handler>
       <handler
             class="com.agritrace.edairy.desktop.install.handlers.ImportEmployeesHandler"
@@ -90,9 +90,9 @@
                label="Setup"
                mnemonic="I">
             <command
-                  commandId="com.agritrace.edairy.desktop.install.commands.importRouteData"
-                  label="Import Routes"
-                  mnemonic="R"
+                  commandId="com.agritrace.edairy.desktop.install.commands.importCollectionCenterData"
+                  label="Import Collection Centers"
+                  mnemonic="C"
                   style="push">
             </command>
             <command

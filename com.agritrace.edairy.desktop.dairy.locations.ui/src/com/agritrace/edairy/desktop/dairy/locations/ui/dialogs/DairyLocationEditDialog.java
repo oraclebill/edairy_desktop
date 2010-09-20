@@ -22,6 +22,7 @@ import com.agritrace.edairy.desktop.common.ui.controls.location.LocationTabFolde
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.dairy.locations.ui.DairyLocationUIConstants;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyDialogController;
+import org.eclipse.swt.widgets.Label;
 
 public class DairyLocationEditDialog extends RecordDialog<DairyLocation> {
 	private Composite comonComp;
@@ -69,17 +70,26 @@ public class DairyLocationEditDialog extends RecordDialog<DairyLocation> {
 				DairyLocationUIConstants.RIDGET_ID_FUNCTIONS);
 		functionsChoice.setOrientation(SWT.HORIZONTAL);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(functionsChoice);
+		
+		Composite routeDetailArea = UIControlsFactory.createComposite(composite, SWT.NONE);
+		routeDetailArea.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 2, 1));
+		routeDetailArea.setLayout(new GridLayout(4, false));
+		addUIControl(routeDetailArea, DairyLocationUIConstants.RIDGET_ID_ROUTE_DETAIL_AREA);
 
-		// code
-		UIControlsFactory.createLabel(composite, "Code");
-		final Text txtCode = UIControlsFactory.createText(composite);
-		txtCode.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false,1, 1));
-		addUIControl(txtCode, DairyLocationUIConstants.RIDGET_ID_CODE);
-
-		//route
-		UIControlsFactory.createLabel(composite, "Transport Route", SWT.LEFT);
-		final CCombo combo = UIControlsFactory.createCCombo(composite, DairyLocationUIConstants.RIDGET_ID_ROUTE);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(combo);
+				// code
+				Label label = UIControlsFactory.createLabel(routeDetailArea, "Collection Center Code");
+				final Text txtCode = UIControlsFactory.createText(routeDetailArea);
+				txtCode.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
+				addUIControl(txtCode, DairyLocationUIConstants.RIDGET_ID_CODE);
+				
+						//route
+						Label label_1 = UIControlsFactory.createLabel(routeDetailArea, "Transport Route", SWT.LEFT);
+						GridData gd_label_1 = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+						gd_label_1.horizontalIndent = 10;
+						label_1.setLayoutData(gd_label_1);
+						final CCombo combo = UIControlsFactory.createCCombo(routeDetailArea, DairyLocationUIConstants.RIDGET_ID_ROUTE);
+						combo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
+						GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(combo);
 		createContactGroup(comonComp);
 		parent.pack();
 	}
