@@ -4,7 +4,6 @@ import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.util.Date;
 
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.resource.FontDescriptor;
 import org.eclipse.jface.resource.JFaceResources;
@@ -20,10 +19,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.internal.StartupThreading.StartupRunnable;
 import org.eclipse.ui.internal.splash.EclipseSplashHandler;
 
-import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.ui.controllers.AuthController;
 import com.google.inject.Inject;
@@ -32,7 +29,6 @@ import com.google.inject.Inject;
 public class EdairySplashHandler extends EclipseSplashHandler {
 	private static final int WAIT_MSEC = 5000;
 	
-	private volatile boolean initialized = false;
 	private boolean authenticated = false;
 	private Label developerLabel;
 	private Text username;
@@ -61,23 +57,7 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 		getContent().setBackgroundImage(Activator.getImage("splash/splash.bmp"));
 		long endTime = System.currentTimeMillis() + WAIT_MSEC;
 		
-		final IProgressMonitor monitor = getBundleProgressMonitor();
-		monitor.beginTask("Initializing database", 2);
-		
-		getSplash().getDisplay().asyncExec(new StartupRunnable() {
-			@Override
-			public void runWithException() throws Throwable {
-				PersistenceManager pm = PersistenceManager.getDefault();
-				monitor.worked(1);
-				// Force Hibernate to initialize - how should we do this elegantly?
-				pm.getSession().close();
-				monitor.worked(1);
-				
-				initialized = true;
-			}
-		});
-		
-		while (!initialized || System.currentTimeMillis() < endTime) {
+		while (System.currentTimeMillis() < endTime) {
 			if (splash.getDisplay().readAndDispatch() == false) {
 				splash.getDisplay().sleep();
 			}

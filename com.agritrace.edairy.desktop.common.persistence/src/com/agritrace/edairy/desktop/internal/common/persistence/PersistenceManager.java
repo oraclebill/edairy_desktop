@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.common.persistence.services;
+package com.agritrace.edairy.desktop.internal.common.persistence;
 
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.eclipse.equinox.log.Logger;
@@ -7,7 +7,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.osgi.service.log.LogService;
 
-import com.agritrace.edairy.desktop.internal.common.persistence.Activator;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 

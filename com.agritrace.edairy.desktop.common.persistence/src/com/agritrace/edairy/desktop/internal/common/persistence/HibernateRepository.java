@@ -18,7 +18,6 @@ import org.osgi.service.log.LogService;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
-import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 
 public abstract class HibernateRepository<T extends EObject> implements
 		IRepository<T> {
