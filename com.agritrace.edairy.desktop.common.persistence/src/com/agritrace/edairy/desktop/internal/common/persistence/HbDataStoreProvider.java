@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.common.persistence.services;
+package com.agritrace.edairy.desktop.internal.common.persistence;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -18,7 +18,7 @@ import org.hibernate.cfg.Environment;
 import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
-import com.agritrace.edairy.desktop.internal.common.persistence.Activator;
+import com.agritrace.edairy.desktop.common.persistence.services.IDbPropertiesManager;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 

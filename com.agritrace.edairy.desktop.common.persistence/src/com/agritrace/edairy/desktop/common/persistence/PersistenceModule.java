@@ -2,7 +2,6 @@ package com.agritrace.edairy.desktop.common.persistence;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -23,8 +22,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
-import com.agritrace.edairy.desktop.common.persistence.services.HbDataStoreProvider;
 import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
+import com.agritrace.edairy.desktop.internal.common.persistence.HbDataStoreProvider;
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
 import com.agritrace.edairy.desktop.internal.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.internal.operations.services.customer.CustomerRepository;
@@ -86,8 +85,7 @@ public class PersistenceModule extends AbstractModule {
 	protected void configure() {
 		bind(Session.class).toProvider(PersistenceManager.class);
 		bind(PersistenceManager.class).in(Scopes.SINGLETON);
-		bind(HbDataStore.class).toProvider(HbDataStoreProvider.class);
-		bind(HbDataStoreProvider.class).in(Scopes.SINGLETON);
+		bindDataStore();
 		
 		for (EPackage pkg: EPACKAGES) {
 			for (EClassifier klass: pkg.getEClassifiers()) {
@@ -125,5 +123,10 @@ public class PersistenceModule extends AbstractModule {
 		// Ideally we shouldn't need this...
 		requestStaticInjection(PersistenceManager.class);
 		requestStaticInjection(RepositoryFactory.class);
+	}
+	
+	protected void bindDataStore() {
+		bind(HbDataStore.class).toProvider(HbDataStoreProvider.class);
+		bind(HbDataStoreProvider.class).in(Scopes.SINGLETON);
 	}
 }
