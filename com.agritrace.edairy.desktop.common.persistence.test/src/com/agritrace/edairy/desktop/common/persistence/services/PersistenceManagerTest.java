@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.After;
@@ -20,7 +21,6 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.Scopes;
 
 public class PersistenceManagerTest {
 	@Inject
@@ -31,9 +31,8 @@ public class PersistenceManagerTest {
 		Injector injector = Guice.createInjector(new AbstractModule() {
 			@Override
 			protected void configure() {
-				bind(Session.class).toProvider(HsqlDbPersistenceManager.class);
-				bind(PersistenceManager.class).to(HsqlDbPersistenceManager.class);
-				bind(HsqlDbPersistenceManager.class).in(Scopes.SINGLETON);
+				bind(Session.class).toProvider(PersistenceManager.class);
+				bind(HbDataStore.class).toProvider(HsqlDbDataStoreProvider.class);
 			}
 		});
 		

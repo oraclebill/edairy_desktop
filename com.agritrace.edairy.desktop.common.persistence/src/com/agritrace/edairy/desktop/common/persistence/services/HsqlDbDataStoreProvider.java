@@ -5,9 +5,9 @@ import java.util.Properties;
 
 import org.hibernate.cfg.Environment;
 
-public class HsqlDbPersistenceManager extends PersistenceManager {
+public class HsqlDbDataStoreProvider extends HbDataStoreProvider {
 
-	public HsqlDbPersistenceManager() {
+	public HsqlDbDataStoreProvider() {
 		super();
 	}
 

@@ -1,5 +1,6 @@
 package com.agritrace.ediary.desktop.operations.ui.tests;
 
+import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.eclipse.riena.core.RienaStatus;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.NavigationNodeId;
@@ -14,7 +15,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
-import com.agritrace.edairy.desktop.common.persistence.services.HsqlDbPersistenceManager;
+import com.agritrace.edairy.desktop.common.persistence.services.HsqlDbDataStoreProvider;
+import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.common.ui.reference.CompanyStatus;
 import com.agritrace.edairy.desktop.common.ui.reference.CustomerType;
 import com.agritrace.edairy.desktop.operations.ui.controllers.CustomerDirectoryController;
@@ -53,7 +55,8 @@ public class CustomerDirectoryControllerTestCase extends AbstractSubModuleContro
 		Injector injector = Guice.createInjector(new AbstractModule() {
 			@Override
 			protected void configure() {
-				bind(Session.class).toProvider(HsqlDbPersistenceManager.class);
+				bind(Session.class).toProvider(PersistenceManager.class);
+				bind(HbDataStore.class).toProvider(HsqlDbDataStoreProvider.class);
 			}
 		});
 		

@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.hibernate.Session;
 
 import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
@@ -21,6 +22,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
+import com.agritrace.edairy.desktop.common.persistence.services.HbDataStoreProvider;
 import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
 import com.agritrace.edairy.desktop.internal.operations.services.DairyRepository;
@@ -38,6 +40,7 @@ import com.google.inject.Scopes;
 import com.google.inject.util.Types;
 
 public class PersistenceModule extends AbstractModule {
+	public static final String PROPERTIES_FILE_NAME = "edairydb.properties";
 	public static final EPackage[] EPACKAGES = {
 		TrackingPackage.eINSTANCE,
 		DairyPackage.eINSTANCE,
@@ -82,6 +85,7 @@ public class PersistenceModule extends AbstractModule {
 	protected void configure() {
 		bind(Session.class).toProvider(PersistenceManager.class);
 		bind(PersistenceManager.class).in(Scopes.SINGLETON);
+		bind(HbDataStore.class).toProvider(HbDataStoreProvider.class);
 		
 		for (EPackage pkg: EPACKAGES) {
 			for (EClassifier klass: pkg.getEClassifiers()) {

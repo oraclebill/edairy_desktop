@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.NavigationNodeId;
 import org.eclipse.riena.navigation.ui.swt.controllers.AbstractSubModuleControllerTest;
@@ -25,7 +26,8 @@ import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
-import com.agritrace.edairy.desktop.common.persistence.services.HsqlDbPersistenceManager;
+import com.agritrace.edairy.desktop.common.persistence.services.HsqlDbDataStoreProvider;
+import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.services.ui.controllers.AnimalHealthRequestViewController;
 import com.agritrace.edairy.desktop.services.ui.views.AnimalHealthRequestView;
@@ -48,7 +50,8 @@ public class ServiceRequestControllerTestCase extends AbstractSubModuleControlle
 		Guice.createInjector(new AbstractModule() {
 			@Override
 			protected void configure() {
-				bind(Session.class).toProvider(HsqlDbPersistenceManager.class);
+				bind(Session.class).toProvider(PersistenceManager.class);
+				bind(HbDataStore.class).toProvider(HsqlDbDataStoreProvider.class);
 				requestStaticInjection(ServiceRequestControllerTestCase.class);
 			}
 		});
