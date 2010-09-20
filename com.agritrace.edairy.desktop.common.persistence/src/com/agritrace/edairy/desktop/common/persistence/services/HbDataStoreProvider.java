@@ -3,7 +3,11 @@ package com.agritrace.edairy.desktop.common.persistence.services;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Date;
 import java.util.Properties;
 
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
@@ -18,7 +22,7 @@ import com.agritrace.edairy.desktop.internal.common.persistence.Activator;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class HbDataStoreProvider implements Provider<HbDataStore> {
+public class HbDataStoreProvider implements Provider<HbDataStore>, IDbPropertiesManager {
 	private static final org.eclipse.equinox.log.Logger LOG = Log4r.getLogger(Activator.getDefault(),
 			HbDataStoreProvider.class);
 
@@ -62,6 +66,21 @@ public class HbDataStoreProvider implements Provider<HbDataStore> {
 			LOG.log(LogService.LOG_INFO, "Saved mapping file to " + file);
 		} catch (Exception e) {
 			LOG.log(LogService.LOG_ERROR, e.getMessage(), e);
+		}
+
+		LOG.log(LogService.LOG_DEBUG, ">>>>>> PersistenceManager[" + getClass().getName() + ":" + hashCode()
+				+ "] started on thread " + Thread.currentThread());
+		
+		File propFile = new File(getConfigFileArea(), PersistenceModule.PROPERTIES_FILE_NAME);
+		
+		if (!propFile.exists()) {
+			try {
+				setProperties(hbds.getProperties());
+			} catch (FileNotFoundException e) {
+				LOG.log(LogService.LOG_WARNING, e.getMessage(), e);
+			} catch (IOException e) {
+				LOG.log(LogService.LOG_WARNING, e.getMessage(), e);
+			}
 		}
 	}
 	
@@ -124,5 +143,19 @@ public class HbDataStoreProvider implements Provider<HbDataStore> {
 	
 	protected final String getDatabaseName() {
 		return System.getProperty(DB_NAME_PROPERTY, DEFAULT_DB_NAME);
+	}
+
+
+	@Override
+	public Properties getProperties() {
+		return hbds.getProperties();
+	}
+
+	@Override
+	public void setProperties(Properties props) throws IOException {
+		File propFile = new File(getConfigFileArea(), PersistenceModule.PROPERTIES_FILE_NAME);
+		LOG.log(LogService.LOG_INFO, "Saving properties to " + propFile);
+
+		props.store(new FileOutputStream(propFile), "default properties, written on " + new Date());
 	}
 }

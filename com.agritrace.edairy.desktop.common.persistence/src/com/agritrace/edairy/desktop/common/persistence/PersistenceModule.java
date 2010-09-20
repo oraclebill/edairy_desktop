@@ -2,6 +2,7 @@ package com.agritrace.edairy.desktop.common.persistence;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -86,6 +87,7 @@ public class PersistenceModule extends AbstractModule {
 		bind(Session.class).toProvider(PersistenceManager.class);
 		bind(PersistenceManager.class).in(Scopes.SINGLETON);
 		bind(HbDataStore.class).toProvider(HbDataStoreProvider.class);
+		bind(HbDataStoreProvider.class).in(Scopes.SINGLETON);
 		
 		for (EPackage pkg: EPACKAGES) {
 			for (EClassifier klass: pkg.getEClassifiers()) {

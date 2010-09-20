@@ -18,6 +18,7 @@ import org.hibernate.cfg.Environment;
 
 import com.agritrace.edairy.desktop.common.ui.controllers.SiteSettingsController;
 import com.agritrace.edairy.desktop.common.ui.controllers.SystemSettingsController;
+import com.google.inject.Inject;
 
 /**
  * Preferences dialog invoked from the Preference menu, with two pages.
@@ -26,13 +27,14 @@ import com.agritrace.edairy.desktop.common.ui.controllers.SystemSettingsControll
  *
  */
 public final class PreferencesDialog extends PreferenceDialog {
-	private static final class SitePrefsPage extends FieldEditorPreferencePage {
+	public static final class SitePrefsPage extends FieldEditorPreferencePage {
 		private SiteSettingsController controller;
 		
-		public SitePrefsPage() {
+		@Inject
+		public SitePrefsPage(SiteSettingsController controller) {
 			super("Site preferences", GRID);
 			setDescription("Settings that affect the client installation.");
-			controller = new SiteSettingsController();
+			this.controller = controller;
 		}
 		
 		@Override
@@ -127,8 +129,9 @@ public final class PreferencesDialog extends PreferenceDialog {
 		}
 	}
 	
-	public PreferencesDialog(Shell parentShell) {
-		super(parentShell, createPreferenceManager());
+	@Inject
+	public PreferencesDialog(Shell parentShell, SitePrefsPage sitePrefsPage) {
+		super(parentShell, createPreferenceManager(sitePrefsPage));
 	}
 	
 	@Override
@@ -136,9 +139,9 @@ public final class PreferencesDialog extends PreferenceDialog {
 		// Do nothing, everything is saved in performOk events
 	}
 	
-	private static PreferenceManager createPreferenceManager() {
+	private static PreferenceManager createPreferenceManager(SitePrefsPage sitePrefsPage) {
 		PreferenceManager manager = new PreferenceManager();
-		manager.addToRoot(new PreferenceNode("site", new SitePrefsPage()));
+		manager.addToRoot(new PreferenceNode("site", sitePrefsPage));
 		manager.addToRoot(new PreferenceNode("user", new UserPrefsPage()));
 		manager.addToRoot(new PreferenceNode("system", new SystemPrefsPage()));
 		return manager;

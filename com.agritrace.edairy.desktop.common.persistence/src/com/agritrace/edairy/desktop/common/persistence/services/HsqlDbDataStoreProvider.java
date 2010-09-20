@@ -6,11 +6,6 @@ import java.util.Properties;
 import org.hibernate.cfg.Environment;
 
 public class HsqlDbDataStoreProvider extends HbDataStoreProvider {
-
-	public HsqlDbDataStoreProvider() {
-		super();
-	}
-
 	@Override
 	protected Properties getDatastoreProperties() {
 		final Properties props = new Properties();

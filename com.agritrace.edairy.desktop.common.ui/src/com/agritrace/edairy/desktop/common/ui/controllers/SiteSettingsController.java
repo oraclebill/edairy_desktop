@@ -10,11 +10,19 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceStore;
 import org.hibernate.cfg.Environment;
 
-import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
+import com.agritrace.edairy.desktop.common.persistence.services.IDbPropertiesManager;
+import com.google.inject.Inject;
 
 public class SiteSettingsController {
 	public static final String DB_HOST = "SiteSettingsController.Custom.DB_HOST";
 	public static final String DB_NAME = "SiteSettingsController.Custom.DB_NAME";
+	
+	private IDbPropertiesManager manager;
+	
+	@Inject
+	public SiteSettingsController(IDbPropertiesManager manager) {
+		this.manager = manager;
+	}
 	
 	private static PreferenceStore loadPreferenceStore(Properties props) {
 		final PreferenceStore prefs = new PreferenceStore();
@@ -55,7 +63,7 @@ public class SiteSettingsController {
 	 * @return Preference store to use in a preference page
 	 */
 	public IPreferenceStore loadData() {
-		props = PersistenceManager.getDefault().getProperties();
+		props = manager.getProperties();
 		prefs = loadPreferenceStore(props);
 		return prefs;
 	}
@@ -73,7 +81,7 @@ public class SiteSettingsController {
 		if (propsCopy.equals(props))
 			return false;
 		
-		PersistenceManager.getDefault().saveProperties(props);
+		manager.setProperties(props);
 		return true;
 	}
 }
