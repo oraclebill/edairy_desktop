@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+	<title>eDairy Dashboard</title>
+	<title>Charting</title>
+	<link href="css/basic.css" type="text/css" rel="stylesheet" />
+	<link href="css/visualize.css" type="text/css" rel="stylesheet" />
+	<link href="css/visualize-dark.css" type="text/css" rel="stylesheet" />
+	
+	<script type="text/javascript" src="js/jquery.min.js"></script>	
+	<script type="text/javascript" src="js/visualize.jQuery.js"></script>	
+	<style>
+	</style>
+	<script type="text/javascript">
+		function getData() {
+			var d = [];
+			for (i = 0; i < 25; i++) {
+				num = Math.floor(Math.random() * 800 + Math.random() * 800);
+				num = num / 10;
+				if (i < 10) 
+					d[i] = [ "R00" + i, num, Math.floor(num * Math.random()) ];
+				else 
+					d[i] = [ "R0" + i,num, Math.floor(num * Math.random()) ];
+			}
+			return d;
+		}
+		
+		function genTableData(data) {
+		    for ( i = 0; i < data.length; i++ ) {
+			    row = data[i];
+			    name = row[0];
+			    am_qty = row[1];
+			    pm_qty = row[2];
+			    html ='<tr><th scope="row">' + name + '</th><td>'+am_qty+'</td><td>'+pm_qty+'</td><td>'+(am_qty+pm_qty)+'</td></tr>' ;
+			    $('table#intake-data-table tbody').append( html );
+		    }
+		}
+		
+	    $(document).ready(function(){  
+		    /** build the table **/
+		    data = getData();
+		    genTableData(data);
+	        /** visualize with a line graph **/  
+	         
+	         xcolors: ['#be1e2d','#666699','#92d5ea','#ee8310','#8d10ee','#5a3b16','#26a4ed','#f45a90','#e9e744'];
+	        
+		     $('table').visualize({ type: 'pie', parseDirection: 'x', colors: xcolors }).appendTo('#pie-chart');  
+		     $('table').visualize({ type: 'bar', parseDirection: 'y', colors: xcolors }).appendTo('#bar-chart');  
+	    });  
+    </script>
+</head>
+<body>
+	<div id='header'>
+		<h1>LIMURU DAIRY OWNERS COOPERATIVE UNION</h1>
+	</div>
+	<div id='body'>
+		<div id='charts'>
+			<div id='pie-chart'>
+				<h2>Pie</h2>
+			</div>
+			<div id='bar-chart'>
+				<h2>Bar</h2>
+			</div>
+		</div>
+		<div id='intake-data'>
+			<table id='intake-data-table'>
+				<caption>REAL TIME DAILY MILK INTAKE MONITOR</caption>
+			  <thead>		
+			  	<tr> 
+			  		<td></td> 
+			  		<th scope="col">Session 1</th>
+			  		<th scope="col">Session 2</th>
+			  		<th scope="col">Total</th>
+			  	</tr>
+			  </thead>
+			  <tbody>
+			  </tbody>
+			</table>
+		</div>
+		<div id='finance-data'></div>
+	</div>
+	<div id='footer'></div>
+</body>
+</html>

@@ -18,6 +18,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.part.ViewPart;
+import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.layout.GridData;
 
 public class DairyHomeView extends ViewPart {
 	public static final String ID = "desktop.home.view";
@@ -27,12 +30,14 @@ public class DairyHomeView extends ViewPart {
 
 	@Override
 	public void createPartControl(Composite parent) {
-		final Label l = new Label(parent, SWT.CENTER);
-		l.setImage(ImageStore.getInstance().getImage("edairydashboard.jpg"));
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(l);
 		GridLayoutFactory.fillDefaults().generateLayout(parent);
 		parent.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
-		l.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
+		parent.setLayout(new GridLayout(1, false));
+		
+		Browser browser = new Browser(parent, SWT.NONE);
+		browser.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		
+		browser.setUrl("http://www.google.com/");
 	}
 
 	@Override
