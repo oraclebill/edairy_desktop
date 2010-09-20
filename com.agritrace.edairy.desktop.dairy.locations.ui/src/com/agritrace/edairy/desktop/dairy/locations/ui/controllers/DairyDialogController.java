@@ -43,6 +43,8 @@ public class DairyDialogController extends RecordDialogController<DairyLocation>
 
 		detailArea = getRidget(ICompositeRidget.class, DairyLocationUIConstants.RIDGET_ID_ROUTE_DETAIL_AREA);
 		txtCode = getRidget(ITextRidget.class, DairyLocationUIConstants.RIDGET_ID_CODE);
+		txtCode.setMandatory(true);
+
 		comboRoute = getRidget(IComboRidget.class, DairyLocationUIConstants.RIDGET_ID_ROUTE);
 
 		phone = getRidget(ITextRidget.class,DairyLocationUIConstants.RIDGET_ID_PHONE);
@@ -52,9 +54,7 @@ public class DairyDialogController extends RecordDialogController<DairyLocation>
 		addTextMap(DairyLocationUIConstants.RIDGET_ID_PHONE, DairyPackage.Literals.DAIRY_LOCATION__PHONE);
 		addTextMap(DairyLocationUIConstants.RIDGET_ID_DESCRIPTION, DairyPackage.Literals.DAIRY_LOCATION__DESCRIPTION);
 		addTextMap(DairyLocationUIConstants.RIDGET_ID_CODE, DairyPackage.Literals.DAIRY_LOCATION__CODE);
-		
-		final ITextRidget txtCode = getRidget(ITextRidget.class, DairyLocationUIConstants.RIDGET_ID_CODE);
-		
+			
 		//functions
 		functions = getRidget(IMultipleChoiceRidget.class,DairyLocationUIConstants.RIDGET_ID_FUNCTIONS);
 		final IObservableList optionValues = new WritableList(Arrays.asList(DairyFunction.values()),
@@ -108,10 +108,8 @@ public class DairyDialogController extends RecordDialogController<DairyLocation>
 
 	private void resetDetailArea() {		
 		final boolean isCollectionCenter = editLocation.getFunctions().contains(DairyFunction.MILK_COLLECTION);		
-		txtCode.setMandatory(isCollectionCenter);
 		detailArea.setEnabled(isCollectionCenter);
 		if (!isCollectionCenter) {
-			txtCode.setText(null);
 			comboRoute.setSelection(null);
 		}
 		detailArea.setVisible(isCollectionCenter);

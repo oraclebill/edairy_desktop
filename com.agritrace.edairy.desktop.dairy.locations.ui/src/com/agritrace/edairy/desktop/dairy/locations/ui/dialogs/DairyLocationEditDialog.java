@@ -43,6 +43,11 @@ public class DairyLocationEditDialog extends RecordDialog<DairyLocation> {
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false,1, 1));
 		composite.setLayout(new GridLayout(2, false));
 		
+		// code
+		Label lblLocationCode = UIControlsFactory.createLabel(composite, "Location Code");
+		final Text txtCode = UIControlsFactory.createText(composite);
+		addUIControl(txtCode, DairyLocationUIConstants.RIDGET_ID_CODE);
+		
 		UIControlsFactory.createLabel(composite, "Name");
 		final Text txtDate = UIControlsFactory.createText(composite);
 		txtDate.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false,1, 1));
@@ -73,14 +78,8 @@ public class DairyLocationEditDialog extends RecordDialog<DairyLocation> {
 		
 		Composite routeDetailArea = UIControlsFactory.createComposite(composite, SWT.NONE);
 		routeDetailArea.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 2, 1));
-		routeDetailArea.setLayout(new GridLayout(4, false));
+		routeDetailArea.setLayout(new GridLayout(2, false));
 		addUIControl(routeDetailArea, DairyLocationUIConstants.RIDGET_ID_ROUTE_DETAIL_AREA);
-
-				// code
-				Label label = UIControlsFactory.createLabel(routeDetailArea, "Collection Center Code");
-				final Text txtCode = UIControlsFactory.createText(routeDetailArea);
-				txtCode.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
-				addUIControl(txtCode, DairyLocationUIConstants.RIDGET_ID_CODE);
 				
 						//route
 						Label label_1 = UIControlsFactory.createLabel(routeDetailArea, "Transport Route", SWT.LEFT);
