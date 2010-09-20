@@ -22,6 +22,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
+import com.agritrace.edairy.desktop.common.persistence.services.ImageDataUtil;
 import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.internal.common.persistence.HbDataStoreProvider;
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
@@ -123,6 +124,7 @@ public class PersistenceModule extends AbstractModule {
 		// Ideally we shouldn't need this...
 		requestStaticInjection(PersistenceManager.class);
 		requestStaticInjection(RepositoryFactory.class);
+		requestStaticInjection(ImageDataUtil.class);
 	}
 	
 	protected void bindDataStore() {
