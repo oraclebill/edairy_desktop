@@ -13,8 +13,15 @@ import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
 import com.agritrace.edairy.desktop.operations.services.dairylocation.IDairyLocationRepository;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class DairyLocationRepository extends HibernateRepository<DairyLocation> implements IDairyLocationRepository {
+	@Inject
+	protected DairyLocationRepository(Provider<Session> sessionProvider) {
+		super(sessionProvider);
+	}
+
 	private class RoutesQuery extends SessionRunnable<Object> {
 		List<Route> routes;
 

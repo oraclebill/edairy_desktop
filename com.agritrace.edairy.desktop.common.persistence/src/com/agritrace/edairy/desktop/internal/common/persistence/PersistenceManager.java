@@ -13,16 +13,8 @@ import com.google.inject.Provider;
 public class PersistenceManager implements Provider<Session> {
 	private static final Logger LOG = Log4r.getLogger(Activator.getDefault(), PersistenceManager.class);
 	
-	@Inject
-	private static Provider<PersistenceManager> PROVIDER;
-
-	@Deprecated
-	public static PersistenceManager getDefault() {
-		return PROVIDER.get();
-	}
-
-	private Session session;
 	private final SessionFactory sessionFactory;
+	private Session session;
 
 	@Inject
 	protected PersistenceManager(HbDataStore hbds) {
@@ -32,16 +24,6 @@ public class PersistenceManager implements Provider<Session> {
 		sessionFactory = hbds.getSessionFactory();
 	}
 
-	/**
-	 * Deprecated. Inject a <code>Provider&lt;Session&gt;</code> instead.
-	 * 
-	 * @return New Hibernate session
-	 */
-	@Deprecated
-	public Session getSession() {
-		return get();
-	}
-	
 	@Override
 	public Session get() {
 		if (null == session) {

@@ -4,6 +4,7 @@ import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.util.Date;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.resource.FontDescriptor;
 import org.eclipse.jface.resource.JFaceResources;
@@ -56,6 +57,9 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 
 		getContent().setBackgroundImage(Activator.getImage("splash/splash.bmp"));
 		long endTime = System.currentTimeMillis() + WAIT_MSEC;
+		
+		final IProgressMonitor monitor = getBundleProgressMonitor();
+		monitor.beginTask("Loading", 0);
 		
 		while (System.currentTimeMillis() < endTime) {
 			if (splash.getDisplay().readAndDispatch() == false) {

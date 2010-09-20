@@ -14,9 +14,15 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class MilkCollectionJournalLineRepository extends HibernateRepository<CollectionJournalLine> implements
 		ICollectionJournalLineRepository {
+	@Inject
+	protected MilkCollectionJournalLineRepository(Provider<Session> sessionProvider) {
+		super(sessionProvider);
+	}
 
 	@Override
 	protected Class<CollectionJournalLine> getClassType() {

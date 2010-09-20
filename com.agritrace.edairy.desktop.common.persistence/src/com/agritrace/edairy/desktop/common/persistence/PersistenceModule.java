@@ -61,7 +61,7 @@ public class PersistenceModule extends AbstractModule {
 		}
 		
 		public IRepository<?> get() {
-			return new HibernateRepository<EObject>() {
+			return new HibernateRepository<EObject>(sessionProvider) {
 				@Override
 				protected Class<?> getClassType() {
 					return klass;
@@ -122,7 +122,6 @@ public class PersistenceModule extends AbstractModule {
 		bind(DairyRepository.class).in(Scopes.SINGLETON);
 		
 		// Ideally we shouldn't need this...
-		requestStaticInjection(PersistenceManager.class);
 		requestStaticInjection(RepositoryFactory.class);
 		requestStaticInjection(ImageDataUtil.class);
 	}

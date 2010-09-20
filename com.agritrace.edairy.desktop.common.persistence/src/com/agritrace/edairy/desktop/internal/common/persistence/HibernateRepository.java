@@ -18,6 +18,8 @@ import org.osgi.service.log.LogService;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public abstract class HibernateRepository<T extends EObject> implements
 		IRepository<T> {
@@ -47,15 +49,12 @@ public abstract class HibernateRepository<T extends EObject> implements
 	private final String entityName;
 	private final String identifierName;
 
-	private final PersistenceManager persistenceManager;
+	private final Provider<Session> sessionProvider;
 
 	private Session session;
 
-	protected HibernateRepository() {
-		this(PersistenceManager.getDefault());
-	}
-
-	protected HibernateRepository(PersistenceManager pm) {
+	@Inject
+	protected HibernateRepository(Provider<Session> sessionProvider) {
 		String className;
 		ClassMetadata metaData;
 
@@ -64,7 +63,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 						.getName(), hashCode()));
 
 		// set the persistence manager
-		persistenceManager = pm;
+		this.sessionProvider = sessionProvider;
 
 		// get metadata about the class we will be persisting..
 		className = getClassType().getName();
@@ -72,8 +71,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 		entityName = className.substring(className.lastIndexOf('.') + 1);
 		Assert.isLegal(!entityName.startsWith("."));
 
-		metaData = persistenceManager.getSession().getSessionFactory()
-				.getClassMetadata(entityName);
+		metaData = sessionProvider.get().getSessionFactory().getClassMetadata(entityName);
 		Assert.isNotNull(metaData);
 		// identifier (pk) name
 		identifierName = metaData.getIdentifierPropertyName();
@@ -215,8 +213,9 @@ public abstract class HibernateRepository<T extends EObject> implements
 		}
 	}
 
+	// TODO: We should not cache the session
 	private void openSession() {
-		session = persistenceManager.getSession();
+		session = sessionProvider.get();
 		Assert.isNotNull(session);
 	}
 

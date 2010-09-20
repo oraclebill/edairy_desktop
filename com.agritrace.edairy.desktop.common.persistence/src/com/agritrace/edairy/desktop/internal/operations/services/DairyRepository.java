@@ -90,8 +90,12 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	 * @author bjones
 	 *
 	 */
-	private final static class DairyRepoInternal extends
-			HibernateRepository<Dairy> {
+	protected final static class DairyRepoInternal extends HibernateRepository<Dairy> {
+		@Inject
+		protected DairyRepoInternal(Provider<Session> sessionProvider) {
+			super(sessionProvider);
+		}
+
 		@Override
 		protected Class<Dairy> getClassType() {
 			return Dairy.class;
@@ -204,9 +208,9 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	private final Dairy localDairy;
 
 	@Inject
-	public DairyRepository(final Provider<Session> sessionProvider) {
+	public DairyRepository(final Provider<Session> sessionProvider, final DairyRepoInternal dairyRepository) {
 		this.sessionProvider = sessionProvider;
-		dairyRepository = new DairyRepoInternal();
+		this.dairyRepository = dairyRepository;
 		Dairy myDairy = dairyRepository.findByKey(1L);
 		
 		if (myDairy == null) {
