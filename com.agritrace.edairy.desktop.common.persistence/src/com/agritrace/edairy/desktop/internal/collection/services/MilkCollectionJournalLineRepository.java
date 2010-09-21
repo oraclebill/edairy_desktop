@@ -3,8 +3,10 @@ package com.agritrace.edairy.desktop.internal.collection.services;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -52,4 +54,25 @@ public class MilkCollectionJournalLineRepository extends HibernateRepository<Col
 		runWithTransaction(runnable);
 		return runnable.getResult();
 	}
+
+	@Override
+	public List<CollectionJournalLine> allForDate(final Date date) {
+		SessionRunnable<List<CollectionJournalLine>> runnable = new SessionRunnable<List<CollectionJournalLine>>() {
+			@SuppressWarnings("unchecked")
+			@Override
+			public void run(Session session) {
+				Query query = session.createQuery(
+						"FROM CollectionJournalLine " +
+						"     join CollectionGroup as grp " +
+						"          with day(grp.journalDate) = day(:collectionDate)" +
+						"          and  month(grp.journalDate) = month(:collectionDate)" +
+						"          and  year(grp.journalDate) = year(:collectionDate)");
+				query.setDate("collectionDate", date);
+				setResult(query.list());
+			}
+		};
+		
+		runWithTransaction(runnable);
+		return runnable.getResult();
+	}	
 }
