@@ -12,8 +12,15 @@ import org.ops4j.peaberry.Peaberry;
 import org.ops4j.peaberry.eclipse.EclipseRegistry;
 import org.osgi.framework.BundleContext;
 
+import com.agritrace.edairy.desktop.collection.ui.controllers.MilkCollectionLogController;
 import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
 import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
+import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationDirectoryController;
+import com.agritrace.edairy.desktop.install.navigation.InstallModule;
+import com.agritrace.edairy.desktop.member.ui.controllers.ContainerListViewController;
+import com.agritrace.edairy.desktop.member.ui.controllers.FarmListViewController;
+import com.agritrace.edairy.desktop.member.ui.controllers.LiveStockListController;
+import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDirectoryController;
 import com.agritrace.edairy.desktop.splashHandlers.EdairySplashHandler;
 import com.agritrace.edairy.desktop.system.ui.controllers.RoleDirectoryController;
 import com.google.inject.AbstractModule;
@@ -27,8 +34,15 @@ public class EDairyModule extends AbstractModule {
 	
 	private static final List<Class<? extends IController>> CONTROLLERS = new ArrayList<Class<? extends IController>>();
 	
+	// Add any directory controllers that require injection here.
 	static {
+		CONTROLLERS.add(LiveStockListController.class);
+		CONTROLLERS.add(FarmListViewController.class);
 		CONTROLLERS.add(RoleDirectoryController.class);
+		CONTROLLERS.add(DairyLocationDirectoryController.class);
+		CONTROLLERS.add(ContainerListViewController.class);
+		CONTROLLERS.add(MilkCollectionLogController.class);
+		CONTROLLERS.add(SupplierDirectoryController.class);
 	}
 	
 	public EDairyModule(BundleContext context) {
@@ -38,6 +52,7 @@ public class EDairyModule extends AbstractModule {
 	@Override
 	protected void configure() {
 		install(new PersistenceModule());
+		install(new InstallModule());
 		install(Peaberry.osgiModule(context, EclipseRegistry.eclipseRegistry()));
 		
 		Map<Class<? extends IController>, Provider<? extends IController>> map =

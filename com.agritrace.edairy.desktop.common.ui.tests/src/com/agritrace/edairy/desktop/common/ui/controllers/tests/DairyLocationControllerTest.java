@@ -24,8 +24,10 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.persistence.TestPersistenceModule;
 import com.agritrace.edairy.desktop.dairy.locations.ui.DairyLocationUIConstants;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationDirectoryController;
+import com.google.inject.Guice;
 
 public class DairyLocationControllerTest extends AbstractSubModuleControllerTest<DairyLocationDirectoryController> {
 
@@ -36,7 +38,8 @@ public class DairyLocationControllerTest extends AbstractSubModuleControllerTest
 	protected DairyLocationDirectoryController createController(ISubModuleNode node) {
 		initTestData();
 		node.setNodeId(new NavigationNodeId(DairyLocationUIConstants.NODE_ID));
-		final DairyLocationDirectoryController newInst = new DairyLocationDirectoryController(/* node */);
+		final DairyLocationDirectoryController newInst = 
+			Guice.createInjector(new TestPersistenceModule()).getInstance(DairyLocationDirectoryController.class);
 		newInst.setNavigationNode(node);
 		// newInst.getInput().add(dairyLocation);
 		return newInst;

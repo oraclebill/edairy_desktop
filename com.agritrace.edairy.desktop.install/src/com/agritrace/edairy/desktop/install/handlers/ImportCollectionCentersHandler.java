@@ -20,10 +20,11 @@ import org.eclipse.riena.ui.core.uiprocess.UIProcess;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.dialogs.ImportResultsDialog;
 import com.agritrace.edairy.desktop.install.CollectionCenterImportTool;
 import com.agritrace.edairy.desktop.operations.services.dairylocation.IDairyLocationRepository;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
@@ -32,8 +33,17 @@ import com.agritrace.edairy.desktop.operations.services.dairylocation.IDairyLoca
  * @see org.eclipse.core.commands.AbstractHandler
  */
 public class ImportCollectionCentersHandler extends HandlerBase {
-
 	ExecutionEvent event;
+	
+	protected static class RepositoryHolder implements Provider<IDairyLocationRepository> {
+		@Inject private Provider<IDairyLocationRepository> internal;
+		
+		@Override
+		public IDairyLocationRepository get() {
+			return internal.get();
+		}
+		
+	}
 
 	private class CollectionCenterImportProcess extends UIProcess {
 		final File importFile;
@@ -113,11 +123,13 @@ public class ImportCollectionCentersHandler extends HandlerBase {
 		}
 
 		private void saveCenters(List<DairyLocation> successes2) {
-			IDairyLocationRepository repo = RepositoryFactory.getRegisteredRepository(IDairyLocationRepository.class);
 			repo.saveAll(successes2);
 		}
 
 	}
+	
+	@Inject
+	private static IDairyLocationRepository repo;
 
 	/**
 	 * The constructor.

@@ -43,6 +43,7 @@ import com.agritrace.edairy.desktop.member.ui.controls.LiveStockFilterWidgetCont
 import com.agritrace.edairy.desktop.member.ui.data.LiveStockListViewTableNode;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddLiveStockDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewLiveStockDialog;
+import com.google.inject.Inject;
 
 @PermissionRequired(Permission.VIEW_LIVESTOCK)
 public class LiveStockListController extends BasicDirectoryController<RegisteredAnimal> {
@@ -66,8 +67,9 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 
 	private Membership selectedMember;
 
-	public LiveStockListController() {
-		farmRepository = RepositoryFactory.getRegisteredRepository(IFarmRepository.class);
+	@Inject
+	public LiveStockListController(IFarmRepository farmRepository) {
+		this.farmRepository = farmRepository;
 		setEClass(TrackingPackage.Literals.REGISTERED_ANIMAL);
 		
 		for (int i = 0; i < propertyNames.length; i++) {

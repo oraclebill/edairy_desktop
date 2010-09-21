@@ -43,6 +43,7 @@ import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.agritrace.edairy.desktop.operations.services.dairylocation.IDairyLocationRepository;
+import com.google.inject.Inject;
 
 @PermissionRequired(Permission.VIEW_MILK_COLLECTIONS)
 public class MilkCollectionLogController extends BasicDirectoryController<CollectionGroup> {
@@ -116,10 +117,9 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 			.getSystemColor(SWT.COLOR_YELLOW);
 	private List<DairyLocation> collectionCenters;
 
-	public MilkCollectionLogController() {
+	@Inject
+	public MilkCollectionLogController(final IRepository<CollectionGroup> journalRepo, final IDairyLocationRepository repo) {
 		setEClass(DairyPackage.Literals.COLLECTION_GROUP);
-		
-		final IRepository<CollectionGroup> journalRepo = RepositoryFactory.getRepository(CollectionGroup.class);
 		setRepository(journalRepo);
 
 		addTableColumn("Date", DairyPackage.Literals.COLLECTION_GROUP__JOURNAL_DATE);
@@ -132,7 +132,6 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		addTableColumn("# Suspended", DairyPackage.Literals.COLLECTION_GROUP__SUSPENDED_COUNT);
 		addTableColumn("# Rejected", DairyPackage.Literals.COLLECTION_GROUP__REJECTED_COUNT);
 
-		final IDairyLocationRepository repo = RepositoryFactory.getRegisteredRepository(IDairyLocationRepository.class);
 		collectionCenters = new ArrayList<DairyLocation>();
 		collectionCenters.add(null); // First, empty entry - means "show all"
 		collectionCenters.addAll(repo.allCollectionCenters());

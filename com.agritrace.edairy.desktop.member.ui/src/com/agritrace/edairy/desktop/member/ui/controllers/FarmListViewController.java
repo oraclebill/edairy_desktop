@@ -27,7 +27,6 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
@@ -39,6 +38,7 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.data.FarmListViewTableNode;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddFarmDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewFarmDialog;
+import com.google.inject.Inject;
 
 @PermissionRequired(Permission.VIEW_FARMS)
 public class FarmListViewController extends BasicDirectoryController<Farm> {
@@ -67,9 +67,10 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 
 	private Membership selectedMember;
 
-	public FarmListViewController() {
-		memberRepository = RepositoryFactory.getMemberRepository();
-		farmRepository = RepositoryFactory.getRegisteredRepository(IFarmRepository.class);
+	@Inject
+	public FarmListViewController(final IMemberRepository memberRepository, final IFarmRepository farmRepository) {
+		this.memberRepository = memberRepository;
+		this.farmRepository = farmRepository;
 		farmNames = new ArrayList<String>();
 
 		setEClass(TrackingPackage.Literals.FARM);

@@ -7,6 +7,8 @@ Bundle-Vendor: AGRITRACE
 Require-Bundle: com.agritrace.edairy.desktop.common.model,
  com.agritrace.edairy.desktop.dairy.locations.ui;bundle-version="1.0.0",
  org.junit;bundle-version="4.8.1",
- com.agritrace.edairy.desktop.common.ui;bundle-version="1.0.0"
+ com.agritrace.edairy.desktop.common.ui;bundle-version="1.0.0",
+ com.agritrace.edairy.desktop.common.persistence;bundle-version="1.0.0",
+ com.google.inject
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

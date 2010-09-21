@@ -13,8 +13,10 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
+import com.agritrace.edairy.desktop.common.persistence.TestPersistenceModule;
 import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDirectoryController;
 import com.agritrace.edairy.desktop.operations.ui.views.SupplierDirectoryView;
+import com.google.inject.Guice;
 
 /**
  * Test case for supplier list controller
@@ -30,7 +32,7 @@ public class SupplierListControllerTestCase extends
 
 	@Override
 	protected SupplierDirectoryController createController(ISubModuleNode node) {
-		newInst = new SupplierDirectoryController();
+		newInst = Guice.createInjector(new TestPersistenceModule()).getInstance(SupplierDirectoryController.class);
 		node.setNodeId(new NavigationNodeId("edm.services.supplier.directory"));
 		newInst.setNavigationNode(node);
 		return newInst;
