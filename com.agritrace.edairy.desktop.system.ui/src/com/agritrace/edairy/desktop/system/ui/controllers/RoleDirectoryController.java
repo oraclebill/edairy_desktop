@@ -18,11 +18,13 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.system.ui.constants.RoleFilterBinding;
 import com.agritrace.edairy.desktop.system.ui.dialogs.RoleEditDialog;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 @PermissionRequired(Permission.VIEW_ROLES)
 public final class RoleDirectoryController extends BasicDirectoryController<Role> {
 	private ITextRidget nameSearch;
 	private ITextRidget permSearch;
+	private final Provider<RoleEditDialog> dialogProvider;
 	
 	@Override
 	protected String getFullTitle() {
@@ -30,8 +32,9 @@ public final class RoleDirectoryController extends BasicDirectoryController<Role
 	}
 	
 	@Inject
-	public RoleDirectoryController(final IRepository<Role> repo) {
+	public RoleDirectoryController(final IRepository<Role> repo, final Provider<RoleEditDialog> dialogProvider) {
 		super();
+		this.dialogProvider = dialogProvider;
 		setEClass(DairyPackage.Literals.ROLE);
 		setRepository(repo);
 		addTableColumn("ID", DairyPackage.Literals.ROLE__ID);
@@ -95,7 +98,7 @@ public final class RoleDirectoryController extends BasicDirectoryController<Role
 
 	@Override
 	protected RecordDialog<Role> getRecordDialog(Shell shell) {
-		return new RoleEditDialog(shell);
+		return dialogProvider.get();
 	}
 
 	@Override

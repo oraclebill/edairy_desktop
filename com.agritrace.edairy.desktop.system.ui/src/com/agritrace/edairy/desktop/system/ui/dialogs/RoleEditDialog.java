@@ -16,9 +16,13 @@ import com.agritrace.edairy.desktop.common.model.dairy.Role;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.system.ui.constants.RoleBinding;
 import com.agritrace.edairy.desktop.system.ui.controllers.RoleDialogController;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.inject.name.Named;
 
 public final class RoleEditDialog extends RecordDialog<Role> {
-	public RoleEditDialog(Shell parentShell) {
+	@Inject
+	public RoleEditDialog(@Named("current") Shell parentShell) {
 		super(parentShell);
 	}
 
