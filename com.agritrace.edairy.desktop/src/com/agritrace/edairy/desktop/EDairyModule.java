@@ -6,6 +6,7 @@ import org.osgi.framework.BundleContext;
 
 import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
 import com.agritrace.edairy.desktop.splashHandlers.EdairySplashHandler;
+import com.agritrace.edairy.desktop.ui.EDairyManagerApplication;
 import com.google.inject.AbstractModule;
 
 public class EDairyModule extends AbstractModule {
@@ -21,5 +22,6 @@ public class EDairyModule extends AbstractModule {
 		install(Peaberry.osgiModule(context, EclipseRegistry.eclipseRegistry()));
 		
 		requestStaticInjection(EdairySplashHandler.class);
+		requestStaticInjection(EDairyManagerApplication.class);
 	}
 }

@@ -55,6 +55,8 @@ import com.agritrace.edairy.desktop.ui.views.MemberPayablesReportView;
 import com.agritrace.edairy.desktop.ui.views.MemberStatementReportView;
 import com.agritrace.edairy.desktop.ui.views.MilkProductionReportView;
 import com.agritrace.edairy.desktop.ui.views.MonthlyCreditReportView;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author oraclebill
@@ -138,6 +140,9 @@ public class EDairyManagerApplication extends SwtApplication {
 	private static final String TAB_OPERATIONS = SUBAPP_OPERATIONS;
 	private static final String TAB_REPORTS = SUBAPP_REPORTS;
 	private static final String TAB_SYSTEM = SUBAPP_SYSTEM;
+	
+	@Inject
+	private static Provider<RoleDirectoryController> provRoleDirectoryController;
 
 	public EDairyManagerApplication() {
 		super();
@@ -424,7 +429,7 @@ public class EDairyManagerApplication extends SwtApplication {
 
 		moduleNode = NodeFactory.createModule(MODULE_SYSTEM, "Security", moduleGroupNode); //$NON-NLS-1$ 
 		NodeFactory.createSubModule("edm.system.roles", "Roles", moduleNode,
-				RoleDirectoryView.ID, RoleDirectoryController.class); //$NON-NLS-1$ //$NON-NLS-2$
+				RoleDirectoryView.ID, RoleDirectoryController.class, provRoleDirectoryController); //$NON-NLS-1$ //$NON-NLS-2$
 		
 		/*
 		app.addSimpleListener(new SimpleNavigationNodeAdapter() {
