@@ -6,13 +6,24 @@
 	<title>Charting</title>
 	<link href="css/basic.css" type="text/css" rel="stylesheet" />
 	<link href="css/visualize.css" type="text/css" rel="stylesheet" />
-	<link href="css/visualize-dark.css" type="text/css" rel="stylesheet" />
+	<link href="css/visualize-light.css" type="text/css" rel="stylesheet" />
 	
 	<script type="text/javascript" src="js/jquery.min.js"></script>	
 	<script type="text/javascript" src="js/visualize.jQuery.js"></script>	
 	<style>
 	</style>
-	<script type="text/javascript">
+	<script type="text/javascript"><!--
+		var COLORS = [ "Coral", "MediumSlateBlue", "Gold", "DarkSeaGreen", "RosyBrown",
+		"MediumPurple", "PaleVioletRed", "GreenYellow", "DarkKhaki",
+		"MediumAquaMarine", "MediumOrchid", "MediumTurquoise", "CornflowerBlue",
+		"Salmon", "Turquoise", "LightCoral", "DarkSalmon", "SandyBrown", "DarkGray",
+		 "Cyan", "Fuchsia","Yellow", "LightGreen", "Tan",
+		"LightSalmon", "BurlyWood", "HotPink","Aqua", "Orchid", "PaleGreen", "Silver",
+		"SkyBlue", "LightSkyBlue", "Magenta",  "LightSteelBlue", "Aquamarine", "Plum", "Violet",
+		"Khaki", "LightBlue", "Thistle", "PowderBlue", "LightPink", "LightGrey",
+		"PaleGoldenRod", "Wheat", "NavajoWhite", "Pink", "PaleTurquoise", "PeachPuff",
+		"Gainsboro", "Moccasin", "Bisque" ];
+		
 		function getData() {
 			var d = [];
 			for (i = 0; i < 25; i++) {
@@ -27,14 +38,23 @@
 		}
 		
 		function genTableData(data) {
+			var sums = [0, 0, 0];
 		    for ( i = 0; i < data.length; i++ ) {
 			    row = data[i];
 			    name = row[0];
 			    am_qty = row[1];
 			    pm_qty = row[2];
-			    html ='<tr><th scope="row">' + name + '</th><td>'+am_qty+'</td><td>'+pm_qty+'</td><td>'+(am_qty+pm_qty)+'</td></tr>' ;
+			    sum = am_qty + pm_qty;
+			    sums[0] += am_qty;
+			    sums[1] += pm_qty;
+			    sums[2] += sum;
+			    html ='<tr><th scope="row">' + name + '</th><td class="chart">'+am_qty+'</td><td class="chart">'+pm_qty+'</td><td>'+sum+'</td></tr>' ;
 			    $('table#intake-data-table tbody').append( html );
 		    }
+		    $('table#intake-data-table tfoot').append( "<tr><td></td></tr>" );
+		    html ='<tr><th >Total</th><td>'+Math.floor(sums[0]*10)/10+'</td><td>'+Math.floor(sums[1]*10)/10+'</td><td>'+Math.floor(sums[2]*10)/10+'</td></tr>' ;		   
+		    $('table#intake-data-table tfoot').append( html );
+			    
 		}
 		
 	    $(document).ready(function(){  
@@ -42,13 +62,32 @@
 		    data = getData();
 		    genTableData(data);
 	        /** visualize with a line graph **/  
-	         
-	         xcolors: ['#be1e2d','#666699','#92d5ea','#ee8310','#8d10ee','#5a3b16','#26a4ed','#f45a90','#e9e744'];
-	        
-		     $('table').visualize({ type: 'pie', parseDirection: 'x', colors: xcolors }).appendTo('#pie-chart');  
-		     $('table').visualize({ type: 'bar', parseDirection: 'y', colors: xcolors }).appendTo('#bar-chart');  
+			pieProps = { 
+					type: 'pie', 
+					parseDirection: 'y', 
+					colors: COLORS, 
+					colFilter: '.chart', 
+					width: 100, 
+					height: 100, 
+					title: ' ' ,
+					pieLablePos: 'outside'
+			}	        	      
+		    $('table').visualize(pieProps).appendTo('#pie-chart');  
+
+		    barProps = { 
+				    type: 'bar', 
+				    parseDirection: 'y', 
+				    colors: COLORS, 
+					colFilter: '.chart', 
+				    barMargin: 0, 
+				    barGroupMargin: 4, 
+				    width: 300, 
+				    height: 100, 
+					title: ' ' 
+			}
+		    $('table').visualize(barProps).appendTo('#bar-chart');  
 	    });  
-    </script>
+    --></script>
 </head>
 <body>
 	<div id='header'>
@@ -56,27 +95,31 @@
 	</div>
 	<div id='body'>
 		<div id='charts'>
-			<div id='pie-chart'>
-				<h2>Pie</h2>
+			<div id='pie-chart' class='chart-box'>
+				<h2>Total Intake Today</h2>
 			</div>
-			<div id='bar-chart'>
-				<h2>Bar</h2>
+			<div id='bar-chart'  class='chart-box''>
+				<h2>Intake By Collection Center (Route)</h2>
 			</div>
+			<hr>
 		</div>
 		<div id='intake-data'>
+			<h2>REAL TIME DAILY MILK INTAKE MONITOR </h2>
 			<table id='intake-data-table'>
-				<caption>REAL TIME DAILY MILK INTAKE MONITOR</caption>
 			  <thead>		
 			  	<tr> 
 			  		<td></td> 
-			  		<th scope="col">Session 1</th>
-			  		<th scope="col">Session 2</th>
+			  		<th scope="col" class="chart">Session 1</th>
+			  		<th scope="col" class="chart">Session 2</th>
 			  		<th scope="col">Total</th>
 			  	</tr>
 			  </thead>
 			  <tbody>
 			  </tbody>
+			  <tfoot>
+			  </tfoot>
 			</table>
+			<hr>
 		</div>
 		<div id='finance-data'></div>
 	</div>

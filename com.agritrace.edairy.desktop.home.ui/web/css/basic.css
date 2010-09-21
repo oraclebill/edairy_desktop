@@ -8,3 +8,15 @@ td, th {
    }
    
 caption {margin: 0 0 .5em; font-weight: bold; }
+
+/* sections */
+
+div#header 	{ margin: 2em; }
+div#body 	{ margin: 2em; }
+div#footer 	{ margin: 2em; }
+
+/* body */
+div#charts { margin-bottom: 50px; }
+div#charts .chart-box { display: inline-block;  margin-left: 30px; }
+div#intake-data { }
+div#finance-data { }
