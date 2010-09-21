@@ -141,9 +141,6 @@ public class EDairyManagerApplication extends SwtApplication {
 	private static final String TAB_REPORTS = SUBAPP_REPORTS;
 	private static final String TAB_SYSTEM = SUBAPP_SYSTEM;
 	
-	@Inject
-	private static Provider<RoleDirectoryController> provRoleDirectoryController;
-
 	public EDairyManagerApplication() {
 		super();
 		LnfManager.setLnf(new EDairyManagerLookAndFeel());
@@ -429,7 +426,7 @@ public class EDairyManagerApplication extends SwtApplication {
 
 		moduleNode = NodeFactory.createModule(MODULE_SYSTEM, "Security", moduleGroupNode); //$NON-NLS-1$ 
 		NodeFactory.createSubModule("edm.system.roles", "Roles", moduleNode,
-				RoleDirectoryView.ID, RoleDirectoryController.class, provRoleDirectoryController); //$NON-NLS-1$ //$NON-NLS-2$
+				RoleDirectoryView.ID, RoleDirectoryController.class); //$NON-NLS-1$ //$NON-NLS-2$
 		
 		/*
 		app.addSimpleListener(new SimpleNavigationNodeAdapter() {

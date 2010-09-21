@@ -10,6 +10,8 @@
  *******************************************************************************/
 package com.agritrace.edairy.desktop.common.ui.navigation;
 
+import java.util.Map;
+
 import org.eclipse.riena.internal.ui.workarea.registry.WorkareaDefinitionRegistryFacade;
 import org.eclipse.riena.navigation.IModuleGroupNode;
 import org.eclipse.riena.navigation.IModuleNode;
@@ -24,12 +26,16 @@ import org.eclipse.riena.ui.workarea.WorkareaManager;
 
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager;
+import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
  * Factory to help create {@link IModuleNode}s and {@link ISubModuleNode}s.
  */
 public final class NodeFactory {
+	@Inject
+	private static Map<Class<? extends IController>, Provider<? extends IController>> PROVIDER_MAP;
+	
 	private static class GuiceWorkareaDefinition implements IWorkareaDefinition {
 		private final Class<? extends IController> controllerClass;
 		private final Provider<? extends IController> controllerProvider;
@@ -102,6 +108,8 @@ public final class NodeFactory {
 
 	public static ISubModuleNode createSubModule(String nodeId, String caption, final IModuleNode parent, String viewId,
 			final Class<? extends IController> controllerClass) {
+		final Provider<? extends IController> controllerProvider = PROVIDER_MAP.get(controllerClass);
+		
 		final ISubModuleNode result = new SubModuleNode(new NavigationNodeId(nodeId), caption) {
 			@Override
 			public boolean allowsActivate(INavigationContext context) {
@@ -112,25 +120,14 @@ public final class NodeFactory {
 		// path found via org.eclipse.riena.ui.swt.imagePaths in plugin.xml
 		result.setIcon("arrow_right.png"); //$NON-NLS-1$
 		parent.addChild(result);
-		WorkareaManager.getInstance().registerDefinition(result, controllerClass, viewId);
-		return result;
-	}
-
-	public static ISubModuleNode createSubModule(String nodeId, String caption, final IModuleNode parent, String viewId,
-			final Class<? extends IController> controllerClass, final Provider<? extends IController> controllerProvider) {
-		final ISubModuleNode result = new SubModuleNode(new NavigationNodeId(nodeId), caption) {
-			@Override
-			public boolean allowsActivate(INavigationContext context) {
-				return super.allowsActivate(context) && havePermissions(controllerClass);
-			}
-		};
 		
-		// path found via org.eclipse.riena.ui.swt.imagePaths in plugin.xml
-		result.setIcon("arrow_right.png"); //$NON-NLS-1$
-		parent.addChild(result);
-		WorkareaDefinitionRegistryFacade.getInstance().register(result,
-				new GuiceWorkareaDefinition(controllerClass, controllerProvider, viewId));
-		// WorkareaManager.getInstance().registerDefinition(result, controller.getClass(), viewId);
+		if (controllerProvider != null) {
+			WorkareaDefinitionRegistryFacade.getInstance().register(result,
+					new GuiceWorkareaDefinition(controllerClass, controllerProvider, viewId));
+		} else {
+			WorkareaManager.getInstance().registerDefinition(result, controllerClass, viewId);
+		}
+		
 		return result;
 	}
 
