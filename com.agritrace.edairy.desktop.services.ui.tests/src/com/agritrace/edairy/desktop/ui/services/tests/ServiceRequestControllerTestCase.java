@@ -57,7 +57,8 @@ public class ServiceRequestControllerTestCase extends AbstractSubModuleControlle
 
 	@Override
 	protected AnimalHealthRequestViewController createController(ISubModuleNode node) {
-		AnimalHealthRequestViewController newInst = new AnimalHealthRequestViewController();
+		final AnimalHealthRequestViewController newInst = Guice.createInjector(
+				new TestPersistenceModule()).getInstance(AnimalHealthRequestViewController.class);
 		node.setNodeId(new NavigationNodeId("edm.services.log"));
 		newInst.setNavigationNode(node);
 		return newInst;

@@ -20,9 +20,10 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.dialogs.ImportResultsDialog;
 import com.agritrace.edairy.desktop.install.MemberTransactionImportTool;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
@@ -78,9 +79,8 @@ public class ImportMemberTransactionHandler extends HandlerBase {
 				transactions = new LinkedList<AccountTransaction>();
 				errors = new HashMap<String, List<String[]>>();
 
-				MemberTransactionImportTool tool = new MemberTransactionImportTool(input, transactions, errors, monitor);
-//				tool.setMonitorDelta(lineCount / 2);
-				tool.processFile();
+				MemberTransactionImportTool tool = toolProvider.get();
+				tool.processFile(input, transactions, errors, monitor);
 
 				msgList.add(String.format(
 						"%-4d records imported successfully.", transactions.size()));
@@ -112,7 +112,6 @@ public class ImportMemberTransactionHandler extends HandlerBase {
 		}
 
 		private void saveTransactions(List<AccountTransaction> transactions) {
-			IRepository<AccountTransaction> accountRepo = RepositoryFactory.getRepository(AccountTransaction.class);
 			for (AccountTransaction newEntity : transactions) {
 				accountRepo.saveNew(newEntity);
 			}
@@ -120,6 +119,9 @@ public class ImportMemberTransactionHandler extends HandlerBase {
 		}
 
 	}
+	
+	@Inject private static Provider<MemberTransactionImportTool> toolProvider;
+	@Inject private static IRepository<AccountTransaction> accountRepo;
 
 	/**
 	 * The constructor.

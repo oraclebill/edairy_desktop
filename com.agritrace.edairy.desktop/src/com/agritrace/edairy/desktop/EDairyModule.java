@@ -24,6 +24,7 @@ import com.agritrace.edairy.desktop.member.ui.controllers.MemberDirectoryControl
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberDirectoryController2;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberRegisterViewController;
 import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDirectoryController;
+import com.agritrace.edairy.desktop.services.ui.controllers.AnimalHealthRequestViewController;
 import com.agritrace.edairy.desktop.splashHandlers.EdairySplashHandler;
 import com.agritrace.edairy.desktop.system.ui.controllers.RoleDirectoryController;
 import com.google.inject.AbstractModule;
@@ -39,6 +40,7 @@ public class EDairyModule extends AbstractModule {
 	
 	// Add any directory controllers that require injection here.
 	static {
+		CONTROLLERS.add(AnimalHealthRequestViewController.class);
 		CONTROLLERS.add(LiveStockListController.class);
 		CONTROLLERS.add(FarmListViewController.class);
 		CONTROLLERS.add(RoleDirectoryController.class);
