@@ -1,0 +1,74 @@
+/* ### GENERAL ### */
+* { margin: 0px; padding: 0px; }
+html, body { font-family: Arial; font-size: 12px; color: #231F20; height: 100%; }
+input, select, textarea { font-family: Arial; font-size: 12px; color: #231F20; }
+body { background: #fff url('../images/bg.gif') repeat-x; }
+img { border: 0px; display: block; }
+
+/* ### GLOBAL CLASSES ### */
+.clear { clear: both; height: 1px; }
+
+/* ### WRAPPER ### */
+#wrapper { position: relative; display: block; width: 100%; min-height: 100%; }
+
+/* ### MAIN CONTAINER ### */
+#mainCntr { margin: 0 auto; width: 748px; }
+
+	/* ### HEADER CONTAINER ### */
+	#headerCntr { position: relative; width: 748px; height: 109px; }
+	#headerCntr h1 { padding-top: 5px; font-size: 27px; font-weight: bold; }
+	#headerCntr h1 a { color: #1B75BB; text-decoration: none; }
+	#headerCntr h2 { color: #1A1A1A; text-transform: uppercase; font-size: 18px; font-weight: normal; }
+	#headerCntr h2 span { font-size: 16px; color: #006838; display: block; }
+	
+		/* ### ADDRESS BOX ### */
+		.addressBox { padding-top: 10px; float: right; text-align: right; }
+		.addressBox h4 { padding-bottom: 5px; color: #006838; font-size: 13px; font-weight: normal; }
+		.addressBox address { font-style: normal; color: #333333; font-size: 10px; }
+		.addressBox a { color: #1B75BB; text-decoration: none; }
+		.addressBox a:hover { text-decoration: underline; }
+	
+	/* ### CONTENT CONTAINER ### */
+	#contentCntr { padding: 30px 0 20px 0; overflow: hidden; width: 748px; }
+	 
+		/* ### CENTER CONTAINER ### */
+		#centerCntr {  }
+		#centerCntr span { display: block; }
+		#centerCntr span span { color: #1B75BB; font-size: 14px; text-transform: uppercase; }
+		#centerCntr h3 { padding: 20px 0; color: #009345; font-weight: normal; font-size: 14px; }
+			
+			/* ### FARMER BOX ### */
+			.farmerBox { padding: 0 2%; width: 96%; border-bottom: 2px solid #8dbadd; }
+			.farmerBox p { padding-bottom: 20px; width: 100%; overflow: hidden; }
+			.farmerBox span.first { width: 155px; float: left; }
+			.farmerBox span.second { width: 340px; float: left; }			
+			.farmerBox span.third { width: 150px; float: left; }
+
+			/* ### SALE BOX ### */
+			.saleBox { padding: 0 2%; width: 96%; border-bottom: 2px solid #8dbadd; }		
+			.saleBox p { padding: 0 0 20px 3%; width: 97%; overflow: hidden; }	
+			.saleBox span.first { width: 275px; float: left; }
+			.saleBox span.second { width: 420px; float: right; }
+			.saleBox span.last { text-align: right; }
+
+			/* ### APPLIED BOX ### */
+			.appliedBox { padding: 0 2%; width: 96%; border-bottom: 2px solid #8dbadd; }
+			.appliedBox ul { padding: 0 3%; width: 94%; }			
+			.appliedBox li { list-style: none; width: 100%; overflow: hidden; }
+			.appliedBox li.head { padding-bottom: 15px; }
+			.appliedBox span.first { width: 115px; float: left; }
+			.appliedBox span.second { width: 313px; float: left; }
+			.appliedBox span.third { width: 180px; float: left; }
+			.appliedBox p { padding: 20px 0; text-align: right; color: #1B75BB; text-transform: uppercase; font-size: 14px; width: 100%; overflow: hidden; }
+			.appliedBox p span { float: right; width: 256px; }
+
+			/* ### TOTAL BOX ### */
+			.totalBox { padding: 5px 2%; width: 96%; font-size: 14px; }			
+			.totalBox p { padding: 8px 0; text-align: right; text-transform: uppercase; font-style: italic; font-weight: bold; }
+			.totalBox p.small { font-size: 12px; }
+			.totalBox span { width: 100px; float: right; }
+		 	
+	/* ### FOOTER CONTAINER ### */
+	#footerCntr { padding: 20px 0; width: 100%; overflow: hidden; background: #1c658e; }
+	#footerCntr .center { width: 748px; margin: 0 auto; }
+	#footerCntr a.right { float: right; }
