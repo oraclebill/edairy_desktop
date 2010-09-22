@@ -91,4 +91,10 @@ public abstract class BaseDialogView extends AbstractDialogView {
 //	}
 	protected abstract void buildWorkArea(Composite parent);
 
+	// This is not abstract, so we don't have to bother to override. But if we don't,
+	// we need to supply our own controller to the constructor.
+	@Override
+	protected AbstractWindowController createController() {
+		return null;
+	}
 }

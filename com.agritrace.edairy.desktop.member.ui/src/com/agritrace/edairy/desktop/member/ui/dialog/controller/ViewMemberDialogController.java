@@ -15,11 +15,10 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class ViewMemberDialogController extends AddMemberDialogController {
-	// TODO: Get rid of static injection here
-	@Inject	private static IFarmRepository farmRepository;
-	@Inject	private static IMemberRepository memberRepository;
-	@Inject	private static Provider<AddFarmDialog> addDialogProvider;
-	@Inject private static Provider<ViewFarmDialog> viewDialogProvider;
+	@Inject	private IFarmRepository farmRepository;
+	@Inject	private IMemberRepository memberRepository;
+	@Inject	private Provider<AddFarmDialog> addDialogProvider;
+	@Inject private Provider<ViewFarmDialog> viewDialogProvider;
 	
 	// collection tab
 	private MemberCollectionRecordsWidgetController collectionController;

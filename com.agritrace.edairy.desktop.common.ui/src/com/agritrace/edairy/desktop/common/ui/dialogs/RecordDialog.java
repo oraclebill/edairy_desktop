@@ -67,12 +67,4 @@ public abstract class RecordDialog<T extends EObject> extends BaseDialogView
 		// newShell.setSize(240, 400);
 		newShell.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 	}
-
-	// This is not abstract, so we don't have to bother to override. But if we don't,
-	// we need to supply our own controller to the constructor.
-	@Override
-	protected AbstractWindowController createController() {
-		return null;
-	}
-
 }

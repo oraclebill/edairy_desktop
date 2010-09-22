@@ -1,12 +1,12 @@
 package com.agritrace.edairy.desktop.member.ui.dialog;
 
-import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.ui.dialogs.BaseDialogView;
+import com.agritrace.edairy.desktop.member.ui.dialog.controller.AddMemberDialogController;
 import com.agritrace.edairy.desktop.member.ui.dialog.controller.ViewMemberDialogController;
 import com.agritrace.edairy.desktop.member.ui.views.MemberInfoGroup;
 import com.google.inject.Inject;
@@ -16,8 +16,13 @@ public class ViewMemberDialog extends BaseDialogView {
 	private MembershipTabFolder tabFolder;
 
 	@Inject
-	public ViewMemberDialog(@Named("current") Shell shell) {
-		super(shell);
+	public ViewMemberDialog(@Named("current") Shell shell, ViewMemberDialogController controller) {
+		super(shell, controller);
+	}
+	
+	// TODO: This kind of weird cross-inheritance really should be fixed.
+	protected ViewMemberDialog(@Named("current") Shell shell, AddMemberDialogController controller) {
+		super(shell, controller);
 	}
 
 	@Override
@@ -25,11 +30,6 @@ public class ViewMemberDialog extends BaseDialogView {
 		createMemberHeadlineGroup(parent);
 		createMemberInfoGroup(parent);
 		createMemberTabFolderGroup(parent);
-	}
-
-	@Override
-	protected AbstractWindowController createController() {
-		return new ViewMemberDialogController();
 	}
 
 	protected void createMemberHeadlineGroup(Composite composite) {

@@ -5,7 +5,6 @@ import java.beans.PropertyChangeListener;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import org.eclipse.core.databinding.conversion.Converter;
@@ -178,9 +177,8 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 
 	protected void addPropertyChangedListener() {
 		final AddMemberPropertyChangedListener propertyChangedListener = new AddMemberPropertyChangedListener();
-		final Iterator<IRidget> ridgetIterator = (Iterator<IRidget>) getRidgets().iterator();
-		while (ridgetIterator.hasNext()) {
-			final IRidget ridget = ridgetIterator.next();
+
+		for (final IRidget ridget: getRidgets()) {
 			if (ridget instanceof ITextRidget) {
 				ridget.addPropertyChangeListener("text", propertyChangedListener);
 			} else if (ridget instanceof IComboRidget) {
