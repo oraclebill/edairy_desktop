@@ -22,6 +22,7 @@ import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.RouteEditDialog;
 import com.agritrace.edairy.desktop.operations.ui.views.RouteDirectoryView;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 @PermissionRequired(Permission.VIEW_ROUTES)
 public class RouteListController extends BasicDirectoryController<Route> {
@@ -60,13 +61,16 @@ public class RouteListController extends BasicDirectoryController<Route> {
 	}
 
 	private final IDairyRepository dairyRepo;
+	private final Provider<RouteEditDialog> editDialogProvider;
 	private ITextRidget description;
 	private ITextRidget name;
 	private final SearchBean searchBean = new SearchBean();
 
 	@Inject
-	public RouteListController(final IDairyRepository dairyRepo, final IRepository<Route> repo) {
+	public RouteListController(final IDairyRepository dairyRepo, final IRepository<Route> repo,
+			final Provider<RouteEditDialog> editDialogProvider) {
 		this.dairyRepo = dairyRepo;
+		this.editDialogProvider = editDialogProvider;
 		setRepository(repo);
 		setEClass(DairyPackage.Literals.ROUTE);
 
@@ -123,7 +127,7 @@ public class RouteListController extends BasicDirectoryController<Route> {
 
 	@Override
 	protected RecordDialog<Route> getRecordDialog(Shell shell) {
-		return new RouteEditDialog(shell);
+		return editDialogProvider.get();
 	}
 
 	@Override

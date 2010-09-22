@@ -20,9 +20,11 @@ import org.eclipse.riena.ui.core.uiprocess.UIProcess;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.dialogs.ImportResultsDialog;
 import com.agritrace.edairy.desktop.install.MemberImportTool;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
@@ -78,9 +80,9 @@ public class ImportMembersHandler extends HandlerBase {
 				input = new BufferedInputStream(new FileInputStream(importFile));
 				
 				setNote("Importing " + lineCount + " members...");
-				MemberImportTool tool = new MemberImportTool(input, successes, errors, monitor);
+				MemberImportTool tool = toolProvider.get();
 				tool.setMonitorDelta(lineCount / 100);
-				tool.processFile();
+				tool.processFile(input, successes, errors, monitor);
 
 				msgList.add(String.format("%-4d records imported successfully.",
 						successes.size()));
@@ -111,13 +113,17 @@ public class ImportMembersHandler extends HandlerBase {
 		}
 		
 		private void saveMembers(List<Membership> successes2) {
-			RepositoryFactory.getDairyRepository().getLocalDairy().getMemberships()
+			IDairyRepository dairyRepo = repoProvider.get();
+			dairyRepo.getLocalDairy().getMemberships()
 					.addAll(successes2);
-			RepositoryFactory.getDairyRepository().save();
+			dairyRepo.save();
 		}
 	}
 	
 	private ExecutionEvent event;
+	
+	@Inject private static Provider<IDairyRepository> repoProvider;
+	@Inject private static Provider<MemberImportTool> toolProvider;
 
 	/**
 	 * The constructor.

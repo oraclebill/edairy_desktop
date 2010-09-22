@@ -19,10 +19,12 @@ import org.eclipse.riena.ui.core.uiprocess.UIProcess;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.dialogs.ImportResultsDialog;
 import com.agritrace.edairy.desktop.install.EmployeeImportTool;
 import com.agritrace.edairy.desktop.install.ValidationException;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
@@ -76,8 +78,7 @@ public class ImportEmployeesHandler extends HandlerBase {
 
 				monitor.subTask("Importing records...");
 				try {
-					new EmployeeImportTool(input, successes, errors, monitor)
-						.processFile();
+					toolProvider.get().processFile(input, successes, errors, monitor);
 					msgList.add(String.format(
 							"%-4d records imported successfully.", successes.size()));
 					for (String err : errors.keySet()) {
@@ -113,9 +114,10 @@ public class ImportEmployeesHandler extends HandlerBase {
 		}
 		
 		private void saveEmployees(List<Employee> successes2) {
-			RepositoryFactory.getDairyRepository().getLocalDairy().getEmployees()
+			IDairyRepository dairyRepo = repoProvider.get();
+			dairyRepo.getLocalDairy().getEmployees()
 					.addAll(successes2);
-			RepositoryFactory.getDairyRepository().save();
+			dairyRepo.save();
 		}
 
 
@@ -123,6 +125,9 @@ public class ImportEmployeesHandler extends HandlerBase {
 	}
 
 	private ExecutionEvent event;
+	
+	@Inject private static Provider<IDairyRepository> repoProvider;
+	@Inject private static Provider<EmployeeImportTool> toolProvider;
 
 	/**
 	 * The constructor.

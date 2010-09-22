@@ -2,7 +2,6 @@ package com.agritrace.edairy.desktop.common.persistence;
 
 import org.eclipse.emf.ecore.EObject;
 
-import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Key;
@@ -28,11 +27,7 @@ public final class RepositoryFactory {
 		
 		return INJECTOR.getInstance(key);
 	}
-	
-	public static IDairyRepository getDairyRepository() {
-		return INJECTOR.getInstance(IDairyRepository.class);
-	}
-	
+		
 	private RepositoryFactory() {
 		// don't really wan't to instantiate this - it's here for the statics..
 	}

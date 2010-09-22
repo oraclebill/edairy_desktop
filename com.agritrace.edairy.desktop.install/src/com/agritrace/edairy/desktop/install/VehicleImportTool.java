@@ -3,6 +3,7 @@ package com.agritrace.edairy.desktop.install;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -22,6 +23,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
+import com.google.inject.Inject;
 
 /**
  * Create a dairy configuration by importing excel data in standard format.
@@ -81,32 +84,29 @@ public class VehicleImportTool extends AbstractImportTool {
 
 	private int count = 0, errCount = 0;
 
-
-	public VehicleImportTool(Dairy dairy, File f) throws FileNotFoundException {
-		this(dairy, new FileReader(f));
-	}
-
-	public VehicleImportTool(Dairy dairy, InputStream f) {
-		this(dairy, new InputStreamReader(f));
-	}
-
-	public VehicleImportTool(Dairy dairy, Reader reader) {
-		this.reader = reader;
+	private final IDairyRepository repo;
+	
+	@Inject
+	public VehicleImportTool(IDairyRepository repo) {
+		this.repo = repo;
 	}
 	
-	public VehicleImportTool(InputStream input, List<Vehicle> vehicles,
-			Map<String, List<String[]>> errors, IProgressMonitor monitor) {
-		super(new InputStreamReader(input));
+	public void processFile(InputStream input, List<Vehicle> vehicles,
+			Map<String, List<String[]>> errors, IProgressMonitor monitor) throws IOException {
+		setReader(new InputStreamReader(input));
 		setMonitor(monitor);
 		
 		this.vehicles = vehicles;
 		this.failedRecords = errors;
 
-		Dairy dairy = RepositoryFactory.getDairyRepository().getLocalDairy();
+		Dairy dairy = repo.getLocalDairy();
 		vehicleCache = new HashMap<String, Object>();
+		
 		for (Vehicle vehicle : dairy.getVehicles()) {
 			vehicleCache.put(vehicle.getLogBookNumber(), vehicle);
-		}		
+		}
+		
+		super.processFile();
 	}
 	
 	@Override
