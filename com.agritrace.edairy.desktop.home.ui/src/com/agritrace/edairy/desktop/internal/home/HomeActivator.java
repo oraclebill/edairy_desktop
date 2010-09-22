@@ -1,5 +1,6 @@
-package com.agritrace.edairy.desktop.home;
+package com.agritrace.edairy.desktop.internal.home;
 
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
@@ -7,20 +8,21 @@ import org.osgi.framework.BundleContext;
 /**
  * The activator class controls the plug-in life cycle
  */
-public class Activator extends AbstractUIPlugin {
+public class HomeActivator extends AbstractUIPlugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "com.agritrace.edairy.desktop.home"; //$NON-NLS-1$
+	public static String PLUGIN_WEB_PATH;	
 
 	// The shared instance
-	private static Activator plugin;
+	private static HomeActivator plugin;
 
 	/**
 	 * Returns the shared instance
 	 * 
 	 * @return the shared instance
 	 */
-	public static Activator getDefault() {
+	public static HomeActivator getDefault() {
 		return plugin;
 	}
 
@@ -39,7 +41,7 @@ public class Activator extends AbstractUIPlugin {
 	/**
 	 * The constructor
 	 */
-	public Activator() {
+	public HomeActivator() {
 	}
 
 	/*
@@ -53,6 +55,7 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
+		PLUGIN_WEB_PATH = FileLocator.resolve(plugin.getBundle().getEntry("web")).toString();
 	}
 
 	/*

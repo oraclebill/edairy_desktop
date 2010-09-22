@@ -3,11 +3,12 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Home
 Bundle-SymbolicName: com.agritrace.edairy.desktop.home.ui;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: com.agritrace.edairy.desktop.home.Activator
+Bundle-Activator: com.agritrace.edairy.desktop.internal.home.HomeActivator
 Bundle-Vendor: AGRITRACE
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- com.agritrace.edairy.desktop.common.ui;bundle-version="1.0.0"
+ com.agritrace.edairy.desktop.common.ui;bundle-version="1.0.0",
+ com.agritrace.edairy.desktop.common.persistence;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.desktop.home.views
