@@ -20,8 +20,11 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
+import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.controller.ViewFarmDialogController;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * 
@@ -33,16 +36,17 @@ import com.agritrace.edairy.desktop.member.ui.dialog.controller.ViewFarmDialogCo
  * 
  */
 public class ViewFarmDialog extends AbstractDialogView {
-
 	private Button cancelButton;
-
 	private Button deleteButton;
-
 	private Composite main;
 	private Button saveButton;
+	
+	private final IFarmRepository farmRepository;
 
-	public ViewFarmDialog(Shell parentShell) {
+	@Inject
+	public ViewFarmDialog(@Named("current") final Shell parentShell, final IFarmRepository farmRepository) {
 		super(parentShell);
+		this.farmRepository = farmRepository;
 	}
 
 	private Composite createOkCancelButtons(Composite parent) {
@@ -101,7 +105,7 @@ public class ViewFarmDialog extends AbstractDialogView {
 
 	@Override
 	protected AbstractWindowController createController() {
-		return new ViewFarmDialogController();
+		return new ViewFarmDialogController(farmRepository);
 	}
 
 	protected void createHeader(Composite parent) {

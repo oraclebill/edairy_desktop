@@ -17,9 +17,13 @@ import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
 import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationDirectoryController;
 import com.agritrace.edairy.desktop.install.navigation.InstallModule;
+import com.agritrace.edairy.desktop.member.ui.MemberModule;
 import com.agritrace.edairy.desktop.member.ui.controllers.ContainerListViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.FarmListViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.LiveStockListController;
+import com.agritrace.edairy.desktop.member.ui.controllers.MemberDirectoryController;
+import com.agritrace.edairy.desktop.member.ui.controllers.MemberDirectoryController2;
+import com.agritrace.edairy.desktop.member.ui.controllers.MemberRegisterViewController;
 import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDirectoryController;
 import com.agritrace.edairy.desktop.splashHandlers.EdairySplashHandler;
 import com.agritrace.edairy.desktop.system.ui.controllers.RoleDirectoryController;
@@ -43,6 +47,9 @@ public class EDairyModule extends AbstractModule {
 		CONTROLLERS.add(ContainerListViewController.class);
 		CONTROLLERS.add(MilkCollectionLogController.class);
 		CONTROLLERS.add(SupplierDirectoryController.class);
+		CONTROLLERS.add(MemberDirectoryController.class);
+		CONTROLLERS.add(MemberDirectoryController2.class);
+		CONTROLLERS.add(MemberRegisterViewController.class);
 	}
 	
 	public EDairyModule(BundleContext context) {
@@ -52,6 +59,7 @@ public class EDairyModule extends AbstractModule {
 	@Override
 	protected void configure() {
 		install(new PersistenceModule());
+		install(new MemberModule());
 		install(new InstallModule());
 		install(Peaberry.osgiModule(context, EclipseRegistry.eclipseRegistry()));
 		

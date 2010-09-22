@@ -4,8 +4,10 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
+import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberContainerWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberLiveStockWidgetController;
+import com.google.inject.Inject;
 
 public class ViewFarmDialogController extends AddFarmDialogController {
 	
@@ -13,11 +15,19 @@ public class ViewFarmDialogController extends AddFarmDialogController {
 	// container tab
 	private MemberContainerWidgetController containerController;	
 	
+	private final IFarmRepository farmRepository;
+
+	@Inject
+	public ViewFarmDialogController(final IFarmRepository farmRepository) {
+		this.farmRepository = farmRepository;
+	}
+
 	protected void configureTabs(){
 		super.configureTabs();
-		liveStockController = new MemberLiveStockWidgetController(this);
-		containerController = new MemberContainerWidgetController(this);
+		liveStockController = new MemberLiveStockWidgetController(this, farmRepository);
+		containerController = new MemberContainerWidgetController(this, farmRepository);
 	}
+	
 	@Override
 	protected void configureButtonsPanel() {
 		super.configureButtonsPanel();

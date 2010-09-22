@@ -54,7 +54,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BaseDialogController;
@@ -146,6 +145,7 @@ public class BulkCollectionsEntryDialogController extends
 			.getSystemColor(SWT.COLOR_RED);
 
 	private final IDairyRepository dairyRepo;
+	private final ICollectionJournalLineRepository lineRepo;
 
 	// milk Entry group
 	private ITableRidget journalEntryTable;
@@ -168,9 +168,11 @@ public class BulkCollectionsEntryDialogController extends
 	/**
 	 * 
 	 */
-	public BulkCollectionsEntryDialogController() {
+	public BulkCollectionsEntryDialogController(final IDairyRepository dairyRepo,
+			final ICollectionJournalLineRepository lineRepo) {
 		super();
-		dairyRepo = RepositoryFactory.getDairyRepository();
+		this.dairyRepo = dairyRepo;
+		this.lineRepo = lineRepo;
 		journalPageValidators = new ValidatorCollection();
 		addJournalValidator(new BasicJournalValidator());
 		// drivers = dairyRepo.employeesByPosition("Driver");
@@ -506,9 +508,6 @@ public class BulkCollectionsEntryDialogController extends
 		collectionLineRidget.addValidator(new DuplicateDeliveryValidator(
 				workingJournalPage.getJournalEntries(), "Collection Journal"));
 		
-		final ICollectionJournalLineRepository repository =
-			RepositoryFactory.getRegisteredRepository(ICollectionJournalLineRepository.class);
-		
 		collectionLineRidget.addValidator(new IValidator() {
 			@Override
 			public IStatus validate(Object value) {
@@ -517,7 +516,7 @@ public class BulkCollectionsEntryDialogController extends
 				final DairyLocation center = getContextJournalPage().getCollectionCenter();
 				final Date date = getContextJournalPage().getJournalDate();
 				
-				if (repository.countByMemberCenterDate(member, center, date) > 0) {
+				if (lineRepo.countByMemberCenterDate(member, center, date) > 0) {
 					return ValidationStatus.error("Another entry for this member, center and date already exists");
 				} else {
 					return ValidationStatus.ok();

@@ -11,9 +11,9 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
+import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberCollectionRecordsWidgetController;
@@ -22,9 +22,13 @@ import com.agritrace.edairy.desktop.member.ui.controls.MemberFarmWidgetControlle
 import com.agritrace.edairy.desktop.member.ui.controls.MemberLiveStockWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberProfileWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberTransactionWidgetController;
+import com.agritrace.edairy.desktop.member.ui.dialog.AddFarmDialog;
+import com.agritrace.edairy.desktop.member.ui.dialog.ViewFarmDialog;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchDetachedView;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchSelectionListener;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchSelectionManager;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class MemberRegisterViewController extends SubModuleController implements MemberSearchSelectionListener {
 
@@ -53,8 +57,6 @@ public class MemberRegisterViewController extends SubModuleController implements
 
 	// upper panel fields
 	private ILabelRidget memberIdRidget;
-
-	private final IMemberRepository memberRepository;
 	private ITextRidget nameRidget;
 
 	// private Membership workingCopy;
@@ -75,10 +77,21 @@ public class MemberRegisterViewController extends SubModuleController implements
 
 	// transaction tab
 	MemberTransactionWidgetController transactionController;
+	
+	private final IMemberRepository memberRepository;
+	private final IFarmRepository farmRepository;
+	private final Provider<AddFarmDialog> addDialogProvider;
+	private final Provider<ViewFarmDialog> viewDialogProvider;
 
-	public MemberRegisterViewController() {
+	@Inject
+	public MemberRegisterViewController(final IFarmRepository farmRepository,
+			final IMemberRepository memberRepository,
+			final Provider<AddFarmDialog> addDialogProvider, final Provider<ViewFarmDialog> viewDialogProvider) {
 		MemberSearchSelectionManager.INSTANCE.addSearchSelectionListener(this);
-		memberRepository = RepositoryFactory.getMemberRepository();
+		this.memberRepository = memberRepository;
+		this.farmRepository = farmRepository;
+		this.addDialogProvider = addDialogProvider;
+		this.viewDialogProvider = viewDialogProvider;
 	}
 
 	@Override
@@ -86,10 +99,11 @@ public class MemberRegisterViewController extends SubModuleController implements
 		getNavigationNode().addSimpleListener(new MemberSearchNodeListern());
 		configureUpperPanel();
 		memberProfileController = new MemberProfileWidgetController(this);
-		farmController = new MemberFarmWidgetController(this);
+		farmController = new MemberFarmWidgetController(this, farmRepository, memberRepository,
+				addDialogProvider, viewDialogProvider);
 		collectionController = new MemberCollectionRecordsWidgetController(this);
-		liveStockController = new MemberLiveStockWidgetController(this);
-		containerController = new MemberContainerWidgetController(this);
+		liveStockController = new MemberLiveStockWidgetController(this, farmRepository);
+		containerController = new MemberContainerWidgetController(this, farmRepository);
 		transactionController = new MemberTransactionWidgetController(this);
 
 		if (selectedMember != null) {

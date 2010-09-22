@@ -9,26 +9,21 @@ import org.eclipse.swt.widgets.Shell;
 import com.agritrace.edairy.desktop.common.ui.dialogs.BaseDialogView;
 import com.agritrace.edairy.desktop.member.ui.dialog.controller.ViewMemberDialogController;
 import com.agritrace.edairy.desktop.member.ui.views.MemberInfoGroup;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 public class ViewMemberDialog extends BaseDialogView {
+	private MembershipTabFolder tabFolder;
 
-	MembershipTabFolder tabFolder;
-
-	public ViewMemberDialog() {
-		this(null);
-	}
-
-	public ViewMemberDialog(Shell shell) {
+	@Inject
+	public ViewMemberDialog(@Named("current") Shell shell) {
 		super(shell);
 	}
 
 	@Override
 	protected void buildWorkArea(Composite parent) {
-
 		createMemberHeadlineGroup(parent);
-
 		createMemberInfoGroup(parent);
-
 		createMemberTabFolderGroup(parent);
 	}
 

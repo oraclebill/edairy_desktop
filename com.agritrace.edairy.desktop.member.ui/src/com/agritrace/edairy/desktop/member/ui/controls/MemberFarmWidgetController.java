@@ -19,7 +19,6 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
@@ -28,6 +27,8 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.data.FarmListViewTableNode;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddFarmDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewFarmDialog;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class MemberFarmWidgetController extends BasicDirectoryController<Farm> implements WidgetController<Object> {
 
@@ -39,18 +40,27 @@ public class MemberFarmWidgetController extends BasicDirectoryController<Farm> i
 	private final String[] farmPropertyNames = { "farmId", "name", "location", "numberOfAnimals", "numberOfContainers" };
 
 	private final IFarmRepository farmRepository;
-	private final List<Farm> farms = new ArrayList<Farm>();
 	private final IMemberRepository memberRepository;
+	private final Provider<AddFarmDialog> addDialogProvider;
+	private final Provider<ViewFarmDialog> viewDialogProvider;
+	private final List<Farm> farms = new ArrayList<Farm>();
 	private Membership selectedMember;
 
-	public MemberFarmWidgetController(IController controller) {
-		memberRepository = RepositoryFactory.getMemberRepository();
-		farmRepository = RepositoryFactory.getRegisteredRepository(IFarmRepository.class);
+	@Inject
+	public MemberFarmWidgetController(final IController controller, final IFarmRepository farmRepository,
+			final IMemberRepository memberRepository,
+			final Provider<AddFarmDialog> addDialogProvider, final Provider<ViewFarmDialog> viewDialogProvider) {
+		this.memberRepository = memberRepository;
+		this.farmRepository = farmRepository;
 		this.controller = controller;
+		this.addDialogProvider = addDialogProvider;
+		this.viewDialogProvider = viewDialogProvider;
 		setEClass(TrackingPackage.Literals.FARM);
+		
 		for (int i = 0; i < farmPropertyNames.length; i++) {
 			addTableColumn(farmColumnHeaders[i], farmPropertyNames[i], String.class);
 		}
+		
 		configure();
 	}
 
@@ -220,13 +230,13 @@ public class MemberFarmWidgetController extends BasicDirectoryController<Farm> i
 	}
 
 	@Override
-	protected List getFilteredResult() {
+	protected List<Farm> getFilteredResult() {
 		updateBinding();
 		return farms;
 	}
 
 	@Override
-	protected RecordDialog getRecordDialog(Shell shell) {
+	protected RecordDialog<Farm> getRecordDialog(Shell shell) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -266,7 +276,7 @@ public class MemberFarmWidgetController extends BasicDirectoryController<Farm> i
 		final Location newFarmLocation = DairyUtil.createLocation(null, null, null);
 		final Farm newFarm = DairyUtil.createFarm("", newFarmLocation);
 		FarmListViewTableNode newNode = new FarmListViewTableNode(selectedMember, newFarm);
-		final AddFarmDialog memberDialog = new AddFarmDialog(Display.getDefault().getActiveShell());
+		final AddFarmDialog memberDialog = addDialogProvider.get();
 		memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM,
 				newNode);
 
@@ -296,7 +306,7 @@ public class MemberFarmWidgetController extends BasicDirectoryController<Farm> i
 		if (selections.size() > 0) {
 			final Farm selectedFarm = (Farm) selections.get(0);
 			FarmListViewTableNode newNode = new FarmListViewTableNode(selectedMember, selectedFarm);
-			final ViewFarmDialog memberDialog = new ViewFarmDialog(Display.getDefault().getActiveShell());
+			final ViewFarmDialog memberDialog = viewDialogProvider.get();
 			memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM,
 					newNode);
 

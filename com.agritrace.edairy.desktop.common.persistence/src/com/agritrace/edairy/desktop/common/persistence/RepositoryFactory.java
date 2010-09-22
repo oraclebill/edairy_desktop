@@ -21,10 +21,6 @@ public final class RepositoryFactory {
 	@Inject
 	private static Injector INJECTOR;
 	
-	public static <T extends IRepository<?>> T getRegisteredRepository(final Class<T> klass) {
-		return INJECTOR.getInstance(klass);
-	}
-
 	public static <X extends EObject> IRepository<X> getRepository(final Class<X> repoClass) {
 		@SuppressWarnings("unchecked")
 		Key<IRepository<X>> key = (Key<IRepository<X>>)

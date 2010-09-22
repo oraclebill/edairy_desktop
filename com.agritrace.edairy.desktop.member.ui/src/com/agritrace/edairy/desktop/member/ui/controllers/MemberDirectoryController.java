@@ -28,12 +28,14 @@ import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.BaseDialogView;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddMemberDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewMemberDialog;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class MemberDirectoryController extends SubModuleController {
 
@@ -74,7 +76,7 @@ public class MemberDirectoryController extends SubModuleController {
 		@Override
 		public void callback() {
 			Membership selectedMember = DairyUtil.createMembership(null, null, null);
-			final AddMemberDialog memberDialog = new AddMemberDialog();
+			final AddMemberDialog memberDialog = addDialogProvider.get();
 			memberDialog.getController().setContext("selectedMember", selectedMember);
 
 			final int returnCode = memberDialog.open();
@@ -98,7 +100,7 @@ public class MemberDirectoryController extends SubModuleController {
 		@Override
 		public void callback() {
 			Membership selectedMember = (Membership) memberListRidget.getSelection().get(0);
-			final BaseDialogView memberDialog = new ViewMemberDialog();
+			final BaseDialogView memberDialog = viewDialogProvider.get();
 			memberDialog.getController().setContext("selectedMember", selectedMember);
 
 			final int returnCode = memberDialog.open();
@@ -143,14 +145,20 @@ public class MemberDirectoryController extends SubModuleController {
 	private final List<Membership> membershipList;
 	private List<Membership> allMembers;
 	private final Dairy localDairy;
-	
+	private final Provider<ViewMemberDialog> viewDialogProvider;
+	private final Provider<AddMemberDialog> addDialogProvider;
 
-	public MemberDirectoryController() {
+	@Inject
+	public MemberDirectoryController(final IMemberRepository repository, final IDairyRepository dairyRepo,
+			final Provider<ViewMemberDialog> viewDialogProvider,
+			final Provider<AddMemberDialog> addDialogProvider) {
+		this.repository = repository;
+		this.localDairy = dairyRepo.getLocalDairy();
+		this.viewDialogProvider = viewDialogProvider;
+		this.addDialogProvider = addDialogProvider;
+		
 		membershipList 	= new ArrayList<Membership>();
 		searchLabels 	= new ILabelRidget[27];
-		repository 		= RepositoryFactory.getMemberRepository();
-//		farmRepository 	= new FarmRepository();
-		localDairy 		= RepositoryFactory.getDairyRepository().getLocalDairy(); 
 		allMembers 		= localDairy.getMemberships();
 	}
 

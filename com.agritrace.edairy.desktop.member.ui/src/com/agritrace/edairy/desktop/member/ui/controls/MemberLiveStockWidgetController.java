@@ -22,7 +22,6 @@ import com.agritrace.edairy.desktop.common.model.tracking.RearingMode;
 import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.util.DateFilterUtil;
@@ -32,6 +31,7 @@ import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddLiveStockDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewLiveStockDialog;
+import com.google.inject.Inject;
 
 public class MemberLiveStockWidgetController extends BasicDirectoryController<RegisteredAnimal>implements WidgetController<Object> {
 
@@ -47,10 +47,10 @@ public class MemberLiveStockWidgetController extends BasicDirectoryController<Re
 	private final String[] liveStockPropertyNames = { "registrationId", "location", "purpose", "givenName",
 			"animalType", "animalType", "dateOfAcquisition", "acquisitionType" };
 
-
-	public MemberLiveStockWidgetController(IController controller) {
+	@Inject
+	public MemberLiveStockWidgetController(IController controller, IFarmRepository farmRepository) {
 		this.controller = controller;
-		farmRepository = RepositoryFactory.getRegisteredRepository(IFarmRepository.class);
+		this.farmRepository = farmRepository;
 		setEClass(TrackingPackage.Literals.REGISTERED_ANIMAL);
 		for (int i = 0; i < liveStockPropertyNames.length; i++) {
 			addTableColumn(liveStockColumnHeaders[i], liveStockPropertyNames[i], String.class);
@@ -64,7 +64,6 @@ public class MemberLiveStockWidgetController extends BasicDirectoryController<Re
 	
 	}
 
-		
 	@Override
 	public IRidgetContainer getContainer() {
 		return controller;
@@ -98,10 +97,12 @@ public class MemberLiveStockWidgetController extends BasicDirectoryController<Re
 
 	private List<RegisteredAnimal> filterDate(List<RegisteredAnimal> inputRecrods, Date startDate, Date endDate) {
 		if ((inputRecrods == null) || inputRecrods.isEmpty()) {
-			return Collections.EMPTY_LIST;
+			return new ArrayList<RegisteredAnimal>();
 		}
+		
 		DateFilterUtil<RegisteredAnimal> dateFilter = new DateFilterUtil<RegisteredAnimal>(
 				RegisteredAnimal.class, TrackingPackage.Literals.REGISTERED_ANIMAL__DATE_OF_ACQUISITION);
+		
 		return dateFilter.filterDate(inputRecrods, startDate, endDate);
 	}
 

@@ -35,16 +35,6 @@ import com.google.inject.Provider;
 public class ImportCollectionCentersHandler extends HandlerBase {
 	ExecutionEvent event;
 	
-	protected static class RepositoryHolder implements Provider<IDairyLocationRepository> {
-		@Inject private Provider<IDairyLocationRepository> internal;
-		
-		@Override
-		public IDairyLocationRepository get() {
-			return internal.get();
-		}
-		
-	}
-
 	private class CollectionCenterImportProcess extends UIProcess {
 		final File importFile;
 		final int lineCount;
@@ -89,9 +79,9 @@ public class ImportCollectionCentersHandler extends HandlerBase {
 				centers = new ArrayList<DairyLocation>();
 				errors = new HashMap<String, List<String[]>>();
 
-				CollectionCenterImportTool tool = new CollectionCenterImportTool(input, centers, errors, monitor);
+				CollectionCenterImportTool tool = toolProvider.get();
 //				tool.setMonitorDelta(lineCount / 2);
-				tool.processFile();
+				tool.processFile(input, centers, errors, monitor);
 
 				msgList.add(String.format(
 						"%-4d records imported successfully.", centers.size()));
@@ -130,6 +120,8 @@ public class ImportCollectionCentersHandler extends HandlerBase {
 	
 	@Inject
 	private static IDairyLocationRepository repo;
+	@Inject
+	private static Provider<CollectionCenterImportTool> toolProvider;
 
 	/**
 	 * The constructor.

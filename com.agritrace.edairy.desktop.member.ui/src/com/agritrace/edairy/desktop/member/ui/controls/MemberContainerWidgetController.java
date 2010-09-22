@@ -19,7 +19,6 @@ import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
@@ -27,6 +26,7 @@ import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddContainerDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewContainerDialog;
+import com.google.inject.Inject;
 
 public class MemberContainerWidgetController extends BasicDirectoryController<Container> implements WidgetController<Object> {
 	public static final String ALL_FARM = "All Farms";
@@ -43,9 +43,10 @@ public class MemberContainerWidgetController extends BasicDirectoryController<Co
 	private final List<Farm> farms = new ArrayList<Farm>();
 	private Object inputModel;
 
-	public MemberContainerWidgetController(IController controller) {
+	@Inject
+	public MemberContainerWidgetController(IController controller, IFarmRepository farmRepository) {
 		this.controller = controller;
-		farmRepository = RepositoryFactory.getRegisteredRepository(IFarmRepository.class);
+		this.farmRepository = farmRepository;
 		setEClass(TrackingPackage.Literals.CONTAINER);
 		for (int i = 0; i < containerPropertyNames.length; i++) {
 			addTableColumn(containerColumnHeaders[i], containerPropertyNames[i], String.class);

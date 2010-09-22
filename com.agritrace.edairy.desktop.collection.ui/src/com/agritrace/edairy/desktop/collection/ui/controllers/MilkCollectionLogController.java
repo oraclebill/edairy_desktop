@@ -36,7 +36,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
@@ -44,6 +43,7 @@ import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.agritrace.edairy.desktop.operations.services.dairylocation.IDairyLocationRepository;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 @PermissionRequired(Permission.VIEW_MILK_COLLECTIONS)
 public class MilkCollectionLogController extends BasicDirectoryController<CollectionGroup> {
@@ -54,9 +54,8 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 
 		@Override
 		public void saveJournal(CollectionGroup journal) {
-			final IDairyRepository repo = RepositoryFactory.getDairyRepository();
-			repo.getLocalDairy().getCollectionJournals().add(journal);
-			repo.save(repo.getLocalDairy());
+			dairyRepo.getLocalDairy().getCollectionJournals().add(journal);
+			dairyRepo.save(dairyRepo.getLocalDairy());
 			MilkCollectionLogController.this.refreshTableContents();
 		}
 	}
@@ -112,15 +111,30 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	private IToggleButtonRidget rejected;
 
 	private final MilkCollectionLogFilterBean filterBean = new MilkCollectionLogFilterBean();
-	private final List<CollectionGroup> allJournals = RepositoryFactory.getDairyRepository().allCollectionGroups();
+	private final IDairyRepository dairyRepo;
+	private final IDairyLocationRepository dairyLocationRepo;
+	private final IRepository<CollectionSession> sessionRepo;
+	private final List<CollectionGroup> allJournals;
+	private final Provider<NewMilkCollectionJournalDialog> newDialogProvider;
+	private final Provider<BulkCollectionsEntryDialog> entryDialogProvider;
 	private final Color TABLE_HIGHLIGHT_BACKGROUND = PlatformUI.getWorkbench().getDisplay()
 			.getSystemColor(SWT.COLOR_YELLOW);
 	private List<DairyLocation> collectionCenters;
 
 	@Inject
-	public MilkCollectionLogController(final IRepository<CollectionGroup> journalRepo, final IDairyLocationRepository repo) {
+	public MilkCollectionLogController(final IRepository<CollectionGroup> journalRepo,
+			final IDairyLocationRepository dairyLocationRepo, final IDairyRepository dairyRepo,
+			final IRepository<CollectionSession> sessionRepo,
+			final Provider<NewMilkCollectionJournalDialog> newDialogProvider,
+			final Provider<BulkCollectionsEntryDialog> entryDialogProvider) {
 		setEClass(DairyPackage.Literals.COLLECTION_GROUP);
 		setRepository(journalRepo);
+		this.dairyRepo = dairyRepo;
+		this.dairyLocationRepo = dairyLocationRepo;
+		this.sessionRepo = sessionRepo;
+		this.newDialogProvider = newDialogProvider;
+		this.entryDialogProvider = entryDialogProvider;
+		allJournals = dairyRepo.allCollectionGroups();
 
 		addTableColumn("Date", DairyPackage.Literals.COLLECTION_GROUP__JOURNAL_DATE);
 		addTableColumn("Collection Center", "collectionCenter.code", String.class);
@@ -134,14 +148,15 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 
 		collectionCenters = new ArrayList<DairyLocation>();
 		collectionCenters.add(null); // First, empty entry - means "show all"
-		collectionCenters.addAll(repo.allCollectionCenters());
+		collectionCenters.addAll(dairyLocationRepo.allCollectionCenters());
 	}
 
 	@Override
 	public void afterBind() {
 		super.afterBind();
 		getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_NEW_BUTTON).setText("Enter Collection Journals");
-		getRidget(IActionRidget.class, "import-file-button").addListener(new ScaleImportAction(this));
+		getRidget(IActionRidget.class, "import-file-button").addListener(
+				new ScaleImportAction(this, dairyLocationRepo, dairyRepo, sessionRepo));
 		getRidget(IActionRidget.class, "edit-sessions").addListener(new IActionListener() {
 			@Override
 			public void callback() {
@@ -177,7 +192,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		
 		List<CollectionSession> sessions = new ArrayList<CollectionSession>();
 		sessions.add(null); // Do not filter by status
-		sessions.addAll(RepositoryFactory.getRepository(CollectionSession.class).all());
+		sessions.addAll(sessionRepo.all());
 		session.bindToModel(
 				new WritableList(sessions, CollectionSession.class),
 				CollectionSession.class,
@@ -272,12 +287,11 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 
 	@Override
 	protected void handleNewItemAction() {
-		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
-		final NewMilkCollectionJournalDialog dialog = new NewMilkCollectionJournalDialog(getShell());
+		final NewMilkCollectionJournalDialog dialog = newDialogProvider.get();
 		final int returnCode = dialog.open();
 		if (Window.OK == returnCode) {
 			final CollectionGroup newPage = dialog.getNewJournalPage();			
-			BulkCollectionsEntryDialog journalEntryDialog = new BulkCollectionsEntryDialog(shell);
+			BulkCollectionsEntryDialog journalEntryDialog = entryDialogProvider.get();
 			final BulkCollectionsEntryDialogController controller = ( BulkCollectionsEntryDialogController)journalEntryDialog.getController(); 
 
 			controller.setPersistenceDelegate(new CollectionLogJournalPersister(controller));
@@ -291,8 +305,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	@Override
 	protected void handleViewItemAction() {
 		if(table != null && table.getSelection().size()>0){
-			Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
-			BulkCollectionsEntryDialog journalEntryDialog = new BulkCollectionsEntryDialog(shell);
+			BulkCollectionsEntryDialog journalEntryDialog = entryDialogProvider.get();
 			final BulkCollectionsEntryDialogController controller = (BulkCollectionsEntryDialogController)journalEntryDialog.getController(); 
 
 			controller.setPersistenceDelegate(new CollectionLogJournalPersister(controller));

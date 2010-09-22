@@ -27,6 +27,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
+import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.collection.ui.components.collectionline.CollectionLineComposite;
 import com.agritrace.edairy.desktop.collection.ui.components.journalheader.JournalHeaderComposite;
@@ -36,6 +37,9 @@ import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.dialogs.BaseDialogView;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * 
@@ -98,6 +102,8 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 		}
 
 		public void callback() {
+			/*
+			 // TODO: Do something about it
 			BulkCollectionsEntryDialog dialog = new BulkCollectionsEntryDialog(shell);
 
 			dialog.getController().setContext(BulkCollectionsEntryDialogController.CONTEXT_JOURNAL_PAGE,
@@ -110,6 +116,7 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 			} else {
 				System.out.println("CANCEL pressed"); //$NON-NLS-1$
 			}
+			*/
 		}
 	}
 
@@ -125,15 +132,22 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 
 	private static final String BIN_COLUMN_HEADER = "Bin";
 	private static final String MILK_ENTRY_LIST_GROUP_TITLE = "Milk Collection Entries";
+	
+	private final IDairyRepository dairyRepo;
+	private final ICollectionJournalLineRepository lineRepo;
+	
 	/**
 	 * Create the dialog.
 	 * 
 	 * @param parentShell
 	 * @param testJournalPersister
 	 */
-	public BulkCollectionsEntryDialog(Shell parentShell) {
+	@Inject
+	public BulkCollectionsEntryDialog(@Named("current") Shell parentShell, IDairyRepository dairyRepo,
+			ICollectionJournalLineRepository lineRepo) {
 		super(parentShell);
-//		setShellStyle(SWT.CLOSE|SWT.MIN|SWT.MAX|SWT.RESIZE);
+		this.dairyRepo = dairyRepo;
+		this.lineRepo = lineRepo;
 	}
 
 	@Override
@@ -196,7 +210,7 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 
 	@Override
 	protected AbstractWindowController createController() {
-		return new BulkCollectionsEntryDialogController();
+		return new BulkCollectionsEntryDialogController(dairyRepo, lineRepo);
 	}
 
 	private Composite createButtonComposite(Composite group) {
