@@ -27,7 +27,7 @@ import com.google.inject.Inject;
  *
  */
 public final class PreferencesDialog extends PreferenceDialog {
-	public static final class SitePrefsPage extends FieldEditorPreferencePage {
+	protected static final class SitePrefsPage extends FieldEditorPreferencePage {
 		private SiteSettingsController controller;
 		
 		@Inject
@@ -92,13 +92,14 @@ public final class PreferencesDialog extends PreferenceDialog {
 		}
 	}
 	
-	private static final class SystemPrefsPage extends FieldEditorPreferencePage {
+	protected static final class SystemPrefsPage extends FieldEditorPreferencePage {
 		private SystemSettingsController controller;
 		
-		public SystemPrefsPage() {
+		@Inject
+		public SystemPrefsPage(final SystemSettingsController controller) {
 			super("System preferences", GRID);
 			setDescription("Settings that affect the entire application system.");
-			controller = new SystemSettingsController();
+			this.controller = controller;
 		}
 		
 		@Override
@@ -130,8 +131,8 @@ public final class PreferencesDialog extends PreferenceDialog {
 	}
 	
 	@Inject
-	public PreferencesDialog(Shell parentShell, SitePrefsPage sitePrefsPage) {
-		super(parentShell, createPreferenceManager(sitePrefsPage));
+	public PreferencesDialog(Shell parentShell, SitePrefsPage sitePrefsPage, SystemPrefsPage systemPrefsPage) {
+		super(parentShell, createPreferenceManager(sitePrefsPage, systemPrefsPage));
 	}
 	
 	@Override
@@ -139,11 +140,11 @@ public final class PreferencesDialog extends PreferenceDialog {
 		// Do nothing, everything is saved in performOk events
 	}
 	
-	private static PreferenceManager createPreferenceManager(SitePrefsPage sitePrefsPage) {
+	private static PreferenceManager createPreferenceManager(SitePrefsPage sitePrefsPage, SystemPrefsPage systemPrefsPage) {
 		PreferenceManager manager = new PreferenceManager();
 		manager.addToRoot(new PreferenceNode("site", sitePrefsPage));
 		manager.addToRoot(new PreferenceNode("user", new UserPrefsPage()));
-		manager.addToRoot(new PreferenceNode("system", new SystemPrefsPage()));
+		manager.addToRoot(new PreferenceNode("system", systemPrefsPage));
 		return manager;
 	}
 }

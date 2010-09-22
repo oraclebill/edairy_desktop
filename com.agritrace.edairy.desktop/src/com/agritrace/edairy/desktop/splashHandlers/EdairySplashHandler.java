@@ -23,7 +23,6 @@ import org.eclipse.ui.internal.StartupThreading.StartupRunnable;
 import org.eclipse.ui.internal.splash.EclipseSplashHandler;
 
 import com.agritrace.edairy.desktop.member.ui.Activator;
-import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.agritrace.edairy.desktop.ui.controllers.AuthController;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -31,10 +30,11 @@ import com.google.inject.Provider;
 @SuppressWarnings("restriction")
 public class EdairySplashHandler extends EclipseSplashHandler {
 	@Inject
-	// It doesn't have to be IDairyRepository. Anything persistence-related will do.
-	private static Provider<IDairyRepository> PROVIDER;
+	private static Provider<AuthController> PROVIDER;
 	
 	private static final int WAIT_MSEC = 5000;
+	
+	private AuthController authController = null;
 	private boolean authenticated = false;
 	private Label developerLabel;
 	private Text username;
@@ -64,11 +64,11 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 			@Override
 			public void runWithException() throws Throwable {
 				// Force initialization of the persistence layer
-				PROVIDER.get();
+				authController = PROVIDER.get();
 			}
 		});
 		
-		while (System.currentTimeMillis() < endTime) {
+		while (System.currentTimeMillis() < endTime || authController == null) {
 			if (splash.getDisplay().readAndDispatch() == false) {
 				splash.getDisplay().sleep();
 			}
@@ -126,7 +126,7 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 		buttonOK.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				authenticated = AuthController.authenticate(username.getText(), password.getText());
+				authenticated = authController.authenticate(username.getText(), password.getText());
 				
 				if (!authenticated) {
 					MessageDialog.openWarning(getSplash(), "Authentication Failure",

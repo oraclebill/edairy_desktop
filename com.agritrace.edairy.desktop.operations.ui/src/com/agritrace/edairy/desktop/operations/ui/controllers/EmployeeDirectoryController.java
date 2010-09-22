@@ -27,6 +27,7 @@ import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.EmployeeEditDialog;
 import com.agritrace.edairy.desktop.operations.ui.views.EmployeeDirectoryView;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 @PermissionRequired(Permission.VIEW_EMPLOYEES)
 public class EmployeeDirectoryController extends BasicDirectoryController<Employee> {
@@ -37,11 +38,14 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 	private final IDairyRepository dairyRepo;
 	private final Dairy localDairy;
 	private final List<Employee> allEmployees;
+	private final Provider<EmployeeEditDialog> editDialogProvider;
 	private final EmployeeSearchBean searchBean = new EmployeeSearchBean();
 
 	@Inject
-	public EmployeeDirectoryController(final IDairyRepository dairyRepo, final IRepository<Employee> repo) {
+	public EmployeeDirectoryController(final IDairyRepository dairyRepo, final IRepository<Employee> repo,
+			final Provider<EmployeeEditDialog> editDialogProvider) {
 		this.dairyRepo = dairyRepo;
+		this.editDialogProvider = editDialogProvider;
 		localDairy = dairyRepo.getLocalDairy();
 		allEmployees = dairyRepo.getLocalDairy().getEmployees();
 		setRepository(repo);
@@ -130,7 +134,7 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 
 	@Override
 	protected RecordDialog<Employee> getRecordDialog(Shell shell) {
-		return new EmployeeEditDialog(shell);
+		return editDialogProvider.get();
 	}
 
 	private void handleException(Throwable e) {

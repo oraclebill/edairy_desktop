@@ -117,6 +117,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	private final List<CollectionGroup> allJournals;
 	private final Provider<NewMilkCollectionJournalDialog> newDialogProvider;
 	private final Provider<BulkCollectionsEntryDialog> entryDialogProvider;
+	private final Provider<SessionEditDialog> sessionEditProvider;
 	private final Color TABLE_HIGHLIGHT_BACKGROUND = PlatformUI.getWorkbench().getDisplay()
 			.getSystemColor(SWT.COLOR_YELLOW);
 	private List<DairyLocation> collectionCenters;
@@ -126,7 +127,8 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 			final IDairyLocationRepository dairyLocationRepo, final IDairyRepository dairyRepo,
 			final IRepository<CollectionSession> sessionRepo,
 			final Provider<NewMilkCollectionJournalDialog> newDialogProvider,
-			final Provider<BulkCollectionsEntryDialog> entryDialogProvider) {
+			final Provider<BulkCollectionsEntryDialog> entryDialogProvider,
+			final Provider<SessionEditDialog> sessionEditProvider) {
 		setEClass(DairyPackage.Literals.COLLECTION_GROUP);
 		setRepository(journalRepo);
 		this.dairyRepo = dairyRepo;
@@ -134,6 +136,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		this.sessionRepo = sessionRepo;
 		this.newDialogProvider = newDialogProvider;
 		this.entryDialogProvider = entryDialogProvider;
+		this.sessionEditProvider = sessionEditProvider;
 		allJournals = dairyRepo.allCollectionGroups();
 
 		addTableColumn("Date", DairyPackage.Literals.COLLECTION_GROUP__JOURNAL_DATE);
@@ -281,8 +284,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	}
 
 	private void handleEditSessions() {
-		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
-		new SessionEditDialog(shell).open();
+		sessionEditProvider.get().open();
 	}
 
 	@Override

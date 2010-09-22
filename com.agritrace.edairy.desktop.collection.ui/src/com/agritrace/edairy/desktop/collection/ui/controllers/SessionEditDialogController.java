@@ -20,13 +20,13 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDetailPanelController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BaseDialogController;
 import com.agritrace.edairy.desktop.common.ui.controllers.util.BindingHelper;
 import com.agritrace.edairy.desktop.common.ui.controllers.util.ContainerValidator;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
+import com.google.inject.Inject;
 
 public final class SessionEditDialogController extends BaseDialogController<CollectionSession> {
 	private final class DetailController extends AbstractDetailPanelController<CollectionSession> {
@@ -85,7 +85,12 @@ public final class SessionEditDialogController extends BaseDialogController<Coll
 	}
 	
 	private List<CollectionSession> sessions;
-	private IRepository<CollectionSession> repository;
+	private final IRepository<CollectionSession> repository;
+	
+	@Inject
+	public SessionEditDialogController(final IRepository<CollectionSession> repository) {
+		this.repository = repository;
+	}
 	
 	@Override
 	public void configureRidgets() {
@@ -99,7 +104,6 @@ public final class SessionEditDialogController extends BaseDialogController<Coll
 		};
 
 		final IMasterDetailsRidget master = getRidget(IMasterDetailsRidget.class, "master"); //$NON-NLS-1$
-		repository = RepositoryFactory.getRepository(CollectionSession.class);
 		sessions = new ArrayList<CollectionSession>(repository.all());
 		
 		if (master != null) {

@@ -122,7 +122,6 @@ public class PersistenceModule extends AbstractModule {
 		bind(DairyRepository.class).in(Scopes.SINGLETON);
 		
 		// Ideally we shouldn't need this...
-		requestStaticInjection(RepositoryFactory.class);
 		requestStaticInjection(ImageDataUtil.class);
 	}
 	

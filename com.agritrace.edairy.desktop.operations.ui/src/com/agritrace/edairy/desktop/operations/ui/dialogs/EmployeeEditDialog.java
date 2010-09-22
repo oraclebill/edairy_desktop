@@ -24,6 +24,8 @@ import com.agritrace.edairy.desktop.common.ui.controls.location.LocationTabFolde
 import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.ProfilePhotoComposite;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.operations.ui.controllers.EmployeeEditDialogController;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * Employee list dialog to add/view/edit customer
@@ -32,9 +34,9 @@ import com.agritrace.edairy.desktop.operations.ui.controllers.EmployeeEditDialog
  * 
  */
 public class EmployeeEditDialog extends RecordDialog<Employee> {
-
-	public EmployeeEditDialog(Shell shell) {
-		super(shell);
+	@Inject
+	public EmployeeEditDialog(@Named("current") final Shell shell, final EmployeeEditDialogController controller) {
+		super(shell, controller);
 	}
 
 	@Override
@@ -151,13 +153,5 @@ public class EmployeeEditDialog extends RecordDialog<Employee> {
 		commsTab.setControl(commGroup);
 		return contactGroup;
 
-	}
-
-
-	@Override
-	protected EmployeeEditDialogController createController() {
-		final EmployeeEditDialogController controller = new EmployeeEditDialogController();
-		// controller.setWorkingCopy( null );
-		return controller;
 	}
 }

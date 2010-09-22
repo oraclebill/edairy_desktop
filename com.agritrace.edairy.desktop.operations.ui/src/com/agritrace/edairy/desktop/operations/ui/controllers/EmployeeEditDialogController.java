@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.riena.core.util.StringUtils;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IMarkableRidget;
@@ -19,8 +20,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Role;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
-import com.agritrace.edairy.desktop.common.ui.DBPreferenceStore;
+import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.controllers.SystemSettingsController;
@@ -31,26 +31,26 @@ import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.IContactMe
 import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.IProfilePhotoRidget;
 import com.agritrace.edairy.desktop.common.ui.reference.EmployeeReference;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.EmployeeBindingConstants;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 public class EmployeeEditDialogController extends RecordDialogController<Employee> {
-
 	private Employee editEmployee = null;
 
 	private ITextRidget employeeId;
 	private ITextRidget passwordRidget;
-	/*
-	private IComboRidget department;
-	private ITextRidget familyName;
-	private ITextRidget givenName;
-	private IComboRidget position;
-	private IDateTimeRidget startDate;
-	private ITextRidget operatorCode;
-	private ITextRidget securityRole;
-	*/
-
 	private IProfilePhotoRidget photoRidget;
-
 	private IContactMethodsGroupRidget contacts;
+	
+	private final IPersistentPreferenceStore preferenceStore;
+	private final IRepository<Role> roleRepo;
+	
+	@Inject
+	public EmployeeEditDialogController(@Named("db") final IPersistentPreferenceStore store,
+			final IRepository<Role> roleRepo) {
+		this.preferenceStore = store;
+		this.roleRepo = roleRepo;
+	}
 
 	@Override
 	public void configureUserRidgets() {
@@ -73,7 +73,7 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 			employeeId.updateFromModel();
 		}
 		
-		final List<Role> allRoles = RepositoryFactory.getRepository(Role.class).all();
+		final List<Role> allRoles = roleRepo.all();
 
 		addTextMap(EmployeeBindingConstants.BIND_ID_FAMILY_NAME, ModelPackage.Literals.PERSON__FAMILY_NAME);
 		addTextMap(EmployeeBindingConstants.BIND_ID_GIVEN_NAME, ModelPackage.Literals.PERSON__GIVEN_NAME);
@@ -127,7 +127,7 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		if (!StringUtils.isEmpty(password)) {
 			final Employee employee = getWorkingCopy();
 			
-			if (new DBPreferenceStore().getBoolean(SystemSettingsController.ENCRYPT_PASSWORDS)) {
+			if (preferenceStore.getBoolean(SystemSettingsController.ENCRYPT_PASSWORDS)) {
 				employee.setPassword(PrincipalManager.getInstance().hashPassword(password));
 				employee.setPasswordHashed(true);
 			} else {
