@@ -24,10 +24,9 @@ import com.google.inject.Provider;
 public abstract class HibernateRepository<T extends EObject> implements
 		IRepository<T> {
 	protected abstract class SessionRunnable<X> implements Runnable {
-
 		@Override
 		public void run() {
-			run(session);
+			run(sessionProvider.get());
 		}
 
 		abstract public void run(Session session);
@@ -50,8 +49,6 @@ public abstract class HibernateRepository<T extends EObject> implements
 	private final String identifierName;
 
 	private final Provider<Session> sessionProvider;
-
-	private Session session;
 
 	@Inject
 	protected HibernateRepository(Provider<Session> sessionProvider) {
@@ -128,7 +125,8 @@ public abstract class HibernateRepository<T extends EObject> implements
 		if (key == null) {
 			throw new IllegalArgumentException("key cannot be null");
 		}
-		openSession();
+		
+		Session session = sessionProvider.get();
 
 		if (!session.contains(obj))
 			session.load(obj, key);
@@ -149,8 +147,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 	 */
 	@SuppressWarnings("unchecked")
 	public <X> X findByKey(Class<X> entityClass, long entityKey) {
-		openSession();
-		return (X) session.get(getEntityName(entityClass), new Long(entityKey));
+		return (X) sessionProvider.get().get(getEntityName(entityClass), new Long(entityKey));
 	}
 
 	/**
@@ -177,7 +174,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 		runWithTransaction(new Runnable() {
 			@Override
 			public void run() {
-				session.saveOrUpdate(changedItem);
+				sessionProvider.get().saveOrUpdate(changedItem);
 			}
 		});
 	}
@@ -187,7 +184,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 		runWithTransaction(new Runnable() {
 			@Override
 			public void run() {
-				session.save(newEntity);
+				sessionProvider.get().save(newEntity);
 			}
 		});
 	}
@@ -198,29 +195,17 @@ public abstract class HibernateRepository<T extends EObject> implements
 		runWithTransaction(new Runnable() {
 			@Override
 			public void run() {
-				session.update(getEntityName(), updateableEntity);
+				sessionProvider.get().update(getEntityName(), updateableEntity);
 			}
 		});
 	}
 
 	private void closeSession() {
-		if (null != session) {
-			// session.close();
-			// session = null;
-		} else {
-			// TODO: use proper logging and exception code.
-			throw new IllegalStateException("null session");
-		}
-	}
-
-	// TODO: We should not cache the session
-	private void openSession() {
-		session = sessionProvider.get();
-		Assert.isNotNull(session);
+		// Currently does nothing!
 	}
 
 	protected Object get(String eName, Serializable key) {
-		return session.get(eName, key);
+		return sessionProvider.get().get(eName, key);
 	}
 
 	/**
@@ -256,7 +241,8 @@ public abstract class HibernateRepository<T extends EObject> implements
 	}
 
 	protected void run(Runnable r) {
-		openSession();
+		sessionProvider.get();
+		
 		try {
 			r.run();
 		} finally {
@@ -265,7 +251,8 @@ public abstract class HibernateRepository<T extends EObject> implements
 	}
 
 	protected void runWithTransaction(Runnable r) {
-		openSession();
+		Session session = sessionProvider.get();
+		
 		final Transaction t = session.beginTransaction();
 		try {
 			r.run();
