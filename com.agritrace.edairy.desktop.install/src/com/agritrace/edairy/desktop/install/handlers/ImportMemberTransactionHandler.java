@@ -113,7 +113,7 @@ public class ImportMemberTransactionHandler extends HandlerBase {
 
 		private void saveTransactions(List<AccountTransaction> transactions) {
 			for (AccountTransaction newEntity : transactions) {
-				accountRepo.saveNew(newEntity);
+				accountRepo.get().saveNew(newEntity);
 			}
 //			RepositoryFactory.getDairyRepository().save();
 		}
@@ -121,7 +121,7 @@ public class ImportMemberTransactionHandler extends HandlerBase {
 	}
 	
 	@Inject private static Provider<MemberTransactionImportTool> toolProvider;
-	@Inject private static IRepository<AccountTransaction> accountRepo;
+	@Inject private static Provider<IRepository<AccountTransaction>> accountRepo;
 
 	/**
 	 * The constructor.

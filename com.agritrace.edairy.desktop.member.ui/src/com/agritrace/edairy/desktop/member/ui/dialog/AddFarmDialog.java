@@ -16,15 +16,10 @@ import com.google.inject.name.Named;
  */
 public class AddFarmDialog extends ViewFarmDialog {
 	@Inject
-	public AddFarmDialog(@Named("current") Shell parentShell, IFarmRepository farmRepository) {
-		super(parentShell, farmRepository);
+	public AddFarmDialog(@Named("current") Shell parentShell, AddFarmDialogController controller) {
+		super(parentShell, controller);
 	}
 
-	@Override
-	protected AbstractWindowController createController() {
-		return new AddFarmDialogController();
-	}
-	
 	protected void createTabs(Composite parent){
 		new FarmTabFolder(parent,true);
 	}

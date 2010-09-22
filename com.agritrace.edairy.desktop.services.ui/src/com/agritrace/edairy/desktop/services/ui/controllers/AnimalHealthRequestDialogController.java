@@ -60,7 +60,7 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 	public class MemberLookupAction implements IActionListener {
 		@Override
 		public void callback() {
-			final MemberSearchDialog memberDialog = new MemberSearchDialog(Display.getCurrent().getActiveShell());
+			final MemberSearchDialog memberDialog = memberSearchDialogProvider.get();
 			memberDialog.setSelectedMember(request.getRequestingMember());
 			memberDialog.setSelectedFarm(request.getFarm());
 			final int retVal = memberDialog.open();
@@ -136,6 +136,8 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 	
 	@Inject
 	private Provider<FarmSearchDialog> farmSearchDialogProvider;
+	@Inject
+	private Provider<MemberSearchDialog> memberSearchDialogProvider;
 
 	private IActionRidget farmLookupButton;
 	private ITextRidget farmLookupText;

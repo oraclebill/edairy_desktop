@@ -1,19 +1,14 @@
 package com.agritrace.edairy.desktop.member.ui.dialog;
 
-import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.member.ui.dialog.controller.AddContainerDialogController;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 public class AddContainerDialog extends ViewContainerDialog {
-
-	public AddContainerDialog(Shell shell) {
-		super(shell);
+	@Inject
+	public AddContainerDialog(@Named("current") final Shell shell, final AddContainerDialogController controller) {
+		super(shell, controller);
 	}
-
-	@Override
-	protected AbstractWindowController createController() {
-		return new AddContainerDialogController();
-	}
-
 }

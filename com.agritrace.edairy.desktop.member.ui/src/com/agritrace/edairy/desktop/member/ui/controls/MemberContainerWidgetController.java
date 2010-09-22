@@ -27,6 +27,7 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddContainerDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewContainerDialog;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class MemberContainerWidgetController extends BasicDirectoryController<Container> implements WidgetController<Object> {
 	public static final String ALL_FARM = "All Farms";
@@ -37,16 +38,23 @@ public class MemberContainerWidgetController extends BasicDirectoryController<Co
 	private final List<Container> containerInput = new ArrayList<Container>();
 	private final String[] containerPropertyNames = { "containerId", "owner", "measureType", "capacity" };
 	private final List<Container> containers = new ArrayList<Container>();
-
+	
 	// private IComboRidget farmFilterCombo;
 	private final IFarmRepository farmRepository;
+	private final Provider<AddContainerDialog> addContainerProvider;
+	private final Provider<ViewContainerDialog> viewContainerProvider;
 	private final List<Farm> farms = new ArrayList<Farm>();
 	private Object inputModel;
 
 	@Inject
-	public MemberContainerWidgetController(IController controller, IFarmRepository farmRepository) {
+	public MemberContainerWidgetController(final IController controller, final IFarmRepository farmRepository,
+			final Provider<AddContainerDialog> addContainerProvider,
+			final Provider<ViewContainerDialog> viewContainerProvider) {
 		this.controller = controller;
 		this.farmRepository = farmRepository;
+		this.addContainerProvider = addContainerProvider;
+		this.viewContainerProvider = viewContainerProvider;
+		
 		setEClass(TrackingPackage.Literals.CONTAINER);
 		for (int i = 0; i < containerPropertyNames.length; i++) {
 			addTableColumn(containerColumnHeaders[i], containerPropertyNames[i], String.class);
@@ -151,7 +159,7 @@ public class MemberContainerWidgetController extends BasicDirectoryController<Co
 			MessageDialog.openInformation(shell, "Add Containter", "Farms list is empty, can not create a container without a farm.");
 		} else {
 			Container container = DairyUtil.createContainer(ContainerType.BIN, UnitOfMeasure.LITRE, null, 0.0);
-			final AddContainerDialog memberDialog = new AddContainerDialog(Display.getDefault().getActiveShell());
+			final AddContainerDialog memberDialog = addContainerProvider.get();
 			memberDialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER, container);
 			memberDialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST, farms);
 			memberDialog.getController().setContext(ControllerContextConstant.ENABLE_LOOKUP,"false");
@@ -177,7 +185,7 @@ public class MemberContainerWidgetController extends BasicDirectoryController<Co
 	@Override
 	protected void handleViewItemAction() {
 		Container selectedNode = (Container) table.getSelection().get(0);
-		final ViewContainerDialog dialog = new ViewContainerDialog(Display.getDefault().getActiveShell());
+		final ViewContainerDialog dialog = viewContainerProvider.get();
 		final List<Farm> inputFarms = new ArrayList<Farm>();
 		inputFarms.add(selectedNode.getOwner());
 

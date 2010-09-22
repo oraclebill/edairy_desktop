@@ -34,39 +34,34 @@ import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class ViewContainerDialogController extends BaseDialogController<Farm> implements ISelectionListener {
 	
 	public static final String FARM_MEMBER_NAME_LABEL_PREFIX = "Member Name :";
 
-
 	ITextRidget capacity;
-
 	Double capacityValue;
-
 	ErrorMessageMarker capactiyError = new ErrorMessageMarker("Invalid number");
-
 	IComboRidget farmCombo;
-
 	List<Farm> farmList;
-
 	ILabelRidget idLabel;
-
 	IActionRidget okAction;
-
 	Container selectedContainer;
-	
 	Farmer selectedMember;
-
 	IComboRidget typeCombo;
-
 	IComboRidget unitCombo;
-	
 	ITextRidget memberNameRidget;
-	
 	IActionRidget memberLookupBtn;
-	
 	private boolean enableLookupBtn;
+	
+	private final Provider<MemberSearchDialog> memberSearchProvider;
+	
+	@Inject
+	public ViewContainerDialogController(final Provider<MemberSearchDialog> memberSearchProvider) {
+		this.memberSearchProvider = memberSearchProvider;
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -232,10 +227,12 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 	public class MemberLookupAction implements IActionListener {
 		@Override
 		public void callback() {
-			final MemberSearchDialog memberDialog = new MemberSearchDialog(null);
+			final MemberSearchDialog memberDialog = memberSearchProvider.get();;
 			final int retVal = memberDialog.open();
+			
 			if (retVal == Window.OK) {
 				Membership memberShip = memberDialog.getSelectedMember();
+				
 				if (memberShip != null) {
 					final String memberName = MemberUtil.formattedMemberName(memberShip.getMember());
 					memberNameRidget.setText(memberName);

@@ -7,20 +7,20 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 
 
 public abstract class MemberLookupAction implements IActionListener {
-	
-
 	public MemberLookupAction() {
 	}
 
 	@Override
 	public void callback() {
-		final MemberSearchDialog memberDialog = new MemberSearchDialog(null);
+		final MemberSearchDialog memberDialog = getMemberSearchDialog();
 		final int retVal = memberDialog.open();
+		
 		if (retVal == Window.OK) {
 			final Membership selectedMember = memberDialog.getSelectedMember();
 			callback(selectedMember);
 		}
 	}
 
+	protected abstract MemberSearchDialog getMemberSearchDialog();
 	protected abstract void callback(Membership selectedMember);
 }

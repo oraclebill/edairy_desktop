@@ -22,6 +22,7 @@ import org.eclipse.swt.widgets.Text;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
+import com.agritrace.edairy.desktop.member.ui.dialog.controller.AddFarmDialogController;
 import com.agritrace.edairy.desktop.member.ui.dialog.controller.ViewFarmDialogController;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -41,12 +42,14 @@ public class ViewFarmDialog extends AbstractDialogView {
 	private Composite main;
 	private Button saveButton;
 	
-	private final IFarmRepository farmRepository;
-
 	@Inject
-	public ViewFarmDialog(@Named("current") final Shell parentShell, final IFarmRepository farmRepository) {
-		super(parentShell);
-		this.farmRepository = farmRepository;
+	public ViewFarmDialog(@Named("current") final Shell parentShell, final ViewFarmDialogController controller) {
+		super(parentShell, controller);
+	}
+
+	// Cross-inheritance: get rid of this
+	protected ViewFarmDialog(final Shell parentShell, final AddFarmDialogController controller) {
+		super(parentShell, controller);
 	}
 
 	private Composite createOkCancelButtons(Composite parent) {
@@ -103,11 +106,6 @@ public class ViewFarmDialog extends AbstractDialogView {
 		// newShell.setSize(550, 450);
 	}
 
-	@Override
-	protected AbstractWindowController createController() {
-		return new ViewFarmDialogController(farmRepository);
-	}
-
 	protected void createHeader(Composite parent) {
 
 		final Composite headerPanel = UIControlsFactory.createComposite(parent);
@@ -153,6 +151,12 @@ public class ViewFarmDialog extends AbstractDialogView {
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true,
 				false).applyTo(memberNameLabel);
 
+	}
+
+	@Override
+	protected AbstractWindowController createController() {
+		// unused
+		return null;
 	}
 
 }

@@ -22,8 +22,12 @@ import com.agritrace.edairy.desktop.member.ui.controls.MemberFarmWidgetControlle
 import com.agritrace.edairy.desktop.member.ui.controls.MemberLiveStockWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberProfileWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberTransactionWidgetController;
+import com.agritrace.edairy.desktop.member.ui.dialog.AddContainerDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddFarmDialog;
+import com.agritrace.edairy.desktop.member.ui.dialog.AddLiveStockDialog;
+import com.agritrace.edairy.desktop.member.ui.dialog.ViewContainerDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewFarmDialog;
+import com.agritrace.edairy.desktop.member.ui.dialog.ViewLiveStockDialog;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchDetachedView;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchSelectionListener;
 import com.agritrace.edairy.desktop.member.ui.views.MemberSearchSelectionManager;
@@ -82,16 +86,28 @@ public class MemberRegisterViewController extends SubModuleController implements
 	private final IFarmRepository farmRepository;
 	private final Provider<AddFarmDialog> addDialogProvider;
 	private final Provider<ViewFarmDialog> viewDialogProvider;
+	private final Provider<AddContainerDialog> addContainerProvider;
+	private final Provider<ViewContainerDialog> viewContainerProvider;
+	private final Provider<AddLiveStockDialog> addLiveStockProvider;
+	private final Provider<ViewLiveStockDialog> viewLiveStockProvider;
 
 	@Inject
 	public MemberRegisterViewController(final IFarmRepository farmRepository,
 			final IMemberRepository memberRepository,
-			final Provider<AddFarmDialog> addDialogProvider, final Provider<ViewFarmDialog> viewDialogProvider) {
+			final Provider<AddFarmDialog> addDialogProvider, final Provider<ViewFarmDialog> viewDialogProvider,
+			final Provider<AddContainerDialog> addContainerProvider,
+			final Provider<ViewContainerDialog> viewContainerProvider,
+			final Provider<AddLiveStockDialog> addLiveStockProvider,
+			final Provider<ViewLiveStockDialog> viewLiveStockProvider) {
 		MemberSearchSelectionManager.INSTANCE.addSearchSelectionListener(this);
 		this.memberRepository = memberRepository;
 		this.farmRepository = farmRepository;
 		this.addDialogProvider = addDialogProvider;
 		this.viewDialogProvider = viewDialogProvider;
+		this.addContainerProvider = addContainerProvider;
+		this.viewContainerProvider = viewContainerProvider;
+		this.addLiveStockProvider = addLiveStockProvider;
+		this.viewLiveStockProvider = viewLiveStockProvider;
 	}
 
 	@Override
@@ -102,8 +118,10 @@ public class MemberRegisterViewController extends SubModuleController implements
 		farmController = new MemberFarmWidgetController(this, farmRepository, memberRepository,
 				addDialogProvider, viewDialogProvider);
 		collectionController = new MemberCollectionRecordsWidgetController(this);
-		liveStockController = new MemberLiveStockWidgetController(this, farmRepository);
-		containerController = new MemberContainerWidgetController(this, farmRepository);
+		liveStockController = new MemberLiveStockWidgetController(this, farmRepository,
+				addLiveStockProvider, viewLiveStockProvider);
+		containerController = new MemberContainerWidgetController(this, farmRepository,
+				addContainerProvider, viewContainerProvider);
 		transactionController = new MemberTransactionWidgetController(this);
 
 		if (selectedMember != null) {

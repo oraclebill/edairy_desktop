@@ -9,7 +9,6 @@ import java.util.Set;
 import org.apache.commons.collections.Predicate;
 import org.apache.commons.collections.functors.AllPredicate;
 import org.apache.commons.collections.functors.NullIsTruePredicate;
-import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.widgets.Shell;
@@ -18,9 +17,13 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AdjustmentTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
+import com.agritrace.edairy.desktop.common.persistence.IRepository;
+import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
+import com.agritrace.edairy.desktop.finance.ui.dialogs.AdjustmentTransactionEditDialog;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public final class AdjustmentTransactionJournalController extends TransactionJournalController<AdjustmentTransaction> {
 
@@ -58,18 +61,18 @@ public final class AdjustmentTransactionJournalController extends TransactionJou
 
 	// private final IMemberRepository memberRepo = RepositoryFactory.getMemberRepository();
 	private IMultipleChoiceRidget typeSetRidget;
+	
+	private final Provider<AdjustmentTransactionEditDialog> dialogProvider;
 
-	// private ICompositeRidget sourceRow;
-
-	public AdjustmentTransactionJournalController() {
-		this(null);
-	}
-
-	public AdjustmentTransactionJournalController(ISubModuleNode node) {
-		super(node);
+	@Inject
+	public AdjustmentTransactionJournalController(final IRepository<AdjustmentTransaction> repo,
+			final Provider<MemberSearchDialog> memberSearchProvider,
+			final Provider<AdjustmentTransactionEditDialog> dialogProvider) {
+		super(memberSearchProvider);
+		this.dialogProvider = dialogProvider;
 		
 		setEClass(AccountPackage.Literals.ADJUSTMENT_TRANSACTION);
-		setRepository(RepositoryFactory.getRepository(AdjustmentTransaction.class));
+		setRepository(repo);
 
 		this.addTableColumn("ID", AccountPackage.Literals.TRANSACTION__TRANSACTION_ID);
 		this.addTableColumn("Date", AccountPackage.Literals.TRANSACTION__TRANSACTION_DATE);
@@ -127,7 +130,7 @@ public final class AdjustmentTransactionJournalController extends TransactionJou
 
 	@Override
 	protected RecordDialog<AdjustmentTransaction> getRecordDialog(Shell shell) {
-		return new AdjustmentTransactionEditDialog(shell);
+		return dialogProvider.get();
 	}
 
 }

@@ -33,10 +33,6 @@ public final class RepositoryFactory {
 		return INJECTOR.getInstance(IDairyRepository.class);
 	}
 	
-	public static IMemberRepository getMemberRepository() {
-		return INJECTOR.getInstance(IMemberRepository.class);
-	}
-		
 	private RepositoryFactory() {
 		// don't really wan't to instantiate this - it's here for the statics..
 	}

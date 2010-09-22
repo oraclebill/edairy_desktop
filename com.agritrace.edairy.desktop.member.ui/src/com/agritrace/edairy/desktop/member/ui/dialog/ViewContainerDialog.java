@@ -1,7 +1,6 @@
 package com.agritrace.edairy.desktop.member.ui.dialog;
 
 import org.eclipse.jface.layout.GridDataFactory;
-import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.swt.ImageButton;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
@@ -19,6 +18,8 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.BaseDialogView;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.controller.ViewContainerDialogController;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 public class ViewContainerDialog extends BaseDialogView {
 
@@ -28,9 +29,9 @@ public class ViewContainerDialog extends BaseDialogView {
 	 * @param shell
 	 *            the parent shell
 	 */
-	public ViewContainerDialog(Shell shell) {
-		super(shell);
-
+	@Inject
+	public ViewContainerDialog(@Named("current") Shell shell, ViewContainerDialogController controller) {
+		super(shell, controller);
 	}
 
 	/**
@@ -89,11 +90,6 @@ public class ViewContainerDialog extends BaseDialogView {
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
 		newShell.setSize(550, 450);
-	}
-
-	@Override
-	protected AbstractWindowController createController() {
-		return new ViewContainerDialogController();
 	}
 
 	@Override

@@ -16,6 +16,7 @@ import com.agritrace.edairy.desktop.collection.ui.controllers.MilkCollectionLogC
 import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
 import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationDirectoryController;
+import com.agritrace.edairy.desktop.finance.ui.navigation.FinanceModule;
 import com.agritrace.edairy.desktop.install.navigation.InstallModule;
 import com.agritrace.edairy.desktop.member.ui.controllers.ContainerListViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.FarmListViewController;
@@ -51,6 +52,7 @@ public class EDairyModule extends AbstractModule {
 		CONTROLLERS.add(MemberDirectoryController.class);
 		CONTROLLERS.add(MemberDirectoryController2.class);
 		CONTROLLERS.add(MemberRegisterViewController.class);
+		FinanceModule.contributeControllers(CONTROLLERS);
 	}
 	
 	public EDairyModule(BundleContext context) {
@@ -61,6 +63,7 @@ public class EDairyModule extends AbstractModule {
 	protected void configure() {
 		install(new PersistenceModule());
 		install(new InstallModule());
+		install(new FinanceModule());
 		install(Peaberry.osgiModule(context, EclipseRegistry.eclipseRegistry()));
 		
 		Map<Class<? extends IController>, Provider<? extends IController>> map =

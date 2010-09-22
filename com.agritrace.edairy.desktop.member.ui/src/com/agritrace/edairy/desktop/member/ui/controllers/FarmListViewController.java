@@ -69,14 +69,17 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 	private final IMemberRepository memberRepository;
 	private final Provider<AddFarmDialog> addDialogProvider;
 	private final Provider<ViewFarmDialog> viewDialogProvider;
+	private final Provider<MemberSearchDialog> memberSearchProvider;
 
 	@Inject
 	public FarmListViewController(final IMemberRepository memberRepository, final IFarmRepository farmRepository,
-			final Provider<AddFarmDialog> addDialogProvider, final Provider<ViewFarmDialog> viewDialogProvider) {
+			final Provider<AddFarmDialog> addDialogProvider, final Provider<ViewFarmDialog> viewDialogProvider,
+			final Provider<MemberSearchDialog> memberSearchProvider) {
 		this.memberRepository = memberRepository;
 		this.farmRepository = farmRepository;
 		this.addDialogProvider = addDialogProvider;
 		this.viewDialogProvider = viewDialogProvider;
+		this.memberSearchProvider = memberSearchProvider;
 		farmNames = new ArrayList<String>();
 
 		setEClass(TrackingPackage.Literals.FARM);
@@ -218,17 +221,21 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 	public class MemberLookupAction implements IActionListener {
 		@Override
 		public void callback() {
-			final MemberSearchDialog memberDialog = new MemberSearchDialog(AbstractDirectoryController.getShell());
+			final MemberSearchDialog memberDialog = memberSearchProvider.get();
 			final int retVal = memberDialog.open();
+			
 			if (retVal == Window.OK) {
 				selectedMember = memberDialog.getSelectedMember();
+				
 				if (selectedMember == null) {
 					Log4r.getLogger(getClass()).log(LogService.LOG_WARNING, "Null member selected from dialog");
 					return;
 				}
+				
 				final String memberName = MemberUtil.formattedMemberName(selectedMember.getMember());
 				memberNameFilter.setText(memberName);
 				updateFarmCombo();
+				
 				if (searchButton != null) {
 					searchButton.setEnabled(true);
 				}

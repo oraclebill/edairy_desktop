@@ -41,6 +41,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
 import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 public class MemberSearchDialog extends TitleAreaDialog {
 
@@ -177,9 +179,10 @@ public class MemberSearchDialog extends TitleAreaDialog {
 	 * @param shell
 	 *            the parent shell
 	 */
-	public MemberSearchDialog(Shell shell) {
+	@Inject
+	public MemberSearchDialog(@Named("current") Shell shell, final IMemberRepository memberRepo) {
 		super(shell);
-		memberRepo = RepositoryFactory.getMemberRepository();
+		this.memberRepo = memberRepo;
 		memberList = memberRepo.all();
 	}
 

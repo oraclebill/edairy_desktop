@@ -79,7 +79,7 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 	private final class MemberLookupAction implements IActionListener {
 		@Override
 		public void callback() {
-			final MemberSearchDialog dialog = new MemberSearchDialog(Display.getCurrent().getActiveShell());
+			final MemberSearchDialog dialog = memberSearchDialogProvider.get();
 			dialog.setSelectedMember(condtionsBean.getSelectedMember());
 			dialog.setSelectedFarm(condtionsBean.getSelectedFarm());
 			final int ret = dialog.open();
@@ -115,12 +115,15 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 	private IToggleButtonRidget vertRidget;
 	
 	private final Provider<FarmSearchDialog> farmSearchDialogProvider;
+	private final Provider<MemberSearchDialog> memberSearchDialogProvider;
 
 	@Inject
 	public AnimalHealthRequestViewController(final IRepository<AnimalHealthRequest> myRepo,
-			final Provider<FarmSearchDialog> farmSearchDialogProvider) {
+			final Provider<FarmSearchDialog> farmSearchDialogProvider,
+			final Provider<MemberSearchDialog> memberSearchDialogProvider) {
 		setRepository(this.myRepo = myRepo);
 		this.farmSearchDialogProvider = farmSearchDialogProvider;
+		this.memberSearchDialogProvider = memberSearchDialogProvider;
 	}
 	
 	@Override

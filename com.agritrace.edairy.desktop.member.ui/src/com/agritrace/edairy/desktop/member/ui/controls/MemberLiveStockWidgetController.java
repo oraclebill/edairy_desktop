@@ -32,13 +32,13 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddLiveStockDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewLiveStockDialog;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class MemberLiveStockWidgetController extends BasicDirectoryController<RegisteredAnimal>implements WidgetController<Object> {
 
 	public static final String liveStockRemoveMessage = "Do you want to remove selected animals?";
 	public static final String liveStockRemoveTitle = "Remove Registered Animales";
 //	private final List<RegisteredAnimal> animalInput = new ArrayList<RegisteredAnimal>();
-	private final IFarmRepository farmRepository;
 	private LiveStockFilterWidgetController filterController;
 	private Object inputModel;
 	private final String[] liveStockColumnHeaders = { "ID", "Farm", "Purpose", "Name", "Species", "Breed",
@@ -47,11 +47,21 @@ public class MemberLiveStockWidgetController extends BasicDirectoryController<Re
 	private final String[] liveStockPropertyNames = { "registrationId", "location", "purpose", "givenName",
 			"animalType", "animalType", "dateOfAcquisition", "acquisitionType" };
 
+	private final IFarmRepository farmRepository;
+	private final Provider<AddLiveStockDialog> addLiveStockProvider;
+	private final Provider<ViewLiveStockDialog> viewLiveStockProvider;
+	
 	@Inject
-	public MemberLiveStockWidgetController(IController controller, IFarmRepository farmRepository) {
+	public MemberLiveStockWidgetController(final IController controller, IFarmRepository farmRepository,
+			final Provider<AddLiveStockDialog> addLiveStockProvider,
+			final Provider<ViewLiveStockDialog> viewLiveStockProvider) {
 		this.controller = controller;
 		this.farmRepository = farmRepository;
+		this.addLiveStockProvider = addLiveStockProvider;
+		this.viewLiveStockProvider = viewLiveStockProvider;
+		
 		setEClass(TrackingPackage.Literals.REGISTERED_ANIMAL);
+		
 		for (int i = 0; i < liveStockPropertyNames.length; i++) {
 			addTableColumn(liveStockColumnHeaders[i], liveStockPropertyNames[i], String.class);
 		}
@@ -145,7 +155,7 @@ public class MemberLiveStockWidgetController extends BasicDirectoryController<Re
 				DairyUtil.createReferenceAnimal("", ""), "", "", null, null, AcquisitionType.get(0), null);
 		newAnimal.setDateOfAcquisition(new Date());
 		newAnimal.setDateOfBirth(new Date());
-		final AddLiveStockDialog aniamlDialog = new AddLiveStockDialog(Display.getDefault().getActiveShell());
+		final AddLiveStockDialog aniamlDialog = addLiveStockProvider.get();
 		aniamlDialog.getController().setContext(ControllerContextConstant.DIALOG_CONTXT_SELECTED, newAnimal);
 		aniamlDialog.getController().setContext(ControllerContextConstant.ENABLE_LOOKUP,"false");
 
@@ -179,7 +189,7 @@ public class MemberLiveStockWidgetController extends BasicDirectoryController<Re
 	protected void handleViewItemAction() {
 		if (table != null && !table.getSelection().isEmpty()) {
 			final RegisteredAnimal selectedAnimal = (RegisteredAnimal) table.getSelection().get(0);
-			final ViewLiveStockDialog aniamlDialog = new ViewLiveStockDialog(Display.getDefault().getActiveShell());
+			final ViewLiveStockDialog aniamlDialog = viewLiveStockProvider.get();
 			aniamlDialog.getController().setContext(ControllerContextConstant.DIALOG_CONTXT_SELECTED,
 					selectedAnimal);
 			aniamlDialog.getController().setContext(ControllerContextConstant.ENABLE_LOOKUP,"false");
