@@ -88,12 +88,17 @@ public abstract class AbstractDialogView extends TrayDialog {
 	 *             when parentShell the value {@code null} and the class failed
 	 *             to obtain an appropriate shell.
 	 */
+	// MODIFIED from the original Riena code
 	protected AbstractDialogView(Shell parentShell) {
+		this(parentShell, null);
+	}
+	
+	protected AbstractDialogView(Shell parentShell, AbstractWindowController controller) {
 		super(parentShell != null ? parentShell : getShellByGuessing());
 		title = ""; //$NON-NLS-1$
 		dlgRenderer = new RienaWindowRenderer(this);
 		controlledView = new ControlledView();
-		controlledView.setController(createController());
+		controlledView.setController(controller != null ? controller : createController());
 	}
 
 	@Override
