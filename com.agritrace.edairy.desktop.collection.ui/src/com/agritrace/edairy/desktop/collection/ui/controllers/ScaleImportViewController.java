@@ -22,10 +22,10 @@ import com.agritrace.edairy.desktop.collection.ui.components.journalheader.Journ
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
+import com.google.inject.Inject;
 
 public class ScaleImportViewController extends SubModuleController {
 
@@ -59,13 +59,9 @@ public class ScaleImportViewController extends SubModuleController {
 	/**
 	 * 
 	 */
-	public ScaleImportViewController() {
-		super();
-		dairyRepo = RepositoryFactory.getDairyRepository();
-//		bins = dairyRepo.allDairyContainers();
-		// drivers = dairyRepo.employeesByPosition("Driver");
-		// vehicles = dairyRepo.allVehicles();
-		// routes = dairyRepo.allRoutes();
+	@Inject
+	public ScaleImportViewController(final IDairyRepository dairyRepo) {
+		this.dairyRepo = dairyRepo;
 	}
 
 	/**

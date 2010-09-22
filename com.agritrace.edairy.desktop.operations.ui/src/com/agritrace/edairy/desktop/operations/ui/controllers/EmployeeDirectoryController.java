@@ -19,32 +19,33 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
+import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.EmployeeEditDialog;
 import com.agritrace.edairy.desktop.operations.ui.views.EmployeeDirectoryView;
+import com.google.inject.Inject;
 
 @PermissionRequired(Permission.VIEW_EMPLOYEES)
 public class EmployeeDirectoryController extends BasicDirectoryController<Employee> {
-
-
 	private IComboRidget departmentSearchCombo;
 	private ITextRidget nameSearchText;
 	private IComboRidget positionSearchCombo;
 
-	private final IDairyRepository dairyRepo = RepositoryFactory.getDairyRepository();
-	private final Dairy localDairy = dairyRepo.getLocalDairy();
-	private final List<Employee> allEmployees = dairyRepo.getLocalDairy().getEmployees();
+	private final IDairyRepository dairyRepo;
+	private final Dairy localDairy;
+	private final List<Employee> allEmployees;
 	private final EmployeeSearchBean searchBean = new EmployeeSearchBean();
 
-	public EmployeeDirectoryController() {
-		super();
-		setRepository(RepositoryFactory.getRepository(Employee.class));
+	@Inject
+	public EmployeeDirectoryController(final IDairyRepository dairyRepo, final IRepository<Employee> repo) {
+		this.dairyRepo = dairyRepo;
+		localDairy = dairyRepo.getLocalDairy();
+		allEmployees = dairyRepo.getLocalDairy().getEmployees();
+		setRepository(repo);
 		setEClass(DairyPackage.Literals.EMPLOYEE);
-		// setEntityClass(Employee.class);
 
 		addTableColumn("ID", DairyPackage.Literals.EMPLOYEE__ID);
 		addTableColumn("Last Name", ModelPackage.Literals.PERSON__FAMILY_NAME);

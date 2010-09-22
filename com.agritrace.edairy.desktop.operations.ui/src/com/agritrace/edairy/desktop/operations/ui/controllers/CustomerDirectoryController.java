@@ -15,14 +15,16 @@ import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
+import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.reference.CompanyStatus;
 import com.agritrace.edairy.desktop.common.ui.reference.CustomerType;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.CustomerEditDialog;
 import com.agritrace.edairy.desktop.operations.ui.views.CustomerDirectoryView;
+import com.google.inject.Inject;
 
 @PermissionRequired(Permission.VIEW_CUSTOMERS)
 public class CustomerDirectoryController extends BasicDirectoryController<Customer> {
@@ -37,10 +39,13 @@ public class CustomerDirectoryController extends BasicDirectoryController<Custom
 	private IComboRidget customerTypeSearchCombo;
 
 	private final CustomerSearchBean searchBean = new CustomerSearchBean();
+	private final IDairyRepository dairyRepo;
 
-	public CustomerDirectoryController() {
+	@Inject
+	public CustomerDirectoryController(final IDairyRepository dairyRepo, final IRepository<Customer> repo) {
 		super();
-		setRepository(RepositoryFactory.getRepository(Customer.class));
+		this.dairyRepo = dairyRepo;
+		setRepository(repo);
 		setEClass(DairyPackage.Literals.CUSTOMER);
 		// setEntityClass(Customer.class);
 
@@ -89,8 +94,8 @@ public class CustomerDirectoryController extends BasicDirectoryController<Custom
 
 	@Override
 	protected void createEntity(Customer newEntity) {
-		RepositoryFactory.getDairyRepository().getLocalDairy().getCustomers().add(newEntity);
-		RepositoryFactory.getDairyRepository().save();
+		dairyRepo.getLocalDairy().getCustomers().add(newEntity);
+		dairyRepo.save();
 		//		getRepository().saveNew(newEntity);
 	}
 
@@ -127,9 +132,9 @@ public class CustomerDirectoryController extends BasicDirectoryController<Custom
 	@Override
 	protected void deleteEntity(Customer deletableEntity) {
 		if(deletableEntity != null){
-			RepositoryFactory.getDairyRepository().getLocalDairy().getCustomers().remove(deletableEntity);
+			dairyRepo.getLocalDairy().getCustomers().remove(deletableEntity);
 			super.deleteEntity(deletableEntity);
-			RepositoryFactory.getDairyRepository().save();
+			dairyRepo.save();
 		}
 	}
 }

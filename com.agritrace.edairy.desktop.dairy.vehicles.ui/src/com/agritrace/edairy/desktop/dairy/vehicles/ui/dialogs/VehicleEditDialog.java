@@ -12,12 +12,15 @@ import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.controllers.VehicleEditDialogController;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.controls.VehicleLogDetailComposite;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 public class VehicleEditDialog extends RecordDialog<Vehicle> {
 	private Composite comonComp;
 
-	public VehicleEditDialog(Shell shell) {
-		super(shell);
+	@Inject
+	public VehicleEditDialog(@Named("current") Shell shell, final VehicleEditDialogController controller) {
+		super(shell, controller);
 	}
 
 	@Override
@@ -32,11 +35,4 @@ public class VehicleEditDialog extends RecordDialog<Vehicle> {
 
 		parent.pack();
 	}
-
-
-	@Override
-	protected VehicleEditDialogController createController() {
-		return new VehicleEditDialogController();
-	}
-
 }

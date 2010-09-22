@@ -23,21 +23,25 @@ import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
+import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 @PermissionRequired(Permission.VIEW_MILK_DELIVERIES)
 public class MilkDeliveryJournalController extends BasicDirectoryController<DeliveryJournal> {
 
 	private IComboRidget customerRidget;
-	private final IDairyRepository dairyRepo = RepositoryFactory.getDairyRepository();
 
 	private IDateTimeRidget endDateRidget;
 	private DeliveryJournalFilterBean filterBean = null;
 	private IComboRidget routeRidget;
 	private IDateTimeRidget startDateRidget;
+	
+	private final IDairyRepository dairyRepo;
+	private final Provider<DeliveryJournalEditDialog> editDialogProvider;
 
 	private static abstract class DJColumnFormatter extends ColumnFormatter {
 		@Override public final String getText(Object element) {
@@ -50,9 +54,13 @@ public class MilkDeliveryJournalController extends BasicDirectoryController<Deli
 		protected abstract String getFormattedText(DeliveryJournal line);
 	}
 
-	public MilkDeliveryJournalController() {
+	@Inject
+	public MilkDeliveryJournalController(final IDairyRepository dairyRepo, final IRepository<DeliveryJournal> repo,
+			final Provider<DeliveryJournalEditDialog> editDialogProvider) {
+		this.dairyRepo = dairyRepo;
+		this.editDialogProvider = editDialogProvider;
 		setEClass(DairyPackage.Literals.DELIVERY_JOURNAL);
-		setRepository(RepositoryFactory.getRepository(DeliveryJournal.class));
+		setRepository(repo);
 
 		addTableColumn("Date", DairyPackage.Literals.DELIVERY_JOURNAL__DATE);
 		addTableColumn("Transport Route", DairyPackage.Literals.DELIVERY_JOURNAL__ROUTE, new DJColumnFormatter() {
@@ -128,7 +136,7 @@ public class MilkDeliveryJournalController extends BasicDirectoryController<Deli
 
 	@Override
 	protected RecordDialog<DeliveryJournal> getRecordDialog(Shell shell) {
-		return new DeliveryJournalEditDialog(shell);
+		return editDialogProvider.get();
 	}
 
 	@Override

@@ -38,7 +38,7 @@ public class CustomerDirectoryControllerTestCase extends AbstractSubModuleContro
 
 	@Override
 	protected CustomerDirectoryController createController(ISubModuleNode node) {
-		controller = new CustomerDirectoryController();
+		controller = Guice.createInjector(new TestPersistenceModule()).getInstance(CustomerDirectoryController.class);
 		node.setNodeId(new NavigationNodeId("edm.customer.directory"));
 		controller.setNavigationNode(node);
 		return controller;

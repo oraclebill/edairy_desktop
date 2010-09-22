@@ -87,6 +87,7 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 		}
 
 		private static CollectionGroup createCollectionJournal() {
+			/*
 			Dairy dairy = RepositoryFactory.getDairyRepository().getLocalDairy();
 			CollectionGroup journal = DairyFactory.eINSTANCE.createCollectionGroup();
 
@@ -99,6 +100,8 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 //			journal.setDriverTotal(new BigDecimal("10"));
 			
 			return journal;
+			*/
+			return null;
 		}
 
 		public void callback() {

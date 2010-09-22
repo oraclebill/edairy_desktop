@@ -13,9 +13,13 @@ import org.ops4j.peaberry.eclipse.EclipseRegistry;
 import org.osgi.framework.BundleContext;
 
 import com.agritrace.edairy.desktop.collection.ui.controllers.MilkCollectionLogController;
+import com.agritrace.edairy.desktop.collection.ui.controllers.MilkDeliveryJournalController;
+import com.agritrace.edairy.desktop.collection.ui.controllers.ScaleImportViewController;
 import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
 import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationDirectoryController;
+import com.agritrace.edairy.desktop.dairy.profile.ui.controllers.DairyProfileViewController;
+import com.agritrace.edairy.desktop.dairy.vehicles.ui.controllers.VehicleLogDirectoryViewController;
 import com.agritrace.edairy.desktop.finance.ui.navigation.FinanceModule;
 import com.agritrace.edairy.desktop.install.navigation.InstallModule;
 import com.agritrace.edairy.desktop.member.ui.controllers.ContainerListViewController;
@@ -24,6 +28,10 @@ import com.agritrace.edairy.desktop.member.ui.controllers.LiveStockListControlle
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberDirectoryController;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberDirectoryController2;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberRegisterViewController;
+import com.agritrace.edairy.desktop.operations.ui.controllers.ContainersDirectoryViewController;
+import com.agritrace.edairy.desktop.operations.ui.controllers.CustomerDirectoryController;
+import com.agritrace.edairy.desktop.operations.ui.controllers.EmployeeDirectoryController;
+import com.agritrace.edairy.desktop.operations.ui.controllers.RouteListController;
 import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDirectoryController;
 import com.agritrace.edairy.desktop.services.ui.controllers.AnimalHealthRequestViewController;
 import com.agritrace.edairy.desktop.splashHandlers.EdairySplashHandler;
@@ -48,10 +56,19 @@ public class EDairyModule extends AbstractModule {
 		CONTROLLERS.add(DairyLocationDirectoryController.class);
 		CONTROLLERS.add(ContainerListViewController.class);
 		CONTROLLERS.add(MilkCollectionLogController.class);
+		CONTROLLERS.add(MilkDeliveryJournalController.class);
 		CONTROLLERS.add(SupplierDirectoryController.class);
 		CONTROLLERS.add(MemberDirectoryController.class);
 		CONTROLLERS.add(MemberDirectoryController2.class);
 		CONTROLLERS.add(MemberRegisterViewController.class);
+		CONTROLLERS.add(DairyProfileViewController.class);
+		CONTROLLERS.add(ScaleImportViewController.class);
+		CONTROLLERS.add(VehicleLogDirectoryViewController.class);
+		CONTROLLERS.add(ContainersDirectoryViewController.class);
+		CONTROLLERS.add(EmployeeDirectoryController.class);
+		CONTROLLERS.add(CustomerDirectoryController.class);
+		CONTROLLERS.add(RouteListController.class);
+		CONTROLLERS.add(VehicleLogDirectoryViewController.class);
 		FinanceModule.contributeControllers(CONTROLLERS);
 	}
 	
