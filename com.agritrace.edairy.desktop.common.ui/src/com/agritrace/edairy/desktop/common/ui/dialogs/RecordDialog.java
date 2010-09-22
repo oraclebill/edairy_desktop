@@ -24,7 +24,10 @@ public abstract class RecordDialog<T extends EObject> extends BaseDialogView
 
 	public RecordDialog(Shell parentShell) {
 		super(parentShell);
-		// setReturnCode(CANCEL); // default to cancel,
+	}
+
+	public RecordDialog(Shell parentShell, AbstractWindowController controller) {
+		super(parentShell, controller);
 	}
 
 	/**
@@ -65,7 +68,11 @@ public abstract class RecordDialog<T extends EObject> extends BaseDialogView
 		newShell.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 	}
 
+	// This is not abstract, so we don't have to bother to override. But if we don't,
+	// we need to supply our own controller to the constructor.
 	@Override
-	protected abstract AbstractWindowController createController();
+	protected AbstractWindowController createController() {
+		return null;
+	}
 
 }
