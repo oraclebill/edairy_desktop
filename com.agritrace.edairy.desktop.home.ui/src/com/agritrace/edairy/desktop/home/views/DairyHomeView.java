@@ -38,6 +38,7 @@ import com.agritrace.edairy.desktop.internal.home.HomeActivator;
 
 public class DairyHomeView extends ViewPart {
 	public static final String ID = "desktop.home.view";
+	private Browser browser;
 
 	private static class HomepageLocationListener extends LocationAdapter {
 		@Override
@@ -50,20 +51,23 @@ public class DairyHomeView extends ViewPart {
 		GetIntakeData(Browser browser, String name) {
 			super(browser, name);
 		}
-		public Object function (Object[] arguments) {
+
+		public Object function(Object[] arguments) {
 			Date today = new Date();
-			ICollectionJournalLineRepository journalRepository = (ICollectionJournalLineRepository) RepositoryFactory.getRepository(CollectionJournalLine.class);
+			ICollectionJournalLineRepository journalRepository = (ICollectionJournalLineRepository) RepositoryFactory
+					.getRepository(CollectionJournalLine.class);
 			List<CollectionGroup> groups = journalRepository.allForDate(today);
 
 			Object[] retVal;
 			HashMap<String, Object[]> centerSums = new HashMap<String, Object[]>();
-			
+
 			// for each group, add its collections to the proper sum
 			for (int i = 0; i < groups.size(); i++) {
 				CollectionGroup group = groups.get(i);
-				String centerName = group.getCollectionCenter().getName();
-				
-				// get or create a slot to accumulate the sum of the groups collections
+				String centerName = group.getCollectionCenter().getCode();
+
+				// get or create a slot to accumulate the sum of the groups
+				// collections
 				Object[] sumArray = centerSums.get(centerName);
 				if (sumArray == null) {
 					sumArray = new Object[3];
@@ -72,31 +76,41 @@ public class DairyHomeView extends ViewPart {
 					sumArray[2] = new BigDecimal(0.0);
 					centerSums.put(centerName, sumArray);
 				}
-				
-				// a group contains collections for at most one session - identify it.
-					// default to 'am'
+
+				// a group contains collections for at most one session -
+				// identify it.
+				// default to 'am'
 				int sessionIndex = 1;
 				CollectionSession session = group.getSession();
-				if ( session != null ) {
-					if( "PM".equals(session.getCode()) ) sessionIndex = 2;	
+				if (session != null) {
+					if ("PM".equals(session.getCode()))
+						sessionIndex = 2;
 				}
-				
-				// calculate the sum of collections and store it 
-				//    values that are flagged or rejected are ignored.
+
+				// calculate the sum of collections and store it
+				// values that are flagged or rejected are ignored.
 				List<CollectionJournalLine> lines = group.getJournalEntries();
-				for ( CollectionJournalLine line : lines ) {
-					if (line.isRejected()) continue;
-					if (line.isFlagged()) continue;
-					
-					sumArray[sessionIndex] = line.getQuantity().add((BigDecimal)sumArray[sessionIndex]); 
+				for (CollectionJournalLine line : lines) {
+					if (line.isRejected())
+						continue;
+					if (line.isFlagged())
+						continue;
+
+					sumArray[sessionIndex] = line.getQuantity().add(
+							(BigDecimal) sumArray[sessionIndex]);
 				}
 			}
-			retVal = centerSums.values().toArray();	
+
+			if (centerSums.size() > 0) {
+				retVal = centerSums.values().toArray();
+			} else {
+				retVal = new Object[] { new Object[] { "", 0.0, 0.0 }, };
+			}
+
 			return retVal;
 		}
-
 	}
-	
+
 	public DairyHomeView() {
 	}
 
@@ -107,11 +121,11 @@ public class DairyHomeView extends ViewPart {
 				SWT.COLOR_WHITE));
 		parent.setLayout(new GridLayout(1, false));
 
-		Browser browser = new Browser(parent, SWT.NONE);
+		browser = new Browser(parent, SWT.NONE);
 		browser.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		browser.addLocationListener(new HomepageLocationListener());
 		new GetIntakeData(browser, "getIntakeData");
-		
+
 		try {
 			browser.setUrl(FileLocator.resolve(
 					new URL(HomeActivator.PLUGIN_WEB_PATH + "index.html"))
@@ -123,6 +137,7 @@ public class DairyHomeView extends ViewPart {
 
 	@Override
 	public void setFocus() {
+		browser.refresh();
 	}
 
 }
