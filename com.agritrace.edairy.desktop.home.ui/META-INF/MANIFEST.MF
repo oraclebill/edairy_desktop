@@ -8,7 +8,9 @@ Bundle-Vendor: AGRITRACE
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  com.agritrace.edairy.desktop.common.ui;bundle-version="1.0.0",
- com.agritrace.edairy.desktop.common.persistence;bundle-version="1.0.0"
+ com.agritrace.edairy.desktop.common.persistence;bundle-version="1.0.0",
+ com.google.inject
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Export-Package: com.agritrace.edairy.desktop.home.views
+Export-Package: com.agritrace.edairy.desktop.home,
+ com.agritrace.edairy.desktop.home.views

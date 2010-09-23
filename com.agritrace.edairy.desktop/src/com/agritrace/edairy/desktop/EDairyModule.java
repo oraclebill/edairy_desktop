@@ -22,6 +22,7 @@ import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocation
 import com.agritrace.edairy.desktop.dairy.profile.ui.controllers.DairyProfileViewController;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.controllers.VehicleLogDirectoryViewController;
 import com.agritrace.edairy.desktop.finance.ui.navigation.FinanceModule;
+import com.agritrace.edairy.desktop.home.HomeModule;
 import com.agritrace.edairy.desktop.install.navigation.InstallModule;
 import com.agritrace.edairy.desktop.member.ui.controllers.ContainerListViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.FarmListViewController;
@@ -79,11 +80,12 @@ public class EDairyModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
+		install(Peaberry.osgiModule(context, EclipseRegistry.eclipseRegistry()));
 		install(new PersistenceModule());
+		install(new UIModule());
 		install(new InstallModule());
 		install(new FinanceModule());
-		install(new UIModule());
-		install(Peaberry.osgiModule(context, EclipseRegistry.eclipseRegistry()));
+		install(new HomeModule());
 		
 		Map<Class<? extends IController>, Provider<? extends IController>> map =
 			new HashMap<Class<? extends IController>, Provider<? extends IController>>();
