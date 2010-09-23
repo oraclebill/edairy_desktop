@@ -1,6 +1,7 @@
 package com.agritrace.edairy.desktop.internal.operations.services.employee;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -125,5 +126,8 @@ public class EmployeeRepository implements IEmployeeRepository, IRepository<Empl
 		return employeeRepo.find(username, password);
 	}
 
-
+	@Override
+	public void saveAll(Collection<? extends Employee> objects) {
+		employeeRepo.saveAll(objects);
+	}
 }

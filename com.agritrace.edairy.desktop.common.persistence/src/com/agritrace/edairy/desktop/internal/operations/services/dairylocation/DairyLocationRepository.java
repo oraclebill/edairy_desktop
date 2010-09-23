@@ -1,6 +1,5 @@
 package com.agritrace.edairy.desktop.internal.operations.services.dairylocation;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -108,18 +107,6 @@ public class DairyLocationRepository extends HibernateRepository<DairyLocation> 
 		super.saveNew(newEntity);
 	}
 	
-	@Override
-	public void saveAll(final Collection<? extends DairyLocation> locs) {
-		runWithTransaction(new SessionRunnable<Object>() {
-			@Override
-			public void run(Session session) {
-				for (DairyLocation loc: locs) {
-					session.save(loc);
-				}
-			}
-		});
-	}
-
 	public void saveNewRoute(final Route newRoute) {
 		runWithTransaction(new SessionRunnable<Object>() {
 			@Override

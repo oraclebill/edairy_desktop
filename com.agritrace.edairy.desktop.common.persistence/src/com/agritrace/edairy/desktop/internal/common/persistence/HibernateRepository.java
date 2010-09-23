@@ -1,6 +1,7 @@
 package com.agritrace.edairy.desktop.internal.common.persistence;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
@@ -200,6 +201,18 @@ public abstract class HibernateRepository<T extends EObject> implements
 		});
 	}
 
+	@Override
+	public void saveAll(final Collection<? extends T> objects) {
+		runWithTransaction(new SessionRunnable<Object>() {
+			@Override
+			public void run(Session session) {
+				for (T obj: objects) {
+					session.save(obj);
+				}
+			}
+		});
+	}
+	
 	private void closeSession() {
 		// Currently does nothing!
 	}
