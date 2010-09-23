@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -17,7 +16,6 @@ import com.agritrace.edairy.desktop.collection.ui.controllers.MilkCollectionLogC
 import com.agritrace.edairy.desktop.collection.ui.controllers.MilkDeliveryJournalController;
 import com.agritrace.edairy.desktop.collection.ui.controllers.ScaleImportViewController;
 import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
-import com.agritrace.edairy.desktop.common.ui.DBPreferenceStore;
 import com.agritrace.edairy.desktop.common.ui.UIModule;
 import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationDirectoryController;
@@ -44,7 +42,6 @@ import com.google.inject.Provider;
 import com.google.inject.Provides;
 import com.google.inject.TypeLiteral;
 import com.google.inject.name.Named;
-import com.google.inject.name.Names;
 
 public class EDairyModule extends AbstractModule {
 	private BundleContext context;
