@@ -13,15 +13,20 @@ import com.agritrace.edairy.desktop.internal.collection.services.MilkCollectionJ
 import com.google.inject.ImplementedBy;
 
 @ImplementedBy(MilkCollectionJournalLineRepository.class)
-public interface ICollectionJournalLineRepository extends IRepository<CollectionJournalLine> {
-	int countByMemberCenterDate(final Membership member, final DairyLocation center, final Date date);
+public interface ICollectionJournalLineRepository extends
+		IRepository<CollectionJournalLine> {
+	int countByMemberCenterDate(final Membership member,
+			final DairyLocation center, final Date date);
+
 	List<CollectionGroup> allForDate(Date date);
+
 	BigDecimal getMilkPrice(int priceMonth, int priceYear);
+
 	List<Membership> getMembersWithDeliveriesFor(int priceMonth, int priceYear);
-	List<CollectionJournalLine> getPayableDeliveriesForMember(Membership member,
-			int paymentMonth, int paymentYear);
+
+	List<CollectionJournalLine> getPayableDeliveriesForMember(
+			Membership member, int paymentMonth, int paymentYear);
+
 	BigDecimal getSumOfPayableDeliveries(Membership member, int paymentMonth,
 			int paymentYear);
-
-
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;

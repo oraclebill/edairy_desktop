@@ -75,7 +75,7 @@ import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
  * 
  */
 public class MemberPaymentsProcessor {
-	private static final MathContext MONEYCONTEXT = new MathContext(0,
+	static final MathContext MONEYCONTEXT = new MathContext(0,
 			RoundingMode.HALF_EVEN);
 	static final BigDecimal BIGZERO = new BigDecimal(0, MONEYCONTEXT);
 	private static final String[] MONTHS = new String[] { "Jan", "Feb", "Mar",
@@ -120,7 +120,8 @@ public class MemberPaymentsProcessor {
 		// TODO: Lock database
 		BigDecimal milkPrice = collectionsManager.getMilkPriceForPeriod(
 				priceMonth, priceYear);
-		List<Membership> activeMembers = collectionsManager.getActiveMembers();
+		List<Membership> activeMembers = collectionsManager.getActiveMembers(
+				priceMonth, priceYear);
 		// for each member
 		for (final Membership member : activeMembers) {
 			final BigDecimal payment = processMemberPayout(priceMonth,
