@@ -163,7 +163,7 @@
             <method name="open"><![CDATA[count = 0;
 //importPackage(Packages.org.eclipse.birt.samples.scripted.hibernate);
 dao = Packages.com.agritrace.ediary.desktop.reports.data.FarmerPayablesYearDao.instance();
-data = dao.getReportValues(reportContext.getParameterValue("Year"), reportContext.getParameterValue("Month"));
+data = dao.getReportValuesX(reportContext.getParameterValue("Year"), reportContext.getParameterValue("Month"));
 ]]></method>
             <method name="fetch"><![CDATA[if(count < data.size()){
 var dataLine = data.get(count);
