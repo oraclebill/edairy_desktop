@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.internal.collection.services;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -83,22 +84,21 @@ public class MilkCollectionJournalLineRepository extends
 			@Override
 			public void run(Session session) {
 				int year, month, day;
-				
+
 				Calendar cal = Calendar.getInstance();
-				
+
 				if (date != null) {
 					cal.setTime(date);
-				}
-				else { 
+				} else {
 					cal.setTime(new Date());
-				}				
-				
+				}
+
 				year = cal.get(Calendar.YEAR);
 				month = cal.get(Calendar.MONTH);
 				day = cal.get(Calendar.DAY_OF_MONTH);
 
-				String queryText = //"SELECT grp " +
-						"FROM CollectionGroup as grp "
+				String queryText = // "SELECT grp " +
+				"FROM CollectionGroup as grp "
 						+ "          where day(grp.journalDate) = :day"
 						+ "          and  month(grp.journalDate) = :month"
 						+ "          and  year(grp.journalDate) = :year";
@@ -106,23 +106,68 @@ public class MilkCollectionJournalLineRepository extends
 				Query query = session.createQuery(queryText);
 
 				query.setInteger("year", year);
-				query.setInteger("month", month+1);
+				query.setInteger("month", month + 1);
 				query.setInteger("day", day);
 
 				List<CollectionGroup> results = query.list();
 				setResult(results);
-				
+
 				// debug
 				System.err.format("XXXXXX: Day = %d, month = %d, year = %d\n",
 						day, month, year);
 				System.err.format("XXXXXX: results count = %d\n",
 						results.size());
 
-				
 			}
 		};
 
 		runWithTransaction(runnable);
 		return runnable.getResult();
+	}
+
+	@Override
+	public BigDecimal getMilkPrice(int priceMonth, int priceYear) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Membership> getMembersWithDeliveriesFor(int priceMonth,
+			int priceYear) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<CollectionJournalLine> getPayableDeliveries(
+			final Membership member, final int month, final int year) {
+		SessionRunnable<List<CollectionJournalLine>> runnable = new SessionRunnable<List<CollectionJournalLine>>() {
+			@Override
+			public void run(Session session) {
+				String queryString = "FROM CollectionJournalLine l "
+						+ "WHERE l.validatedMember = :member "
+						+ "  AND l.rejected = False "
+						+ "  AND l.flagged = False "
+						+ "  AND year(l.collectionJournal.journalDate) = :year "
+						+ "  AND month(l.collectionJournal.journalDate) = :month ";
+				
+				Query query = session.createQuery(queryString);
+				query.setEntity("member", member);
+				query.setInteger("year", year);
+				query.setInteger("month", month);
+				
+				setResult(query.list());
+			}
+		};
+
+		runWithTransaction(runnable);
+		return runnable.getResult();
+	}
+
+	@Override
+	public BigDecimal getSumOfPayableDeliveries(Membership member,
+			int paymentMonth, int paymentYear) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
