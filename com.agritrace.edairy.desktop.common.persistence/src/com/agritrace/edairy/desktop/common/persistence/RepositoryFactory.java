@@ -10,9 +10,11 @@ import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
+import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.internal.collection.services.MilkCollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
+import com.agritrace.edairy.desktop.internal.common.persistence.TransactionRepository;
 import com.agritrace.edairy.desktop.internal.member.services.farm.FarmRepository;
 import com.agritrace.edairy.desktop.internal.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.internal.operations.services.customer.CustomerRepository;
@@ -108,6 +110,7 @@ public abstract class RepositoryFactory {
 		addRepository(Employee.class, new EmployeeRepository());
 		addRepository(Farm.class, new FarmRepository());
 		addRepository(Supplier.class, new SupplierRepository());
+		addRepository(Transaction.class, new TransactionRepository());
 	}
 	
 	@Deprecated

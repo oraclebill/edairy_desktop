@@ -29,6 +29,7 @@ public class HsqldbMemoryPersistenceManager extends PersistenceManager {
 		props.setProperty(Environment.URL, "jdbc:hsqldb:mem:test" + System.currentTimeMillis());
 		props.setProperty(Environment.PASS, "");
 		props.setProperty(Environment.DIALECT, "org.hibernate.dialect.HSQLDialect");
+		
 
 		// TODO: test this - perhaps JTA or 'managed' is better...
 		props.setProperty(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
@@ -38,9 +39,11 @@ public class HsqldbMemoryPersistenceManager extends PersistenceManager {
 
 		// show all sql
 		props.setProperty(Environment.SHOW_SQL, "true");
+		props.setProperty(Environment.USE_SQL_COMMENTS, "true");
 
 		// drop and recreate db on startup
 		props.setProperty(Environment.HBM2DDL_AUTO, "update");
 		return props;
 	}
+	
 }

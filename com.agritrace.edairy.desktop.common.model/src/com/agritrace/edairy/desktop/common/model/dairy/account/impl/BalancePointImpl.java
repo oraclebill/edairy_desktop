@@ -16,11 +16,13 @@ import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,7 +33,6 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.BalancePointImpl#getAccountBalanceId <em>Account Balance Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.BalancePointImpl#getAccount <em>Account</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.BalancePointImpl#getPreviousBalance <em>Previous Balance</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.BalancePointImpl#getAsOf <em>As Of</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.account.impl.BalancePointImpl#getAmount <em>Amount</em>}</li>
  * </ul>
@@ -59,26 +60,6 @@ public class BalancePointImpl extends EObjectImpl implements BalancePoint {
 	 * @ordered
 	 */
 	protected long accountBalanceId = ACCOUNT_BALANCE_ID_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getAccount() <em>Account</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAccount()
-	 * @generated
-	 * @ordered
-	 */
-	protected Account account;
-
-	/**
-	 * The cached value of the '{@link #getPreviousBalance() <em>Previous Balance</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPreviousBalance()
-	 * @generated
-	 * @ordered
-	 */
-	protected BalancePoint previousBalance;
 
 	/**
 	 * The default value of the '{@link #getAsOf() <em>As Of</em>}' attribute.
@@ -166,15 +147,8 @@ public class BalancePointImpl extends EObjectImpl implements BalancePoint {
 	 * @generated
 	 */
 	public Account getAccount() {
-		if (account != null && account.eIsProxy()) {
-			InternalEObject oldAccount = (InternalEObject)account;
-			account = (Account)eResolveProxy(oldAccount);
-			if (account != oldAccount) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AccountPackage.BALANCE_POINT__ACCOUNT, oldAccount, account));
-			}
-		}
-		return account;
+		if (eContainerFeatureID() != AccountPackage.BALANCE_POINT__ACCOUNT) return null;
+		return (Account)eContainer();
 	}
 
 	/**
@@ -182,8 +156,9 @@ public class BalancePointImpl extends EObjectImpl implements BalancePoint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Account basicGetAccount() {
-		return account;
+	public NotificationChain basicSetAccount(Account newAccount, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newAccount, AccountPackage.BALANCE_POINT__ACCOUNT, msgs);
+		return msgs;
 	}
 
 	/**
@@ -192,48 +167,19 @@ public class BalancePointImpl extends EObjectImpl implements BalancePoint {
 	 * @generated
 	 */
 	public void setAccount(Account newAccount) {
-		Account oldAccount = account;
-		account = newAccount;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.BALANCE_POINT__ACCOUNT, oldAccount, account));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public BalancePoint getPreviousBalance() {
-		if (previousBalance != null && previousBalance.eIsProxy()) {
-			InternalEObject oldPreviousBalance = (InternalEObject)previousBalance;
-			previousBalance = (BalancePoint)eResolveProxy(oldPreviousBalance);
-			if (previousBalance != oldPreviousBalance) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AccountPackage.BALANCE_POINT__PREVIOUS_BALANCE, oldPreviousBalance, previousBalance));
-			}
+		if (newAccount != eInternalContainer() || (eContainerFeatureID() != AccountPackage.BALANCE_POINT__ACCOUNT && newAccount != null)) {
+			if (EcoreUtil.isAncestor(this, newAccount))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newAccount != null)
+				msgs = ((InternalEObject)newAccount).eInverseAdd(this, AccountPackage.ACCOUNT__BALANCES, Account.class, msgs);
+			msgs = basicSetAccount(newAccount, msgs);
+			if (msgs != null) msgs.dispatch();
 		}
-		return previousBalance;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public BalancePoint basicGetPreviousBalance() {
-		return previousBalance;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setPreviousBalance(BalancePoint newPreviousBalance) {
-		BalancePoint oldPreviousBalance = previousBalance;
-		previousBalance = newPreviousBalance;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.BALANCE_POINT__PREVIOUS_BALANCE, oldPreviousBalance, previousBalance));
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.BALANCE_POINT__ACCOUNT, newAccount, newAccount));
 	}
 
 	/**
@@ -284,16 +230,56 @@ public class BalancePointImpl extends EObjectImpl implements BalancePoint {
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case AccountPackage.BALANCE_POINT__ACCOUNT:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetAccount((Account)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case AccountPackage.BALANCE_POINT__ACCOUNT:
+				return basicSetAccount(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case AccountPackage.BALANCE_POINT__ACCOUNT:
+				return eInternalContainer().eInverseRemove(this, AccountPackage.ACCOUNT__BALANCES, Account.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case AccountPackage.BALANCE_POINT__ACCOUNT_BALANCE_ID:
 				return getAccountBalanceId();
 			case AccountPackage.BALANCE_POINT__ACCOUNT:
-				if (resolve) return getAccount();
-				return basicGetAccount();
-			case AccountPackage.BALANCE_POINT__PREVIOUS_BALANCE:
-				if (resolve) return getPreviousBalance();
-				return basicGetPreviousBalance();
+				return getAccount();
 			case AccountPackage.BALANCE_POINT__AS_OF:
 				return getAsOf();
 			case AccountPackage.BALANCE_POINT__AMOUNT:
@@ -315,9 +301,6 @@ public class BalancePointImpl extends EObjectImpl implements BalancePoint {
 				return;
 			case AccountPackage.BALANCE_POINT__ACCOUNT:
 				setAccount((Account)newValue);
-				return;
-			case AccountPackage.BALANCE_POINT__PREVIOUS_BALANCE:
-				setPreviousBalance((BalancePoint)newValue);
 				return;
 			case AccountPackage.BALANCE_POINT__AS_OF:
 				setAsOf((Date)newValue);
@@ -343,9 +326,6 @@ public class BalancePointImpl extends EObjectImpl implements BalancePoint {
 			case AccountPackage.BALANCE_POINT__ACCOUNT:
 				setAccount((Account)null);
 				return;
-			case AccountPackage.BALANCE_POINT__PREVIOUS_BALANCE:
-				setPreviousBalance((BalancePoint)null);
-				return;
 			case AccountPackage.BALANCE_POINT__AS_OF:
 				setAsOf(AS_OF_EDEFAULT);
 				return;
@@ -367,9 +347,7 @@ public class BalancePointImpl extends EObjectImpl implements BalancePoint {
 			case AccountPackage.BALANCE_POINT__ACCOUNT_BALANCE_ID:
 				return accountBalanceId != ACCOUNT_BALANCE_ID_EDEFAULT;
 			case AccountPackage.BALANCE_POINT__ACCOUNT:
-				return account != null;
-			case AccountPackage.BALANCE_POINT__PREVIOUS_BALANCE:
-				return previousBalance != null;
+				return getAccount() != null;
 			case AccountPackage.BALANCE_POINT__AS_OF:
 				return AS_OF_EDEFAULT == null ? asOf != null : !AS_OF_EDEFAULT.equals(asOf);
 			case AccountPackage.BALANCE_POINT__AMOUNT:

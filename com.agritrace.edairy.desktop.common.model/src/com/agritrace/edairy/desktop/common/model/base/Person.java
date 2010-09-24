@@ -306,7 +306,7 @@ public interface Person extends Contactable {
 	 * @return the value of the '<em>Person Id</em>' attribute.
 	 * @see #setPersonId(Long)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getPerson_PersonId()
-	 * @model id="true" dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID"
+	 * @model id="true" dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID" required="true"
 	 * @generated
 	 */
 	Long getPersonId();
