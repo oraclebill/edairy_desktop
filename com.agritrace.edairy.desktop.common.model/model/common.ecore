@@ -88,8 +88,8 @@
         <details key="appinfo" value="@OneToOne"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="personId" eType="#//UniqueID"
-        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="personId" lowerBound="1"
+        eType="#//UniqueID" iD="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Company" eSuperTypes="#//Contactable">
     <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">

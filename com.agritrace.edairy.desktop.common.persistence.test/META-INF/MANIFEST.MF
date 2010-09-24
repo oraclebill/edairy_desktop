@@ -9,8 +9,9 @@ Bundle-Localization: plugin
 Require-Bundle: com.agritrace.edairy.desktop.common.persistence,
  org.eclipse.core.runtime,
  com.agritrace.edairy.desktop.common.ui;bundle-version="1.0.0",
- org.junit;bundle-version="4.8.1"
+ org.junit;bundle-version="4.8.1",
+ com.csvreader;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Bundle-ActivationPolicy: lazy
+Fragment-Host: com.agritrace.edairy.desktop.common.persistence;bundle-version="1.0.0"
 Export-Package: com.agritrace.edairy.desktop.common.persistence.services,
  com.agritrace.edairy.desktop.common.persistence.test
