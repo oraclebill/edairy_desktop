@@ -77,7 +77,7 @@ import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 public class MemberPaymentsProcessor {
 	private static final MathContext MONEYCONTEXT = new MathContext(0,
 			RoundingMode.HALF_EVEN);
-	private static final BigDecimal BIGZERO = new BigDecimal(0, MONEYCONTEXT);
+	static final BigDecimal BIGZERO = new BigDecimal(0, MONEYCONTEXT);
 	private static final String[] MONTHS = new String[] { "Jan", "Feb", "Mar",
 			"Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
 
@@ -143,7 +143,7 @@ public class MemberPaymentsProcessor {
 	 * @param member
 	 * @return
 	 */
-	private BigDecimal processMemberPayout(int priceMonth, int priceYear,
+	BigDecimal processMemberPayout(int priceMonth, int priceYear,
 			List<PaymentRecord> paymentList, BigDecimal milkPrice,
 			Membership member) {
 		Account primaryAcct = member.getAccount();
@@ -171,7 +171,7 @@ public class MemberPaymentsProcessor {
 
 		// if member balance is positive, create a transaction to register
 		// balance payout.
-		BigDecimal payout = accountManager.getCurrentDebitBalance(primaryAcct);
+		BigDecimal payout = accountManager.getCurrentBalance(primaryAcct);
 		if (payout.compareTo(BIGZERO) > 0) {
 			accountManager.createCredit(primaryAcct,
 					TransactionSource.CASH_PAYMENT, payout,

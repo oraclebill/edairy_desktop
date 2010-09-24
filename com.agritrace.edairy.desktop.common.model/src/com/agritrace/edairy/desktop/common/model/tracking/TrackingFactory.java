@@ -35,6 +35,15 @@ public interface TrackingFactory extends EFactory {
 	Farm createFarm();
 
 	/**
+	 * Returns a new object of class '<em>Farmer</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Farmer</em>'.
+	 * @generated
+	 */
+	Farmer createFarmer();
+
+	/**
 	 * Returns a new object of class '<em>Container</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -69,15 +78,6 @@ public interface TrackingFactory extends EFactory {
 	 * @generated
 	 */
 	AnimalIdentifier createAnimalIdentifier();
-
-	/**
-	 * Returns a new object of class '<em>Farmer</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Farmer</em>'.
-	 * @generated
-	 */
-	Farmer createFarmer();
 
 	/**
 	 * Returns the package supported by this factory.

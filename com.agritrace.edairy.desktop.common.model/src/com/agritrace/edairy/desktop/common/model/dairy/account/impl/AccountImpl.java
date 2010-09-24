@@ -29,7 +29,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -359,7 +358,7 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 */
 	public EList<BalancePoint> getBalances() {
 		if (balances == null) {
-			balances = new EObjectContainmentEList<BalancePoint>(BalancePoint.class, this, AccountPackage.ACCOUNT__BALANCES);
+			balances = new EObjectContainmentWithInverseEList<BalancePoint>(BalancePoint.class, this, AccountPackage.ACCOUNT__BALANCES, AccountPackage.BALANCE_POINT__ACCOUNT);
 		}
 		return balances;
 	}
@@ -379,6 +378,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 				return basicSetMember((Membership)otherEnd, msgs);
 			case AccountPackage.ACCOUNT__TRANSACTIONS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTransactions()).basicAdd(otherEnd, msgs);
+			case AccountPackage.ACCOUNT__BALANCES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getBalances()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}

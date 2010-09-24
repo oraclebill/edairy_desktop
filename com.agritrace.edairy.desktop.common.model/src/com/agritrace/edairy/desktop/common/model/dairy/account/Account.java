@@ -221,6 +221,7 @@ public interface Account extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Balances</b></em>' containment reference list.
 	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint}.
+	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint#getAccount <em>Account</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Balances</em>' containment reference list isn't clear,
@@ -229,7 +230,8 @@ public interface Account extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Balances</em>' containment reference list.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage#getAccount_Balances()
-	 * @model containment="true"
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint#getAccount
+	 * @model opposite="account" containment="true"
 	 * @generated
 	 */
 	EList<BalancePoint> getBalances();

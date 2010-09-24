@@ -330,8 +330,6 @@
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/BalancePoint/accountBalanceId"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference dairy.ecore#//account/BalancePoint/account"/>
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference dairy.ecore#//account/BalancePoint/previousBalance"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/BalancePoint/asOf"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/BalancePoint/amount"/>
       </genClasses>

@@ -520,17 +520,19 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
 	 */
 	public com.agritrace.edairy.desktop.common.model.dairy.security.Permission createPermissionTFromString(EDataType eDataType, String initialValue) {
-		return Enum.valueOf(com.agritrace.edairy.desktop.common.model.dairy.security.Permission.class, initialValue);
+		return (com.agritrace.edairy.desktop.common.model.dairy.security.Permission)super.createFromString(eDataType, initialValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
 	 */
 	public String convertPermissionTToString(EDataType eDataType, Object instanceValue) {
-		return ((com.agritrace.edairy.desktop.common.model.dairy.security.Permission) instanceValue).name();
+		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**

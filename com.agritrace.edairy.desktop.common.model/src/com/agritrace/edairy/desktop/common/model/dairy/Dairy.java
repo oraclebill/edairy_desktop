@@ -78,30 +78,56 @@ public interface Dairy extends Company {
 	void setRegistrationNumber(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Nhif Number</b></em>' attribute.
+	 * Returns the value of the '<em><b>Established Date</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Nhif Number</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Established Date</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Nhif Number</em>' attribute.
-	 * @see #setNhifNumber(String)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_NhifNumber()
+	 * @return the value of the '<em>Established Date</em>' attribute.
+	 * @see #setEstablishedDate(Date)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_EstablishedDate()
 	 * @model
 	 * @generated
 	 */
-	String getNhifNumber();
+	Date getEstablishedDate();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getNhifNumber <em>Nhif Number</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getEstablishedDate <em>Established Date</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Nhif Number</em>' attribute.
-	 * @see #getNhifNumber()
+	 * @param value the new value of the '<em>Established Date</em>' attribute.
+	 * @see #getEstablishedDate()
 	 * @generated
 	 */
-	void setNhifNumber(String value);
+	void setEstablishedDate(Date value);
+
+	/**
+	 * Returns the value of the '<em><b>Manager Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Manager Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Manager Name</em>' attribute.
+	 * @see #setManagerName(String)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_ManagerName()
+	 * @model
+	 * @generated
+	 */
+	String getManagerName();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getManagerName <em>Manager Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Manager Name</em>' attribute.
+	 * @see #getManagerName()
+	 * @generated
+	 */
+	void setManagerName(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Nssf Number</b></em>' attribute.
@@ -128,6 +154,32 @@ public interface Dairy extends Company {
 	 * @generated
 	 */
 	void setNssfNumber(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Nhif Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Nhif Number</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Nhif Number</em>' attribute.
+	 * @see #setNhifNumber(String)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_NhifNumber()
+	 * @model
+	 * @generated
+	 */
+	String getNhifNumber();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getNhifNumber <em>Nhif Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Nhif Number</em>' attribute.
+	 * @see #getNhifNumber()
+	 * @generated
+	 */
+	void setNhifNumber(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Federal Pin</b></em>' attribute.
@@ -427,57 +479,5 @@ public interface Dairy extends Company {
 	 * @generated
 	 */
 	void setVersion(long value);
-
-	/**
-	 * Returns the value of the '<em><b>Manager Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Manager Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Manager Name</em>' attribute.
-	 * @see #setManagerName(String)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_ManagerName()
-	 * @model
-	 * @generated
-	 */
-	String getManagerName();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getManagerName <em>Manager Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Manager Name</em>' attribute.
-	 * @see #getManagerName()
-	 * @generated
-	 */
-	void setManagerName(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Established Date</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Established Date</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Established Date</em>' attribute.
-	 * @see #setEstablishedDate(Date)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_EstablishedDate()
-	 * @model
-	 * @generated
-	 */
-	Date getEstablishedDate();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getEstablishedDate <em>Established Date</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Established Date</em>' attribute.
-	 * @see #getEstablishedDate()
-	 * @generated
-	 */
-	void setEstablishedDate(Date value);
 
 } // Dairy

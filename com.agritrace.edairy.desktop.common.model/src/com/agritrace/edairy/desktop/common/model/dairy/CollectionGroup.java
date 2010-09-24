@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Collection Journal Page</b></em>'.
+ * A representation of the model object '<em><b>Collection Group</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -72,24 +72,6 @@ public interface CollectionGroup extends EObject {
 	 * @generated
 	 */
 	void setJournalId(Long value);
-
-	/**
-	 * Returns the value of the '<em><b>Journal Entries</b></em>' containment reference list.
-	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine}.
-	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getCollectionJournal <em>Collection Journal</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Journal Entries</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Journal Entries</em>' containment reference list.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_JournalEntries()
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getCollectionJournal
-	 * @model opposite="collectionJournal" containment="true"
-	 * @generated
-	 */
-	EList<CollectionJournalLine> getJournalEntries();
 
 	/**
 	 * Returns the value of the '<em><b>Reference Number</b></em>' attribute.
@@ -172,88 +154,6 @@ public interface CollectionGroup extends EObject {
 	 * @generated
 	 */
 	void setStatus(JournalStatus value);
-
-	/**
-	 * Returns the value of the '<em><b>Session</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Session</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Session</em>' reference.
-	 * @see #setSession(CollectionSession)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_Session()
-	 * @model
-	 * @generated
-	 */
-	CollectionSession getSession();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getSession <em>Session</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Session</em>' reference.
-	 * @see #getSession()
-	 * @generated
-	 */
-	void setSession(CollectionSession value);
-
-	/**
-	 * Returns the value of the '<em><b>Collection Center</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Collection Center</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Collection Center</em>' reference.
-	 * @see #setCollectionCenter(DairyLocation)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_CollectionCenter()
-	 * @model
-	 * @generated
-	 */
-	DairyLocation getCollectionCenter();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getCollectionCenter <em>Collection Center</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Collection Center</em>' reference.
-	 * @see #getCollectionCenter()
-	 * @generated
-	 */
-	void setCollectionCenter(DairyLocation value);
-
-	/**
-	 * Returns the value of the '<em><b>Type</b></em>' attribute.
-	 * The default value is <code>"ScaleGroup"</code>.
-	 * The literals are from the enumeration {@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Type</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type</em>' attribute.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType
-	 * @see #setType(CollectionGroupType)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_Type()
-	 * @model default="ScaleGroup" required="true"
-	 * @generated
-	 */
-	CollectionGroupType getType();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getType <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' attribute.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType
-	 * @see #getType()
-	 * @generated
-	 */
-	void setType(CollectionGroupType value);
 
 	/**
 	 * Returns the value of the '<em><b>Driver</b></em>' reference.
@@ -359,6 +259,24 @@ public interface CollectionGroup extends EObject {
 	 * @generated
 	 */
 	void setRecordTotal(BigDecimal value);
+
+	/**
+	 * Returns the value of the '<em><b>Journal Entries</b></em>' containment reference list.
+	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine}.
+	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getCollectionJournal <em>Collection Journal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Journal Entries</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Journal Entries</em>' containment reference list.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_JournalEntries()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getCollectionJournal
+	 * @model opposite="collectionJournal" containment="true"
+	 * @generated
+	 */
+	EList<CollectionJournalLine> getJournalEntries();
 
 	/**
 	 * Returns the value of the '<em><b>Suspended</b></em>' attribute.
@@ -494,5 +412,87 @@ public interface CollectionGroup extends EObject {
 	 * @generated
 	 */
 	void setJournalNumber(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Session</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Session</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Session</em>' reference.
+	 * @see #setSession(CollectionSession)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_Session()
+	 * @model
+	 * @generated
+	 */
+	CollectionSession getSession();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getSession <em>Session</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Session</em>' reference.
+	 * @see #getSession()
+	 * @generated
+	 */
+	void setSession(CollectionSession value);
+
+	/**
+	 * Returns the value of the '<em><b>Collection Center</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Collection Center</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Collection Center</em>' reference.
+	 * @see #setCollectionCenter(DairyLocation)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_CollectionCenter()
+	 * @model
+	 * @generated
+	 */
+	DairyLocation getCollectionCenter();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getCollectionCenter <em>Collection Center</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Collection Center</em>' reference.
+	 * @see #getCollectionCenter()
+	 * @generated
+	 */
+	void setCollectionCenter(DairyLocation value);
+
+	/**
+	 * Returns the value of the '<em><b>Type</b></em>' attribute.
+	 * The default value is <code>"ScaleGroup"</code>.
+	 * The literals are from the enumeration {@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Type</em>' attribute.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType
+	 * @see #setType(CollectionGroupType)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_Type()
+	 * @model default="ScaleGroup" required="true"
+	 * @generated
+	 */
+	CollectionGroupType getType();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getType <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Type</em>' attribute.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType
+	 * @see #getType()
+	 * @generated
+	 */
+	void setType(CollectionGroupType value);
 
 } // CollectionGroup

@@ -427,17 +427,8 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBalancePoint_PreviousBalance() {
-		return (EReference)balancePointEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getBalancePoint_AsOf() {
-		return (EAttribute)balancePointEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)balancePointEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -446,7 +437,7 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * @generated
 	 */
 	public EAttribute getBalancePoint_Amount() {
-		return (EAttribute)balancePointEClass.getEStructuralFeatures().get(4);
+		return (EAttribute)balancePointEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -535,7 +526,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 		balancePointEClass = createEClass(BALANCE_POINT);
 		createEAttribute(balancePointEClass, BALANCE_POINT__ACCOUNT_BALANCE_ID);
 		createEReference(balancePointEClass, BALANCE_POINT__ACCOUNT);
-		createEReference(balancePointEClass, BALANCE_POINT__PREVIOUS_BALANCE);
 		createEAttribute(balancePointEClass, BALANCE_POINT__AS_OF);
 		createEAttribute(balancePointEClass, BALANCE_POINT__AMOUNT);
 
@@ -588,7 +578,7 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 		initEAttribute(getAccount_Status(), this.getAccountStatus(), "status", "0", 1, 1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAccount_Type(), ecorePackage.getEString(), "type", null, 0, 1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAccount_Transactions(), this.getTransaction(), this.getTransaction_Account(), "transactions", null, 0, -1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAccount_Balances(), this.getBalancePoint(), null, "balances", null, 0, -1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAccount_Balances(), this.getBalancePoint(), this.getBalancePoint_Account(), "balances", null, 0, -1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(transactionEClass, Transaction.class, "Transaction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTransaction_Account(), this.getAccount(), this.getAccount_Transactions(), "account", null, 1, 1, Transaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -611,8 +601,7 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 
 		initEClass(balancePointEClass, BalancePoint.class, "BalancePoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBalancePoint_AccountBalanceId(), ecorePackage.getELong(), "accountBalanceId", null, 1, 1, BalancePoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBalancePoint_Account(), this.getAccount(), null, "account", null, 1, 1, BalancePoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBalancePoint_PreviousBalance(), this.getBalancePoint(), null, "previousBalance", null, 1, 1, BalancePoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBalancePoint_Account(), this.getAccount(), this.getAccount_Balances(), "account", null, 1, 1, BalancePoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBalancePoint_AsOf(), ecorePackage.getEDate(), "asOf", null, 0, 1, BalancePoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBalancePoint_Amount(), ecorePackage.getEBigDecimal(), "amount", null, 0, 1, BalancePoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

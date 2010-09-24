@@ -165,6 +165,27 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Long getFarmId() {
+		return farmId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFarmId(Long newFarmId) {
+		Long oldFarmId = farmId;
+		farmId = newFarmId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.FARM__FARM_ID, oldFarmId, farmId));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getName() {
 		return name;
 	}
@@ -308,27 +329,6 @@ public class FarmImpl extends EObjectImpl implements Farm {
 		profilePhoto = newProfilePhoto;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.FARM__PROFILE_PHOTO, oldProfilePhoto, profilePhoto));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Long getFarmId() {
-		return farmId;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setFarmId(Long newFarmId) {
-		Long oldFarmId = farmId;
-		farmId = newFarmId;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.FARM__FARM_ID, oldFarmId, farmId));
 	}
 
 	/**

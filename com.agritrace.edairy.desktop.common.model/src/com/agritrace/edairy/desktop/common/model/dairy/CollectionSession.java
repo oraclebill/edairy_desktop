@@ -134,5 +134,4 @@ public interface CollectionSession extends EObject {
 	 */
 	void setTimeOfDay(Date value);
 
-	String getTimeAsString();
 } // CollectionSession

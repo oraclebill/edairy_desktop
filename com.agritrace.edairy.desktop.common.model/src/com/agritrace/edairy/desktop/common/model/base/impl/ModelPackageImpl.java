@@ -23,8 +23,8 @@ import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
 import com.agritrace.edairy.desktop.common.model.base.StatutoryLocation;
 import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
-
 import com.agritrace.edairy.desktop.common.model.base.Versioned;
+
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;

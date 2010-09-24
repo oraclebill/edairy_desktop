@@ -129,6 +129,16 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Farmer createFarmer() {
+		FarmerImpl farmer = new FarmerImpl();
+		return farmer;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public com.agritrace.edairy.desktop.common.model.tracking.Container createContainer() {
 		ContainerImpl container = new ContainerImpl();
 		return container;
@@ -162,16 +172,6 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 	public AnimalIdentifier createAnimalIdentifier() {
 		AnimalIdentifierImpl animalIdentifier = new AnimalIdentifierImpl();
 		return animalIdentifier;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Farmer createFarmer() {
-		FarmerImpl farmer = new FarmerImpl();
-		return farmer;
 	}
 
 	/**
