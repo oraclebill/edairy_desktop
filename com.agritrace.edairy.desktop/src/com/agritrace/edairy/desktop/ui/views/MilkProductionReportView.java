@@ -24,7 +24,7 @@ public class MilkProductionReportView extends ViewPart {
 
 	@Override
 	public void createPartControl(Composite parent) {
-		new ReportController().createPartControl(parent);
+		new ReportController(ReportController.MILK_COLLECTION_YEAR).createPartControl(parent);
 //		final Composite top = new Composite(parent, SWT.NONE);
 //		top.setSize(new Point(800, 800));
 //		top.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));

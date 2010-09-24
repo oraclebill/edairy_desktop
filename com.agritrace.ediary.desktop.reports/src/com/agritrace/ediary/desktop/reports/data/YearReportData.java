@@ -20,6 +20,11 @@ public String getProductionString() {
 public Date getDate() {
 	return date;
 }
+
+public String getDateString(){
+	return ""+getDate();
+}
+
 public void setDate(Date date) {
 	this.date = date;
 }

@@ -25,19 +25,19 @@ public class FarmerPayablesYearData {
 		this.payables = payables;
 	}
 	public String getFarmerName() {
-		return farmerName;
+		return (farmerName == null || farmerName.isEmpty())?"":farmerName;
 	}
 	public void setFarmerName(String farmerName) {
 		this.farmerName = farmerName;
 	}
 	public String getMemberNumber() {
-		return memberNumber;
+		return (memberNumber == null || memberNumber.isEmpty())?"":memberNumber;
 	}
 	public void setMemberNumber(String memberNumber) {
 		this.memberNumber = memberNumber;
 	}
 	public String getAccountNumber() {
-		return accountNumber;
+		return (accountNumber == null || accountNumber.isEmpty())?"":accountNumber;
 	}
 	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
