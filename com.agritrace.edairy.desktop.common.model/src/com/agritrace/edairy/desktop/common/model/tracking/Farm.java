@@ -36,6 +36,32 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Farm extends EObject {
 	/**
+	 * Returns the value of the '<em><b>Farm Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Farm Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Farm Id</em>' attribute.
+	 * @see #setFarmId(Long)
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getFarm_FarmId()
+	 * @model id="true" dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID"
+	 * @generated
+	 */
+	Long getFarmId();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.tracking.Farm#getFarmId <em>Farm Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Farm Id</em>' attribute.
+	 * @see #getFarmId()
+	 * @generated
+	 */
+	void setFarmId(Long value);
+
+	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -172,32 +198,6 @@ public interface Farm extends EObject {
 	 * @generated
 	 */
 	void setProfilePhoto(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Farm Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Farm Id</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Farm Id</em>' attribute.
-	 * @see #setFarmId(Long)
-	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getFarm_FarmId()
-	 * @model id="true" dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID"
-	 * @generated
-	 */
-	Long getFarmId();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.tracking.Farm#getFarmId <em>Farm Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Farm Id</em>' attribute.
-	 * @see #getFarmId()
-	 * @generated
-	 */
-	void setFarmId(Long value);
 
 	/**
 	 * <!-- begin-user-doc -->

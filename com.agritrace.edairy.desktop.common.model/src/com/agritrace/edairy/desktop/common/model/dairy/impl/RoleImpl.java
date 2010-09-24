@@ -10,6 +10,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Role;
 
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;

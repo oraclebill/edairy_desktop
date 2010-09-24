@@ -50,7 +50,9 @@ public enum MembershipStatus implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	DORMANT(2, "Dormant", "Dormant"), /**
+	DORMANT(2, "Dormant", "Dormant"),
+
+	/**
 	 * The '<em><b>Deleted</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

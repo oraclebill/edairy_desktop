@@ -421,8 +421,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getNhifNumber() {
-		return nhifNumber;
+	public Date getEstablishedDate() {
+		return establishedDate;
 	}
 
 	/**
@@ -430,11 +430,32 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setNhifNumber(String newNhifNumber) {
-		String oldNhifNumber = nhifNumber;
-		nhifNumber = newNhifNumber;
+	public void setEstablishedDate(Date newEstablishedDate) {
+		Date oldEstablishedDate = establishedDate;
+		establishedDate = newEstablishedDate;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY__NHIF_NUMBER, oldNhifNumber, nhifNumber));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY__ESTABLISHED_DATE, oldEstablishedDate, establishedDate));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getManagerName() {
+		return managerName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setManagerName(String newManagerName) {
+		String oldManagerName = managerName;
+		managerName = newManagerName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY__MANAGER_NAME, oldManagerName, managerName));
 	}
 
 	/**
@@ -456,6 +477,27 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 		nssfNumber = newNssfNumber;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY__NSSF_NUMBER, oldNssfNumber, nssfNumber));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getNhifNumber() {
+		return nhifNumber;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNhifNumber(String newNhifNumber) {
+		String oldNhifNumber = nhifNumber;
+		nhifNumber = newNhifNumber;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY__NHIF_NUMBER, oldNhifNumber, nhifNumber));
 	}
 
 	/**
@@ -684,48 +726,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 		version = newVersion;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY__VERSION, oldVersion, version));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getManagerName() {
-		return managerName;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setManagerName(String newManagerName) {
-		String oldManagerName = managerName;
-		managerName = newManagerName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY__MANAGER_NAME, oldManagerName, managerName));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Date getEstablishedDate() {
-		return establishedDate;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setEstablishedDate(Date newEstablishedDate) {
-		Date oldEstablishedDate = establishedDate;
-		establishedDate = newEstablishedDate;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY__ESTABLISHED_DATE, oldEstablishedDate, establishedDate));
 	}
 
 	/**

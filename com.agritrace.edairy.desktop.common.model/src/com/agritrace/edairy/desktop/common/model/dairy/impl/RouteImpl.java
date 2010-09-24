@@ -9,8 +9,8 @@ package com.agritrace.edairy.desktop.common.model.dairy.impl;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
-
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;

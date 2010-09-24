@@ -68,7 +68,6 @@
     <xsd:attribute name="asOf" type="xsd:string"/>
     <xsd:attribute name="amount" type="xsd:string"/>
     <xsd:attribute name="account" type="xsd:string"/>
-    <xsd:attribute name="previousBalance" type="xsd:string"/>
   </xsd:complexType>
   <xsd:element name="BalancePoint" type="account:BalancePoint"/>
 </xsd:schema>

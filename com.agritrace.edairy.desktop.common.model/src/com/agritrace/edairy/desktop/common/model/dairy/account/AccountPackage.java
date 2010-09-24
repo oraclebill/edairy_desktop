@@ -444,7 +444,7 @@ public interface AccountPackage extends EPackage {
 	int BALANCE_POINT__ACCOUNT_BALANCE_ID = 0;
 
 	/**
-	 * The feature id for the '<em><b>Account</b></em>' reference.
+	 * The feature id for the '<em><b>Account</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -453,22 +453,13 @@ public interface AccountPackage extends EPackage {
 	int BALANCE_POINT__ACCOUNT = 1;
 
 	/**
-	 * The feature id for the '<em><b>Previous Balance</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BALANCE_POINT__PREVIOUS_BALANCE = 2;
-
-	/**
 	 * The feature id for the '<em><b>As Of</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BALANCE_POINT__AS_OF = 3;
+	int BALANCE_POINT__AS_OF = 2;
 
 	/**
 	 * The feature id for the '<em><b>Amount</b></em>' attribute.
@@ -477,7 +468,7 @@ public interface AccountPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BALANCE_POINT__AMOUNT = 4;
+	int BALANCE_POINT__AMOUNT = 3;
 
 	/**
 	 * The number of structural features of the '<em>Balance Point</em>' class.
@@ -486,7 +477,7 @@ public interface AccountPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BALANCE_POINT_FEATURE_COUNT = 5;
+	int BALANCE_POINT_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType <em>Transaction Type</em>}' enum.
@@ -801,26 +792,15 @@ public interface AccountPackage extends EPackage {
 	EAttribute getBalancePoint_AccountBalanceId();
 
 	/**
-	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint#getAccount <em>Account</em>}'.
+	 * Returns the meta object for the container reference '{@link com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint#getAccount <em>Account</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Account</em>'.
+	 * @return the meta object for the container reference '<em>Account</em>'.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint#getAccount()
 	 * @see #getBalancePoint()
 	 * @generated
 	 */
 	EReference getBalancePoint_Account();
-
-	/**
-	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint#getPreviousBalance <em>Previous Balance</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Previous Balance</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint#getPreviousBalance()
-	 * @see #getBalancePoint()
-	 * @generated
-	 */
-	EReference getBalancePoint_PreviousBalance();
 
 	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint#getAsOf <em>As Of</em>}'.
@@ -1115,20 +1095,12 @@ public interface AccountPackage extends EPackage {
 		EAttribute BALANCE_POINT__ACCOUNT_BALANCE_ID = eINSTANCE.getBalancePoint_AccountBalanceId();
 
 		/**
-		 * The meta object literal for the '<em><b>Account</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Account</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference BALANCE_POINT__ACCOUNT = eINSTANCE.getBalancePoint_Account();
-
-		/**
-		 * The meta object literal for the '<em><b>Previous Balance</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BALANCE_POINT__PREVIOUS_BALANCE = eINSTANCE.getBalancePoint_PreviousBalance();
 
 		/**
 		 * The meta object literal for the '<em><b>As Of</b></em>' attribute feature.

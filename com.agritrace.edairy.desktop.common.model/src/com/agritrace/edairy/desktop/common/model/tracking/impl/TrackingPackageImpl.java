@@ -61,6 +61,13 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass farmerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass containerEClass = null;
 
 	/**
@@ -83,13 +90,6 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * @generated
 	 */
 	private EClass animalIdentifierEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass farmerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -208,6 +208,15 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getFarm_FarmId() {
+		return (EAttribute)farmEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getFarm_Name() {
 		return (EAttribute)farmEClass.getEStructuralFeatures().get(1);
 	}
@@ -262,8 +271,17 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getFarm_FarmId() {
-		return (EAttribute)farmEClass.getEStructuralFeatures().get(0);
+	public EClass getFarmer() {
+		return farmerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFarmer_Farms() {
+		return (EReference)farmerEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -624,24 +642,6 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 */
 	public EAttribute getAnimalIdentifier_Value() {
 		return (EAttribute)animalIdentifierEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getFarmer() {
-		return farmerEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getFarmer_Farms() {
-		return (EReference)farmerEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**

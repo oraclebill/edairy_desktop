@@ -10,17 +10,15 @@ import com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
-
 import com.agritrace.edairy.desktop.common.model.dairy.Role;
-import com.agritrace.edairy.desktop.common.model.dairy.LoginData;
+
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
 
-import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**

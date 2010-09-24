@@ -11,9 +11,9 @@ import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Asset;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
@@ -25,9 +25,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
-import com.agritrace.edairy.desktop.common.model.dairy.GlobalSettings;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
-import com.agritrace.edairy.desktop.common.model.dairy.LoginData;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
@@ -964,15 +962,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCollectionGroup_JournalEntries() {
-		return (EReference)collectionGroupEClass.getEStructuralFeatures().get(8);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getCollectionGroup_ReferenceNumber() {
 		return (EAttribute)collectionGroupEClass.getEStructuralFeatures().get(1);
 	}
@@ -993,33 +982,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 */
 	public EAttribute getCollectionGroup_Status() {
 		return (EAttribute)collectionGroupEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getCollectionGroup_Session() {
-		return (EReference)collectionGroupEClass.getEStructuralFeatures().get(14);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getCollectionGroup_CollectionCenter() {
-		return (EReference)collectionGroupEClass.getEStructuralFeatures().get(15);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getCollectionGroup_Type() {
-		return (EAttribute)collectionGroupEClass.getEStructuralFeatures().get(16);
 	}
 
 	/**
@@ -1056,6 +1018,15 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 */
 	public EAttribute getCollectionGroup_RecordTotal() {
 		return (EAttribute)collectionGroupEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCollectionGroup_JournalEntries() {
+		return (EReference)collectionGroupEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -1101,6 +1072,33 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 */
 	public EAttribute getCollectionGroup_JournalNumber() {
 		return (EAttribute)collectionGroupEClass.getEStructuralFeatures().get(13);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCollectionGroup_Session() {
+		return (EReference)collectionGroupEClass.getEStructuralFeatures().get(14);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCollectionGroup_CollectionCenter() {
+		return (EReference)collectionGroupEClass.getEStructuralFeatures().get(15);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCollectionGroup_Type() {
+		return (EAttribute)collectionGroupEClass.getEStructuralFeatures().get(16);
 	}
 
 	/**
@@ -1252,15 +1250,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDeliveryJournal_Session() {
-		return (EReference)deliveryJournalEClass.getEStructuralFeatures().get(8);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getDeliveryJournal_Customer() {
 		return (EReference)deliveryJournalEClass.getEStructuralFeatures().get(3);
 	}
@@ -1299,6 +1288,15 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 */
 	public EAttribute getDeliveryJournal_Total() {
 		return (EAttribute)deliveryJournalEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDeliveryJournal_Session() {
+		return (EReference)deliveryJournalEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -1369,8 +1367,17 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDairy_NhifNumber() {
-		return (EAttribute)dairyEClass.getEStructuralFeatures().get(4);
+	public EAttribute getDairy_EstablishedDate() {
+		return (EAttribute)dairyEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDairy_ManagerName() {
+		return (EAttribute)dairyEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1380,6 +1387,15 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 */
 	public EAttribute getDairy_NssfNumber() {
 		return (EAttribute)dairyEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDairy_NhifNumber() {
+		return (EAttribute)dairyEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1524,24 +1540,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 */
 	public EAttribute getDairy_Version() {
 		return (EAttribute)dairyEClass.getEStructuralFeatures().get(20);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getDairy_ManagerName() {
-		return (EAttribute)dairyEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getDairy_EstablishedDate() {
-		return (EAttribute)dairyEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**

@@ -481,7 +481,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="transactions" upperBound="-1"
           eType="#//account/Transaction" containment="true" eOpposite="#//account/Transaction/account"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="balances" upperBound="-1"
-          eType="#//account/BalancePoint" containment="true"/>
+          eType="#//account/BalancePoint" containment="true" eOpposite="#//account/BalancePoint/account"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Transaction">
       <eStructuralFeatures xsi:type="ecore:EReference" name="account" lowerBound="1"
@@ -519,9 +519,7 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="accountBalanceId" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong" iD="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="account" lowerBound="1"
-          eType="#//account/Account"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="previousBalance" lowerBound="1"
-          eType="#//account/BalancePoint"/>
+          eType="#//account/Account" eOpposite="#//account/Account/balances"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="asOf" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="amount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
     </eClassifiers>

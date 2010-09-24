@@ -6,15 +6,14 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
-import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 
 import java.math.BigDecimal;
@@ -38,7 +37,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Collection Journal Page</b></em>'.
+ * An implementation of the model object '<em><b>Collection Group</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
@@ -401,18 +400,6 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<CollectionJournalLine> getJournalEntries() {
-		if (journalEntries == null) {
-			journalEntries = new EObjectContainmentWithInverseEList<CollectionJournalLine>(CollectionJournalLine.class, this, DairyPackage.COLLECTION_GROUP__JOURNAL_ENTRIES, DairyPackage.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL);
-		}
-		return journalEntries;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getReferenceNumber() {
 		return referenceNumber;
 	}
@@ -469,103 +456,6 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 		status = newStatus == null ? STATUS_EDEFAULT : newStatus;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_GROUP__STATUS, oldStatus, status));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public CollectionSession getSession() {
-		if (session != null && session.eIsProxy()) {
-			InternalEObject oldSession = (InternalEObject)session;
-			session = (CollectionSession)eResolveProxy(oldSession);
-			if (session != oldSession) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_GROUP__SESSION, oldSession, session));
-			}
-		}
-		return session;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public CollectionSession basicGetSession() {
-		return session;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSession(CollectionSession newSession) {
-		CollectionSession oldSession = session;
-		session = newSession;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_GROUP__SESSION, oldSession, session));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DairyLocation getCollectionCenter() {
-		if (collectionCenter != null && collectionCenter.eIsProxy()) {
-			InternalEObject oldCollectionCenter = (InternalEObject)collectionCenter;
-			collectionCenter = (DairyLocation)eResolveProxy(oldCollectionCenter);
-			if (collectionCenter != oldCollectionCenter) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_GROUP__COLLECTION_CENTER, oldCollectionCenter, collectionCenter));
-			}
-		}
-		return collectionCenter;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DairyLocation basicGetCollectionCenter() {
-		return collectionCenter;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setCollectionCenter(DairyLocation newCollectionCenter) {
-		DairyLocation oldCollectionCenter = collectionCenter;
-		collectionCenter = newCollectionCenter;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_GROUP__COLLECTION_CENTER, oldCollectionCenter, collectionCenter));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public CollectionGroupType getType() {
-		return type;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setType(CollectionGroupType newType) {
-		CollectionGroupType oldType = type;
-		type = newType == null ? TYPE_EDEFAULT : newType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_GROUP__TYPE, oldType, type));
 	}
 
 	/**
@@ -691,6 +581,18 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<CollectionJournalLine> getJournalEntries() {
+		if (journalEntries == null) {
+			journalEntries = new EObjectContainmentWithInverseEList<CollectionJournalLine>(CollectionJournalLine.class, this, DairyPackage.COLLECTION_GROUP__JOURNAL_ENTRIES, DairyPackage.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL);
+		}
+		return journalEntries;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean isSuspended() {
 		return suspended;
 	}
@@ -789,6 +691,103 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 		journalNumber = newJournalNumber;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_GROUP__JOURNAL_NUMBER, oldJournalNumber, journalNumber));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CollectionSession getSession() {
+		if (session != null && session.eIsProxy()) {
+			InternalEObject oldSession = (InternalEObject)session;
+			session = (CollectionSession)eResolveProxy(oldSession);
+			if (session != oldSession) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_GROUP__SESSION, oldSession, session));
+			}
+		}
+		return session;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CollectionSession basicGetSession() {
+		return session;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSession(CollectionSession newSession) {
+		CollectionSession oldSession = session;
+		session = newSession;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_GROUP__SESSION, oldSession, session));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DairyLocation getCollectionCenter() {
+		if (collectionCenter != null && collectionCenter.eIsProxy()) {
+			InternalEObject oldCollectionCenter = (InternalEObject)collectionCenter;
+			collectionCenter = (DairyLocation)eResolveProxy(oldCollectionCenter);
+			if (collectionCenter != oldCollectionCenter) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_GROUP__COLLECTION_CENTER, oldCollectionCenter, collectionCenter));
+			}
+		}
+		return collectionCenter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DairyLocation basicGetCollectionCenter() {
+		return collectionCenter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCollectionCenter(DairyLocation newCollectionCenter) {
+		DairyLocation oldCollectionCenter = collectionCenter;
+		collectionCenter = newCollectionCenter;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_GROUP__COLLECTION_CENTER, oldCollectionCenter, collectionCenter));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CollectionGroupType getType() {
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setType(CollectionGroupType newType) {
+		CollectionGroupType oldType = type;
+		type = newType == null ? TYPE_EDEFAULT : newType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_GROUP__TYPE, oldType, type));
 	}
 
 	/**

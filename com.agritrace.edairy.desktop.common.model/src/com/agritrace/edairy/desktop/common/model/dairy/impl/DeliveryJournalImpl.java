@@ -280,44 +280,6 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CollectionSession getSession() {
-		if (session != null && session.eIsProxy()) {
-			InternalEObject oldSession = (InternalEObject)session;
-			session = (CollectionSession)eResolveProxy(oldSession);
-			if (session != oldSession) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DELIVERY_JOURNAL__SESSION, oldSession, session));
-			}
-		}
-		return session;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public CollectionSession basicGetSession() {
-		return session;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSession(CollectionSession newSession) {
-		CollectionSession oldSession = session;
-		session = newSession;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL__SESSION, oldSession, session));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Customer getCustomer() {
 		if (customer != null && customer.eIsProxy()) {
 			InternalEObject oldCustomer = (InternalEObject)customer;
@@ -458,6 +420,44 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 		total = newTotal;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL__TOTAL, oldTotal, total));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CollectionSession getSession() {
+		if (session != null && session.eIsProxy()) {
+			InternalEObject oldSession = (InternalEObject)session;
+			session = (CollectionSession)eResolveProxy(oldSession);
+			if (session != oldSession) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DELIVERY_JOURNAL__SESSION, oldSession, session));
+			}
+		}
+		return session;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CollectionSession basicGetSession() {
+		return session;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSession(CollectionSession newSession) {
+		CollectionSession oldSession = session;
+		session = newSession;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL__SESSION, oldSession, session));
 	}
 
 	/**

@@ -118,32 +118,6 @@ public interface DeliveryJournal extends EObject {
 	void setRoute(Route value);
 
 	/**
-	 * Returns the value of the '<em><b>Session</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Session</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Session</em>' reference.
-	 * @see #setSession(CollectionSession)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDeliveryJournal_Session()
-	 * @model
-	 * @generated
-	 */
-	CollectionSession getSession();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getSession <em>Session</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Session</em>' reference.
-	 * @see #getSession()
-	 * @generated
-	 */
-	void setSession(CollectionSession value);
-
-	/**
 	 * Returns the value of the '<em><b>Customer</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -263,5 +237,31 @@ public interface DeliveryJournal extends EObject {
 	 * @generated
 	 */
 	void setTotal(BigDecimal value);
+
+	/**
+	 * Returns the value of the '<em><b>Session</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Session</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Session</em>' reference.
+	 * @see #setSession(CollectionSession)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDeliveryJournal_Session()
+	 * @model
+	 * @generated
+	 */
+	CollectionSession getSession();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getSession <em>Session</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Session</em>' reference.
+	 * @see #getSession()
+	 * @generated
+	 */
+	void setSession(CollectionSession value);
 
 } // DeliveryJournal

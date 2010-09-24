@@ -9,7 +9,6 @@ package com.agritrace.edairy.desktop.common.model.dairy.impl;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 
-import java.text.DateFormat;
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -329,8 +328,4 @@ public class CollectionSessionImpl extends EObjectImpl implements CollectionSess
 		return result.toString();
 	}
 
-	@Override
-	public String getTimeAsString() {
-		return DateFormat.getTimeInstance(DateFormat.SHORT).format(getTimeOfDay());
-	}
 } //CollectionSessionImpl

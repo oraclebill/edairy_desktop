@@ -46,7 +46,6 @@ public interface ScaleImportRecord extends CollectionJournalLine {
 	 * @generated
 	 */
 	String getScaleSerial();
-	
 
 	/**
 	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord#getScaleSerial <em>Scale Serial</em>}' attribute.
