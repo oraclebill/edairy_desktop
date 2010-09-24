@@ -1,6 +1,7 @@
 package com.agritrace.ediary.desktop.reports.data;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
@@ -34,6 +35,9 @@ public class YearReportDao {
 			YearReportData data = new YearReportData(page.getJournalDate(), ""+page.getRecordTotal(), "%"/*TODO!*/);
 			ret.add(data);
 		}
+		
+//		YearReportData data = new YearReportData(new Date(), "12", "%"/*TODO!*/);
+//		ret.add(data);
 		return ret;
 	}
 
