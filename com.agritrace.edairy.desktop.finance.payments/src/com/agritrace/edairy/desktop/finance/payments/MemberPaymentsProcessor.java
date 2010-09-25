@@ -1,18 +1,13 @@
 package com.agritrace.edairy.desktop.finance.payments;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
-import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
-import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
+import com.google.inject.Inject;
 
 /**
  * The member payments processor performs the typical end-of-month accounting
@@ -75,11 +70,6 @@ import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
  * 
  */
 public class MemberPaymentsProcessor {
-	static final MathContext MONEYCONTEXT = new MathContext(0,
-			RoundingMode.HALF_EVEN);
-	static final BigDecimal BIGZERO = new BigDecimal(0, MONEYCONTEXT);
-	private static final String[] MONTHS = new String[] { "Jan", "Feb", "Mar",
-			"Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
 
 	private MemberAccountManager accountManager;
 	private MemberCollectionsManager collectionsManager;
@@ -127,7 +117,7 @@ public class MemberPaymentsProcessor {
 		for (final Membership member : activeMembers) {
 			final BigDecimal payment = processMemberPayout(priceMonth,
 					priceYear, paymentList, milkPrice, member);
-			if (payment.compareTo(BIGZERO) > 0) {
+			if (payment.compareTo(Constants.BIGZERO) > 0) {
 				paymentList.add(new PaymentRecord(null, accountManager
 						.getEffectiveDate(), member, payment));
 			}
@@ -157,8 +147,8 @@ public class MemberPaymentsProcessor {
 		BigDecimal memberDeliveries = collectionsManager
 				.calculatePayableDeliveries(member, priceMonth, priceYear);
 		// multiply by price
-		BigDecimal amountDue = memberDeliveries.compareTo(BIGZERO) > 0 ? memberDeliveries
-				.multiply(milkPrice, MONEYCONTEXT) : BIGZERO;
+		BigDecimal amountDue = memberDeliveries.compareTo(Constants.BIGZERO) > 0 ? memberDeliveries
+				.multiply(milkPrice, Constants.MONEYCONTEXT) : Constants.BIGZERO;
 
 		// debit account for value
 		accountManager
@@ -168,13 +158,13 @@ public class MemberPaymentsProcessor {
 						amountDue,
 						String.format(
 								"dairy payment for milk recieved during %s %d: %f kg @  %f ksh/kg",
-								MONTHS[priceMonth], priceYear,
+								Constants.MONTHS[priceMonth], priceYear,
 								memberDeliveries, milkPrice));
 
 		// if member balance is positive, create a transaction to register
 		// balance payout.
 		BigDecimal payout = accountManager.getCurrentBalance(primaryAcct);
-		if (payout.compareTo(BIGZERO) > 0) {
+		if (payout.compareTo(Constants.BIGZERO) > 0) {
 			accountManager.createCredit(primaryAcct,
 					TransactionSource.CASH_PAYMENT, payout,
 					"transfer to member bank account # XXXX");

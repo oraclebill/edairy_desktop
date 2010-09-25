@@ -61,7 +61,7 @@ public class MemberAccountManager {
 	 * @return
 	 */
 	BigDecimal sum(List<Transaction> transactionList) {
-		BigDecimal sum = MemberPaymentsProcessor.BIGZERO;
+		BigDecimal sum = Constants.BIGZERO;
 		for (Transaction tx : transactionList) {
 			BigDecimal amount = tx.getAmount();
 			if (TransactionType.CREDIT.equals(tx.getTransactionType())) {
@@ -94,7 +94,7 @@ public class MemberAccountManager {
 	 */
 	public BigDecimal getCurrentBalance(Account account) {
 		Date startDate = new Date(0);
-		BigDecimal balance = MemberPaymentsProcessor.BIGZERO;
+		BigDecimal balance = Constants.BIGZERO;
 		BalancePoint point = getLatestBalancePoint(account);
 
 		if (point != null) {

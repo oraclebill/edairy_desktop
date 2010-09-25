@@ -43,7 +43,7 @@ public class MemberCollectionsManager {
 				paymentMonth, paymentYear);
 		BigDecimal periodRate = getMilkPriceForPeriod(paymentMonth, paymentYear);
 		return periodRate.multiply(totalQuantity,
-				MemberPaymentsProcessor.MONEYCONTEXT);
+				Constants.MONEYCONTEXT);
 	}
 
 	BigDecimal getMilkPriceForPeriod(int priceMonth, int priceYear) {
