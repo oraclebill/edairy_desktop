@@ -117,7 +117,7 @@ public class FarmerPayablesYearDao {
 
 	private BigDecimal calculateMemberMonthlyIncome(Membership membership,
 			String month, String year) {
-		ICollectionJournalLineRepository collectionsRepo = RepositoryFactory.getRegisteredRepository(CollectionJournalLine.class);
+		ICollectionJournalLineRepository collectionsRepo = RepositoryFactory.getRegisteredRepository(ICollectionJournalLineRepository.class);
 		return ZERO;
 	}
 

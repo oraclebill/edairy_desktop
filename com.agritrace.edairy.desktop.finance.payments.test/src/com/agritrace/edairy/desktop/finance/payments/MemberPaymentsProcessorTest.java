@@ -1,5 +1,7 @@
 package com.agritrace.edairy.desktop.finance.payments;
 
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 
 /**
@@ -66,6 +68,7 @@ public class MemberPaymentsProcessorTest {
 	
 	@Test
 	public void testGeneratePaymentReport() throws Exception {
+		fail("unimplemented");
 	}
 
 //	@Test

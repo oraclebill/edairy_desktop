@@ -15,7 +15,7 @@ public interface ICollectionJournalLineRepository extends IRepository<Collection
 	List<CollectionGroup> allForDate(Date date);
 	BigDecimal getMilkPrice(int priceMonth, int priceYear);
 	List<Membership> getMembersWithDeliveriesFor(int priceMonth, int priceYear);
-	List<CollectionJournalLine> getPayableDeliveries(Membership member,
+	List<CollectionJournalLine> getPayableDeliveriesForMember(Membership member,
 			int paymentMonth, int paymentYear);
 	BigDecimal getSumOfPayableDeliveries(Membership member, int paymentMonth,
 			int paymentYear);

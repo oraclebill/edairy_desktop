@@ -533,9 +533,9 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 		return session.createCriteria("MilkPrice")
 				.addOrder(Order.desc("year"))
 				.addOrder(Order.desc("month"))
-				.add(Restrictions.ge("year", startDate.getYear()))
+				.add(Restrictions.ge("year", startDate.getYear()+1900))
 				.add(Restrictions.ge("month", startDate.getMonth()))
-				.add(Restrictions.le("year", endDate.getYear()))
+				.add(Restrictions.le("year", endDate.getYear()+1900))
 				.add(Restrictions.le("month", endDate.getMonth()))				
 				.list();
 	}
