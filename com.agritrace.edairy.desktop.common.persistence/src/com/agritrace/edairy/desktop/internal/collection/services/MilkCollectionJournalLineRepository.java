@@ -185,9 +185,10 @@ public class MilkCollectionJournalLineRepository extends
 		SessionRunnable<List<Membership>> runnable = new SessionRunnable<List<Membership>>() {
 			@Override
 			public void run(Session session) {
-				String queryString = "SELECT distinct validatedMember "
-						+ "FROM CollectionJournalLine l "
-						+ "WHERE l.rejected = False "
+				String queryString = "SELECT validatedMember " +
+						"FROM CollectionJournalLine l "
+						+ "WHERE l.validatedMember = :member "
+						+ "  AND l.rejected = False "
 						+ "  AND l.flagged = False "
 						+ "  AND year(l.collectionJournal.journalDate) = :year "
 						+ "  AND month(l.collectionJournal.journalDate) = :month ";
@@ -236,8 +237,8 @@ public class MilkCollectionJournalLineRepository extends
 		SessionRunnable<BigDecimal> runnable = new SessionRunnable<BigDecimal>() {
 			@Override
 			public void run(Session session) {
-				String queryString = "SELECT sum(l.quantity) "
-						+ "FROM CollectionJournalLine l "
+				String queryString = "SELECT sum(l.quantity) " +
+						"FROM CollectionJournalLine l "
 						+ "WHERE l.validatedMember = :member "
 						+ "  AND l.rejected = False "
 						+ "  AND l.flagged = False "
@@ -254,7 +255,7 @@ public class MilkCollectionJournalLineRepository extends
 		};
 
 		runWithTransaction(runnable);
-		return (BigDecimal) runnable.getResult();
+		return (BigDecimal)runnable.getResult();
 	}
 
 }

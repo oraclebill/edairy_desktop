@@ -23,10 +23,8 @@ public interface ICollectionJournalLineRepository extends
 	BigDecimal getMilkPrice(int priceMonth, int priceYear);
 
 	List<Membership> getMembersWithDeliveriesFor(int priceMonth, int priceYear);
-
-	List<CollectionJournalLine> getPayableDeliveriesForMember(
-			Membership member, int paymentMonth, int paymentYear);
-
+	List<CollectionJournalLine> getPayableDeliveriesForMember(Membership member,
+			int paymentMonth, int paymentYear);
 	BigDecimal getSumOfPayableDeliveries(Membership member, int paymentMonth,
 			int paymentYear);
 }

@@ -1,7 +1,7 @@
 package com.agritrace.edairy.desktop.finance.ui;
 
 public interface MilkPriceJournalConstants {
-	String CURRENT_PRICE_LABEL_FMT = "Latest %s Milk Price (%s) : %15s ksh";
+	String CURRENT_PRICE_LABEL_FMT = "Latest Milk Price (%s  %s) : %15s ksh";
 	String CURRENT_PRICE_DEFAULT = "Latest Milk Price - (unknown)";
 	String ID_LBL_CURRENT_MILK_PRICE = "ID_LBL_CURRENT_MILK_PRICE";
 

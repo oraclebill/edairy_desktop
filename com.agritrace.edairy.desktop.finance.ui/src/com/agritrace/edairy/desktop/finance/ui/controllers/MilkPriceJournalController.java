@@ -11,6 +11,7 @@ import org.eclipse.riena.navigation.INavigationContext;
 import org.eclipse.riena.navigation.INavigationNode;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
+import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
@@ -72,13 +73,31 @@ public class MilkPriceJournalController extends BasicDirectoryController<MilkPri
 	private ILabelRidget currentPriceLabel;
 	private IDateRangeRidget dateRange;
 
+	private static final String[] MONTHS = new String[] { "January",
+		"February", "March", "April", "May", "June", "July", "August",
+		"September", "October", "November", "December", };
+
 	@Inject
 	public MilkPriceJournalController(final IDairyRepository dairyRepo, final IRepository<MilkPrice> repo) {
 		this.dairyRepo = dairyRepo;
+
 		setEClass(DairyPackage.Literals.MILK_PRICE);
 		setRepository(repo);
 
-		addTableColumn("Month", DairyPackage.Literals.MILK_PRICE__MONTH);
+		addTableColumn("Month", DairyPackage.Literals.MILK_PRICE__MONTH, new ColumnFormatter() {
+			@Override
+			public String getText(Object element) {
+				String ret = "";
+				if ( element instanceof MilkPrice ) {
+					ret = getMonth(((MilkPrice)element).getMonth());
+				}
+				return ret;
+			}
+
+			private String getMonth(int month) {
+				return MONTHS[month];
+			}			
+		});
 		addTableColumn("Year", DairyPackage.Literals.MILK_PRICE__YEAR);
 		addTableColumn("Price", DairyPackage.Literals.MILK_PRICE__VALUE);
 		addTableColumn("Entered By", DairyPackage.Literals.MILK_PRICE__ENTERED_BY, new PersonToFormattedName(
