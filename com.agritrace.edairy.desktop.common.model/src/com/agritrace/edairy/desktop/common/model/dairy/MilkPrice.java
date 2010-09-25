@@ -21,8 +21,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getId <em>Id</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getPricePeriod <em>Price Period</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getPriceDate <em>Price Date</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getMonth <em>Month</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getYear <em>Year</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getValue <em>Value</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getEnteredBy <em>Entered By</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getEntryDate <em>Entry Date</em>}</li>
@@ -61,60 +61,56 @@ public interface MilkPrice extends EObject {
 	void setId(Long value);
 
 	/**
-	 * Returns the value of the '<em><b>Price Period</b></em>' attribute.
-	 * The default value is <code>"1"</code>.
-	 * The literals are from the enumeration {@link com.agritrace.edairy.desktop.common.model.dairy.MilkPricePeriod}.
+	 * Returns the value of the '<em><b>Month</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Price Period</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Month</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Price Period</em>' attribute.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkPricePeriod
-	 * @see #setPricePeriod(MilkPricePeriod)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMilkPrice_PricePeriod()
-	 * @model default="1" required="true"
-	 * @generated
-	 */
-	MilkPricePeriod getPricePeriod();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getPricePeriod <em>Price Period</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Price Period</em>' attribute.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkPricePeriod
-	 * @see #getPricePeriod()
-	 * @generated
-	 */
-	void setPricePeriod(MilkPricePeriod value);
-
-	/**
-	 * Returns the value of the '<em><b>Price Date</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Price Date</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Price Date</em>' attribute.
-	 * @see #setPriceDate(Date)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMilkPrice_PriceDate()
+	 * @return the value of the '<em>Month</em>' attribute.
+	 * @see #setMonth(int)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMilkPrice_Month()
 	 * @model required="true"
 	 * @generated
 	 */
-	Date getPriceDate();
+	int getMonth();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getPriceDate <em>Price Date</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getMonth <em>Month</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Price Date</em>' attribute.
-	 * @see #getPriceDate()
+	 * @param value the new value of the '<em>Month</em>' attribute.
+	 * @see #getMonth()
 	 * @generated
 	 */
-	void setPriceDate(Date value);
+	void setMonth(int value);
+
+	/**
+	 * Returns the value of the '<em><b>Year</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Year</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Year</em>' attribute.
+	 * @see #setYear(int)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMilkPrice_Year()
+	 * @model required="true"
+	 * @generated
+	 */
+	int getYear();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getYear <em>Year</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Year</em>' attribute.
+	 * @see #getYear()
+	 * @generated
+	 */
+	void setYear(int value);
 
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.

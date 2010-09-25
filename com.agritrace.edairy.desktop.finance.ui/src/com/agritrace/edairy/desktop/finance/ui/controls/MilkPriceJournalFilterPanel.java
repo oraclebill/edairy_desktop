@@ -38,7 +38,7 @@ public class MilkPriceJournalFilterPanel extends Composite {
 		fd_dateRange.top = new FormAttachment(lblMilkPriceFor, 12, SWT.BOTTOM);
 		fd_dateRange.left = new FormAttachment(0, 18);
 		dateRange.setLayoutData(fd_dateRange);
-		SWTBindingPropertyLocator.getInstance().setBindingProperty(dateRange, MilkPriceJournalConstants.ID_DATE_PRICEDATE);
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(dateRange, MilkPriceJournalConstants.ID_COMBO_RATEMONTH);
 		
 //		pack();
 	}

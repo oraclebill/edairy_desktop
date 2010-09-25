@@ -5,22 +5,20 @@ import java.util.List;
 
 import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+
 
 public class MemberCollectionsManager {
 	ICollectionJournalLineRepository repository;
 	int priceMonth;
 	int priceYear;
 
+	@Inject
 	public MemberCollectionsManager(ICollectionJournalLineRepository repo) {
 		this.repository = repo;
 	}
 
-	public MemberCollectionsManager() {
-		this(
-				RepositoryFactory
-						.getRegisteredRepository(ICollectionJournalLineRepository.class));
-	}
 
 	public void setContext(int pMon, int pYear) {
 		priceMonth = pMon;

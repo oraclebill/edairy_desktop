@@ -4,13 +4,10 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 
 /**
  * class to collect the data needed for the report and to place it into special beans for report presentation.
@@ -22,14 +19,12 @@ public class FarmerPayablesYearDao {
 	private static final BigDecimal ZERO = new BigDecimal(0);
 	
 	private static FarmerPayablesYearDao instance;
-//	private final IDairyRepository dairyRepo;
 	private final IMemberRepository memberRepo;
 	private java.text.DecimalFormat floatFormater;
 	
 	public FarmerPayablesYearDao(){
 		super();
-//		this.dairyRepo = RepositoryFactory.getDairyRepository();
-		this.memberRepo = RepositoryFactory.getMemberRepository();
+		memberRepo = null;  // TODO: fixme
 		this.floatFormater = new java.text.DecimalFormat("#,#00.0#;(#,#00.0#)");
 	}
 	
@@ -117,7 +112,6 @@ public class FarmerPayablesYearDao {
 
 	private BigDecimal calculateMemberMonthlyIncome(Membership membership,
 			String month, String year) {
-		ICollectionJournalLineRepository collectionsRepo = RepositoryFactory.getRegisteredRepository(CollectionJournalLine.class);
 		return ZERO;
 	}
 

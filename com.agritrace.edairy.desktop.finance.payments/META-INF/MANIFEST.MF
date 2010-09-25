@@ -8,6 +8,7 @@ Bundle-Vendor: AGRITRACE
 Require-Bundle: org.eclipse.core.runtime,
  com.agritrace.edairy.desktop.common.model;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.common.persistence;bundle-version="1.0.0",
- com.csvreader;bundle-version="1.0.0"
+ com.csvreader;bundle-version="1.0.0",
+ com.google.inject;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
