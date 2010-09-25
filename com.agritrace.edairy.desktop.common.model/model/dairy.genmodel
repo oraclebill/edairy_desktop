@@ -239,8 +239,8 @@
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//MilkPrice">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkPrice/id"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkPrice/pricePeriod"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkPrice/priceDate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkPrice/month"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkPrice/year"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkPrice/value"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//MilkPrice/enteredBy"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkPrice/entryDate"/>
@@ -332,8 +332,6 @@
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/BalancePoint/accountBalanceId"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference dairy.ecore#//account/BalancePoint/account"/>
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference dairy.ecore#//account/BalancePoint/previousBalance"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/BalancePoint/asOf"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//account/BalancePoint/amount"/>
       </genClasses>

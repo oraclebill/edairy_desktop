@@ -384,20 +384,11 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="Active"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="MilkPricePeriod">
-    <eLiterals name="Daily"/>
-    <eLiterals name="Weekly" value="1"/>
-    <eLiterals name="Monthly" value="2"/>
-    <eLiterals name="AdHoc" value="3"/>
-    <eLiterals name="Hourly" value="10"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MilkPrice">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType common.ecore#//UniqueID"
         iD="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pricePeriod" lowerBound="1"
-        eType="#//MilkPricePeriod" defaultValueLiteral="1"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="priceDate" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="month" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="year" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="enteredBy" lowerBound="1"
         eType="#//Employee"/>

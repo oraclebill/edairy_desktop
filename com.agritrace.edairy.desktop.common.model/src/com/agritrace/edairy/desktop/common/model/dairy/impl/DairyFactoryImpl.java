@@ -105,8 +105,6 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 				return createVendorStatusFromString(eDataType, initialValue);
 			case DairyPackage.DAIRY_FUNCTION:
 				return createDairyFunctionFromString(eDataType, initialValue);
-			case DairyPackage.MILK_PRICE_PERIOD:
-				return createMilkPricePeriodFromString(eDataType, initialValue);
 			case DairyPackage.PREFERENCE_TYPE:
 				return createPreferenceTypeFromString(eDataType, initialValue);
 			case DairyPackage.COLLECTION_GROUP_TYPE:
@@ -134,8 +132,6 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 				return convertVendorStatusToString(eDataType, instanceValue);
 			case DairyPackage.DAIRY_FUNCTION:
 				return convertDairyFunctionToString(eDataType, instanceValue);
-			case DairyPackage.MILK_PRICE_PERIOD:
-				return convertMilkPricePeriodToString(eDataType, instanceValue);
 			case DairyPackage.PREFERENCE_TYPE:
 				return convertPreferenceTypeToString(eDataType, instanceValue);
 			case DairyPackage.COLLECTION_GROUP_TYPE:
@@ -454,26 +450,6 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * @generated
 	 */
 	public String convertDairyFunctionToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public MilkPricePeriod createMilkPricePeriodFromString(EDataType eDataType, String initialValue) {
-		MilkPricePeriod result = MilkPricePeriod.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertMilkPricePeriodToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
