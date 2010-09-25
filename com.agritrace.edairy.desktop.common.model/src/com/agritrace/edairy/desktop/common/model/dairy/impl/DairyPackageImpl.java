@@ -29,7 +29,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
-import com.agritrace.edairy.desktop.common.model.dairy.MilkPricePeriod;
 import com.agritrace.edairy.desktop.common.model.dairy.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.PermissionNamespace;
 import com.agritrace.edairy.desktop.common.model.dairy.Preference;
@@ -259,13 +258,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	private EEnum dairyFunctionEEnum = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EEnum milkPricePeriodEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1862,7 +1854,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMilkPrice_PricePeriod() {
+	public EAttribute getMilkPrice_Month() {
 		return (EAttribute)milkPriceEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1871,7 +1863,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMilkPrice_PriceDate() {
+	public EAttribute getMilkPrice_Year() {
 		return (EAttribute)milkPriceEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -2186,15 +2178,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getMilkPricePeriod() {
-		return milkPricePeriodEEnum;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EEnum getPreferenceType() {
 		return preferenceTypeEEnum;
 	}
@@ -2427,8 +2410,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 
 		milkPriceEClass = createEClass(MILK_PRICE);
 		createEAttribute(milkPriceEClass, MILK_PRICE__ID);
-		createEAttribute(milkPriceEClass, MILK_PRICE__PRICE_PERIOD);
-		createEAttribute(milkPriceEClass, MILK_PRICE__PRICE_DATE);
+		createEAttribute(milkPriceEClass, MILK_PRICE__MONTH);
+		createEAttribute(milkPriceEClass, MILK_PRICE__YEAR);
 		createEAttribute(milkPriceEClass, MILK_PRICE__VALUE);
 		createEReference(milkPriceEClass, MILK_PRICE__ENTERED_BY);
 		createEAttribute(milkPriceEClass, MILK_PRICE__ENTRY_DATE);
@@ -2471,7 +2454,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		membershipStatusEEnum = createEEnum(MEMBERSHIP_STATUS);
 		vendorStatusEEnum = createEEnum(VENDOR_STATUS);
 		dairyFunctionEEnum = createEEnum(DAIRY_FUNCTION);
-		milkPricePeriodEEnum = createEEnum(MILK_PRICE_PERIOD);
 		preferenceTypeEEnum = createEEnum(PREFERENCE_TYPE);
 		collectionGroupTypeEEnum = createEEnum(COLLECTION_GROUP_TYPE);
 
@@ -2712,8 +2694,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 
 		initEClass(milkPriceEClass, MilkPrice.class, "MilkPrice", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMilkPrice_Id(), theModelPackage.getUniqueID(), "id", null, 1, 1, MilkPrice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMilkPrice_PricePeriod(), this.getMilkPricePeriod(), "pricePeriod", "1", 1, 1, MilkPrice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMilkPrice_PriceDate(), ecorePackage.getEDate(), "priceDate", null, 1, 1, MilkPrice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMilkPrice_Month(), ecorePackage.getEInt(), "month", null, 1, 1, MilkPrice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMilkPrice_Year(), ecorePackage.getEInt(), "year", null, 1, 1, MilkPrice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMilkPrice_Value(), ecorePackage.getEBigDecimal(), "value", null, 1, 1, MilkPrice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMilkPrice_EnteredBy(), this.getEmployee(), null, "enteredBy", null, 1, 1, MilkPrice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMilkPrice_EntryDate(), ecorePackage.getEDate(), "entryDate", null, 1, 1, MilkPrice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2778,13 +2760,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		addEEnumLiteral(dairyFunctionEEnum, DairyFunction.STORE_SALES);
 		addEEnumLiteral(dairyFunctionEEnum, DairyFunction.WAREHOUSE);
 		addEEnumLiteral(dairyFunctionEEnum, DairyFunction.MILK_PROCESSING);
-
-		initEEnum(milkPricePeriodEEnum, MilkPricePeriod.class, "MilkPricePeriod");
-		addEEnumLiteral(milkPricePeriodEEnum, MilkPricePeriod.DAILY);
-		addEEnumLiteral(milkPricePeriodEEnum, MilkPricePeriod.WEEKLY);
-		addEEnumLiteral(milkPricePeriodEEnum, MilkPricePeriod.MONTHLY);
-		addEEnumLiteral(milkPricePeriodEEnum, MilkPricePeriod.AD_HOC);
-		addEEnumLiteral(milkPricePeriodEEnum, MilkPricePeriod.HOURLY);
 
 		initEEnum(preferenceTypeEEnum, PreferenceType.class, "PreferenceType");
 		addEEnumLiteral(preferenceTypeEEnum, PreferenceType.STRING);

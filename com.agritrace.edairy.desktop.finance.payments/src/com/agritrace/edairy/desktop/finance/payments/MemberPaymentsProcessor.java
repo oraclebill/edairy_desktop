@@ -87,9 +87,10 @@ public class MemberPaymentsProcessor {
 	/**
 	 * 
 	 */
-	public MemberPaymentsProcessor() {
-		accountManager = new MemberAccountManager();
-		collectionsManager = new MemberCollectionsManager();
+	@Inject
+	public MemberPaymentsProcessor(MemberAccountManager accountManager, MemberCollectionsManager collectionsManager) {
+		this.accountManager = accountManager;
+		this.collectionsManager = collectionsManager;
 	}
 
 	/**

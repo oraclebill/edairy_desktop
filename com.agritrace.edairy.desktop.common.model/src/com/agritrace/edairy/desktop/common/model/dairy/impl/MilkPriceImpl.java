@@ -9,7 +9,6 @@ package com.agritrace.edairy.desktop.common.model.dairy.impl;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
-import com.agritrace.edairy.desktop.common.model.dairy.MilkPricePeriod;
 
 import java.math.BigDecimal;
 
@@ -31,8 +30,8 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkPriceImpl#getId <em>Id</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkPriceImpl#getPricePeriod <em>Price Period</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkPriceImpl#getPriceDate <em>Price Date</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkPriceImpl#getMonth <em>Month</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkPriceImpl#getYear <em>Year</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkPriceImpl#getValue <em>Value</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkPriceImpl#getEnteredBy <em>Entered By</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkPriceImpl#getEntryDate <em>Entry Date</em>}</li>
@@ -63,44 +62,44 @@ public class MilkPriceImpl extends EObjectImpl implements MilkPrice {
 	protected Long id = ID_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getPricePeriod() <em>Price Period</em>}' attribute.
+	 * The default value of the '{@link #getMonth() <em>Month</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPricePeriod()
+	 * @see #getMonth()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final MilkPricePeriod PRICE_PERIOD_EDEFAULT = MilkPricePeriod.DAILY;
+	protected static final int MONTH_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getPricePeriod() <em>Price Period</em>}' attribute.
+	 * The cached value of the '{@link #getMonth() <em>Month</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPricePeriod()
+	 * @see #getMonth()
 	 * @generated
 	 * @ordered
 	 */
-	protected MilkPricePeriod pricePeriod = PRICE_PERIOD_EDEFAULT;
+	protected int month = MONTH_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getPriceDate() <em>Price Date</em>}' attribute.
+	 * The default value of the '{@link #getYear() <em>Year</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPriceDate()
+	 * @see #getYear()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Date PRICE_DATE_EDEFAULT = null;
+	protected static final int YEAR_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getPriceDate() <em>Price Date</em>}' attribute.
+	 * The cached value of the '{@link #getYear() <em>Year</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPriceDate()
+	 * @see #getYear()
 	 * @generated
 	 * @ordered
 	 */
-	protected Date priceDate = PRICE_DATE_EDEFAULT;
+	protected int year = YEAR_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
@@ -197,8 +196,8 @@ public class MilkPriceImpl extends EObjectImpl implements MilkPrice {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public MilkPricePeriod getPricePeriod() {
-		return pricePeriod;
+	public int getMonth() {
+		return month;
 	}
 
 	/**
@@ -206,11 +205,11 @@ public class MilkPriceImpl extends EObjectImpl implements MilkPrice {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setPricePeriod(MilkPricePeriod newPricePeriod) {
-		MilkPricePeriod oldPricePeriod = pricePeriod;
-		pricePeriod = newPricePeriod == null ? PRICE_PERIOD_EDEFAULT : newPricePeriod;
+	public void setMonth(int newMonth) {
+		int oldMonth = month;
+		month = newMonth;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MILK_PRICE__PRICE_PERIOD, oldPricePeriod, pricePeriod));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MILK_PRICE__MONTH, oldMonth, month));
 	}
 
 	/**
@@ -218,8 +217,8 @@ public class MilkPriceImpl extends EObjectImpl implements MilkPrice {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Date getPriceDate() {
-		return priceDate;
+	public int getYear() {
+		return year;
 	}
 
 	/**
@@ -227,11 +226,11 @@ public class MilkPriceImpl extends EObjectImpl implements MilkPrice {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setPriceDate(Date newPriceDate) {
-		Date oldPriceDate = priceDate;
-		priceDate = newPriceDate;
+	public void setYear(int newYear) {
+		int oldYear = year;
+		year = newYear;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MILK_PRICE__PRICE_DATE, oldPriceDate, priceDate));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MILK_PRICE__YEAR, oldYear, year));
 	}
 
 	/**
@@ -324,10 +323,10 @@ public class MilkPriceImpl extends EObjectImpl implements MilkPrice {
 		switch (featureID) {
 			case DairyPackage.MILK_PRICE__ID:
 				return getId();
-			case DairyPackage.MILK_PRICE__PRICE_PERIOD:
-				return getPricePeriod();
-			case DairyPackage.MILK_PRICE__PRICE_DATE:
-				return getPriceDate();
+			case DairyPackage.MILK_PRICE__MONTH:
+				return getMonth();
+			case DairyPackage.MILK_PRICE__YEAR:
+				return getYear();
 			case DairyPackage.MILK_PRICE__VALUE:
 				return getValue();
 			case DairyPackage.MILK_PRICE__ENTERED_BY:
@@ -350,11 +349,11 @@ public class MilkPriceImpl extends EObjectImpl implements MilkPrice {
 			case DairyPackage.MILK_PRICE__ID:
 				setId((Long)newValue);
 				return;
-			case DairyPackage.MILK_PRICE__PRICE_PERIOD:
-				setPricePeriod((MilkPricePeriod)newValue);
+			case DairyPackage.MILK_PRICE__MONTH:
+				setMonth((Integer)newValue);
 				return;
-			case DairyPackage.MILK_PRICE__PRICE_DATE:
-				setPriceDate((Date)newValue);
+			case DairyPackage.MILK_PRICE__YEAR:
+				setYear((Integer)newValue);
 				return;
 			case DairyPackage.MILK_PRICE__VALUE:
 				setValue((BigDecimal)newValue);
@@ -380,11 +379,11 @@ public class MilkPriceImpl extends EObjectImpl implements MilkPrice {
 			case DairyPackage.MILK_PRICE__ID:
 				setId(ID_EDEFAULT);
 				return;
-			case DairyPackage.MILK_PRICE__PRICE_PERIOD:
-				setPricePeriod(PRICE_PERIOD_EDEFAULT);
+			case DairyPackage.MILK_PRICE__MONTH:
+				setMonth(MONTH_EDEFAULT);
 				return;
-			case DairyPackage.MILK_PRICE__PRICE_DATE:
-				setPriceDate(PRICE_DATE_EDEFAULT);
+			case DairyPackage.MILK_PRICE__YEAR:
+				setYear(YEAR_EDEFAULT);
 				return;
 			case DairyPackage.MILK_PRICE__VALUE:
 				setValue(VALUE_EDEFAULT);
@@ -409,10 +408,10 @@ public class MilkPriceImpl extends EObjectImpl implements MilkPrice {
 		switch (featureID) {
 			case DairyPackage.MILK_PRICE__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-			case DairyPackage.MILK_PRICE__PRICE_PERIOD:
-				return pricePeriod != PRICE_PERIOD_EDEFAULT;
-			case DairyPackage.MILK_PRICE__PRICE_DATE:
-				return PRICE_DATE_EDEFAULT == null ? priceDate != null : !PRICE_DATE_EDEFAULT.equals(priceDate);
+			case DairyPackage.MILK_PRICE__MONTH:
+				return month != MONTH_EDEFAULT;
+			case DairyPackage.MILK_PRICE__YEAR:
+				return year != YEAR_EDEFAULT;
 			case DairyPackage.MILK_PRICE__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 			case DairyPackage.MILK_PRICE__ENTERED_BY:
@@ -435,10 +434,10 @@ public class MilkPriceImpl extends EObjectImpl implements MilkPrice {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (id: ");
 		result.append(id);
-		result.append(", pricePeriod: ");
-		result.append(pricePeriod);
-		result.append(", priceDate: ");
-		result.append(priceDate);
+		result.append(", month: ");
+		result.append(month);
+		result.append(", year: ");
+		result.append(year);
 		result.append(", value: ");
 		result.append(value);
 		result.append(", entryDate: ");

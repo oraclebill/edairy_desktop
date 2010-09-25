@@ -3,6 +3,7 @@ package com.agritrace.edairy.desktop.finance.ui.controllers;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.riena.beans.common.AbstractBean;
@@ -15,11 +16,14 @@ import org.eclipse.swt.widgets.Shell;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
-import com.agritrace.edairy.desktop.common.model.dairy.MilkPricePeriod;
+import com.agritrace.edairy.desktop.common.model.dairy.security.EmployeePrincipal;
+import com.agritrace.edairy.desktop.common.model.dairy.security.IPrincipal;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
+import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager;
 import com.agritrace.edairy.desktop.common.ui.columnformatters.PersonToFormattedName;
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controls.daterange.IDateRangeRidget;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
@@ -74,8 +78,8 @@ public class MilkPriceJournalController extends BasicDirectoryController<MilkPri
 		setEClass(DairyPackage.Literals.MILK_PRICE);
 		setRepository(repo);
 
-		addTableColumn("Period", DairyPackage.Literals.MILK_PRICE__PRICE_PERIOD);
-		addTableColumn("Date", DairyPackage.Literals.MILK_PRICE__PRICE_DATE);
+		addTableColumn("Month", DairyPackage.Literals.MILK_PRICE__MONTH);
+		addTableColumn("Year", DairyPackage.Literals.MILK_PRICE__YEAR);
 		addTableColumn("Price", DairyPackage.Literals.MILK_PRICE__VALUE);
 		addTableColumn("Entered By", DairyPackage.Literals.MILK_PRICE__ENTERED_BY, new PersonToFormattedName(
 				"enteredBy"));
@@ -88,7 +92,7 @@ public class MilkPriceJournalController extends BasicDirectoryController<MilkPri
 	protected void configureFilterRidgets() {
 
 		currentPriceLabel = getRidget(ILabelRidget.class, MilkPriceJournalConstants.ID_LBL_CURRENT_MILK_PRICE);
-		dateRange = getRidget(IDateRangeRidget.class, MilkPriceJournalConstants.ID_DATE_PRICEDATE);
+		dateRange = getRidget(IDateRangeRidget.class, MilkPriceJournalConstants.ID_COMBO_RATEMONTH);
 	}
 
 	@Override
@@ -146,10 +150,12 @@ public class MilkPriceJournalController extends BasicDirectoryController<MilkPri
 	private void updateMilkPrice() {
 		MilkPrice currentPrice = getCurrentPrice();
 		if (currentPrice != null) {
+			Calendar cal = Calendar.getInstance();
+			cal.set(Calendar.MONTH, currentPrice.getMonth());
 			currentPriceLabel.setText(String.format(
 					MilkPriceJournalConstants.CURRENT_PRICE_LABEL_FMT, 
-					currentPrice.getPricePeriod().getName(), 
-					currentPrice.getPriceDate(), 
+					cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()), 
+					currentPrice.getYear(), 
 					currentPrice.getValue().toString()));
 		} else {
 			currentPriceLabel.setText(MilkPriceJournalConstants.CURRENT_PRICE_DEFAULT);
@@ -181,26 +187,27 @@ public class MilkPriceJournalController extends BasicDirectoryController<MilkPri
 	@Override
 	protected MilkPrice createNewModel() {
 		final MilkPrice milkPrice = super.createNewModel();
-		milkPrice.setPriceDate(new Date());
-		milkPrice.setEntryDate(new Date());
-		milkPrice.setPricePeriod(MilkPricePeriod.WEEKLY);
-		// milkPrice.setEnteredBy(getSecurityContext().getUser());
-		milkPrice.setEnteredBy(getDefaultUser());
+		milkPrice.setMonth(Calendar.getInstance().get(Calendar.MONTH));
+		milkPrice.setYear(Calendar.getInstance().get(Calendar.YEAR));
 		return milkPrice;
 	}
 
 	@Override
-	protected void createEntity(MilkPrice newEntity) {
-		dairyRepo.getLocalDairy().getPriceHistory().add(newEntity);
-		super.createEntity(newEntity);
+	protected void createEntity(MilkPrice milkPrice) {
+		milkPrice.setEnteredBy(getUser());
+		milkPrice.setEntryDate(new Date());
+		dairyRepo.getLocalDairy().getPriceHistory().add(milkPrice);
+		super.createEntity(milkPrice);
 	}
 
 	/**
 	 * FIXME
 	 */
-	private Employee getDefaultUser() {
-		Employee defaultEmp = dairyRepo.getLocalDairy().getEmployees().get(0);
-		return defaultEmp;
+	private Employee getUser() {
+		IPrincipal principal = PrincipalManager.getInstance().getPrincipal();
+		if (principal instanceof EmployeePrincipal)
+			return(((EmployeePrincipal) principal).getEmployee());
+		return null;
 	}
 
 	/**

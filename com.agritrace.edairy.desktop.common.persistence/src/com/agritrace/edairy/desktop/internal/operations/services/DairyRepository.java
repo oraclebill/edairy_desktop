@@ -88,13 +88,13 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	/**
 	 * 
 	 * @author bjones
-	 *
+	 * 
 	 */
 	protected final static class DairyRepoInternal extends HibernateRepository<Dairy> {
 		@Inject
 		protected DairyRepoInternal(Provider<Session> sessionProvider) {
 			super(sessionProvider);
-		}
+	}
 
 		@Override
 		protected Class<Dairy> getClassType() {
@@ -129,15 +129,19 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 
 			@Override
 			public void run(Session session) {
-				System.err.println("AccountForMemberNo: finding member account: " + memberNumber);
+				System.err
+						.println("AccountForMemberNo: finding member account: "
+								+ memberNumber);
 				Criteria query = session.createCriteria("Membership").add(
 						Restrictions.eq(
 								DairyPackage.Literals.MEMBERSHIP__MEMBER_NUMBER
 										.getName(), memberNumber));
 				final Membership member = (Membership) query.uniqueResult();
-				final Account account = member != null ? member.getAccount() : null;
+				final Account account = member != null ? member.getAccount()
+						: null;
 				setResult(account);
-				System.err.println("AccountForMemberNo: returning : " + account);
+				System.err
+						.println("AccountForMemberNo: returning : " + account);
 			}
 		}
 
@@ -156,7 +160,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 				setResult(result);
 			}
 		}
-		
+
 		class SkinnyAccountsQuery extends SessionRunnable<List<Account>> {
 
 			public SkinnyAccountsQuery() {
@@ -164,16 +168,14 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 
 			@Override
 			public void run(Session session) {
-				Criteria criteria = session.createCriteria("Account");				
+				Criteria criteria = session.createCriteria("Account");
 				criteria.setFetchMode("transactions", FetchMode.SELECT);
-				
+
 				@SuppressWarnings("unchecked")
 				List<Account> result = criteria.list();
 				setResult(result);
 			}
 		}
-		
-		
 
 		public List<Membership> membersForRoute(Route defaultRoute) {
 			MembersForRoute query = new MembersForRoute(defaultRoute);
@@ -195,7 +197,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 			run(query);
 			return query.getResult();
 		}
-		
+
 		public List<Account> allAccounts() {
 			SkinnyAccountsQuery query = new SkinnyAccountsQuery();
 			run(query);
@@ -421,7 +423,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	public List<Membership> all() {
 		return localDairy.getMemberships();
 	}
-	
+
 	public List<Account> allAccounts() {
 		return dairyRepository.allAccounts();
 	}
@@ -515,17 +517,23 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 		DetachedCriteria maxDate = DetachedCriteria.forEntityName("MilkPrice")
 				.setProjection(Property.forName("priceDate").max());
 		MilkPrice currentPrice = (MilkPrice) session
-				.createCriteria("MilkPrice")
-				.add(Property.forName("priceDate").eq(maxDate)).uniqueResult();
+				.createCriteria("MilkPrice").addOrder(Order.desc("year"))
+				.addOrder(Order.desc("month")).setFetchSize(1).setMaxResults(1)
+				.uniqueResult();
 		return currentPrice;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
 	public List<MilkPrice> getMilkPrices(Date startDate, Date endDate) {
 		Session session = sessionProvider.get();
 		return session.createCriteria("MilkPrice")
-				.add(Restrictions.between("priceDate", startDate, endDate))
+				.addOrder(Order.desc("year"))
+				.addOrder(Order.desc("month"))
+				.add(Restrictions.ge("year", startDate.getYear()))
+				.add(Restrictions.ge("month", startDate.getMonth()))
+				.add(Restrictions.le("year", endDate.getYear()))
+				.add(Restrictions.le("month", endDate.getMonth()))				
 				.list();
 	}
 
@@ -535,26 +543,26 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 			Date maxDate, Route route, Customer customer) {
 		Session session = sessionProvider.get();
 		Criteria djCriteria = session.createCriteria("DeliveryJournal");
-		
+
 		if (minDate != null) {
 			djCriteria.add(Restrictions.ge("date", minDate));
 		}
-		
+
 		if (maxDate != null) {
 			Calendar cld = Calendar.getInstance();
 			cld.setTime(maxDate);
 			cld.add(Calendar.DAY_OF_MONTH, 1);
 			djCriteria.add(Restrictions.lt("date", cld.getTime()));
 		}
-		
+
 		if (route != null) {
 			djCriteria.add(Restrictions.eq("route", route));
 		}
-		
+
 		if (customer != null) {
 			djCriteria.add(Restrictions.eq("customer", customer));
 		}
-		
+
 		djCriteria.addOrder(Order.asc("route"));
 		djCriteria.addOrder(Order.asc("date"));
 		return djCriteria.list();
@@ -581,7 +589,8 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	}
 
 	@Override
-	public List<CollectionJournalLine> getMemberCollectionsForSession(CollectionSession session, Membership value) {
+	public List<CollectionJournalLine> getMemberCollectionsForSession(
+			CollectionSession session, Membership value) {
 		// TODO: implement
 		return null;
 	}

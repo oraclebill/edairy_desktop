@@ -39,15 +39,6 @@
       <xsd:enumeration value="MilkProcessing"/>
     </xsd:restriction>
   </xsd:simpleType>
-  <xsd:simpleType name="MilkPricePeriod">
-    <xsd:restriction base="xsd:NCName">
-      <xsd:enumeration value="Daily"/>
-      <xsd:enumeration value="Weekly"/>
-      <xsd:enumeration value="Monthly"/>
-      <xsd:enumeration value="AdHoc"/>
-      <xsd:enumeration value="Hourly"/>
-    </xsd:restriction>
-  </xsd:simpleType>
   <xsd:simpleType name="PreferenceType">
     <xsd:restriction base="xsd:NCName">
       <xsd:enumeration value="String"/>
@@ -300,8 +291,8 @@
   <xsd:element name="Customer" type="dairy:Customer"/>
   <xsd:complexType name="MilkPrice">
     <xsd:attribute name="id" type="xsd:string" use="required"/>
-    <xsd:attribute default="1" name="pricePeriod" type="dairy:MilkPricePeriod" use="required"/>
-    <xsd:attribute name="priceDate" type="xsd:string" use="required"/>
+    <xsd:attribute name="month" type="xsd:int" use="required"/>
+    <xsd:attribute name="year" type="xsd:int" use="required"/>
     <xsd:attribute name="value" type="xsd:string" use="required"/>
     <xsd:attribute name="entryDate" type="xsd:string" use="required"/>
     <xsd:attribute name="enteredBy" type="xsd:string"/>

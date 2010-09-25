@@ -35,13 +35,6 @@
       <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//DairyFunction/Warehouse"/>
       <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//DairyFunction/MilkProcessing"/>
     </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="dairy.ecore#//MilkPricePeriod">
-      <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//MilkPricePeriod/Daily"/>
-      <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//MilkPricePeriod/Weekly"/>
-      <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//MilkPricePeriod/Monthly"/>
-      <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//MilkPricePeriod/AdHoc"/>
-      <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//MilkPricePeriod/Hourly"/>
-    </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="dairy.ecore#//PreferenceType">
       <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//PreferenceType/String"/>
       <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//PreferenceType/Boolean"/>
@@ -237,8 +230,8 @@
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//MilkPrice">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkPrice/id"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkPrice/pricePeriod"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkPrice/priceDate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkPrice/month"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkPrice/year"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkPrice/value"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//MilkPrice/enteredBy"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkPrice/entryDate"/>
