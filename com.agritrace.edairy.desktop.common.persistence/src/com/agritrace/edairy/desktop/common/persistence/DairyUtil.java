@@ -30,6 +30,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountFactory;
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.model.requests.RequestType;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsFactory;
@@ -352,6 +353,10 @@ public class DairyUtil {
 			applicationDate = new Date();
 		}
 		member.setApplicationDate(applicationDate);
+		
+		member.setAccount(AccountFactory.eINSTANCE.createAccount());
+		member.getAccount().setAccountNumber("");
+		
 		return member;
 	}
 

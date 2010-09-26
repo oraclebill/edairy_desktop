@@ -25,7 +25,7 @@ public class ScaleImporter {
 	 *      { member, date } (2 fields)
 	 *     
 	 *   4 X collection record:
-	 *      { quantity, time, ?, operator code, ?, am/pm, ?, ? } (8 fields) except last one which has 7
+	 *      { quantity, time, ?, operator code, ?, am/pm, ?, ? } (8 fields) 
 	 * 
 	 * 	 footer:
 	 *      { ?, route code, dairy code, scale code, line total } 5 fields, where the first one varies with session.

@@ -11,7 +11,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 
 public interface ICollectionJournalLineRepository extends IRepository<CollectionJournalLine> {
-	int countByMemberCenterDate(final Membership member, final DairyLocation center, final Date date);
+	long countByMemberCenterDate(final Membership member, final DairyLocation center, final Date date);
 	List<CollectionGroup> allForDate(Date date);
 	BigDecimal getMilkPrice(int priceMonth, int priceYear);
 	List<Membership> getMembersWithDeliveriesFor(int priceMonth, int priceYear);
