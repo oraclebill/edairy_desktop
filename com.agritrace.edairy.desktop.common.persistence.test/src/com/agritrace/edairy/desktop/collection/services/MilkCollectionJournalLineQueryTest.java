@@ -1,8 +1,6 @@
 package com.agritrace.edairy.desktop.collection.services;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -16,7 +14,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
-import com.agritrace.edairy.desktop.common.model.dairy.MilkPricePeriod;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.services.HsqldbMemoryPersistenceManager;
 import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
@@ -70,6 +67,8 @@ public class MilkCollectionJournalLineQueryTest {
 		testPM.getSession().save(dairy);
 
 		assertEquals(1, dairy.getPriceHistory().size());
+		BigDecimal rate = repo.getMilkPrice(1, 1990);
+		assertEquals(new BigDecimal("23.22"), rate);
 
 	}
 
@@ -85,31 +84,36 @@ public class MilkCollectionJournalLineQueryTest {
 
 	}
 
-	private void createSampleDairy(PersistenceManager pm) {
+	private Dairy createSampleDairy(PersistenceManager pm) {
 		Dairy dairy = DairyFactory.eINSTANCE.createDairy();
-		dairy.setCompanyName("Test Company");
-	}
-
-	Dairy dairy;
-	Employee driver;
-
-	private void createTestContext(String testFile) {
-		testPM = new HsqldbMemoryPersistenceManager();
-		System.setProperty("riena.test", "true");
-		PersistenceManager.reset(testPM);
-
-		dairy = DairyFactory.eINSTANCE.createDairy();
 		dairy.setCompanyName("test");
 		dairy.setDescription("");
 		dairy.setRegistrationNumber("");
 		dairy.setLocation(DairyUtil.createLocation(null, null, null));
 		dairy.setPhoneNumber("");
-
+		
 		driver = DairyUtil.createEmployee(null, "Driver", new Date(100000),
 				"Strom", "", "Thurmond", "", null, null);
 		dairy.getEmployees().add(driver);
 
-		testPM.getSession().save(dairy);
+		pm.getSession().save(dairy);
+		return dairy;
+	}
+
+	Dairy dairy;
+	Employee driver;
+
+	private void createTestContext( ) {
+		createTestContext(null);
+	}
+	
+	private void createTestContext(String testFile) {
+		testPM = new HsqldbMemoryPersistenceManager();
+		System.setProperty("riena.test", "true");
+		PersistenceManager.reset(testPM);
+
+		dairy = createSampleDairy(testPM);
+
 
 		if (testFile != null) {
 			try {
