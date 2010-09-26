@@ -1,6 +1,6 @@
 package com.agritrace.edairy.desktop.collection.services;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.io.File;
 import java.math.BigDecimal;
@@ -64,8 +64,10 @@ public class MilkCollectionJournalLineQueryTest {
 		DairyLocation centerGood = (DairyLocation) centers.get("R012");
 		Date date = DateFormat.getDateInstance().parse("June 20, 2010");
 
-		assertEquals(1, repo.countByMemberCenterDate(membership, centerGood, date));
-		assertEquals(0, repo.countByMemberCenterDate(membership, centerBad, date));
+		assertEquals(1,
+				repo.countByMemberCenterDate(membership, centerGood, date));
+		assertEquals(0,
+				repo.countByMemberCenterDate(membership, centerBad, date));
 		// assertEquals(0, repo.countByMemberCenterDate(null, null, null));
 	}
 
@@ -107,22 +109,60 @@ public class MilkCollectionJournalLineQueryTest {
 
 	}
 
+	@Test
 	public void testGetMembersWithDeliveriesFor() throws Exception {
 		initTestContext("../test-data/collections/test-collections.csv");
 
 		Membership newMember = createMember("newMember");
 		ICollectionJournalLineRepository repo = new MilkCollectionJournalLineRepository();
 		List<Membership> members = repo.getMembersWithDeliveriesFor(6, 2010);
-		assertEquals(4, members.size());
+		assertEquals(3, members.size());
+		members = repo.getMembersWithDeliveriesFor(7, 2010);
+		assertEquals(2, members.size());
 
 	}
 
+	@Test
 	public void testGetPayableDeliveriesForMember() throws Exception {
+		initTestContext("../test-data/collections/test-collections.csv");
+		ICollectionJournalLineRepository repo = new MilkCollectionJournalLineRepository();
 
+		Membership member = null;
+		for (Membership m : DAIRY.getMemberships()) {
+			if (m.getMemberNumber().equals("1975")
+					|| m.getMemberNumber().equals("01975")) {
+				member = m;
+				break;
+			}
+		}
+		assertNotNull(member);
+
+		List<CollectionJournalLine> collections;
+		
+		collections = repo.getPayableDeliveriesForMember(member, 6, 2010);
+		assertEquals(6, collections.size());
+		collections = repo.getPayableDeliveriesForMember(member, 7, 2010);
+		assertEquals(0, collections.size());
+		collections = repo.getPayableDeliveriesForMember(member, 8, 2010);
+		assertEquals(17, collections.size());
 	}
 
+	@Test
 	public void testGetSumOfPayableDeliveries() throws Exception {
+		initTestContext("../test-data/collections/test-collections.csv");
+		ICollectionJournalLineRepository repo = new MilkCollectionJournalLineRepository();
 
+		Membership member = null;
+		for (Membership m : DAIRY.getMemberships()) {
+			if (m.getMemberNumber().equals("1975")
+					|| m.getMemberNumber().equals("01975")) {
+				member = m;
+				break;
+			}
+		}
+		assertNotNull(member);
+
+		assertEquals(new BigDecimal("88.6"), repo.getSumOfPayableDeliveries(member, 6, 2010));
 	}
 
 	Dairy DAIRY;
@@ -141,6 +181,8 @@ public class MilkCollectionJournalLineQueryTest {
 		DAIRY.getEmployees().add(DEFAULT_DRIVER);
 	}
 
+	
+	
 	private void initTestContext() throws Exception {
 		initTestContext(null);
 	}
@@ -166,13 +208,13 @@ public class MilkCollectionJournalLineQueryTest {
 				line.setQuantity(new BigDecimal(record.getQuantity()));
 
 				final CollectionGroup group = getCollectionGroup(
-						record.getRouteNumber(), 
-						record.getSessionCode(),
+						record.getRouteNumber(), record.getSessionCode(),
 						record.getValidDate());
 				line.setCollectionJournal(group);
 				group.getJournalEntries().add(line);
-				group.setEntryCount(group.getEntryCount() +1);
-				group.setRecordTotal(group.getRecordTotal().add(line.getQuantity()));
+				group.setEntryCount(group.getEntryCount() + 1);
+				group.setRecordTotal(group.getRecordTotal().add(
+						line.getQuantity()));
 			}
 			for (CollectionGroup group : groups.values()) {
 				testPM.getSession().save(group);
@@ -181,6 +223,7 @@ public class MilkCollectionJournalLineQueryTest {
 	}
 
 	HashMap<String, DairyLocation> centers = new HashMap<String, DairyLocation>();
+
 	private DairyLocation getCenter(String key) {
 		DairyLocation center = centers.get(key);
 		if (center == null) {
@@ -189,13 +232,14 @@ public class MilkCollectionJournalLineQueryTest {
 			center.setName(key);
 			center.setLocation(DairyUtil.createLocation(null, null, null));
 			DAIRY.getBranchLocations().add(center);
-			testPM.getSession().save(center);	
+			testPM.getSession().save(center);
 			centers.put(key, center);
 		}
 		return center;
 	}
-	
+
 	HashMap<String, CollectionGroup> groups = new HashMap<String, CollectionGroup>();
+
 	private CollectionGroup getCollectionGroup(String routeNumber,
 			String sessionCode, Date date) {
 		if (date == null)

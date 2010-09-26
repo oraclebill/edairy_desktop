@@ -148,10 +148,9 @@ public class MilkCollectionJournalLineRepository extends
 		SessionRunnable<List<Membership>> runnable = new SessionRunnable<List<Membership>>() {
 			@Override
 			public void run(Session session) {
-				String queryString = "SELECT validatedMember "
+				String queryString = "SELECT distinct validatedMember "
 						+ "FROM CollectionJournalLine l "
-						+ "WHERE l.validatedMember = :member "
-						+ "  AND l.rejected = False "
+						+ "WHERE l.rejected = False "
 						+ "  AND l.flagged = False "
 						+ "  AND year(l.collectionJournal.journalDate) = :year "
 						+ "  AND month(l.collectionJournal.journalDate) = :month ";
