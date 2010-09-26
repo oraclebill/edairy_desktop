@@ -3,14 +3,10 @@ package com.agritrace.edairy.desktop.internal.collection.services;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
-import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
 
 import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
@@ -44,29 +40,49 @@ public class MilkCollectionJournalLineRepository extends
 	 * com.agritrace.edairy.desktop.common.model.dairy.DairyLocation,
 	 * java.util.Date)
 	 */
-	public int countByMemberCenterDate(final Membership member,
+	public long countByMemberCenterDate(final Membership member,
 			final DairyLocation center, final Date date) {
-		SessionRunnable<Integer> runnable = new SessionRunnable<Integer>() {
+		final Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+//		final int day = cal.get(Calendar.DAY_OF_MONTH), month = cal
+//				.get(Calendar.MONTH), year = cal.get(Calendar.YEAR);
+
+		SessionRunnable<Long> runnable = new SessionRunnable<Long>() {
 			@Override
 			public void run(Session session) {
-				Criteria crit = session
-						.createCriteria(CollectionJournalLine.class);
-				crit.add(Restrictions.eq("validatedMember", member));
+				String queryText = "SELECT count(*) "
+						+ "  FROM CollectionJournalLine l "
+						+ " WHERE l.validatedMember = :member "
+						+ "   AND l.collectionJournal.journalDate = :cal ";
+//						+ "   AND	month(l.collectionJournal.journalDate) = :month "
+//						+ "   AND year(l.collectionJournal.journalDate) = :year ";
 
-				Criteria subcrit = crit.createCriteria("collectionJournal");
-				subcrit.add(Restrictions.eq("collectionCenter", center));
+				Query query = session.createQuery(queryText);
+				query.setEntity("member", member);
+				query.setCalendarDate("cal", cal);
+//				query.setInteger("month", month);
+//				query.setInteger("year", year);
 
-				Calendar cld = Calendar.getInstance();
-				cld.setTime(date);
-				cld = new GregorianCalendar(cld.get(Calendar.YEAR),
-						cld.get(Calendar.MONTH),
-						cld.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
-				subcrit.add(Restrictions.ge("journalDate", cld.getTime()));
-				cld.add(Calendar.DAY_OF_MONTH, 1);
-				subcrit.add(Restrictions.lt("journalDate", cld.getTime()));
+				setResult((Long) query.uniqueResult());
 
-				crit.setProjection(Projections.rowCount());
-				setResult((Integer) crit.uniqueResult());
+				// Criteria crit = session
+				// .createCriteria(CollectionJournalLine.class);
+				// crit.add(Restrictions.eq("validatedMember", member));
+				//
+				// Criteria subcrit = crit.createCriteria("collectionJournal");
+				// subcrit.add(Restrictions.eq("collectionCenter", center));
+				//
+				// Calendar cld = Calendar.getInstance();
+				// cld.setTime(date);
+				// cld = new GregorianCalendar(cld.get(Calendar.YEAR),
+				// cld.get(Calendar.MONTH),
+				// cld.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
+				// subcrit.add(Restrictions.ge("journalDate", cld.getTime()));
+				// cld.add(Calendar.DAY_OF_MONTH, 1);
+				// subcrit.add(Restrictions.lt("journalDate", cld.getTime()));
+				//
+				// crit.setProjection(Projections.rowCount());
+				// setResult((Integer) crit.uniqueResult());
 			}
 		};
 
@@ -154,24 +170,14 @@ public class MilkCollectionJournalLineRepository extends
 		SessionRunnable<BigDecimal> runnable = new SessionRunnable<BigDecimal>() {
 			@Override
 			public void run(Session session) {
-				try{
-					String queryString = "SELECT value " + "FROM MilkPrice m "
-							+ "WHERE YEAR(m.priceDate) = :year " + "  AND MONTH(m.priceDate) = :month ";
-	
-					Query query = session.createQuery(queryString);
-					query.setInteger("year", year);
-					query.setInteger("month", month);
-	
-					
-					Object queryResult = query.uniqueResult();
-					if(queryResult != null){
-						setResult(new BigDecimal(queryResult.toString()));
-					}
-				}
-				catch(Exception e){
-					e.printStackTrace();
-					//throw e;
-				}
+				String queryString = "SELECT value " + "FROM MilkPrice m "
+						+ "WHERE m.year = :year " + "  AND m.month = :month ";
+
+				Query query = session.createQuery(queryString);
+				query.setInteger("year", year);
+				query.setInteger("month", month);
+
+				setResult(new BigDecimal(query.uniqueResult().toString()));
 			}
 		};
 
@@ -185,8 +191,8 @@ public class MilkCollectionJournalLineRepository extends
 		SessionRunnable<List<Membership>> runnable = new SessionRunnable<List<Membership>>() {
 			@Override
 			public void run(Session session) {
-				String queryString = "SELECT validatedMember " +
-						"FROM CollectionJournalLine l "
+				String queryString = "SELECT validatedMember "
+						+ "FROM CollectionJournalLine l "
 						+ "WHERE l.validatedMember = :member "
 						+ "  AND l.rejected = False "
 						+ "  AND l.flagged = False "
@@ -237,8 +243,8 @@ public class MilkCollectionJournalLineRepository extends
 		SessionRunnable<BigDecimal> runnable = new SessionRunnable<BigDecimal>() {
 			@Override
 			public void run(Session session) {
-				String queryString = "SELECT sum(l.quantity) " +
-						"FROM CollectionJournalLine l "
+				String queryString = "SELECT sum(l.quantity) "
+						+ "FROM CollectionJournalLine l "
 						+ "WHERE l.validatedMember = :member "
 						+ "  AND l.rejected = False "
 						+ "  AND l.flagged = False "
@@ -255,7 +261,7 @@ public class MilkCollectionJournalLineRepository extends
 		};
 
 		runWithTransaction(runnable);
-		return (BigDecimal)runnable.getResult();
+		return (BigDecimal) runnable.getResult();
 	}
 
 }
