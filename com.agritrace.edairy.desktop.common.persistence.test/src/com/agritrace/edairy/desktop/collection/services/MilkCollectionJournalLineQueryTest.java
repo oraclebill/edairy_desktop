@@ -2,23 +2,34 @@ package com.agritrace.edairy.desktop.collection.services;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import com.agritrace.edairy.desktop.collections.scaledata.beans.ScaleRecord;
+import com.agritrace.edairy.desktop.collections.scaledata.importer.ScaleImporter;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
+import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
+import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
-import com.agritrace.edairy.desktop.common.persistence.services.HsqldbMemoryPersistenceManager;
-import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.internal.collection.services.MilkCollectionJournalLineRepository;
-import com.csvreader.CsvReader;
+import com.agritrace.edairy.desktop.internal.common.persistence.PersistenceManager;
+import com.ibm.icu.text.DateFormat;
 
 public class MilkCollectionJournalLineQueryTest {
 
@@ -28,52 +39,77 @@ public class MilkCollectionJournalLineQueryTest {
 	public void setup() {
 	}
 
-	// @Test
-	public void testCountByMemberCenterDate() {
-		createTestContext();
+	@Test
+	public void testCountByMemberCenterDate() throws Exception {
+		initTestContext("../test-data/collections/test-collections.csv");
 		ICollectionJournalLineRepository repo = new MilkCollectionJournalLineRepository();
-		assertEquals(0, repo.countByMemberCenterDate(null, null, null));
+		
+		Membership membership = null;
+		for (Membership m : DAIRY.getMemberships() ) {
+			if (m.getMemberNumber().equals("1975") || m.getMemberNumber().equals("01975")) {
+				membership = m;
+				break;
+			}
+		}
+		DairyLocation center = DairyFactory.eINSTANCE.createDairyLocation();
+		center.setName("test");
+		center.setLocation(DairyUtil.createLocation(null, null, null));		
+		DAIRY.getBranchLocations().add(center);
+		testPM.getSession().save(DAIRY);
+		
+		Date date = DateFormat.getDateInstance().parse("June 6, 2010");
+
+		assertEquals(21, repo.countByMemberCenterDate(membership, center, date));
+//		assertEquals(0, repo.countByMemberCenterDate(null, null, null));
 	}
 
-	public void testAllForDate() {
-		long queryDate = 100000;
-
-		createTestContext();
+	@Test
+	public void testAllForDate() throws Exception {
+		initTestContext("../test-data/collections/test-collections.csv");
 		ICollectionJournalLineRepository repo = new MilkCollectionJournalLineRepository();
 
-		List<CollectionGroup> collections = repo
-				.allForDate(new Date(queryDate));
-		assertEquals(1, collections.size());
+		Date queryDate = DateFormat.getDateInstance().parse("Jun 2, 2010");
+		assertEquals(2, repo.allForDate(queryDate).size());
+		
+		queryDate = DateFormat.getDateInstance().parse("Jun 2, 2011");
+		assertEquals(0, repo.allForDate((queryDate)).size());
 	}
 
 	@Test
 	public void testGetMilkPrice() throws Exception {
-		createTestContext();
+		initTestContext();
 		ICollectionJournalLineRepository repo = new MilkCollectionJournalLineRepository();
 
 		// initially empty
-		assertEquals(0, dairy.getPriceHistory().size());
+		assertEquals(0, DAIRY.getPriceHistory().size());
 
 		// create some data
 		long queryDate = 100000;
 		MilkPrice milkPrice = DairyFactory.eINSTANCE.createMilkPrice();
-		milkPrice.setEnteredBy(driver);
+		milkPrice.setEnteredBy(DEFAULT_DRIVER);
 		milkPrice.setEntryDate(new Date(queryDate));
 		milkPrice.setMonth(1);
 		milkPrice.setYear(1990);
 		milkPrice.setValue(new BigDecimal("23.22"));
 
-		dairy.getPriceHistory().add(milkPrice);
-		testPM.getSession().save(dairy);
+		DAIRY.getPriceHistory().add(milkPrice);
+		testPM.getSession().save(DAIRY);
 
-		assertEquals(1, dairy.getPriceHistory().size());
+		assertEquals(1, DAIRY.getPriceHistory().size());
 		BigDecimal rate = repo.getMilkPrice(1, 1990);
 		assertEquals(new BigDecimal("23.22"), rate);
 
 	}
 
 	public void testGetMembersWithDeliveriesFor() throws Exception {
-
+		initTestContext("../test-data/collections/test-collections.csv");
+		
+		Membership newMember = createMember("newMember");
+		ICollectionJournalLineRepository repo = new MilkCollectionJournalLineRepository();
+		List<Membership> members = repo.getMembersWithDeliveriesFor(6, 2010);
+		assertEquals(4, members.size());
+		
+		
 	}
 
 	public void testGetPayableDeliveriesForMember() throws Exception {
@@ -84,49 +120,107 @@ public class MilkCollectionJournalLineQueryTest {
 
 	}
 
-	private Dairy createSampleDairy(PersistenceManager pm) {
-		Dairy dairy = DairyFactory.eINSTANCE.createDairy();
-		dairy.setCompanyName("test");
-		dairy.setDescription("");
-		dairy.setRegistrationNumber("");
-		dairy.setLocation(DairyUtil.createLocation(null, null, null));
-		dairy.setPhoneNumber("");
-		
-		driver = DairyUtil.createEmployee(null, "Driver", new Date(100000),
-				"Strom", "", "Thurmond", "", null, null);
-		dairy.getEmployees().add(driver);
+	Dairy DAIRY;
+	Employee DEFAULT_DRIVER;
 
-		pm.getSession().save(dairy);
-		return dairy;
+	private void initSampleDairy() {
+		DAIRY = DairyFactory.eINSTANCE.createDairy();
+		DAIRY.setCompanyName("test");
+		DAIRY.setDescription("");
+		DAIRY.setRegistrationNumber("");
+		DAIRY.setLocation(DairyUtil.createLocation(null, null, null));
+		DAIRY.setPhoneNumber("");
+
+		DEFAULT_DRIVER = DairyUtil.createEmployee(null, "Driver", new Date(
+				100000), "Strom", "", "Thurmond", "", null, null);
+		DAIRY.getEmployees().add(DEFAULT_DRIVER);
 	}
 
-	Dairy dairy;
-	Employee driver;
-
-	private void createTestContext( ) {
-		createTestContext(null);
+	private void initTestContext() throws Exception {
+		initTestContext(null);
 	}
-	
-	private void createTestContext(String testFile) {
+
+	private void initTestContext(String testFile) throws Exception {
 		testPM = new HsqldbMemoryPersistenceManager();
 		System.setProperty("riena.test", "true");
 		PersistenceManager.reset(testPM);
 
-		dairy = createSampleDairy(testPM);
-
+		initSampleDairy();
 
 		if (testFile != null) {
-			try {
-				CsvReader reader = new CsvReader(testFile);
-				reader.readHeaders();
-				while (reader.readRecord()) {
-					final String[] rec = reader.getValues();
-					
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
+			System.err.println("importing " + testFile);
+			ScaleImporter importer = new ScaleImporter(new File(testFile));
+			importer.readRecords();
+			List<ScaleRecord> results = importer.getResults();
+
+			for (final ScaleRecord record : results) {
+				final CollectionJournalLine line = DairyFactory.eINSTANCE
+						.createCollectionJournalLine();
+				line.setRecordedMember(record.getMemberNumber());
+				line.setValidatedMember(getMembership(record.getMemberNumber()));
+				line.setQuantity(new BigDecimal(record.getQuantity()));
+
+				final CollectionGroup group = getCollectionGroup(
+						record.getRouteNumber(),
+						record.getSessionCode(),
+						DateFormat.getDateInstance().parse(
+								record.getTransactionDate()));
+				line.setCollectionJournal(group);
+				group.getJournalEntries().add(line);
+			}
+			for (CollectionGroup group : groups.values()) {
+				testPM.getSession().save(group);
 			}
 		}
-
 	}
+
+	HashMap<String, CollectionGroup> groups = new HashMap<String, CollectionGroup>();
+
+	private CollectionGroup getCollectionGroup(String routeNumber,
+			String sessionCode, Date date) {
+		if (date == null)
+			throw new IllegalArgumentException("date cannot be null");
+		String key = String.format("%5s-%2s-%tF", routeNumber, sessionCode,
+				date);
+		CollectionGroup group = groups.get(key);
+		if (group == null) {
+			group = DairyFactory.eINSTANCE.createCollectionGroup();
+			group.setReferenceNumber(key);
+			group.setJournalDate(date);
+			group.setStatus(JournalStatus.COMPLETE);
+			group.setDriver(DEFAULT_DRIVER);
+			group.setType(CollectionGroupType.JOURNAL_GROUP);
+
+			groups.put(key, group);
+		}
+		return group;
+	}
+
+	HashMap<String, Membership> memberships = new HashMap<String, Membership>();
+
+	private Membership getMembership(String memberNumber) {
+		Membership member = memberships.get(memberNumber);
+		if (member == null) {
+			member = createMember(memberNumber);
+			memberships.put(memberNumber, member);
+		}
+		return member;
+	}
+
+	protected Membership createMember(String accountNo) {
+		Farmer farmer = DairyUtil.createFarmer(accountNo, "", "", "",
+				(Farm) null);
+		farmer.setNickName(accountNo);
+
+		Membership member = DairyUtil.createMembership(new Date(), new Date(),
+				farmer);
+		member.setMemberNumber(accountNo);
+		member.setStatus(MembershipStatus.ACTIVE);
+
+		DAIRY.getMemberships().add(member);
+		testPM.getSession().save(DAIRY);
+
+		return member;
+	}
+
 }

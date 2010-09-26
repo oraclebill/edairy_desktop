@@ -15,7 +15,7 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(MilkCollectionJournalLineRepository.class)
 public interface ICollectionJournalLineRepository extends
 		IRepository<CollectionJournalLine> {
-	int countByMemberCenterDate(final Membership member,
+	long countByMemberCenterDate(final Membership member,
 			final DairyLocation center, final Date date);
 
 	List<CollectionGroup> allForDate(Date date);
