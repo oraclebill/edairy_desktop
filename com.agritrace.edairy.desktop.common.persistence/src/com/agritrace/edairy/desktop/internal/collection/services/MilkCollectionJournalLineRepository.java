@@ -51,8 +51,6 @@ public class MilkCollectionJournalLineRepository extends
 			final DairyLocation center, final Date date) {
 		final Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-//		final int day = cal.get(Calendar.DAY_OF_MONTH), month = cal
-//				.get(Calendar.MONTH), year = cal.get(Calendar.YEAR);
 
 		SessionRunnable<Long> runnable = new SessionRunnable<Long>() {
 			@Override
@@ -60,36 +58,15 @@ public class MilkCollectionJournalLineRepository extends
 				String queryText = "SELECT count(*) "
 						+ "  FROM CollectionJournalLine l "
 						+ " WHERE l.validatedMember = :member "
-						+ "   AND l.collectionJournal.journalDate = :cal ";
-//						+ "   AND	month(l.collectionJournal.journalDate) = :month "
-//						+ "   AND year(l.collectionJournal.journalDate) = :year ";
+						+ "   AND l.collectionJournal.journalDate = :cal "
+						+ "   AND l.collectionJournal.collectionCenter = :center ";
 
 				Query query = session.createQuery(queryText);
 				query.setEntity("member", member);
+				query.setEntity("center", center);
 				query.setCalendarDate("cal", cal);
-//				query.setInteger("month", month);
-//				query.setInteger("year", year);
 
 				setResult((Long) query.uniqueResult());
-
-				// Criteria crit = session
-				// .createCriteria(CollectionJournalLine.class);
-				// crit.add(Restrictions.eq("validatedMember", member));
-				//
-				// Criteria subcrit = crit.createCriteria("collectionJournal");
-				// subcrit.add(Restrictions.eq("collectionCenter", center));
-				//
-				// Calendar cld = Calendar.getInstance();
-				// cld.setTime(date);
-				// cld = new GregorianCalendar(cld.get(Calendar.YEAR),
-				// cld.get(Calendar.MONTH),
-				// cld.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
-				// subcrit.add(Restrictions.ge("journalDate", cld.getTime()));
-				// cld.add(Calendar.DAY_OF_MONTH, 1);
-				// subcrit.add(Restrictions.lt("journalDate", cld.getTime()));
-				//
-				// crit.setProjection(Projections.rowCount());
-				// setResult((Integer) crit.uniqueResult());
 			}
 		};
 
