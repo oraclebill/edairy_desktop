@@ -132,8 +132,8 @@ public class MilkCollectionJournalLineRepository extends
 			public void run(Session session) {
 				String queryString = "SELECT value " +
 						"FROM MilkPrice m "
-						+ "WHERE year(m.priceDate) = :year "
-						+ "  AND month(m.priceDate) = :month ";
+						+ "WHERE m.year = :year "
+						+ "  AND m.month = :month ";
 
 				Query query = session.createQuery(queryString);
 				query.setInteger("year", year);
