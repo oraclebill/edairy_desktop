@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.21" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 2.6.0.v20100531 Build &lt;2.6.0.v20100609-1613></property>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.6.1.v20100902 Build &lt;2.6.1.v20100915-1750></property>
     <list-property name="userProperties">
         <structure>
             <property name="name">month</property>
@@ -166,16 +166,16 @@ dao = Packages.com.agritrace.ediary.desktop.reports.data.FarmerPayablesYearDao.i
 data = dao.getReportValuesX(reportContext.getParameterValue("Year"), reportContext.getParameterValue("Month"));
 ]]></method>
             <method name="fetch"><![CDATA[if(count < data.size()){
-var dataLine = data.get(count);
-row["farmerName"] = dataLine.getFarmerName();
-row["memberNumber"] = dataLine.getMemberNumber();
-row["accountNumber"] = dataLine.getAccountNumber();
-row["income"] = dataLine.getIncome();
-row["credits"] = dataLine.getCredits();
-row["adjustments"] = dataLine.getAdjustments();
-row["payables"] = dataLine.getPayables();
-count++;
-return true;
+	var dataLine = data.get(count);
+	row["farmerName"] = dataLine.getFarmerName();
+	row["memberNumber"] = dataLine.getMemberNumber();
+	row["accountNumber"] = dataLine.getAccountNumber();
+	row["income"] = dataLine.getIncome();
+	row["credits"] = dataLine.getCredits();
+	row["adjustments"] = dataLine.getAdjustments();
+	row["payables"] = dataLine.getPayables();
+	count++;
+	return true;
 }
 return false;]]></method>
         </script-data-set>
