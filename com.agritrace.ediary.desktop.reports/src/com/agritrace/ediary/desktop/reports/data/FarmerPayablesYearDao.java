@@ -33,13 +33,13 @@ public class FarmerPayablesYearDao {
 
 	private static FarmerPayablesYearDao instance;
 	// private final IDairyRepository dairyRepo;
-	private final IMemberRepository memberRepo;
+	// private final IMemberRepository memberRepo;
 	private java.text.DecimalFormat floatFormater;
 
 	public FarmerPayablesYearDao() {
 		super();
 		// this.dairyRepo = RepositoryFactory.getDairyRepository();
-		this.memberRepo = RepositoryFactory.getMemberRepository();
+		// this.memberRepo = RepositoryFactory.getMemberRepository();
 		this.floatFormater = new java.text.DecimalFormat("#,#00.0#;(#,#00.0#)");
 	}
 
@@ -53,15 +53,14 @@ public class FarmerPayablesYearDao {
 	public List<FarmerPayablesYearData> getReportValues(String year,
 			String month) {
 
-		List<Farm> farms = memberRepo.getMemberFarms();
+		ICollectionJournalLineRepository collectionsRepo = RepositoryFactory
+				.getRegisteredRepository(ICollectionJournalLineRepository.class);
 		List<FarmerPayablesYearData> ret = new ArrayList<FarmerPayablesYearData>();
 
-		for (Farm farm : farms) {
-			Membership membership = (Membership) farm.getOwner().eContainer();
-			if (membership == null) {
-				continue;
-			}
-			Farmer farmer = membership.getMember();
+		for (final Membership membership : collectionsRepo
+				.getMembersWithDeliveriesFor(Integer.parseInt(month),
+						Integer.parseInt(year))) {
+			final Farmer farmer = membership.getMember();
 
 			// Income = (Total quantity of milk collected - quantity of rejected
 			// milk) * Posted Milk Price for that month
@@ -97,10 +96,13 @@ public class FarmerPayablesYearDao {
 	public List<FarmerPayablesYearData> getReportValuesX(String year,
 			String month) {
 
-		List<Membership> members = memberRepo.all();
+		ICollectionJournalLineRepository collectionsRepo = RepositoryFactory
+				.getRegisteredRepository(ICollectionJournalLineRepository.class);
 		List<FarmerPayablesYearData> ret = new ArrayList<FarmerPayablesYearData>();
 
-		for (Membership membership : members) {
+		for (Membership membership : collectionsRepo
+				.getMembersWithDeliveriesFor(Integer.parseInt(month),
+						Integer.parseInt(year))) {
 			Farmer farmer = membership.getMember();
 
 			// Income = (Total quantity of milk collected - quantity of rejected
