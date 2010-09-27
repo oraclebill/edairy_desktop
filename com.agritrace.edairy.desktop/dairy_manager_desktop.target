@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.5"?>
+<?pde version="3.6"?>
 
 <target name="dairy_manager_desktop">
 <locations>
-<location path="${workspace_loc}/../edairy_desktop_lib/birt" type="Directory"/>
 <location path="${workspace_loc}/../edairy_desktop_lib/bundle_pool" type="Profile"/>
 <location path="${workspace_loc}/../edairy_desktop_lib/grouplayout" type="Directory"/>
 <location path="${workspace_loc}/../edairy_desktop_lib/servlet" type="Directory"/>
+<location path="${workspace_loc}/../edairy_desktop_lib/birt" type="Directory"/>
 </locations>
 </target>

@@ -19,8 +19,8 @@ import org.eclipse.birt.report.engine.api.IReportEngine;
 import org.eclipse.birt.report.engine.api.IReportEngineFactory;
 import org.eclipse.birt.report.engine.api.IReportRunnable;
 import org.eclipse.birt.report.engine.api.IRunAndRenderTask;
-import org.eclipse.birt.report.viewer.utilities.WebViewer;
-import org.eclipse.birt.report.viewer.utilities.WebappAccessor;
+//import org.eclipse.birt.report.viewer.utilities.WebViewer;
+//import org.eclipse.birt.report.viewer.utilities.WebappAccessor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.CCombo;
@@ -371,15 +371,15 @@ public class ReportController {
 //			
 //			WebViewer.display(""+url, browser, params);
 			
-			WebViewer.startup();
-			String myurl = "http://" + WebappAccessor.getHost( ) + ":" 
-			+ WebappAccessor.getPort( "viewer" )+ "/viewer/"+
-			"frameset"+
-			"?__report="+url+			
-			"&__format=html&__svg=false&__locale=us_US&__masterpage=true&__rtl=false"+
-			"&__cubememsize=10&__resourceFolder=&__dpi=96&__showtitle=false&__title=&"+random.nextInt();
-			
-			browser.setUrl(myurl);
+//			WebViewer.startup();
+//			String myurl = "http://" + WebappAccessor.getHost( ) + ":" 
+//			+ WebappAccessor.getPort( "viewer" )+ "/viewer/"+
+//			"frameset"+
+//			"?__report="+url+			
+//			"&__format=html&__svg=false&__locale=us_US&__masterpage=true&__rtl=false"+
+//			"&__cubememsize=10&__resourceFolder=&__dpi=96&__showtitle=false&__title=&"+random.nextInt();
+//			
+//			browser.setUrl(myurl);
 
 			
 		} catch (Exception e) {

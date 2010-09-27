@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="eDairy Manager Destop" uid="com.agritrace.edairy.desktop.dairy_manager_prod" id="com.agritrace.edairy.desktop.dairy_manager_prod" application="com.agritrace.edairy.desktop.dairy_manager_app" version="0.99" useFeatures="true" includeLaunchers="true">
+<product name="eDairy Manager Destop" uid="com.agritrace.edairy.desktop.dairy_manager_prod" id="com.agritrace.edairy.desktop.dairy_manager_prod" application="com.agritrace.edairy.desktop.dairy_manager_app" version="0.99" useFeatures="true" includeLaunchers="false">
 
    <aboutInfo>
       <image path="/com.agritrace.edairy.desktop/resources/edairy_helpabout.png"/>
