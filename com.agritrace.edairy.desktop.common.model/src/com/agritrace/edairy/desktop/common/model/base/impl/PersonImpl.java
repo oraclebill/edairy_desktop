@@ -35,6 +35,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl#getPhoneNumber <em>Phone Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl#getLocation <em>Location</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl#getPersonId <em>Person Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl#getNssfNumber <em>Nssf Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl#getNhifNumber <em>Nhif Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl#getNationalId <em>National Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -250,6 +253,66 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * @ordered
 	 */
 	protected Long personId = PERSON_ID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getNssfNumber() <em>Nssf Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNssfNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NSSF_NUMBER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getNssfNumber() <em>Nssf Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNssfNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected String nssfNumber = NSSF_NUMBER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getNhifNumber() <em>Nhif Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNhifNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NHIF_NUMBER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getNhifNumber() <em>Nhif Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNhifNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected String nhifNumber = NHIF_NUMBER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getNationalId() <em>National Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNationalId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NATIONAL_ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getNationalId() <em>National Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNationalId()
+	 * @generated
+	 * @ordered
+	 */
+	protected String nationalId = NATIONAL_ID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -523,6 +586,69 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getNssfNumber() {
+		return nssfNumber;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNssfNumber(String newNssfNumber) {
+		String oldNssfNumber = nssfNumber;
+		nssfNumber = newNssfNumber;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__NSSF_NUMBER, oldNssfNumber, nssfNumber));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getNhifNumber() {
+		return nhifNumber;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNhifNumber(String newNhifNumber) {
+		String oldNhifNumber = nhifNumber;
+		nhifNumber = newNhifNumber;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__NHIF_NUMBER, oldNhifNumber, nhifNumber));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getNationalId() {
+		return nationalId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNationalId(String newNationalId) {
+		String oldNationalId = nationalId;
+		nationalId = newNationalId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__NATIONAL_ID, oldNationalId, nationalId));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -549,6 +675,12 @@ public class PersonImpl extends ContactableImpl implements Person {
 				return basicGetLocation();
 			case ModelPackage.PERSON__PERSON_ID:
 				return getPersonId();
+			case ModelPackage.PERSON__NSSF_NUMBER:
+				return getNssfNumber();
+			case ModelPackage.PERSON__NHIF_NUMBER:
+				return getNhifNumber();
+			case ModelPackage.PERSON__NATIONAL_ID:
+				return getNationalId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -593,6 +725,15 @@ public class PersonImpl extends ContactableImpl implements Person {
 				return;
 			case ModelPackage.PERSON__PERSON_ID:
 				setPersonId((Long)newValue);
+				return;
+			case ModelPackage.PERSON__NSSF_NUMBER:
+				setNssfNumber((String)newValue);
+				return;
+			case ModelPackage.PERSON__NHIF_NUMBER:
+				setNhifNumber((String)newValue);
+				return;
+			case ModelPackage.PERSON__NATIONAL_ID:
+				setNationalId((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -639,6 +780,15 @@ public class PersonImpl extends ContactableImpl implements Person {
 			case ModelPackage.PERSON__PERSON_ID:
 				setPersonId(PERSON_ID_EDEFAULT);
 				return;
+			case ModelPackage.PERSON__NSSF_NUMBER:
+				setNssfNumber(NSSF_NUMBER_EDEFAULT);
+				return;
+			case ModelPackage.PERSON__NHIF_NUMBER:
+				setNhifNumber(NHIF_NUMBER_EDEFAULT);
+				return;
+			case ModelPackage.PERSON__NATIONAL_ID:
+				setNationalId(NATIONAL_ID_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -673,6 +823,12 @@ public class PersonImpl extends ContactableImpl implements Person {
 				return location != null;
 			case ModelPackage.PERSON__PERSON_ID:
 				return PERSON_ID_EDEFAULT == null ? personId != null : !PERSON_ID_EDEFAULT.equals(personId);
+			case ModelPackage.PERSON__NSSF_NUMBER:
+				return NSSF_NUMBER_EDEFAULT == null ? nssfNumber != null : !NSSF_NUMBER_EDEFAULT.equals(nssfNumber);
+			case ModelPackage.PERSON__NHIF_NUMBER:
+				return NHIF_NUMBER_EDEFAULT == null ? nhifNumber != null : !NHIF_NUMBER_EDEFAULT.equals(nhifNumber);
+			case ModelPackage.PERSON__NATIONAL_ID:
+				return NATIONAL_ID_EDEFAULT == null ? nationalId != null : !NATIONAL_ID_EDEFAULT.equals(nationalId);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -707,6 +863,12 @@ public class PersonImpl extends ContactableImpl implements Person {
 		result.append(phoneNumber);
 		result.append(", personId: ");
 		result.append(personId);
+		result.append(", nssfNumber: ");
+		result.append(nssfNumber);
+		result.append(", nhifNumber: ");
+		result.append(nhifNumber);
+		result.append(", nationalId: ");
+		result.append(nationalId);
 		result.append(')');
 		return result.toString();
 	}

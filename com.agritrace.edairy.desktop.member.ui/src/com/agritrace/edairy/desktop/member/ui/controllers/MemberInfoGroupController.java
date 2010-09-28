@@ -40,52 +40,6 @@ public class MemberInfoGroupController implements WidgetController<Object> {
 		comboStatus = container.getRidget(IComboRidget.class, ViewWidgetId.memberInfo_status);
 		phoneRidget = container.getRidget(ITextRidget.class, ViewWidgetId.memberInfo_phone);
 		
-//		comboStatus.updateFromModel();
-//		comboStatus.addSelectionListener(this);
-
-//		appliedDateBtn = container.getRidget(IActionRidget.class, ViewWidgetId.memberInfo_applicationDate_btn);
-//		appliedDateBtn.addListener(new IActionListener() {
-//
-//			@Override
-//			public void callback() {
-//				final CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
-//				calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
-//						appliedDate.getText());
-//
-//				if (calDialog.open() == AbstractWindowController.OK) {
-//					final Date selectedDate = (Date) calDialog.getController().getContext(
-//							SimpleFormattedDateBean.DATE_PROR);
-//					final SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
-//					bean.setDate(selectedDate);
-//					appliedDate.setText(bean.getFormattedDate());
-//					if (selectedMember != null) {
-//						selectedMember.setApplicationDate(selectedDate);
-//					}
-//				}
-//
-//			}
-//		});
-//		effectiveDateBtn = container.getRidget(IActionRidget.class, ViewWidgetId.memberInfo_effectiveDate_btn);
-//		effectiveDateBtn.addListener(new IActionListener() {
-//
-//			@Override
-//			public void callback() {
-//				final CalendarSelectionDialog calDialog = new CalendarSelectionDialog();
-//				calDialog.getController().setContext(SimpleFormattedDateBean.FORMATTED_DATE_VALUE_PROP,
-//						effectiveDate.getText());
-//
-//				if (calDialog.open() == AbstractWindowController.OK) {
-//					final Date selectedDate = (Date) calDialog.getController().getContext(
-//							SimpleFormattedDateBean.DATE_PROR);
-//					final SimpleFormattedDateBean bean = new SimpleFormattedDateBean();
-//					bean.setDate(selectedDate);
-//					effectiveDate.setText(bean.getFormattedDate());
-//					if (selectedMember != null) {
-//						selectedMember.setEffectiveDate(selectedDate);
-//					}
-//				}
-//			}
-//		});
 
 		appliedDate.setMandatory(true);
 		appliedDate.setOutputOnly(true);
@@ -108,14 +62,6 @@ public class MemberInfoGroupController implements WidgetController<Object> {
 		return selectedMember;
 	}
 
-//	@Override
-//	public void ridgetSelected(SelectionEvent event) {
-//		if (event.getSource() == comboStatus) {
-//			if (selectedMember != null) {
-//				selectedMember.setStatus((MembershipStatus) event.getNewSelection().get(0));
-//			}
-//		}
-//	}
 
 	@Override
 	public void setController(IRidgetContainer container) {

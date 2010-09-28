@@ -802,7 +802,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEmployee_NationalId() {
+	public EAttribute getEmployee_Username() {
 		return (EAttribute)employeeEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -811,7 +811,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEmployee_NhifNumber() {
+	public EAttribute getEmployee_Password() {
 		return (EAttribute)employeeEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -820,7 +820,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEmployee_NssfNumber() {
+	public EAttribute getEmployee_LocalEnabled() {
 		return (EAttribute)employeeEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -829,35 +829,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEmployee_Username() {
-		return (EAttribute)employeeEClass.getEStructuralFeatures().get(8);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEmployee_Password() {
-		return (EAttribute)employeeEClass.getEStructuralFeatures().get(9);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEmployee_LocalEnabled() {
-		return (EAttribute)employeeEClass.getEStructuralFeatures().get(10);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getEmployee_Role() {
-		return (EReference)employeeEClass.getEStructuralFeatures().get(11);
+		return (EReference)employeeEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -866,7 +839,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	public EAttribute getEmployee_PasswordHashed() {
-		return (EAttribute)employeeEClass.getEStructuralFeatures().get(12);
+		return (EAttribute)employeeEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -2325,9 +2298,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(employeeEClass, EMPLOYEE__START_DATE);
 		createEAttribute(employeeEClass, EMPLOYEE__JOB_FUNCTION);
 		createEAttribute(employeeEClass, EMPLOYEE__DEPARTMENT);
-		createEAttribute(employeeEClass, EMPLOYEE__NATIONAL_ID);
-		createEAttribute(employeeEClass, EMPLOYEE__NHIF_NUMBER);
-		createEAttribute(employeeEClass, EMPLOYEE__NSSF_NUMBER);
 		createEAttribute(employeeEClass, EMPLOYEE__USERNAME);
 		createEAttribute(employeeEClass, EMPLOYEE__PASSWORD);
 		createEAttribute(employeeEClass, EMPLOYEE__LOCAL_ENABLED);
@@ -2607,9 +2577,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getEmployee_StartDate(), ecorePackage.getEDate(), "startDate", null, 1, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEmployee_JobFunction(), ecorePackage.getEString(), "jobFunction", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEmployee_Department(), ecorePackage.getEString(), "department", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEmployee_NationalId(), ecorePackage.getEString(), "nationalId", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getEmployee_NhifNumber(), ecorePackage.getEString(), "nhifNumber", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEmployee_NssfNumber(), ecorePackage.getEString(), "nssfNumber", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEmployee_Username(), ecorePackage.getEString(), "username", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEmployee_Password(), ecorePackage.getEString(), "password", "", 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEmployee_LocalEnabled(), ecorePackage.getEBoolean(), "localEnabled", "true", 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -745,6 +745,33 @@ public interface DairyPackage extends EPackage {
 	int EMPLOYEE__PERSON_ID = ModelPackage.PERSON__PERSON_ID;
 
 	/**
+	 * The feature id for the '<em><b>Nssf Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPLOYEE__NSSF_NUMBER = ModelPackage.PERSON__NSSF_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Nhif Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPLOYEE__NHIF_NUMBER = ModelPackage.PERSON__NHIF_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>National Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPLOYEE__NATIONAL_ID = ModelPackage.PERSON__NATIONAL_ID;
+
+	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -790,40 +817,13 @@ public interface DairyPackage extends EPackage {
 	int EMPLOYEE__DEPARTMENT = ModelPackage.PERSON_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>National Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMPLOYEE__NATIONAL_ID = ModelPackage.PERSON_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Nhif Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMPLOYEE__NHIF_NUMBER = ModelPackage.PERSON_FEATURE_COUNT + 6;
-
-	/**
-	 * The feature id for the '<em><b>Nssf Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMPLOYEE__NSSF_NUMBER = ModelPackage.PERSON_FEATURE_COUNT + 7;
-
-	/**
 	 * The feature id for the '<em><b>Username</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE__USERNAME = ModelPackage.PERSON_FEATURE_COUNT + 8;
+	int EMPLOYEE__USERNAME = ModelPackage.PERSON_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Password</b></em>' attribute.
@@ -832,7 +832,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE__PASSWORD = ModelPackage.PERSON_FEATURE_COUNT + 9;
+	int EMPLOYEE__PASSWORD = ModelPackage.PERSON_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Local Enabled</b></em>' attribute.
@@ -841,7 +841,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE__LOCAL_ENABLED = ModelPackage.PERSON_FEATURE_COUNT + 10;
+	int EMPLOYEE__LOCAL_ENABLED = ModelPackage.PERSON_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Role</b></em>' reference.
@@ -850,7 +850,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE__ROLE = ModelPackage.PERSON_FEATURE_COUNT + 11;
+	int EMPLOYEE__ROLE = ModelPackage.PERSON_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Password Hashed</b></em>' attribute.
@@ -859,7 +859,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE__PASSWORD_HASHED = ModelPackage.PERSON_FEATURE_COUNT + 12;
+	int EMPLOYEE__PASSWORD_HASHED = ModelPackage.PERSON_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of structural features of the '<em>Employee</em>' class.
@@ -868,7 +868,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE_FEATURE_COUNT = ModelPackage.PERSON_FEATURE_COUNT + 13;
+	int EMPLOYEE_FEATURE_COUNT = ModelPackage.PERSON_FEATURE_COUNT + 10;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyLocationImpl <em>Location</em>}' class.
@@ -3261,39 +3261,6 @@ public interface DairyPackage extends EPackage {
 	EAttribute getEmployee_Department();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getNationalId <em>National Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>National Id</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Employee#getNationalId()
-	 * @see #getEmployee()
-	 * @generated
-	 */
-	EAttribute getEmployee_NationalId();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getNhifNumber <em>Nhif Number</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Nhif Number</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Employee#getNhifNumber()
-	 * @see #getEmployee()
-	 * @generated
-	 */
-	EAttribute getEmployee_NhifNumber();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getNssfNumber <em>Nssf Number</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Nssf Number</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Employee#getNssfNumber()
-	 * @see #getEmployee()
-	 * @generated
-	 */
-	EAttribute getEmployee_NssfNumber();
-
-	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getUsername <em>Username</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5418,30 +5385,6 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute EMPLOYEE__DEPARTMENT = eINSTANCE.getEmployee_Department();
-
-		/**
-		 * The meta object literal for the '<em><b>National Id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EMPLOYEE__NATIONAL_ID = eINSTANCE.getEmployee_NationalId();
-
-		/**
-		 * The meta object literal for the '<em><b>Nhif Number</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EMPLOYEE__NHIF_NUMBER = eINSTANCE.getEmployee_NhifNumber();
-
-		/**
-		 * The meta object literal for the '<em><b>Nssf Number</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EMPLOYEE__NSSF_NUMBER = eINSTANCE.getEmployee_NssfNumber();
 
 		/**
 		 * The meta object literal for the '<em><b>Username</b></em>' attribute feature.

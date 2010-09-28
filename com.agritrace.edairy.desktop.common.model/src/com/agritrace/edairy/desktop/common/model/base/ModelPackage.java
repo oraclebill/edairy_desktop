@@ -419,13 +419,40 @@ public interface ModelPackage extends EPackage {
 	int PERSON__PERSON_ID = CONTACTABLE_FEATURE_COUNT + 10;
 
 	/**
+	 * The feature id for the '<em><b>Nssf Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__NSSF_NUMBER = CONTACTABLE_FEATURE_COUNT + 11;
+
+	/**
+	 * The feature id for the '<em><b>Nhif Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__NHIF_NUMBER = CONTACTABLE_FEATURE_COUNT + 12;
+
+	/**
+	 * The feature id for the '<em><b>National Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__NATIONAL_ID = CONTACTABLE_FEATURE_COUNT + 13;
+
+	/**
 	 * The number of structural features of the '<em>Person</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON_FEATURE_COUNT = CONTACTABLE_FEATURE_COUNT + 11;
+	int PERSON_FEATURE_COUNT = CONTACTABLE_FEATURE_COUNT + 14;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl <em>Company</em>}' class.
@@ -1140,6 +1167,39 @@ public interface ModelPackage extends EPackage {
 	EAttribute getPerson_PersonId();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.base.Person#getNssfNumber <em>Nssf Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Nssf Number</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.base.Person#getNssfNumber()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_NssfNumber();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.base.Person#getNhifNumber <em>Nhif Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Nhif Number</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.base.Person#getNhifNumber()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_NhifNumber();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.base.Person#getNationalId <em>National Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>National Id</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.base.Person#getNationalId()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_NationalId();
+
+	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.base.Company <em>Company</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1779,6 +1839,30 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PERSON__PERSON_ID = eINSTANCE.getPerson_PersonId();
+
+		/**
+		 * The meta object literal for the '<em><b>Nssf Number</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__NSSF_NUMBER = eINSTANCE.getPerson_NssfNumber();
+
+		/**
+		 * The meta object literal for the '<em><b>Nhif Number</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__NHIF_NUMBER = eINSTANCE.getPerson_NhifNumber();
+
+		/**
+		 * The meta object literal for the '<em><b>National Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__NATIONAL_ID = eINSTANCE.getPerson_NationalId();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl <em>Company</em>}' class.

@@ -303,6 +303,33 @@ public interface TrackingPackage extends EPackage {
 	int FARMER__PERSON_ID = ModelPackage.PERSON__PERSON_ID;
 
 	/**
+	 * The feature id for the '<em><b>Nssf Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__NSSF_NUMBER = ModelPackage.PERSON__NSSF_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Nhif Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__NHIF_NUMBER = ModelPackage.PERSON__NHIF_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>National Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__NATIONAL_ID = ModelPackage.PERSON__NATIONAL_ID;
+
+	/**
 	 * The feature id for the '<em><b>Farms</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

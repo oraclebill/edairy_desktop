@@ -266,4 +266,8 @@ public class ViewWidgetId implements DialogConstants {
 	public static final String COLLECTION_FILTER_DATE_RANGE = "COLLECTION_FILTER_DATE_RANGE";
 
 	public static final String LIVESTOCK_FILTER_DATE_RANGE = "LIVESTOCK_FILTER_DATE_RANGE";
+
+	public static final String memberInfo_nationalId = "memberInfo_nationalId";
+	public static final String memberInfo_nssfId = "memberInfo_nssfId";
+	public static final String memberInfo_nhifId = "memberInfo_nhifId";
 }

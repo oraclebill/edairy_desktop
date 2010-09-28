@@ -47,9 +47,9 @@ public class EmployeeImportTool extends AbstractImportTool {
 			new Entry(FAMILY_NAME, ModelPackage.Literals.PERSON__FAMILY_NAME),
 			new Entry(JOB_TITLE, DairyPackage.Literals.EMPLOYEE__JOB_FUNCTION),
 			new Entry(DATE_STARTED, DairyPackage.Literals.EMPLOYEE__START_DATE),
-			new Entry(NATIONAL_ID, DairyPackage.Literals.EMPLOYEE__NATIONAL_ID),
-			new Entry(NSSF_NUMBER, DairyPackage.Literals.EMPLOYEE__NSSF_NUMBER),
-			new Entry(NHIF_NUMBER, DairyPackage.Literals.EMPLOYEE__NHIF_NUMBER), };
+			new Entry(NATIONAL_ID, ModelPackage.Literals.PERSON__NATIONAL_ID),
+			new Entry(NSSF_NUMBER, ModelPackage.Literals.PERSON__NSSF_NUMBER),
+			new Entry(NHIF_NUMBER, ModelPackage.Literals.PERSON__NHIF_NUMBER), };
 	
 	String[] expectedHeaders = { "employee id","given name","middle name","family name","job title","date started","national id","nssf number","nhif number" };
 
