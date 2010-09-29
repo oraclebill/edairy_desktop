@@ -11,6 +11,7 @@ import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.hibernate.Session;
 
 import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
+import com.agritrace.edairy.desktop.common.model.base.ImageEntry;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
@@ -25,6 +26,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.services.Audit;
 import com.agritrace.edairy.desktop.common.persistence.services.ISessionContextManager;
 import com.agritrace.edairy.desktop.common.persistence.services.ImageDataUtil;
+import com.agritrace.edairy.desktop.common.services.IImageEntryRepository;
 import com.agritrace.edairy.desktop.internal.common.persistence.AuditDataStoreProvider;
 import com.agritrace.edairy.desktop.internal.common.persistence.AuditSessionProvider;
 import com.agritrace.edairy.desktop.internal.common.persistence.HbDataStoreProvider;
@@ -83,6 +85,7 @@ public class PersistenceModule extends AbstractModule {
 		customRepositories.put(DairyLocation.class, IDairyLocationRepository.class);
 		customRepositories.put(Employee.class, IEmployeeRepository.class);
 		customRepositories.put(Farm.class, IFarmRepository.class);
+		customRepositories.put(ImageEntry.class, IImageEntryRepository.class);
 		customRepositories.put(Supplier.class, ISupplierRepository.class);
 	}
 	

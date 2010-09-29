@@ -9,25 +9,23 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageLoader;
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.common.model.base.ImageEntry;
 import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
+import com.agritrace.edairy.desktop.common.services.IImageEntryRepository;
 import com.agritrace.edairy.desktop.internal.common.persistence.Activator;
 import com.agritrace.edairy.desktop.internal.operations.services.DairyRepository;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 public final class ImageDataUtil {
 	@Inject
 	private static ImageDataUtil INSTANCE;
-	private Provider<Session> sessionProvider;
+	private final IImageEntryRepository repo;
 	
 	@Inject
-	protected ImageDataUtil(Provider<Session> sessionProvider) {
-		this.sessionProvider = sessionProvider;
+	protected ImageDataUtil(final IImageEntryRepository repo) {
+		this.repo = repo;
 	}
 
 	@Deprecated
@@ -42,7 +40,7 @@ public final class ImageDataUtil {
 		ImageData ret = null;
 		if (key != null) {
 			try {
-				ImageEntry entry = (ImageEntry) sessionProvider.get().load("ImageEntry", key);
+				ImageEntry entry = (ImageEntry) repo.findByKey(key);
 				final byte[] data = entry.getImageData();
 				debug_print(key, data);
 				InputStream stream = new ByteArrayInputStream(
@@ -63,32 +61,27 @@ public final class ImageDataUtil {
 			return;
 		}
 		
-		Session session = sessionProvider.get();
+		ImageEntry entry = (ImageEntry) repo.findByKey(key);
+		boolean saveNew = false;
 		
-		try {
-			Transaction tx = session.beginTransaction();
-			ImageEntry entry = (ImageEntry) session.get("ImageEntry", key);
-			if (entry == null) {
-				entry = ModelFactory.eINSTANCE.createImageEntry();
-				entry.setImageId(key);
-				entry.setMimeType("image/unknown");
-				session.save(entry);
-			}
-			final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			final ImageLoader loader = new ImageLoader();
-			loader.data = new ImageData[] { data };
-			loader.save(baos, data.type);
-			entry.setImageData(baos.toByteArray());
-			entry.setMimeType(decodeMimeType(data.type));
-			tx.commit();
-		} catch (HibernateException hbe) {
-			log(LogService.LOG_WARNING, "Error saving ImageEntry: " + key, hbe);
-		} finally {
-			if (session != null) {
-				session.clear();
-			}
+		if (entry == null) {
+			entry = ModelFactory.eINSTANCE.createImageEntry();
+			entry.setImageId(key);
+			entry.setMimeType("image/unknown");
+			saveNew = true;
 		}
-
+		
+		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		final ImageLoader loader = new ImageLoader();
+		loader.data = new ImageData[] { data };
+		loader.save(baos, data.type);
+		entry.setImageData(baos.toByteArray());
+		entry.setMimeType(decodeMimeType(data.type));
+		
+		if (saveNew)
+			repo.saveNew(entry);
+		else
+			repo.save(entry);
 	}
 
 	private static String decodeMimeType(int type) {
