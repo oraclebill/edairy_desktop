@@ -25,12 +25,15 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransactio
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
+import com.agritrace.edairy.desktop.common.persistence.IRepository;
+import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.agritrace.edairy.desktop.finance.ui.dialogs.AccountTransactionBatchEntryDialog;
 import com.agritrace.edairy.desktop.finance.ui.dialogs.AccountTransactionEditDialog;
 import com.agritrace.edairy.desktop.internal.finance.ui.Activator;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 @PermissionRequired(Permission.VIEW_TRANSACTIONS)
 public class AccountTransactionJournalController extends TransactionJournalController<AccountTransaction> {
@@ -74,15 +77,20 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 	private ITextRidget referenceNumRidget;
 	private IActionRidget batchEditRidget;
 
-	public AccountTransactionJournalController() {
-		this(null);
-	}
+	private final Provider<AccountTransactionEditDialog> editDialogProvider;
+	private final Provider<AccountTransactionBatchEntryDialog> batchEntryProvider;
 
-	public AccountTransactionJournalController(ISubModuleNode node) {
-		super(node);
+	@Inject
+	public AccountTransactionJournalController(final IRepository<AccountTransaction> repo,
+			final Provider<MemberSearchDialog> memberSearchProvider,
+			final Provider<AccountTransactionEditDialog> editDialogProvider,
+			final Provider<AccountTransactionBatchEntryDialog> batchEntryProvider) {
+		super(memberSearchProvider);
+		this.editDialogProvider = editDialogProvider;
+		this.batchEntryProvider = batchEntryProvider;
 		
 		setEClass(AccountPackage.Literals.ACCOUNT_TRANSACTION);
-		setRepository(RepositoryFactory.getRepository(AccountTransaction.class));
+		setRepository(repo);
 
 		this.addTableColumn("ID", AccountPackage.Literals.TRANSACTION__TRANSACTION_ID);
 		this.addTableColumn("Date", AccountPackage.Literals.TRANSACTION__TRANSACTION_DATE);
@@ -167,8 +175,8 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 	}
 
 	private void handleBatchEntryAction() {
-		final AccountTransactionBatchEntryDialog dialog = new AccountTransactionBatchEntryDialog();
-		final ArrayList<AccountTransaction> transactionList = new ArrayList<AccountTransaction>();
+		final AccountTransactionBatchEntryDialog dialog = batchEntryProvider.get();
+		final List<AccountTransaction> transactionList = new ArrayList<AccountTransaction>();
 		dialog.getController().setContext("tranaction-list", transactionList);
 		final int returnCode = dialog.open();
 		
@@ -191,7 +199,7 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 
 	@Override
 	protected RecordDialog<AccountTransaction> getRecordDialog(Shell shell) {
-		return new AccountTransactionEditDialog(shell);
+		return editDialogProvider.get();
 	}
 
 }

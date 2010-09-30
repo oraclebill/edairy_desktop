@@ -23,7 +23,6 @@ import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.LocationProfileWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controls.IDataChangeListener;
 import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.IContactMethodsGroupRidget;
@@ -31,6 +30,7 @@ import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.IProfilePhot
 import com.agritrace.edairy.desktop.common.ui.validators.PhoneNumberValidatiionRule;
 import com.agritrace.edairy.desktop.dairy.profile.ui.DairyProfileViewWidgetID;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
+import com.google.inject.Inject;
 
 /**
  * Dairy Profile view controller
@@ -130,9 +130,9 @@ public class DairyProfileViewController extends SubModuleController {
 	 * Constructor
 	 * 
 	 */
-	public DairyProfileViewController() {
-		super();
-		dairyRepository = RepositoryFactory.getDairyRepository();
+	@Inject
+	public DairyProfileViewController(final IDairyRepository dairyRepository) {
+		this.dairyRepository = dairyRepository;
 		localDairy = dairyRepository.getLocalDairy();
 	}
 

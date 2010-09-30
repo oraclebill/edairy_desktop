@@ -7,7 +7,6 @@ import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
-import org.eclipse.jface.util.Assert;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDecimalTextRidget;
@@ -25,13 +24,15 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDetailPanelController;
 import com.agritrace.edairy.desktop.common.ui.controllers.util.BindingHelper;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberLookupAction;
+import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * A controller type thing for the account transaction edit panel.
@@ -57,9 +58,18 @@ public class AccountTransactionEditPanelController extends AbstractDetailPanelCo
 
 	}
 
-	private final IDairyRepository dairyRepo = RepositoryFactory.getDairyRepository();
 	private IComboRidget storeLocation;
 	private ITextRidget memberName;
+	
+	private final IDairyRepository dairyRepo;
+	private final Provider<MemberSearchDialog> memberSearchProvider;
+	
+	@Inject
+	public AccountTransactionEditPanelController(final IDairyRepository dairyRepo,
+			final Provider<MemberSearchDialog> memberSearchProvider) {
+		this.dairyRepo = dairyRepo;
+		this.memberSearchProvider = memberSearchProvider;
+	}
 
 	@Override
 	public void configureAndBind() {
@@ -114,6 +124,11 @@ public class AccountTransactionEditPanelController extends AbstractDetailPanelCo
 			@Override
 			protected void callback(Membership selectedMember) {
 				setSelectedMember(selectedMember);
+			}
+
+			@Override
+			protected MemberSearchDialog getMemberSearchDialog() {
+				return memberSearchProvider.get();
 			}
 		});
 

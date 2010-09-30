@@ -9,21 +9,23 @@ import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.finance.ui.controls.AccountTransactionEditPanel;
 import com.agritrace.edairy.desktop.finance.ui.controls.AccountTransactionEditPanelController;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 public class AccountTransactionEditDialog extends RecordDialog<AccountTransaction> {
 
 	public static class AccountTransactionEditController extends RecordDialogController<AccountTransaction> {
+		private final AccountTransactionEditPanelController panelController;
 
-		private AccountTransactionEditPanelController panelController;
-
-		public AccountTransactionEditController() {
+		@Inject
+		public AccountTransactionEditController(final AccountTransactionEditPanelController panelController) {
 			super();
+			this.panelController = panelController;
 			setReturnCode(ACTION_CANCEL);
 		}
 
 		@Override
 		protected void configureUserRidgets() {
-			panelController = new AccountTransactionEditPanelController();
 			panelController.setModel(getWorkingCopy());
 			panelController.setRidgetContainer(this);
 		}
@@ -42,20 +44,16 @@ public class AccountTransactionEditDialog extends RecordDialog<AccountTransactio
 
 	}
 
-	public AccountTransactionEditDialog(Shell parentShell) {
-		super(parentShell);
+	@Inject
+	public AccountTransactionEditDialog(final @Named("current") Shell parentShell,
+			final AccountTransactionEditController controller) {
+		super(parentShell, controller);
 	}
 
 	@Override
 	protected void buildWorkArea(Composite comp) {
 		new AccountTransactionEditPanel(comp, SWT.NONE);
 
-	}
-
-	@Override
-	protected AccountTransactionEditController createController() {
-		final AccountTransactionEditController controller = new AccountTransactionEditController();
-		return controller;
 	}
 
 }

@@ -14,27 +14,28 @@ import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.ContainerBindingConstants;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.ContainerEditDialog;
+import com.google.inject.Inject;
 
 @PermissionRequired(Permission.VIEW_DAIRY_BINS)
 public class ContainersDirectoryViewController extends BasicDirectoryController<DairyContainer> {
 
 	private final ContainerSearchBean searchBean = new ContainerSearchBean();
 	private final IRepository<DairyContainer> containerRepository;
-	private final IDairyRepository dairyRepository = RepositoryFactory.getDairyRepository();
+	private final IDairyRepository dairyRepository;
 
 	private ITextRidget trackingText;
 
-	public ContainersDirectoryViewController() {
-		super();
+	@Inject
+	public ContainersDirectoryViewController(final IDairyRepository dairyRepo, final IRepository<DairyContainer> repo) {
 		setEClass(DairyPackage.Literals.DAIRY_CONTAINER);
-		containerRepository = RepositoryFactory.getRepository(DairyContainer.class);
+		dairyRepository = dairyRepo;
+		containerRepository = repo;
 		setRepository(containerRepository);
 
 		addTableColumn("ID", TrackingPackage.Literals.CONTAINER__CONTAINER_ID);

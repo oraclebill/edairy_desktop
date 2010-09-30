@@ -26,7 +26,6 @@ import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
@@ -38,6 +37,8 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.data.ContainerListViewTableNode;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddContainerDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewContainerDialog;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 @PermissionRequired(Permission.VIEW_CONTAINERS)
 public class ContainerListViewController extends BasicDirectoryController<Container> {
@@ -62,10 +63,22 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 	private Membership selectedMember;
 
 	private final List<ContainerListViewTableNode> tableInput = new ArrayList<ContainerListViewTableNode>();
+	private final Provider<MemberSearchDialog> memberSearchProvider;
+	private final Provider<AddContainerDialog> addContainerProvider;
+	private final Provider<ViewContainerDialog> viewContainerProvider;
 
-	public ContainerListViewController() {
-		farmRepository = RepositoryFactory.getRegisteredRepository(IFarmRepository.class);
+	@Inject
+	public ContainerListViewController(final IFarmRepository farmRepository,
+			final Provider<MemberSearchDialog> memberSearchProvider,
+			final Provider<AddContainerDialog> addContainerProvider,
+			final Provider<ViewContainerDialog> viewContainerProvider) {
+		this.farmRepository = farmRepository;
+		this.memberSearchProvider = memberSearchProvider;
+		this.addContainerProvider = addContainerProvider;
+		this.viewContainerProvider = viewContainerProvider;
+		
 		setEClass(TrackingPackage.Literals.CONTAINER);
+		
 		for (int i = 0; i < containerPropertyNames.length; i++) {
 			addTableColumn(containerColumnHeaders[i], containerPropertyNames[i], String.class);
 		}
@@ -266,7 +279,7 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 	public class MemberLookupAction implements IActionListener {
 		@Override
 		public void callback() {
-			final MemberSearchDialog memberDialog = new MemberSearchDialog(null);
+			final MemberSearchDialog memberDialog = memberSearchProvider.get();
 			final int retVal = memberDialog.open();
 			if (retVal == Window.OK) {
 				selectedMember = memberDialog.getSelectedMember();
@@ -286,7 +299,7 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 	protected void handleNewItemAction() {
 
 		Container container = DairyUtil.createContainer(ContainerType.BIN, UnitOfMeasure.LITRE, null, 0.0);
-		final AddContainerDialog memberDialog = new AddContainerDialog(AbstractDirectoryController.getShell());
+		final AddContainerDialog memberDialog = addContainerProvider.get();
 		final List<Farm> inputFarms = new ArrayList<Farm>();
 		final int index = farmCombo.getSelectionIndex();
 		if (index == 0 || index == -1) {
@@ -315,7 +328,7 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 	protected void handleViewItemAction() {
 
 		final ContainerListViewTableNode selectedNode = (ContainerListViewTableNode) table.getSelection().get(0);
-		final ViewContainerDialog dialog = new ViewContainerDialog(AbstractDirectoryController.getShell());
+		final ViewContainerDialog dialog = viewContainerProvider.get();
 		final List<Farm> inputFarms = new ArrayList<Farm>();
 		inputFarms.add(selectedNode.getContainer().getOwner());
 

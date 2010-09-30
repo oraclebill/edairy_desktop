@@ -102,7 +102,7 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 				currentKey = null;
 			} else if (!key.equals(currentKey)) {
 				currentKey = key;
-				imageData = ImageDataUtil.getImageData(currentKey);
+				imageData = ImageDataUtil.getInstance().getImageData(currentKey);
 			}
 		}
 		updateDisplay();
@@ -251,7 +251,7 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 			modelObj.setValue(imageRefKey);
 		}
 		
-		ImageDataUtil.saveImageData(imageRefKey, imageData);
+		ImageDataUtil.getInstance().saveImageData(imageRefKey, imageData);
 	}
 
 	private void updateDisplay() {

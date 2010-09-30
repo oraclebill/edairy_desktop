@@ -33,8 +33,8 @@ import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRe
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.internal.home.HomeActivator;
+import com.google.inject.Inject;
 
 public class DairyHomeView extends ViewPart {
 	public static final String ID = "desktop.home.view";
@@ -54,8 +54,6 @@ public class DairyHomeView extends ViewPart {
 
 		public Object function(Object[] arguments) {
 			Date today = new Date();
-			ICollectionJournalLineRepository journalRepository = (ICollectionJournalLineRepository) RepositoryFactory
-					.getRepository(CollectionJournalLine.class);
 			List<CollectionGroup> groups = journalRepository.allForDate(today);
 
 			Object[] retVal;
@@ -111,6 +109,9 @@ public class DairyHomeView extends ViewPart {
 		}
 	}
 
+	@Inject
+	private static ICollectionJournalLineRepository journalRepository;
+	
 	public DairyHomeView() {
 	}
 

@@ -18,8 +18,9 @@ import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.csvreader.CsvReader;
+import com.google.inject.Inject;
 
 /**
  * Create a dairy configuration by importing excel data in standard format.
@@ -53,31 +54,36 @@ public class EmployeeImportTool extends AbstractImportTool {
 	
 	String[] expectedHeaders = { "employee id","given name","middle name","family name","job title","date started","national id","nssf number","nhif number" };
 
-	final private List<Employee> empList;
-	final Map<String, List<String[]>> errors;
-	final private IProgressMonitor monitor;
-	final private Map<String, Object> employeeCache;
+	private List<Employee> empList;
+	Map<String, List<String[]>> errors;
+	private IProgressMonitor monitor;
+	private Map<String, Object> employeeCache;
+	
+	private final IDairyRepository dairyRepo;
 	
 	private Reader reader;
 	private int count = 0, errCount = 0;
 
-	
-	public EmployeeImportTool(InputStream input, List<Employee> successes,
-			Map<String, List<String[]>> errors, IProgressMonitor monitor) {
+	@Inject
+	public EmployeeImportTool(final IDairyRepository dairyRepo) {
+		this.dairyRepo = dairyRepo;
+		
+	}
+
+	public void processFile(InputStream input, List<Employee> successes,
+			Map<String, List<String[]>> errors, IProgressMonitor monitor) throws IOException {
 		this.empList = successes;
 		this.errors = errors;
 		this.monitor = monitor;
 
 		reader = new BufferedReader(new InputStreamReader(input));
 		
-		Dairy dairy = RepositoryFactory.getDairyRepository().getLocalDairy();
+		Dairy dairy = dairyRepo.getLocalDairy();
 		employeeCache = new HashMap<String, Object>();
 		for (Employee member : dairy.getEmployees()) {
 			employeeCache.put(member.getId(), member);
 		}
-	}
 
-	public void processFile() throws IOException {
 		CsvReader csvReader = new CsvReader(reader);
 		csvReader.readRecord();
 		String[] headers = csvReader.getValues();

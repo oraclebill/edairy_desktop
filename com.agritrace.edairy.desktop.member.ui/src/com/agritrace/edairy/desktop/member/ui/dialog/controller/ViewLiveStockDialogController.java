@@ -53,6 +53,8 @@ import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.IOwnershipGroupRidget;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class ViewLiveStockDialogController extends BaseDialogController<RegisteredAnimal> implements ISelectionListener {
 
@@ -120,9 +122,12 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 	IOwnershipGroupRidget ownershipRidget;
 	
 	boolean enableLookupBtn = true;
+	
+	private final Provider<MemberSearchDialog> memberSearchProvider;
 
-	public ViewLiveStockDialogController() {
-
+	@Inject
+	public ViewLiveStockDialogController(final Provider<MemberSearchDialog> memberSearchProvider) {
+		this.memberSearchProvider = memberSearchProvider;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -513,7 +518,7 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 	public class MemberLookupAction implements IActionListener {
 		@Override
 		public void callback() {
-			final MemberSearchDialog memberDialog = new MemberSearchDialog(null);
+			final MemberSearchDialog memberDialog = memberSearchProvider.get();
 			final int retVal = memberDialog.open();
 			if (retVal == Window.OK) {
 				selectedMember = memberDialog.getSelectedMember();

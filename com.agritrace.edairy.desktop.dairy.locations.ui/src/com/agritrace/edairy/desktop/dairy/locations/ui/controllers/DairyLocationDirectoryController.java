@@ -18,7 +18,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
@@ -27,6 +26,7 @@ import com.agritrace.edairy.desktop.dairy.locations.ui.DairyLocationUIConstants;
 import com.agritrace.edairy.desktop.dairy.locations.ui.dialogs.DairyLocationEditDialog;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.agritrace.edairy.desktop.operations.services.dairylocation.IDairyLocationRepository;
+import com.google.inject.Inject;
 
 @PermissionRequired(Permission.VIEW_DAIRY_LOCATIONS)
 public class DairyLocationDirectoryController extends
@@ -38,7 +38,7 @@ public class DairyLocationDirectoryController extends
 	private final DairyLocationSearchBean searchBean = new DairyLocationSearchBean();
 	private IDairyLocationRepository dairyLocationRepo;
 
-	private final IDairyRepository dairyRepo = RepositoryFactory.getDairyRepository();
+	private final IDairyRepository dairyRepo;
 	// private final Dairy localDairy = dairyRepo.getLocalDairy();
 
 	@Override
@@ -48,10 +48,12 @@ public class DairyLocationDirectoryController extends
 		}
 	}
 
-	public DairyLocationDirectoryController() {
+	@Inject
+	public DairyLocationDirectoryController(IDairyLocationRepository dairyLocationRepo, IDairyRepository dairyRepo) {
 		super();
 		setEClass(DairyPackage.Literals.DAIRY_LOCATION);
-		dairyLocationRepo = RepositoryFactory.getRegisteredRepository(IDairyLocationRepository.class);
+		this.dairyLocationRepo = dairyLocationRepo;
+		this.dairyRepo = dairyRepo;
 		setRepository(dairyLocationRepo);
 
 		addTableColumn("Name", DairyPackage.Literals.DAIRY_LOCATION__NAME);

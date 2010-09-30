@@ -45,13 +45,17 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
+import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.agritrace.edairy.desktop.operations.services.dairylocation.IDairyLocationRepository;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 
-	private final IDairyRepository dairyRepository = RepositoryFactory.getDairyRepository();
+	private final IDairyRepository dairyRepository;
+	private final IDairyLocationRepository dairyLocationRepo;
+	private final IRepository<CollectionSession> sessionRepo;
 	private DateTime datePicker;
 	private CCombo driverCombo;
 	private final CollectionGroup newJournalPage;
@@ -62,8 +66,14 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 	private List<Employee> drivers;
 	private List<Vehicle> vehicles;
 
-	public NewMilkCollectionJournalDialog(Shell parentShell) {
+	@Inject
+	public NewMilkCollectionJournalDialog(@Named("current") final Shell parentShell,
+			final IDairyRepository dairyRepository, final IDairyLocationRepository dairyLocationRepo,
+			final IRepository<CollectionSession> sessionRepo) {
 		super(parentShell);
+		this.dairyRepository = dairyRepository;
+		this.dairyLocationRepo = dairyLocationRepo;
+		this.sessionRepo = sessionRepo;
 		newJournalPage = DairyFactory.eINSTANCE.createCollectionGroup();
 		newJournalPage.setType(CollectionGroupType.JOURNAL_GROUP);
 	}
@@ -159,8 +169,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		final Dairy localDairy = dairyRepository.getLocalDairy();
 
 		try {
-			final IDairyLocationRepository repo = RepositoryFactory.getRegisteredRepository(IDairyLocationRepository.class);
-			List<DairyLocation> centers = repo.allCollectionCenters();
+			List<DairyLocation> centers = dairyLocationRepo.allCollectionCenters();
 			center.bindToModel(new WritableList(centers, DairyLocation.class), DairyLocation.class, "getCode", 
 					PojoObservables.observeValue( newJournalPage,
 							DairyPackage.Literals.COLLECTION_GROUP__COLLECTION_CENTER.getName()));
@@ -182,7 +191,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		}
 
 		try {
-			List<CollectionSession> sessions = RepositoryFactory.getRepository(CollectionSession.class).all();
+			List<CollectionSession> sessions = sessionRepo.all();
 			
 			session.bindToModel(new WritableList(sessions, CollectionSession.class),
 					CollectionSession.class, "getCode",

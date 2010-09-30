@@ -17,19 +17,32 @@ import com.agritrace.edairy.desktop.common.model.base.ImageEntry;
 import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
 import com.agritrace.edairy.desktop.internal.common.persistence.Activator;
 import com.agritrace.edairy.desktop.internal.operations.services.DairyRepository;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public final class ImageDataUtil {
-	private ImageDataUtil() { }
+	@Inject
+	private static ImageDataUtil INSTANCE;
+	private Provider<Session> sessionProvider;
+	
+	@Inject
+	protected ImageDataUtil(Provider<Session> sessionProvider) {
+		this.sessionProvider = sessionProvider;
+	}
 
+	@Deprecated
+	public static ImageDataUtil getInstance() {
+		return INSTANCE;
+	}
+	
 	/**
 	 * 
 	 */
-	public static ImageData getImageData(String key) {
+	public ImageData getImageData(String key) {
 		ImageData ret = null;
 		if (key != null) {
 			try {
-				ImageEntry entry = (ImageEntry) PersistenceManager.getDefault()
-						.getSession().load("ImageEntry", key);
+				ImageEntry entry = (ImageEntry) sessionProvider.get().load("ImageEntry", key);
 				final byte[] data = entry.getImageData();
 				debug_print(key, data);
 				InputStream stream = new ByteArrayInputStream(
@@ -45,11 +58,13 @@ public final class ImageDataUtil {
 	/**
 	 * 
 	 */
-	public static void saveImageData(String key, ImageData data) {
+	public void saveImageData(String key, ImageData data) {
 		if (key == null) {
 			return;
 		}
-		Session session = PersistenceManager.getDefault().getSession();
+		
+		Session session = sessionProvider.get();
+		
 		try {
 			Transaction tx = session.beginTransaction();
 			ImageEntry entry = (ImageEntry) session.get("ImageEntry", key);

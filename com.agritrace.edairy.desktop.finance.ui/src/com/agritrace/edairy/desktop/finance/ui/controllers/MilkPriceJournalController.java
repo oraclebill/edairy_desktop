@@ -18,7 +18,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkPricePeriod;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
+import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.ui.columnformatters.PersonToFormattedName;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controls.daterange.IDateRangeRidget;
@@ -26,6 +26,7 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.finance.ui.MilkPriceJournalConstants;
 import com.agritrace.edairy.desktop.finance.ui.dialogs.MilkPriceEditDialog;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
+import com.google.inject.Inject;
 
 @PermissionRequired(Permission.VIEW_MILK_PRICES)
 public class MilkPriceJournalController extends BasicDirectoryController<MilkPrice> {
@@ -62,17 +63,16 @@ public class MilkPriceJournalController extends BasicDirectoryController<MilkPri
 
 	}
 	
-	private final IDairyRepository dairyRepo = RepositoryFactory.getDairyRepository();
+	private final IDairyRepository dairyRepo;
 	private final FilterBean filterBean = new FilterBean();
 	private ILabelRidget currentPriceLabel;
 	private IDateRangeRidget dateRange;
 
-
-	public MilkPriceJournalController() {
-
+	@Inject
+	public MilkPriceJournalController(final IDairyRepository dairyRepo, final IRepository<MilkPrice> repo) {
+		this.dairyRepo = dairyRepo;
 		setEClass(DairyPackage.Literals.MILK_PRICE);
-		setRepository(RepositoryFactory.getRepository(MilkPrice.class));
-		// setRepository(new Repo());
+		setRepository(repo);
 
 		addTableColumn("Period", DairyPackage.Literals.MILK_PRICE__PRICE_PERIOD);
 		addTableColumn("Date", DairyPackage.Literals.MILK_PRICE__PRICE_DATE);
@@ -191,7 +191,7 @@ public class MilkPriceJournalController extends BasicDirectoryController<MilkPri
 
 	@Override
 	protected void createEntity(MilkPrice newEntity) {
-		RepositoryFactory.getDairyRepository().getLocalDairy().getPriceHistory().add(newEntity);
+		dairyRepo.getLocalDairy().getPriceHistory().add(newEntity);
 		super.createEntity(newEntity);
 	}
 
@@ -199,7 +199,7 @@ public class MilkPriceJournalController extends BasicDirectoryController<MilkPri
 	 * FIXME
 	 */
 	private Employee getDefaultUser() {
-		Employee defaultEmp = RepositoryFactory.getDairyRepository().getLocalDairy().getEmployees().get(0);
+		Employee defaultEmp = dairyRepo.getLocalDairy().getEmployees().get(0);
 		return defaultEmp;
 	}
 

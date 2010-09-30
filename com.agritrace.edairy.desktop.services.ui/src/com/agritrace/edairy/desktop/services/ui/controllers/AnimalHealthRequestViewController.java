@@ -41,7 +41,6 @@ import com.agritrace.edairy.desktop.common.model.requests.RequestType;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.FarmSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
@@ -50,6 +49,8 @@ import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 import com.agritrace.edairy.desktop.services.ui.dialogs.AnimalHealthRequestDialog;
 import com.agritrace.edairy.desktop.services.ui.views.AnimalHealthRequestView;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * Service Requests view controller
@@ -63,7 +64,7 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 	private final class FarmLookupAction implements IActionListener {
 		@Override
 		public void callback() {
-			final FarmSearchDialog farmDialog = new FarmSearchDialog(Display.getCurrent().getActiveShell());
+			final FarmSearchDialog farmDialog = farmSearchDialogProvider.get();
 			farmDialog.setSelectedMember(condtionsBean.getSelectedMember());
 
 			final int retVal = farmDialog.open();
@@ -78,7 +79,7 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 	private final class MemberLookupAction implements IActionListener {
 		@Override
 		public void callback() {
-			final MemberSearchDialog dialog = new MemberSearchDialog(Display.getCurrent().getActiveShell());
+			final MemberSearchDialog dialog = memberSearchDialogProvider.get();
 			dialog.setSelectedMember(condtionsBean.getSelectedMember());
 			dialog.setSelectedFarm(condtionsBean.getSelectedFarm());
 			final int ret = dialog.open();
@@ -111,12 +112,18 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 	private IRepository<AnimalHealthRequest> myRepo;
 
 	private IDateTimeRidget startDateText;
-
 	private IToggleButtonRidget vertRidget;
+	
+	private final Provider<FarmSearchDialog> farmSearchDialogProvider;
+	private final Provider<MemberSearchDialog> memberSearchDialogProvider;
 
-	public AnimalHealthRequestViewController() {
-		super();
-		setRepository(myRepo = RepositoryFactory.getRepository(AnimalHealthRequest.class));
+	@Inject
+	public AnimalHealthRequestViewController(final IRepository<AnimalHealthRequest> myRepo,
+			final Provider<FarmSearchDialog> farmSearchDialogProvider,
+			final Provider<MemberSearchDialog> memberSearchDialogProvider) {
+		setRepository(this.myRepo = myRepo);
+		this.farmSearchDialogProvider = farmSearchDialogProvider;
+		this.memberSearchDialogProvider = memberSearchDialogProvider;
 	}
 	
 	@Override

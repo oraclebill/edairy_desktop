@@ -22,15 +22,19 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.internal.StartupThreading.StartupRunnable;
 import org.eclipse.ui.internal.splash.EclipseSplashHandler;
 
-import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.ui.controllers.AuthController;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 @SuppressWarnings("restriction")
 public class EdairySplashHandler extends EclipseSplashHandler {
+	@Inject
+	private static Provider<AuthController> PROVIDER;
+	
 	private static final int WAIT_MSEC = 5000;
 	
-	private volatile boolean initialized = false;
+	private AuthController authController = null;
 	private boolean authenticated = false;
 	private Label developerLabel;
 	private Text username;
@@ -55,22 +59,16 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 		long endTime = System.currentTimeMillis() + WAIT_MSEC;
 		
 		final IProgressMonitor monitor = getBundleProgressMonitor();
-		monitor.beginTask("Initializing database", 2);
-		
-		getSplash().getDisplay().asyncExec(new StartupRunnable() {
+		monitor.beginTask("Initializing database", 1);
+		splash.getDisplay().asyncExec(new StartupRunnable() {
 			@Override
 			public void runWithException() throws Throwable {
-				PersistenceManager pm = PersistenceManager.getDefault();
-				monitor.worked(1);
-				// Force Hibernate to initialize - how should we do this elegantly?
-				pm.getSession().close();
-				monitor.worked(1);
-				
-				initialized = true;
+				// Force initialization of the persistence layer
+				authController = PROVIDER.get();
 			}
 		});
 		
-		while (!initialized || System.currentTimeMillis() < endTime) {
+		while (System.currentTimeMillis() < endTime || authController == null) {
 			if (splash.getDisplay().readAndDispatch() == false) {
 				splash.getDisplay().sleep();
 			}
@@ -128,7 +126,7 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 		buttonOK.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				authenticated = AuthController.authenticate(username.getText(), password.getText());
+				authenticated = authController.authenticate(username.getText(), password.getText());
 				
 				if (!authenticated) {
 					MessageDialog.openWarning(getSplash(), "Authentication Failure",

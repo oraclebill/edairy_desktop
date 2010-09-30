@@ -23,10 +23,12 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controls.daterange.IDateRangeRidget;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberLookupAction;
+import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.util.FilterUtil;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.agritrace.edairy.desktop.internal.finance.ui.Activator;
+import com.google.inject.Provider;
 
 public abstract class TransactionJournalController<T extends Transaction> extends BasicDirectoryController<T> {
 
@@ -67,17 +69,20 @@ public abstract class TransactionJournalController<T extends Transaction> extend
 	protected ITextRidget memberNameRidget;
 	protected IDateRangeRidget dateRangeRidget;
 	private IActionRidget memberLookupRidget;
+	private final Provider<MemberSearchDialog> memberSearchProvider;
 
 	// protected ITextRidget referenceNumberRidget;
 	// protected ISingleChoiceRidget transactionSourceRidget;
 
 	// abstract class requires subclass to
-	protected TransactionJournalController() {
-		this(null);
+	protected TransactionJournalController(final Provider<MemberSearchDialog> memberSearchProvider) {
+		this(null, memberSearchProvider);
 	}
 
-	protected TransactionJournalController(final ISubModuleNode node) {
+	protected TransactionJournalController(final ISubModuleNode node,
+			final Provider<MemberSearchDialog> memberSearchProvider) {
 		super(node);
+		this.memberSearchProvider = memberSearchProvider;
 	}
 
 	@Override
@@ -93,6 +98,11 @@ public abstract class TransactionJournalController<T extends Transaction> extend
 			protected void callback(Membership selectedMember) {
 				filterBean.setMember(selectedMember);
 				memberNameRidget.setText(MemberUtil.formattedMemberName(selectedMember.getMember()));
+			}
+
+			@Override
+			protected MemberSearchDialog getMemberSearchDialog() {
+				return memberSearchProvider.get();
 			}
 		});
 	}

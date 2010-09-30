@@ -2,7 +2,6 @@ package com.agritrace.edairy.desktop.collection.ui.dialogs;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
-import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.swt.MasterDetailsComposite;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
@@ -14,6 +13,8 @@ import org.eclipse.swt.widgets.Text;
 import com.agritrace.edairy.desktop.collection.ui.ViewConstants;
 import com.agritrace.edairy.desktop.collection.ui.controllers.SessionEditDialogController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.BaseDialogView;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 public class SessionEditDialog extends BaseDialogView {
 	private class SessionEditPanel extends Composite {
@@ -36,8 +37,9 @@ public class SessionEditDialog extends BaseDialogView {
 		}
 	}
 	
-	public SessionEditDialog(Shell parentShell) {
-		super(parentShell);
+	@Inject
+	public SessionEditDialog(final @Named("current") Shell parentShell, final SessionEditDialogController controller) {
+		super(parentShell, controller);
 	}
 
 	@Override
@@ -57,10 +59,4 @@ public class SessionEditDialog extends BaseDialogView {
 		addUIControl(master, "master");
 		GridLayoutFactory.fillDefaults().generateLayout(master);
 	}
-
-	@Override
-	protected AbstractWindowController createController() {
-		return new SessionEditDialogController();
-	}
-
 }

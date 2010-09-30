@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.install;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
@@ -23,7 +24,9 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
+import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
+import com.google.inject.Inject;
 
 /**
  * Create a dairy configuration by importing excel data in standard format.
@@ -61,30 +64,41 @@ public class MemberTransactionImportTool extends AbstractImportTool {
 
 	final private Map<String, Account> memberAccountCache = new HashMap<String, Account>();
 	final private Map<String, DairyLocation> locationCache = new HashMap<String, DairyLocation>();
-	final private List<AccountTransaction> transactions;
-	final private Map<String, List<String[]>> failedRecords;
+	private Map<String, List<String[]>> failedRecords;
+	private List<AccountTransaction> transactions;
+	
+	private final IDairyRepository dairyRepo;
+	private final IMemberRepository memberRepo;
 
 	private int count = 0, errCount = 0;
 	private SimpleDateFormat dateFormat;
 
-	public MemberTransactionImportTool(InputStream input, List<AccountTransaction> transactions,
-			Map<String, List<String[]>> errors, IProgressMonitor monitor) {
-		super(new InputStreamReader(input));
+	@Inject
+	public MemberTransactionImportTool(final IDairyRepository dairyRepo, final IMemberRepository memberRepo) {
+		this.dairyRepo = dairyRepo;
+		this.memberRepo = memberRepo;
+	}
+	
+	public void processFile(InputStream input, List<AccountTransaction> transactions,
+			Map<String, List<String[]>> errors, IProgressMonitor monitor) throws IOException {
+		setReader(new InputStreamReader(input));
 		setMonitor(monitor);
 		
 		this.transactions = transactions;
 		this.failedRecords = errors;
 		this.dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-		for (DairyLocation location : RepositoryFactory.getDairyRepository().getLocalDairyLocations()) {
+		for (DairyLocation location : dairyRepo.getLocalDairyLocations()) {
 			locationCache.put(location.getCode(), location);
 		}
 		
 		//List<Account> accounts = RepositoryFactory.getRepository(Account.class).all();
-		List<Account> accounts = RepositoryFactory.getMemberRepository().allAccounts();
+		List<Account> accounts = memberRepo.allAccounts();
 		System.err.println("======== retrieved allaccounts ============");
 		for (Account account : accounts) {
 			memberAccountCache.put(account.getAccountNumber().substring(1), account);
 		}
+		
+		super.processFile();
 	}
 	
 	@Override

@@ -15,7 +15,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Preference;
 import com.agritrace.edairy.desktop.common.model.dairy.PreferenceKey;
 import com.agritrace.edairy.desktop.common.model.dairy.PreferenceType;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
+import com.google.inject.Inject;
 
 /**
  * An implementation of <code>IPreferenceStore</code> backed by the database. Used for user and system settings.
@@ -29,13 +29,20 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 	private final Map<String, PreferenceKey> keys = new HashMap<String, PreferenceKey>();
 	private boolean needsSaving = false;
 	
+	private final IRepository<PreferenceKey> keyRepo;
+	private final IRepository<Preference> valueRepo;
+	
 	/* Load and store */
-	public DBPreferenceStore() {
-		for (final PreferenceKey key: RepositoryFactory.getRepository(PreferenceKey.class).all()) {
+	@Inject
+	public DBPreferenceStore(final IRepository<PreferenceKey> keyRepo, final IRepository<Preference> valueRepo) {
+		this.keyRepo = keyRepo;
+		this.valueRepo = valueRepo;
+		
+		for (final PreferenceKey key: keyRepo.all()) {
 			keys.put(key.getName(), key);
 		}
 
-		for (final Preference value: RepositoryFactory.getRepository(Preference.class).all()) {
+		for (final Preference value: valueRepo.all()) {
 			values.put(value.getKey().getName(), value);
 		}
 	}
@@ -45,9 +52,6 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 		try {
 			if (!needsSaving())
 				return;
-			
-			final IRepository<PreferenceKey> keyRepo = RepositoryFactory.getRepository(PreferenceKey.class);
-			final IRepository<Preference> valueRepo = RepositoryFactory.getRepository(Preference.class);
 			
 			// First save...
 			

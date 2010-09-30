@@ -41,6 +41,10 @@ public abstract class AbstractImportTool {
 	}
 
 	public AbstractImportTool(Reader reader) {
+		setReader(reader);
+	}
+	
+	protected void setReader(Reader reader) {
 		this.reader = reader;
 	}
 

@@ -36,7 +36,8 @@ import org.eclipse.swt.widgets.Text;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * This is a demo dialog copied from MemberSearchDialog
@@ -149,9 +150,10 @@ public class FarmSearchDialog extends TitleAreaDialog {
 	 * @param shell
 	 *            the parent shell
 	 */
-	public FarmSearchDialog(Shell shell) {
+	@Inject
+	public FarmSearchDialog(@Named("current") final Shell shell, final IMemberRepository memberRepo) {
 		super(shell);
-		memberRepo = RepositoryFactory.getMemberRepository();
+		this.memberRepo = memberRepo;
 		farmList = memberRepo.getMemberFarms();
 	}
 

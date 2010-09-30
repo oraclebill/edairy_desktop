@@ -29,10 +29,18 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.BaseDialogView;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.finance.ui.controls.AccountTransactionEditPanel;
 import com.agritrace.edairy.desktop.finance.ui.controls.AccountTransactionEditPanelController;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 public class AccountTransactionBatchEntryDialog extends BaseDialogView {
-	private final class TBEC extends BaseDialogController<AccountTransaction> {
+	protected static final class TBEC extends BaseDialogController<AccountTransaction> {
 		private List<AccountTransaction> transactions;
+		private final TransactionBatchEntryDialogController delegate;
+		
+		@Inject
+		public TBEC(final TransactionBatchEntryDialogController delegate) {
+			this.delegate = delegate;
+		}
 
 		@Override
 		public void configureRidgets() {
@@ -54,7 +62,7 @@ public class AccountTransactionBatchEntryDialog extends BaseDialogView {
 			final IMasterDetailsRidget master = getRidget(IMasterDetailsRidget.class, "master"); //$NON-NLS-1$
 			
 			if (master != null) {
-				master.setDelegate(new TransactionBatchEntryDialogController());
+				master.setDelegate(delegate);
 				master.bindToModel(new WritableList(transactions, AccountTransaction.class), AccountTransaction.class,
 						properties, headers);
 				master.updateFromModel();
@@ -75,12 +83,13 @@ public class AccountTransactionBatchEntryDialog extends BaseDialogView {
 		}
 	}
 
-	private final class TransactionBatchEntryDialogController extends AbstractMasterDetailsDelegate {
+	protected static final class TransactionBatchEntryDialogController extends AbstractMasterDetailsDelegate {
 		private final AccountTransactionEditPanelController detailController;
 		private final AccountTransaction workingCopy = createWorkingCopy();
 
-		public TransactionBatchEntryDialogController() {
-			detailController = new AccountTransactionEditPanelController();
+		@Inject
+		public TransactionBatchEntryDialogController(final AccountTransactionEditPanelController detailController) {
+			this.detailController = detailController;
 		}
 
 		@Override
@@ -118,12 +127,9 @@ public class AccountTransactionBatchEntryDialog extends BaseDialogView {
 		}
 	}
 
-	public AccountTransactionBatchEntryDialog() {
-		this(null);
-	}
-
-	public AccountTransactionBatchEntryDialog(Shell shell) {
-		super(shell);
+	@Inject
+	public AccountTransactionBatchEntryDialog(@Named("current") final Shell shell, final TBEC controller) {
+		super(shell, controller);
 	}
 
 	@Override
@@ -140,10 +146,4 @@ public class AccountTransactionBatchEntryDialog extends BaseDialogView {
 		addUIControl(master, "master");
 		GridLayoutFactory.fillDefaults().generateLayout(master);
 	}
-
-	@Override
-	protected AbstractWindowController createController() {
-		return new TBEC();
-	}
-
 }

@@ -22,11 +22,13 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
+import com.agritrace.edairy.desktop.common.persistence.TestPersistenceModule;
 import com.agritrace.edairy.desktop.common.ui.util.FilterUtil;
+import com.google.inject.Guice;
+import com.google.inject.Inject;
 
 public class TestAccountTransactionRepository{
-
+	@Inject
 	private IRepository<AccountTransaction> myRepo;
 	private List<AccountTransaction> transactionList;
 	public static final int BATCH_SIZE = 300;
@@ -64,7 +66,7 @@ public class TestAccountTransactionRepository{
 	
 	public IRepository<AccountTransaction> getRepository(){
 		if(myRepo == null){
-			myRepo = RepositoryFactory.getRepository(AccountTransaction.class);
+			Guice.createInjector(new TestPersistenceModule()).injectMembers(this);
 		}
 		return myRepo;
 	}

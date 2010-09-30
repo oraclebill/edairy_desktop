@@ -19,12 +19,14 @@ import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryContr
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddLiveStockDialog;
 
+// TODO: Unused, why?
 abstract public class AnimalDialogHandler implements IActionListener {
 	private String liveStockRemoveTitle = "";
 	private String liveStockRemoveMessage = "";
 	
 	@Override
 	public void callback() {
+		/*
 		RegisteredAnimal newAnimal = getEditAnimal();
 		final AddLiveStockDialog aniamlDialog = new AddLiveStockDialog(Display.getDefault().getActiveShell());
 		aniamlDialog.getController().setContext(ControllerContextConstant.DIALOG_CONTXT_SELECTED, newAnimal);
@@ -46,7 +48,8 @@ abstract public class AnimalDialogHandler implements IActionListener {
 					liveStockRemoveMessage)) {
 				delete(newAnimal);
 			}
-		} 
+		}
+		*/
 	}
 	
 	protected RegisteredAnimal getEditAnimal() {

@@ -2,6 +2,7 @@ package com.agritrace.edairy.desktop.common.ui.dialogs;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
+import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.ridgets.swt.views.AbstractDialogView;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
@@ -29,8 +30,10 @@ public abstract class BaseDialogView extends AbstractDialogView {
 
 	public BaseDialogView(Shell parentShell) {
 		super(parentShell);
-		// on windows (xp) this results in an ugly wrapper around the dialog
-		//		setShellStyle(getShellStyle() | SWT.SHEET);  
+	}
+
+	public BaseDialogView(Shell parentShell, AbstractWindowController controller) {
+		super(parentShell, controller);
 	}
 
 	/**
@@ -88,4 +91,10 @@ public abstract class BaseDialogView extends AbstractDialogView {
 //	}
 	protected abstract void buildWorkArea(Composite parent);
 
+	// This is not abstract, so we don't have to bother to override. But if we don't,
+	// we need to supply our own controller to the constructor.
+	@Override
+	protected AbstractWindowController createController() {
+		return null;
+	}
 }

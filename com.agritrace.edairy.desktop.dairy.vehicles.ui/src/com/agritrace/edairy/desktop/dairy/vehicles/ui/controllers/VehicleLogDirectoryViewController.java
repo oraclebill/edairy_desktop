@@ -16,7 +16,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.reference.VehicleType;
@@ -25,23 +24,29 @@ import com.agritrace.edairy.desktop.common.ui.util.MatchUtil;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.controls.VehicleLogDetailBindConstants;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.dialogs.VehicleEditDialog;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 @PermissionRequired(Permission.VIEW_VEHICLES)
 public class VehicleLogDirectoryViewController extends BasicDirectoryController<Vehicle>{
-
-	private final VehicleSearchBean searchBean = new VehicleSearchBean();
-	private IRepository<Vehicle> vehicleRepository;
-	private final IDairyRepository dairyRepository;
-	private final Dairy localDairy;
 	private IComboRidget vehicleTypeCombo;
 	private IComboRidget driverCombo;
 
-	public VehicleLogDirectoryViewController() {
-		super();
-		dairyRepository = RepositoryFactory.getDairyRepository();
+	private final VehicleSearchBean searchBean = new VehicleSearchBean();
+	private final IRepository<Vehicle> vehicleRepository;
+	private final IDairyRepository dairyRepository;
+	private final Dairy localDairy;
+	private final Provider<VehicleEditDialog> editDialogProvider;
+
+	@Inject
+	public VehicleLogDirectoryViewController(final IDairyRepository dairyRepository,
+			final IRepository<Vehicle> vehicleRepository,
+			final Provider<VehicleEditDialog> editDialogProvider) {
+		this.editDialogProvider = editDialogProvider;
+		this.dairyRepository = dairyRepository;
 		localDairy = dairyRepository.getLocalDairy();
 		setEClass(DairyPackage.Literals.VEHICLE);
-		setRepository(vehicleRepository = RepositoryFactory.getRepository(Vehicle.class));
+		setRepository(this.vehicleRepository = vehicleRepository);
 	
 		addTableColumn("Log Book Number", DairyPackage.Literals.VEHICLE__LOG_BOOK_NUMBER);
 		addTableColumn("VIN Nubmer", DairyPackage.Literals.VEHICLE__REGISTRATION_NUMBER);
@@ -98,7 +103,7 @@ public class VehicleLogDirectoryViewController extends BasicDirectoryController<
 
 	@Override
 	protected RecordDialog<Vehicle> getRecordDialog(Shell shell) {
-		VehicleEditDialog dialog = new VehicleEditDialog(shell);
+		VehicleEditDialog dialog = editDialogProvider.get();
 		dialog.setTitle("Edit Vehicle Information");
 		return dialog;
 	}

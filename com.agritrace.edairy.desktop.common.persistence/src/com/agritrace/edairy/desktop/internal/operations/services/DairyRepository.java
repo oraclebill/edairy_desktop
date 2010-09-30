@@ -43,10 +43,11 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
-import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
 import com.agritrace.edairy.desktop.internal.common.persistence.Activator;
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class DairyRepository implements IDairyRepository, IMemberRepository {
 
@@ -86,25 +87,15 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 
 	/**
 	 * 
-	 */
-	private static class DairyRepositoryHolder {
-		private static final DairyRepository INSTANCE = new DairyRepository();
-	}
-
-	/**
-	 * 
-	 */
-	public static DairyRepository getInstance() {
-		return DairyRepositoryHolder.INSTANCE;
-	}
-
-	/**
-	 * 
 	 * @author bjones
 	 *
 	 */
-	private final static class DairyRepoInternal extends
-			HibernateRepository<Dairy> {
+	protected final static class DairyRepoInternal extends HibernateRepository<Dairy> {
+		@Inject
+		protected DairyRepoInternal(Provider<Session> sessionProvider) {
+			super(sessionProvider);
+		}
+
 		@Override
 		protected Class<Dairy> getClassType() {
 			return Dairy.class;
@@ -212,16 +203,21 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 		}
 	};
 
-	private static final DairyRepoInternal dairyRepository = new DairyRepoInternal();
-
+	private final Provider<Session> sessionProvider;
+	private final DairyRepoInternal dairyRepository;
 	private final Dairy localDairy;
 
-	private DairyRepository() {
+	@Inject
+	public DairyRepository(final Provider<Session> sessionProvider, final DairyRepoInternal dairyRepository) {
+		this.sessionProvider = sessionProvider;
+		this.dairyRepository = dairyRepository;
 		Dairy myDairy = dairyRepository.findByKey(1L);
+		
 		if (myDairy == null) {
 			myDairy = createLocalDairy();
 			dairyRepository.saveNew(myDairy);
 		}
+		
 		localDairy = myDairy;
 		initLocalDairy();
 	}
@@ -316,8 +312,8 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	@Override
 	public void deleteRoute(final Route object) {
 		if (localDairy.getRoutes().remove(object)) {
-			PersistenceManager.getDefault().getSession().delete(object);
-			PersistenceManager.getDefault().getSession().flush();
+			sessionProvider.get().delete(object);
+			sessionProvider.get().flush();
 			save(localDairy);
 
 		} else {
@@ -433,8 +429,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Farm> getMemberFarms() {
-		return PersistenceManager.getDefault().getSession()
-				.createCriteria(Farm.class).list();
+		return sessionProvider.get().createCriteria(Farm.class).list();
 	}
 
 	@Override
@@ -495,7 +490,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 		} else {
 			localDairy.getBranchLocations().add(changedDairyLocation);
 		}
-		PersistenceManager.getDefault().getSession().flush();
+		sessionProvider.get().flush();
 	}
 
 	@Override
@@ -509,14 +504,14 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	@Override
 	public void deleteBranchLocation(DairyLocation oldItem) {
 		localDairy.getBranchLocations().remove(oldItem);
-		PersistenceManager.getDefault().getSession().delete(oldItem);
-		PersistenceManager.getDefault().getSession().flush();
+		sessionProvider.get().delete(oldItem);
+		sessionProvider.get().flush();
 
 	}
 
 	@Override
 	public MilkPrice getCurrentMilkPrice() {
-		Session session = PersistenceManager.getDefault().getSession();
+		Session session = sessionProvider.get();
 		DetachedCriteria maxDate = DetachedCriteria.forEntityName("MilkPrice")
 				.setProjection(Property.forName("priceDate").max());
 		MilkPrice currentPrice = (MilkPrice) session
@@ -528,7 +523,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<MilkPrice> getMilkPrices(Date startDate, Date endDate) {
-		Session session = PersistenceManager.getDefault().getSession();
+		Session session = sessionProvider.get();
 		return session.createCriteria("MilkPrice")
 				.add(Restrictions.between("priceDate", startDate, endDate))
 				.list();
@@ -538,7 +533,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	@Override
 	public List<DeliveryJournal> getDeliveryJournals(Date minDate,
 			Date maxDate, Route route, Customer customer) {
-		Session session = PersistenceManager.getDefault().getSession();
+		Session session = sessionProvider.get();
 		Criteria djCriteria = session.createCriteria("DeliveryJournal");
 		
 		if (minDate != null) {
@@ -568,7 +563,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<DairyContainer> getBinsByRoute(Route journalRoute) {
-		Session session = PersistenceManager.getDefault().getSession();
+		Session session = sessionProvider.get();
 		Criteria dcCriteria = session.createCriteria("DairyContainer");
 		if (journalRoute != null) {
 			dcCriteria.add(Restrictions.eq("", journalRoute));

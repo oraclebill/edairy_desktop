@@ -10,7 +10,8 @@ Require-Bundle: com.agritrace.edairy.desktop.common.ui;bundle-version="1.0.0",
  org.apache.commons.collections;bundle-version="3.2.0",
  com.agritrace.edairy.desktop.common.model;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.common.persistence;bundle-version="1.0.0",
- org.junit;bundle-version="4.8.1";resolution:=optional
+ org.junit;bundle-version="4.8.1";resolution:=optional,
+ com.google.inject
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.desktop.finance.ui.navigation,

@@ -1,20 +1,19 @@
 package com.agritrace.edairy.desktop.member.ui.dialog;
 
-import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.member.ui.dialog.controller.AddMemberDialogController;
 import com.agritrace.edairy.desktop.member.ui.views.MemberInfoGroup;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 public class AddMemberDialog extends ViewMemberDialog {
-	public AddMemberDialog() {
-	}
-
-	@Override
-	protected AbstractWindowController createController() {
-		return new AddMemberDialogController();
+	@Inject
+	public AddMemberDialog(@Named("current") Shell shell, AddMemberDialogController controller) {
+		super(shell, controller);
 	}
 
 	@Override

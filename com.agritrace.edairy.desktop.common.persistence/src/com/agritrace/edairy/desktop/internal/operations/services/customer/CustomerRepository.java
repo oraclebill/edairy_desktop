@@ -8,8 +8,14 @@ import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class CustomerRepository extends HibernateRepository<Customer> {
+	@Inject
+	protected CustomerRepository(Provider<Session> sessionProvider) {
+		super(sessionProvider);
+	}
 
 	class RunLoad extends SessionRunnable<Object> {
 		Customer myObj;

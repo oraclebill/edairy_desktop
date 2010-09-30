@@ -12,26 +12,31 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Role;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
+import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.system.ui.constants.RoleFilterBinding;
 import com.agritrace.edairy.desktop.system.ui.dialogs.RoleEditDialog;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 @PermissionRequired(Permission.VIEW_ROLES)
 public final class RoleDirectoryController extends BasicDirectoryController<Role> {
 	private ITextRidget nameSearch;
 	private ITextRidget permSearch;
+	private final Provider<RoleEditDialog> dialogProvider;
 	
 	@Override
 	protected String getFullTitle() {
 		return "Security Roles";
 	}
 	
-	public RoleDirectoryController() {
+	@Inject
+	public RoleDirectoryController(final IRepository<Role> repo, final Provider<RoleEditDialog> dialogProvider) {
 		super();
+		this.dialogProvider = dialogProvider;
 		setEClass(DairyPackage.Literals.ROLE);
-		setRepository(RepositoryFactory.getRepository(Role.class));
+		setRepository(repo);
 		addTableColumn("ID", DairyPackage.Literals.ROLE__ID);
 		addTableColumn("Name", DairyPackage.Literals.ROLE__NAME);
 		addTableColumn("Description", DairyPackage.Literals.ROLE__DESCRIPTION);
@@ -93,7 +98,7 @@ public final class RoleDirectoryController extends BasicDirectoryController<Role
 
 	@Override
 	protected RecordDialog<Role> getRecordDialog(Shell shell) {
-		return new RoleEditDialog(shell);
+		return dialogProvider.get();
 	}
 
 	@Override

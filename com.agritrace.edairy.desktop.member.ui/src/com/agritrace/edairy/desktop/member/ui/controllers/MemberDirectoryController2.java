@@ -23,15 +23,16 @@ import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
-import com.agritrace.edairy.desktop.common.ui.dialogs.BaseDialogView;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddMemberDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewMemberDialog;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 @PermissionRequired(Permission.VIEW_MEMBER_LIST)
 public class MemberDirectoryController2 extends BasicDirectoryController<Membership> {
@@ -72,10 +73,17 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 	private ITextRidget searchText;
 	private Dairy localDairy;
 	private IMemberRepository repository;
-
-	public MemberDirectoryController2() {
-		repository = RepositoryFactory.getMemberRepository();
-		localDairy = RepositoryFactory.getDairyRepository().getLocalDairy();
+	private final Provider<ViewMemberDialog> viewDialogProvider;
+	private final Provider<AddMemberDialog> addDialogProvider;
+	
+	@Inject
+	public MemberDirectoryController2(final IMemberRepository repository, final IDairyRepository dairyRepo,
+			final Provider<ViewMemberDialog> viewDialogProvider,
+			final Provider<AddMemberDialog> addDialogProvider) {
+		this.repository = repository;
+		this.localDairy = dairyRepo.getLocalDairy();
+		this.viewDialogProvider = viewDialogProvider;
+		this.addDialogProvider = addDialogProvider;
 
 		setEClass(DairyPackage.Literals.MEMBERSHIP);
 
@@ -163,7 +171,7 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 	@Override
 	protected void handleNewItemAction() {
 		Membership selectedMember = DairyUtil.createMembership(null, null, null);
-		final AddMemberDialog memberDialog = new AddMemberDialog();
+		final AddMemberDialog memberDialog = addDialogProvider.get();
 		memberDialog.getController().setContext("selectedMember", selectedMember);
 
 		final int returnCode = memberDialog.open();
@@ -185,7 +193,7 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 	@Override
 	protected void handleViewItemAction() {
 		Membership selectedMember = (Membership) table.getSelection().get(0);
-		final BaseDialogView memberDialog = new ViewMemberDialog();
+		final ViewMemberDialog memberDialog = viewDialogProvider.get();
 		memberDialog.getController().setContext("selectedMember", selectedMember);
 
 		final int returnCode = memberDialog.open();

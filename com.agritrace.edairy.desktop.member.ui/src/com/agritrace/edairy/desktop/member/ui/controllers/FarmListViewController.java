@@ -27,7 +27,6 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
@@ -39,6 +38,8 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.data.FarmListViewTableNode;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddFarmDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewFarmDialog;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 @PermissionRequired(Permission.VIEW_FARMS)
 public class FarmListViewController extends BasicDirectoryController<Farm> {
@@ -61,15 +62,24 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 	private IActionRidget memberLookupBtn;
 	// filter group ridgets
 	private ITextRidget memberNameFilter;
-	private final IMemberRepository memberRepository;
 
 	private IActionRidget searchButton;
-
 	private Membership selectedMember;
+	
+	private final IMemberRepository memberRepository;
+	private final Provider<AddFarmDialog> addDialogProvider;
+	private final Provider<ViewFarmDialog> viewDialogProvider;
+	private final Provider<MemberSearchDialog> memberSearchProvider;
 
-	public FarmListViewController() {
-		memberRepository = RepositoryFactory.getMemberRepository();
-		farmRepository = RepositoryFactory.getRegisteredRepository(IFarmRepository.class);
+	@Inject
+	public FarmListViewController(final IMemberRepository memberRepository, final IFarmRepository farmRepository,
+			final Provider<AddFarmDialog> addDialogProvider, final Provider<ViewFarmDialog> viewDialogProvider,
+			final Provider<MemberSearchDialog> memberSearchProvider) {
+		this.memberRepository = memberRepository;
+		this.farmRepository = farmRepository;
+		this.addDialogProvider = addDialogProvider;
+		this.viewDialogProvider = viewDialogProvider;
+		this.memberSearchProvider = memberSearchProvider;
 		farmNames = new ArrayList<String>();
 
 		setEClass(TrackingPackage.Literals.FARM);
@@ -186,7 +196,7 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 			final Location newFarmLocation = DairyUtil.createLocation(null, null, null);
 			final Farm newFarm = DairyUtil.createFarm("", newFarmLocation);
 			FarmListViewTableNode selectedNode = new FarmListViewTableNode(selectedMember, newFarm);
-			final AddFarmDialog memberDialog = new AddFarmDialog(AbstractDirectoryController.getShell());
+			final AddFarmDialog memberDialog = addDialogProvider.get();
 			memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM, selectedNode);
 
 			final int returnCode = memberDialog.open();
@@ -211,17 +221,21 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 	public class MemberLookupAction implements IActionListener {
 		@Override
 		public void callback() {
-			final MemberSearchDialog memberDialog = new MemberSearchDialog(AbstractDirectoryController.getShell());
+			final MemberSearchDialog memberDialog = memberSearchProvider.get();
 			final int retVal = memberDialog.open();
+			
 			if (retVal == Window.OK) {
 				selectedMember = memberDialog.getSelectedMember();
+				
 				if (selectedMember == null) {
 					Log4r.getLogger(getClass()).log(LogService.LOG_WARNING, "Null member selected from dialog");
 					return;
 				}
+				
 				final String memberName = MemberUtil.formattedMemberName(selectedMember.getMember());
 				memberNameFilter.setText(memberName);
 				updateFarmCombo();
+				
 				if (searchButton != null) {
 					searchButton.setEnabled(true);
 				}
@@ -233,7 +247,7 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 	protected void handleViewItemAction() {
 		if (!table.getSelection().isEmpty()) {
 			FarmListViewTableNode selectedNode = (FarmListViewTableNode) table.getSelection().get(0);
-			final ViewFarmDialog memberDialog = new ViewFarmDialog(AbstractDirectoryController.getShell());
+			final ViewFarmDialog memberDialog = viewDialogProvider.get();
 			memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM, selectedNode);
 
 			final int returnCode = memberDialog.open();

@@ -16,6 +16,7 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
+import org.hibernate.Session;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
@@ -24,11 +25,14 @@ import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
-import com.agritrace.edairy.desktop.common.persistence.services.HsqldbMemoryPersistenceManager;
-import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
+import com.agritrace.edairy.desktop.common.persistence.TestPersistenceModule;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.services.ui.controllers.AnimalHealthRequestViewController;
 import com.agritrace.edairy.desktop.services.ui.views.AnimalHealthRequestView;
+import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * Test case for service request controller
@@ -37,17 +41,24 @@ import com.agritrace.edairy.desktop.services.ui.views.AnimalHealthRequestView;
  * 
  */
 public class ServiceRequestControllerTestCase extends AbstractSubModuleControllerTest<AnimalHealthRequestViewController> {
-
-	static HsqldbMemoryPersistenceManager testPersistenceManager;
+	@Inject
+	private static Provider<Session> sessionProvider;
+	
 	static {
-		PersistenceManager.setDefault(testPersistenceManager = new HsqldbMemoryPersistenceManager());
+		Guice.createInjector(new TestPersistenceModule(), new AbstractModule() {
+			@Override
+			protected void configure() {
+				requestStaticInjection(ServiceRequestControllerTestCase.class);
+			}
+		});
 	}
 
 	List<AnimalHealthRequest> requests = new ArrayList<AnimalHealthRequest>();
 
 	@Override
 	protected AnimalHealthRequestViewController createController(ISubModuleNode node) {
-		AnimalHealthRequestViewController newInst = new AnimalHealthRequestViewController();
+		final AnimalHealthRequestViewController newInst = Guice.createInjector(
+				new TestPersistenceModule()).getInstance(AnimalHealthRequestViewController.class);
 		node.setNodeId(new NavigationNodeId("edm.services.log"));
 		newInst.setNavigationNode(node);
 		return newInst;
@@ -60,25 +71,19 @@ public class ServiceRequestControllerTestCase extends AbstractSubModuleControlle
 	 * @throws CoreException
 	 */
 	private void initModel() {
-		PersistenceManager.reset(new HsqldbMemoryPersistenceManager());
-
 		Farm farm = DairyUtil.createFarm("daisy dukes", DairyUtil.createLocation(null, null, null));
-
 		Farmer farmer = DairyUtil.createFarmer("Joe", "", "Gibbs", "1234567", Arrays.asList(farm));
-
 		Date now = new Date();
-
+		
 		Membership membership = DairyUtil.createMembership(now, now, farmer);
-
 		Dairy testDairy = DairyFactory.eINSTANCE.createDairy();
+
 		testDairy.setLegalName("test");
 		testDairy.setCompanyName("test co");
 		testDairy.setPhoneNumber("12345678");
 		testDairy.getMemberships().add(membership);
 		testDairy.setLocation(DairyUtil.createLocation(null, null, null));
-
-		PersistenceManager.getDefault().getSession().save(testDairy);
-
+		sessionProvider.get().save(testDairy);
 	}
 
 	/**

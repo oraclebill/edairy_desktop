@@ -35,7 +35,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
+import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.ImportResultsDialog;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
@@ -182,9 +182,8 @@ final class ScaleImportAction implements IActionListener {
 					System.err.printf("  page %d: %s\n", i, page);
 					// }
 					try {
-						IDairyRepository repo = RepositoryFactory.getDairyRepository();
-						repo.getLocalDairy().getCollectionJournals().add(page);
-						repo.save();
+						dairyRepo.getLocalDairy().getCollectionJournals().add(page);
+						dairyRepo.save();
 					} catch (Exception e) {
 						e.getMessage();
 					}
@@ -324,15 +323,22 @@ final class ScaleImportAction implements IActionListener {
 		 * 
 		 */
 	private final MilkCollectionLogController milkCollectionLogController;
-	private IDairyRepository dairyRepo = RepositoryFactory.getDairyRepository();
+	private IDairyRepository dairyRepo;
+	private IRepository<CollectionSession> sessionRepo;
+	private IDairyLocationRepository dairyLocationRepo;
 	private Map<String, CollectionGroup> pageMap = new HashMap<String, CollectionGroup>();
 	private Map<String, CollectionSession> sessionMap = new HashMap<String, CollectionSession>();
 	private Map<String, DairyLocation> centerMap = new HashMap<String, DairyLocation>();
 	Dairy localDairy;
 
-	public ScaleImportAction(MilkCollectionLogController milkCollectionLogController) {
+	// Pointedly not injected (for now)
+	public ScaleImportAction(final MilkCollectionLogController milkCollectionLogController,
+			final IDairyLocationRepository dairyLocationRepo, final IDairyRepository dairyRepo,
+			final IRepository<CollectionSession> sessionRepo) {
 		this.milkCollectionLogController = milkCollectionLogController;
-		
+		this.dairyRepo = dairyRepo;
+		this.dairyLocationRepo = dairyLocationRepo;
+		this.sessionRepo = sessionRepo;
 	}
 
 	@Override
@@ -358,11 +364,11 @@ final class ScaleImportAction implements IActionListener {
 		sessionMap.clear();
 		centerMap.clear();
 		
-		for (CollectionSession session: RepositoryFactory.getRepository(CollectionSession.class).all()) {
+		for (CollectionSession session: sessionRepo.all()) {
 			sessionMap.put(session.getCode(), session);
 		}
 		
-		for (DairyLocation loc: RepositoryFactory.getRegisteredRepository(IDairyLocationRepository.class).all()) {
+		for (DairyLocation loc: dairyLocationRepo.all()) {
 			if (loc.getCode() != null) {
 				centerMap.put(loc.getCode().toLowerCase(), loc);
 			}

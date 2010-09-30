@@ -26,9 +26,10 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
+import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
+import com.google.inject.Inject;
 
 public class MilkDeliveryJournalEditController extends RecordDialogController<DeliveryJournal> {
 
@@ -54,7 +55,7 @@ public class MilkDeliveryJournalEditController extends RecordDialogController<De
 //			binList = dairyRepo.getBinsByRoute(journalRoute);
 			// until we have an association between bins and routes (or locations), cache all bins statically
 			if (binList == null) {
-				binList = RepositoryFactory.getDairyRepository().allDairyContainers();
+				binList = dairyRepo.allDairyContainers();
 			}
 		}
 
@@ -90,10 +91,17 @@ public class MilkDeliveryJournalEditController extends RecordDialogController<De
 		}		
 	}
 
-	private final IDairyRepository dairyRepo = RepositoryFactory.getDairyRepository();
 	private ICompositeTableRidget lineItemsRidget;
+	
+	// HACK, this shouldn't be static
+	private static IDairyRepository dairyRepo;
+	private final IRepository<CollectionSession> sessionRepo;
 
-	public MilkDeliveryJournalEditController() {
+	@Inject
+	public MilkDeliveryJournalEditController(final IDairyRepository dairyRepository,
+			final IRepository<CollectionSession> sessionRepo) {
+		dairyRepo = dairyRepository;
+		this.sessionRepo = sessionRepo;
 	}
 
 	@Override
@@ -117,7 +125,7 @@ public class MilkDeliveryJournalEditController extends RecordDialogController<De
 
 		addTextMap(DeliveryJournalEditBindContants.DATE_COMBO, DairyPackage.Literals.DELIVERY_JOURNAL__DATE);
 
-		List<CollectionSession> sessions = RepositoryFactory.getRepository(CollectionSession.class).all();
+		List<CollectionSession> sessions = sessionRepo.all();
 		addComboMap(DeliveryJournalEditBindContants.SESSION_COMBO, sessions, "getCode",
 				DairyPackage.Literals.DELIVERY_JOURNAL__SESSION);
 

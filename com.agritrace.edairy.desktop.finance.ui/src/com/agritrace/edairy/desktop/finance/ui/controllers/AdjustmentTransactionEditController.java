@@ -19,10 +19,20 @@ import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberLookupAction;
+import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class AdjustmentTransactionEditController extends RecordDialogController<AdjustmentTransaction> {
+	private final Provider<MemberSearchDialog> memberSearchProvider;
+
+	@Inject
+	public AdjustmentTransactionEditController(final Provider<MemberSearchDialog> memberSearchProvider) {
+		this.memberSearchProvider = memberSearchProvider;
+	}
+	
 	@Override
 	protected void configureButtonsPanel() {
 		super.configureButtonsPanel();
@@ -89,6 +99,11 @@ public class AdjustmentTransactionEditController extends RecordDialogController<
 			protected void callback(Membership selectedMember) {
 				model.setAccount(selectedMember.getAccount());
 				memberName.setText(MemberUtil.formattedMemberName(selectedMember.getMember()));
+			}
+
+			@Override
+			protected MemberSearchDialog getMemberSearchDialog() {
+				return memberSearchProvider.get();
 			}
 		});
 	}

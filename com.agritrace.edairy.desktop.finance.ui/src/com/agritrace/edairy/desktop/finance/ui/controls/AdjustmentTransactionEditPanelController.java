@@ -21,12 +21,13 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.util.BindingHelper;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class AdjustmentTransactionEditPanelController {
 	public class MemberLookupAction implements IActionListener {
@@ -38,7 +39,7 @@ public class AdjustmentTransactionEditPanelController {
 
 		@Override
 		public void callback() {
-			final MemberSearchDialog memberDialog = new MemberSearchDialog(null);
+			final MemberSearchDialog memberDialog = memberSearchProvider.get();
 			final int retVal = memberDialog.open();
 			if (retVal == Window.OK) {
 				final Membership selectedMember = memberDialog.getSelectedMember();
@@ -63,13 +64,17 @@ public class AdjustmentTransactionEditPanelController {
 	}
 
 	private IRidgetContainer container;
-	private final IDairyRepository dairyRepo = RepositoryFactory.getDairyRepository();
 	private BindingHelper<AccountTransaction> mapper;
 	private AccountTransaction model;
 
-	public AdjustmentTransactionEditPanelController() {
-		;
-		;
+	private final IDairyRepository dairyRepo;
+	private final Provider<MemberSearchDialog> memberSearchProvider;
+	
+	@Inject
+	public AdjustmentTransactionEditPanelController(final IDairyRepository dairyRepo,
+			final Provider<MemberSearchDialog> memberSearchProvider) {
+		this.dairyRepo = dairyRepo;
+		this.memberSearchProvider = memberSearchProvider;
 	}
 
 	public void checkValid() {

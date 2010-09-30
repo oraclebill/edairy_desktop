@@ -13,18 +13,16 @@ import org.junit.Test;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
-import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
+import com.agritrace.edairy.desktop.common.persistence.TestPersistenceModule;
 import com.agritrace.edairy.desktop.internal.collection.services.MilkCollectionJournalLineRepository;
+import com.google.inject.Guice;
 
 public class ICollectionJournalLineQueryTest {
-
-	private PersistenceManager testPM;
 	private ICollectionJournalLineRepository repo;
 
 	@Before
 	public void setup() {
-//		testPM = new HsqldbMemoryPersistenceManager();
-		repo = new MilkCollectionJournalLineRepository();
+		repo = Guice.createInjector(new TestPersistenceModule()).getInstance(ICollectionJournalLineRepository.class);
 	}
 
 	// @Test
@@ -41,8 +39,10 @@ public class ICollectionJournalLineQueryTest {
 		assertTrue(collections.size() > 1);
 	}
 
-	private void createSampleDairy(PersistenceManager pm) {
+	/*
+	private void createSampleDairy() {
 		Dairy dairy = DairyFactory.eINSTANCE.createDairy();
 		dairy.setCompanyName("Test Company");
 	}
+	*/
 }

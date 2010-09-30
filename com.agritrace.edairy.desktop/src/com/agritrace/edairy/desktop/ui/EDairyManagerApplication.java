@@ -55,6 +55,8 @@ import com.agritrace.edairy.desktop.ui.views.MemberPayablesReportView;
 import com.agritrace.edairy.desktop.ui.views.MemberStatementReportView;
 import com.agritrace.edairy.desktop.ui.views.MilkProductionReportView;
 import com.agritrace.edairy.desktop.ui.views.MonthlyCreditReportView;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author oraclebill
@@ -138,7 +140,7 @@ public class EDairyManagerApplication extends SwtApplication {
 	private static final String TAB_OPERATIONS = SUBAPP_OPERATIONS;
 	private static final String TAB_REPORTS = SUBAPP_REPORTS;
 	private static final String TAB_SYSTEM = SUBAPP_SYSTEM;
-
+	
 	public EDairyManagerApplication() {
 		super();
 		LnfManager.setLnf(new EDairyManagerLookAndFeel());
@@ -204,8 +206,6 @@ public class EDairyManagerApplication extends SwtApplication {
 		moduleNode = NodeFactory.createModule(MODULE_MEMBERS, LABEL_MEMBERS, moduleGroupNode);
 		NodeFactory.createSubModule(SUBMODULE_MEMBER_DIRECTORY,
 				"Member Directory", moduleNode, MemberDirectoryView.ID, MemberDirectoryController2.class); //$NON-NLS-1$ 
-		// NodeFactory.createSubModule(SUBMODULE_MEMBER_EDITOR,
-		//				"Register Member", moduleNode, CreateMemberView.ID, MemberRegisterViewController.class); //$NON-NLS-1$ 
 
 		//
 		// FARM MODULE GROUP

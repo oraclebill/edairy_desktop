@@ -24,6 +24,8 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.FarmSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.services.ui.dialogs.AnimalHealthRequestDialog;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * Dialog controller for Animal Health Request
@@ -36,7 +38,7 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 	public class FarmLookupAction implements IActionListener {
 		@Override
 		public void callback() {
-			final FarmSearchDialog farmDialog = new FarmSearchDialog(Display.getCurrent().getActiveShell());
+			final FarmSearchDialog farmDialog = farmSearchDialogProvider.get();
 			farmDialog.setSelectedMember(request.getRequestingMember());
 
 			final int retVal = farmDialog.open();
@@ -58,7 +60,7 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 	public class MemberLookupAction implements IActionListener {
 		@Override
 		public void callback() {
-			final MemberSearchDialog memberDialog = new MemberSearchDialog(Display.getCurrent().getActiveShell());
+			final MemberSearchDialog memberDialog = memberSearchDialogProvider.get();
 			memberDialog.setSelectedMember(request.getRequestingMember());
 			memberDialog.setSelectedFarm(request.getFarm());
 			final int retVal = memberDialog.open();
@@ -131,6 +133,11 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 			return null;
 		}
 	}
+	
+	@Inject
+	private Provider<FarmSearchDialog> farmSearchDialogProvider;
+	@Inject
+	private Provider<MemberSearchDialog> memberSearchDialogProvider;
 
 	private IActionRidget farmLookupButton;
 	private ITextRidget farmLookupText;
@@ -140,10 +147,6 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 	private AnimalHealthRequest request;
 
 	IDateTimeRidget textRidget;
-
-	public AnimalHealthRequestDialogController() {
-		super();
-	}
 
 	public void addListener(IActionListener listener) {
 		this.listeners.add(listener);

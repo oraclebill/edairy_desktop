@@ -8,21 +8,18 @@ import com.agritrace.edairy.desktop.collection.ui.components.DeliveryJournalEdit
 import com.agritrace.edairy.desktop.collection.ui.controllers.MilkDeliveryJournalEditController;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 public class DeliveryJournalEditDialog extends RecordDialog<DeliveryJournal> {
-
-	public DeliveryJournalEditDialog(Shell parentShell) {
-		super(parentShell);
+	@Inject
+	public DeliveryJournalEditDialog(@Named("current") final Shell parentShell,
+			final MilkDeliveryJournalEditController controller) {
+		super(parentShell, controller);
 	}
 
 	@Override
 	protected void buildWorkArea(Composite comp) {
 		new DeliveryJournalEditPanel(comp, SWT.None);
 	}
-
-	@Override
-	protected MilkDeliveryJournalEditController createController() {
-		return new MilkDeliveryJournalEditController();
-	}
-
 }

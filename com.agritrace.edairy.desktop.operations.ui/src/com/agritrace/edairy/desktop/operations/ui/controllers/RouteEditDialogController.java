@@ -16,24 +16,25 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.agritrace.edairy.desktop.operations.ui.ViewConstants;
+import com.google.inject.Inject;
 
 public class RouteEditDialogController extends RecordDialogController<Route> {
-
-	public RouteEditDialogController() {
-
+	private final IDairyRepository dairyRepo;
+	
+	@Inject
+	public RouteEditDialogController(final IDairyRepository dairyRepo) {
+		this.dairyRepo = dairyRepo;
 	}
 
 	@Override
 	protected void configureUserRidgets() {
-		
-		// addTextMap(ViewConstants.ID_TXT_ROUTE_CODE, DairyPackage.Literals.ROUTE__CODE);
 		addTextMap(ViewConstants.ID_TXT_ROUTE_NAME, DairyPackage.Literals.ROUTE__NAME);
 		addTextMap(ViewConstants.ID_TXT_ROUTE_DESCRIPTION, DairyPackage.Literals.ROUTE__DESCRIPTION);
 
-		final Dairy localDairy = RepositoryFactory.getDairyRepository().getLocalDairy();
+		final Dairy localDairy = dairyRepo.getLocalDairy();
 		final List<Vehicle> vehicles = new ArrayList<Vehicle>();
 		vehicles.add(null);
 		vehicles.addAll(localDairy.getVehicles());

@@ -18,15 +18,15 @@ import org.osgi.service.log.LogService;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
-import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public abstract class HibernateRepository<T extends EObject> implements
 		IRepository<T> {
 	protected abstract class SessionRunnable<X> implements Runnable {
-
 		@Override
 		public void run() {
-			run(session);
+			run(sessionProvider.get());
 		}
 
 		abstract public void run(Session session);
@@ -48,15 +48,10 @@ public abstract class HibernateRepository<T extends EObject> implements
 	private final String entityName;
 	private final String identifierName;
 
-	private final PersistenceManager persistenceManager;
+	private final Provider<Session> sessionProvider;
 
-	private Session session;
-
-	protected HibernateRepository() {
-		this(PersistenceManager.getDefault());
-	}
-
-	protected HibernateRepository(PersistenceManager pm) {
+	@Inject
+	protected HibernateRepository(Provider<Session> sessionProvider) {
 		String className;
 		ClassMetadata metaData;
 
@@ -65,7 +60,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 						.getName(), hashCode()));
 
 		// set the persistence manager
-		persistenceManager = pm;
+		this.sessionProvider = sessionProvider;
 
 		// get metadata about the class we will be persisting..
 		className = getClassType().getName();
@@ -73,8 +68,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 		entityName = className.substring(className.lastIndexOf('.') + 1);
 		Assert.isLegal(!entityName.startsWith("."));
 
-		metaData = persistenceManager.getSession().getSessionFactory()
-				.getClassMetadata(entityName);
+		metaData = sessionProvider.get().getSessionFactory().getClassMetadata(entityName);
 		Assert.isNotNull(metaData);
 		// identifier (pk) name
 		identifierName = metaData.getIdentifierPropertyName();
@@ -131,7 +125,8 @@ public abstract class HibernateRepository<T extends EObject> implements
 		if (key == null) {
 			throw new IllegalArgumentException("key cannot be null");
 		}
-		openSession();
+		
+		Session session = sessionProvider.get();
 
 		if (!session.contains(obj))
 			session.load(obj, key);
@@ -152,8 +147,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 	 */
 	@SuppressWarnings("unchecked")
 	public <X> X findByKey(Class<X> entityClass, long entityKey) {
-		openSession();
-		return (X) session.get(getEntityName(entityClass), new Long(entityKey));
+		return (X) sessionProvider.get().get(getEntityName(entityClass), new Long(entityKey));
 	}
 
 	/**
@@ -180,7 +174,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 		runWithTransaction(new Runnable() {
 			@Override
 			public void run() {
-				session.saveOrUpdate(changedItem);
+				sessionProvider.get().saveOrUpdate(changedItem);
 			}
 		});
 	}
@@ -190,7 +184,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 		runWithTransaction(new Runnable() {
 			@Override
 			public void run() {
-				session.save(newEntity);
+				sessionProvider.get().save(newEntity);
 			}
 		});
 	}
@@ -201,28 +195,17 @@ public abstract class HibernateRepository<T extends EObject> implements
 		runWithTransaction(new Runnable() {
 			@Override
 			public void run() {
-				session.update(getEntityName(), updateableEntity);
+				sessionProvider.get().update(getEntityName(), updateableEntity);
 			}
 		});
 	}
 
 	private void closeSession() {
-		if (null != session) {
-			// session.close();
-			// session = null;
-		} else {
-			// TODO: use proper logging and exception code.
-			throw new IllegalStateException("null session");
-		}
-	}
-
-	private void openSession() {
-		session = persistenceManager.getSession();
-		Assert.isNotNull(session);
+		// Currently does nothing!
 	}
 
 	protected Object get(String eName, Serializable key) {
-		return session.get(eName, key);
+		return sessionProvider.get().get(eName, key);
 	}
 
 	/**
@@ -258,7 +241,8 @@ public abstract class HibernateRepository<T extends EObject> implements
 	}
 
 	protected void run(Runnable r) {
-		openSession();
+		sessionProvider.get();
+		
 		try {
 			r.run();
 		} finally {
@@ -267,7 +251,8 @@ public abstract class HibernateRepository<T extends EObject> implements
 	}
 
 	protected void runWithTransaction(Runnable r) {
-		openSession();
+		Session session = sessionProvider.get();
+		
 		final Transaction t = session.beginTransaction();
 		try {
 			r.run();

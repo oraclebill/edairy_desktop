@@ -12,10 +12,12 @@ import org.hibernate.Transaction;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
-import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManager;
+import com.agritrace.edairy.desktop.common.persistence.TestPersistenceModule;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDialogController;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 /**
  * Test case for supplier list controller
@@ -34,8 +36,6 @@ public class SupplierListDialogControllerTestCase extends
 
 	}
 	
-	
-
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -43,19 +43,14 @@ public class SupplierListDialogControllerTestCase extends
 	
 	}
 
-
-
 	protected void prepareDBForTest() {
-		// TODO
-		
-		Session session = PersistenceManager.getDefault().getSession();
+		Injector injector = Guice.createInjector(new TestPersistenceModule());
+		Session session = injector.getInstance(Session.class);
 		Transaction tx = session.beginTransaction();
 		session.createSQLQuery("Delete from supplier");
 		// delete all records
 		tx.commit();
 	}
-
-
 
 	/**
 	 * Test the filter section and buttons

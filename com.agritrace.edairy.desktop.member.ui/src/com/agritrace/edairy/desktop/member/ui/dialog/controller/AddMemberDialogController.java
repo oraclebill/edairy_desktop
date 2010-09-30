@@ -5,7 +5,6 @@ import java.beans.PropertyChangeListener;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import org.eclipse.core.databinding.conversion.Converter;
@@ -62,13 +61,13 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 	// public static final
 
 	private ITextRidget addtlNameRidget;
-	private ITextRidget familyNameRidget;
+    private ITextRidget familyNameRidget;
 
 	// upper panel fields
 	private ILabelRidget formattedMemberNameRidget;
 	private ITextRidget givenNameRidget;
 	// live stock tab
-	// private MemberLiveStockWidgetController liveStockController;
+//	private MemberLiveStockWidgetController liveStockController;
 	private Map<IRidget, FeaturePath> memberBindings;
 	private ITextRidget memberNbrRidget;
 	private MemberProfileWidgetController memberProfileController;
@@ -119,8 +118,8 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 		enableSaveButton(validate());
 
 	}
-
-	protected void configureTabs() {
+	
+	protected void configureTabs(){
 		memberProfileController = new MemberProfileWidgetController(this);
 	}
 
@@ -196,10 +195,8 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 
 	protected void addPropertyChangedListener() {
 		final AddMemberPropertyChangedListener propertyChangedListener = new AddMemberPropertyChangedListener();
-		final Iterator<IRidget> ridgetIterator = (Iterator<IRidget>) getRidgets()
-				.iterator();
-		while (ridgetIterator.hasNext()) {
-			final IRidget ridget = ridgetIterator.next();
+
+		for (final IRidget ridget: getRidgets()) {
 			if (ridget instanceof ITextRidget) {
 				ridget.addPropertyChangeListener("text",
 						propertyChangedListener);
@@ -271,14 +268,14 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 
 	protected void updateUpperPanelBinding() {
 		final Membership selectedMember = getWorkingCopy();
-
-		if ((null == selectedMember) || (null == selectedMember.getMember()))
+		
+		if((null == selectedMember) || (null == selectedMember.getMember())) 
 			throw new IllegalStateException();
-
+		
 		if (selectedMember.getMember() != null) {
 			// loop through the text ridgets
 			for (final IRidget r : memberBindings.keySet()) {
-
+				
 				if (r instanceof IValueRidget) {
 
 					final IObservableValue oberservModel = EMFProperties.value(
@@ -290,15 +287,15 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 								.setModelToUIControlConverter(new Converter(
 										oberservModel.getValueType(),
 										String.class) {
-									@Override
-									public Object convert(Object from) {
-										if (from instanceof Person) {
+							@Override
+							public Object convert(Object from) {
+								if (from instanceof Person) {
 											return MemberUtil
 													.formattedMemberName((Person) from);
-										}
-										return "";
-									}
-								});
+								}
+								return "";
+							}
+						});
 					}
 					((IValueRidget) r).bindToModel(oberservModel);
 				}

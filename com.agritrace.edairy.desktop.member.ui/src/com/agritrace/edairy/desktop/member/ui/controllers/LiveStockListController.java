@@ -28,7 +28,6 @@ import com.agritrace.edairy.desktop.common.model.tracking.RearingMode;
 import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
@@ -43,6 +42,8 @@ import com.agritrace.edairy.desktop.member.ui.controls.LiveStockFilterWidgetCont
 import com.agritrace.edairy.desktop.member.ui.data.LiveStockListViewTableNode;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddLiveStockDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewLiveStockDialog;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 @PermissionRequired(Permission.VIEW_LIVESTOCK)
 public class LiveStockListController extends BasicDirectoryController<RegisteredAnimal> {
@@ -65,9 +66,19 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 	private final String[] propertyNames = { "membership", "membership", "animal", "animal", "animal", "animal", "animal", "animal", "animal" };
 
 	private Membership selectedMember;
+	private final Provider<AddLiveStockDialog> addLiveStockProvider;
+	private final Provider<ViewLiveStockDialog> viewLiveStockProvider;
+	private final Provider<MemberSearchDialog> memberSearchProvider;
 
-	public LiveStockListController() {
-		farmRepository = RepositoryFactory.getRegisteredRepository(IFarmRepository.class);
+	@Inject
+	public LiveStockListController(final IFarmRepository farmRepository,
+			final Provider<AddLiveStockDialog> addLiveStockProvider,
+			final Provider<ViewLiveStockDialog> viewLiveStockProvider,
+			final Provider<MemberSearchDialog> memberSearchProvider) {
+		this.farmRepository = farmRepository;
+		this.addLiveStockProvider = addLiveStockProvider;
+		this.viewLiveStockProvider = viewLiveStockProvider;
+		this.memberSearchProvider = memberSearchProvider;
 		setEClass(TrackingPackage.Literals.REGISTERED_ANIMAL);
 		
 		for (int i = 0; i < propertyNames.length; i++) {
@@ -275,77 +286,6 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 
 	}
 
-	// @Override
-	// protected void configureTableRidget() {
-	// // super.configureTableRidget();
-	// if (getEClass() == null) {
-	// throw new IllegalStateException("EClass must be set in constructor");
-	// }
-	// if (getEntityClass() == null) {
-	// throw new IllegalStateException(
-	// "Entity class must be set in constructor");
-	// }
-	// table = this.getRidget(ITableRidget.class,
-	// AbstractDirectoryView.BIND_ID_TABLE);
-	// table.addSelectionListener(selectionListener);
-	// table.bindSingleSelectionToModel(this, "selectedEObject");
-	// table.addDoubleClickListener(new IActionListener() {
-	// @Override
-	// public void callback() {
-	// handleViewItemAction();
-	// }
-	// });
-	//
-	// final ColumnFormatter[] formatters = getTableColumnFormatters();
-	// final Comparator<Object>[] comparators = getTableColumnComparators();
-	// for (int i = 0; i < formatters.length; i++) {
-	// if (formatters[i] != null) {
-	// table.setColumnFormatter(i, formatters[i]);
-	// }
-	// if (comparators[i] != null) {
-	// table.setComparator(i, comparators[i]);
-	// table.setColumnSortable(i, true);
-	// } else {
-	// table.setColumnSortable(i, false);
-	// }
-	// }
-	// // location formatter
-	// setColumnFormatters();
-	//
-	// table.bindToModel(new WritableList(listTableInput,
-	// LiveStockListViewTableNode.class),
-	// LiveStockListViewTableNode.class, propertyNames, columnHeaders);
-	// table.updateFromModel();
-
-	// liveStockListTable = getRidget(ITableRidget.class,
-	// ViewWidgetId.LIVESTOCK_TABLE);
-	// if (liveStockListTable != null) {
-	// liveStockListTable.bindToModel(new WritableList(listTableInput,
-	// LiveStockListViewTableNode.class),
-	// LiveStockListViewTableNode.class, propertyNames, columnHeaders);
-	//
-	// liveStockListTable.addSelectionListener(new ISelectionListener() {
-	//
-	// @Override
-	// public void ridgetSelected(SelectionEvent event) {
-	// if (event.getSource() == liveStockListTable) {
-	// viewRidget.setEnabled(liveStockListTable.getSelection().size() > 0);
-	// }
-	// }
-	//
-	// });
-	// liveStockListTable.updateFromModel();
-	//
-	// addRidget = getRidget(IActionRidget.class, ViewWidgetId.LIVESTOCK_ADD);
-	// addRidget.addListener(new AddAction());
-	// viewRidget = getRidget(IActionRidget.class, ViewWidgetId.LIVESTOCK_VIEW);
-	// if (viewRidget != null) {
-	// viewRidget.setEnabled(false);
-	// viewRidget.addListener(new ViewAction());
-	// }
-	// }
-	// }
-
 	@Override
 	protected void tableBindToModel() {
 		if (table != null) {
@@ -396,7 +336,7 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 					.createReferenceAnimal("", ""), "", "", null, null, AcquisitionType.get(0), null);
 			newAnimal.setDateOfAcquisition(new Date());
 			newAnimal.setDateOfBirth(new Date());
-			final AddLiveStockDialog aniamlDialog = new AddLiveStockDialog(AbstractDirectoryController.getShell());
+			final AddLiveStockDialog aniamlDialog = addLiveStockProvider.get();
 			aniamlDialog.getController().setContext(ControllerContextConstant.DIALOG_CONTXT_SELECTED, newAnimal);
 			final List<Farm> farmList = new ArrayList<Farm>();
 			if(selectedMember != null){
@@ -426,7 +366,7 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 		if (!table.getSelection().isEmpty()) {
 			final LiveStockListViewTableNode selectedNode = (LiveStockListViewTableNode) table.getSelection().get(0);
 			final RegisteredAnimal selectedAnimal = selectedNode.getAnimal();
-			final ViewLiveStockDialog aniamlDialog = new ViewLiveStockDialog(AbstractDirectoryController.getShell());
+			final ViewLiveStockDialog aniamlDialog = viewLiveStockProvider.get();
 			aniamlDialog.getController().setContext(ControllerContextConstant.DIALOG_CONTXT_SELECTED, selectedAnimal);
 			final List<Farm> farmList = new ArrayList<Farm>();
 			farmList.add(selectedAnimal.getLocation());
@@ -460,10 +400,12 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 	public class MemberLookupAction implements IActionListener {
 		@Override
 		public void callback() {
-			final MemberSearchDialog memberDialog = new MemberSearchDialog(null);
+			final MemberSearchDialog memberDialog = memberSearchProvider.get();
 			final int retVal = memberDialog.open();
+			
 			if (retVal == Window.OK) {
 				selectedMember = memberDialog.getSelectedMember();
+				
 				if (selectedMember != null) {
 					final String memberName = MemberUtil.formattedMemberName(selectedMember.getMember());
 					memberNameFilter.setText(memberName);

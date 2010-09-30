@@ -15,10 +15,16 @@ import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsExc
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
 import com.agritrace.edairy.desktop.operations.services.employee.IEmployeeRepository;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class EmployeeRepository implements IEmployeeRepository, IRepository<Employee> {
+	protected static final class EmployeeRepositoryInternal extends HibernateRepository<Employee> {
+		@Inject
+		protected EmployeeRepositoryInternal(Provider<Session> sessionProvider) {
+			super(sessionProvider);
+		}
 
-	private final class EmployeeRepositoryInternal extends HibernateRepository<Employee> {
 		@Override
 		protected Class<Employee> getClassType() {
 			return Employee.class;
@@ -53,7 +59,12 @@ public class EmployeeRepository implements IEmployeeRepository, IRepository<Empl
 		}
 	};
 
-	EmployeeRepositoryInternal employeeRepo = new EmployeeRepositoryInternal();
+	private final EmployeeRepositoryInternal employeeRepo;
+	
+	@Inject
+	public EmployeeRepository(EmployeeRepositoryInternal employeeRepo) {
+		this.employeeRepo = employeeRepo;
+	}
 	
 	@Override
 	public List<Employee> all() {

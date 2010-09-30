@@ -20,10 +20,11 @@ import org.eclipse.riena.ui.core.uiprocess.UIProcess;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.dialogs.ImportResultsDialog;
 import com.agritrace.edairy.desktop.install.CollectionCenterImportTool;
 import com.agritrace.edairy.desktop.operations.services.dairylocation.IDairyLocationRepository;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
@@ -32,9 +33,8 @@ import com.agritrace.edairy.desktop.operations.services.dairylocation.IDairyLoca
  * @see org.eclipse.core.commands.AbstractHandler
  */
 public class ImportCollectionCentersHandler extends HandlerBase {
-
 	ExecutionEvent event;
-
+	
 	private class CollectionCenterImportProcess extends UIProcess {
 		final File importFile;
 		final int lineCount;
@@ -79,9 +79,9 @@ public class ImportCollectionCentersHandler extends HandlerBase {
 				centers = new ArrayList<DairyLocation>();
 				errors = new HashMap<String, List<String[]>>();
 
-				CollectionCenterImportTool tool = new CollectionCenterImportTool(input, centers, errors, monitor);
+				CollectionCenterImportTool tool = toolProvider.get();
 //				tool.setMonitorDelta(lineCount / 2);
-				tool.processFile();
+				tool.processFile(input, centers, errors, monitor);
 
 				msgList.add(String.format(
 						"%-4d records imported successfully.", centers.size()));
@@ -113,11 +113,15 @@ public class ImportCollectionCentersHandler extends HandlerBase {
 		}
 
 		private void saveCenters(List<DairyLocation> successes2) {
-			IDairyLocationRepository repo = RepositoryFactory.getRegisteredRepository(IDairyLocationRepository.class);
 			repo.saveAll(successes2);
 		}
 
 	}
+	
+	@Inject
+	private static IDairyLocationRepository repo;
+	@Inject
+	private static Provider<CollectionCenterImportTool> toolProvider;
 
 	/**
 	 * The constructor.

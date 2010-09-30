@@ -1,6 +1,5 @@
 package com.agritrace.edairy.desktop.install;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -26,7 +25,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountStatus;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
+import com.google.inject.Inject;
 
 public class MemberImportTool extends AbstractImportTool {
 	private static final Date DEFAULT_IMPORT_DATE = getDefaultDate();
@@ -46,21 +46,29 @@ public class MemberImportTool extends AbstractImportTool {
 	public int count = 0;
 	public int errors = 0;
 
-	public MemberImportTool(InputStream stream, List<Membership> memberCollection,
-			Map<String, List<String[]>> failedRecords, IProgressMonitor monitor) throws FileNotFoundException, IOException {
-
-		super(new InputStreamReader(stream));
+	private final IDairyRepository repo;
+	
+	@Inject
+	public MemberImportTool(IDairyRepository repo) {
+		this.repo = repo;
+	}
+	
+	public void processFile(InputStream stream, List<Membership> memberCollection,
+			Map<String, List<String[]>> failedRecords, IProgressMonitor monitor) throws IOException {
+		setReader(new InputStreamReader(stream));
 		setMonitor(monitor);
 		this.memberCollection = memberCollection;
 		this.failedRecords = failedRecords;
 
-		Dairy dairy = RepositoryFactory.getDairyRepository().getLocalDairy();
+		Dairy dairy = repo.getLocalDairy();
 		for (Route route : dairy.getRoutes()) {
 			routeCache.put(route.getName(), route);
 		}
 		for (Membership member : dairy.getMemberships()) {
 			memberCache.put(member.getMemberNumber(), member);
 		}
+
+		super.processFile();
 	}
 
 	@Override

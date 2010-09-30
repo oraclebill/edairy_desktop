@@ -1,7 +1,6 @@
 package com.agritrace.edairy.desktop.system.ui.dialogs;
 
 import org.eclipse.jface.layout.GridDataFactory;
-import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
@@ -16,10 +15,13 @@ import com.agritrace.edairy.desktop.common.model.dairy.Role;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.system.ui.constants.RoleBinding;
 import com.agritrace.edairy.desktop.system.ui.controllers.RoleDialogController;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 public final class RoleEditDialog extends RecordDialog<Role> {
-	public RoleEditDialog(Shell parentShell) {
-		super(parentShell);
+	@Inject
+	public RoleEditDialog(@Named("current") Shell parentShell, RoleDialogController controller) {
+		super(parentShell, controller);
 	}
 
 	@Override
@@ -82,10 +84,4 @@ public final class RoleEditDialog extends RecordDialog<Role> {
 				RoleBinding.BIND_ID_ROLE_PERMISSIONS.name());
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).minSize(0, 200).applyTo(permTable);
 	}
-
-	@Override
-	protected AbstractWindowController createController() {
-		return new RoleDialogController();
-	}
-
 }

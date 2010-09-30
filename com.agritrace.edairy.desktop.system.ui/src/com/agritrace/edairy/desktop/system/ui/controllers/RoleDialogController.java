@@ -30,12 +30,16 @@ import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController
 import com.agritrace.edairy.desktop.system.ui.constants.RoleBinding;
 import com.agritrace.edairy.desktop.system.ui.util.ListMultiSelectionHolder;
 import com.agritrace.edairy.desktop.system.ui.util.ListSelectionHolder;
+import com.google.inject.Inject;
 
 public final class RoleDialogController extends RecordDialogController<Role> {
 	private Map<Namespace, Set<Permission>> perms;
 	private ListSelectionHolder<Namespace> nsList;
 	private ListMultiSelectionHolder<Permission> permList;
 	private List<Permission> selectedModelPermissions = new ArrayList<Permission>();
+	
+	@Inject
+	public RoleDialogController() {}
 	
 	@Override
 	protected void configureUserRidgets() {

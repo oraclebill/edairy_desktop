@@ -15,12 +15,14 @@ import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
+import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.RouteEditDialog;
 import com.agritrace.edairy.desktop.operations.ui.views.RouteDirectoryView;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 @PermissionRequired(Permission.VIEW_ROUTES)
 public class RouteListController extends BasicDirectoryController<Route> {
@@ -58,13 +60,18 @@ public class RouteListController extends BasicDirectoryController<Route> {
 		}
 	}
 
-	private final IDairyRepository dairyRepo = RepositoryFactory.getDairyRepository();
+	private final IDairyRepository dairyRepo;
+	private final Provider<RouteEditDialog> editDialogProvider;
 	private ITextRidget description;
 	private ITextRidget name;
 	private final SearchBean searchBean = new SearchBean();
 
-	public RouteListController() {
-		setRepository(RepositoryFactory.getRepository(Route.class));
+	@Inject
+	public RouteListController(final IDairyRepository dairyRepo, final IRepository<Route> repo,
+			final Provider<RouteEditDialog> editDialogProvider) {
+		this.dairyRepo = dairyRepo;
+		this.editDialogProvider = editDialogProvider;
+		setRepository(repo);
 		setEClass(DairyPackage.Literals.ROUTE);
 
 		// addTableColumn("Code", DairyPackage.Literals.ROUTE__CODE);
@@ -120,7 +127,7 @@ public class RouteListController extends BasicDirectoryController<Route> {
 
 	@Override
 	protected RecordDialog<Route> getRecordDialog(Shell shell) {
-		return new RouteEditDialog(shell);
+		return editDialogProvider.get();
 	}
 
 	@Override

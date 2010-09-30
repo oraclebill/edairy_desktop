@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.install;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
@@ -17,8 +18,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.operations.services.dairylocation.IDairyLocationRepository;
+import com.google.inject.Inject;
 
 /**
  * Create a dairy configuration by importing excel data in standard format.
@@ -43,23 +44,30 @@ public class CollectionCenterImportTool extends AbstractImportTool {
 	private Collection<DairyLocation> centers;
 	private Map<String, List<String[]>> failedRecords;
 	private Map<String, Object> centerCache;
+	private IDairyLocationRepository repo;
 
 	private int count = 0, errCount = 0;
 
-	public CollectionCenterImportTool(InputStream input, Collection<DairyLocation> locs,
-			Map<String, List<String[]>> errors, IProgressMonitor monitor) {
-		super(new InputStreamReader(input));
+	@Inject
+	public CollectionCenterImportTool(IDairyLocationRepository repo) {
+		this.repo = repo;
+	}
+	
+	public void processFile(InputStream input, Collection<DairyLocation> locs,
+			Map<String, List<String[]>> errors, IProgressMonitor monitor) throws IOException {
+		setReader(new InputStreamReader(input));
 		setMonitor(monitor);
 		
 		this.centers = locs;
 		this.failedRecords = errors;
 
-		IDairyLocationRepository repo = RepositoryFactory.getRegisteredRepository(IDairyLocationRepository.class);
 		centerCache = new HashMap<String, Object>();
 		
 		for (DairyLocation loc : repo.allCollectionCenters()) {
 			centerCache.put(loc.getCode(), loc);
 		}
+		
+		super.processFile();
 	}
 	
 	@Override

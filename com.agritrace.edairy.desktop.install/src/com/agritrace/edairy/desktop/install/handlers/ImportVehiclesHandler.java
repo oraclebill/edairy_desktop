@@ -19,9 +19,11 @@ import org.eclipse.riena.ui.core.uiprocess.UIProcess;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.common.ui.dialogs.ImportResultsDialog;
 import com.agritrace.edairy.desktop.install.VehicleImportTool;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
@@ -76,9 +78,8 @@ public class ImportVehiclesHandler extends HandlerBase {
 				vehicles = new LinkedList<Vehicle>();
 				errors = new HashMap<String, List<String[]>>();
 
-				VehicleImportTool tool = new VehicleImportTool(input, vehicles, errors, monitor);
-//				tool.setMonitorDelta(lineCount / 2);
-				tool.processFile();
+				VehicleImportTool tool = toolProvider.get();
+				tool.processFile(input, vehicles, errors, monitor);
 
 				msgList.add(String.format(
 						"%-4d records imported successfully.", vehicles.size()));
@@ -110,12 +111,17 @@ public class ImportVehiclesHandler extends HandlerBase {
 		}
 
 		private void saveVehicles(List<Vehicle> successes2) {
-			RepositoryFactory.getDairyRepository().getLocalDairy().getVehicles()
-					.addAll(successes2);
-			RepositoryFactory.getDairyRepository().save();
+			IDairyRepository dairyRepo = repoProvider.get();
+			dairyRepo.getLocalDairy().getVehicles().addAll(successes2);
+			dairyRepo.save();
 		}
 
-	}	/**
+	}
+	
+	@Inject private static Provider<IDairyRepository> repoProvider;
+	@Inject private static Provider<VehicleImportTool> toolProvider;
+	
+	/**
 	 * The constructor.
 	 */
 	public ImportVehiclesHandler() {

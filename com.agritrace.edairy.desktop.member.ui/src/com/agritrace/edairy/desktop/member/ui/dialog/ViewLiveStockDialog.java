@@ -21,24 +21,20 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.BaseDialogView;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.controller.ViewLiveStockDialogController;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 public class ViewLiveStockDialog extends BaseDialogView {
-
-	public ViewLiveStockDialog(Shell parentShell) {
-		super(parentShell);
-		// TODO Auto-generated constructor stub
+	@Inject
+	public ViewLiveStockDialog(@Named("current") final Shell parentShell,
+			final ViewLiveStockDialogController controller) {
+		super(parentShell, controller);
 	}
 
 	@Override
 	protected void buildWorkArea(Composite parent) {
 		createHeadlineGroup(parent);
 		createTabFolderGroup(parent);
-	}
-
-	@Override
-	protected AbstractWindowController createController() {
-		// TODO Auto-generated method stub
-		return new ViewLiveStockDialogController();
 	}
 
 	protected void createHeadlineGroup(Composite parent) {

@@ -24,7 +24,10 @@ public abstract class RecordDialog<T extends EObject> extends BaseDialogView
 
 	public RecordDialog(Shell parentShell) {
 		super(parentShell);
-		// setReturnCode(CANCEL); // default to cancel,
+	}
+
+	public RecordDialog(Shell parentShell, AbstractWindowController controller) {
+		super(parentShell, controller);
 	}
 
 	/**
@@ -64,8 +67,4 @@ public abstract class RecordDialog<T extends EObject> extends BaseDialogView
 		// newShell.setSize(240, 400);
 		newShell.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 	}
-
-	@Override
-	protected abstract AbstractWindowController createController();
-
 }
