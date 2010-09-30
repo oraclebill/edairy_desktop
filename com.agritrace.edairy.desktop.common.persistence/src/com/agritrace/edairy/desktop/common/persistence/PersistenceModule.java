@@ -61,13 +61,15 @@ public class PersistenceModule extends AbstractModule {
 		
 		@Inject
 		private Provider<Session> sessionProvider;
+		@Inject @Audit
+		private Provider<Session> auditProvider;
 
 		public HibernateRepositoryProvider(Class<?> klass) {
 			this.klass = klass;
 		}
 		
 		public IRepository<?> get() {
-			return new HibernateRepository<EObject>(sessionProvider) {
+			return new HibernateRepository<EObject>(sessionProvider, auditProvider) {
 				@Override
 				protected Class<?> getClassType() {
 					return klass;

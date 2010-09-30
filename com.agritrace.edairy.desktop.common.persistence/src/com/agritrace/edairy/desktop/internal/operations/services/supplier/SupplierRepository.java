@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
+import com.agritrace.edairy.desktop.common.persistence.services.Audit;
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
 import com.agritrace.edairy.desktop.operations.services.supplier.ISupplierRepository;
 import com.google.inject.Inject;
@@ -12,8 +13,8 @@ import com.google.inject.Provider;
 
 public class SupplierRepository extends HibernateRepository<Supplier> implements ISupplierRepository {
 	@Inject
-	protected SupplierRepository(Provider<Session> sessionProvider) {
-		super(sessionProvider);
+	protected SupplierRepository(Provider<Session> sessionProvider, @Audit Provider<Session> auditProvider) {
+		super(sessionProvider, auditProvider);
 	}
 
 	@Override

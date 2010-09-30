@@ -13,6 +13,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
+import com.agritrace.edairy.desktop.common.persistence.services.Audit;
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
 import com.agritrace.edairy.desktop.operations.services.employee.IEmployeeRepository;
@@ -22,8 +23,8 @@ import com.google.inject.Provider;
 public class EmployeeRepository implements IEmployeeRepository, IRepository<Employee> {
 	protected static final class EmployeeRepositoryInternal extends HibernateRepository<Employee> {
 		@Inject
-		protected EmployeeRepositoryInternal(Provider<Session> sessionProvider) {
-			super(sessionProvider);
+		protected EmployeeRepositoryInternal(Provider<Session> sessionProvider, @Audit Provider<Session> auditProvider) {
+			super(sessionProvider, auditProvider);
 		}
 
 		@Override

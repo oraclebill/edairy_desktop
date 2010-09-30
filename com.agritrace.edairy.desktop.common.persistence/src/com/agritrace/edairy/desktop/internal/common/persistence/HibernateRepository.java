@@ -18,6 +18,7 @@ import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
+import com.agritrace.edairy.desktop.common.persistence.services.Audit;
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -50,9 +51,10 @@ public abstract class HibernateRepository<T extends EObject> implements
 	private final String identifierName;
 
 	private final Provider<Session> sessionProvider;
+	private final Provider<Session> auditProvider;
 
 	@Inject
-	protected HibernateRepository(Provider<Session> sessionProvider) {
+	protected HibernateRepository(Provider<Session> sessionProvider, @Audit Provider<Session> auditProvider) {
 		String className;
 		ClassMetadata metaData;
 
@@ -62,6 +64,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 
 		// set the persistence manager
 		this.sessionProvider = sessionProvider;
+		this.auditProvider = auditProvider;
 
 		// get metadata about the class we will be persisting..
 		className = getClassType().getName();
@@ -178,6 +181,8 @@ public abstract class HibernateRepository<T extends EObject> implements
 				sessionProvider.get().saveOrUpdate(changedItem);
 			}
 		});
+		
+		onSave(changedItem);
 	}
 
 	@Override
@@ -188,6 +193,8 @@ public abstract class HibernateRepository<T extends EObject> implements
 				sessionProvider.get().save(newEntity);
 			}
 		});
+		
+		onSave(newEntity);
 	}
 
 	@Override
@@ -199,6 +206,8 @@ public abstract class HibernateRepository<T extends EObject> implements
 				sessionProvider.get().update(getEntityName(), updateableEntity);
 			}
 		});
+		
+		onSave(updateableEntity);
 	}
 
 	@Override
@@ -211,6 +220,10 @@ public abstract class HibernateRepository<T extends EObject> implements
 				}
 			}
 		});
+		
+		for (T obj: objects) {
+			onSave(obj);
+		}
 	}
 	
 	private void closeSession() {
@@ -279,4 +292,11 @@ public abstract class HibernateRepository<T extends EObject> implements
 		}
 	}
 
+	protected void onSave(Object entity) {
+		// Audit
+	}
+
+	protected void onDelete(Object entity) {
+		// Audit
+	}
 }
