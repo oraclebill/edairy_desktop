@@ -2,11 +2,12 @@ package com.agritrace.edairy.desktop.internal.common.persistence;
 
 import java.util.Properties;
 
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.eclipse.emf.teneo.hibernate.HbHelper;
 import org.hibernate.cfg.Environment;
 
-import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
+import com.agritrace.edairy.desktop.common.model.audit.AuditPackage;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -20,7 +21,7 @@ public class AuditDataStoreProvider implements Provider<HbDataStore> {
 	public AuditDataStoreProvider() {
 		hbds = HbHelper.INSTANCE.createRegisterDataStore(AUDIT_DB_NAME);
 		hbds.setProperties(getDatastoreProperties());
-		hbds.setEPackages(PersistenceModule.EPACKAGES);
+		hbds.setEPackages(new EPackage[] { AuditPackage.eINSTANCE });
 
 		hbds.initialize();
 	}
