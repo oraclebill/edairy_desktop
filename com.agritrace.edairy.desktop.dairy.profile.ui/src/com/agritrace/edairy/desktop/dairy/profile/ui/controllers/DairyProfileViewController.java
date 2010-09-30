@@ -62,7 +62,7 @@ public class DairyProfileViewController extends SubModuleController {
 				updateBindings();
 				// getInfoFlyout().addInfo(new InfoFlyoutData("message", "Dairy profile updated successfully."));
 			} catch (Exception e) {
-				getInfoFlyout().addInfo(new InfoFlyoutData("message", "Error updating dairy profile!"));
+//				getInfoFlyout().addInfo(new InfoFlyoutData("message", "Error updating dairy profile!"));
 			}
 		}
 
@@ -137,15 +137,15 @@ public class DairyProfileViewController extends SubModuleController {
 	}
 
 	public void validateProfile() {
-		for (IRidget ridget : getRidgets()) {
-			if (ridget instanceof IEditableRidget) {
-				IEditableRidget editable = (IEditableRidget) ridget;
-				if (!editable.revalidate()) {
-					editable.requestFocus();
-					throw new RuntimeException();
-				}
-			}
-		}
+//		for (IRidget ridget : getRidgets()) {
+//			if (ridget instanceof IEditableRidget) {
+//				IEditableRidget editable = (IEditableRidget) ridget;
+//				if (!editable.revalidate()) {
+//					editable.requestFocus();
+//					throw new RuntimeException();
+//				}
+//			}
+//		}
 	}
 
 	@Override
