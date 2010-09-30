@@ -84,6 +84,7 @@ public class MemberTransactionImportTool extends AbstractImportTool {
 		setReader(new InputStreamReader(input));
 		setMonitor(monitor);
 		
+		setMonitorDelta(100);
 		this.transactions = transactions;
 		this.failedRecords = errors;
 		this.dateFormat = new SimpleDateFormat("dd.MM.yyyy");
