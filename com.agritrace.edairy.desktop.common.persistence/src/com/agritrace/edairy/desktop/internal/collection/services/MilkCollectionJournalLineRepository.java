@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.internal.collection.services;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -122,4 +123,108 @@ public class MilkCollectionJournalLineRepository extends
 		runWithTransaction(runnable);
 		return runnable.getResult();
 	}
+	
+	@Override
+	public BigDecimal getMilkPrice(final int month, final int year) {
+		SessionRunnable<BigDecimal> runnable = new SessionRunnable<BigDecimal>() {
+			@Override
+			public void run(Session session) {
+					String queryString = "SELECT value " + "FROM MilkPrice m "
+							+ "WHERE m.year = :year " + "  AND m.month = :month ";
+	
+					Query query = session.createQuery(queryString);
+					query.setInteger("year", year);
+					query.setInteger("month", month);
+	
+					
+					Object queryResult = query.uniqueResult();
+					if(queryResult != null){
+						setResult(new BigDecimal(queryResult.toString()));
+					}
+				
+			}
+		};
+
+		runWithTransaction(runnable);
+		return runnable.getResult();
+	}
+
+	@Override
+	public List<Membership> getMembersWithDeliveriesFor(final int month,
+			final int year) {
+		SessionRunnable<List<Membership>> runnable = new SessionRunnable<List<Membership>>() {
+			@Override
+			public void run(Session session) {
+				String queryString = "SELECT distinct validatedMember "
+						+ "FROM CollectionJournalLine l "
+						+ "WHERE l.rejected = False "
+						+ "  AND l.flagged = False "
+						+ "  AND year(l.collectionJournal.journalDate) = :year "
+						+ "  AND month(l.collectionJournal.journalDate) = :month ";
+
+				Query query = session.createQuery(queryString);
+				query.setInteger("year", year);
+				query.setInteger("month", month);
+
+				setResult(query.list());
+			}
+		};
+
+		runWithTransaction(runnable);
+		return runnable.getResult();
+	}
+
+	@Override
+	public List<CollectionJournalLine> getPayableDeliveriesForMember(
+			final Membership member, final int month, final int year) {
+		SessionRunnable<List<CollectionJournalLine>> runnable = new SessionRunnable<List<CollectionJournalLine>>() {
+			@Override
+			public void run(Session session) {
+				String queryString = "FROM CollectionJournalLine l "
+						+ "WHERE l.validatedMember = :member "
+						+ "  AND l.rejected = False "
+						+ "  AND l.flagged = False "
+						+ "  AND year(l.collectionJournal.journalDate) = :year "
+						+ "  AND month(l.collectionJournal.journalDate) = :month ";
+
+				Query query = session.createQuery(queryString);
+				query.setEntity("member", member);
+				query.setInteger("year", year);
+				query.setInteger("month", month);
+
+				setResult(query.list());
+			}
+		};
+
+		runWithTransaction(runnable);
+		return runnable.getResult();
+	}
+
+	@Override
+	public BigDecimal getSumOfPayableDeliveries(final Membership member,
+			final int month, final int year) {
+		SessionRunnable<BigDecimal> runnable = new SessionRunnable<BigDecimal>() {
+			@Override
+			public void run(Session session) {
+				String queryString = "SELECT sum(l.quantity) "
+						+ "FROM CollectionJournalLine l "
+						+ "WHERE l.validatedMember = :member "
+						+ "  AND l.rejected = False "
+						+ "  AND l.flagged = False "
+						+ "  AND year(l.collectionJournal.journalDate) = :year "
+						+ "  AND month(l.collectionJournal.journalDate) = :month ";
+
+				Query query = session.createQuery(queryString);
+				query.setEntity("member", member);
+				query.setInteger("year", year);
+				query.setInteger("month", month);
+
+				setResult(new BigDecimal(query.uniqueResult().toString()));
+			}
+		};
+
+		runWithTransaction(runnable);
+		return (BigDecimal) runnable.getResult();
+	}
+
 }

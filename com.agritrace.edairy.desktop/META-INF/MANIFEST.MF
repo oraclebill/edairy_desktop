@@ -23,7 +23,8 @@ Require-Bundle: com.agritrace.edairy.desktop.common.persistence;bundle-version="
  com.agritrace.edairy.desktop.system.ui;bundle-version="1.0.0",
  com.google.inject,
  org.ops4j.peaberry;bundle-version="1.1.1",
- org.ops4j.peaberry.eclipse;bundle-version="1.1.1"
+ org.ops4j.peaberry.eclipse;bundle-version="1.1.1",
+ com.agritrace.edairy.desktop.birt;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.desktop,

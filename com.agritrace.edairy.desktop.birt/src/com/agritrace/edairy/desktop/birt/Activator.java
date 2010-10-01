@@ -7,7 +7,9 @@ public class Activator implements BundleActivator {
 
 	static String PLUGIN_ID = "com.agritrace.edairy.desktop.birt";
 	
-	private static BundleContext context;
+	public static BundleContext context;
+	
+	private static Activator plugin;
 
 	static BundleContext getContext() {
 		return context;
@@ -19,6 +21,7 @@ public class Activator implements BundleActivator {
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
 		Activator.context = bundleContext;
+		plugin = this;
 	}
 
 	/*
@@ -27,6 +30,10 @@ public class Activator implements BundleActivator {
 	 */
 	public void stop(BundleContext bundleContext) throws Exception {
 		Activator.context = null;
+	}
+	
+	public static Activator getDefault() {
+		return plugin;
 	}
 
 }

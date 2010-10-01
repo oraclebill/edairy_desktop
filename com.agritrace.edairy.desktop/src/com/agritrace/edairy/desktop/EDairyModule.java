@@ -12,6 +12,7 @@ import org.ops4j.peaberry.Peaberry;
 import org.ops4j.peaberry.eclipse.EclipseRegistry;
 import org.osgi.framework.BundleContext;
 
+import com.agritrace.edairy.desktop.birt.BirtModule;
 import com.agritrace.edairy.desktop.collection.ui.controllers.MilkCollectionLogController;
 import com.agritrace.edairy.desktop.collection.ui.controllers.MilkDeliveryJournalController;
 import com.agritrace.edairy.desktop.collection.ui.controllers.ScaleImportViewController;
@@ -82,6 +83,7 @@ public class EDairyModule extends AbstractModule {
 		install(new InstallModule());
 		install(new FinanceModule());
 		install(new HomeModule());
+		install(new BirtModule());
 		
 		Map<Class<? extends IController>, Provider<? extends IController>> map =
 			new HashMap<Class<? extends IController>, Provider<? extends IController>>();

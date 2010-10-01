@@ -9,15 +9,8 @@
  *     Ola Spjuth - initial API and implementation
  ******************************************************************************/
 package com.agritrace.edairy.desktop.birt;
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashMap;
-
-import org.eclipse.birt.report.viewer.utilities.WebViewer;
-import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.swt.SWT;
@@ -25,7 +18,6 @@ import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IStartup;
-import org.osgi.framework.Bundle;
 
 /**
  * 
@@ -57,36 +49,36 @@ public class Startup implements IStartup {
                 monitor.beginTask( "Initializing BIRT ", 3 );
                 monitor.worked( 1 );
 
-                WebViewer.startup();
-
-                Bundle bundle = org.eclipse.core.runtime.Platform.getBundle(
-                                                           Activator.PLUGIN_ID); 
-                URL url = FileLocator.find(bundle, 
-                                           new Path("/reports/empty.rptdesign"), 
-                                           null);
-                final String rpt;
-                try {
-                    rpt = FileLocator.toFileURL(url).getPath();
-
-                    //Do new viewer
-//                    ViewerPlugin.getDefault( ).getPluginPreferences( ).setValue("APPCONTEXT_EXTENSION_KEY", "MyAppContext");
-
-                    final HashMap myparms = new HashMap();
-                    myparms.put("SERVLET_NAME_KEY", "frameset");
-                    myparms.put("FORMAT_KEY", "html");
-
-                    monitor.worked( 1 );
-
-                    Display.getDefault().syncExec( new Runnable(){
-
-                        public void run() {
-                            WebViewer.display(rpt, browser, myparms);
-                        }} );
-
-
-                } catch ( IOException e ) {
-                    e.printStackTrace();
-                }
+//                WebViewer.startup();
+//
+//                Bundle bundle = org.eclipse.core.runtime.Platform.getBundle(
+//                                                           Activator.PLUGIN_ID); 
+//                URL url = FileLocator.find(bundle, 
+//                                           new Path("/reports/empty.rptdesign"), 
+//                                           null);
+//                final String rpt;
+//                try {
+//                    rpt = FileLocator.toFileURL(url).getPath();
+//
+//                    //Do new viewer
+////                    ViewerPlugin.getDefault( ).getPluginPreferences( ).setValue("APPCONTEXT_EXTENSION_KEY", "MyAppContext");
+//
+//                    final HashMap myparms = new HashMap();
+//                    myparms.put("SERVLET_NAME_KEY", "frameset");
+//                    myparms.put("FORMAT_KEY", "html");
+//
+//                    monitor.worked( 1 );
+//
+//                    Display.getDefault().syncExec( new Runnable(){
+//
+//                        public void run() {
+//                            WebViewer.display(rpt, browser, myparms);
+//                        }} );
+//
+//
+//                } catch ( IOException e ) {
+//                    e.printStackTrace();
+//                }
 
                 monitor.done();
                 return Status.OK_STATUS;

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.21" id="1">
+    <list-property name="configVars">
+        <structure>
+            <property name="name">__isdisplay__Year_147_0</property>
+            <property name="value">2009</property>
+        </structure>
+        <structure>
+            <property name="name">__isdisplay__Month_163_1</property>
+            <property name="value">July</property>
+        </structure>
+        <structure>
+            <property name="name">__isdisplay__Name_164_2</property>
+            <property name="value">MEMBER_PAHJKSFJHASDF</property>
+        </structure>
+        <structure>
+            <property name="name">Name_164_3</property>
+            <property name="value">MEMBER_PAHJKSFJHASDF</property>
+        </structure>
+        <structure>
+            <property name="name">Name_164_type_</property>
+            <property name="value">string</property>
+        </structure>
+        <structure>
+            <property name="name">Year_147_4</property>
+            <property name="value">2009</property>
+        </structure>
+        <structure>
+            <property name="name">Year_147_type_</property>
+            <property name="value">string</property>
+        </structure>
+        <structure>
+            <property name="name">Month_163_5</property>
+            <property name="value">July</property>
+        </structure>
+        <structure>
+            <property name="name">Month_163_type_</property>
+            <property name="value">string</property>
+        </structure>
+    </list-property>
+</report>
