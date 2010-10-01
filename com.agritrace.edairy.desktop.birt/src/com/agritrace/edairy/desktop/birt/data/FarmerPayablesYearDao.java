@@ -15,7 +15,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 /**
  * class to collect the data needed for the report and to place it into special

@@ -19,6 +19,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.part.ViewPart;
 
+import com.agritrace.edairy.desktop.birt.controllers.ReportController;
 import com.swtdesigner.ResourceManager;
 import com.swtdesigner.SWTResourceManager;
 
@@ -31,22 +32,23 @@ public class MemberPayablesReportView extends ViewPart {
 
 	@Override
 	public void createPartControl(Composite parent) {
-		final Composite top = new Composite(parent, SWT.NONE);
-		top.setSize(new Point(800, 800));
-		top.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		top.setLayout(new GridLayout(1, false));
-
-		final ScrolledComposite scrolledComposite = new ScrolledComposite(top, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
-		scrolledComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		scrolledComposite.setExpandHorizontal(true);
-		scrolledComposite.setExpandVertical(true);
-
-		final Label label = new Label(scrolledComposite, SWT.NONE);
-		label.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		label.setImage(ResourceManager.getPluginImage("com.agritrace.edairy.desktop.demo.riena",
-				"resources/reports/eDairyReport-farmerpayables.jpg"));
-		scrolledComposite.setContent(label);
-		scrolledComposite.setMinSize(label.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+		new ReportController(ReportController.MEMBER_PAYABLE_YEAR).createPartControl(parent);
+//		final Composite top = new Composite(parent, SWT.NONE);
+//		top.setSize(new Point(800, 800));
+//		top.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+//		top.setLayout(new GridLayout(1, false));
+//
+//		final ScrolledComposite scrolledComposite = new ScrolledComposite(top, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+//		scrolledComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+//		scrolledComposite.setExpandHorizontal(true);
+//		scrolledComposite.setExpandVertical(true);
+//
+//		final Label label = new Label(scrolledComposite, SWT.NONE);
+//		label.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+//		label.setImage(ResourceManager.getPluginImage("com.agritrace.edairy.desktop.demo.riena",
+//				"resources/reports/eDairyReport-farmerpayables.jpg"));
+//		scrolledComposite.setContent(label);
+//		scrolledComposite.setMinSize(label.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 	}
 
 	@Override

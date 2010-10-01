@@ -17,4 +17,6 @@ Require-Bundle: org.eclipse.ui,
  com.google.inject;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Export-Package: com.agritrace.edairy.desktop.birt
+Export-Package: com.agritrace.edairy.desktop.birt,
+ com.agritrace.edairy.desktop.birt.controllers,
+ com.agritrace.edairy.desktop.birt.data
