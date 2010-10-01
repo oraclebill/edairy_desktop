@@ -3,10 +3,11 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/com.agritrace.edairy.desktop.common.model/src"
     modelPluginID="com.agritrace.edairy.desktop.common.model" modelName="Dairy" modelPluginClass=""
-    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false">
+    generateSchema="true" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false">
   <foreignModel>dairy.ecore</foreignModel>
   <genPackages prefix="Dairy" basePackage="com.agritrace.edairy.desktop.common.model"
-      resource="XMI" disposableProviderFactory="true" ecorePackage="dairy.ecore#/">
+      resource="XML" disposableProviderFactory="true" contentTypeIdentifier="" ecorePackage="dairy.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="dairy.ecore#//JournalStatus">
       <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//JournalStatus/NEW"/>
       <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//JournalStatus/PENDING"/>
@@ -105,9 +106,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/startDate"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/jobFunction"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/department"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/nationalId"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/nhifNumber"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/nssfNumber"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/username"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/password"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/localEnabled"/>
@@ -408,6 +406,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Person/phoneNumber"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Person/location"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Person/personId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Person/nssfNumber"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Person/nhifNumber"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Person/nationalId"/>
     </genClasses>
     <genClasses ecoreClass="common.ecore#//Company">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Company/legalName"/>
@@ -441,7 +442,7 @@
     </genClasses>
   </genPackages>
   <genPackages prefix="Tracking" basePackage="com.agritrace.edairy.desktop.common.model"
-      disposableProviderFactory="true" ecorePackage="farm.ecore#/">
+      resource="XML" disposableProviderFactory="true" ecorePackage="farm.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="farm.ecore#//AcquisitionType">
       <genEnumLiterals ecoreEnumLiteral="farm.ecore#//AcquisitionType/BIRTH"/>
       <genEnumLiterals ecoreEnumLiteral="farm.ecore#//AcquisitionType/PURCHASE"/>
@@ -530,7 +531,7 @@
     </genClasses>
   </genPackages>
   <genPackages prefix="Requests" basePackage="com.agritrace.edairy.desktop.common.model"
-      ecorePackage="requests.ecore#/">
+      resource="XML" ecorePackage="requests.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="requests.ecore#//RequestType">
       <genEnumLiterals ecoreEnumLiteral="requests.ecore#//RequestType/Veterinary"/>
       <genEnumLiterals ecoreEnumLiteral="requests.ecore#//RequestType/Insemination"/>

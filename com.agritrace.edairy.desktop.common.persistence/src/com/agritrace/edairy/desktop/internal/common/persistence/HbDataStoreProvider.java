@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Properties;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.eclipse.emf.teneo.hibernate.HbHelper;
 import org.eclipse.riena.core.Log4r;
@@ -114,8 +115,24 @@ public class HbDataStoreProvider implements Provider<HbDataStore>, IDbProperties
 			// TODO: test this - perhaps JTA or 'managed' is better...
 			props.setProperty(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
 
+			URI mappingFileURI = URI.createPlatformPluginURI("/com.agritrace.edairy.desktop.common.persistence/etc/hibernate-mapping.xml", true);
+			if (mappingFileURI.isFile()) {
+				LOG.log(LogService.LOG_INFO, "Using hibernate mapping from plugin.");
+				props.setProperty("teneo.mapping.mapping_file_name", mappingFileURI.toString());
+			}
 			props.setProperty("teneo.mapping.disable_econtainer", "true");
 			props.setProperty("teneo.mapping.default_varchar_length", "60");
+			
+			// TODO: improve performance...
+//			props.setProperty("teneo.mapping.set_proxy", "true");  // classloading issues
+//			props.setProperty("teneo.mapping.fetch_containment_eagerly", "true");  // counterproductive
+//			props.setProperty("teneo.mapping.map_all_lists_as_idbag", "true"); // untried
+//			props.setProperty("teneo.mapping.always_map_list_as_bag", "true"); // untried
+//			props.setProperty("teneo.mapping.map_embeddable_as_embedded", "true");
+			
+			// global extra-lazy wont work. contactmethods fouls it up (at least) probably teneo bug..
+			//			props.setProperty("teneo.mapping.fetch_one_to_many_extra_lazy", "true"); 
+
 
 			// show all sql for debugging
 //			props.setProperty(Environment.SHOW_SQL, "true");

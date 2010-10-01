@@ -4,6 +4,8 @@
 <target name="dairy_manager_desktop">
 <locations>
 <location path="${workspace_loc}/../edairy_desktop_lib/grouplayout" type="Directory"/>
+<location path="/Users/bjones/Development/Projects/edairy_desktop_lib/servlet" type="Directory"/>
 <location path="${workspace_loc}/../edairy_desktop_lib/bundle_pool" type="Profile"/>
+<location path="/Users/bjones/Development/Projects/edairy_desktop_lib/birt" type="Directory"/>
 </locations>
 </target>

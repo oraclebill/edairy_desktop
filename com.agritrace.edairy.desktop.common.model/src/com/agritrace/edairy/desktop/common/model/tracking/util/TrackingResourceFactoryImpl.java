@@ -4,30 +4,31 @@
  *
  * $Id$
  */
-package com.agritrace.edairy.desktop.common.model.dairy.util;
+package com.agritrace.edairy.desktop.common.model.tracking.util;
 
 import org.eclipse.emf.common.util.URI;
 
 import org.eclipse.emf.ecore.resource.Resource;
 
 import org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl;
+
 import org.eclipse.emf.ecore.xmi.XMLResource;
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Resource Factory</b> associated with the package.
  * <!-- end-user-doc -->
- * @see com.agritrace.edairy.desktop.common.model.dairy.util.DairyResourceImpl
+ * @see com.agritrace.edairy.desktop.common.model.tracking.util.TrackingResourceImpl
  * @generated
  */
-public class DairyResourceFactoryImpl extends ResourceFactoryImpl {
+public class TrackingResourceFactoryImpl extends ResourceFactoryImpl {
 	/**
 	 * Creates an instance of the resource factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DairyResourceFactoryImpl() {
+	public TrackingResourceFactoryImpl() {
 		super();
 	}
 
@@ -39,7 +40,7 @@ public class DairyResourceFactoryImpl extends ResourceFactoryImpl {
 	 */
 	@Override
 	public Resource createResource(URI uri) {
-		XMLResource result = new DairyResourceImpl(uri);
+		XMLResource result = new TrackingResourceImpl(uri);
 		result.getDefaultSaveOptions().put(XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE);
 		result.getDefaultLoadOptions().put(XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE);
 
@@ -52,4 +53,4 @@ public class DairyResourceFactoryImpl extends ResourceFactoryImpl {
 		return result;
 	}
 
-} //DairyResourceFactoryImpl
+} //TrackingResourceFactoryImpl

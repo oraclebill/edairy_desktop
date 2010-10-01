@@ -172,6 +172,7 @@
       <feature id="org.eclipse.nebula.widgets.compositetable.feature" version="1.0.0.HEAD"/>
       <feature id="org.eclipse.rcp" version="3.6.0.v20100519-9OArFKvFtsd7WLUKh-DcYTS"/>
       <feature id="org.hsqldb" version="1.8.1.201005082216"/>
+      <feature id="com.agritrace.edairy.desktop.birt.feature" version="1.0.0.qualifier"/>
    </features>
 
    <configurations>
