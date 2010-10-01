@@ -391,6 +391,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Audited/lastUpdated"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Audited/voidDate"/>
     </genClasses>
+    <genClasses ecoreClass="common.ecore#//Versioned">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute common.ecore#//Versioned/version"/>
+    </genClasses>
     <genClasses ecoreClass="common.ecore#//Contactable">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference common.ecore#//Contactable/contactMethods"/>
     </genClasses>

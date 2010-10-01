@@ -88,6 +88,10 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createAuditedAdapter();
 			}
 			@Override
+			public Adapter caseVersioned(Versioned object) {
+				return createVersionedAdapter();
+			}
+			@Override
 			public Adapter caseContactable(Contactable object) {
 				return createContactableAdapter();
 			}
@@ -188,6 +192,20 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAuditedAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.base.Versioned <em>Versioned</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.agritrace.edairy.desktop.common.model.base.Versioned
+	 * @generated
+	 */
+	public Adapter createVersionedAdapter() {
 		return null;
 	}
 

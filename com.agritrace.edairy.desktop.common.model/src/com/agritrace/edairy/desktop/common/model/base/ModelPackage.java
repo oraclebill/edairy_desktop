@@ -273,6 +273,34 @@ public interface ModelPackage extends EPackage {
 	int AUDITED_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.VersionedImpl <em>Versioned</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.desktop.common.model.base.impl.VersionedImpl
+	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getVersioned()
+	 * @generated
+	 */
+	int VERSIONED = 4;
+
+	/**
+	 * The feature id for the '<em><b>Version</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VERSIONED__VERSION = 0;
+
+	/**
+	 * The number of structural features of the '<em>Versioned</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VERSIONED_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.ContactableImpl <em>Contactable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -280,7 +308,7 @@ public interface ModelPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getContactable()
 	 * @generated
 	 */
-	int CONTACTABLE = 4;
+	int CONTACTABLE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
@@ -308,7 +336,7 @@ public interface ModelPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getPerson()
 	 * @generated
 	 */
-	int PERSON = 5;
+	int PERSON = 6;
 
 	/**
 	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
@@ -462,7 +490,7 @@ public interface ModelPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getCompany()
 	 * @generated
 	 */
-	int COMPANY = 6;
+	int COMPANY = 7;
 
 	/**
 	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
@@ -562,7 +590,7 @@ public interface ModelPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getDescriptiveLocation()
 	 * @generated
 	 */
-	int DESCRIPTIVE_LOCATION = 7;
+	int DESCRIPTIVE_LOCATION = 8;
 
 	/**
 	 * The feature id for the '<em><b>Directions</b></em>' attribute.
@@ -599,7 +627,7 @@ public interface ModelPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getLocation()
 	 * @generated
 	 */
-	int LOCATION = 8;
+	int LOCATION = 9;
 
 	/**
 	 * The feature id for the '<em><b>Postal Location</b></em>' containment reference.
@@ -663,7 +691,7 @@ public interface ModelPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getContactMethod()
 	 * @generated
 	 */
-	int CONTACT_METHOD = 9;
+	int CONTACT_METHOD = 10;
 
 	/**
 	 * The feature id for the '<em><b>Cm Type</b></em>' attribute.
@@ -700,7 +728,7 @@ public interface ModelPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getImageEntry()
 	 * @generated
 	 */
-	int IMAGE_ENTRY = 10;
+	int IMAGE_ENTRY = 11;
 
 	/**
 	 * The feature id for the '<em><b>Image Id</b></em>' attribute.
@@ -746,7 +774,7 @@ public interface ModelPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getGender()
 	 * @generated
 	 */
-	int GENDER = 11;
+	int GENDER = 12;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.ContactMethodType <em>Contact Method Type</em>}' enum.
@@ -756,7 +784,7 @@ public interface ModelPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getContactMethodType()
 	 * @generated
 	 */
-	int CONTACT_METHOD_TYPE = 12;
+	int CONTACT_METHOD_TYPE = 13;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure <em>Unit Of Measure</em>}' enum.
@@ -766,7 +794,7 @@ public interface ModelPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getUnitOfMeasure()
 	 * @generated
 	 */
-	int UNIT_OF_MEASURE = 13;
+	int UNIT_OF_MEASURE = 14;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.ContainerType <em>Container Type</em>}' enum.
@@ -776,7 +804,7 @@ public interface ModelPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getContainerType()
 	 * @generated
 	 */
-	int CONTAINER_TYPE = 14;
+	int CONTAINER_TYPE = 15;
 
 	/**
 	 * The meta object id for the '<em>Transaction ID</em>' data type.
@@ -786,7 +814,7 @@ public interface ModelPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getTransactionID()
 	 * @generated
 	 */
-	int TRANSACTION_ID = 15;
+	int TRANSACTION_ID = 16;
 
 	/**
 	 * The meta object id for the '<em>Unique ID</em>' data type.
@@ -796,7 +824,7 @@ public interface ModelPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getUniqueID()
 	 * @generated
 	 */
-	int UNIQUE_ID = 16;
+	int UNIQUE_ID = 17;
 
 	/**
 	 * The meta object id for the '<em>Image Reference</em>' data type.
@@ -806,7 +834,7 @@ public interface ModelPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getImageReference()
 	 * @generated
 	 */
-	int IMAGE_REFERENCE = 17;
+	int IMAGE_REFERENCE = 18;
 
 
 	/**
@@ -1013,6 +1041,27 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAudited_VoidDate();
+
+	/**
+	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.base.Versioned <em>Versioned</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Versioned</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.base.Versioned
+	 * @generated
+	 */
+	EClass getVersioned();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.base.Versioned#getVersion <em>Version</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Version</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.base.Versioned#getVersion()
+	 * @see #getVersioned()
+	 * @generated
+	 */
+	EAttribute getVersioned_Version();
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.base.Contactable <em>Contactable</em>}'.
@@ -1723,6 +1772,24 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute AUDITED__VOID_DATE = eINSTANCE.getAudited_VoidDate();
+
+		/**
+		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.VersionedImpl <em>Versioned</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.agritrace.edairy.desktop.common.model.base.impl.VersionedImpl
+		 * @see com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl#getVersioned()
+		 * @generated
+		 */
+		EClass VERSIONED = eINSTANCE.getVersioned();
+
+		/**
+		 * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VERSIONED__VERSION = eINSTANCE.getVersioned_Version();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.ContactableImpl <em>Contactable</em>}' class.

@@ -24,6 +24,7 @@ import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
 import com.agritrace.edairy.desktop.common.model.base.StatutoryLocation;
 import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
 
+import com.agritrace.edairy.desktop.common.model.base.Versioned;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
@@ -83,6 +84,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass auditedEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass versionedEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -426,6 +434,24 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	public EAttribute getAudited_VoidDate() {
 		return (EAttribute)auditedEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getVersioned() {
+		return versionedEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getVersioned_Version() {
+		return (EAttribute)versionedEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -920,6 +946,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(auditedEClass, AUDITED__LAST_UPDATED);
 		createEAttribute(auditedEClass, AUDITED__VOID_DATE);
 
+		versionedEClass = createEClass(VERSIONED);
+		createEAttribute(versionedEClass, VERSIONED__VERSION);
+
 		contactableEClass = createEClass(CONTACTABLE);
 		createEReference(contactableEClass, CONTACTABLE__CONTACT_METHODS);
 
@@ -1035,6 +1064,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEClass(auditedEClass, Audited.class, "Audited", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAudited_LastUpdated(), ecorePackage.getEDate(), "lastUpdated", null, 0, 1, Audited.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAudited_VoidDate(), ecorePackage.getEDate(), "voidDate", null, 0, 1, Audited.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(versionedEClass, Versioned.class, "Versioned", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getVersioned_Version(), ecorePackage.getELong(), "version", null, 1, 1, Versioned.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(contactableEClass, Contactable.class, "Contactable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getContactable_ContactMethods(), this.getContactMethod(), null, "contactMethods", null, 0, -1, Contactable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -1170,6 +1202,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 			 "kind", "element"
 		   });		
 		addAnnotation
+		  (versionedEClass, 
+		   source, 
+		   new String[] {
+			 "name", "Versioned",
+			 "kind", "elementOnly"
+		   });			
+		addAnnotation
 		  (contactableEClass, 
 		   source, 
 		   new String[] {
@@ -1266,6 +1305,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   new String[] {
 			 "appinfo", "@Embeddable"
 		   });				
+		addAnnotation
+		  (versionedEClass, 
+		   source, 
+		   new String[] {
+			 "appinfo", "@MappedSuperclass"
+		   });			
 		addAnnotation
 		  (contactableEClass, 
 		   source, 

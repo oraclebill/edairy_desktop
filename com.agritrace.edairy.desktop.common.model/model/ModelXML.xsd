@@ -61,6 +61,10 @@
     <xsd:attribute name="voidDate" type="xsd:string"/>
   </xsd:complexType>
   <xsd:element name="Audited" type="base:Audited"/>
+  <xsd:complexType name="Versioned">
+    <xsd:attribute name="version" type="xsd:long" use="required"/>
+  </xsd:complexType>
+  <xsd:element name="Versioned" type="base:Versioned"/>
   <xsd:complexType name="Contactable">
     <xsd:sequence>
       <xsd:element maxOccurs="unbounded" minOccurs="0" name="contactMethods" type="base:ContactMethod"/>
