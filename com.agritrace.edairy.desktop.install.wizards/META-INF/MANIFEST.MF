@@ -1,8 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: Wizards
-Bundle-SymbolicName: com.agritrace.edairy.desktop.install.wizards
-Bundle-Version: 1.0.0.qualifier
-Bundle-Vendor: AGRITRACE
-Fragment-Host: com.agritrace.edairy.desktop.install;bundle-version="0.0.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
