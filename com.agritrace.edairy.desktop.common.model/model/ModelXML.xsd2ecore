@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xsd2ecore:XSD2EcoreMappingRoot xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsd2ecore="http://www.eclipse.org/emf/2002/XSD2Ecore" inputs="common.ecore#/"
+    outputs="ModelXML.xsd#/">
+  <nested inputs="common.ecore#/" outputs="ModelXML.xsd#/">
+    <nested inputs="common.ecore#//Gender" outputs="ModelXML.xsd#//Gender;XSDSimpleTypeDefinition">
+      <nested inputs="common.ecore#//Gender/MALE" outputs="ModelXML.xsd#//Gender;XSDSimpleTypeDefinition/XSDEnumerationFacet"/>
+      <nested inputs="common.ecore#//Gender/FEMALE" outputs="ModelXML.xsd#//Gender;XSDSimpleTypeDefinition/XSDEnumerationFacet=1"/>
+    </nested>
+    <nested inputs="common.ecore#//ContactMethodType" outputs="ModelXML.xsd#//ContactMethodType;XSDSimpleTypeDefinition=1">
+      <nested inputs="common.ecore#//ContactMethodType/EMAIL" outputs="ModelXML.xsd#//ContactMethodType;XSDSimpleTypeDefinition=1/XSDEnumerationFacet"/>
+      <nested inputs="common.ecore#//ContactMethodType/SMS" outputs="ModelXML.xsd#//ContactMethodType;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=1"/>
+      <nested inputs="common.ecore#//ContactMethodType/PHONE" outputs="ModelXML.xsd#//ContactMethodType;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=2"/>
+      <nested inputs="common.ecore#//ContactMethodType/FAX" outputs="ModelXML.xsd#//ContactMethodType;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=3"/>
+      <nested inputs="common.ecore#//ContactMethodType/IM_AIM" outputs="ModelXML.xsd#//ContactMethodType;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=4"/>
+      <nested inputs="common.ecore#//ContactMethodType/IM_SKYPE" outputs="ModelXML.xsd#//ContactMethodType;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=5"/>
+      <nested inputs="common.ecore#//ContactMethodType/IM_MSN" outputs="ModelXML.xsd#//ContactMethodType;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=6"/>
+      <nested inputs="common.ecore#//ContactMethodType/IM_GTALK" outputs="ModelXML.xsd#//ContactMethodType;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=7"/>
+      <nested inputs="common.ecore#//ContactMethodType/IM_YAHOO" outputs="ModelXML.xsd#//ContactMethodType;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=8"/>
+      <nested inputs="common.ecore#//ContactMethodType/IM_OTHER" outputs="ModelXML.xsd#//ContactMethodType;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=9"/>
+      <nested inputs="common.ecore#//ContactMethodType/OTHER" outputs="ModelXML.xsd#//ContactMethodType;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=10"/>
+    </nested>
+    <nested inputs="common.ecore#//UnitOfMeasure" outputs="ModelXML.xsd#//UnitOfMeasure;XSDSimpleTypeDefinition=2">
+      <nested inputs="common.ecore#//UnitOfMeasure/LITRE" outputs="ModelXML.xsd#//UnitOfMeasure;XSDSimpleTypeDefinition=2/XSDEnumerationFacet"/>
+      <nested inputs="common.ecore#//UnitOfMeasure/KILOGRAM" outputs="ModelXML.xsd#//UnitOfMeasure;XSDSimpleTypeDefinition=2/XSDEnumerationFacet=1"/>
+      <nested inputs="common.ecore#//UnitOfMeasure/UNKNOWN" outputs="ModelXML.xsd#//UnitOfMeasure;XSDSimpleTypeDefinition=2/XSDEnumerationFacet=2"/>
+    </nested>
+    <nested inputs="common.ecore#//ContainerType" outputs="ModelXML.xsd#//ContainerType;XSDSimpleTypeDefinition=3">
+      <nested inputs="common.ecore#//ContainerType/BIN" outputs="ModelXML.xsd#//ContainerType;XSDSimpleTypeDefinition=3/XSDEnumerationFacet"/>
+      <nested inputs="common.ecore#//ContainerType/CAN" outputs="ModelXML.xsd#//ContainerType;XSDSimpleTypeDefinition=3/XSDEnumerationFacet=1"/>
+    </nested>
+    <nested inputs="common.ecore#//MapLocation" outputs="ModelXML.xsd#//MapLocation;XSDComplexTypeDefinition">
+      <nested inputs="common.ecore#//MapLocation/longitude" outputs="ModelXML.xsd#//MapLocation;XSDComplexTypeDefinition/XSDAttributeUse"/>
+      <nested inputs="common.ecore#//MapLocation/latitude" outputs="ModelXML.xsd#//MapLocation;XSDComplexTypeDefinition/XSDAttributeUse=1"/>
+    </nested>
+    <nested inputs="common.ecore#//MapLocation" outputs="ModelXML.xsd#//MapLocation;XSDElementDeclaration"/>
+    <nested inputs="common.ecore#//PostalLocation" outputs="ModelXML.xsd#//PostalLocation;XSDComplexTypeDefinition=1">
+      <nested inputs="common.ecore#//PostalLocation/address" outputs="ModelXML.xsd#//PostalLocation;XSDComplexTypeDefinition=1/XSDAttributeUse"/>
+      <nested inputs="common.ecore#//PostalLocation/section" outputs="ModelXML.xsd#//PostalLocation;XSDComplexTypeDefinition=1/XSDAttributeUse=1"/>
+      <nested inputs="common.ecore#//PostalLocation/estate" outputs="ModelXML.xsd#//PostalLocation;XSDComplexTypeDefinition=1/XSDAttributeUse=2"/>
+      <nested inputs="common.ecore#//PostalLocation/village" outputs="ModelXML.xsd#//PostalLocation;XSDComplexTypeDefinition=1/XSDAttributeUse=3"/>
+      <nested inputs="common.ecore#//PostalLocation/subLocation" outputs="ModelXML.xsd#//PostalLocation;XSDComplexTypeDefinition=1/XSDAttributeUse=4"/>
+      <nested inputs="common.ecore#//PostalLocation/location" outputs="ModelXML.xsd#//PostalLocation;XSDComplexTypeDefinition=1/XSDAttributeUse=5"/>
+      <nested inputs="common.ecore#//PostalLocation/district" outputs="ModelXML.xsd#//PostalLocation;XSDComplexTypeDefinition=1/XSDAttributeUse=6"/>
+      <nested inputs="common.ecore#//PostalLocation/division" outputs="ModelXML.xsd#//PostalLocation;XSDComplexTypeDefinition=1/XSDAttributeUse=7"/>
+      <nested inputs="common.ecore#//PostalLocation/province" outputs="ModelXML.xsd#//PostalLocation;XSDComplexTypeDefinition=1/XSDAttributeUse=8"/>
+      <nested inputs="common.ecore#//PostalLocation/postalCode" outputs="ModelXML.xsd#//PostalLocation;XSDComplexTypeDefinition=1/XSDAttributeUse=9"/>
+    </nested>
+    <nested inputs="common.ecore#//PostalLocation" outputs="ModelXML.xsd#//PostalLocation;XSDElementDeclaration=1"/>
+    <nested inputs="common.ecore#//StatutoryLocation" outputs="ModelXML.xsd#//StatutoryLocation;XSDComplexTypeDefinition=2">
+      <nested inputs="common.ecore#//StatutoryLocation/landReferenceNumber" outputs="ModelXML.xsd#//StatutoryLocation;XSDComplexTypeDefinition=2/XSDAttributeUse"/>
+    </nested>
+    <nested inputs="common.ecore#//StatutoryLocation" outputs="ModelXML.xsd#//StatutoryLocation;XSDElementDeclaration=2"/>
+    <nested inputs="common.ecore#//Audited" outputs="ModelXML.xsd#//Audited;XSDComplexTypeDefinition=3">
+      <nested inputs="common.ecore#//Audited/lastUpdated" outputs="ModelXML.xsd#//Audited;XSDComplexTypeDefinition=3/XSDAttributeUse"/>
+      <nested inputs="common.ecore#//Audited/voidDate" outputs="ModelXML.xsd#//Audited;XSDComplexTypeDefinition=3/XSDAttributeUse=1"/>
+    </nested>
+    <nested inputs="common.ecore#//Audited" outputs="ModelXML.xsd#//Audited;XSDElementDeclaration=3"/>
+    <nested inputs="common.ecore#//Versioned" outputs="ModelXML.xsd#//Versioned;XSDComplexTypeDefinition=4">
+      <nested inputs="common.ecore#//Versioned/version" outputs="ModelXML.xsd#//Versioned;XSDComplexTypeDefinition=4/XSDAttributeUse"/>
+    </nested>
+    <nested inputs="common.ecore#//Versioned" outputs="ModelXML.xsd#//Versioned;XSDElementDeclaration=4"/>
+    <nested inputs="common.ecore#//Contactable" outputs="ModelXML.xsd#//Contactable;XSDComplexTypeDefinition=5">
+      <nested inputs="common.ecore#//Contactable/contactMethods" outputs="ModelXML.xsd#//Contactable;XSDComplexTypeDefinition=5/XSDParticle/XSDModelGroup/XSDParticle"/>
+    </nested>
+    <nested inputs="common.ecore#//Contactable" outputs="ModelXML.xsd#//Contactable;XSDElementDeclaration=5"/>
+    <nested inputs="common.ecore#//Person" outputs="ModelXML.xsd#//Person;XSDComplexTypeDefinition=6">
+      <nested inputs="common.ecore#//Person/photo" outputs="ModelXML.xsd#//Person;XSDComplexTypeDefinition=6/XSDAttributeUse"/>
+      <nested inputs="common.ecore#//Person/honorific" outputs="ModelXML.xsd#//Person;XSDComplexTypeDefinition=6/XSDAttributeUse=1"/>
+      <nested inputs="common.ecore#//Person/familyName" outputs="ModelXML.xsd#//Person;XSDComplexTypeDefinition=6/XSDAttributeUse=2"/>
+      <nested inputs="common.ecore#//Person/givenName" outputs="ModelXML.xsd#//Person;XSDComplexTypeDefinition=6/XSDAttributeUse=3"/>
+      <nested inputs="common.ecore#//Person/middleName" outputs="ModelXML.xsd#//Person;XSDComplexTypeDefinition=6/XSDAttributeUse=4"/>
+      <nested inputs="common.ecore#//Person/additionalNames" outputs="ModelXML.xsd#//Person;XSDComplexTypeDefinition=6/XSDAttributeUse=5"/>
+      <nested inputs="common.ecore#//Person/suffix" outputs="ModelXML.xsd#//Person;XSDComplexTypeDefinition=6/XSDAttributeUse=6"/>
+      <nested inputs="common.ecore#//Person/nickName" outputs="ModelXML.xsd#//Person;XSDComplexTypeDefinition=6/XSDAttributeUse=7"/>
+      <nested inputs="common.ecore#//Person/phoneNumber" outputs="ModelXML.xsd#//Person;XSDComplexTypeDefinition=6/XSDAttributeUse=8"/>
+      <nested inputs="common.ecore#//Person/personId" outputs="ModelXML.xsd#//Person;XSDComplexTypeDefinition=6/XSDAttributeUse=9"/>
+      <nested inputs="common.ecore#//Person/nssfNumber" outputs="ModelXML.xsd#//Person;XSDComplexTypeDefinition=6/XSDAttributeUse=10"/>
+      <nested inputs="common.ecore#//Person/nhifNumber" outputs="ModelXML.xsd#//Person;XSDComplexTypeDefinition=6/XSDAttributeUse=11"/>
+      <nested inputs="common.ecore#//Person/nationalId" outputs="ModelXML.xsd#//Person;XSDComplexTypeDefinition=6/XSDAttributeUse=12"/>
+      <nested inputs="common.ecore#//Person/location" outputs="ModelXML.xsd#//Person;XSDComplexTypeDefinition=6/XSDAttributeUse=13"/>
+    </nested>
+    <nested inputs="common.ecore#//Person" outputs="ModelXML.xsd#//Person;XSDElementDeclaration=6"/>
+    <nested inputs="common.ecore#//Company" outputs="ModelXML.xsd#//Company;XSDComplexTypeDefinition=7">
+      <nested inputs="common.ecore#//Company/legalName" outputs="ModelXML.xsd#//Company;XSDComplexTypeDefinition=7/XSDAttributeUse"/>
+      <nested inputs="common.ecore#//Company/companyName" outputs="ModelXML.xsd#//Company;XSDComplexTypeDefinition=7/XSDAttributeUse=1"/>
+      <nested inputs="common.ecore#//Company/phoneNumber" outputs="ModelXML.xsd#//Company;XSDComplexTypeDefinition=7/XSDAttributeUse=2"/>
+      <nested inputs="common.ecore#//Company/companyId" outputs="ModelXML.xsd#//Company;XSDComplexTypeDefinition=7/XSDAttributeUse=3"/>
+      <nested inputs="common.ecore#//Company/description" outputs="ModelXML.xsd#//Company;XSDComplexTypeDefinition=7/XSDAttributeUse=4"/>
+      <nested inputs="common.ecore#//Company/profilePhoto" outputs="ModelXML.xsd#//Company;XSDComplexTypeDefinition=7/XSDAttributeUse=5"/>
+      <nested inputs="common.ecore#//Company/contacts" outputs="ModelXML.xsd#//Company;XSDComplexTypeDefinition=7/XSDParticle/XSDModelGroup/XSDParticle"/>
+      <nested inputs="common.ecore#//Company/location" outputs="ModelXML.xsd#//Company;XSDComplexTypeDefinition=7/XSDParticle/XSDModelGroup/XSDParticle=1"/>
+    </nested>
+    <nested inputs="common.ecore#//Company" outputs="ModelXML.xsd#//Company;XSDElementDeclaration=7"/>
+    <nested inputs="common.ecore#//DescriptiveLocation" outputs="ModelXML.xsd#//DescriptiveLocation;XSDComplexTypeDefinition=8">
+      <nested inputs="common.ecore#//DescriptiveLocation/directions" outputs="ModelXML.xsd#//DescriptiveLocation;XSDComplexTypeDefinition=8/XSDAttributeUse"/>
+      <nested inputs="common.ecore#//DescriptiveLocation/landmarks" outputs="ModelXML.xsd#//DescriptiveLocation;XSDComplexTypeDefinition=8/XSDAttributeUse=1"/>
+    </nested>
+    <nested inputs="common.ecore#//DescriptiveLocation" outputs="ModelXML.xsd#//DescriptiveLocation;XSDElementDeclaration=8"/>
+    <nested inputs="common.ecore#//Location" outputs="ModelXML.xsd#//Location;XSDComplexTypeDefinition=9">
+      <nested inputs="common.ecore#//Location/locationId" outputs="ModelXML.xsd#//Location;XSDComplexTypeDefinition=9/XSDAttributeUse"/>
+      <nested inputs="common.ecore#//Location/postalLocation" outputs="ModelXML.xsd#//Location;XSDComplexTypeDefinition=9/XSDParticle/XSDModelGroup/XSDParticle"/>
+      <nested inputs="common.ecore#//Location/mapLocation" outputs="ModelXML.xsd#//Location;XSDComplexTypeDefinition=9/XSDParticle/XSDModelGroup/XSDParticle=1"/>
+      <nested inputs="common.ecore#//Location/statutoryLocation" outputs="ModelXML.xsd#//Location;XSDComplexTypeDefinition=9/XSDParticle/XSDModelGroup/XSDParticle=2"/>
+      <nested inputs="common.ecore#//Location/descriptiveLocation" outputs="ModelXML.xsd#//Location;XSDComplexTypeDefinition=9/XSDParticle/XSDModelGroup/XSDParticle=3"/>
+    </nested>
+    <nested inputs="common.ecore#//Location" outputs="ModelXML.xsd#//Location;XSDElementDeclaration=9"/>
+    <nested inputs="common.ecore#//ContactMethod" outputs="ModelXML.xsd#//ContactMethod;XSDComplexTypeDefinition=10">
+      <nested inputs="common.ecore#//ContactMethod/cmType" outputs="ModelXML.xsd#//ContactMethod;XSDComplexTypeDefinition=10/XSDAttributeUse"/>
+      <nested inputs="common.ecore#//ContactMethod/cmValue" outputs="ModelXML.xsd#//ContactMethod;XSDComplexTypeDefinition=10/XSDAttributeUse=1"/>
+    </nested>
+    <nested inputs="common.ecore#//ContactMethod" outputs="ModelXML.xsd#//ContactMethod;XSDElementDeclaration=10"/>
+    <nested inputs="common.ecore#//ImageEntry" outputs="ModelXML.xsd#//ImageEntry;XSDComplexTypeDefinition=11">
+      <nested inputs="common.ecore#//ImageEntry/imageId" outputs="ModelXML.xsd#//ImageEntry;XSDComplexTypeDefinition=11/XSDAttributeUse"/>
+      <nested inputs="common.ecore#//ImageEntry/mimeType" outputs="ModelXML.xsd#//ImageEntry;XSDComplexTypeDefinition=11/XSDAttributeUse=1"/>
+      <nested inputs="common.ecore#//ImageEntry/imageData" outputs="ModelXML.xsd#//ImageEntry;XSDComplexTypeDefinition=11/XSDAttributeUse=2"/>
+    </nested>
+    <nested inputs="common.ecore#//ImageEntry" outputs="ModelXML.xsd#//ImageEntry;XSDElementDeclaration=11"/>
+  </nested>
+</xsd2ecore:XSD2EcoreMappingRoot>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xsd2ecore:XSD2EcoreMappingRoot xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsd2ecore="http://www.eclipse.org/emf/2002/XSD2Ecore" inputs="requests.ecore#/"
+    outputs="RequestsXML.xsd#/">
+  <nested inputs="requests.ecore#/" outputs="RequestsXML.xsd#/">
+    <nested inputs="requests.ecore#//RequestType" outputs="RequestsXML.xsd#//RequestType;XSDSimpleTypeDefinition">
+      <nested inputs="requests.ecore#//RequestType/Veterinary" outputs="RequestsXML.xsd#//RequestType;XSDSimpleTypeDefinition/XSDEnumerationFacet"/>
+      <nested inputs="requests.ecore#//RequestType/Insemination" outputs="RequestsXML.xsd#//RequestType;XSDSimpleTypeDefinition/XSDEnumerationFacet=1"/>
+    </nested>
+    <nested inputs="requests.ecore#//AnimalHealthRequest" outputs="RequestsXML.xsd#//AnimalHealthRequest;XSDComplexTypeDefinition">
+      <nested inputs="requests.ecore#//AnimalHealthRequest/requestId" outputs="RequestsXML.xsd#//AnimalHealthRequest;XSDComplexTypeDefinition/XSDAttributeUse"/>
+      <nested inputs="requests.ecore#//AnimalHealthRequest/date" outputs="RequestsXML.xsd#//AnimalHealthRequest;XSDComplexTypeDefinition/XSDAttributeUse=1"/>
+      <nested inputs="requests.ecore#//AnimalHealthRequest/type" outputs="RequestsXML.xsd#//AnimalHealthRequest;XSDComplexTypeDefinition/XSDAttributeUse=2"/>
+      <nested inputs="requests.ecore#//AnimalHealthRequest/reportedProblem" outputs="RequestsXML.xsd#//AnimalHealthRequest;XSDComplexTypeDefinition/XSDAttributeUse=3"/>
+      <nested inputs="requests.ecore#//AnimalHealthRequest/dateHeatDetected" outputs="RequestsXML.xsd#//AnimalHealthRequest;XSDComplexTypeDefinition/XSDAttributeUse=4"/>
+      <nested inputs="requests.ecore#//AnimalHealthRequest/firstTreatment" outputs="RequestsXML.xsd#//AnimalHealthRequest;XSDComplexTypeDefinition/XSDAttributeUse=5"/>
+      <nested inputs="requests.ecore#//AnimalHealthRequest/secondTreatment" outputs="RequestsXML.xsd#//AnimalHealthRequest;XSDComplexTypeDefinition/XSDAttributeUse=6"/>
+      <nested inputs="requests.ecore#//AnimalHealthRequest/thirdTreatment" outputs="RequestsXML.xsd#//AnimalHealthRequest;XSDComplexTypeDefinition/XSDAttributeUse=7"/>
+      <nested inputs="requests.ecore#//AnimalHealthRequest/requestingMember" outputs="RequestsXML.xsd#//AnimalHealthRequest;XSDComplexTypeDefinition/XSDAttributeUse=8"/>
+      <nested inputs="requests.ecore#//AnimalHealthRequest/dairy" outputs="RequestsXML.xsd#//AnimalHealthRequest;XSDComplexTypeDefinition/XSDAttributeUse=9"/>
+      <nested inputs="requests.ecore#//AnimalHealthRequest/reportedAnimal" outputs="RequestsXML.xsd#//AnimalHealthRequest;XSDComplexTypeDefinition/XSDAttributeUse=10"/>
+      <nested inputs="requests.ecore#//AnimalHealthRequest/farm" outputs="RequestsXML.xsd#//AnimalHealthRequest;XSDComplexTypeDefinition/XSDAttributeUse=11"/>
+      <nested inputs="requests.ecore#//AnimalHealthRequest/referredTo" outputs="RequestsXML.xsd#//AnimalHealthRequest;XSDComplexTypeDefinition/XSDAttributeUse=12"/>
+    </nested>
+    <nested inputs="requests.ecore#//AnimalHealthRequest" outputs="RequestsXML.xsd#//AnimalHealthRequest;XSDElementDeclaration"/>
+  </nested>
+</xsd2ecore:XSD2EcoreMappingRoot>
