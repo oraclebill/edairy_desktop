@@ -1,6 +1,7 @@
 package com.agritrace.edairy.desktop.collection.services;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
 import java.math.BigDecimal;
@@ -27,22 +28,22 @@ import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
-import com.agritrace.edairy.desktop.internal.collection.services.MilkCollectionJournalLineRepository;
-import com.agritrace.edairy.desktop.internal.common.persistence.PersistenceManager;
+import com.agritrace.edairy.desktop.common.persistence.TestPersistenceModule;
+import com.google.inject.Guice;
 import com.ibm.icu.text.DateFormat;
 
 public class MilkCollectionJournalLineQueryTest {
 
-	private PersistenceManager testPM;
-
+	ICollectionJournalLineRepository repo;
+	
 	@Before
 	public void setup() {
+		repo = Guice.createInjector(new TestPersistenceModule()).getInstance(ICollectionJournalLineRepository.class);
 	}
 
 	@Test
 	public void testCountByMemberCenterDate() throws Exception {
 		initTestContext("../test-data/collections/test-collections.csv");
-		ICollectionJournalLineRepository repo = new MilkCollectionJournalLineRepository();
 
 		Membership membership = null;
 		for (Membership m : DAIRY.getMemberships()) {
@@ -58,7 +59,7 @@ public class MilkCollectionJournalLineQueryTest {
 		centerBad.setLocation(DairyUtil.createLocation(null, null, null));
 		centerBad.setCode("RXXX");
 		DAIRY.getBranchLocations().add(centerBad);
-		testPM.getSession().save(DAIRY);
+		repo.save(DAIRY);
 
 		DairyLocation centerGood = (DairyLocation) centers.get("R012");
 		Date date = DateFormat.getDateInstance().parse("June 20, 2010");
@@ -73,7 +74,7 @@ public class MilkCollectionJournalLineQueryTest {
 	@Test
 	public void testAllForDate() throws Exception {
 		initTestContext("../test-data/collections/test-collections.csv");
-		ICollectionJournalLineRepository repo = new MilkCollectionJournalLineRepository();
+//		ICollectionJournalLineRepository repo = new MilkCollectionJournalLineRepository();
 
 		Date queryDate = DateFormat.getDateInstance().parse("Jun 2, 2010");
 		assertEquals(2, repo.allForDate(queryDate).size());
@@ -85,7 +86,7 @@ public class MilkCollectionJournalLineQueryTest {
 	@Test
 	public void testGetMilkPrice() throws Exception {
 		initTestContext();
-		ICollectionJournalLineRepository repo = new MilkCollectionJournalLineRepository();
+//		ICollectionJournalLineRepository repo = new MilkCollectionJournalLineRepository();
 
 		// initially empty
 		assertEquals(0, DAIRY.getPriceHistory().size());
@@ -100,7 +101,7 @@ public class MilkCollectionJournalLineQueryTest {
 		milkPrice.setValue(new BigDecimal("23.22"));
 
 		DAIRY.getPriceHistory().add(milkPrice);
-		testPM.getSession().save(DAIRY);
+		repo.save(DAIRY);
 
 		assertEquals(1, DAIRY.getPriceHistory().size());
 		BigDecimal rate = repo.getMilkPrice(1, 1990);
@@ -113,7 +114,7 @@ public class MilkCollectionJournalLineQueryTest {
 		initTestContext("../test-data/collections/test-collections.csv");
 
 		Membership newMember = createMember("newMember");
-		ICollectionJournalLineRepository repo = new MilkCollectionJournalLineRepository();
+//		ICollectionJournalLineRepository repo = new MilkCollectionJournalLineRepository();
 		List<Membership> members = repo.getMembersWithDeliveriesFor(6, 2010);
 		assertEquals(3, members.size());
 		members = repo.getMembersWithDeliveriesFor(7, 2010);
@@ -124,7 +125,7 @@ public class MilkCollectionJournalLineQueryTest {
 	@Test
 	public void testGetPayableDeliveriesForMember() throws Exception {
 		initTestContext("../test-data/collections/test-collections.csv");
-		ICollectionJournalLineRepository repo = new MilkCollectionJournalLineRepository();
+//		ICollectionJournalLineRepository repo = new MilkCollectionJournalLineRepository();
 
 		Membership member = null;
 		for (Membership m : DAIRY.getMemberships()) {
@@ -149,7 +150,7 @@ public class MilkCollectionJournalLineQueryTest {
 	@Test
 	public void testGetSumOfPayableDeliveries() throws Exception {
 		initTestContext("../test-data/collections/test-collections.csv");
-		ICollectionJournalLineRepository repo = new MilkCollectionJournalLineRepository();
+//		ICollectionJournalLineRepository repo = new MilkCollectionJournalLineRepository();
 
 		Membership member = null;
 		for (Membership m : DAIRY.getMemberships()) {
@@ -187,9 +188,9 @@ public class MilkCollectionJournalLineQueryTest {
 	}
 
 	private void initTestContext(String testFile) throws Exception {
-		testPM = new HsqldbMemoryPersistenceManager();
-		System.setProperty("riena.test", "true");
-		PersistenceManager.reset(testPM);
+//		testPM = new HsqldbMemoryPersistenceManager();
+//		System.setProperty("riena.test", "true");
+//		PersistenceManager.reset(testPM);
 
 		initSampleDairy();
 
@@ -216,7 +217,7 @@ public class MilkCollectionJournalLineQueryTest {
 						line.getQuantity()));
 			}
 			for (CollectionGroup group : groups.values()) {
-				testPM.getSession().save(group);
+				repo.save(group);
 			}
 		}
 	}
@@ -231,7 +232,7 @@ public class MilkCollectionJournalLineQueryTest {
 			center.setName(key);
 			center.setLocation(DairyUtil.createLocation(null, null, null));
 			DAIRY.getBranchLocations().add(center);
-			testPM.getSession().save(center);
+			repo.save(center);
 			centers.put(key, center);
 		}
 		return center;
@@ -281,7 +282,7 @@ public class MilkCollectionJournalLineQueryTest {
 		member.setStatus(MembershipStatus.ACTIVE);
 
 		DAIRY.getMemberships().add(member);
-		testPM.getSession().save(DAIRY);
+		repo.save(DAIRY);
 
 		return member;
 	}

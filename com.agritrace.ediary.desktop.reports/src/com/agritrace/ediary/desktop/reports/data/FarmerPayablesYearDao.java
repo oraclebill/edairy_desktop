@@ -12,11 +12,9 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
-import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
 import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 
 /**
  * class to collect the data needed for the report and to place it into special
@@ -33,12 +31,14 @@ public class FarmerPayablesYearDao {
 
 	private static FarmerPayablesYearDao instance;
 	// private final IDairyRepository dairyRepo;
-	// private final IMemberRepository memberRepo;
+	private final IMemberRepository memberRepo;
+	private ICollectionJournalLineRepository collectionsRepo;
+	private ITransactionRepository transactionRepo;
 	private java.text.DecimalFormat floatFormater;
 
 	public FarmerPayablesYearDao() {
 		super();
-		memberRepo = null;  // TODO: fixme
+		memberRepo = null; // TODO: fixme
 		this.floatFormater = new java.text.DecimalFormat("#,#00.0#;(#,#00.0#)");
 	}
 
@@ -52,8 +52,8 @@ public class FarmerPayablesYearDao {
 	public List<FarmerPayablesYearData> getReportValues(String year,
 			String month) {
 
-		ICollectionJournalLineRepository collectionsRepo = RepositoryFactory
-				.getRegisteredRepository(ICollectionJournalLineRepository.class);
+//		ICollectionJournalLineRepository collectionsRepo = RepositoryFactory
+//				.getRegisteredRepository(ICollectionJournalLineRepository.class);
 		List<FarmerPayablesYearData> ret = new ArrayList<FarmerPayablesYearData>();
 
 		for (final Membership membership : collectionsRepo
@@ -95,8 +95,8 @@ public class FarmerPayablesYearDao {
 	public List<FarmerPayablesYearData> getReportValuesX(String year,
 			String month) {
 
-		ICollectionJournalLineRepository collectionsRepo = RepositoryFactory
-				.getRegisteredRepository(ICollectionJournalLineRepository.class);
+//		ICollectionJournalLineRepository collectionsRepo = RepositoryFactory
+//				.getRegisteredRepository(ICollectionJournalLineRepository.class);
 		List<FarmerPayablesYearData> ret = new ArrayList<FarmerPayablesYearData>();
 
 		for (Membership membership : collectionsRepo
@@ -140,8 +140,8 @@ public class FarmerPayablesYearDao {
 
 	private BigDecimal calculateMemberMonthlyIncome(
 			final Membership membership, final String month, final String year) {
-		final ICollectionJournalLineRepository collectionsRepo = RepositoryFactory
-				.getRegisteredRepository(ICollectionJournalLineRepository.class);
+//		final ICollectionJournalLineRepository collectionsRepo = RepositoryFactory
+//				.getRegisteredRepository(ICollectionJournalLineRepository.class);
 		final int priceMonth = Integer.parseInt(month), priceYear = Integer
 				.parseInt(year);
 		final BigDecimal memberCollections = collectionsRepo
@@ -154,8 +154,8 @@ public class FarmerPayablesYearDao {
 
 	private BigDecimal[] calculateMemberMonthlyCreditsAndAdjustments(
 			Membership membership, String month, String year) {
-		ITransactionRepository transactionRepo = RepositoryFactory
-				.getRegisteredRepository(ITransactionRepository.class);
+//		ITransactionRepository transactionRepo = RepositoryFactory
+//				.getRegisteredRepository(ITransactionRepository.class);
 		final int priceMonth = Integer.parseInt(month), priceYear = Integer
 				.parseInt(year);
 		Calendar startDate = Calendar.getInstance(), endDate = Calendar

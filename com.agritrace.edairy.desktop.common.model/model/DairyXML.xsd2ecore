@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xsd2ecore:XSD2EcoreMappingRoot xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsd2ecore="http://www.eclipse.org/emf/2002/XSD2Ecore" inputs="dairy.ecore#/"
+    outputs="DairyXML.xsd#/">
+  <nested inputs="dairy.ecore#/" outputs="DairyXML.xsd#/">
+    <nested inputs="dairy.ecore#//JournalStatus" outputs="DairyXML.xsd#//JournalStatus;XSDSimpleTypeDefinition">
+      <nested inputs="dairy.ecore#//JournalStatus/NEW" outputs="DairyXML.xsd#//JournalStatus;XSDSimpleTypeDefinition/XSDEnumerationFacet"/>
+      <nested inputs="dairy.ecore#//JournalStatus/PENDING" outputs="DairyXML.xsd#//JournalStatus;XSDSimpleTypeDefinition/XSDEnumerationFacet=1"/>
+      <nested inputs="dairy.ecore#//JournalStatus/COMPLETE" outputs="DairyXML.xsd#//JournalStatus;XSDSimpleTypeDefinition/XSDEnumerationFacet=2"/>
+      <nested inputs="dairy.ecore#//JournalStatus/SUSPENDED" outputs="DairyXML.xsd#//JournalStatus;XSDSimpleTypeDefinition/XSDEnumerationFacet=3"/>
+      <nested inputs="dairy.ecore#//JournalStatus/ARCHIVED" outputs="DairyXML.xsd#//JournalStatus;XSDSimpleTypeDefinition/XSDEnumerationFacet=4"/>
+    </nested>
+    <nested inputs="dairy.ecore#//MembershipStatus" outputs="DairyXML.xsd#//MembershipStatus;XSDSimpleTypeDefinition=1">
+      <nested inputs="dairy.ecore#//MembershipStatus/Active" outputs="DairyXML.xsd#//MembershipStatus;XSDSimpleTypeDefinition=1/XSDEnumerationFacet"/>
+      <nested inputs="dairy.ecore#//MembershipStatus/Inactive" outputs="DairyXML.xsd#//MembershipStatus;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=1"/>
+      <nested inputs="dairy.ecore#//MembershipStatus/Dormant" outputs="DairyXML.xsd#//MembershipStatus;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=2"/>
+      <nested inputs="dairy.ecore#//MembershipStatus/Deleted" outputs="DairyXML.xsd#//MembershipStatus;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=3"/>
+    </nested>
+    <nested inputs="dairy.ecore#//VendorStatus" outputs="DairyXML.xsd#//VendorStatus;XSDSimpleTypeDefinition=2">
+      <nested inputs="dairy.ecore#//VendorStatus/Pending" outputs="DairyXML.xsd#//VendorStatus;XSDSimpleTypeDefinition=2/XSDEnumerationFacet"/>
+      <nested inputs="dairy.ecore#//VendorStatus/Valid" outputs="DairyXML.xsd#//VendorStatus;XSDSimpleTypeDefinition=2/XSDEnumerationFacet=1"/>
+      <nested inputs="dairy.ecore#//VendorStatus/Invalid" outputs="DairyXML.xsd#//VendorStatus;XSDSimpleTypeDefinition=2/XSDEnumerationFacet=2"/>
+      <nested inputs="dairy.ecore#//VendorStatus/Suspended" outputs="DairyXML.xsd#//VendorStatus;XSDSimpleTypeDefinition=2/XSDEnumerationFacet=3"/>
+      <nested inputs="dairy.ecore#//VendorStatus/Other" outputs="DairyXML.xsd#//VendorStatus;XSDSimpleTypeDefinition=2/XSDEnumerationFacet=4"/>
+    </nested>
+    <nested inputs="dairy.ecore#//DairyFunction" outputs="DairyXML.xsd#//DairyFunction;XSDSimpleTypeDefinition=3">
+      <nested inputs="dairy.ecore#//DairyFunction/MilkCollection" outputs="DairyXML.xsd#//DairyFunction;XSDSimpleTypeDefinition=3/XSDEnumerationFacet"/>
+      <nested inputs="dairy.ecore#//DairyFunction/MilkStorage" outputs="DairyXML.xsd#//DairyFunction;XSDSimpleTypeDefinition=3/XSDEnumerationFacet=1"/>
+      <nested inputs="dairy.ecore#//DairyFunction/StoreSales" outputs="DairyXML.xsd#//DairyFunction;XSDSimpleTypeDefinition=3/XSDEnumerationFacet=2"/>
+      <nested inputs="dairy.ecore#//DairyFunction/Warehouse" outputs="DairyXML.xsd#//DairyFunction;XSDSimpleTypeDefinition=3/XSDEnumerationFacet=3"/>
+      <nested inputs="dairy.ecore#//DairyFunction/MilkProcessing" outputs="DairyXML.xsd#//DairyFunction;XSDSimpleTypeDefinition=3/XSDEnumerationFacet=4"/>
+    </nested>
+    <nested inputs="dairy.ecore#//PreferenceType" outputs="DairyXML.xsd#//PreferenceType;XSDSimpleTypeDefinition=4">
+      <nested inputs="dairy.ecore#//PreferenceType/String" outputs="DairyXML.xsd#//PreferenceType;XSDSimpleTypeDefinition=4/XSDEnumerationFacet"/>
+      <nested inputs="dairy.ecore#//PreferenceType/Boolean" outputs="DairyXML.xsd#//PreferenceType;XSDSimpleTypeDefinition=4/XSDEnumerationFacet=1"/>
+      <nested inputs="dairy.ecore#//PreferenceType/Int" outputs="DairyXML.xsd#//PreferenceType;XSDSimpleTypeDefinition=4/XSDEnumerationFacet=2"/>
+      <nested inputs="dairy.ecore#//PreferenceType/Long" outputs="DairyXML.xsd#//PreferenceType;XSDSimpleTypeDefinition=4/XSDEnumerationFacet=3"/>
+      <nested inputs="dairy.ecore#//PreferenceType/Float" outputs="DairyXML.xsd#//PreferenceType;XSDSimpleTypeDefinition=4/XSDEnumerationFacet=4"/>
+      <nested inputs="dairy.ecore#//PreferenceType/Double" outputs="DairyXML.xsd#//PreferenceType;XSDSimpleTypeDefinition=4/XSDEnumerationFacet=5"/>
+    </nested>
+    <nested inputs="dairy.ecore#//CollectionGroupType" outputs="DairyXML.xsd#//CollectionGroupType;XSDSimpleTypeDefinition=5">
+      <nested inputs="dairy.ecore#//CollectionGroupType/ScaleGroup" outputs="DairyXML.xsd#//CollectionGroupType;XSDSimpleTypeDefinition=5/XSDEnumerationFacet"/>
+      <nested inputs="dairy.ecore#//CollectionGroupType/JournalGroup" outputs="DairyXML.xsd#//CollectionGroupType;XSDSimpleTypeDefinition=5/XSDEnumerationFacet=1"/>
+    </nested>
+    <nested inputs="dairy.ecore#//Vehicle" outputs="DairyXML.xsd#//Vehicle;XSDComplexTypeDefinition">
+      <nested inputs="dairy.ecore#//Vehicle/vehicleId" outputs="DairyXML.xsd#//Vehicle;XSDComplexTypeDefinition/XSDAttributeUse"/>
+      <nested inputs="dairy.ecore#//Vehicle/registrationNumber" outputs="DairyXML.xsd#//Vehicle;XSDComplexTypeDefinition/XSDAttributeUse=1"/>
+      <nested inputs="dairy.ecore#//Vehicle/type" outputs="DairyXML.xsd#//Vehicle;XSDComplexTypeDefinition/XSDAttributeUse=2"/>
+      <nested inputs="dairy.ecore#//Vehicle/make" outputs="DairyXML.xsd#//Vehicle;XSDComplexTypeDefinition/XSDAttributeUse=3"/>
+      <nested inputs="dairy.ecore#//Vehicle/model" outputs="DairyXML.xsd#//Vehicle;XSDComplexTypeDefinition/XSDAttributeUse=4"/>
+      <nested inputs="dairy.ecore#//Vehicle/engineNumber" outputs="DairyXML.xsd#//Vehicle;XSDComplexTypeDefinition/XSDAttributeUse=5"/>
+      <nested inputs="dairy.ecore#//Vehicle/chassisNumber" outputs="DairyXML.xsd#//Vehicle;XSDComplexTypeDefinition/XSDAttributeUse=6"/>
+      <nested inputs="dairy.ecore#//Vehicle/logBookNumber" outputs="DairyXML.xsd#//Vehicle;XSDComplexTypeDefinition/XSDAttributeUse=7"/>
+      <nested inputs="dairy.ecore#//Vehicle/insurancePolicyNumber" outputs="DairyXML.xsd#//Vehicle;XSDComplexTypeDefinition/XSDAttributeUse=8"/>
+      <nested inputs="dairy.ecore#//Vehicle/insuranceExpirationDate" outputs="DairyXML.xsd#//Vehicle;XSDComplexTypeDefinition/XSDAttributeUse=9"/>
+      <nested inputs="dairy.ecore#//Vehicle/dominantColour" outputs="DairyXML.xsd#//Vehicle;XSDComplexTypeDefinition/XSDAttributeUse=10"/>
+      <nested inputs="dairy.ecore#//Vehicle/capacityInTonnes" outputs="DairyXML.xsd#//Vehicle;XSDComplexTypeDefinition/XSDAttributeUse=11"/>
+      <nested inputs="dairy.ecore#//Vehicle/year" outputs="DairyXML.xsd#//Vehicle;XSDComplexTypeDefinition/XSDAttributeUse=12"/>
+      <nested inputs="dairy.ecore#//Vehicle/driver" outputs="DairyXML.xsd#//Vehicle;XSDComplexTypeDefinition/XSDAttributeUse=13"/>
+      <nested inputs="dairy.ecore#//Vehicle/assetInfo" outputs="DairyXML.xsd#//Vehicle;XSDComplexTypeDefinition/XSDAttributeUse=14"/>
+    </nested>
+    <nested inputs="dairy.ecore#//Vehicle" outputs="DairyXML.xsd#//Vehicle;XSDElementDeclaration"/>
+    <nested inputs="dairy.ecore#//CollectionJournalLine" outputs="DairyXML.xsd#//CollectionJournalLine;XSDComplexTypeDefinition=1">
+      <nested inputs="dairy.ecore#//CollectionJournalLine/lineNumber" outputs="DairyXML.xsd#//CollectionJournalLine;XSDComplexTypeDefinition=1/XSDAttributeUse"/>
+      <nested inputs="dairy.ecore#//CollectionJournalLine/recordedMember" outputs="DairyXML.xsd#//CollectionJournalLine;XSDComplexTypeDefinition=1/XSDAttributeUse=1"/>
+      <nested inputs="dairy.ecore#//CollectionJournalLine/quantity" outputs="DairyXML.xsd#//CollectionJournalLine;XSDComplexTypeDefinition=1/XSDAttributeUse=2"/>
+      <nested inputs="dairy.ecore#//CollectionJournalLine/flagged" outputs="DairyXML.xsd#//CollectionJournalLine;XSDComplexTypeDefinition=1/XSDAttributeUse=3"/>
+      <nested inputs="dairy.ecore#//CollectionJournalLine/unitOfMeasure" outputs="DairyXML.xsd#//CollectionJournalLine;XSDComplexTypeDefinition=1/XSDAttributeUse=4"/>
+      <nested inputs="dairy.ecore#//CollectionJournalLine/notRecorded" outputs="DairyXML.xsd#//CollectionJournalLine;XSDComplexTypeDefinition=1/XSDAttributeUse=5"/>
+      <nested inputs="dairy.ecore#//CollectionJournalLine/offRoute" outputs="DairyXML.xsd#//CollectionJournalLine;XSDComplexTypeDefinition=1/XSDAttributeUse=6"/>
+      <nested inputs="dairy.ecore#//CollectionJournalLine/rejected" outputs="DairyXML.xsd#//CollectionJournalLine;XSDComplexTypeDefinition=1/XSDAttributeUse=7"/>
+      <nested inputs="dairy.ecore#//CollectionJournalLine/rejectionReason" outputs="DairyXML.xsd#//CollectionJournalLine;XSDComplexTypeDefinition=1/XSDAttributeUse=8"/>
+      <nested inputs="dairy.ecore#//CollectionJournalLine/milkFatPercentage" outputs="DairyXML.xsd#//CollectionJournalLine;XSDComplexTypeDefinition=1/XSDAttributeUse=9"/>
+      <nested inputs="dairy.ecore#//CollectionJournalLine/alcoholPercentage" outputs="DairyXML.xsd#//CollectionJournalLine;XSDComplexTypeDefinition=1/XSDAttributeUse=10"/>
+      <nested inputs="dairy.ecore#//CollectionJournalLine/waterAdded" outputs="DairyXML.xsd#//CollectionJournalLine;XSDComplexTypeDefinition=1/XSDAttributeUse=11"/>
+      <nested inputs="dairy.ecore#//CollectionJournalLine/validatedMember" outputs="DairyXML.xsd#//CollectionJournalLine;XSDComplexTypeDefinition=1/XSDAttributeUse=12"/>
+      <nested inputs="dairy.ecore#//CollectionJournalLine/from" outputs="DairyXML.xsd#//CollectionJournalLine;XSDComplexTypeDefinition=1/XSDAttributeUse=13"/>
+      <nested inputs="dairy.ecore#//CollectionJournalLine/farmContainer" outputs="DairyXML.xsd#//CollectionJournalLine;XSDComplexTypeDefinition=1/XSDAttributeUse=14"/>
+      <nested inputs="dairy.ecore#//CollectionJournalLine/dairyContainer" outputs="DairyXML.xsd#//CollectionJournalLine;XSDComplexTypeDefinition=1/XSDAttributeUse=15"/>
+      <nested inputs="dairy.ecore#//CollectionJournalLine/collectionJournal" outputs="DairyXML.xsd#//CollectionJournalLine;XSDComplexTypeDefinition=1/XSDAttributeUse=16"/>
+    </nested>
+    <nested inputs="dairy.ecore#//CollectionJournalLine" outputs="DairyXML.xsd#//CollectionJournalLine;XSDElementDeclaration=1"/>
+    <nested inputs="dairy.ecore#//ScaleImportRecord" outputs="DairyXML.xsd#//ScaleImportRecord;XSDComplexTypeDefinition=2">
+      <nested inputs="dairy.ecore#//ScaleImportRecord/scaleSerial" outputs="DairyXML.xsd#//ScaleImportRecord;XSDComplexTypeDefinition=2/XSDAttributeUse"/>
+      <nested inputs="dairy.ecore#//ScaleImportRecord/collectionTime" outputs="DairyXML.xsd#//ScaleImportRecord;XSDComplexTypeDefinition=2/XSDAttributeUse=1"/>
+      <nested inputs="dairy.ecore#//ScaleImportRecord/centerNumber" outputs="DairyXML.xsd#//ScaleImportRecord;XSDComplexTypeDefinition=2/XSDAttributeUse=2"/>
+      <nested inputs="dairy.ecore#//ScaleImportRecord/numCans" outputs="DairyXML.xsd#//ScaleImportRecord;XSDComplexTypeDefinition=2/XSDAttributeUse=3"/>
+      <nested inputs="dairy.ecore#//ScaleImportRecord/tripNumber" outputs="DairyXML.xsd#//ScaleImportRecord;XSDComplexTypeDefinition=2/XSDAttributeUse=4"/>
+      <nested inputs="dairy.ecore#//ScaleImportRecord/operatorCode" outputs="DairyXML.xsd#//ScaleImportRecord;XSDComplexTypeDefinition=2/XSDAttributeUse=5"/>
+      <nested inputs="dairy.ecore#//ScaleImportRecord/validated" outputs="DairyXML.xsd#//ScaleImportRecord;XSDComplexTypeDefinition=2/XSDAttributeUse=6"/>
+    </nested>
+    <nested inputs="dairy.ecore#//ScaleImportRecord" outputs="DairyXML.xsd#//ScaleImportRecord;XSDElementDeclaration=2"/>
+    <nested inputs="dairy.ecore#//Employee" outputs="DairyXML.xsd#//Employee;XSDComplexTypeDefinition=3">
+      <nested inputs="dairy.ecore#//Employee/id" outputs="DairyXML.xsd#//Employee;XSDComplexTypeDefinition=3/XSDAttributeUse"/>
+      <nested inputs="dairy.ecore#//Employee/operatorCode" outputs="DairyXML.xsd#//Employee;XSDComplexTypeDefinition=3/XSDAttributeUse=1"/>
+      <nested inputs="dairy.ecore#//Employee/startDate" outputs="DairyXML.xsd#//Employee;XSDComplexTypeDefinition=3/XSDAttributeUse=2"/>
+      <nested inputs="dairy.ecore#//Employee/jobFunction" outputs="DairyXML.xsd#//Employee;XSDComplexTypeDefinition=3/XSDAttributeUse=3"/>
+      <nested inputs="dairy.ecore#//Employee/department" outputs="DairyXML.xsd#//Employee;XSDComplexTypeDefinition=3/XSDAttributeUse=4"/>
+      <nested inputs="dairy.ecore#//Employee/username" outputs="DairyXML.xsd#//Employee;XSDComplexTypeDefinition=3/XSDAttributeUse=5"/>
+      <nested inputs="dairy.ecore#//Employee/password" outputs="DairyXML.xsd#//Employee;XSDComplexTypeDefinition=3/XSDAttributeUse=6"/>
+      <nested inputs="dairy.ecore#//Employee/localEnabled" outputs="DairyXML.xsd#//Employee;XSDComplexTypeDefinition=3/XSDAttributeUse=7"/>
+      <nested inputs="dairy.ecore#//Employee/passwordHashed" outputs="DairyXML.xsd#//Employee;XSDComplexTypeDefinition=3/XSDAttributeUse=8"/>
+      <nested inputs="dairy.ecore#//Employee/role" outputs="DairyXML.xsd#//Employee;XSDComplexTypeDefinition=3/XSDAttributeUse=9"/>
+    </nested>
+    <nested inputs="dairy.ecore#//Employee" outputs="DairyXML.xsd#//Employee;XSDElementDeclaration=3"/>
+    <nested inputs="dairy.ecore#//DairyLocation" outputs="DairyXML.xsd#//DairyLocation;XSDComplexTypeDefinition=4">
+      <nested inputs="dairy.ecore#//DairyLocation/Id" outputs="DairyXML.xsd#//DairyLocation;XSDComplexTypeDefinition=4/XSDAttributeUse"/>
+      <nested inputs="dairy.ecore#//DairyLocation/name" outputs="DairyXML.xsd#//DairyLocation;XSDComplexTypeDefinition=4/XSDAttributeUse=1"/>
+      <nested inputs="dairy.ecore#//DairyLocation/dateOpened" outputs="DairyXML.xsd#//DairyLocation;XSDComplexTypeDefinition=4/XSDAttributeUse=2"/>
+      <nested inputs="dairy.ecore#//DairyLocation/phone" outputs="DairyXML.xsd#//DairyLocation;XSDComplexTypeDefinition=4/XSDAttributeUse=3"/>
+      <nested inputs="dairy.ecore#//DairyLocation/description" outputs="DairyXML.xsd#//DairyLocation;XSDComplexTypeDefinition=4/XSDAttributeUse=4"/>
+      <nested inputs="dairy.ecore#//DairyLocation/code" outputs="DairyXML.xsd#//DairyLocation;XSDComplexTypeDefinition=4/XSDAttributeUse=5"/>
+      <nested inputs="dairy.ecore#//DairyLocation/functions" outputs="DairyXML.xsd#//DairyLocation;XSDComplexTypeDefinition=4/XSDParticle/XSDModelGroup/XSDParticle"/>
+      <nested inputs="dairy.ecore#//DairyLocation/route" outputs="DairyXML.xsd#//DairyLocation;XSDComplexTypeDefinition=4/XSDAttributeUse=6"/>
+      <nested inputs="dairy.ecore#//DairyLocation/location" outputs="DairyXML.xsd#//DairyLocation;XSDComplexTypeDefinition=4/XSDParticle/XSDModelGroup/XSDParticle=1"/>
+      <nested inputs="dairy.ecore#//DairyLocation/containers" outputs="DairyXML.xsd#//DairyLocation;XSDComplexTypeDefinition=4/XSDAttributeUse=7"/>
+    </nested>
+    <nested inputs="dairy.ecore#//DairyLocation" outputs="DairyXML.xsd#//DairyLocation;XSDElementDeclaration=4"/>
+    <nested inputs="dairy.ecore#//CollectionGroup" outputs="DairyXML.xsd#//CollectionGroup;XSDComplexTypeDefinition=5">
+      <nested inputs="dairy.ecore#//CollectionGroup/journalId" outputs="DairyXML.xsd#//CollectionGroup;XSDComplexTypeDefinition=5/XSDAttributeUse"/>
+      <nested inputs="dairy.ecore#//CollectionGroup/referenceNumber" outputs="DairyXML.xsd#//CollectionGroup;XSDComplexTypeDefinition=5/XSDAttributeUse=1"/>
+      <nested inputs="dairy.ecore#//CollectionGroup/journalDate" outputs="DairyXML.xsd#//CollectionGroup;XSDComplexTypeDefinition=5/XSDAttributeUse=2"/>
+      <nested inputs="dairy.ecore#//CollectionGroup/status" outputs="DairyXML.xsd#//CollectionGroup;XSDComplexTypeDefinition=5/XSDAttributeUse=3"/>
+      <nested inputs="dairy.ecore#//CollectionGroup/driverTotal" outputs="DairyXML.xsd#//CollectionGroup;XSDComplexTypeDefinition=5/XSDAttributeUse=4"/>
+      <nested inputs="dairy.ecore#//CollectionGroup/recordTotal" outputs="DairyXML.xsd#//CollectionGroup;XSDComplexTypeDefinition=5/XSDAttributeUse=5"/>
+      <nested inputs="dairy.ecore#//CollectionGroup/suspended" outputs="DairyXML.xsd#//CollectionGroup;XSDComplexTypeDefinition=5/XSDAttributeUse=6"/>
+      <nested inputs="dairy.ecore#//CollectionGroup/entryCount" outputs="DairyXML.xsd#//CollectionGroup;XSDComplexTypeDefinition=5/XSDAttributeUse=7"/>
+      <nested inputs="dairy.ecore#//CollectionGroup/suspendedCount" outputs="DairyXML.xsd#//CollectionGroup;XSDComplexTypeDefinition=5/XSDAttributeUse=8"/>
+      <nested inputs="dairy.ecore#//CollectionGroup/rejectedCount" outputs="DairyXML.xsd#//CollectionGroup;XSDComplexTypeDefinition=5/XSDAttributeUse=9"/>
+      <nested inputs="dairy.ecore#//CollectionGroup/journalNumber" outputs="DairyXML.xsd#//CollectionGroup;XSDComplexTypeDefinition=5/XSDAttributeUse=10"/>
+      <nested inputs="dairy.ecore#//CollectionGroup/type" outputs="DairyXML.xsd#//CollectionGroup;XSDComplexTypeDefinition=5/XSDAttributeUse=11"/>
+      <nested inputs="dairy.ecore#//CollectionGroup/driver" outputs="DairyXML.xsd#//CollectionGroup;XSDComplexTypeDefinition=5/XSDAttributeUse=12"/>
+      <nested inputs="dairy.ecore#//CollectionGroup/vehicle" outputs="DairyXML.xsd#//CollectionGroup;XSDComplexTypeDefinition=5/XSDAttributeUse=13"/>
+      <nested inputs="dairy.ecore#//CollectionGroup/journalEntries" outputs="DairyXML.xsd#//CollectionGroup;XSDComplexTypeDefinition=5/XSDParticle/XSDModelGroup/XSDParticle"/>
+      <nested inputs="dairy.ecore#//CollectionGroup/session" outputs="DairyXML.xsd#//CollectionGroup;XSDComplexTypeDefinition=5/XSDAttributeUse=14"/>
+      <nested inputs="dairy.ecore#//CollectionGroup/collectionCenter" outputs="DairyXML.xsd#//CollectionGroup;XSDComplexTypeDefinition=5/XSDAttributeUse=15"/>
+    </nested>
+    <nested inputs="dairy.ecore#//CollectionGroup" outputs="DairyXML.xsd#//CollectionGroup;XSDElementDeclaration=5"/>
+    <nested inputs="dairy.ecore#//Route" outputs="DairyXML.xsd#//Route;XSDComplexTypeDefinition=6">
+      <nested inputs="dairy.ecore#//Route/Id" outputs="DairyXML.xsd#//Route;XSDComplexTypeDefinition=6/XSDAttributeUse"/>
+      <nested inputs="dairy.ecore#//Route/name" outputs="DairyXML.xsd#//Route;XSDComplexTypeDefinition=6/XSDAttributeUse=1"/>
+      <nested inputs="dairy.ecore#//Route/description" outputs="DairyXML.xsd#//Route;XSDComplexTypeDefinition=6/XSDAttributeUse=2"/>
+      <nested inputs="dairy.ecore#//Route/stops" outputs="DairyXML.xsd#//Route;XSDComplexTypeDefinition=6/XSDAttributeUse=3"/>
+      <nested inputs="dairy.ecore#//Route/vehicle" outputs="DairyXML.xsd#//Route;XSDComplexTypeDefinition=6/XSDAttributeUse=4"/>
+    </nested>
+    <nested inputs="dairy.ecore#//Route" outputs="DairyXML.xsd#//Route;XSDElementDeclaration=6"/>
+    <nested inputs="dairy.ecore#//Trip" outputs="DairyXML.xsd#//Trip;XSDComplexTypeDefinition=7">
+      <nested inputs="dairy.ecore#//Trip/started" outputs="DairyXML.xsd#//Trip;XSDComplexTypeDefinition=7/XSDAttributeUse"/>
+      <nested inputs="dairy.ecore#//Trip/ended" outputs="DairyXML.xsd#//Trip;XSDComplexTypeDefinition=7/XSDAttributeUse=1"/>
+      <nested inputs="dairy.ecore#//Trip/tripId" outputs="DairyXML.xsd#//Trip;XSDComplexTypeDefinition=7/XSDAttributeUse=2"/>
+      <nested inputs="dairy.ecore#//Trip/collections" outputs="DairyXML.xsd#//Trip;XSDComplexTypeDefinition=7/XSDAttributeUse=3"/>
+      <nested inputs="dairy.ecore#//Trip/deliveries" outputs="DairyXML.xsd#//Trip;XSDComplexTypeDefinition=7/XSDAttributeUse=4"/>
+    </nested>
+    <nested inputs="dairy.ecore#//Trip" outputs="DairyXML.xsd#//Trip;XSDElementDeclaration=7"/>
+    <nested inputs="dairy.ecore#//DeliveryJournal" outputs="DairyXML.xsd#//DeliveryJournal;XSDComplexTypeDefinition=8">
+      <nested inputs="dairy.ecore#//DeliveryJournal/referenceNumber" outputs="DairyXML.xsd#//DeliveryJournal;XSDComplexTypeDefinition=8/XSDAttributeUse"/>
+      <nested inputs="dairy.ecore#//DeliveryJournal/date" outputs="DairyXML.xsd#//DeliveryJournal;XSDComplexTypeDefinition=8/XSDAttributeUse=1"/>
+      <nested inputs="dairy.ecore#//DeliveryJournal/total" outputs="DairyXML.xsd#//DeliveryJournal;XSDComplexTypeDefinition=8/XSDAttributeUse=2"/>
+      <nested inputs="dairy.ecore#//DeliveryJournal/route" outputs="DairyXML.xsd#//DeliveryJournal;XSDComplexTypeDefinition=8/XSDAttributeUse=3"/>
+      <nested inputs="dairy.ecore#//DeliveryJournal/customer" outputs="DairyXML.xsd#//DeliveryJournal;XSDComplexTypeDefinition=8/XSDAttributeUse=4"/>
+      <nested inputs="dairy.ecore#//DeliveryJournal/driver" outputs="DairyXML.xsd#//DeliveryJournal;XSDComplexTypeDefinition=8/XSDAttributeUse=5"/>
+      <nested inputs="dairy.ecore#//DeliveryJournal/vehicle" outputs="DairyXML.xsd#//DeliveryJournal;XSDComplexTypeDefinition=8/XSDAttributeUse=6"/>
+      <nested inputs="dairy.ecore#//DeliveryJournal/lines" outputs="DairyXML.xsd#//DeliveryJournal;XSDComplexTypeDefinition=8/XSDParticle/XSDModelGroup/XSDParticle"/>
+      <nested inputs="dairy.ecore#//DeliveryJournal/session" outputs="DairyXML.xsd#//DeliveryJournal;XSDComplexTypeDefinition=8/XSDAttributeUse=7"/>
+    </nested>
+    <nested inputs="dairy.ecore#//DeliveryJournal" outputs="DairyXML.xsd#//DeliveryJournal;XSDElementDeclaration=8"/>
+    <nested inputs="dairy.ecore#//DeliveryJournalLine" outputs="DairyXML.xsd#//DeliveryJournalLine;XSDComplexTypeDefinition=9">
+      <nested inputs="dairy.ecore#//DeliveryJournalLine/lineNumber" outputs="DairyXML.xsd#//DeliveryJournalLine;XSDComplexTypeDefinition=9/XSDAttributeUse"/>
+      <nested inputs="dairy.ecore#//DeliveryJournalLine/quantity" outputs="DairyXML.xsd#//DeliveryJournalLine;XSDComplexTypeDefinition=9/XSDAttributeUse=1"/>
+      <nested inputs="dairy.ecore#//DeliveryJournalLine/description" outputs="DairyXML.xsd#//DeliveryJournalLine;XSDComplexTypeDefinition=9/XSDAttributeUse=2"/>
+      <nested inputs="dairy.ecore#//DeliveryJournalLine/bin" outputs="DairyXML.xsd#//DeliveryJournalLine;XSDComplexTypeDefinition=9/XSDAttributeUse=3"/>
+    </nested>
+    <nested inputs="dairy.ecore#//DeliveryJournalLine" outputs="DairyXML.xsd#//DeliveryJournalLine;XSDElementDeclaration=9"/>
+    <nested inputs="dairy.ecore#//Dairy" outputs="DairyXML.xsd#//Dairy;XSDComplexTypeDefinition=10">
+      <nested inputs="dairy.ecore#//Dairy/registrationNumber" outputs="DairyXML.xsd#//Dairy;XSDComplexTypeDefinition=10/XSDAttributeUse"/>
+      <nested inputs="dairy.ecore#//Dairy/establishedDate" outputs="DairyXML.xsd#//Dairy;XSDComplexTypeDefinition=10/XSDAttributeUse=1"/>
+      <nested inputs="dairy.ecore#//Dairy/managerName" outputs="DairyXML.xsd#//Dairy;XSDComplexTypeDefinition=10/XSDAttributeUse=2"/>
+      <nested inputs="dairy.ecore#//Dairy/nssfNumber" outputs="DairyXML.xsd#//Dairy;XSDComplexTypeDefinition=10/XSDAttributeUse=3"/>
+      <nested inputs="dairy.ecore#//Dairy/nhifNumber" outputs="DairyXML.xsd#//Dairy;XSDComplexTypeDefinition=10/XSDAttributeUse=4"/>
+      <nested inputs="dairy.ecore#//Dairy/federalPin" outputs="DairyXML.xsd#//Dairy;XSDComplexTypeDefinition=10/XSDAttributeUse=5"/>
+      <nested inputs="dairy.ecore#//Dairy/licenseEffectiveDate" outputs="DairyXML.xsd#//Dairy;XSDComplexTypeDefinition=10/XSDAttributeUse=6"/>
+      <nested inputs="dairy.ecore#//Dairy/licenseExpirationDate" outputs="DairyXML.xsd#//Dairy;XSDComplexTypeDefinition=10/XSDAttributeUse=7"/>
+      <nested inputs="dairy.ecore#//Dairy/version" outputs="DairyXML.xsd#//Dairy;XSDComplexTypeDefinition=10/XSDAttributeUse=8"/>
+      <nested inputs="dairy.ecore#//Dairy/routes" outputs="DairyXML.xsd#//Dairy;XSDComplexTypeDefinition=10/XSDParticle/XSDModelGroup/XSDParticle"/>
+      <nested inputs="dairy.ecore#//Dairy/vehicles" outputs="DairyXML.xsd#//Dairy;XSDComplexTypeDefinition=10/XSDParticle/XSDModelGroup/XSDParticle=1"/>
+      <nested inputs="dairy.ecore#//Dairy/employees" outputs="DairyXML.xsd#//Dairy;XSDComplexTypeDefinition=10/XSDParticle/XSDModelGroup/XSDParticle=2"/>
+      <nested inputs="dairy.ecore#//Dairy/memberships" outputs="DairyXML.xsd#//Dairy;XSDComplexTypeDefinition=10/XSDParticle/XSDModelGroup/XSDParticle=3"/>
+      <nested inputs="dairy.ecore#//Dairy/branchLocations" outputs="DairyXML.xsd#//Dairy;XSDComplexTypeDefinition=10/XSDParticle/XSDModelGroup/XSDParticle=4"/>
+      <nested inputs="dairy.ecore#//Dairy/collectionJournals" outputs="DairyXML.xsd#//Dairy;XSDComplexTypeDefinition=10/XSDParticle/XSDModelGroup/XSDParticle=5"/>
+      <nested inputs="dairy.ecore#//Dairy/deliveryJournals" outputs="DairyXML.xsd#//Dairy;XSDComplexTypeDefinition=10/XSDParticle/XSDModelGroup/XSDParticle=6"/>
+      <nested inputs="dairy.ecore#//Dairy/suppliers" outputs="DairyXML.xsd#//Dairy;XSDComplexTypeDefinition=10/XSDParticle/XSDModelGroup/XSDParticle=7"/>
+      <nested inputs="dairy.ecore#//Dairy/customers" outputs="DairyXML.xsd#//Dairy;XSDComplexTypeDefinition=10/XSDParticle/XSDModelGroup/XSDParticle=8"/>
+      <nested inputs="dairy.ecore#//Dairy/animalHealthRequests" outputs="DairyXML.xsd#//Dairy;XSDComplexTypeDefinition=10/XSDParticle/XSDModelGroup/XSDParticle=9"/>
+      <nested inputs="dairy.ecore#//Dairy/dairyBins" outputs="DairyXML.xsd#//Dairy;XSDComplexTypeDefinition=10/XSDParticle/XSDModelGroup/XSDParticle=10"/>
+      <nested inputs="dairy.ecore#//Dairy/priceHistory" outputs="DairyXML.xsd#//Dairy;XSDComplexTypeDefinition=10/XSDParticle/XSDModelGroup/XSDParticle=11"/>
+    </nested>
+    <nested inputs="dairy.ecore#//Dairy" outputs="DairyXML.xsd#//Dairy;XSDElementDeclaration=10"/>
+    <nested inputs="dairy.ecore#//Membership" outputs="DairyXML.xsd#//Membership;XSDComplexTypeDefinition=11">
+      <nested inputs="dairy.ecore#//Membership/memberId" outputs="DairyXML.xsd#//Membership;XSDComplexTypeDefinition=11/XSDAttributeUse"/>
+      <nested inputs="dairy.ecore#//Membership/memberNumber" outputs="DairyXML.xsd#//Membership;XSDComplexTypeDefinition=11/XSDAttributeUse=1"/>
+      <nested inputs="dairy.ecore#//Membership/applicationDate" outputs="DairyXML.xsd#//Membership;XSDComplexTypeDefinition=11/XSDAttributeUse=2"/>
+      <nested inputs="dairy.ecore#//Membership/effectiveDate" outputs="DairyXML.xsd#//Membership;XSDComplexTypeDefinition=11/XSDAttributeUse=3"/>
+      <nested inputs="dairy.ecore#//Membership/status" outputs="DairyXML.xsd#//Membership;XSDComplexTypeDefinition=11/XSDAttributeUse=4"/>
+      <nested inputs="dairy.ecore#//Membership/defaultRoute" outputs="DairyXML.xsd#//Membership;XSDComplexTypeDefinition=11/XSDAttributeUse=5"/>
+      <nested inputs="dairy.ecore#//Membership/member" outputs="DairyXML.xsd#//Membership;XSDComplexTypeDefinition=11/XSDParticle/XSDModelGroup/XSDParticle"/>
+      <nested inputs="dairy.ecore#//Membership/account" outputs="DairyXML.xsd#//Membership;XSDComplexTypeDefinition=11/XSDParticle/XSDModelGroup/XSDParticle=1"/>
+    </nested>
+    <nested inputs="dairy.ecore#//Membership" outputs="DairyXML.xsd#//Membership;XSDElementDeclaration=11"/>
+    <nested inputs="dairy.ecore#//Asset" outputs="DairyXML.xsd#//Asset;XSDComplexTypeDefinition=12">
+      <nested inputs="dairy.ecore#//Asset/tagType" outputs="DairyXML.xsd#//Asset;XSDComplexTypeDefinition=12/XSDAttributeUse"/>
+      <nested inputs="dairy.ecore#//Asset/tagValue" outputs="DairyXML.xsd#//Asset;XSDComplexTypeDefinition=12/XSDAttributeUse=1"/>
+      <nested inputs="dairy.ecore#//Asset/dateAcquired" outputs="DairyXML.xsd#//Asset;XSDComplexTypeDefinition=12/XSDAttributeUse=2"/>
+      <nested inputs="dairy.ecore#//Asset/damageDate" outputs="DairyXML.xsd#//Asset;XSDComplexTypeDefinition=12/XSDAttributeUse=3"/>
+      <nested inputs="dairy.ecore#//Asset/damageDescription" outputs="DairyXML.xsd#//Asset;XSDComplexTypeDefinition=12/XSDAttributeUse=4"/>
+      <nested inputs="dairy.ecore#//Asset/dateDisposed" outputs="DairyXML.xsd#//Asset;XSDComplexTypeDefinition=12/XSDAttributeUse=5"/>
+      <nested inputs="dairy.ecore#//Asset/disposalReason" outputs="DairyXML.xsd#//Asset;XSDComplexTypeDefinition=12/XSDAttributeUse=6"/>
+      <nested inputs="dairy.ecore#//Asset/disposalWitness" outputs="DairyXML.xsd#//Asset;XSDComplexTypeDefinition=12/XSDAttributeUse=7"/>
+    </nested>
+    <nested inputs="dairy.ecore#//Asset" outputs="DairyXML.xsd#//Asset;XSDElementDeclaration=12"/>
+    <nested inputs="dairy.ecore#//DairyContainer" outputs="DairyXML.xsd#//DairyContainer;XSDComplexTypeDefinition=13">
+      <nested inputs="dairy.ecore#//DairyContainer/assetInfo" outputs="DairyXML.xsd#//DairyContainer;XSDComplexTypeDefinition=13/XSDParticle/XSDModelGroup/XSDParticle"/>
+    </nested>
+    <nested inputs="dairy.ecore#//DairyContainer" outputs="DairyXML.xsd#//DairyContainer;XSDElementDeclaration=13"/>
+    <nested inputs="dairy.ecore#//Supplier" outputs="DairyXML.xsd#//Supplier;XSDComplexTypeDefinition=14">
+      <nested inputs="dairy.ecore#//Supplier/categories" outputs="DairyXML.xsd#//Supplier;XSDComplexTypeDefinition=14/XSDParticle/XSDModelGroup/XSDParticle"/>
+      <nested inputs="dairy.ecore#//Supplier/id" outputs="DairyXML.xsd#//Supplier;XSDComplexTypeDefinition=14/XSDAttributeUse"/>
+      <nested inputs="dairy.ecore#//Supplier/publicDescription" outputs="DairyXML.xsd#//Supplier;XSDComplexTypeDefinition=14/XSDAttributeUse=1"/>
+      <nested inputs="dairy.ecore#//Supplier/status" outputs="DairyXML.xsd#//Supplier;XSDComplexTypeDefinition=14/XSDAttributeUse=2"/>
+      <nested inputs="dairy.ecore#//Supplier/registrationDate" outputs="DairyXML.xsd#//Supplier;XSDComplexTypeDefinition=14/XSDAttributeUse=3"/>
+      <nested inputs="dairy.ecore#//Supplier/expirationDate" outputs="DairyXML.xsd#//Supplier;XSDComplexTypeDefinition=14/XSDAttributeUse=4"/>
+      <nested inputs="dairy.ecore#//Supplier/notes" outputs="DairyXML.xsd#//Supplier;XSDComplexTypeDefinition=14/XSDAttributeUse=5"/>
+      <nested inputs="dairy.ecore#//Supplier/rating" outputs="DairyXML.xsd#//Supplier;XSDComplexTypeDefinition=14/XSDAttributeUse=6"/>
+    </nested>
+    <nested inputs="dairy.ecore#//Supplier" outputs="DairyXML.xsd#//Supplier;XSDElementDeclaration=14"/>
+    <nested inputs="dairy.ecore#//Customer" outputs="DairyXML.xsd#//Customer;XSDComplexTypeDefinition=15">
+      <nested inputs="dairy.ecore#//Customer/id" outputs="DairyXML.xsd#//Customer;XSDComplexTypeDefinition=15/XSDAttributeUse"/>
+      <nested inputs="dairy.ecore#//Customer/customerType" outputs="DairyXML.xsd#//Customer;XSDComplexTypeDefinition=15/XSDAttributeUse=1"/>
+      <nested inputs="dairy.ecore#//Customer/status" outputs="DairyXML.xsd#//Customer;XSDComplexTypeDefinition=15/XSDAttributeUse=2"/>
+    </nested>
+    <nested inputs="dairy.ecore#//Customer" outputs="DairyXML.xsd#//Customer;XSDElementDeclaration=15"/>
+    <nested inputs="dairy.ecore#//MilkPrice" outputs="DairyXML.xsd#//MilkPrice;XSDComplexTypeDefinition=16">
+      <nested inputs="dairy.ecore#//MilkPrice/id" outputs="DairyXML.xsd#//MilkPrice;XSDComplexTypeDefinition=16/XSDAttributeUse"/>
+      <nested inputs="dairy.ecore#//MilkPrice/month" outputs="DairyXML.xsd#//MilkPrice;XSDComplexTypeDefinition=16/XSDAttributeUse=1"/>
+      <nested inputs="dairy.ecore#//MilkPrice/year" outputs="DairyXML.xsd#//MilkPrice;XSDComplexTypeDefinition=16/XSDAttributeUse=2"/>
+      <nested inputs="dairy.ecore#//MilkPrice/value" outputs="DairyXML.xsd#//MilkPrice;XSDComplexTypeDefinition=16/XSDAttributeUse=3"/>
+      <nested inputs="dairy.ecore#//MilkPrice/entryDate" outputs="DairyXML.xsd#//MilkPrice;XSDComplexTypeDefinition=16/XSDAttributeUse=4"/>
+      <nested inputs="dairy.ecore#//MilkPrice/enteredBy" outputs="DairyXML.xsd#//MilkPrice;XSDComplexTypeDefinition=16/XSDAttributeUse=5"/>
+    </nested>
+    <nested inputs="dairy.ecore#//MilkPrice" outputs="DairyXML.xsd#//MilkPrice;XSDElementDeclaration=16"/>
+    <nested inputs="dairy.ecore#//Preference" outputs="DairyXML.xsd#//Preference;XSDComplexTypeDefinition=17">
+      <nested inputs="dairy.ecore#//Preference/id" outputs="DairyXML.xsd#//Preference;XSDComplexTypeDefinition=17/XSDAttributeUse"/>
+      <nested inputs="dairy.ecore#//Preference/value" outputs="DairyXML.xsd#//Preference;XSDComplexTypeDefinition=17/XSDAttributeUse=1"/>
+      <nested inputs="dairy.ecore#//Preference/key" outputs="DairyXML.xsd#//Preference;XSDComplexTypeDefinition=17/XSDAttributeUse=2"/>
+    </nested>
+    <nested inputs="dairy.ecore#//Preference" outputs="DairyXML.xsd#//Preference;XSDElementDeclaration=17"/>
+    <nested inputs="dairy.ecore#//PreferenceKey" outputs="DairyXML.xsd#//PreferenceKey;XSDComplexTypeDefinition=18">
+      <nested inputs="dairy.ecore#//PreferenceKey/id" outputs="DairyXML.xsd#//PreferenceKey;XSDComplexTypeDefinition=18/XSDAttributeUse"/>
+      <nested inputs="dairy.ecore#//PreferenceKey/name" outputs="DairyXML.xsd#//PreferenceKey;XSDComplexTypeDefinition=18/XSDAttributeUse=1"/>
+      <nested inputs="dairy.ecore#//PreferenceKey/defaultValue" outputs="DairyXML.xsd#//PreferenceKey;XSDComplexTypeDefinition=18/XSDAttributeUse=2"/>
+      <nested inputs="dairy.ecore#//PreferenceKey/type" outputs="DairyXML.xsd#//PreferenceKey;XSDComplexTypeDefinition=18/XSDAttributeUse=3"/>
+    </nested>
+    <nested inputs="dairy.ecore#//PreferenceKey" outputs="DairyXML.xsd#//PreferenceKey;XSDElementDeclaration=18"/>
+    <nested inputs="dairy.ecore#//Role" outputs="DairyXML.xsd#//Role;XSDComplexTypeDefinition=19">
+      <nested inputs="dairy.ecore#//Role/id" outputs="DairyXML.xsd#//Role;XSDComplexTypeDefinition=19/XSDAttributeUse"/>
+      <nested inputs="dairy.ecore#//Role/name" outputs="DairyXML.xsd#//Role;XSDComplexTypeDefinition=19/XSDAttributeUse=1"/>
+      <nested inputs="dairy.ecore#//Role/description" outputs="DairyXML.xsd#//Role;XSDComplexTypeDefinition=19/XSDAttributeUse=2"/>
+      <nested inputs="dairy.ecore#//Role/permissions" outputs="DairyXML.xsd#//Role;XSDComplexTypeDefinition=19/XSDParticle/XSDModelGroup/XSDParticle"/>
+    </nested>
+    <nested inputs="dairy.ecore#//Role" outputs="DairyXML.xsd#//Role;XSDElementDeclaration=19"/>
+    <nested inputs="dairy.ecore#//PermissionNamespace" outputs="DairyXML.xsd#//PermissionNamespace;XSDComplexTypeDefinition=20">
+      <nested inputs="dairy.ecore#//PermissionNamespace/id" outputs="DairyXML.xsd#//PermissionNamespace;XSDComplexTypeDefinition=20/XSDAttributeUse"/>
+      <nested inputs="dairy.ecore#//PermissionNamespace/name" outputs="DairyXML.xsd#//PermissionNamespace;XSDComplexTypeDefinition=20/XSDAttributeUse=1"/>
+    </nested>
+    <nested inputs="dairy.ecore#//PermissionNamespace" outputs="DairyXML.xsd#//PermissionNamespace;XSDElementDeclaration=20"/>
+    <nested inputs="dairy.ecore#//Permission" outputs="DairyXML.xsd#//Permission;XSDComplexTypeDefinition=21">
+      <nested inputs="dairy.ecore#//Permission/id" outputs="DairyXML.xsd#//Permission;XSDComplexTypeDefinition=21/XSDAttributeUse"/>
+      <nested inputs="dairy.ecore#//Permission/name" outputs="DairyXML.xsd#//Permission;XSDComplexTypeDefinition=21/XSDAttributeUse=1"/>
+      <nested inputs="dairy.ecore#//Permission/displayName" outputs="DairyXML.xsd#//Permission;XSDComplexTypeDefinition=21/XSDAttributeUse=2"/>
+      <nested inputs="dairy.ecore#//Permission/namespace" outputs="DairyXML.xsd#//Permission;XSDComplexTypeDefinition=21/XSDAttributeUse=3"/>
+    </nested>
+    <nested inputs="dairy.ecore#//Permission" outputs="DairyXML.xsd#//Permission;XSDElementDeclaration=21"/>
+    <nested inputs="dairy.ecore#//CollectionSession" outputs="DairyXML.xsd#//CollectionSession;XSDComplexTypeDefinition=22">
+      <nested inputs="dairy.ecore#//CollectionSession/id" outputs="DairyXML.xsd#//CollectionSession;XSDComplexTypeDefinition=22/XSDAttributeUse"/>
+      <nested inputs="dairy.ecore#//CollectionSession/code" outputs="DairyXML.xsd#//CollectionSession;XSDComplexTypeDefinition=22/XSDAttributeUse=1"/>
+      <nested inputs="dairy.ecore#//CollectionSession/description" outputs="DairyXML.xsd#//CollectionSession;XSDComplexTypeDefinition=22/XSDAttributeUse=2"/>
+      <nested inputs="dairy.ecore#//CollectionSession/timeOfDay" outputs="DairyXML.xsd#//CollectionSession;XSDComplexTypeDefinition=22/XSDAttributeUse=3"/>
+    </nested>
+    <nested inputs="dairy.ecore#//CollectionSession" outputs="DairyXML.xsd#//CollectionSession;XSDElementDeclaration=22"/>
+  </nested>
+</xsd2ecore:XSD2EcoreMappingRoot>

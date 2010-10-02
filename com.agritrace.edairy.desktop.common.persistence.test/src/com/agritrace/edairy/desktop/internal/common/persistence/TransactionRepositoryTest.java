@@ -6,19 +6,28 @@ import static org.junit.Assert.assertTrue;
 import java.util.Date;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
+import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
+import com.agritrace.edairy.desktop.common.persistence.TestPersistenceModule;
+import com.google.inject.Guice;
 
 public class TransactionRepositoryTest  extends TransactionTestCase {
+
+	ITransactionRepository repo;
+	
+	@Before
+	public void setUp() {
+		repo = Guice.createInjector(new TestPersistenceModule()).getInstance(ITransactionRepository.class);
+	}
 
 	@Test
 	public void testAccountTransactionsInRange() throws Exception {
 		List<Transaction> transactions;
 
-//		TransactionRepository repo = new TransactionRepository();
-		TransactionRepository repo = null;
 		assertTrue(repo.all().size() > 10);
 		
 		Account testAccount = getAccount("04632");

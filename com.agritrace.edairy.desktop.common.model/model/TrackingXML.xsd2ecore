@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xsd2ecore:XSD2EcoreMappingRoot xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsd2ecore="http://www.eclipse.org/emf/2002/XSD2Ecore" inputs="farm.ecore#/"
+    outputs="TrackingXML.xsd#/">
+  <nested inputs="farm.ecore#/" outputs="TrackingXML.xsd#/">
+    <nested inputs="farm.ecore#//AcquisitionType" outputs="TrackingXML.xsd#//AcquisitionType;XSDSimpleTypeDefinition">
+      <nested inputs="farm.ecore#//AcquisitionType/BIRTH" outputs="TrackingXML.xsd#//AcquisitionType;XSDSimpleTypeDefinition/XSDEnumerationFacet"/>
+      <nested inputs="farm.ecore#//AcquisitionType/PURCHASE" outputs="TrackingXML.xsd#//AcquisitionType;XSDSimpleTypeDefinition/XSDEnumerationFacet=1"/>
+      <nested inputs="farm.ecore#//AcquisitionType/OTHER" outputs="TrackingXML.xsd#//AcquisitionType;XSDSimpleTypeDefinition/XSDEnumerationFacet=2"/>
+    </nested>
+    <nested inputs="farm.ecore#//Purpose" outputs="TrackingXML.xsd#//Purpose;XSDSimpleTypeDefinition=1">
+      <nested inputs="farm.ecore#//Purpose/DAIRY" outputs="TrackingXML.xsd#//Purpose;XSDSimpleTypeDefinition=1/XSDEnumerationFacet"/>
+      <nested inputs="farm.ecore#//Purpose/BEEF" outputs="TrackingXML.xsd#//Purpose;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=1"/>
+      <nested inputs="farm.ecore#//Purpose/BREEDING" outputs="TrackingXML.xsd#//Purpose;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=2"/>
+      <nested inputs="farm.ecore#//Purpose/HIDE" outputs="TrackingXML.xsd#//Purpose;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=3"/>
+      <nested inputs="farm.ecore#//Purpose/TRANSPORT" outputs="TrackingXML.xsd#//Purpose;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=4"/>
+      <nested inputs="farm.ecore#//Purpose/OTHER" outputs="TrackingXML.xsd#//Purpose;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=5"/>
+    </nested>
+    <nested inputs="farm.ecore#//RearingMode" outputs="TrackingXML.xsd#//RearingMode;XSDSimpleTypeDefinition=2">
+      <nested inputs="farm.ecore#//RearingMode/GRAZE" outputs="TrackingXML.xsd#//RearingMode;XSDSimpleTypeDefinition=2/XSDEnumerationFacet"/>
+      <nested inputs="farm.ecore#//RearingMode/ZEROGRAZE" outputs="TrackingXML.xsd#//RearingMode;XSDSimpleTypeDefinition=2/XSDEnumerationFacet=1"/>
+      <nested inputs="farm.ecore#//RearingMode/PASTORALHERD" outputs="TrackingXML.xsd#//RearingMode;XSDSimpleTypeDefinition=2/XSDEnumerationFacet=2"/>
+      <nested inputs="farm.ecore#//RearingMode/OTHER" outputs="TrackingXML.xsd#//RearingMode;XSDSimpleTypeDefinition=2/XSDEnumerationFacet=3"/>
+    </nested>
+    <nested inputs="farm.ecore#//Mechanism" outputs="TrackingXML.xsd#//Mechanism;XSDSimpleTypeDefinition=3">
+      <nested inputs="farm.ecore#//Mechanism/BRAND" outputs="TrackingXML.xsd#//Mechanism;XSDSimpleTypeDefinition=3/XSDEnumerationFacet"/>
+      <nested inputs="farm.ecore#//Mechanism/BADGE" outputs="TrackingXML.xsd#//Mechanism;XSDSimpleTypeDefinition=3/XSDEnumerationFacet=1"/>
+      <nested inputs="farm.ecore#//Mechanism/COLLAR" outputs="TrackingXML.xsd#//Mechanism;XSDSimpleTypeDefinition=3/XSDEnumerationFacet=2"/>
+      <nested inputs="farm.ecore#//Mechanism/EARTAG" outputs="TrackingXML.xsd#//Mechanism;XSDSimpleTypeDefinition=3/XSDEnumerationFacet=3"/>
+      <nested inputs="farm.ecore#//Mechanism/RFID" outputs="TrackingXML.xsd#//Mechanism;XSDSimpleTypeDefinition=3/XSDEnumerationFacet=4"/>
+      <nested inputs="farm.ecore#//Mechanism/GSMGPRS" outputs="TrackingXML.xsd#//Mechanism;XSDSimpleTypeDefinition=3/XSDEnumerationFacet=5"/>
+      <nested inputs="farm.ecore#//Mechanism/OTHER" outputs="TrackingXML.xsd#//Mechanism;XSDSimpleTypeDefinition=3/XSDEnumerationFacet=6"/>
+    </nested>
+    <nested inputs="farm.ecore#//Farm" outputs="TrackingXML.xsd#//Farm;XSDComplexTypeDefinition">
+      <nested inputs="farm.ecore#//Farm/farmId" outputs="TrackingXML.xsd#//Farm;XSDComplexTypeDefinition/XSDAttributeUse"/>
+      <nested inputs="farm.ecore#//Farm/name" outputs="TrackingXML.xsd#//Farm;XSDComplexTypeDefinition/XSDAttributeUse=1"/>
+      <nested inputs="farm.ecore#//Farm/profilePhoto" outputs="TrackingXML.xsd#//Farm;XSDComplexTypeDefinition/XSDAttributeUse=2"/>
+      <nested inputs="farm.ecore#//Farm/animals" outputs="TrackingXML.xsd#//Farm;XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"/>
+      <nested inputs="farm.ecore#//Farm/cans" outputs="TrackingXML.xsd#//Farm;XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1"/>
+      <nested inputs="farm.ecore#//Farm/location" outputs="TrackingXML.xsd#//Farm;XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2"/>
+      <nested inputs="farm.ecore#//Farm/owner" outputs="TrackingXML.xsd#//Farm;XSDComplexTypeDefinition/XSDAttributeUse=3"/>
+    </nested>
+    <nested inputs="farm.ecore#//Farm" outputs="TrackingXML.xsd#//Farm;XSDElementDeclaration"/>
+    <nested inputs="farm.ecore#//Farmer" outputs="TrackingXML.xsd#//Farmer;XSDComplexTypeDefinition=1">
+      <nested inputs="farm.ecore#//Farmer/farms" outputs="TrackingXML.xsd#//Farmer;XSDComplexTypeDefinition=1/XSDParticle/XSDModelGroup/XSDParticle"/>
+    </nested>
+    <nested inputs="farm.ecore#//Farmer" outputs="TrackingXML.xsd#//Farmer;XSDElementDeclaration=1"/>
+    <nested inputs="farm.ecore#//Container" outputs="TrackingXML.xsd#//Container;XSDComplexTypeDefinition=2">
+      <nested inputs="farm.ecore#//Container/containerId" outputs="TrackingXML.xsd#//Container;XSDComplexTypeDefinition=2/XSDAttributeUse"/>
+      <nested inputs="farm.ecore#//Container/trackingNumber" outputs="TrackingXML.xsd#//Container;XSDComplexTypeDefinition=2/XSDAttributeUse=1"/>
+      <nested inputs="farm.ecore#//Container/capacity" outputs="TrackingXML.xsd#//Container;XSDComplexTypeDefinition=2/XSDAttributeUse=2"/>
+      <nested inputs="farm.ecore#//Container/measureType" outputs="TrackingXML.xsd#//Container;XSDComplexTypeDefinition=2/XSDAttributeUse=3"/>
+      <nested inputs="farm.ecore#//Container/owner" outputs="TrackingXML.xsd#//Container;XSDComplexTypeDefinition=2/XSDAttributeUse=4"/>
+    </nested>
+    <nested inputs="farm.ecore#//Container" outputs="TrackingXML.xsd#//Container;XSDElementDeclaration=2"/>
+    <nested inputs="farm.ecore#//RegisteredAnimal" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3">
+      <nested inputs="farm.ecore#//RegisteredAnimal/registrationId" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/givenName" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=1"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/gender" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=2"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/purpose" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=3"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/dateOfAcquisition" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=4"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/acquisitionType" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=5"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/identifyingFeatures" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=6"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/rearingMode" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=7"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/pastOwners" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDParticle/XSDModelGroup/XSDParticle"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/insuranceNumber" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=8"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/dateOfBirth" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=9"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/birthCertificateNumber" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=10"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/veterinaryCertificateNumber" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=11"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/ministryId" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=12"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/insuranceCompany" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=13"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/feedingHabit" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=14"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/feedType" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=15"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/feedBrand" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=16"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/supplements" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=17"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/antibiotics" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=18"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/veterinary" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=19"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/awards" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=20"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/notes" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=21"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/location" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=22"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/animalType" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=23"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/sireType" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDParticle/XSDModelGroup/XSDParticle=1"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/identifiers" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDParticle/XSDModelGroup/XSDParticle=2"/>
+    </nested>
+    <nested inputs="farm.ecore#//RegisteredAnimal" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDElementDeclaration=3"/>
+    <nested inputs="farm.ecore#//ReferenceAnimalType" outputs="TrackingXML.xsd#//ReferenceAnimalType;XSDComplexTypeDefinition=4">
+      <nested inputs="farm.ecore#//ReferenceAnimalType/species" outputs="TrackingXML.xsd#//ReferenceAnimalType;XSDComplexTypeDefinition=4/XSDAttributeUse"/>
+      <nested inputs="farm.ecore#//ReferenceAnimalType/breed" outputs="TrackingXML.xsd#//ReferenceAnimalType;XSDComplexTypeDefinition=4/XSDAttributeUse=1"/>
+    </nested>
+    <nested inputs="farm.ecore#//ReferenceAnimalType" outputs="TrackingXML.xsd#//ReferenceAnimalType;XSDElementDeclaration=4"/>
+    <nested inputs="farm.ecore#//AnimalIdentifier" outputs="TrackingXML.xsd#//AnimalIdentifier;XSDComplexTypeDefinition=5">
+      <nested inputs="farm.ecore#//AnimalIdentifier/issuer" outputs="TrackingXML.xsd#//AnimalIdentifier;XSDComplexTypeDefinition=5/XSDAttributeUse"/>
+      <nested inputs="farm.ecore#//AnimalIdentifier/value" outputs="TrackingXML.xsd#//AnimalIdentifier;XSDComplexTypeDefinition=5/XSDAttributeUse=1"/>
+    </nested>
+    <nested inputs="farm.ecore#//AnimalIdentifier" outputs="TrackingXML.xsd#//AnimalIdentifier;XSDElementDeclaration=5"/>
+  </nested>
+</xsd2ecore:XSD2EcoreMappingRoot>

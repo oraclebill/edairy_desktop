@@ -33,7 +33,7 @@ public class SessionDirectoryController extends BasicDirectoryController<Collect
 		addTableColumn("Time of Day", DairyPackage.Literals.COLLECTION_SESSION__TIME_OF_DAY, new ColumnFormatter() {
 			@Override
 			public String getText(Object element) {
-				return ((CollectionSession) element).getTimeAsString();
+				return ((CollectionSession) element).getTimeOfDay().toLocaleString();
 			}
 		});
 		addTableColumn("Description", DairyPackage.Literals.COLLECTION_SESSION__DESCRIPTION);

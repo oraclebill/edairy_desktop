@@ -1,16 +1,18 @@
 package com.agritrace.ediary.desktop.reports.data;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 public class YearReportDao {
 	
+	
 	private static YearReportDao instance;
+	
+	IDairyRepository dairyRepo;
 	
 	public YearReportDao(){
 		super();
@@ -25,7 +27,8 @@ public class YearReportDao {
 	
 	public List<YearReportData> getReportValues(String year){
 		//TODO apply year!
-		List<CollectionGroup> allJournals = RepositoryFactory.getDairyRepository().allCollectionGroups();
+//		List<CollectionGroup> allJournals = RepositoryFactory.getDairyRepository().allCollectionGroups();
+		List<CollectionGroup> allJournals = dairyRepo.allCollectionGroups();
 		List<YearReportData> ret = new ArrayList<YearReportData>();
 		
 		for(CollectionGroup page:allJournals){

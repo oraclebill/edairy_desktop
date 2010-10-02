@@ -35,7 +35,6 @@ import org.osgi.framework.Bundle;
 
 import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
-import com.agritrace.edairy.desktop.common.persistence.RepositoryFactory;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.agritrace.ediary.desktop.reports.Activator;
 
@@ -50,7 +49,7 @@ public class ReportController {
 	private Browser browser;
 	private Random random = new Random();
 	
-	private final IDairyRepository dairyRepo;
+	private  IDairyRepository dairyRepo;
 	
 	private String reportName;
 	private Composite composite;
@@ -64,7 +63,6 @@ public class ReportController {
 	
 	public ReportController(String reportName){
 		this.reportName = reportName;
-		this.dairyRepo = RepositoryFactory.getDairyRepository();
 	}
 	
 	public void createPartControl(Composite parent) {
