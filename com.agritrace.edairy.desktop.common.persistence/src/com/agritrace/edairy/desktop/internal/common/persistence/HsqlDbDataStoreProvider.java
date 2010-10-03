@@ -12,10 +12,10 @@ public class HsqlDbDataStoreProvider extends HbDataStoreProvider {
 
 		File dbFile = new File(getDatabaseFileArea(), getDatabaseName());
 		
-		// in memory hsqldb
+		// file based hsqldb
 		props.setProperty(Environment.DRIVER, "org.hsqldb.jdbcDriver");
 		props.setProperty(Environment.USER, "SA");
-		props.setProperty(Environment.URL, String.format("jdbc:hsqldb:file:%s.db", dbFile));
+		props.setProperty(Environment.URL, String.format("jdbc:hsqldb:mem:%s.db", dbFile));
 		props.setProperty(Environment.PASS, "");
 		props.setProperty(Environment.DIALECT, "org.hibernate.dialect.HSQLDialect");
 		

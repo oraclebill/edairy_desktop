@@ -11,6 +11,7 @@ Require-Bundle: org.eclipse.core.runtime,
  com.google.inject,
  com.agritrace.edairy.desktop.collections.scaledata,
  com.csvreader;bundle-version="1.0.0",
- aopalliance;bundle-version="0.0.0"
+ aopalliance;bundle-version="0.0.0",
+ org.apache.commons.collections;bundle-version="3.2.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Fragment-Host: com.agritrace.edairy.desktop.common.persistence

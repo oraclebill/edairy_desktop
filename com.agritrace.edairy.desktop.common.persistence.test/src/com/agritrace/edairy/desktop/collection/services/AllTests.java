@@ -24,7 +24,6 @@ import com.agritrace.edairy.desktop.internal.common.persistence.TransactionTestC
 	MilkCollectionJournalLineQueryTest.class,
 	DialogCancelTest.class, 
 	TransactionRepositoryTest.class, 
-	TransactionTestCase.class
 	})
 public class AllTests {
 
