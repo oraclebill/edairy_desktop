@@ -112,9 +112,11 @@ public class ImportMemberTransactionHandler extends HandlerBase {
 		}
 
 		private void saveTransactions(List<AccountTransaction> transactions) {
-			for (AccountTransaction newEntity : transactions) {
-				accountRepo.get().saveNew(newEntity);
-			}
+			IRepository<AccountTransaction> transactionRepo = accountRepo.get();
+			transactionRepo.save(transactions);
+//			for (AccountTransaction newEntity : transactions) {
+//				transactionRepo.saveNew(newEntity);
+//			}
 //			RepositoryFactory.getDairyRepository().save();
 		}
 

@@ -39,7 +39,7 @@ public class MemberTransactionImportTool extends AbstractImportTool {
 	public static final String CREDIT_SALE 			= "Credit Sale";
 	public static final String STORE_PREFIX 		= "Stores:";
 	public static final String CLINICAL_PREFIX 		= "Vet Services:Clinical Services";
-	public static final String AI_PREFIX 			= "Vet Services:A.I.";
+	public static final String AI_PREFIX 			= "Vet Services:A.I";
 	
 	public static final int BASE = 0;
 	public static final int TX_TYPE = 		BASE;
