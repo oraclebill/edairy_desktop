@@ -19,7 +19,7 @@ import org.eclipse.riena.ui.workarea.WorkareaManager;
 import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
 import com.agritrace.edairy.desktop.finance.ui.controllers.AccountTransactionJournalController;
 import com.agritrace.edairy.desktop.finance.ui.controllers.AdjustmentTransactionJournalController;
-import com.agritrace.edairy.desktop.finance.ui.controllers.MemberPaymentsController;
+import com.agritrace.edairy.desktop.finance.ui.controllers.MemberPaymentsViewController;
 import com.agritrace.edairy.desktop.finance.ui.controllers.MilkPriceJournalController;
 import com.agritrace.edairy.desktop.finance.ui.views.AdjustmentTransactionJournalView;
 import com.agritrace.edairy.desktop.finance.ui.views.MemberPaymentsView;
@@ -90,7 +90,7 @@ public class FinanceNavigationNodeAssembler extends AbstractNavigationAssembler 
 //			NodeFactory.createSubModule(SUBMODULE_FINANCE_MILK_PRICE_REGISTER,
 //					LABEL_MILKPRICE, moduleNode, MilkPriceJournalView.ID, MilkPriceJournalController.class); //$NON-NLS-1$
 			NodeFactory.createSubModule(SUBMODULE_FINANCE_MEMBER_PAYMENTS,
-					LABEL_PAYMENTS, moduleNode, MemberPaymentsView.ID, MemberPaymentsController.class); //$NON-NLS-1$
+					LABEL_PAYMENTS, moduleNode, MemberPaymentsView.ID, MemberPaymentsViewController.class); //$NON-NLS-1$
 		}
 		{
 			final IModuleGroupNode moduleGroupNode = new ModuleGroupNode(new NavigationNodeId(MODULE_GROUP_ADJUSTMENT));
