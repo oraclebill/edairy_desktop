@@ -19,8 +19,10 @@ import org.eclipse.riena.ui.workarea.WorkareaManager;
 import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
 import com.agritrace.edairy.desktop.finance.ui.controllers.AccountTransactionJournalController;
 import com.agritrace.edairy.desktop.finance.ui.controllers.AdjustmentTransactionJournalController;
+import com.agritrace.edairy.desktop.finance.ui.controllers.MemberPaymentsController;
 import com.agritrace.edairy.desktop.finance.ui.controllers.MilkPriceJournalController;
 import com.agritrace.edairy.desktop.finance.ui.views.AdjustmentTransactionJournalView;
+import com.agritrace.edairy.desktop.finance.ui.views.MemberPaymentsView;
 import com.agritrace.edairy.desktop.finance.ui.views.MilkPriceJournalView;
 import com.agritrace.edairy.desktop.finance.ui.views.TransactionJournalView;
 
@@ -28,9 +30,10 @@ public class FinanceNavigationNodeAssembler extends AbstractNavigationAssembler 
 	// FINANCE
 
 	private static final String LABEL_FINANCE = "Finance";
-	private static final String LABEL_MILK_PRICE = "Milk Price Register";
+	private static final String LABEL_MILKPRICE = "Milk Price Log";
+	private static final String LABEL_PAYMENTS = "Member Payments Register";
 	private static final String LABEL_TRANSACTION_LOG = "Member Transaction Register";
-	private static final String LABEL_ADJUSTMENT = "Adjustment Register";
+	private static final String LABEL_ADJUSTMENT = "Account Adjustment Register";
 	private static final String SUBAPP_FINANCE = "com.agritrace.edairy.desktop.finance";	//$NON-NLS-1$
 	private static final String MODULE_TRANSACTION_REGISTER = "edm.transaction.entry";	//$NON-NLS-1$
 	private static final String MODULE_MILK_PRICE_REGISTER = "edm.milk-price.entry";	//$NON-NLS-1$
@@ -40,6 +43,7 @@ public class FinanceNavigationNodeAssembler extends AbstractNavigationAssembler 
 	private static final String MODULE_GROUP_ADJUSTMENT = "modulegroup.finance.adjustment"; 	//$NON-NLS-1$
 	private static final String SUBMODULE_FINANCE_TRANSACTION_REGISTER = "edm.finances.log";	//$NON-NLS-1$
 	private static final String SUBMODULE_FINANCE_MILK_PRICE_REGISTER = "milk.price.log";	//$NON-NLS-1$
+	private static final String SUBMODULE_FINANCE_MEMBER_PAYMENTS = "com.agritrace.edairy.desktop.finance.ui.views.MemberPaymentsView";	//$NON-NLS-1$
 	private static final String SUBMODULE_FINANCE_ADJUSTMENT_REGISTER = "adjustment.log";	//$NON-NLS-1$
 
 	private static final String TAB_FINANCE = SUBAPP_FINANCE;
@@ -82,9 +86,11 @@ public class FinanceNavigationNodeAssembler extends AbstractNavigationAssembler 
 			final IModuleGroupNode moduleGroupNode = new ModuleGroupNode(new NavigationNodeId(MODULE_GROUP_MILK_PRICE));
 			subAppNode.addChild(moduleGroupNode);
 
-			final IModuleNode moduleNode = NodeFactory.createModule(MODULE_MILK_PRICE_REGISTER, LABEL_MILK_PRICE, moduleGroupNode);
-			NodeFactory.createSubModule(SUBMODULE_FINANCE_MILK_PRICE_REGISTER,
-							LABEL_MILK_PRICE, moduleNode, MilkPriceJournalView.ID, MilkPriceJournalController.class); //$NON-NLS-1$
+			final IModuleNode moduleNode = NodeFactory.createModule(MODULE_MILK_PRICE_REGISTER, LABEL_PAYMENTS, moduleGroupNode);
+//			NodeFactory.createSubModule(SUBMODULE_FINANCE_MILK_PRICE_REGISTER,
+//					LABEL_MILKPRICE, moduleNode, MilkPriceJournalView.ID, MilkPriceJournalController.class); //$NON-NLS-1$
+			NodeFactory.createSubModule(SUBMODULE_FINANCE_MEMBER_PAYMENTS,
+					LABEL_PAYMENTS, moduleNode, MemberPaymentsView.ID, MemberPaymentsController.class); //$NON-NLS-1$
 		}
 		{
 			final IModuleGroupNode moduleGroupNode = new ModuleGroupNode(new NavigationNodeId(MODULE_GROUP_ADJUSTMENT));

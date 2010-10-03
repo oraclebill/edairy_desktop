@@ -243,37 +243,6 @@ public class EDairyManagerApplication extends SwtApplication {
 		//
 
 		app.create(new NavigationNodeId(SUBAPP_FINANCE));
-//		app.create(new NavigationNodeId(SUBAPP_INSTALL));
-
-		/************
-		 * subAppNode = new SubApplicationNode(new
-		 * NavigationNodeId(SUBAPP_FINANCE), LABEL_FINANCE);
-		 * app.addChild(subAppNode); workarea.registerDefinition(subAppNode,
-		 * TAB_FINANCE); moduleGroupNode = new ModuleGroupNode(new
-		 * NavigationNodeId(MODULE_GROUP_FINANCE));
-		 * subAppNode.addChild(moduleGroupNode);
-		 * 
-		 * // // FINANCE GROUP //
-		 * 
-		 * final IModuleNode financeMembers =
-		 * NodeFactory.createModule(MODULE_FINANCE, "Finance", moduleGroupNode);
-		 * //$NON-NLS-1$
-		 * NodeFactory.createSubModule(SUBMODULE_FINANCE_TRANSACTION_REGISTER,
-		 * "Transaction Journal", financeMembers,
-		 * MemberTransactionRegisterView.ID); //$NON-NLS-1$ //
-		 * NodeFactory.createSubModule
-		 * (SUBMODULE_FINANCE_TRANSACTION_BATCH_ENTRY, //
-		 * "Transaction Journal 8", financeMembers,
-		 * TransactionBatchEntrySubModuleView.ID); //$NON-NLS-1$ //
-		 * NodeFactory.createSubModule( // "edm.finances.mdlog",
-		 * "Transaction Journal 9", financeMembers,
-		 * TransactionBatchEntryMDSubModuleView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-		 * // NodeFactory //
-		 * .createSubModule(SUBMODULE_FINANCE_ADJUSTMENTS_REGISTER,
-		 * "Adjustments", financeMembers, BlankView.ID); //$NON-NLS-1$ //
-		 * NodeFactory.createSubModule(SUBMODULE_FINANCE_MILK_PRICE_REGISTER, //
-		 * "Milk Price Register", financeMembers, BlankView.ID); //$NON-NLS-1$
-		 ************/
 
 		//
 		// VETERINARY TAB

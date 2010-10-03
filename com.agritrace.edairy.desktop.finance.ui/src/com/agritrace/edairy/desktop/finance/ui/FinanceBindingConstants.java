@@ -12,6 +12,8 @@ public interface FinanceBindingConstants {
 	static final String ID_SIGNED_BY_TEXT_LBL = "ID_SIGNED_BY_TEXT_LBL";
 	static final String ID_DAIRY_LOCATION_COMBO_LBL = "ID_DAIRY_LOCATION_COMBO_LBL";
 	static final String ID_CHECK_NUMBER_TEXT_LBL = "ID_CHECK_NUMBER_TEXT_LBL";
+	static final String BTN_RUN_PAYMENTS = "BTN_RUN_PAYMENTS";
+	static final String TABLE = "TABLE";
 	
 	String AMT_TEXT_RIDGET = "amtText";
 	String BTN_ADD_TRANSACTION = "btnAddTransaction";
