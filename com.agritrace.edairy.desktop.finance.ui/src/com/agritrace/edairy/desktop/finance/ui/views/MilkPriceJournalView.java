@@ -2,7 +2,6 @@ package com.agritrace.edairy.desktop.finance.ui.views;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
@@ -26,4 +25,5 @@ public class MilkPriceJournalView extends AbstractDirectoryView {
 		GridDataFactory.swtDefaults().grab(true, false).indent(8,8).applyTo(control);
 	}
 
+	
 }
