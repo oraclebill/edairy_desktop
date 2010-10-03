@@ -111,7 +111,8 @@ public class MilkCollectionJournalLineRepository extends
 			}
 		};
 
-		runWithTransaction(runnable);
+//		runWithTransaction(runnable);
+		run(runnable);
 		return runnable.getResult();
 	}
 

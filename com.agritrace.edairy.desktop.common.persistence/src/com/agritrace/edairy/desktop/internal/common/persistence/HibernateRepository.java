@@ -1,6 +1,7 @@
 package com.agritrace.edairy.desktop.internal.common.persistence;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
@@ -98,7 +99,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 				setResult(result);
 			}
 		};
-		runWithTransaction(runner);
+		run(runner);
 		return runner.getResult();
 	}
 
@@ -174,7 +175,15 @@ public abstract class HibernateRepository<T extends EObject> implements
 		runWithTransaction(new Runnable() {
 			@Override
 			public void run() {
-				sessionProvider.get().saveOrUpdate(changedItem);
+				Session session = sessionProvider.get();
+				if (changedItem instanceof Collection) {
+					for(Object item : (Collection) changedItem) {
+						session.saveOrUpdate(item);
+					}
+				}
+				else {
+					session.saveOrUpdate(changedItem);
+				}
 			}
 		});
 	}
