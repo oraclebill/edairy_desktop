@@ -161,7 +161,9 @@
             </structure>
             <property name="dataSource">Data Source</property>
             <method name="open"><![CDATA[count = 0;
-dao = Packages.com.agritrace.edairy.desktop.reports.birt.FarmerPayablesYearDao.instance();
+importPackage(Packages.com.google.inject);
+importPackage(Packages.com.agritrace.edairy.desktop.birt.data);
+dao = Packages.com.agritrace.edairy.desktop.birt.data.YearReportDao.instance();
 data = dao.getReportValuesX(reportContext.getParameterValue("Year"), reportContext.getParameterValue("Month"));
 ]]></method>
             <method name="fetch"><![CDATA[//

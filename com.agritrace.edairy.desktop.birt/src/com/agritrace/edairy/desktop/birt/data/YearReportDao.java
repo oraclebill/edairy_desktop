@@ -23,6 +23,11 @@ public class YearReportDao {
 		return instance;
 	}
 	
+	public List<FarmerPayablesYearData> getReportValuesX(String year,
+			String month){
+		return FarmerPayablesYearDao.getInstance().getReportValuesX(year, month);
+	}
+	
 	@Inject private static IDairyRepository dairyRepo;
 	public List<YearReportData> getReportValues(String year){
 		//TODO apply year!

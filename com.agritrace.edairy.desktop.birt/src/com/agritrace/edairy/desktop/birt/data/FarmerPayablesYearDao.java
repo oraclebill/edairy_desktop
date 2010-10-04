@@ -41,7 +41,7 @@ public class FarmerPayablesYearDao {
 		this.floatFormater = new java.text.DecimalFormat("#,#00.0#;(#,#00.0#)");
 	}
 
-	public static FarmerPayablesYearDao instance() {
+	public static FarmerPayablesYearDao getInstance() {
 		if (instance == null) {
 			instance = new FarmerPayablesYearDao();
 		}
