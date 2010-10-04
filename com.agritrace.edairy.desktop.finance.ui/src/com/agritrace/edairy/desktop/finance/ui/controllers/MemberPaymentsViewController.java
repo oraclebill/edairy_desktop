@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.finance.ui.controllers;
 
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import org.eclipse.jface.dialogs.Dialog;
@@ -16,6 +17,7 @@ import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.finance.ui.dialogs.paymentwizard.MemberPaymentProcessWizard;
+import com.agritrace.edairy.desktop.persistence.finance.IMemberPaymentsRepository;
 import com.google.inject.Inject;
 
 public class MemberPaymentsViewController extends
@@ -29,22 +31,8 @@ public class MemberPaymentsViewController extends
 		}
 	}
 
-	private static final class PaymentButtonListener implements IActionListener {
-		@Override
-		public void callback() {
-			MemberPaymentProcessWizard paymentsWizard = new MemberPaymentProcessWizard();
-			Shell shell = PlatformUI.getWorkbench().getDisplay()
-					.getActiveShell();
-			WizardDialog wizDialog = new WizardDialog(shell, paymentsWizard);
-
-			if (wizDialog.open() == Dialog.OK) {
-				// paymentsWizard;
-			}
-		}
-	}
-
 	@Inject
-	public MemberPaymentsViewController(IRepository<MilkPrice> paymentsRepository) {
+	public MemberPaymentsViewController(IMemberPaymentsRepository paymentsRepository) {
 		setEClass(DairyPackage.Literals.MILK_PRICE);
 		setRepository(paymentsRepository);
 
@@ -66,6 +54,22 @@ public class MemberPaymentsViewController extends
 		// TODO:
 	}
 
+	private void handlePaymentButton() {
+		MemberPaymentProcessWizard paymentsWizard = new MemberPaymentProcessWizard(getRepository());
+		Shell shell = PlatformUI.getWorkbench().getDisplay()
+				.getActiveShell();
+		WizardDialog wizDialog = new WizardDialog(shell, paymentsWizard);
+
+		if (wizDialog.open() == Dialog.OK) {
+			// paymentsWizard;
+		}
+	}
+	
+	@Override 
+	public IMemberPaymentsRepository getRepository() {
+		return (IMemberPaymentsRepository) super.getRepository();
+	}
+	
 	@Override
 	protected List<MilkPrice> getFilteredResult() {
 		return getRepository().all();
@@ -79,7 +83,12 @@ public class MemberPaymentsViewController extends
 	@Override
 	protected void configureNewItemButton(IActionRidget newBtnRidget) {
 		newBtnRidget.setText("Run Member Payment Process");
-		newBtnRidget.addListener(new PaymentButtonListener());
+		newBtnRidget.addListener(new IActionListener() {			
+			@Override
+			public void callback() {
+				handlePaymentButton();
+			}
+		});
 	}
 
 	@Override
