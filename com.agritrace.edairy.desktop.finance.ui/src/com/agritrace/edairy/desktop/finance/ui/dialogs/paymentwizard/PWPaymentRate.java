@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.ui.util.FormUtil;
 import com.agritrace.edairy.desktop.finance.ui.MilkPriceJournalConstants;
-import com.agritrace.edairy.desktop.finance.ui.dialogs.paymentwizard.MemberPaymentProcessWizard.PaymentWizardModel;
+import com.google.inject.Inject;
 
 public class PWPaymentRate extends WizardPage {
 
@@ -28,18 +28,16 @@ public class PWPaymentRate extends WizardPage {
 
 	private String values[] = new String[2];
 
-	private PaymentWizardModel model;
-
 	/**
 	 * Create the wizard.
 	 * 
 	 * @param model
 	 */
-	public PWPaymentRate(PaymentWizardModel wizardModel) {
+	@Inject
+	public PWPaymentRate() {
 		super("paymentRate");
 		setTitle("Payment Rate");
 		setDescription("Enter the payment rate for the selected period");
-		this.model = wizardModel;
 	}
 
 	/**
@@ -117,7 +115,7 @@ public class PWPaymentRate extends WizardPage {
 
 	private void validate() {
 		try {
-			model.setPaymentRate(new BigDecimal(values[1]));
+			getWizard().getDialogSettings().put("paymentRate", new BigDecimal(values[1]).toPlainString());
 			setPageComplete(values[1] != null && values[1].equals(values[0]));
 		}
 		catch(Exception e) {
