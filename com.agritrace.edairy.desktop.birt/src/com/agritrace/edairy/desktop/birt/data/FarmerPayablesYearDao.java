@@ -178,7 +178,7 @@ public class FarmerPayablesYearDao {
 				startDate.getActualMaximum(Calendar.DAY_OF_MONTH));
 
 		List<Transaction> transactions = transactionRepo
-				.accountTransactionsInRange(membership.getAccount(),
+				.findAccountTransactionsInRange(membership.getAccount(),
 						startDate.getTime(), endDate.getTime());
 		BigDecimal credits = ZERO, adjustments = ZERO;
 		for (Transaction tx : transactions) {

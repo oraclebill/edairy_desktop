@@ -35,13 +35,13 @@ public class TransactionRepositoryTest  extends TransactionTestCase {
 		start = TX_FORMAT.parse("01.06.2010");
 		end = TX_FORMAT.parse("15.06.2010");
 
-		transactions = repo.accountTransactionsInRange(testAccount, start, end);
+		transactions = repo.findAccountTransactionsInRange(testAccount, start, end);
 		assertEquals(2, transactions.size());
 		
 		start = TX_FORMAT.parse("15.06.2010");
 		end = TX_FORMAT.parse("30.06.2010");
 		
-		transactions = repo.accountTransactionsInRange(testAccount, start, end);
+		transactions = repo.findAccountTransactionsInRange(testAccount, start, end);
 		assertEquals(2, transactions.size());
 
 	}

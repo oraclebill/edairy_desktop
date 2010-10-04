@@ -1,104 +1,47 @@
 package com.agritrace.edairy.desktop.finance.ui.dialogs.paymentwizard;
 
-import java.math.BigDecimal;
-import java.util.List;
-
+import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.Wizard;
 
-import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
-import com.agritrace.edairy.desktop.persistence.finance.IMemberPaymentsRepository;
-
+import com.google.inject.Inject;
 
 public class MemberPaymentProcessWizard extends Wizard {
 
-	
-	static class PaymentWizardModel {
-		public static final String[] MONTHS = new String[] { "January", "February",
-			"March", "April", "May", "June", "July", "August", "September",
-			"October", "November", "December", };
+	private PWSelectPaymentPeriod periodPage;
+	private PWPaymentRate ratePage;
+	private PWPaymentComplete reviewAndCompletePage;
 
-		private int paymentMonth;
-		private int paymentYear;
-		private BigDecimal paymentRate;
-		private List<AccountTransaction> payments; 
-		
-		public String[] getMonths() {
-			return MONTHS;
-		}
-
-		public int getPaymentMonth() {
-			return paymentMonth;
-		}
-
-		public void setPaymentMonth(int paymentMonth) {
-			this.paymentMonth = paymentMonth;
-		}
-
-		public int getPaymentYear() {
-			return paymentYear;
-		}
-
-		public void setPaymentYear(int paymentYear) {
-			this.paymentYear = paymentYear;
-		}
-
-		public BigDecimal getPaymentRate() {
-			return paymentRate;
-		}
-
-		public void setPaymentRate(BigDecimal paymentRate) {
-			this.paymentRate = paymentRate;
-		}
-
-		public List<AccountTransaction> getPayments() {
-			return payments;
-		}
-
-		public void setPayments(List<AccountTransaction> payments) {
-			this.payments = payments;
-		}
-		
-		
-	}
-	
-	private final PaymentWizardModel wizardModel;
-	private IMemberPaymentsRepository pmtRepo;
-	
-	public MemberPaymentProcessWizard(IMemberPaymentsRepository repo) {
+	@Inject
+	public MemberPaymentProcessWizard(PWSelectPaymentPeriod periodPage, PWPaymentRate ratePage,
+			PWPaymentComplete reviewAndCompletePage) {
 		setWindowTitle("Run Member Payments Process");
-		wizardModel = new PaymentWizardModel();
-		pmtRepo = repo;
+		setNeedsProgressMonitor(true);
 	}
 
 	@Override
 	public void addPages() {
-		addPage(new PWSelectPaymentPeriod(wizardModel, pmtRepo));
-		addPage(new PWPaymentRate(wizardModel));
-		addPage(new PWPaymentComplete(wizardModel));
+		addPage(periodPage);
+		addPage(ratePage);
+		addPage(reviewAndCompletePage);
+	}
+
+	@Override
+	public IWizardPage getNextPage(IWizardPage page) {
+		IWizardPage newPage = super.getNextPage(page);
+		if (page.getName().equals("previewAndComplete")) {
+
+		}
+		return newPage;
 	}
 
 	@Override
 	public boolean performFinish() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean canFinish() {
-		return false;
-	}
-	
-
-	@Override
-	public boolean needsPreviousAndNextButtons() {
-		// TODO Auto-generated method stub
-		return super.needsPreviousAndNextButtons();
+		return true;
 	}
 
-	@Override
-	public boolean needsProgressMonitor() {
-		// TODO Auto-generated method stub
-		return super.needsProgressMonitor();
-	}
-
-	
 }

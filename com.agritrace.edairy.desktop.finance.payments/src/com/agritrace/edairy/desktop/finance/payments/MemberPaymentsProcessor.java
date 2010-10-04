@@ -1,12 +1,17 @@
 package com.agritrace.edairy.desktop.finance.payments;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
+import com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
+import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
+import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository.BalanceType;
 import com.google.inject.Inject;
 
 /**
@@ -32,8 +37,8 @@ import com.google.inject.Inject;
  * recent than that balance, and subtract the value of all credit transactions
  * after that date. This gives us a 'current' balance.
  * 
- * Balances can be calculated at any time, but they are always calculated as a
- * result of the monthly payments process.
+ * Balances can be calculated at any time, but they are always calculated during
+ * the monthly payments process.
  * 
  * The payment process determines the amount a farmer is owed, or the amount the
  * farmer owes the dairy, taking into account all of the farmers credit
@@ -71,16 +76,18 @@ import com.google.inject.Inject;
  */
 public class MemberPaymentsProcessor {
 
-	private MemberAccountManager accountManager;
+	// private MemberAccountManager accountManager;
 	private MemberCollectionsManager collectionsManager;
+	private ITransactionRepository repository;
 
 	/**
 	 * 
 	 */
 	@Inject
-	public MemberPaymentsProcessor(MemberAccountManager accountManager, MemberCollectionsManager collectionsManager) {
-		this.accountManager = accountManager;
+	public MemberPaymentsProcessor(ITransactionRepository repository, MemberCollectionsManager collectionsManager) {
+		// this.accountManager = accountManager;
 		this.collectionsManager = collectionsManager;
+		this.repository = repository;
 	}
 
 	/**
@@ -105,21 +112,21 @@ public class MemberPaymentsProcessor {
 	 *            if true, apply payments to account.
 	 * @return a list of payment records for reporting.
 	 */
-	public List<PaymentRecord> runPaymentProcess(int priceMonth, int priceYear) {
+	public List<PaymentRecord> generatePaymentsList(BigDecimal paymentRate, int priceMonth, int priceYear) {
 		List<PaymentRecord> paymentList = new LinkedList<PaymentRecord>();
 
 		// TODO: Lock database
-		BigDecimal milkPrice = collectionsManager.getMilkPriceForPeriod(
-				priceMonth, priceYear);
-		List<Membership> activeMembers = collectionsManager.getActiveMembers(
-				priceMonth, priceYear);
+		List<Membership> activeMembers = collectionsManager.getActiveMembers(priceMonth, priceYear);
 		// for each member
+		PaymentRecord payment;
 		for (final Membership member : activeMembers) {
-			final BigDecimal payment = processMemberPayout(priceMonth,
-					priceYear, paymentList, milkPrice, member);
-			if (payment.compareTo(Constants.BIGZERO) > 0) {
-				paymentList.add(new PaymentRecord(null, accountManager
-						.getEffectiveDate(), member, payment));
+			try {
+				payment = generatePaymentRecord(paymentRate, priceMonth, priceYear, member);
+				if (payment.getTotalPayment().compareTo(Constants.BIGZERO) > 0) {
+					paymentList.add(payment);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 
@@ -127,54 +134,74 @@ public class MemberPaymentsProcessor {
 	}
 
 	/**
+	 * Generate a payment record that can be applied later.
+	 * 
+	 * The payment record contains the results of the 'end of period' member
+	 * account reconciliation, where members milk sales are calculated and
+	 * applied to their account and a payout determination is made.
 	 * 
 	 * @param priceMonth
 	 * @param priceYear
 	 * @param paymentList
-	 * @param milkPrice
+	 * @param rate
 	 * @param member
 	 * @return
 	 */
-	BigDecimal processMemberPayout(int priceMonth, int priceYear,
-			List<PaymentRecord> paymentList, BigDecimal milkPrice,
-			Membership member) {
+	public PaymentRecord generatePaymentRecord(BigDecimal rate, int priceMonth, int priceYear, Membership member) {
+
+		PaymentRecord paymentRecord = new PaymentRecord(member, priceMonth, priceYear);
 		Account primaryAcct = member.getAccount();
 
-		// generate a 'checkpoint' balance transaction
-		accountManager.createBalancePoint(primaryAcct,
-				"checkpoint before starting payment process");
-		// sum total deliveries
-		BigDecimal memberDeliveries = collectionsManager
-				.calculatePayableDeliveries(member, priceMonth, priceYear);
-		// multiply by price
-		BigDecimal amountDue = memberDeliveries.compareTo(Constants.BIGZERO) > 0 ? memberDeliveries
-				.multiply(milkPrice, Constants.MONEYCONTEXT) : Constants.BIGZERO;
+		Calendar periodStart = repository.createPeriodDate(BalanceType.STARTING, priceMonth, priceYear);
+		Calendar periodEnd = repository.createPeriodDate(BalanceType.ENDING, priceMonth, priceYear);
 
-		// debit account for value
-		accountManager
-				.createDebit(
-						primaryAcct,
-						TransactionSource.CASH_PAYMENT,
-						amountDue,
-						String.format(
-								"dairy payment for milk recieved during %s %d: %f kg @  %f ksh/kg",
-								Constants.MONTHS[priceMonth], priceYear,
-								memberDeliveries, milkPrice));
+		paymentRecord.setStartingBalance(repository.calculateBalance(primaryAcct, periodStart.getTime()));
+
+		// sum total deliveries
+		final BigDecimal memberDeliveries = collectionsManager
+				.calculatePayableDeliveries(member, priceMonth, priceYear);
+
+		// multiply by price
+		if (memberDeliveries.compareTo(Constants.BIGZERO) > 0) {
+			paymentRecord.setPayableMilkQuantity(memberDeliveries);
+			paymentRecord.setPaymentRate(rate);
+			// paymentRecord.setMilkIncome(memberDeliveries.multiply(rate,
+			// Constants.MONEYCONTEXT));
+		} else {
+			paymentRecord.setPayableMilkQuantity(Constants.BIGZERO);
+			paymentRecord.setPaymentRate(Constants.BIGZERO);
+			// paymentRecord.setMilkIncome(Constants.BIGZERO);
+		}
+
+		paymentRecord.setAccountCredits(repository.calculateBalance(primaryAcct));
+		paymentRecord.setAccountAdjustments(Constants.BIGZERO); // TODO: Fix
+
+		return paymentRecord;
+	}
+
+	public void processPayment(PaymentRecord payment) {
+
+		Account primaryAcct = payment.getMember().getAccount();
+
+		Calendar balanceDate = repository.createPeriodDate(BalanceType.STARTING, payment.getMonth(), payment.getYear());
+		repository.createBalancePoint(primaryAcct, balanceDate, payment.getStartingBalance());
+
+		String debitMessage = String.format("dairy payment for milk recieved during %s %d: %f kg @  %f ksh/kg",
+				Constants.MONTHS[payment.getMonth()], payment.getYear(), payment.getPayableMilkQuantity(),
+				payment.getPaymentRate());
+
+		// debit account for value of milk sales
+		repository.createDebit(primaryAcct, TransactionSource.CASH_PAYMENT, payment.getMilkIncome(), debitMessage);
 
 		// if member balance is positive, create a transaction to register
 		// balance payout.
-		BigDecimal payout = accountManager.getCurrentBalance(primaryAcct);
-		if (payout.compareTo(Constants.BIGZERO) > 0) {
-			accountManager.createCredit(primaryAcct,
-					TransactionSource.CASH_PAYMENT, payout,
+		if (payment.getTotalPayment().compareTo(Constants.BIGZERO) > 0) {
+			repository.createCredit(primaryAcct, TransactionSource.CASH_PAYMENT, payment.getTotalPayment(),
 					"transfer to member bank account # XXXX");
 		}
 
-		// generate 'post-pay' account balance transaction
-		accountManager.createBalancePoint(primaryAcct,
-				"checkpoint after payment applied");
-
-		return payout;
+		balanceDate = repository.createPeriodDate(BalanceType.ENDING, payment.getMonth(), payment.getYear());
+		repository.createBalancePoint(primaryAcct, balanceDate, payment.getTotalPayment());
 	}
 
 }

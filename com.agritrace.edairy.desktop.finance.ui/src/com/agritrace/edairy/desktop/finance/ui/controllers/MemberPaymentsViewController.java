@@ -23,6 +23,7 @@ import com.google.inject.Inject;
 public class MemberPaymentsViewController extends
 		BasicDirectoryController<MilkPrice> {
 
+	MemberPaymentProcessWizard paymentsWizard;
 
 	private final class BlankColumnFormatter extends ColumnFormatter {
 		@Override
@@ -32,7 +33,7 @@ public class MemberPaymentsViewController extends
 	}
 
 	@Inject
-	public MemberPaymentsViewController(IMemberPaymentsRepository paymentsRepository) {
+	public MemberPaymentsViewController(IMemberPaymentsRepository paymentsRepository, MemberPaymentProcessWizard paymentsWizard) {
 		setEClass(DairyPackage.Literals.MILK_PRICE);
 		setRepository(paymentsRepository);
 
@@ -47,6 +48,8 @@ public class MemberPaymentsViewController extends
 				new BlankColumnFormatter());
 		addTableColumn("Run On", DairyPackage.Literals.MILK_PRICE__ENTRY_DATE);
 		addTableColumn("By", DairyPackage.Literals.MILK_PRICE__ENTERED_BY);
+		
+		this.paymentsWizard  = paymentsWizard;
 	}
 
 	@Override
@@ -55,7 +58,6 @@ public class MemberPaymentsViewController extends
 	}
 
 	private void handlePaymentButton() {
-		MemberPaymentProcessWizard paymentsWizard = new MemberPaymentProcessWizard(getRepository());
 		Shell shell = PlatformUI.getWorkbench().getDisplay()
 				.getActiveShell();
 		WizardDialog wizDialog = new WizardDialog(shell, paymentsWizard);

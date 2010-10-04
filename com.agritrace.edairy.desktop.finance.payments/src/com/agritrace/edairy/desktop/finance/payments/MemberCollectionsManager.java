@@ -1,13 +1,13 @@
 package com.agritrace.edairy.desktop.finance.payments;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.util.List;
 
 import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-
 
 public class MemberCollectionsManager {
 	ICollectionJournalLineRepository repository;
@@ -18,7 +18,6 @@ public class MemberCollectionsManager {
 	public MemberCollectionsManager(ICollectionJournalLineRepository repo) {
 		this.repository = repo;
 	}
-
 
 	public void setContext(int pMon, int pYear) {
 		priceMonth = pMon;
@@ -37,13 +36,16 @@ public class MemberCollectionsManager {
 		return getActiveMembers(priceMonth, priceYear);
 	}
 
-	BigDecimal calculatePayableDeliveries(Membership member, int paymentMonth,
-			int paymentYear) {
-		BigDecimal totalQuantity = repository.getSumOfPayableDeliveries(member,
-				paymentMonth, paymentYear);
+	BigDecimal calculatePayableDeliveries(Membership member, int paymentMonth, int paymentYear) {
+		BigDecimal totalQuantity = repository.getSumOfPayableDeliveries(member, paymentMonth, paymentYear);
 		BigDecimal periodRate = getMilkPriceForPeriod(paymentMonth, paymentYear);
-		return periodRate.multiply(totalQuantity,
-				Constants.MONEYCONTEXT);
+		return periodRate.multiply(totalQuantity, Constants.MONEYCONTEXT);
+	}
+
+	BigDecimal calculatePayableDeliveries(Membership member, Date date) {
+		BigDecimal totalQuantity = repository.getSumOfPayableDeliveries(member, date.getMonth(), date.getYear());
+		BigDecimal periodRate = getMilkPriceForPeriod(priceMonth, priceYear);
+		return periodRate.multiply(totalQuantity, Constants.MONEYCONTEXT);
 	}
 
 	BigDecimal getMilkPriceForPeriod(int priceMonth, int priceYear) {
