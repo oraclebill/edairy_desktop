@@ -10,7 +10,6 @@ import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.jface.window.Window;
 import org.eclipse.riena.core.Log4r;
-import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
@@ -26,7 +25,6 @@ import com.agritrace.edairy.desktop.collection.ui.beans.MilkCollectionLogFilterB
 import com.agritrace.edairy.desktop.collection.ui.dialogs.BulkCollectionsEntryDialog;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.JournalPersistenceDelegate;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.NewMilkCollectionJournalDialog;
-import com.agritrace.edairy.desktop.collection.ui.dialogs.SessionEditDialog;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
@@ -117,7 +115,6 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	private final List<CollectionGroup> allJournals;
 	private final Provider<NewMilkCollectionJournalDialog> newDialogProvider;
 	private final Provider<BulkCollectionsEntryDialog> entryDialogProvider;
-	private final Provider<SessionEditDialog> sessionEditProvider;
 	private final Color TABLE_HIGHLIGHT_BACKGROUND = PlatformUI.getWorkbench().getDisplay()
 			.getSystemColor(SWT.COLOR_YELLOW);
 	private List<DairyLocation> collectionCenters;
@@ -127,8 +124,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 			final IDairyLocationRepository dairyLocationRepo, final IDairyRepository dairyRepo,
 			final IRepository<CollectionSession> sessionRepo,
 			final Provider<NewMilkCollectionJournalDialog> newDialogProvider,
-			final Provider<BulkCollectionsEntryDialog> entryDialogProvider,
-			final Provider<SessionEditDialog> sessionEditProvider) {
+			final Provider<BulkCollectionsEntryDialog> entryDialogProvider) {
 		setEClass(DairyPackage.Literals.COLLECTION_GROUP);
 		setRepository(journalRepo);
 		this.dairyRepo = dairyRepo;
@@ -136,7 +132,6 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		this.sessionRepo = sessionRepo;
 		this.newDialogProvider = newDialogProvider;
 		this.entryDialogProvider = entryDialogProvider;
-		this.sessionEditProvider = sessionEditProvider;
 		allJournals = dairyRepo.allCollectionGroups();
 
 		addTableColumn("Date", DairyPackage.Literals.COLLECTION_GROUP__JOURNAL_DATE);
@@ -160,12 +155,6 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_NEW_BUTTON).setText("Enter Collection Journals");
 		getRidget(IActionRidget.class, "import-file-button").addListener(
 				new ScaleImportAction(this, dairyLocationRepo, dairyRepo, sessionRepo));
-		getRidget(IActionRidget.class, "edit-sessions").addListener(new IActionListener() {
-			@Override
-			public void callback() {
-				handleEditSessions();
-			}
-		});
 	}
 
 	@Override
@@ -281,10 +270,6 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	@Override
 	protected RecordDialog<CollectionGroup> getRecordDialog(Shell shell) {
 		throw new UnsupportedOperationException("unsupported");
-	}
-
-	private void handleEditSessions() {
-		sessionEditProvider.get().open();
 	}
 
 	@Override

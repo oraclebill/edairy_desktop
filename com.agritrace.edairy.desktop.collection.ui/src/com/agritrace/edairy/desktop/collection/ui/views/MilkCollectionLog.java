@@ -33,7 +33,6 @@ public class MilkCollectionLog extends AbstractDirectoryView {
 		Control filler = UIControlsFactory.createLabel(buttonsPanel, "");
 		Composite rightPanel = UIControlsFactory.createComposite(buttonsPanel);
 		
-		UIControlsFactory.createButton(rightPanel, "Edit Sessions", "edit-sessions");
 		UIControlsFactory.createButton(rightPanel, "View Journal", viewButtonId);
 		UIControlsFactory.createButton(rightPanel, "Post Journal Details", addButtonId);
 		

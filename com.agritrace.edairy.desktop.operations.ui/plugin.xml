@@ -38,6 +38,13 @@
             name="Dairy Container Directory"
             restorable="true">
       </view>
+      <view
+            allowMultiple="true"
+            class="com.agritrace.edairy.desktop.operations.ui.views.SessionDirectoryView"
+            id="edairy.operations.session.directory"
+            name="Session Directory"
+            restorable="true">
+      </view>
    </extension>
 
 </plugin>

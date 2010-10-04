@@ -41,11 +41,13 @@ import com.agritrace.edairy.desktop.operations.ui.controllers.ContainersDirector
 import com.agritrace.edairy.desktop.operations.ui.controllers.CustomerDirectoryController;
 import com.agritrace.edairy.desktop.operations.ui.controllers.EmployeeDirectoryController;
 import com.agritrace.edairy.desktop.operations.ui.controllers.RouteListController;
+import com.agritrace.edairy.desktop.operations.ui.controllers.SessionDirectoryController;
 import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDirectoryController;
 import com.agritrace.edairy.desktop.operations.ui.views.ContainerDirectoryView;
 import com.agritrace.edairy.desktop.operations.ui.views.CustomerDirectoryView;
 import com.agritrace.edairy.desktop.operations.ui.views.EmployeeDirectoryView;
 import com.agritrace.edairy.desktop.operations.ui.views.RouteDirectoryView;
+import com.agritrace.edairy.desktop.operations.ui.views.SessionDirectoryView;
 import com.agritrace.edairy.desktop.operations.ui.views.SupplierDirectoryView;
 import com.agritrace.edairy.desktop.services.ui.controllers.AnimalHealthRequestViewController;
 import com.agritrace.edairy.desktop.services.ui.views.AnimalHealthRequestView;
@@ -378,6 +380,18 @@ public class EDairyManagerApplication extends SwtApplication {
 			NodeFactory
 					.createSubModule(
 							"edm.services.supplier.directory", "Supplier Directory", moduleDirectory, SupplierDirectoryView.ID, SupplierDirectoryController.class); //, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
+			//	NodeFactory.createSubModule("edm.services.supplier.editor", "Register Supplier", moduleDirectory, BlankView.ID); //, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+
+		//
+		// SESSIONS GRP
+		//
+		{
+			final IModuleNode moduleDirectory = NodeFactory.createModule(
+					"edm.session.directory", "Sessions", moduleGroupNode); //$NON-NLS-1$ //$NON-NLS-2$
+			NodeFactory
+					.createSubModule(
+							"edm.services.session.directory", "Session Directory", moduleDirectory, SessionDirectoryView.ID, SessionDirectoryController.class); //, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 			//	NodeFactory.createSubModule("edm.services.supplier.editor", "Register Supplier", moduleDirectory, BlankView.ID); //, StaffInfoViewController.class); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		//

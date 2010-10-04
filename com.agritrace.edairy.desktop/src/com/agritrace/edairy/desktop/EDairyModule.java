@@ -33,6 +33,7 @@ import com.agritrace.edairy.desktop.operations.ui.controllers.ContainersDirector
 import com.agritrace.edairy.desktop.operations.ui.controllers.CustomerDirectoryController;
 import com.agritrace.edairy.desktop.operations.ui.controllers.EmployeeDirectoryController;
 import com.agritrace.edairy.desktop.operations.ui.controllers.RouteListController;
+import com.agritrace.edairy.desktop.operations.ui.controllers.SessionDirectoryController;
 import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDirectoryController;
 import com.agritrace.edairy.desktop.services.ui.controllers.AnimalHealthRequestViewController;
 import com.agritrace.edairy.desktop.splashHandlers.EdairySplashHandler;
@@ -59,6 +60,7 @@ public class EDairyModule extends AbstractModule {
 		CONTROLLERS.add(MilkCollectionLogController.class);
 		CONTROLLERS.add(MilkDeliveryJournalController.class);
 		CONTROLLERS.add(SupplierDirectoryController.class);
+		CONTROLLERS.add(SessionDirectoryController.class);
 		CONTROLLERS.add(MemberDirectoryController2.class);
 		CONTROLLERS.add(DairyProfileViewController.class);
 		CONTROLLERS.add(ScaleImportViewController.class);
