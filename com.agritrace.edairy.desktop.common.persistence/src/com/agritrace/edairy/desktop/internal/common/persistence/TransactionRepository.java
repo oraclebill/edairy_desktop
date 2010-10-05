@@ -34,15 +34,22 @@ public class TransactionRepository extends HibernateRepository<Transaction> impl
 	}
 
 	@Override
-	public List<Transaction> findAccountTransactionsInRange(final Account account, final Date start, final Date end) {
+	public List<Transaction> findAccountTransactions(final Account account, final Date start, final Date end) {
 		SessionRunnable<List<Transaction>> runnable = new SessionRunnable<List<Transaction>>() {
 			@SuppressWarnings("unchecked")
 			@Override
 			public void run(Session session) {
 				Criteria criteria = session.createCriteria("Transaction");
 
-				criteria.add(Restrictions.eq("account", account));
-				criteria.add(Restrictions.between("transactionDate", start, end));
+				if (account != null) {
+					criteria.add(Restrictions.eq("account", account));
+				}
+				if (start != null) {
+					criteria.add(Restrictions.ge("transactionDate", start));
+				}
+				if (end != null) {
+					criteria.add(Restrictions.le("transactionDate", end));
+				}
 
 				setResult(criteria.list());
 			}
@@ -181,7 +188,7 @@ public class TransactionRepository extends HibernateRepository<Transaction> impl
 			sum = point.getAmount();
 		}
 
-		List<Transaction> transactions = findAccountTransactionsInRange(primaryAcct, startDate, cutoffDate);
+		List<Transaction> transactions = findAccountTransactions(primaryAcct, startDate, cutoffDate);
 		return sum.add(sumTransactions(transactions));
 	}
 

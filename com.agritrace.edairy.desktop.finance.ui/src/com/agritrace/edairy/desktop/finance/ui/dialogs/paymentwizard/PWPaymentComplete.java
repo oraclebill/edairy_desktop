@@ -9,7 +9,6 @@ import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.swt.SwtRidgetFactory;
 import org.eclipse.swt.SWT;
@@ -28,7 +27,7 @@ import com.agritrace.edairy.desktop.finance.payments.MemberPaymentsProcessor;
 import com.agritrace.edairy.desktop.finance.payments.PaymentRecord;
 import com.google.inject.Inject;
 
-public class PWPaymentComplete extends WizardPage {
+public class PWPaymentComplete extends PWPage {
 
 	private static final String[] COLUMN_HEADERS = { "ID", "Name", "", "Milk Income", "Credit Sales", "Adjustments",
 			"Payment" };
@@ -54,33 +53,34 @@ public class PWPaymentComplete extends WizardPage {
 		super("previewAndComplete");
 		setTitle("Apply Payments");
 		setDescription("This table displays the payments that have been calculated. If you complete the wizard, these payments will be entered.");
+		this.processor = processor;
 	}
 
 	public final int getPaymentMonth() {
-		return getWizard().getDialogSettings().getInt("paymentMonth");
+		return getInt("paymentMonth");
 	}
 	
 	public final int getPaymentYear() {
-		return getWizard().getDialogSettings().getInt("paymentYear");
+		return getInt("paymentYear");
 	}
 	
 	public final BigDecimal getPaymentRate() {
-		return new BigDecimal(getWizard().getDialogSettings().getInt("paymentRate"));
+		return new BigDecimal(get("paymentRate"));
 	}
 	
 	
 	public final BigDecimal getPaymentAverage() {
-		return new BigDecimal(getWizard().getDialogSettings().getInt("paymentAverage"));
+		return new BigDecimal(get("paymentAverage"));
 	}
 	
 	
 	public final BigDecimal getPaymentTotal() {
-		return new BigDecimal(getWizard().getDialogSettings().getInt("paymentTotal"));
+		return new BigDecimal(get("paymentTotal"));
 	}
 	
 	
 	public final int getPaymentCount() {
-		return getWizard().getDialogSettings().getInt("paymentCount");
+		return getInt("paymentCount");
 	}
 	
 	
@@ -142,7 +142,7 @@ public class PWPaymentComplete extends WizardPage {
 				lblPaymentRate.setBounds(0, 0, 59, 14);
 				lblPaymentRate.setText("Payment Rate");
 
-				Text paymentRate = text(header, String.format("%s", getWizard().getDialogSettings().get("paymentRate")));
+				Text paymentRate = text(header, String.format("%s", get("paymentRate")));
 				paymentRate.setLayoutData(gdf.create());
 
 			}
@@ -152,7 +152,7 @@ public class PWPaymentComplete extends WizardPage {
 				lblFarmers.setBounds(0, 0, 59, 14);
 				lblFarmers.setText("# Farmers");
 
-				Text paymentCount = text(header, String.format("%s", getWizard().getDialogSettings().get("paymentRate")));
+				Text paymentCount = text(header, String.format("%s", get("paymentRate")));
 				paymentCount.setLayoutData(gdf.create());
 			}
 		}
@@ -162,7 +162,7 @@ public class PWPaymentComplete extends WizardPage {
 				lblAvgPayment.setBounds(0, 0, 59, 14);
 				lblAvgPayment.setText("Avg. Payment");
 
-				Text paymentAverage = text(header, String.format("%s", getWizard().getDialogSettings().get("paymentRate")));
+				Text paymentAverage = text(header, String.format("%s", get("paymentRate")));
 				paymentAverage.setLayoutData(gdf.create());
 
 			}
@@ -172,7 +172,7 @@ public class PWPaymentComplete extends WizardPage {
 				lblTotalPaidThis.setBounds(0, 0, 59, 14);
 				lblTotalPaidThis.setText("Total Paid this Period");
 
-				Text paymentTotal = text(header, String.format("%s", getWizard().getDialogSettings().get("paymentRate")));
+				Text paymentTotal = text(header, String.format("%s", get("paymentRate")));
 				paymentTotal.setLayoutData(gdf.create());
 			}
 		}
@@ -240,7 +240,8 @@ public class PWPaymentComplete extends WizardPage {
 					for (PaymentRecord record : paymentsList) {
 						total.add(record.getTotalPayment());
 					}
-					headerValues[3] = total.divide(new BigDecimal(paymentsList.size()), Constants.MONEYCONTEXT);
+					int count = paymentsList.size();
+					headerValues[3] = count > 0 ? total.divide(new BigDecimal(count), Constants.MONEYCONTEXT) : new BigDecimal(0);
 					headerValues[4] = new BigDecimal(paymentsList.size());
 					headerValues[5] = total;
 					

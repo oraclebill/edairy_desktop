@@ -32,7 +32,7 @@ public interface ITransactionRepository extends IRepository<Transaction> {
 	// QUERIES
 	//
 
-	List<Transaction> findAccountTransactionsInRange(Account account, Date start, Date end);
+	List<Transaction> findAccountTransactions(Account account, Date start, Date end);
 
 	BalancePoint findLatestBalancePoint(Account primaryAcct);
 
