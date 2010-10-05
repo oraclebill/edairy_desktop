@@ -15,6 +15,7 @@ import org.eclipse.birt.report.engine.api.EngineConstants;
 import org.eclipse.birt.report.engine.api.EngineException;
 import org.eclipse.birt.report.engine.api.HTMLCompleteImageHandler;
 import org.eclipse.birt.report.engine.api.HTMLRenderOption;
+import org.eclipse.birt.report.engine.api.IRenderOption;
 import org.eclipse.birt.report.engine.api.IReportEngine;
 import org.eclipse.birt.report.engine.api.IReportEngineFactory;
 import org.eclipse.birt.report.engine.api.IReportRunnable;
@@ -199,6 +200,7 @@ public class ReportController {
 		options.setEmbeddable(true);
 		options.setEnableInlineStyle(true);
 		options.setLayoutPreference(HTMLRenderOption.LAYOUT_PREFERENCE_AUTO);
+		options.setOption(IRenderOption.HTML_PAGINATION, new Boolean(true));
 		options.setOutputFormat("html");
 		options.setImageDirectory("images");
 		
