@@ -3,7 +3,6 @@ package com.agritrace.edairy.desktop.finance.ui.dialogs.paymentwizard;
 import java.math.BigDecimal;
 
 import org.eclipse.jface.layout.GridDataFactory;
-import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
@@ -20,7 +19,7 @@ import com.agritrace.edairy.desktop.common.ui.util.FormUtil;
 import com.agritrace.edairy.desktop.finance.ui.MilkPriceJournalConstants;
 import com.google.inject.Inject;
 
-public class PWPaymentRate extends WizardPage {
+public class PWPaymentRate extends PWPage {
 
 	public static final String[] MONTHS = new String[] { "January", "February",
 			"March", "April", "May", "June", "July", "August", "September",
@@ -114,9 +113,12 @@ public class PWPaymentRate extends WizardPage {
 	}
 
 	private void validate() {
+	
 		try {
-			getWizard().getDialogSettings().put("paymentRate", new BigDecimal(values[1]).toPlainString());
-			setPageComplete(values[1] != null && values[1].equals(values[0]));
+			boolean valid = values[1] != null && values[1].equals(values[0]);
+			if (valid)
+				put("paymentRate", new BigDecimal(values[1]).toPlainString());
+			setPageComplete(valid);
 		}
 		catch(Exception e) {
 			setPageComplete(false);

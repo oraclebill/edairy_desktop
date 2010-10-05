@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
+import com.agritrace.edairy.desktop.internal.operations.services.DairyRepository;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 
@@ -16,7 +17,7 @@ public class DairyRepositoryTest {
 	static class TestModule extends AbstractModule {
 		@Override
 		protected void configure() {
-			bind(IMemberRepository.class).to(MemberRepository.class);
+			bind(IMemberRepository.class).to(DairyRepository.class);
 		}
 	}
 	
@@ -37,4 +38,5 @@ public class DairyRepositoryTest {
 		account = repo.findAccountByMemberNo("00025");
 		assertNotNull(account);
 	}
+
 }

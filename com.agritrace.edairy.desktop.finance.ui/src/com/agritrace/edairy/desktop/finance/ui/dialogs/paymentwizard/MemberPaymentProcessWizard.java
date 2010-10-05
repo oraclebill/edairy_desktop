@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.finance.ui.dialogs.paymentwizard;
 
+import org.eclipse.jface.dialogs.DialogSettings;
 import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.Wizard;
 
@@ -16,6 +17,10 @@ public class MemberPaymentProcessWizard extends Wizard {
 			PWPaymentComplete reviewAndCompletePage) {
 		setWindowTitle("Run Member Payments Process");
 		setNeedsProgressMonitor(true);
+		this.periodPage = periodPage;
+		this.ratePage = ratePage;
+		this.reviewAndCompletePage = reviewAndCompletePage;
+		this.setDialogSettings(new DialogSettings(""));
 	}
 
 	@Override
