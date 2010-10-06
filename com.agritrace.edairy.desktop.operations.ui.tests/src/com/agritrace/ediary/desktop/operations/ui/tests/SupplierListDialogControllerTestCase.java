@@ -10,9 +10,9 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.agritrace.edairy.desktop.collection.services.TestPersistenceModule;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
-import com.agritrace.edairy.desktop.common.persistence.TestPersistenceModule;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDialogController;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;

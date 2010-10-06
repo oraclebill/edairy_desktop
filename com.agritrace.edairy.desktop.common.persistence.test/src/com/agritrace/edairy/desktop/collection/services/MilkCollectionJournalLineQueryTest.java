@@ -28,7 +28,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
-import com.agritrace.edairy.desktop.common.persistence.TestPersistenceModule;
 import com.google.inject.Guice;
 import com.ibm.icu.text.DateFormat;
 

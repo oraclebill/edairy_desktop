@@ -1,15 +1,19 @@
 package com.agritrace.edairy.desktop.common.persistence.test;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
+import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
+import com.agritrace.edairy.desktop.common.persistence.services.IDbPropertiesManager;
+import com.agritrace.edairy.desktop.internal.common.persistence.HsqlDbDataStoreProvider;
 import com.agritrace.edairy.desktop.internal.operations.services.DairyRepository;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
+import com.google.inject.Scopes;
 
 public class DairyRepositoryTest {
 	private IMemberRepository repo;
@@ -18,6 +22,9 @@ public class DairyRepositoryTest {
 		@Override
 		protected void configure() {
 			bind(IMemberRepository.class).to(DairyRepository.class);
+			bind(HbDataStore.class).toProvider(HsqlDbDataStoreProvider.class);
+			bind(IDbPropertiesManager.class).to(HsqlDbDataStoreProvider.class);
+			bind(HsqlDbDataStoreProvider.class).in(Scopes.SINGLETON);
 		}
 	}
 	
@@ -26,6 +33,11 @@ public class DairyRepositoryTest {
 		repo = Guice.createInjector(new TestModule()).getInstance(IMemberRepository.class);
 	}
 
+	@Test 
+	public void testEmptyRepo() {
+		assertEquals(0, repo.all().size());
+	}
+	
 	@Test
 	public void testAccountForMemberNoQuery() throws Exception {
 		System.err.println("RUNNING");
