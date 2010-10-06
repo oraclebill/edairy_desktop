@@ -16,6 +16,7 @@ import org.eclipse.emf.teneo.hibernate.HbHelper;
 import org.eclipse.riena.core.Log4r;
 import org.eclipse.riena.core.RienaLocations;
 import org.hibernate.cfg.Environment;
+import org.hibernate.context.ManagedSessionContext;
 import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
@@ -56,6 +57,7 @@ public class HbDataStoreProvider implements Provider<HbDataStore>, IDbProperties
 		hbds.setEPackages(PersistenceModule.EPACKAGES);
 
 		hbds.initialize();
+//		ManagedSessionContext.bind(hbds.getSessionFactory().openSession());
 		
 		try {
 			File file = new File(getConfigFileArea(), "hibernate-mapping.xml");
@@ -113,7 +115,7 @@ public class HbDataStoreProvider implements Provider<HbDataStore>, IDbProperties
 			props.setProperty(Environment.DIALECT, "org.hibernate.dialect.MySQLInnoDBDialect");
 
 			// TODO: test this - perhaps JTA or 'managed' is better...
-			props.setProperty(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
+			props.setProperty(Environment.CURRENT_SESSION_CONTEXT_CLASS, "managed");
 
 			URI mappingFileURI = URI.createPlatformPluginURI("/com.agritrace.edairy.desktop.common.persistence/etc/hibernate-mapping.xml", true);
 			if (mappingFileURI.isFile()) {

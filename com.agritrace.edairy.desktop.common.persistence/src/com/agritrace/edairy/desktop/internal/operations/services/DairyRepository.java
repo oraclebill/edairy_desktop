@@ -207,21 +207,25 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 
 	private final Provider<Session> sessionProvider;
 	private final DairyRepoInternal dairyRepository;
-	private final Dairy localDairy;
+	private Dairy localDairy = null;
 
 	@Inject
 	public DairyRepository(final Provider<Session> sessionProvider, final DairyRepoInternal dairyRepository) {
 		this.sessionProvider = sessionProvider;
 		this.dairyRepository = dairyRepository;
-		Dairy myDairy = dairyRepository.findByKey(1L);
-		
-		if (myDairy == null) {
-			myDairy = createLocalDairy();
-			dairyRepository.saveNew(myDairy);
+	}
+
+	@Override
+	public Dairy getLocalDairy() {
+		if (localDairy == null) {
+			localDairy = dairyRepository.findByKey(1L);			
+			if (localDairy == null) {
+				localDairy = createLocalDairy();
+				dairyRepository.saveNew(localDairy);
+			}			
+			initLocalDairy();
 		}
-		
-		localDairy = myDairy;
-		initLocalDairy();
+		return localDairy;
 	}
 
 	/**
@@ -243,10 +247,6 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 		}
 	}
 
-	@Override
-	public Dairy getLocalDairy() {
-		return localDairy;
-	}
 
 	@Override
 	public void updateDairy() {

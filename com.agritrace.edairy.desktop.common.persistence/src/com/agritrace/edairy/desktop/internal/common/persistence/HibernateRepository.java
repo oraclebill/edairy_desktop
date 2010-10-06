@@ -47,7 +47,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 	private static final Logger LOGGER = Log4r.getLogger(
 			Activator.getDefault(), HibernateRepository.class);
 	private final String entityName;
-	private final String identifierName;
+//	private final String identifierName;
 
 	private final Provider<Session> sessionProvider;
 
@@ -69,11 +69,11 @@ public abstract class HibernateRepository<T extends EObject> implements
 		entityName = className.substring(className.lastIndexOf('.') + 1);
 		Assert.isLegal(!entityName.startsWith("."));
 
-		metaData = sessionProvider.get().getSessionFactory().getClassMetadata(entityName);
-		Assert.isNotNull(metaData);
-		// identifier (pk) name
-		identifierName = metaData.getIdentifierPropertyName();
-		Assert.isNotNull(identifierName);
+//		metaData = sessionProvider.get().getSessionFactory().getClassMetadata(entityName);
+//		Assert.isNotNull(metaData);
+//		// identifier (pk) name
+//		identifierName = metaData.getIdentifierPropertyName();
+//		Assert.isNotNull(identifierName);
 
 	}
 
@@ -239,15 +239,15 @@ public abstract class HibernateRepository<T extends EObject> implements
 		return entityName;
 	}
 
-	/**
-	 * The name of the identifier property (primary key) of the parameterized
-	 * class.
-	 * 
-	 * @return
-	 */
-	protected String getIdentifierName() {
-		return identifierName;
-	}
+//	/**
+//	 * The name of the identifier property (primary key) of the parameterized
+//	 * class.
+//	 * 
+//	 * @return
+//	 */
+//	protected String getIdentifierName() {
+//		return identifierName;
+//	}
 
 	protected void run(Runnable r) {
 		sessionProvider.get();
