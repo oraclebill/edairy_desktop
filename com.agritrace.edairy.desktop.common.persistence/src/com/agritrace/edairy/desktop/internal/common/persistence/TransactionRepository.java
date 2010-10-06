@@ -10,6 +10,7 @@ import org.hibernate.criterion.Restrictions;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
 import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
+import com.agritrace.edairy.desktop.common.persistence.services.Audit;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -17,8 +18,8 @@ public class TransactionRepository extends HibernateRepository<Transaction>
 		implements ITransactionRepository {
 	
 	@Inject
-	protected TransactionRepository(Provider<Session> sessionProvider) {
-		super(sessionProvider);
+	protected TransactionRepository(Provider<Session> sessionProvider, @Audit Provider<Session> auditProvider) {
+		super(sessionProvider, auditProvider);
 	}
 	
 	@Override

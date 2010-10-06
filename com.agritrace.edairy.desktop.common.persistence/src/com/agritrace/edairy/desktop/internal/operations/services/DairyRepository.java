@@ -43,6 +43,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
+import com.agritrace.edairy.desktop.common.persistence.services.Audit;
 import com.agritrace.edairy.desktop.internal.common.persistence.Activator;
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
@@ -92,8 +93,8 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	 */
 	protected final static class DairyRepoInternal extends HibernateRepository<Dairy> {
 		@Inject
-		protected DairyRepoInternal(Provider<Session> sessionProvider) {
-			super(sessionProvider);
+		protected DairyRepoInternal(Provider<Session> sessionProvider, @Audit Provider<Session> auditProvider) {
+			super(sessionProvider, auditProvider);
 		}
 
 		@Override

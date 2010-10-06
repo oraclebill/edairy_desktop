@@ -6,6 +6,7 @@ import org.hibernate.Session;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
+import com.agritrace.edairy.desktop.common.persistence.services.Audit;
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
 import com.google.inject.Inject;
@@ -13,8 +14,8 @@ import com.google.inject.Provider;
 
 public class CustomerRepository extends HibernateRepository<Customer> {
 	@Inject
-	protected CustomerRepository(Provider<Session> sessionProvider) {
-		super(sessionProvider);
+	protected CustomerRepository(Provider<Session> sessionProvider, @Audit Provider<Session> auditProvider) {
+		super(sessionProvider, auditProvider);
 	}
 
 	class RunLoad extends SessionRunnable<Object> {

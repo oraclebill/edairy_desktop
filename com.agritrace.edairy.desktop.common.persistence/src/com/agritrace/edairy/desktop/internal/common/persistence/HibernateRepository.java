@@ -1,6 +1,8 @@
 package com.agritrace.edairy.desktop.internal.common.persistence;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
@@ -15,8 +17,14 @@ import org.hibernate.TransactionException;
 import org.hibernate.metadata.ClassMetadata;
 import org.osgi.service.log.LogService;
 
+import com.agritrace.edairy.desktop.common.model.audit.AuditFactory;
+import com.agritrace.edairy.desktop.common.model.audit.AuditRecord;
+import com.agritrace.edairy.desktop.common.model.audit.ChangeType;
+import com.agritrace.edairy.desktop.common.model.dairy.security.IPrincipal;
+import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
+import com.agritrace.edairy.desktop.common.persistence.services.Audit;
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -49,9 +57,10 @@ public abstract class HibernateRepository<T extends EObject> implements
 	private final String identifierName;
 
 	private final Provider<Session> sessionProvider;
+	private final Provider<Session> auditProvider;
 
 	@Inject
-	protected HibernateRepository(Provider<Session> sessionProvider) {
+	protected HibernateRepository(Provider<Session> sessionProvider, @Audit Provider<Session> auditProvider) {
 		String className;
 		ClassMetadata metaData;
 
@@ -61,6 +70,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 
 		// set the persistence manager
 		this.sessionProvider = sessionProvider;
+		this.auditProvider = auditProvider;
 
 		// get metadata about the class we will be persisting..
 		className = getClassType().getName();
@@ -177,6 +187,8 @@ public abstract class HibernateRepository<T extends EObject> implements
 				sessionProvider.get().saveOrUpdate(changedItem);
 			}
 		});
+		
+		onSave(changedItem);
 	}
 
 	@Override
@@ -187,6 +199,8 @@ public abstract class HibernateRepository<T extends EObject> implements
 				sessionProvider.get().save(newEntity);
 			}
 		});
+		
+		onSave(newEntity);
 	}
 
 	@Override
@@ -198,8 +212,26 @@ public abstract class HibernateRepository<T extends EObject> implements
 				sessionProvider.get().update(getEntityName(), updateableEntity);
 			}
 		});
+		
+		onSave(updateableEntity);
 	}
 
+	@Override
+	public void saveAll(final Collection<? extends T> objects) {
+		runWithTransaction(new SessionRunnable<Object>() {
+			@Override
+			public void run(Session session) {
+				for (T obj: objects) {
+					session.save(obj);
+				}
+			}
+		});
+		
+		for (T obj: objects) {
+			onSave(obj);
+		}
+	}
+	
 	private void closeSession() {
 		// Currently does nothing!
 	}
@@ -266,4 +298,42 @@ public abstract class HibernateRepository<T extends EObject> implements
 		}
 	}
 
+	protected void onSave(Object entity) {
+		addAuditRecord(entity, ChangeType.SAVE);
+	}
+
+	protected void onDelete(Object entity) {
+		addAuditRecord(entity, ChangeType.DELETE);
+	}
+
+	private void addAuditRecord(Object entity, ChangeType type) {
+		final AuditRecord rec = AuditFactory.eINSTANCE.createAuditRecord();
+		rec.setDate(new Date());
+		rec.setChangeType(type);
+		rec.setContent(entity.toString());
+		
+		if (entity instanceof EObject) {
+			rec.setEntity(((EObject) entity).eClass().getName());
+		} else {
+			rec.setEntity(sessionProvider.get().getEntityName(entity));
+		}
+		
+		IPrincipal principal = PrincipalManager.getInstance().getPrincipal();
+		
+		if (principal != null) {
+			rec.setUser(principal.getName());
+		}
+		
+		final Session session = auditProvider.get();
+		final Transaction t = session.beginTransaction();
+		
+		try {
+			session.save(rec);
+			t.commit();
+		} catch (final Exception ex) {
+			t.rollback();
+			session.clear();
+			throw new TransactionException(entityName, ex);
+		}
+	}
 }

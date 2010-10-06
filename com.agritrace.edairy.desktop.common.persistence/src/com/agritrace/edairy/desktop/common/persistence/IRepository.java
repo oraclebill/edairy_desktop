@@ -1,6 +1,7 @@
 package com.agritrace.edairy.desktop.common.persistence;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -95,5 +96,5 @@ public interface IRepository<T extends EObject> {
 	 */
 	void update(T updateableEntity) throws NonExistingEntityException;
 
-
+	void saveAll(Collection<? extends T> objects);
 }

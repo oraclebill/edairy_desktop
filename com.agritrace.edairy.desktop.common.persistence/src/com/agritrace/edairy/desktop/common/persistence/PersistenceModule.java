@@ -11,6 +11,7 @@ import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.hibernate.Session;
 
 import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
+import com.agritrace.edairy.desktop.common.model.base.ImageEntry;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
@@ -22,7 +23,12 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
+import com.agritrace.edairy.desktop.common.persistence.services.Audit;
+import com.agritrace.edairy.desktop.common.persistence.services.ISessionContextManager;
 import com.agritrace.edairy.desktop.common.persistence.services.ImageDataUtil;
+import com.agritrace.edairy.desktop.common.services.IImageEntryRepository;
+import com.agritrace.edairy.desktop.internal.common.persistence.AuditDataStoreProvider;
+import com.agritrace.edairy.desktop.internal.common.persistence.AuditSessionProvider;
 import com.agritrace.edairy.desktop.internal.common.persistence.HbDataStoreProvider;
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
 import com.agritrace.edairy.desktop.internal.common.persistence.PersistenceManager;
@@ -55,13 +61,15 @@ public class PersistenceModule extends AbstractModule {
 		
 		@Inject
 		private Provider<Session> sessionProvider;
+		@Inject @Audit
+		private Provider<Session> auditProvider;
 
 		public HibernateRepositoryProvider(Class<?> klass) {
 			this.klass = klass;
 		}
 		
 		public IRepository<?> get() {
-			return new HibernateRepository<EObject>(sessionProvider) {
+			return new HibernateRepository<EObject>(sessionProvider, auditProvider) {
 				@Override
 				protected Class<?> getClassType() {
 					return klass;
@@ -79,13 +87,16 @@ public class PersistenceModule extends AbstractModule {
 		customRepositories.put(DairyLocation.class, IDairyLocationRepository.class);
 		customRepositories.put(Employee.class, IEmployeeRepository.class);
 		customRepositories.put(Farm.class, IFarmRepository.class);
+		customRepositories.put(ImageEntry.class, IImageEntryRepository.class);
 		customRepositories.put(Supplier.class, ISupplierRepository.class);
 	}
 	
 	@Override
 	protected void configure() {
 		bind(Session.class).toProvider(PersistenceManager.class);
+		bind(ISessionContextManager.class).to(PersistenceManager.class);
 		bind(PersistenceManager.class).in(Scopes.SINGLETON);
+		bind(Session.class).annotatedWith(Audit.class).toProvider(AuditSessionProvider.class).in(Scopes.SINGLETON);
 		bindDataStore();
 		
 		for (EPackage pkg: EPACKAGES) {
@@ -128,5 +139,6 @@ public class PersistenceModule extends AbstractModule {
 	protected void bindDataStore() {
 		bind(HbDataStore.class).toProvider(HbDataStoreProvider.class);
 		bind(HbDataStoreProvider.class).in(Scopes.SINGLETON);
+		bind(HbDataStore.class).annotatedWith(Audit.class).toProvider(AuditDataStoreProvider.class).in(Scopes.SINGLETON);
 	}
 }

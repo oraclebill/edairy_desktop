@@ -1,6 +1,5 @@
 package com.agritrace.edairy.desktop.internal.operations.services.dairylocation;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -11,6 +10,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
+import com.agritrace.edairy.desktop.common.persistence.services.Audit;
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
 import com.agritrace.edairy.desktop.operations.services.dairylocation.IDairyLocationRepository;
 import com.google.inject.Inject;
@@ -18,8 +18,8 @@ import com.google.inject.Provider;
 
 public class DairyLocationRepository extends HibernateRepository<DairyLocation> implements IDairyLocationRepository {
 	@Inject
-	protected DairyLocationRepository(Provider<Session> sessionProvider) {
-		super(sessionProvider);
+	protected DairyLocationRepository(Provider<Session> sessionProvider, @Audit Provider<Session> auditProvider) {
+		super(sessionProvider, auditProvider);
 	}
 
 	private class RoutesQuery extends SessionRunnable<Object> {
@@ -108,18 +108,6 @@ public class DairyLocationRepository extends HibernateRepository<DairyLocation> 
 		super.saveNew(newEntity);
 	}
 	
-	@Override
-	public void saveAll(final Collection<? extends DairyLocation> locs) {
-		runWithTransaction(new SessionRunnable<Object>() {
-			@Override
-			public void run(Session session) {
-				for (DairyLocation loc: locs) {
-					session.save(loc);
-				}
-			}
-		});
-	}
-
 	public void saveNewRoute(final Route newRoute) {
 		runWithTransaction(new SessionRunnable<Object>() {
 			@Override

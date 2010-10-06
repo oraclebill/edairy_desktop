@@ -16,9 +16,11 @@ import org.eclipse.riena.internal.ui.workarea.registry.WorkareaDefinitionRegistr
 import org.eclipse.riena.navigation.IModuleGroupNode;
 import org.eclipse.riena.navigation.IModuleNode;
 import org.eclipse.riena.navigation.INavigationContext;
+import org.eclipse.riena.navigation.INavigationNode;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.NavigationNodeId;
 import org.eclipse.riena.navigation.model.ModuleNode;
+import org.eclipse.riena.navigation.model.SimpleNavigationNodeAdapter;
 import org.eclipse.riena.navigation.model.SubModuleNode;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 import org.eclipse.riena.ui.workarea.IWorkareaDefinition;
@@ -26,6 +28,7 @@ import org.eclipse.riena.ui.workarea.WorkareaManager;
 
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager;
+import com.agritrace.edairy.desktop.common.persistence.services.ISessionContextManager;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -35,6 +38,8 @@ import com.google.inject.Provider;
 public final class NodeFactory {
 	@Inject
 	private static Map<Class<? extends IController>, Provider<? extends IController>> PROVIDER_MAP;
+	@Inject
+	private static ISessionContextManager CONTEXT_MANAGER;
 	
 	private static class GuiceWorkareaDefinition implements IWorkareaDefinition {
 		private final Class<? extends IController> controllerClass;
@@ -116,6 +121,13 @@ public final class NodeFactory {
 				return super.allowsActivate(context) && havePermissions(controllerClass);
 			}
 		};
+		
+		result.addSimpleListener(new SimpleNavigationNodeAdapter() {
+			@Override
+			public void beforeActivated(INavigationNode<?> source) {
+				CONTEXT_MANAGER.switchContext(result);
+			}
+		});
 		
 		// path found via org.eclipse.riena.ui.swt.imagePaths in plugin.xml
 		result.setIcon("arrow_right.png"); //$NON-NLS-1$
