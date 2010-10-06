@@ -41,13 +41,19 @@ public final class AuditInterceptor extends EmptyInterceptor {
 		return o1.equals(o2);
 	}
 	
+	private static String toString(Object obj) {
+		return obj == null ? null : obj.toString();
+	}
+	
 	@Override
 	public boolean onSave(Object entity, Serializable id, Object[] state, String[] propertyNames, Type[] types) {
 		for (int i = 0; i < propertyNames.length; i++) {
 			String name = propertyNames[i];
 			Object newValue = state[i];
 			
-			logChange(entity, ChangeType.SAVE, name, null, newValue);
+			if (newValue != null) {
+				logChange(entity, ChangeType.SAVE, name, null, newValue);
+			}
 		}
 		
 		return false;
@@ -81,8 +87,10 @@ public final class AuditInterceptor extends EmptyInterceptor {
 		
 		rec.setDate(new Date());
 		rec.setChangeType(type);
-		rec.setContent(entity.toString());
 		rec.setEntity("");
+		rec.setFieldName(name);
+		rec.setOldValue(toString(oldValue));
+		rec.setNewValue(toString(newValue));
 		
 		if (entity instanceof EObject) {
 			rec.setEntity(((EObject) entity).eClass().getName());
@@ -95,7 +103,7 @@ public final class AuditInterceptor extends EmptyInterceptor {
 		}
 		
 		if (transaction != null) {
-			
+			rec.setTransactionStamp(transaction.hashCode());
 		}
 		
 		session.save(rec);

@@ -42,7 +42,7 @@ public class AuditDataStoreProvider implements Provider<HbDataStore> {
 		props.setProperty(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
 
 		props.setProperty("teneo.mapping.disable_econtainer", "true");
-		props.setProperty("teneo.mapping.default_varchar_length", "2000");
+		props.setProperty("teneo.mapping.default_varchar_length", "255");
 		return props;
 	}
 	

@@ -31,7 +31,10 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.audit.impl.AuditRecordImpl#getUser <em>User</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.audit.impl.AuditRecordImpl#getEntity <em>Entity</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.audit.impl.AuditRecordImpl#getChangeType <em>Change Type</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.audit.impl.AuditRecordImpl#getContent <em>Content</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.audit.impl.AuditRecordImpl#getFieldName <em>Field Name</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.audit.impl.AuditRecordImpl#getOldValue <em>Old Value</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.audit.impl.AuditRecordImpl#getNewValue <em>New Value</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.audit.impl.AuditRecordImpl#getTransactionStamp <em>Transaction Stamp</em>}</li>
  * </ul>
  * </p>
  *
@@ -139,24 +142,84 @@ public class AuditRecordImpl extends EObjectImpl implements AuditRecord {
 	protected ChangeType changeType = CHANGE_TYPE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getContent() <em>Content</em>}' attribute.
+	 * The default value of the '{@link #getFieldName() <em>Field Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getContent()
+	 * @see #getFieldName()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String CONTENT_EDEFAULT = null;
+	protected static final String FIELD_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getContent() <em>Content</em>}' attribute.
+	 * The cached value of the '{@link #getFieldName() <em>Field Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getContent()
+	 * @see #getFieldName()
 	 * @generated
 	 * @ordered
 	 */
-	protected String content = CONTENT_EDEFAULT;
+	protected String fieldName = FIELD_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getOldValue() <em>Old Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOldValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String OLD_VALUE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getOldValue() <em>Old Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOldValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected String oldValue = OLD_VALUE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getNewValue() <em>New Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNewValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NEW_VALUE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getNewValue() <em>New Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNewValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected String newValue = NEW_VALUE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getTransactionStamp() <em>Transaction Stamp</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTransactionStamp()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Integer TRANSACTION_STAMP_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getTransactionStamp() <em>Transaction Stamp</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTransactionStamp()
+	 * @generated
+	 * @ordered
+	 */
+	protected Integer transactionStamp = TRANSACTION_STAMP_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -287,8 +350,8 @@ public class AuditRecordImpl extends EObjectImpl implements AuditRecord {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getContent() {
-		return content;
+	public String getFieldName() {
+		return fieldName;
 	}
 
 	/**
@@ -296,11 +359,74 @@ public class AuditRecordImpl extends EObjectImpl implements AuditRecord {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setContent(String newContent) {
-		String oldContent = content;
-		content = newContent;
+	public void setFieldName(String newFieldName) {
+		String oldFieldName = fieldName;
+		fieldName = newFieldName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AuditPackage.AUDIT_RECORD__CONTENT, oldContent, content));
+			eNotify(new ENotificationImpl(this, Notification.SET, AuditPackage.AUDIT_RECORD__FIELD_NAME, oldFieldName, fieldName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getOldValue() {
+		return oldValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOldValue(String newOldValue) {
+		String oldOldValue = oldValue;
+		oldValue = newOldValue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AuditPackage.AUDIT_RECORD__OLD_VALUE, oldOldValue, oldValue));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getNewValue() {
+		return newValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNewValue(String newNewValue) {
+		String oldNewValue = newValue;
+		newValue = newNewValue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AuditPackage.AUDIT_RECORD__NEW_VALUE, oldNewValue, newValue));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Integer getTransactionStamp() {
+		return transactionStamp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTransactionStamp(Integer newTransactionStamp) {
+		Integer oldTransactionStamp = transactionStamp;
+		transactionStamp = newTransactionStamp;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AuditPackage.AUDIT_RECORD__TRANSACTION_STAMP, oldTransactionStamp, transactionStamp));
 	}
 
 	/**
@@ -321,8 +447,14 @@ public class AuditRecordImpl extends EObjectImpl implements AuditRecord {
 				return getEntity();
 			case AuditPackage.AUDIT_RECORD__CHANGE_TYPE:
 				return getChangeType();
-			case AuditPackage.AUDIT_RECORD__CONTENT:
-				return getContent();
+			case AuditPackage.AUDIT_RECORD__FIELD_NAME:
+				return getFieldName();
+			case AuditPackage.AUDIT_RECORD__OLD_VALUE:
+				return getOldValue();
+			case AuditPackage.AUDIT_RECORD__NEW_VALUE:
+				return getNewValue();
+			case AuditPackage.AUDIT_RECORD__TRANSACTION_STAMP:
+				return getTransactionStamp();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -350,8 +482,17 @@ public class AuditRecordImpl extends EObjectImpl implements AuditRecord {
 			case AuditPackage.AUDIT_RECORD__CHANGE_TYPE:
 				setChangeType((ChangeType)newValue);
 				return;
-			case AuditPackage.AUDIT_RECORD__CONTENT:
-				setContent((String)newValue);
+			case AuditPackage.AUDIT_RECORD__FIELD_NAME:
+				setFieldName((String)newValue);
+				return;
+			case AuditPackage.AUDIT_RECORD__OLD_VALUE:
+				setOldValue((String)newValue);
+				return;
+			case AuditPackage.AUDIT_RECORD__NEW_VALUE:
+				setNewValue((String)newValue);
+				return;
+			case AuditPackage.AUDIT_RECORD__TRANSACTION_STAMP:
+				setTransactionStamp((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -380,8 +521,17 @@ public class AuditRecordImpl extends EObjectImpl implements AuditRecord {
 			case AuditPackage.AUDIT_RECORD__CHANGE_TYPE:
 				setChangeType(CHANGE_TYPE_EDEFAULT);
 				return;
-			case AuditPackage.AUDIT_RECORD__CONTENT:
-				setContent(CONTENT_EDEFAULT);
+			case AuditPackage.AUDIT_RECORD__FIELD_NAME:
+				setFieldName(FIELD_NAME_EDEFAULT);
+				return;
+			case AuditPackage.AUDIT_RECORD__OLD_VALUE:
+				setOldValue(OLD_VALUE_EDEFAULT);
+				return;
+			case AuditPackage.AUDIT_RECORD__NEW_VALUE:
+				setNewValue(NEW_VALUE_EDEFAULT);
+				return;
+			case AuditPackage.AUDIT_RECORD__TRANSACTION_STAMP:
+				setTransactionStamp(TRANSACTION_STAMP_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -405,8 +555,14 @@ public class AuditRecordImpl extends EObjectImpl implements AuditRecord {
 				return ENTITY_EDEFAULT == null ? entity != null : !ENTITY_EDEFAULT.equals(entity);
 			case AuditPackage.AUDIT_RECORD__CHANGE_TYPE:
 				return changeType != CHANGE_TYPE_EDEFAULT;
-			case AuditPackage.AUDIT_RECORD__CONTENT:
-				return CONTENT_EDEFAULT == null ? content != null : !CONTENT_EDEFAULT.equals(content);
+			case AuditPackage.AUDIT_RECORD__FIELD_NAME:
+				return FIELD_NAME_EDEFAULT == null ? fieldName != null : !FIELD_NAME_EDEFAULT.equals(fieldName);
+			case AuditPackage.AUDIT_RECORD__OLD_VALUE:
+				return OLD_VALUE_EDEFAULT == null ? oldValue != null : !OLD_VALUE_EDEFAULT.equals(oldValue);
+			case AuditPackage.AUDIT_RECORD__NEW_VALUE:
+				return NEW_VALUE_EDEFAULT == null ? newValue != null : !NEW_VALUE_EDEFAULT.equals(newValue);
+			case AuditPackage.AUDIT_RECORD__TRANSACTION_STAMP:
+				return TRANSACTION_STAMP_EDEFAULT == null ? transactionStamp != null : !TRANSACTION_STAMP_EDEFAULT.equals(transactionStamp);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -431,8 +587,14 @@ public class AuditRecordImpl extends EObjectImpl implements AuditRecord {
 		result.append(entity);
 		result.append(", changeType: ");
 		result.append(changeType);
-		result.append(", content: ");
-		result.append(content);
+		result.append(", fieldName: ");
+		result.append(fieldName);
+		result.append(", oldValue: ");
+		result.append(oldValue);
+		result.append(", newValue: ");
+		result.append(newValue);
+		result.append(", transactionStamp: ");
+		result.append(transactionStamp);
 		result.append(')');
 		return result.toString();
 	}

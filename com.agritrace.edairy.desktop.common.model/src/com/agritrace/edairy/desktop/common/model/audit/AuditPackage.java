@@ -115,13 +115,40 @@ public interface AuditPackage extends EPackage {
 	int AUDIT_RECORD__CHANGE_TYPE = 4;
 
 	/**
-	 * The feature id for the '<em><b>Content</b></em>' attribute.
+	 * The feature id for the '<em><b>Field Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AUDIT_RECORD__CONTENT = 5;
+	int AUDIT_RECORD__FIELD_NAME = 5;
+
+	/**
+	 * The feature id for the '<em><b>Old Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AUDIT_RECORD__OLD_VALUE = 6;
+
+	/**
+	 * The feature id for the '<em><b>New Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AUDIT_RECORD__NEW_VALUE = 7;
+
+	/**
+	 * The feature id for the '<em><b>Transaction Stamp</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AUDIT_RECORD__TRANSACTION_STAMP = 8;
 
 	/**
 	 * The number of structural features of the '<em>Record</em>' class.
@@ -130,7 +157,7 @@ public interface AuditPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AUDIT_RECORD_FEATURE_COUNT = 6;
+	int AUDIT_RECORD_FEATURE_COUNT = 9;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.audit.ChangeType <em>Change Type</em>}' enum.
@@ -209,15 +236,48 @@ public interface AuditPackage extends EPackage {
 	EAttribute getAuditRecord_ChangeType();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.audit.AuditRecord#getContent <em>Content</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.audit.AuditRecord#getFieldName <em>Field Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Content</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.audit.AuditRecord#getContent()
+	 * @return the meta object for the attribute '<em>Field Name</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.audit.AuditRecord#getFieldName()
 	 * @see #getAuditRecord()
 	 * @generated
 	 */
-	EAttribute getAuditRecord_Content();
+	EAttribute getAuditRecord_FieldName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.audit.AuditRecord#getOldValue <em>Old Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Old Value</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.audit.AuditRecord#getOldValue()
+	 * @see #getAuditRecord()
+	 * @generated
+	 */
+	EAttribute getAuditRecord_OldValue();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.audit.AuditRecord#getNewValue <em>New Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>New Value</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.audit.AuditRecord#getNewValue()
+	 * @see #getAuditRecord()
+	 * @generated
+	 */
+	EAttribute getAuditRecord_NewValue();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.audit.AuditRecord#getTransactionStamp <em>Transaction Stamp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Transaction Stamp</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.audit.AuditRecord#getTransactionStamp()
+	 * @see #getAuditRecord()
+	 * @generated
+	 */
+	EAttribute getAuditRecord_TransactionStamp();
 
 	/**
 	 * Returns the meta object for enum '{@link com.agritrace.edairy.desktop.common.model.audit.ChangeType <em>Change Type</em>}'.
@@ -302,12 +362,36 @@ public interface AuditPackage extends EPackage {
 		EAttribute AUDIT_RECORD__CHANGE_TYPE = eINSTANCE.getAuditRecord_ChangeType();
 
 		/**
-		 * The meta object literal for the '<em><b>Content</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Field Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute AUDIT_RECORD__CONTENT = eINSTANCE.getAuditRecord_Content();
+		EAttribute AUDIT_RECORD__FIELD_NAME = eINSTANCE.getAuditRecord_FieldName();
+
+		/**
+		 * The meta object literal for the '<em><b>Old Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute AUDIT_RECORD__OLD_VALUE = eINSTANCE.getAuditRecord_OldValue();
+
+		/**
+		 * The meta object literal for the '<em><b>New Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute AUDIT_RECORD__NEW_VALUE = eINSTANCE.getAuditRecord_NewValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Transaction Stamp</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute AUDIT_RECORD__TRANSACTION_STAMP = eINSTANCE.getAuditRecord_TransactionStamp();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.audit.ChangeType <em>Change Type</em>}' enum.

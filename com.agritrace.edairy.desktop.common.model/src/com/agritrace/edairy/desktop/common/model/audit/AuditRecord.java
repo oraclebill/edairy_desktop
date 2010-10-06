@@ -23,7 +23,10 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.audit.AuditRecord#getUser <em>User</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.audit.AuditRecord#getEntity <em>Entity</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.audit.AuditRecord#getChangeType <em>Change Type</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.audit.AuditRecord#getContent <em>Content</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.audit.AuditRecord#getFieldName <em>Field Name</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.audit.AuditRecord#getOldValue <em>Old Value</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.audit.AuditRecord#getNewValue <em>New Value</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.audit.AuditRecord#getTransactionStamp <em>Transaction Stamp</em>}</li>
  * </ul>
  * </p>
  *
@@ -166,30 +169,107 @@ public interface AuditRecord extends EObject {
 	void setChangeType(ChangeType value);
 
 	/**
-	 * Returns the value of the '<em><b>Content</b></em>' attribute.
+	 * Returns the value of the '<em><b>Field Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Content</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Field Name</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Content</em>' attribute.
-	 * @see #setContent(String)
-	 * @see com.agritrace.edairy.desktop.common.model.audit.AuditPackage#getAuditRecord_Content()
-	 * @model required="true"
-	 *        annotation="teneo.jpa appinfo='@Column(length=2000)'"
+	 * @return the value of the '<em>Field Name</em>' attribute.
+	 * @see #setFieldName(String)
+	 * @see com.agritrace.edairy.desktop.common.model.audit.AuditPackage#getAuditRecord_FieldName()
+	 * @model
 	 * @generated
 	 */
-	String getContent();
+	String getFieldName();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.audit.AuditRecord#getContent <em>Content</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.audit.AuditRecord#getFieldName <em>Field Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Content</em>' attribute.
-	 * @see #getContent()
+	 * @param value the new value of the '<em>Field Name</em>' attribute.
+	 * @see #getFieldName()
 	 * @generated
 	 */
-	void setContent(String value);
+	void setFieldName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Old Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Old Value</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Old Value</em>' attribute.
+	 * @see #setOldValue(String)
+	 * @see com.agritrace.edairy.desktop.common.model.audit.AuditPackage#getAuditRecord_OldValue()
+	 * @model
+	 * @generated
+	 */
+	String getOldValue();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.audit.AuditRecord#getOldValue <em>Old Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Old Value</em>' attribute.
+	 * @see #getOldValue()
+	 * @generated
+	 */
+	void setOldValue(String value);
+
+	/**
+	 * Returns the value of the '<em><b>New Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>New Value</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>New Value</em>' attribute.
+	 * @see #setNewValue(String)
+	 * @see com.agritrace.edairy.desktop.common.model.audit.AuditPackage#getAuditRecord_NewValue()
+	 * @model
+	 * @generated
+	 */
+	String getNewValue();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.audit.AuditRecord#getNewValue <em>New Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>New Value</em>' attribute.
+	 * @see #getNewValue()
+	 * @generated
+	 */
+	void setNewValue(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Transaction Stamp</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Transaction Stamp</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Transaction Stamp</em>' attribute.
+	 * @see #setTransactionStamp(Integer)
+	 * @see com.agritrace.edairy.desktop.common.model.audit.AuditPackage#getAuditRecord_TransactionStamp()
+	 * @model
+	 * @generated
+	 */
+	Integer getTransactionStamp();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.audit.AuditRecord#getTransactionStamp <em>Transaction Stamp</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Transaction Stamp</em>' attribute.
+	 * @see #getTransactionStamp()
+	 * @generated
+	 */
+	void setTransactionStamp(Integer value);
 
 } // AuditRecord

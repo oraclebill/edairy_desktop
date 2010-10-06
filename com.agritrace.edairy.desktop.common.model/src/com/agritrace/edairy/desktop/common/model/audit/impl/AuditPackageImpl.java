@@ -159,8 +159,35 @@ public class AuditPackageImpl extends EPackageImpl implements AuditPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAuditRecord_Content() {
+	public EAttribute getAuditRecord_FieldName() {
 		return (EAttribute)auditRecordEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAuditRecord_OldValue() {
+		return (EAttribute)auditRecordEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAuditRecord_NewValue() {
+		return (EAttribute)auditRecordEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAuditRecord_TransactionStamp() {
+		return (EAttribute)auditRecordEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -206,7 +233,10 @@ public class AuditPackageImpl extends EPackageImpl implements AuditPackage {
 		createEAttribute(auditRecordEClass, AUDIT_RECORD__USER);
 		createEAttribute(auditRecordEClass, AUDIT_RECORD__ENTITY);
 		createEAttribute(auditRecordEClass, AUDIT_RECORD__CHANGE_TYPE);
-		createEAttribute(auditRecordEClass, AUDIT_RECORD__CONTENT);
+		createEAttribute(auditRecordEClass, AUDIT_RECORD__FIELD_NAME);
+		createEAttribute(auditRecordEClass, AUDIT_RECORD__OLD_VALUE);
+		createEAttribute(auditRecordEClass, AUDIT_RECORD__NEW_VALUE);
+		createEAttribute(auditRecordEClass, AUDIT_RECORD__TRANSACTION_STAMP);
 
 		// Create enums
 		changeTypeEEnum = createEEnum(CHANGE_TYPE);
@@ -248,7 +278,10 @@ public class AuditPackageImpl extends EPackageImpl implements AuditPackage {
 		initEAttribute(getAuditRecord_User(), ecorePackage.getEString(), "user", null, 1, 1, AuditRecord.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAuditRecord_Entity(), ecorePackage.getEString(), "entity", null, 0, 1, AuditRecord.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAuditRecord_ChangeType(), this.getChangeType(), "changeType", null, 1, 1, AuditRecord.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAuditRecord_Content(), ecorePackage.getEString(), "content", null, 1, 1, AuditRecord.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAuditRecord_FieldName(), ecorePackage.getEString(), "fieldName", null, 0, 1, AuditRecord.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAuditRecord_OldValue(), ecorePackage.getEString(), "oldValue", null, 0, 1, AuditRecord.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAuditRecord_NewValue(), ecorePackage.getEString(), "newValue", null, 0, 1, AuditRecord.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAuditRecord_TransactionStamp(), ecorePackage.getEIntegerObject(), "transactionStamp", null, 0, 1, AuditRecord.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(changeTypeEEnum, ChangeType.class, "ChangeType");
@@ -257,26 +290,6 @@ public class AuditPackageImpl extends EPackageImpl implements AuditPackage {
 
 		// Create resource
 		createResource(eNS_URI);
-
-		// Create annotations
-		// teneo.jpa
-		createTeneoAnnotations();
-	}
-
-	/**
-	 * Initializes the annotations for <b>teneo.jpa</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createTeneoAnnotations() {
-		String source = "teneo.jpa";		
-		addAnnotation
-		  (getAuditRecord_Content(), 
-		   source, 
-		   new String[] {
-			 "appinfo", "@Column(length=2000)"
-		   });
 	}
 
 } //AuditPackageImpl

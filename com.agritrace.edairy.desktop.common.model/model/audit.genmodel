@@ -17,7 +17,10 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute audit.ecore#//AuditRecord/user"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute audit.ecore#//AuditRecord/entity"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute audit.ecore#//AuditRecord/changeType"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute audit.ecore#//AuditRecord/content"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute audit.ecore#//AuditRecord/fieldName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute audit.ecore#//AuditRecord/oldValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute audit.ecore#//AuditRecord/newValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute audit.ecore#//AuditRecord/transactionStamp"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
