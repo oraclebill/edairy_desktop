@@ -232,7 +232,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	 * Initialize local dairy collections -
 	 */
 	private void initLocalDairy() {
-		Hibernate.initialize(localDairy);
+		Hibernate.initialize(getLocalDairy());
 		final List<EReference> persistentCollections = Arrays.asList(
 				DairyPackage.Literals.DAIRY__BRANCH_LOCATIONS,
 				DairyPackage.Literals.DAIRY__CUSTOMERS,
@@ -243,14 +243,14 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 				DairyPackage.Literals.DAIRY__SUPPLIERS,
 				ModelPackage.Literals.CONTACTABLE__CONTACT_METHODS);
 		for (EStructuralFeature feature : persistentCollections) {
-			Hibernate.initialize(localDairy.eGet(feature));
+			Hibernate.initialize(getLocalDairy().eGet(feature));
 		}
 	}
 
 
 	@Override
 	public void updateDairy() {
-		dairyRepository.update(localDairy);
+		dairyRepository.update(getLocalDairy());
 	}
 
 	public void updateRoute(final Route changedRoute) {
@@ -259,8 +259,8 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 
 	@Override
 	public void addRoute(final Route newRoute) {
-		localDairy.getRoutes().add(newRoute);
-		dairyRepository.save(localDairy);
+		getLocalDairy().getRoutes().add(newRoute);
+		dairyRepository.save(getLocalDairy());
 	}
 
 	protected Dairy createLocalDairy() {
@@ -278,7 +278,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 
 	public List<CollectionGroup> allCollectionGroups() {
 		// return collectionsRepository.getMemberships();
-		return localDairy.getCollectionJournals();
+		return getLocalDairy().getCollectionJournals();
 	}
 
 	@Override
@@ -288,23 +288,23 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 
 	@Override
 	public List<DairyContainer> allDairyContainers() {
-		return localDairy.getDairyBins();
+		return getLocalDairy().getDairyBins();
 	}
 
 	@Override
 	public List<DeliveryJournal> allDeliveries() {
 		// return deliveryRepository.getMemberships();
-		return localDairy.getDeliveryJournals();
+		return getLocalDairy().getDeliveryJournals();
 	}
 
 	@Override
 	public List<Route> allRoutes() {
-		return localDairy.getRoutes();
+		return getLocalDairy().getRoutes();
 	}
 
 	@Override
 	public List<Vehicle> allVehicles() {
-		return localDairy.getVehicles();
+		return getLocalDairy().getVehicles();
 	}
 
 	public void delete(Dairy deletableEntity) {
@@ -313,10 +313,10 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 
 	@Override
 	public void deleteRoute(final Route object) {
-		if (localDairy.getRoutes().remove(object)) {
+		if (getLocalDairy().getRoutes().remove(object)) {
 			sessionProvider.get().delete(object);
 			sessionProvider.get().flush();
-			save(localDairy);
+			save(getLocalDairy());
 
 		} else {
 			throw new RepositoryException("Transport Route not found!");
@@ -328,7 +328,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 		// return employeeRepository.find("FROM Employee where jobfunction='" +
 		// string + "'");
 		List<Employee> found = new LinkedList<Employee>();
-		for (Employee employee : localDairy.getEmployees()) {
+		for (Employee employee : getLocalDairy().getEmployees()) {
 			String job = employee.getJobFunction();
 			if (job != null && job.equals(string)) {
 				found.add(employee);
@@ -354,7 +354,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	public Container getFarmContainerById(String canId) {
 		// return binRepository.findByKey(Long.parseLong(canId));
 		Container found = null;
-		for (Container bin : localDairy.getDairyBins()) {
+		for (Container bin : getLocalDairy().getDairyBins()) {
 			if (bin.getTrackingNumber() != null
 					&& bin.getTrackingNumber().equals(canId)) {
 				found = bin;
@@ -372,7 +372,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	@Override
 	public CollectionGroup getJournalPageById(String pageId) {
 		CollectionGroup found = null;
-		for (CollectionGroup page : localDairy.getCollectionJournals()) {
+		for (CollectionGroup page : getLocalDairy().getCollectionJournals()) {
 			if (page.getReferenceNumber().equals(pageId)) {
 				found = page;
 				break;
@@ -383,7 +383,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 
 	@Override
 	public List<DairyLocation> getLocalDairyLocations() {
-		return localDairy.getBranchLocations();
+		return getLocalDairy().getBranchLocations();
 	}
 
 	@Override
@@ -395,7 +395,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 		long start = System.currentTimeMillis();
 		try {
 			Membership found = null;
-			for (Membership member : localDairy.getMemberships()) {
+			for (Membership member : getLocalDairy().getMemberships()) {
 				if (member.getMemberNumber().equals(memberIdString)) {
 					found = member;
 					break;
@@ -412,7 +412,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	public void delete(Membership member) {
 		// member.setStatus(MembershipStatus.DELETED);
 		// dairyRepository.save(member);
-		if (localDairy.getMemberships().remove(member)) {
+		if (getLocalDairy().getMemberships().remove(member)) {
 			save();
 		} else {
 			throw new RepositoryException("Member not in memberlist");
@@ -421,7 +421,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 
 	@Override
 	public List<Membership> all() {
-		return localDairy.getMemberships();
+		return getLocalDairy().getMemberships();
 	}
 
 	public List<Account> allAccounts() {
@@ -438,8 +438,8 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	public void saveNew(Membership newEntity) throws AlreadyExistsException {
 		if (newEntity.getMemberNumber() == null
 				|| newEntity.getMemberNumber().trim().length() == 0) {
-			int size = localDairy.getMemberships().size();
-			long count = localDairy.getVersion();
+			int size = getLocalDairy().getMemberships().size();
+			long count = getLocalDairy().getVersion();
 			newEntity.setMemberNumber("A" + count + "" + size);
 			// throw new RepositoryException("Member number cannot be null");
 		}
@@ -448,8 +448,8 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 			memberAccount.setMember(newEntity);
 			memberAccount.setAccountNumber("V" + newEntity.getMemberNumber());
 		}
-		if (!localDairy.getMemberships().contains(newEntity)) {
-			localDairy.getMemberships().add(newEntity);
+		if (!getLocalDairy().getMemberships().contains(newEntity)) {
+			getLocalDairy().getMemberships().add(newEntity);
 		}
 		save();
 	}
@@ -470,7 +470,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	}
 
 	public void save() {
-		dairyRepository.save(localDairy);
+		dairyRepository.save(getLocalDairy());
 	}
 
 	@Override
@@ -481,31 +481,31 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	@Override
 	public void saveNewJournalPage(CollectionGroup newJournal) {
 		// collectionsRepository.saveNew(newJournal);
-		localDairy.getCollectionJournals().add(newJournal);
+		getLocalDairy().getCollectionJournals().add(newJournal);
 		save();
 	}
 
 	@Override
 	public void updateBranchLocation(DairyLocation changedDairyLocation) {
-		if (localDairy.getBranchLocations().contains(changedDairyLocation)) {
+		if (getLocalDairy().getBranchLocations().contains(changedDairyLocation)) {
 			;
 		} else {
-			localDairy.getBranchLocations().add(changedDairyLocation);
+			getLocalDairy().getBranchLocations().add(changedDairyLocation);
 		}
 		sessionProvider.get().flush();
 	}
 
 	@Override
 	public void addBranchLocation(DairyLocation changedDairyLocation) {
-		localDairy.getBranchLocations().add(changedDairyLocation);
-		dairyRepository.update(localDairy);
+		getLocalDairy().getBranchLocations().add(changedDairyLocation);
+		dairyRepository.update(getLocalDairy());
 		// PersistenceManager.getDefault().getSession().persist(changedDairyLocation);
 		// PersistenceManager.getDefault().getSession().flush();
 	}
 
 	@Override
 	public void deleteBranchLocation(DairyLocation oldItem) {
-		localDairy.getBranchLocations().remove(oldItem);
+		getLocalDairy().getBranchLocations().remove(oldItem);
 		sessionProvider.get().delete(oldItem);
 		sessionProvider.get().flush();
 
@@ -581,6 +581,9 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 
 	@Override
 	public Membership findMemberByMemberNo(String searchMemberNumber) {
+		if(searchMemberNumber.length() < 5) {
+			searchMemberNumber = "00000".substring(0, 5-searchMemberNumber.length()) + searchMemberNumber;
+		}
 		return dairyRepository.memberByNumber(searchMemberNumber);
 	}
 

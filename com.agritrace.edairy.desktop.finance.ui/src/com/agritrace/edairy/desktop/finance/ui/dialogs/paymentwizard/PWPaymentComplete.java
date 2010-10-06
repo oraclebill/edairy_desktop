@@ -31,7 +31,7 @@ public class PWPaymentComplete extends PWPage {
 
 	private static final String[] COLUMN_HEADERS = { "ID", "Name", "", "Milk Income", "Credit Sales", "Adjustments",
 			"Payment" };
-	private static final String[] COLUMN_PROPS = { "member.id", "member.givenName", "member.familyName", "milkIncome",
+	private static final String[] COLUMN_PROPS = { "member.memberId", "member.member.givenName", "member.member.familyName", "milkIncome",
 			"accountCredits", "accountAdjustments", "totalPayment" };
 
 	private Text runDate;
@@ -59,31 +59,27 @@ public class PWPaymentComplete extends PWPage {
 	public final int getPaymentMonth() {
 		return getInt("paymentMonth");
 	}
-	
+
 	public final int getPaymentYear() {
 		return getInt("paymentYear");
 	}
-	
+
 	public final BigDecimal getPaymentRate() {
 		return new BigDecimal(get("paymentRate"));
 	}
-	
-	
+
 	public final BigDecimal getPaymentAverage() {
 		return new BigDecimal(get("paymentAverage"));
 	}
-	
-	
+
 	public final BigDecimal getPaymentTotal() {
 		return new BigDecimal(get("paymentTotal"));
 	}
-	
-	
+
 	public final int getPaymentCount() {
 		return getInt("paymentCount");
 	}
-	
-	
+
 	/**
 	 * Create contents of the wizard.
 	 * 
@@ -112,19 +108,17 @@ public class PWPaymentComplete extends PWPage {
 			try {
 				paymentMonth = getPaymentMonth();
 				paymentYear = getPaymentYear();
-			}
-			catch( Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 			{
 				Label lblPaymentPeriod = new Label(header, SWT.NONE);
 				lblPaymentPeriod.setBounds(0, 0, 59, 14);
 				lblPaymentPeriod.setText("Payment Period");
 				lblPaymentPeriod.setLayoutData(gdf.create());
 
-				Text payPeriod = text(header,
-						String.format("%s %s", paymentMonth, paymentYear));
+				payPeriod = text(header, String.format("%s %s", paymentMonth, paymentYear));
 				payPeriod.setLayoutData(gdf.create());
 			}
 			{
@@ -132,17 +126,17 @@ public class PWPaymentComplete extends PWPage {
 				lblRunDate.setText("Run Date");
 				lblRunDate.setLayoutData(gdf.create());
 
-				Text runDate = text(header, String.format("%s", new Date()));
+				runDate = text(header, String.format("%s", new Date()));
 				runDate.setLayoutData(gdf.create());
 			}
 		}
-		{			
+		{
 			{
 				Label lblPaymentRate = new Label(header, SWT.NONE);
 				lblPaymentRate.setBounds(0, 0, 59, 14);
 				lblPaymentRate.setText("Payment Rate");
 
-				Text paymentRate = text(header, String.format("%s", get("paymentRate")));
+				paymentRate = text(header, String.format("%s", get("paymentRate")));
 				paymentRate.setLayoutData(gdf.create());
 
 			}
@@ -152,7 +146,7 @@ public class PWPaymentComplete extends PWPage {
 				lblFarmers.setBounds(0, 0, 59, 14);
 				lblFarmers.setText("# Farmers");
 
-				Text paymentCount = text(header, String.format("%s", get("paymentRate")));
+				paymentCount = text(header, String.format("%s", get("paymentRate")));
 				paymentCount.setLayoutData(gdf.create());
 			}
 		}
@@ -162,7 +156,7 @@ public class PWPaymentComplete extends PWPage {
 				lblAvgPayment.setBounds(0, 0, 59, 14);
 				lblAvgPayment.setText("Avg. Payment");
 
-				Text paymentAverage = text(header, String.format("%s", get("paymentRate")));
+				paymentAverage = text(header, String.format("%s", get("paymentRate")));
 				paymentAverage.setLayoutData(gdf.create());
 
 			}
@@ -172,7 +166,7 @@ public class PWPaymentComplete extends PWPage {
 				lblTotalPaidThis.setBounds(0, 0, 59, 14);
 				lblTotalPaidThis.setText("Total Paid this Period");
 
-				Text paymentTotal = text(header, String.format("%s", get("paymentRate")));
+				paymentTotal = text(header, String.format("%s", get("paymentRate")));
 				paymentTotal.setLayoutData(gdf.create());
 			}
 		}
@@ -220,6 +214,7 @@ public class PWPaymentComplete extends PWPage {
 
 	private Text[] headerWidgets = { runDate, paymentRate, payPeriod, paymentAverage, paymentCount, paymentTotal };
 	private Object[] headerValues = new Object[6];
+	private Text payPeriod2;
 
 	private void previewPayments() {
 		try {
@@ -251,8 +246,9 @@ public class PWPaymentComplete extends PWPage {
 					paymentRecord.setYear(getPaymentYear());
 					paymentRecord.setValue(getPaymentRate());					
 					
+					headerWidgets = new Text[] { runDate, paymentRate, payPeriod, paymentAverage, paymentCount, paymentTotal };
 					for (int i = 0; i < headerWidgets.length; i++) {
-						headerWidgets[i].setText( headerValues[i].toString() );						
+						headerWidgets[i].setText( headerValues[i] != null ? headerValues[i].toString() : "");						
 					}
 					
 					tableRidget.bindToModel(Observables.staticObservableList(paymentsList), PaymentRecord.class,

@@ -112,8 +112,8 @@ final class ScaleImportAction implements IActionListener {
 				CollectionGroup journalPage = getJournalForScaleRecord(scaleRecord);
 				/* boolean journalConsistent = */validateJournalInfo(journalPage, scaleRecord);
 				ScaleImportRecord importRecord = DairyFactory.eINSTANCE.createScaleImportRecord();
+				// primary data
 				try {
-					// primary data
 					importRecord.setCollectionJournal(journalPage);
 					importRecord.setRecordedMember(scaleRecord.getMemberNumber());
 					importRecord.setQuantity(scaleRecord.getValidQuantity());
@@ -127,8 +127,9 @@ final class ScaleImportAction implements IActionListener {
 					Membership memberInfo = getMemberById(scaleRecord.getMemberNumber());
 					if (memberInfo != null) {
 						importRecord.setValidatedMember(memberInfo);
-						//importRecord.setOffRoute(memberInfo.getDefaultRoute() != journalPage.getRoute()); // TODO:
-						//																					// calculate
+						// importRecord.setOffRoute(memberInfo.getDefaultRoute()
+						// != journalPage.getCollectionCenter()); // TODO:
+						// // calculate
 						importRecord.setFrom(null); // TODO: calculate (how?)
 						importRecord.setFarmContainer(null); // don't seem to
 						// get one fromm
@@ -170,7 +171,7 @@ final class ScaleImportAction implements IActionListener {
 			setNote("Preparing to save new data...");
 
 			prepareMessageList();
-			
+
 			boolean importEnabled = pageMap.size() > 0;
 			ImportResultsDialog irDialog = new ImportResultsDialog(AbstractDirectoryController.getShell(), msgList,
 					importEnabled);
@@ -198,44 +199,46 @@ final class ScaleImportAction implements IActionListener {
 			for (String err : errMessages.keySet()) {
 				msgList.add(String.format("%-4d records failed with a '%s' error.", errMessages.get(err).size(), err));
 			}
-			
+
 			int allEntries = 0;
-			
+
 			for (CollectionGroup page : pageMap.values()) {
 				allEntries += page.getEntryCount();
 			}
-			
+
 			msgList.add(0, String.format("Import completed with %d sessions, %d total collections, and %d messages",
 					pageMap.keySet().size(), allEntries, errMessages.values().size()));
 
 			int i = 0;
-			
+
 			for (CollectionGroup page : pageMap.values()) {
 				allEntries += page.getEntryCount();
-				msgList.add(++i, String.format("- Driver name: %s, journal date: %tF",
-						MemberUtil.formattedMemberName(page.getDriver()), page.getJournalDate()));
+				msgList.add(
+						++i,
+						String.format("- Driver name: %s, journal date: %tF",
+								MemberUtil.formattedMemberName(page.getDriver()), page.getJournalDate()));
 			}
 		}
 
 		protected void addError(String message, Object detail) {
 			List<Object> errList = errMessages.get(message);
-			
+
 			if (errList == null) {
 				errList = new LinkedList<Object>();
 				errMessages.put(message, errList);
 			}
-			
+
 			errList.add(detail);
 		}
 
 		private void setPageJournalDate(CollectionGroup page) {
 			if (page.getJournalDate() == null) {
 				Date lowest = null, highest = null, journalDate = null;
-				
+
 				for (CollectionJournalLine line : page.getJournalEntries()) {
 					ScaleImportRecord record = (ScaleImportRecord) line;
 					Date collectionTime = record.getCollectionTime();
-					
+
 					if (collectionTime == null) {
 						addError("Record is missing collection time.", record);
 					} else {
@@ -247,13 +250,13 @@ final class ScaleImportAction implements IActionListener {
 						}
 					}
 				}
-				
+
 				if (lowest != null && highest != null) {
 					Calendar lowCal = Calendar.getInstance(), highCal = Calendar.getInstance();
 					lowCal.setTime(lowest);
 					highCal.setTime(highest);
 					long milliDiff = (highCal.getTimeInMillis() - lowCal.getTimeInMillis());
-					
+
 					if (milliDiff > MAX_COLLECTION_TIME_DIFFERENTIAL) {
 						addError("Difference between collection times exceeds threshold: " + milliDiff, page);
 					} else {
@@ -346,29 +349,29 @@ final class ScaleImportAction implements IActionListener {
 		Object navigationContext = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActivePart();
 		SubModuleView rienaView = (SubModuleView) Platform.getAdapterManager().getAdapter(navigationContext,
 				SubModuleView.class);
-		
+
 		if (rienaView != null) {
 			navigationContext = rienaView.getController().getNavigationNode();
 		}
-		
+
 		final FileDialog fileDialog = new FileDialog(AbstractDirectoryController.getShell(), SWT.DIALOG_TRIM);
 		final String retVal = fileDialog.open();
-		
+
 		if (retVal == null) {
 			// user pressed Cancel
 			return;
 		}
-		
+
 		File importFile = new File(retVal);
 		pageMap.clear();
 		sessionMap.clear();
 		centerMap.clear();
-		
-		for (CollectionSession session: sessionRepo.all()) {
+
+		for (CollectionSession session : sessionRepo.all()) {
 			sessionMap.put(session.getCode(), session);
 		}
-		
-		for (DairyLocation loc: dairyLocationRepo.all()) {
+
+		for (DairyLocation loc : dairyLocationRepo.all()) {
 			if (loc.getCode() != null) {
 				centerMap.put(loc.getCode().toLowerCase(), loc);
 			}
@@ -417,7 +420,7 @@ final class ScaleImportAction implements IActionListener {
 		String key = createGroupKey(record);
 		String centerCode = record.getRouteNumber() == null ? null : record.getRouteNumber().toLowerCase();
 		CollectionGroup page = pageMap.get(key);
-		
+
 		if (page == null) {
 			page = DairyFactory.eINSTANCE.createCollectionGroup();
 			page.setReferenceNumber(key);
@@ -425,18 +428,18 @@ final class ScaleImportAction implements IActionListener {
 			page.setJournalDate(record.getValidDate());
 			page.setSession(sessionMap.get(record.getSessionCode()));
 			page.setCollectionCenter(centerMap.get(centerCode));
-			
+
 			if (page.getDriver() == null || page.getJournalDate() == null || page.getSession() == null
-					/* || page.getRoute() == null */) {
+			/* || page.getRoute() == null */) {
 				// TODO: add suspension reason
 				page.setSuspended(true);
 				this.milkCollectionLogController.log(LogService.LOG_INFO, "Suspending " + key
 						+ " for validation failure - null key item.");
 			}
-			
+
 			pageMap.put(key, page);
 		}
-		
+
 		return page;
 	}
 
@@ -458,12 +461,14 @@ final class ScaleImportAction implements IActionListener {
 	}
 
 	private Membership getMemberById(String memberNumber) {
-		// TODO: we are creating members for testing
-		// -- FIXME
-
-		Membership member = dairyRepo.findMemberByMemberNo(memberNumber);
-		if (member == null) {
-			throw new RuntimeException("invalid member id " + memberNumber);
+		Membership member = null;
+		try {
+			member = dairyRepo.findMemberByMemberNo(memberNumber);
+			if (member == null) {
+				throw new RuntimeException("invalid member id " + memberNumber);
+			}
+		} catch (Exception e) {
+			;
 		}
 		return member;
 	}
