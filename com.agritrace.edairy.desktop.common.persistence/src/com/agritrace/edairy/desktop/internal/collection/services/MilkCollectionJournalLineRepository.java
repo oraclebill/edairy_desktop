@@ -129,8 +129,9 @@ public class MilkCollectionJournalLineRepository extends
 		SessionRunnable<BigDecimal> runnable = new SessionRunnable<BigDecimal>() {
 			@Override
 			public void run(Session session) {
+				try{
 					String queryString = "SELECT value " + "FROM MilkPrice m "
-							+ "WHERE m.year = :year " + "  AND m.month = :month ";
+							+ "WHERE YEAR(m.priceDate) = :year " + "  AND MONTH(m.priceDate) = :month ";
 	
 					Query query = session.createQuery(queryString);
 					query.setInteger("year", year);
@@ -141,7 +142,11 @@ public class MilkCollectionJournalLineRepository extends
 					if(queryResult != null){
 						setResult(new BigDecimal(queryResult.toString()));
 					}
-				
+				}
+				catch(Exception e){
+					e.printStackTrace();
+					//throw e;
+				}
 			}
 		};
 
