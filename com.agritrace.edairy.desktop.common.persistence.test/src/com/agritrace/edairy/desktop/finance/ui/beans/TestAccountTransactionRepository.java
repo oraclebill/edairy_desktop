@@ -16,7 +16,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.agritrace.edairy.desktop.collection.services.TestPersistenceModule;
+import com.agritrace.edairy.desktop.collection.services.TestingPersistenceModule;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
@@ -66,7 +66,7 @@ public class TestAccountTransactionRepository{
 	
 	public IRepository<AccountTransaction> getRepository(){
 		if(myRepo == null){
-			Guice.createInjector(new TestPersistenceModule()).injectMembers(this);
+			Guice.createInjector(new TestingPersistenceModule()).injectMembers(this);
 		}
 		return myRepo;
 	}

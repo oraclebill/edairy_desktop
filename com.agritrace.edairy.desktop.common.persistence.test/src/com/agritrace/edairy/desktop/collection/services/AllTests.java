@@ -3,6 +3,7 @@ package com.agritrace.edairy.desktop.collection.services;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
+import com.agritrace.edairy.desktop.common.persistence.services.MilkCollectionJournalLineQueryTest;
 import com.agritrace.edairy.desktop.common.persistence.services.PersistenceManagerTest;
 import com.agritrace.edairy.desktop.common.persistence.test.DairyPersistenceTest;
 import com.agritrace.edairy.desktop.common.persistence.test.DairyRepoPerfTest;

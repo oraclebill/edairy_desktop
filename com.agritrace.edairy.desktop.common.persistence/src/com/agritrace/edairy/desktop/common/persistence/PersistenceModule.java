@@ -25,7 +25,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.services.ImageDataUtil;
 import com.agritrace.edairy.desktop.internal.common.persistence.HbDataStoreProvider;
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
-import com.agritrace.edairy.desktop.internal.common.persistence.PersistenceManager;
+import com.agritrace.edairy.desktop.internal.common.persistence.SessionProvider;
 import com.agritrace.edairy.desktop.internal.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.internal.operations.services.customer.CustomerRepository;
 import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
@@ -84,8 +84,8 @@ public class PersistenceModule extends AbstractModule {
 	
 	@Override
 	protected void configure() {
-		bind(Session.class).toProvider(PersistenceManager.class);
-		bind(PersistenceManager.class).in(Scopes.SINGLETON);
+		bind(Session.class).toProvider(SessionProvider.class);
+		bind(SessionProvider.class).in(Scopes.SINGLETON);
 		bindDataStore();
 		
 		for (EPackage pkg: EPACKAGES) {

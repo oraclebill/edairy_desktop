@@ -10,14 +10,14 @@ import org.osgi.service.log.LogService;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class PersistenceManager implements Provider<Session> {
-	private static final Logger LOG = Log4r.getLogger(Activator.getDefault(), PersistenceManager.class);
+public class SessionProvider implements Provider<Session> {
+	private static final Logger LOG = Log4r.getLogger(Activator.getDefault(), "com.agritrace.edairy.desktop.internal.common.persistence.SessionProvider");
 	
 	private final SessionFactory sessionFactory;
 	private Session session;
 
 	@Inject
-	protected PersistenceManager(HbDataStore hbds) {
+	protected SessionProvider(HbDataStore hbds) {
 		LOG.log(LogService.LOG_INFO, " ** Creating PersistenceManager [" + getClass().getName() + ":" + hashCode()
 				+ "]");
 

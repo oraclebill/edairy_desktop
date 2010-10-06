@@ -6,7 +6,7 @@ import org.hibernate.cfg.Environment;
 
 import com.agritrace.edairy.desktop.internal.common.persistence.HbDataStoreProvider;
 
-public class TestDataStoreProvider extends HbDataStoreProvider {
+public class TestingDataStoreProvider extends HbDataStoreProvider {
 
 	/* (non-Javadoc)
 	 * @see com.agritrace.edairy.desktop.internal.common.persistence.HsqlDbDataStoreProvider#getDatastoreProperties()

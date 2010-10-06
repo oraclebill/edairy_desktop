@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.collection.services;
+package com.agritrace.edairy.desktop.common.persistence.services;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -12,6 +12,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
+import com.agritrace.edairy.desktop.collection.services.TestingPersistenceModule;
 import com.agritrace.edairy.desktop.collections.scaledata.beans.ScaleRecord;
 import com.agritrace.edairy.desktop.collections.scaledata.importer.ScaleImporter;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
@@ -37,7 +39,7 @@ public class MilkCollectionJournalLineQueryTest {
 	
 	@Before
 	public void setup() {
-		repo = Guice.createInjector(new TestPersistenceModule()).getInstance(ICollectionJournalLineRepository.class);
+		repo = Guice.createInjector(new TestingPersistenceModule()).getInstance(ICollectionJournalLineRepository.class);
 	}
 
 	@Test
