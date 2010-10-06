@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.agritrace.edairy.desktop.collection.services.TestPersistenceModule;
+import com.agritrace.edairy.desktop.collection.services.TestingPersistenceModule;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
 import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
@@ -21,7 +21,7 @@ public class TransactionRepositoryTest  extends TransactionTestCase {
 	
 	@Before
 	public void setUp() {
-		repo = Guice.createInjector(new TestPersistenceModule()).getInstance(ITransactionRepository.class);
+		repo = Guice.createInjector(new TestingPersistenceModule()).getInstance(ITransactionRepository.class);
 	}
 
 	@Test

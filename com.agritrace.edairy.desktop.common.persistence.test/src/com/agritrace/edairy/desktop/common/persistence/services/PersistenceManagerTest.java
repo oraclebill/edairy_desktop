@@ -12,7 +12,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.agritrace.edairy.desktop.collection.services.TestPersistenceModule;
+import com.agritrace.edairy.desktop.collection.services.TestingPersistenceModule;
 import com.agritrace.edairy.desktop.common.model.base.ContainerType;
 import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
@@ -26,7 +26,7 @@ public class PersistenceManagerTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		Guice.createInjector(new TestPersistenceModule()).injectMembers(this);
+		Guice.createInjector(new TestingPersistenceModule()).injectMembers(this);
 	}
 
 	@After

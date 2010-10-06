@@ -4,14 +4,12 @@ import org.eclipse.emf.teneo.hibernate.HbDataStore;
 
 import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
 import com.agritrace.edairy.desktop.common.persistence.services.IDbPropertiesManager;
-import com.agritrace.edairy.desktop.internal.common.persistence.HsqlDbDataStoreProvider;
-import com.google.inject.Scopes;
 
-public class TestPersistenceModule extends PersistenceModule {
+public class TestingPersistenceModule extends PersistenceModule {
 	@Override
 	protected void bindDataStore() {
-		bind(HbDataStore.class).toProvider(TestDataStoreProvider.class);
-		bind(IDbPropertiesManager.class).to(TestDataStoreProvider.class);
+		bind(HbDataStore.class).toProvider(TestingDataStoreProvider.class);
+		bind(IDbPropertiesManager.class).to(TestingDataStoreProvider.class);
 //		bind(HsqlDbDataStoreProvider.class).in(Scopes.SINGLETON);
 	}
 }
