@@ -1,7 +1,8 @@
-package com.agritrace.edairy.desktop.common.persistence;
+package com.agritrace.edairy.desktop.collection.services;
 
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
 
+import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
 import com.agritrace.edairy.desktop.common.persistence.services.IDbPropertiesManager;
 import com.agritrace.edairy.desktop.internal.common.persistence.HsqlDbDataStoreProvider;
 import com.google.inject.Scopes;

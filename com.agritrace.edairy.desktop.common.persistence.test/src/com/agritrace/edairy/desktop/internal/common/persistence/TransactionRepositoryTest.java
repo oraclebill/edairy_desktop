@@ -9,10 +9,10 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.agritrace.edairy.desktop.collection.services.TestPersistenceModule;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
 import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
-import com.agritrace.edairy.desktop.common.persistence.TestPersistenceModule;
 import com.google.inject.Guice;
 
 public class TransactionRepositoryTest  extends TransactionTestCase {
