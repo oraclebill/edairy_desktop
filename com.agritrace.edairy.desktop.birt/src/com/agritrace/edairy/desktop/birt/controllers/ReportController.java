@@ -1,8 +1,11 @@
 package com.agritrace.edairy.desktop.birt.controllers;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -15,20 +18,36 @@ import org.eclipse.birt.report.engine.api.EngineConstants;
 import org.eclipse.birt.report.engine.api.EngineException;
 import org.eclipse.birt.report.engine.api.HTMLCompleteImageHandler;
 import org.eclipse.birt.report.engine.api.HTMLRenderOption;
+import org.eclipse.birt.report.engine.api.IRenderOption;
 import org.eclipse.birt.report.engine.api.IReportEngine;
 import org.eclipse.birt.report.engine.api.IReportEngineFactory;
 import org.eclipse.birt.report.engine.api.IReportRunnable;
 import org.eclipse.birt.report.engine.api.IRunAndRenderTask;
+import org.eclipse.birt.report.engine.api.PDFRenderOption;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.CCombo;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.printing.PrintDialog;
+import org.eclipse.swt.printing.Printer;
+import org.eclipse.swt.printing.PrinterData;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.handlers.HandlerUtil;
 import org.osgi.framework.Bundle;
 
 import com.agritrace.edairy.desktop.birt.Activator;
@@ -36,6 +55,13 @@ import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.google.inject.Inject;
+import com.lowagie.text.Document;
+import com.lowagie.text.pdf.BaseFont;
+import com.lowagie.text.pdf.PdfContentByte;
+import com.lowagie.text.pdf.PdfCopyFields;
+import com.lowagie.text.pdf.PdfImportedPage;
+import com.lowagie.text.pdf.PdfReader;
+import com.lowagie.text.pdf.PdfWriter;
 
 
 public class ReportController {
@@ -57,6 +83,8 @@ public class ReportController {
 
 	private String[] months = new String[]{"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 	private Label monthLabel;
+	private Button exportToPDF;
+	private Button print;
 	
 	@Inject private static IDairyRepository dairyRepo;
 	public ReportController(String reportName){
@@ -125,29 +153,109 @@ public class ReportController {
 			}
 		});
 		
+		exportToPDF.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				doPDFExport();
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				doPDFExport();
+				
+			}
+		});
+		
+		exportToPDF.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseUp(MouseEvent e) {
+				doPDFExport();
+			}
+			
+			@Override
+			public void mouseDown(MouseEvent e) {
+				
+			}
+			
+			@Override
+			public void mouseDoubleClick(MouseEvent e) {
+				
+			}
+		});
+		
+		print.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				doPrint();
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				doPrint();
+				
+			}
+		});
+		
+		print.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseUp(MouseEvent e) {
+				doPrint();
+			}
+			
+			@Override
+			public void mouseDown(MouseEvent e) {
+				
+			}
+			
+			@Override
+			public void mouseDoubleClick(MouseEvent e) {
+				
+			}
+		});
+		
 	}
 
-	private void updateReport(){
-		browser.setText("");
+	private void doPrint(){
+		browser.setUrl("javascript:print()");
+	}
+	
+	private void doPDFExport(){
+		exportToPDF.setEnabled(false);
 		try{
-			runReport();
-		}
-		catch(Exception e){
+			String fileName = getFileNameToExport();
+			exportToPDF(fileName);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		finally{
+			exportToPDF.setEnabled(true);
+		}
 	}
 	
-	private void runComplexReport() {
-		updateReport();
+	private String getFileNameToExport(){
+		Shell shell = Display.getCurrent().getActiveShell();
+		FileDialog fileDialog = new FileDialog(shell, SWT.SAVE);
+		fileDialog.setFilterExtensions(new String[] { "*.pdf", });
+		String importFileName = fileDialog.open();
+		return importFileName;
 	}
 	
-	public void runReport() throws EngineException, IOException 	{
-
+	private void exportToPDF(String pdfFile) throws Exception{
+		
+		OutputStream output = new FileOutputStream(pdfFile);
+		
 		IReportEngine engine=null;
 		EngineConfig config = null;
 
 		try{
-	
+			//configure engine and platform; create factory object
 			config = new EngineConfig( );			
 			//config.setBIRTHome("C:\\birt\\birt-runtime-2_2_0\\birt-runtime-2_2_0\\ReportEngine");
 			config.setLogConfig(null, Level.OFF);
@@ -163,23 +271,27 @@ public class ReportController {
 			ex.printStackTrace();
 		}
 
+		//will create html report from 3 independable parts:
 		IReportRunnable designHead, designFoot, designBody = null;
 		URL reportHead = toURL("reports/header.rptdesign");
 		URL reportFoot = toURL("reports/footer.rptdesign");
 		URL reportBody = toURL(this.reportName);
 
+		//acceptors for the rendered data:
 		InputStream reportHeadIS = reportHead.openStream();
 		InputStream reportFootIS = reportFoot.openStream();
 		InputStream reportBodyIS = reportBody.openStream();
 		
+		//accessing the design files:
 		designHead = engine.openReportDesign(""+reportHead, reportHeadIS); 
 		designFoot = engine.openReportDesign(""+reportFoot, reportFootIS); 
 		designBody = engine.openReportDesign(""+reportBody, reportBodyIS);
 
+		//setting the parameters for each report:
 		String month = getMonthSelected();
 		String year = getYearSelected();
 		
-		//Create task to run and render the report,
+		//Create task to run and render the header report
 		IRunAndRenderTask task = engine.createRunAndRenderTask(designHead); 		
 		task.setParameterValue("Year", year);
 		task.setParameterValue("Month", month);
@@ -189,27 +301,24 @@ public class ReportController {
 		
 		task.validateParameters();
 				
-		HTMLRenderOption options = new HTMLRenderOption();
+		PDFRenderOption options = new PDFRenderOption();
 		
 		ByteArrayOutputStream fso=null, fso2=null, fso3 = null;
+		
 		
 		fso = new ByteArrayOutputStream();
 		
 		options.setOutputStream(fso);
-		options.setEmbeddable(true);
-		options.setEnableInlineStyle(true);
-		options.setLayoutPreference(HTMLRenderOption.LAYOUT_PREFERENCE_AUTO);
-		options.setOutputFormat("html");
-		options.setImageDirectory("images");
+		options.setOption(IRenderOption.HTML_PAGINATION, new Boolean(false));
+		options.setOutputFormat("pdf");
+		
 		
 		//ImageHandlerTest
-		//options.setImageHandler(new MyImageHandler());
-		//options.setImageHandler(new HTMLServerImageHandler());
 		options.setImageHandler(new HTMLCompleteImageHandler());
 		task.setRenderOption(options);
 		task.run();
 
-		//Create task to run and render the report,
+		//Create task to run and render the report, with the same set of options:
 		task = engine.createRunAndRenderTask(designBody); 
 		task.setParameterValue("Year", year);
 		task.setParameterValue("Month", ""+getMonthIndex(month));
@@ -225,9 +334,10 @@ public class ReportController {
 		options.setOutputStream(fso2);		
 		task.setRenderOption(options);		
 		
-		
+		//run the task (it will render from here):
 		task.run();
 		
+		//task to render a footer:
 		task = engine.createRunAndRenderTask(designFoot);
 		
 		try{
@@ -249,14 +359,168 @@ public class ReportController {
 			e.printStackTrace();
 		}
 
-		
+		//report is done, closing now the staff involved:
 		engine.destroy();
 		Platform.shutdown();
-		System.out.println("Finished");
+		
+		//merge PDFs:
+		
+	    concatPDFs(new ByteArrayInputStream(fso.toByteArray()), 
+	    		new ByteArrayInputStream(fso2.toByteArray()), 
+	    		new ByteArrayInputStream(fso3.toByteArray()), 
+	    		output, true);
+	}
+	
+	private void concatPDFs(InputStream head, InputStream body, InputStream foot, 
+			OutputStream output, boolean paginate) throws Exception{
+		
+        PdfReader reader1 = new PdfReader(head);
+        PdfReader reader2 = new PdfReader(body);
+        PdfReader reader3 = new PdfReader(foot);
+        PdfCopyFields copy = new PdfCopyFields(output);
+        copy.addDocument(reader1);
+        copy.addDocument(reader2);
+        copy.addDocument(reader3);
+        copy.close();
+        
+        output.flush();
+        output.close();
+	}
+	
+	private void updateReport(){
+		browser.setText("");
+		try{
+			runReport();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	private void runComplexReport() {
+		updateReport();
+	}
+	
+	public void runReport() throws EngineException, IOException 	{
+
+		IReportEngine engine=null;
+		EngineConfig config = null;
+
+		try{
+			//configure engine and platform; create factory object
+			config = new EngineConfig( );			
+			//config.setBIRTHome("C:\\birt\\birt-runtime-2_2_0\\birt-runtime-2_2_0\\ReportEngine");
+			config.setLogConfig(null, Level.OFF);
+			HashMap hm = config.getAppContext();
+	        hm.put( EngineConstants.APPCONTEXT_CLASSLOADER_KEY, ReportController.class.getClassLoader());
+	        config.setAppContext(hm); 
+
+			Platform.startup( config );
+			IReportEngineFactory factory = (IReportEngineFactory) Platform
+			.createFactoryObject( IReportEngineFactory.EXTENSION_REPORT_ENGINE_FACTORY );
+			engine = factory.createReportEngine( config );
+		}catch( Exception ex){
+			ex.printStackTrace();
+		}
+
+		//will create html report from 3 independable parts:
+		IReportRunnable designHead, designFoot, designBody = null;
+		URL reportHead = toURL("reports/header.rptdesign");
+		URL reportFoot = toURL("reports/footer.rptdesign");
+		URL reportBody = toURL(this.reportName);
+
+		//acceptors for the rendered data:
+		InputStream reportHeadIS = reportHead.openStream();
+		InputStream reportFootIS = reportFoot.openStream();
+		InputStream reportBodyIS = reportBody.openStream();
+		
+		//accessing the design files:
+		designHead = engine.openReportDesign(""+reportHead, reportHeadIS); 
+		designFoot = engine.openReportDesign(""+reportFoot, reportFootIS); 
+		designBody = engine.openReportDesign(""+reportBody, reportBodyIS);
+
+		//setting the parameters for each report:
+		String month = getMonthSelected();
+		String year = getYearSelected();
+		
+		//Create task to run and render the header report
+		IRunAndRenderTask task = engine.createRunAndRenderTask(designHead); 		
+		task.setParameterValue("Year", year);
+		task.setParameterValue("Month", month);
+		task.setParameterValue("Name", getReportName());
+		
+		setAddressParameters(task);
+		
+		task.validateParameters();
+				
+		HTMLRenderOption options = new HTMLRenderOption();
+		PDFRenderOption opt = new PDFRenderOption();
 		
 		
-		//fill the browser with this html:
 		
+		ByteArrayOutputStream fso=null, fso2=null, fso3 = null;
+		
+		fso = new ByteArrayOutputStream();
+		
+		options.setOutputStream(fso);
+		options.setEmbeddable(true);
+		options.setEnableInlineStyle(true);
+		options.setLayoutPreference(HTMLRenderOption.LAYOUT_PREFERENCE_AUTO);
+		options.setOption(IRenderOption.HTML_PAGINATION, new Boolean(true));
+		options.setOutputFormat("html");
+		options.setImageDirectory("images");
+		
+		//ImageHandlerTest
+		options.setImageHandler(new HTMLCompleteImageHandler());
+		task.setRenderOption(options);
+		task.run();
+
+		//Create task to run and render the report, with the same set of options:
+		task = engine.createRunAndRenderTask(designBody); 
+		task.setParameterValue("Year", year);
+		task.setParameterValue("Month", ""+getMonthIndex(month));
+		task.validateParameters();
+		
+		try{
+			fso.flush();
+			fso.close();
+			fso2 = new ByteArrayOutputStream();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		options.setOutputStream(fso2);		
+		task.setRenderOption(options);		
+		
+		//run the task (it will render from here):
+		task.run();
+		
+		//task to render a footer:
+		task = engine.createRunAndRenderTask(designFoot);
+		
+		try{
+			fso2.flush();
+			fso2.close();
+			fso3 = new ByteArrayOutputStream();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		options.setOutputStream(fso3);		
+		task.setRenderOption(options);		
+		
+		task.run();
+
+		try{
+			fso3.flush();
+			fso3.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
+		//report is done, closing now the staff involved:
+		engine.destroy();
+		Platform.shutdown();
+		
+		//fill the browser object with this html:		
 		StringBuffer html = new StringBuffer();
 		html.append(fso.toString());
 		html.append(fso2.toString());
@@ -332,7 +596,7 @@ public class ReportController {
 		compositeBase.setSize(800, 800);
 		
 		GridLayout gridLayout = new GridLayout();
-		gridLayout.numColumns = 4;
+		gridLayout.numColumns = 6;
 		GridData gridData = new GridData();
 		gridData.grabExcessHorizontalSpace = false;
 		gridData.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
@@ -347,6 +611,14 @@ public class ReportController {
 		monthLabel = new Label(composite, SWT.NONE);
 		monthLabel.setText("Month:");
 		monthCombo = new CCombo(composite, SWT.NONE);
+		
+		exportToPDF = new Button(composite, SWT.NONE);
+		exportToPDF.setText("Export to PDF");
+
+		print = new Button(composite, SWT.NONE);
+		print.setText("Print");
+		
+		
 	}
 
 	

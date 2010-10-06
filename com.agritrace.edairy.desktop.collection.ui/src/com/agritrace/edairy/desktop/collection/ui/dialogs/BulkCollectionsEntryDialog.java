@@ -1,14 +1,11 @@
 package com.agritrace.edairy.desktop.collection.ui.dialogs;
 
-import java.util.Date;
-
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ColumnWeightData;
-import org.eclipse.jface.window.Window;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
@@ -27,16 +24,12 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
-import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.collection.ui.components.collectionline.CollectionLineComposite;
 import com.agritrace.edairy.desktop.collection.ui.components.journalheader.JournalHeaderComposite;
 import com.agritrace.edairy.desktop.collection.ui.controllers.BulkCollectionsEntryDialogController;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
-import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.ui.dialogs.BaseDialogView;
-import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
@@ -135,9 +128,6 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 	private static final String BIN_COLUMN_HEADER = "Bin";
 	private static final String MILK_ENTRY_LIST_GROUP_TITLE = "Milk Collection Entries";
 	
-	private final IDairyRepository dairyRepo;
-	private final ICollectionJournalLineRepository lineRepo;
-	
 	/**
 	 * Create the dialog.
 	 * 
@@ -145,11 +135,8 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 	 * @param testJournalPersister
 	 */
 	@Inject
-	public BulkCollectionsEntryDialog(@Named("current") Shell parentShell, IDairyRepository dairyRepo,
-			ICollectionJournalLineRepository lineRepo) {
-		super(parentShell);
-		this.dairyRepo = dairyRepo;
-		this.lineRepo = lineRepo;
+	public BulkCollectionsEntryDialog(@Named("current") Shell parentShell, BulkCollectionsEntryDialogController controller) {
+		super(parentShell, controller);
 	}
 
 	@Override
@@ -209,11 +196,6 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 //
 //		return composite; 
 //	}
-
-	@Override
-	protected AbstractWindowController createController() {
-		return new BulkCollectionsEntryDialogController(dairyRepo, lineRepo);
-	}
 
 	private Composite createButtonComposite(Composite group) {
 		final Composite buttonComposite = UIControlsFactory.createComposite(group);

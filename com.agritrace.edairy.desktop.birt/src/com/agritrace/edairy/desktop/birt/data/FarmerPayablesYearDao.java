@@ -41,7 +41,7 @@ public class FarmerPayablesYearDao {
 		this.floatFormater = new java.text.DecimalFormat("#,#00.0#;(#,#00.0#)");
 	}
 
-	public static FarmerPayablesYearDao instance() {
+	public static FarmerPayablesYearDao getInstance() {
 		if (instance == null) {
 			instance = new FarmerPayablesYearDao();
 		}
@@ -147,7 +147,7 @@ public class FarmerPayablesYearDao {
 				.parseInt(year);
 		final BigDecimal memberCollections = collectionsRepo
 				.getSumOfPayableDeliveries(membership, priceMonth, priceYear);
-		BigDecimal paymentRate = collectionsRepo.getMilkPrice(priceMonth-1,
+		BigDecimal paymentRate = collectionsRepo.getMilkPrice(priceMonth,
 				priceYear);
 
 		if(paymentRate == null){
