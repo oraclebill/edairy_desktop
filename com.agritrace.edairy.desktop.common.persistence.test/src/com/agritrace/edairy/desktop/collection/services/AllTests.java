@@ -11,7 +11,6 @@ import com.agritrace.edairy.desktop.common.persistence.test.DialogCancelTest;
 import com.agritrace.edairy.desktop.common.persistence.test.MembershipPerformanceTestCase;
 import com.agritrace.edairy.desktop.common.persistence.test.ModelPersistenceTestCase;
 import com.agritrace.edairy.desktop.internal.common.persistence.TransactionRepositoryTest;
-import com.agritrace.edairy.desktop.internal.common.persistence.TransactionTestCase;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ 
