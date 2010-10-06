@@ -7,15 +7,20 @@ import org.hibernate.context.ManagedSessionContext;
 
 public class DataStoreManager {
 	private final HbDataStore store;
-	private final SessionFactory sessionFactory;
+	private  SessionFactory sessionFactory;
 	
 	public DataStoreManager(HbDataStore store) {
 		this.store = store;		
-		this.sessionFactory = store.getSessionFactory();
-		ManagedSessionContext.bind(sessionFactory.openSession());			
+		sessionFactory = null;
 	}
 		
 	protected Session getCurrentSession() {
+		if (sessionFactory == null) {
+			this.sessionFactory = store.getSessionFactory();
+			Session session = sessionFactory.openSession();
+			System.err.println(" --> Binding session@" + session.hashCode() + " to managed context." );
+			ManagedSessionContext.bind(sessionFactory.openSession());			
+		}
 		return sessionFactory.getCurrentSession();	
 	}
 

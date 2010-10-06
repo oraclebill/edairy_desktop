@@ -9,11 +9,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
-import com.agritrace.edairy.desktop.collection.services.TestingPersistenceModule;
+import com.agritrace.edairy.desktop.collection.services.ManagedMemoryDataStoreProvider;
 import com.agritrace.edairy.desktop.collections.scaledata.beans.ScaleRecord;
 import com.agritrace.edairy.desktop.collections.scaledata.importer.ScaleImporter;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
@@ -30,16 +31,28 @@ import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
+import com.agritrace.edairy.desktop.internal.collection.services.MilkCollectionJournalLineRepository;
+import com.agritrace.edairy.desktop.internal.common.persistence.AltRoleRepository;
+import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
+import com.google.inject.Injector;
 import com.ibm.icu.text.DateFormat;
 
 public class MilkCollectionJournalLineQueryTest {
+
+	Injector injector = Guice.createInjector(new AbstractModule() {
+		@Override protected void configure() {
+			ManagedMemoryDataStoreProvider provider = new ManagedMemoryDataStoreProvider();
+			bind(HbDataStore.class).toProvider(provider);
+			bind(ICollectionJournalLineRepository.class).to(MilkCollectionJournalLineRepository.class);				
+		}
+	});
 
 	ICollectionJournalLineRepository repo;
 	
 	@Before
 	public void setup() {
-		repo = Guice.createInjector(new TestingPersistenceModule()).getInstance(ICollectionJournalLineRepository.class);
+		repo = injector.getInstance(ICollectionJournalLineRepository.class);
 	}
 
 	@Test

@@ -4,66 +4,30 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 
-import java.util.Properties;
 
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
-import org.eclipse.emf.teneo.hibernate.HbHelper;
-import org.hibernate.cfg.Environment;
 import org.junit.Test;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.Role;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
-import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
 import com.agritrace.edairy.desktop.internal.common.persistence.AltRoleRepository;
 import com.agritrace.edairy.desktop.internal.common.persistence.AltTransactionRepository;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Key;
-import com.google.inject.Provider;
 import com.google.inject.TypeLiteral;
 
 
 public class TestTestDataStoreProvider {
 
-	private static class  DataStoreProvider implements Provider<HbDataStore> {
-		
-		@Override
-		public HbDataStore get() {
-			long COUNTER = System.currentTimeMillis();
-			
-			Properties props = new Properties();	
-			
-			props.setProperty(Environment.DRIVER, "org.hsqldb.jdbcDriver");
-			props.setProperty(Environment.USER, "SA");
-			props.setProperty(Environment.URL, "jdbc:hsqldb:mem:test"  + COUNTER);
-			props.setProperty(Environment.PASS, "");
-			props.setProperty(Environment.DIALECT, "org.hibernate.dialect.HSQLDialect");
-			props.setProperty(Environment.CURRENT_SESSION_CONTEXT_CLASS, "managed");
-
-			props.setProperty("teneo.mapping.disable_econtainer", "true");
-			props.setProperty("teneo.mapping.default_varchar_length", "60");
-
-			HbDataStore hbds = HbHelper.INSTANCE.createRegisterDataStore("data-store-test" + COUNTER);
-			hbds.setProperties(props);
-			hbds.setEPackages(PersistenceModule.EPACKAGES);
-
-			hbds.initialize();		
-			
-			System.err.println(" --> returngin data store : " + hbds );
-			System.err.println("     " + hbds.getProperties().get(Environment.URL));
-			
-			return hbds;
-		}
-	}
-	
 	@Test
 	public void testDatastoreCreation() throws Exception {
 		Injector injector = Guice.createInjector(new AbstractModule() {
 			@Override protected void configure() {
-				DataStoreProvider provider = new DataStoreProvider();
+				ManagedMemoryDataStoreProvider provider = new ManagedMemoryDataStoreProvider();
 				bind(HbDataStore.class).toInstance(provider.get());
 			}
 		});
@@ -81,7 +45,7 @@ public class TestTestDataStoreProvider {
 	public void testRepositoryCreation() throws Exception {		
 		Injector injector = Guice.createInjector(new AbstractModule() {
 			@Override protected void configure() {
-				DataStoreProvider provider = new DataStoreProvider();
+				ManagedMemoryDataStoreProvider provider = new ManagedMemoryDataStoreProvider();
 				bind(HbDataStore.class).toProvider(provider);
 				bind(ITransactionRepository.class).to(AltTransactionRepository.class);
 				
