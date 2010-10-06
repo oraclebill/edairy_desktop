@@ -105,14 +105,15 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 
 	@Override
 	public List<Membership> getMembersWithDeliveriesFor(final int month, final int year) {
-		String queryString = "SELECT distinct validatedMember " + "FROM CollectionJournalLine l "
-				+ "WHERE l.rejected = False " + "  AND l.flagged = False "
-				+ "  AND year(l.collectionJournal.journalDate) = :year "
-				+ "  AND month(l.collectionJournal.journalDate) = :month ";
+		String queryString = "SELECT distinct validatedMember " 
+			+ " FROM CollectionJournalLine l "
+			+ " WHERE 1 = 1" 
+			+ "   AND year(l.collectionJournal.journalDate) = :year "
+			+ "   AND month(l.collectionJournal.journalDate) = :month ";
 
 		Query query = getCurrentSession().createQuery(queryString);
 		query.setInteger("year", year);
-		query.setInteger("month", month);
+		query.setInteger("month", month+1);
 
 		return (query.list());
 	}
