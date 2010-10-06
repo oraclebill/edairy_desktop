@@ -2,7 +2,6 @@ package com.agritrace.edairy.desktop.internal.common.persistence;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
@@ -17,11 +16,6 @@ import org.hibernate.TransactionException;
 import org.hibernate.metadata.ClassMetadata;
 import org.osgi.service.log.LogService;
 
-import com.agritrace.edairy.desktop.common.model.audit.AuditFactory;
-import com.agritrace.edairy.desktop.common.model.audit.AuditRecord;
-import com.agritrace.edairy.desktop.common.model.audit.ChangeType;
-import com.agritrace.edairy.desktop.common.model.dairy.security.IPrincipal;
-import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
 import com.agritrace.edairy.desktop.common.persistence.services.Audit;
@@ -187,8 +181,6 @@ public abstract class HibernateRepository<T extends EObject> implements
 				sessionProvider.get().saveOrUpdate(changedItem);
 			}
 		});
-		
-		onSave(changedItem);
 	}
 
 	@Override
@@ -199,8 +191,6 @@ public abstract class HibernateRepository<T extends EObject> implements
 				sessionProvider.get().save(newEntity);
 			}
 		});
-		
-		onSave(newEntity);
 	}
 
 	@Override
@@ -212,8 +202,6 @@ public abstract class HibernateRepository<T extends EObject> implements
 				sessionProvider.get().update(getEntityName(), updateableEntity);
 			}
 		});
-		
-		onSave(updateableEntity);
 	}
 
 	@Override
@@ -226,10 +214,6 @@ public abstract class HibernateRepository<T extends EObject> implements
 				}
 			}
 		});
-		
-		for (T obj: objects) {
-			onSave(obj);
-		}
 	}
 	
 	private void closeSession() {
@@ -284,20 +268,27 @@ public abstract class HibernateRepository<T extends EObject> implements
 
 	protected void runWithTransaction(Runnable r) {
 		Session session = sessionProvider.get();
+		Session auditSession = auditProvider.get();
 		
 		final Transaction t = session.beginTransaction();
+		final Transaction auditT = auditSession.beginTransaction();
+		
 		try {
 			r.run();
 			t.commit();
+			auditT.commit();
 		} catch (final Exception ex) {
 			t.rollback();
+			auditT.rollback();
 			session.clear();
+			auditSession.clear();
 			throw new TransactionException(entityName, ex);
 		} finally {
 			closeSession();
 		}
 	}
 
+	/*
 	protected void onSave(Object entity) {
 		addAuditRecord(entity, ChangeType.SAVE);
 	}
@@ -336,4 +327,5 @@ public abstract class HibernateRepository<T extends EObject> implements
 			throw new TransactionException(entityName, ex);
 		}
 	}
+	*/
 }

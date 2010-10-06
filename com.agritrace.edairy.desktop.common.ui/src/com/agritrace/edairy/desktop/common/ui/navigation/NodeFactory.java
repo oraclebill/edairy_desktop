@@ -122,12 +122,17 @@ public final class NodeFactory {
 			}
 		};
 		
+		/*
+		// TODO: Fix remaining regressions in session-per-module
+		
+		 
 		result.addSimpleListener(new SimpleNavigationNodeAdapter() {
 			@Override
 			public void beforeActivated(INavigationNode<?> source) {
 				CONTEXT_MANAGER.switchContext(result);
 			}
 		});
+		*/
 		
 		// path found via org.eclipse.riena.ui.swt.imagePaths in plugin.xml
 		result.setIcon("arrow_right.png"); //$NON-NLS-1$

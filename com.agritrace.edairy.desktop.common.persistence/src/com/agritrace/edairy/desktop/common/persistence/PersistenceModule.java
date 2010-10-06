@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
+import org.hibernate.Interceptor;
 import org.hibernate.Session;
 
 import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
@@ -28,6 +29,7 @@ import com.agritrace.edairy.desktop.common.persistence.services.ISessionContextM
 import com.agritrace.edairy.desktop.common.persistence.services.ImageDataUtil;
 import com.agritrace.edairy.desktop.common.services.IImageEntryRepository;
 import com.agritrace.edairy.desktop.internal.common.persistence.AuditDataStoreProvider;
+import com.agritrace.edairy.desktop.internal.common.persistence.AuditInterceptor;
 import com.agritrace.edairy.desktop.internal.common.persistence.AuditSessionProvider;
 import com.agritrace.edairy.desktop.internal.common.persistence.HbDataStoreProvider;
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
@@ -140,5 +142,6 @@ public class PersistenceModule extends AbstractModule {
 		bind(HbDataStore.class).toProvider(HbDataStoreProvider.class);
 		bind(HbDataStoreProvider.class).in(Scopes.SINGLETON);
 		bind(HbDataStore.class).annotatedWith(Audit.class).toProvider(AuditDataStoreProvider.class).in(Scopes.SINGLETON);
+		bind(Interceptor.class).annotatedWith(Audit.class).to(AuditInterceptor.class);
 	}
 }

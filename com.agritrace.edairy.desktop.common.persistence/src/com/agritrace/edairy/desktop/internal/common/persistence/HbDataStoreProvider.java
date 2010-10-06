@@ -54,7 +54,6 @@ public class HbDataStoreProvider implements Provider<HbDataStore>, IDbProperties
 		hbds = HbHelper.INSTANCE.createRegisterDataStore(DEFAULT_DB_NAME);
 		hbds.setProperties(getDatastoreProperties());
 		hbds.setEPackages(PersistenceModule.EPACKAGES);
-
 		hbds.initialize();
 		
 		try {
