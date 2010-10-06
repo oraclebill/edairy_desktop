@@ -47,6 +47,7 @@ import com.agritrace.edairy.desktop.collection.ui.dialogs.JournalPersistenceDele
 import com.agritrace.edairy.desktop.collection.ui.dialogs.MemberLookupProvider;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
@@ -60,6 +61,7 @@ import com.agritrace.edairy.desktop.common.ui.controllers.BaseDialogController;
 import com.agritrace.edairy.desktop.common.ui.controllers.util.ContainerValidator;
 import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
+import com.google.inject.Inject;
 
 public class BulkCollectionsEntryDialogController extends
 		BaseDialogController<CollectionGroup> {
@@ -168,6 +170,7 @@ public class BulkCollectionsEntryDialogController extends
 	/**
 	 * 
 	 */
+	@Inject
 	public BulkCollectionsEntryDialogController(final IDairyRepository dairyRepo,
 			final ICollectionJournalLineRepository lineRepo) {
 		super();
@@ -502,8 +505,8 @@ public class BulkCollectionsEntryDialogController extends
 			collectionLineRidget.setMemberInfoProvider(lookupProvider);
 		// }
 		
-		collectionLineRidget.setBinList(dairyRepo.getLocalDairy()
-				.getDairyBins());
+		Dairy dairy = dairyRepo.getLocalDairy();
+		collectionLineRidget.setBinList(dairy.getDairyBins());
 
 		collectionLineRidget.addValidator(new DuplicateDeliveryValidator(
 				workingJournalPage.getJournalEntries(), "Collection Journal"));
