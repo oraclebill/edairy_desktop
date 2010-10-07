@@ -14,7 +14,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
-import org.hibernate.cfg.Environment;
 
 import com.agritrace.edairy.desktop.common.ui.controllers.SiteSettingsController;
 import com.agritrace.edairy.desktop.common.ui.controllers.SystemSettingsController;
@@ -74,8 +73,8 @@ public final class PreferencesDialog extends PreferenceDialog {
 			
 			addField(new StringFieldEditor(SiteSettingsController.DB_HOST, "Database host:", comp));
 			addField(new StringFieldEditor(SiteSettingsController.DB_NAME, "Database name:", comp));
-			addField(new StringFieldEditor(Environment.USER, "Database user:", comp));
-			addField(new StringFieldEditor(Environment.PASS, "Database password:", comp));
+			addField(new StringFieldEditor("hibernate.connection.username", "Database user:", comp));		// TODO: replace with application specific key
+			addField(new StringFieldEditor("hibernate.connection.password", "Database password:", comp));   // TODO: replace with application specific key
 		}
 	}
 	
