@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceStore;
-import org.hibernate.cfg.Environment;
+//import org.hibernate.cfg.Environment;
 
 import com.agritrace.edairy.desktop.common.persistence.services.IDbPropertiesManager;
 import com.google.inject.Inject;
@@ -16,6 +16,7 @@ import com.google.inject.Inject;
 public class SiteSettingsController {
 	public static final String DB_HOST = "SiteSettingsController.Custom.DB_HOST";
 	public static final String DB_NAME = "SiteSettingsController.Custom.DB_NAME";
+	public static final String URL = "hibernate.connection.url";
 	
 	private IDbPropertiesManager manager;
 	
@@ -30,12 +31,12 @@ public class SiteSettingsController {
 		for (final Enumeration<?> e = props.propertyNames(); e.hasMoreElements(); ) {
 			String key = e.nextElement().toString();
 			
-			if (!key.equals(Environment.URL))
+			if (!key.equals(URL))
 				prefs.putValue(key, props.getProperty(key));
 		}
 
 		// JDBC URL requires special treatment
-		final Matcher matcher = Pattern.compile("jdbc:mysql://(.*)/(.*)").matcher(props.getProperty(Environment.URL));
+		final Matcher matcher = Pattern.compile("jdbc:mysql://(.*)/(.*)").matcher(props.getProperty(URL));
 		matcher.matches();
 		prefs.putValue(DB_HOST, matcher.group(1));
 		prefs.putValue(DB_NAME, matcher.group(2));
@@ -51,7 +52,7 @@ public class SiteSettingsController {
 		
 		// JDBC URL requires special treatment
 		final String url = String.format("jdbc:mysql://%s/%s", prefs.getString(DB_HOST), prefs.getString(DB_NAME));
-		props.setProperty(Environment.URL, url);
+		props.setProperty(URL, url);
 	}
 	
 	private Properties props;

@@ -10,8 +10,6 @@ import org.eclipse.riena.navigation.IAction;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.swt.widgets.Shell;
-import org.hibernate.TransactionException;
-import org.hibernate.exception.ConstraintViolationException;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
@@ -140,7 +138,8 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 	private void handleException(Throwable e) {
 		String message;
 		
-		if (e instanceof ConstraintViolationException) {
+//		if (e instanceof ConstraintViolationException) {
+		if (e.getClass().getName().startsWith("org.hibernate")) {  // TODO: replace hibernate exceptions with domain specific.. 
 			message = "Could not save the employee record. An employee with this username already exists.";
 		} else {
 			message = "Unhandled exception: " + e.getMessage();
@@ -154,7 +153,7 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 		try {
 			localDairy.getEmployees().add(newEntity);
 			dairyRepo.save(localDairy);
-		} catch (TransactionException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			handleException(e.getCause());
 		}
@@ -164,7 +163,7 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 	protected void updateEntity(Employee updateableEntity) {
 		try {
 			dairyRepo.save(updateableEntity);
-		} catch (TransactionException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			handleException(e.getCause());
 		}

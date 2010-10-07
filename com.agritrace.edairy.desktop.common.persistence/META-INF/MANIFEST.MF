@@ -5,14 +5,14 @@ Bundle-SymbolicName: com.agritrace.edairy.desktop.common.persistence
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: com.agritrace.edairy.desktop.internal.common.persistence.Activator
 Bundle-Vendor: AGRITRACE
-Require-Bundle: com.agritrace.edairy.desktop.common.model;visibility:=reexport,
- org.eclipse.emf.teneo.hibernate;bundle-version="1.1.2";visibility:=reexport,
- org.eclipse.core.runtime,
- org.hibernate;bundle-version="3.3.2";visibility:=reexport,
+Require-Bundle: org.eclipse.core.runtime,
+ com.agritrace.edairy.desktop.common.model,
+ org.eclipse.emf.teneo.hibernate;bundle-version="1.1.2",
+ org.hibernate;bundle-version="3.3.2",
  org.eclipse.riena.core;bundle-version="2.0.0",
  org.eclipse.osgi.services;bundle-version="3.2.100",
- org.eclipse.swt;bundle-version="3.6.0",
- com.google.inject
+ com.google.inject,
+ org.eclipse.swt;bundle-version="3.6.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Import-Package: com.mysql.jdbc,
@@ -23,23 +23,13 @@ Import-Package: com.mysql.jdbc,
  org.hsqldb;version="1.8.1",
  org.hsqldb.jdbc;version="1.8.1"
 Export-Package: com.agritrace.edairy.desktop.collection.services,
- com.agritrace.edairy.desktop.common.persistence;
-  uses:="com.agritrace.edairy.desktop.common.model.requests,
-   com.agritrace.edairy.desktop.common.model.tracking,
-   com.agritrace.edairy.desktop.common.model.dairy,
-   com.agritrace.edairy.desktop.common.model.base",
- com.agritrace.edairy.desktop.common.persistence.services;uses:="com.agritrace.edairy.desktop.common.persistence,org.hibernate,org.eclipse.emf.teneo.hibernate",
- com.agritrace.edairy.desktop.common.ui.managers;
-  uses:="org.eclipse.emf.ecore.resource,
-   org.eclipse.emf.ecore,
-   org.eclipse.emf.common.util,
-   org.eclipse.emf.ecore.resource.impl,
-   com.agritrace.edairy.desktop.common.model.tracking,
-   com.agritrace.edairy.desktop.common.model.dairy",
+ com.agritrace.edairy.desktop.common.persistence,
+ com.agritrace.edairy.desktop.common.persistence.services,
+ com.agritrace.edairy.desktop.common.ui.managers,
  com.agritrace.edairy.desktop.internal.collection.services,
  com.agritrace.edairy.desktop.member.services.farm,
- com.agritrace.edairy.desktop.operations.services;uses:="com.agritrace.edairy.desktop.common.model.tracking,com.agritrace.edairy.desktop.common.model.dairy",
- com.agritrace.edairy.desktop.operations.services.dairylocation;uses:="org.hibernate,com.agritrace.edairy.desktop.common.model.dairy,com.agritrace.edairy.desktop.common.persistence.services",
- com.agritrace.edairy.desktop.operations.services.employee;uses:="com.agritrace.edairy.desktop.common.persistence,com.agritrace.edairy.desktop.common.model.dairy",
- com.agritrace.edairy.desktop.operations.services.supplier;uses:="com.agritrace.edairy.desktop.common.model.dairy,com.agritrace.edairy.desktop.common.persistence.services",
+ com.agritrace.edairy.desktop.operations.services,
+ com.agritrace.edairy.desktop.operations.services.dairylocation,
+ com.agritrace.edairy.desktop.operations.services.employee,
+ com.agritrace.edairy.desktop.operations.services.supplier,
  com.agritrace.edairy.desktop.persistence.finance
