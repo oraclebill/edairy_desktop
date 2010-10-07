@@ -14,7 +14,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
-import com.agritrace.edairy.desktop.collection.services.ManagedMemoryDataStoreProvider;
 import com.agritrace.edairy.desktop.collections.scaledata.beans.ScaleRecord;
 import com.agritrace.edairy.desktop.collections.scaledata.importer.ScaleImporter;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
@@ -31,8 +30,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
+import com.agritrace.edairy.desktop.common.persistence.ManagedMemoryDataStoreProvider;
 import com.agritrace.edairy.desktop.internal.collection.services.MilkCollectionJournalLineRepository;
-import com.agritrace.edairy.desktop.internal.common.persistence.AltRoleRepository;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;

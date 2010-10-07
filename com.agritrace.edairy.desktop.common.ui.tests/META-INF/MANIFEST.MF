@@ -9,6 +9,7 @@ Require-Bundle: com.agritrace.edairy.desktop.common.model,
  org.junit;bundle-version="4.8.1",
  com.agritrace.edairy.desktop.common.ui;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.common.persistence;bundle-version="1.0.0",
- com.google.inject
+ com.google.inject,
+ aopalliance;bundle-version="0.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

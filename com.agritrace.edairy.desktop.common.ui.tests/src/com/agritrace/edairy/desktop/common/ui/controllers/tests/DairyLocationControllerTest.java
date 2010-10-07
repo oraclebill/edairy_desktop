@@ -7,6 +7,7 @@ import java.util.List;
 
 import junit.framework.Assert;
 
+import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.NavigationNodeId;
 import org.eclipse.riena.navigation.ui.swt.controllers.AbstractSubModuleControllerTest;
@@ -15,7 +16,6 @@ import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 
-import com.agritrace.edairy.desktop.collection.services.TestPersistenceModule;
 import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
 import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.base.MapLocation;
@@ -25,11 +25,30 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.persistence.ManagedMemoryDataStoreProvider;
+import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
 import com.agritrace.edairy.desktop.dairy.locations.ui.DairyLocationUIConstants;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationDirectoryController;
+import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 public class DairyLocationControllerTest extends AbstractSubModuleControllerTest<DairyLocationDirectoryController> {
+
+//	Injector injector = Guice.createInjector(new AbstractModule() {
+//		@Override protected void configure() {
+//			ManagedMemoryDataStoreProvider provider = new ManagedMemoryDataStoreProvider();
+//			bind(HbDataStore.class).toProvider(provider);
+////			bind(IDairyRepository.class).to(DairyRepository.class);				
+//		}
+//	});
+	Injector injector = Guice.createInjector(new PersistenceModule() {
+		@Override protected void bindDataStore() {
+			ManagedMemoryDataStoreProvider provider = new ManagedMemoryDataStoreProvider();
+			bind(HbDataStore.class).toProvider(provider);
+//			bind(IDairyRepository.class).to(DairyRepository.class);				
+		}
+	});
 
 	private DairyLocation dairyLocation;
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat(DairyLocationUIConstants.DATE_FORMATE);
@@ -39,7 +58,7 @@ public class DairyLocationControllerTest extends AbstractSubModuleControllerTest
 		initTestData();
 		node.setNodeId(new NavigationNodeId(DairyLocationUIConstants.NODE_ID));
 		final DairyLocationDirectoryController newInst = 
-			Guice.createInjector(new TestPersistenceModule()).getInstance(DairyLocationDirectoryController.class);
+			injector.getInstance(DairyLocationDirectoryController.class);
 		newInst.setNavigationNode(node);
 		// newInst.getInput().add(dairyLocation);
 		return newInst;

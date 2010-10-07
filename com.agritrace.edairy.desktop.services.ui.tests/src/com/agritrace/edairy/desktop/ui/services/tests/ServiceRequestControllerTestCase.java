@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.NavigationNodeId;
 import org.eclipse.riena.navigation.ui.swt.controllers.AbstractSubModuleControllerTest;
@@ -16,9 +17,7 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
-import org.hibernate.Session;
 
-import com.agritrace.edairy.desktop.collection.services.TestPersistenceModule;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
@@ -26,13 +25,14 @@ import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
+import com.agritrace.edairy.desktop.common.persistence.ManagedMemoryDataStoreProvider;
+import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.agritrace.edairy.desktop.services.ui.controllers.AnimalHealthRequestViewController;
 import com.agritrace.edairy.desktop.services.ui.views.AnimalHealthRequestView;
-import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
-import com.google.inject.Inject;
-import com.google.inject.Provider;
+import com.google.inject.Injector;
 
 /**
  * Test case for service request controller
@@ -41,24 +41,32 @@ import com.google.inject.Provider;
  * 
  */
 public class ServiceRequestControllerTestCase extends AbstractSubModuleControllerTest<AnimalHealthRequestViewController> {
-	@Inject
-	private static Provider<Session> sessionProvider;
-	
-	static {
-		Guice.createInjector(new TestPersistenceModule(), new AbstractModule() {
-			@Override
-			protected void configure() {
-				requestStaticInjection(ServiceRequestControllerTestCase.class);
-			}
-		});
-	}
+	Injector injector = Guice.createInjector(new PersistenceModule() {
+		@Override protected void bindDataStore() {
+			ManagedMemoryDataStoreProvider provider = new ManagedMemoryDataStoreProvider();
+			bind(HbDataStore.class).toProvider(provider);
+		}
+	});
+
+
+//	@Inject
+//	private static Provider<Session> sessionProvider;
+//	
+//
+//	static {
+//		Guice.createInjector(new TestPersistenceModule(), new AbstractModule() {
+//			@Override
+//			protected void configure() {
+//				requestStaticInjection(ServiceRequestControllerTestCase.class);
+//			}
+//		});
+//	}
 
 	List<AnimalHealthRequest> requests = new ArrayList<AnimalHealthRequest>();
 
 	@Override
 	protected AnimalHealthRequestViewController createController(ISubModuleNode node) {
-		final AnimalHealthRequestViewController newInst = Guice.createInjector(
-				new TestPersistenceModule()).getInstance(AnimalHealthRequestViewController.class);
+		final AnimalHealthRequestViewController newInst = injector.getInstance(AnimalHealthRequestViewController.class);
 		node.setNodeId(new NavigationNodeId("edm.services.log"));
 		newInst.setNavigationNode(node);
 		return newInst;
@@ -83,7 +91,7 @@ public class ServiceRequestControllerTestCase extends AbstractSubModuleControlle
 		testDairy.setPhoneNumber("12345678");
 		testDairy.getMemberships().add(membership);
 		testDairy.setLocation(DairyUtil.createLocation(null, null, null));
-		sessionProvider.get().save(testDairy);
+		injector.getInstance(IDairyRepository.class).save(testDairy);
 	}
 
 	/**
