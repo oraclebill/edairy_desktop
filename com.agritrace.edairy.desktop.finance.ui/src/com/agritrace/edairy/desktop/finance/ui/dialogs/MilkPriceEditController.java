@@ -18,12 +18,12 @@ import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 
-import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
+import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.finance.ui.MilkPriceJournalConstants;
 import com.ibm.icu.util.Calendar;
 
-public class MilkPriceEditController extends RecordDialogController<MilkPrice> {
+public class MilkPriceEditController extends RecordDialogController<MemberPayment> {
 	private static final String[] MONTHS = new String[] { "January",
 			"February", "March", "April", "May", "June", "July", "August",
 			"September", "October", "November", "December", };
@@ -178,7 +178,7 @@ public class MilkPriceEditController extends RecordDialogController<MilkPrice> {
 		}
 		beanValid = superValid && beanValid;
 		if (beanValid) {
-			getWorkingCopy().setValue(priceBean.getPrice1());
+			getWorkingCopy().setPaymentRate(priceBean.getPrice1());
 			getWorkingCopy().setMonth(priceBean.getMonth());
 			getWorkingCopy().setYear(priceBean.getYear());
 		}

@@ -228,13 +228,15 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Customer/customerType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Customer/status"/>
     </genClasses>
-    <genClasses ecoreClass="dairy.ecore#//MilkPrice">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkPrice/id"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkPrice/month"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkPrice/year"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkPrice/value"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//MilkPrice/enteredBy"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkPrice/entryDate"/>
+    <genClasses ecoreClass="dairy.ecore#//MemberPayment">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MemberPayment/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MemberPayment/year"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MemberPayment/month"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MemberPayment/paymentRate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MemberPayment/paymentsTotal"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MemberPayment/paymentsCount"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//MemberPayment/enteredBy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MemberPayment/entryDate"/>
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//Preference">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Preference/id"/>

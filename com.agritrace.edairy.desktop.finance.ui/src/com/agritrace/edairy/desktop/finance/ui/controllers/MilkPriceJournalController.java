@@ -16,15 +16,14 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
-import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
+import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
 import com.agritrace.edairy.desktop.common.model.dairy.security.EmployeePrincipal;
 import com.agritrace.edairy.desktop.common.model.dairy.security.IPrincipal;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
-import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager;
+import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.ui.columnformatters.PersonToFormattedName;
-import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controls.daterange.IDateRangeRidget;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
@@ -34,7 +33,7 @@ import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.google.inject.Inject;
 
 @PermissionRequired(Permission.VIEW_MILK_PRICES)
-public class MilkPriceJournalController extends BasicDirectoryController<MilkPrice> {
+public class MilkPriceJournalController extends BasicDirectoryController<MemberPayment> {
 
 	static class FilterBean extends AbstractBean {
 		private static final String START_DATE = "start-date";
@@ -78,18 +77,18 @@ public class MilkPriceJournalController extends BasicDirectoryController<MilkPri
 		"September", "October", "November", "December", };
 
 	@Inject
-	public MilkPriceJournalController(final IDairyRepository dairyRepo, final IRepository<MilkPrice> repo) {
+	public MilkPriceJournalController(final IDairyRepository dairyRepo, final IRepository<MemberPayment> repo) {
 		this.dairyRepo = dairyRepo;
 
-		setEClass(DairyPackage.Literals.MILK_PRICE);
+		setEClass(DairyPackage.Literals.MEMBER_PAYMENT);
 		setRepository(repo);
 
-		addTableColumn("Month", DairyPackage.Literals.MILK_PRICE__MONTH, new ColumnFormatter() {
+		addTableColumn("Month", DairyPackage.Literals.MEMBER_PAYMENT__MONTH, new ColumnFormatter() {
 			@Override
 			public String getText(Object element) {
 				String ret = "";
-				if ( element instanceof MilkPrice ) {
-					ret = getMonth(((MilkPrice)element).getMonth());
+				if ( element instanceof MemberPayment ) {
+					ret = getMonth(((MemberPayment)element).getMonth());
 				}
 				return ret;
 			}
@@ -98,13 +97,13 @@ public class MilkPriceJournalController extends BasicDirectoryController<MilkPri
 				return MONTHS[month];
 			}			
 		});
-		addTableColumn("Year", DairyPackage.Literals.MILK_PRICE__YEAR);
-		addTableColumn("Price", DairyPackage.Literals.MILK_PRICE__VALUE);
-		addTableColumn("Entered By", DairyPackage.Literals.MILK_PRICE__ENTERED_BY, new PersonToFormattedName(
+		addTableColumn("Year", DairyPackage.Literals.MEMBER_PAYMENT__YEAR);
+		addTableColumn("Price", DairyPackage.Literals.MEMBER_PAYMENT__PAYMENT_RATE);
+		addTableColumn("Entered By", DairyPackage.Literals.MEMBER_PAYMENT__ENTERED_BY, new PersonToFormattedName(
 				"enteredBy"));
-		addTableColumn("Entry Date", DairyPackage.Literals.MILK_PRICE__ENTRY_DATE);
+		addTableColumn("Entry Date", DairyPackage.Literals.MEMBER_PAYMENT__ENTRY_DATE);
 		// addTableColumn("Locked",
-		// DairyPackage.Literals.MILK_PRICE__ENTRY_DATE);
+		// DairyPackage.Literals.MEMBER_PAYMENT__ENTRY_DATE);
 	}
 
 	@Override
@@ -123,7 +122,7 @@ public class MilkPriceJournalController extends BasicDirectoryController<MilkPri
 
 	@Override
 	protected void handleViewItemAction() {
-		// MilkPrice selectedObject = getSelectedEObject();
+		// MemberPayment selectedObject = getSelectedEObject();
 		// boolean doIt = MessageDialog.openConfirm(getShell(),
 		// "Confirm Price Deletion",
 		// "Are you sure you want to delete this price?");
@@ -167,7 +166,7 @@ public class MilkPriceJournalController extends BasicDirectoryController<MilkPri
 	 * 
 	 */
 	private void updateMilkPrice() {
-		MilkPrice currentPrice = getCurrentPrice();
+		MemberPayment currentPrice = getCurrentPrice();
 		if (currentPrice != null) {
 			Calendar cal = Calendar.getInstance();
 			cal.set(Calendar.MONTH, currentPrice.getMonth());
@@ -175,7 +174,7 @@ public class MilkPriceJournalController extends BasicDirectoryController<MilkPri
 					MilkPriceJournalConstants.CURRENT_PRICE_LABEL_FMT, 
 					cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()), 
 					currentPrice.getYear(), 
-					currentPrice.getValue().toString()));
+					currentPrice.getPaymentRate().toString()));
 		} else {
 			currentPriceLabel.setText(MilkPriceJournalConstants.CURRENT_PRICE_DEFAULT);
 		}
@@ -188,31 +187,31 @@ public class MilkPriceJournalController extends BasicDirectoryController<MilkPri
 	 * 
 	 * @return
 	 */
-	private MilkPrice getCurrentPrice() {
+	private MemberPayment getCurrentPrice() {
 		return dairyRepo.getCurrentMilkPrice();
 	}
 
 	@Override
-	protected List<MilkPrice> getFilteredResult() {
+	protected List<MemberPayment> getFilteredResult() {
 		updateMilkPrice();
 		return dairyRepo.getMilkPrices(filterBean.getStartDate(), filterBean.getEndDate());
 	}
 
 	@Override
-	protected RecordDialog<MilkPrice> getRecordDialog(Shell shell) {
+	protected RecordDialog<MemberPayment> getRecordDialog(Shell shell) {
 		return new MilkPriceEditDialog(shell);
 	}
 
 	@Override
-	protected MilkPrice createNewModel() {
-		final MilkPrice milkPrice = super.createNewModel();
+	protected MemberPayment createNewModel() {
+		final MemberPayment milkPrice = super.createNewModel();
 		milkPrice.setMonth(Calendar.getInstance().get(Calendar.MONTH));
 		milkPrice.setYear(Calendar.getInstance().get(Calendar.YEAR));
 		return milkPrice;
 	}
 
 	@Override
-	protected void createEntity(MilkPrice milkPrice) {
+	protected void createEntity(MemberPayment milkPrice) {
 		milkPrice.setEnteredBy(getUser());
 		milkPrice.setEntryDate(new Date());
 		dairyRepo.getLocalDairy().getPriceHistory().add(milkPrice);

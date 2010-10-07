@@ -24,9 +24,9 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
+import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus;
-import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
@@ -106,12 +106,12 @@ public class MilkCollectionJournalLineQueryTest {
 
 		// create some data
 		long queryDate = 100000;
-		MilkPrice milkPrice = DairyFactory.eINSTANCE.createMilkPrice();
+		MemberPayment milkPrice = DairyFactory.eINSTANCE.createMemberPayment();
 		milkPrice.setEnteredBy(DEFAULT_DRIVER);
 		milkPrice.setEntryDate(new Date(queryDate));
 		milkPrice.setMonth(1);
 		milkPrice.setYear(1990);
-		milkPrice.setValue(new BigDecimal("23.22"));
+		milkPrice.setPaymentRate(new BigDecimal("23.22"));
 
 		DAIRY.getPriceHistory().add(milkPrice);
 		repo.save(DAIRY);

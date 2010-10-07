@@ -12,13 +12,13 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
-import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
+import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.FormUtil;
 import com.agritrace.edairy.desktop.finance.ui.MilkPriceJournalConstants;
 import com.ibm.icu.util.Calendar;
 
-public class MilkPriceEditDialog extends RecordDialog<MilkPrice> {
+public class MilkPriceEditDialog extends RecordDialog<MemberPayment> {
 
 	public static final String[] MONTHS = new String[] { "January",
 			"February", "March", "April", "May", "June", "July", "August",

@@ -439,7 +439,7 @@ public interface Dairy extends Company {
 
 	/**
 	 * Returns the value of the '<em><b>Price History</b></em>' containment reference list.
-	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.MilkPrice}.
+	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.MemberPayment}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Price History</em>' containment reference list isn't clear,
@@ -451,7 +451,7 @@ public interface Dairy extends Company {
 	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
-	EList<MilkPrice> getPriceHistory();
+	EList<MemberPayment> getPriceHistory();
 
 	/**
 	 * Returns the value of the '<em><b>Version</b></em>' attribute.
