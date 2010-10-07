@@ -3,6 +3,7 @@ package com.agritrace.ediary.desktop.operations.ui.tests;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.NavigationNodeId;
 import org.eclipse.riena.navigation.ui.swt.controllers.AbstractSubModuleControllerTest;
@@ -11,12 +12,14 @@ import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IListRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 
-import com.agritrace.edairy.desktop.collection.services.TestPersistenceModule;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
+import com.agritrace.edairy.desktop.common.persistence.ManagedMemoryDataStoreProvider;
+import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
 import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDirectoryController;
 import com.agritrace.edairy.desktop.operations.ui.views.SupplierDirectoryView;
 import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 /**
  * Test case for supplier list controller
@@ -27,12 +30,19 @@ import com.google.inject.Guice;
 public class SupplierListControllerTestCase extends
 		AbstractSubModuleControllerTest<SupplierDirectoryController> {
 
+	Injector injector = Guice.createInjector(new PersistenceModule() {
+		@Override protected void bindDataStore() {
+			ManagedMemoryDataStoreProvider provider = new ManagedMemoryDataStoreProvider();
+			bind(HbDataStore.class).toProvider(provider);
+		}
+	});
+
 	List<Supplier> supplier = new ArrayList<Supplier>();
 	private SupplierDirectoryController newInst;
 
 	@Override
 	protected SupplierDirectoryController createController(ISubModuleNode node) {
-		newInst = Guice.createInjector(new TestPersistenceModule()).getInstance(SupplierDirectoryController.class);
+		newInst = injector.getInstance(SupplierDirectoryController.class);
 		node.setNodeId(new NavigationNodeId("edm.services.supplier.directory"));
 		newInst.setNavigationNode(node);
 		return newInst;

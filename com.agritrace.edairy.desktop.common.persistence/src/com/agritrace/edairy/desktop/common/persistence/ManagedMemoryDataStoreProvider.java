@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.collection.services;
+package com.agritrace.edairy.desktop.common.persistence;
 
 import java.util.Properties;
 
@@ -6,7 +6,6 @@ import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.eclipse.emf.teneo.hibernate.HbHelper;
 import org.hibernate.cfg.Environment;
 
-import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
 import com.google.inject.Provider;
 
 public class  ManagedMemoryDataStoreProvider implements Provider<HbDataStore> {

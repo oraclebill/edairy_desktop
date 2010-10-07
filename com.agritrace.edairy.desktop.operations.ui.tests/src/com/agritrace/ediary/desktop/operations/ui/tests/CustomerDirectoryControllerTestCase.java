@@ -1,5 +1,6 @@
 package com.agritrace.ediary.desktop.operations.ui.tests;
 
+import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.eclipse.riena.core.RienaStatus;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.NavigationNodeId;
@@ -9,13 +10,16 @@ import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 
-import com.agritrace.edairy.desktop.collection.services.TestPersistenceModule;
+import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
+import com.agritrace.edairy.desktop.common.persistence.ManagedMemoryDataStoreProvider;
+import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
 import com.agritrace.edairy.desktop.common.ui.reference.CompanyStatus;
 import com.agritrace.edairy.desktop.common.ui.reference.CustomerType;
+import com.agritrace.edairy.desktop.internal.collection.services.MilkCollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.operations.ui.controllers.CustomerDirectoryController;
 import com.agritrace.edairy.desktop.operations.ui.views.CustomerDirectoryView;
 import com.google.inject.Guice;
@@ -30,6 +34,14 @@ import com.google.inject.Injector;
  */
 public class CustomerDirectoryControllerTestCase extends AbstractSubModuleControllerTest<CustomerDirectoryController> {
 
+	Injector injector = Guice.createInjector(new PersistenceModule() {
+		@Override protected void bindDataStore() {
+			ManagedMemoryDataStoreProvider provider = new ManagedMemoryDataStoreProvider();
+			bind(HbDataStore.class).toProvider(provider);
+		}
+	});
+
+
 	// List<Supplier> supplier = new ArrayList<Supplier>();
 	private CustomerDirectoryController controller;
 	
@@ -38,7 +50,7 @@ public class CustomerDirectoryControllerTestCase extends AbstractSubModuleContro
 
 	@Override
 	protected CustomerDirectoryController createController(ISubModuleNode node) {
-		controller = Guice.createInjector(new TestPersistenceModule()).getInstance(CustomerDirectoryController.class);
+		controller = injector.getInstance(CustomerDirectoryController.class);
 		node.setNodeId(new NavigationNodeId("edm.customer.directory"));
 		controller.setNavigationNode(node);
 		return controller;
@@ -48,7 +60,6 @@ public class CustomerDirectoryControllerTestCase extends AbstractSubModuleContro
 	public void setUp() throws Exception {
 		// start with a new db
 		System.setProperty(RienaStatus.RIENA_TEST_SYSTEM_PROPERTY, "true");
-		Injector injector = Guice.createInjector(new TestPersistenceModule());
 		injector.injectMembers(this);
 		
 		for (int i = 0; i < 10; i++) {

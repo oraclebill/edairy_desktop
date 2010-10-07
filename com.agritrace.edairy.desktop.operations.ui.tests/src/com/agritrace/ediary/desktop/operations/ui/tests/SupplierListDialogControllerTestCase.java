@@ -3,6 +3,7 @@ package com.agritrace.ediary.desktop.operations.ui.tests;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IListRidget;
@@ -10,9 +11,10 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.agritrace.edairy.desktop.collection.services.TestPersistenceModule;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
+import com.agritrace.edairy.desktop.common.persistence.ManagedMemoryDataStoreProvider;
+import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDialogController;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;
@@ -27,6 +29,14 @@ import com.google.inject.Injector;
  */
 public class SupplierListDialogControllerTestCase extends
 		AbstractDialogViewControllerTestCase<SupplierDialogController> {
+
+	Injector injector = Guice.createInjector(new PersistenceModule() {
+		@Override protected void bindDataStore() {
+			ManagedMemoryDataStoreProvider provider = new ManagedMemoryDataStoreProvider();
+			bind(HbDataStore.class).toProvider(provider);
+		}
+	});
+
 
 	List<Supplier> supplier = new ArrayList<Supplier>();
 	private SupplierDialogController newInst;
@@ -44,7 +54,6 @@ public class SupplierListDialogControllerTestCase extends
 	}
 
 	protected void prepareDBForTest() {
-		Injector injector = Guice.createInjector(new TestPersistenceModule());
 		Session session = injector.getInstance(Session.class);
 		Transaction tx = session.beginTransaction();
 		session.createSQLQuery("Delete from supplier");
