@@ -2278,14 +2278,14 @@ public interface DairyPackage extends EPackage {
 	int CUSTOMER_FEATURE_COUNT = ModelPackage.COMPANY_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkPriceImpl <em>Milk Price</em>}' class.
+	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MemberPaymentImpl <em>Member Payment</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.MilkPriceImpl
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getMilkPrice()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.MemberPaymentImpl
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getMemberPayment()
 	 * @generated
 	 */
-	int MILK_PRICE = 16;
+	int MEMBER_PAYMENT = 16;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -2294,16 +2294,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MILK_PRICE__ID = 0;
-
-	/**
-	 * The feature id for the '<em><b>Month</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MILK_PRICE__MONTH = 1;
+	int MEMBER_PAYMENT__ID = 0;
 
 	/**
 	 * The feature id for the '<em><b>Year</b></em>' attribute.
@@ -2312,16 +2303,43 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MILK_PRICE__YEAR = 2;
+	int MEMBER_PAYMENT__YEAR = 1;
 
 	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * The feature id for the '<em><b>Month</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MILK_PRICE__VALUE = 3;
+	int MEMBER_PAYMENT__MONTH = 2;
+
+	/**
+	 * The feature id for the '<em><b>Payment Rate</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMBER_PAYMENT__PAYMENT_RATE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Payments Total</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMBER_PAYMENT__PAYMENTS_TOTAL = 4;
+
+	/**
+	 * The feature id for the '<em><b>Payments Count</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMBER_PAYMENT__PAYMENTS_COUNT = 5;
 
 	/**
 	 * The feature id for the '<em><b>Entered By</b></em>' reference.
@@ -2330,7 +2348,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MILK_PRICE__ENTERED_BY = 4;
+	int MEMBER_PAYMENT__ENTERED_BY = 6;
 
 	/**
 	 * The feature id for the '<em><b>Entry Date</b></em>' attribute.
@@ -2339,16 +2357,16 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MILK_PRICE__ENTRY_DATE = 5;
+	int MEMBER_PAYMENT__ENTRY_DATE = 7;
 
 	/**
-	 * The number of structural features of the '<em>Milk Price</em>' class.
+	 * The number of structural features of the '<em>Member Payment</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MILK_PRICE_FEATURE_COUNT = 6;
+	int MEMBER_PAYMENT_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.PreferenceImpl <em>Preference</em>}' class.
@@ -4513,80 +4531,102 @@ public interface DairyPackage extends EPackage {
 	EAttribute getCustomer_Status();
 
 	/**
-	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPrice <em>Milk Price</em>}'.
+	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.MemberPayment <em>Member Payment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Milk Price</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkPrice
+	 * @return the meta object for class '<em>Member Payment</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MemberPayment
 	 * @generated
 	 */
-	EClass getMilkPrice();
+	EClass getMemberPayment();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getId <em>Id</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.MemberPayment#getId <em>Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getId()
-	 * @see #getMilkPrice()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MemberPayment#getId()
+	 * @see #getMemberPayment()
 	 * @generated
 	 */
-	EAttribute getMilkPrice_Id();
+	EAttribute getMemberPayment_Id();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getMonth <em>Month</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Month</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getMonth()
-	 * @see #getMilkPrice()
-	 * @generated
-	 */
-	EAttribute getMilkPrice_Month();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getYear <em>Year</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.MemberPayment#getYear <em>Year</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Year</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getYear()
-	 * @see #getMilkPrice()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MemberPayment#getYear()
+	 * @see #getMemberPayment()
 	 * @generated
 	 */
-	EAttribute getMilkPrice_Year();
+	EAttribute getMemberPayment_Year();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getValue <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.MemberPayment#getMonth <em>Month</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getValue()
-	 * @see #getMilkPrice()
+	 * @return the meta object for the attribute '<em>Month</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MemberPayment#getMonth()
+	 * @see #getMemberPayment()
 	 * @generated
 	 */
-	EAttribute getMilkPrice_Value();
+	EAttribute getMemberPayment_Month();
 
 	/**
-	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getEnteredBy <em>Entered By</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.MemberPayment#getPaymentRate <em>Payment Rate</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Payment Rate</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MemberPayment#getPaymentRate()
+	 * @see #getMemberPayment()
+	 * @generated
+	 */
+	EAttribute getMemberPayment_PaymentRate();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.MemberPayment#getPaymentsTotal <em>Payments Total</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Payments Total</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MemberPayment#getPaymentsTotal()
+	 * @see #getMemberPayment()
+	 * @generated
+	 */
+	EAttribute getMemberPayment_PaymentsTotal();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.MemberPayment#getPaymentsCount <em>Payments Count</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Payments Count</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MemberPayment#getPaymentsCount()
+	 * @see #getMemberPayment()
+	 * @generated
+	 */
+	EAttribute getMemberPayment_PaymentsCount();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.MemberPayment#getEnteredBy <em>Entered By</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Entered By</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getEnteredBy()
-	 * @see #getMilkPrice()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MemberPayment#getEnteredBy()
+	 * @see #getMemberPayment()
 	 * @generated
 	 */
-	EReference getMilkPrice_EnteredBy();
+	EReference getMemberPayment_EnteredBy();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getEntryDate <em>Entry Date</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.MemberPayment#getEntryDate <em>Entry Date</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Entry Date</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkPrice#getEntryDate()
-	 * @see #getMilkPrice()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MemberPayment#getEntryDate()
+	 * @see #getMemberPayment()
 	 * @generated
 	 */
-	EAttribute getMilkPrice_EntryDate();
+	EAttribute getMemberPayment_EntryDate();
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.Preference <em>Preference</em>}'.
@@ -6317,14 +6357,14 @@ public interface DairyPackage extends EPackage {
 		EAttribute CUSTOMER__STATUS = eINSTANCE.getCustomer_Status();
 
 		/**
-		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkPriceImpl <em>Milk Price</em>}' class.
+		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MemberPaymentImpl <em>Member Payment</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.MilkPriceImpl
-		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getMilkPrice()
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.MemberPaymentImpl
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getMemberPayment()
 		 * @generated
 		 */
-		EClass MILK_PRICE = eINSTANCE.getMilkPrice();
+		EClass MEMBER_PAYMENT = eINSTANCE.getMemberPayment();
 
 		/**
 		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
@@ -6332,15 +6372,7 @@ public interface DairyPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MILK_PRICE__ID = eINSTANCE.getMilkPrice_Id();
-
-		/**
-		 * The meta object literal for the '<em><b>Month</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute MILK_PRICE__MONTH = eINSTANCE.getMilkPrice_Month();
+		EAttribute MEMBER_PAYMENT__ID = eINSTANCE.getMemberPayment_Id();
 
 		/**
 		 * The meta object literal for the '<em><b>Year</b></em>' attribute feature.
@@ -6348,15 +6380,39 @@ public interface DairyPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MILK_PRICE__YEAR = eINSTANCE.getMilkPrice_Year();
+		EAttribute MEMBER_PAYMENT__YEAR = eINSTANCE.getMemberPayment_Year();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Month</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MILK_PRICE__VALUE = eINSTANCE.getMilkPrice_Value();
+		EAttribute MEMBER_PAYMENT__MONTH = eINSTANCE.getMemberPayment_Month();
+
+		/**
+		 * The meta object literal for the '<em><b>Payment Rate</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEMBER_PAYMENT__PAYMENT_RATE = eINSTANCE.getMemberPayment_PaymentRate();
+
+		/**
+		 * The meta object literal for the '<em><b>Payments Total</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEMBER_PAYMENT__PAYMENTS_TOTAL = eINSTANCE.getMemberPayment_PaymentsTotal();
+
+		/**
+		 * The meta object literal for the '<em><b>Payments Count</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEMBER_PAYMENT__PAYMENTS_COUNT = eINSTANCE.getMemberPayment_PaymentsCount();
 
 		/**
 		 * The meta object literal for the '<em><b>Entered By</b></em>' reference feature.
@@ -6364,7 +6420,7 @@ public interface DairyPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MILK_PRICE__ENTERED_BY = eINSTANCE.getMilkPrice_EnteredBy();
+		EReference MEMBER_PAYMENT__ENTERED_BY = eINSTANCE.getMemberPayment_EnteredBy();
 
 		/**
 		 * The meta object literal for the '<em><b>Entry Date</b></em>' attribute feature.
@@ -6372,7 +6428,7 @@ public interface DairyPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MILK_PRICE__ENTRY_DATE = eINSTANCE.getMilkPrice_EntryDate();
+		EAttribute MEMBER_PAYMENT__ENTRY_DATE = eINSTANCE.getMemberPayment_EntryDate();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.PreferenceImpl <em>Preference</em>}' class.

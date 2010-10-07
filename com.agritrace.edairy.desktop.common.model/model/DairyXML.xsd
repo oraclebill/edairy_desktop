@@ -213,7 +213,7 @@
           <xsd:element maxOccurs="unbounded" minOccurs="0" name="customers" type="dairy:Customer"/>
           <xsd:element maxOccurs="unbounded" minOccurs="0" name="animalHealthRequests" type="requests:AnimalHealthRequest"/>
           <xsd:element maxOccurs="unbounded" minOccurs="0" name="dairyBins" type="dairy:DairyContainer"/>
-          <xsd:element maxOccurs="unbounded" minOccurs="0" name="priceHistory" type="dairy:MilkPrice"/>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" name="priceHistory" type="dairy:MemberPayment"/>
         </xsd:sequence>
         <xsd:attribute name="registrationNumber" type="xsd:string" use="required"/>
         <xsd:attribute name="establishedDate" type="xsd:string"/>
@@ -289,15 +289,17 @@
     </xsd:complexContent>
   </xsd:complexType>
   <xsd:element name="Customer" type="dairy:Customer"/>
-  <xsd:complexType name="MilkPrice">
+  <xsd:complexType name="MemberPayment">
     <xsd:attribute name="id" type="xsd:string" use="required"/>
-    <xsd:attribute name="month" type="xsd:int" use="required"/>
     <xsd:attribute name="year" type="xsd:int" use="required"/>
-    <xsd:attribute name="value" type="xsd:string" use="required"/>
+    <xsd:attribute name="month" type="xsd:int" use="required"/>
+    <xsd:attribute name="paymentRate" type="xsd:string" use="required"/>
+    <xsd:attribute name="paymentsTotal" type="xsd:string"/>
+    <xsd:attribute name="paymentsCount" type="xsd:int"/>
     <xsd:attribute name="entryDate" type="xsd:string" use="required"/>
     <xsd:attribute name="enteredBy" type="xsd:string"/>
   </xsd:complexType>
-  <xsd:element name="MilkPrice" type="dairy:MilkPrice"/>
+  <xsd:element name="MemberPayment" type="dairy:MemberPayment"/>
   <xsd:complexType name="Preference">
     <xsd:attribute name="id" type="xsd:string" use="required"/>
     <xsd:attribute name="value" type="xsd:string"/>

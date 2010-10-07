@@ -77,7 +77,7 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 			case DairyPackage.DAIRY_CONTAINER: return createDairyContainer();
 			case DairyPackage.SUPPLIER: return createSupplier();
 			case DairyPackage.CUSTOMER: return createCustomer();
-			case DairyPackage.MILK_PRICE: return createMilkPrice();
+			case DairyPackage.MEMBER_PAYMENT: return createMemberPayment();
 			case DairyPackage.PREFERENCE: return createPreference();
 			case DairyPackage.PREFERENCE_KEY: return createPreferenceKey();
 			case DairyPackage.ROLE: return createRole();
@@ -308,9 +308,9 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public MilkPrice createMilkPrice() {
-		MilkPriceImpl milkPrice = new MilkPriceImpl();
-		return milkPrice;
+	public MemberPayment createMemberPayment() {
+		MemberPaymentImpl memberPayment = new MemberPaymentImpl();
+		return memberPayment;
 	}
 
 	/**

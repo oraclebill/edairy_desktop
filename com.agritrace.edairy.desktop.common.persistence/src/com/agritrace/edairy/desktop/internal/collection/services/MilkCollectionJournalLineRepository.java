@@ -100,7 +100,9 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 		query.setInteger("year", year);
 		query.setInteger("month", month);
 
-		return (new BigDecimal(query.uniqueResult().toString()));
+		Object value = query.uniqueResult();
+		if (value == null) value = "0";
+		return (new BigDecimal(value.toString()));
 	}
 
 	@Override
@@ -147,7 +149,9 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 		query.setInteger("year", year);
 		query.setInteger("month", month);
 
-		return (new BigDecimal(query.uniqueResult().toString()));
+		Object sum = query.uniqueResult();
+		if (sum == null) sum = "0";
+		return (new BigDecimal(sum.toString()));
 	}
 
 

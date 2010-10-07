@@ -142,8 +142,8 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 				return createCustomerAdapter();
 			}
 			@Override
-			public Adapter caseMilkPrice(MilkPrice object) {
-				return createMilkPriceAdapter();
+			public Adapter caseMemberPayment(MemberPayment object) {
+				return createMemberPaymentAdapter();
 			}
 			@Override
 			public Adapter casePreference(Preference object) {
@@ -430,16 +430,16 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkPrice <em>Milk Price</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.dairy.MemberPayment <em>Member Payment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkPrice
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MemberPayment
 	 * @generated
 	 */
-	public Adapter createMilkPriceAdapter() {
+	public Adapter createMemberPaymentAdapter() {
 		return null;
 	}
 

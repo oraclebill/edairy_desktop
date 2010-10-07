@@ -238,15 +238,17 @@
       <nested inputs="dairy.ecore#//Customer/status" outputs="DairyXML.xsd#//Customer;XSDComplexTypeDefinition=15/XSDAttributeUse=2"/>
     </nested>
     <nested inputs="dairy.ecore#//Customer" outputs="DairyXML.xsd#//Customer;XSDElementDeclaration=15"/>
-    <nested inputs="dairy.ecore#//MilkPrice" outputs="DairyXML.xsd#//MilkPrice;XSDComplexTypeDefinition=16">
-      <nested inputs="dairy.ecore#//MilkPrice/id" outputs="DairyXML.xsd#//MilkPrice;XSDComplexTypeDefinition=16/XSDAttributeUse"/>
-      <nested inputs="dairy.ecore#//MilkPrice/month" outputs="DairyXML.xsd#//MilkPrice;XSDComplexTypeDefinition=16/XSDAttributeUse=1"/>
-      <nested inputs="dairy.ecore#//MilkPrice/year" outputs="DairyXML.xsd#//MilkPrice;XSDComplexTypeDefinition=16/XSDAttributeUse=2"/>
-      <nested inputs="dairy.ecore#//MilkPrice/value" outputs="DairyXML.xsd#//MilkPrice;XSDComplexTypeDefinition=16/XSDAttributeUse=3"/>
-      <nested inputs="dairy.ecore#//MilkPrice/entryDate" outputs="DairyXML.xsd#//MilkPrice;XSDComplexTypeDefinition=16/XSDAttributeUse=4"/>
-      <nested inputs="dairy.ecore#//MilkPrice/enteredBy" outputs="DairyXML.xsd#//MilkPrice;XSDComplexTypeDefinition=16/XSDAttributeUse=5"/>
+    <nested inputs="dairy.ecore#//MemberPayment" outputs="DairyXML.xsd#//MemberPayment;XSDComplexTypeDefinition=16">
+      <nested inputs="dairy.ecore#//MemberPayment/id" outputs="DairyXML.xsd#//MemberPayment;XSDComplexTypeDefinition=16/XSDAttributeUse"/>
+      <nested inputs="dairy.ecore#//MemberPayment/year" outputs="DairyXML.xsd#//MemberPayment;XSDComplexTypeDefinition=16/XSDAttributeUse=1"/>
+      <nested inputs="dairy.ecore#//MemberPayment/month" outputs="DairyXML.xsd#//MemberPayment;XSDComplexTypeDefinition=16/XSDAttributeUse=2"/>
+      <nested inputs="dairy.ecore#//MemberPayment/paymentRate" outputs="DairyXML.xsd#//MemberPayment;XSDComplexTypeDefinition=16/XSDAttributeUse=3"/>
+      <nested inputs="dairy.ecore#//MemberPayment/paymentsTotal" outputs="DairyXML.xsd#//MemberPayment;XSDComplexTypeDefinition=16/XSDAttributeUse=4"/>
+      <nested inputs="dairy.ecore#//MemberPayment/paymentsCount" outputs="DairyXML.xsd#//MemberPayment;XSDComplexTypeDefinition=16/XSDAttributeUse=5"/>
+      <nested inputs="dairy.ecore#//MemberPayment/entryDate" outputs="DairyXML.xsd#//MemberPayment;XSDComplexTypeDefinition=16/XSDAttributeUse=6"/>
+      <nested inputs="dairy.ecore#//MemberPayment/enteredBy" outputs="DairyXML.xsd#//MemberPayment;XSDComplexTypeDefinition=16/XSDAttributeUse=7"/>
     </nested>
-    <nested inputs="dairy.ecore#//MilkPrice" outputs="DairyXML.xsd#//MilkPrice;XSDElementDeclaration=16"/>
+    <nested inputs="dairy.ecore#//MemberPayment" outputs="DairyXML.xsd#//MemberPayment;XSDElementDeclaration=16"/>
     <nested inputs="dairy.ecore#//Preference" outputs="DairyXML.xsd#//Preference;XSDComplexTypeDefinition=17">
       <nested inputs="dairy.ecore#//Preference/id" outputs="DairyXML.xsd#//Preference;XSDComplexTypeDefinition=17/XSDAttributeUse"/>
       <nested inputs="dairy.ecore#//Preference/value" outputs="DairyXML.xsd#//Preference;XSDComplexTypeDefinition=17/XSDAttributeUse=1"/>

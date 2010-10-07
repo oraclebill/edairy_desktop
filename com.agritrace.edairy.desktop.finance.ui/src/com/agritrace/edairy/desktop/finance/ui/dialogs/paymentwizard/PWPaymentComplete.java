@@ -21,7 +21,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
-import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
+import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
 import com.agritrace.edairy.desktop.finance.payments.Constants;
 import com.agritrace.edairy.desktop.finance.payments.MemberPaymentsProcessor;
 import com.agritrace.edairy.desktop.finance.payments.PaymentRecord;
@@ -240,11 +240,11 @@ public class PWPaymentComplete extends PWPage {
 					headerValues[4] = new BigDecimal(paymentsList.size());
 					headerValues[5] = total;
 					
-					MilkPrice paymentRecord = DairyFactory.eINSTANCE.createMilkPrice();
+					MemberPayment paymentRecord = DairyFactory.eINSTANCE.createMemberPayment();
 					paymentRecord.setEntryDate(new Date());
 					paymentRecord.setMonth(getPaymentMonth());
 					paymentRecord.setYear(getPaymentYear());
-					paymentRecord.setValue(getPaymentRate());					
+					paymentRecord.setPaymentRate(getPaymentRate());					
 					
 					headerWidgets = new Text[] { runDate, paymentRate, payPeriod, paymentAverage, paymentCount, paymentTotal };
 					for (int i = 0; i < headerWidgets.length; i++) {

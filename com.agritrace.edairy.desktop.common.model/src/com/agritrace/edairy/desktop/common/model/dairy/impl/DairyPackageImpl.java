@@ -26,9 +26,9 @@ import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
+import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus;
-import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
 import com.agritrace.edairy.desktop.common.model.dairy.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.PermissionNamespace;
 import com.agritrace.edairy.desktop.common.model.dairy.Preference;
@@ -187,7 +187,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass milkPriceEClass = null;
+	private EClass memberPaymentEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1836,8 +1836,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getMilkPrice() {
-		return milkPriceEClass;
+	public EClass getMemberPayment() {
+		return memberPaymentEClass;
 	}
 
 	/**
@@ -1845,8 +1845,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMilkPrice_Id() {
-		return (EAttribute)milkPriceEClass.getEStructuralFeatures().get(0);
+	public EAttribute getMemberPayment_Id() {
+		return (EAttribute)memberPaymentEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1854,8 +1854,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMilkPrice_Month() {
-		return (EAttribute)milkPriceEClass.getEStructuralFeatures().get(1);
+	public EAttribute getMemberPayment_Year() {
+		return (EAttribute)memberPaymentEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1863,8 +1863,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMilkPrice_Year() {
-		return (EAttribute)milkPriceEClass.getEStructuralFeatures().get(2);
+	public EAttribute getMemberPayment_Month() {
+		return (EAttribute)memberPaymentEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1872,8 +1872,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMilkPrice_Value() {
-		return (EAttribute)milkPriceEClass.getEStructuralFeatures().get(3);
+	public EAttribute getMemberPayment_PaymentRate() {
+		return (EAttribute)memberPaymentEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1881,8 +1881,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMilkPrice_EnteredBy() {
-		return (EReference)milkPriceEClass.getEStructuralFeatures().get(4);
+	public EAttribute getMemberPayment_PaymentsTotal() {
+		return (EAttribute)memberPaymentEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1890,8 +1890,26 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMilkPrice_EntryDate() {
-		return (EAttribute)milkPriceEClass.getEStructuralFeatures().get(5);
+	public EAttribute getMemberPayment_PaymentsCount() {
+		return (EAttribute)memberPaymentEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMemberPayment_EnteredBy() {
+		return (EReference)memberPaymentEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMemberPayment_EntryDate() {
+		return (EAttribute)memberPaymentEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -2408,13 +2426,15 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(customerEClass, CUSTOMER__CUSTOMER_TYPE);
 		createEAttribute(customerEClass, CUSTOMER__STATUS);
 
-		milkPriceEClass = createEClass(MILK_PRICE);
-		createEAttribute(milkPriceEClass, MILK_PRICE__ID);
-		createEAttribute(milkPriceEClass, MILK_PRICE__MONTH);
-		createEAttribute(milkPriceEClass, MILK_PRICE__YEAR);
-		createEAttribute(milkPriceEClass, MILK_PRICE__VALUE);
-		createEReference(milkPriceEClass, MILK_PRICE__ENTERED_BY);
-		createEAttribute(milkPriceEClass, MILK_PRICE__ENTRY_DATE);
+		memberPaymentEClass = createEClass(MEMBER_PAYMENT);
+		createEAttribute(memberPaymentEClass, MEMBER_PAYMENT__ID);
+		createEAttribute(memberPaymentEClass, MEMBER_PAYMENT__YEAR);
+		createEAttribute(memberPaymentEClass, MEMBER_PAYMENT__MONTH);
+		createEAttribute(memberPaymentEClass, MEMBER_PAYMENT__PAYMENT_RATE);
+		createEAttribute(memberPaymentEClass, MEMBER_PAYMENT__PAYMENTS_TOTAL);
+		createEAttribute(memberPaymentEClass, MEMBER_PAYMENT__PAYMENTS_COUNT);
+		createEReference(memberPaymentEClass, MEMBER_PAYMENT__ENTERED_BY);
+		createEAttribute(memberPaymentEClass, MEMBER_PAYMENT__ENTRY_DATE);
 
 		preferenceEClass = createEClass(PREFERENCE);
 		createEAttribute(preferenceEClass, PREFERENCE__ID);
@@ -2648,7 +2668,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEReference(getDairy_AnimalHealthRequests(), theRequestsPackage.getAnimalHealthRequest(), theRequestsPackage.getAnimalHealthRequest_Dairy(), "animalHealthRequests", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		getDairy_AnimalHealthRequests().getEKeys().add(theRequestsPackage.getAnimalHealthRequest_RequestId());
 		initEReference(getDairy_DairyBins(), this.getDairyContainer(), null, "dairyBins", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getDairy_PriceHistory(), this.getMilkPrice(), null, "priceHistory", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getDairy_PriceHistory(), this.getMemberPayment(), null, "priceHistory", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getDairy_Version(), ecorePackage.getELong(), "version", null, 0, 1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(membershipEClass, Membership.class, "Membership", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2692,13 +2712,15 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getCustomer_CustomerType(), ecorePackage.getEString(), "customerType", "Milk Processor", 0, 1, Customer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCustomer_Status(), ecorePackage.getEString(), "status", "Active", 0, 1, Customer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(milkPriceEClass, MilkPrice.class, "MilkPrice", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getMilkPrice_Id(), theModelPackage.getUniqueID(), "id", null, 1, 1, MilkPrice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMilkPrice_Month(), ecorePackage.getEInt(), "month", null, 1, 1, MilkPrice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMilkPrice_Year(), ecorePackage.getEInt(), "year", null, 1, 1, MilkPrice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMilkPrice_Value(), ecorePackage.getEBigDecimal(), "value", null, 1, 1, MilkPrice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMilkPrice_EnteredBy(), this.getEmployee(), null, "enteredBy", null, 1, 1, MilkPrice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMilkPrice_EntryDate(), ecorePackage.getEDate(), "entryDate", null, 1, 1, MilkPrice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(memberPaymentEClass, MemberPayment.class, "MemberPayment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMemberPayment_Id(), theModelPackage.getUniqueID(), "id", null, 1, 1, MemberPayment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMemberPayment_Year(), ecorePackage.getEInt(), "year", null, 1, 1, MemberPayment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMemberPayment_Month(), ecorePackage.getEInt(), "month", null, 1, 1, MemberPayment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMemberPayment_PaymentRate(), ecorePackage.getEBigDecimal(), "paymentRate", null, 1, 1, MemberPayment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMemberPayment_PaymentsTotal(), ecorePackage.getEBigDecimal(), "paymentsTotal", null, 0, 1, MemberPayment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMemberPayment_PaymentsCount(), ecorePackage.getEInt(), "paymentsCount", null, 0, 1, MemberPayment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMemberPayment_EnteredBy(), this.getEmployee(), null, "enteredBy", null, 1, 1, MemberPayment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMemberPayment_EntryDate(), ecorePackage.getEDate(), "entryDate", null, 1, 1, MemberPayment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(preferenceEClass, Preference.class, "Preference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPreference_Id(), theModelPackage.getUniqueID(), "id", null, 1, 1, Preference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

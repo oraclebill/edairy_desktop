@@ -16,8 +16,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
+import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
@@ -354,7 +354,7 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<MilkPrice> priceHistory;
+	protected EList<MemberPayment> priceHistory;
 
 	/**
 	 * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
@@ -700,9 +700,9 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<MilkPrice> getPriceHistory() {
+	public EList<MemberPayment> getPriceHistory() {
 		if (priceHistory == null) {
-			priceHistory = new EObjectContainmentEList<MilkPrice>(MilkPrice.class, this, DairyPackage.DAIRY__PRICE_HISTORY);
+			priceHistory = new EObjectContainmentEList<MemberPayment>(MemberPayment.class, this, DairyPackage.DAIRY__PRICE_HISTORY);
 		}
 		return priceHistory;
 	}
@@ -912,7 +912,7 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return;
 			case DairyPackage.DAIRY__PRICE_HISTORY:
 				getPriceHistory().clear();
-				getPriceHistory().addAll((Collection<? extends MilkPrice>)newValue);
+				getPriceHistory().addAll((Collection<? extends MemberPayment>)newValue);
 				return;
 			case DairyPackage.DAIRY__VERSION:
 				setVersion((Long)newValue);

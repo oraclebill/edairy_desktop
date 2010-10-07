@@ -170,13 +170,13 @@ public interface DairyFactory extends EFactory {
 	Customer createCustomer();
 
 	/**
-	 * Returns a new object of class '<em>Milk Price</em>'.
+	 * Returns a new object of class '<em>Member Payment</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Milk Price</em>'.
+	 * @return a new object of class '<em>Member Payment</em>'.
 	 * @generated
 	 */
-	MilkPrice createMilkPrice();
+	MemberPayment createMemberPayment();
 
 	/**
 	 * Returns a new object of class '<em>Preference</em>'.

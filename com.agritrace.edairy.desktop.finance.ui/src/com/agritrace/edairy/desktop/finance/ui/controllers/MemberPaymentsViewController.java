@@ -1,6 +1,5 @@
 package com.agritrace.edairy.desktop.finance.ui.controllers;
 
-import java.awt.event.ActionListener;
 import java.util.List;
 
 import org.eclipse.jface.dialogs.Dialog;
@@ -12,8 +11,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
-import com.agritrace.edairy.desktop.common.persistence.IRepository;
+import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.finance.ui.dialogs.paymentwizard.MemberPaymentProcessWizard;
@@ -21,7 +19,7 @@ import com.agritrace.edairy.desktop.persistence.finance.IMemberPaymentsRepositor
 import com.google.inject.Inject;
 
 public class MemberPaymentsViewController extends
-		BasicDirectoryController<MilkPrice> {
+		BasicDirectoryController<MemberPayment> {
 
 	MemberPaymentProcessWizard paymentsWizard;
 
@@ -34,20 +32,20 @@ public class MemberPaymentsViewController extends
 
 	@Inject
 	public MemberPaymentsViewController(IMemberPaymentsRepository paymentsRepository, MemberPaymentProcessWizard paymentsWizard) {
-		setEClass(DairyPackage.Literals.MILK_PRICE);
+		setEClass(DairyPackage.Literals.MEMBER_PAYMENT);
 		setRepository(paymentsRepository);
 
-		addTableColumn("Year", DairyPackage.Literals.MILK_PRICE__YEAR);
-		addTableColumn("Month", DairyPackage.Literals.MILK_PRICE__YEAR);
-		addTableColumn("Rate", DairyPackage.Literals.MILK_PRICE__VALUE);
-		addTableColumn("Farmer Count", DairyPackage.Literals.MILK_PRICE__ID,
+		addTableColumn("Year", DairyPackage.Literals.MEMBER_PAYMENT__YEAR);
+		addTableColumn("Month", DairyPackage.Literals.MEMBER_PAYMENT__YEAR);
+		addTableColumn("Rate", DairyPackage.Literals.MEMBER_PAYMENT__PAYMENT_RATE);
+		addTableColumn("Farmer Count", DairyPackage.Literals.MEMBER_PAYMENT__ID,
 				new BlankColumnFormatter());
-		addTableColumn("Average Payment", DairyPackage.Literals.MILK_PRICE__ID,
+		addTableColumn("Average Payment", DairyPackage.Literals.MEMBER_PAYMENT__ID,
 				new BlankColumnFormatter());
-		addTableColumn("Total Payments", DairyPackage.Literals.MILK_PRICE__ID,
+		addTableColumn("Total Payments", DairyPackage.Literals.MEMBER_PAYMENT__ID,
 				new BlankColumnFormatter());
-		addTableColumn("Run On", DairyPackage.Literals.MILK_PRICE__ENTRY_DATE);
-		addTableColumn("By", DairyPackage.Literals.MILK_PRICE__ENTERED_BY);
+		addTableColumn("Run On", DairyPackage.Literals.MEMBER_PAYMENT__ENTRY_DATE);
+		addTableColumn("By", DairyPackage.Literals.MEMBER_PAYMENT__ENTERED_BY);
 		
 		this.paymentsWizard  = paymentsWizard;
 	}
@@ -73,7 +71,7 @@ public class MemberPaymentsViewController extends
 	}
 	
 	@Override
-	protected List<MilkPrice> getFilteredResult() {
+	protected List<MemberPayment> getFilteredResult() {
 		return getRepository().all();
 	}
 
@@ -94,7 +92,7 @@ public class MemberPaymentsViewController extends
 	}
 
 	@Override
-	protected RecordDialog<MilkPrice> getRecordDialog(Shell shell) {
+	protected RecordDialog<MemberPayment> getRecordDialog(Shell shell) {
 		throw new UnsupportedOperationException("unused");
 	}
 

@@ -21,8 +21,8 @@ import org.hibernate.criterion.Restrictions;
 import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
@@ -32,8 +32,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
+import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
@@ -512,12 +512,12 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	}
 
 	@Override
-	public MilkPrice getCurrentMilkPrice() {
+	public MemberPayment getCurrentMilkPrice() {
 		Session session = sessionProvider.get();
-		DetachedCriteria maxDate = DetachedCriteria.forEntityName("MilkPrice")
+		DetachedCriteria maxDate = DetachedCriteria.forEntityName("MemberPayment")
 				.setProjection(Property.forName("priceDate").max());
-		MilkPrice currentPrice = (MilkPrice) session
-				.createCriteria("MilkPrice").addOrder(Order.desc("year"))
+		MemberPayment currentPrice = (MemberPayment) session
+				.createCriteria("MemberPayment").addOrder(Order.desc("year"))
 				.addOrder(Order.desc("month")).setFetchSize(1).setMaxResults(1)
 				.uniqueResult();
 		return currentPrice;
@@ -525,9 +525,9 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 
 	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
-	public List<MilkPrice> getMilkPrices(Date startDate, Date endDate) {
+	public List<MemberPayment> getMilkPrices(Date startDate, Date endDate) {
 		Session session = sessionProvider.get();
-		return session.createCriteria("MilkPrice")
+		return session.createCriteria("MemberPayment")
 				.addOrder(Order.desc("year"))
 				.addOrder(Order.desc("month"))
 				.add(Restrictions.ge("year", startDate.getYear()+1900))

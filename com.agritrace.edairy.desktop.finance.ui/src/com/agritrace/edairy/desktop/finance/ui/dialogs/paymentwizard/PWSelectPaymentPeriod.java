@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
-import com.agritrace.edairy.desktop.common.model.dairy.MilkPrice;
+import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
 import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
 import com.agritrace.edairy.desktop.common.ui.util.FormUtil;
@@ -151,7 +151,7 @@ public class PWSelectPaymentPeriod extends PWPage {
 		int paymentYear = getInt(PAYMENT_YEAR);
 		int paymentMonth = getInt(PAYMENT_MONTH);
 
-		MilkPrice paymentRecord = paymentsRepo.getPaymentForPeriod(paymentYear, paymentMonth);
+		MemberPayment paymentRecord = paymentsRepo.getPaymentForPeriod(paymentYear, paymentMonth);
 		if (paymentRecord != null) {
 			Employee first = paymentRecord.getEnteredBy();
 			setErrorMessage(String.format(

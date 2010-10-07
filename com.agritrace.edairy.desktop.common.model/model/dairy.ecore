@@ -267,7 +267,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="dairyBins" ordered="false"
         upperBound="-1" eType="#//DairyContainer" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="priceHistory" ordered="false"
-        upperBound="-1" eType="#//MilkPrice" containment="true"/>
+        upperBound="-1" eType="#//MemberPayment" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
         <details key="name" value="version"/>
@@ -380,12 +380,15 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="Active"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MilkPrice">
+  <eClassifiers xsi:type="ecore:EClass" name="MemberPayment">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType common.ecore#//UniqueID"
         iD="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="month" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="year" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="month" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="paymentRate" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="paymentsTotal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="paymentsCount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="enteredBy" lowerBound="1"
         eType="#//Employee"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="entryDate" lowerBound="1"
