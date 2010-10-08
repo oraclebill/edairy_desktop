@@ -3,15 +3,9 @@ package com.agritrace.edairy.desktop.finance.ui.beans;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import junit.framework.Assert;
-
 import org.apache.commons.collections.Predicate;
-import org.apache.commons.collections.functors.AllPredicate;
-import org.apache.commons.collections.functors.NullIsTruePredicate;
-import org.apache.commons.collections.functors.TruePredicate;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,11 +13,9 @@ import org.junit.Test;
 import com.agritrace.edairy.desktop.collection.services.TestingPersistenceModule;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
-import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
-import com.agritrace.edairy.desktop.common.ui.util.FilterUtil;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 
@@ -113,25 +105,25 @@ public class TestAccountTransactionRepository{
 		
 	}
 
-	@Test
-	public void testHandleFilterPredicate(){
-		long start = System.currentTimeMillis();
-		final List<AccountTransaction> filtered = new ArrayList<AccountTransaction>();
-		final Predicate filterPredicate = buildFilterPredicate();
-		try {
-			for (final AccountTransaction tx : getRepository().all()) {
-				if (filterPredicate.evaluate(tx)) {
-					filtered.add(tx);
-				}
-			}
-			System.err.println("NOTE: filtering test completed in "+(System.currentTimeMillis()-start)+"ms.");
-			Assert.assertTrue(filtered.size() > 0);
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.err.println("NOTE: filtering test FAILED in "+(System.currentTimeMillis()-start)+"ms.");
-			fail("error evaluating the filters on ALL transactional entries");
-		}		
-	}
+//	@Test
+//	public void testHandleFilterPredicate(){
+//		long start = System.currentTimeMillis();
+//		final List<AccountTransaction> filtered = new ArrayList<AccountTransaction>();
+//		final Predicate filterPredicate = buildFilterPredicate();
+//		try {
+//			for (final AccountTransaction tx : getRepository().all()) {
+//				if (filterPredicate.evaluate(tx)) {
+//					filtered.add(tx);
+//				}
+//			}
+//			System.err.println("NOTE: filtering test completed in "+(System.currentTimeMillis()-start)+"ms.");
+//			Assert.assertTrue(filtered.size() > 0);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			System.err.println("NOTE: filtering test FAILED in "+(System.currentTimeMillis()-start)+"ms.");
+//			fail("error evaluating the filters on ALL transactional entries");
+//		}		
+//	}
 
 	@Test
 	public void testDropBatchEntry(){
@@ -163,42 +155,42 @@ public class TestAccountTransactionRepository{
 	}
 	
 	
-	private Predicate buildFilterPredicate() {
-		final List<Predicate> predicateList = new ArrayList<Predicate>();
-		Predicate returnPredicate;
-
-		Date date;
-
-		date = new Date(System.currentTimeMillis() + 30*24*60*60*1000);
-		if (date != null) {
-			predicateList.add(NullIsTruePredicate.getInstance(new FilterUtil.DateAfterPredicate(date, AccountPackage.Literals.TRANSACTION__TRANSACTION_DATE.getName())));
-		}
-
-		date = new Date(System.currentTimeMillis() - 30*24*60*60*1000);
-		if (date != null) {
-			predicateList.add(NullIsTruePredicate.getInstance(new FilterUtil.DateBeforePredicate(date, AccountPackage.Literals.TRANSACTION__TRANSACTION_DATE.getName())));
-		}
-
-		Membership member = null;
-		if (member != null) {
-			predicateList.add(NullIsTruePredicate.getInstance(new TransactionMemberEqualPredicate(member)));
-		}
-
-		// predicateList.add(NullIsTruePredicate.getInstance(new
-		// EqualPredicate(filterBean.getMember())));
-
-		if (predicateList.size() > 0) {
-			final Predicate[] predicates = new Predicate[predicateList.size()];
-			for (int i = 0; i < predicates.length; i++) {
-				predicates[i] = predicateList.get(i);
-			}
-			returnPredicate = new AllPredicate(predicates);
-		} else {
-			returnPredicate = TruePredicate.getInstance();
-		}
-
-		return returnPredicate;
-	}
+//	private Predicate buildFilterPredicate() {
+//		final List<Predicate> predicateList = new ArrayList<Predicate>();
+//		Predicate returnPredicate;
+//
+//		Date date;
+//
+//		date = new Date(System.currentTimeMillis() + 30*24*60*60*1000);
+//		if (date != null) {
+//			predicateList.add(NullIsTruePredicate.getInstance(new FilterUtil.DateAfterPredicate(date, AccountPackage.Literals.TRANSACTION__TRANSACTION_DATE.getName())));
+//		}
+//
+//		date = new Date(System.currentTimeMillis() - 30*24*60*60*1000);
+//		if (date != null) {
+//			predicateList.add(NullIsTruePredicate.getInstance(new FilterUtil.DateBeforePredicate(date, AccountPackage.Literals.TRANSACTION__TRANSACTION_DATE.getName())));
+//		}
+//
+//		Membership member = null;
+//		if (member != null) {
+//			predicateList.add(NullIsTruePredicate.getInstance(new TransactionMemberEqualPredicate(member)));
+//		}
+//
+//		// predicateList.add(NullIsTruePredicate.getInstance(new
+//		// EqualPredicate(filterBean.getMember())));
+//
+//		if (predicateList.size() > 0) {
+//			final Predicate[] predicates = new Predicate[predicateList.size()];
+//			for (int i = 0; i < predicates.length; i++) {
+//				predicates[i] = predicateList.get(i);
+//			}
+//			returnPredicate = new AllPredicate(predicates);
+//		} else {
+//			returnPredicate = TruePredicate.getInstance();
+//		}
+//
+//		return returnPredicate;
+//	}
 
 	
 

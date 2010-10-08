@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: aopalliance
+Bundle-SymbolicName: aopalliance
+Bundle-Version: 0
+Bundle-ClassPath: aopalliance-1.0.jar
+Export-Package: org.aopalliance.aop,
+ org.aopalliance.intercept;uses:="org.aopalliance.aop"
+Created-By: 1.6.0_11 (Sun Microsystems Inc.)
+Import-Package: org.aopalliance.aop,
+ org.aopalliance.intercept

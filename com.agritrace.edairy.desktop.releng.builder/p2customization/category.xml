@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.your.feature_0.0.0.jar" id="org.your.feature" version="0.0.0">
+      <category name="new_category_1"/>
+   </feature>
+   <category-def name="new_category_1" label="Your Category">
+      <description>
+         Your Category description
+      </description>
+   </category-def>
+</site>

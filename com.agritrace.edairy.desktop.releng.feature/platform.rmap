@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rm:rmap xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0"
+	xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
+
+	<rm:locator pattern="^com\.agritrace\.edairy\.desktop(\..+)+"
+		searchPathRef="com.agritrace.edairy.desktop" />		
+	<rm:locator pattern="^org\.eclipse\.riena\.ui\.ridgets(\.swt)?"
+		searchPathRef="com.agritrace.edairy.desktop" />
+		
+	<rm:locator pattern="^org\.hibernate(\..+)*" 		searchPathRef="org.hibernate" />	
+	<rm:locator pattern="^org\.hibernate(\..+)*" 		searchPathRef="org.hibernate" />
+		
+	<rm:locator pattern="^com\.google\.inject(\..+)*" 	searchPathRef="com.google.inject" />
+	<rm:locator pattern="^aopalliance(\..+)*" 			searchPathRef="com.google.inject" />
+	
+	<rm:locator searchPathRef="org.eclipse.platform" failOnError="false"/>
+	<rm:locator searchPathRef="orbit" />
+
+	<!--
+		   
+ 	  -->
+	<rm:searchPath name="com.agritrace.edairy.desktop">
+		<rm:provider componentTypes="osgi.bundle,eclipse.feature,buckminster"
+			readerType="git">
+			<rm:uri format="{0},{1}">
+				<bc:propertyRef key="workspace.root" />
+				<bc:propertyRef key="buckminster.component" />
+			</rm:uri>
+		</rm:provider>
+	</rm:searchPath>
+
+	<rm:searchPath name="com.google.inject">
+		<rm:provider componentTypes="osgi.bundle,buckminster"
+			readerType="url" source="true" mutable="false">
+			<rm:uri format="http://google-guice.googlecode.com/files/guice-2.0.zip" >
+				<!-- bc:propertyRef key="buckminster.component" /-->
+			</rm:uri>				
+		</rm:provider>
+		<rm:provider componentTypes="osgi.bundle,buckminster"
+			readerType="svn" source="true" mutable="false">
+			<rm:uri format="http://google-guice.googlecode.com/svn/trunk/" >
+				<!-- bc:propertyRef key="buckminster.component" /-->
+			</rm:uri>				
+		</rm:provider>
+	</rm:searchPath>
+
+
+	<rm:searchPath name="org.hibernate">
+		<rm:provider componentTypes="osgi.bundle,eclipse.feature"
+			readerType="p2" source="false" mutable="false">
+			<rm:uri format="http://www.elver.org/eclipse/update/" />
+		</rm:provider>
+	</rm:searchPath>
+
+	<rm:searchPath name="org.eclipse.platform">
+		<rm:provider componentTypes="osgi.bundle,eclipse.feature"
+			readerType="p2" source="false" mutable="false">
+			<rm:uri format="http://download.eclipse.org/releases/helios/" />
+		</rm:provider>
+	</rm:searchPath>	
+
+	<rm:searchPath name="orbit">
+		<rm:provider componentTypes="osgi.bundle" readerType="p2"
+			source="false" mutable="false">
+			<rm:uri
+				format="http://download.eclipse.org/tools/orbit/downloads/drops/S20100831105311/" />
+		</rm:provider>
+	</rm:searchPath>
+
+</rm:rmap>
