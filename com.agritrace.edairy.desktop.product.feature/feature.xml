@@ -27,7 +27,8 @@
 
    <includes
          id="org.eclipse.datatools.enablement.hsqldb.feature"
-         version="0.0.0"/>
+         version="0.0.0"
+         name="com.agritrace.edairy.desktop.product.feature"/>
 
    <includes
          id="org.eclipse.datatools.enablement.mysql.feature"
