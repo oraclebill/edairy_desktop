@@ -9,50 +9,52 @@ import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.google.inject.Inject;
 
 public class YearReportDao {
-	
+	@Inject
 	private static YearReportDao instance;
-	
-	public YearReportDao(){
-		super();
+
+	private final FarmerPayablesYearDao farmerPayablesYearDao;
+	private final IDairyRepository dairyRepo;
+
+	@Inject
+	public YearReportDao(FarmerPayablesYearDao farmerPayablesYearDao, IDairyRepository dairyRepo) {
+		this.farmerPayablesYearDao = farmerPayablesYearDao;
+		this.dairyRepo = dairyRepo;
 	}
-	
-	public static YearReportDao instance(){
-		if(instance == null){
-			instance = new YearReportDao();
-		}
+
+	public static YearReportDao instance() {
 		return instance;
 	}
-	
-	public List<FarmerPayablesYearData> getReportValuesX(String year,
-			String month){
-		return FarmerPayablesYearDao.getInstance().getReportValuesX(year, month);
+
+	public List<FarmerPayablesYearData> getReportValuesX(String year, String month) {
+		return farmerPayablesYearDao.getReportValuesX(year, month);
 	}
-	
-	@Inject private static IDairyRepository dairyRepo;
-	public List<YearReportData> getReportValues(String year){
-		//TODO apply year!
+
+	public List<YearReportData> getReportValues(String year) {
+		// TODO apply year!
 		List<CollectionGroup> allJournals = dairyRepo.allCollectionGroups();
 		List<YearReportData> ret = new ArrayList<YearReportData>();
-		
-		for(CollectionGroup page:allJournals){
-			if(!checkStatusForListing(page)){
+
+		for (CollectionGroup page : allJournals) {
+			if (!checkStatusForListing(page)) {
 				continue;
 			}
-			YearReportData data = new YearReportData(page.getJournalDate(), ""+page.getRecordTotal(), "%"/*TODO!*/);
+			YearReportData data = new YearReportData(page.getJournalDate(), "" + page.getRecordTotal(), "%"/*
+																											 * TODO!
+																											 */);
 			ret.add(data);
 		}
-		
-//		YearReportData data = new YearReportData(new Date(), "12", "%"/*TODO!*/);
-//		ret.add(data);
+
+		// YearReportData data = new YearReportData(new Date(), "12",
+		// "%"/*TODO!*/);
+		// ret.add(data);
 		return ret;
 	}
 
 	private boolean checkStatusForListing(CollectionGroup page) {
-		if(page == null){
+		if (page == null) {
 			return false;
 		}
-		if(page.getStatus() == JournalStatus.SUSPENDED
-				|| page.getStatus() == JournalStatus.PENDING){
+		if (page.getStatus() == JournalStatus.SUSPENDED || page.getStatus() == JournalStatus.PENDING) {
 			return true;
 		}
 		return true;

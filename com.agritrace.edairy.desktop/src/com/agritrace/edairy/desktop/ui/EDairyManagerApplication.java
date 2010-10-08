@@ -57,8 +57,6 @@ import com.agritrace.edairy.desktop.ui.views.MemberPayablesReportView;
 import com.agritrace.edairy.desktop.ui.views.MemberStatementReportView;
 import com.agritrace.edairy.desktop.ui.views.MilkProductionReportView;
 import com.agritrace.edairy.desktop.ui.views.MonthlyCreditReportView;
-import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 /**
  * @author oraclebill

@@ -11,7 +11,7 @@
             <method name="open"><![CDATA[importPackage(Packages.org.eclipse.birt.samples.scripted.hibernate);
 importPackage(Packages.com.agritrace.ediary.desktop.reports.data);
 count = 0;
-gsh = new Packages.com.agritrace.ediary.desktop.reports.data.YearReportDao();
+gsh = Packages.com.agritrace.ediary.desktop.reports.data.YearReportDao.instance();
 data = gsh.getReportValues("2009");
 ]]></method>
         </script-data-source>
