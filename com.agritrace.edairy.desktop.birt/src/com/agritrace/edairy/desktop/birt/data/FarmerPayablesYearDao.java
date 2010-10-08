@@ -114,14 +114,15 @@ public class FarmerPayablesYearDao {
 		return ret;
 	}
 
-	private BigDecimal calculateMemberMonthlyIncome(final Membership membership, final String month, final String year) {
-		// final ICollectionJournalLineRepository collectionsRepo =
-		// RepositoryFactory
-		// .getRegisteredRepository(ICollectionJournalLineRepository.class);
-		final int priceMonth = Integer.parseInt(month), priceYear = Integer.parseInt(year);
-		final BigDecimal memberCollections = collectionsRepo.getSumOfPayableDeliveries(membership, priceMonth,
-				priceYear);
-		BigDecimal paymentRate = collectionsRepo.getMilkPrice(priceMonth - 1, priceYear);
+	private BigDecimal calculateMemberMonthlyIncome(
+			final Membership membership, final String month, final String year) {
+//		final ICollectionJournalLineRepository collectionsRepo = RepositoryFactory
+//				.getRegisteredRepository(ICollectionJournalLineRepository.class);
+		final int priceMonth = Integer.parseInt(month), priceYear = Integer
+				.parseInt(year);
+		final BigDecimal memberCollections = collectionsRepo
+				.getSumOfPayableDeliveries(membership, priceMonth, priceYear);
+		BigDecimal paymentRate = collectionsRepo.getMilkPrice(priceMonth, priceYear);
 
 		if (paymentRate == null) {
 			paymentRate = new BigDecimal("0");
