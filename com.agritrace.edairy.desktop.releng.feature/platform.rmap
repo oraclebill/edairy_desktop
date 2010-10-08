@@ -21,8 +21,8 @@
  	  -->
 	<rm:searchPath name="com.agritrace.edairy.desktop">
 		<rm:provider componentTypes="osgi.bundle,eclipse.feature,buckminster"
-			readerType="git">
-			<rm:uri format="{0},{1}">
+			readerType="local">
+			<rm:uri format="{0}/{1}">
 				<bc:propertyRef key="workspace.root" />
 				<bc:propertyRef key="buckminster.component" />
 			</rm:uri>
