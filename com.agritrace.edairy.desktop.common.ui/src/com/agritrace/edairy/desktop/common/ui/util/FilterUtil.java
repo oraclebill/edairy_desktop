@@ -104,9 +104,7 @@ public class FilterUtil {
 
 		@Override
 		protected boolean evaluate(Calendar comparisonPoint, Calendar testDate) {
-			boolean ret = testDate.before(comparisonPoint) || testDate.equals(comparisonPoint);
-			System.err.printf("Comparing %s to %s returning %s\n", comparisonPoint.getTime(), testDate.getTime(), ret);
-			return ret;
+			return testDate.before(comparisonPoint) || testDate.equals(comparisonPoint);
 		}
 	}
 
