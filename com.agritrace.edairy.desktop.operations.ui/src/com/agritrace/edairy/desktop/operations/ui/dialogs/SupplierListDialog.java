@@ -29,8 +29,8 @@ import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDialogCont
 
 /**
  * Supplier list dialog to add/view/edit supplier
- * 
- * 
+ *
+ *
  */
 public class SupplierListDialog extends RecordDialog<Supplier> {
 
@@ -65,7 +65,7 @@ public class SupplierListDialog extends RecordDialog<Supplier> {
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
 				.grab(true, false).applyTo(addressWidget);
 
-		CTabFolder tabs = addressWidget.getTabFolder();
+		final CTabFolder tabs = addressWidget.getTabFolder();
 
 		final CTabItem tab = new CTabItem(tabs, SWT.NONE);
 		tab.setText("Contacts");

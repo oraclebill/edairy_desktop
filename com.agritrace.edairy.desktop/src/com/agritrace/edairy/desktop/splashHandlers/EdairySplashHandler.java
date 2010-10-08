@@ -31,9 +31,9 @@ import com.google.inject.Provider;
 public class EdairySplashHandler extends EclipseSplashHandler {
 	@Inject
 	private static Provider<AuthController> PROVIDER;
-	
+
 	private static final int WAIT_MSEC = 5000;
-	
+
 	private AuthController authController = null;
 	private boolean authenticated = false;
 	private Label developerLabel;
@@ -42,12 +42,12 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 	private Button buttonOK;
 	private Button buttonCancel;
 	private Font font;
-	
+
 	@Override
 	public void init(Shell splash) {
 		super.init(splash);
 		final RuntimeMXBean mx = ManagementFactory.getRuntimeMXBean();
-		
+
 		// Wait until the VM has been up for 5 seconds
 		while (mx.getUptime() < WAIT_MSEC) {
 			if (splash.getDisplay().readAndDispatch() == false) {
@@ -56,8 +56,8 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 		}
 
 		getContent().setBackgroundImage(Activator.getImage("splash/splash.bmp"));
-		long endTime = System.currentTimeMillis() + WAIT_MSEC;
-		
+		final long endTime = System.currentTimeMillis() + WAIT_MSEC;
+
 		final IProgressMonitor monitor = getBundleProgressMonitor();
 		monitor.beginTask("Initializing database", 1);
 		splash.getDisplay().asyncExec(new StartupRunnable() {
@@ -67,13 +67,13 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 				authController = PROVIDER.get();
 			}
 		});
-		
+
 		while (System.currentTimeMillis() < endTime || authController == null) {
 			if (splash.getDisplay().readAndDispatch() == false) {
 				splash.getDisplay().sleep();
 			}
 		}
-		
+
 		createLoginControls();
 
 		while (!authenticated) {
@@ -81,59 +81,59 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 				splash.getDisplay().sleep();
 			}
 		}
-		
+
 		restoreProgressWindow();
 	}
-	
+
 	private void createLoginControls() {
 		final Composite content = getContent();
 		content.setBackgroundImage(Activator.getImage("splash/loginSplash.bmp"));
-		
-		for (Control child: content.getChildren()) {
+
+		for (final Control child: content.getChildren()) {
 			child.setVisible(false);
 		}
-		
+
 		// TODO: Remove this in the final version
 		developerLabel = new Label(content, SWT.NONE);
 		developerLabel.setText("Developer version; empty login and password give administrator access");
 		developerLabel.setForeground(new Color(developerLabel.getDisplay(), 240, 240, 240));
 		developerLabel.setBounds(0, 153, content.getBounds().width, 20);
 		developerLabel.setAlignment(SWT.CENTER);
-		
+
 		username = new Text(content, SWT.NONE);
 		username.setBounds(276, 178, 226, 33);
-		
+
 		password = new Text(content, SWT.PASSWORD);
 		password.setBounds(276, 216, 226, 33);
-		
+
 		buttonCancel = new Button(content, SWT.PUSH);
 		buttonCancel.setText("Cancel");
 		buttonCancel.setBounds(20, 262, 115, 46);
-		
+
 		buttonCancel.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				PlatformUI.getWorkbench().close();
 			}
-			
+
 		});
-		
+
 		buttonOK = new Button(content, SWT.PUSH);
 		buttonOK.setText("Login");
 		buttonOK.setBounds(387, 262, 115, 46);
 		getSplash().setDefaultButton(buttonOK);
-		
+
 		buttonOK.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				authenticated = authController.authenticate(username.getText(), password.getText());
-				
+
 				if (!authenticated) {
 					MessageDialog.openWarning(getSplash(), "Authentication Failure",
 							"You have entered an invalid username or password");
 				}
 			}
-			
+
 		});
 
 		final FontDescriptor desc = JFaceResources.getDialogFontDescriptor().setHeight(14);
@@ -143,19 +143,19 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 		buttonOK.setFont(font);
 		buttonCancel.setFont(font);
 	}
-	
+
 	private void restoreProgressWindow() {
 		final Composite content = getContent();
 		content.setBackgroundImage(Activator.getImage("splash/splash.bmp"));
-		
+
 		developerLabel.dispose();
 		username.dispose();
 		password.dispose();
 		buttonCancel.dispose();
 		buttonOK.dispose();
 		font.dispose();
-		
-		for (Control child: content.getChildren()) {
+
+		for (final Control child: content.getChildren()) {
 			child.setVisible(true);
 		}
 	}

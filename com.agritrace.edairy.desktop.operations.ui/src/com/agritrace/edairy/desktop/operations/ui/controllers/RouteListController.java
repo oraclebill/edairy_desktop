@@ -79,7 +79,7 @@ public class RouteListController extends BasicDirectoryController<Route> {
 		addTableColumn("Vehicle", DairyPackage.Literals.ROUTE__VEHICLE, new ColumnFormatter() {
 			@Override
 			public String getText(Object element) {
-				Vehicle vehicle = ((Route) element).getVehicle();
+				final Vehicle vehicle = ((Route) element).getVehicle();
 				return vehicle == null ? "" : vehicle.getRegistrationNumber();
 			}
 		});
@@ -94,12 +94,12 @@ public class RouteListController extends BasicDirectoryController<Route> {
 		name.bindToModel(searchBean, "name");
 		name.setDirectWriting(true);
 		name.updateFromModel();
-		
+
 		description.bindToModel(searchBean, "description");
 		description.setDirectWriting(true);
 		description.updateFromModel();
-		
-		PropertyChangeListener listener = new PropertyChangeListener() {
+
+		final PropertyChangeListener listener = new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
 				refreshTableContents();
@@ -143,9 +143,9 @@ public class RouteListController extends BasicDirectoryController<Route> {
 	@Override
 	protected void deleteEntity(Route deletableEntity) {
 		if(deletableEntity != null){
-			dairyRepo.deleteRoute(deletableEntity);	
+			dairyRepo.deleteRoute(deletableEntity);
 		}
-		
+
 	}
-	
+
 }

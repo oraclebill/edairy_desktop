@@ -59,11 +59,11 @@ public class MilkNavigationNodeAssembler extends AbstractNavigationAssembler {
 
 		// NodeFactory.createSubModule(NavigationConstants.SUBMODULE_MILK_COLLECTIONS_DETAIL_REGISTER,
 		// "Collection Detail Log", moduleNode, MilkCollectionDetailLog.ID,
-		//				MilkCollectionDetailLogController.class); //$NON-NLS-1$ 
+		//				MilkCollectionDetailLogController.class); //$NON-NLS-1$
 		//
 		// NodeFactory.createSubModule(NavigationConstants.SUBMODULE_MILK_COLLECTIONS_DETAIL_ENTRY,
 		// "Log New Collections",
-		//				moduleNode, MilkCollectionJournalView.ID, MilkCollectionJournalController.class); //$NON-NLS-1$ 
+		//				moduleNode, MilkCollectionJournalView.ID, MilkCollectionJournalController.class); //$NON-NLS-1$
 
 		//
 		// DELIVERY MODULE GROUP
@@ -71,7 +71,7 @@ public class MilkNavigationNodeAssembler extends AbstractNavigationAssembler {
 		moduleNode = NodeFactory.createModule(NavigationConstants.MODULE_MILK_DELIVERY, "Milk Deliveries",
 				moduleGroupNode);
 		NodeFactory.createSubModule(NavigationConstants.SUBMODULE_MILK_DELIVERY_REGISTER,
-				"Delivery Log", moduleNode, MilkDeliveryJournalView.ID, MilkDeliveryJournalController.class); //$NON-NLS-1$ 
+				"Delivery Log", moduleNode, MilkDeliveryJournalView.ID, MilkDeliveryJournalController.class); //$NON-NLS-1$
 		//	NodeFactory.createSubModule("edm.milk.delivery.entry", "Log New Delivery", moduleNode, DeliveryView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
 		return new INavigationNode<?>[] { subAppNode };

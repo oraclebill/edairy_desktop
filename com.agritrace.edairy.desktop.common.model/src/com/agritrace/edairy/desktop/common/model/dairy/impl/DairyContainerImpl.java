@@ -6,19 +6,16 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import com.agritrace.edairy.desktop.common.model.dairy.Asset;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-
 import com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -68,6 +65,7 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Asset getAssetInfo() {
 		return assetInfo;
 	}
@@ -78,11 +76,15 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 	 * @generated
 	 */
 	public NotificationChain basicSetAssetInfo(Asset newAssetInfo, NotificationChain msgs) {
-		Asset oldAssetInfo = assetInfo;
+		final Asset oldAssetInfo = assetInfo;
 		assetInfo = newAssetInfo;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_CONTAINER__ASSET_INFO, oldAssetInfo, newAssetInfo);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+			final ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_CONTAINER__ASSET_INFO, oldAssetInfo, newAssetInfo);
+			if (msgs == null) {
+				msgs = notification;
+			} else {
+				msgs.add(notification);
+			}
 		}
 		return msgs;
 	}
@@ -92,18 +94,24 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAssetInfo(Asset newAssetInfo) {
 		if (newAssetInfo != assetInfo) {
 			NotificationChain msgs = null;
-			if (assetInfo != null)
+			if (assetInfo != null) {
 				msgs = ((InternalEObject)assetInfo).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DairyPackage.DAIRY_CONTAINER__ASSET_INFO, null, msgs);
-			if (newAssetInfo != null)
+			}
+			if (newAssetInfo != null) {
 				msgs = ((InternalEObject)newAssetInfo).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - DairyPackage.DAIRY_CONTAINER__ASSET_INFO, null, msgs);
+			}
 			msgs = basicSetAssetInfo(newAssetInfo, msgs);
-			if (msgs != null) msgs.dispatch();
+			if (msgs != null) {
+				msgs.dispatch();
+			}
 		}
-		else if (eNotificationRequired())
+		else if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_CONTAINER__ASSET_INFO, newAssetInfo, newAssetInfo));
+		}
 	}
 
 	/**

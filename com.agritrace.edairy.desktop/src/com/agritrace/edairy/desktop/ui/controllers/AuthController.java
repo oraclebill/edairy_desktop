@@ -13,40 +13,41 @@ import com.google.inject.Inject;
 
 public final class AuthController {
 	private final IEmployeeRepository repo;
-	
+
 	@Inject
 	public AuthController(final IEmployeeRepository repo) {
 		this.repo = repo;
 	}
-	
+
 	private void setPrincipal(IPrincipal principal) {
 		PrincipalManager.getInstance().setPrincipal(principal);
-		
+
 		try {
 			ApplicationNodeManager.getApplicationNode().setLabel(String.format("Welcome, %s!", principal.getDisplayName()));
-		} catch (NullPointerException e) {
+		} catch (final NullPointerException e) {
 			// This is normal, we haven't created the window yet
 		}
 	}
-	
+
 	public boolean authenticate(String username, String password) {
 		// TODO: Developer version hack for empty username/password
 		if (StringUtils.isEmpty(username)) {
-			boolean valid = StringUtils.isEmpty(username);
-			
-			if (valid)
+			final boolean valid = StringUtils.isEmpty(username);
+
+			if (valid) {
 				setPrincipal(new DefaultPrincipal());
-			
+			}
+
 			return valid;
 		}
-		
-		Employee employee = repo.find(username, password);
-		
+
+		final Employee employee = repo.find(username, password);
+
 		if (employee != null) {
 			setPrincipal(new EmployeePrincipal(employee));
 			return true;
 		}
-		
+
 		return false;
 	}
 }

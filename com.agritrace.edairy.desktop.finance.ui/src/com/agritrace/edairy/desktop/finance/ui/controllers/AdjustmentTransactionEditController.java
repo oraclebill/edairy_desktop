@@ -32,68 +32,69 @@ public class AdjustmentTransactionEditController extends RecordDialogController<
 	public AdjustmentTransactionEditController(final Provider<MemberSearchDialog> memberSearchProvider) {
 		this.memberSearchProvider = memberSearchProvider;
 	}
-	
+
 	@Override
 	protected void configureButtonsPanel() {
 		super.configureButtonsPanel();
-		
+
 		if (getActionType() != AbstractDirectoryController.ACTION_NEW) {
 			getRidget(IActionRidget.class, DialogConstants.BIND_ID_BUTTON_SAVE).setVisible(false);
 			getRidget(IActionRidget.class, DialogConstants.BIND_ID_BUTTON_DELETE).setVisible(false);
 			getRidget(IActionRidget.class, DialogConstants.BIND_ID_BUTTON_CANCEL).setText("Close");
 		}
 	}
-	
+
 	@Override
 	protected void configureUserRidgets() {
 		final AdjustmentTransaction model = getWorkingCopy();
-		
+
 		if (getActionType() != AbstractDirectoryController.ACTION_NEW) {
 			// Disable editing
 			getRidget(FinanceBindingConstants.ID_TRANSACTION_WRAPPER_FRAME).setEnabled(false);
 			getRidget(FinanceBindingConstants.ID_TRANSACTION_ALERT_FRAME).setVisible(false);
 		}
-		
+
 		final ISingleChoiceRidget typeRidget = getRidget(ISingleChoiceRidget.class,
 				FinanceBindingConstants.ID_TRANSACTION_CHOICE);
 		final List<String> optionValues = Arrays.asList("Credit Adjustment", "Debit Adjustment");
 		typeRidget.bindToModel(TransactionType.VALUES, optionValues, model, "transactionType");
-		
+
 		addTextMap(FinanceBindingConstants.ID_TRANSACTION_AMOUNT_TEXT, AccountPackage.Literals.TRANSACTION__AMOUNT);
 		addTextMap(FinanceBindingConstants.ID_TRANSACTION_DESCRIPTION_TEXT, AccountPackage.Literals.TRANSACTION__DESCRIPTION);
 		addTextMap(FinanceBindingConstants.ID_TRANSACTION_DATE, AccountPackage.Literals.TRANSACTION__TRANSACTION_DATE);
-		
+
 		final IDecimalTextRidget transactionText = getRidget(IDecimalTextRidget.class,
 				FinanceBindingConstants.ID_TRANSACTION_AMOUNT_TEXT);
 		transactionText.setGrouping(true);
 		transactionText.setPrecision(2);
 		transactionText.setSigned(false);
 		transactionText.setMandatory(true);
-		
+
 		final IPrincipal principal = PrincipalManager.getInstance().getPrincipal();
 
-		if (getActionType() == AbstractDirectoryController.ACTION_NEW && principal instanceof EmployeePrincipal)
-				model.setSignedOffBy(((EmployeePrincipal) principal).getEmployee());
-		
+		if (getActionType() == AbstractDirectoryController.ACTION_NEW && principal instanceof EmployeePrincipal) {
+			model.setSignedOffBy(((EmployeePrincipal) principal).getEmployee());
+		}
+
 		final ITextRidget signedBy = getRidget(ITextRidget.class, FinanceBindingConstants.ID_SIGNED_BY_TEXT);
 		signedBy.setOutputOnly(true);
-		
+
 		if (model.getSignedOffBy() != null) {
 			signedBy.setText(MemberUtil.formattedMemberName(model.getSignedOffBy()));
 		}
-		
+
 		final ITextRidget memberName = getRidget(ITextRidget.class, FinanceBindingConstants.ID_MEMBER_NAME_TEXT);
 		memberName.setMandatory(true);
 		memberName.setOutputOnly(true);
-		
+
 		if (model.getAccount() != null) {
-			Membership member = model.getAccount().getMember();
-			
+			final Membership member = model.getAccount().getMember();
+
 			if (member != null) {
 				memberName.setText(MemberUtil.formattedMemberName(member.getMember()));
 			}
 		}
-		
+
 		getRidget(IActionRidget.class, FinanceBindingConstants.ID_MEMBER_LOOKUP_BTN).addListener(new MemberLookupAction() {
 			@Override
 			protected void callback(Membership selectedMember) {

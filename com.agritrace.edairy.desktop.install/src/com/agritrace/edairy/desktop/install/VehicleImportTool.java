@@ -1,12 +1,8 @@
 package com.agritrace.edairy.desktop.install;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -27,9 +23,9 @@ import com.google.inject.Inject;
 
 /**
  * Create a dairy configuration by importing excel data in standard format.
- * 
+ *
  * @author bjones
- * 
+ *
  */
 public class VehicleImportTool extends AbstractImportTool {
 
@@ -84,30 +80,30 @@ public class VehicleImportTool extends AbstractImportTool {
 	private int count = 0, errCount = 0;
 
 	private final IDairyRepository repo;
-	
+
 	@Inject
 	public VehicleImportTool(IDairyRepository repo) {
 		this.repo = repo;
 	}
-	
+
 	public void processFile(InputStream input, List<Vehicle> vehicles,
 			Map<String, List<String[]>> errors, IProgressMonitor monitor) throws IOException {
 		setReader(new InputStreamReader(input));
 		setMonitor(monitor);
-		
+
 		this.vehicles = vehicles;
 		this.failedRecords = errors;
 
-		Dairy dairy = repo.getLocalDairy();
+		final Dairy dairy = repo.getLocalDairy();
 		vehicleCache = new HashMap<String, Object>();
-		
-		for (Vehicle vehicle : dairy.getVehicles()) {
+
+		for (final Vehicle vehicle : dairy.getVehicles()) {
 			vehicleCache.put(vehicle.getLogBookNumber(), vehicle);
 		}
-		
+
 		super.processFile();
 	}
-	
+
 	@Override
 	protected List<Entry> getFields() {
 		return Arrays.asList(fieldMap);
@@ -122,11 +118,11 @@ public class VehicleImportTool extends AbstractImportTool {
 	protected String[] getExpectedHeaders() {
 		return expectedHeaders;
 	}
-	
+
 	@Override
 	protected void validateRecord(String[] values) {
 		super.validateRecord(values);
-		Object route = vehicleCache.get(values[REGISTRATION_NUMBER]);
+		final Object route = vehicleCache.get(values[REGISTRATION_NUMBER]);
 		if (route instanceof Vehicle) {
 			throw new ValidationException("Vehicle exists in database.");
 		}
@@ -138,29 +134,29 @@ public class VehicleImportTool extends AbstractImportTool {
 
 	@Override
 	protected void saveImportedEntity(Object entity) {
-		Vehicle vehicle = (Vehicle)entity;
+		final Vehicle vehicle = (Vehicle)entity;
 		madeConsistent(vehicle);
 		count++;
 		vehicles.add(vehicle);
 	}
 
-	
-	
+
+
 	private void madeConsistent(Vehicle vehicle) {
-		String logBookNumber = vehicle.getLogBookNumber();
-		if(logBookNumber == null 
-				|| logBookNumber.isEmpty()//NOTE! this may clatch with VehicleImpl.LOG_BOOK_NUMBER_EDEFAULT if it will be set to 
+		final String logBookNumber = vehicle.getLogBookNumber();
+		if(logBookNumber == null
+				|| logBookNumber.isEmpty()//NOTE! this may clatch with VehicleImpl.LOG_BOOK_NUMBER_EDEFAULT if it will be set to
 				//something different than just empty string!
 				){
 			vehicle.setLogBookNumber(vehicle.getRegistrationNumber());
-		}			
-		
+		}
+
 	}
 
 	@Override
 	protected void doImportRecordFailed(String[] values, Exception e) {
 		errCount++;
-		String message = e.getMessage();
+		final String message = e.getMessage();
 		List<String[]> records = failedRecords.get(message);
 		if (records == null) {
 			records = new LinkedList<String[]>();
@@ -171,7 +167,7 @@ public class VehicleImportTool extends AbstractImportTool {
 
 	@Override
 	protected EObject createBlankEntity() {
-		EObject vehicle = DairyFactory.eINSTANCE.createVehicle();
+		final EObject vehicle = DairyFactory.eINSTANCE.createVehicle();
 		EMFUtil.populate(vehicle);
 		return vehicle;
 	}

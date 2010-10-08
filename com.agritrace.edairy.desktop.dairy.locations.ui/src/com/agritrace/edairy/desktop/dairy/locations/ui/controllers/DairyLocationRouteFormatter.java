@@ -17,7 +17,7 @@ public class DairyLocationRouteFormatter extends ColumnFormatter {
 		if (element instanceof DairyLocation) {
 			final Route route = ((DairyLocation) element).getRoute();
 			if(route != null){
-				return route.getName();	
+				return route.getName();
 			}
 		}
 		return null;

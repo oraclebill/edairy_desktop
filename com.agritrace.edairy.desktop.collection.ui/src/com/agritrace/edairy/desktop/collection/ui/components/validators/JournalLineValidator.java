@@ -2,16 +2,16 @@ package com.agritrace.edairy.desktop.collection.ui.components.validators;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 
 public class JournalLineValidator {
-	
+
 	private boolean errorDialogsEnabled;
 	/**
 	 * Called when the ID specified is not valid.
-	 * 
+	 *
 	 * @param journalLine
 	 * @param canId
 	 * @return
@@ -33,7 +33,7 @@ public class JournalLineValidator {
 	}
 
 	/**
- * 
+ *
  */
 	public boolean handleInvalidMemberID(final CollectionJournalLine journalLine, final String memberId) {
 		boolean ret = true;
@@ -51,7 +51,7 @@ public class JournalLineValidator {
 
 	/**
 	 * Called when there is no can id specified.
-	 * 
+	 *
 	 * @param journalLine
 	 * @return false to abort the current operation (usually the 'save' of a journal line)
 	 */
@@ -62,7 +62,7 @@ public class JournalLineValidator {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean handleTotalsNotEqualOnSave(CollectionGroup workingJournalPage) {
@@ -71,7 +71,7 @@ public class JournalLineValidator {
 
 	/**
 	 * Called when a can id is not recognized.
-	 * 
+	 *
 	 * @param journalLine
 	 * @param canId
 	 * @return false to abort the current operation (usually the 'save' of a journal line)

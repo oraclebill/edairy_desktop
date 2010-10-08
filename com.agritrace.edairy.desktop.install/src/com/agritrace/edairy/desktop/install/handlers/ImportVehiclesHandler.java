@@ -14,7 +14,7 @@ import java.util.Map;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.window.Window;
 import org.eclipse.riena.ui.core.uiprocess.UIProcess;
 import org.eclipse.ui.handlers.HandlerUtil;
 
@@ -27,7 +27,7 @@ import com.google.inject.Provider;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
- * 
+ *
  * @see org.eclipse.core.commands.IHandler
  * @see org.eclipse.core.commands.AbstractHandler
  */
@@ -37,7 +37,7 @@ public class ImportVehiclesHandler extends HandlerBase {
 	private class VehicleImportProcess extends UIProcess {
 		final File importFile;
 		final int lineCount;
-		private List<String> msgList;
+		private final List<String> msgList;
 		private List<Vehicle> vehicles;
 		private Map<String, List<String[]>> errors;
 
@@ -56,10 +56,10 @@ public class ImportVehiclesHandler extends HandlerBase {
 
 		@Override
 		public void finalUpdateUI() {
-			boolean importEnabled = vehicles.size() > 0;
-			ImportResultsDialog irDialog = new ImportResultsDialog(
+			final boolean importEnabled = vehicles.size() > 0;
+			final ImportResultsDialog irDialog = new ImportResultsDialog(
 					HandlerUtil.getActiveShell(event), msgList, importEnabled);
-			if (irDialog.open() == Dialog.OK) {
+			if (irDialog.open() == Window.OK) {
 				saveVehicles(vehicles);
 			}
 		}
@@ -74,26 +74,26 @@ public class ImportVehiclesHandler extends HandlerBase {
 				input = new BufferedInputStream(new FileInputStream(importFile));
 
 				monitor.subTask("Importing records...");
-				
+
 				vehicles = new LinkedList<Vehicle>();
 				errors = new HashMap<String, List<String[]>>();
 
-				VehicleImportTool tool = toolProvider.get();
+				final VehicleImportTool tool = toolProvider.get();
 				tool.processFile(input, vehicles, errors, monitor);
 
 				msgList.add(String.format(
 						"%-4d records imported successfully.", vehicles.size()));
-				for (String err : errors.keySet()) {
+				for (final String err : errors.keySet()) {
 					msgList.add(String.format(
 							"%-4d records failed with a '%s' error.", errors
 									.get(err).size(), err));
 				}
 				monitor.setTaskName("Saving members...");
 
-			} catch (FileNotFoundException e) {
+			} catch (final FileNotFoundException e) {
 				e.printStackTrace();
 				return false;
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				e.printStackTrace();
 				return false;
 			} finally {
@@ -101,7 +101,7 @@ public class ImportVehiclesHandler extends HandlerBase {
 				if (input != null) {
 					try {
 						input.close();
-					} catch (IOException ioe) {
+					} catch (final IOException ioe) {
 						;
 					}
 				}
@@ -111,16 +111,16 @@ public class ImportVehiclesHandler extends HandlerBase {
 		}
 
 		private void saveVehicles(List<Vehicle> successes2) {
-			IDairyRepository dairyRepo = repoProvider.get();
+			final IDairyRepository dairyRepo = repoProvider.get();
 			dairyRepo.getLocalDairy().getVehicles().addAll(successes2);
 			dairyRepo.save();
 		}
 
 	}
-	
+
 	@Inject private static Provider<IDairyRepository> repoProvider;
 	@Inject private static Provider<VehicleImportTool> toolProvider;
-	
+
 	/**
 	 * The constructor.
 	 */
@@ -131,21 +131,22 @@ public class ImportVehiclesHandler extends HandlerBase {
 	 * the command has been executed, so extract extract the needed information
 	 * from the application context.
 	 */
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		this.event = event;
 
-		Object navigationContext = getNavigationContext(event);
+		final Object navigationContext = getNavigationContext(event);
 		try {
 
-			File importFile = new File(getImportFile(event));
-			int lineCount = countLines(importFile);
-			UIProcess process = new VehicleImportProcess(importFile, lineCount,
+			final File importFile = new File(getImportFile(event));
+			final int lineCount = countLines(importFile);
+			final UIProcess process = new VehicleImportProcess(importFile, lineCount,
 					navigationContext);
 
 			process.setTitle("Import Vehicles");
 			process.setNote("Importing...");
 			process.start();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			throw new ExecutionException("Import operation failed.", e);
 		}
 		return null;

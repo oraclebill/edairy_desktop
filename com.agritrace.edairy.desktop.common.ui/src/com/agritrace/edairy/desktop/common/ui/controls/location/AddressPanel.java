@@ -119,7 +119,7 @@ public class AddressPanel extends CompositePanel {
 
 //			final Text provinceText = UIControlsFactory.createText(this, SWT.BORDER | SWT.SINGLE,
 //					DairyLocationController.RIDGET_ID_PL_PROVINCE);
-			final CCombo provinceText = UIControlsFactory.createCCombo(this, 
+			final CCombo provinceText = UIControlsFactory.createCCombo(this,
 					ViewWidgetId.PROVINCE_TXT);
 			gd = new GridData();
 			gd.widthHint = FormUtil.WIDTH_UNIT * 2;

@@ -6,34 +6,25 @@
  */
 package com.agritrace.edairy.desktop.common.model.requests.impl;
 
-import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
-
-import com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl;
-
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-
-import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
-
-import com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountPackageImpl;
-
-import com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl;
-
-import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
-import com.agritrace.edairy.desktop.common.model.requests.RequestType;
-import com.agritrace.edairy.desktop.common.model.requests.RequestsFactory;
-import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
-
-import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
-
-import com.agritrace.edairy.desktop.common.model.tracking.impl.TrackingPackageImpl;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+
+import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+import com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountPackageImpl;
+import com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl;
+import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
+import com.agritrace.edairy.desktop.common.model.requests.RequestType;
+import com.agritrace.edairy.desktop.common.model.requests.RequestsFactory;
+import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
+import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
+import com.agritrace.edairy.desktop.common.model.tracking.impl.TrackingPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -84,7 +75,7 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link RequestsPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -95,18 +86,20 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 	 * @generated
 	 */
 	public static RequestsPackage init() {
-		if (isInited) return (RequestsPackage)EPackage.Registry.INSTANCE.getEPackage(RequestsPackage.eNS_URI);
+		if (isInited) {
+			return (RequestsPackage)EPackage.Registry.INSTANCE.getEPackage(RequestsPackage.eNS_URI);
+		}
 
 		// Obtain or create and register package
-		RequestsPackageImpl theRequestsPackage = (RequestsPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof RequestsPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new RequestsPackageImpl());
+		final RequestsPackageImpl theRequestsPackage = (RequestsPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof RequestsPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new RequestsPackageImpl());
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		DairyPackageImpl theDairyPackage = (DairyPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DairyPackage.eNS_URI) instanceof DairyPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DairyPackage.eNS_URI) : DairyPackage.eINSTANCE);
-		AccountPackageImpl theAccountPackage = (AccountPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(AccountPackage.eNS_URI) instanceof AccountPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(AccountPackage.eNS_URI) : AccountPackage.eINSTANCE);
-		ModelPackageImpl theModelPackage = (ModelPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) : ModelPackage.eINSTANCE);
-		TrackingPackageImpl theTrackingPackage = (TrackingPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TrackingPackage.eNS_URI) instanceof TrackingPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TrackingPackage.eNS_URI) : TrackingPackage.eINSTANCE);
+		final DairyPackageImpl theDairyPackage = (DairyPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DairyPackage.eNS_URI) instanceof DairyPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DairyPackage.eNS_URI) : DairyPackage.eINSTANCE);
+		final AccountPackageImpl theAccountPackage = (AccountPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(AccountPackage.eNS_URI) instanceof AccountPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(AccountPackage.eNS_URI) : AccountPackage.eINSTANCE);
+		final ModelPackageImpl theModelPackage = (ModelPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) : ModelPackage.eINSTANCE);
+		final TrackingPackageImpl theTrackingPackage = (TrackingPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TrackingPackage.eNS_URI) instanceof TrackingPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TrackingPackage.eNS_URI) : TrackingPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theRequestsPackage.createPackageContents();
@@ -125,7 +118,7 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 		// Mark meta-data to indicate it can't be changed
 		theRequestsPackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(RequestsPackage.eNS_URI, theRequestsPackage);
 		return theRequestsPackage;
@@ -136,6 +129,7 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAnimalHealthRequest() {
 		return animalHealthRequestEClass;
 	}
@@ -145,6 +139,7 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAnimalHealthRequest_RequestId() {
 		return (EAttribute)animalHealthRequestEClass.getEStructuralFeatures().get(0);
 	}
@@ -154,6 +149,7 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAnimalHealthRequest_RequestingMember() {
 		return (EReference)animalHealthRequestEClass.getEStructuralFeatures().get(1);
 	}
@@ -163,6 +159,7 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAnimalHealthRequest_Dairy() {
 		return (EReference)animalHealthRequestEClass.getEStructuralFeatures().get(2);
 	}
@@ -172,6 +169,7 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAnimalHealthRequest_Date() {
 		return (EAttribute)animalHealthRequestEClass.getEStructuralFeatures().get(3);
 	}
@@ -181,6 +179,7 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAnimalHealthRequest_Type() {
 		return (EAttribute)animalHealthRequestEClass.getEStructuralFeatures().get(4);
 	}
@@ -190,6 +189,7 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAnimalHealthRequest_ReportedProblem() {
 		return (EAttribute)animalHealthRequestEClass.getEStructuralFeatures().get(5);
 	}
@@ -199,6 +199,7 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAnimalHealthRequest_ReportedAnimal() {
 		return (EReference)animalHealthRequestEClass.getEStructuralFeatures().get(6);
 	}
@@ -208,6 +209,7 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAnimalHealthRequest_DateHeatDetected() {
 		return (EAttribute)animalHealthRequestEClass.getEStructuralFeatures().get(7);
 	}
@@ -217,6 +219,7 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAnimalHealthRequest_FirstTreatment() {
 		return (EAttribute)animalHealthRequestEClass.getEStructuralFeatures().get(8);
 	}
@@ -226,6 +229,7 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAnimalHealthRequest_SecondTreatment() {
 		return (EAttribute)animalHealthRequestEClass.getEStructuralFeatures().get(9);
 	}
@@ -235,6 +239,7 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAnimalHealthRequest_ThirdTreatment() {
 		return (EAttribute)animalHealthRequestEClass.getEStructuralFeatures().get(10);
 	}
@@ -244,6 +249,7 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAnimalHealthRequest_Farm() {
 		return (EReference)animalHealthRequestEClass.getEStructuralFeatures().get(11);
 	}
@@ -253,6 +259,7 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAnimalHealthRequest_ReferredTo() {
 		return (EReference)animalHealthRequestEClass.getEStructuralFeatures().get(12);
 	}
@@ -262,6 +269,7 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getRequestType() {
 		return requestTypeEEnum;
 	}
@@ -271,6 +279,7 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RequestsFactory getRequestsFactory() {
 		return (RequestsFactory)getEFactoryInstance();
 	}
@@ -290,7 +299,9 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 	 * @generated
 	 */
 	public void createPackageContents() {
-		if (isCreated) return;
+		if (isCreated) {
+			return;
+		}
 		isCreated = true;
 
 		// Create classes and their features
@@ -328,7 +339,9 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 	 * @generated
 	 */
 	public void initializePackageContents() {
-		if (isInitialized) return;
+		if (isInitialized) {
+			return;
+		}
 		isInitialized = true;
 
 		// Initialize package
@@ -337,9 +350,9 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		ModelPackage theModelPackage = (ModelPackage)EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
-		DairyPackage theDairyPackage = (DairyPackage)EPackage.Registry.INSTANCE.getEPackage(DairyPackage.eNS_URI);
-		TrackingPackage theTrackingPackage = (TrackingPackage)EPackage.Registry.INSTANCE.getEPackage(TrackingPackage.eNS_URI);
+		final ModelPackage theModelPackage = (ModelPackage)EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
+		final DairyPackage theDairyPackage = (DairyPackage)EPackage.Registry.INSTANCE.getEPackage(DairyPackage.eNS_URI);
+		final TrackingPackage theTrackingPackage = (TrackingPackage)EPackage.Registry.INSTANCE.getEPackage(TrackingPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -386,14 +399,14 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		
+		final String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";
 		addAnnotation
-		  (getAnimalHealthRequest_Dairy(), 
-		   source, 
+		  (getAnimalHealthRequest_Dairy(),
+		   source,
 		   new String[] {
 			 "name", "dairy",
 			 "kind", "elementOnly"
-		   });	
+		   });
 	}
 
 	/**
@@ -403,10 +416,10 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 	 * @generated
 	 */
 	protected void createTeneoAnnotations() {
-		String source = "teneo.jpa";			
+		final String source = "teneo.jpa";
 		addAnnotation
-		  (getAnimalHealthRequest_Dairy(), 
-		   source, 
+		  (getAnimalHealthRequest_Dairy(),
+		   source,
 		   new String[] {
 			 "appinfo", "@ManyToOne(cascade=PERSIST)"
 		   });

@@ -11,11 +11,11 @@ public final class AdjustmentTransactionJournalFilterPanel extends TransactionJo
 	public AdjustmentTransactionJournalFilterPanel(Composite parent) {
 		this(parent, SWT.NONE);
 	}
-	
+
 	public AdjustmentTransactionJournalFilterPanel(Composite parent, int style) {
 		super(parent, style);
 	}
-	
+
 	@Override
 	public void addRefNumFilterLookup() {
 		// Do nothing - hide reference number filter

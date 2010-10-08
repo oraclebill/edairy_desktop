@@ -18,7 +18,7 @@ import com.csvreader.CsvReader;
 public abstract class AbstractImportTool2 {
 
 	/**
-	 * 
+	 *
 	 * @author bjones
 	 *
 	 */
@@ -33,7 +33,7 @@ public abstract class AbstractImportTool2 {
 
 
 	/**
-	 * 
+	 *
 	 * @author bjones
 	 *
 	 */
@@ -43,13 +43,13 @@ public abstract class AbstractImportTool2 {
 		/**
 		 */
 		private static final long serialVersionUID = 1L;
-		
+
 		/**
 		 */
 		protected EventType eventType;
-		
+
 		/**
-		 * 
+		 *
 		 * @param source
 		 */
 		public ImportEvent(Object source, EventType type) {
@@ -57,22 +57,22 @@ public abstract class AbstractImportTool2 {
 			eventType = type;
 		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @author bjones
 	 *
 	 */
 	public static class RowImportEvent extends ImportEvent {
 		private static final long serialVersionUID = 1L;
-		
+
 		/**
-		 * 
+		 *
 		 */
 		public String values[];
-		
+
 		/**
-		 * 
+		 *
 		 * @param source
 		 * @param type
 		 * @param values
@@ -82,22 +82,22 @@ public abstract class AbstractImportTool2 {
 			this.values = values;
 		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @author bjones
 	 *
 	 */
 	public static class RowImportExceptionEvent extends RowImportEvent {
 		private static final long serialVersionUID = 1L;
-		
+
 		/**
-		 * 
+		 *
 		 */
 		public Exception exception;
-		
+
 		/**
-		 * 
+		 *
 		 * @param source
 		 * @param type
 		 * @param values
@@ -110,22 +110,22 @@ public abstract class AbstractImportTool2 {
 
 	public static class ImportFailedEvent extends ImportEvent {
 		private static final long serialVersionUID = 1L;
-		
+
 		/**
-		 * 
+		 *
 		 */
 		public Exception exception;
-		
+
 		/**
-		 * 
+		 *
 		 * @param source
 		 */
 		ImportFailedEvent(Object source, final Exception e) {
 			super(source, EventType.FAILED);
 			this.exception = e;
-		}		
+		}
 	}
-	
+
 	protected Reader reader;
 	private int count, errors;
 	private ListenerList listeners;
@@ -137,39 +137,40 @@ public abstract class AbstractImportTool2 {
 	public Reader getReader() {
 		return this.reader;
 	}
-	
+
 	public void processFile() throws IOException {
-		CsvReader csvReader = new CsvReader(reader);
+		final CsvReader csvReader = new CsvReader(reader);
 		csvReader.readRecord();
-		String[] headers = csvReader.getValues();
+		final String[] headers = csvReader.getValues();
 		try {
 			// csvReader.setHeaders(headers);
 			fireBegin(headers);
 			while (csvReader.readRecord()) {
-				String[] values = csvReader.getValues();
+				final String[] values = csvReader.getValues();
 				try {
 					fireBeforeImportRow(values);
 					fireImportRow(values);
 					count++;
-				} catch (ValidationException e) {
+				} catch (final ValidationException e) {
 					errors++;
 					fireRowException(values, e);
 				}
 			}
-			
+
 			fireImportComplete(count, errors);
 		}
-		catch(ValidationException e) {
+		catch(final ValidationException e) {
 			fireImportFailed(e);
 		}
 	}
 
 
 	private void fireBegin(final String[] headers) {
-		Object[] array = listeners.getListeners();
-		for (int i = 0; i < array.length; i++) {
-			final ImportEventListener l = (ImportEventListener) array[i];
+		final Object[] array = listeners.getListeners();
+		for (final Object element : array) {
+			final ImportEventListener l = (ImportEventListener) element;
 			SafeRunnable.run(new SafeRunnable() {
+				@Override
 				public void run() {
 					l.beginImport(new RowImportEvent(this, EventType.BEGIN, headers));
 				}
@@ -178,10 +179,11 @@ public abstract class AbstractImportTool2 {
 	}
 
 	private void fireBeforeImportRow(final String[] values) {
-		Object[] array = listeners.getListeners();
-		for (int i = 0; i < array.length; i++) {
-			final ImportEventListener l = (ImportEventListener) array[i];
+		final Object[] array = listeners.getListeners();
+		for (final Object element : array) {
+			final ImportEventListener l = (ImportEventListener) element;
 			SafeRunnable.run(new SafeRunnable() {
+				@Override
 				public void run() {
 					l.beforeImportRow(new RowImportEvent(this, EventType.BEFORE_ROW, values));
 				}
@@ -190,10 +192,11 @@ public abstract class AbstractImportTool2 {
 	}
 
 	private void fireImportRow(final String[] values) {
-		Object[] array = listeners.getListeners();
-		for (int i = 0; i < array.length; i++) {
-			final ImportEventListener l = (ImportEventListener) array[i];
+		final Object[] array = listeners.getListeners();
+		for (final Object element : array) {
+			final ImportEventListener l = (ImportEventListener) element;
 			SafeRunnable.run(new SafeRunnable() {
+				@Override
 				public void run() {
 					l.importRow(new RowImportEvent(this, EventType.BEFORE_ROW, values));
 				}
@@ -202,10 +205,11 @@ public abstract class AbstractImportTool2 {
 	}
 
 	private void fireRowException(final String[] values, final Exception e) {
-		Object[] array = listeners.getListeners();
-		for (int i = 0; i < array.length; i++) {
-			final ImportEventListener l = (ImportEventListener) array[i];
+		final Object[] array = listeners.getListeners();
+		for (final Object element : array) {
+			final ImportEventListener l = (ImportEventListener) element;
 			SafeRunnable.run(new SafeRunnable() {
+				@Override
 				public void run() {
 					l.importRowException(new RowImportExceptionEvent(this, EventType.BEFORE_ROW, values, e));
 				}
@@ -214,10 +218,11 @@ public abstract class AbstractImportTool2 {
 	}
 
 	private void fireImportComplete(int succeeded, int failed) {
-		Object[] array = listeners.getListeners();
-		for (int i = 0; i < array.length; i++) {
-			final ImportEventListener l = (ImportEventListener) array[i];
+		final Object[] array = listeners.getListeners();
+		for (final Object element : array) {
+			final ImportEventListener l = (ImportEventListener) element;
 			SafeRunnable.run(new SafeRunnable() {
+				@Override
 				public void run() {
 					l.importComplete(new ImportEvent(this, EventType.COMPLETE));
 				}
@@ -225,12 +230,13 @@ public abstract class AbstractImportTool2 {
 		}
 
 	}
-	
+
 	private void fireImportFailed(final Exception e) {
-		Object[] array = listeners.getListeners();
-		for (int i = 0; i < array.length; i++) {
-			final ImportEventListener l = (ImportEventListener) array[i];
+		final Object[] array = listeners.getListeners();
+		for (final Object element : array) {
+			final ImportEventListener l = (ImportEventListener) element;
 			SafeRunnable.run(new SafeRunnable() {
+				@Override
 				public void run() {
 					l.importFailed(new ImportFailedEvent(this,e));
 				}
@@ -242,14 +248,16 @@ public abstract class AbstractImportTool2 {
 	public void validateHeaders(String[] expectedHeaders, String[] actualHeaders) {
 		String errorMessage = null;
 		if (expectedHeaders != null) {
-			if (actualHeaders.length != expectedHeaders.length)
+			if (actualHeaders.length != expectedHeaders.length) {
 				throw new ValidationException("Number of fields does not match - found " + actualHeaders.length
 						+ " expected " + expectedHeaders.length);
+			}
 			for (int i = 0; i < expectedHeaders.length; i++) {
-				if (expectedHeaders[i] == null)
+				if (expectedHeaders[i] == null) {
 					continue;
-				String expected = expectedHeaders[i].trim();
-				String actual = actualHeaders[i].trim();
+				}
+				final String expected = expectedHeaders[i].trim();
+				final String actual = actualHeaders[i].trim();
 				if (!expected.equals(actual)) {
 					if (errorMessage == null) {
 						errorMessage = "Mismatched headers: \n";
@@ -258,25 +266,26 @@ public abstract class AbstractImportTool2 {
 							+ "'\n";
 				}
 			}
-			if (errorMessage != null)
+			if (errorMessage != null) {
 				throw new ValidationException(errorMessage);
+			}
 		}
 	}
 
 	public static Object convert(EStructuralFeature feature, String value) {
-		Class<?> instanceClass = feature.getEType().getInstanceClass();
+		final Class<?> instanceClass = feature.getEType().getInstanceClass();
 		Object retVal = value;
 		if (Date.class.isAssignableFrom(instanceClass)) {
 			try {
 				retVal = new Date(value);
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				retVal = null;
 			}
 		} else if (Integer.class.isAssignableFrom(instanceClass)) {
 			System.err.println(">> Converting from " + value + " (" + instanceClass + ") to Integer");
 			try {
 				retVal = new Integer(value);
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				retVal = null;
 			}
 		}

@@ -1,7 +1,7 @@
 /*
  * Java CSV is a stream based library for reading and writing
  * CSV and other delimited data.
- *   
+ *
  * Copyright (C) Bruce Dunwiddie bruce@csvreader.com
  *
  * This library is free software; you can redistribute it and/or
@@ -43,7 +43,7 @@ public class CsvWriter {
 	private Charset charset = null;
 
 	// this holds all the values for switches that the user is allowed to set
-	private UserSettings userSettings = new UserSettings();
+	private final UserSettings userSettings = new UserSettings();
 
 	private boolean initialized = false;
 
@@ -64,7 +64,7 @@ public class CsvWriter {
 	/**
 	 * Creates a {@link com.csvreader.CsvWriter CsvWriter} object using a file
 	 * as the data destination.
-	 * 
+	 *
 	 * @param fileName
 	 *            The path to the file to output the data.
 	 * @param delimiter
@@ -91,7 +91,7 @@ public class CsvWriter {
 	 * Creates a {@link com.csvreader.CsvWriter CsvWriter} object using a file
 	 * as the data destination.&nbsp;Uses a comma as the column delimiter and
 	 * ISO-8859-1 as the {@link java.nio.charset.Charset Charset}.
-	 * 
+	 *
 	 * @param fileName
 	 *            The path to the file to output the data.
 	 */
@@ -102,7 +102,7 @@ public class CsvWriter {
 	/**
 	 * Creates a {@link com.csvreader.CsvWriter CsvWriter} object using a Writer
 	 * to write data to.
-	 * 
+	 *
 	 * @param outputStream
 	 *            The stream to write the column delimited data to.
 	 * @param delimiter
@@ -121,7 +121,7 @@ public class CsvWriter {
 	/**
 	 * Creates a {@link com.csvreader.CsvWriter CsvWriter} object using an
 	 * OutputStream to write data to.
-	 * 
+	 *
 	 * @param outputStream
 	 *            The stream to write the column delimited data to.
 	 * @param delimiter
@@ -136,7 +136,7 @@ public class CsvWriter {
 
 	/**
 	 * Gets the character being used as the column delimiter.
-	 * 
+	 *
 	 * @return The character being used as the column delimiter.
 	 */
 	public char getDelimiter() {
@@ -145,7 +145,7 @@ public class CsvWriter {
 
 	/**
 	 * Sets the character to use as the column delimiter.
-	 * 
+	 *
 	 * @param delimiter
 	 *            The character to use as the column delimiter.
 	 */
@@ -159,7 +159,7 @@ public class CsvWriter {
 
 	/**
 	 * Sets the character to use as the record delimiter.
-	 * 
+	 *
 	 * @param recordDelimiter
 	 *            The character to use as the record delimiter. Default is
 	 *            combination of standard end of line characters for Windows,
@@ -172,7 +172,7 @@ public class CsvWriter {
 
 	/**
 	 * Gets the character to use as a text qualifier in the data.
-	 * 
+	 *
 	 * @return The character to use as a text qualifier in the data.
 	 */
 	public char getTextQualifier() {
@@ -181,7 +181,7 @@ public class CsvWriter {
 
 	/**
 	 * Sets the character to use as a text qualifier in the data.
-	 * 
+	 *
 	 * @param textQualifier
 	 *            The character to use as a text qualifier in the data.
 	 */
@@ -191,7 +191,7 @@ public class CsvWriter {
 
 	/**
 	 * Whether text qualifiers will be used while writing data or not.
-	 * 
+	 *
 	 * @return Whether text qualifiers will be used while writing data or not.
 	 */
 	public boolean getUseTextQualifier() {
@@ -200,7 +200,7 @@ public class CsvWriter {
 
 	/**
 	 * Sets whether text qualifiers will be used while writing data or not.
-	 * 
+	 *
 	 * @param useTextQualifier
 	 *            Whether to use a text qualifier while writing data or not.
 	 */
@@ -227,7 +227,7 @@ public class CsvWriter {
 	/**
 	 * Whether fields will be surrounded by the text qualifier even if the
 	 * qualifier is not necessarily needed to escape this field.
-	 * 
+	 *
 	 * @return Whether fields will be forced to be qualified or not.
 	 */
 	public boolean getForceQualifier() {
@@ -238,7 +238,7 @@ public class CsvWriter {
 	 * Use this to force all fields to be surrounded by the text qualifier even
 	 * if the qualifier is not necessarily needed to escape this field. Default
 	 * is false.
-	 * 
+	 *
 	 * @param forceQualifier
 	 *            Whether to force the fields to be qualified or not.
 	 */
@@ -248,7 +248,7 @@ public class CsvWriter {
 
 	/**
 	 * Writes another column of data to this record.
-	 * 
+	 *
 	 * @param content
 	 *            The data for the new column.
 	 * @param preserveSpaces
@@ -282,29 +282,29 @@ public class CsvWriter {
 				&& userSettings.UseTextQualifier
 				&& (content.indexOf(userSettings.TextQualifier) > -1
 						|| content.indexOf(userSettings.Delimiter) > -1
-						|| (!useCustomRecordDelimiter && (content
+						|| !useCustomRecordDelimiter && (content
 								.indexOf(Letters.LF) > -1 || content
-								.indexOf(Letters.CR) > -1))
-						|| (useCustomRecordDelimiter && content
-								.indexOf(userSettings.RecordDelimiter) > -1)
-						|| (firstColumn && content.length() > 0 && content
-								.charAt(0) == userSettings.Comment) ||
+								.indexOf(Letters.CR) > -1)
+						|| useCustomRecordDelimiter && content
+								.indexOf(userSettings.RecordDelimiter) > -1
+						|| firstColumn && content.length() > 0 && content
+								.charAt(0) == userSettings.Comment ||
 				// check for empty first column, which if on its own line must
 				// be qualified or the line will be skipped
-				(firstColumn && content.length() == 0))) {
+				firstColumn && content.length() == 0)) {
 			textQualify = true;
 		}
 
 		if (userSettings.UseTextQualifier && !textQualify
 				&& content.length() > 0 && preserveSpaces) {
-			char firstLetter = content.charAt(0);
+			final char firstLetter = content.charAt(0);
 
 			if (firstLetter == Letters.SPACE || firstLetter == Letters.TAB) {
 				textQualify = true;
 			}
 
 			if (!textQualify && content.length() > 1) {
-				char lastLetter = content.charAt(content.length() - 1);
+				final char lastLetter = content.charAt(content.length() - 1);
 
 				if (lastLetter == Letters.SPACE || lastLetter == Letters.TAB) {
 					textQualify = true;
@@ -364,7 +364,7 @@ public class CsvWriter {
 	/**
 	 * Writes another column of data to this record.&nbsp;Does not preserve
 	 * leading and trailing whitespace in this column of data.
-	 * 
+	 *
 	 * @param content
 	 *            The data for the new column.
 	 * @exception IOException
@@ -395,14 +395,14 @@ public class CsvWriter {
 
 	/**
 	 * Writes a new record using the passed in array of values.
-	 * 
+	 *
 	 * @param values
 	 *            Values to be written.
-	 * 
+	 *
 	 * @param preserveSpaces
 	 *            Whether to preserver leading and trailing spaces in columns
 	 *            while writing out to the record or not.
-	 * 
+	 *
 	 * @throws IOException
 	 *             Thrown if an error occurs while writing data to the
 	 *             destination stream.
@@ -410,8 +410,8 @@ public class CsvWriter {
 	public void writeRecord(String[] values, boolean preserveSpaces)
 			throws IOException {
 		if (values != null && values.length > 0) {
-			for (int i = 0; i < values.length; i++) {
-				write(values[i], preserveSpaces);
+			for (final String value : values) {
+				write(value, preserveSpaces);
 			}
 
 			endRecord();
@@ -420,10 +420,10 @@ public class CsvWriter {
 
 	/**
 	 * Writes a new record using the passed in array of values.
-	 * 
+	 *
 	 * @param values
 	 *            Values to be written.
-	 * 
+	 *
 	 * @throws IOException
 	 *             Thrown if an error occurs while writing data to the
 	 *             destination stream.
@@ -434,7 +434,7 @@ public class CsvWriter {
 
 	/**
 	 * Ends the current record by sending the record delimiter.
-	 * 
+	 *
 	 * @exception IOException
 	 *                Thrown if an error occurs while writing data to the
 	 *                destination stream.
@@ -454,7 +454,7 @@ public class CsvWriter {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private void checkInit() throws IOException {
 		if (!initialized) {
@@ -487,7 +487,7 @@ public class CsvWriter {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private void close(boolean closing) {
 		if (!closed) {
@@ -499,7 +499,7 @@ public class CsvWriter {
 				if (initialized) {
 					outputStream.close();
 				}
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				// just eat the exception
 			}
 
@@ -510,7 +510,7 @@ public class CsvWriter {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private void checkClosed() throws IOException {
 		if (closed) {
@@ -520,8 +520,9 @@ public class CsvWriter {
 	}
 
 	/**
-	 * 
+	 *
 	 */
+	@Override
 	protected void finalize() {
 		close(false);
 	}
@@ -579,7 +580,7 @@ public class CsvWriter {
 		int found = original.indexOf(pattern);
 
 		if (found > -1) {
-			StringBuffer sb = new StringBuffer();
+			final StringBuffer sb = new StringBuffer();
 			int start = 0;
 
 			while (found != -1) {

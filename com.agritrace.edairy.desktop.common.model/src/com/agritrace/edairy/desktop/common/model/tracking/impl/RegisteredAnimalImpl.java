@@ -6,8 +6,21 @@
  */
 package com.agritrace.edairy.desktop.common.model.tracking.impl;
 
-import com.agritrace.edairy.desktop.common.model.base.Gender;
+import java.util.Collection;
+import java.util.Date;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import com.agritrace.edairy.desktop.common.model.base.Gender;
 import com.agritrace.edairy.desktop.common.model.tracking.AcquisitionType;
 import com.agritrace.edairy.desktop.common.model.tracking.AnimalIdentifier;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
@@ -16,24 +29,6 @@ import com.agritrace.edairy.desktop.common.model.tracking.RearingMode;
 import com.agritrace.edairy.desktop.common.model.tracking.ReferenceAnimalType;
 import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
-
-import java.util.Collection;
-import java.util.Date;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -589,6 +584,7 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public long getRegistrationId() {
 		return registrationId;
 	}
@@ -598,11 +594,13 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRegistrationId(long newRegistrationId) {
-		long oldRegistrationId = registrationId;
+		final long oldRegistrationId = registrationId;
 		registrationId = newRegistrationId;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__REGISTRATION_ID, oldRegistrationId, registrationId));
+		}
 	}
 
 	/**
@@ -610,6 +608,7 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getGivenName() {
 		return givenName;
 	}
@@ -619,11 +618,13 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setGivenName(String newGivenName) {
-		String oldGivenName = givenName;
+		final String oldGivenName = givenName;
 		givenName = newGivenName;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__GIVEN_NAME, oldGivenName, givenName));
+		}
 	}
 
 	/**
@@ -631,13 +632,15 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Farm getLocation() {
 		if (location != null && location.eIsProxy()) {
-			InternalEObject oldLocation = (InternalEObject)location;
+			final InternalEObject oldLocation = (InternalEObject)location;
 			location = (Farm)eResolveProxy(oldLocation);
 			if (location != oldLocation) {
-				if (eNotificationRequired())
+				if (eNotificationRequired()) {
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TrackingPackage.REGISTERED_ANIMAL__LOCATION, oldLocation, location));
+				}
 			}
 		}
 		return location;
@@ -657,11 +660,13 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLocation(Farm newLocation) {
-		Farm oldLocation = location;
+		final Farm oldLocation = location;
 		location = newLocation;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__LOCATION, oldLocation, location));
+		}
 	}
 
 	/**
@@ -669,6 +674,7 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Gender getGender() {
 		return gender;
 	}
@@ -678,11 +684,13 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setGender(Gender newGender) {
-		Gender oldGender = gender;
+		final Gender oldGender = gender;
 		gender = newGender == null ? GENDER_EDEFAULT : newGender;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__GENDER, oldGender, gender));
+		}
 	}
 
 	/**
@@ -690,13 +698,15 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ReferenceAnimalType getAnimalType() {
 		if (animalType != null && animalType.eIsProxy()) {
-			InternalEObject oldAnimalType = (InternalEObject)animalType;
+			final InternalEObject oldAnimalType = (InternalEObject)animalType;
 			animalType = (ReferenceAnimalType)eResolveProxy(oldAnimalType);
 			if (animalType != oldAnimalType) {
-				if (eNotificationRequired())
+				if (eNotificationRequired()) {
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TrackingPackage.REGISTERED_ANIMAL__ANIMAL_TYPE, oldAnimalType, animalType));
+				}
 			}
 		}
 		return animalType;
@@ -716,11 +726,13 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAnimalType(ReferenceAnimalType newAnimalType) {
-		ReferenceAnimalType oldAnimalType = animalType;
+		final ReferenceAnimalType oldAnimalType = animalType;
 		animalType = newAnimalType;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__ANIMAL_TYPE, oldAnimalType, animalType));
+		}
 	}
 
 	/**
@@ -728,6 +740,7 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ReferenceAnimalType getSireType() {
 		return sireType;
 	}
@@ -738,11 +751,15 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * @generated
 	 */
 	public NotificationChain basicSetSireType(ReferenceAnimalType newSireType, NotificationChain msgs) {
-		ReferenceAnimalType oldSireType = sireType;
+		final ReferenceAnimalType oldSireType = sireType;
 		sireType = newSireType;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__SIRE_TYPE, oldSireType, newSireType);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+			final ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__SIRE_TYPE, oldSireType, newSireType);
+			if (msgs == null) {
+				msgs = notification;
+			} else {
+				msgs.add(notification);
+			}
 		}
 		return msgs;
 	}
@@ -752,18 +769,24 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSireType(ReferenceAnimalType newSireType) {
 		if (newSireType != sireType) {
 			NotificationChain msgs = null;
-			if (sireType != null)
+			if (sireType != null) {
 				msgs = ((InternalEObject)sireType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TrackingPackage.REGISTERED_ANIMAL__SIRE_TYPE, null, msgs);
-			if (newSireType != null)
+			}
+			if (newSireType != null) {
 				msgs = ((InternalEObject)newSireType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TrackingPackage.REGISTERED_ANIMAL__SIRE_TYPE, null, msgs);
+			}
 			msgs = basicSetSireType(newSireType, msgs);
-			if (msgs != null) msgs.dispatch();
+			if (msgs != null) {
+				msgs.dispatch();
+			}
 		}
-		else if (eNotificationRequired())
+		else if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__SIRE_TYPE, newSireType, newSireType));
+		}
 	}
 
 	/**
@@ -771,6 +794,7 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Purpose getPurpose() {
 		return purpose;
 	}
@@ -780,11 +804,13 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPurpose(Purpose newPurpose) {
-		Purpose oldPurpose = purpose;
+		final Purpose oldPurpose = purpose;
 		purpose = newPurpose == null ? PURPOSE_EDEFAULT : newPurpose;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__PURPOSE, oldPurpose, purpose));
+		}
 	}
 
 	/**
@@ -792,6 +818,7 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Date getDateOfAcquisition() {
 		return dateOfAcquisition;
 	}
@@ -801,11 +828,13 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDateOfAcquisition(Date newDateOfAcquisition) {
-		Date oldDateOfAcquisition = dateOfAcquisition;
+		final Date oldDateOfAcquisition = dateOfAcquisition;
 		dateOfAcquisition = newDateOfAcquisition;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__DATE_OF_ACQUISITION, oldDateOfAcquisition, dateOfAcquisition));
+		}
 	}
 
 	/**
@@ -813,6 +842,7 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AcquisitionType getAcquisitionType() {
 		return acquisitionType;
 	}
@@ -822,11 +852,13 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAcquisitionType(AcquisitionType newAcquisitionType) {
-		AcquisitionType oldAcquisitionType = acquisitionType;
+		final AcquisitionType oldAcquisitionType = acquisitionType;
 		acquisitionType = newAcquisitionType == null ? ACQUISITION_TYPE_EDEFAULT : newAcquisitionType;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__ACQUISITION_TYPE, oldAcquisitionType, acquisitionType));
+		}
 	}
 
 	/**
@@ -834,6 +866,7 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<AnimalIdentifier> getIdentifiers() {
 		if (identifiers == null) {
 			identifiers = new EObjectContainmentEList<AnimalIdentifier>(AnimalIdentifier.class, this, TrackingPackage.REGISTERED_ANIMAL__IDENTIFIERS);
@@ -846,6 +879,7 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getIdentifyingFeatures() {
 		return identifyingFeatures;
 	}
@@ -855,11 +889,13 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIdentifyingFeatures(String newIdentifyingFeatures) {
-		String oldIdentifyingFeatures = identifyingFeatures;
+		final String oldIdentifyingFeatures = identifyingFeatures;
 		identifyingFeatures = newIdentifyingFeatures;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__IDENTIFYING_FEATURES, oldIdentifyingFeatures, identifyingFeatures));
+		}
 	}
 
 	/**
@@ -867,6 +903,7 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RearingMode getRearingMode() {
 		return rearingMode;
 	}
@@ -876,11 +913,13 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRearingMode(RearingMode newRearingMode) {
-		RearingMode oldRearingMode = rearingMode;
+		final RearingMode oldRearingMode = rearingMode;
 		rearingMode = newRearingMode == null ? REARING_MODE_EDEFAULT : newRearingMode;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__REARING_MODE, oldRearingMode, rearingMode));
+		}
 	}
 
 	/**
@@ -888,6 +927,7 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<String> getPastOwners() {
 		if (pastOwners == null) {
 			pastOwners = new EDataTypeUniqueEList<String>(String.class, this, TrackingPackage.REGISTERED_ANIMAL__PAST_OWNERS);
@@ -900,6 +940,7 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getInsuranceNumber() {
 		return insuranceNumber;
 	}
@@ -909,11 +950,13 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInsuranceNumber(String newInsuranceNumber) {
-		String oldInsuranceNumber = insuranceNumber;
+		final String oldInsuranceNumber = insuranceNumber;
 		insuranceNumber = newInsuranceNumber;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__INSURANCE_NUMBER, oldInsuranceNumber, insuranceNumber));
+		}
 	}
 
 	/**
@@ -921,6 +964,7 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
@@ -930,11 +974,13 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDateOfBirth(Date newDateOfBirth) {
-		Date oldDateOfBirth = dateOfBirth;
+		final Date oldDateOfBirth = dateOfBirth;
 		dateOfBirth = newDateOfBirth;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__DATE_OF_BIRTH, oldDateOfBirth, dateOfBirth));
+		}
 	}
 
 	/**
@@ -942,6 +988,7 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getBirthCertificateNumber() {
 		return birthCertificateNumber;
 	}
@@ -951,11 +998,13 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBirthCertificateNumber(String newBirthCertificateNumber) {
-		String oldBirthCertificateNumber = birthCertificateNumber;
+		final String oldBirthCertificateNumber = birthCertificateNumber;
 		birthCertificateNumber = newBirthCertificateNumber;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__BIRTH_CERTIFICATE_NUMBER, oldBirthCertificateNumber, birthCertificateNumber));
+		}
 	}
 
 	/**
@@ -963,6 +1012,7 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getVeterinaryCertificateNumber() {
 		return veterinaryCertificateNumber;
 	}
@@ -972,11 +1022,13 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setVeterinaryCertificateNumber(String newVeterinaryCertificateNumber) {
-		String oldVeterinaryCertificateNumber = veterinaryCertificateNumber;
+		final String oldVeterinaryCertificateNumber = veterinaryCertificateNumber;
 		veterinaryCertificateNumber = newVeterinaryCertificateNumber;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__VETERINARY_CERTIFICATE_NUMBER, oldVeterinaryCertificateNumber, veterinaryCertificateNumber));
+		}
 	}
 
 	/**
@@ -984,6 +1036,7 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getMinistryId() {
 		return ministryId;
 	}
@@ -993,11 +1046,13 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMinistryId(String newMinistryId) {
-		String oldMinistryId = ministryId;
+		final String oldMinistryId = ministryId;
 		ministryId = newMinistryId;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__MINISTRY_ID, oldMinistryId, ministryId));
+		}
 	}
 
 	/**
@@ -1005,6 +1060,7 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getInsuranceCompany() {
 		return insuranceCompany;
 	}
@@ -1014,11 +1070,13 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInsuranceCompany(String newInsuranceCompany) {
-		String oldInsuranceCompany = insuranceCompany;
+		final String oldInsuranceCompany = insuranceCompany;
 		insuranceCompany = newInsuranceCompany;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__INSURANCE_COMPANY, oldInsuranceCompany, insuranceCompany));
+		}
 	}
 
 	/**
@@ -1026,6 +1084,7 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getFeedingHabit() {
 		return feedingHabit;
 	}
@@ -1035,11 +1094,13 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFeedingHabit(String newFeedingHabit) {
-		String oldFeedingHabit = feedingHabit;
+		final String oldFeedingHabit = feedingHabit;
 		feedingHabit = newFeedingHabit;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__FEEDING_HABIT, oldFeedingHabit, feedingHabit));
+		}
 	}
 
 	/**
@@ -1047,6 +1108,7 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getFeedType() {
 		return feedType;
 	}
@@ -1056,11 +1118,13 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFeedType(String newFeedType) {
-		String oldFeedType = feedType;
+		final String oldFeedType = feedType;
 		feedType = newFeedType;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__FEED_TYPE, oldFeedType, feedType));
+		}
 	}
 
 	/**
@@ -1068,6 +1132,7 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getFeedBrand() {
 		return feedBrand;
 	}
@@ -1077,11 +1142,13 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFeedBrand(String newFeedBrand) {
-		String oldFeedBrand = feedBrand;
+		final String oldFeedBrand = feedBrand;
 		feedBrand = newFeedBrand;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__FEED_BRAND, oldFeedBrand, feedBrand));
+		}
 	}
 
 	/**
@@ -1089,6 +1156,7 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getSupplements() {
 		return supplements;
 	}
@@ -1098,11 +1166,13 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSupplements(String newSupplements) {
-		String oldSupplements = supplements;
+		final String oldSupplements = supplements;
 		supplements = newSupplements;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__SUPPLEMENTS, oldSupplements, supplements));
+		}
 	}
 
 	/**
@@ -1110,6 +1180,7 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getAntibiotics() {
 		return antibiotics;
 	}
@@ -1119,11 +1190,13 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAntibiotics(String newAntibiotics) {
-		String oldAntibiotics = antibiotics;
+		final String oldAntibiotics = antibiotics;
 		antibiotics = newAntibiotics;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__ANTIBIOTICS, oldAntibiotics, antibiotics));
+		}
 	}
 
 	/**
@@ -1131,6 +1204,7 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getVeterinary() {
 		return veterinary;
 	}
@@ -1140,11 +1214,13 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setVeterinary(String newVeterinary) {
-		String oldVeterinary = veterinary;
+		final String oldVeterinary = veterinary;
 		veterinary = newVeterinary;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__VETERINARY, oldVeterinary, veterinary));
+		}
 	}
 
 	/**
@@ -1152,6 +1228,7 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getAwards() {
 		return awards;
 	}
@@ -1161,11 +1238,13 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAwards(String newAwards) {
-		String oldAwards = awards;
+		final String oldAwards = awards;
 		awards = newAwards;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__AWARDS, oldAwards, awards));
+		}
 	}
 
 	/**
@@ -1173,6 +1252,7 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getNotes() {
 		return notes;
 	}
@@ -1182,11 +1262,13 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNotes(String newNotes) {
-		String oldNotes = notes;
+		final String oldNotes = notes;
 		notes = newNotes;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__NOTES, oldNotes, notes));
+		}
 	}
 
 	/**
@@ -1218,12 +1300,16 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 			case TrackingPackage.REGISTERED_ANIMAL__GIVEN_NAME:
 				return getGivenName();
 			case TrackingPackage.REGISTERED_ANIMAL__LOCATION:
-				if (resolve) return getLocation();
+				if (resolve) {
+					return getLocation();
+				}
 				return basicGetLocation();
 			case TrackingPackage.REGISTERED_ANIMAL__GENDER:
 				return getGender();
 			case TrackingPackage.REGISTERED_ANIMAL__ANIMAL_TYPE:
-				if (resolve) return getAnimalType();
+				if (resolve) {
+					return getAnimalType();
+				}
 				return basicGetAnimalType();
 			case TrackingPackage.REGISTERED_ANIMAL__SIRE_TYPE:
 				return getSireType();
@@ -1535,9 +1621,11 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy()) {
+			return super.toString();
+		}
 
-		StringBuffer result = new StringBuffer(super.toString());
+		final StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (registrationId: ");
 		result.append(registrationId);
 		result.append(", givenName: ");

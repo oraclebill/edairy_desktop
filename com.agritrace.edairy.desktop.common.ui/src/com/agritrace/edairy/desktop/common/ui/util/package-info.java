@@ -1,7 +1,7 @@
 /**
  * Provides the utilites classes
  * <p>
- * The utilies involves three utils: 
+ * The utilies involves three utils:
  * DateTimeUtils   Util class for time releated
  * EMFUtils    Util class for the EMF model
  * RidgetUtils Util class for the ridgets

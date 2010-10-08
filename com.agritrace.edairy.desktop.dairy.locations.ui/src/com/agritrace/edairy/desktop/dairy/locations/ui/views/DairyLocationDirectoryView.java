@@ -36,11 +36,11 @@ public class DairyLocationDirectoryView extends AbstractDirectoryView {
 				DairyLocationUIConstants.RIDGET_ID_FUNCTIONS);
 		functionsChoice.setOrientation(SWT.HORIZONTAL);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true,false).applyTo(functionsChoice);
-		
+
 		//route filter
 		UIControlsFactory.createLabel(filterGroup, "Transport Route: ", SWT.LEFT);
 		final CCombo combo = UIControlsFactory.createCCombo(filterGroup, DairyLocationUIConstants.RIDGET_ID_ROUTE);
-		GridData gd = new GridData();
+		final GridData gd = new GridData();
 		gd.widthHint = FormUtil.WIDTH_UNIT * 3;
 		gd.verticalAlignment = SWT.FILL;
 		combo.setLayoutData(gd);

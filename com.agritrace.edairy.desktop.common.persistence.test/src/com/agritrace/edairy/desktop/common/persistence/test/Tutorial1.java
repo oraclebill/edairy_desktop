@@ -11,7 +11,7 @@ package com.agritrace.edairy.desktop.common.persistence.test;
 // * Contributors:
 // *   Martin Taal
 // * </copyright>
-// * 
+// *
 // * $Id: Tutorial1.java,v 1.10 2009/05/08 04:01:01 mtaal Exp $
 // */
 //
@@ -44,7 +44,7 @@ package com.agritrace.edairy.desktop.common.persistence.test;
 //
 ///**
 // * Quick Start Tutorial
-// * 
+// *
 // * @author <a href="mailto:mtaal@elver.org">Martin Taal</a>
 // * @version $Revision: 1.10 $
 // */
@@ -78,7 +78,7 @@ package com.agritrace.edairy.desktop.common.persistence.test;
 //		hibernateProperties.setProperty(Environment.DIALECT, "org.hibernate.dialect.MySQLInnoDBDialect");
 //		//
 //		dataStore.setProperties(hibernateProperties);
-//		// 
+//		//
 //		// For more information see <a
 //		// href="http://www.hibernate.org/hib_docs/v3/reference/en/html/session-configuration.html#configuration-programmatic">
 //		// section 3.1 of the Hibernate manual</a>.

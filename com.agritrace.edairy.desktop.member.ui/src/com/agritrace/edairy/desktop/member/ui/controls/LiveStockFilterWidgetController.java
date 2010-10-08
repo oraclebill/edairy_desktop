@@ -141,11 +141,11 @@ public class LiveStockFilterWidgetController implements WidgetController<Object>
 		} else if (inputModel instanceof Farm) {
 			farmsList.add(((Farm) inputModel).getName());
 
-		}		
+		}
 		if(farmCombo != null){
 			farmCombo.bindToModel(Observables.staticObservableList(farmsList), String.class, null, new WritableValue());
 			farmCombo.updateFromModel();
-			farmCombo.setSelection(0);		
+			farmCombo.setSelection(0);
 		}
 
 	}
@@ -156,7 +156,7 @@ public class LiveStockFilterWidgetController implements WidgetController<Object>
 		if(speciesCombo != null){
 			speciesCombo.bindToModel(Observables.staticObservableList(speciesList), String.class, null, new WritableValue());
 			speciesCombo.updateFromModel();
-			speciesCombo.setSelection(0);	
+			speciesCombo.setSelection(0);
 		}
 
 		statusList.clear();
@@ -173,13 +173,13 @@ public class LiveStockFilterWidgetController implements WidgetController<Object>
 		if(farmCombo  != null){
 			farmCombo.bindToModel(Observables.staticObservableList(farmsList), String.class, null, new WritableValue());
 			farmCombo.updateFromModel();
-			farmCombo.setSelection(0);		
+			farmCombo.setSelection(0);
 		}
-		
+
 		if(dateSearchController != null){
 			dateSearchController.resetDates();
 		}
-	
+
 	}
 
 }

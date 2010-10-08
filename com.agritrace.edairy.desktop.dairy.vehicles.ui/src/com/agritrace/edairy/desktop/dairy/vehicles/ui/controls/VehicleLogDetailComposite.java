@@ -46,7 +46,7 @@ public class VehicleLogDetailComposite extends CompositePanel {
 
 		final CTabItem assetInfoTab = new CTabItem(tabFolder, SWT.None);
 		assetInfoTab.setText("Asset Info");
-		Control control = new AssetInfo(tabFolder, SWT.None);
+		final Control control = new AssetInfo(tabFolder, SWT.None);
 		assetInfoTab.setControl(control);
 		SWTBindingPropertyLocator.getInstance().setBindingProperty(control, "asset-info");
 
@@ -58,17 +58,17 @@ public class VehicleLogDetailComposite extends CompositePanel {
 
 	private void createDescriptionGroup(Composite parent) {
 		final Group detailGroup = UIControlsFactory.createGroup(parent, "Description");
-		GridLayout gl_detailGroup = GridLayoutFactory.swtDefaults().numColumns(2).create();
+		final GridLayout gl_detailGroup = GridLayoutFactory.swtDefaults().numColumns(2).create();
 		// gl_detailGroup.makeColumnsEqualWidth = true;
 		detailGroup.setLayout(gl_detailGroup);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(detailGroup);
 
-		GridDataFactory fieldDataFactory = GridDataFactory.swtDefaults().align(SWT.FILL, SWT.CENTER).grab(true, false)
+		final GridDataFactory fieldDataFactory = GridDataFactory.swtDefaults().align(SWT.FILL, SWT.CENTER).grab(true, false)
 				.hint(120, -1);
 
 		// Make
-		Label lblMake = UIControlsFactory.createLabel(detailGroup, "Make");
-		GridData gd_lblMake = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		final Label lblMake = UIControlsFactory.createLabel(detailGroup, "Make");
+		final GridData gd_lblMake = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_lblMake.widthHint = 100;
 		lblMake.setLayoutData(gd_lblMake);
 		final Text makeText = UIControlsFactory.createText(detailGroup, SWT.NONE,
@@ -108,8 +108,8 @@ public class VehicleLogDetailComposite extends CompositePanel {
 		comonComp.setLayout(new GridLayout(2, true));
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(comonComp);
 
-		Label label = UIControlsFactory.createLabel(comonComp, "Log Book No.");
-		GridData gd_label = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		final Label label = UIControlsFactory.createLabel(comonComp, "Log Book No.");
+		final GridData gd_label = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_label.minimumWidth = 120;
 		label.setLayoutData(gd_label);
 		final Text logNumber = UIControlsFactory.createText(comonComp, SWT.NONE,
@@ -134,14 +134,14 @@ public class VehicleLogDetailComposite extends CompositePanel {
 
 	private void createInsuranceInfoGroup(Composite parent) {
 		final Group detailGroup = UIControlsFactory.createGroup(parent, "Insurance Info");
-		GridLayout gl_detailGroup = GridLayoutFactory.swtDefaults().numColumns(2).create();
+		final GridLayout gl_detailGroup = GridLayoutFactory.swtDefaults().numColumns(2).create();
 		gl_detailGroup.makeColumnsEqualWidth = true;
 		detailGroup.setLayout(gl_detailGroup);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(detailGroup);
 
 		// Insurance Number
-		Label label = UIControlsFactory.createLabel(detailGroup, "Insurance Number"); //$NON-NLS-1$
-		GridData gd_label = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		final Label label = UIControlsFactory.createLabel(detailGroup, "Insurance Number"); //$NON-NLS-1$
+		final GridData gd_label = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_label.minimumWidth = 120;
 		label.setLayoutData(gd_label);
 		final Text dateAcqText = UIControlsFactory.createText(detailGroup, SWT.NONE,
@@ -160,14 +160,14 @@ public class VehicleLogDetailComposite extends CompositePanel {
 
 	private void createRegistrationGroup(Composite parent) {
 		final Group detailGroup = UIControlsFactory.createGroup(parent, "Registration");
-		GridLayout gl_detailGroup = GridLayoutFactory.swtDefaults().numColumns(2).create();
+		final GridLayout gl_detailGroup = GridLayoutFactory.swtDefaults().numColumns(2).create();
 		gl_detailGroup.makeColumnsEqualWidth = true;
 		detailGroup.setLayout(gl_detailGroup);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(detailGroup);
 
 		// Registration Number
-		Label label_1 = UIControlsFactory.createLabel(detailGroup, "Registration No.");
-		GridData gd_label_1 = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		final Label label_1 = UIControlsFactory.createLabel(detailGroup, "Registration No.");
+		final GridData gd_label_1 = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_label_1.minimumWidth = 120;
 		label_1.setLayoutData(gd_label_1);
 		final Text regText = UIControlsFactory.createText(detailGroup, SWT.NONE,
@@ -176,8 +176,8 @@ public class VehicleLogDetailComposite extends CompositePanel {
 		// addUIControl(regText, BIND_ID_REG_NUM);
 
 		// Chassis Number
-		Label lblChassisNumber = UIControlsFactory.createLabel(detailGroup, "Chassis Number");
-		GridData gd_lblChassisNumber = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		final Label lblChassisNumber = UIControlsFactory.createLabel(detailGroup, "Chassis Number");
+		final GridData gd_lblChassisNumber = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_lblChassisNumber.widthHint = 114;
 		lblChassisNumber.setLayoutData(gd_lblChassisNumber);
 		final Text chassisText = UIControlsFactory.createText(detailGroup, SWT.NONE,

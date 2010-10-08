@@ -41,9 +41,9 @@ public class ModelPersistenceBase {
 	@Before
 	public void setupSessionFactory() {
 		// create the HbDataStore
-		String hbName = "dairytest";
-		String dbName = "dairytest";
-		HbDataStore hbds = HbHelper.INSTANCE.createRegisterDataStore(hbName);
+		final String hbName = "dairytest";
+		final String dbName = "dairytest";
+		final HbDataStore hbds = HbHelper.INSTANCE.createRegisterDataStore(hbName);
 
 		// The hibernate properties can be set by having a hibernate.properties
 		// file in the root of
@@ -75,11 +75,11 @@ public class ModelPersistenceBase {
 
 		hbds.setProperties(props);
 
-		EPackage pkg[] = { DairyPackage.eINSTANCE, TrackingPackage.eINSTANCE,
+		final EPackage pkg[] = { DairyPackage.eINSTANCE, TrackingPackage.eINSTANCE,
 				ModelPackage.eINSTANCE, RequestsPackage.eINSTANCE,
 				AccountPackage.eINSTANCE };
 
-		hbds.setEPackages((pkg));
+		hbds.setEPackages(pkg);
 		hbds.initialize();
 		sessionFactory = hbds.getSessionFactory();
 	}
@@ -136,7 +136,7 @@ public class ModelPersistenceBase {
 				.maxMemory());
 		System.out.printf("\tMemory Used : %,14d\n", Runtime.getRuntime()
 				.totalMemory() - Runtime.getRuntime()
-				.freeMemory());		
+				.freeMemory());
 	}
 
 	public void printMemoryStats(boolean gc) {
@@ -144,17 +144,19 @@ public class ModelPersistenceBase {
 	}
 
 	protected void printout(Membership membership, long count) {
-		Account a = membership.getAccount();
-		Farmer f = membership.getMember();
-		Route r = membership.getDefaultRoute();
-		Formatter formatter = new Formatter();
+		final Account a = membership.getAccount();
+		final Farmer f = membership.getMember();
+		final Route r = membership.getDefaultRoute();
+		final Formatter formatter = new Formatter();
 		formatter.format("Member: %s, Account: %s, Farmer: %s, Route: %s\n",
 				membership.getApplicationDate(), a.getEstablished(),
 				f.getFamilyName(), r.getName());
-		if (count % 100 == 0)
+		if (count % 100 == 0) {
 			System.out.print('.');
-		if (count % 800 == 0)
+		}
+		if (count % 800 == 0) {
 			System.out.print('\n');
+		}
 	}
 
 }

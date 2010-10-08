@@ -32,11 +32,11 @@ public class ContainerDirectoryView extends AbstractDirectoryView {
 		UIControlsFactory.createLabel(filterGroup, "Tracking Number :");
 		final Control text = UIControlsFactory.createText(filterGroup, SWT.NONE,
 				ContainerBindingConstants.BIND_ID_CONTAINER_TRACKING_NUM);
-		GridData gd = new GridData();
+		final GridData gd = new GridData();
 		gd.widthHint = FormUtil.WIDTH_UNIT * 3;
 		gd.verticalAlignment = SWT.FILL;
 		text.setLayoutData(gd);
-				
+
 //		//Capacity
 //		UIControlsFactory.createLabel(parent, "Capacity");
 //		final Text capacityText = UIControlsFactory.createTextDecimal(parent,

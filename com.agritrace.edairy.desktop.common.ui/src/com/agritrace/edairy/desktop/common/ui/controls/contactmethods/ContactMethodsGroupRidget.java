@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.agritrace.edairy.desktop.common.ui.controls.contactmethods;
 
@@ -34,17 +34,17 @@ import com.agritrace.edairy.desktop.common.ui.controls.IDataChangeListener;
 
 /**
  * @author oraclebill
- * 
+ *
  */
 public class ContactMethodsGroupRidget extends AbstractCompositeRidget implements IContactMethodsGroupRidget {
-	private ListenerList<IDataChangeListener> listeners = new ListenerList<IDataChangeListener>(IDataChangeListener.class);
+	private final ListenerList<IDataChangeListener> listeners = new ListenerList<IDataChangeListener>(IDataChangeListener.class);
 
 	private void fireDataChanged() {
-		for (IDataChangeListener listener: listeners.getListeners()) {
+		for (final IDataChangeListener listener: listeners.getListeners()) {
 			listener.dataChanged();
 		}
 	}
-	
+
 	private final class DeleteAllContactsAction implements IActionListener {
 		@Override
 		public void callback() {
@@ -67,7 +67,7 @@ public class ContactMethodsGroupRidget extends AbstractCompositeRidget implement
 		@Override
 		public void callback() {
 			if (boundContacts != null) {
-				for (Object method : contactTable.getSelection()) {
+				for (final Object method : contactTable.getSelection()) {
 					boundContacts.remove(method);
 				}
 				contactTable.updateFromModel();
@@ -105,13 +105,14 @@ public class ContactMethodsGroupRidget extends AbstractCompositeRidget implement
 
 		private ContactMethod rowData;
 
+		@Override
 		public void setData(final Object rowData) {
 			this.rowData = (ContactMethod) rowData;
 		}
 
 		@Override
 		public void configureRidgets() {
-			final IComboRidget contactType = getRidget(IComboRidget.class, "contactType"); //$NON-NLS-1$			
+			final IComboRidget contactType = getRidget(IComboRidget.class, "contactType"); //$NON-NLS-1$
 			final IObservableValue selectionValue = BeansObservables.observeValue(rowData, CONTACT_TYPE_PROPERTY);
 			contactType.bindToModel(optionValues, ContactMethod.class, "getName", selectionValue);
 			contactType.updateFromModel();
@@ -132,16 +133,16 @@ public class ContactMethodsGroupRidget extends AbstractCompositeRidget implement
 	private final IActionListener addContactAction = new AddContactAction();
 	private final IActionListener deleteContactAction = new DeleteContactAction();
 	private final IActionListener deleteAllAction = new DeleteAllContactsAction();
-	
-	
+
+
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.riena.ui.ridgets.IRidgetContainer#configureRidgets()
 	 */
 	@Override
 	public void configureRidgets() {
-		contactTable = getRidget(ICompositeTableRidget.class, ContactMethodsGroup.BIND_ID_TABLE);		
+		contactTable = getRidget(ICompositeTableRidget.class, ContactMethodsGroup.BIND_ID_TABLE);
 		addBtn = getRidget(IActionRidget.class, ContactMethodsGroup.BIND_ID_BTN_ADD);
 		deleteBtn = getRidget(IActionRidget.class, ContactMethodsGroup.BIND_ID_BTN_DELETE);
 		deleteAllBtn = getRidget(IActionRidget.class, ContactMethodsGroup.BIND_ID_BTN_DELETEALL);
@@ -153,7 +154,7 @@ public class ContactMethodsGroupRidget extends AbstractCompositeRidget implement
 //				updateButtonStatus();
 //			}
 //		});
-		
+
 		addBtn.addListener(addContactAction);
 		deleteBtn.addListener(deleteContactAction);
 		deleteAllBtn.addListener(deleteAllAction);
@@ -164,30 +165,32 @@ public class ContactMethodsGroupRidget extends AbstractCompositeRidget implement
 	 * (non-Javadoc)
 	 * @see com.agritrace.edairy.desktop.common.ui.controls.contactmethods.IContactMethodsGroupRidget#bindToModel(com.agritrace.edairy.desktop.common.model.base.Contactable)
 	 */
+	@Override
 	public void bindToModel(Contactable contactable) {
 		bindToModel(contactable.getContactMethods());
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
-	public void bindToModel(List<ContactMethod> contacts) {		
+	@Override
+	public void bindToModel(List<ContactMethod> contacts) {
 		this.boundContacts = contacts;
-		
+
 		if (contacts == null) {
 			throw new IllegalArgumentException("Null model");
 		}
-		
-		for (ContactMethod cm: contacts) {
+
+		for (final ContactMethod cm: contacts) {
 			imbue(cm);
 		}
-		
+
 		contactTable.bindToModel(new WritableList(boundContacts, ContactMethod.class), ContactMethod.class, RowRidget.class);
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param string
 	 * @return
 	 */
@@ -210,7 +213,7 @@ public class ContactMethodsGroupRidget extends AbstractCompositeRidget implement
 	public void removeDataChangeListener(IDataChangeListener listener) {
 		listeners.remove(listener);
 	}
-	
+
 	private void imbue(ContactMethod cm) {
 		cm.eAdapters().add(new Adapter() {
 			@Override
@@ -228,7 +231,7 @@ public class ContactMethodsGroupRidget extends AbstractCompositeRidget implement
 			@Override
 			public void setTarget(Notifier arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override

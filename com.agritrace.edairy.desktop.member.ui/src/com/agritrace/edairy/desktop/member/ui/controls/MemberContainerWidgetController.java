@@ -38,7 +38,7 @@ public class MemberContainerWidgetController extends BasicDirectoryController<Co
 	private final List<Container> containerInput = new ArrayList<Container>();
 	private final String[] containerPropertyNames = { "containerId", "owner", "measureType", "capacity" };
 	private final List<Container> containers = new ArrayList<Container>();
-	
+
 	// private IComboRidget farmFilterCombo;
 	private final IFarmRepository farmRepository;
 	private final Provider<AddContainerDialog> addContainerProvider;
@@ -54,7 +54,7 @@ public class MemberContainerWidgetController extends BasicDirectoryController<Co
 		this.farmRepository = farmRepository;
 		this.addContainerProvider = addContainerProvider;
 		this.viewContainerProvider = viewContainerProvider;
-		
+
 		setEClass(TrackingPackage.Literals.CONTAINER);
 		for (int i = 0; i < containerPropertyNames.length; i++) {
 			addTableColumn(containerColumnHeaders[i], containerPropertyNames[i], String.class);
@@ -135,7 +135,7 @@ public class MemberContainerWidgetController extends BasicDirectoryController<Co
 		try {
 			containers.clear();
 			containerInput.clear();
-			for (Farm farm : farms) {
+			for (final Farm farm : farms) {
 				containers.addAll(farm.getCans());
 			}
 			containerInput.addAll(containers);

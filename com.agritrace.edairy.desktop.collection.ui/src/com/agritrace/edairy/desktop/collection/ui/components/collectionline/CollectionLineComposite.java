@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
-import org.eclipse.riena.core.Log4r;
 import org.eclipse.riena.ui.common.IComplexComponent;
 import org.eclipse.riena.ui.ridgets.swt.uibinding.SwtControlRidgetMapper;
 import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
@@ -25,7 +24,6 @@ import org.eclipse.swt.widgets.Label;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.collection.ui.util.FieldUtil;
-import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
 import com.swtdesigner.ResourceManager;
 
 public class CollectionLineComposite extends Composite implements TraverseListener, IComplexComponent {
@@ -42,7 +40,7 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 	private static final String QUANTITY_LABEL = "Quantity";
 
 	private static final String REJECTED_COLUMN_HEADER = "Rejected";
-	private GridData layoutData;
+	private final GridData layoutData;
 	boolean cachedHide;
 
 	private Control memberIdWidget;
@@ -62,10 +60,10 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 		final Group group = UIControlsFactory.createGroup(this, MILK_ENTRY_GROUP_TITLE);
 		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(2).applyTo(group);
 
-		Composite primaryGroup = addPrimaryGroup(group);
-		Composite buttonsGroup = addButtons(group);				
-		Composite qualityGroup = addQualityGroup(group);
-		
+		final Composite primaryGroup = addPrimaryGroup(group);
+		final Composite buttonsGroup = addButtons(group);
+		final Composite qualityGroup = addQualityGroup(group);
+
 		group.setTabList(new Control[]{primaryGroup, buttonsGroup, qualityGroup});
 
 		for (final Control control : this.getChildren()) {
@@ -129,10 +127,10 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 
 		binWidget = fu.addLabeledCompletionComboField(panel, BIN_LABEL, ViewWidgetId.binCombo);
 		binWidget.addTraverseListener(this);
-		
+
 
 		canWidget = fu.addLabeledTextField(panel, CAN_ID_LABEL, ViewWidgetId.canIdText);
-		canWidget.addTraverseListener(this);		
+		canWidget.addTraverseListener(this);
 
 		qtyWidget = fu.addLabeledDecimalTextField(panel, QUANTITY_LABEL, ViewWidgetId.quantityText);
 		qtyWidget.addTraverseListener(this);
@@ -142,7 +140,7 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 		memberIdWidget.addTraverseListener(this);
 
 		panel.setTabList(new Control[] { binWidget, memberIdWidget, qtyWidget, canWidget});
-		
+
 		final Composite buttonComposite = UIControlsFactory.createComposite(panel);
 		// buttonComposite.setSize(162, 18);
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(true, false).span(4, 1).applyTo(buttonComposite);
@@ -168,8 +166,8 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 		memberName.setLocation(427, 28);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(3, 1).applyTo(memberName);
 
-		
-		
+
+
 		return panel;
 	}
 
@@ -182,7 +180,7 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 		// 2).numColumns(3).applyTo(checkPanel);
 
 		final Label label = UIControlsFactory.createLabel(checkPanel, "Collect Milk Quality Data? ");
-		FormData fd_label = new FormData();
+		final FormData fd_label = new FormData();
 		// fd_label.bottom = new FormAttachment(0);
 		// fd_label.right = new FormAttachment(0);
 		fd_label.top = new FormAttachment(0, 10);
@@ -192,7 +190,7 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 		// SWT.TOP).applyTo(label);
 
 		final Button control = UIControlsFactory.createButtonCheck(checkPanel, "", "display-quality-controls-button");
-		FormData fd_control = new FormData();
+		final FormData fd_control = new FormData();
 		// fd_control.top = new FormAttachment(0);
 		// fd_control.right = new FormAttachment(0);
 		fd_control.bottom = new FormAttachment(label, 2, SWT.BOTTOM);
@@ -202,7 +200,7 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 		// SWT.TOP).applyTo(control);
 
 		final Group qualityPanel = UIControlsFactory.createGroup(checkPanel, "", "quality-group");
-		FormData fd_qualityPanel = new FormData();
+		final FormData fd_qualityPanel = new FormData();
 		// fd_qualityPanel.bottom = new FormAttachment(0);
 		// fd_qualityPanel.right = new FormAttachment(0);
 		// fd_qualityPanel.top = new FormAttachment(0);
@@ -212,7 +210,7 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 		// true).span(1, 1).applyTo(qualityPanel);
 		GridLayoutFactory.fillDefaults().margins(2, 2).numColumns(6).applyTo(qualityPanel);
 
-		FieldUtil fu = new FieldUtil(10, SWT.DEFAULT);
+		final FieldUtil fu = new FieldUtil(10, SWT.DEFAULT);
 		fu.addLabeledDecimalTextField(qualityPanel, "Milk Fat % : ", "milk-fat-percent-text");
 		fu.addLabeledDecimalTextField(qualityPanel, "Alcohol % : ", "alcohol-percent-text");
 		fu.addLabeledBooleanField(qualityPanel, "Water Added? : ", "added-water-checkbox");
@@ -224,13 +222,6 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 	@Override
 	public List<Object> getUIControls() {
 		return SWTBindingPropertyLocator.getControlsWithBindingProperty(this);
-	}
-
-	/**
-	 * 
-	 */
-	private void log(int level, String message) {
-		Log4r.getLogger(Activator.getDefault(), getClass()).log(level, message);
 	}
 
 }

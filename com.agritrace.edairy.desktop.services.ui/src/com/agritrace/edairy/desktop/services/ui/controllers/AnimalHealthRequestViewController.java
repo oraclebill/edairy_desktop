@@ -31,7 +31,6 @@ import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
@@ -54,9 +53,9 @@ import com.google.inject.Provider;
 
 /**
  * Service Requests view controller
- * 
+ *
  * @author Hui(Spark) Wan
- * 
+ *
  */
 @PermissionRequired(Permission.VIEW_ANIMAL_HEALTH_REQUESTS)
 public class AnimalHealthRequestViewController extends AbstractDirectoryController<AnimalHealthRequest> {
@@ -113,7 +112,7 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 
 	private IDateTimeRidget startDateText;
 	private IToggleButtonRidget vertRidget;
-	
+
 	private final Provider<FarmSearchDialog> farmSearchDialogProvider;
 	private final Provider<MemberSearchDialog> memberSearchDialogProvider;
 
@@ -125,7 +124,7 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 		this.farmSearchDialogProvider = farmSearchDialogProvider;
 		this.memberSearchDialogProvider = memberSearchDialogProvider;
 	}
-	
+
 	@Override
 	public void configureTableRidget() {
 		masterTable = this.getRidget(ITableRidget.class, AbstractDirectoryView.BIND_ID_TABLE);
@@ -399,7 +398,7 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 
 			@Override
 			public int compare(Object arg0, Object arg1) {
-				if ((arg0 instanceof AnimalHealthRequest) && (arg1 instanceof AnimalHealthRequest)) {
+				if (arg0 instanceof AnimalHealthRequest && arg1 instanceof AnimalHealthRequest) {
 					return (int) (((AnimalHealthRequest) arg0).getRequestId().longValue() - ((AnimalHealthRequest) arg1)
 							.getRequestId().longValue());
 				}

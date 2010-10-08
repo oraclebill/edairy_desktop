@@ -80,7 +80,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.agritrace.edairy.ui.IDairyResourceManager#addFarm(com.agritrace.edairy
 	 * .model.tracking.Farm)
@@ -299,7 +299,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.agritrace.edairy.ui.IDairyResourceManager#createDairyResource()
 	 */
 	@Override
@@ -309,7 +309,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.agritrace.edairy.ui.IDairyResourceManager#createDairyResource(java
 	 * .lang.String)
@@ -326,7 +326,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.agritrace.edairy.ui.IDairyResourceManager#createFarmResource()
 	 */
 	@Override
@@ -373,7 +373,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 
 	/**
 	 * Gets dairy resource
-	 * 
+	 *
 	 * @return Dairy resource
 	 */
 	public Resource getDairyResource() {
@@ -382,7 +382,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.agritrace.edairy.ui.IDairyResourceManager#getLocalDairy()
 	 */
 	@Override
@@ -402,7 +402,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.agritrace.edairy.ui.IDairyResourceManager#getObjectsFromDairyModel
 	 * (java.lang.Class)
@@ -428,7 +428,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.agritrace.edairy.ui.IDairyResourceManager#loadDairyResources()
 	 */
 	@Override
@@ -449,7 +449,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.agritrace.edairy.ui.IDairyResourceManager#loadFarmResources()
 	 */
 	@Override
@@ -460,7 +460,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.agritrace.edairy.ui.IDairyResourceManager#reLoadDairyResource()
 	 */
 	@Override
@@ -476,7 +476,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.agritrace.edairy.ui.IDairyResourceManager#saveDairyResource()
 	 */
 	@Override
@@ -486,7 +486,7 @@ public class DairyDemoResourceManager implements IDairyResourceManager {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.agritrace.edairy.ui.IDairyResourceManager#saveFarmResource()
 	 */
 	@Override

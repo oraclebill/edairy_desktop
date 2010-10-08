@@ -31,7 +31,7 @@ public class LiveStockTabFolder {
 
 	static class TabItemSet extends HashSet<TabItem> {
 		/**
-		 * 
+		 *
 		 */
 		private static final long serialVersionUID = 1L;
 

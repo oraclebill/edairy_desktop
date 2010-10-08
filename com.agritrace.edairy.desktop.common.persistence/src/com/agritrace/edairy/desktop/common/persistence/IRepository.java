@@ -11,9 +11,9 @@ import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntit
 /**
  * Core repository interface which encapsulates a concrete persistence
  * implementation.
- * 
+ *
  * @author bjones
- * 
+ *
  * @param <T>
  *            type of objects this repo can persist.
  */
@@ -21,22 +21,22 @@ public interface IRepository<T extends EObject> {
 
 	/**
 	 * Find objects that match the query.
-	 * 
+	 *
 	 * @param query
 	 * @return List of matches or empty list.
 	 */
 	List<T> all();
 
 	/**
-	 * 
+	 *
 	 * @param deletableEntity
 	 * @throws NonExistingEntityException
 	 */
 	void delete(T deletableEntity) throws NonExistingEntityException;
-	
+
 	/**
 	 * Load object from db.
-	 * 
+	 *
 	 * @param object
 	 */
 	void load(EObject object);
@@ -44,7 +44,7 @@ public interface IRepository<T extends EObject> {
 
 //	/**
 //	 * Find objects matching the query.
-//	 * 
+//	 *
 //	 * @param rawQuery
 //	 * @return a possibly empty list.
 //	 */
@@ -52,7 +52,7 @@ public interface IRepository<T extends EObject> {
 
 //	/**
 //	 * Find objects that match the query after parameter substitution.
-//	 * 
+//	 *
 //	 * @param query
 //	 * @param params
 //	 * @return List of matches or empty list.
@@ -61,7 +61,7 @@ public interface IRepository<T extends EObject> {
 
 	/**
 	 * Find the object that has key of <key> or null if it does not exist.
-	 * 
+	 *
 	 * @param key
 	 * @return Single <T> object or null.
 	 */
@@ -69,15 +69,15 @@ public interface IRepository<T extends EObject> {
 
 	/**
 	 * Raw save.
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	void save(Object obj);
 
 	/**
 	 * Creates a new persistent entity. If there is a key set in the new entity
 	 * it will be used. If there is a key conflict an exception will be thrown.
-	 * 
+	 *
 	 * @param newEntity
 	 * @return the internal key of the new entity.
 	 * @throws AlreadyExistsException
@@ -87,7 +87,7 @@ public interface IRepository<T extends EObject> {
 
 	/**
 	 * Stores the current state of an existing persistent entity. *
-	 * 
+	 *
 	 * @param newEntity
 	 * @return the internal key of the new entity.
 	 * @throws NonExistingEntityException

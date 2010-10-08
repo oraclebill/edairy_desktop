@@ -29,7 +29,7 @@ public final class RoleEditDialog extends RecordDialog<Role> {
 		final Composite contentArea = UIControlsFactory.createComposite(parent);
 		contentArea.setLayout(new GridLayout(1, false));
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).minSize(500, 0).applyTo(contentArea);
-		
+
 		final Composite editPanel = UIControlsFactory.createComposite(contentArea);
 		editPanel.setLayout(new GridLayout(2, false));
 		final GridDataFactory factory = GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true);
@@ -44,24 +44,24 @@ public final class RoleEditDialog extends RecordDialog<Role> {
 		final Text txtDescription = UIControlsFactory.createText(editPanel, SWT.MULTI);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).minSize(0, 60).applyTo(txtDescription);
 		addUIControl(txtDescription, RoleBinding.BIND_ID_ROLE_DESCRIPTION.name());
-		
+
 		// Permission editing area
-		
+
 		final Composite permPanel = UIControlsFactory.createComposite(contentArea);
 		permPanel.setLayout(new GridLayout(3, false));
 		factory.applyTo(permPanel);
-		
+
 		final Composite permLeft = UIControlsFactory.createComposite(permPanel);
 		permLeft.setLayout(new GridLayout(1, false));
 		factory.applyTo(permLeft);
-		
+
 		final GridDataFactory vSqueezedFactory = GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false);
 		final GridDataFactory hSqueezedFactory = GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(false, true);
-		
+
 		UIControlsFactory.createLabel(permLeft, "Group");
 		final Combo nsCombo = UIControlsFactory.createCombo(permLeft, RoleBinding.NAMESPACE_COMBO.name());
 		vSqueezedFactory.applyTo(nsCombo);
-		
+
 		UIControlsFactory.createLabel(permLeft, "Permission");
 		final List permList = UIControlsFactory.createList(permLeft, false, true, RoleBinding.PERMISSION_LIST.name());
 		factory.applyTo(permList);
@@ -69,7 +69,7 @@ public final class RoleEditDialog extends RecordDialog<Role> {
 		final Composite permMiddle = UIControlsFactory.createComposite(permPanel);
 		permMiddle.setLayout(new GridLayout(1, false));
 		hSqueezedFactory.applyTo(permMiddle);
-		
+
 		hSqueezedFactory.applyTo(UIControlsFactory.createLabel(permMiddle, ""));
 		UIControlsFactory.createButton(permMiddle, ">>", RoleBinding.ADD_BUTTON.name());
 		UIControlsFactory.createButton(permMiddle, "<<", RoleBinding.REMOVE_BUTTON.name());
@@ -78,7 +78,7 @@ public final class RoleEditDialog extends RecordDialog<Role> {
 		final Composite permRight = UIControlsFactory.createComposite(permPanel);
 		permRight.setLayout(new GridLayout(1, false));
 		factory.applyTo(permRight);
-		
+
 		UIControlsFactory.createLabel(permRight, "Selected Permissions");
 		final Table permTable = UIControlsFactory.createTable(permRight, SWT.BORDER | SWT.MULTI,
 				RoleBinding.BIND_ID_ROLE_PERMISSIONS.name());

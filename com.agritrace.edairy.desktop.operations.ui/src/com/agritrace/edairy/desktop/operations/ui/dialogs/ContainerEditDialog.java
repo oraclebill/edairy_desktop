@@ -39,7 +39,7 @@ public class ContainerEditDialog extends RecordDialog<DairyContainer> {
 			final Group detailGroup = UIControlsFactory.createGroup(parent, "Asset Info");
 			GridLayoutFactory.fillDefaults().applyTo(detailGroup);
 
-			Control control = new AssetInfo(detailGroup, SWT.NULL);
+			final Control control = new AssetInfo(detailGroup, SWT.NULL);
 			SWTBindingPropertyLocator.getInstance().setBindingProperty(control,
 					ContainerBindingConstants.BIND_ID_ASSET_INFO);
 			GridDataFactory.fillDefaults().grab(true, true).applyTo(control);
@@ -49,14 +49,14 @@ public class ContainerEditDialog extends RecordDialog<DairyContainer> {
 			final Group comp = UIControlsFactory.createGroup(boxyBrown, "Description");
 
 			comp.setLayout(GridLayoutFactory.fillDefaults().numColumns(2).create());
-			GridDataFactory fieldDefault = GridDataFactory.swtDefaults().grab(true, false).minSize(140, -1);
+			final GridDataFactory fieldDefault = GridDataFactory.swtDefaults().grab(true, false).minSize(140, -1);
 			{
 				final Composite detailGroup = UIControlsFactory.createComposite(comp, SWT.NULL);
 				detailGroup.setLayout(GridLayoutFactory.swtDefaults().numColumns(2).create());
 				GridDataFactory.fillDefaults().grab(true, false).applyTo(detailGroup);
 
 				{
-					Control sizingLabel = UIControlsFactory.createLabel(detailGroup, "Container ID:");
+					final Control sizingLabel = UIControlsFactory.createLabel(detailGroup, "Container ID:");
 					GridDataFactory.fillDefaults().hint(120, -1).applyTo(sizingLabel);
 					final Text text = UIControlsFactory.createText(detailGroup, SWT.NONE,
 							ContainerBindingConstants.BIND_ID_CONTAINER_ID);
@@ -99,7 +99,7 @@ public class ContainerEditDialog extends RecordDialog<DairyContainer> {
 		comonComp.setLayout(new GridLayout(1, true));
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(comonComp);
 
-		ContainerLogDetailComposite details = new ContainerLogDetailComposite(comonComp);
+		final ContainerLogDetailComposite details = new ContainerLogDetailComposite(comonComp);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(details);
 
 		parent.pack();

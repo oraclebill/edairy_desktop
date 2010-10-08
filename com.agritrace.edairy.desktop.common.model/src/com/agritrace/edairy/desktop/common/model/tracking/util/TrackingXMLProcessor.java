@@ -6,15 +6,13 @@
  */
 package com.agritrace.edairy.desktop.common.model.tracking.util;
 
-import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
-
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.resource.Resource;
-
 import org.eclipse.emf.ecore.xmi.util.XMLProcessor;
+
+import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 
 /**
  * This class contains helper methods to serialize and deserialize XML documents
@@ -31,10 +29,10 @@ public class TrackingXMLProcessor extends XMLProcessor {
 	 * @generated
 	 */
 	public TrackingXMLProcessor() {
-		super((EPackage.Registry.INSTANCE));
+		super(EPackage.Registry.INSTANCE);
 		TrackingPackage.eINSTANCE.eClass();
 	}
-	
+
 	/**
 	 * Register for "*" and "xml" file extensions the TrackingResourceFactoryImpl factory.
 	 * <!-- begin-user-doc -->

@@ -9,7 +9,7 @@ public interface MilkPriceJournalConstants {
 	String ID_DATE_START = "ID_DATE_START";
 	String ID_TEXT_PRICE1 = "ID_TEXT_PRICE1";
 	String ID_TEXT_PRICE2 = "ID_TEXT_PRICE2";
-	
+
 	String ID_COMBO_RATEMONTH = "ID_COMBO_RATEMONTH";
 	String ID_COMBO_RATEYEAR = "ID_COMBO_RATEYEAR";
 }

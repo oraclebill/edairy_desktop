@@ -9,10 +9,10 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 class FeatureProperties {
 	private final String bindingId;
-	private IObservableList domainList;
+	private final IObservableList domainList;
 	private Class<?> entityClass;
 	private final FeaturePath featurePath;
-	private String renderMethod;
+	private final String renderMethod;
 
 	public FeatureProperties(String bindingId, EStructuralFeature... featureList) {
 		this(bindingId, null, null, FeaturePath.fromList(featureList));
@@ -66,15 +66,17 @@ class FeatureProperties {
 
 	/**
 	 * Return the bean property name of the feature associated with this binding.
-	 * 
+	 *
 	 * @return
 	 */
 	public String getPropertyName() {
-		StringBuffer buf = new StringBuffer();
-		EStructuralFeature[] path = featurePath.getFeaturePath();
+		final StringBuffer buf = new StringBuffer();
+		final EStructuralFeature[] path = featurePath.getFeaturePath();
 		for (int i = 0; i < path.length; i++) {
 			buf.append(path[i].getName());
-			if (i+1 < path.length) buf.append(".");
+			if (i+1 < path.length) {
+				buf.append(".");
+			}
 		}
 		return buf.toString();
 	}

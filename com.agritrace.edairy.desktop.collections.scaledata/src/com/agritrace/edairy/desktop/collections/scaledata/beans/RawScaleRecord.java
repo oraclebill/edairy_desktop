@@ -6,7 +6,7 @@ public class RawScaleRecord {
 	public static class ValidationException extends Exception {
 
 		/**
-		 * 
+		 *
 		 */
 		private static final long serialVersionUID = 1L;
 
@@ -46,7 +46,7 @@ public class RawScaleRecord {
 														// NUM_CANS)
 	public static final int ATTR_COUNT = BASE + 13;
 
-	private String[] attributes = new String[ATTR_COUNT];
+	private final String[] attributes = new String[ATTR_COUNT];
 	boolean valid = true;
 
 	protected String getAttr(int attr) {
@@ -65,7 +65,7 @@ public class RawScaleRecord {
 	public void init(String transactionDate, String transactionTime, String dairyCode, String scaleSerial,
 			String operatorCode, String tripNumber, String sessionCode, String routeNumber, String centerNumber,
 			String memberNumber, String quantity, String binNumber, String scaleTotal) {
-		String params[] = new String[] { transactionDate, transactionTime, dairyCode, scaleSerial, operatorCode,
+		final String params[] = new String[] { transactionDate, transactionTime, dairyCode, scaleSerial, operatorCode,
 				tripNumber, sessionCode, routeNumber, centerNumber, memberNumber, quantity, binNumber, scaleTotal };
 
 		check(params.length == ATTR_COUNT);
@@ -87,9 +87,9 @@ public class RawScaleRecord {
 
 	/**
 	 * Base simply checks that all attributes have been set.
-	 * 
+	 *
 	 * Subclasses should override to perform more meaningful validation.
-	 * @throws ValidationException 
+	 * @throws ValidationException
 	 */
 	protected void convertValues()  {
 //		boolean valid = true;
@@ -201,8 +201,9 @@ public class RawScaleRecord {
 		setAttr(NUM_CANS, quantity);
 	}
 
+	@Override
 	public String toString() {
-		StringBuffer buf = new StringBuffer();
+		final StringBuffer buf = new StringBuffer();
 		buf.append("memberNumber: ").append(getMemberNumber()).append(", ");
 		buf.append("transactionDate: ").append(getTransactionDate()).append(", ");
 		buf.append("transactionTime: ").append(getTransactionTime()).append(", ");

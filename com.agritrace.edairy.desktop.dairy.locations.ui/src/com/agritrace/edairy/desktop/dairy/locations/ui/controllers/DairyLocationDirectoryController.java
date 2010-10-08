@@ -36,7 +36,7 @@ public class DairyLocationDirectoryController extends
 	public final static String NODE_ID = "com.agritrace.edairy.dairy.ui.views.DairyLocationView";
 
 	private final DairyLocationSearchBean searchBean = new DairyLocationSearchBean();
-	private IDairyLocationRepository dairyLocationRepo;
+	private final IDairyLocationRepository dairyLocationRepo;
 
 	private final IDairyRepository dairyRepo;
 	// private final Dairy localDairy = dairyRepo.getLocalDairy();
@@ -88,7 +88,7 @@ public class DairyLocationDirectoryController extends
 
 	/**
 	 * Create new model while creating a new record
-	 * 
+	 *
 	 * @return
 	 */
 	@Override
@@ -105,22 +105,22 @@ public class DairyLocationDirectoryController extends
 		final List<DairyLocation> allLocations = dairyLocationRepo.all();
 		System.err.println("allLocations: " + allLocations);
 		for (final DairyLocation c : allLocations) {
-			String cName = (c.getRoute() == null) ? "" : c.getRoute().getName();
+			final String cName = c.getRoute() == null ? "" : c.getRoute().getName();
 			if (searchBean.getRouteSearchValue() == null
 					|| MatchUtil.matchEquals(searchBean.getRouteSearchValue().getName(), cName)) {
-				
-				List<DairyFunction> filterFunctions = searchBean
+
+				final List<DairyFunction> filterFunctions = searchBean
 						.getFunctionSearchValues();
-				List<DairyFunction> functions = c.getFunctions();
-				
+				final List<DairyFunction> functions = c.getFunctions();
+
 				boolean found = true;
-				for (DairyFunction f : filterFunctions) {
+				for (final DairyFunction f : filterFunctions) {
 					if (!functions.contains(f)) {
 						found = false;
 						break;
 					}
 				}
-				
+
 				if (found) {
 					filtered.add(c);
 				}
@@ -132,7 +132,7 @@ public class DairyLocationDirectoryController extends
 
 	@Override
 	protected RecordDialog<DairyLocation> getRecordDialog(Shell shell) {
-		DairyLocationEditDialog dialog = new DairyLocationEditDialog(shell);
+		final DairyLocationEditDialog dialog = new DairyLocationEditDialog(shell);
 		dialog.getController().setContext("routes",
 				dairyLocationRepo.getRoutes());
 		dialog.setTitle("Edit Dairy Location");

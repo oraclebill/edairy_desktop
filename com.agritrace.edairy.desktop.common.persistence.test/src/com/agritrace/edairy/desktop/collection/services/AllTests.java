@@ -14,16 +14,16 @@ import com.agritrace.edairy.desktop.common.persistence.test.ModelPersistenceTest
 import com.agritrace.edairy.desktop.internal.common.persistence.TransactionRepositoryTest;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ 
-	PersistenceManagerTest.class, 
+@Suite.SuiteClasses({
+	PersistenceManagerTest.class,
 	DairyPersistenceTest.class,
-	DairyRepoPerfTest.class, 
-	DairyRepositoryTest.class, 
-	ModelPersistenceTestCase.class, 
+	DairyRepoPerfTest.class,
+	DairyRepositoryTest.class,
+	ModelPersistenceTestCase.class,
 	MembershipPerformanceTestCase.class,
 	MilkCollectionJournalLineQueryTest.class,
-	DialogCancelTest.class, 
-	TransactionRepositoryTest.class, 
+	DialogCancelTest.class,
+	TransactionRepositoryTest.class,
 	})
 public class AllTests {
 

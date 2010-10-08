@@ -24,10 +24,6 @@ import com.agritrace.edairy.desktop.finance.ui.MilkPriceJournalConstants;
 import com.ibm.icu.util.Calendar;
 
 public class MilkPriceEditController extends RecordDialogController<MemberPayment> {
-	private static final String[] MONTHS = new String[] { "January",
-			"February", "March", "April", "May", "June", "July", "August",
-			"September", "October", "November", "December", };
-
 	static class PriceCheckBean extends AbstractBean {
 		public static final String PRICE1 = "price1";
 		public static final String PRICE2 = "price2";
@@ -42,7 +38,7 @@ public class MilkPriceEditController extends RecordDialogController<MemberPaymen
 		}
 
 		public void setPrice1(BigDecimal price1) {
-			Object oldValue = this.price1;
+			final Object oldValue = this.price1;
 			this.price1 = price1;
 			firePropertyChanged(PRICE1, oldValue, price1);
 		}
@@ -68,7 +64,7 @@ public class MilkPriceEditController extends RecordDialogController<MemberPaymen
 		}
 
 		public void setPrice2(BigDecimal price2) {
-			Object oldValue = this.price2;
+			final Object oldValue = this.price2;
 			this.price2 = price2;
 			firePropertyChanged(PRICE2, oldValue, price2);
 		}
@@ -82,10 +78,10 @@ public class MilkPriceEditController extends RecordDialogController<MemberPaymen
 	private INumericTextRidget priceText1;
 	private INumericTextRidget priceText2;
 	private IComboRidget monthCombo, yearCombo;
-	private PropertyChangeListener errorMarkerListener = new PropertyChangeListener() {
+	private final PropertyChangeListener errorMarkerListener = new PropertyChangeListener() {
 		@Override
 		public void propertyChange(PropertyChangeEvent evt) {
-			boolean matched = priceBean.isValid();
+			final boolean matched = priceBean.isValid();
 			priceText1.setErrorMarked(!matched);
 			priceText2.setErrorMarked(!matched);
 		}
@@ -124,6 +120,7 @@ public class MilkPriceEditController extends RecordDialogController<MemberPaymen
 
 	}
 
+	@Override
 	public void afterBind() {
 		super.afterBind();
 		// bind
@@ -138,9 +135,9 @@ public class MilkPriceEditController extends RecordDialogController<MemberPaymen
 		});
 		monthCombo.updateFromModel();
 		monthCombo.setSelection(Calendar.getInstance().get(Calendar.MONTH));
-		
-		List<Integer> yearList = new ArrayList<Integer>();
-		int start = Calendar.getInstance().get(Calendar.YEAR) - 2;
+
+		final List<Integer> yearList = new ArrayList<Integer>();
+		final int start = Calendar.getInstance().get(Calendar.YEAR) - 2;
 		for (int i = 0; i < 5; i++) {
 			yearList.add(start + i);
 		}
@@ -149,7 +146,7 @@ public class MilkPriceEditController extends RecordDialogController<MemberPaymen
 		yearCombo.addSelectionListener(new ISelectionListener() {
 			@Override
 			public void ridgetSelected(SelectionEvent event) {
-				Object selection = yearCombo.getSelection();
+				final Object selection = yearCombo.getSelection();
 				if (selection instanceof Integer) {
 					priceBean.setYear((Integer)selection);
 				}
@@ -163,14 +160,14 @@ public class MilkPriceEditController extends RecordDialogController<MemberPaymen
 		priceText2.bindToModel(BeansObservables.observeValue(priceBean,
 				"price2"));
 
-		for (IRidget r : getRidgets()) {
+		for (final IRidget r : getRidgets()) {
 			r.updateFromModel();
 		}
 	}
 
 	@Override
 	protected boolean validate() {
-		boolean superValid = super.validate();
+		final boolean superValid = super.validate();
 		boolean beanValid = priceBean.isValid();
 		if (!beanValid) {
 			priceText1.addPropertyChangeListener(errorMarkerListener);

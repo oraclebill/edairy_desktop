@@ -19,13 +19,8 @@ public class InstallNavigationNodeAssembler extends AbstractNavigationAssembler 
 	// FINANCE
 
 	private static final String LABEL_INSTALL = "Install";
-	private static final String LABEL_IMPORT_WIZARD = "Import Wizard";
-	private static final String LABEL_IMPORT_EMPLOYEES = "Import Employees";
 	private static final String SUBAPP_INSTALL = "com.agritrace.edairy.desktop.install";	//$NON-NLS-1$
-	private static final String MODULE_INSTALL_IMPORT = "install.import";	//$NON-NLS-1$
 	private static final String MODULE_GROUP_INSTALL_IMPORT = "modulegroup.install.import"; 	//$NON-NLS-1$
-	private static final String SUBMODULE_INSTALL_IMPORT_EMPLOYEES = "edm.import.employees";	//$NON-NLS-1$
-
 	private Set<String> knownTargetIds = null;
 
 	@Override
@@ -61,7 +56,7 @@ public class InstallNavigationNodeAssembler extends AbstractNavigationAssembler 
 			NodeFactory
 					.createSubModule(
 							SUBMODULE_INSTALL_IMPORT_EMPLOYEES,
-							LABEL_IMPORT_EMPLOYEES, moduleNode, SampleView.ID); //$NON-NLS-1$ 
+							LABEL_IMPORT_EMPLOYEES, moduleNode, SampleView.ID); //$NON-NLS-1$
 			*/
 		}
 

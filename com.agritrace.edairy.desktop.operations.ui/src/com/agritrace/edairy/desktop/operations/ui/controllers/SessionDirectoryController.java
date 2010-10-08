@@ -20,7 +20,7 @@ import com.google.inject.Provider;
 public class SessionDirectoryController extends BasicDirectoryController<CollectionSession> {
 	private final IRepository<CollectionSession> repository;
 	private final Provider<SessionEditDialog> dialogProvider;
-	
+
 	@Inject
 	public SessionDirectoryController(final IRepository<CollectionSession> repository,
 			final Provider<SessionEditDialog> dialogProvider) {
@@ -28,7 +28,7 @@ public class SessionDirectoryController extends BasicDirectoryController<Collect
 		this.dialogProvider = dialogProvider;
 		setRepository(repository);
 		setEClass(DairyPackage.Literals.COLLECTION_SESSION);
-		
+
 		addTableColumn("Code", DairyPackage.Literals.COLLECTION_SESSION__CODE);
 		addTableColumn("Time of Day", DairyPackage.Literals.COLLECTION_SESSION__TIME_OF_DAY, new ColumnFormatter() {
 			@Override
@@ -38,7 +38,7 @@ public class SessionDirectoryController extends BasicDirectoryController<Collect
 		});
 		addTableColumn("Description", DairyPackage.Literals.COLLECTION_SESSION__DESCRIPTION);
 	}
-	
+
 	@Override
 	protected void configureFilterRidgets() {
 		getRidget(BaseListView.BIND_ID_FILTER_SEARCH).setVisible(false);
@@ -59,10 +59,10 @@ public class SessionDirectoryController extends BasicDirectoryController<Collect
 	protected void resetFilterConditions() {
 		// Do nothing
 	}
-	
+
 	@Override
 	protected CollectionSession createNewModel() {
-		CollectionSession session = super.createNewModel();
+		final CollectionSession session = super.createNewModel();
 		session.setTimeOfDay(new GregorianCalendar(1970, Calendar.JANUARY, 1, 9, 0, 0).getTime());
 		return session;
 	}

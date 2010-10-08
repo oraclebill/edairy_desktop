@@ -7,7 +7,6 @@
 package com.agritrace.edairy.desktop.common.model.tracking.util;
 
 import org.eclipse.emf.common.util.URI;
-
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 
 /**

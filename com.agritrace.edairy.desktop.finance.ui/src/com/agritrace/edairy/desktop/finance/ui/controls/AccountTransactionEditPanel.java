@@ -13,9 +13,9 @@ import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 public class AccountTransactionEditPanel extends AbstractTransactionEditPanel {
 	public AccountTransactionEditPanel(Composite parent, int style) {
 		super(parent, style);
-		Group middlePanel = getContentArea();
+		final Group middlePanel = getContentArea();
 		middlePanel.setText("Transaction Entry");
-		
+
 		addChoiceField("Type");
 		addDateField();
 
@@ -39,7 +39,7 @@ public class AccountTransactionEditPanel extends AbstractTransactionEditPanel {
 		final Text checkNumberText = UIControlsFactory.createText(middlePanel, SWT.NONE,
 				FinanceBindingConstants.ID_CHECK_NUMBER_TEXT);
 		GridDataFactory.fillDefaults().grab(true, true).span(2, 1).applyTo(checkNumberText);
-		
+
 		addSignedField("Signed By");
 	}
 }

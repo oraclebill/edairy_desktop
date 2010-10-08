@@ -4,7 +4,7 @@ import org.eclipse.core.databinding.conversion.Converter;
 
 final class InlineInputFlagConverter extends Converter {
 	/**
-	 * 
+	 *
 	 */
 	private final CollectionLineRidget collectionLineRidget;
 
@@ -15,7 +15,7 @@ final class InlineInputFlagConverter extends Converter {
 
 	@Override
 	public Object convert(Object fromObject) {
-		if ((fromObject instanceof String) && !((String) fromObject).isEmpty()) {
+		if (fromObject instanceof String && !((String) fromObject).isEmpty()) {
 			String text = (String) fromObject;
 			final String firstChar = text.substring(0, 1);
 			if (firstChar.equalsIgnoreCase("N")) {

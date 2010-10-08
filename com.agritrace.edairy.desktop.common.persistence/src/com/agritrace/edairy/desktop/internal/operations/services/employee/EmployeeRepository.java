@@ -31,28 +31,30 @@ public class EmployeeRepository implements IEmployeeRepository, IRepository<Empl
 		}
 
 		Employee find(final String username, final String password) {
-			if (username == null || password == null)
+			if (username == null || password == null) {
 				throw new NullPointerException("Username and password must be non-null");
-			
-			SessionRunnable<List<Employee>> runner = new SessionRunnable<List<Employee>>() {
+			}
+
+			final SessionRunnable<List<Employee>> runner = new SessionRunnable<List<Employee>>() {
 				@Override
 				public void run(Session s) {
 					final Criteria crit = s.createCriteria(getClassType());
 					final String hash = PrincipalManager.getInstance().hashPassword(password);
-					
+
 					crit.add(Restrictions.eq("username", username));
 					crit.add(Restrictions.or(
-							Restrictions.and(Restrictions.eq("password", password), 
+							Restrictions.and(Restrictions.eq("password", password),
 									Restrictions.or(Restrictions.eq("passwordHashed", false), Restrictions.isNull("passwordHashed"))),
 							Restrictions.and(Restrictions.eq("password", hash), Restrictions.eq("passwordHashed", true))
 					));
-					
+
 					@SuppressWarnings("unchecked")
+					final
 					List<Employee> result = crit.list();
 					setResult(result);
 				}
 			};
-			
+
 			// TODO Auto-generated method stub
 			runWithTransaction(runner);
 			return runner.getResult().size() == 1 ? runner.getResult().get(0) : null;
@@ -60,12 +62,12 @@ public class EmployeeRepository implements IEmployeeRepository, IRepository<Empl
 	};
 
 	private final EmployeeRepositoryInternal employeeRepo;
-	
+
 	@Inject
 	public EmployeeRepository(EmployeeRepositoryInternal employeeRepo) {
 		this.employeeRepo = employeeRepo;
 	}
-	
+
 	@Override
 	public List<Employee> all() {
 		return employeeRepo.all();

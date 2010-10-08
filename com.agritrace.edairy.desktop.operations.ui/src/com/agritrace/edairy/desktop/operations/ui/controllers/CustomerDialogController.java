@@ -22,7 +22,7 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 	public static String[] CUSTOMER_TYPES = { "Milk Processor", "Milk Bar", "Other" };
 
 	private ITextRidget phone;
-	
+
 	@Override
 	public void configureUserRidgets() {
 		Customer editCustomer = null;
@@ -30,12 +30,12 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 
 		// ensure model available
 		editCustomer = getWorkingCopy();
-		assert (null != editCustomer);
+		assert null != editCustomer;
 
 		phone = getRidget(ITextRidget.class,CustomerBindingConstants.BIND_ID_PHONE_NUMBER);
 		phone.addValidationRule(new PhoneNumberValidatiionRule(), ValidationTime.ON_UI_CONTROL_EDIT);
 		phone.setDirectWriting(true);
-		
+
 		addTextMap(CustomerBindingConstants.BIND_ID_COMPANY_NAME, ModelPackage.Literals.COMPANY__COMPANY_NAME);
 		addTextMap(CustomerBindingConstants.BIND_ID_PHONE_NUMBER, ModelPackage.Literals.COMPANY__PHONE_NUMBER);
 		addTextMap(CustomerBindingConstants.BIND_ID_LEGAL_NAME, ModelPackage.Literals.COMPANY__LEGAL_NAME);
@@ -71,7 +71,7 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 		addressGroupController.updateBinding();
 
 		// Configure Communication Group
-		IContactMethodsGroupRidget contacts = getRidget(IContactMethodsGroupRidget.class,
+		final IContactMethodsGroupRidget contacts = getRidget(IContactMethodsGroupRidget.class,
 				IContactMethodsGroupRidget.WIDGET_ID);
 		contacts.bindToModel(editCustomer);
 		contacts.updateFromModel();

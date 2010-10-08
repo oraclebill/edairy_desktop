@@ -15,7 +15,7 @@ import java.util.Map;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.window.Window;
 import org.eclipse.riena.ui.core.uiprocess.UIProcess;
 import org.eclipse.ui.handlers.HandlerUtil;
 
@@ -28,7 +28,7 @@ import com.google.inject.Provider;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
- * 
+ *
  * @see org.eclipse.core.commands.IHandler
  * @see org.eclipse.core.commands.AbstractHandler
  */
@@ -37,10 +37,10 @@ public class ImportMembersHandler extends HandlerBase {
 	private class MemberImportProcess extends UIProcess {
 		final File importFile;
 		final int lineCount;
-		private List<String> msgList;
+		private final List<String> msgList;
 
-		private List<Membership> successes;
-		private Map<String, List<String[]>> errors;
+		private final List<Membership> successes;
+		private final Map<String, List<String[]>> errors;
 
 
 		public MemberImportProcess(File importFile, int lineCount,
@@ -61,10 +61,10 @@ public class ImportMembersHandler extends HandlerBase {
 
 		@Override
 		public void finalUpdateUI() {
-			boolean importEnabled = successes.size() > 0;
-			ImportResultsDialog irDialog = new ImportResultsDialog(
+			final boolean importEnabled = successes.size() > 0;
+			final ImportResultsDialog irDialog = new ImportResultsDialog(
 					HandlerUtil.getActiveShell(event), msgList, importEnabled);
-			if (irDialog.open() == Dialog.OK) {
+			if (irDialog.open() == Window.OK) {
 				saveMembers(successes);
 			}
 		}
@@ -75,27 +75,27 @@ public class ImportMembersHandler extends HandlerBase {
 			try {
 				monitor.beginTask("Member Import", lineCount);
 				setNote("Reading input file...");
-				
-				
+
+
 				input = new BufferedInputStream(new FileInputStream(importFile));
-				
+
 				setNote("Importing " + lineCount + " members...");
-				MemberImportTool tool = toolProvider.get();
+				final MemberImportTool tool = toolProvider.get();
 				tool.setMonitorDelta(lineCount / 100);
 				tool.processFile(input, successes, errors, monitor);
 
 				msgList.add(String.format("%-4d records imported successfully.",
 						successes.size()));
-				for (String err : errors.keySet()) {
+				for (final String err : errors.keySet()) {
 					msgList.add(String.format("%-4d records failed with a '%s' error.",
 							errors.get(err).size(), err));
 				}
 				setNote("Saving members...");
 
-			} catch (FileNotFoundException e) {
+			} catch (final FileNotFoundException e) {
 				e.printStackTrace();
 				return false;
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				e.printStackTrace();
 				return false;
 			} finally {
@@ -103,7 +103,7 @@ public class ImportMembersHandler extends HandlerBase {
 				if (input != null) {
 					try {
 						input.close();
-					} catch (IOException ioe) {
+					} catch (final IOException ioe) {
 						;
 					}
 				}
@@ -111,17 +111,17 @@ public class ImportMembersHandler extends HandlerBase {
 
 			return true;
 		}
-		
+
 		private void saveMembers(List<Membership> successes2) {
-			IDairyRepository dairyRepo = repoProvider.get();
+			final IDairyRepository dairyRepo = repoProvider.get();
 			dairyRepo.getLocalDairy().getMemberships()
 					.addAll(successes2);
 			dairyRepo.save();
 		}
 	}
-	
+
 	private ExecutionEvent event;
-	
+
 	@Inject private static Provider<IDairyRepository> repoProvider;
 	@Inject private static Provider<MemberImportTool> toolProvider;
 
@@ -135,6 +135,7 @@ public class ImportMembersHandler extends HandlerBase {
 	 * the command has been executed, so extract extract the needed information
 	 * from the application context.
 	 */
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		// create a file dialog to get the filename..
 		this.event = event;
@@ -148,10 +149,10 @@ public class ImportMembersHandler extends HandlerBase {
 			// }
 			// };
 
-			Object navigationContext = getNavigationContext(event);
-			File importFile = new File(getImportFile(event));
-			int lineCount = countLines(importFile);
-			UIProcess process = new MemberImportProcess(importFile, lineCount,
+			final Object navigationContext = getNavigationContext(event);
+			final File importFile = new File(getImportFile(event));
+			final int lineCount = countLines(importFile);
+			final UIProcess process = new MemberImportProcess(importFile, lineCount,
 					navigationContext);
 			// job.setProperty(UIProcess.PROPERTY_CONTEXT, navigationContext);
 			// job.setUser(true);// to be visualized the job has to be user
@@ -160,7 +161,7 @@ public class ImportMembersHandler extends HandlerBase {
 			process.setNote("Importing...");
 			process.start();
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			throw new ExecutionException("Import operation failed.", e);
 		}
 		// MessageDialog.openInformation(window.getShell(), "Status",

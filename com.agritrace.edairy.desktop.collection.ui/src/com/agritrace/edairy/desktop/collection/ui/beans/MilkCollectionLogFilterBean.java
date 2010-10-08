@@ -17,7 +17,7 @@ public class MilkCollectionLogFilterBean extends AbstractBean {
 	public static final String SUSPENDED = "SUSPENDED";
 	public static final String STATUS = "STATUS";
 	public static final String SESSION = "SESSION";
-	
+
 	public static final String ROUTES = "ROUTES";
 
 	private Date endDate;
@@ -102,7 +102,7 @@ public class MilkCollectionLogFilterBean extends AbstractBean {
 		this.status = status;
 		firePropertyChanged(STATUS, oldVal, status);
 	}
-	
+
 	public void setSession(CollectionSession session) {
 		final Object oldVal = getSession();
 		this.session = session;

@@ -24,7 +24,7 @@ public class TestAccountTransactionRepository{
 	private IRepository<AccountTransaction> myRepo;
 	private List<AccountTransaction> transactionList;
 	public static final int BATCH_SIZE = 300;
-	
+
 	static class TransactionMemberEqualPredicate implements Predicate {
 		final private Membership testMember;
 
@@ -55,14 +55,14 @@ public class TestAccountTransactionRepository{
 			return ret;
 		}
 	}
-	
+
 	public IRepository<AccountTransaction> getRepository(){
 		if(myRepo == null){
 			Guice.createInjector(new TestingPersistenceModule()).injectMembers(this);
 		}
 		return myRepo;
 	}
-	
+
 	@Before
 	public void setUp() throws Exception {
 		getRepository();
@@ -70,15 +70,15 @@ public class TestAccountTransactionRepository{
 
 	@After
 	public void tearDown() throws Exception {
-	
+
 	}
-	
+
 	@Test
 	public void testHandleBatchEntryAction(){
 		this.transactionList = new ArrayList<AccountTransaction>();
 		createBatchAccountTransactions(transactionList);
 		System.err.println("NOTE: created a list of fake account transactions, size="+this.transactionList.size());
-		long start = System.currentTimeMillis();
+		final long start = System.currentTimeMillis();
 		//int count = 0;
 		for (final AccountTransaction tx : transactionList) {
 			try{
@@ -86,23 +86,23 @@ public class TestAccountTransactionRepository{
 				//count++;
 				//System.out.println(""+count);
 			}
-			catch(Throwable t){
+			catch(final Throwable t){
 				t.printStackTrace();
-				fail("Exception is: "+t);				
-			}			
+				fail("Exception is: "+t);
+			}
 		}
 		System.err.println("batch entries creation completed in "+(System.currentTimeMillis()-start)+"ms.");
-		
+
 	}
-	
+
 	private void createBatchAccountTransactions(
 			List<AccountTransaction> transactionList) {
-		TestAccountTransactionGenerator tg = new TestAccountTransactionGenerator();
-		
-		List<AccountTransaction> transactions = tg.createTransactions(BATCH_SIZE);
-		
+		final TestAccountTransactionGenerator tg = new TestAccountTransactionGenerator();
+
+		final List<AccountTransaction> transactions = tg.createTransactions(BATCH_SIZE);
+
 		transactionList.addAll(transactions);
-		
+
 	}
 
 //	@Test
@@ -122,17 +122,17 @@ public class TestAccountTransactionRepository{
 //			e.printStackTrace();
 //			System.err.println("NOTE: filtering test FAILED in "+(System.currentTimeMillis()-start)+"ms.");
 //			fail("error evaluating the filters on ALL transactional entries");
-//		}		
+//		}
 //	}
 
 	@Test
 	public void testDropBatchEntry(){
 		this.transactionList = getRepository().all();
 		if(this.transactionList != null){
-			long start = System.currentTimeMillis();
+			final long start = System.currentTimeMillis();
 			try{
 				int count = BATCH_SIZE;
-				for(AccountTransaction tr:this.transactionList){
+				for(final AccountTransaction tr:this.transactionList){
 					getRepository().delete(tr);
 					count--;
 					//System.out.println(""+count);
@@ -141,20 +141,20 @@ public class TestAccountTransactionRepository{
 					}
 				}
 			}
-			catch(Throwable t){
+			catch(final Throwable t){
 				t.printStackTrace();
 				fail("faled to drop test account transactions!");
 			}
 			this.transactionList = null;
 			System.err.println("NOTE account transaction batch drop was completed in "+(System.currentTimeMillis()-start)+"ms.");
-			
+
 		}
 		else{
 			fail("transaction list must not be empty!");
 		}
 	}
-	
-	
+
+
 //	private Predicate buildFilterPredicate() {
 //		final List<Predicate> predicateList = new ArrayList<Predicate>();
 //		Predicate returnPredicate;
@@ -192,6 +192,6 @@ public class TestAccountTransactionRepository{
 //		return returnPredicate;
 //	}
 
-	
+
 
 }

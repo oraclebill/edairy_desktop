@@ -38,7 +38,7 @@ public class DateRangeRidget extends AbstractCompositeRidget implements IDateRan
 
 	@Override
 	protected void bindUIControl() {
-		Control control = (Control) getUIControl();
+		final Control control = (Control) getUIControl();
 		if (control != null) {
 			updateFromModel();
 		}
@@ -55,14 +55,16 @@ public class DateRangeRidget extends AbstractCompositeRidget implements IDateRan
 		startDateText.addPropertyChangeListener(IDateTimeRidget.PROPERTY_DATE, new ValueChangedListener(START_DATE));
 		endDateText.addPropertyChangeListener(IDateTimeRidget.PROPERTY_DATE, new ValueChangedListener(END_DATE));
 	}
-	
+
+	@Override
 	public Date getStartDate() {
 		if (startDateText != null) {
 			return startDateText.getDate();
 		}
 		return null;
 	}
-	
+
+	@Override
 	public void setStartDate(Date date) {
 		if (startDateText != null) {
 			startDateText.setDate(date);
@@ -70,13 +72,15 @@ public class DateRangeRidget extends AbstractCompositeRidget implements IDateRan
 	}
 
 
+	@Override
 	public Date getEndDate() {
 		if (endDateText != null) {
 			return endDateText.getDate();
 		}
 		return null;
 	}
-	
+
+	@Override
 	public void setEndDate(Date date) {
 		if (endDateText != null) {
 			endDateText.setDate(date);
@@ -87,12 +91,14 @@ public class DateRangeRidget extends AbstractCompositeRidget implements IDateRan
 		startDateText.bindToModel(new WritableValue(startDate, Date.class));
 		endDateText.bindToModel(new WritableValue(endDate, Date.class));
 	}
-	
+
+	@Override
 	public void bindToModel(IObservableValue startDate, IObservableValue endDate) {
 		startDateText.bindToModel(startDate);
 		endDateText.bindToModel(endDate);
 	}
-	
+
+	@Override
 	public void updateFromModel() {
 		startDateText.updateFromModel();
 		endDateText.updateFromModel();

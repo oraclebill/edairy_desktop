@@ -10,12 +10,12 @@ import org.junit.Test;
 public class AdapterFactoryTests {
 
 	public class GenericMapCellLabelProvider extends ObservableMapCellLabelProvider {
-		private IObservableMap[] attributeMaps;
-		private String messagePattern;
+		private final IObservableMap[] attributeMaps;
+		private final String messagePattern;
 
 		/**
 		 * Create a new label provider
-		 * 
+		 *
 		 * @param messagePattern
 		 *            the message pattern
 		 * @param attributeMaps
@@ -29,10 +29,10 @@ public class AdapterFactoryTests {
 
 		@Override
 		public void update(ViewerCell cell) {
-			Object element = cell.getElement();
-			Object[] values = new Object[attributeMaps.length];
+			final Object element = cell.getElement();
+			final Object[] values = new Object[attributeMaps.length];
 			int i = 0;
-			for (IObservableMap m : attributeMaps) {
+			for (final IObservableMap m : attributeMaps) {
 				values[i++] = m.get(element);
 				if (values[i - 1] == null) {
 					cell.setText("");

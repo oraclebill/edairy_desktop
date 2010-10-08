@@ -6,22 +6,23 @@
  */
 package com.agritrace.edairy.desktop.common.model.tracking.impl;
 
+import static com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage.CONTAINER;
+
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
-
 import com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl;
-
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
-
 import com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountPackageImpl;
-
 import com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl;
-
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
-
 import com.agritrace.edairy.desktop.common.model.requests.impl.RequestsPackageImpl;
-
 import com.agritrace.edairy.desktop.common.model.tracking.AcquisitionType;
 import com.agritrace.edairy.desktop.common.model.tracking.AnimalIdentifier;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
@@ -33,14 +34,6 @@ import com.agritrace.edairy.desktop.common.model.tracking.ReferenceAnimalType;
 import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
-
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-
-import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -147,7 +140,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link TrackingPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -158,18 +151,20 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * @generated
 	 */
 	public static TrackingPackage init() {
-		if (isInited) return (TrackingPackage)EPackage.Registry.INSTANCE.getEPackage(TrackingPackage.eNS_URI);
+		if (isInited) {
+			return (TrackingPackage)EPackage.Registry.INSTANCE.getEPackage(TrackingPackage.eNS_URI);
+		}
 
 		// Obtain or create and register package
-		TrackingPackageImpl theTrackingPackage = (TrackingPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TrackingPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TrackingPackageImpl());
+		final TrackingPackageImpl theTrackingPackage = (TrackingPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TrackingPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TrackingPackageImpl());
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		DairyPackageImpl theDairyPackage = (DairyPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DairyPackage.eNS_URI) instanceof DairyPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DairyPackage.eNS_URI) : DairyPackage.eINSTANCE);
-		AccountPackageImpl theAccountPackage = (AccountPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(AccountPackage.eNS_URI) instanceof AccountPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(AccountPackage.eNS_URI) : AccountPackage.eINSTANCE);
-		ModelPackageImpl theModelPackage = (ModelPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) : ModelPackage.eINSTANCE);
-		RequestsPackageImpl theRequestsPackage = (RequestsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(RequestsPackage.eNS_URI) instanceof RequestsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(RequestsPackage.eNS_URI) : RequestsPackage.eINSTANCE);
+		final DairyPackageImpl theDairyPackage = (DairyPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DairyPackage.eNS_URI) instanceof DairyPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DairyPackage.eNS_URI) : DairyPackage.eINSTANCE);
+		final AccountPackageImpl theAccountPackage = (AccountPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(AccountPackage.eNS_URI) instanceof AccountPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(AccountPackage.eNS_URI) : AccountPackage.eINSTANCE);
+		final ModelPackageImpl theModelPackage = (ModelPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) : ModelPackage.eINSTANCE);
+		final RequestsPackageImpl theRequestsPackage = (RequestsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(RequestsPackage.eNS_URI) instanceof RequestsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(RequestsPackage.eNS_URI) : RequestsPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theTrackingPackage.createPackageContents();
@@ -188,7 +183,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 		// Mark meta-data to indicate it can't be changed
 		theTrackingPackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(TrackingPackage.eNS_URI, theTrackingPackage);
 		return theTrackingPackage;
@@ -199,6 +194,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFarm() {
 		return farmEClass;
 	}
@@ -208,6 +204,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getFarm_FarmId() {
 		return (EAttribute)farmEClass.getEStructuralFeatures().get(0);
 	}
@@ -217,6 +214,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getFarm_Name() {
 		return (EAttribute)farmEClass.getEStructuralFeatures().get(1);
 	}
@@ -226,6 +224,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFarm_Animals() {
 		return (EReference)farmEClass.getEStructuralFeatures().get(2);
 	}
@@ -235,6 +234,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFarm_Cans() {
 		return (EReference)farmEClass.getEStructuralFeatures().get(3);
 	}
@@ -244,6 +244,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFarm_Location() {
 		return (EReference)farmEClass.getEStructuralFeatures().get(4);
 	}
@@ -253,6 +254,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFarm_Owner() {
 		return (EReference)farmEClass.getEStructuralFeatures().get(5);
 	}
@@ -262,6 +264,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getFarm_ProfilePhoto() {
 		return (EAttribute)farmEClass.getEStructuralFeatures().get(6);
 	}
@@ -271,6 +274,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFarmer() {
 		return farmerEClass;
 	}
@@ -280,6 +284,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFarmer_Farms() {
 		return (EReference)farmerEClass.getEStructuralFeatures().get(0);
 	}
@@ -289,6 +294,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getContainer() {
 		return containerEClass;
 	}
@@ -298,6 +304,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getContainer_ContainerId() {
 		return (EAttribute)containerEClass.getEStructuralFeatures().get(0);
 	}
@@ -307,6 +314,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getContainer_TrackingNumber() {
 		return (EAttribute)containerEClass.getEStructuralFeatures().get(1);
 	}
@@ -316,6 +324,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getContainer_Owner() {
 		return (EReference)containerEClass.getEStructuralFeatures().get(2);
 	}
@@ -325,6 +334,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getContainer_Capacity() {
 		return (EAttribute)containerEClass.getEStructuralFeatures().get(3);
 	}
@@ -334,6 +344,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getContainer_MeasureType() {
 		return (EAttribute)containerEClass.getEStructuralFeatures().get(4);
 	}
@@ -343,6 +354,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRegisteredAnimal() {
 		return registeredAnimalEClass;
 	}
@@ -352,6 +364,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRegisteredAnimal_RegistrationId() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(0);
 	}
@@ -361,6 +374,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRegisteredAnimal_GivenName() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(1);
 	}
@@ -370,6 +384,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRegisteredAnimal_Location() {
 		return (EReference)registeredAnimalEClass.getEStructuralFeatures().get(2);
 	}
@@ -379,6 +394,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRegisteredAnimal_Gender() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(3);
 	}
@@ -388,6 +404,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRegisteredAnimal_AnimalType() {
 		return (EReference)registeredAnimalEClass.getEStructuralFeatures().get(4);
 	}
@@ -397,6 +414,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRegisteredAnimal_SireType() {
 		return (EReference)registeredAnimalEClass.getEStructuralFeatures().get(5);
 	}
@@ -406,6 +424,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRegisteredAnimal_Purpose() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(6);
 	}
@@ -415,6 +434,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRegisteredAnimal_DateOfAcquisition() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(7);
 	}
@@ -424,6 +444,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRegisteredAnimal_AcquisitionType() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(8);
 	}
@@ -433,6 +454,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRegisteredAnimal_Identifiers() {
 		return (EReference)registeredAnimalEClass.getEStructuralFeatures().get(9);
 	}
@@ -442,6 +464,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRegisteredAnimal_IdentifyingFeatures() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(10);
 	}
@@ -451,6 +474,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRegisteredAnimal_RearingMode() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(11);
 	}
@@ -704,7 +728,9 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * @generated
 	 */
 	public void createPackageContents() {
-		if (isCreated) return;
+		if (isCreated) {
+			return;
+		}
 		isCreated = true;
 
 		// Create classes and their features
@@ -786,7 +812,9 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * @generated
 	 */
 	public void initializePackageContents() {
-		if (isInitialized) return;
+		if (isInitialized) {
+			return;
+		}
 		isInitialized = true;
 
 		// Initialize package
@@ -795,7 +823,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		ModelPackage theModelPackage = (ModelPackage)EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
+		final ModelPackage theModelPackage = (ModelPackage)EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -911,14 +939,14 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";				
+		final String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";
 		addAnnotation
-		  (getRegisteredAnimal_AnimalType(), 
-		   source, 
+		  (getRegisteredAnimal_AnimalType(),
+		   source,
 		   new String[] {
 			 "name", "animalType",
 			 "kind", "elementOnly"
-		   });	
+		   });
 	}
 
 	/**
@@ -928,10 +956,10 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * @generated
 	 */
 	protected void createTeneoAnnotations() {
-		String source = "teneo.jpa";					
+		final String source = "teneo.jpa";
 		addAnnotation
-		  (getRegisteredAnimal_AnimalType(), 
-		   source, 
+		  (getRegisteredAnimal_AnimalType(),
+		   source,
 		   new String[] {
 			 "appinfo", "@ManyToOne(cascade=PERSIST)"
 		   });

@@ -36,38 +36,38 @@ public class DateFilterUtilTest {
 
 			@Override
 			public void run() {
-				List<Account> list = new LinkedList<Account>();
-				
-				Date beforeAll = new Date();
+				final List<Account> list = new LinkedList<Account>();
+
+				final Date beforeAll = new Date();
 				try {
 					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				Date transactionDate = new Date();
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
+				} catch (final InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
-				Date afterAll = new Date();
+				final Date transactionDate = new Date();
+				try {
+					Thread.sleep(1000);
+				} catch (final InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
-				Account account = AccountFactory.eINSTANCE.createAccount();
+				final Date afterAll = new Date();
+
+				final Account account = AccountFactory.eINSTANCE.createAccount();
 				account.setAccountNumber("TEST123");
 				account.setEstablished(transactionDate);
 				list.add(account);
 
 
-				DateFilterUtil<Account> filterUtil = new DateFilterUtil<Account>(Account.class,
+				final DateFilterUtil<Account> filterUtil = new DateFilterUtil<Account>(Account.class,
 						AccountPackage.Literals.ACCOUNT__ESTABLISHED);
-				
+
 				List<Account> result = filterUtil.filterDate(list, beforeAll, afterAll);
 				Assert.assertEquals(1, result.size());
-				
+
 				result = filterUtil.filterDate(list, afterAll, beforeAll);
 				Assert.assertEquals(0, result.size());
 
@@ -81,8 +81,8 @@ public class DateFilterUtilTest {
 
 
 	}
-	
-	
+
+
 	@Test
 	public void testDateFilterUtil() throws Exception {
 
@@ -90,23 +90,23 @@ public class DateFilterUtilTest {
 
 			@Override
 			public void run() {
-				List<Account> list = new LinkedList<Account>();
-				Calendar cal = Calendar.getInstance();
-				int STARTYEAR = 1990;
+				final List<Account> list = new LinkedList<Account>();
+				final Calendar cal = Calendar.getInstance();
+				final int STARTYEAR = 1990;
 				for (int i = 0; i < 20; i++) {
-					Account account = AccountFactory.eINSTANCE.createAccount();
+					final Account account = AccountFactory.eINSTANCE.createAccount();
 					cal.set(STARTYEAR + i, 6, 1);
 					account.setAccountNumber("" + i);
 					account.setEstablished(cal.getTime());
 					list.add(account);
 				}
 				cal.set(1975, 1, 1);
-				Date beforeAll = cal.getTime();
+				final Date beforeAll = cal.getTime();
 				cal.set(2000, 1, 1);
-				Date midWay = cal.getTime();
+				final Date midWay = cal.getTime();
 				cal.set(2100, 1, 1);
-				Date afterAll = cal.getTime();
-				DateFilterUtil<Account> filterUtil = new DateFilterUtil<Account>(Account.class,
+				final Date afterAll = cal.getTime();
+				final DateFilterUtil<Account> filterUtil = new DateFilterUtil<Account>(Account.class,
 						AccountPackage.Literals.ACCOUNT__ESTABLISHED);
 				List<Account> result = filterUtil.filterDate(list, beforeAll, midWay);
 				Assert.assertEquals(10, result.size());
@@ -114,10 +114,10 @@ public class DateFilterUtilTest {
 				Assert.assertEquals(20, result.size());
 
 				cal.set(2001, 5, 29);
-				Date d2001_05_29 = cal.getTime();
+				final Date d2001_05_29 = cal.getTime();
 
 				cal.set(2002, 5, 29);
-				Date d2002_05_29 = cal.getTime();
+				final Date d2002_05_29 = cal.getTime();
 
 				result = filterUtil.filterDate(list, d2001_05_29, d2002_05_29);
 				Assert.assertEquals(1, result.size());
@@ -134,12 +134,12 @@ public class DateFilterUtilTest {
 
 			@Override
 			public void run() {
-				List<Account> list = new LinkedList<Account>();
-				Calendar cal = Calendar.getInstance();
-				int STARTYEAR = 1990;
+				final List<Account> list = new LinkedList<Account>();
+				final Calendar cal = Calendar.getInstance();
+				final int STARTYEAR = 1990;
 				cal.set(STARTYEAR, 0, 1);
 				for (int i = 0; i < 100000; i++) {
-					Account account = AccountFactory.eINSTANCE.createAccount();
+					final Account account = AccountFactory.eINSTANCE.createAccount();
 					cal.add(Calendar.DAY_OF_YEAR, i);
 					account.setAccountNumber("" + i);
 					account.setEstablished(cal.getTime());
@@ -147,17 +147,17 @@ public class DateFilterUtilTest {
 				}
 
 				cal.set(1975, 1, 1);
-				Date beforeAll = cal.getTime();
+				final Date beforeAll = cal.getTime();
 				cal.set(2000, 1, 1);
-				Date midWay = cal.getTime();
+				final Date midWay = cal.getTime();
 				cal.set(2100, 1, 1);
 				cal.getTime();
-				DateFilterUtil<Account> filterUtil = new DateFilterUtil<Account>(Account.class,
+				final DateFilterUtil<Account> filterUtil = new DateFilterUtil<Account>(Account.class,
 						AccountPackage.Literals.ACCOUNT__ESTABLISHED);
 
-				long start = System.currentTimeMillis();
+				final long start = System.currentTimeMillis();
 				filterUtil.filterDate(list, beforeAll, midWay);
-				long end = System.currentTimeMillis();
+				final long end = System.currentTimeMillis();
 				System.out.println(end - start);
 				Assert.assertTrue(start - end < 1000);
 			}

@@ -13,7 +13,6 @@ import org.apache.commons.collections.functors.NullIsTruePredicate;
 import org.eclipse.equinox.log.Logger;
 import org.eclipse.jface.window.Window;
 import org.eclipse.riena.core.Log4r;
-import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
@@ -72,7 +71,7 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 
 	// ridgets specific to an AccountTransaction
 	private static final Logger LOGGER = Log4r.getLogger(Activator.getDefault(), AccountTransactionJournalController.class);
-	
+
 	private IMultipleChoiceRidget sourceListRidget;
 	private ITextRidget referenceNumRidget;
 	private IActionRidget batchEditRidget;
@@ -88,7 +87,7 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 		super(memberSearchProvider);
 		this.editDialogProvider = editDialogProvider;
 		this.batchEntryProvider = batchEntryProvider;
-		
+
 		setEClass(AccountPackage.Literals.ACCOUNT_TRANSACTION);
 		setRepository(repo);
 
@@ -103,7 +102,7 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 	@Override
 	public void configureFilterRidgets() {
 		super.configureFilterRidgets();
-		
+
 		referenceNumRidget = getRidget(ITextRidget.class, FinanceBindingConstants.FILTER_TXT_REF_NO);
 		sourceListRidget = getRidget(IMultipleChoiceRidget.class, FinanceBindingConstants.FILTER_CHOICE_TX_SOURCE);
 		batchEditRidget = getRidget(IActionRidget.class, FinanceBindingConstants.ID_BTN_BATCH_ENTRY);
@@ -114,53 +113,55 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 	public void afterBind() {
 		super.afterBind();
 
-		referenceNumRidget.bindToModel(filterBean, "referenceNumber"); 
-		
+		referenceNumRidget.bindToModel(filterBean, "referenceNumber");
+
 		sourceListRidget.bindToModel(filterBean, "sourceOptions", filterBean, "sourceSelections");
 		sourceListRidget.updateFromModel();
-		
-//		sourceListRidget.addSelectionListener(new ISelectionListener() {			
+
+//		sourceListRidget.addSelectionListener(new ISelectionListener() {
 //			@Override
 //			public void ridgetSelected(SelectionEvent event) {
 //				List<TransactionSource> selection = (List<TransactionSource>)
 //					sourceListRidget.getSelection();
-//				
+//
 //				filterBean.getSourceSelections().clear();
 //				filterBean.getSourceSelections().addAll(selection);
-//				
+//
 //				System.err.println("Selection: " + selection);
 //			}
 //		});
-		
+
 		batchEditRidget.addListener(new IActionListener() {
 			@Override
 			public void callback() {
 				handleBatchEntryAction();
 			}
 		});
-		
+
 		updateAllRidgetsFromModel();
 	}
 
+	@Override
 	protected void updateEntity(AccountTransaction updateableEntity) {
 		// the 'all' has the side effect of flushing the currnet session.. this is what we want to do, not 'update'...
-		getRepository().all();		
+		getRepository().all();
 	}
 
+	@Override
 	protected Predicate buildFilterPredicate() {
 
-		Predicate superPredicate = super.buildFilterPredicate();
-		
+		final Predicate superPredicate = super.buildFilterPredicate();
+
 		final List<Predicate> predicateList = new ArrayList<Predicate>();
 
 		predicateList.add(superPredicate);
-		
-		String refNum = filterBean.getReferenceNumber();
+
+		final String refNum = filterBean.getReferenceNumber();
 		if (refNum != null && refNum.length() > 0) {
 			predicateList.add(NullIsTruePredicate.getInstance(new EqualPredicate(refNum)));
 		}
 
-		List<TransactionSource> sources = filterBean.getSourceSelections();
+		final List<TransactionSource> sources = filterBean.getSourceSelections();
 		System.err.println("Sources: " + sources);
 		if (sources != null && sources.size() > 0) {
 			predicateList.add(NullIsTruePredicate.getInstance(new TransactionSourceMatchPredicate(sources)));
@@ -170,7 +171,7 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 		for (int i = 0; i < predicates.length; i++) {
 			predicates[i] = predicateList.get(i);
 		}
-		
+
 		return new AllPredicate(predicates);
 	}
 
@@ -179,12 +180,12 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 		final List<AccountTransaction> transactionList = new ArrayList<AccountTransaction>();
 		dialog.getController().setContext("tranaction-list", transactionList);
 		final int returnCode = dialog.open();
-		
+
 		if (returnCode == Window.OK) {
 			for (final AccountTransaction tx : transactionList) {
 				getRepository().saveNew(tx);
 			}
-			
+
 			refreshTableContents();
 		} else {
 			for (final AccountTransaction tx : transactionList) {

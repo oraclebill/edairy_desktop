@@ -44,6 +44,7 @@ public class MilkDeliveryJournalEditController extends RecordDialogController<De
 		private static List<DairyContainer> binList = null;
 
 
+		@Override
 		public void setData(final Object rowData) {
 			this.rowData = (DeliveryJournalLine) rowData;
 //			EObject container = this.rowData.eContainer();
@@ -61,38 +62,38 @@ public class MilkDeliveryJournalEditController extends RecordDialogController<De
 
 		@Override
 		public void configureRidgets() {
-			
-			final IRidget binId = getRidget(IComboRidget.class, DeliveryJournalEditBindContants.ROW_TXT_BIN_ID); //$NON-NLS-1$
+
+			final IRidget binId = getRidget(IComboRidget.class, DeliveryJournalEditBindContants.ROW_TXT_BIN_ID);
 			if (binId instanceof ITextRidget) {
-				ITextRidget textBinId = (ITextRidget) binId;
+				final ITextRidget textBinId = (ITextRidget) binId;
 				textBinId.setMandatory(true);
 				textBinId.bindToModel(rowData, DairyPackage.Literals.DELIVERY_JOURNAL_LINE__BIN.getName());
 			}
 			else if (binId instanceof IComboRidget) {
-				IComboRidget comboBinId = (IComboRidget) binId;
+				final IComboRidget comboBinId = (IComboRidget) binId;
 				comboBinId.setMandatory(true);
-				comboBinId.bindToModel(new WritableList(binList, DairyContainer.class), DairyContainer.class, "getContainerId", 
+				comboBinId.bindToModel(new WritableList(binList, DairyContainer.class), DairyContainer.class, "getContainerId",
 					PojoObservables.observeValue(rowData, "bin"));
 			}
 			binId.updateFromModel();
 
-			final IDecimalTextRidget amount = getRidget(IDecimalTextRidget.class, DeliveryJournalEditBindContants.ROW_TXT_AMOUNT); //$NON-NLS-1$
+			final IDecimalTextRidget amount = getRidget(IDecimalTextRidget.class, DeliveryJournalEditBindContants.ROW_TXT_AMOUNT);
 			amount.setSigned(false);
 			amount.setDirectWriting(true);
 			amount.setMandatory(true);
 			amount.setModelToUIControlConverter(NumberToStringConverter.fromBigDecimal());
 			amount.bindToModel(rowData, DairyPackage.Literals.DELIVERY_JOURNAL_LINE__QUANTITY.getName());
 			amount.updateFromModel();
-			
-			final  ITextRidget description =  getRidget(ITextRidget.class, DeliveryJournalEditBindContants.ROW_TXT_DESCRIPTION); //$NON-NLS-1$]
+
+			final  ITextRidget description =  getRidget(ITextRidget.class, DeliveryJournalEditBindContants.ROW_TXT_DESCRIPTION); //]
 			description.setDirectWriting(true);
 			description.bindToModel(rowData, DairyPackage.Literals.DELIVERY_JOURNAL_LINE__DESCRIPTION.getName());
-			description.updateFromModel();			
-		}		
+			description.updateFromModel();
+		}
 	}
 
 	private ICompositeTableRidget lineItemsRidget;
-	
+
 	// HACK, this shouldn't be static
 	private static IDairyRepository dairyRepo;
 	private final IRepository<CollectionSession> sessionRepo;
@@ -106,9 +107,10 @@ public class MilkDeliveryJournalEditController extends RecordDialogController<De
 
 	@Override
 	public DeliveryJournal getWorkingCopy() {
-		DeliveryJournal working = (DeliveryJournal) super.getWorkingCopy();
-		if (working.getDate() == null)
+		final DeliveryJournal working = super.getWorkingCopy();
+		if (working.getDate() == null) {
 			working.setDate(new Date());
+		}
 		return working;
 	}
 
@@ -125,7 +127,7 @@ public class MilkDeliveryJournalEditController extends RecordDialogController<De
 
 		addTextMap(DeliveryJournalEditBindContants.DATE_COMBO, DairyPackage.Literals.DELIVERY_JOURNAL__DATE);
 
-		List<CollectionSession> sessions = sessionRepo.all();
+		final List<CollectionSession> sessions = sessionRepo.all();
 		addComboMap(DeliveryJournalEditBindContants.SESSION_COMBO, sessions, "getCode",
 				DairyPackage.Literals.DELIVERY_JOURNAL__SESSION);
 
@@ -160,7 +162,7 @@ public class MilkDeliveryJournalEditController extends RecordDialogController<De
 			}
 		});
 
-		IActionRidget addBttonRidget = getRidget(IActionRidget.class, DeliveryJournalEditBindContants.BTN_ADD_ROW);
+		final IActionRidget addBttonRidget = getRidget(IActionRidget.class, DeliveryJournalEditBindContants.BTN_ADD_ROW);
 		addBttonRidget.addListener(new IActionListener() {
 			@Override
 			public void callback() {

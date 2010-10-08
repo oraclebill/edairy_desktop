@@ -18,10 +18,10 @@ import com.agritrace.edairy.desktop.member.ui.controls.MemberLiveStockWidget;
 public class FarmTabFolder {
 
 	public static final String MEMBER_INFO_GROUP = "Farm Information";
-	
-	private boolean addressTabOnly;
+
+	private final boolean addressTabOnly;
 	private Composite tabComposite;
-	
+
 	/**
 	 * Create tabs for Farm dialog. addressTabOnly is true, only create LocationTabFolder,
 	 * @param parent
@@ -52,8 +52,8 @@ public class FarmTabFolder {
 		groupLayout.numColumns = 1;
 		detailGroup.setLayout(groupLayout);
 		detailGroup.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
-		
-		
+
+
 
 		// address tab
 		final LocationTabFolder addressWidget = new LocationTabFolder(
@@ -64,7 +64,7 @@ public class FarmTabFolder {
 				.grab(true, false).applyTo(addressWidget);
 
 		if(!addressTabOnly){
-			CTabFolder tabfolder = addressWidget.getTabFolder();
+			final CTabFolder tabfolder = addressWidget.getTabFolder();
 
 			final CTabItem livestockTab = new CTabItem(tabfolder, SWT.NULL);
 			livestockTab.setText("Livestock");

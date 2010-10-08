@@ -23,16 +23,16 @@ import com.google.inject.Injector;
 
 /**
  * Test case for supplier list controller
- * 
+ *
  * @author Hui(Spark) Wan
- * 
+ *
  */
 public class SupplierListDialogControllerTestCase extends
 		AbstractDialogViewControllerTestCase<SupplierDialogController> {
 
 	Injector injector = Guice.createInjector(new PersistenceModule() {
 		@Override protected void bindDataStore() {
-			ManagedMemoryDataStoreProvider provider = new ManagedMemoryDataStoreProvider();
+			final ManagedMemoryDataStoreProvider provider = new ManagedMemoryDataStoreProvider();
 			bind(HbDataStore.class).toProvider(provider);
 		}
 	});
@@ -40,22 +40,23 @@ public class SupplierListDialogControllerTestCase extends
 
 	List<Supplier> supplier = new ArrayList<Supplier>();
 	private SupplierDialogController newInst;
+	@Override
 	protected SupplierDialogController createController() {
 		newInst = new SupplierDialogController();
 		return newInst;
 
 	}
-	
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		prepareDBForTest();
-	
+
 	}
 
 	protected void prepareDBForTest() {
-		Session session = injector.getInstance(Session.class);
-		Transaction tx = session.beginTransaction();
+		final Session session = injector.getInstance(Session.class);
+		final Transaction tx = session.beginTransaction();
 		session.createSQLQuery("Delete from supplier");
 		// delete all records
 		tx.commit();
@@ -67,7 +68,7 @@ public class SupplierListDialogControllerTestCase extends
 	public void testNewRecord() {
 
 		// Set action type
-		SupplierDialogController controller = this.getController();
+		final SupplierDialogController controller = this.getController();
 		// Update from model
 		controller.afterBind();
 

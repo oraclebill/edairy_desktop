@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.agritrace.edairy.desktop.member.ui.dialog;
 
@@ -45,7 +45,7 @@ public class OwnershipGroupRidget extends AbstractCompositeRidget implements IOw
 		@Override
 		public void callback() {
 			if (ownershipList != null) {
-				for (Object method : ownershipTable.getSelection()) {
+				for (final Object method : ownershipTable.getSelection()) {
 					if (method instanceof OwnershipBean) {
 						ownershipList.remove(((OwnershipBean) method).getIndex());
 
@@ -66,9 +66,9 @@ public class OwnershipGroupRidget extends AbstractCompositeRidget implements IOw
 		@Override
 		public void callback() {
 			if (ownershipList != null) {
-				String newOwner = "owner" + counter++;
+				final String newOwner = "owner" + counter++;
 				ownershipList.add(newOwner);
-				OwnershipBean newOwnerObject = createNewOwnership(ownershipList.size() - 1, newOwner);
+				final OwnershipBean newOwnerObject = createNewOwnership(ownershipList.size() - 1, newOwner);
 				ownershipObjectsList.add(newOwnerObject);
 				ownershipTable.updateFromModel();
 				updateButtonStatus();
@@ -81,6 +81,7 @@ public class OwnershipGroupRidget extends AbstractCompositeRidget implements IOw
 
 		private OwnershipBean rowData;
 
+		@Override
 		public void setData(final Object rowData) {
 			this.rowData = (OwnershipBean) rowData;
 		}
@@ -100,7 +101,7 @@ public class OwnershipGroupRidget extends AbstractCompositeRidget implements IOw
 	private IActionRidget deleteBtn;
 	private ICompositeTableRidget ownershipTable;
 	private List<String> ownershipList;
-	private List<OwnershipBean> ownershipObjectsList = new ArrayList<OwnershipBean>();
+	private final List<OwnershipBean> ownershipObjectsList = new ArrayList<OwnershipBean>();
 
 	private final IActionListener addContactAction = new AddOwnershipAction();
 	private final IActionListener deleteContactAction = new DeleteAction();
@@ -108,7 +109,7 @@ public class OwnershipGroupRidget extends AbstractCompositeRidget implements IOw
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.riena.ui.ridgets.IRidgetContainer#configureRidgets()
 	 */
 	@Override
@@ -133,9 +134,10 @@ public class OwnershipGroupRidget extends AbstractCompositeRidget implements IOw
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
+	@Override
 	public void bindToModel(List<String> ownerships) {
 		this.ownershipList = ownerships;
 		if (ownerships == null) {
@@ -148,20 +150,20 @@ public class OwnershipGroupRidget extends AbstractCompositeRidget implements IOw
 	private void updateTable() {
 		ownershipObjectsList.clear();
 		for (int i = 0; i < ownershipList.size(); i++) {
-			OwnershipBean owner = createNewOwnership(i, ownershipList.get(i));
+			final OwnershipBean owner = createNewOwnership(i, ownershipList.get(i));
 			ownershipObjectsList.add(owner);
 		}
 		ownershipTable.updateFromModel();
 	}
 
 	private OwnershipBean createNewOwnership(int index, String value) {
-		OwnershipBean owner = new OwnershipBean(index, value);
+		final OwnershipBean owner = new OwnershipBean(index, value);
 		owner.addPropertyChangeListener(new PropertyChangeListener() {
 
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
 				if (evt.getSource() instanceof OwnershipBean) {
-					int index = ((OwnershipBean) evt.getSource()).getIndex();
+					final int index = ((OwnershipBean) evt.getSource()).getIndex();
 					ownershipList.set(index, (String) evt.getNewValue());
 				}
 			}
@@ -170,7 +172,7 @@ public class OwnershipGroupRidget extends AbstractCompositeRidget implements IOw
 	}
 
 	/**
-	 * 
+	 *
 	 * @param string
 	 * @return
 	 */

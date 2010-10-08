@@ -21,9 +21,9 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 /**
  * MemberProfile Tab widget
- * 
+ *
  * @author CJ
- * 
+ *
  */
 public class MemberProfileWidget {
 
@@ -58,7 +58,7 @@ public class MemberProfileWidget {
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
 				.grab(true, false).applyTo(addressWidget);
 
-		CTabFolder folder = addressWidget.getTabFolder();
+		final CTabFolder folder = addressWidget.getTabFolder();
 
 		final CTabItem contactsTab = new CTabItem(folder, SWT.NONE);
 		contactsTab.setText("Contacts");

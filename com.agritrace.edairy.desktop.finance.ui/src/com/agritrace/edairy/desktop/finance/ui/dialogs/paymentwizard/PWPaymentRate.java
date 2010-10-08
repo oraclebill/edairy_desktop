@@ -25,11 +25,11 @@ public class PWPaymentRate extends PWPage {
 			"March", "April", "May", "June", "July", "August", "September",
 			"October", "November", "December", };
 
-	private String values[] = new String[2];
+	private final String values[] = new String[2];
 
 	/**
 	 * Create the wizard.
-	 * 
+	 *
 	 * @param model
 	 */
 	@Inject
@@ -41,26 +41,27 @@ public class PWPaymentRate extends PWPage {
 
 	/**
 	 * Create contents of the wizard.
-	 * 
+	 *
 	 * @param parent
 	 */
+	@Override
 	public void createControl(Composite parent) {
-		Composite container = UIControlsFactory.createComposite(parent,
+		final Composite container = UIControlsFactory.createComposite(parent,
 				SWT.NULL);
-		FormLayout topLayout = new FormLayout();
+		final FormLayout topLayout = new FormLayout();
 		topLayout.marginWidth = 10;
 		topLayout.marginHeight = 10;
 		container.setLayout(topLayout);
 
-		Composite comp = UIControlsFactory.createComposite(container, SWT.NULL);
+		final Composite comp = UIControlsFactory.createComposite(container, SWT.NULL);
 		comp.setLayout(new GridLayout(1, false));
 		{
-			Composite row = UIControlsFactory.createComposite(comp);
+			final Composite row = UIControlsFactory.createComposite(comp);
 			row.setLayout(new GridLayout(2, false));
 			row.setLayoutData(GridDataFactory.defaultsFor(row)
 					.grab(true, false).create());
 
-			Label label = UIControlsFactory.createLabel(row, "Amount");
+			final Label label = UIControlsFactory.createLabel(row, "Amount");
 			GridDataFactory.defaultsFor(label)
 					.hint(FormUtil.WIDTH_UNIT * 2, SWT.DEFAULT).applyTo(label);
 
@@ -78,12 +79,12 @@ public class PWPaymentRate extends PWPage {
 			});
 		}
 		{
-			Composite row = UIControlsFactory.createComposite(comp);
+			final Composite row = UIControlsFactory.createComposite(comp);
 			row.setLayout(new GridLayout(2, false));
 			row.setLayoutData(GridDataFactory.defaultsFor(row)
 					.grab(true, false).create());
 
-			Label label = UIControlsFactory.createLabel(row, "Re-enter Amount");
+			final Label label = UIControlsFactory.createLabel(row, "Re-enter Amount");
 			GridDataFactory.defaultsFor(label)
 					.hint(FormUtil.WIDTH_UNIT * 2, SWT.DEFAULT).applyTo(label);
 
@@ -101,7 +102,7 @@ public class PWPaymentRate extends PWPage {
 			});
 		}
 
-		FormData compData = new FormData();
+		final FormData compData = new FormData();
 		compData.top = new FormAttachment(20);
 		compData.right = new FormAttachment(80);
 		compData.bottom = new FormAttachment(80);
@@ -113,14 +114,15 @@ public class PWPaymentRate extends PWPage {
 	}
 
 	private void validate() {
-	
+
 		try {
-			boolean valid = values[1] != null && values[1].equals(values[0]);
-			if (valid)
+			final boolean valid = values[1] != null && values[1].equals(values[0]);
+			if (valid) {
 				put("paymentRate", new BigDecimal(values[1]).toPlainString());
+			}
 			setPageComplete(valid);
 		}
-		catch(Exception e) {
+		catch(final Exception e) {
 			setPageComplete(false);
 		}
 	}

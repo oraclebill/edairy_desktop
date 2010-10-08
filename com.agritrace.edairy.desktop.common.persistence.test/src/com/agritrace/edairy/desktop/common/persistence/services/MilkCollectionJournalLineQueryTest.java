@@ -41,14 +41,14 @@ public class MilkCollectionJournalLineQueryTest {
 
 	Injector injector = Guice.createInjector(new AbstractModule() {
 		@Override protected void configure() {
-			ManagedMemoryDataStoreProvider provider = new ManagedMemoryDataStoreProvider();
+			final ManagedMemoryDataStoreProvider provider = new ManagedMemoryDataStoreProvider();
 			bind(HbDataStore.class).toProvider(provider);
-			bind(ICollectionJournalLineRepository.class).to(MilkCollectionJournalLineRepository.class);				
+			bind(ICollectionJournalLineRepository.class).to(MilkCollectionJournalLineRepository.class);
 		}
 	});
 
 	ICollectionJournalLineRepository repo;
-	
+
 	@Before
 	public void setup() {
 		repo = injector.getInstance(ICollectionJournalLineRepository.class);
@@ -59,7 +59,7 @@ public class MilkCollectionJournalLineQueryTest {
 		initTestContext("../test-data/collections/test-collections.csv");
 
 		Membership membership = null;
-		for (Membership m : DAIRY.getMemberships()) {
+		for (final Membership m : DAIRY.getMemberships()) {
 			if (m.getMemberNumber().equals("1975")
 					|| m.getMemberNumber().equals("01975")) {
 				membership = m;
@@ -67,15 +67,15 @@ public class MilkCollectionJournalLineQueryTest {
 			}
 		}
 
-		DairyLocation centerBad = DairyFactory.eINSTANCE.createDairyLocation();
+		final DairyLocation centerBad = DairyFactory.eINSTANCE.createDairyLocation();
 		centerBad.setName("test");
 		centerBad.setLocation(DairyUtil.createLocation(null, null, null));
 		centerBad.setCode("RXXX");
 		DAIRY.getBranchLocations().add(centerBad);
 		repo.save(DAIRY);
 
-		DairyLocation centerGood = (DairyLocation) centers.get("R012");
-		Date date = DateFormat.getDateInstance().parse("June 20, 2010");
+		final DairyLocation centerGood = centers.get("R012");
+		final Date date = DateFormat.getDateInstance().parse("June 20, 2010");
 
 		assertEquals(1,
 				repo.countByMemberCenterDate(membership, centerGood, date));
@@ -93,7 +93,7 @@ public class MilkCollectionJournalLineQueryTest {
 		assertEquals(2, repo.allForDate(queryDate).size());
 
 		queryDate = DateFormat.getDateInstance().parse("Jun 2, 2011");
-		assertEquals(0, repo.allForDate((queryDate)).size());
+		assertEquals(0, repo.allForDate(queryDate).size());
 	}
 
 	@Test
@@ -105,8 +105,8 @@ public class MilkCollectionJournalLineQueryTest {
 		assertEquals(0, DAIRY.getPriceHistory().size());
 
 		// create some data
-		long queryDate = 100000;
-		MemberPayment milkPrice = DairyFactory.eINSTANCE.createMemberPayment();
+		final long queryDate = 100000;
+		final MemberPayment milkPrice = DairyFactory.eINSTANCE.createMemberPayment();
 		milkPrice.setEnteredBy(DEFAULT_DRIVER);
 		milkPrice.setEntryDate(new Date(queryDate));
 		milkPrice.setMonth(1);
@@ -117,7 +117,7 @@ public class MilkCollectionJournalLineQueryTest {
 		repo.save(DAIRY);
 
 		assertEquals(1, DAIRY.getPriceHistory().size());
-		BigDecimal rate = repo.getMilkPrice(1, 1990);
+		final BigDecimal rate = repo.getMilkPrice(1, 1990);
 		assertEquals(new BigDecimal("23.22"), rate);
 
 	}
@@ -126,7 +126,7 @@ public class MilkCollectionJournalLineQueryTest {
 	public void testGetMembersWithDeliveriesFor() throws Exception {
 		initTestContext("../test-data/collections/test-collections.csv");
 
-		Membership newMember = createMember("newMember");
+		createMember("newMember");
 //		ICollectionJournalLineRepository repo = new MilkCollectionJournalLineRepository();
 		List<Membership> members = repo.getMembersWithDeliveriesFor(6, 2010);
 		assertEquals(3, members.size());
@@ -141,7 +141,7 @@ public class MilkCollectionJournalLineQueryTest {
 //		ICollectionJournalLineRepository repo = new MilkCollectionJournalLineRepository();
 
 		Membership member = null;
-		for (Membership m : DAIRY.getMemberships()) {
+		for (final Membership m : DAIRY.getMemberships()) {
 			if (m.getMemberNumber().equals("1975")
 					|| m.getMemberNumber().equals("01975")) {
 				member = m;
@@ -151,7 +151,7 @@ public class MilkCollectionJournalLineQueryTest {
 		assertNotNull(member);
 
 		List<CollectionJournalLine> collections;
-		
+
 		collections = repo.getPayableDeliveriesForMember(member, 6, 2010);
 		assertEquals(6, collections.size());
 		collections = repo.getPayableDeliveriesForMember(member, 7, 2010);
@@ -166,7 +166,7 @@ public class MilkCollectionJournalLineQueryTest {
 //		ICollectionJournalLineRepository repo = new MilkCollectionJournalLineRepository();
 
 		Membership member = null;
-		for (Membership m : DAIRY.getMemberships()) {
+		for (final Membership m : DAIRY.getMemberships()) {
 			if (m.getMemberNumber().equals("1975")
 					|| m.getMemberNumber().equals("01975")) {
 				member = m;
@@ -194,8 +194,8 @@ public class MilkCollectionJournalLineQueryTest {
 		DAIRY.getEmployees().add(DEFAULT_DRIVER);
 	}
 
-	
-	
+
+
 	private void initTestContext() throws Exception {
 		initTestContext(null);
 	}
@@ -209,9 +209,9 @@ public class MilkCollectionJournalLineQueryTest {
 
 		if (testFile != null) {
 			System.err.println("importing " + testFile);
-			ScaleImporter importer = new ScaleImporter(new File(testFile));
+			final ScaleImporter importer = new ScaleImporter(new File(testFile));
 			importer.readRecords();
-			List<ScaleRecord> results = importer.getResults();
+			final List<ScaleRecord> results = importer.getResults();
 
 			for (final ScaleRecord record : results) {
 				final CollectionJournalLine line = DairyFactory.eINSTANCE
@@ -229,7 +229,7 @@ public class MilkCollectionJournalLineQueryTest {
 				group.setRecordTotal(group.getRecordTotal().add(
 						line.getQuantity()));
 			}
-			for (CollectionGroup group : groups.values()) {
+			for (final CollectionGroup group : groups.values()) {
 				repo.save(group);
 			}
 		}
@@ -255,9 +255,10 @@ public class MilkCollectionJournalLineQueryTest {
 
 	private CollectionGroup getCollectionGroup(String routeNumber,
 			String sessionCode, Date date) {
-		if (date == null)
+		if (date == null) {
 			throw new IllegalArgumentException("date cannot be null");
-		String key = String.format("%5s-%2s-%tF", routeNumber, sessionCode,
+		}
+		final String key = String.format("%5s-%2s-%tF", routeNumber, sessionCode,
 				date);
 		CollectionGroup group = groups.get(key);
 		if (group == null) {
@@ -285,11 +286,11 @@ public class MilkCollectionJournalLineQueryTest {
 	}
 
 	protected Membership createMember(String accountNo) {
-		Farmer farmer = DairyUtil.createFarmer(accountNo, "", "", "",
+		final Farmer farmer = DairyUtil.createFarmer(accountNo, "", "", "",
 				(Farm) null);
 		farmer.setNickName(accountNo);
 
-		Membership member = DairyUtil.createMembership(new Date(), new Date(),
+		final Membership member = DairyUtil.createMembership(new Date(), new Date(),
 				farmer);
 		member.setMemberNumber(accountNo);
 		member.setStatus(MembershipStatus.ACTIVE);

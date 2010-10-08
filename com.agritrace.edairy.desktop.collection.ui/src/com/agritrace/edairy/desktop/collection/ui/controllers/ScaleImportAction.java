@@ -13,7 +13,7 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.window.Window;
 import org.eclipse.riena.core.Log4r;
 import org.eclipse.riena.navigation.ui.swt.views.SubModuleView;
 import org.eclipse.riena.ui.core.uiprocess.UIProcess;
@@ -25,8 +25,8 @@ import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.collections.scaledata.beans.ScaleRecord;
 import com.agritrace.edairy.desktop.collections.scaledata.importer.ScaleImporter;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
@@ -53,8 +53,8 @@ final class ScaleImportAction implements IActionListener {
 		File importFile;
 		// int lineCount;
 
-		private List<String> msgList;
-		private Map<String, List<Object>> errMessages;
+		private final List<String> msgList;
+		private final Map<String, List<Object>> errMessages;
 
 		public ScaleImportProcess(File importFile, Object context) {
 			super("Scale Import", true, context);
@@ -72,7 +72,7 @@ final class ScaleImportAction implements IActionListener {
 
 		@Override
 		public boolean runJob(IProgressMonitor monitor) {
-			int fileSize = (int) importFile.length();
+			final int fileSize = (int) importFile.length();
 			double quantum = 1.0d;
 			double multiple = 1.0d;
 
@@ -92,7 +92,7 @@ final class ScaleImportAction implements IActionListener {
 					multiple = scaleData.size() / 100;
 					quantum = quantum * multiple;
 				}
-			} catch (IOException ioe) {
+			} catch (final IOException ioe) {
 				msgList.add("Error reading raw data: " + ioe.getMessage());
 			}
 
@@ -103,15 +103,15 @@ final class ScaleImportAction implements IActionListener {
 			// generate one or more collection groups - one group per
 			// scale/date/route/session (driver, vehicle,...)
 
-			int intQuantum = (int) quantum;
+			final int intQuantum = (int) quantum;
 			int counter = 0;
-			for (ScaleRecord scaleRecord : scaleData) {
+			for (final ScaleRecord scaleRecord : scaleData) {
 				if (monitor.isCanceled()) {
 					return false;
 				}
-				CollectionGroup journalPage = getJournalForScaleRecord(scaleRecord);
+				final CollectionGroup journalPage = getJournalForScaleRecord(scaleRecord);
 				/* boolean journalConsistent = */validateJournalInfo(journalPage, scaleRecord);
-				ScaleImportRecord importRecord = DairyFactory.eINSTANCE.createScaleImportRecord();
+				final ScaleImportRecord importRecord = DairyFactory.eINSTANCE.createScaleImportRecord();
 				// primary data
 				try {
 					importRecord.setCollectionJournal(journalPage);
@@ -124,7 +124,7 @@ final class ScaleImportAction implements IActionListener {
 					importRecord.setNumCans(scaleRecord.getNumCans());
 					importRecord.setOperatorCode(scaleRecord.getOperatorCode());
 
-					Membership memberInfo = getMemberById(scaleRecord.getMemberNumber());
+					final Membership memberInfo = getMemberById(scaleRecord.getMemberNumber());
 					if (memberInfo != null) {
 						importRecord.setValidatedMember(memberInfo);
 						// importRecord.setOffRoute(memberInfo.getDefaultRoute()
@@ -144,7 +144,7 @@ final class ScaleImportAction implements IActionListener {
 					importRecord.setFlagged(importRecord.getValidatedMember() != null
 							&& importRecord.getQuantity() != null);
 
-				} catch (Exception e) {
+				} catch (final Exception e) {
 					System.err.println(e.getMessage());
 					addError(e.getMessage(), importRecord);
 				}
@@ -156,7 +156,7 @@ final class ScaleImportAction implements IActionListener {
 
 			setNote("Validating raw data...");
 
-			for (CollectionGroup page : pageMap.values()) {
+			for (final CollectionGroup page : pageMap.values()) {
 				page.setStatus(JournalStatus.PENDING);
 				setPageJournalDate(page);
 				updateRollupValues(page);
@@ -172,20 +172,20 @@ final class ScaleImportAction implements IActionListener {
 
 			prepareMessageList();
 
-			boolean importEnabled = pageMap.size() > 0;
-			ImportResultsDialog irDialog = new ImportResultsDialog(AbstractDirectoryController.getShell(), msgList,
+			final boolean importEnabled = pageMap.size() > 0;
+			final ImportResultsDialog irDialog = new ImportResultsDialog(AbstractDirectoryController.getShell(), msgList,
 					importEnabled);
-			if (irDialog.open() == Dialog.OK) {
+			if (irDialog.open() == Window.OK) {
 				System.err.printf("Import completed with %d pages\n", pageMap.size());
 				int i = 0;
-				for (CollectionGroup page : pageMap.values()) {
+				for (final CollectionGroup page : pageMap.values()) {
 					System.err.printf("  page %d: %s - %d entries\n", ++i, page, page.getJournalEntries().size());
 					System.err.printf("  page %d: %s\n", i, page);
 					// }
 					try {
 						dairyRepo.getLocalDairy().getCollectionJournals().add(page);
 						dairyRepo.save();
-					} catch (Exception e) {
+					} catch (final Exception e) {
 						e.getMessage();
 					}
 				}
@@ -193,16 +193,16 @@ final class ScaleImportAction implements IActionListener {
 		}
 
 		/**
-		 * 
+		 *
 		 */
 		protected void prepareMessageList() {
-			for (String err : errMessages.keySet()) {
+			for (final String err : errMessages.keySet()) {
 				msgList.add(String.format("%-4d records failed with a '%s' error.", errMessages.get(err).size(), err));
 			}
 
 			int allEntries = 0;
 
-			for (CollectionGroup page : pageMap.values()) {
+			for (final CollectionGroup page : pageMap.values()) {
 				allEntries += page.getEntryCount();
 			}
 
@@ -211,7 +211,7 @@ final class ScaleImportAction implements IActionListener {
 
 			int i = 0;
 
-			for (CollectionGroup page : pageMap.values()) {
+			for (final CollectionGroup page : pageMap.values()) {
 				allEntries += page.getEntryCount();
 				msgList.add(
 						++i,
@@ -235,9 +235,9 @@ final class ScaleImportAction implements IActionListener {
 			if (page.getJournalDate() == null) {
 				Date lowest = null, highest = null, journalDate = null;
 
-				for (CollectionJournalLine line : page.getJournalEntries()) {
-					ScaleImportRecord record = (ScaleImportRecord) line;
-					Date collectionTime = record.getCollectionTime();
+				for (final CollectionJournalLine line : page.getJournalEntries()) {
+					final ScaleImportRecord record = (ScaleImportRecord) line;
+					final Date collectionTime = record.getCollectionTime();
 
 					if (collectionTime == null) {
 						addError("Record is missing collection time.", record);
@@ -252,10 +252,10 @@ final class ScaleImportAction implements IActionListener {
 				}
 
 				if (lowest != null && highest != null) {
-					Calendar lowCal = Calendar.getInstance(), highCal = Calendar.getInstance();
+					final Calendar lowCal = Calendar.getInstance(), highCal = Calendar.getInstance();
 					lowCal.setTime(lowest);
 					highCal.setTime(highest);
-					long milliDiff = (highCal.getTimeInMillis() - lowCal.getTimeInMillis());
+					final long milliDiff = highCal.getTimeInMillis() - lowCal.getTimeInMillis();
 
 					if (milliDiff > MAX_COLLECTION_TIME_DIFFERENTIAL) {
 						addError("Difference between collection times exceeds threshold: " + milliDiff, page);
@@ -276,15 +276,17 @@ final class ScaleImportAction implements IActionListener {
 			BigDecimal quantity = new BigDecimal(0);
 
 			int numSuspended = 0, numRejected = 0;
-			for (CollectionJournalLine line : page.getJournalEntries()) {
+			for (final CollectionJournalLine line : page.getJournalEntries()) {
 				quantity = quantity.add(line.getQuantity());
 
 				line.setFlagged(line.getValidatedMember() == null);
 
-				if (line.isFlagged())
+				if (line.isFlagged()) {
 					numSuspended++;
-				if (line.isRejected())
+				}
+				if (line.isRejected()) {
 					numRejected++;
+				}
 			}
 			page.setDriverTotal(quantity);
 			page.setRecordTotal(quantity);
@@ -295,16 +297,16 @@ final class ScaleImportAction implements IActionListener {
 
 		private void setDriver(CollectionGroup page) {
 			if (page.getDriver() == null) {
-				LinkedList<String> codes = new LinkedList<String>();
-				for (CollectionJournalLine line : page.getJournalEntries()) {
-					ScaleImportRecord rec = (ScaleImportRecord) line;
-					String operatorCode = rec.getOperatorCode();
+				final LinkedList<String> codes = new LinkedList<String>();
+				for (final CollectionJournalLine line : page.getJournalEntries()) {
+					final ScaleImportRecord rec = (ScaleImportRecord) line;
+					final String operatorCode = rec.getOperatorCode();
 					if (operatorCode != null) {
 						codes.add(operatorCode);
 					}
 				}
-				for (String code : codes) {
-					for (Employee emp : dairyRepo.getLocalDairy().getEmployees()) {
+				for (final String code : codes) {
+					for (final Employee emp : dairyRepo.getLocalDairy().getEmployees()) {
 						if (code.equals(emp.getOperatorCode())) {
 							page.setDriver(emp);
 							return;
@@ -323,15 +325,15 @@ final class ScaleImportAction implements IActionListener {
 	}
 
 	/**
-		 * 
+		 *
 		 */
 	private final MilkCollectionLogController milkCollectionLogController;
-	private IDairyRepository dairyRepo;
-	private IRepository<CollectionSession> sessionRepo;
-	private IDairyLocationRepository dairyLocationRepo;
-	private Map<String, CollectionGroup> pageMap = new HashMap<String, CollectionGroup>();
-	private Map<String, CollectionSession> sessionMap = new HashMap<String, CollectionSession>();
-	private Map<String, DairyLocation> centerMap = new HashMap<String, DairyLocation>();
+	private final IDairyRepository dairyRepo;
+	private final IRepository<CollectionSession> sessionRepo;
+	private final IDairyLocationRepository dairyLocationRepo;
+	private final Map<String, CollectionGroup> pageMap = new HashMap<String, CollectionGroup>();
+	private final Map<String, CollectionSession> sessionMap = new HashMap<String, CollectionSession>();
+	private final Map<String, DairyLocation> centerMap = new HashMap<String, DairyLocation>();
 	Dairy localDairy;
 
 	// Pointedly not injected (for now)
@@ -347,7 +349,7 @@ final class ScaleImportAction implements IActionListener {
 	@Override
 	public void callback() {
 		Object navigationContext = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActivePart();
-		SubModuleView rienaView = (SubModuleView) Platform.getAdapterManager().getAdapter(navigationContext,
+		final SubModuleView rienaView = (SubModuleView) Platform.getAdapterManager().getAdapter(navigationContext,
 				SubModuleView.class);
 
 		if (rienaView != null) {
@@ -362,22 +364,22 @@ final class ScaleImportAction implements IActionListener {
 			return;
 		}
 
-		File importFile = new File(retVal);
+		final File importFile = new File(retVal);
 		pageMap.clear();
 		sessionMap.clear();
 		centerMap.clear();
 
-		for (CollectionSession session : sessionRepo.all()) {
+		for (final CollectionSession session : sessionRepo.all()) {
 			sessionMap.put(session.getCode(), session);
 		}
 
-		for (DairyLocation loc : dairyLocationRepo.all()) {
+		for (final DairyLocation loc : dairyLocationRepo.all()) {
 			if (loc.getCode() != null) {
 				centerMap.put(loc.getCode().toLowerCase(), loc);
 			}
 		}
 
-		UIProcess process = new ScaleImportProcess(importFile, navigationContext);
+		final UIProcess process = new ScaleImportProcess(importFile, navigationContext);
 		// job.setProperty(UIProcess.PROPERTY_CONTEXT, navigationContext);
 		// job.setUser(true);// to be visualized the job has to be user
 		// job.schedule();
@@ -390,12 +392,12 @@ final class ScaleImportAction implements IActionListener {
 	 * Validate that lookup fields (memberNumber -> member, routeCode -> route,
 	 * etc) are not null, and all codes and ids in the record exist in the
 	 * database.
-	 * 
+	 *
 	 * @param importRecord
 	 * @return
 	 */
 	private boolean validateDbLookups(ScaleImportRecord importRecord) {
-		boolean isConsistent = true;
+		final boolean isConsistent = true;
 		// TODO: implement
 		return isConsistent;
 	}
@@ -405,20 +407,20 @@ final class ScaleImportAction implements IActionListener {
 	 * Page (CollectionGroup). Returns false if any of the redundant fields in
 	 * the scale record are different than the corresponding fields in the
 	 * journal page (collection group).
-	 * 
+	 *
 	 * @param journalPage
 	 * @param scaleRecord
 	 * @return
 	 */
 	private boolean validateJournalInfo(CollectionGroup journalPage, ScaleRecord scaleRecord) {
-		boolean isConsistent = true;
+		final boolean isConsistent = true;
 		// TODO: implement
 		return isConsistent;
 	}
 
 	private CollectionGroup getJournalForScaleRecord(ScaleRecord record) {
-		String key = createGroupKey(record);
-		String centerCode = record.getRouteNumber() == null ? null : record.getRouteNumber().toLowerCase();
+		final String key = createGroupKey(record);
+		final String centerCode = record.getRouteNumber() == null ? null : record.getRouteNumber().toLowerCase();
 		CollectionGroup page = pageMap.get(key);
 
 		if (page == null) {
@@ -449,8 +451,8 @@ final class ScaleImportAction implements IActionListener {
 			if (localDairy == null) {
 				localDairy = dairyRepo.getLocalDairy();
 			}
-			for (Employee employee : localDairy.getEmployees()) {
-				String operCode = employee.getOperatorCode();
+			for (final Employee employee : localDairy.getEmployees()) {
+				final String operCode = employee.getOperatorCode();
 				if (operCode != null && operCode.equals(operatorCode)) {
 					retval = employee;
 					break;
@@ -467,7 +469,7 @@ final class ScaleImportAction implements IActionListener {
 			if (member == null) {
 				throw new RuntimeException("invalid member id " + memberNumber);
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			;
 		}
 		return member;
@@ -476,13 +478,13 @@ final class ScaleImportAction implements IActionListener {
 	/**
 	 * There should be only one date per scale file, but the key generate will
 	 * accomodate multiples..
-	 * 
+	 *
 	 * @param record
 	 * @return
 	 */
 	private String createGroupKey(ScaleRecord record) {
-		StringBuffer buffer = new StringBuffer();
-		Formatter formatter = new Formatter(buffer);
+		final StringBuffer buffer = new StringBuffer();
+		final Formatter formatter = new Formatter(buffer);
 		formatter.format("%s-%s-%s-%2s", record.getScaleSerial(), record.getRouteNumber(), record.getTransactionDate(),
 				record.getSessionCode());
 		return buffer.toString();

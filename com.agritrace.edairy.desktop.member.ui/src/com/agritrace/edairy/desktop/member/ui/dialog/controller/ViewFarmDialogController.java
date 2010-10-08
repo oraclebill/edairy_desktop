@@ -15,11 +15,11 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class ViewFarmDialogController extends AddFarmDialogController {
-	
+
 	private MemberLiveStockWidgetController liveStockController;
 	// container tab
-	private MemberContainerWidgetController containerController;	
-	
+	private MemberContainerWidgetController containerController;
+
 	private final IFarmRepository farmRepository;
 	private final Provider<AddContainerDialog> addContainerProvider;
 	private final Provider<ViewContainerDialog> viewContainerProvider;
@@ -39,6 +39,7 @@ public class ViewFarmDialogController extends AddFarmDialogController {
 		this.viewLiveStockProvider = viewLiveStockProvider;
 	}
 
+	@Override
 	protected void configureTabs(){
 		super.configureTabs();
 		liveStockController = new MemberLiveStockWidgetController(this, farmRepository,
@@ -46,7 +47,7 @@ public class ViewFarmDialogController extends AddFarmDialogController {
 		containerController = new MemberContainerWidgetController(this, farmRepository,
 				addContainerProvider, viewContainerProvider);
 	}
-	
+
 	@Override
 	protected void configureButtonsPanel() {
 		super.configureButtonsPanel();
@@ -54,6 +55,7 @@ public class ViewFarmDialogController extends AddFarmDialogController {
 		deleteAction.setVisible(true);
 	}
 
+	@Override
 	protected void updateBindings() {
 		super.updateBindings();
 		if (selectedNode != null) {

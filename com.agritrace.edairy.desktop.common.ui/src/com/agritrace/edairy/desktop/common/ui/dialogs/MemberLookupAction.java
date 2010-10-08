@@ -14,7 +14,7 @@ public abstract class MemberLookupAction implements IActionListener {
 	public void callback() {
 		final MemberSearchDialog memberDialog = getMemberSearchDialog();
 		final int retVal = memberDialog.open();
-		
+
 		if (retVal == Window.OK) {
 			final Membership selectedMember = memberDialog.getSelectedMember();
 			callback(selectedMember);

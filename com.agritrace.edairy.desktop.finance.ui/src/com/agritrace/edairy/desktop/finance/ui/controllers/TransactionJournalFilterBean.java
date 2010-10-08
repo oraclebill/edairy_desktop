@@ -2,10 +2,8 @@ package com.agritrace.edairy.desktop.finance.ui.controllers;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
@@ -24,20 +22,20 @@ class TransactionJournalFilterBean {
 //	private TransactionType transactionType;
 
 	/**
-	 * 
+	 *
 	 */
 	public TransactionJournalFilterBean() {
 		clear();
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void clear() {
 		final Calendar today = Calendar.getInstance();
-				
+
 		final Calendar todayMinusThirty = Calendar.getInstance();
-		todayMinusThirty.setTime(today.getTime());		
+		todayMinusThirty.setTime(today.getTime());
 		todayMinusThirty.add(Calendar.DAY_OF_YEAR, -30);
 
 		startDate = todayMinusThirty.getTime();
@@ -47,13 +45,13 @@ class TransactionJournalFilterBean {
 		referenceNumber = "";
 		typeSelections.clear();
 		sourceSelections.clear();
-		
+
 		typeSelections.addAll(getTypeOptions());
 		sourceSelections.addAll(getSourceOptions());
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public Date getEndDate() {
@@ -61,7 +59,7 @@ class TransactionJournalFilterBean {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public Membership getMember() {
@@ -69,7 +67,7 @@ class TransactionJournalFilterBean {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public String getReferenceNumber() {
@@ -77,7 +75,7 @@ class TransactionJournalFilterBean {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public List<TransactionSource> getSourceOptions() {
@@ -85,7 +83,7 @@ class TransactionJournalFilterBean {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public Date getStartDate() {
@@ -93,7 +91,7 @@ class TransactionJournalFilterBean {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public List<TransactionType> getTypeOptions() {
@@ -101,7 +99,7 @@ class TransactionJournalFilterBean {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param endDate
 	 */
 	public void setEndDate(Date endDate) {
@@ -109,7 +107,7 @@ class TransactionJournalFilterBean {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param member
 	 */
 	public void setMember(Membership member) {
@@ -117,7 +115,7 @@ class TransactionJournalFilterBean {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param referenceNumber
 	 */
 	public void setReferenceNumber(String referenceNumber) {
@@ -126,7 +124,7 @@ class TransactionJournalFilterBean {
 
 
 	/**
-	 * 
+	 *
 	 * @param startDate
 	 */
 	public void setStartDate(Date startDate) {
@@ -134,32 +132,32 @@ class TransactionJournalFilterBean {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public List<TransactionType> getTypeSelections() {
 		return typeSelections;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param typeOptions
 	 */
 	public void setTypeSelections(List<TransactionType> typeOptions) {
 		this.typeSelections.clear();
 		this.typeSelections.addAll(typeOptions);
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public List<TransactionSource> getSourceSelections() {
 		return sourceSelections;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param sources
 	 */
 	public void setSourceSelections(List<TransactionSource> sources) {

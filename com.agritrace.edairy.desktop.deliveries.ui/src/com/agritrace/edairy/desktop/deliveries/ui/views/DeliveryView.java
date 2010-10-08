@@ -136,9 +136,9 @@ public class DeliveryView extends SubModuleView {
 				dialog.setLayout(new GridLayout(3, false));
 
 				final DateTime calendar = new DateTime(dialog, SWT.CALENDAR | SWT.BORDER);
-				if ((dateField.getText() != null) && !dateField.getText().equals("")) {
+				if (dateField.getText() != null && !dateField.getText().equals("")) {
 					final String[] textDate = dateField.getText().split("/");
-					if ((textDate != null) && (textDate.length == 3)) {
+					if (textDate != null && textDate.length == 3) {
 						final int month = new Integer(textDate[0]).intValue() - 1;
 						final int day = new Integer(textDate[1]).intValue();
 						final int year = new Integer(textDate[2]).intValue();

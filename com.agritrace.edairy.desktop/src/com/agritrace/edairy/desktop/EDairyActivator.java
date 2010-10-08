@@ -22,10 +22,10 @@ public class EDairyActivator extends AbstractUIPlugin {
 	// The shared instance
 	@Inject
 	private static EDairyActivator plugin;
-	
+
 	/**
 	 * Returns the shared instance
-	 * 
+	 *
 	 * @return the shared instance
 	 */
 	public static EDairyActivator getDefault() {
@@ -35,7 +35,7 @@ public class EDairyActivator extends AbstractUIPlugin {
 	/**
 	 * Return a "shared" image instance using the given colorKey. Shared images
 	 * are managed automatically and must not be disposed by client code.
-	 * 
+	 *
 	 * @param imageKey
 	 * @return a non-null Image instance
 	 */
@@ -51,7 +51,7 @@ public class EDairyActivator extends AbstractUIPlugin {
 	/**
 	 * Returns an image descriptor for the image file at the given plug-in
 	 * relative path
-	 * 
+	 *
 	 * @param path
 	 *            the path
 	 * @return the image descriptor
@@ -68,7 +68,7 @@ public class EDairyActivator extends AbstractUIPlugin {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
 	 * )
@@ -88,7 +88,7 @@ public class EDairyActivator extends AbstractUIPlugin {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
 	 * )

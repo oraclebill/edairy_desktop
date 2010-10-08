@@ -31,7 +31,7 @@ public class ResourceManager {
 
 	/**
 	 * get resourceSet
-	 * 
+	 *
 	 * @return
 	 */
 	public ResourceSetImpl getResourceSet() {
@@ -40,7 +40,7 @@ public class ResourceManager {
 
 	/**
 	 * save options
-	 * 
+	 *
 	 * @return
 	 */
 	public Map<String, Object> getSaveOptions() {
@@ -49,7 +49,7 @@ public class ResourceManager {
 
 	/**
 	 * load resource
-	 * 
+	 *
 	 * @param uri
 	 * @return
 	 * @throws RuntimeException
@@ -63,7 +63,7 @@ public class ResourceManager {
 
 	/**
 	 * save resource with default options
-	 * 
+	 *
 	 * @param resource
 	 * @throws IOException
 	 * @throws IllegalArgumentException
@@ -74,7 +74,7 @@ public class ResourceManager {
 
 	/**
 	 * save resource for given options.
-	 * 
+	 *
 	 * @param resource
 	 * @param saveOptions
 	 * @throws IOException

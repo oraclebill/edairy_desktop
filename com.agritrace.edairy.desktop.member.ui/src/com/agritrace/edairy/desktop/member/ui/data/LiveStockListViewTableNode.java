@@ -6,9 +6,9 @@ import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
 /**
  * This class create instance of the table of
  * <code>LiveStockLitController</code>
- * 
+ *
  * @author cin
- * 
+ *
  */
 public class LiveStockListViewTableNode {
 	private RegisteredAnimal animal;

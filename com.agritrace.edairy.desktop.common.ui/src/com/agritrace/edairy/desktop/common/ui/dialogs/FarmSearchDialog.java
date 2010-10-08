@@ -41,23 +41,23 @@ import com.google.inject.name.Named;
 
 /**
  * This is a demo dialog copied from MemberSearchDialog
- * 
+ *
  * @author Hui(Spark) Wan
- * 
+ *
  */
 public class FarmSearchDialog extends TitleAreaDialog {
 	private static enum FilterColumn {
 		ID("ID"),
 		NAME("Name"),
 		LOCATION("Location");
-		
+
 		static final String[] NAMES = { ID.name, NAME.name, LOCATION.name };
 		private final String name;
-		
+
 		FilterColumn(String name) {
 			this.name = name;
 		}
-		
+
 		static FilterColumn valueOf(int index) {
 			switch(index) {
 			case 0:
@@ -70,7 +70,7 @@ public class FarmSearchDialog extends TitleAreaDialog {
 				throw new AssertionError();
 			}
 		}
-		
+
 		@Override
 		public String toString() {
 			return name;
@@ -101,7 +101,7 @@ public class FarmSearchDialog extends TitleAreaDialog {
 		public String getColumnText(Object element, int columnIndex) {
 			if (element instanceof Farm) {
 				final Farm farm = (Farm) element;
-				assert (farm != null);
+				assert farm != null;
 				switch (FilterColumn.valueOf(columnIndex)) {
 				case ID:
 					try {
@@ -146,7 +146,7 @@ public class FarmSearchDialog extends TitleAreaDialog {
 
 	/**
 	 * MyTitleAreaDialog constructor
-	 * 
+	 *
 	 * @param shell
 	 *            the parent shell
 	 */
@@ -182,7 +182,7 @@ public class FarmSearchDialog extends TitleAreaDialog {
 
 	/**
 	 * Creates the buttons for the button bar
-	 * 
+	 *
 	 * @param parent
 	 *            the parent composite
 	 */
@@ -193,7 +193,7 @@ public class FarmSearchDialog extends TitleAreaDialog {
 
 	/**
 	 * Creates the dialog's contents
-	 * 
+	 *
 	 * @param parent
 	 *            the parent composite
 	 * @return Control
@@ -208,7 +208,7 @@ public class FarmSearchDialog extends TitleAreaDialog {
 
 	/**
 	 * Creates the gray area
-	 * 
+	 *
 	 * @param parent
 	 *            the parent composite
 	 * @return Control
@@ -266,17 +266,17 @@ public class FarmSearchDialog extends TitleAreaDialog {
 			@Override
 			public boolean select(Viewer viewer, Object parentElement, Object element) {
 				final Farm farm = (Farm) element;
-				assert (farm != null);
-				
+				assert farm != null;
+
 				if (null != selectedMember && !selectedMember.getMember().getFarms().contains(element)) {
 					return false;
 				}
-				
-				String filter = filterText.getText();
-				
+
+				final String filter = filterText.getText();
+
 				if (!StringUtils.isEmpty(filter)) {
 					String searchIn;
-					
+
 					switch (FilterColumn.valueOf(combo.getSelectionIndex())) {
 					case ID:
 						searchIn = farm.getFarmId().toString();
@@ -294,20 +294,20 @@ public class FarmSearchDialog extends TitleAreaDialog {
 					default:
 						throw new AssertionError();
 					}
-					
+
 					return searchIn.toLowerCase().indexOf(filter.toLowerCase()) != -1;
 				}
-					
+
 				return true;
 			}
 		});
-		
+
 		tableView.addSelectionChangedListener(new ISelectionChangedListener() {
 
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
 				final ISelection selection = event.getSelectionProvider().getSelection();
-				if ((selection != null) && (selection instanceof IStructuredSelection)) {
+				if (selection != null && selection instanceof IStructuredSelection) {
 					final IStructuredSelection sel = (IStructuredSelection) selection;
 					final Object obj = sel.getFirstElement();
 					if (obj instanceof Farm) {

@@ -14,13 +14,13 @@ import org.eclipse.riena.ui.ridgets.ISpinnerRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.swt.widgets.Shell;
 
+import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.collection.ui.ViewConstants;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
-import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
 import com.google.inject.Inject;
 
 public class MilkCollectionDetailLogController extends BasicDirectoryController<CollectionJournalLine> {
@@ -41,7 +41,7 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 	private ITextRidget driver;
 	private IActionRidget editButton;
 
-	
+
 	// UI infrastructure
 	private final WritableValue pageValue = new WritableValue(1, Integer.class);
 	private ITextRidget route;
@@ -80,7 +80,7 @@ public class MilkCollectionDetailLogController extends BasicDirectoryController<
 
 			journalPage = node.getContext("JOURNAL_PAGE");
 		}
-		if ((journalPage != null) && (journalPage instanceof CollectionGroup)) {
+		if (journalPage != null && journalPage instanceof CollectionGroup) {
 			currentJournalPage = (CollectionGroup) journalPage;
 		} else {
 			throw new IllegalStateException("Journal editor requires context setting 'JOURNAL_PAGE' with current page");

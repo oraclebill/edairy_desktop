@@ -26,7 +26,7 @@ public class AddItemDialog extends TitleAreaDialog implements ModifyListener {
 
 	/**
 	 * MyTitleAreaDialog constructor
-	 * 
+	 *
 	 * @param shell
 	 *            the parent shell
 	 */
@@ -55,14 +55,14 @@ public class AddItemDialog extends TitleAreaDialog implements ModifyListener {
 			newItem.setId(idText.getText().trim());
 		} else if (e.getSource() == numberText) {
 			final String value = numberText.getText();
-			if ((value != null) && !value.trim().equals("")) {
+			if (value != null && !value.trim().equals("")) {
 				newItem.setNumber(new Integer(value).intValue());
 			}
 		} else if (e.getSource() == descriptionText) {
 			newItem.setDescription(descriptionText.getText().trim());
 		}
 
-		if ((newItem.getId() != null) && (newItem.getNumber() != 0)) {
+		if (newItem.getId() != null && newItem.getNumber() != 0) {
 			getButton(IDialogConstants.OK_ID).setEnabled(true);
 		} else {
 			getButton(IDialogConstants.OK_ID).setEnabled(false);
@@ -84,7 +84,7 @@ public class AddItemDialog extends TitleAreaDialog implements ModifyListener {
 
 	/**
 	 * Creates the buttons for the button bar
-	 * 
+	 *
 	 * @param parent
 	 *            the parent composite
 	 */
@@ -98,7 +98,7 @@ public class AddItemDialog extends TitleAreaDialog implements ModifyListener {
 
 	/**
 	 * Creates the dialog's contents
-	 * 
+	 *
 	 * @param parent
 	 *            the parent composite
 	 * @return Control
@@ -113,7 +113,7 @@ public class AddItemDialog extends TitleAreaDialog implements ModifyListener {
 
 	/**
 	 * Creates the gray area
-	 * 
+	 *
 	 * @param parent
 	 *            the parent composite
 	 * @return Control

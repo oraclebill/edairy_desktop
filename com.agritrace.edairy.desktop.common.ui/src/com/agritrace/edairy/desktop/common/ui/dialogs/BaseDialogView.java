@@ -38,7 +38,7 @@ public abstract class BaseDialogView extends AbstractDialogView {
 
 	/**
 	 * Subclasses can control these via ridget bindings.
-	 * 
+	 *
 	 * @param parent
 	 * @return
 	 */

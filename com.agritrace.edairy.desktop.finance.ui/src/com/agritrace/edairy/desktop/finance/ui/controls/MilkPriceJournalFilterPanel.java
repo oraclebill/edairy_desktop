@@ -22,24 +22,24 @@ public class MilkPriceJournalFilterPanel extends Composite {
 	 * @param style
 	 */
 	public MilkPriceJournalFilterPanel(Composite parent, int style) {
-		super(parent, style);		
+		super(parent, style);
 		setBackground(PlatformUI.getWorkbench().getDisplay().getSystemColor(SWT.COLOR_WHITE));
 		setLayout(new FormLayout());
-		
-		Label lblMilkPriceFor = UIControlsFactory.createLabel(this, MilkPriceJournalConstants.CURRENT_PRICE_LABEL_FMT, SWT.NONE, MilkPriceJournalConstants.ID_LBL_CURRENT_MILK_PRICE);
-		FormData fd_lblMilkPriceFor = new FormData();
+
+		final Label lblMilkPriceFor = UIControlsFactory.createLabel(this, MilkPriceJournalConstants.CURRENT_PRICE_LABEL_FMT, SWT.NONE, MilkPriceJournalConstants.ID_LBL_CURRENT_MILK_PRICE);
+		final FormData fd_lblMilkPriceFor = new FormData();
 		fd_lblMilkPriceFor.top = new FormAttachment(0);
 		fd_lblMilkPriceFor.left = new FormAttachment(0, 10);
 		lblMilkPriceFor.setLayoutData(fd_lblMilkPriceFor);
 		lblMilkPriceFor.setFont(SWTResourceManager.getFont("Lucida Grande", 18, SWT.BOLD));
-						
-		DateRange dateRange = new DateRange(this, 75, SWT.NONE);
-		FormData fd_dateRange = new FormData();
+
+		final DateRange dateRange = new DateRange(this, 75, SWT.NONE);
+		final FormData fd_dateRange = new FormData();
 		fd_dateRange.top = new FormAttachment(lblMilkPriceFor, 12, SWT.BOTTOM);
 		fd_dateRange.left = new FormAttachment(0, 18);
 		dateRange.setLayoutData(fd_dateRange);
 		SWTBindingPropertyLocator.getInstance().setBindingProperty(dateRange, MilkPriceJournalConstants.ID_COMBO_RATEMONTH);
-		
+
 //		pack();
 	}
 }

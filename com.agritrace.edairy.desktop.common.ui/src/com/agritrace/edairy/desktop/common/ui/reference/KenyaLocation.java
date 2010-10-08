@@ -3,7 +3,7 @@ package com.agritrace.edairy.desktop.common.ui.reference;
 /**
  * The approx 1060 Locations and 3450 sublocations in Kenya, sorted
  * alphabetically...
- * 
+ *
  */
 
 public class KenyaLocation {

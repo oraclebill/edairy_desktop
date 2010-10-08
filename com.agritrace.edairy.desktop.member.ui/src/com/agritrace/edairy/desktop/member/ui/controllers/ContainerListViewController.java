@@ -76,14 +76,15 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 		this.memberSearchProvider = memberSearchProvider;
 		this.addContainerProvider = addContainerProvider;
 		this.viewContainerProvider = viewContainerProvider;
-		
+
 		setEClass(TrackingPackage.Literals.CONTAINER);
-		
+
 		for (int i = 0; i < containerPropertyNames.length; i++) {
 			addTableColumn(containerColumnHeaders[i], containerPropertyNames[i], String.class);
 		}
 	}
 
+	@Override
 	public void refreshTableContents() {
 		tableInput.clear();
 		tableInput.addAll(getFilteredTableResult());
@@ -114,7 +115,7 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 				if (element instanceof ContainerListViewTableNode) {
 					final Membership membership = ((ContainerListViewTableNode) element).getMembership();
 					if (membership != null) {
-						final Person member = (membership).getMember();
+						final Person member = membership.getMember();
 						if (member != null) {
 							return member.getFamilyName() + "," + member.getGivenName();
 						}
@@ -233,6 +234,7 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 
 	}
 
+	@Override
 	protected void tableBindToModel() {
 		if (table != null) {
 			setColumnFormatters();
@@ -256,9 +258,9 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 					final List<Container> containerList = farm.getCans();
 					for (final Container container : containerList) {
 						if(selectedMember != null){
-							results.add(new ContainerListViewTableNode(selectedMember, container));	
+							results.add(new ContainerListViewTableNode(selectedMember, container));
 						}else if( container.getOwner().getOwner().eContainer() instanceof Membership){
-							Membership member = (Membership) container.getOwner().getOwner().eContainer();
+							final Membership member = (Membership) container.getOwner().getOwner().eContainer();
 							results.add(new ContainerListViewTableNode(member, container));
 						}
 
@@ -274,7 +276,7 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 
 	/**
 	 * Open member search dialog, IActionListener for search button
-	 * 
+	 *
 	 */
 	public class MemberLookupAction implements IActionListener {
 		@Override
@@ -291,11 +293,12 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 						searchButton.setEnabled(true);
 					}
 				}
-				
+
 			}
 		}
 	}
 
+	@Override
 	protected void handleNewItemAction() {
 
 		Container container = DairyUtil.createContainer(ContainerType.BIN, UnitOfMeasure.LITRE, null, 0.0);
@@ -325,6 +328,7 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 
 	}
 
+	@Override
 	protected void handleViewItemAction() {
 
 		final ContainerListViewTableNode selectedNode = (ContainerListViewTableNode) table.getSelection().get(0);
@@ -335,7 +339,7 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 		dialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER, selectedNode.getContainer());
 		dialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST, inputFarms);
 		dialog.getController().setContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER, selectedNode.getMembership());
-	
+
 		final int returnCode = dialog.open();
 		if (returnCode == AbstractWindowController.OK) {
 			final Container container = (Container) dialog.getController().getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
@@ -378,7 +382,7 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	private class ContainerListTableComparator implements Comparator<Object> {
 		int columnIndex;
 
@@ -393,13 +397,13 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 				case 0:
 					return ((Membership) o1).getMemberId().compareTo(((Membership) o2).getMemberId());
 				case 1:
-					Membership node1 = (Membership) o1;
-					Membership node2 = (Membership) o2;
+					final Membership node1 = (Membership) o1;
+					final Membership node2 = (Membership) o2;
 					final Person member1 = node1.getMember();
 					final Person member2 = node2.getMember();
 					if (member1 != null && member2 != null) {
-						String name1 = member1.getFamilyName() + "," + member1.getGivenName();
-						String name2 = member2.getFamilyName() + "," + member2.getGivenName();
+						final String name1 = member1.getFamilyName() + "," + member1.getGivenName();
+						final String name2 = member2.getFamilyName() + "," + member2.getGivenName();
 						return name1.compareTo(name2);
 					}
 
@@ -408,8 +412,8 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 					final Farm farm1 = ((Container) o1).getOwner();
 					final Farm farm2 = ((Container) o2).getOwner();
 					if (farm1 != null && farm2 != null) {
-						String name1 = farm1.getName();
-						String name2 = farm2.getName();
+						final String name1 = farm1.getName();
+						final String name2 = farm2.getName();
 						if (name1 != null && name2 != null) {
 							return name1.compareTo(name2);
 						}
@@ -417,8 +421,8 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 
 					return 0;
 				case 3:
-					String number1 = ((Container) o1).getTrackingNumber();
-					String number2 = ((Container) o2).getTrackingNumber();
+					final String number1 = ((Container) o1).getTrackingNumber();
+					final String number2 = ((Container) o2).getTrackingNumber();
 					if (number1 != null && number2 != null) {
 						return number1.compareTo(number2);
 					}

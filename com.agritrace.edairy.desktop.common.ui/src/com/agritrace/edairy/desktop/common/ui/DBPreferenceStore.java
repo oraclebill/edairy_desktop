@@ -19,7 +19,7 @@ import com.google.inject.Inject;
 
 /**
  * An implementation of <code>IPreferenceStore</code> backed by the database. Used for user and system settings.
- * 
+ *
  * @author Matvey Kozhev <inetperson@gmail.com>
  *
  */
@@ -28,16 +28,16 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 	private final Map<String, Preference> values = new HashMap<String, Preference>();
 	private final Map<String, PreferenceKey> keys = new HashMap<String, PreferenceKey>();
 	private boolean needsSaving = false;
-	
+
 	private final IRepository<PreferenceKey> keyRepo;
 	private final IRepository<Preference> valueRepo;
-	
+
 	/* Load and store */
 	@Inject
 	public DBPreferenceStore(final IRepository<PreferenceKey> keyRepo, final IRepository<Preference> valueRepo) {
 		this.keyRepo = keyRepo;
 		this.valueRepo = valueRepo;
-		
+
 		for (final PreferenceKey key: keyRepo.all()) {
 			keys.put(key.getName(), key);
 		}
@@ -46,131 +46,146 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 			values.put(value.getKey().getName(), value);
 		}
 	}
-	
+
 	@Override
 	public void save() throws IOException {
 		try {
-			if (!needsSaving())
+			if (!needsSaving()) {
 				return;
-			
+			}
+
 			// First save...
-			
+
 			for (final PreferenceKey key: keys.values()) {
-				if (key.getId() == null)
+				if (key.getId() == null) {
 					keyRepo.saveNew(key);
-				else
+				} else {
 					keyRepo.save(key);
+				}
 			}
-			
+
 			for (final Preference value: values.values()) {
-				if (value.getId() == null)
+				if (value.getId() == null) {
 					valueRepo.saveNew(value);
-				else
+				} else {
 					valueRepo.save(value);
+				}
 			}
-			
+
 			// Then delete unused objects
-	
+
 			for (final Preference value: valueRepo.all()) {
-				if (!values.containsKey(value.getKey().getName()))
+				if (!values.containsKey(value.getKey().getName())) {
 					valueRepo.delete(value);
+				}
 			}
 
 			for (final PreferenceKey key: keyRepo.all()) {
-				if (!keys.containsKey(key.getName()))
+				if (!keys.containsKey(key.getName())) {
 					keyRepo.delete(key);
+				}
 			}
-			
+
 			needsSaving = false;
-		} catch (RuntimeException e) {
+		} catch (final RuntimeException e) {
 			throw new IOException(e);
 		}
 	}
-	
+
 	/* Internal helper functions */
-	
+
 	private String getValue(String key, PreferenceType type) {
 		final Preference value = values.get(key);
-		
-		if (value == null)
+
+		if (value == null) {
 			return getDefaultValue(key, type);
-		
-		if (value.getKey().getType() != type || value.getValue() == null)
+		}
+
+		if (value.getKey().getType() != type || value.getValue() == null) {
 			throw new NumberFormatException("Internal exception to be caught by getXXX");
-		
+		}
+
 		return value.getValue();
 	}
-	
+
 	private String getDefaultValue(String key, PreferenceType type) {
 		PreferenceKey keyObject = keys.get(key);
-		
+
 		if (keyObject == null) {
 			// Create setting upon first access
 			keyObject = setDefaultValue(key, type, getDefaultDefaultValue(type));
-		} else if (keyObject.getType() != type || keyObject.getDefaultValue() == null)
+		} else if (keyObject.getType() != type || keyObject.getDefaultValue() == null) {
 			throw new NumberFormatException("Internal exception to be caught by getXXX");
-		
+		}
+
 		return keyObject.getDefaultValue();
 	}
-	
+
 	private void setValue(String key, PreferenceType type, String value, boolean firePropertyChange) {
 		Preference valueObject = values.get(key);
-		
+
 		if (valueObject == null) {
 			PreferenceKey keyObject = keys.get(key);
-			
+
 			if (keyObject == null) {
 				// Create setting upon first access
 				keyObject = setDefaultValue(key, type, getDefaultDefaultValue(type));
-			} else if (type != keyObject.getType())
+			} else if (type != keyObject.getType()) {
 				throw new IllegalArgumentException("Attempting to set property to an invalid type");
-			
+			}
+
 			valueObject = DairyFactory.eINSTANCE.createPreference();
 			valueObject.setKey(keyObject);
 			valueObject.setValue(value);
-			
-			if (!value.equals(keyObject.getDefaultValue()))
-				values.put(key, valueObject);
-			
-			needsSaving = true;
-			
-			if (firePropertyChange)
-				firePropertyChangeEvent(valueObject, keyObject.getDefaultValue());
-		} else {
-			if (type != valueObject.getKey().getType())
-				throw new IllegalArgumentException("Attempting to set property to an invalid type");
 
-			String oldValue = valueObject.getValue();
+			if (!value.equals(keyObject.getDefaultValue())) {
+				values.put(key, valueObject);
+			}
+
+			needsSaving = true;
+
+			if (firePropertyChange) {
+				firePropertyChangeEvent(valueObject, keyObject.getDefaultValue());
+			}
+		} else {
+			if (type != valueObject.getKey().getType()) {
+				throw new IllegalArgumentException("Attempting to set property to an invalid type");
+			}
+
+			final String oldValue = valueObject.getValue();
 			valueObject.setValue(value);
-			
-			if (value.equals(valueObject.getKey().getDefaultValue()))
+
+			if (value.equals(valueObject.getKey().getDefaultValue())) {
 				values.remove(value);
-			
+			}
+
 			if (!value.equals(oldValue)) {
 				needsSaving = true;
-				
-				if (firePropertyChange)
+
+				if (firePropertyChange) {
 					firePropertyChangeEvent(valueObject, oldValue);
+				}
 			}
 		}
 	}
-	
+
 	private PreferenceKey setDefaultValue(String key, PreferenceType type, String value) {
 		PreferenceKey keyObject = keys.get(key);
-		
+
 		if (keyObject == null) {
 			keyObject = DairyFactory.eINSTANCE.createPreferenceKey();
 			keyObject.setName(key);
 			keyObject.setType(type);
 			keys.put(key, keyObject);
-		} else if (type != keyObject.getType())
+		} else if (type != keyObject.getType()) {
 			throw new IllegalArgumentException("Attempting to set default value to an invalid type");
-		
+		}
+
 		keyObject.setDefaultValue(value);
 		needsSaving = true;
 		return keyObject;
 	}
-	
+
 	private static String getDefaultDefaultValue(PreferenceType type) {
 		switch (type) {
 		case BOOLEAN:
@@ -189,7 +204,7 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 			throw new AssertionError();
 		}
 	}
-	
+
 	private static Object toType(PreferenceType type, String value) {
 		switch (type) {
 		case BOOLEAN:
@@ -208,12 +223,12 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 			throw new AssertionError();
 		}
 	}
-	
+
 	private void firePropertyChangeEvent(Preference pref, String oldValue) {
 		final PreferenceKey key = pref.getKey();
 		firePropertyChangeEvent(key.getName(), toType(key.getType(), oldValue), toType(key.getType(), pref.getValue()));
 	}
-	
+
 	/* API implementation follows */
 
 	@Override
@@ -225,7 +240,7 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 	public void removePropertyChangeListener(IPropertyChangeListener listener) {
 		listeners.remove(listener);
 	}
-	
+
 	@Override
 	public void firePropertyChangeEvent(String property, Object oldValue, Object newValue) {
 		for (final IPropertyChangeListener listener: listeners) {
@@ -237,7 +252,7 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 	public boolean contains(String key) {
 		return values.containsKey(key) || keys.containsKey(key);
 	}
-	
+
 	@Override
 	public boolean isDefault(String key) {
 		return keys.containsKey(key) && !values.containsKey(key);
@@ -255,9 +270,10 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 
 	@Override
 	public void setToDefault(String key) {
-		if (values.containsKey(key))
+		if (values.containsKey(key)) {
 			needsSaving = true;
-		
+		}
+
 		values.remove(key);
 	}
 
@@ -265,7 +281,7 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 	public boolean getDefaultBoolean(String key) {
 		try {
 			return Boolean.parseBoolean(getDefaultValue(key, PreferenceType.BOOLEAN));
-		} catch (NumberFormatException e) {
+		} catch (final NumberFormatException e) {
 			return BOOLEAN_DEFAULT_DEFAULT;
 		}
 	}
@@ -274,7 +290,7 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 	public double getDefaultDouble(String key) {
 		try {
 			return Double.parseDouble(getDefaultValue(key, PreferenceType.DOUBLE));
-		} catch (NumberFormatException e) {
+		} catch (final NumberFormatException e) {
 			return DOUBLE_DEFAULT_DEFAULT;
 		}
 	}
@@ -283,7 +299,7 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 	public float getDefaultFloat(String key) {
 		try {
 			return Float.parseFloat(getDefaultValue(key, PreferenceType.FLOAT));
-		} catch (NumberFormatException e) {
+		} catch (final NumberFormatException e) {
 			return FLOAT_DEFAULT_DEFAULT;
 		}
 	}
@@ -292,7 +308,7 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 	public int getDefaultInt(String key) {
 		try {
 			return Integer.parseInt(getDefaultValue(key, PreferenceType.INT));
-		} catch (NumberFormatException e) {
+		} catch (final NumberFormatException e) {
 			return INT_DEFAULT_DEFAULT;
 		}
 	}
@@ -301,7 +317,7 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 	public long getDefaultLong(String key) {
 		try {
 			return Long.parseLong(getDefaultValue(key, PreferenceType.LONG));
-		} catch (NumberFormatException e) {
+		} catch (final NumberFormatException e) {
 			return LONG_DEFAULT_DEFAULT;
 		}
 	}
@@ -310,7 +326,7 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 	public String getDefaultString(String key) {
 		try {
 			return getDefaultValue(key, PreferenceType.STRING);
-		} catch (NumberFormatException e) {
+		} catch (final NumberFormatException e) {
 			return STRING_DEFAULT_DEFAULT;
 		}
 	}
@@ -319,7 +335,7 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 	public boolean getBoolean(String key) {
 		try {
 			return Boolean.parseBoolean(getValue(key, PreferenceType.BOOLEAN));
-		} catch (NumberFormatException e) {
+		} catch (final NumberFormatException e) {
 			return BOOLEAN_DEFAULT_DEFAULT;
 		}
 	}
@@ -328,7 +344,7 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 	public double getDouble(String key) {
 		try {
 			return Double.parseDouble(getValue(key, PreferenceType.DOUBLE));
-		} catch (NumberFormatException e) {
+		} catch (final NumberFormatException e) {
 			return DOUBLE_DEFAULT_DEFAULT;
 		}
 	}
@@ -337,7 +353,7 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 	public float getFloat(String key) {
 		try {
 			return Float.parseFloat(getValue(key, PreferenceType.FLOAT));
-		} catch (NumberFormatException e) {
+		} catch (final NumberFormatException e) {
 			return FLOAT_DEFAULT_DEFAULT;
 		}
 	}
@@ -346,7 +362,7 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 	public int getInt(String key) {
 		try {
 			return Integer.parseInt(getValue(key, PreferenceType.INT));
-		} catch (NumberFormatException e) {
+		} catch (final NumberFormatException e) {
 			return INT_DEFAULT_DEFAULT;
 		}
 	}
@@ -355,7 +371,7 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 	public long getLong(String key) {
 		try {
 			return Long.parseLong(getValue(key, PreferenceType.LONG));
-		} catch (NumberFormatException e) {
+		} catch (final NumberFormatException e) {
 			return LONG_DEFAULT_DEFAULT;
 		}
 	}
@@ -364,7 +380,7 @@ public final class DBPreferenceStore implements IPersistentPreferenceStore {
 	public String getString(String key) {
 		try {
 			return getValue(key, PreferenceType.STRING);
-		} catch (NumberFormatException e) {
+		} catch (final NumberFormatException e) {
 			return STRING_DEFAULT_DEFAULT;
 		}
 	}

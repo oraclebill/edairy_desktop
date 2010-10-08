@@ -21,8 +21,8 @@ public class ModelPersistenceTestCase extends ModelPersistenceBase {
 	public void testSessionFailureBehaviour() throws Exception {
 		Session session = getSessionFactory().openSession();
 		// do something that will fail, then try to do something else..
-		long initialSize = session.createQuery("FROM Dairy").list().size();
-		Dairy invalidDairy = DairyFactory.eINSTANCE.createDairy();
+		final long initialSize = session.createQuery("FROM Dairy").list().size();
+		final Dairy invalidDairy = DairyFactory.eINSTANCE.createDairy();
 
 		Transaction tx = session.beginTransaction();
 		boolean rolledBack = false;
@@ -31,7 +31,7 @@ public class ModelPersistenceTestCase extends ModelPersistenceBase {
 			session.save(invalidDairy);
 			tx.commit();
 			fail("no exception");
-		} catch (org.hibernate.PropertyValueException e) {
+		} catch (final org.hibernate.PropertyValueException e) {
 			tx.rollback();
 			// session.clear();
 			rolledBack = true;
@@ -44,7 +44,7 @@ public class ModelPersistenceTestCase extends ModelPersistenceBase {
 		session = getSessionFactory().openSession();
 		tx = session.beginTransaction();
 		// test starts here...
-		List<Dairy> dairyList = session.createQuery("FROM Dairy").list();
+		final List<Dairy> dairyList = session.createQuery("FROM Dairy").list();
 		assertEquals(initialSize, dairyList.size());
 		tx.commit();
 
@@ -57,7 +57,7 @@ public class ModelPersistenceTestCase extends ModelPersistenceBase {
 		Transaction tx = session.beginTransaction();
 
 		// save some reference data
-		ReferenceAnimalType animalType = TrackingFactory.eINSTANCE.createReferenceAnimalType();
+		final ReferenceAnimalType animalType = TrackingFactory.eINSTANCE.createReferenceAnimalType();
 		animalType.setBreed("Guersney");
 		animalType.setSpecies("Cow");
 

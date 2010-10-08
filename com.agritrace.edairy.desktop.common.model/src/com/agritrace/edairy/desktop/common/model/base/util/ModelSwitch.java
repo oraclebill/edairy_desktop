@@ -6,12 +6,24 @@
  */
 package com.agritrace.edairy.desktop.common.model.base.util;
 
-import com.agritrace.edairy.desktop.common.model.base.*;
-
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+
+import com.agritrace.edairy.desktop.common.model.base.Audited;
+import com.agritrace.edairy.desktop.common.model.base.Company;
+import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
+import com.agritrace.edairy.desktop.common.model.base.Contactable;
+import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
+import com.agritrace.edairy.desktop.common.model.base.ImageEntry;
+import com.agritrace.edairy.desktop.common.model.base.Location;
+import com.agritrace.edairy.desktop.common.model.base.MapLocation;
+import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+import com.agritrace.edairy.desktop.common.model.base.Person;
+import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
+import com.agritrace.edairy.desktop.common.model.base.StatutoryLocation;
+import com.agritrace.edairy.desktop.common.model.base.Versioned;
 
 /**
  * <!-- begin-user-doc -->
@@ -70,7 +82,7 @@ public class ModelSwitch<T> {
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
 		else {
-			List<EClass> eSuperTypes = theEClass.getESuperTypes();
+			final List<EClass> eSuperTypes = theEClass.getESuperTypes();
 			return
 				eSuperTypes.isEmpty() ?
 					defaultCase(theEObject) :
@@ -88,77 +100,105 @@ public class ModelSwitch<T> {
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case ModelPackage.MAP_LOCATION: {
-				MapLocation mapLocation = (MapLocation)theEObject;
+				final MapLocation mapLocation = (MapLocation)theEObject;
 				T result = caseMapLocation(mapLocation);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null) {
+					result = defaultCase(theEObject);
+				}
 				return result;
 			}
 			case ModelPackage.POSTAL_LOCATION: {
-				PostalLocation postalLocation = (PostalLocation)theEObject;
+				final PostalLocation postalLocation = (PostalLocation)theEObject;
 				T result = casePostalLocation(postalLocation);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null) {
+					result = defaultCase(theEObject);
+				}
 				return result;
 			}
 			case ModelPackage.STATUTORY_LOCATION: {
-				StatutoryLocation statutoryLocation = (StatutoryLocation)theEObject;
+				final StatutoryLocation statutoryLocation = (StatutoryLocation)theEObject;
 				T result = caseStatutoryLocation(statutoryLocation);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null) {
+					result = defaultCase(theEObject);
+				}
 				return result;
 			}
 			case ModelPackage.AUDITED: {
-				Audited audited = (Audited)theEObject;
+				final Audited audited = (Audited)theEObject;
 				T result = caseAudited(audited);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null) {
+					result = defaultCase(theEObject);
+				}
 				return result;
 			}
 			case ModelPackage.VERSIONED: {
-				Versioned versioned = (Versioned)theEObject;
+				final Versioned versioned = (Versioned)theEObject;
 				T result = caseVersioned(versioned);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null) {
+					result = defaultCase(theEObject);
+				}
 				return result;
 			}
 			case ModelPackage.CONTACTABLE: {
-				Contactable contactable = (Contactable)theEObject;
+				final Contactable contactable = (Contactable)theEObject;
 				T result = caseContactable(contactable);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null) {
+					result = defaultCase(theEObject);
+				}
 				return result;
 			}
 			case ModelPackage.PERSON: {
-				Person person = (Person)theEObject;
+				final Person person = (Person)theEObject;
 				T result = casePerson(person);
-				if (result == null) result = caseContactable(person);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null) {
+					result = caseContactable(person);
+				}
+				if (result == null) {
+					result = defaultCase(theEObject);
+				}
 				return result;
 			}
 			case ModelPackage.COMPANY: {
-				Company company = (Company)theEObject;
+				final Company company = (Company)theEObject;
 				T result = caseCompany(company);
-				if (result == null) result = caseContactable(company);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null) {
+					result = caseContactable(company);
+				}
+				if (result == null) {
+					result = defaultCase(theEObject);
+				}
 				return result;
 			}
 			case ModelPackage.DESCRIPTIVE_LOCATION: {
-				DescriptiveLocation descriptiveLocation = (DescriptiveLocation)theEObject;
+				final DescriptiveLocation descriptiveLocation = (DescriptiveLocation)theEObject;
 				T result = caseDescriptiveLocation(descriptiveLocation);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null) {
+					result = defaultCase(theEObject);
+				}
 				return result;
 			}
 			case ModelPackage.LOCATION: {
-				Location location = (Location)theEObject;
+				final Location location = (Location)theEObject;
 				T result = caseLocation(location);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null) {
+					result = defaultCase(theEObject);
+				}
 				return result;
 			}
 			case ModelPackage.CONTACT_METHOD: {
-				ContactMethod contactMethod = (ContactMethod)theEObject;
+				final ContactMethod contactMethod = (ContactMethod)theEObject;
 				T result = caseContactMethod(contactMethod);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null) {
+					result = defaultCase(theEObject);
+				}
 				return result;
 			}
 			case ModelPackage.IMAGE_ENTRY: {
-				ImageEntry imageEntry = (ImageEntry)theEObject;
+				final ImageEntry imageEntry = (ImageEntry)theEObject;
 				T result = caseImageEntry(imageEntry);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null) {
+					result = defaultCase(theEObject);
+				}
 				return result;
 			}
 			default: return defaultCase(theEObject);

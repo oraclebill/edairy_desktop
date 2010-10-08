@@ -61,10 +61,10 @@ public class MemberTransactionWidgetController implements WidgetController<Objec
 		if (transactionTable == null) {
 			return objs;
 		}
-		DateFilterUtil<AccountTransaction> filterUtil = new DateFilterUtil<AccountTransaction>(AccountTransaction.class,
+		final DateFilterUtil<AccountTransaction> filterUtil = new DateFilterUtil<AccountTransaction>(AccountTransaction.class,
 				AccountPackage.Literals.TRANSACTION__TRANSACTION_DATE);
 		return filterUtil.filterDate(transactionRecords, startDate, endDate);
-		
+
 //
 //		if ((transactionRecords != null) && !transactionRecords.isEmpty()) {
 //			try {

@@ -6,30 +6,25 @@
  */
 package com.agritrace.edairy.desktop.common.model.tracking.impl;
 
-import com.agritrace.edairy.desktop.common.model.base.Location;
+import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
-
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -165,6 +160,7 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Long getFarmId() {
 		return farmId;
 	}
@@ -174,11 +170,13 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFarmId(Long newFarmId) {
-		Long oldFarmId = farmId;
+		final Long oldFarmId = farmId;
 		farmId = newFarmId;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.FARM__FARM_ID, oldFarmId, farmId));
+		}
 	}
 
 	/**
@@ -186,6 +184,7 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -195,11 +194,13 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
-		String oldName = name;
+		final String oldName = name;
 		name = newName;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.FARM__NAME, oldName, name));
+		}
 	}
 
 	/**
@@ -207,6 +208,7 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<RegisteredAnimal> getAnimals() {
 		if (animals == null) {
 			animals = new EObjectContainmentEList<RegisteredAnimal>(RegisteredAnimal.class, this, TrackingPackage.FARM__ANIMALS);
@@ -219,6 +221,7 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Container> getCans() {
 		if (cans == null) {
 			cans = new EObjectContainmentEList<Container>(Container.class, this, TrackingPackage.FARM__CANS);
@@ -231,6 +234,7 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Location getLocation() {
 		return location;
 	}
@@ -241,11 +245,15 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 * @generated
 	 */
 	public NotificationChain basicSetLocation(Location newLocation, NotificationChain msgs) {
-		Location oldLocation = location;
+		final Location oldLocation = location;
 		location = newLocation;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TrackingPackage.FARM__LOCATION, oldLocation, newLocation);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+			final ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TrackingPackage.FARM__LOCATION, oldLocation, newLocation);
+			if (msgs == null) {
+				msgs = notification;
+			} else {
+				msgs.add(notification);
+			}
 		}
 		return msgs;
 	}
@@ -255,18 +263,24 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLocation(Location newLocation) {
 		if (newLocation != location) {
 			NotificationChain msgs = null;
-			if (location != null)
+			if (location != null) {
 				msgs = ((InternalEObject)location).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TrackingPackage.FARM__LOCATION, null, msgs);
-			if (newLocation != null)
+			}
+			if (newLocation != null) {
 				msgs = ((InternalEObject)newLocation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TrackingPackage.FARM__LOCATION, null, msgs);
+			}
 			msgs = basicSetLocation(newLocation, msgs);
-			if (msgs != null) msgs.dispatch();
+			if (msgs != null) {
+				msgs.dispatch();
+			}
 		}
-		else if (eNotificationRequired())
+		else if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.FARM__LOCATION, newLocation, newLocation));
+		}
 	}
 
 	/**
@@ -274,8 +288,11 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Farmer getOwner() {
-		if (eContainerFeatureID() != TrackingPackage.FARM__OWNER) return null;
+		if (eContainerFeatureID() != TrackingPackage.FARM__OWNER) {
+			return null;
+		}
 		return (Farmer)eContainer();
 	}
 
@@ -294,20 +311,27 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwner(Farmer newOwner) {
-		if (newOwner != eInternalContainer() || (eContainerFeatureID() != TrackingPackage.FARM__OWNER && newOwner != null)) {
-			if (EcoreUtil.isAncestor(this, newOwner))
+		if (newOwner != eInternalContainer() || eContainerFeatureID() != TrackingPackage.FARM__OWNER && newOwner != null) {
+			if (EcoreUtil.isAncestor(this, newOwner)) {
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			}
 			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
+			if (eInternalContainer() != null) {
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newOwner != null)
+			}
+			if (newOwner != null) {
 				msgs = ((InternalEObject)newOwner).eInverseAdd(this, TrackingPackage.FARMER__FARMS, Farmer.class, msgs);
+			}
 			msgs = basicSetOwner(newOwner, msgs);
-			if (msgs != null) msgs.dispatch();
+			if (msgs != null) {
+				msgs.dispatch();
+			}
 		}
-		else if (eNotificationRequired())
+		else if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.FARM__OWNER, newOwner, newOwner));
+		}
 	}
 
 	/**
@@ -315,6 +339,7 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getProfilePhoto() {
 		return profilePhoto;
 	}
@@ -324,11 +349,13 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setProfilePhoto(String newProfilePhoto) {
-		String oldProfilePhoto = profilePhoto;
+		final String oldProfilePhoto = profilePhoto;
 		profilePhoto = newProfilePhoto;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.FARM__PROFILE_PHOTO, oldProfilePhoto, profilePhoto));
+		}
 	}
 
 	/**
@@ -336,6 +363,7 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getNumberOfAnimals() {
 		return getAnimals().size();
 	}
@@ -345,6 +373,7 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getNumberOfContainers() {
 		return getCans().size();
 	}
@@ -358,8 +387,9 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case TrackingPackage.FARM__OWNER:
-				if (eInternalContainer() != null)
+				if (eInternalContainer() != null) {
 					msgs = eBasicRemoveFromContainer(msgs);
+				}
 				return basicSetOwner((Farmer)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -527,9 +557,11 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy()) {
+			return super.toString();
+		}
 
-		StringBuffer result = new StringBuffer(super.toString());
+		final StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (farmId: ");
 		result.append(farmId);
 		result.append(", name: ");

@@ -6,24 +6,24 @@ import java.util.List;
 import org.junit.Test;
 
 import com.agritrace.edairy.desktop.collections.scaledata.beans.ScaleRecord;
-import com.agritrace.edairy.desktop.collections.scaledata.importer.ScaleImporter;
 
 public class ScaleImporterTest {
-	
+
 	@Test
 	public void testImportFile() throws Exception {
-		String inputFileName = "/Users/oraclebill/Development/Projects/edairy_desktop/test-data/fwfiles/E00906072010.TRN";
-		File inputFile = new File(inputFileName );
+		final String inputFileName = "/Users/oraclebill/Development/Projects/edairy_desktop/test-data/fwfiles/E00906072010.TRN";
+		final File inputFile = new File(inputFileName );
 		if ( inputFile.canRead() && inputFile.isFile()) {
-			ScaleImporter scaleImporter = new ScaleImporter(inputFile);
-			List<ScaleRecord> testData = scaleImporter.readRecords().getResults();
+			final ScaleImporter scaleImporter = new ScaleImporter(inputFile);
+			final List<ScaleRecord> testData = scaleImporter.readRecords().getResults();
 			System.out.println( " records: " + testData.size() );
-			for ( ScaleRecord record : testData ) {
+			for ( final ScaleRecord record : testData ) {
 				record.convertValues();
-				if (record.isValid()) 
+				if (record.isValid()) {
 					System.out.println( record ) ;
-				else 
+				} else {
 					System.err.println( record ) ;
+				}
 			}
 			System.out.println( "external count: " + testData.size() );
 			System.out.println( "internal count: " + scaleImporter.getCount() );

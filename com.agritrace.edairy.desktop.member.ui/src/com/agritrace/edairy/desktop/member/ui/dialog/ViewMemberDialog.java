@@ -19,7 +19,7 @@ public class ViewMemberDialog extends BaseDialogView {
 	public ViewMemberDialog(@Named("current") Shell shell, ViewMemberDialogController controller) {
 		super(shell, controller);
 	}
-	
+
 	// TODO: This kind of weird cross-inheritance really should be fixed.
 	protected ViewMemberDialog(@Named("current") Shell shell, AddMemberDialogController controller) {
 		super(shell, controller);

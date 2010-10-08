@@ -6,17 +6,15 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -139,6 +137,7 @@ public class CollectionSessionImpl extends EObjectImpl implements CollectionSess
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Long getId() {
 		return id;
 	}
@@ -148,11 +147,13 @@ public class CollectionSessionImpl extends EObjectImpl implements CollectionSess
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setId(Long newId) {
-		Long oldId = id;
+		final Long oldId = id;
 		id = newId;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_SESSION__ID, oldId, id));
+		}
 	}
 
 	/**
@@ -160,6 +161,7 @@ public class CollectionSessionImpl extends EObjectImpl implements CollectionSess
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getCode() {
 		return code;
 	}
@@ -169,11 +171,13 @@ public class CollectionSessionImpl extends EObjectImpl implements CollectionSess
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCode(String newCode) {
-		String oldCode = code;
+		final String oldCode = code;
 		code = newCode;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_SESSION__CODE, oldCode, code));
+		}
 	}
 
 	/**
@@ -181,6 +185,7 @@ public class CollectionSessionImpl extends EObjectImpl implements CollectionSess
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -190,11 +195,13 @@ public class CollectionSessionImpl extends EObjectImpl implements CollectionSess
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDescription(String newDescription) {
-		String oldDescription = description;
+		final String oldDescription = description;
 		description = newDescription;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_SESSION__DESCRIPTION, oldDescription, description));
+		}
 	}
 
 	/**
@@ -202,6 +209,7 @@ public class CollectionSessionImpl extends EObjectImpl implements CollectionSess
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Date getTimeOfDay() {
 		return timeOfDay;
 	}
@@ -211,11 +219,13 @@ public class CollectionSessionImpl extends EObjectImpl implements CollectionSess
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTimeOfDay(Date newTimeOfDay) {
-		Date oldTimeOfDay = timeOfDay;
+		final Date oldTimeOfDay = timeOfDay;
 		timeOfDay = newTimeOfDay;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_SESSION__TIME_OF_DAY, oldTimeOfDay, timeOfDay));
+		}
 	}
 
 	/**
@@ -313,9 +323,11 @@ public class CollectionSessionImpl extends EObjectImpl implements CollectionSess
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy()) {
+			return super.toString();
+		}
 
-		StringBuffer result = new StringBuffer(super.toString());
+		final StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (id: ");
 		result.append(id);
 		result.append(", code: ");

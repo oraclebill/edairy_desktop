@@ -19,8 +19,8 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.controls.LiveStockFilterWidget;
 
 public class LivestockListView extends AbstractDirectoryView {
-	
-	
+
+
 	public static final String CONTAINER_GROUP = "Containers";
 	public static final int DEFAULT_LABEL_WIDTH = 110;
 	public static final String FILTER_GROUP_FARM_LOOKUP = "Show conatiners :";
@@ -28,7 +28,7 @@ public class LivestockListView extends AbstractDirectoryView {
 	public static final String FILTER_GROUP_TEXT = "Search for a Livestock";
 
 	public static final String ID = LivestockListView.class.getName();
-	
+
 	public LivestockListView() {
 	}
 

@@ -29,9 +29,9 @@ import com.google.inject.name.Named;
 
 /**
  * Employee list dialog to add/view/edit customer
- * 
+ *
  * @author Hui(Spark) Wan
- * 
+ *
  */
 public class EmployeeEditDialog extends RecordDialog<Employee> {
 	@Inject
@@ -42,11 +42,11 @@ public class EmployeeEditDialog extends RecordDialog<Employee> {
 	@Override
 	protected void buildWorkArea(Composite parent) {
 
-		Composite comonComp = UIControlsFactory.createComposite(parent);
-		comonComp.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));		
+		final Composite comonComp = UIControlsFactory.createComposite(parent);
+		comonComp.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 		comonComp.setLayoutData(GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).create());
 		comonComp.setLayout(new GridLayout(2, false));
-		
+
 		createEmployeeInfoPanel(comonComp).setLayoutData(GridDataFactory.fillDefaults().align(SWT.FILL, SWT.TOP).grab(true, false).create());
 
 		createPhotoPanel(comonComp).setLayoutData(GridDataFactory.fillDefaults().create());
@@ -58,7 +58,7 @@ public class EmployeeEditDialog extends RecordDialog<Employee> {
 		final ProfilePhotoComposite photoWidget = new ProfilePhotoComposite(parent, SWT.NONE);
 //		photoWidget.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 		addUIControl(photoWidget, "profile-photo-widget");
-		return photoWidget;		
+		return photoWidget;
 	}
 
 	protected Composite createEmployeeInfoPanel(final Composite comonComp) {
@@ -67,7 +67,7 @@ public class EmployeeEditDialog extends RecordDialog<Employee> {
 		employeeInfo.setLayout(GridLayoutFactory.swtDefaults().margins(5, 5).numColumns(2).create());
 
 		final GridDataFactory factory = GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true);
-		
+
 		UIControlsFactory.createLabel(employeeInfo, "Employee No.");
 		final Text txtId = UIControlsFactory.createText(employeeInfo);
 		txtId.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
@@ -103,13 +103,13 @@ public class EmployeeEditDialog extends RecordDialog<Employee> {
 		operatorCode.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		factory.copy().applyTo(operatorCode);
 		addUIControl(operatorCode, EmployeeBindingConstants.BIND_ID_OPR_CODE);
-		
+
 		UIControlsFactory.createLabel(employeeInfo, "Start Date");
 		final DateTime startDate = UIControlsFactory.createDate(employeeInfo, SWT.MEDIUM|SWT.BORDER);
 		startDate.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		factory.copy().applyTo(startDate);
 		addUIControl(startDate, EmployeeBindingConstants.BIND_ID_SINCE);
-		
+
 		UIControlsFactory.createLabel(employeeInfo, "Security Role");
 		final CCombo securityRole = UIControlsFactory.createCCombo(employeeInfo);
 		securityRole.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
@@ -133,12 +133,12 @@ public class EmployeeEditDialog extends RecordDialog<Employee> {
 		familyName.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 2, 1));
 		factory.copy().applyTo(localEnabled);
 		addUIControl(localEnabled, EmployeeBindingConstants.BIND_ID_LOCAL_ENABLED);
-		
+
 		return employeeInfo;
 	}
 
 	private Composite createContactGroup(Composite parent) {
-		
+
 		final Group contactGroup = UIControlsFactory.createGroup(parent, "Company Contact");
 //		contactGroup.setLayoutData(GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1).create());
 		contactGroup.setLayout(GridLayoutFactory.swtDefaults().numColumns(2).create());
@@ -149,7 +149,7 @@ public class EmployeeEditDialog extends RecordDialog<Employee> {
 		final CTabItem commsTab = new CTabItem(locationGroup.getTabFolder(), SWT.NONE);
 		commsTab.setText("Contact Info");
 		final ContactMethodsGroup commGroup = new ContactMethodsGroup(locationGroup.getTabFolder());
-		SWTBindingPropertyLocator.getInstance().setBindingProperty(commGroup, "contact-methods");		
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(commGroup, "contact-methods");
 		commsTab.setControl(commGroup);
 		return contactGroup;
 

@@ -45,10 +45,10 @@ import com.google.inject.TypeLiteral;
 import com.google.inject.name.Named;
 
 public class EDairyModule extends AbstractModule {
-	private BundleContext context;
-	
+	private final BundleContext context;
+
 	private static final List<Class<? extends IController>> CONTROLLERS = new ArrayList<Class<? extends IController>>();
-	
+
 	// Add any directory controllers that require injection here.
 	static {
 		CONTROLLERS.add(AnimalHealthRequestViewController.class);
@@ -72,7 +72,7 @@ public class EDairyModule extends AbstractModule {
 		CONTROLLERS.add(VehicleLogDirectoryViewController.class);
 		FinanceModule.contributeControllers(CONTROLLERS);
 	}
-	
+
 	public EDairyModule(BundleContext context) {
 		this.context = context;
 	}
@@ -86,19 +86,19 @@ public class EDairyModule extends AbstractModule {
 		install(new FinanceModule());
 		install(new HomeModule());
 		install(new BirtModule());
-		
-		Map<Class<? extends IController>, Provider<? extends IController>> map =
+
+		final Map<Class<? extends IController>, Provider<? extends IController>> map =
 			new HashMap<Class<? extends IController>, Provider<? extends IController>>();
-		
-		for (Class<? extends IController> klass: CONTROLLERS) {
+
+		for (final Class<? extends IController> klass: CONTROLLERS) {
 			map.put(klass, getProvider(klass));
 		}
-		
+
 		bind(new TypeLiteral<Map<Class<? extends IController>, Provider<? extends IController>>>() {}).toInstance(map);
 		requestStaticInjection(EdairySplashHandler.class);
 		requestStaticInjection(NodeFactory.class);
 	}
-	
+
 	@Provides @Named("current")
 	protected Shell getCurrentShell()
 	{

@@ -11,7 +11,7 @@ import org.eclipse.core.runtime.Status;
 public class PhoneNumberValidatiionRule implements IValidator {
 
 	public static final int MIN_CHARS_AMOUNT = 7;
-	
+
 	@Override
 	public IStatus validate(Object value) {
 		if (value instanceof String) {
@@ -37,16 +37,16 @@ public class PhoneNumberValidatiionRule implements IValidator {
 			return false;
 		}
 		int count = 0;
-		char[] chars = new char[value.length()];
+		final char[] chars = new char[value.length()];
 		value.getChars(0, value.length(), chars, 0);
-		
-		for(char c:chars){
+
+		for(final char c:chars){
 			if(c >='0' && c<='9'){
 				count++;
 			}
 		}
-		
+
 		return count >= MIN_CHARS_AMOUNT;
 	}
-	
+
 }

@@ -55,7 +55,7 @@ public class LocationProfileWidgetController implements WidgetController<Locatio
 
 	@Override
 	public void setInputModel(Location model) {
-		this.location = (Location) model;
+		this.location = model;
 		if (controller != null) {
 			updateBinding();
 		}

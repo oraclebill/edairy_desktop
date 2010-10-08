@@ -6,12 +6,17 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.account.util;
 
-import com.agritrace.edairy.desktop.common.model.dairy.account.*;
-
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+
+import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AdjustmentTransaction;
+import com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint;
+import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
 
 /**
  * <!-- begin-user-doc -->
@@ -70,7 +75,7 @@ public class AccountSwitch<T> {
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
 		else {
-			List<EClass> eSuperTypes = theEClass.getESuperTypes();
+			final List<EClass> eSuperTypes = theEClass.getESuperTypes();
 			return
 				eSuperTypes.isEmpty() ?
 					defaultCase(theEObject) :
@@ -88,35 +93,49 @@ public class AccountSwitch<T> {
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case AccountPackage.ACCOUNT: {
-				Account account = (Account)theEObject;
+				final Account account = (Account)theEObject;
 				T result = caseAccount(account);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null) {
+					result = defaultCase(theEObject);
+				}
 				return result;
 			}
 			case AccountPackage.TRANSACTION: {
-				Transaction transaction = (Transaction)theEObject;
+				final Transaction transaction = (Transaction)theEObject;
 				T result = caseTransaction(transaction);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null) {
+					result = defaultCase(theEObject);
+				}
 				return result;
 			}
 			case AccountPackage.ACCOUNT_TRANSACTION: {
-				AccountTransaction accountTransaction = (AccountTransaction)theEObject;
+				final AccountTransaction accountTransaction = (AccountTransaction)theEObject;
 				T result = caseAccountTransaction(accountTransaction);
-				if (result == null) result = caseTransaction(accountTransaction);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null) {
+					result = caseTransaction(accountTransaction);
+				}
+				if (result == null) {
+					result = defaultCase(theEObject);
+				}
 				return result;
 			}
 			case AccountPackage.ADJUSTMENT_TRANSACTION: {
-				AdjustmentTransaction adjustmentTransaction = (AdjustmentTransaction)theEObject;
+				final AdjustmentTransaction adjustmentTransaction = (AdjustmentTransaction)theEObject;
 				T result = caseAdjustmentTransaction(adjustmentTransaction);
-				if (result == null) result = caseTransaction(adjustmentTransaction);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null) {
+					result = caseTransaction(adjustmentTransaction);
+				}
+				if (result == null) {
+					result = defaultCase(theEObject);
+				}
 				return result;
 			}
 			case AccountPackage.BALANCE_POINT: {
-				BalancePoint balancePoint = (BalancePoint)theEObject;
+				final BalancePoint balancePoint = (BalancePoint)theEObject;
 				T result = caseBalancePoint(balancePoint);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null) {
+					result = defaultCase(theEObject);
+				}
 				return result;
 			}
 			default: return defaultCase(theEObject);

@@ -42,13 +42,13 @@ public class DateRangeSearchWidget {
 
 		final Label startLabel = UIControlsFactory.createLabel(composite, "Start");
 		GridDataFactory.defaultsFor(startLabel).applyTo(startLabel);
-		
+
 		final DateTime startDateText = UIControlsFactory.createDate(composite, SWT.READ_ONLY | SWT.BORDER, startId);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(startDateText);
 
 		final Label endLabel = UIControlsFactory.createLabel(composite, "End");
 		GridDataFactory.defaultsFor(endLabel).applyTo(endLabel);
-		
+
 		final DateTime endDateText = UIControlsFactory.createDate(composite, SWT.READ_ONLY | SWT.BORDER, endId);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(endDateText);
 	}

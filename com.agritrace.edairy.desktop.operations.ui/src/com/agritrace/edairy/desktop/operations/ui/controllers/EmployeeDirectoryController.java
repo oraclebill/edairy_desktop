@@ -96,7 +96,7 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 
 	/**
 	 * Create new model while creating a new record
-	 * 
+	 *
 	 * @return
 	 */
 	@Override
@@ -111,13 +111,13 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 	@Override
 	protected List<Employee> getFilteredResult() {
 		final List<Employee> filtered = new ArrayList<Employee>();
-		
+
 		for (final Employee e : allEmployees) {
 			String memberName = "";
 			if (nameSearchText != null && !(nameSearchText.getText().trim().length() == 0)) {
 				memberName = nameSearchText.getText();
 			}
-			String matchText = e.getGivenName() + " " + e.getFamilyName() + " "	+ e.getAdditionalNames();
+			final String matchText = e.getGivenName() + " " + e.getFamilyName() + " "	+ e.getAdditionalNames();
 			if (matchText.toUpperCase().contains(memberName.toUpperCase())
 					&& MatchUtil.matchEquals(searchBean.getDepartment(),e.getDepartment())
 					&& MatchUtil.matchContains(searchBean.getPosition(), e.getJobFunction() )
@@ -137,14 +137,14 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 
 	private void handleException(Throwable e) {
 		String message;
-		
+
 //		if (e instanceof ConstraintViolationException) {
-		if (e.getClass().getName().startsWith("org.hibernate")) {  // TODO: replace hibernate exceptions with domain specific.. 
+		if (e.getClass().getName().startsWith("org.hibernate")) {  // TODO: replace hibernate exceptions with domain specific..
 			message = "Could not save the employee record. An employee with this username already exists.";
 		} else {
 			message = "Unhandled exception: " + e.getMessage();
 		}
-		
+
 		MessageDialog.openError(getShell(), "Error", message);
 	}
 
@@ -153,7 +153,7 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 		try {
 			localDairy.getEmployees().add(newEntity);
 			dairyRepo.save(localDairy);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 			handleException(e.getCause());
 		}
@@ -163,7 +163,7 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 	protected void updateEntity(Employee updateableEntity) {
 		try {
 			dairyRepo.save(updateableEntity);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 			handleException(e.getCause());
 		}

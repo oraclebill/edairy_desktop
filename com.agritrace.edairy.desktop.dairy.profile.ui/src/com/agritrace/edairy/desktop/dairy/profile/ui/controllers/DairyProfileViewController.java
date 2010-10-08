@@ -8,11 +8,8 @@ import java.util.List;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.core.marker.ValidationTime;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
-import org.eclipse.riena.ui.ridgets.IEditableRidget;
 import org.eclipse.riena.ui.ridgets.INumericTextRidget;
-import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
-import org.eclipse.riena.ui.ridgets.IInfoFlyoutRidget.InfoFlyoutData;
 import org.eclipse.riena.ui.ridgets.listener.FocusEvent;
 import org.eclipse.riena.ui.ridgets.listener.IFocusListener;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
@@ -34,9 +31,9 @@ import com.google.inject.Inject;
 
 /**
  * Dairy Profile view controller
- * 
+ *
  * @author Bill Jones
- * 
+ *
  */
 @PermissionRequired(Permission.VIEW_DAIRY_PROFILE)
 public class DairyProfileViewController extends SubModuleController {
@@ -44,8 +41,8 @@ public class DairyProfileViewController extends SubModuleController {
 		private void condenseContacts() {
 			// TODO: this is really not safe.. need to lock dairy as well?
 			synchronized (localDairy.getContactMethods()) {
-				List<ContactMethod> emptyMethods = new LinkedList<ContactMethod>();
-				for (ContactMethod method : localDairy.getContactMethods()) {
+				final List<ContactMethod> emptyMethods = new LinkedList<ContactMethod>();
+				for (final ContactMethod method : localDairy.getContactMethods()) {
 					if (method.getCmValue() == null || method.getCmValue().trim().length() == 0) {
 						emptyMethods.add(method);
 					}
@@ -53,7 +50,7 @@ public class DairyProfileViewController extends SubModuleController {
 				localDairy.getContactMethods().removeAll(emptyMethods);
 			}
 		}
-		
+
 		private void update() {
 			try {
 				condenseContacts();
@@ -61,7 +58,7 @@ public class DairyProfileViewController extends SubModuleController {
 				dairyRepository.updateDairy();
 				updateBindings();
 				// getInfoFlyout().addInfo(new InfoFlyoutData("message", "Dairy profile updated successfully."));
-			} catch (Exception e) {
+			} catch (final Exception e) {
 //				getInfoFlyout().addInfo(new InfoFlyoutData("message", "Error updating dairy profile!"));
 			}
 		}
@@ -96,7 +93,7 @@ public class DairyProfileViewController extends SubModuleController {
 	// private IActionRidget cancelAction;
 	private IContactMethodsGroupRidget contactsGroup;
 	private final IDairyRepository dairyRepository;
-	private Dairy localDairy;
+	private final Dairy localDairy;
 
 	private LocationProfileWidgetController locationController;
 	private int memberCount;
@@ -128,7 +125,7 @@ public class DairyProfileViewController extends SubModuleController {
 
 	/**
 	 * Constructor
-	 * 
+	 *
 	 */
 	@Inject
 	public DairyProfileViewController(final IDairyRepository dairyRepository) {
@@ -171,9 +168,9 @@ public class DairyProfileViewController extends SubModuleController {
 
 	/**
 	 * Get member count for UI.
-	 * 
+	 *
 	 * TODO: for now, we fake it..
-	 * 
+	 *
 	 * @return
 	 */
 	public int getMemberCount() {
@@ -186,7 +183,7 @@ public class DairyProfileViewController extends SubModuleController {
 
 	/**
 	 * Configure teh button panel.
-	 * 
+	 *
 	 */
 	/*
 	private void configureButtonsPanel() {
@@ -199,10 +196,10 @@ public class DairyProfileViewController extends SubModuleController {
 
 	/**
 	 * Configures the ridgets in teh upper panel.
-	 * 
+	 *
 	 */
 	private void configureInfoPanelRidgets() {
-		final DairyProfileSaveAction changeListener = new DairyProfileSaveAction();
+		new DairyProfileSaveAction();
 
 		// top panel
 		txtID = getRidget(ITextRidget.class, DairyProfileViewWidgetID.DAIRY_ID);
@@ -245,7 +242,7 @@ public class DairyProfileViewController extends SubModuleController {
 
 	/**
 	 * Initialize bindings (bind to model).
-	 * 
+	 *
 	 */
 	private void initBindings() {
 		// info panel
@@ -257,7 +254,7 @@ public class DairyProfileViewController extends SubModuleController {
 
 		txtMANAGER_NAME.bindToModel(localDairy, "managerName");
 		txtESTABLISHED_DATE.bindToModel(localDairy, "establishedDate");
-		txtMEMBER_COUNT.bindToModel(this, "memberCount");		
+		txtMEMBER_COUNT.bindToModel(this, "memberCount");
 		//setMemberCount(localDairy.getMemberships().size());
 		// registration panel
 		txtLEGAL_NAME.bindToModel(localDairy, "legalName");
@@ -274,16 +271,16 @@ public class DairyProfileViewController extends SubModuleController {
 
 	/**
 	 * Update the info displayed from the model.
-	 * 
+	 *
 	 */
 	private void updateBindings() {
 		updateAllRidgetsFromModel();
 		locationController.updateBinding();
 	}
-	
+
 	private void addDataChangeListener() {
 		final DairyProfileSaveAction changeListener = new DairyProfileSaveAction();
-		
+
 		txtNAME.addFocusListener(changeListener);
 		txtPHONE.addFocusListener(changeListener);
 		txtPUBLIC_DESCRIPTION.addFocusListener(changeListener);
@@ -296,10 +293,10 @@ public class DairyProfileViewController extends SubModuleController {
 		txtFEDERAL_PIN.addFocusListener(changeListener);
 		txtLIC_EFFECTIVE_DATE.addFocusListener(changeListener);
 		txtLIC_EFFECTIVE_DATE.addFocusListener(changeListener);
-		
+
 		txtESTABLISHED_DATE.addPropertyChangeListener("date", changeListener);
 		txtLIC_EFFECTIVE_DATE.addPropertyChangeListener("date", changeListener);
-		txtLIC_EXPIRATION_DATE.addPropertyChangeListener("date", changeListener);		
+		txtLIC_EXPIRATION_DATE.addPropertyChangeListener("date", changeListener);
 
 		locationController.addDataChangeListener(changeListener);
 		contactsGroup.addDataChangeListener(changeListener);

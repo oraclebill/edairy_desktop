@@ -6,20 +6,18 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
+import java.util.Date;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 import com.agritrace.edairy.desktop.common.model.dairy.Asset;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
-
-import java.util.Date;
-
-import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -353,6 +351,7 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Long getVehicleId() {
 		return vehicleId;
 	}
@@ -362,11 +361,13 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setVehicleId(Long newVehicleId) {
-		Long oldVehicleId = vehicleId;
+		final Long oldVehicleId = vehicleId;
 		vehicleId = newVehicleId;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__VEHICLE_ID, oldVehicleId, vehicleId));
+		}
 	}
 
 	/**
@@ -374,6 +375,7 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getRegistrationNumber() {
 		return registrationNumber;
 	}
@@ -383,11 +385,13 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRegistrationNumber(String newRegistrationNumber) {
-		String oldRegistrationNumber = registrationNumber;
+		final String oldRegistrationNumber = registrationNumber;
 		registrationNumber = newRegistrationNumber;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__REGISTRATION_NUMBER, oldRegistrationNumber, registrationNumber));
+		}
 	}
 
 	/**
@@ -395,6 +399,7 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getType() {
 		return type;
 	}
@@ -404,11 +409,13 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(String newType) {
-		String oldType = type;
+		final String oldType = type;
 		type = newType;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__TYPE, oldType, type));
+		}
 	}
 
 	/**
@@ -416,6 +423,7 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getMake() {
 		return make;
 	}
@@ -425,11 +433,13 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMake(String newMake) {
-		String oldMake = make;
+		final String oldMake = make;
 		make = newMake;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__MAKE, oldMake, make));
+		}
 	}
 
 	/**
@@ -437,6 +447,7 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getModel() {
 		return model;
 	}
@@ -446,11 +457,13 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setModel(String newModel) {
-		String oldModel = model;
+		final String oldModel = model;
 		model = newModel;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__MODEL, oldModel, model));
+		}
 	}
 
 	/**
@@ -458,6 +471,7 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getEngineNumber() {
 		return engineNumber;
 	}
@@ -467,11 +481,13 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEngineNumber(String newEngineNumber) {
-		String oldEngineNumber = engineNumber;
+		final String oldEngineNumber = engineNumber;
 		engineNumber = newEngineNumber;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__ENGINE_NUMBER, oldEngineNumber, engineNumber));
+		}
 	}
 
 	/**
@@ -479,6 +495,7 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getChassisNumber() {
 		return chassisNumber;
 	}
@@ -488,11 +505,13 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setChassisNumber(String newChassisNumber) {
-		String oldChassisNumber = chassisNumber;
+		final String oldChassisNumber = chassisNumber;
 		chassisNumber = newChassisNumber;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__CHASSIS_NUMBER, oldChassisNumber, chassisNumber));
+		}
 	}
 
 	/**
@@ -500,6 +519,7 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLogBookNumber() {
 		return logBookNumber;
 	}
@@ -509,11 +529,13 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLogBookNumber(String newLogBookNumber) {
-		String oldLogBookNumber = logBookNumber;
+		final String oldLogBookNumber = logBookNumber;
 		logBookNumber = newLogBookNumber;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__LOG_BOOK_NUMBER, oldLogBookNumber, logBookNumber));
+		}
 	}
 
 	/**
@@ -521,6 +543,7 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getInsurancePolicyNumber() {
 		return insurancePolicyNumber;
 	}
@@ -530,11 +553,13 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInsurancePolicyNumber(String newInsurancePolicyNumber) {
-		String oldInsurancePolicyNumber = insurancePolicyNumber;
+		final String oldInsurancePolicyNumber = insurancePolicyNumber;
 		insurancePolicyNumber = newInsurancePolicyNumber;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__INSURANCE_POLICY_NUMBER, oldInsurancePolicyNumber, insurancePolicyNumber));
+		}
 	}
 
 	/**
@@ -542,6 +567,7 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Date getInsuranceExpirationDate() {
 		return insuranceExpirationDate;
 	}
@@ -551,11 +577,13 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInsuranceExpirationDate(Date newInsuranceExpirationDate) {
-		Date oldInsuranceExpirationDate = insuranceExpirationDate;
+		final Date oldInsuranceExpirationDate = insuranceExpirationDate;
 		insuranceExpirationDate = newInsuranceExpirationDate;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__INSURANCE_EXPIRATION_DATE, oldInsuranceExpirationDate, insuranceExpirationDate));
+		}
 	}
 
 	/**
@@ -563,6 +591,7 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDominantColour() {
 		return dominantColour;
 	}
@@ -572,11 +601,13 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDominantColour(String newDominantColour) {
-		String oldDominantColour = dominantColour;
+		final String oldDominantColour = dominantColour;
 		dominantColour = newDominantColour;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__DOMINANT_COLOUR, oldDominantColour, dominantColour));
+		}
 	}
 
 	/**
@@ -584,6 +615,7 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public double getCapacityInTonnes() {
 		return capacityInTonnes;
 	}
@@ -593,11 +625,13 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCapacityInTonnes(double newCapacityInTonnes) {
-		double oldCapacityInTonnes = capacityInTonnes;
+		final double oldCapacityInTonnes = capacityInTonnes;
 		capacityInTonnes = newCapacityInTonnes;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__CAPACITY_IN_TONNES, oldCapacityInTonnes, capacityInTonnes));
+		}
 	}
 
 	/**
@@ -605,6 +639,7 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Integer getYear() {
 		return year;
 	}
@@ -614,11 +649,13 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setYear(Integer newYear) {
-		Integer oldYear = year;
+		final Integer oldYear = year;
 		year = newYear;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__YEAR, oldYear, year));
+		}
 	}
 
 	/**
@@ -626,13 +663,15 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Employee getDriver() {
 		if (driver != null && driver.eIsProxy()) {
-			InternalEObject oldDriver = (InternalEObject)driver;
+			final InternalEObject oldDriver = (InternalEObject)driver;
 			driver = (Employee)eResolveProxy(oldDriver);
 			if (driver != oldDriver) {
-				if (eNotificationRequired())
+				if (eNotificationRequired()) {
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.VEHICLE__DRIVER, oldDriver, driver));
+				}
 			}
 		}
 		return driver;
@@ -652,11 +691,13 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDriver(Employee newDriver) {
-		Employee oldDriver = driver;
+		final Employee oldDriver = driver;
 		driver = newDriver;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__DRIVER, oldDriver, driver));
+		}
 	}
 
 	/**
@@ -664,13 +705,15 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Asset getAssetInfo() {
 		if (assetInfo != null && assetInfo.eIsProxy()) {
-			InternalEObject oldAssetInfo = (InternalEObject)assetInfo;
+			final InternalEObject oldAssetInfo = (InternalEObject)assetInfo;
 			assetInfo = (Asset)eResolveProxy(oldAssetInfo);
 			if (assetInfo != oldAssetInfo) {
-				if (eNotificationRequired())
+				if (eNotificationRequired()) {
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.VEHICLE__ASSET_INFO, oldAssetInfo, assetInfo));
+				}
 			}
 		}
 		return assetInfo;
@@ -690,11 +733,13 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAssetInfo(Asset newAssetInfo) {
-		Asset oldAssetInfo = assetInfo;
+		final Asset oldAssetInfo = assetInfo;
 		assetInfo = newAssetInfo;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.VEHICLE__ASSET_INFO, oldAssetInfo, assetInfo));
+		}
 	}
 
 	/**
@@ -732,10 +777,14 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 			case DairyPackage.VEHICLE__YEAR:
 				return getYear();
 			case DairyPackage.VEHICLE__DRIVER:
-				if (resolve) return getDriver();
+				if (resolve) {
+					return getDriver();
+				}
 				return basicGetDriver();
 			case DairyPackage.VEHICLE__ASSET_INFO:
-				if (resolve) return getAssetInfo();
+				if (resolve) {
+					return getAssetInfo();
+				}
 				return basicGetAssetInfo();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -904,9 +953,11 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy()) {
+			return super.toString();
+		}
 
-		StringBuffer result = new StringBuffer(super.toString());
+		final StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (vehicleId: ");
 		result.append(vehicleId);
 		result.append(", registrationNumber: ");

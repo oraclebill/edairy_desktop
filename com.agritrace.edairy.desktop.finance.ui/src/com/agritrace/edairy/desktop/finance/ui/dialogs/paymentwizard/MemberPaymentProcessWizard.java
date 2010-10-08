@@ -8,9 +8,9 @@ import com.google.inject.Inject;
 
 public class MemberPaymentProcessWizard extends Wizard {
 
-	private PWSelectPaymentPeriod periodPage;
-	private PWPaymentRate ratePage;
-	private PWPaymentComplete reviewAndCompletePage;
+	private final PWSelectPaymentPeriod periodPage;
+	private final PWPaymentRate ratePage;
+	private final PWPaymentComplete reviewAndCompletePage;
 
 	@Inject
 	public MemberPaymentProcessWizard(PWSelectPaymentPeriod periodPage, PWPaymentRate ratePage,
@@ -32,7 +32,7 @@ public class MemberPaymentProcessWizard extends Wizard {
 
 	@Override
 	public IWizardPage getNextPage(IWizardPage page) {
-		IWizardPage newPage = super.getNextPage(page);
+		final IWizardPage newPage = super.getNextPage(page);
 		if (page.getName().equals("previewAndComplete")) {
 
 		}

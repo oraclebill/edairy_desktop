@@ -32,7 +32,7 @@ public class MilkCollectionDetailLogFilterPanel extends Composite {
 
 	/**
 	 * Create the composite.
-	 * 
+	 *
 	 * @param parent
 	 * @param style
 	 */

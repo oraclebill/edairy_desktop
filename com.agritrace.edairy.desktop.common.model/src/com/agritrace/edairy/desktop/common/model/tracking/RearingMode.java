@@ -152,7 +152,7 @@ public enum RearingMode implements Enumerator {
 	 */
 	public static RearingMode get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			RearingMode result = VALUES_ARRAY[i];
+			final RearingMode result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -168,7 +168,7 @@ public enum RearingMode implements Enumerator {
 	 */
 	public static RearingMode getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			RearingMode result = VALUES_ARRAY[i];
+			final RearingMode result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -230,6 +230,7 @@ public enum RearingMode implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getValue() {
 	  return value;
 	}
@@ -239,6 +240,7 @@ public enum RearingMode implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 	  return name;
 	}
@@ -248,6 +250,7 @@ public enum RearingMode implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLiteral() {
 	  return literal;
 	}
@@ -262,5 +265,5 @@ public enum RearingMode implements Enumerator {
 	public String toString() {
 		return literal;
 	}
-	
+
 } //RearingMode

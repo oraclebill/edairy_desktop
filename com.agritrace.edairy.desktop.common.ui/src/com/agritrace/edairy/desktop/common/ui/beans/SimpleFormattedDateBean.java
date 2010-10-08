@@ -56,7 +56,7 @@ public class SimpleFormattedDateBean extends AbstractBean {
 			dateFormat = new SimpleDateFormat(STD_DATE_FORMAT);
 		}
 		try {
-			if ((formattedDate == null) || formattedDate.trim().equals("")) {
+			if (formattedDate == null || formattedDate.trim().equals("")) {
 				this.formattedDate = dateFormat.format(new Date());
 			} else {
 				date = dateFormat.parse(formattedDate);

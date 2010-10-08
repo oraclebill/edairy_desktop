@@ -18,9 +18,9 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 
 /**
  * Create a dairy configuration by importing excel data in standard format.
- * 
+ *
  * @author bjones
- * 
+ *
  */
 public class CollectionsImportTool extends AbstractImportTool {
 	// TODO - untested
@@ -36,12 +36,12 @@ public class CollectionsImportTool extends AbstractImportTool {
 	public static final int CENTER_NUMBER = BASE + 8;
 	public static final int MEMBER_NUMBER = BASE + 9;
 	public static final int QUANTITY = BASE + 10;
-	public static final int NUM_CANS = BASE + 11;  // TODO: confirm.. (was NUM_CANS) 
-	public static final int SCALE_TOTAL = BASE + 12;  // TODO: confirm.. (was NUM_CANS) 
+	public static final int NUM_CANS = BASE + 11;  // TODO: confirm.. (was NUM_CANS)
+	public static final int SCALE_TOTAL = BASE + 12;  // TODO: confirm.. (was NUM_CANS)
 	public static final int ATTR_COUNT = BASE + 13;
 
 
-	static final Entry[] fieldMap = { 
+	static final Entry[] fieldMap = {
 //		new Entry(TRANSACTION_DATE , DairyPackage.Literals.COLLECTION_GROUP__JOURNAL_DATE ), 	// PAGE ATTR
 		new Entry(TRANSACTION_TIME , DairyPackage.Literals.SCALE_IMPORT_RECORD__COLLECTION_TIME ),
 //		new Entry(DAIRY_CODE , DairyPackage.Literals.NO_MATCHING_ATTRIBUTE ),				// NO MATCHING ATTRIBUTE IN MODEL
@@ -50,7 +50,7 @@ public class CollectionsImportTool extends AbstractImportTool {
 //		new Entry(TRIP_NUMBER , DairyPackage.Literals.NO_MATCHING_ATTRIBUTE ),				// NO MATCHING ATTRIBUTE IN MODEL
 //		new Entry(SESSION_CODE , DairyPackage.Literals.COLLECTION_GROUP__SESSION ), 	// PAGE ATTR
 //		new Entry(ROUTE_NUMBER , DairyPackage.Literals.COLLECTION_GROUP__ROUTE ),	// PAGE ATTR
-		new Entry(CENTER_NUMBER , DairyPackage.Literals.SCALE_IMPORT_RECORD__CENTER_NUMBER ),		
+		new Entry(CENTER_NUMBER , DairyPackage.Literals.SCALE_IMPORT_RECORD__CENTER_NUMBER ),
 		new Entry(MEMBER_NUMBER , DairyPackage.Literals.COLLECTION_JOURNAL_LINE__RECORDED_MEMBER ),
 		new Entry(QUANTITY , DairyPackage.Literals.COLLECTION_JOURNAL_LINE__QUANTITY ),
 		new Entry(NUM_CANS , DairyPackage.Literals.SCALE_IMPORT_RECORD__NUM_CANS ),
@@ -106,7 +106,7 @@ public class CollectionsImportTool extends AbstractImportTool {
 	@Override
 	protected void doImportComplete(int okCount, int failCount) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

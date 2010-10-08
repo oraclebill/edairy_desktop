@@ -12,7 +12,6 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IMarkableRidget;
 import org.eclipse.riena.ui.ridgets.IMasterDetailsRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
-import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.swt.AbstractMasterDetailsComposite;
 import org.eclipse.riena.ui.swt.MasterDetailsComposite;
 import org.eclipse.swt.SWT;
@@ -36,7 +35,7 @@ public class AccountTransactionBatchEntryDialog extends BaseDialogView {
 	protected static final class TBEC extends BaseDialogController<AccountTransaction> {
 		private List<AccountTransaction> transactions;
 		private final TransactionBatchEntryDialogController delegate;
-		
+
 		@Inject
 		public TBEC(final TransactionBatchEntryDialogController delegate) {
 			this.delegate = delegate;
@@ -56,11 +55,12 @@ public class AccountTransactionBatchEntryDialog extends BaseDialogView {
 					AccountPackage.Literals.TRANSACTION__AMOUNT.getName() };
 
 			@SuppressWarnings("unchecked")
+			final
 			List<AccountTransaction> transactions = (List<AccountTransaction>) getContext("tranaction-list");
 			this.transactions = transactions;
-			
+
 			final IMasterDetailsRidget master = getRidget(IMasterDetailsRidget.class, "master"); //$NON-NLS-1$
-			
+
 			if (master != null) {
 				master.setDelegate(delegate);
 				master.bindToModel(new WritableList(transactions, AccountTransaction.class), AccountTransaction.class,
@@ -76,7 +76,7 @@ public class AccountTransactionBatchEntryDialog extends BaseDialogView {
 			// We are inputting new data, no delete
 			getRidget(DialogConstants.BIND_ID_BUTTON_DELETE).setVisible(false);
 		}
-		
+
 		@Override
 		protected boolean validate() {
 			return super.validate() && !transactions.isEmpty();
@@ -109,7 +109,7 @@ public class AccountTransactionBatchEntryDialog extends BaseDialogView {
 
 		@Override
 		public AccountTransaction createWorkingCopy() {
-			AccountTransaction transaction = AccountFactory.eINSTANCE.createAccountTransaction();
+			final AccountTransaction transaction = AccountFactory.eINSTANCE.createAccountTransaction();
 			transaction.setTransactionDate(new Date());
 			return transaction;
 		}
@@ -118,11 +118,11 @@ public class AccountTransactionBatchEntryDialog extends BaseDialogView {
 		public AccountTransaction getWorkingCopy() {
 			return workingCopy;
 		}
-		
+
 		@Override
 		public String isValid(IRidgetContainer container) {
-			Collection<IMarkableRidget> errors = ContainerValidator.validateContainer(container);
-			
+			final Collection<IMarkableRidget> errors = ContainerValidator.validateContainer(container);
+
 			return errors.isEmpty() ? null : "There are errors in the form. Please correct them before pressing Apply.";
 		}
 	}

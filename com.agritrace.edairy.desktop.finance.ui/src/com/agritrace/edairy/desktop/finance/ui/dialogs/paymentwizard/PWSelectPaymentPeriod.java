@@ -34,12 +34,12 @@ public class PWSelectPaymentPeriod extends PWPage {
 	public static final String PAYMENT_MONTH = "paymentMonth";
 	public static final String PAYMENT_YEAR = "paymentYear";
 
-	private IMemberPaymentsRepository paymentsRepo;
-	private ITransactionRepository transactionRepo;
+	private final IMemberPaymentsRepository paymentsRepo;
+	private final ITransactionRepository transactionRepo;
 
 	/**
 	 * Create the wizard.
-	 * 
+	 *
 	 * @param wizardModel
 	 * @param pmtRepo
 	 */
@@ -54,7 +54,7 @@ public class PWSelectPaymentPeriod extends PWPage {
 
 	/**
 	 * Create contents of the wizard.
-	 * 
+	 *
 	 * @param parent
 	 */
 	@Override
@@ -63,28 +63,28 @@ public class PWSelectPaymentPeriod extends PWPage {
 	}
 
 	private void basicCreateControl(Composite parent) {
-		Composite container = UIControlsFactory.createComposite(parent, SWT.NULL);
-		FormLayout topLayout = new FormLayout();
+		final Composite container = UIControlsFactory.createComposite(parent, SWT.NULL);
+		final FormLayout topLayout = new FormLayout();
 		topLayout.marginWidth = 10;
 		topLayout.marginHeight = 10;
 		container.setLayout(topLayout);
 
-		Composite comp = UIControlsFactory.createComposite(container, SWT.NULL);
+		final Composite comp = UIControlsFactory.createComposite(container, SWT.NULL);
 		comp.setLayout(new GridLayout(1, false));
 		{
-			Composite row = UIControlsFactory.createComposite(comp);
+			final Composite row = UIControlsFactory.createComposite(comp);
 			row.setLayout(new GridLayout(2, false));
 			row.setLayoutData(GridDataFactory.defaultsFor(row).grab(true, false).create());
 
-			Label lbl = UIControlsFactory.createLabel(row, "Year");
+			final Label lbl = UIControlsFactory.createLabel(row, "Year");
 			GridDataFactory.defaultsFor(lbl).hint(FormUtil.WIDTH_UNIT * 2, SWT.DEFAULT).applyTo(lbl);
 
 			final Combo control = UIControlsFactory.createCombo(row, MilkPriceJournalConstants.ID_COMBO_RATEYEAR);
 			GridDataFactory.defaultsFor(control).grab(true, true).align(SWT.FILL, SWT.FILL).applyTo(control);
 			final int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-			String[] items = new String[5];
+			final String[] items = new String[5];
 			int count = 0;
-			for (int i = (currentYear - 2); i < currentYear + 3; i++) {
+			for (int i = currentYear - 2; i < currentYear + 3; i++) {
 				items[count++] = String.valueOf(i);
 			}
 			control.setItems(items);
@@ -92,7 +92,7 @@ public class PWSelectPaymentPeriod extends PWPage {
 			try {
 				paymentYear = getInt(PAYMENT_YEAR);
 				control.setText(items[currentYear - paymentYear + 2]);
-			} catch (ArrayIndexOutOfBoundsException aioobe) {
+			} catch (final ArrayIndexOutOfBoundsException aioobe) {
 				control.setText(items[2]);
 				put(PAYMENT_YEAR, items[2]);
 			}
@@ -111,22 +111,22 @@ public class PWSelectPaymentPeriod extends PWPage {
 
 		}
 		{
-			Composite row = UIControlsFactory.createComposite(comp);
+			final Composite row = UIControlsFactory.createComposite(comp);
 			row.setLayout(new GridLayout(2, false));
 			row.setLayoutData(GridDataFactory.defaultsFor(row).grab(true, false).create());
 
-			Label lblMonth = UIControlsFactory.createLabel(row, "Month");
+			final Label lblMonth = UIControlsFactory.createLabel(row, "Month");
 			GridDataFactory.defaultsFor(lblMonth).hint(FormUtil.WIDTH_UNIT * 2, SWT.DEFAULT).applyTo(lblMonth);
 
 			final Combo control = UIControlsFactory.createCombo(row, MilkPriceJournalConstants.ID_COMBO_RATEMONTH);
 			GridDataFactory.defaultsFor(control).grab(true, true).align(SWT.FILL, SWT.FILL).applyTo(control);
-			int paymentMonth = getInt(PAYMENT_MONTH);
+			final int paymentMonth = getInt(PAYMENT_MONTH);
 			control.setItems(MONTHS);
 			control.setText(MONTHS[paymentMonth]);
 			control.addSelectionListener(new SelectionAdapter() {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
-					int selected = control.getSelectionIndex();
+					final int selected = control.getSelectionIndex();
 					if (selected >= 0) {
 						put(PAYMENT_MONTH, selected);
 						validateModel();
@@ -135,7 +135,7 @@ public class PWSelectPaymentPeriod extends PWPage {
 			});
 		}
 
-		FormData compData = new FormData();
+		final FormData compData = new FormData();
 		compData.top = new FormAttachment(20);
 		compData.right = new FormAttachment(80);
 		compData.bottom = new FormAttachment(80);
@@ -148,19 +148,19 @@ public class PWSelectPaymentPeriod extends PWPage {
 	}
 
 	private void validateModel() {
-		int paymentYear = getInt(PAYMENT_YEAR);
-		int paymentMonth = getInt(PAYMENT_MONTH);
+		final int paymentYear = getInt(PAYMENT_YEAR);
+		final int paymentMonth = getInt(PAYMENT_MONTH);
 
-		MemberPayment paymentRecord = paymentsRepo.getPaymentForPeriod(paymentYear, paymentMonth);
+		final MemberPayment paymentRecord = paymentsRepo.getPaymentForPeriod(paymentYear, paymentMonth);
 		if (paymentRecord != null) {
-			Employee first = paymentRecord.getEnteredBy();
+			final Employee first = paymentRecord.getEnteredBy();
 			setErrorMessage(String.format(
 					"A payment run for the selected period was already executed on %s by %s %s (%s).",
 					paymentRecord.getEntryDate(), first.getGivenName(), first.getFamilyName(), first.getId()));
 			setPageComplete(false);
 		} else {
 			Date startDate, endDate;
-			Calendar cal = Calendar.getInstance();
+			final Calendar cal = Calendar.getInstance();
 
 			cal.clear();
 			cal.set(Calendar.YEAR, paymentYear);
@@ -172,7 +172,7 @@ public class PWSelectPaymentPeriod extends PWPage {
 			cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
 			endDate = cal.getTime();
 
-			List<Transaction> transactions = transactionRepo.findAccountTransactions(null, startDate, endDate);
+			final List<Transaction> transactions = transactionRepo.findAccountTransactions(null, startDate, endDate);
 			if (transactions.size() == 0) {
 				setErrorMessage("There are no transactions for this time period. Please select an active period.");
 				setPageComplete(false);

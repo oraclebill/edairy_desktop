@@ -26,9 +26,9 @@ import com.agritrace.edairy.desktop.operations.ui.controllers.CustomerDialogCont
 
 /**
  * Customer list dialog to add/view/edit customer
- * 
+ *
  * @author Hui(Spark) Wan
- * 
+ *
  */
 public class CustomerEditDialog extends RecordDialog<Customer> {
 	private Composite comonComp;
@@ -40,14 +40,14 @@ public class CustomerEditDialog extends RecordDialog<Customer> {
 		super(shell);
 	}
 
-	
+
 
 	@Override
 	protected void buildWorkArea(Composite parent) {
 		comonComp = UIControlsFactory.createComposite(parent);
-		
+
 //		DialogTray tray = new DialogTray() {
-//			
+//
 //			@Override
 //
 //			protected Control createContents(Composite parent) {
@@ -57,9 +57,9 @@ public class CustomerEditDialog extends RecordDialog<Customer> {
 //				return label;
 //			}
 //		} ;
-//		
+//
 //		this.openTray(tray);
-		
+
 		comonComp.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, true, 1, 1));
 		comonComp.setLayout(new GridLayout(2, false));
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(comonComp);
@@ -115,7 +115,7 @@ public class CustomerEditDialog extends RecordDialog<Customer> {
 		addUIControl(descText, CustomerBindingConstants.BIND_ID_DESCRIPTION);
 
 		createContactGroup(comonComp);
-		
+
 		new Label(comonComp, SWT.NONE);
 		parent.pack();
 
@@ -126,24 +126,24 @@ public class CustomerEditDialog extends RecordDialog<Customer> {
 		final Composite photoPanel = new ProfilePhotoComposite(comonComp, SWT.NONE);
 		SWTBindingPropertyLocator.getInstance().setBindingProperty(photoPanel, CustomerBindingConstants.BIND_ID_CUSTOMER_PHOTO);
 		new Label(photoPanel, SWT.NONE);
-		
+
 		final Group companyContactGroup = UIControlsFactory.createGroup(parent, "Company Contact");
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1)
 				.applyTo(companyContactGroup);
 
-		LocationTabFolder locationTabs = new LocationTabFolder(companyContactGroup, SWT.BORDER);
+		final LocationTabFolder locationTabs = new LocationTabFolder(companyContactGroup, SWT.BORDER);
 		GridDataFactory.fillDefaults().grab(true,true).span(2, 1).applyTo(locationTabs);
-		
+
 		final CTabItem commsTab = new CTabItem(locationTabs.getTabFolder(), SWT.NONE);
 		commsTab.setText("Contact Info");
 		final ContactMethodsGroup commGroup = new ContactMethodsGroup(locationTabs.getTabFolder());
-		SWTBindingPropertyLocator.getInstance().setBindingProperty(commGroup, "contact-methods");		
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(commGroup, "contact-methods");
 		commsTab.setControl(commGroup);
 
 
 		GridLayoutFactory.swtDefaults().generateLayout(companyContactGroup);
 	}
-	
+
 	@Override
 	protected CustomerDialogController createController() {
 		final CustomerDialogController controller = new CustomerDialogController();

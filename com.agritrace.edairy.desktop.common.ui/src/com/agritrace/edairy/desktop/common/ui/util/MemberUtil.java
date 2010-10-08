@@ -5,7 +5,7 @@ import com.agritrace.edairy.desktop.common.model.base.Person;
 public class MemberUtil {
 
 	public static boolean check(String s) {
-		return (null != s) && (s.length() > 0);
+		return null != s && s.length() > 0;
 	}
 
 	public static String formattedMemberName(Person member) {

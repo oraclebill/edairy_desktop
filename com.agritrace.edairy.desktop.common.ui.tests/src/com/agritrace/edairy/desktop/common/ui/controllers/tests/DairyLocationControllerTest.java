@@ -29,7 +29,6 @@ import com.agritrace.edairy.desktop.common.persistence.ManagedMemoryDataStorePro
 import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
 import com.agritrace.edairy.desktop.dairy.locations.ui.DairyLocationUIConstants;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationDirectoryController;
-import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
@@ -39,14 +38,14 @@ public class DairyLocationControllerTest extends AbstractSubModuleControllerTest
 //		@Override protected void configure() {
 //			ManagedMemoryDataStoreProvider provider = new ManagedMemoryDataStoreProvider();
 //			bind(HbDataStore.class).toProvider(provider);
-////			bind(IDairyRepository.class).to(DairyRepository.class);				
+////			bind(IDairyRepository.class).to(DairyRepository.class);
 //		}
 //	});
 	Injector injector = Guice.createInjector(new PersistenceModule() {
 		@Override protected void bindDataStore() {
-			ManagedMemoryDataStoreProvider provider = new ManagedMemoryDataStoreProvider();
+			final ManagedMemoryDataStoreProvider provider = new ManagedMemoryDataStoreProvider();
 			bind(HbDataStore.class).toProvider(provider);
-//			bind(IDairyRepository.class).to(DairyRepository.class);				
+//			bind(IDairyRepository.class).to(DairyRepository.class);
 		}
 	});
 
@@ -57,7 +56,7 @@ public class DairyLocationControllerTest extends AbstractSubModuleControllerTest
 	protected DairyLocationDirectoryController createController(ISubModuleNode node) {
 		initTestData();
 		node.setNodeId(new NavigationNodeId(DairyLocationUIConstants.NODE_ID));
-		final DairyLocationDirectoryController newInst = 
+		final DairyLocationDirectoryController newInst =
 			injector.getInstance(DairyLocationDirectoryController.class);
 		newInst.setNavigationNode(node);
 		// newInst.getInput().add(dairyLocation);

@@ -7,7 +7,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 
 /**
  * @author wanhui
- * 
+ *
  */
 public class Member2StringConverter extends Converter {
 

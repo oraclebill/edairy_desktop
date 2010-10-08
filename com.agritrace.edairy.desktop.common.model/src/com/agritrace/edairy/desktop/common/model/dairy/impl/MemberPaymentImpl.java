@@ -6,21 +6,18 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.Employee;
-import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
-
 import java.math.BigDecimal;
-
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.Employee;
+import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
 
 /**
  * <!-- begin-user-doc -->
@@ -217,6 +214,7 @@ public class MemberPaymentImpl extends EObjectImpl implements MemberPayment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Long getId() {
 		return id;
 	}
@@ -226,11 +224,13 @@ public class MemberPaymentImpl extends EObjectImpl implements MemberPayment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setId(Long newId) {
-		Long oldId = id;
+		final Long oldId = id;
 		id = newId;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBER_PAYMENT__ID, oldId, id));
+		}
 	}
 
 	/**
@@ -238,6 +238,7 @@ public class MemberPaymentImpl extends EObjectImpl implements MemberPayment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getYear() {
 		return year;
 	}
@@ -247,11 +248,13 @@ public class MemberPaymentImpl extends EObjectImpl implements MemberPayment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setYear(int newYear) {
-		int oldYear = year;
+		final int oldYear = year;
 		year = newYear;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBER_PAYMENT__YEAR, oldYear, year));
+		}
 	}
 
 	/**
@@ -259,6 +262,7 @@ public class MemberPaymentImpl extends EObjectImpl implements MemberPayment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getMonth() {
 		return month;
 	}
@@ -268,11 +272,13 @@ public class MemberPaymentImpl extends EObjectImpl implements MemberPayment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMonth(int newMonth) {
-		int oldMonth = month;
+		final int oldMonth = month;
 		month = newMonth;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBER_PAYMENT__MONTH, oldMonth, month));
+		}
 	}
 
 	/**
@@ -280,6 +286,7 @@ public class MemberPaymentImpl extends EObjectImpl implements MemberPayment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BigDecimal getPaymentRate() {
 		return paymentRate;
 	}
@@ -289,11 +296,13 @@ public class MemberPaymentImpl extends EObjectImpl implements MemberPayment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPaymentRate(BigDecimal newPaymentRate) {
-		BigDecimal oldPaymentRate = paymentRate;
+		final BigDecimal oldPaymentRate = paymentRate;
 		paymentRate = newPaymentRate;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBER_PAYMENT__PAYMENT_RATE, oldPaymentRate, paymentRate));
+		}
 	}
 
 	/**
@@ -301,6 +310,7 @@ public class MemberPaymentImpl extends EObjectImpl implements MemberPayment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BigDecimal getPaymentsTotal() {
 		return paymentsTotal;
 	}
@@ -310,11 +320,13 @@ public class MemberPaymentImpl extends EObjectImpl implements MemberPayment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPaymentsTotal(BigDecimal newPaymentsTotal) {
-		BigDecimal oldPaymentsTotal = paymentsTotal;
+		final BigDecimal oldPaymentsTotal = paymentsTotal;
 		paymentsTotal = newPaymentsTotal;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBER_PAYMENT__PAYMENTS_TOTAL, oldPaymentsTotal, paymentsTotal));
+		}
 	}
 
 	/**
@@ -322,6 +334,7 @@ public class MemberPaymentImpl extends EObjectImpl implements MemberPayment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getPaymentsCount() {
 		return paymentsCount;
 	}
@@ -331,11 +344,13 @@ public class MemberPaymentImpl extends EObjectImpl implements MemberPayment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPaymentsCount(int newPaymentsCount) {
-		int oldPaymentsCount = paymentsCount;
+		final int oldPaymentsCount = paymentsCount;
 		paymentsCount = newPaymentsCount;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBER_PAYMENT__PAYMENTS_COUNT, oldPaymentsCount, paymentsCount));
+		}
 	}
 
 	/**
@@ -343,13 +358,15 @@ public class MemberPaymentImpl extends EObjectImpl implements MemberPayment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Employee getEnteredBy() {
 		if (enteredBy != null && enteredBy.eIsProxy()) {
-			InternalEObject oldEnteredBy = (InternalEObject)enteredBy;
+			final InternalEObject oldEnteredBy = (InternalEObject)enteredBy;
 			enteredBy = (Employee)eResolveProxy(oldEnteredBy);
 			if (enteredBy != oldEnteredBy) {
-				if (eNotificationRequired())
+				if (eNotificationRequired()) {
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.MEMBER_PAYMENT__ENTERED_BY, oldEnteredBy, enteredBy));
+				}
 			}
 		}
 		return enteredBy;
@@ -369,11 +386,13 @@ public class MemberPaymentImpl extends EObjectImpl implements MemberPayment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEnteredBy(Employee newEnteredBy) {
-		Employee oldEnteredBy = enteredBy;
+		final Employee oldEnteredBy = enteredBy;
 		enteredBy = newEnteredBy;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBER_PAYMENT__ENTERED_BY, oldEnteredBy, enteredBy));
+		}
 	}
 
 	/**
@@ -381,6 +400,7 @@ public class MemberPaymentImpl extends EObjectImpl implements MemberPayment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Date getEntryDate() {
 		return entryDate;
 	}
@@ -390,11 +410,13 @@ public class MemberPaymentImpl extends EObjectImpl implements MemberPayment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEntryDate(Date newEntryDate) {
-		Date oldEntryDate = entryDate;
+		final Date oldEntryDate = entryDate;
 		entryDate = newEntryDate;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBER_PAYMENT__ENTRY_DATE, oldEntryDate, entryDate));
+		}
 	}
 
 	/**
@@ -418,7 +440,9 @@ public class MemberPaymentImpl extends EObjectImpl implements MemberPayment {
 			case DairyPackage.MEMBER_PAYMENT__PAYMENTS_COUNT:
 				return getPaymentsCount();
 			case DairyPackage.MEMBER_PAYMENT__ENTERED_BY:
-				if (resolve) return getEnteredBy();
+				if (resolve) {
+					return getEnteredBy();
+				}
 				return basicGetEnteredBy();
 			case DairyPackage.MEMBER_PAYMENT__ENTRY_DATE:
 				return getEntryDate();
@@ -533,9 +557,11 @@ public class MemberPaymentImpl extends EObjectImpl implements MemberPayment {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy()) {
+			return super.toString();
+		}
 
-		StringBuffer result = new StringBuffer(super.toString());
+		final StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (id: ");
 		result.append(id);
 		result.append(", year: ");

@@ -31,15 +31,15 @@ public class VehicleLogDirectoryView extends AbstractDirectoryView {
 		//Vehicle type
 		UIControlsFactory.createLabel(filterGroup, "Vehicle Type: ", SWT.LEFT);
 		final CCombo vehicleCombo = UIControlsFactory.createCCombo(filterGroup,  VehicleLogDetailBindConstants.BIND_ID_VEHICLE_TYPE);
-		GridData gd = new GridData();
+		final GridData gd = new GridData();
 		gd.widthHint = FormUtil.WIDTH_UNIT * 3;
 		gd.verticalAlignment = SWT.FILL;
 		vehicleCombo.setLayoutData(gd);
-				
+
 		//Driver
 		UIControlsFactory.createLabel(filterGroup, "Driver");
 		final CCombo driverText = UIControlsFactory.createCCombo(filterGroup,VehicleLogDetailBindConstants.BIND_ID_DRIVER_NAME);
-		GridData gd2 = new GridData();
+		final GridData gd2 = new GridData();
 		gd2.widthHint = FormUtil.WIDTH_UNIT * 3;
 		gd2.verticalAlignment = SWT.FILL;
 		driverText.setLayoutData(gd2);

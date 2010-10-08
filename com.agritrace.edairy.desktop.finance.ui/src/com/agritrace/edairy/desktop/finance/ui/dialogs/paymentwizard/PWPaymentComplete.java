@@ -43,7 +43,7 @@ public class PWPaymentComplete extends PWPage {
 
 	private Table table;
 	private ITableRidget tableRidget;
-	private MemberPaymentsProcessor processor;
+	private final MemberPaymentsProcessor processor;
 
 	/**
 	 * Create the wizard.
@@ -82,38 +82,39 @@ public class PWPaymentComplete extends PWPage {
 
 	/**
 	 * Create contents of the wizard.
-	 * 
+	 *
 	 * @param parent
 	 */
+	@Override
 	public void createControl(Composite parent) {
-		Composite container = new Composite(parent, SWT.NULL);
+		final Composite container = new Composite(parent, SWT.NULL);
 
 		setControl(container);
-		GridLayout gl_container = new GridLayout(1, false);
+		final GridLayout gl_container = new GridLayout(1, false);
 		gl_container.marginWidth = 10;
 		container.setLayout(gl_container);
 
-		Composite header = new Composite(container, SWT.NONE);
+		final Composite header = new Composite(container, SWT.NONE);
 		header.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-		GridLayout gl_composite = new GridLayout(4, false);
+		final GridLayout gl_composite = new GridLayout(4, false);
 		gl_composite.marginWidth = 10;
 		gl_composite.marginHeight = 15;
 		gl_composite.horizontalSpacing = 20;
 		header.setLayout(gl_composite);
 
-		GridDataFactory gdf = GridDataFactory.swtDefaults().hint(100, SWT.DEFAULT);
+		final GridDataFactory gdf = GridDataFactory.swtDefaults().hint(100, SWT.DEFAULT);
 
 		{
 			int paymentMonth = -1, paymentYear = -1;
 			try {
 				paymentMonth = getPaymentMonth();
 				paymentYear = getPaymentYear();
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				e.printStackTrace();
 			}
 
 			{
-				Label lblPaymentPeriod = new Label(header, SWT.NONE);
+				final Label lblPaymentPeriod = new Label(header, SWT.NONE);
 				lblPaymentPeriod.setBounds(0, 0, 59, 14);
 				lblPaymentPeriod.setText("Payment Period");
 				lblPaymentPeriod.setLayoutData(gdf.create());
@@ -122,7 +123,7 @@ public class PWPaymentComplete extends PWPage {
 				payPeriod.setLayoutData(gdf.create());
 			}
 			{
-				Label lblRunDate = new Label(header, SWT.NONE);
+				final Label lblRunDate = new Label(header, SWT.NONE);
 				lblRunDate.setText("Run Date");
 				lblRunDate.setLayoutData(gdf.create());
 
@@ -132,7 +133,7 @@ public class PWPaymentComplete extends PWPage {
 		}
 		{
 			{
-				Label lblPaymentRate = new Label(header, SWT.NONE);
+				final Label lblPaymentRate = new Label(header, SWT.NONE);
 				lblPaymentRate.setBounds(0, 0, 59, 14);
 				lblPaymentRate.setText("Payment Rate");
 
@@ -142,7 +143,7 @@ public class PWPaymentComplete extends PWPage {
 			}
 			{
 
-				Label lblFarmers = new Label(header, SWT.NONE);
+				final Label lblFarmers = new Label(header, SWT.NONE);
 				lblFarmers.setBounds(0, 0, 59, 14);
 				lblFarmers.setText("# Farmers");
 
@@ -152,7 +153,7 @@ public class PWPaymentComplete extends PWPage {
 		}
 		{
 			{
-				Label lblAvgPayment = new Label(header, SWT.NONE);
+				final Label lblAvgPayment = new Label(header, SWT.NONE);
 				lblAvgPayment.setBounds(0, 0, 59, 14);
 				lblAvgPayment.setText("Avg. Payment");
 
@@ -162,7 +163,7 @@ public class PWPaymentComplete extends PWPage {
 			}
 			{
 
-				Label lblTotalPaidThis = new Label(header, SWT.NONE);
+				final Label lblTotalPaidThis = new Label(header, SWT.NONE);
 				lblTotalPaidThis.setBounds(0, 0, 59, 14);
 				lblTotalPaidThis.setText("Total Paid this Period");
 
@@ -176,27 +177,27 @@ public class PWPaymentComplete extends PWPage {
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 
-		TableColumn tblclmnMember = new TableColumn(table, SWT.CENTER);
+		final TableColumn tblclmnMember = new TableColumn(table, SWT.CENTER);
 		tblclmnMember.setWidth(40);
 		tblclmnMember.setText("ID");
 
-		TableColumn tblclmnMemberName = new TableColumn(table, SWT.CENTER);
+		final TableColumn tblclmnMemberName = new TableColumn(table, SWT.CENTER);
 		tblclmnMemberName.setWidth(200);
 		tblclmnMemberName.setText(" Name");
 
-		TableColumn tblclmnMilkIncome = new TableColumn(table, SWT.CENTER);
+		final TableColumn tblclmnMilkIncome = new TableColumn(table, SWT.CENTER);
 		tblclmnMilkIncome.setWidth(80);
 		tblclmnMilkIncome.setText("Milk Income");
 
-		TableColumn tblclmnCreditSales = new TableColumn(table, SWT.CENTER);
+		final TableColumn tblclmnCreditSales = new TableColumn(table, SWT.CENTER);
 		tblclmnCreditSales.setWidth(80);
 		tblclmnCreditSales.setText("Credit Sales");
 
-		TableColumn tblclmnAdjustments = new TableColumn(table, SWT.CENTER);
+		final TableColumn tblclmnAdjustments = new TableColumn(table, SWT.CENTER);
 		tblclmnAdjustments.setWidth(80);
 		tblclmnAdjustments.setText("Adjustments");
 
-		TableColumn tblclmnPayment = new TableColumn(table, SWT.CENTER);
+		final TableColumn tblclmnPayment = new TableColumn(table, SWT.CENTER);
 		tblclmnPayment.setWidth(100);
 		tblclmnPayment.setText("Payment");
 
@@ -213,9 +214,7 @@ public class PWPaymentComplete extends PWPage {
 	}
 
 	private Text[] headerWidgets = { runDate, paymentRate, payPeriod, paymentAverage, paymentCount, paymentTotal };
-	private Object[] headerValues = new Object[6];
-	private Text payPeriod2;
-
+	private final Object[] headerValues = new Object[6];
 	private void previewPayments() {
 		try {
 			getContainer().run(false, false, new IRunnableWithProgress() {
@@ -223,58 +222,58 @@ public class PWPaymentComplete extends PWPage {
 				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 					monitor.beginTask("Generating paymentRecords", 0);
 
-					List<PaymentRecord> paymentsList = processor.generatePaymentsList(
+					final List<PaymentRecord> paymentsList = processor.generatePaymentsList(
 							getPaymentRate(),
-							getPaymentMonth(), 
+							getPaymentMonth(),
 							getPaymentYear());
 					headerValues[0] = new Date();
 					headerValues[1] = getPaymentRate();
 					headerValues[2] = String.format("%s-%s", getPaymentMonth(), getPaymentYear());
 
-					BigDecimal total = Constants.BIGZERO;
-					for (PaymentRecord record : paymentsList) {
+					final BigDecimal total = Constants.BIGZERO;
+					for (final PaymentRecord record : paymentsList) {
 						total.add(record.getTotalPayment());
 					}
-					int count = paymentsList.size();
+					final int count = paymentsList.size();
 					headerValues[3] = count > 0 ? total.divide(new BigDecimal(count), Constants.MONEYCONTEXT) : new BigDecimal(0);
 					headerValues[4] = new BigDecimal(paymentsList.size());
 					headerValues[5] = total;
-					
-					MemberPayment paymentRecord = DairyFactory.eINSTANCE.createMemberPayment();
+
+					final MemberPayment paymentRecord = DairyFactory.eINSTANCE.createMemberPayment();
 					paymentRecord.setEntryDate(new Date());
 					paymentRecord.setMonth(getPaymentMonth());
 					paymentRecord.setYear(getPaymentYear());
-					paymentRecord.setPaymentRate(getPaymentRate());					
-					
+					paymentRecord.setPaymentRate(getPaymentRate());
+
 					headerWidgets = new Text[] { runDate, paymentRate, payPeriod, paymentAverage, paymentCount, paymentTotal };
 					for (int i = 0; i < headerWidgets.length; i++) {
-						headerWidgets[i].setText( headerValues[i] != null ? headerValues[i].toString() : "");						
+						headerWidgets[i].setText( headerValues[i] != null ? headerValues[i].toString() : "");
 					}
-					
+
 					tableRidget.bindToModel(Observables.staticObservableList(paymentsList), PaymentRecord.class,
 							COLUMN_PROPS, COLUMN_HEADERS);
 					tableRidget.updateFromModel();
 					monitor.done();
 				}
 			});
-		} catch (InvocationTargetException e) {
+		} catch (final InvocationTargetException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * 
+	 *
 	 * @param parent
 	 * @param s
 	 * @return
 	 * @wbp.factory
 	 */
 	private static Text text(Composite parent, String s) {
-		Text text = new Text(parent, SWT.BORDER);
+		final Text text = new Text(parent, SWT.BORDER);
 
 		text.setText(s);
 		text.setEditable(false);

@@ -16,6 +16,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
 import com.agritrace.edairy.desktop.common.persistence.ManagedMemoryDataStoreProvider;
 import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
+import com.agritrace.edairy.desktop.common.ui.views.BaseListView;
 import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDirectoryController;
 import com.agritrace.edairy.desktop.operations.ui.views.SupplierDirectoryView;
 import com.google.inject.Guice;
@@ -23,16 +24,16 @@ import com.google.inject.Injector;
 
 /**
  * Test case for supplier list controller
- * 
+ *
  * @author Hui(Spark) Wan
- * 
+ *
  */
 public class SupplierListControllerTestCase extends
 		AbstractSubModuleControllerTest<SupplierDirectoryController> {
 
 	Injector injector = Guice.createInjector(new PersistenceModule() {
 		@Override protected void bindDataStore() {
-			ManagedMemoryDataStoreProvider provider = new ManagedMemoryDataStoreProvider();
+			final ManagedMemoryDataStoreProvider provider = new ManagedMemoryDataStoreProvider();
 			bind(HbDataStore.class).toProvider(provider);
 		}
 	});
@@ -73,7 +74,7 @@ public class SupplierListControllerTestCase extends
 
 		// Test Apply Button, Change some condition
 		final IActionRidget apply = getController().getRidget(
-				IActionRidget.class, SupplierDirectoryView.BIND_ID_FILTER_SEARCH);
+				IActionRidget.class, BaseListView.BIND_ID_FILTER_SEARCH);
 		categories.setSelection(1);
 		apply.fireAction();
 

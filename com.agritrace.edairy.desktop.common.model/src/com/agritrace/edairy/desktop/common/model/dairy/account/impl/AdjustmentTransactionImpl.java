@@ -6,17 +6,14 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.account.impl;
 
-import com.agritrace.edairy.desktop.common.model.dairy.Employee;
-
-import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.account.AdjustmentTransaction;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import com.agritrace.edairy.desktop.common.model.dairy.Employee;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AdjustmentTransaction;
 
 /**
  * <!-- begin-user-doc -->
@@ -66,13 +63,15 @@ public class AdjustmentTransactionImpl extends TransactionImpl implements Adjust
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Employee getSignedOffBy() {
 		if (signedOffBy != null && signedOffBy.eIsProxy()) {
-			InternalEObject oldSignedOffBy = (InternalEObject)signedOffBy;
+			final InternalEObject oldSignedOffBy = (InternalEObject)signedOffBy;
 			signedOffBy = (Employee)eResolveProxy(oldSignedOffBy);
 			if (signedOffBy != oldSignedOffBy) {
-				if (eNotificationRequired())
+				if (eNotificationRequired()) {
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AccountPackage.ADJUSTMENT_TRANSACTION__SIGNED_OFF_BY, oldSignedOffBy, signedOffBy));
+				}
 			}
 		}
 		return signedOffBy;
@@ -92,11 +91,13 @@ public class AdjustmentTransactionImpl extends TransactionImpl implements Adjust
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSignedOffBy(Employee newSignedOffBy) {
-		Employee oldSignedOffBy = signedOffBy;
+		final Employee oldSignedOffBy = signedOffBy;
 		signedOffBy = newSignedOffBy;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.ADJUSTMENT_TRANSACTION__SIGNED_OFF_BY, oldSignedOffBy, signedOffBy));
+		}
 	}
 
 	/**
@@ -108,7 +109,9 @@ public class AdjustmentTransactionImpl extends TransactionImpl implements Adjust
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case AccountPackage.ADJUSTMENT_TRANSACTION__SIGNED_OFF_BY:
-				if (resolve) return getSignedOffBy();
+				if (resolve) {
+					return getSignedOffBy();
+				}
 				return basicGetSignedOffBy();
 		}
 		return super.eGet(featureID, resolve, coreType);

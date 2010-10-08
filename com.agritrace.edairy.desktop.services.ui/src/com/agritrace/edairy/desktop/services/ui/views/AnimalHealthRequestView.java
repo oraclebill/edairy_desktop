@@ -17,32 +17,32 @@ import com.agritrace.edairy.desktop.services.ui.Activator;
 
 /**
  * Service request view
- * 
+ *
  * @author Hui(Spark) Wan
- * 
+ *
  */
 public class AnimalHealthRequestView extends AbstractDirectoryView {
 	public static final String ID = "animalhealth.services.edit.view";
-	
+
 	public static final String START_DATE_TEXT = "start.date.text";
 	public static final String END_DATE_TEXT = "end.date.text";
-	
+
 	public static final String FARM_LOOKUP_BUTTON = "filter.farm.button";
 	public static final String FARM_LOOKUP_TEXT = "filter.farm.text";
-	
+
 	public static final String MEMBER_LOOKUP_BUTTON = "filter.member.button";
 	public static final String MEMBER_LOOKUP_TEXT = "filter.member.text";
-	
+
 	/**
 	 * Binding ID for All Request Types Radio Button Binding ID
 	 */
 	public static final String REQUEST_TYPE_ALL = "filter.type.all";
-	
+
 	/**
 	 * Request Type-- Insemination Radio Button Binding ID
 	 */
 	public static final String REQUEST_TYPE_INSEMINATION = "filter.type.insemination";
-	
+
 	/**
 	 * Binding ID for Request Type-- VERTERNARY Radio Button Binding ID
 	 */
@@ -53,7 +53,7 @@ public class AnimalHealthRequestView extends AbstractDirectoryView {
 
 	private void configureLookupFields(Composite parent, String label, Image icon, String textBindId,
 			String buttonBindId) {
-		Label label_1 = UIControlsFactory.createLabel(parent, label);
+		final Label label_1 = UIControlsFactory.createLabel(parent, label);
 		label_1.setLayoutData(new RowData(120, SWT.DEFAULT));
 
 		// date text
@@ -70,15 +70,15 @@ public class AnimalHealthRequestView extends AbstractDirectoryView {
 
 	private void createDateRange(Composite parent) {
 		final Composite composite = UIControlsFactory.createComposite(parent);
-		RowLayout rl_composite = new RowLayout(SWT.HORIZONTAL);
+		final RowLayout rl_composite = new RowLayout(SWT.HORIZONTAL);
 		rl_composite.spacing = 5;
 		composite.setLayout(rl_composite);
-		
-		Label label = UIControlsFactory.createLabel(composite, "Date Range");
+
+		final Label label = UIControlsFactory.createLabel(composite, "Date Range");
 		label.setLayoutData(new RowData(120, SWT.DEFAULT));
-		
+
 		UIControlsFactory.createLabel(composite, "Start");
-		final DateTime startDateLookup = UIControlsFactory.createDate(composite, SWT.NULL);		
+		final DateTime startDateLookup = UIControlsFactory.createDate(composite, SWT.NULL);
 //		startDateLookup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		addUIControl(startDateLookup, START_DATE_TEXT);
 
@@ -113,13 +113,13 @@ public class AnimalHealthRequestView extends AbstractDirectoryView {
 		configureLookupFields(composite, "Member Lookup",
 				Activator.getDefault().getImageRegistry().get(DesktopBaseActivator.MEMBER_SEARCH_ICON),
 				MEMBER_LOOKUP_TEXT, MEMBER_LOOKUP_BUTTON);
-		
+
 		composite = UIControlsFactory.createComposite(parent);
 		rl_composite = new RowLayout(SWT.HORIZONTAL);
 		rl_composite.wrap = false;
 		rl_composite.spacing = 5;
 		composite.setLayout(rl_composite);
-		
+
 		// Create farm lookup
 		configureLookupFields(composite, "Farm Lookup",
 				Activator.getDefault().getImageRegistry().get(DesktopBaseActivator.FARM_SEARCH_ICON), FARM_LOOKUP_TEXT,
@@ -130,10 +130,10 @@ public class AnimalHealthRequestView extends AbstractDirectoryView {
 	private void createRequestType(Composite parent) {
 		// Request Type
 		final Composite requestTypeComp = UIControlsFactory.createComposite(parent);
-		RowLayout rl_requestTypeComp = new RowLayout(SWT.HORIZONTAL);
+		final RowLayout rl_requestTypeComp = new RowLayout(SWT.HORIZONTAL);
 		rl_requestTypeComp.spacing = 5;
 		requestTypeComp.setLayout(rl_requestTypeComp);
-		Label label = UIControlsFactory.createLabel(requestTypeComp, "Request Type");
+		final Label label = UIControlsFactory.createLabel(requestTypeComp, "Request Type");
 		label.setLayoutData(new RowData(120, SWT.DEFAULT));
 //		final GridLayout requestTypeLayout = new GridLayout(1, false);
 //		requestTypeComp.setLayout(requestTypeLayout);

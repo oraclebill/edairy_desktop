@@ -14,7 +14,7 @@ public class SupplierCategory {
 	public static SupplierCategory getByName(String name) {
 
 		for (final SupplierCategory cate : CATEGORIES) {
-			if ((cate != null) && (cate.getName() != null) && cate.getName().equals(name)) {
+			if (cate != null && cate.getName() != null && cate.getName().equals(name)) {
 				return cate;
 			}
 		}

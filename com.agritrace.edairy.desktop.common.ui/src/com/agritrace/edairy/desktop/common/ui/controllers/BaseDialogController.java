@@ -37,7 +37,7 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 	}
 
 	private boolean validateInternal() {
-		boolean retVal = validate(); // user validation first...
+		final boolean retVal = validate(); // user validation first...
 		if (!retVal) {
 			return false;
 		}
@@ -47,7 +47,7 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 	/**
 	 * Configures the 'Save', 'Cancel' and 'Delete' buttons. Subclasses can
 	 * override the defaults by manipulating the ridget bindings.
-	 * 
+	 *
 	 */
 	protected void configureButtonsPanel() {
 		if (okAction == null) {
@@ -73,7 +73,7 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 		});
 
 		final IActionRidget deleteAction = (IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_DELETE);
-		Object actionType = getContext(AbstractDirectoryController.EDITED_ACTION_TYPE);
+		final Object actionType = getContext(AbstractDirectoryController.EDITED_ACTION_TYPE);
 		if(actionType != null && new Integer(actionType.toString()).intValue() == AbstractDirectoryController.ACTION_NEW){
 			deleteAction.setVisible(false);
 
@@ -88,7 +88,7 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 
 	/**
 	 * Enable /disable the save button.
-	 * 
+	 *
 	 * @param enable
 	 */
 	protected void enableSaveButton(boolean enable) {
@@ -101,7 +101,7 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 	/**
 	 * Called when 'Cancel' action is triggered.
 	 * @return true if cancel should succeed.
-	 * 
+	 *
 	 */
 	protected boolean handleCancelAction() {
 		setReturnCode(DialogConstants.ACTION_CANCEL);
@@ -111,7 +111,7 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 
 	/**
 	 * Called when 'Delete' action is triggered.
-	 * 
+	 *
 	 */
 	protected void handleDeleteAction() {
 		setReturnCode(DialogConstants.ACTION_DELETE);
@@ -121,8 +121,8 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 	/**
 	 * Called after validation is successful, when 'Save' or 'Update' action is
 	 * triggered.
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	protected void handleSaveAction() {
 		setReturnCode(DialogConstants.ACTION_SAVE);
@@ -133,10 +133,10 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 
 	/**
 	 * Validate is called before the standard page validation processs.
-	 * 
+	 *
 	 * Subclasses should override to provide additional page level validation.
 	 * The default implementation returns 'true'.
-	 * 
+	 *
 	 * @return
 	 */
 	protected boolean validate() {

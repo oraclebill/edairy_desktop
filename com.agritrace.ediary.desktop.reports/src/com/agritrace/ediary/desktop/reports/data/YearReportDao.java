@@ -8,37 +8,37 @@ import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 
 public class YearReportDao {
-	
-	
+
+
 	private static YearReportDao instance;
-	
+
 	IDairyRepository dairyRepo;
-	
+
 	public YearReportDao(){
 		super();
 	}
-	
+
 	public static YearReportDao instance(){
 		if(instance == null){
 			instance = new YearReportDao();
 		}
 		return instance;
 	}
-	
+
 	public List<YearReportData> getReportValues(String year){
 		//TODO apply year!
 //		List<CollectionGroup> allJournals = RepositoryFactory.getDairyRepository().allCollectionGroups();
-		List<CollectionGroup> allJournals = dairyRepo.allCollectionGroups();
-		List<YearReportData> ret = new ArrayList<YearReportData>();
-		
-		for(CollectionGroup page:allJournals){
+		final List<CollectionGroup> allJournals = dairyRepo.allCollectionGroups();
+		final List<YearReportData> ret = new ArrayList<YearReportData>();
+
+		for(final CollectionGroup page:allJournals){
 			if(!checkStatusForListing(page)){
 				continue;
 			}
-			YearReportData data = new YearReportData(page.getJournalDate(), ""+page.getRecordTotal(), "%"/*TODO!*/);
+			final YearReportData data = new YearReportData(page.getJournalDate(), ""+page.getRecordTotal(), "%"/*TODO!*/);
 			ret.add(data);
 		}
-		
+
 //		YearReportData data = new YearReportData(new Date(), "12", "%"/*TODO!*/);
 //		ret.add(data);
 		return ret;

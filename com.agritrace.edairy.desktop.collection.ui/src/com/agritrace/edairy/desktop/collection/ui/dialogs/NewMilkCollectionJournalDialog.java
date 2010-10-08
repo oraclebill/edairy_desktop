@@ -80,16 +80,16 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 
 	public CollectionGroup getNewJournalPage() {
 		final String refNum = newJournalPage.getReferenceNumber();
-		
+
 		if (refNum == null || refNum.trim().length() == 0) {
-			newJournalPage.setReferenceNumber("REF-" + newJournalPage.hashCode()); 
+			newJournalPage.setReferenceNumber("REF-" + newJournalPage.hashCode());
 		}
-		
+
 		return newJournalPage;
 	}
 
 	private void configureRidgets() {
-		
+
 		// create/configure ridgets
 		final IDateTimeRidget dateTime = (IDateTimeRidget) SwtRidgetFactory.createRidget(datePicker);
 		final IComboRidget center = (IComboRidget) SwtRidgetFactory.createRidget(centerCombo);
@@ -102,8 +102,8 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		final PropertyChangeListener validationListener = new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
-				final boolean isValid = 
-					/* newJournalPage.getRoute() != null 
+				final boolean isValid =
+					/* newJournalPage.getRoute() != null
 					&& */ newJournalPage.getSession() != null
 					&& newJournalPage.getDriver() != null
 					&& newJournalPage.getJournalDate() != null
@@ -169,35 +169,35 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		final Dairy localDairy = dairyRepository.getLocalDairy();
 
 		try {
-			List<DairyLocation> centers = dairyLocationRepo.allCollectionCenters();
-			center.bindToModel(new WritableList(centers, DairyLocation.class), DairyLocation.class, "getCode", 
+			final List<DairyLocation> centers = dairyLocationRepo.allCollectionCenters();
+			center.bindToModel(new WritableList(centers, DairyLocation.class), DairyLocation.class, "getCode",
 					PojoObservables.observeValue( newJournalPage,
 							DairyPackage.Literals.COLLECTION_GROUP__COLLECTION_CENTER.getName()));
 			center.setSelection(localDairy.getRoutes().get(0));
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 
 		try {
 			vehicles = new ArrayList<Vehicle>(localDairy.getVehicles());
-			
-			vehicle.bindToModel(new WritableList(vehicles, Vehicle.class), Vehicle.class, "getRegistrationNumber", 
-					PojoObservables.observeValue(newJournalPage, 
+
+			vehicle.bindToModel(new WritableList(vehicles, Vehicle.class), Vehicle.class, "getRegistrationNumber",
+					PojoObservables.observeValue(newJournalPage,
 							DairyPackage.Literals.COLLECTION_GROUP__VEHICLE.getName()));
-			
+
 			vehicle.setSelection(localDairy.getVehicles().get(0));
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 
 		try {
-			List<CollectionSession> sessions = sessionRepo.all();
-			
+			final List<CollectionSession> sessions = sessionRepo.all();
+
 			session.bindToModel(new WritableList(sessions, CollectionSession.class),
 					CollectionSession.class, "getCode",
 					PojoObservables.observeValue(newJournalPage,
 							DairyPackage.Literals.COLLECTION_GROUP__SESSION.getName()));
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 
@@ -210,14 +210,14 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 					PojoObservables.observeValue(newJournalPage,
 							DairyPackage.Literals.COLLECTION_GROUP__DRIVER.getName()));
 			driver.setSelection(drivers.get(0));
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 
 		// update initial values
 
 		newJournalPage.setJournalDate(new Date());
-		
+
 		dateTime.updateFromModel();
 		center.updateFromModel();
 		vehicle.updateFromModel();
@@ -227,21 +227,21 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		center.addSelectionListener(new ISelectionListener() {
 			@Override
 			public void ridgetSelected(SelectionEvent event) {
-				DairyLocation loc = newJournalPage.getCollectionCenter();
-				Route route = loc.getRoute();
-				
+				final DairyLocation loc = newJournalPage.getCollectionCenter();
+				final Route route = loc.getRoute();
+
 				if (route != null && route.getVehicle() != null) {
 					newJournalPage.setVehicle(route.getVehicle());
 					vehicle.updateFromModel();
 				}
 			}
 		});
-		
+
 		vehicle.addSelectionListener(new ISelectionListener() {
 			@Override
 			public void ridgetSelected(SelectionEvent event) {
-				Vehicle vehicle = newJournalPage.getVehicle();
-				
+				final Vehicle vehicle = newJournalPage.getVehicle();
+
 				if (vehicle != null && vehicle.getDriver() != null) {
 					newJournalPage.setDriver(vehicle.getDriver());
 					driver.updateFromModel();
@@ -251,8 +251,8 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 	}
 
 	private List<Employee> createEmployeeList(Dairy dairy) {
-		List<Employee> driverList = new LinkedList<Employee>();
-		for (Employee emp : dairy.getEmployees()) {
+		final List<Employee> driverList = new LinkedList<Employee>();
+		for (final Employee emp : dairy.getEmployees()) {
 			final String job = emp.getJobFunction();
 			if (job != null && job.equals("Driver")) {
 				driverList.add(emp);
@@ -269,7 +269,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 
 	/**
 	 * Creates the buttons for the button bar
-	 * 
+	 *
 	 * @param parent
 	 *            the parent composite
 	 */
@@ -289,7 +289,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		setMessage("Please enter the date, session, and transport route for this set of collections records.");
 		return contents;
 	}
-	
+
 	@Override
 	protected void initializeBounds() {
 		super.initializeBounds();
@@ -302,9 +302,9 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		final Composite workArea = UIControlsFactory.createComposite(buffer);
 		GridLayoutFactory.swtDefaults().numColumns(2).spacing(8, 8).margins(6, 6).generateLayout(workArea);
 		workArea.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		
+
 		final int widgetWidth = 250;
-		
+
 		{
 			final Composite panel = workArea;
 			{
@@ -349,7 +349,8 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 
 		return buffer;
 	}
-	
+
+	@Override
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
 		newShell.setText("Milk Collection Journal");

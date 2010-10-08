@@ -5,9 +5,9 @@ import java.util.List;
 
 /**
  * An enum with Kenya's provinces..
- * 
+ *
  * I'm hoping these won't change anytime soon.
- * 
+ *
  * @author bjones
  */
 public enum KenyaProvinceDistrict {

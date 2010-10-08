@@ -35,7 +35,7 @@ import com.google.inject.Provider;
 public final class NodeFactory {
 	@Inject
 	private static Map<Class<? extends IController>, Provider<? extends IController>> PROVIDER_MAP;
-	
+
 	private static class GuiceWorkareaDefinition implements IWorkareaDefinition {
 		private final Class<? extends IController> controllerClass;
 		private final Provider<? extends IController> controllerProvider;
@@ -96,38 +96,39 @@ public final class NodeFactory {
 	public static ISubModuleNode createSubModule(String nodeId, String caption, IModuleNode parent, String viewId) {
 		return createSubModule(nodeId, caption, parent, viewId, (Class<? extends IController>) null);
 	}
-	
+
 	private static boolean havePermissions(final Class<? extends IController> controllerClass) {
-		if (controllerClass == null)
+		if (controllerClass == null) {
 			return true;
-		
+		}
+
 		// Check permissions
-		PermissionRequired annotation = controllerClass.getAnnotation(PermissionRequired.class);
+		final PermissionRequired annotation = controllerClass.getAnnotation(PermissionRequired.class);
 		return annotation == null || PrincipalManager.getInstance().hasPermission(annotation.value());
 	}
 
 	public static ISubModuleNode createSubModule(String nodeId, String caption, final IModuleNode parent, String viewId,
 			final Class<? extends IController> controllerClass) {
 		final Provider<? extends IController> controllerProvider = PROVIDER_MAP.get(controllerClass);
-		
+
 		final ISubModuleNode result = new SubModuleNode(new NavigationNodeId(nodeId), caption) {
 			@Override
 			public boolean allowsActivate(INavigationContext context) {
 				return super.allowsActivate(context) && havePermissions(controllerClass);
 			}
 		};
-		
+
 		// path found via org.eclipse.riena.ui.swt.imagePaths in plugin.xml
 		result.setIcon("arrow_right.png"); //$NON-NLS-1$
 		parent.addChild(result);
-		
+
 		if (controllerProvider != null) {
 			WorkareaDefinitionRegistryFacade.getInstance().register(result,
 					new GuiceWorkareaDefinition(controllerClass, controllerProvider, viewId));
 		} else {
 			WorkareaManager.getInstance().registerDefinition(result, controllerClass, viewId);
 		}
-		
+
 		return result;
 	}
 

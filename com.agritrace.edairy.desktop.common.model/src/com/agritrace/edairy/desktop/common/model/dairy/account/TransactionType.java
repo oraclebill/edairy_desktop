@@ -100,7 +100,7 @@ public enum TransactionType implements Enumerator {
 	 */
 	public static TransactionType get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			TransactionType result = VALUES_ARRAY[i];
+			final TransactionType result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -116,7 +116,7 @@ public enum TransactionType implements Enumerator {
 	 */
 	public static TransactionType getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			TransactionType result = VALUES_ARRAY[i];
+			final TransactionType result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -176,6 +176,7 @@ public enum TransactionType implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getValue() {
 	  return value;
 	}
@@ -185,6 +186,7 @@ public enum TransactionType implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 	  return name;
 	}
@@ -194,6 +196,7 @@ public enum TransactionType implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLiteral() {
 	  return literal;
 	}
@@ -208,5 +211,5 @@ public enum TransactionType implements Enumerator {
 	public String toString() {
 		return literal;
 	}
-	
+
 } //TransactionType

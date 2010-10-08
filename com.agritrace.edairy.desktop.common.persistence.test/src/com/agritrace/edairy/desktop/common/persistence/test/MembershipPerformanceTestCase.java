@@ -2,10 +2,8 @@ package com.agritrace.edairy.desktop.common.persistence.test;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Formatter;
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.teneo.hibernate.LazyCollectionUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,35 +13,32 @@ import org.junit.Test;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
-import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
-import com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint;
-import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 
 @SuppressWarnings("unchecked")
 public class MembershipPerformanceTestCase extends ModelPersistenceBase {
 	@Test
 	public void testLazyLoadBehaviour() throws Exception {
-		Session session = getSessionFactory().openSession();
+		final Session session = getSessionFactory().openSession();
 		printSessionStats(session);
 
-		Dairy dairy = (Dairy) session.createQuery("From Dairy").uniqueResult();
+		final Dairy dairy = (Dairy) session.createQuery("From Dairy").uniqueResult();
 
-		Collection<Employee> employees = dairy.getEmployees();
+		final Collection<Employee> employees = dairy.getEmployees();
 		showCollection("Employees", employees);
 
-		Collection<Membership> members = dairy.getMemberships();
+		final Collection<Membership> members = dairy.getMemberships();
 		showCollection("Members", members);
 		session.close();
 
-		Membership member = members.iterator().next();
+		final Membership member = members.iterator().next();
 		System.out.println("Account Number : "
 				+ member.getAccount().getAccountNumber());
-		List<Vehicle> vehicles = dairy.getVehicles();
-		Vehicle truck = vehicles.iterator().next();
-		if (truck != null)
+		final List<Vehicle> vehicles = dairy.getVehicles();
+		final Vehicle truck = vehicles.iterator().next();
+		if (truck != null) {
 			System.out.println(truck.getAssetInfo().getDamageDescription());
+		}
 		printSessionStats(session);
 
 		session.flush();
@@ -52,20 +47,22 @@ public class MembershipPerformanceTestCase extends ModelPersistenceBase {
 
 	@Test
 	public void testIterateCriteriaQuery() {
-		long start = System.currentTimeMillis();
-		Session session = getSessionFactory().openSession();
+		final long start = System.currentTimeMillis();
+		final Session session = getSessionFactory().openSession();
 		session.createQuery("From Dairy").uniqueResult();
 
 		System.out.println("\nTesting iterate time for Criteria Query... ");
 
-		List<Membership> members = session.createCriteria("Membership").list();
+		final List<Membership> members = session.createCriteria("Membership").list();
 
 		long count = 0;
-		for (Membership member : members) {
-			if (++count % 100 == 0)
+		for (final Membership member : members) {
+			if (++count % 100 == 0) {
 				System.out.print('.');
-			if (++count % 800 == 0)
+			}
+			if (++count % 800 == 0) {
 				System.out.print('\n');
+			}
 		}
 
 		System.out.println("\n time elapsed: "
@@ -89,21 +86,23 @@ public class MembershipPerformanceTestCase extends ModelPersistenceBase {
 
 	@Test
 	public void testIterateCriteriaQueryInTransaction() {
-		long start = System.currentTimeMillis();
-		Session session = getSessionFactory().openSession();
-		Transaction tx = session.beginTransaction();
+		final long start = System.currentTimeMillis();
+		final Session session = getSessionFactory().openSession();
+		final Transaction tx = session.beginTransaction();
 		session.createQuery("From Dairy").uniqueResult();
 
 		System.out.println("\nTesting iterate time for Criteria Query... ");
 
-		List<Membership> members = session.createCriteria("Membership").list();
+		final List<Membership> members = session.createCriteria("Membership").list();
 
 		long count = 0;
-		for (Membership member : members) {
-			if (++count % 100 == 0)
+		for (final Membership member : members) {
+			if (++count % 100 == 0) {
 				System.out.print('.');
-			if (++count % 800 == 0)
+			}
+			if (++count % 800 == 0) {
 				System.out.print('\n');
+			}
 		}
 		printSessionStats(session);
 		tx.commit();
@@ -116,23 +115,25 @@ public class MembershipPerformanceTestCase extends ModelPersistenceBase {
 
 	@Test
 	public void testIterateTouchingAttributesCriteriaQuery() {
-		long start = System.currentTimeMillis();
-		Session session = getSessionFactory().openSession();
+		final long start = System.currentTimeMillis();
+		final Session session = getSessionFactory().openSession();
 		session.createQuery("From Dairy").uniqueResult();
 
 		System.out.println("\nTesting iterate time for Criteria Query... ");
 
-		List<Membership> members = session.createCriteria("Membership").list();
+		final List<Membership> members = session.createCriteria("Membership").list();
 
 		long count = 0;
-		for (Membership member : members) {
-			EList<BalancePoint> sum = member.getAccount().getBalances();
+		for (final Membership member : members) {
+			member.getAccount().getBalances();
 			String code = member.getDefaultRoute().getName();
 			code += code;
-			if (++count % 100 == 0)
+			if (++count % 100 == 0) {
 				System.out.print('.');
-			if (++count % 800 == 0)
+			}
+			if (++count % 800 == 0) {
 				System.out.print('\n');
+			}
 			code += count;
 		}
 		System.out.println("\n time elapsed: "
@@ -141,17 +142,17 @@ public class MembershipPerformanceTestCase extends ModelPersistenceBase {
 
 	@Test
 	public void testIterateHSQLQuery() {
-		long start = System.currentTimeMillis();
-		Session session = getSessionFactory().openSession();
+		final long start = System.currentTimeMillis();
+		final Session session = getSessionFactory().openSession();
 		session.createQuery("From Dairy").uniqueResult();
 
 		System.out.println("\nTesting iterate time for HSQL Query... ");
 
-		List<Membership> members = session.createQuery("FROM Membership")
+		final List<Membership> members = session.createQuery("FROM Membership")
 				.list();
 
 		long count = 0;
-		for (Membership membership : members) {
+		for (final Membership membership : members) {
 			printout(membership, ++count);
 		}
 		System.out.println("\n time elapsed: "
@@ -160,22 +161,22 @@ public class MembershipPerformanceTestCase extends ModelPersistenceBase {
 
 	@Test
 	public void testIterateDairyCollection() throws Exception {
-		Session session = getSessionFactory().openSession();
-		Dairy dairy = (Dairy) session.createQuery("From Dairy").uniqueResult();
+		final Session session = getSessionFactory().openSession();
+		final Dairy dairy = (Dairy) session.createQuery("From Dairy").uniqueResult();
 
 		System.out.println("\nTesting iterate time... ");
 
 		long count = 0;
-		long time0 = System.currentTimeMillis();
-		Collection<Membership> members = dairy.getMemberships();
-		Object[] memberArray = members.toArray();
-		for (Object obj : memberArray) {
+		final long time0 = System.currentTimeMillis();
+		final Collection<Membership> members = dairy.getMemberships();
+		final Object[] memberArray = members.toArray();
+		for (final Object obj : memberArray) {
 			if (obj instanceof Membership) {
-				Membership membership = (Membership) obj;
+				final Membership membership = (Membership) obj;
 				printout(membership, ++count);
 			}
 		}
-		long elapsed = System.currentTimeMillis() - time0;
+		final long elapsed = System.currentTimeMillis() - time0;
 		System.out.println("\nElapsed: " + elapsed);
 
 		session.close();
@@ -208,6 +209,7 @@ public class MembershipPerformanceTestCase extends ModelPersistenceBase {
 	// iterateUsing(session);
 	// }
 
+	@Override
 	public void printSessionStats(final Session session) {
 		System.out.printf("Session Collection Count: %s \n", session
 				.getStatistics().getCollectionCount());
@@ -217,12 +219,13 @@ public class MembershipPerformanceTestCase extends ModelPersistenceBase {
 				"Session Factory Role Names: %s \n",
 				Arrays.toString(session.getSessionFactory().getStatistics()
 						.getCollectionRoleNames()));
-		
+
 		printFactoryStats(session.getSessionFactory());
-		printMemoryStats(false);		
-		printMemoryStats(true);		
+		printMemoryStats(false);
+		printMemoryStats(true);
 	}
 
+	@Override
 	public void printFactoryStats(final SessionFactory factory) {
 		System.out.printf("Session Factory Close Statement Count: %s \n",
 				factory.getStatistics().getCloseStatementCount());
@@ -243,6 +246,7 @@ public class MembershipPerformanceTestCase extends ModelPersistenceBase {
 
 	}
 
+	@Override
 	public void printMemoryStats(boolean gc) {
 		if (gc) {
 			System.gc();

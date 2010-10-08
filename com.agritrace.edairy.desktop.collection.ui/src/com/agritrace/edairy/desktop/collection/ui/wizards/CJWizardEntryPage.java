@@ -44,10 +44,11 @@ public class CJWizardEntryPage extends WizardPage {
 	 * Create contents of the wizard.
 	 * @param parent
 	 */
+	@Override
 	public void createControl(Composite parent) {
-		Composite container = new Composite(parent, SWT.NULL);
+		final Composite container = new Composite(parent, SWT.NULL);
 		setControl(container);
-		
+
 		container.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 		container.setLayout(new GridLayout(1, false));
 
@@ -66,7 +67,7 @@ public class CJWizardEntryPage extends WizardPage {
 		gdf.grab(true, true).applyTo(groupFour);
 
 	}
-	
+
 	private Group createSubHeaderGroup(Composite parent) {
 		final Group group = UIControlsFactory.createGroup(parent, MILK_BOOK_GROUP_TITLE,
 				ViewWidgetId.milkGroup);
@@ -177,9 +178,9 @@ public class CJWizardEntryPage extends WizardPage {
 
 		return group;
 	}
-	
+
 	private void addUIControl(Control control, String id) {
-		
+
 	}
 
 }

@@ -79,13 +79,13 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 
 	private IMemberInfoProvider memberInfoProvider;
 	private IValidator routeValidator;
-	
+
 //	private IMessageMarkerViewer markerViewer;
 
 	public CollectionLineRidget() {
 		validatorCollection = new ValidatorCollection();
 //		markerViewer = new TooltipMessageMarkerViewer();
-		
+
 	}
 
 	@Override
@@ -97,12 +97,12 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	public void setMemberInfoProvider(IMemberInfoProvider provider) {
 		this.memberInfoProvider = provider;
 	}
-	
+
 	@Override
 	public IMemberInfoProvider getMemberInfoProvider() {
 		return this.memberInfoProvider;
 	}
-	
+
 	@Override
 	public List<DairyContainer> getBinList() {
 		return binList;
@@ -126,11 +126,11 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	public void removeValidator(IValidator vc) {
 		validatorCollection.remove(vc);
 	}
-	
+
 	@Override
 	synchronized public void clearValidators() {
-		Collection<IValidator> toBeRemoved = validatorCollection.getValidators();
-		for (IValidator dumpMe : toBeRemoved) {
+		final Collection<IValidator> toBeRemoved = validatorCollection.getValidators();
+		for (final IValidator dumpMe : toBeRemoved) {
 			validatorCollection.remove(dumpMe);
 		}
 	}
@@ -251,8 +251,8 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 
 
 	protected void sillyNormalize(Object memberString) {
-		
-		String rawMemberNum = (String) memberString;
+
+		final String rawMemberNum = (String) memberString;
 		String prefix = "";
 		String digits = "";
 		String suffix = "";
@@ -260,7 +260,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		int i = 0;
 		boolean done = false;
 		while (!done) {
-			char cur = rawMemberNum.charAt(i);
+			final char cur = rawMemberNum.charAt(i);
 			switch(state) {
 			case 0: // initial
 				if ( Character.isLetter(cur) ) {
@@ -279,7 +279,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 					break;
 				} else {
 					state = 2;
-				} 
+				}
 			case 2:
 				if ( Character.isDigit(cur) ) {
 					done = true;
@@ -290,7 +290,9 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 					break;
 				}
 			}
-			if (++i > 15) done = true;
+			if (++i > 15) {
+				done = true;
+			}
 		}
 	}
 
@@ -348,25 +350,27 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	@Override
 	protected void updateEnabled() {
 		super.updateEnabled();
-		boolean enabled = this.isEnabled();
+		final boolean enabled = this.isEnabled();
 		log(LogService.LOG_DEBUG, " ** updateEnabled: " + enabled);
-		for (IRidget ridget : getRidgets()) {
+		for (final IRidget ridget : getRidgets()) {
 			ridget.setEnabled(enabled);
 		}
 	}
 
 	protected void clearJournalLine(boolean saveBin) {
-		if (workingJournalLine == null)
+		if (workingJournalLine == null) {
 			return;
-		for (EStructuralFeature feature : DairyPackage.Literals.COLLECTION_JOURNAL_LINE.getEAllStructuralFeatures()) {
-			if (saveBin && feature != DairyPackage.Literals.COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER)
+		}
+		for (final EStructuralFeature feature : DairyPackage.Literals.COLLECTION_JOURNAL_LINE.getEAllStructuralFeatures()) {
+			if (saveBin && feature != DairyPackage.Literals.COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER) {
 				workingJournalLine.eSet(feature, feature.getDefaultValue());
+			}
 		}
 		updateAllRidgetsFromModel();
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private void handleClearLine() {
 		log(LogService.LOG_DEBUG, "\nhandleClearLine: journal-line: %s\n", workingJournalLine);
@@ -384,15 +388,15 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private void handleSaveLine() {
-		IStatus result = validatorCollection.validate(workingJournalLine);
+		final IStatus result = validatorCollection.validate(workingJournalLine);
 		log(LogService.LOG_DEBUG, "handleSaveLine: journal-line: %s, validation result: [%s]\n", workingJournalLine, result);
 		if (result.isOK()) {
 			savedContainer = workingJournalLine.getDairyContainer();
 			firePropertyChange(VALIDATED_VALUE, null, workingJournalLine);
-		} 
+		}
 		else if (result.matches(IStatus.WARNING | IStatus.INFO )) {
 //			markerViewer.setVisible(true);
 			if(displaySuspendMessage(result)) {
@@ -403,51 +407,51 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		}
 		else if (result.matches(IStatus.ERROR | IStatus.CANCEL )) {
 			displayMessage(result);
-		} 
+		}
 	}
 
 	protected void displayMessage(final IStatus validationResult) {
 		displayMessage(validationResult, IStatus.ERROR | IStatus.CANCEL);
 	}
-	
+
 	protected void displayMessage(final IStatus validationResult, int mask) {
-		StringBuffer message = new StringBuffer();
-		Formatter formatter = new Formatter(message);
+		final StringBuffer message = new StringBuffer();
+		final Formatter formatter = new Formatter(message);
 		IStatus[] statusList;
 		if (validationResult.isMultiStatus()) {
 			statusList = validationResult.getChildren();
 		} else {
 			statusList = new IStatus[] { validationResult };
 		}
-		for (IStatus status : statusList) {
+		for (final IStatus status : statusList) {
 			if (status.matches(mask)) {
 //				formatter.format("[%s] %s: %s\n", status.getCode(), status.getSeverity(), status.getMessage());
 				System.err.println("status: " + status.getClass().getName());
 				System.err.println("Severity: " + status.getSeverity());
 				System.err.println("MAsk: " + mask);
-				
+
 				formatter.format("%s\n", status.getMessage());
 			}
 		}
 		try {
 			MessageDialog.openError(getShell(), "Validation Error(s)", message.toString());
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 			System.err.println(message.toString());
 		}
 	}
-	
+
 	protected boolean displaySuspendMessage(final IStatus validationResult) {
 		boolean ret = false;
-		StringBuffer message = new StringBuffer();
-		Formatter formatter = new Formatter(message);
+		final StringBuffer message = new StringBuffer();
+		final Formatter formatter = new Formatter(message);
 		IStatus[] statusList;
 		if (validationResult.isMultiStatus()) {
 			statusList = validationResult.getChildren();
 		} else {
 			statusList = new IStatus[] { validationResult };
 		}
-		for (IStatus status : statusList) {
+		for (final IStatus status : statusList) {
 			if (status.matches(IStatus.WARNING | IStatus.INFO)) {
 				System.err.printf("[%s] %s: %s\n", status.getClass().getName(), status.getSeverity(), status.getMessage());
 				formatter.format("%s\n",  status.getMessage());
@@ -456,7 +460,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		try {
 			formatter.format("\n\nSelect 'Yes' to suspend this record, or 'No' to correct the error(s)");
 			ret = MessageDialog.openQuestion(getShell(), "Suspend Confirmation", message.toString());
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 			System.err.println(message.toString());
 		}
@@ -464,7 +468,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void enableQualityWidgets(boolean enabled) {
 		qualityGroup.setEnabled(enabled);
@@ -475,11 +479,11 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	protected void handleRejectedPropertyChange(PropertyChangeEvent evt) {
 		if (evt.getPropertyName().equals("selected")) {
-			boolean newRejectedValue = (Boolean) evt.getNewValue();
+			final boolean newRejectedValue = (Boolean) evt.getNewValue();
 			if (newRejectedValue && evt.getNewValue() != evt.getOldValue()) {
 				// MessageDialog.openQuestion(activeShell(),
 				// "Milk Rejection Reason", "Enter reason milk was rejected -");
@@ -528,9 +532,9 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 			binCombo.requestFocus();
 		}
 	}
-	
+
 	private void updateAllRidgetsFromModel() {
-		for (IRidget ridget : getRidgets()) {
+		for (final IRidget ridget : getRidgets()) {
 			ridget.updateFromModel();
 		}
 		updateMemberNameText();
@@ -539,10 +543,10 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	private String normalizeMemberNumber(Object memberString) {
 		String normal = "";
 		String prefix = "";
-		if (memberString instanceof String) {			
+		if (memberString instanceof String) {
 			normal = ((String) memberString).trim();
-			while(normal.length() > 0 
-					&& (normal.startsWith("0") 
+			while(normal.length() > 0
+					&& (normal.startsWith("0")
 							|| !Character.isDigit(normal.charAt(0)))) {
 				if (Character.isLetter(normal.charAt(0))) {
 					prefix += normal.charAt(0);
@@ -559,35 +563,36 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		}
 		return (prefix + normal).toUpperCase();
 	}
-	
+
 	private void updateValidatedMember(String memberId) {
-		Membership member = memberInfoProvider.getMember(memberId);
+		final Membership member = memberInfoProvider.getMember(memberId);
 		workingJournalLine.setValidatedMember(member);
-		
+
 	}
 
 	private void updateMemberNameText() {
 		String memberNameText = "<unknown>";
-		Label label = (Label) memberNameRidget.getUIControl();
+		final Label label = (Label) memberNameRidget.getUIControl();
 		if (label != null) {
 			label.setForeground(NORMAL_COLOR);
 		}
-		Membership member = workingJournalLine.getValidatedMember();
+		final Membership member = workingJournalLine.getValidatedMember();
 		if (member != null) {
 //			workingJournalLine.setValidatedMember(member);
 			memberNameText = formatPersonName(member.getMember());
 			if (label != null) {
-				if (routeValidator == null || routeValidator.validate(member).isOK())
+				if (routeValidator == null || routeValidator.validate(member).isOK()) {
 					label.setForeground(SUCCESS_COLOR);
-				else 
+				} else {
 					label.setForeground(WARNING_COLOR);
+				}
 			}
 		}
 		memberNameRidget.setText(memberNameText);
 	}
 
 	/**
-	 * 
+	 *
 	 * @param person
 	 * @return
 	 */
@@ -600,7 +605,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private void log(int level, String message, Object... args) {
 		Log4r.getLogger(Activator.getDefault(), getClass()).log(level, String.format(message, args));

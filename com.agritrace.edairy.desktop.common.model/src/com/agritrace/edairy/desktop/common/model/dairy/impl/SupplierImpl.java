@@ -6,24 +6,19 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
-import com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl;
-
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
-import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
-
 import java.util.Collection;
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+
+import com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
+import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
 
 /**
  * <!-- begin-user-doc -->
@@ -220,6 +215,7 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<String> getCategories() {
 		if (categories == null) {
 			categories = new EDataTypeUniqueEList<String>(String.class, this, DairyPackage.SUPPLIER__CATEGORIES);
@@ -232,6 +228,7 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getId() {
 		return id;
 	}
@@ -241,11 +238,13 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setId(String newId) {
-		String oldId = id;
+		final String oldId = id;
 		id = newId;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.SUPPLIER__ID, oldId, id));
+		}
 	}
 
 	/**
@@ -253,6 +252,7 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getPublicDescription() {
 		return publicDescription;
 	}
@@ -262,11 +262,13 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPublicDescription(String newPublicDescription) {
-		String oldPublicDescription = publicDescription;
+		final String oldPublicDescription = publicDescription;
 		publicDescription = newPublicDescription;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.SUPPLIER__PUBLIC_DESCRIPTION, oldPublicDescription, publicDescription));
+		}
 	}
 
 	/**
@@ -274,6 +276,7 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public VendorStatus getStatus() {
 		return status;
 	}
@@ -283,11 +286,13 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStatus(VendorStatus newStatus) {
-		VendorStatus oldStatus = status;
+		final VendorStatus oldStatus = status;
 		status = newStatus == null ? STATUS_EDEFAULT : newStatus;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.SUPPLIER__STATUS, oldStatus, status));
+		}
 	}
 
 	/**
@@ -295,6 +300,7 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Date getRegistrationDate() {
 		return registrationDate;
 	}
@@ -304,11 +310,13 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRegistrationDate(Date newRegistrationDate) {
-		Date oldRegistrationDate = registrationDate;
+		final Date oldRegistrationDate = registrationDate;
 		registrationDate = newRegistrationDate;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.SUPPLIER__REGISTRATION_DATE, oldRegistrationDate, registrationDate));
+		}
 	}
 
 	/**
@@ -316,6 +324,7 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Date getExpirationDate() {
 		return expirationDate;
 	}
@@ -325,11 +334,13 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExpirationDate(Date newExpirationDate) {
-		Date oldExpirationDate = expirationDate;
+		final Date oldExpirationDate = expirationDate;
 		expirationDate = newExpirationDate;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.SUPPLIER__EXPIRATION_DATE, oldExpirationDate, expirationDate));
+		}
 	}
 
 	/**
@@ -337,6 +348,7 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getNotes() {
 		return notes;
 	}
@@ -346,11 +358,13 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNotes(String newNotes) {
-		String oldNotes = notes;
+		final String oldNotes = notes;
 		notes = newNotes;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.SUPPLIER__NOTES, oldNotes, notes));
+		}
 	}
 
 	/**
@@ -358,6 +372,7 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getRating() {
 		return rating;
 	}
@@ -367,11 +382,13 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRating(int newRating) {
-		int oldRating = rating;
+		final int oldRating = rating;
 		rating = newRating;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.SUPPLIER__RATING, oldRating, rating));
+		}
 	}
 
 	/**
@@ -511,9 +528,11 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy()) {
+			return super.toString();
+		}
 
-		StringBuffer result = new StringBuffer(super.toString());
+		final StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (categories: ");
 		result.append(categories);
 		result.append(", id: ");

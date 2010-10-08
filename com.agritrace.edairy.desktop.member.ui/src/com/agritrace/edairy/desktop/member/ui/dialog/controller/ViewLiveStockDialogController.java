@@ -118,11 +118,11 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 	ITextRidget veterinaryTxt;
 
 	Membership selectedMember;
-	
+
 	IOwnershipGroupRidget ownershipRidget;
-	
+
 	boolean enableLookupBtn = true;
-	
+
 	private final Provider<MemberSearchDialog> memberSearchProvider;
 
 	@Inject
@@ -142,8 +142,8 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 		} else {
 			farmList = new ArrayList<Farm>();
 		}
-		
-		String enableLookup = (String) getContext(ControllerContextConstant.ENABLE_LOOKUP);
+
+		final String enableLookup = (String) getContext(ControllerContextConstant.ENABLE_LOOKUP);
 		if(enableLookup != null && enableLookup.equalsIgnoreCase("false")){
 			enableLookupBtn = false;
 		}
@@ -264,7 +264,7 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 				}
 			}
 			updateComboBindings();
-			Object selected = getContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER);
+			final Object selected = getContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER);
 			Farmer selectedFarmer = null;
 			if(selected instanceof Membership){
 				selectedFarmer =((Membership) selected).getMember();
@@ -287,7 +287,7 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 			farmCombo.updateFromModel();
 			if (selectedNode.getLocation() != null) {
 				if (selectedNode.getLocation().getOwner() != null) {
-					Farmer farmer = selectedNode.getLocation().getOwner();
+					final Farmer farmer = selectedNode.getLocation().getOwner();
 					memberNameRidget.setText(MemberUtil.formattedMemberName(farmer));
 				}
 
@@ -374,7 +374,7 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 			feedCombo.updateFromModel();
 			feedCombo.setSelection(selectedNode.getFeedType());
 			feedCombo.addSelectionListener(this);
-			
+
 			//ownership
 			ownershipRidget.bindToModel(selectedNode.getPastOwners());
 
@@ -425,7 +425,7 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 		acquisionDate = getRidget(IDateTimeRidget.class, ViewWidgetId.LIVESTOCK_IDENTIFICATION_ACQUISION_DATE);
 		acquisionDate.setMandatory(true);
 		acquisionDate.setOutputOnly(true);
-		
+
 		acquisionTypeCombo = getRidget(IComboRidget.class, ViewWidgetId.LIVESTOCK_IDENTIFICATION_ACQUISION_TYPE);
 		idTypeCombo = getRidget(IComboRidget.class, ViewWidgetId.LIVESTOCK_IDENTIFICATION_ID_TYPE);
 		idNumberTxt = getRidget(ITextRidget.class, ViewWidgetId.LIVESTOCK_IDENTIFICATION_ID_NUMBER);
@@ -437,7 +437,7 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 		idTypeCombo.setMandatory(true);
 		idNumberTxt.setMandatory(true);
 		idNumberTxt.setDirectWriting(true);
-		
+
 		ownershipRidget = getRidget(IOwnershipGroupRidget.class, ViewWidgetId.LIVESTOCK_IDENTIFICATION_OWNERSHIPS);
 
 	}
@@ -513,7 +513,7 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 
 	/**
 	 * Open member search dialog, IActionListener for search button
-	 * 
+	 *
 	 */
 	public class MemberLookupAction implements IActionListener {
 		@Override

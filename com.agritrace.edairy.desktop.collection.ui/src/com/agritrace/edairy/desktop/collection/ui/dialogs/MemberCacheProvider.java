@@ -12,7 +12,7 @@ public class MemberCacheProvider implements IMemberInfoProvider {
 	private final Map<String, Membership> memberCache = new HashMap<String, Membership>();
 
 	public MemberCacheProvider(Collection<Membership> members) {
-		for (Membership member : members) {
+		for (final Membership member : members) {
 			System.err.printf("Adding member %s: %s \n", member.getMemberNumber(), member.getMember().getFamilyName());
 			memberCache.put(member.getMemberNumber(), member);
 		}

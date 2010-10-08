@@ -22,7 +22,7 @@ import com.agritrace.edairy.desktop.common.ui.controls.IDataChangeListener;
 import com.agritrace.edairy.desktop.common.ui.controls.location.ViewWidgetId;
 
 public class AddressGroupWidgetController implements WidgetController<PostalLocation>, ISelectionListener {
-	private ListenerList<IDataChangeListener> listeners = new ListenerList<IDataChangeListener>(IDataChangeListener.class);
+	private final ListenerList<IDataChangeListener> listeners = new ListenerList<IDataChangeListener>(IDataChangeListener.class);
 
 	private ITextRidget addressTxt;
 	private IRidgetContainer container;
@@ -36,7 +36,7 @@ public class AddressGroupWidgetController implements WidgetController<PostalLoca
 	private ITextRidget sectionTxt;
 	private ITextRidget subLocationTxt;
 	private ITextRidget villageTxt;
-	
+
 //	private PostalLocation location;
 	private IObservableValue location;
 
@@ -50,7 +50,7 @@ public class AddressGroupWidgetController implements WidgetController<PostalLoca
 		if (container == null) {
 			return;
 		}
-		
+
 		final IFocusListener listener = new IFocusListener() {
 			@Override
 			public void focusGained(FocusEvent event) {
@@ -59,7 +59,7 @@ public class AddressGroupWidgetController implements WidgetController<PostalLoca
 
 			@Override
 			public void focusLost(FocusEvent event) {
-				for (IDataChangeListener listener: listeners.getListeners()) {
+				for (final IDataChangeListener listener: listeners.getListeners()) {
 					listener.dataChanged();
 				}
 			}
@@ -134,7 +134,7 @@ public class AddressGroupWidgetController implements WidgetController<PostalLoca
 		}
 
 	}
-	
+
 	public void setInputModel(IObservableValue model) {
 		location = model;
 	}
@@ -176,7 +176,7 @@ public class AddressGroupWidgetController implements WidgetController<PostalLoca
 				String.class, null, EMFObservables.observeDetailValue(location.getRealm(), location, ModelPackage.Literals.POSTAL_LOCATION__PROVINCE));
 		provinceComo.updateFromModel();
 //		provinceComo.addSelectionListener(this);
-		
+
 		postalCodeTxt.bindToModel(EMFObservables.observeDetailValue(location.getRealm(), location,
 				ModelPackage.Literals.POSTAL_LOCATION__POSTAL_CODE));
 		postalCodeTxt.updateFromModel();

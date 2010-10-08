@@ -23,14 +23,14 @@ public class DairyRepoPerfTest extends ModelPersistenceBase {
 
 	@Test
 	public void testDairyRepoSizePerformance() throws Exception {
-		Session session = getSessionFactory().openSession();
+		final Session session = getSessionFactory().openSession();
 
 		System.out.println("\n  ---- Testing iterate time  ----  \n");
 
 		long count = 0;
 		long time0 = System.currentTimeMillis();
 
-		Dairy localDairy = (Dairy) session.createQuery("From Dairy")
+		final Dairy localDairy = (Dairy) session.createQuery("From Dairy")
 				.uniqueResult();
 		Hibernate.initialize(localDairy);
 		final List<EReference> persistentCollections = Arrays.asList(
@@ -42,7 +42,7 @@ public class DairyRepoPerfTest extends ModelPersistenceBase {
 				DairyPackage.Literals.DAIRY__VEHICLES,
 				DairyPackage.Literals.DAIRY__SUPPLIERS,
 				ModelPackage.Literals.CONTACTABLE__CONTACT_METHODS);
-		for (EStructuralFeature feature : persistentCollections) {
+		for (final EStructuralFeature feature : persistentCollections) {
 			Hibernate.initialize(localDairy.eGet(feature));
 		}
 
@@ -61,11 +61,11 @@ public class DairyRepoPerfTest extends ModelPersistenceBase {
 
 		System.out.println("Iterating : ");
 
-		Collection<Membership> members = localDairy.getMemberships();
-		Object[] memberArray = members.toArray();
-		for (Object obj : memberArray) {
+		final Collection<Membership> members = localDairy.getMemberships();
+		final Object[] memberArray = members.toArray();
+		for (final Object obj : memberArray) {
 			if (obj instanceof Membership) {
-				Membership membership = (Membership) obj;
+				final Membership membership = (Membership) obj;
 				printout(membership, ++count);
 			}
 		}
@@ -89,14 +89,14 @@ public class DairyRepoPerfTest extends ModelPersistenceBase {
 
 	@Test
 	public void testDairyRepoInterrupted() throws Exception {
-		Session session = getSessionFactory().openSession();
+		final Session session = getSessionFactory().openSession();
 
 		System.out.println("\n  ---- Testing iterate time  ----  \n");
 
 		long count = 0;
 		long time0 = System.currentTimeMillis();
 
-		Dairy localDairy = (Dairy) session.createQuery("From Dairy")
+		final Dairy localDairy = (Dairy) session.createQuery("From Dairy")
 				.uniqueResult();
 		Hibernate.initialize(localDairy);
 		final List<EReference> persistentCollections = Arrays.asList(
@@ -108,7 +108,7 @@ public class DairyRepoPerfTest extends ModelPersistenceBase {
 				DairyPackage.Literals.DAIRY__VEHICLES,
 				DairyPackage.Literals.DAIRY__SUPPLIERS,
 				ModelPackage.Literals.CONTACTABLE__CONTACT_METHODS);
-		for (EStructuralFeature feature : persistentCollections) {
+		for (final EStructuralFeature feature : persistentCollections) {
 			Hibernate.initialize(localDairy.eGet(feature));
 		}
 
@@ -128,25 +128,24 @@ public class DairyRepoPerfTest extends ModelPersistenceBase {
 		System.out.println("\nIterating : ");
 
 		try {
-			Collection<Membership> members = localDairy.getMemberships();
-			Object[] memberArray = members.toArray();
-			for (Object obj : memberArray) {
+			final Collection<Membership> members = localDairy.getMemberships();
+			final Object[] memberArray = members.toArray();
+			for (final Object obj : memberArray) {
 				if (obj instanceof Membership) {
-					Membership membership = (Membership) obj;
+					final Membership membership = (Membership) obj;
 					printout(membership, ++count);
 				}
 			}
 			fail("no lazy init?");
-		} catch (LazyInitializationException lie) {
+		} catch (final LazyInitializationException lie) {
 
 		}
 
 		{
-			Collection<Employee> members = localDairy.getEmployees();
-			Object[] memberArray = members.toArray();
-			for (Object obj : memberArray) {
+			final Collection<Employee> members = localDairy.getEmployees();
+			final Object[] memberArray = members.toArray();
+			for (final Object obj : memberArray) {
 				if (obj instanceof Membership) {
-					Employee membership = (Employee) obj;
 					// printout(membership, ++count);
 					++count;
 				}
@@ -171,14 +170,14 @@ public class DairyRepoPerfTest extends ModelPersistenceBase {
 
 	@Test
 	public void testDairyRepoInterruptedNonInit() throws Exception {
-		Session session = getSessionFactory().openSession();
+		final Session session = getSessionFactory().openSession();
 
 		System.out.println("\n  ---- Testing iterate time  ----  \n");
 
 		long count = 0;
 		long time0 = System.currentTimeMillis();
 
-		Dairy localDairy = (Dairy) session.createQuery("From Dairy")
+		final Dairy localDairy = (Dairy) session.createQuery("From Dairy")
 				.uniqueResult();
 		Hibernate.initialize(localDairy);
 		final List<EReference> persistentCollections = Arrays.asList(
@@ -190,7 +189,7 @@ public class DairyRepoPerfTest extends ModelPersistenceBase {
 				DairyPackage.Literals.DAIRY__VEHICLES,
 				DairyPackage.Literals.DAIRY__SUPPLIERS,
 				ModelPackage.Literals.CONTACTABLE__CONTACT_METHODS);
-		for (EStructuralFeature feature : persistentCollections) {
+		for (final EStructuralFeature feature : persistentCollections) {
 			Hibernate.initialize(localDairy.eGet(feature));
 		}
 
@@ -210,25 +209,24 @@ public class DairyRepoPerfTest extends ModelPersistenceBase {
 		System.out.println("\nIterating : ");
 
 		try {
-			Collection<Membership> members = localDairy.getMemberships();
-			Object[] memberArray = members.toArray();
-			for (Object obj : memberArray) {
+			final Collection<Membership> members = localDairy.getMemberships();
+			final Object[] memberArray = members.toArray();
+			for (final Object obj : memberArray) {
 				if (obj instanceof Membership) {
-					Membership membership = (Membership) obj;
+					final Membership membership = (Membership) obj;
 					printout(membership, ++count);
 				}
 			}
 			fail("no lazy init?");
-		} catch (LazyInitializationException lie) {
+		} catch (final LazyInitializationException lie) {
 
 		}
 
 		{
-			Collection<Employee> members = localDairy.getEmployees();
-			Object[] memberArray = members.toArray();
-			for (Object obj : memberArray) {
+			final Collection<Employee> members = localDairy.getEmployees();
+			final Object[] memberArray = members.toArray();
+			for (final Object obj : memberArray) {
 				if (obj instanceof Membership) {
-					Employee membership = (Employee) obj;
 					// printout(membership, ++count);
 					++count;
 				}
@@ -253,12 +251,12 @@ public class DairyRepoPerfTest extends ModelPersistenceBase {
 
 	@Test
 	public void testSizeDifferences() {
-		
-		
+
+
 		printMemoryStats("Before anything...", false);
-		
-		Session session = getSessionFactory().openSession();
-		
+
+		final Session session = getSessionFactory().openSession();
+
 		printMemoryStats("Session created...", false);
 
 		Dairy localDairy = (Dairy) session.createQuery("From Dairy")
@@ -274,19 +272,19 @@ public class DairyRepoPerfTest extends ModelPersistenceBase {
 //				DairyPackage.Literals.DAIRY__SUPPLIERS,
 				ModelPackage.Literals.CONTACTABLE__CONTACT_METHODS
 				);
-		for (EStructuralFeature feature : persistentCollections) {
+		for (final EStructuralFeature feature : persistentCollections) {
 			Hibernate.initialize(localDairy.eGet(feature));
 		}
 
 		printMemoryStats("Dairy Initialized...", false);
 
 		printMemoryStats("...", true);
-		
+
 		localDairy = null;
-		
+
 		printMemoryStats(" null dairy...", true);
 
-		
+
 	}
 
 }

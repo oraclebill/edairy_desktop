@@ -10,8 +10,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 
 public class DuplicateDeliveryValidator implements IValidator {
 
-	private Collection<CollectionJournalLine> searchScope;
-	private String scopeDescription;
+	private final Collection<CollectionJournalLine> searchScope;
+	private final String scopeDescription;
 
 	@SuppressWarnings("unchecked")
 	public DuplicateDeliveryValidator(Collection<?> scope, String scopeDescription) {
@@ -22,10 +22,10 @@ public class DuplicateDeliveryValidator implements IValidator {
 	@Override
 	public IStatus validate(Object value) {
 		if (value instanceof CollectionJournalLine) {
-			CollectionJournalLine testVal = (CollectionJournalLine)value;
-			for (CollectionJournalLine line : searchScope) {
-				if (line.getValidatedMember() == testVal 
-						|| line.getRecordedMember() == null 
+			final CollectionJournalLine testVal = (CollectionJournalLine)value;
+			for (final CollectionJournalLine line : searchScope) {
+				if (line.getValidatedMember() == testVal
+						|| line.getRecordedMember() == null
 								|| line.getRecordedMember().equals(testVal.getRecordedMember())) {
 					return ValidationStatus
 						.warning("Duplicate member delivery found in " + scopeDescription);

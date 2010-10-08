@@ -9,10 +9,10 @@ public interface IDateRangeRidget extends IRidget {
 
 	Date getStartDate();
 	void setStartDate(Date start);
-	
+
 	Date getEndDate();
 	void setEndDate(Date end);
-	
+
 	void bindToModel(IObservableValue startDate, IObservableValue endDate);
 
 }

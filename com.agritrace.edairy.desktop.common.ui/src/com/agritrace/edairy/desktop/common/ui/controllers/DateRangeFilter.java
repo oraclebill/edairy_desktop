@@ -7,7 +7,7 @@ public interface DateRangeFilter {
 
 	/**
 	 * Get a list of filter results for a given date range
-	 * 
+	 *
 	 * @param startDate
 	 *            the startDate String in format of "MM/dd/yyyy"
 	 * @param endDate

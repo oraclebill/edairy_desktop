@@ -6,23 +6,19 @@
  */
 package com.agritrace.edairy.desktop.common.model.base.impl;
 
-import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
-import com.agritrace.edairy.desktop.common.model.base.Contactable;
-import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
+import com.agritrace.edairy.desktop.common.model.base.Contactable;
+import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -72,6 +68,7 @@ public class ContactableImpl extends EObjectImpl implements Contactable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<ContactMethod> getContactMethods() {
 		if (contactMethods == null) {
 			contactMethods = new EObjectContainmentEList<ContactMethod>(ContactMethod.class, this, ModelPackage.CONTACTABLE__CONTACT_METHODS);

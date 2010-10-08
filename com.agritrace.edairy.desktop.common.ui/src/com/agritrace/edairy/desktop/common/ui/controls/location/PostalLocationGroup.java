@@ -11,7 +11,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 public class PostalLocationGroup extends Group {
-	
+
 	public static final String[] DISTRICTS = new String[] { "Baringo District (Kabarnet)", "Bomet District (Bomet)",
 			"Bondo District (Bondo)", "Bungoma District (Bungoma)", "Buret District (Litein)", "Busia (Busia)",
 			"Butere/Mumias District (Butere)", "Embu District (Embu)", "Garissa District (Garissa)",
@@ -49,7 +49,7 @@ public class PostalLocationGroup extends Group {
 
 	/**
 	 * Create the composite.
-	 * 
+	 *
 	 * @param parent
 	 * @param style
 	 */

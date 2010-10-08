@@ -39,7 +39,7 @@ public class ScaleDataImportView extends SubModuleView {
 	/**
 	 * Milk collection entry group - defines: - milk collection entry table -
 	 * list of collection entries. - total label - current total of all entries.
-	 * 
+	 *
 	 * @param parent
 	 * @return
 	 */
@@ -113,7 +113,7 @@ public class ScaleDataImportView extends SubModuleView {
 
 		final Composite buttonPanel = UIControlsFactory.createComposite(parent);
 		buttonPanel.setLayout(new RowLayout());
-		
+
 		UIControlsFactory.createButton(buttonPanel, CANCEL_LABEL, ViewWidgetId.cancelButton);
 		UIControlsFactory.createButton(buttonPanel, SAVE_LABEL, DialogConstants.BIND_ID_BUTTON_SAVE);
 

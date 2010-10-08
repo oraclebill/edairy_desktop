@@ -230,7 +230,7 @@ public enum Mechanism implements Enumerator {
 	 */
 	public static Mechanism get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			Mechanism result = VALUES_ARRAY[i];
+			final Mechanism result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -246,7 +246,7 @@ public enum Mechanism implements Enumerator {
 	 */
 	public static Mechanism getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			Mechanism result = VALUES_ARRAY[i];
+			final Mechanism result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -311,6 +311,7 @@ public enum Mechanism implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getValue() {
 	  return value;
 	}
@@ -320,6 +321,7 @@ public enum Mechanism implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 	  return name;
 	}
@@ -329,6 +331,7 @@ public enum Mechanism implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLiteral() {
 	  return literal;
 	}
@@ -343,5 +346,5 @@ public enum Mechanism implements Enumerator {
 	public String toString() {
 		return literal;
 	}
-	
+
 } //Mechanism

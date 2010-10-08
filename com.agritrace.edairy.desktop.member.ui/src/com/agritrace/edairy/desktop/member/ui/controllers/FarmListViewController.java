@@ -27,7 +27,6 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
-import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
@@ -65,7 +64,7 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 
 	private IActionRidget searchButton;
 	private Membership selectedMember;
-	
+
 	private final IMemberRepository memberRepository;
 	private final Provider<AddFarmDialog> addDialogProvider;
 	private final Provider<ViewFarmDialog> viewDialogProvider;
@@ -88,6 +87,7 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 		}
 	}
 
+	@Override
 	public void refreshTableContents() {
 		farmListTableInput.clear();
 		farmListTableInput.addAll(getFilteredFarmResult());
@@ -132,13 +132,15 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 		farmCombo.bindToModel(new WritableList(farmNames, String.class), String.class, null, new WritableValue());
 	}
 
+	@Override
 	protected void tableBindToModel() {
 		if (table != null) {
 			// location formatter
 			table.setColumnFormatter(4, new ColumnFormatter() {
+				@Override
 				public String getText(Object element) {
 					if (element instanceof FarmListViewTableNode) {
-						Location location = ((FarmListViewTableNode) element).getFarm().getLocation();
+						final Location location = ((FarmListViewTableNode) element).getFarm().getLocation();
 						if (location != null) {
 							final PostalLocation postalLocation = location.getPostalLocation();
 							// StringBuffer sb = new StringBuffer();
@@ -161,7 +163,7 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 	}
 
 	protected List<FarmListViewTableNode> getFilteredFarmResult() {
-		List<Farm> allFarms = new ArrayList<Farm>();
+		final List<Farm> allFarms = new ArrayList<Farm>();
 		if (selectedMember != null) {
 			allFarms.addAll(selectedMember.getMember().getFarms());
 		} else {
@@ -182,6 +184,7 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 
 	}
 
+	@Override
 	protected void handleApplyFilterAction() {
 		// Rebind the updateFromModel to refresh the tables
 		refreshTableContents();
@@ -216,26 +219,26 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 
 	/**
 	 * Open member search dialog, IActionListener for search button
-	 * 
+	 *
 	 */
 	public class MemberLookupAction implements IActionListener {
 		@Override
 		public void callback() {
 			final MemberSearchDialog memberDialog = memberSearchProvider.get();
 			final int retVal = memberDialog.open();
-			
+
 			if (retVal == Window.OK) {
 				selectedMember = memberDialog.getSelectedMember();
-				
+
 				if (selectedMember == null) {
 					Log4r.getLogger(getClass()).log(LogService.LOG_WARNING, "Null member selected from dialog");
 					return;
 				}
-				
+
 				final String memberName = MemberUtil.formattedMemberName(selectedMember.getMember());
 				memberNameFilter.setText(memberName);
 				updateFarmCombo();
-				
+
 				if (searchButton != null) {
 					searchButton.setEnabled(true);
 				}
@@ -267,8 +270,8 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 					message = String.format(DELETE_DIALOG_MESSAGE, message);
 					if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(), DELETE_DIALOG_TITLE, message)) {
 						selectedNode.getMembership().getMember().getFarms().remove(selectedNode.getFarm());
-						(selectedNode.getFarm()).getAnimals().clear();
-						(selectedNode.getFarm()).setLocation(null);
+						selectedNode.getFarm().getAnimals().clear();
+						selectedNode.getFarm().setLocation(null);
 						farmRepository.delete(selectedNode.getFarm());
 						// memberRepository.update(selectedMember);
 						updateFarmCombo();
@@ -301,6 +304,7 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 		return null;
 	}
 
+	@Override
 	protected void handleResetFilterAction() {
 		super.handleResetFilterAction();
 		refreshTableContents();

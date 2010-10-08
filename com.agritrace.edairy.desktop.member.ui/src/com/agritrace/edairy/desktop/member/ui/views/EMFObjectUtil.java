@@ -15,7 +15,7 @@ public class EMFObjectUtil {
 
 	/**
 	 * Create a Farm object
-	 * 
+	 *
 	 * @return
 	 */
 	public static Farm createFarm() {

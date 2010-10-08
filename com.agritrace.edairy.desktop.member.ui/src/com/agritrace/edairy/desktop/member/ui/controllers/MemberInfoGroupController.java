@@ -35,11 +35,11 @@ public class MemberInfoGroupController implements WidgetController<Object> {
 
 	@Override
 	public void configure() {
-		appliedDate = container.getRidget(IDateTimeRidget.class, ViewWidgetId.memberInfo_applicationDate);		
+		appliedDate = container.getRidget(IDateTimeRidget.class, ViewWidgetId.memberInfo_applicationDate);
 		effectiveDate = container.getRidget(IDateTimeRidget.class, ViewWidgetId.memberInfo_effectiveDate);
 		comboStatus = container.getRidget(IComboRidget.class, ViewWidgetId.memberInfo_status);
 		phoneRidget = container.getRidget(ITextRidget.class, ViewWidgetId.memberInfo_phone);
-		
+
 
 		appliedDate.setMandatory(true);
 		appliedDate.setOutputOnly(true);
@@ -85,20 +85,20 @@ public class MemberInfoGroupController implements WidgetController<Object> {
 			effectiveDate.setDate(new Date());
 			return;
 		}
-		
+
 		appliedDate.bindToModel(selectedMember, "applicationDate");
 		effectiveDate.bindToModel(selectedMember, "effectiveDate");
 		phoneRidget.bindToModel(selectedMember, "member.phoneNumber");
 		comboStatus.bindToModel(Observables.staticObservableList(MembershipStatus.VALUES), MembershipStatus.class,
 				null, BeansObservables.observeValue(selectedMember, "status"));
 
-		
+
 		comboStatus.updateFromModel();
 		appliedDate.updateFromModel();
 		effectiveDate.updateFromModel();
 		phoneRidget.updateFromModel();
 		comboStatus.updateFromModel();
-		
+
 //		comboStatus.setSelection(selectedMember.getStatus().getValue());
 	}
 }

@@ -6,9 +6,9 @@
  */
 package com.agritrace.edairy.desktop.common.model.tracking;
 
-import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
-
 import org.eclipse.emf.ecore.EObject;
+
+import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
 
 /**
  * <!-- begin-user-doc -->
