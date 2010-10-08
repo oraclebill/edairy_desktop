@@ -17,12 +17,12 @@ import com.agritrace.edairy.desktop.system.ui.constants.RoleFilterBinding;
 
 public final class RoleDirectoryView extends AbstractDirectoryView {
 	public static final String ID = "edairy.system.roles.directory";
-	
+
 	@Override
 	protected void createFilterConditions(Composite comp) {
 		setPartName("Security Roles");
-		
-		Composite parent = UIControlsFactory.createComposite(comp);
+
+		final Composite parent = UIControlsFactory.createComposite(comp);
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(parent);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(parent);
 

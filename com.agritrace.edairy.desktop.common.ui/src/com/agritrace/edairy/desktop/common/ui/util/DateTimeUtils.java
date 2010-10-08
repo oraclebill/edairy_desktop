@@ -14,8 +14,8 @@ import org.eclipse.swt.widgets.Control;
 
 /**
  * Utilities class for Date Time
- * 
- * 
+ *
+ *
  */
 public class DateTimeUtils {
 
@@ -24,12 +24,12 @@ public class DateTimeUtils {
 	 * Uses european format - day/month/year
 	 */
 	public static String DEFAULT_DATE_PATTERN = "dd/MM/yyyy";
-	
+
 	/**
 	 * Default date format instance
 	 */
 	public static DateFormat DATE_FORMAT = new SimpleDateFormat(DEFAULT_DATE_PATTERN);
-	
+
 	/**
 	 * Date to String converter using default date pattern
 	 */
@@ -39,7 +39,7 @@ public class DateTimeUtils {
 
 	/**
 	 * Dispose composite's children recursively
-	 * 
+	 *
 	 * @param comp
 	 */
 	public static void disposeAllChildrens(Composite comp) {
@@ -58,7 +58,7 @@ public class DateTimeUtils {
 
 	/**
 	 * Get the current date
-	 * 
+	 *
 	 * @return date one month ago, {@link Date}
 	 */
 	public static Date getCurrentDate() {
@@ -68,7 +68,7 @@ public class DateTimeUtils {
 
 	/**
 	 * Get the formatted String of the current date.
-	 * 
+	 *
 	 * @return the formatted String "MM/dd/yyyy"
 	 */
 	public static String getCurrentDateString() {
@@ -78,7 +78,7 @@ public class DateTimeUtils {
 
 	/**
 	 * Gets the first day of month of current time
-	 * 
+	 *
 	 * @return
 	 */
 	public static String getFirstDayofMonth() {
@@ -87,7 +87,7 @@ public class DateTimeUtils {
 
 	/**
 	 * Gets the first day of month of specific date
-	 * 
+	 *
 	 * @param date
 	 *            Specific date
 	 * @return First Day String
@@ -99,7 +99,7 @@ public class DateTimeUtils {
 
 	/**
 	 * Gets the first day of a month
-	 * 
+	 *
 	 * @param date
 	 *            One day in a month
 	 * @return
@@ -113,7 +113,7 @@ public class DateTimeUtils {
 
 	/**
 	 * Gets the first day of month of current time
-	 * 
+	 *
 	 * @return
 	 */
 	public static String getLastDayofMonth() {
@@ -122,7 +122,7 @@ public class DateTimeUtils {
 
 	/**
 	 * Gets the first day of month of specific date
-	 * 
+	 *
 	 * @param date
 	 *            Specific date
 	 * @return First Day String
@@ -134,7 +134,7 @@ public class DateTimeUtils {
 
 	/**
 	 * Gets the last day of a month
-	 * 
+	 *
 	 * @param date
 	 *            One day in a month
 	 * @return
@@ -151,7 +151,7 @@ public class DateTimeUtils {
 
 	/**
 	 * Add one day to specific date
-	 * 
+	 *
 	 * @param date
 	 * @return
 	 */
@@ -164,7 +164,7 @@ public class DateTimeUtils {
 
 	/**
 	 * Get one month date before the current date
-	 * 
+	 *
 	 * @return date one month ago, {@link Date}
 	 */
 	public static Date getOneMonthBeforeCurrentDate() {
@@ -175,7 +175,7 @@ public class DateTimeUtils {
 
 	/**
 	 * Get the formatted String of the date one month before the current date.
-	 * 
+	 *
 	 * @return the formatted String "MM/dd/yyyy"
 	 */
 	public static String getOneMonthBeforeCurrentDateString() {

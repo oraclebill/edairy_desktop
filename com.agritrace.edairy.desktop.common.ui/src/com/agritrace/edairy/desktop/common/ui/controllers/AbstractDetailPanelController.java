@@ -14,18 +14,18 @@ public abstract class AbstractDetailPanelController<T extends EObject> {
 	private T model;
 
 	public void checkValid() {
-	
+
 	}
-	
+
 	public void configureAndBind() {
 		if (container == null) {
 			throw new IllegalStateException("RidgetContainer must be set before configureAndBind");
 		}
-		
+
 		if (model == null) {
 			throw new IllegalStateException("Model must be set before configureAndBind");
 		}
-		
+
 		createMapper();
 		bindRidgets();
 		bindMappedRidgets();
@@ -34,7 +34,7 @@ public abstract class AbstractDetailPanelController<T extends EObject> {
 	public T getModel() {
 		return model;
 	}
-	
+
 	public void setModel(T model) {
 		this.model = model;
 	}
@@ -42,7 +42,7 @@ public abstract class AbstractDetailPanelController<T extends EObject> {
 	public IRidgetContainer getRidgetContainer() {
 		return container;
 	}
-	
+
 	public void setRidgetContainer(IRidgetContainer container) {
 		this.container = container;
 	}
@@ -54,7 +54,7 @@ public abstract class AbstractDetailPanelController<T extends EObject> {
 	private void createMapper() {
 		mapper = new BindingHelper<T>(container, model);
 	}
-	
+
 	protected BindingHelper<T> getMapper() {
 		return mapper;
 	}
@@ -63,12 +63,12 @@ public abstract class AbstractDetailPanelController<T extends EObject> {
 
 	protected void enableMandatoryRidget(IRidget ridget, boolean enabled) {
 		ridget.setEnabled(enabled);
-		
+
 		if (ridget instanceof ITextRidget) {
-			ITextRidget editable = (ITextRidget) ridget;
+			final ITextRidget editable = (ITextRidget) ridget;
 			editable.setMandatory(enabled);
 		} else if (ridget instanceof IComboRidget) {
-			IComboRidget editable = (IComboRidget) ridget;
+			final IComboRidget editable = (IComboRidget) ridget;
 			editable.setMandatory(enabled);
 		}
 		// else if (ridget instanceof ILabelRidget) {

@@ -9,6 +9,7 @@ public class OwnshipRowRidget extends AbstractCompositeRidget implements IRowRid
 
 	private String rowData;
 
+	@Override
 	public void setData(final Object rowData) {
 		this.rowData = (String) rowData;
 	}

@@ -30,7 +30,7 @@ public class VehicleEditDialog extends RecordDialog<Vehicle> {
 		comonComp.setLayout(new GridLayout(1, true));
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(comonComp);
 
-		VehicleLogDetailComposite details = new VehicleLogDetailComposite(comonComp);
+		final VehicleLogDetailComposite details = new VehicleLogDetailComposite(comonComp);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(details);
 
 		parent.pack();

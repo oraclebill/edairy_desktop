@@ -118,7 +118,7 @@ public class DateRangeSearchController {
 		new Exception().printStackTrace();
 		this.filter = filter;
 	}
-	
+
 	public void resetDates(){
 		startDate.setDate(DateTimeUtils.getOneMonthBeforeCurrentDate());
 		endDate.setDate(DateTimeUtils.getCurrentDate());

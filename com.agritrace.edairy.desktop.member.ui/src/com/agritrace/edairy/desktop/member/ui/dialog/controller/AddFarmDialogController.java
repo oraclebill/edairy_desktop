@@ -25,7 +25,7 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.data.FarmListViewTableNode;
 
 public class AddFarmDialogController extends BaseDialogController<Farm> {
-	
+
 	private class AddPropertyChangedListener implements PropertyChangeListener {
 
 		@Override
@@ -44,7 +44,7 @@ public class AddFarmDialogController extends BaseDialogController<Farm> {
 	public static final String FARM_MEMBER_ID_LABEL_PREFIX = "Member Id :";
 	public static final String FARM_MEMBER_NAME_LABEL_PREFIX = "Member Name :";
 	public static final String FARM_NAME_LABEL_PREFIX = "Farm Name :";
-	
+
 
 	private ILabelRidget farmIdRidget;
 
@@ -79,7 +79,7 @@ public class AddFarmDialogController extends BaseDialogController<Farm> {
 		addPropertyChangedListener();
 		enableSaveButton(validate());
 	}
-	
+
 	protected void configureTabs(){
 		locationProfileController = new LocationProfileWidgetController(this);
 
@@ -154,12 +154,12 @@ public class AddFarmDialogController extends BaseDialogController<Farm> {
 	}
 
 	protected void updateUpperPanelBinding() {
-		if ((selectedNode != null) && (selectedNode.getMembership() != null)) {
+		if (selectedNode != null && selectedNode.getMembership() != null) {
 			final Farm selectedFarm = selectedNode.getFarm();
 			farmNameTextRidget.bindToModel(EMFObservables.observeValue(selectedNode.getFarm(),
 					TrackingPackage.Literals.FARM__NAME));
 			farmNameTextRidget.updateFromModel();
-			if ((farmNameRidget != null) && (selectedFarm.getFarmId() != null)) {
+			if (farmNameRidget != null && selectedFarm.getFarmId() != null) {
 				farmNameRidget.setText("Farm " + farmNameTextRidget.getText());
 			}
 
@@ -206,7 +206,7 @@ public class AddFarmDialogController extends BaseDialogController<Farm> {
 		return true;
 
 	}
-	
+
 
 
 }

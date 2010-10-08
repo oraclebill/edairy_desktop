@@ -17,7 +17,7 @@ import org.eclipse.swt.widgets.Text;
 import com.agritrace.edairy.desktop.common.ui.controls.CompositePanel;
 
 public class AssetInfo extends CompositePanel implements IComplexComponent {
-	
+
 	static {
 		// TODO: should this be in the activator?
 		SwtControlRidgetMapper.getInstance().addMapping(AssetInfo.class, AssetInfoRidget.class);
@@ -35,7 +35,7 @@ public class AssetInfo extends CompositePanel implements IComplexComponent {
 	public AssetInfo(Composite parent, int style) {
 		super(parent, style);
 		setLayout(GridLayoutFactory.swtDefaults().numColumns(2).create());
-		
+
 		// Date Acquired
 		UIControlsFactory.createLabel(this, "Date Acquired");
 		final DateTime dateAcqText = UIControlsFactory.createDate(this, SWT.MEDIUM|SWT.BORDER,

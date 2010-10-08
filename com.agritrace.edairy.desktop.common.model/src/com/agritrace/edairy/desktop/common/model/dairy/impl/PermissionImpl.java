@@ -6,17 +6,15 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.PermissionNamespace;
-
-import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -129,6 +127,7 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Long getId() {
 		return id;
 	}
@@ -138,11 +137,13 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setId(Long newId) {
-		Long oldId = id;
+		final Long oldId = id;
 		id = newId;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.PERMISSION__ID, oldId, id));
+		}
 	}
 
 	/**
@@ -150,13 +151,15 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PermissionNamespace getNamespace() {
 		if (namespace != null && namespace.eIsProxy()) {
-			InternalEObject oldNamespace = (InternalEObject)namespace;
+			final InternalEObject oldNamespace = (InternalEObject)namespace;
 			namespace = (PermissionNamespace)eResolveProxy(oldNamespace);
 			if (namespace != oldNamespace) {
-				if (eNotificationRequired())
+				if (eNotificationRequired()) {
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.PERMISSION__NAMESPACE, oldNamespace, namespace));
+				}
 			}
 		}
 		return namespace;
@@ -176,11 +179,13 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNamespace(PermissionNamespace newNamespace) {
-		PermissionNamespace oldNamespace = namespace;
+		final PermissionNamespace oldNamespace = namespace;
 		namespace = newNamespace;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.PERMISSION__NAMESPACE, oldNamespace, namespace));
+		}
 	}
 
 	/**
@@ -188,6 +193,7 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -197,11 +203,13 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
-		String oldName = name;
+		final String oldName = name;
 		name = newName;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.PERMISSION__NAME, oldName, name));
+		}
 	}
 
 	/**
@@ -209,6 +217,7 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDisplayName() {
 		return displayName;
 	}
@@ -218,11 +227,13 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDisplayName(String newDisplayName) {
-		String oldDisplayName = displayName;
+		final String oldDisplayName = displayName;
 		displayName = newDisplayName;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.PERMISSION__DISPLAY_NAME, oldDisplayName, displayName));
+		}
 	}
 
 	/**
@@ -236,7 +247,9 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 			case DairyPackage.PERMISSION__ID:
 				return getId();
 			case DairyPackage.PERMISSION__NAMESPACE:
-				if (resolve) return getNamespace();
+				if (resolve) {
+					return getNamespace();
+				}
 				return basicGetNamespace();
 			case DairyPackage.PERMISSION__NAME:
 				return getName();
@@ -321,9 +334,11 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy()) {
+			return super.toString();
+		}
 
-		StringBuffer result = new StringBuffer(super.toString());
+		final StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (id: ");
 		result.append(id);
 		result.append(", name: ");

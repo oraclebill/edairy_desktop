@@ -9,7 +9,7 @@ public class Activator extends RienaActivator {
 	public static Activator getDefault() {
 		return DEFAULT;
 	}
-	
+
 	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);

@@ -14,33 +14,33 @@ public abstract class PWPage extends WizardPage {
 	}
 
 	protected int getInt(String key) {
-		int ret = 0; 
+		int ret = 0;
 		try {
 			ret = getWizard().getDialogSettings().getInt(key);
-		} catch( NumberFormatException nfe) {
+		} catch( final NumberFormatException nfe) {
 			;
 		}
-		return ret;		
+		return ret;
 	}
 
 	protected String get(String key) {
-		String ret = null; 
+		String ret = null;
 		try {
 			ret = getWizard().getDialogSettings().get(key);
-		} catch( NumberFormatException nfe) {
+		} catch( final NumberFormatException nfe) {
 			;
 		}
-		return ret;		
+		return ret;
 	}
 
 	protected void put(String key, String value) {
 		getWizard().getDialogSettings().put(key, value);
 	}
-	
+
 	protected void put(String key, int value) {
 		getWizard().getDialogSettings().put(key, value);
 	}
-	
+
 	protected void put(String key, String[] value) {
 		getWizard().getDialogSettings().put(key, value);
 	}

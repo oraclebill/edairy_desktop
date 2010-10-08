@@ -128,10 +128,11 @@ public class DairyUtil {
 
 	public static Container createContainer(ContainerType type, UnitOfMeasure unit, Farm farm, double campacity) {
 		Container container;
-		if(type == ContainerType.BIN)
+		if(type == ContainerType.BIN) {
 			container = DairyFactory.eINSTANCE.createDairyContainer();
-		else
+		} else {
 			container = TrackingFactory.eINSTANCE.createContainer();
+		}
 //		container.setType(type);
 		container.setMeasureType(unit);
 		container.setOwner(farm);
@@ -206,7 +207,7 @@ public class DairyUtil {
 	/**
 	 * Create a farmer using the location of his first farm as the farmers
 	 * location. If there are no farms, use a 'blank' location.
-	 * 
+	 *
 	 * @param givenName
 	 * @param middleName
 	 * @param familyName
@@ -217,7 +218,7 @@ public class DairyUtil {
 	public static Farmer createFarmer(String givenName, String middleName, String familyName, String phoneNumber,
 			Collection<Farm> farms) {
 		Location loc = null;
-		if ((null != farms) && (farms.size() > 0)) {
+		if (null != farms && farms.size() > 0) {
 			loc = farms.iterator().next().getLocation();
 		}
 		return createFarmer(givenName, middleName, familyName, phoneNumber, loc, null, farms);
@@ -226,7 +227,7 @@ public class DairyUtil {
 	/**
 	 * Create a farmer who resides at the location of their one and only farm -
 	 * probably the most common case.
-	 * 
+	 *
 	 * @param givenName
 	 * @param middleName
 	 * @param familyName
@@ -247,7 +248,7 @@ public class DairyUtil {
 
 	/**
 	 * Create a farmer with the most common 'Person' related fields set.
-	 * 
+	 *
 	 * @param givenName
 	 * @param middleName
 	 * @param familyName
@@ -271,7 +272,7 @@ public class DairyUtil {
 
 	/**
 	 * Create a generic request that can be specialized to Vet or AI.
-	 * 
+	 *
 	 * @param dairy
 	 * @param member
 	 * @param farm
@@ -291,7 +292,7 @@ public class DairyUtil {
 
 	public static Location createLocation(PostalLocation pLoc, MapLocation mLoc, DescriptiveLocation dLoc) {
 		final Location loc = ModelFactory.eINSTANCE.createLocation();
-		if ((pLoc == null) && (mLoc == null) && (dLoc == null)) {
+		if (pLoc == null && mLoc == null && dLoc == null) {
 			dLoc = createDescriptiveLocation("", "");
 			mLoc = createMapLocation(0, 0);
 			pLoc = createPostalLocation("", "", "", "");
@@ -325,7 +326,7 @@ public class DairyUtil {
 
 	/**
 	 * Create a new membership.
-	 * 
+	 *
 	 * @param memberId
 	 * @param applicationDate
 	 * @param effectiveDate
@@ -353,10 +354,10 @@ public class DairyUtil {
 			applicationDate = new Date();
 		}
 		member.setApplicationDate(applicationDate);
-		
+
 		member.setAccount(AccountFactory.eINSTANCE.createAccount());
 		member.getAccount().setAccountNumber("");
-		
+
 		return member;
 	}
 
@@ -372,7 +373,7 @@ public class DairyUtil {
 
 	/**
 	 * Create a person, ensuring proper initialization.
-	 * 
+	 *
 	 * @param givenName
 	 * @param middleName
 	 * @param familyName
@@ -421,7 +422,7 @@ public class DairyUtil {
 
 	/**
 	 * Create a new ReferenceAnimalType
-	 * 
+	 *
 	 * @param species
 	 * @param breed
 	 * @return
@@ -474,7 +475,7 @@ public class DairyUtil {
 	public static Customer createCustomer(String companyName, String legalName, String type, String status) throws ParseException {
 		return createCustomer(companyName, legalName, type, status, NO_PERSONS, NO_CONTACTS);
 	}
-	
+
 	public static Customer createCustomer(String companyName, String legalName, String type, String status, Collection<Person> contacts,
 			Collection<ContactMethod> contactMethods) throws ParseException {
 		final Customer customer = DairyFactory.eINSTANCE.createCustomer();

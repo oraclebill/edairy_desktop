@@ -55,9 +55,9 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 		}
 	}
 
-	private List<Object> uiControls = new LinkedList<Object>();
+	private final List<Object> uiControls = new LinkedList<Object>();
 	private Text dateText;
-	private TraverseListener traverseListener = new JournalHeaderTraverseListener();
+	private final TraverseListener traverseListener = new JournalHeaderTraverseListener();
 
 	public JournalHeaderComposite(Composite parent, int style) {
 		super(parent, style);
@@ -132,7 +132,7 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 	protected Composite createSubHeaderGroup(Composite parent) {
 		final Group group = createGroup(parent, MILK_BOOK_GROUP_TITLE, ViewWidgetId.milkGroup);
 		GridLayoutFactory.fillDefaults().margins(4, 2).numColumns(5).applyTo(group);
-		GridDataFactory factory = GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING)
+		final GridDataFactory factory = GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BEGINNING)
 				.hint(MINIMUM_LABEL_WIDTH, -1).grab(true, false);
 
 		{
@@ -186,7 +186,7 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 
 
 	private Group createGroup(Composite parent, String title, String bindingId) {
-		Group group = new Group(parent, SWT.BORDER);
+		final Group group = new Group(parent, SWT.BORDER);
 		group.setText(title);
 		SWTBindingPropertyLocator.getInstance().setBindingProperty(group, bindingId);
 		group.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));

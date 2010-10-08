@@ -38,7 +38,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class ViewContainerDialogController extends BaseDialogController<Farm> implements ISelectionListener {
-	
+
 	public static final String FARM_MEMBER_NAME_LABEL_PREFIX = "Member Name :";
 
 	ITextRidget capacity;
@@ -55,9 +55,9 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 	ITextRidget memberNameRidget;
 	IActionRidget memberLookupBtn;
 	private boolean enableLookupBtn;
-	
+
 	private final Provider<MemberSearchDialog> memberSearchProvider;
-	
+
 	@Inject
 	public ViewContainerDialogController(final Provider<MemberSearchDialog> memberSearchProvider) {
 		this.memberSearchProvider = memberSearchProvider;
@@ -86,8 +86,8 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 		memberNameRidget.setDirectWriting(true);
 		memberLookupBtn = getRidget(IActionRidget.class, ViewWidgetId.FARM_LIST_SEARCH_BUTTON);
 		memberLookupBtn.addListener(new MemberLookupAction());
-		
-		String enableLookup = (String) getContext(ControllerContextConstant.ENABLE_LOOKUP);
+
+		final String enableLookup = (String) getContext(ControllerContextConstant.ENABLE_LOOKUP);
 		if(enableLookup != null && enableLookup.equalsIgnoreCase("false")){
 			enableLookupBtn = false;
 		}
@@ -95,7 +95,7 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 
 		selectedContainer = (Container) getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
 		farmList = (List<Farm>) getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST);
-		Object selected = getContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER);
+		final Object selected = getContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER);
 		if(selected instanceof Membership){
 			selectedMember =((Membership) selected).getMember();
 
@@ -103,11 +103,11 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 			selectedMember =(Farmer) selected;
 
 		}
-		
+
 		if(selectedMember != null){
 			memberNameRidget.setText( MemberUtil.formattedMemberName(selectedMember));
 		}
-	
+
 		if (selectedContainer != null) {
 			if (selectedContainer.getContainerId() != null) {
 				idLabel.setText(selectedContainer.getContainerId().toString());
@@ -137,7 +137,7 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 
 			}, ValidationTime.ON_UI_CONTROL_EDIT);
 
-			if ((farmList == null) && (selectedContainer.getOwner() != null)) {
+			if (farmList == null && selectedContainer.getOwner() != null) {
 				farmList = new ArrayList<Farm>();
 				farmList.add(selectedContainer.getOwner());
 			}
@@ -158,7 +158,7 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 			unitCombo.updateFromModel();
 			unitCombo.addSelectionListener(this);
 			unitCombo.setSelection(selectedContainer.getMeasureType());
-			
+
 
 //			typeCombo.bindToModel(Observables.staticObservableList(ContainerType.VALUES), ContainerType.class, null,
 //					new WritableValue());
@@ -219,20 +219,20 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 			}
 		});
 	}
-	
+
 	/**
 	 * Open member search dialog, IActionListener for search button
-	 * 
+	 *
 	 */
 	public class MemberLookupAction implements IActionListener {
 		@Override
 		public void callback() {
 			final MemberSearchDialog memberDialog = memberSearchProvider.get();;
 			final int retVal = memberDialog.open();
-			
+
 			if (retVal == Window.OK) {
-				Membership memberShip = memberDialog.getSelectedMember();
-				
+				final Membership memberShip = memberDialog.getSelectedMember();
+
 				if (memberShip != null) {
 					final String memberName = MemberUtil.formattedMemberName(memberShip.getMember());
 					memberNameRidget.setText(memberName);

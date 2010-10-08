@@ -14,7 +14,7 @@ import com.agritrace.edairy.desktop.common.ui.controls.IDataChangeListener;
 import com.agritrace.edairy.desktop.common.ui.controls.location.ViewWidgetId;
 
 public class DirectionGroupController implements WidgetController<DescriptiveLocation> {
-	private ListenerList<IDataChangeListener> listeners = new ListenerList<IDataChangeListener>(IDataChangeListener.class);
+	private final ListenerList<IDataChangeListener> listeners = new ListenerList<IDataChangeListener>(IDataChangeListener.class);
 
 	private IRidgetContainer container;
 	private ITextRidget directionsTxt;
@@ -41,12 +41,12 @@ public class DirectionGroupController implements WidgetController<DescriptiveLoc
 
 			@Override
 			public void focusLost(FocusEvent event) {
-				for (IDataChangeListener listener: listeners.getListeners()) {
+				for (final IDataChangeListener listener: listeners.getListeners()) {
 					listener.dataChanged();
 				}
 			}
 		};
-		
+
 		landmarkTxt = container.getRidget(ITextRidget.class, ViewWidgetId.LANDMARK_TEXT);
 		landmarkTxt.addFocusListener(listener);
 		directionsTxt = container.getRidget(ITextRidget.class, ViewWidgetId.DIRECTIONS_TEXT);
@@ -70,7 +70,7 @@ public class DirectionGroupController implements WidgetController<DescriptiveLoc
 
 	@Override
 	public void setInputModel(DescriptiveLocation model) {
-		this.location = (DescriptiveLocation) model;
+		this.location = model;
 		if (container != null) {
 			updateBinding();
 		}

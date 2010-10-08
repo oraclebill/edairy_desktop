@@ -17,9 +17,9 @@ public class FinanceModule extends AbstractModule {
 		list.add(MilkPriceJournalController.class);
 		list.add(MemberPaymentsViewController.class);
 	}
-	
+
 	@Override
 	protected void configure() {
-		
+
 	}
 }

@@ -14,7 +14,7 @@ import java.util.Map;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.window.Window;
 import org.eclipse.riena.ui.core.uiprocess.UIProcess;
 import org.eclipse.ui.handlers.HandlerUtil;
 
@@ -28,7 +28,7 @@ import com.google.inject.Provider;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
- * 
+ *
  * @see org.eclipse.core.commands.IHandler
  * @see org.eclipse.core.commands.AbstractHandler
  */
@@ -37,16 +37,16 @@ public class ImportEmployeesHandler extends HandlerBase {
 	private class EmployeeImportProcess extends UIProcess {
 		final File importFile;
 		final int lineCount;
-		private List<String> msgList;
-		private List<Employee> successes;
-		private Map<String, List<String[]>> errors;
+		private final List<String> msgList;
+		private final List<Employee> successes;
+		private final Map<String, List<String[]>> errors;
 
 		public EmployeeImportProcess(File importFile, int lineCount,
 				Object navigationNode) {
 			super("Import Employees", true, navigationNode);
 			this.importFile = importFile;
 			this.lineCount = lineCount;
-			
+
 			msgList = new LinkedList<String>();
 			successes = new LinkedList<Employee>();
 			errors = new HashMap<String, List<String[]>>();
@@ -59,10 +59,10 @@ public class ImportEmployeesHandler extends HandlerBase {
 
 		@Override
 		public void finalUpdateUI() {
-			boolean importEnabled = successes.size() > 0;
-			ImportResultsDialog irDialog = new ImportResultsDialog(
+			final boolean importEnabled = successes.size() > 0;
+			final ImportResultsDialog irDialog = new ImportResultsDialog(
 					HandlerUtil.getActiveShell(event), msgList, importEnabled);
-			if (irDialog.open() == Dialog.OK) {
+			if (irDialog.open() == Window.OK) {
 				saveEmployees(successes);
 			}
 		}
@@ -81,22 +81,22 @@ public class ImportEmployeesHandler extends HandlerBase {
 					toolProvider.get().processFile(input, successes, errors, monitor);
 					msgList.add(String.format(
 							"%-4d records imported successfully.", successes.size()));
-					for (String err : errors.keySet()) {
+					for (final String err : errors.keySet()) {
 						msgList.add(String.format(
 								"%-4d records failed with a '%s' error.", errors
 										.get(err).size(), err));
 					}
 					monitor.setTaskName("Saving members...");
 				}
-				catch(ValidationException ve) {
+				catch(final ValidationException ve) {
 					msgList.add(String.format(
 							"Import failed with message: '%s'", ve.getMessage()));
 				}
 
-			} catch (FileNotFoundException e) {
+			} catch (final FileNotFoundException e) {
 				e.printStackTrace();
 				return false;
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				e.printStackTrace();
 				return false;
 			} finally {
@@ -104,7 +104,7 @@ public class ImportEmployeesHandler extends HandlerBase {
 				if (input != null) {
 					try {
 						input.close();
-					} catch (IOException ioe) {
+					} catch (final IOException ioe) {
 						;
 					}
 				}
@@ -112,9 +112,9 @@ public class ImportEmployeesHandler extends HandlerBase {
 
 			return true;
 		}
-		
+
 		private void saveEmployees(List<Employee> successes2) {
-			IDairyRepository dairyRepo = repoProvider.get();
+			final IDairyRepository dairyRepo = repoProvider.get();
 			dairyRepo.getLocalDairy().getEmployees()
 					.addAll(successes2);
 			dairyRepo.save();
@@ -125,7 +125,7 @@ public class ImportEmployeesHandler extends HandlerBase {
 	}
 
 	private ExecutionEvent event;
-	
+
 	@Inject private static Provider<IDairyRepository> repoProvider;
 	@Inject private static Provider<EmployeeImportTool> toolProvider;
 
@@ -139,15 +139,16 @@ public class ImportEmployeesHandler extends HandlerBase {
 	 * the command has been executed, so extract extract the needed information
 	 * from the application context.
 	 */
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		this.event = event;
-		Object navigationContext = getNavigationContext(event);
+		final Object navigationContext = getNavigationContext(event);
 
 		try {
-			File importFile = new File(getImportFile(event));
-			int lineCount = countLines(importFile);
+			final File importFile = new File(getImportFile(event));
+			final int lineCount = countLines(importFile);
 
-			UIProcess process = new EmployeeImportProcess(importFile,
+			final UIProcess process = new EmployeeImportProcess(importFile,
 					lineCount, navigationContext);
 			// job.setProperty(UIProcess.PROPERTY_CONTEXT, navigationContext);
 			// job.setUser(true);// to be visualized the job has to be user
@@ -156,7 +157,7 @@ public class ImportEmployeesHandler extends HandlerBase {
 			process.setNote("Importing...");
 			process.start();
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			throw new ExecutionException("Import operation failed.", e);
 		}
 		return null;

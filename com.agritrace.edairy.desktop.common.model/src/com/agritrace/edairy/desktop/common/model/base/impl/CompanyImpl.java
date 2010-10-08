@@ -6,25 +6,21 @@
  */
 package com.agritrace.edairy.desktop.common.model.base.impl;
 
-import com.agritrace.edairy.desktop.common.model.base.Company;
-import com.agritrace.edairy.desktop.common.model.base.Location;
-import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
-import com.agritrace.edairy.desktop.common.model.base.Person;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import com.agritrace.edairy.desktop.common.model.base.Company;
+import com.agritrace.edairy.desktop.common.model.base.Location;
+import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+import com.agritrace.edairy.desktop.common.model.base.Person;
 
 /**
  * <!-- begin-user-doc -->
@@ -211,6 +207,7 @@ public class CompanyImpl extends ContactableImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLegalName() {
 		return legalName;
 	}
@@ -220,11 +217,13 @@ public class CompanyImpl extends ContactableImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLegalName(String newLegalName) {
-		String oldLegalName = legalName;
+		final String oldLegalName = legalName;
 		legalName = newLegalName;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__LEGAL_NAME, oldLegalName, legalName));
+		}
 	}
 
 	/**
@@ -232,6 +231,7 @@ public class CompanyImpl extends ContactableImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getCompanyName() {
 		return companyName;
 	}
@@ -241,11 +241,13 @@ public class CompanyImpl extends ContactableImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCompanyName(String newCompanyName) {
-		String oldCompanyName = companyName;
+		final String oldCompanyName = companyName;
 		companyName = newCompanyName;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__COMPANY_NAME, oldCompanyName, companyName));
+		}
 	}
 
 	/**
@@ -253,6 +255,7 @@ public class CompanyImpl extends ContactableImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Person> getContacts() {
 		if (contacts == null) {
 			contacts = new EObjectContainmentEList<Person>(Person.class, this, ModelPackage.COMPANY__CONTACTS);
@@ -265,6 +268,7 @@ public class CompanyImpl extends ContactableImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Location getLocation() {
 		return location;
 	}
@@ -275,11 +279,15 @@ public class CompanyImpl extends ContactableImpl implements Company {
 	 * @generated
 	 */
 	public NotificationChain basicSetLocation(Location newLocation, NotificationChain msgs) {
-		Location oldLocation = location;
+		final Location oldLocation = location;
 		location = newLocation;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__LOCATION, oldLocation, newLocation);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+			final ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__LOCATION, oldLocation, newLocation);
+			if (msgs == null) {
+				msgs = notification;
+			} else {
+				msgs.add(notification);
+			}
 		}
 		return msgs;
 	}
@@ -289,18 +297,24 @@ public class CompanyImpl extends ContactableImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLocation(Location newLocation) {
 		if (newLocation != location) {
 			NotificationChain msgs = null;
-			if (location != null)
+			if (location != null) {
 				msgs = ((InternalEObject)location).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.COMPANY__LOCATION, null, msgs);
-			if (newLocation != null)
+			}
+			if (newLocation != null) {
 				msgs = ((InternalEObject)newLocation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.COMPANY__LOCATION, null, msgs);
+			}
 			msgs = basicSetLocation(newLocation, msgs);
-			if (msgs != null) msgs.dispatch();
+			if (msgs != null) {
+				msgs.dispatch();
+			}
 		}
-		else if (eNotificationRequired())
+		else if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__LOCATION, newLocation, newLocation));
+		}
 	}
 
 	/**
@@ -308,6 +322,7 @@ public class CompanyImpl extends ContactableImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
@@ -317,11 +332,13 @@ public class CompanyImpl extends ContactableImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPhoneNumber(String newPhoneNumber) {
-		String oldPhoneNumber = phoneNumber;
+		final String oldPhoneNumber = phoneNumber;
 		phoneNumber = newPhoneNumber;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__PHONE_NUMBER, oldPhoneNumber, phoneNumber));
+		}
 	}
 
 	/**
@@ -329,6 +346,7 @@ public class CompanyImpl extends ContactableImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Long getCompanyId() {
 		return companyId;
 	}
@@ -338,11 +356,13 @@ public class CompanyImpl extends ContactableImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCompanyId(Long newCompanyId) {
-		Long oldCompanyId = companyId;
+		final Long oldCompanyId = companyId;
 		companyId = newCompanyId;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__COMPANY_ID, oldCompanyId, companyId));
+		}
 	}
 
 	/**
@@ -350,6 +370,7 @@ public class CompanyImpl extends ContactableImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -359,11 +380,13 @@ public class CompanyImpl extends ContactableImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDescription(String newDescription) {
-		String oldDescription = description;
+		final String oldDescription = description;
 		description = newDescription;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__DESCRIPTION, oldDescription, description));
+		}
 	}
 
 	/**
@@ -371,6 +394,7 @@ public class CompanyImpl extends ContactableImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getProfilePhoto() {
 		return profilePhoto;
 	}
@@ -380,11 +404,13 @@ public class CompanyImpl extends ContactableImpl implements Company {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setProfilePhoto(String newProfilePhoto) {
-		String oldProfilePhoto = profilePhoto;
+		final String oldProfilePhoto = profilePhoto;
 		profilePhoto = newProfilePhoto;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__PROFILE_PHOTO, oldProfilePhoto, profilePhoto));
+		}
 	}
 
 	/**
@@ -540,9 +566,11 @@ public class CompanyImpl extends ContactableImpl implements Company {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy()) {
+			return super.toString();
+		}
 
-		StringBuffer result = new StringBuffer(super.toString());
+		final StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (legalName: ");
 		result.append(legalName);
 		result.append(", companyName: ");

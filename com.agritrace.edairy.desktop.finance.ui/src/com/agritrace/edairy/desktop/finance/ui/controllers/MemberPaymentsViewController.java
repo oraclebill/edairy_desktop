@@ -2,7 +2,7 @@ package com.agritrace.edairy.desktop.finance.ui.controllers;
 
 import java.util.List;
 
-import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
@@ -46,7 +46,7 @@ public class MemberPaymentsViewController extends
 				new BlankColumnFormatter());
 		addTableColumn("Run On", DairyPackage.Literals.MEMBER_PAYMENT__ENTRY_DATE);
 		addTableColumn("By", DairyPackage.Literals.MEMBER_PAYMENT__ENTERED_BY);
-		
+
 		this.paymentsWizard  = paymentsWizard;
 	}
 
@@ -56,20 +56,20 @@ public class MemberPaymentsViewController extends
 	}
 
 	private void handlePaymentButton() {
-		Shell shell = PlatformUI.getWorkbench().getDisplay()
+		final Shell shell = PlatformUI.getWorkbench().getDisplay()
 				.getActiveShell();
-		WizardDialog wizDialog = new WizardDialog(shell, paymentsWizard);
+		final WizardDialog wizDialog = new WizardDialog(shell, paymentsWizard);
 
-		if (wizDialog.open() == Dialog.OK) {
+		if (wizDialog.open() == Window.OK) {
 			// paymentsWizard;
 		}
 	}
-	
-	@Override 
+
+	@Override
 	public IMemberPaymentsRepository getRepository() {
 		return (IMemberPaymentsRepository) super.getRepository();
 	}
-	
+
 	@Override
 	protected List<MemberPayment> getFilteredResult() {
 		return getRepository().all();
@@ -83,7 +83,7 @@ public class MemberPaymentsViewController extends
 	@Override
 	protected void configureNewItemButton(IActionRidget newBtnRidget) {
 		newBtnRidget.setText("Run Member Payment Process");
-		newBtnRidget.addListener(new IActionListener() {			
+		newBtnRidget.addListener(new IActionListener() {
 			@Override
 			public void callback() {
 				handlePaymentButton();

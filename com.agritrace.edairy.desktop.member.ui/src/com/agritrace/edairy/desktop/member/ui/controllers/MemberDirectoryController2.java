@@ -26,7 +26,7 @@ import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
-import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
+import com.agritrace.edairy.desktop.common.ui.views.BaseListView;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddMemberDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewMemberDialog;
@@ -40,7 +40,7 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 	private final class DefaultTextListener implements IFocusListener {
 		@Override
 		public void focusGained(FocusEvent event) {
-			String text = searchText.getText();
+			final String text = searchText.getText();
 			if (text != null && text.equals(DEFAULT_SEARCH_DISPLAY_TXT)) {
 				System.err.println("]]]] TEXT: clearing...'");
 				searchText.setText("");
@@ -49,7 +49,7 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 
 		@Override
 		public void focusLost(FocusEvent event) {
-			String text = searchText.getText();
+			final String text = searchText.getText();
 			System.err.println("]]]] TEXT: '" + text + "'");
 			if (text != null && text.equals("")) {
 				System.err.println("]]]] TEXT: setting...'");
@@ -71,11 +71,11 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 	// "account" };
 
 	private ITextRidget searchText;
-	private Dairy localDairy;
-	private IMemberRepository repository;
+	private final Dairy localDairy;
+	private final IMemberRepository repository;
 	private final Provider<ViewMemberDialog> viewDialogProvider;
 	private final Provider<AddMemberDialog> addDialogProvider;
-	
+
 	@Inject
 	public MemberDirectoryController2(final IMemberRepository repository, final IDairyRepository dairyRepo,
 			final Provider<ViewMemberDialog> viewDialogProvider,
@@ -119,7 +119,7 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 			}
 		});
 
-		getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_FILTER_RESET).addListener(new IActionListener() {
+		getRidget(IActionRidget.class, BaseListView.BIND_ID_FILTER_RESET).addListener(new IActionListener() {
 			@Override
 			public void callback() {
 				if (searchText != null) {
@@ -127,7 +127,7 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 				}
 			}
 		});
-		addDefaultAction(searchText, getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_FILTER_SEARCH));
+		addDefaultAction(searchText, getRidget(IActionRidget.class, BaseListView.BIND_ID_FILTER_SEARCH));
 
 	}
 
@@ -135,17 +135,17 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 	protected List<Membership> getFilteredResult() {
 		final List<Membership> allMembers = localDairy.getMemberships();
 		final List<Membership> results = new ArrayList<Membership>();
-		long start = System.currentTimeMillis();
+		final long start = System.currentTimeMillis();
 		if (searchText == null || searchText.getText().trim().length() == 0) {
 			results.addAll(allMembers);
 		} else {
-			String memberName = searchText.getText();
+			final String memberName = searchText.getText();
 			if (memberName.isEmpty() || memberName.equals(DEFAULT_SEARCH_DISPLAY_TXT)) {
 				results.addAll(allMembers);
 			} else {
-				for (Membership member : allMembers) {
-					Person person = member.getMember();
-					String matchText = person.getGivenName() + " " + person.getFamilyName() + " "
+				for (final Membership member : allMembers) {
+					final Person person = member.getMember();
+					final String matchText = person.getGivenName() + " " + person.getFamilyName() + " "
 							+ person.getAdditionalNames();
 					if (matchText.toUpperCase().contains(memberName.toUpperCase())) {
 						results.add(member);

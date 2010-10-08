@@ -29,7 +29,7 @@ public class EmployeeDirectoryView extends AbstractDirectoryView {
 
 	@Override
 	protected void createFilterConditions(Composite top) {
-		Composite parent = UIControlsFactory.createComposite(top);
+		final Composite parent = UIControlsFactory.createComposite(top);
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(parent);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(parent);
 

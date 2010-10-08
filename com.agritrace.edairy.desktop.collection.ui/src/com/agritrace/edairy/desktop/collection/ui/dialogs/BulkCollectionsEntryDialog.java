@@ -8,7 +8,6 @@ import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
-import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.ridgets.swt.SwtRidgetFactory;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
@@ -34,48 +33,24 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
 /**
- * 
+ *
  * @author bill jones
- * 
+ *
  */
 public class BulkCollectionsEntryDialog extends BaseDialogView {
 
 	/**
-	 * 
+	 *
 	 * @author bill jones
-	 * 
+	 *
 	 */
 	private static final class JournalEntryTestAction implements IActionListener {
-
-		/**
-		 * 
-		 * @author bill jones
-		 * 
-		 */
-		private final class DummyJournalPersister implements JournalPersistenceDelegate {
-			private AbstractWindowController controller;
-
-			public DummyJournalPersister(AbstractWindowController controller) {
-				this.controller = controller;
-			}
-
-			@Override
-			public void saveJournal(CollectionGroup journal) {
-				System.err.println(">> Saving journal : " + journal);
-				System.err.println(">>  controller : " + controller);
-			}
-		}
-
-		private final Shell shell;
-//		private CollectionGroup page;
 
 		private JournalEntryTestAction(Shell shell) {
 			this(shell, createCollectionJournal());
 		}
 
 		private JournalEntryTestAction(Shell shell, CollectionGroup page) {
-			this.shell = shell;
-//			this.page = page;
 		}
 
 		private static CollectionGroup createCollectionJournal() {
@@ -90,12 +65,13 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 
 			journal.setReferenceNumber("r001");
 //			journal.setDriverTotal(new BigDecimal("10"));
-			
+
 			return journal;
 			*/
 			return null;
 		}
 
+		@Override
 		public void callback() {
 			/*
 			 // TODO: Do something about it
@@ -127,10 +103,10 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 
 	private static final String BIN_COLUMN_HEADER = "Bin";
 	private static final String MILK_ENTRY_LIST_GROUP_TITLE = "Milk Collection Entries";
-	
+
 	/**
 	 * Create the dialog.
-	 * 
+	 *
 	 * @param parentShell
 	 * @param testJournalPersister
 	 */
@@ -145,9 +121,9 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 		try {
 			ret = MessageDialog.openConfirm(getShell(), "Confirm Cancel", "Are you sure you want to close this window without saving?");
 		}
-		catch(Throwable t) {
+		catch(final Throwable t) {
 			t.printStackTrace();
-		}					
+		}
 		return ret;
 	}
 
@@ -174,13 +150,13 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 //		GridLayout layout = new GridLayout();
 //		layout.marginHeight = 10;
 //		layout.marginWidth = 10;
-//		
+//
 //		composite.setLayout(layout);
-//		
+//
 //		final Control headerGroups = new JournalHeaderComposite(parent, SWT.NULL, ControlType.TEXT);
 //		addUIControl(headerGroups, "journal-header");
 //		gdf.applyTo(headerGroups);
-//		
+//
 //		final Control groupThree = new CollectionLineComposite(parent, SWT.NONE);
 //		addUIControl(groupThree, "journal-entry");
 //		gdf.applyTo(groupThree);
@@ -194,7 +170,7 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 //		final Button closeButton = UIControlsFactory.createButton(parent, CLOSE_LABEL, ViewWidgetId.closeButton);
 //		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).applyTo(saveButton);
 //
-//		return composite; 
+//		return composite;
 //	}
 
 	private Composite createButtonComposite(Composite group) {
@@ -218,7 +194,7 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 	/**
 	 * Milk collection entry group - defines: - milk collection entry table - list of collection entries. - total label
 	 * - current total of all entries.
-	 * 
+	 *
 	 * @param parent
 	 * @return
 	 */
@@ -254,7 +230,7 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 
 	/**
 	 * Mainly useful for gui-builder support.. overridden at runtime.
-	 * 
+	 *
 	 * @param tableComposite
 	 * @param table
 	 */
@@ -286,7 +262,7 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 
 	/**
 	 * Create contents of the button bar.
-	 * 
+	 *
 	 * @param parent
 	 */
 	@Override
@@ -303,25 +279,25 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 //		return new Point(450, 300);
 //	}
 //
-//	
+//
 
-	
+
 	/**
 	 * (non-javadoc) For tetsing
-	 * 
+	 *
 	 */
 	public static void main(String[] args) {
 
-		Display display = Display.getDefault();
+		final Display display = Display.getDefault();
 
 		try {
 			final Shell shell = new Shell();
 			GridLayoutFactory.fillDefaults().applyTo(shell);
 
-			Button button = new Button(shell, SWT.BORDER);
+			final Button button = new Button(shell, SWT.BORDER);
 			GridDataFactory.fillDefaults().grab(true, false).applyTo(button);
 
-			IActionRidget actionRidget = (IActionRidget) SwtRidgetFactory.createRidget(button);
+			final IActionRidget actionRidget = (IActionRidget) SwtRidgetFactory.createRidget(button);
 			actionRidget.setText("Open dialog"); //$NON-NLS-1$
 			actionRidget.addListener(new JournalEntryTestAction(shell));
 

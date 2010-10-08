@@ -25,7 +25,7 @@ import com.google.inject.Inject;
 public class AltTransactionRepository extends RepositoryUtil<Transaction> implements ITransactionRepository {
 
 	/**
-	 * 
+	 *
 	 * @param store
 	 */
 	@Inject
@@ -40,8 +40,8 @@ public class AltTransactionRepository extends RepositoryUtil<Transaction> implem
 
 	@Override
 	public List<Transaction> findAccountTransactions(Account account, Date start, Date end) {
-		Session session = getCurrentSession();
-		Criteria criteria = session.createCriteria("Transaction");
+		final Session session = getCurrentSession();
+		final Criteria criteria = session.createCriteria("Transaction");
 
 		if (account != null) {
 			criteria.add(Restrictions.eq("account", account));
@@ -53,17 +53,17 @@ public class AltTransactionRepository extends RepositoryUtil<Transaction> implem
 			criteria.add(Restrictions.le("transactionDate", end));
 		}
 
-		return (List<Transaction>) criteria.list();
+		return criteria.list();
 	}
 
 	private List<Transaction> runQuery(String q) {
-		Session session = getCurrentSession();
-		return (List<Transaction>) session.createQuery(q).list();
+		final Session session = getCurrentSession();
+		return session.createQuery(q).list();
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 * @param account
 	 * @param balanceDate
 	 * @param amount
@@ -73,7 +73,7 @@ public class AltTransactionRepository extends RepositoryUtil<Transaction> implem
 	@Override
 	public BalancePoint createBalancePoint(final Account account, Calendar balanceDate, BigDecimal amount)
 			throws IllegalStateException {
-		BalancePoint latest = AccountFactory.eINSTANCE.createBalancePoint();
+		final BalancePoint latest = AccountFactory.eINSTANCE.createBalancePoint();
 
 		latest.setAsOf(balanceDate.getTime());
 		latest.setAccount(account);
@@ -86,7 +86,7 @@ public class AltTransactionRepository extends RepositoryUtil<Transaction> implem
 
 	/**
 	 * Create a Calendar-type date based on the payment period.
-	 * 
+	 *
 	 * @param type
 	 * @param year
 	 * @param month
@@ -95,15 +95,15 @@ public class AltTransactionRepository extends RepositoryUtil<Transaction> implem
 	@Override
 	public Calendar createPeriodDate(BalanceType type, int year, int month) {
 		// initialize balance date
-		Calendar balanceDate = Calendar.getInstance();
+		final Calendar balanceDate = Calendar.getInstance();
 		balanceDate.clear();
 		balanceDate.set(Calendar.YEAR, year);
 		balanceDate.set(Calendar.MONTH, month);
 
 		// floor or ceil the date, as appropriate for the type of balancepoint
-		List<Integer> timeFields = Arrays.asList(Calendar.DAY_OF_MONTH, Calendar.HOUR, Calendar.MINUTE,
+		final List<Integer> timeFields = Arrays.asList(Calendar.DAY_OF_MONTH, Calendar.HOUR, Calendar.MINUTE,
 				Calendar.SECOND, Calendar.MILLISECOND);
-		for (int field : timeFields) {
+		for (final int field : timeFields) {
 			if (type.equals(BalanceType.STARTING)) {
 				balanceDate.set(field, balanceDate.getMinimum(field));
 			} else {
@@ -115,7 +115,7 @@ public class AltTransactionRepository extends RepositoryUtil<Transaction> implem
 
 	/**
 	 * Find the latest balance point, by date, for the specified account
-	 * 
+	 *
 	 * @param account
 	 * @return
 	 */
@@ -134,13 +134,13 @@ public class AltTransactionRepository extends RepositoryUtil<Transaction> implem
 		Date startDate = new Date(0);
 		BigDecimal sum = Constants.BIGZERO;
 
-		BalancePoint point = findLatestBalancePoint(primaryAcct);
+		final BalancePoint point = findLatestBalancePoint(primaryAcct);
 		if (point != null) {
 			startDate = point.getAsOf();
 			sum = point.getAmount();
 		}
 
-		List<Transaction> transactions = findAccountTransactions(primaryAcct, startDate, cutoffDate);
+		final List<Transaction> transactions = findAccountTransactions(primaryAcct, startDate, cutoffDate);
 		return sum.add(sumTransactions(transactions));
 	}
 
@@ -156,16 +156,16 @@ public class AltTransactionRepository extends RepositoryUtil<Transaction> implem
 
 	/**
 	 * Find the latest balance point, before date, for the specified account
-	 * 
+	 *
 	 * @param account
 	 * @return
 	 */
 	private BalancePoint findLatestBalancePoint(final Account account, Date cutoff) {
-		List<BalancePoint> balances = account.getBalances();
+		final List<BalancePoint> balances = account.getBalances();
 		BalancePoint lastBalance = null;
 		Date newest = new Date(0l);
 
-		for (BalancePoint point : balances) {
+		for (final BalancePoint point : balances) {
 			final Date balanceDate = point.getAsOf();
 			if (balanceDate.after(newest) && balanceDate.before(cutoff)) {
 				newest = balanceDate;
@@ -178,14 +178,14 @@ public class AltTransactionRepository extends RepositoryUtil<Transaction> implem
 	/**
 	 * Add a set of transactions where credits decrease and debits increase the
 	 * result.
-	 * 
+	 *
 	 * @param transactionList
 	 * @return
 	 */
 	private BigDecimal sumTransactions(List<Transaction> transactionList) {
 		BigDecimal sum = Constants.BIGZERO;
-		for (Transaction tx : transactionList) {
-			BigDecimal amount = tx.getAmount();
+		for (final Transaction tx : transactionList) {
+			final BigDecimal amount = tx.getAmount();
 			if (TransactionType.CREDIT.equals(tx.getTransactionType())) {
 				sum = sum.subtract(amount);
 			} else {
@@ -196,7 +196,7 @@ public class AltTransactionRepository extends RepositoryUtil<Transaction> implem
 	}
 
 	/**
-	 * 
+	 *
 	 * @param account
 	 * @param type
 	 * @param source
@@ -210,7 +210,7 @@ public class AltTransactionRepository extends RepositoryUtil<Transaction> implem
 	}
 
 	/**
-	 * 
+	 *
 	 * @param account
 	 * @param date
 	 * @param type
@@ -222,10 +222,11 @@ public class AltTransactionRepository extends RepositoryUtil<Transaction> implem
 	private AccountTransaction createTransaction(Account account, Date date, TransactionType type,
 			TransactionSource source, BigDecimal amount, String desc) {
 
-		if (account == null)
+		if (account == null) {
 			throw new IllegalArgumentException("Account must not be null.");
+		}
 
-		AccountTransaction tx = AccountFactory.eINSTANCE.createAccountTransaction();
+		final AccountTransaction tx = AccountFactory.eINSTANCE.createAccountTransaction();
 		tx.setAccount(account);
 		tx.setTransactionType(type);
 		tx.setSource(source);

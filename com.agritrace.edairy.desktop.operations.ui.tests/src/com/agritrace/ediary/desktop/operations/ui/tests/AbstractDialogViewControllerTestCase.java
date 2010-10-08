@@ -16,7 +16,7 @@ public abstract class AbstractDialogViewControllerTestCase<C extends AbstractWin
 		extends RienaTestCase {
 
 	private C controller;
-	private INavigationProcessor mockNavigationProcessor = EasyMock
+	private final INavigationProcessor mockNavigationProcessor = EasyMock
 			.createMock(INavigationProcessor.class);
 
 	@Override
@@ -29,8 +29,8 @@ public abstract class AbstractDialogViewControllerTestCase<C extends AbstractWin
 		// only used to get the initial mappings
 		SwtControlRidgetMapper.getInstance();
 
-		Display display = Display.getDefault();
-		Realm realm = SWTObservables.getRealm(display);
+		final Display display = Display.getDefault();
+		final Realm realm = SWTObservables.getRealm(display);
 		assertNotNull(realm);
 		ReflectionUtils.invokeHidden(realm, "setDefault", realm); //$NON-NLS-1$
 		//

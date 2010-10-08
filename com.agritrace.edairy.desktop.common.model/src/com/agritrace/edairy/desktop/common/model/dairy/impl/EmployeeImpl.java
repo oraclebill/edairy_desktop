@@ -6,20 +6,17 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
-import com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl;
-
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.Employee;
-import com.agritrace.edairy.desktop.common.model.dairy.Role;
-
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.Employee;
+import com.agritrace.edairy.desktop.common.model.dairy.Role;
 
 /**
  * <!-- begin-user-doc -->
@@ -258,6 +255,7 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getId() {
 		return id;
 	}
@@ -267,11 +265,13 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setId(String newId) {
-		String oldId = id;
+		final String oldId = id;
 		id = newId;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__ID, oldId, id));
+		}
 	}
 
 	/**
@@ -279,6 +279,7 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getOperatorCode() {
 		return operatorCode;
 	}
@@ -288,11 +289,13 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOperatorCode(String newOperatorCode) {
-		String oldOperatorCode = operatorCode;
+		final String oldOperatorCode = operatorCode;
 		operatorCode = newOperatorCode;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__OPERATOR_CODE, oldOperatorCode, operatorCode));
+		}
 	}
 
 	/**
@@ -300,6 +303,7 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -309,11 +313,13 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStartDate(Date newStartDate) {
-		Date oldStartDate = startDate;
+		final Date oldStartDate = startDate;
 		startDate = newStartDate;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__START_DATE, oldStartDate, startDate));
+		}
 	}
 
 	/**
@@ -321,6 +327,7 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getJobFunction() {
 		return jobFunction;
 	}
@@ -330,11 +337,13 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setJobFunction(String newJobFunction) {
-		String oldJobFunction = jobFunction;
+		final String oldJobFunction = jobFunction;
 		jobFunction = newJobFunction;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__JOB_FUNCTION, oldJobFunction, jobFunction));
+		}
 	}
 
 	/**
@@ -342,6 +351,7 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDepartment() {
 		return department;
 	}
@@ -351,11 +361,13 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDepartment(String newDepartment) {
-		String oldDepartment = department;
+		final String oldDepartment = department;
 		department = newDepartment;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__DEPARTMENT, oldDepartment, department));
+		}
 	}
 
 	/**
@@ -363,6 +375,7 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getUsername() {
 		return username;
 	}
@@ -372,11 +385,13 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setUsername(String newUsername) {
-		String oldUsername = username;
+		final String oldUsername = username;
 		username = newUsername;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__USERNAME, oldUsername, username));
+		}
 	}
 
 	/**
@@ -384,6 +399,7 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getPassword() {
 		return password;
 	}
@@ -393,11 +409,13 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPassword(String newPassword) {
-		String oldPassword = password;
+		final String oldPassword = password;
 		password = newPassword;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__PASSWORD, oldPassword, password));
+		}
 	}
 
 	/**
@@ -405,6 +423,7 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isLocalEnabled() {
 		return localEnabled;
 	}
@@ -414,11 +433,13 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLocalEnabled(boolean newLocalEnabled) {
-		boolean oldLocalEnabled = localEnabled;
+		final boolean oldLocalEnabled = localEnabled;
 		localEnabled = newLocalEnabled;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__LOCAL_ENABLED, oldLocalEnabled, localEnabled));
+		}
 	}
 
 	/**
@@ -426,13 +447,15 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Role getRole() {
 		if (role != null && role.eIsProxy()) {
-			InternalEObject oldRole = (InternalEObject)role;
+			final InternalEObject oldRole = (InternalEObject)role;
 			role = (Role)eResolveProxy(oldRole);
 			if (role != oldRole) {
-				if (eNotificationRequired())
+				if (eNotificationRequired()) {
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.EMPLOYEE__ROLE, oldRole, role));
+				}
 			}
 		}
 		return role;
@@ -452,11 +475,13 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRole(Role newRole) {
-		Role oldRole = role;
+		final Role oldRole = role;
 		role = newRole;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__ROLE, oldRole, role));
+		}
 	}
 
 	/**
@@ -464,6 +489,7 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isPasswordHashed() {
 		return passwordHashed;
 	}
@@ -473,11 +499,13 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPasswordHashed(boolean newPasswordHashed) {
-		boolean oldPasswordHashed = passwordHashed;
+		final boolean oldPasswordHashed = passwordHashed;
 		passwordHashed = newPasswordHashed;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__PASSWORD_HASHED, oldPasswordHashed, passwordHashed));
+		}
 	}
 
 	/**
@@ -505,7 +533,9 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 			case DairyPackage.EMPLOYEE__LOCAL_ENABLED:
 				return isLocalEnabled();
 			case DairyPackage.EMPLOYEE__ROLE:
-				if (resolve) return getRole();
+				if (resolve) {
+					return getRole();
+				}
 				return basicGetRole();
 			case DairyPackage.EMPLOYEE__PASSWORD_HASHED:
 				return isPasswordHashed();
@@ -636,9 +666,11 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy()) {
+			return super.toString();
+		}
 
-		StringBuffer result = new StringBuffer(super.toString());
+		final StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (id: ");
 		result.append(id);
 		result.append(", operatorCode: ");

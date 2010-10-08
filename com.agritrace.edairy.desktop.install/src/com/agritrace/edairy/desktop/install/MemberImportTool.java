@@ -39,20 +39,20 @@ public class MemberImportTool extends AbstractImportTool {
 
 	// private DairyRepository dairyRepo;
 	// private Dairy dairy;
-	private Map<String, Membership> memberCache = new HashMap<String, Membership>();
-	private Map<String, Route> routeCache = new HashMap<String, Route>();
+	private final Map<String, Membership> memberCache = new HashMap<String, Membership>();
+	private final Map<String, Route> routeCache = new HashMap<String, Route>();
 	private Collection<Membership> memberCollection;
 	private Map<String, List<String[]>> failedRecords;
 	public int count = 0;
 	public int errors = 0;
 
 	private final IDairyRepository repo;
-	
+
 	@Inject
 	public MemberImportTool(IDairyRepository repo) {
 		this.repo = repo;
 	}
-	
+
 	public void processFile(InputStream stream, List<Membership> memberCollection,
 			Map<String, List<String[]>> failedRecords, IProgressMonitor monitor) throws IOException {
 		setReader(new InputStreamReader(stream));
@@ -60,11 +60,11 @@ public class MemberImportTool extends AbstractImportTool {
 		this.memberCollection = memberCollection;
 		this.failedRecords = failedRecords;
 
-		Dairy dairy = repo.getLocalDairy();
-		for (Route route : dairy.getRoutes()) {
+		final Dairy dairy = repo.getLocalDairy();
+		for (final Route route : dairy.getRoutes()) {
 			routeCache.put(route.getName(), route);
 		}
-		for (Membership member : dairy.getMemberships()) {
+		for (final Membership member : dairy.getMemberships()) {
 			memberCache.put(member.getMemberNumber(), member);
 		}
 
@@ -83,7 +83,7 @@ public class MemberImportTool extends AbstractImportTool {
 			try {
 				membership = createMembership(values);
 				memberCollection.add(membership);
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				addFailure(e.getMessage(), values);
 			}
 		}
@@ -96,7 +96,7 @@ public class MemberImportTool extends AbstractImportTool {
 			records = new LinkedList<String[]>();
 			failedRecords.put(message, records);
 		}
-		records.add(values);		
+		records.add(values);
 	}
 
 	public Membership createMembership(String[] values) {
@@ -108,10 +108,10 @@ public class MemberImportTool extends AbstractImportTool {
 		final String membershipNumber = values[MEMBER_NUMBER];
 		final String defaultRoute = values[MEMBER_DEFAULT_ROUTE];
 
-		Formatter formatter = new Formatter();
+		final Formatter formatter = new Formatter();
 		formatter.format("%s %s (%s) Farm", givenName, familyNames, membershipNumber);
-		Farm farm = DairyUtil.createFarm(formatter.toString(), DairyUtil.createLocation(null, null, null));
-		Farmer farmer = DairyUtil.createFarmer(givenName, "", familyNames, "<missing>", farm);
+		final Farm farm = DairyUtil.createFarm(formatter.toString(), DairyUtil.createLocation(null, null, null));
+		final Farmer farmer = DairyUtil.createFarmer(givenName, "", familyNames, "<missing>", farm);
 		membership = DairyUtil.createMembership(DEFAULT_IMPORT_DATE, DEFAULT_IMPORT_DATE, farmer);
 		// membership.setMemberId(key);
 		membership.setMemberNumber(membershipNumber);
@@ -119,7 +119,7 @@ public class MemberImportTool extends AbstractImportTool {
 
 		membership.setDefaultRoute(getRoute(defaultRoute));
 
-		Account account = AccountFactory.eINSTANCE.createAccount();
+		final Account account = AccountFactory.eINSTANCE.createAccount();
 		account.setMember(membership);
 		// account.setAccountNumber("V"+membership.getMemberNumber());
 		account.setAccountNumber(accountNumber);
@@ -139,7 +139,7 @@ public class MemberImportTool extends AbstractImportTool {
 	}
 
 	private static Date getDefaultDate() {
-		Calendar calendar = Calendar.getInstance();
+		final Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.YEAR, 1970);
 		calendar.set(Calendar.MONTH, 0);
 		calendar.set(Calendar.DAY_OF_MONTH, 1);

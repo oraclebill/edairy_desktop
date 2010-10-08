@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.agritrace.edairy.model.tests;
 
@@ -39,11 +39,11 @@ public class EmployeeTestCase {
 	 */
 	@Test
 	public void testGetPhoneNumber() {
-		Employee emp = DairyFactory.eINSTANCE.createEmployee();
+		final Employee emp = DairyFactory.eINSTANCE.createEmployee();
 		assertNull( emp.getPhoneNumber() ); // default values
 		emp.setPhoneNumber("215-878-6947");
 		assertEquals("215-878-6947", emp.getPhoneNumber());
-		
+
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class EmployeeTestCase {
 	 */
 	@Test
 	public void testGetLocation() {
-		Employee emp = DairyFactory.eINSTANCE.createEmployee();
+		final Employee emp = DairyFactory.eINSTANCE.createEmployee();
 		assertNotNull(emp.getLocation());
 	}
 
@@ -60,7 +60,7 @@ public class EmployeeTestCase {
 	 */
 	@Test
 	public void testGetContactMethods() {
-		Employee emp = DairyFactory.eINSTANCE.createEmployee();
+		final Employee emp = DairyFactory.eINSTANCE.createEmployee();
 		assertNotNull(emp.getContactMethods());
 	}
 
@@ -69,14 +69,14 @@ public class EmployeeTestCase {
 	 */
 	@Test
 	public void testGetName() {
-		Employee emp = DairyFactory.eINSTANCE.createEmployee();
+		final Employee emp = DairyFactory.eINSTANCE.createEmployee();
 		emp.setGivenName("William");
 		emp.setMiddleName("Harold");
 		emp.setAdditionalNames("Esteban Garcia");
 		emp.setFamilyName("Jones");
-		
+
 		//assertEquals("William Harold Jones Esteban Garcia", emp.getName());
-		
+
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class EmployeeTestCase {
 		try {
 			//emp.setName("test this" );
 		}
-		catch (UnsupportedOperationException e) {
+		catch (final UnsupportedOperationException e) {
 			;
 		}
 	}

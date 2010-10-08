@@ -14,16 +14,16 @@ import org.eclipse.swt.widgets.Table;
  * area, a table area, and a button area. This class overrides
  * createBasicPartControl and manages the creation of these components and
  * provides standard naming for the widgets involved.
- * 
+ *
  * BIND_ID_TABLE = table widget (w/o view)
- * 
+ *
  * BIND_ID_NEW_BUTTON = table widget (w/o view) BIND_ID_VIEW_BUTTON = table
  * widget (w/o view)
- * 
+ *
  * BIND_ID_FILTER_SEARCH = table widget (w/o view) BIND_ID_FILTER_RESET = table
  * widget (w/o view)
- * 
- * 
+ *
+ *
  */
 public abstract class AbstractDirectoryView extends BaseListView {
 	public AbstractDirectoryView() {
@@ -42,9 +42,10 @@ public abstract class AbstractDirectoryView extends BaseListView {
 
 	/**
 	 * Create a list control to be bound to the BIND_ID_TABLE standard binding.
-	 * 
+	 *
 	 * @param parent
 	 */
+	@Override
 	protected void createListGroup(Composite parent) {
 		// Group
 //		final Group group = UIControlsFactory.createGroup(parent, "");
@@ -61,14 +62,14 @@ public abstract class AbstractDirectoryView extends BaseListView {
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 		addUIControl(table, BIND_ID_TABLE);
-		
+
 		createButtons(parent);
 	}
 
 	/**
 	 * Creates a composite and the buttons for directory view By default, 'View'
 	 * and 'Add new' buttons are created.
-	 * 
+	 *
 	 * @param parent
 	 * @return
 	 */
@@ -79,12 +80,13 @@ public abstract class AbstractDirectoryView extends BaseListView {
 	/**
 	 * Creates a composite and the buttons for directory view By default, 'View'
 	 * and 'Add new' buttons are created.
-	 * 
+	 *
 	 * @param parent
 	 * @param parent
 	 * @param parent
 	 * @return
 	 */
+	@Override
 	protected void createButtonPanel(Composite parent, String viewButtonId, String addButtonId) {
 		final Composite result = UIControlsFactory.createComposite(parent);
 		// result.setBackground(getDisplay().getSystemColor(SWT.COLOR_GREEN));

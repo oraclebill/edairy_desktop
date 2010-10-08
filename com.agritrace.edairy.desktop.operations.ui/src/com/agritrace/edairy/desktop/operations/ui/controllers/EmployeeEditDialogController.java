@@ -41,10 +41,10 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 	private ITextRidget passwordRidget;
 	private IProfilePhotoRidget photoRidget;
 	private IContactMethodsGroupRidget contacts;
-	
+
 	private final IPersistentPreferenceStore preferenceStore;
 	private final IRepository<Role> roleRepo;
-	
+
 	@Inject
 	public EmployeeEditDialogController(@Named("db") final IPersistentPreferenceStore store,
 			final IRepository<Role> roleRepo) {
@@ -56,23 +56,23 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 	public void configureUserRidgets() {
 		// ensure model available
 		editEmployee = getWorkingCopy();
-		assert (null != editEmployee);
+		assert null != editEmployee;
 
 		photoRidget = getRidget(IProfilePhotoRidget.class, "profile-photo-widget");
 		photoRidget.bindToModel(EMFObservables.observeValue(editEmployee, ModelPackage.Literals.PERSON__PHOTO) );
 
 //		addTextMap(EmployeeBindingConstants.BIND_ID_EMPLOYEE_NUM, DairyPackage.Literals.EMPLOYEE__ID);
-		
+
 		// customer id
 		employeeId = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_EMPLOYEE_NUM);
 		employeeId.bindToModel(EMFObservables.observeValue(editEmployee, DairyPackage.Literals.EMPLOYEE__ID));
 		employeeId.setOutputOnly(false);
 		employeeId.setMandatory(true);
-		
+
 		if (this.getActionType() == AbstractDirectoryController.ACTION_VIEW) {
 			employeeId.updateFromModel();
 		}
-		
+
 		final List<Role> allRoles = roleRepo.all();
 
 		addTextMap(EmployeeBindingConstants.BIND_ID_FAMILY_NAME, ModelPackage.Literals.PERSON__FAMILY_NAME);
@@ -82,22 +82,22 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		addTextMap(EmployeeBindingConstants.BIND_ID_SINCE, DairyPackage.Literals.EMPLOYEE__START_DATE);
 		addTextMap(EmployeeBindingConstants.BIND_ID_OPR_CODE, DairyPackage.Literals.EMPLOYEE__OPERATOR_CODE);
 		addTextMap(EmployeeBindingConstants.BIND_ID_USERNAME, DairyPackage.Literals.EMPLOYEE__USERNAME);
-		
+
 		// Role needs special care
 		final IComboRidget roleRidget = getRidget(IComboRidget.class, EmployeeBindingConstants.BIND_ID_SEC_ROLE);
 		roleRidget.bindToModel(new WritableList(allRoles, Role.class), Role.class, "getName",
 				EMFObservables.observeValue(getWorkingCopy(), DairyPackage.Literals.EMPLOYEE__ROLE));
-		
+
 		// We pointedly do not display the current password.
 		passwordRidget = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_PASSWORD);
-		
-		IToggleButtonRidget localEnabled = (IToggleButtonRidget) getRidget(EmployeeBindingConstants.BIND_ID_LOCAL_ENABLED);
+
+		final IToggleButtonRidget localEnabled = (IToggleButtonRidget) getRidget(EmployeeBindingConstants.BIND_ID_LOCAL_ENABLED);
 		localEnabled.bindToModel(EMFObservables.observeValue(getWorkingCopy(), DairyPackage.Literals.EMPLOYEE__LOCAL_ENABLED));
 
 		// Configure address group
 		final AddressGroupWidgetController addressGroupController = new AddressGroupWidgetController(this);
 		if(editEmployee.getLocation() == null){
-			Location employeeLocation = DairyUtil.createLocation(null, null, null);
+			final Location employeeLocation = DairyUtil.createLocation(null, null, null);
 			editEmployee.setLocation(employeeLocation);
 		}
 		addressGroupController.setInputModel(editEmployee.getLocation().getPostalLocation());
@@ -118,15 +118,15 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		contacts.bindToModel(editEmployee);
 		contacts.updateFromModel();
 	}
-	
+
 	@Override
 	protected void handleSaveAction() {
 		// Password requires special care. We'll only update it if something was entered.
 		final String password = passwordRidget.getText();
-		
+
 		if (!StringUtils.isEmpty(password)) {
 			final Employee employee = getWorkingCopy();
-			
+
 			if (preferenceStore.getBoolean(SystemSettingsController.ENCRYPT_PASSWORDS)) {
 				employee.setPassword(PrincipalManager.getInstance().hashPassword(password));
 				employee.setPasswordHashed(true);
@@ -135,20 +135,20 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 				employee.setPasswordHashed(false);
 			}
 		}
-		
+
 		super.handleSaveAction();
 	}
-	
+
 	@Override
 	public void afterBind() {
 		super.afterBind();
-		
+
 		// bind all
-		for (IRidget ridget : getRidgets()) {
+		for (final IRidget ridget : getRidgets()) {
 			if (ridget instanceof IValueRidget) {
 				ridget.updateFromModel();
 			} else if (ridget instanceof IMarkableRidget) {
-				IMarkableRidget imr = (IMarkableRidget) ridget;
+				final IMarkableRidget imr = (IMarkableRidget) ridget;
 				imr.updateFromModel();
 			}
 

@@ -13,7 +13,6 @@ import org.eclipse.riena.ui.ridgets.IDateTextRidget;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
-import org.eclipse.swt.widgets.Display;
 
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.model.requests.RequestType;
@@ -29,9 +28,9 @@ import com.google.inject.Provider;
 
 /**
  * Dialog controller for Animal Health Request
- * 
+ *
  * @author Hui(Spark) Wan
- * 
+ *
  */
 public class AnimalHealthRequestDialogController extends RecordDialogController<AnimalHealthRequest> {
 
@@ -133,7 +132,7 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 			return null;
 		}
 	}
-	
+
 	@Inject
 	private Provider<FarmSearchDialog> farmSearchDialogProvider;
 	@Inject

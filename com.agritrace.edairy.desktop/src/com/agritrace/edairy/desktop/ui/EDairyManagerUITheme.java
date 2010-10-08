@@ -11,7 +11,7 @@ public class EDairyManagerUITheme extends RienaDefaultTheme {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.eclipse.riena.ui.swt.lnf.rienadefault.RienaDefaultTheme#addCustomColors
 	 * (java.util.Map)
@@ -43,7 +43,7 @@ public class EDairyManagerUITheme extends RienaDefaultTheme {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.eclipse.riena.ui.swt.lnf.rienadefault.RienaDefaultTheme#addCustomSettings
 	 * (java.util.Map)
@@ -59,7 +59,7 @@ public class EDairyManagerUITheme extends RienaDefaultTheme {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.riena.ui.swt.lnf.rienadefault.RienaDefaultTheme#
 	 * getPrimaryBackground()
 	 */
@@ -71,7 +71,7 @@ public class EDairyManagerUITheme extends RienaDefaultTheme {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.eclipse.riena.ui.swt.lnf.rienadefault.RienaDefaultTheme#getPrimaryFont
 	 * ()
@@ -84,7 +84,7 @@ public class EDairyManagerUITheme extends RienaDefaultTheme {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.riena.ui.swt.lnf.rienadefault.RienaDefaultTheme#
 	 * getPrimaryForeground()
 	 */
@@ -96,7 +96,7 @@ public class EDairyManagerUITheme extends RienaDefaultTheme {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.eclipse.riena.ui.swt.lnf.rienadefault.RienaDefaultTheme#getSystemFont
 	 * ()
@@ -109,7 +109,7 @@ public class EDairyManagerUITheme extends RienaDefaultTheme {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.eclipse.riena.ui.swt.lnf.rienadefault.RienaDefaultTheme#hideOsBorder
 	 * ()

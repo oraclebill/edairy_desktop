@@ -69,7 +69,7 @@ public class AdjustmentTransactionEditPanelController {
 
 	private final IDairyRepository dairyRepo;
 	private final Provider<MemberSearchDialog> memberSearchProvider;
-	
+
 	@Inject
 	public AdjustmentTransactionEditPanelController(final IDairyRepository dairyRepo,
 			final Provider<MemberSearchDialog> memberSearchProvider) {
@@ -109,7 +109,7 @@ public class AdjustmentTransactionEditPanelController {
 				FinanceBindingConstants.ID_TRANSACTION_CHOICE);
 		final IObservableList optionValues = Observables.staticObservableList(TransactionSource.VALUES,
 				TransactionSource.class);
-		final IObservableValue selectionValue = PojoObservables.observeValue(model, "source"); 
+		final IObservableValue selectionValue = PojoObservables.observeValue(model, "source");
 		sourceRidget.bindToModel(optionValues, selectionValue);
 		sourceRidget.setMandatory(true);
 		sourceRidget.updateFromModel();
@@ -137,8 +137,8 @@ public class AdjustmentTransactionEditPanelController {
 		// configure route combo
 		final IComboRidget combo = container.getRidget(IComboRidget.class,
 				FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO);
-		IObservableList optionList = Observables.staticObservableList(dairyRepo.getLocalDairyLocations());
-		IObservableValue selectedValue = PojoObservables.observeValue(model, "relatedLocation");
+		final IObservableList optionList = Observables.staticObservableList(dairyRepo.getLocalDairyLocations());
+		final IObservableValue selectedValue = PojoObservables.observeValue(model, "relatedLocation");
 		combo.bindToModel(optionList, DairyLocation.class, "getName", selectedValue);
 			System.err.println("Binding: >>>> " + dairyRepo.getLocalDairyLocations());
 			System.err.println(" to Model: >>>> " + model);

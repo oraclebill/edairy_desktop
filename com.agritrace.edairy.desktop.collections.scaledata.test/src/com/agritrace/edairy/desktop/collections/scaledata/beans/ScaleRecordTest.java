@@ -9,16 +9,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ScaleRecordTest {
-	
+
 	ScaleRecord record;
 	String transactionDate, transactionTime, dairyCode, scaleSerial,
 			operatorCode, tripNumber, sessionCode, routeNumber, centerNumber,
 			memberNumber, quantity, numCans, scaleTotal;
 
 	String pmTransactionTime, pmSessionCode, pmQuantity;
-	
+
 	@Before
-	public void setup() {		
+	public void setup() {
 		transactionDate = "01/01/2001";
 		transactionTime = "12:57";
 		dairyCode = "D001";
@@ -36,7 +36,7 @@ public class ScaleRecordTest {
 		pmTransactionTime = "4:32";
 		pmSessionCode = "PM";
 		pmQuantity = "2.0";
-		
+
 		record = new ScaleRecord();
 	}
 	@Test
@@ -58,15 +58,15 @@ public class ScaleRecordTest {
 		assertEquals("memberNumber", record.getMemberNumber(), "3434");
 		assertEquals("quantity", record.getQuantity(), "12.2");
 		assertEquals("numCans", record.getNumCans(), "1");
-		
+
 		record.convertValues();
-		
+
 		assertEquals("isValid", true, record.isValid());
 		assertEquals("validMember", "3434", record.getValidMember());
 		assertEquals("validQuantity", new BigDecimal("12.2"), record.getValidQuantity());
 //		assertEquals("validScaleTotal", new BigDecimal("14.2"), record.getValidScaleTotal());
-		
-		Calendar cal = Calendar.getInstance();
+
+		final Calendar cal = Calendar.getInstance();
 		cal.set(2001, 0, 1, 12, 57, 0);
 
 		// assertEquals(cal.getTime(), record.getValidDate()); // doesn't work -
@@ -74,7 +74,7 @@ public class ScaleRecordTest {
 		// assertEquals(0l,
 		// Math.abs(cal.getTime().compareTo(record.getValidDate()))); // doesn't
 		// work - always off by one or two milliseconds..
-		assertEquals("validDate", 
+		assertEquals("validDate",
 				5l,
 				Math.max(5l, Math.abs(cal.getTime().compareTo(
 						record.getValidDate()))));
@@ -86,7 +86,7 @@ public class ScaleRecordTest {
 		record.init(transactionDate, pmTransactionTime, dairyCode, scaleSerial,
 				operatorCode, tripNumber, pmSessionCode, routeNumber,
 				centerNumber, memberNumber, pmQuantity, numCans, scaleTotal);
-		
+
 		assertEquals("transactionDate", record.getTransactionDate(), "01/01/2001");
 		assertEquals("transactionTime", record.getTransactionTime(), "4:32");
 		assertEquals("dairyCode", record.getDairyCode(), "D001");
@@ -100,15 +100,15 @@ public class ScaleRecordTest {
 		assertEquals("quantity", record.getQuantity(), "2.0");
 		assertEquals("numCans", record.getNumCans(), "1");
 //		assertEquals("scaleTotal", record.getScaleTotal(), "14.2");
-		
+
 		record.convertValues();
-		
+
 		assertEquals("isValid", true, record.isValid());
 		assertEquals("validMember", "3434", record.getValidMember());
 		assertEquals("validQuantity", new BigDecimal("2.0"), record.getValidQuantity());
 //		assertEquals("validScaleTotal", new BigDecimal("14.2"), record.getValidScaleTotal());
 
-		Calendar cal = Calendar.getInstance();
+		final Calendar cal = Calendar.getInstance();
 		cal.set(2001, 0, 1, 4, 32, 0);
 
 		// assertEquals(cal.getTime(), record.getValidDate()); // doesn't work -
@@ -128,11 +128,11 @@ public class ScaleRecordTest {
 		pmTransactionTime = "";
 		pmSessionCode = "";
 		pmQuantity = "";
-		
+
 		record.init(transactionDate, pmTransactionTime, dairyCode, scaleSerial,
 				operatorCode, tripNumber, pmSessionCode, routeNumber,
 				centerNumber, memberNumber, pmQuantity, numCans, scaleTotal);
-		
+
 		assertEquals("transactionDate", record.getTransactionDate(), "01/01/2001");
 		assertEquals("transactionTime", record.getTransactionTime(), "");
 		assertEquals("dairyCode", record.getDairyCode(), "D001");
@@ -145,16 +145,16 @@ public class ScaleRecordTest {
 		assertEquals("memberNumber", record.getMemberNumber(), "3434");
 		assertEquals("quantity", record.getQuantity(), "");
 		assertEquals("numCans", record.getNumCans(), "1");
-		
+
 		record.convertValues();
-		
-		assertEquals("isValid", false, record.isValid());		
+
+		assertEquals("isValid", false, record.isValid());
 	}
 
 
 	@Test
 	public void testBlankMinutes() throws Exception {
-		
+
 		// only change the time..
 		transactionTime = "";
 		record.init(transactionDate, transactionTime, dairyCode, scaleSerial,
@@ -162,8 +162,8 @@ public class ScaleRecordTest {
 				centerNumber, memberNumber, quantity, numCans, scaleTotal);
 		record.convertValues();
 		assertEquals(false, record.isValid());
-		
-		Calendar cal = Calendar.getInstance();
+
+		final Calendar cal = Calendar.getInstance();
 		cal.set(2001, 0, 1);
 		assertEquals(
 				5l,

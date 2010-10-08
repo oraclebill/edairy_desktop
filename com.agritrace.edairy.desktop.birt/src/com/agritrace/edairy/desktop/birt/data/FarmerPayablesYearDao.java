@@ -20,9 +20,9 @@ import com.google.inject.Inject;
 /**
  * class to collect the data needed for the report and to place it into special
  * beans for report presentation.
- * 
+ *
  * @author rsw
- * 
+ *
  */
 public class FarmerPayablesYearDao {
 	private static final MathContext MONEY_CONTEXT = new MathContext(2, RoundingMode.HALF_DOWN);
@@ -41,9 +41,9 @@ public class FarmerPayablesYearDao {
 
 	public List<FarmerPayablesYearData> getReportValues(String year, String month) {
 
-		// ICollectionJournalLineRepository collectionsRepo = RepositoryFactory
-		// .getRegisteredRepository(ICollectionJournalLineRepository.class);
-		List<FarmerPayablesYearData> ret = new ArrayList<FarmerPayablesYearData>();
+//		ICollectionJournalLineRepository collectionsRepo = RepositoryFactory
+//				.getRegisteredRepository(ICollectionJournalLineRepository.class);
+		final List<FarmerPayablesYearData> ret = new ArrayList<FarmerPayablesYearData>();
 
 		for (final Membership membership : collectionsRepo.getMembersWithDeliveriesFor(Integer.parseInt(month), Integer
 				.parseInt(year))) {
@@ -51,22 +51,22 @@ public class FarmerPayablesYearDao {
 
 			// Income = (Total quantity of milk collected - quantity of rejected
 			// milk) * Posted Milk Price for that month
-			float income = 34588;// TODO implement!
+			final float income = 34588;// TODO implement!
 
 			// Credits = 0 - (Sum of all credits attributed to member for
 			// current month)
-			float credits = -34;
+			final float credits = -34;
 
 			// Adjustments = Sum of all adjustments (debit adds and credit
 			// subtracts)
-			float adjustments = 0;
+			final float adjustments = 0;
 
 			// Payables = Sum of Income, credits and adjustments
-			float payables = 1;
+			final float payables = 1;
 
-			String name = farmer.getGivenName();
-			String memberNumber = membership.getMemberNumber();
-			String accountNumber = membership.getAccount().getAccountNumber();
+			final String name = farmer.getGivenName();
+			final String memberNumber = membership.getMemberNumber();
+			final String accountNumber = membership.getAccount().getAccountNumber();
 
 			FarmerPayablesYearData data = new FarmerPayablesYearData(name, memberNumber, accountNumber,
 					this.floatFormater.format(income), this.floatFormater.format(credits), this.floatFormater
@@ -79,9 +79,9 @@ public class FarmerPayablesYearDao {
 
 	public List<FarmerPayablesYearData> getReportValuesX(String year, String month) {
 
-		// ICollectionJournalLineRepository collectionsRepo = RepositoryFactory
-		// .getRegisteredRepository(ICollectionJournalLineRepository.class);
-		List<FarmerPayablesYearData> ret = new ArrayList<FarmerPayablesYearData>();
+//		ICollectionJournalLineRepository collectionsRepo = RepositoryFactory
+//				.getRegisteredRepository(ICollectionJournalLineRepository.class);
+		final List<FarmerPayablesYearData> ret = new ArrayList<FarmerPayablesYearData>();
 
 		for (Membership membership : collectionsRepo.getMembersWithDeliveriesFor(Integer.parseInt(month), Integer
 				.parseInt(year))) {
@@ -89,25 +89,33 @@ public class FarmerPayablesYearDao {
 
 			// Income = (Total quantity of milk collected - quantity of rejected
 			// milk) * Posted Milk Price for that month
-			BigDecimal income = calculateMemberMonthlyIncome(membership, month, year);
+			final BigDecimal income = calculateMemberMonthlyIncome(membership, month,
+					year);
 
 			// Credits = 0 - (Sum of all credits attributed to member for
 			// current month)
-			BigDecimal[] creditsAndAdjustments = calculateMemberMonthlyCreditsAndAdjustments(membership, month, year);
+			final BigDecimal[] creditsAndAdjustments = calculateMemberMonthlyCreditsAndAdjustments(
+					membership, month, year);
 
-			if (income.equals(ZERO) && creditsAndAdjustments[0].equals(ZERO) && creditsAndAdjustments[1].equals(ZERO))
+			if (income.equals(ZERO) && creditsAndAdjustments[0].equals(ZERO)
+					&& creditsAndAdjustments[1].equals(ZERO)) {
 				continue;
+			}
 
 			// Payables = Sum of Income, credits and adjustments
-			BigDecimal payables = income.add(creditsAndAdjustments[0]).add(creditsAndAdjustments[1]);
+			final BigDecimal payables = income.add(creditsAndAdjustments[0]).add(
+					creditsAndAdjustments[1]);
 
-			String name = farmer.getGivenName();
-			String memberNumber = membership.getMemberNumber();
-			String accountNumber = membership.getAccount().getAccountNumber();
+			final String name = farmer.getGivenName();
+			final String memberNumber = membership.getMemberNumber();
+			final String accountNumber = membership.getAccount().getAccountNumber();
 
-			FarmerPayablesYearData data = new FarmerPayablesYearData(name, memberNumber, accountNumber,
-					this.floatFormater.format(income), this.floatFormater.format(creditsAndAdjustments[0]),
-					this.floatFormater.format(creditsAndAdjustments[1]), this.floatFormater.format(payables));
+			final FarmerPayablesYearData data = new FarmerPayablesYearData(name,
+					memberNumber, accountNumber,
+					this.floatFormater.format(income),
+					this.floatFormater.format(creditsAndAdjustments[0]),
+					this.floatFormater.format(creditsAndAdjustments[1]),
+					this.floatFormater.format(payables));
 			ret.add(data);
 		}
 
@@ -124,7 +132,7 @@ public class FarmerPayablesYearDao {
 				.getSumOfPayableDeliveries(membership, priceMonth, priceYear);
 		BigDecimal paymentRate = collectionsRepo.getMilkPrice(priceMonth, priceYear);
 
-		if (paymentRate == null) {
+		if(paymentRate == null){
 			paymentRate = new BigDecimal("0");
 		}
 
@@ -132,8 +140,8 @@ public class FarmerPayablesYearDao {
 	}
 
 	private BigDecimal[] calculateMemberMonthlyCreditsAndAdjustments(Membership membership, String month, String year) {
-		// ITransactionRepository transactionRepo = RepositoryFactory
-		// .getRegisteredRepository(ITransactionRepository.class);
+//		ITransactionRepository transactionRepo = RepositoryFactory
+//				.getRegisteredRepository(ITransactionRepository.class);
 		final int priceMonth = Integer.parseInt(month), priceYear = Integer.parseInt(year);
 		Calendar startDate = Calendar.getInstance(), endDate = Calendar.getInstance();
 
@@ -145,11 +153,11 @@ public class FarmerPayablesYearDao {
 		endDate.set(Calendar.YEAR, priceYear);
 		startDate.set(Calendar.DAY_OF_MONTH, startDate.getActualMaximum(Calendar.DAY_OF_MONTH));
 
-		List<Transaction> transactions = transactionRepo
+		final List<Transaction> transactions = transactionRepo
 				.findAccountTransactions(membership.getAccount(),
 						startDate.getTime(), endDate.getTime());
 		BigDecimal credits = ZERO, adjustments = ZERO;
-		for (Transaction tx : transactions) {
+		for (final Transaction tx : transactions) {
 			BigDecimal amt = tx.getAmount();
 			if (tx.getTransactionType().equals(TransactionType.CREDIT)) {
 				amt = ZERO.subtract(amt);

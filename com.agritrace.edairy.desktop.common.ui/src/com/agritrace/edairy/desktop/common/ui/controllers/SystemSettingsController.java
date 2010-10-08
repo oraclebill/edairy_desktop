@@ -13,18 +13,18 @@ public final class SystemSettingsController {
 	public static final String ENCRYPT_PASSWORDS = "edairy.security.encrypt_passwords";
 	@Inject @Named("db")
 	private static Provider<IPersistentPreferenceStore> storeProvider;
-	
+
 	private final IPersistentPreferenceStore store;
-	
+
 	public SystemSettingsController() {
 		this.store = storeProvider.get();
 	}
-	
+
 	public IPreferenceStore loadData() {
 		// TODO: Stub
 		return store;
 	}
-	
+
 	public void saveData() throws IOException {
 		store.save();
 	}

@@ -6,16 +6,17 @@
  */
 package com.agritrace.edairy.desktop.common.model.requests.impl;
 
-import com.agritrace.edairy.desktop.common.model.requests.*;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
+import com.agritrace.edairy.desktop.common.model.requests.RequestType;
+import com.agritrace.edairy.desktop.common.model.requests.RequestsFactory;
+import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,12 +33,12 @@ public class RequestsFactoryImpl extends EFactoryImpl implements RequestsFactory
 	 */
 	public static RequestsFactory init() {
 		try {
-			RequestsFactory theRequestsFactory = (RequestsFactory)EPackage.Registry.INSTANCE.getEFactory("http://edairy.agritrace.com/requests/"); 
+			final RequestsFactory theRequestsFactory = (RequestsFactory)EPackage.Registry.INSTANCE.getEFactory("http://edairy.agritrace.com/requests/");
 			if (theRequestsFactory != null) {
 				return theRequestsFactory;
 			}
 		}
-		catch (Exception exception) {
+		catch (final Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new RequestsFactoryImpl();
@@ -102,8 +103,9 @@ public class RequestsFactoryImpl extends EFactoryImpl implements RequestsFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AnimalHealthRequest createAnimalHealthRequest() {
-		AnimalHealthRequestImpl animalHealthRequest = new AnimalHealthRequestImpl();
+		final AnimalHealthRequestImpl animalHealthRequest = new AnimalHealthRequestImpl();
 		return animalHealthRequest;
 	}
 
@@ -113,8 +115,10 @@ public class RequestsFactoryImpl extends EFactoryImpl implements RequestsFactory
 	 * @generated
 	 */
 	public RequestType createRequestTypeFromString(EDataType eDataType, String initialValue) {
-		RequestType result = RequestType.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		final RequestType result = RequestType.get(initialValue);
+		if (result == null) {
+			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		}
 		return result;
 	}
 
@@ -132,6 +136,7 @@ public class RequestsFactoryImpl extends EFactoryImpl implements RequestsFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RequestsPackage getRequestsPackage() {
 		return (RequestsPackage)getEPackage();
 	}

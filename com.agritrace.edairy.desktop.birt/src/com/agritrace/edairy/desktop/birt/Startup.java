@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Ola Spjuth - initial API and implementation
  ******************************************************************************/
@@ -20,7 +20,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IStartup;
 
 /**
- * 
+ *
  * @author ola
  *
  */
@@ -28,12 +28,14 @@ public class Startup implements IStartup {
 
     Browser browser;
 
-    public void earlyStartup() {
+    @Override
+	public void earlyStartup() {
 
         Display.getDefault().syncExec( new Runnable(){
 
-            public void run() {
-                final Shell shell = new Shell(Display.getDefault());        
+            @Override
+			public void run() {
+                final Shell shell = new Shell(Display.getDefault());
                 browser=new Browser(shell, SWT.NONE);
             }} );
 
@@ -41,7 +43,7 @@ public class Startup implements IStartup {
 
 
         //Start up a background job for starting BIRT
-        Job loadBirtJob=new Job("Starting BIRT engine"){
+        final Job loadBirtJob=new Job("Starting BIRT engine"){
 
             @Override
             protected IStatus run( IProgressMonitor monitor ) {
@@ -52,9 +54,9 @@ public class Startup implements IStartup {
 //                WebViewer.startup();
 //
 //                Bundle bundle = org.eclipse.core.runtime.Platform.getBundle(
-//                                                           Activator.PLUGIN_ID); 
-//                URL url = FileLocator.find(bundle, 
-//                                           new Path("/reports/empty.rptdesign"), 
+//                                                           Activator.PLUGIN_ID);
+//                URL url = FileLocator.find(bundle,
+//                                           new Path("/reports/empty.rptdesign"),
 //                                           null);
 //                final String rpt;
 //                try {

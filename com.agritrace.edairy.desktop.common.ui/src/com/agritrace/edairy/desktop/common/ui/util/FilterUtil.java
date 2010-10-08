@@ -33,8 +33,8 @@ public class FilterUtil {
 
 			if (obj == null || comparisonPoint == null) {
 				return true;
-			} 
-			else if (propertyName != null) {			
+			}
+			else if (propertyName != null) {
 				obj = resolveProperty(obj);
 			}
 
@@ -52,11 +52,11 @@ public class FilterUtil {
 			Object propVal = null;
 			try {
 				propVal = PropertyUtils.getNestedProperty(obj, propertyName);
-			} catch (IllegalAccessException e) {
+			} catch (final IllegalAccessException e) {
 				LOGGER.log(LogService.LOG_ERROR, "error getting property: programming error.", e);
-			} catch (InvocationTargetException e) {
+			} catch (final InvocationTargetException e) {
 				LOGGER.log(LogService.LOG_ERROR, "unexpected error getting property", e);
-			} catch (NoSuchMethodException e) {
+			} catch (final NoSuchMethodException e) {
 				LOGGER.log(LogService.LOG_ERROR, "error getting property: programming error.", e);
 			}
 			return propVal;
@@ -104,7 +104,7 @@ public class FilterUtil {
 
 		@Override
 		protected boolean evaluate(Calendar comparisonPoint, Calendar testDate) {
-			boolean ret = testDate.before(comparisonPoint) || testDate.equals(comparisonPoint);
+			final boolean ret = testDate.before(comparisonPoint) || testDate.equals(comparisonPoint);
 //			System.err.printf("Comparing %s to %s returning %s\n", comparisonPoint.getTime(), testDate.getTime(), ret);
 			return ret;
 		}

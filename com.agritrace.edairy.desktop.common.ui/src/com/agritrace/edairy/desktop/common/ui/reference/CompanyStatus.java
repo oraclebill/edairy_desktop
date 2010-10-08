@@ -14,7 +14,7 @@ public class CompanyStatus {
 	public static CompanyStatus getByName(String name) {
 
 		for (final CompanyStatus cType : CUST_STATUS) {
-			if ((cType != null) && (cType.getName() != null) && cType.getName().equals(name)) {
+			if (cType != null && cType.getName() != null && cType.getName().equals(name)) {
 				return cType;
 			}
 		}
@@ -24,11 +24,11 @@ public class CompanyStatus {
 	public static List<CompanyStatus> getCustomerStatusList() {
 		return CUST_STATUS_LIST;
 	}
-	
+
 	public static List<String> getCustomerStatusStringList() {
-		List<String> names = new ArrayList<String>();
+		final List<String> names = new ArrayList<String>();
 		for (final CompanyStatus cType : CUST_STATUS) {
-			if ((cType != null) && (cType.getName() != null) ) {
+			if (cType != null && cType.getName() != null ) {
 				names.add(cType.getName());
 			}
 		}

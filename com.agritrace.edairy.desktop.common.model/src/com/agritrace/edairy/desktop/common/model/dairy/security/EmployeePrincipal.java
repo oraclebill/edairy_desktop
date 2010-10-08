@@ -5,12 +5,12 @@ import com.agritrace.edairy.desktop.common.model.dairy.Role;
 
 /**
  * Principal based on an Employee instance.
- * 
+ *
  * @author Matvey Kozhev <inetperson@gmail.com>
  *
  */
 public final class EmployeePrincipal implements IPrincipal {
-	private Employee employee;
+	private final Employee employee;
 
 	public EmployeePrincipal(Employee employee) {
 		this.employee = employee;
@@ -28,8 +28,8 @@ public final class EmployeePrincipal implements IPrincipal {
 
 	@Override
 	public boolean hasPermission(Permission perm) {
-		Role role = employee.getRole();
-		
+		final Role role = employee.getRole();
+
 		return role == null ? false : role.getPermissions().contains(perm);
 	}
 

@@ -24,34 +24,33 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
-import com.agritrace.edairy.desktop.internal.operations.services.DairyRepository;
 import com.csvreader.CsvReader;
 
 public class TransactionTestCase {
-	
+
 	private String testFile = "../test-data/member-transactions/06.210.stores.csv";
-	
+
 	public void setTestFile(String testFile) {
 		this.testFile = testFile;
 	}
-	
-	public String getTestFile() { 
+
+	public String getTestFile() {
 		return testFile;
 	}
 
 	@Before
-	public void setup() throws Exception { 
+	public void setup() throws Exception {
 //		HsqldbMemoryPersistenceManager pm = new HsqldbMemoryPersistenceManager();
 //		PersistenceManager.setDefault(pm);
 
-		Dairy dairy = DairyFactory.eINSTANCE.createDairy();
+		final Dairy dairy = DairyFactory.eINSTANCE.createDairy();
 		dairy.setCompanyName("test");
 		dairy.setDescription("");
 		dairy.setRegistrationNumber("");
 		dairy.setLocation(DairyUtil.createLocation(null, null, null));
 		dairy.setPhoneNumber("");
-		
-		CsvReader reader = new CsvReader(
+
+		final CsvReader reader = new CsvReader(
 				getTestFile());
 
 		// HEADERS:
@@ -59,7 +58,7 @@ public class TransactionTestCase {
 
 		reader.readHeaders();
 		while (reader.readRecord()) {
-			AccountTransaction tx = createTransaction(reader.getValues());
+			final AccountTransaction tx = createTransaction(reader.getValues());
 			if ( tx != null ) {
 				dairy.getMemberships().add(tx.getAccount().getMember());
 			}
@@ -68,9 +67,9 @@ public class TransactionTestCase {
 				System.err.println("Import failed for : " + Arrays.toString(reader.getValues()));
 			}
 		}
-		
+
 //		DairyRepository.getInstance().save(dairy);
-		
+
 	}
 
 	final static HashMap<String, Account> accounts = new HashMap<String, Account>();
@@ -88,13 +87,13 @@ public class TransactionTestCase {
 	}
 
 	protected AccountTransaction createTransaction(String[] record) {
-		AccountTransaction tx = AccountFactory.eINSTANCE
+		final AccountTransaction tx = AccountFactory.eINSTANCE
 				.createAccountTransaction();
 		tx.setAccount(getAccount(record[MEMBER]));
 		Date txDate = null;
 		try {
 			txDate = TX_FORMAT.parse(record[DATE]);
-		} catch (ParseException pe) {
+		} catch (final ParseException pe) {
 			pe.printStackTrace();
 			return null;
 		}
@@ -102,9 +101,9 @@ public class TransactionTestCase {
 		tx.setTransactionDate(txDate);
 		tx.setTransactionType(TransactionType.CREDIT);
 		try {
-			Number num = NumberFormat.getInstance().parse(record[AMOUNT]);			
+			final Number num = NumberFormat.getInstance().parse(record[AMOUNT]);
 			tx.setAmount(new BigDecimal(num.doubleValue()));
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 			System.err.println(record[AMOUNT]);
 			return null;
@@ -116,17 +115,17 @@ public class TransactionTestCase {
 	}
 
 	protected Account createAccount(String accountNo) {
-		Farmer farmer = TrackingFactory.eINSTANCE.createFarmer();
+		final Farmer farmer = TrackingFactory.eINSTANCE.createFarmer();
 		farmer.setNickName(accountNo);
 
-		Membership member = DairyFactory.eINSTANCE.createMembership();
+		final Membership member = DairyFactory.eINSTANCE.createMembership();
 		member.setMemberNumber(accountNo);
 		member.setApplicationDate(new Date());
 		member.setStatus(MembershipStatus.ACTIVE);
 
 		member.setMember(farmer);
 
-		Account account = AccountFactory.eINSTANCE.createAccount();
+		final Account account = AccountFactory.eINSTANCE.createAccount();
 		account.setAccountNumber(accountNo);
 		account.setStatus(AccountStatus.ACTIVE);
 		account.setMember(member);

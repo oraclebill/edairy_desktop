@@ -14,6 +14,7 @@ public class MilkPriceJournalView extends AbstractDirectoryView {
 	public MilkPriceJournalView() {
 	}
 
+	@Override
 	protected void createFilterGroup(Composite parent) {
 		createFilterConditions(parent);
 		createFilterButtonPanel(parent);
@@ -21,9 +22,9 @@ public class MilkPriceJournalView extends AbstractDirectoryView {
 
 	@Override
 	protected void createFilterConditions(Composite comp) {
-		Composite control = new MilkPriceJournalFilterPanel(comp, SWT.NONE);
+		final Composite control = new MilkPriceJournalFilterPanel(comp, SWT.NONE);
 		GridDataFactory.swtDefaults().grab(true, false).indent(8,8).applyTo(control);
 	}
 
-	
+
 }

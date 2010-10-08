@@ -6,25 +6,21 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.account.impl;
 
-import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
-import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
-import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
-
 import java.math.BigDecimal;
-
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EcoreUtil;
+
+import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
+import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
 
 /**
  * <!-- begin-user-doc -->
@@ -169,8 +165,11 @@ public class TransactionImpl extends EObjectImpl implements Transaction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Account getAccount() {
-		if (eContainerFeatureID() != AccountPackage.TRANSACTION__ACCOUNT) return null;
+		if (eContainerFeatureID() != AccountPackage.TRANSACTION__ACCOUNT) {
+			return null;
+		}
 		return (Account)eContainer();
 	}
 
@@ -189,20 +188,27 @@ public class TransactionImpl extends EObjectImpl implements Transaction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAccount(Account newAccount) {
-		if (newAccount != eInternalContainer() || (eContainerFeatureID() != AccountPackage.TRANSACTION__ACCOUNT && newAccount != null)) {
-			if (EcoreUtil.isAncestor(this, newAccount))
+		if (newAccount != eInternalContainer() || eContainerFeatureID() != AccountPackage.TRANSACTION__ACCOUNT && newAccount != null) {
+			if (EcoreUtil.isAncestor(this, newAccount)) {
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			}
 			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
+			if (eInternalContainer() != null) {
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newAccount != null)
+			}
+			if (newAccount != null) {
 				msgs = ((InternalEObject)newAccount).eInverseAdd(this, AccountPackage.ACCOUNT__TRANSACTIONS, Account.class, msgs);
+			}
 			msgs = basicSetAccount(newAccount, msgs);
-			if (msgs != null) msgs.dispatch();
+			if (msgs != null) {
+				msgs.dispatch();
+			}
 		}
-		else if (eNotificationRequired())
+		else if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.TRANSACTION__ACCOUNT, newAccount, newAccount));
+		}
 	}
 
 	/**
@@ -210,6 +216,7 @@ public class TransactionImpl extends EObjectImpl implements Transaction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public long getTransactionId() {
 		return transactionId;
 	}
@@ -219,11 +226,13 @@ public class TransactionImpl extends EObjectImpl implements Transaction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTransactionId(long newTransactionId) {
-		long oldTransactionId = transactionId;
+		final long oldTransactionId = transactionId;
 		transactionId = newTransactionId;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.TRANSACTION__TRANSACTION_ID, oldTransactionId, transactionId));
+		}
 	}
 
 	/**
@@ -231,6 +240,7 @@ public class TransactionImpl extends EObjectImpl implements Transaction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Date getTransactionDate() {
 		return transactionDate;
 	}
@@ -240,11 +250,13 @@ public class TransactionImpl extends EObjectImpl implements Transaction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTransactionDate(Date newTransactionDate) {
-		Date oldTransactionDate = transactionDate;
+		final Date oldTransactionDate = transactionDate;
 		transactionDate = newTransactionDate;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.TRANSACTION__TRANSACTION_DATE, oldTransactionDate, transactionDate));
+		}
 	}
 
 	/**
@@ -252,6 +264,7 @@ public class TransactionImpl extends EObjectImpl implements Transaction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TransactionType getTransactionType() {
 		return transactionType;
 	}
@@ -261,11 +274,13 @@ public class TransactionImpl extends EObjectImpl implements Transaction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTransactionType(TransactionType newTransactionType) {
-		TransactionType oldTransactionType = transactionType;
+		final TransactionType oldTransactionType = transactionType;
 		transactionType = newTransactionType == null ? TRANSACTION_TYPE_EDEFAULT : newTransactionType;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.TRANSACTION__TRANSACTION_TYPE, oldTransactionType, transactionType));
+		}
 	}
 
 	/**
@@ -273,6 +288,7 @@ public class TransactionImpl extends EObjectImpl implements Transaction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BigDecimal getAmount() {
 		return amount;
 	}
@@ -282,11 +298,13 @@ public class TransactionImpl extends EObjectImpl implements Transaction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAmount(BigDecimal newAmount) {
-		BigDecimal oldAmount = amount;
+		final BigDecimal oldAmount = amount;
 		amount = newAmount;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.TRANSACTION__AMOUNT, oldAmount, amount));
+		}
 	}
 
 	/**
@@ -294,6 +312,7 @@ public class TransactionImpl extends EObjectImpl implements Transaction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -303,11 +322,13 @@ public class TransactionImpl extends EObjectImpl implements Transaction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDescription(String newDescription) {
-		String oldDescription = description;
+		final String oldDescription = description;
 		description = newDescription;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.TRANSACTION__DESCRIPTION, oldDescription, description));
+		}
 	}
 
 	/**
@@ -319,8 +340,9 @@ public class TransactionImpl extends EObjectImpl implements Transaction {
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case AccountPackage.TRANSACTION__ACCOUNT:
-				if (eInternalContainer() != null)
+				if (eInternalContainer() != null) {
 					msgs = eBasicRemoveFromContainer(msgs);
+				}
 				return basicSetAccount((Account)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -469,9 +491,11 @@ public class TransactionImpl extends EObjectImpl implements Transaction {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy()) {
+			return super.toString();
+		}
 
-		StringBuffer result = new StringBuffer(super.toString());
+		final StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (transactionId: ");
 		result.append(transactionId);
 		result.append(", transactionDate: ");

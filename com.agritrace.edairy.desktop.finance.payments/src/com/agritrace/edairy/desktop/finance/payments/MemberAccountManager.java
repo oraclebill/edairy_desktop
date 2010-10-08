@@ -34,7 +34,7 @@
 //	/**
 //	 * Create a new balance by adding the sum of all unaccounted transactions to
 //	 * the last balance point.
-//	 * 
+//	 *
 //	 * @param account
 //	 * @param message
 //	 * @return a newly created balance point
@@ -56,7 +56,7 @@
 //	/**
 //	 * Add a set of transactions where credits decrease and debits increase the
 //	 * result.
-//	 * 
+//	 *
 //	 * @param transactionList
 //	 * @return
 //	 */
@@ -90,7 +90,7 @@
 //
 //	/**
 //	 * If the account has a debit balance, return it. Otherwise return 0.
-//	 * 
+//	 *
 //	 */
 //	public BigDecimal getCurrentBalance(Account account) {
 //		Date startDate = new Date(0);

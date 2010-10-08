@@ -1,12 +1,8 @@
 package com.agritrace.edairy.desktop.member.ui.controllers;
 
-import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.riena.ui.ridgets.IActionListener;
-import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
-import org.eclipse.swt.widgets.Display;
 
 import com.agritrace.edairy.desktop.common.model.base.Gender;
 import com.agritrace.edairy.desktop.common.model.tracking.AcquisitionType;
@@ -15,15 +11,9 @@ import com.agritrace.edairy.desktop.common.model.tracking.Purpose;
 import com.agritrace.edairy.desktop.common.model.tracking.RearingMode;
 import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
-import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
-import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
-import com.agritrace.edairy.desktop.member.ui.dialog.AddLiveStockDialog;
 
 // TODO: Unused, why?
 abstract public class AnimalDialogHandler implements IActionListener {
-	private String liveStockRemoveTitle = "";
-	private String liveStockRemoveMessage = "";
-	
 	@Override
 	public void callback() {
 		/*
@@ -51,15 +41,15 @@ abstract public class AnimalDialogHandler implements IActionListener {
 		}
 		*/
 	}
-	
+
 	protected RegisteredAnimal getEditAnimal() {
 		return DairyUtil.createAnimal(null, null, "", Gender.MALE,
 				DairyUtil.createReferenceAnimal("", ""), Purpose.get(0), RearingMode.get(0),
 				DairyUtil.createReferenceAnimal("", ""), "", "", null, null, AcquisitionType.get(0), null);
 	}
-	
+
 	abstract public  List<Farm> getFarms();
-	
+
 	abstract public void save(RegisteredAnimal animal);
 
 	abstract public void delete(RegisteredAnimal animal);

@@ -131,7 +131,7 @@ public abstract class TransactionJournalController<T extends Transaction> extend
 			predicateList.add(NullIsTruePredicate.getInstance(new FilterUtil.DateBeforePredicate(date, AccountPackage.Literals.TRANSACTION__TRANSACTION_DATE.getName())));
 		}
 
-		Membership member = filterBean.getMember();
+		final Membership member = filterBean.getMember();
 		if (member != null) {
 			predicateList.add(NullIsTruePredicate.getInstance(new TransactionMemberEqualPredicate(member)));
 		}
@@ -161,7 +161,7 @@ public abstract class TransactionJournalController<T extends Transaction> extend
 
 	/**
 	 * todo: this will not work for long...
-	 * 
+	 *
 	 * @return
 	 */
 	@Override
@@ -174,7 +174,7 @@ public abstract class TransactionJournalController<T extends Transaction> extend
 					filtered.add(tx);
 				}
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 		return filtered;

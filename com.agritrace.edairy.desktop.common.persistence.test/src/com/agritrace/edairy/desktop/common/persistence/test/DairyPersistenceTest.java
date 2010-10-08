@@ -9,22 +9,21 @@ import org.junit.Test;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.persistence.test.ModelPersistenceBase;
 
 
 public class DairyPersistenceTest extends ModelPersistenceBase  {
 
 	@Test
 	public void testLazyLoadBehaviour() throws Exception {
-		Session session = getSessionFactory().openSession();
-		Dairy dairy = (Dairy) session.createQuery("From Dairy").uniqueResult();
+		final Session session = getSessionFactory().openSession();
+		final Dairy dairy = (Dairy) session.createQuery("From Dairy").uniqueResult();
 
-		Collection<Employee> employees = dairy.getEmployees();
+		final Collection<Employee> employees = dairy.getEmployees();
 		showCollection("Employees", employees);
 
-		Collection<Membership> members = dairy.getMemberships();
+		final Collection<Membership> members = dairy.getMemberships();
 		showCollection("Members", members);
-		
+
 		showCollection("requests", dairy.getAnimalHealthRequests());
 		showCollection("branches", dairy.getBranchLocations());
 		showCollection("journals", dairy.getCollectionJournals());
@@ -38,6 +37,6 @@ public class DairyPersistenceTest extends ModelPersistenceBase  {
 		System.out.printf("Is Lazy Loadable? : %s\n", LazyCollectionUtils.isLazyLoadableCollection(collection));
 
 	}
-	
+
 
 }

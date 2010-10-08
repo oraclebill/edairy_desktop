@@ -45,9 +45,13 @@ public class FieldUtil {
 
 	public FieldUtil(int labelWidth, int fieldWidth) {
 		// SWT.DEFAULT == -1
-		if (labelWidth < 0) labelWidth = MINIMUM_LABEL_WIDTH;
-		if (fieldWidth < 0) labelWidth = STD_FIELD_WIDTH;
-		
+		if (labelWidth < 0) {
+			labelWidth = MINIMUM_LABEL_WIDTH;
+		}
+		if (fieldWidth < 0) {
+			labelWidth = STD_FIELD_WIDTH;
+		}
+
 		comboGDF = GridDataFactory.fillDefaults().minSize(fieldWidth, -1).grab(true, false);
 		fieldGDF = GridDataFactory.fillDefaults().minSize(fieldWidth, -1).grab(true, false).align(SWT.END, SWT.FILL);
 		labelGDF = GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).minSize(labelWidth, -1);
@@ -134,9 +138,9 @@ public class FieldUtil {
 
 		return text;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param parent
 	 * @param labelText
 	 * @return
@@ -145,16 +149,16 @@ public class FieldUtil {
 	public static Label createLabel(Composite parent, String labelText) {
 		return createLabel(parent, labelText, null);
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param parent
 	 * @param labelText
 	 * @return
 	 * @wbp.factory
 	 */
 	private static Label createLabel(Composite parent, String labelText, String bindingId) {
-		Label label = new Label(parent, SWT.NONE);
+		final Label label = new Label(parent, SWT.NONE);
 		label.setText(labelText);
 		if (bindingId != null) {
 			SWTBindingPropertyLocator.getInstance().setBindingProperty(label, bindingId);

@@ -28,17 +28,18 @@ import com.agritrace.edairy.desktop.common.ui.activator.Activator;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
+import com.agritrace.edairy.desktop.common.ui.views.BaseListView;
 
 /**
  * Extension of SubModuleController which provides some utility methods for
  * standard EDairyDesktop views. The controller expects it will be used with the
  * AbstractDirectoryView component.
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
  * @author
- * 
+ *
  */
 public abstract class AbstractDirectoryController<T extends EObject> extends
 		SubModuleController {
@@ -92,7 +93,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends
 
 	/**
 	 * Controller with sub model node
-	 * 
+	 *
 	 * @param navigationNode
 	 */
 	public AbstractDirectoryController(ISubModuleNode navigationNode) {
@@ -143,7 +144,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends
 
 	/**
 	 * Gets the selectedObject
-	 * 
+	 *
 	 * @return
 	 */
 	public T getSelectedEObject() {
@@ -166,7 +167,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends
 
 	private void configureFilterRidgetsInternal() {
 		searchBtnRidget = getRidget(IActionRidget.class,
-				AbstractDirectoryView.BIND_ID_FILTER_SEARCH);
+				BaseListView.BIND_ID_FILTER_SEARCH);
 		if (searchBtnRidget != null) {
 			searchBtnRidget.addListener(new IActionListener() {
 				@Override
@@ -177,7 +178,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends
 		}
 
 		resetBtnRidget = getRidget(IActionRidget.class,
-				AbstractDirectoryView.BIND_ID_FILTER_RESET);
+				BaseListView.BIND_ID_FILTER_RESET);
 		if (resetBtnRidget != null) {
 			resetBtnRidget.addListener(new IActionListener() {
 				@Override
@@ -238,7 +239,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends
 
 	/**
 	 * Create new model while createing a new record
-	 * 
+	 *
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
@@ -248,14 +249,14 @@ public abstract class AbstractDirectoryController<T extends EObject> extends
 
 	/**
 	 * Gets entity class
-	 * 
+	 *
 	 * @return
 	 */
 	protected abstract EClass getEClass();
 
 	/**
 	 * Gets entity class
-	 * 
+	 *
 	 * @return
 	 */
 	final protected Class<?> getEntityClass() {
@@ -269,13 +270,13 @@ public abstract class AbstractDirectoryController<T extends EObject> extends
 
 	/**
 	 * Gets filter class
-	 * 
+	 *
 	 * @return
 	 */
 	protected abstract List<T> getFilteredResult();
 
 	/**
-	 * 
+	 *
 	 * @param shell
 	 * @return
 	 */
@@ -283,14 +284,14 @@ public abstract class AbstractDirectoryController<T extends EObject> extends
 
 	/**
 	 * Gets table column header
-	 * 
+	 *
 	 * @return
 	 */
 	protected abstract String[] getTableColumnHeaders();
 
 	/**
 	 * Gets table column property name
-	 * 
+	 *
 	 * @return
 	 */
 	protected abstract String[] getTableColumnPropertyNames();
@@ -338,10 +339,10 @@ public abstract class AbstractDirectoryController<T extends EObject> extends
 	@SuppressWarnings("unchecked")
 	protected void handleViewItemAction() {
 		final RecordDialog<T> dialog = getRecordDialog(getShell());
-		T selectedObject = getSelectedEObject();
+		final T selectedObject = getSelectedEObject();
 		try {
 			getRepository().load(selectedObject);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 		dialog.getController().setContext(EDITED_OBJECT_ID, selectedObject);
@@ -399,14 +400,14 @@ public abstract class AbstractDirectoryController<T extends EObject> extends
 
 	/**
 	 * A utility to get the current display.
-	 * 
+	 *
 	 * @return the current display, safe for rcp or non-rcp.
 	 */
 	public static final Display getDisplay() {
 		Display display;
 		try {
 			display = PlatformUI.getWorkbench().getDisplay();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			display = Display.getCurrent();
 			if (display == null) {
 				display = Display.getDefault();
@@ -417,7 +418,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends
 
 	/**
 	 * A utility to get the current active shell.
-	 * 
+	 *
 	 * @return the current shell, safe for rcp or non-rcp.
 	 */
 	public static final Shell getShell() {
@@ -425,12 +426,12 @@ public abstract class AbstractDirectoryController<T extends EObject> extends
 	}
 
 	/**
-	 * 
+	 *
 	 * @param level
 	 * @param message
 	 */
 	private void log(int level, String message) {
-		org.eclipse.equinox.log.Logger logger = Log4r.getLogger(
+		final org.eclipse.equinox.log.Logger logger = Log4r.getLogger(
 				Activator.getDefault(), this.getClass().getName());
 		logger.log(level, message);
 	}

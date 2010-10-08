@@ -30,10 +30,10 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 	}
 	public BasicDirectoryController(IController controller) {
 		super(controller);
-		
+
 	}
 
-	
+
 	protected void addTableColumn(String colHeader, EStructuralFeature featurePath) {
 		addTableColumn(colHeader, featurePath, null);
 	}
@@ -46,11 +46,11 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 	protected void addTableColumn(String colHeader, EStructuralFeature feature, ColumnFormatter formatter) {
 		addTableColumn(colHeader, feature.getName(), feature.getEType().getInstanceClass(), formatter);
 	}
-	
+
 	protected void addTableColumn(String colHeader, String colPropertyName, Class<?> colType) {
 		addTableColumn(colHeader, colPropertyName, colType, null);
 	}
-	
+
 	protected void addTableColumn(String colHeader, String colPropertyName, Class<?> colType, ColumnFormatter formatter) {
 		columnHeaders.add(colHeader);
 		columnProperties.add(colPropertyName);
@@ -100,13 +100,13 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 
 			tableBindToModel();
 		}
-		
+
 	}
-	
+
 	protected void tableBindToModel(){
 		if(table != null){
-			String[] tableColumnProperties = getTableColumnPropertyNames();
-			String[] tableColumnHeaders = getTableColumnHeaders();
+			final String[] tableColumnProperties = getTableColumnPropertyNames();
+			final String[] tableColumnHeaders = getTableColumnHeaders();
 			table.bindToModel(new WritableList(getTableContents(), getEntityClass()), getEntityClass(),
 					tableColumnProperties, tableColumnHeaders);
 
@@ -115,7 +115,7 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 	}
 
 	protected Comparator[] getTableColumnComparators() {
-		return columnComparators.toArray(new Comparator[columnComparators.size()] ); 
+		return columnComparators.toArray(new Comparator[columnComparators.size()] );
 	}
 
 	@Override

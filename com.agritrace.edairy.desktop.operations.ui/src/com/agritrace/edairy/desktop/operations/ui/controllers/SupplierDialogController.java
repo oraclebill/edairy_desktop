@@ -9,8 +9,8 @@ import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.riena.beans.common.ListBean;
 import org.eclipse.riena.ui.ridgets.IListRidget;
-import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.ISelectableRidget.SelectionType;
+import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 
 import com.agritrace.edairy.desktop.common.model.base.Location;
@@ -39,7 +39,7 @@ public class SupplierDialogController extends RecordDialogController<Supplier> {
 	public void configureUserRidgets() {
 		// configure supplier ID
 		final Supplier supplier = getWorkingCopy();
-		
+
 		addComboMap(SupplierListDialog.BIND_ID_SUPPLIER_STATUS, VendorStatus.VALUES, "name", DairyPackage.Literals.SUPPLIER__STATUS);
 		addTextMap(SupplierListDialog.BIND_ID_COMPANY_NAME, ModelPackage.Literals.COMPANY__COMPANY_NAME);
 		addTextMap(SupplierListDialog.BIND_ID_LEGAL_NAME,  ModelPackage.Literals.COMPANY__LEGAL_NAME);
@@ -51,7 +51,7 @@ public class SupplierDialogController extends RecordDialogController<Supplier> {
 		supplierId.setMandatory(true);
 		supplierId.bindToModel(supplier, DairyPackage.Literals.SUPPLIER__ID.getName());
 		supplierId.updateFromModel();
-		
+
 		final IProfilePhotoRidget profilePhoto = getRidget(IProfilePhotoRidget.class, SupplierListDialog.BIND_ID_SUPPLIER_PHOTO);
 		profilePhoto.bindToModel(EMFObservables.observeValue(supplier, ModelPackage.Literals.COMPANY__PROFILE_PHOTO));
 

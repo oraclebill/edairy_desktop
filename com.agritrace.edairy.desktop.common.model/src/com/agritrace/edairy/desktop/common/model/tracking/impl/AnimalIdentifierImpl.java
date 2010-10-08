@@ -6,15 +6,13 @@
  */
 package com.agritrace.edairy.desktop.common.model.tracking.impl;
 
-import com.agritrace.edairy.desktop.common.model.tracking.AnimalIdentifier;
-import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import com.agritrace.edairy.desktop.common.model.tracking.AnimalIdentifier;
+import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -95,6 +93,7 @@ public class AnimalIdentifierImpl extends EObjectImpl implements AnimalIdentifie
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getIssuer() {
 		return issuer;
 	}
@@ -104,11 +103,13 @@ public class AnimalIdentifierImpl extends EObjectImpl implements AnimalIdentifie
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIssuer(String newIssuer) {
-		String oldIssuer = issuer;
+		final String oldIssuer = issuer;
 		issuer = newIssuer;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.ANIMAL_IDENTIFIER__ISSUER, oldIssuer, issuer));
+		}
 	}
 
 	/**
@@ -116,6 +117,7 @@ public class AnimalIdentifierImpl extends EObjectImpl implements AnimalIdentifie
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getValue() {
 		return value;
 	}
@@ -125,11 +127,13 @@ public class AnimalIdentifierImpl extends EObjectImpl implements AnimalIdentifie
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(String newValue) {
-		String oldValue = value;
+		final String oldValue = value;
 		value = newValue;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.ANIMAL_IDENTIFIER__VALUE, oldValue, value));
+		}
 	}
 
 	/**
@@ -207,9 +211,11 @@ public class AnimalIdentifierImpl extends EObjectImpl implements AnimalIdentifie
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy()) {
+			return super.toString();
+		}
 
-		StringBuffer result = new StringBuffer(super.toString());
+		final StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (issuer: ");
 		result.append(issuer);
 		result.append(", value: ");

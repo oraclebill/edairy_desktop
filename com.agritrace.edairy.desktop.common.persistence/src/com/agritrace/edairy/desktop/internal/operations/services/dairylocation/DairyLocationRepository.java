@@ -32,6 +32,7 @@ public class DairyLocationRepository extends HibernateRepository<DairyLocation> 
 		@Override
 		public void run(Session session) {
 			@SuppressWarnings("unchecked")
+			final
 			List<Route> result = session.createQuery("FROM Route").list();
 			routes = result;
 		}
@@ -45,18 +46,18 @@ public class DairyLocationRepository extends HibernateRepository<DairyLocation> 
 				final Query query = session.createQuery(
 						"SELECT DISTINCT dl FROM DairyLocation dl LEFT JOIN dl.functions func WHERE func = :func");
 				query.setParameter("func", DairyFunction.MILK_COLLECTION);
-				
+
 				@SuppressWarnings("unchecked")
 				final List<DairyLocation> result = query.list();
 				setResult(result);
 			}
 		};
-		
+
 		runWithTransaction(runnable);
 		return runnable.getResult();
 	}
 
-	
+
 	@Override
 	public void save(Object changedItem) throws AlreadyExistsException {
 		// TODO Auto-generated method stub
@@ -92,13 +93,13 @@ public class DairyLocationRepository extends HibernateRepository<DairyLocation> 
 		runWithTransaction(routesQuery);
 		return routesQuery.getResults();
 	}
-	
+
 	private void prepareNew(DairyLocation newEntity) {
 		final Route route = newEntity.getRoute();
 		if (route != null) {
 			newEntity.setRoute((Route) get("Route", new Long(route.getId())));
 		}
-		Dairy dairy = (Dairy) get("Dairy", 1l);
+		final Dairy dairy = (Dairy) get("Dairy", 1l);
 		dairy.getBranchLocations().add(newEntity);
 	}
 
@@ -107,13 +108,13 @@ public class DairyLocationRepository extends HibernateRepository<DairyLocation> 
 		prepareNew(newEntity);
 		super.saveNew(newEntity);
 	}
-	
+
 	@Override
 	public void saveAll(final Collection<? extends DairyLocation> locs) {
 		runWithTransaction(new SessionRunnable<Object>() {
 			@Override
 			public void run(Session session) {
-				for (DairyLocation loc: locs) {
+				for (final DairyLocation loc: locs) {
 					session.save(loc);
 				}
 			}

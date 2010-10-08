@@ -9,13 +9,13 @@ import org.hibernate.cfg.Environment;
 import com.google.inject.Provider;
 
 public class  ManagedMemoryDataStoreProvider implements Provider<HbDataStore> {
-	
+
 	@Override
 	public HbDataStore get() {
-		long COUNTER = System.currentTimeMillis();
-		
-		Properties props = new Properties();	
-		
+		final long COUNTER = System.currentTimeMillis();
+
+		final Properties props = new Properties();
+
 		props.setProperty(Environment.DRIVER, "org.hsqldb.jdbcDriver");
 		props.setProperty(Environment.USER, "SA");
 		props.setProperty(Environment.URL, "jdbc:hsqldb:mem:test"  + COUNTER);
@@ -26,15 +26,15 @@ public class  ManagedMemoryDataStoreProvider implements Provider<HbDataStore> {
 		props.setProperty("teneo.mapping.disable_econtainer", "true");
 		props.setProperty("teneo.mapping.default_varchar_length", "60");
 
-		HbDataStore hbds = HbHelper.INSTANCE.createRegisterDataStore("data-store-test" + COUNTER);
+		final HbDataStore hbds = HbHelper.INSTANCE.createRegisterDataStore("data-store-test" + COUNTER);
 		hbds.setProperties(props);
 		hbds.setEPackages(PersistenceModule.EPACKAGES);
 
-		hbds.initialize();		
-		
+		hbds.initialize();
+
 		System.err.println(" --> returngin data store : " + hbds );
 		System.err.println("     " + hbds.getProperties().get(Environment.URL));
-		
+
 		return hbds;
 	}
 }

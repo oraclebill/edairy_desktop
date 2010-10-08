@@ -1,8 +1,8 @@
 package com.agritrace.edairy.desktop.common.model.dairy.security;
 
 /**
- * Administrator principal with 
- * 
+ * Administrator principal with
+ *
  * @author Matvey Kozhev <inetperson@gmail.com>
  *
  */

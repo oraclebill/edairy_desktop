@@ -39,24 +39,24 @@ import com.agritrace.edairy.desktop.common.ui.activator.Activator;
  * An ImageWidget is a combination of a Label and a Link. The Label is used to
  * display the image while the Link is used to trigger selection of a new image
  * file to display.
- * 
+ *
  * @author bjones
- * 
+ *
  */
 public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProfilePhotoRidget {
-	private ListenerList<ISelectionListener> listeners = new ListenerList<ISelectionListener>(ISelectionListener.class);
+	private final ListenerList<ISelectionListener> listeners = new ListenerList<ISelectionListener>(ISelectionListener.class);
 
 	private final class LinkSelected implements ISelectionListener {
 		@Override
 		public void ridgetSelected(SelectionEvent event) {
-			File imageFile = getImageFile();
+			final File imageFile = getImageFile();
 			if (imageFile != null && imageFile.canRead()) {
 				imageData = readImageData(imageFile);
 				if (imageData != null) {
 					updateModel();
 					updateDisplay();
-					
-					for (ISelectionListener listener : listeners.getListeners()) {
+
+					for (final ISelectionListener listener : listeners.getListeners()) {
 						listener.ridgetSelected(event);
 					}
 				} else {
@@ -88,7 +88,7 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public void updateFromModel() {
@@ -96,7 +96,7 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 			imageData = null;
 			currentKey = null;
 		} else {
-			String key = (String) modelObj.getValue();
+			final String key = (String) modelObj.getValue();
 			if (key == null) {
 				imageData = null;
 				currentKey = null;
@@ -109,12 +109,12 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public void configureRidgets() {
 		profileImageLabel = getRidget(ILabelRidget.class, "profileImageLabel");
-		ILinkRidget updateImageLink = getRidget(ILinkRidget.class, "updateImageLink");
+		final ILinkRidget updateImageLink = getRidget(ILinkRidget.class, "updateImageLink");
 
 		if (updateImageLink != null) {
 			updateImageLink.addSelectionListener(new LinkSelected());
@@ -152,13 +152,13 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	protected void checkUIControl(Object uiControl) {
 		if (uiControl instanceof Composite) {
-			Composite composite = (Composite) uiControl;
-			Control[] children = composite.getChildren();
+			final Composite composite = (Composite) uiControl;
+			final Control[] children = composite.getChildren();
 			if (children.length < 2) {
 				throw new RuntimeException();
 			}
@@ -166,19 +166,19 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 * @return
 	 */
 	private File getImageFile() {
 		final Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 		final int swtOptions = SWT.DIALOG_TRIM | SWT.SHEET;
 		final String fName = new FileDialog(shell, swtOptions).open();
-		return (fName != null) ? new File(fName) : null;
+		return fName != null ? new File(fName) : null;
 	}
 
 	/**
-	 * 
+	 *
 	 * @param imageFile
 	 * @return
 	 */
@@ -199,24 +199,24 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 			fStream = new BufferedInputStream(new FileInputStream(imageFile));
 			imageData = new ImageData(fStream);
 			if (imageFile.length() > MAX_IMAGE_SIZE) {
-				double shrinkRatio = (double) MAX_IMAGE_SIZE / (double) imageFile.length();
+				final double shrinkRatio = (double) MAX_IMAGE_SIZE / (double) imageFile.length();
 				imageData = imageData.scaledTo((int) (shrinkRatio * imageData.width),
 						(int) (shrinkRatio * imageData.height));
 				log(LogService.LOG_INFO, "Scaled original from " + imageFile.length());
 			}
 
-		} catch (FileNotFoundException fnfe) {
+		} catch (final FileNotFoundException fnfe) {
 			MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
 					"Error opening file", String.format("Error opening file %s: %s", imageFile, fnfe.getMessage()));
 			return null;
-		} catch (SWTException se) {
+		} catch (final SWTException se) {
 			MessageDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
 					"Error opening file", String.format("Error opening file %s: %s", imageFile, se.getMessage()));
 			return null;
 		} finally {
 			try {
 				fStream.close();
-			} catch (Exception e) {
+			} catch (final Exception e) {
 			}
 		}
 		return imageData;
@@ -224,7 +224,7 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 
 	/**
 	 * Persist the current image.
-	 * 
+	 *
 	 * @param imageData
 	 */
 	private void updateModel() {
@@ -250,7 +250,7 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 			imageRefKey = UUID.randomUUID().toString();
 			modelObj.setValue(imageRefKey);
 		}
-		
+
 		ImageDataUtil.getInstance().saveImageData(imageRefKey, imageData);
 	}
 
@@ -263,16 +263,16 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 
 		final Object control = profileImageLabel.getUIControl();
 		if (control instanceof Label) {
-			Label label = (Label) control;
+			final Label label = (Label) control;
 			if (imageData == null) {
 				label.setImage(null);
 				return;
 			}
 
-			int displayWidth = label.getSize().x, displayHeight = label.getSize().y;
+			final int displayWidth = label.getSize().x, displayHeight = label.getSize().y;
 
-			float imgAspect = (float) imageData.width / (float) imageData.height;
-			float displayAspect = (float) displayWidth / (float) displayHeight;
+			final float imgAspect = (float) imageData.width / (float) imageData.height;
+			final float displayAspect = (float) displayWidth / (float) displayHeight;
 			float scale;
 			if (imgAspect > displayAspect) {
 				// scale width
@@ -281,7 +281,7 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 				// scale height
 				scale = (float) displayHeight / (float) imageData.height;
 			}
-			ImageData scaledImage = imageData.scaledTo((int) Math.floor(scale * imageData.width),
+			final ImageData scaledImage = imageData.scaledTo((int) Math.floor(scale * imageData.width),
 					(int) Math.floor(scale * imageData.height));
 
 			final Image photo = new Image(PlatformUI.getWorkbench().getDisplay(), scaledImage);
@@ -292,7 +292,7 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private void log(int level, String message) {
 		Log4r.getLogger(Activator.getDefault(), getClass()).log(level, message);

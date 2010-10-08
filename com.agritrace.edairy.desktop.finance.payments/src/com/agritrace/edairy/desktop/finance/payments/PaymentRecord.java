@@ -6,7 +6,7 @@ import java.util.Date;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 
 public class PaymentRecord {
-	
+
 	private  int year, month;
 	private Long transactionId;
 	private Date transactionDate;
@@ -15,17 +15,17 @@ public class PaymentRecord {
 	private BigDecimal paymentRate;
 	private BigDecimal milkIncome;
 	private BigDecimal accountCredits;
-	private BigDecimal accountAdjustments;	
+	private BigDecimal accountAdjustments;
 	private BigDecimal totalPayment;
 	private BigDecimal startingBalance;
 
-	
+
 	public PaymentRecord(Long transactionId, Date transactionDate, Membership member, BigDecimal amount) {
 		this.transactionId = transactionId;
 		this.transactionDate = transactionDate;
 		this.member = member;
 		this.totalPayment = amount;
-		
+
 	}
 
 	public PaymentRecord(Membership member, int priceMonth, int priceYear) {
@@ -80,8 +80,8 @@ public class PaymentRecord {
 	 * @return the milkIncome
 	 */
 	public BigDecimal getMilkIncome() {
-		if (milkIncome == null 
-			&& getPaymentRate() != null 
+		if (milkIncome == null
+			&& getPaymentRate() != null
 			&& getPayableMilkQuantity() != null) {
 			return getPaymentRate().multiply(getPayableMilkQuantity(), Constants.MONEYCONTEXT);
 		}
@@ -127,11 +127,11 @@ public class PaymentRecord {
 	 * @return the totalPayment
 	 */
 	public BigDecimal getTotalPayment() {
-		if (totalPayment == null 
-				&& getAccountCredits() != null 
-				&& getMilkIncome() != null 
+		if (totalPayment == null
+				&& getAccountCredits() != null
+				&& getMilkIncome() != null
 				&& getAccountCredits() != null) {
-			return getMilkIncome().subtract(getAccountCredits()).add(getAccountAdjustments());			
+			return getMilkIncome().subtract(getAccountCredits()).add(getAccountAdjustments());
 		}
 		return totalPayment;
 	}
@@ -212,9 +212,9 @@ public class PaymentRecord {
 	public void setStartingBalance(BigDecimal startingBalance) {
 		this.startingBalance = startingBalance;
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 }

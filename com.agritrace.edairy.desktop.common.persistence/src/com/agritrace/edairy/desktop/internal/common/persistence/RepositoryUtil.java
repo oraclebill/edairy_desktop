@@ -20,19 +20,19 @@ public abstract class RepositoryUtil<T extends EObject> extends DataStoreManager
 
 	@Override
 	public void delete(T deletableEntity) throws NonExistingEntityException {
-		Session session = getCurrentSession();
+		final Session session = getCurrentSession();
 		session.delete(deletableEntity);
 	}
 
 	@Override
 	public void saveNew(T newEntity) throws AlreadyExistsException {
-		Session session = getCurrentSession();
+		final Session session = getCurrentSession();
 		session.save(newEntity);
 	}
 
 	@Override
 	public void update(T updateableEntity) throws NonExistingEntityException {
-		Session session = getCurrentSession();
+		final Session session = getCurrentSession();
 		session.persist(updateableEntity);
 	}
 
@@ -53,16 +53,16 @@ public abstract class RepositoryUtil<T extends EObject> extends DataStoreManager
 
 	@Override
 	public void save(Object obj) {
-		Session session = getCurrentSession();
-		Transaction tx = session.beginTransaction();
+		final Session session = getCurrentSession();
+		final Transaction tx = session.beginTransaction();
 		try {
 			session.persist(obj);
 			tx.commit();
 		}
-		catch(HibernateException hbe) {
+		catch(final HibernateException hbe) {
 			tx.rollback();
 		}
-		catch(RuntimeException re) {
+		catch(final RuntimeException re) {
 			tx.rollback();
 		}
 	}

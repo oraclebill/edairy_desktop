@@ -12,21 +12,21 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 
 public class AccountTransactionTest {
-	
+
 	@Test
 	public void testESetAmount() throws Exception {
-		AccountTransaction at = AccountFactory.eINSTANCE.createAccountTransaction();
+		final AccountTransaction at = AccountFactory.eINSTANCE.createAccountTransaction();
 			at.eSet(AccountPackage.Literals.TRANSACTION__AMOUNT, 12);
 			assertEquals(at.getAmount(), new Integer(12));
 	}
-	
+
 	@Test
 	public void testSetAmount() throws Exception {
-		AccountTransaction at = AccountFactory.eINSTANCE.createAccountTransaction();
+		final AccountTransaction at = AccountFactory.eINSTANCE.createAccountTransaction();
 		try {
 			at.setAmount(new BigDecimal(12));
 			assertEquals(at.getAmount(), new BigDecimal(12));
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			fail(e.toString());
 		}
 	}

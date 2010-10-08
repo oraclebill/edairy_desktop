@@ -17,7 +17,7 @@ import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.swtdesigner.ResourceManager;
 
 public abstract class AbstractTransactionEditPanel extends Composite {
-	private Group middlePanel;
+	private final Group middlePanel;
 
 	public AbstractTransactionEditPanel(Composite parent, int style) {
 		super(parent, style);
@@ -25,11 +25,11 @@ public abstract class AbstractTransactionEditPanel extends Composite {
 		middlePanel = UIControlsFactory.createGroup(this, "", FinanceBindingConstants.ID_TRANSACTION_WRAPPER_FRAME);
 		GridLayoutFactory.fillDefaults().numColumns(3).margins(6, 6).applyTo(middlePanel);
 	}
-	
+
 	protected final Group getContentArea() {
 		return middlePanel;
 	}
-	
+
 	protected final void addChoiceField(String label) {
 		UIControlsFactory.createLabel(middlePanel, "Type");
 		final ChoiceComposite transactionTypeBox = UIControlsFactory.createChoiceComposite(middlePanel, SWT.NONE,
@@ -73,7 +73,7 @@ public abstract class AbstractTransactionEditPanel extends Composite {
 		UIControlsFactory.createLabel(middlePanel, label);
 		final Text descriptionText = UIControlsFactory.createTextMulti(middlePanel, false, false,
 				FinanceBindingConstants.ID_TRANSACTION_DESCRIPTION_TEXT);
-		GridDataFactory.fillDefaults().grab(true, true).span(2, 1).hint(SWT.DEFAULT, 74).applyTo(descriptionText);		
+		GridDataFactory.fillDefaults().grab(true, true).span(2, 1).hint(SWT.DEFAULT, 74).applyTo(descriptionText);
 	}
 
 	protected final void addSignedField(String label) {

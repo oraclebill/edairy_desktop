@@ -11,11 +11,11 @@ public class SessionEditDialogController extends RecordDialogController<Collecti
 	@Override
 	protected void configureUserRidgets() {
 		getWindowRidget().setTitle("Edit Session");
-		
+
 		addTextMap(SessionBindingConstants.SESSION_BIND_CODE.name(), DairyPackage.Literals.COLLECTION_SESSION__CODE);
 		addTextMap(SessionBindingConstants.SESSION_BIND_DESCRIPTION.name(), DairyPackage.Literals.COLLECTION_SESSION__DESCRIPTION);
 		addTextMap(SessionBindingConstants.SESSION_BIND_TIME.name(), DairyPackage.Literals.COLLECTION_SESSION__TIME_OF_DAY);
-		
+
 		getRidget(ITextRidget.class, SessionBindingConstants.SESSION_BIND_CODE.name()).setMandatory(true);
 	}
 }

@@ -7,7 +7,6 @@ import java.util.List;
 import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 public class MemberCollectionsManager {
 	ICollectionJournalLineRepository repository;
@@ -37,14 +36,14 @@ public class MemberCollectionsManager {
 	}
 
 	BigDecimal calculatePayableDeliveries(Membership member, int paymentMonth, int paymentYear) {
-		BigDecimal totalQuantity = repository.getSumOfPayableDeliveries(member, paymentMonth, paymentYear);
-		BigDecimal periodRate = getMilkPriceForPeriod(paymentMonth, paymentYear);
+		final BigDecimal totalQuantity = repository.getSumOfPayableDeliveries(member, paymentMonth, paymentYear);
+		final BigDecimal periodRate = getMilkPriceForPeriod(paymentMonth, paymentYear);
 		return periodRate.multiply(totalQuantity, Constants.MONEYCONTEXT);
 	}
 
 	BigDecimal calculatePayableDeliveries(Membership member, Date date) {
-		BigDecimal totalQuantity = repository.getSumOfPayableDeliveries(member, date.getMonth(), date.getYear());
-		BigDecimal periodRate = getMilkPriceForPeriod(priceMonth, priceYear);
+		final BigDecimal totalQuantity = repository.getSumOfPayableDeliveries(member, date.getMonth(), date.getYear());
+		final BigDecimal periodRate = getMilkPriceForPeriod(priceMonth, priceYear);
 		return periodRate.multiply(totalQuantity, Constants.MONEYCONTEXT);
 	}
 

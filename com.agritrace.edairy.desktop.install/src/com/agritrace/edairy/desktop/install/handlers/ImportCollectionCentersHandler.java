@@ -15,7 +15,7 @@ import java.util.Map;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.window.Window;
 import org.eclipse.riena.ui.core.uiprocess.UIProcess;
 import org.eclipse.ui.handlers.HandlerUtil;
 
@@ -28,17 +28,17 @@ import com.google.inject.Provider;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
- * 
+ *
  * @see org.eclipse.core.commands.IHandler
  * @see org.eclipse.core.commands.AbstractHandler
  */
 public class ImportCollectionCentersHandler extends HandlerBase {
 	ExecutionEvent event;
-	
+
 	private class CollectionCenterImportProcess extends UIProcess {
 		final File importFile;
 		final int lineCount;
-		private List<String> msgList;
+		private final List<String> msgList;
 		private List<DairyLocation> centers;
 		private Map<String, List<String[]>> errors;
 
@@ -57,10 +57,10 @@ public class ImportCollectionCentersHandler extends HandlerBase {
 
 		@Override
 		public void finalUpdateUI() {
-			boolean importEnabled = centers.size() > 0;
-			ImportResultsDialog irDialog = new ImportResultsDialog(
+			final boolean importEnabled = centers.size() > 0;
+			final ImportResultsDialog irDialog = new ImportResultsDialog(
 					HandlerUtil.getActiveShell(event), msgList, importEnabled);
-			if (irDialog.open() == Dialog.OK) {
+			if (irDialog.open() == Window.OK) {
 				saveCenters(centers);
 			}
 		}
@@ -75,27 +75,27 @@ public class ImportCollectionCentersHandler extends HandlerBase {
 				input = new BufferedInputStream(new FileInputStream(importFile));
 
 				monitor.subTask("Importing records...");
-				
+
 				centers = new ArrayList<DairyLocation>();
 				errors = new HashMap<String, List<String[]>>();
 
-				CollectionCenterImportTool tool = toolProvider.get();
+				final CollectionCenterImportTool tool = toolProvider.get();
 //				tool.setMonitorDelta(lineCount / 2);
 				tool.processFile(input, centers, errors, monitor);
 
 				msgList.add(String.format(
 						"%-4d records imported successfully.", centers.size()));
-				for (String err : errors.keySet()) {
+				for (final String err : errors.keySet()) {
 					msgList.add(String.format(
 							"%-4d records failed with a '%s' error.", errors
 									.get(err).size(), err));
 				}
 				monitor.setTaskName("Saving collection centers...");
 
-			} catch (FileNotFoundException e) {
+			} catch (final FileNotFoundException e) {
 				e.printStackTrace();
 				return false;
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				e.printStackTrace();
 				return false;
 			} finally {
@@ -103,7 +103,7 @@ public class ImportCollectionCentersHandler extends HandlerBase {
 				if (input != null) {
 					try {
 						input.close();
-					} catch (IOException ioe) {
+					} catch (final IOException ioe) {
 						;
 					}
 				}
@@ -117,7 +117,7 @@ public class ImportCollectionCentersHandler extends HandlerBase {
 		}
 
 	}
-	
+
 	@Inject
 	private static IDairyLocationRepository repo;
 	@Inject
@@ -133,21 +133,22 @@ public class ImportCollectionCentersHandler extends HandlerBase {
 	 * the command has been executed, so extract extract the needed information
 	 * from the application context.
 	 */
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		this.event = event;
 
-		Object navigationContext = getNavigationContext(event);
+		final Object navigationContext = getNavigationContext(event);
 		try {
 
-			File importFile = new File(getImportFile(event));
-			int lineCount = countLines(importFile);
-			UIProcess process = new CollectionCenterImportProcess(importFile, lineCount,
+			final File importFile = new File(getImportFile(event));
+			final int lineCount = countLines(importFile);
+			final UIProcess process = new CollectionCenterImportProcess(importFile, lineCount,
 					navigationContext);
 
 			process.setTitle("Import Collection Centers");
 			process.setNote("Importing...");
 			process.start();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			throw new ExecutionException("Import operation failed.", e);
 		}
 		return null;

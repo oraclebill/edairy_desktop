@@ -10,11 +10,12 @@ import org.eclipse.core.runtime.Status;
 
 public class DoubleNumberValidator implements IValidator {
 	private NumberFormat format = null;
-	
+
 	private NumberFormat getNumberFormat() {
-		if (format == null)
+		if (format == null) {
 			format = NumberFormat.getInstance();
-		
+		}
+
 		return format;
 	}
 

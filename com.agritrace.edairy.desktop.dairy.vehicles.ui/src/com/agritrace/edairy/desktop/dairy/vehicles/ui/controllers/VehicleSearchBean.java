@@ -18,15 +18,15 @@ public class VehicleSearchBean extends AbstractBean {
 		year = 0;
 		type = null;
 		driver = null;
-	 
+
 	}
-	
+
 	public int getYear() {
 		return year;
 	}
 
 	public void setYear(int year) {
-		int oldValue = this.year;
+		final int oldValue = this.year;
 		this.year = year;
 		firePropertyChanged(PROP_YEAR, oldValue, year);
 
@@ -37,7 +37,7 @@ public class VehicleSearchBean extends AbstractBean {
 	}
 
 	public void setType(String type) {
-		String oldValue = this.type;
+		final String oldValue = this.type;
 		this.type = type;
 		firePropertyChanged(PROP_TYPE, oldValue, type);
 	}
@@ -47,9 +47,9 @@ public class VehicleSearchBean extends AbstractBean {
 	}
 
 	public void setDriver(Employee driver) {
-		Employee oldValue = this.driver;
+		final Employee oldValue = this.driver;
 		this.driver = driver;
 		firePropertyChanged(PROP_DRIVER, oldValue, driver);
 	}
-	
+
 }

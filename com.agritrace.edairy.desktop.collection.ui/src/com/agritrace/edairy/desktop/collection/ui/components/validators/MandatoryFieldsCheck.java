@@ -7,6 +7,7 @@ import java.util.Iterator;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.riena.core.marker.IMarkable;
 import org.eclipse.riena.ui.core.marker.ErrorMarker;
 import org.eclipse.riena.ui.core.marker.MandatoryMarker;
@@ -15,7 +16,7 @@ import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 
 /**
- * 
+ *
  * @author oraclebill
  *
  */
@@ -27,7 +28,7 @@ public class MandatoryFieldsCheck implements IValidator {
 			this.ridget = ridget;
 			this.marker = markerToClean;
 		}
-		
+
 		@Override
 		public void propertyChange(PropertyChangeEvent evt) {
 			try {
@@ -36,36 +37,36 @@ public class MandatoryFieldsCheck implements IValidator {
 				ridget.removePropertyChangeListener(this);
 				ridget = null;
 			}
-			catch(Exception e) {
+			catch(final Exception e) {
 			}
-		}		
+		}
 	}
 
 	final IRidgetContainer container;
-	
+
 	/**
-	 * 
+	 *
 	 * @param container
 	 */
 	public MandatoryFieldsCheck(IRidgetContainer container) {
 		this.container = container;
 	}
-	
+
 	void setErrorMarker(final IMarkableRidget ridget, String message) {
 		final ErrorMarker errorMarker = new MandatoryErrorMarker(message);
 		final MandatoryErrorMarkerCleaner markerCleaner = new MandatoryErrorMarkerCleaner(ridget, errorMarker);
 		ridget.addMarker(errorMarker);
 		ridget.addPropertyChangeListener("text", markerCleaner);
 	}
-	
+
 	@Override
 	public IStatus validate(Object value) {
 System.err.printf("validate: %s: %s\n", this, value);
-		IStatus status = ValidationStatus.OK_STATUS;
-		for (IRidget ridget : container.getRidgets()) {
+		IStatus status = Status.OK_STATUS;
+		for (final IRidget ridget : container.getRidgets()) {
 			if (ridget instanceof IMarkable) {
 				boolean result = false;
-				Iterator<MandatoryMarker> iter = ((IMarkable) ridget).getMarkersOfType(MandatoryMarker.class)
+				final Iterator<MandatoryMarker> iter = ((IMarkable) ridget).getMarkersOfType(MandatoryMarker.class)
 						.iterator();
 				while (iter.hasNext()) {
 					result = /*result ||*/ !iter.next().isDisabled();

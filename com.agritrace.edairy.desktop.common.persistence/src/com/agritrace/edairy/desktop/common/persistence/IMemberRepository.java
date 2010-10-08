@@ -10,14 +10,14 @@ public interface IMemberRepository {
 
 	/**
 	 * Return a list of all farms owned by members of the 'local' dairy.
-	 * 
+	 *
 	 * @return a list, never null.
 	 */
 	public List<Farm> getMemberFarms();
 
 	/**
 	 * Return a list of all farms owned by members of the 'local' dairy.
-	 * 
+	 *
 	 * @return a list, never null.
 	 */
 	public List<Membership> all();

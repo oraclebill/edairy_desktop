@@ -13,19 +13,19 @@ import com.agritrace.edairy.desktop.operations.ui.dialogs.ContainerBindingConsta
 public class ContainerEditDialogController  extends RecordDialogController<DairyContainer> {
 
 	private DairyContainer editContainer = null;
-	
+
 
 	@Override
 	public void configureUserRidgets() {
 
 		// ensure model available
 		editContainer = getWorkingCopy();
-		assert (null != editContainer);
+		assert null != editContainer;
 		bindContainerInfo();
 		bindAssetInfo();
-	
+
 	}
-	
+
 	private void bindContainerInfo() {
 		final ITextRidget id = getRidget(ITextRidget.class,
 				ContainerBindingConstants.BIND_ID_CONTAINER_ID);
@@ -38,11 +38,11 @@ public class ContainerEditDialogController  extends RecordDialogController<Dairy
 
 		addTextMap(ContainerBindingConstants.BIND_ID_CONTAINER_TRACKING_NUM, TrackingPackage.Literals.CONTAINER__TRACKING_NUMBER);
 		addTextMap(ContainerBindingConstants.BIND_ID_CONTAINER_CAPACITY, TrackingPackage.Literals.CONTAINER__CAPACITY);
-		addComboMap(ContainerBindingConstants.BIND_ID_CONTAINER_UOM, UnitOfMeasure.VALUES, "getName", TrackingPackage.Literals.CONTAINER__MEASURE_TYPE);		
+		addComboMap(ContainerBindingConstants.BIND_ID_CONTAINER_UOM, UnitOfMeasure.VALUES, "getName", TrackingPackage.Literals.CONTAINER__MEASURE_TYPE);
 	}
-	
+
 	private void bindAssetInfo() {
-		IAssetInfoRidget assetInfo = getRidget(IAssetInfoRidget.class, IAssetInfoRidget.WIDGET_ID);
+		final IAssetInfoRidget assetInfo = getRidget(IAssetInfoRidget.class, IAssetInfoRidget.WIDGET_ID);
 		assetInfo.bindToModel(PojoObservables.observeValue(editContainer, "assetInfo"));
 		assetInfo.updateFromModel();
 	}

@@ -14,6 +14,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
@@ -22,7 +23,6 @@ import com.agritrace.edairy.desktop.common.ui.controls.location.LocationTabFolde
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.dairy.locations.ui.DairyLocationUIConstants;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyDialogController;
-import org.eclipse.swt.widgets.Label;
 
 public class DairyLocationEditDialog extends RecordDialog<DairyLocation> {
 	private Composite comonComp;
@@ -42,12 +42,11 @@ public class DairyLocationEditDialog extends RecordDialog<DairyLocation> {
 		composite.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false,1, 1));
 		composite.setLayout(new GridLayout(2, false));
-		
-		// code
-		Label lblLocationCode = UIControlsFactory.createLabel(composite, "Location Code");
+
+		UIControlsFactory.createLabel(composite, "Location Code");
 		final Text txtCode = UIControlsFactory.createText(composite);
 		addUIControl(txtCode, DairyLocationUIConstants.RIDGET_ID_CODE);
-		
+
 		UIControlsFactory.createLabel(composite, "Name");
 		final Text txtDate = UIControlsFactory.createText(composite);
 		txtDate.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false,1, 1));
@@ -63,27 +62,27 @@ public class DairyLocationEditDialog extends RecordDialog<DairyLocation> {
 		final Text phoneText = UIControlsFactory.createText(composite, SWT.BORDER | SWT.SINGLE,	DairyLocationUIConstants.RIDGET_ID_PHONE);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(phoneText);
 
-		//Date 
+		//Date
 		UIControlsFactory.createLabel(composite, "Date Opened", SWT.LEFT);
 		final DateTime dateOpenedPicker = UIControlsFactory.createDate(composite, SWT.DEFAULT,
 				DairyLocationUIConstants.RIDGET_ID_DATEOPENED);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(dateOpenedPicker);
-		
+
 		//functions
 		UIControlsFactory.createLabel(composite, "Functions", SWT.LEFT);
 		final ChoiceComposite functionsChoice = UIControlsFactory.createChoiceComposite(composite, SWT.None, true,
 				DairyLocationUIConstants.RIDGET_ID_FUNCTIONS);
 		functionsChoice.setOrientation(SWT.HORIZONTAL);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(functionsChoice);
-		
-		Composite routeDetailArea = UIControlsFactory.createComposite(composite, SWT.NONE);
+
+		final Composite routeDetailArea = UIControlsFactory.createComposite(composite, SWT.NONE);
 		routeDetailArea.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 2, 1));
 		routeDetailArea.setLayout(new GridLayout(2, false));
 		addUIControl(routeDetailArea, DairyLocationUIConstants.RIDGET_ID_ROUTE_DETAIL_AREA);
-				
+
 						//route
-						Label label_1 = UIControlsFactory.createLabel(routeDetailArea, "Transport Route", SWT.LEFT);
-						GridData gd_label_1 = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+						final Label label_1 = UIControlsFactory.createLabel(routeDetailArea, "Transport Route", SWT.LEFT);
+						final GridData gd_label_1 = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 						gd_label_1.horizontalIndent = 10;
 						label_1.setLayoutData(gd_label_1);
 						final CCombo combo = UIControlsFactory.createCCombo(routeDetailArea, DairyLocationUIConstants.RIDGET_ID_ROUTE);
@@ -98,7 +97,7 @@ public class DairyLocationEditDialog extends RecordDialog<DairyLocation> {
 		final Group companyContactGroup = UIControlsFactory.createGroup(parent, "Address Information");
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).span(2, 1).applyTo(companyContactGroup);
 
-		LocationTabFolder locationTabs = new LocationTabFolder(companyContactGroup, SWT.BORDER);
+		final LocationTabFolder locationTabs = new LocationTabFolder(companyContactGroup, SWT.BORDER);
 		GridDataFactory.fillDefaults().grab(true, true).span(2, 1).applyTo(locationTabs);
 		GridLayoutFactory.swtDefaults().generateLayout(companyContactGroup);
 	}

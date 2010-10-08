@@ -6,30 +6,25 @@
  */
 package com.agritrace.edairy.desktop.common.model.requests.impl;
 
-import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
-
-import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
-import com.agritrace.edairy.desktop.common.model.requests.RequestType;
-import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
-
-import com.agritrace.edairy.desktop.common.model.tracking.Farm;
-import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
-
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EcoreUtil;
+
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
+import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
+import com.agritrace.edairy.desktop.common.model.requests.RequestType;
+import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
+import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
 
 /**
  * <!-- begin-user-doc -->
@@ -281,6 +276,7 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Long getRequestId() {
 		return requestId;
 	}
@@ -290,11 +286,13 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRequestId(Long newRequestId) {
-		Long oldRequestId = requestId;
+		final Long oldRequestId = requestId;
 		requestId = newRequestId;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__REQUEST_ID, oldRequestId, requestId));
+		}
 	}
 
 	/**
@@ -302,13 +300,15 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Membership getRequestingMember() {
 		if (requestingMember != null && requestingMember.eIsProxy()) {
-			InternalEObject oldRequestingMember = (InternalEObject)requestingMember;
+			final InternalEObject oldRequestingMember = (InternalEObject)requestingMember;
 			requestingMember = (Membership)eResolveProxy(oldRequestingMember);
 			if (requestingMember != oldRequestingMember) {
-				if (eNotificationRequired())
+				if (eNotificationRequired()) {
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RequestsPackage.ANIMAL_HEALTH_REQUEST__REQUESTING_MEMBER, oldRequestingMember, requestingMember));
+				}
 			}
 		}
 		return requestingMember;
@@ -328,11 +328,13 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRequestingMember(Membership newRequestingMember) {
-		Membership oldRequestingMember = requestingMember;
+		final Membership oldRequestingMember = requestingMember;
 		requestingMember = newRequestingMember;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__REQUESTING_MEMBER, oldRequestingMember, requestingMember));
+		}
 	}
 
 	/**
@@ -340,8 +342,11 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Dairy getDairy() {
-		if (eContainerFeatureID() != RequestsPackage.ANIMAL_HEALTH_REQUEST__DAIRY) return null;
+		if (eContainerFeatureID() != RequestsPackage.ANIMAL_HEALTH_REQUEST__DAIRY) {
+			return null;
+		}
 		return (Dairy)eContainer();
 	}
 
@@ -360,20 +365,27 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDairy(Dairy newDairy) {
-		if (newDairy != eInternalContainer() || (eContainerFeatureID() != RequestsPackage.ANIMAL_HEALTH_REQUEST__DAIRY && newDairy != null)) {
-			if (EcoreUtil.isAncestor(this, newDairy))
+		if (newDairy != eInternalContainer() || eContainerFeatureID() != RequestsPackage.ANIMAL_HEALTH_REQUEST__DAIRY && newDairy != null) {
+			if (EcoreUtil.isAncestor(this, newDairy)) {
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			}
 			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
+			if (eInternalContainer() != null) {
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newDairy != null)
+			}
+			if (newDairy != null) {
 				msgs = ((InternalEObject)newDairy).eInverseAdd(this, DairyPackage.DAIRY__ANIMAL_HEALTH_REQUESTS, Dairy.class, msgs);
+			}
 			msgs = basicSetDairy(newDairy, msgs);
-			if (msgs != null) msgs.dispatch();
+			if (msgs != null) {
+				msgs.dispatch();
+			}
 		}
-		else if (eNotificationRequired())
+		else if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__DAIRY, newDairy, newDairy));
+		}
 	}
 
 	/**
@@ -381,6 +393,7 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Date getDate() {
 		return date;
 	}
@@ -390,11 +403,13 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDate(Date newDate) {
-		Date oldDate = date;
+		final Date oldDate = date;
 		date = newDate;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__DATE, oldDate, date));
+		}
 	}
 
 	/**
@@ -402,6 +417,7 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RequestType getType() {
 		return type;
 	}
@@ -411,11 +427,13 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(RequestType newType) {
-		RequestType oldType = type;
+		final RequestType oldType = type;
 		type = newType == null ? TYPE_EDEFAULT : newType;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__TYPE, oldType, type));
+		}
 	}
 
 	/**
@@ -423,6 +441,7 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getReportedProblem() {
 		return reportedProblem;
 	}
@@ -432,11 +451,13 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReportedProblem(String newReportedProblem) {
-		String oldReportedProblem = reportedProblem;
+		final String oldReportedProblem = reportedProblem;
 		reportedProblem = newReportedProblem;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__REPORTED_PROBLEM, oldReportedProblem, reportedProblem));
+		}
 	}
 
 	/**
@@ -444,13 +465,15 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RegisteredAnimal getReportedAnimal() {
 		if (reportedAnimal != null && reportedAnimal.eIsProxy()) {
-			InternalEObject oldReportedAnimal = (InternalEObject)reportedAnimal;
+			final InternalEObject oldReportedAnimal = (InternalEObject)reportedAnimal;
 			reportedAnimal = (RegisteredAnimal)eResolveProxy(oldReportedAnimal);
 			if (reportedAnimal != oldReportedAnimal) {
-				if (eNotificationRequired())
+				if (eNotificationRequired()) {
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RequestsPackage.ANIMAL_HEALTH_REQUEST__REPORTED_ANIMAL, oldReportedAnimal, reportedAnimal));
+				}
 			}
 		}
 		return reportedAnimal;
@@ -470,11 +493,13 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReportedAnimal(RegisteredAnimal newReportedAnimal) {
-		RegisteredAnimal oldReportedAnimal = reportedAnimal;
+		final RegisteredAnimal oldReportedAnimal = reportedAnimal;
 		reportedAnimal = newReportedAnimal;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__REPORTED_ANIMAL, oldReportedAnimal, reportedAnimal));
+		}
 	}
 
 	/**
@@ -482,6 +507,7 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Date getDateHeatDetected() {
 		return dateHeatDetected;
 	}
@@ -491,11 +517,13 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDateHeatDetected(Date newDateHeatDetected) {
-		Date oldDateHeatDetected = dateHeatDetected;
+		final Date oldDateHeatDetected = dateHeatDetected;
 		dateHeatDetected = newDateHeatDetected;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__DATE_HEAT_DETECTED, oldDateHeatDetected, dateHeatDetected));
+		}
 	}
 
 	/**
@@ -503,6 +531,7 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Date getFirstTreatment() {
 		return firstTreatment;
 	}
@@ -512,11 +541,13 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFirstTreatment(Date newFirstTreatment) {
-		Date oldFirstTreatment = firstTreatment;
+		final Date oldFirstTreatment = firstTreatment;
 		firstTreatment = newFirstTreatment;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__FIRST_TREATMENT, oldFirstTreatment, firstTreatment));
+		}
 	}
 
 	/**
@@ -524,6 +555,7 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Date getSecondTreatment() {
 		return secondTreatment;
 	}
@@ -533,11 +565,13 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSecondTreatment(Date newSecondTreatment) {
-		Date oldSecondTreatment = secondTreatment;
+		final Date oldSecondTreatment = secondTreatment;
 		secondTreatment = newSecondTreatment;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__SECOND_TREATMENT, oldSecondTreatment, secondTreatment));
+		}
 	}
 
 	/**
@@ -545,6 +579,7 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Date getThirdTreatment() {
 		return thirdTreatment;
 	}
@@ -554,11 +589,13 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setThirdTreatment(Date newThirdTreatment) {
-		Date oldThirdTreatment = thirdTreatment;
+		final Date oldThirdTreatment = thirdTreatment;
 		thirdTreatment = newThirdTreatment;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__THIRD_TREATMENT, oldThirdTreatment, thirdTreatment));
+		}
 	}
 
 	/**
@@ -566,13 +603,15 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Farm getFarm() {
 		if (farm != null && farm.eIsProxy()) {
-			InternalEObject oldFarm = (InternalEObject)farm;
+			final InternalEObject oldFarm = (InternalEObject)farm;
 			farm = (Farm)eResolveProxy(oldFarm);
 			if (farm != oldFarm) {
-				if (eNotificationRequired())
+				if (eNotificationRequired()) {
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RequestsPackage.ANIMAL_HEALTH_REQUEST__FARM, oldFarm, farm));
+				}
 			}
 		}
 		return farm;
@@ -592,11 +631,13 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFarm(Farm newFarm) {
-		Farm oldFarm = farm;
+		final Farm oldFarm = farm;
 		farm = newFarm;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__FARM, oldFarm, farm));
+		}
 	}
 
 	/**
@@ -604,13 +645,15 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Supplier getReferredTo() {
 		if (referredTo != null && referredTo.eIsProxy()) {
-			InternalEObject oldReferredTo = (InternalEObject)referredTo;
+			final InternalEObject oldReferredTo = (InternalEObject)referredTo;
 			referredTo = (Supplier)eResolveProxy(oldReferredTo);
 			if (referredTo != oldReferredTo) {
-				if (eNotificationRequired())
+				if (eNotificationRequired()) {
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RequestsPackage.ANIMAL_HEALTH_REQUEST__REFERRED_TO, oldReferredTo, referredTo));
+				}
 			}
 		}
 		return referredTo;
@@ -630,11 +673,13 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReferredTo(Supplier newReferredTo) {
-		Supplier oldReferredTo = referredTo;
+		final Supplier oldReferredTo = referredTo;
 		referredTo = newReferredTo;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, RequestsPackage.ANIMAL_HEALTH_REQUEST__REFERRED_TO, oldReferredTo, referredTo));
+		}
 	}
 
 	/**
@@ -646,8 +691,9 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__DAIRY:
-				if (eInternalContainer() != null)
+				if (eInternalContainer() != null) {
 					msgs = eBasicRemoveFromContainer(msgs);
+				}
 				return basicSetDairy((Dairy)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -692,7 +738,9 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__REQUEST_ID:
 				return getRequestId();
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__REQUESTING_MEMBER:
-				if (resolve) return getRequestingMember();
+				if (resolve) {
+					return getRequestingMember();
+				}
 				return basicGetRequestingMember();
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__DAIRY:
 				return getDairy();
@@ -703,7 +751,9 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__REPORTED_PROBLEM:
 				return getReportedProblem();
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__REPORTED_ANIMAL:
-				if (resolve) return getReportedAnimal();
+				if (resolve) {
+					return getReportedAnimal();
+				}
 				return basicGetReportedAnimal();
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__DATE_HEAT_DETECTED:
 				return getDateHeatDetected();
@@ -714,10 +764,14 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__THIRD_TREATMENT:
 				return getThirdTreatment();
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__FARM:
-				if (resolve) return getFarm();
+				if (resolve) {
+					return getFarm();
+				}
 				return basicGetFarm();
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__REFERRED_TO:
-				if (resolve) return getReferredTo();
+				if (resolve) {
+					return getReferredTo();
+				}
 				return basicGetReferredTo();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -870,9 +924,11 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy()) {
+			return super.toString();
+		}
 
-		StringBuffer result = new StringBuffer(super.toString());
+		final StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (requestId: ");
 		result.append(requestId);
 		result.append(", date: ");

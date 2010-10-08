@@ -39,7 +39,7 @@ public class DairyDialogController extends RecordDialogController<DairyLocation>
 
 		// ensure model available
 		editLocation = getWorkingCopy();
-		assert (null != editLocation);
+		assert null != editLocation;
 
 		detailArea = getRidget(ICompositeRidget.class, DairyLocationUIConstants.RIDGET_ID_ROUTE_DETAIL_AREA);
 		txtCode = getRidget(ITextRidget.class, DairyLocationUIConstants.RIDGET_ID_CODE);
@@ -54,7 +54,7 @@ public class DairyDialogController extends RecordDialogController<DairyLocation>
 		addTextMap(DairyLocationUIConstants.RIDGET_ID_PHONE, DairyPackage.Literals.DAIRY_LOCATION__PHONE);
 		addTextMap(DairyLocationUIConstants.RIDGET_ID_DESCRIPTION, DairyPackage.Literals.DAIRY_LOCATION__DESCRIPTION);
 		addTextMap(DairyLocationUIConstants.RIDGET_ID_CODE, DairyPackage.Literals.DAIRY_LOCATION__CODE);
-			
+
 		//functions
 		functions = getRidget(IMultipleChoiceRidget.class,DairyLocationUIConstants.RIDGET_ID_FUNCTIONS);
 		final IObservableList optionValues = new WritableList(Arrays.asList(DairyFunction.values()),
@@ -69,7 +69,7 @@ public class DairyDialogController extends RecordDialogController<DairyLocation>
 			}
 		});
 		functions.updateFromModel();
-		
+
 		addTextMap(DairyLocationUIConstants.RIDGET_ID_DATEOPENED, DairyPackage.Literals.DAIRY_LOCATION__DATE_OPENED);
 		addComboMap(DairyLocationUIConstants.RIDGET_ID_ROUTE, getRoutes(), "getName", DairyPackage.Literals.DAIRY_LOCATION__ROUTE);
 
@@ -88,7 +88,7 @@ public class DairyDialogController extends RecordDialogController<DairyLocation>
 		mapController.setInputModel(editLocation.getLocation().getMapLocation());
 		mapController.updateBinding();
 	}
-	
+
 	@Override
 	public DairyLocation getWorkingCopy() {
 		return (DairyLocation) getContext("editObject");
@@ -100,14 +100,14 @@ public class DairyDialogController extends RecordDialogController<DairyLocation>
 		resetDetailArea();
 
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Route> getRoutes(){
 		return (List<Route>)getContext("routes");
 	}
 
-	private void resetDetailArea() {		
-		final boolean isCollectionCenter = editLocation.getFunctions().contains(DairyFunction.MILK_COLLECTION);		
+	private void resetDetailArea() {
+		final boolean isCollectionCenter = editLocation.getFunctions().contains(DairyFunction.MILK_COLLECTION);
 		detailArea.setEnabled(isCollectionCenter);
 		if (!isCollectionCenter) {
 			comboRoute.setSelection(null);

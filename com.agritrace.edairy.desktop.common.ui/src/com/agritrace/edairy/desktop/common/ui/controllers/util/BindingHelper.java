@@ -24,9 +24,9 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 
 /**
  * A utility class that eases binding of Ridgets to EMF properties.
- * 
+ *
  * @author oraclebill
- * 
+ *
  * @param <T>
  */
 public class BindingHelper<T extends EObject> {
@@ -40,16 +40,18 @@ public class BindingHelper<T extends EObject> {
 
 	/**
 	 * Create a new BindingHelper.
-	 * 
+	 *
 	 * @param ridgetContainer
 	 * @param modelObject
 	 */
 	public BindingHelper(IRidgetContainer ridgetContainer, T modelObject) {
-		if (modelObject == null)
+		if (modelObject == null) {
 			throw new IllegalArgumentException("Model object must not be null");
+		}
 
-		if (ridgetContainer == null)
+		if (ridgetContainer == null) {
 			throw new IllegalArgumentException("RidgetContainer must not be null");
+		}
 
 		this.ridgetContainer = ridgetContainer;
 		this.modelObject = modelObject;
@@ -57,7 +59,7 @@ public class BindingHelper<T extends EObject> {
 
 	/**
 	 * Get the model object this binding helper was instantiated with.
-	 * 
+	 *
 	 * @return
 	 */
 	public T getModelObject() {
@@ -67,7 +69,7 @@ public class BindingHelper<T extends EObject> {
 	/**
 	 * Adds a ridget - FeaturePath mapping to the mapping registry. Mapped
 	 * ridgets are bound automatically during the configuration process.
-	 * 
+	 *
 	 * @param ridgetId
 	 * @param featurePath
 	 */
@@ -81,7 +83,7 @@ public class BindingHelper<T extends EObject> {
 	/**
 	 * Adds a combo type ridget - FeaturePath mapping to the mapping registry.
 	 * Combo mappings include domain lists.
-	 * 
+	 *
 	 * @param ridgetId
 	 * @param featurePath
 	 */
@@ -94,7 +96,7 @@ public class BindingHelper<T extends EObject> {
 	/**
 	 * Adds a combo type ridget - FeaturePath mapping to the mapping registry.
 	 * Combo mappings include domain lists.
-	 * 
+	 *
 	 * @param ridgetId
 	 * @param featurePath
 	 */
@@ -105,7 +107,7 @@ public class BindingHelper<T extends EObject> {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param ridgetId
 	 * @param domainList
 	 * @param renderMethod
@@ -114,7 +116,7 @@ public class BindingHelper<T extends EObject> {
 	public void addMultipleChoiceMapping(String ridgetId, List<?> domainList, String renderMethod,
 			EStructuralFeature[] featurePath) {
 		final FeatureProperties props = new FeatureProperties(ridgetId, domainList, renderMethod, featurePath);
-		EStructuralFeature tail = featurePath[featurePath.length - 1];
+		final EStructuralFeature tail = featurePath[featurePath.length - 1];
 		if (!tail.isMany()) {
 			throw new IllegalArgumentException("Feature is not multi-valued");
 		}
@@ -122,7 +124,7 @@ public class BindingHelper<T extends EObject> {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void configureRidgets() {
 
@@ -146,20 +148,20 @@ public class BindingHelper<T extends EObject> {
 				throw new UnsupportedOperationException("Ridget class '" + ridget.getClass().getName()
 						+ "' is not supported.");
 			}
-			
+
 			ridget.updateFromModel();
 		}
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void updateAllRidgetsFromModel() {
 		if (modelObject != null) {
-			for (IRidget ridget : ridgetContainer.getRidgets()) {
+			for (final IRidget ridget : ridgetContainer.getRidgets()) {
 				try {
 					ridget.updateFromModel();
-				} catch (org.eclipse.core.databinding.BindingException bindException) {
+				} catch (final org.eclipse.core.databinding.BindingException bindException) {
 					System.err.printf("Error binding ridget %s[%s] - no model binding: ", ridget, ridget.getUIControl());
 				}
 			}
@@ -167,7 +169,7 @@ public class BindingHelper<T extends EObject> {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param binding
 	 * @param ridget
 	 * @param valueRidget
@@ -175,20 +177,20 @@ public class BindingHelper<T extends EObject> {
 	void bindValueRidget(final FeatureProperties binding, final IEditableRidget valueRidget) {
 		final IObservableValue observable = PojoObservables.observeValue(getModelObject(), binding.getPropertyName());
 		valueRidget.bindToModel(observable);
-		
+
 		// bug-154: set directwriting by default on text ridgets.
-		if (valueRidget instanceof ITextRidget) { 
+		if (valueRidget instanceof ITextRidget) {
 			try {
 				((ITextRidget)valueRidget).setDirectWriting(true);
 			}
-			catch (UnsupportedOperationException uoe) {
+			catch (final UnsupportedOperationException uoe) {
 				;;
 			}
 		}
 
 		try {
 			valueRidget.updateFromModel();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			System.err.printf("Error mapping ridget %s to feature %s: %s", valueRidget, binding.getFeaturePath(),
 					e.getMessage());
 		}
@@ -253,14 +255,14 @@ public class BindingHelper<T extends EObject> {
 	void checkMandatory(FeatureProperties binding, IRidget ridget) {
 		final FeaturePath path = binding.getFeaturePath();
 		final EStructuralFeature testFeature = path.getFeaturePath()[0];
-		if (testFeature.isRequired() && (ridget instanceof IMarkableRidget)) {
+		if (testFeature.isRequired() && ridget instanceof IMarkableRidget) {
 			final IMarkableRidget markableValue = (IMarkableRidget) ridget;
 			markableValue.setMandatory(true);
 		}
 	}
 
 	void checkParameters(IObservableList optionValues, Class<?> rowClass, Object selectionValue) {
-		if ((optionValues == null) || (rowClass == null) || (selectionValue == null)) {
+		if (optionValues == null || rowClass == null || selectionValue == null) {
 			throw new IllegalStateException("One of [optionValues, rowClass, selectionValue] is null (" + optionValues
 					+ ", " + rowClass + ", " + selectionValue + ")");
 		}

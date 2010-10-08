@@ -19,6 +19,7 @@ public final class AdjustmentTransactionJournalView extends AbstractDirectoryVie
 	public AdjustmentTransactionJournalView() {
 	}
 
+	@Override
 	protected void createFilterGroup(Composite parent) {
 		createFilterConditions(parent);
 		createFilterButtonPanel(parent);
@@ -26,10 +27,10 @@ public final class AdjustmentTransactionJournalView extends AbstractDirectoryVie
 
 	@Override
 	protected void createFilterConditions(Composite parent) {
-		Composite comp = UIControlsFactory.createComposite(parent);
+		final Composite comp = UIControlsFactory.createComposite(parent);
 		comp.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		comp.setLayout(new GridLayout(2, false));
-		
+
 		GridDataFactory.fillDefaults().applyTo(new AdjustmentTransactionJournalFilterPanel(comp));
 
 		final Composite composite_1 = new Composite(comp, SWT.NONE);

@@ -19,7 +19,7 @@ public class ViewMemberDialogController extends AddMemberDialogController {
 	@Inject	private IMemberRepository memberRepository;
 	@Inject	private Provider<AddFarmDialog> addDialogProvider;
 	@Inject private Provider<ViewFarmDialog> viewDialogProvider;
-	
+
 	// collection tab
 	private MemberCollectionRecordsWidgetController collectionController;
 	// farm tab
@@ -35,6 +35,7 @@ public class ViewMemberDialogController extends AddMemberDialogController {
 	}
 
 
+	@Override
 	protected void updateBindings() {
 		super.updateBindings();
 		final Membership selectedMember = getWorkingCopy();
@@ -42,7 +43,7 @@ public class ViewMemberDialogController extends AddMemberDialogController {
 		collectionController.setInputModel(selectedMember);
 		transactionController.setInputModel(selectedMember);
 	}
-	
+
 	@Override
 	protected void configureTabs() {
 		super.configureTabs();

@@ -25,7 +25,7 @@ public class ViewContainerDialog extends BaseDialogView {
 
 	/**
 	 * AddContainerDialog constructor
-	 * 
+	 *
 	 * @param shell
 	 *            the parent shell
 	 */
@@ -36,7 +36,7 @@ public class ViewContainerDialog extends BaseDialogView {
 
 	/**
 	 * Creates the gray area
-	 * 
+	 *
 	 * @param parent
 	 *            the parent composite
 	 * @return Control
@@ -50,12 +50,12 @@ public class ViewContainerDialog extends BaseDialogView {
 		final GridDataFactory labelFactory = GridDataFactory.swtDefaults().hint(DEFAULT_LABEL_WIDTH, SWT.DEFAULT).indent(5, 0);
 		final GridDataFactory fieldFactory = GridDataFactory.swtDefaults().hint(DEFAULT_FIELD_WIDTH, SWT.DEFAULT).span(2, 1).grab(false, false);
 
-		Label idLabel = UIControlsFactory.createLabel(dialogArea, "ID:");
+		final Label idLabel = UIControlsFactory.createLabel(dialogArea, "ID:");
 		labelFactory.applyTo(idLabel);
 
 		final Label idLabelValue = UIControlsFactory.createLabel(dialogArea, "", ViewWidgetId.VIEW_CONTAINER_ID);
 		fieldFactory.applyTo(idLabelValue);
-		
+
 		final Label memberLabel = UIControlsFactory.createLabel(dialogArea, "Member:");
 		labelFactory.applyTo(memberLabel);
 
@@ -68,18 +68,18 @@ public class ViewContainerDialog extends BaseDialogView {
 		lookupButton.setImage(lookupIcon);
 		GridDataFactory.swtDefaults().align(SWT.LEFT, SWT.FILL).grab(false, false).applyTo(lookupButton);
 
-		Label farmLabel = UIControlsFactory.createLabel(dialogArea, "Farm:");
+		final Label farmLabel = UIControlsFactory.createLabel(dialogArea, "Farm:");
 		labelFactory.applyTo(farmLabel);
 
 		final CCombo farmCombo = UIControlsFactory.createCCombo(dialogArea, ViewWidgetId.VIEW_CONTAINER_FARM);
 		fieldFactory.applyTo(farmCombo);
 
-		Label unitLabel = UIControlsFactory.createLabel(dialogArea, "Unit Of Measure:");
+		final Label unitLabel = UIControlsFactory.createLabel(dialogArea, "Unit Of Measure:");
 		labelFactory.applyTo(unitLabel);
 		final CCombo measureCombo = UIControlsFactory.createCCombo(dialogArea, ViewWidgetId.VIEW_CONTAINER_UNIT);
 		fieldFactory.applyTo(measureCombo);
 
-		Label capacityLabel = UIControlsFactory.createLabel(dialogArea, "Capacity:");
+		final Label capacityLabel = UIControlsFactory.createLabel(dialogArea, "Capacity:");
 		labelFactory.applyTo(capacityLabel);
 		final Text capacityText = UIControlsFactory.createText(dialogArea, SWT.BORDER | SWT.SINGLE, ViewWidgetId.VIEW_CONTAINER_COMPACITY);
 		fieldFactory.applyTo(capacityText);

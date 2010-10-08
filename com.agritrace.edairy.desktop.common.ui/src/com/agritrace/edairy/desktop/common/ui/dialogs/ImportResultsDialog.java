@@ -17,10 +17,10 @@ import org.eclipse.swt.widgets.Shell;
 public class ImportResultsDialog extends TitleAreaDialog {
 	final private List<String> messages;
 	final private boolean enableSave;
-	
+
 	/**
 	 * Create the dialog.
-	 * 
+	 *
 	 * @param parentShell
 	 */
 	public ImportResultsDialog(Shell parentShell, List<String> messages, boolean enableSave) {
@@ -31,41 +31,41 @@ public class ImportResultsDialog extends TitleAreaDialog {
 
 	/**
 	 * Create contents of the dialog.
-	 * 
+	 *
 	 * @param parent
 	 */
 	@Override
 	protected Control createDialogArea(final Composite parent) {
 		setTitle("Import Results");
-		setMessage("Review the import messages and" 
+		setMessage("Review the import messages and"
 				+ " select 'Save' to complete the import operation, or 'Cancel' to abort without saving.");
 
-		Composite container = (Composite) super.createDialogArea(parent);
+		final Composite container = (Composite) super.createDialogArea(parent);
 		container.setLayout(new GridLayout(1, false));
 
-		ListViewer listView = new ListViewer(container);
+		final ListViewer listView = new ListViewer(container);
 		listView.setContentProvider(new ArrayContentProvider());
 
 		listView.setInput(messages);
 		listView.getList().setLayoutData(
 				GridDataFactory.defaultsFor(listView.getList()).create());
-		
+
 		return container;
 	}
 
 	/**
 	 * Create contents of the button bar.
-	 * 
+	 *
 	 * @param parent
 	 */
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
-		Button button = createButton(parent, IDialogConstants.OK_ID,
+		final Button button = createButton(parent, IDialogConstants.OK_ID,
 				IDialogConstants.OK_LABEL, true);
 		button.setText("Save");
 		button.setEnabled(enableSave);
 
-		Button button_1 = createButton(parent, IDialogConstants.CANCEL_ID,
+		final Button button_1 = createButton(parent, IDialogConstants.CANCEL_ID,
 				IDialogConstants.CANCEL_LABEL, false);
 		button_1.setText("Cancel");
 	}

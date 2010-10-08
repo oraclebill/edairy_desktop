@@ -1,7 +1,6 @@
 package com.agritrace.edairy.desktop.member.ui.controls;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -50,7 +49,7 @@ public class MemberLiveStockWidgetController extends BasicDirectoryController<Re
 	private final IFarmRepository farmRepository;
 	private final Provider<AddLiveStockDialog> addLiveStockProvider;
 	private final Provider<ViewLiveStockDialog> viewLiveStockProvider;
-	
+
 	@Inject
 	public MemberLiveStockWidgetController(final IController controller, IFarmRepository farmRepository,
 			final Provider<AddLiveStockDialog> addLiveStockProvider,
@@ -59,9 +58,9 @@ public class MemberLiveStockWidgetController extends BasicDirectoryController<Re
 		this.farmRepository = farmRepository;
 		this.addLiveStockProvider = addLiveStockProvider;
 		this.viewLiveStockProvider = viewLiveStockProvider;
-		
+
 		setEClass(TrackingPackage.Literals.REGISTERED_ANIMAL);
-		
+
 		for (int i = 0; i < liveStockPropertyNames.length; i++) {
 			addTableColumn(liveStockColumnHeaders[i], liveStockPropertyNames[i], String.class);
 		}
@@ -71,7 +70,7 @@ public class MemberLiveStockWidgetController extends BasicDirectoryController<Re
 	@Override
 	public void configure() {
 		configureRidgets();
-	
+
 	}
 
 	@Override
@@ -84,7 +83,7 @@ public class MemberLiveStockWidgetController extends BasicDirectoryController<Re
 		return inputModel;
 	}
 
-	
+
 	@Override
 	public void setController(IRidgetContainer container) {
 		this.controller = container;
@@ -106,16 +105,17 @@ public class MemberLiveStockWidgetController extends BasicDirectoryController<Re
 	}
 
 	private List<RegisteredAnimal> filterDate(List<RegisteredAnimal> inputRecrods, Date startDate, Date endDate) {
-		if ((inputRecrods == null) || inputRecrods.isEmpty()) {
+		if (inputRecrods == null || inputRecrods.isEmpty()) {
 			return new ArrayList<RegisteredAnimal>();
 		}
-		
-		DateFilterUtil<RegisteredAnimal> dateFilter = new DateFilterUtil<RegisteredAnimal>(
+
+		final DateFilterUtil<RegisteredAnimal> dateFilter = new DateFilterUtil<RegisteredAnimal>(
 				RegisteredAnimal.class, TrackingPackage.Literals.REGISTERED_ANIMAL__DATE_OF_ACQUISITION);
-		
+
 		return dateFilter.filterDate(inputRecrods, startDate, endDate);
 	}
 
+	@Override
 	protected List<RegisteredAnimal> getFilteredResult() {
 		List<RegisteredAnimal> resutls = new ArrayList<RegisteredAnimal>();
 		final List<RegisteredAnimal> animals = new ArrayList<RegisteredAnimal>();
@@ -139,7 +139,7 @@ public class MemberLiveStockWidgetController extends BasicDirectoryController<Re
 	@Override
 	protected void configureFilterRidgets() {
 		filterController = new LiveStockFilterWidgetController(controller);
-		
+
 	}
 
 	@Override
@@ -178,7 +178,7 @@ public class MemberLiveStockWidgetController extends BasicDirectoryController<Re
 					ControllerContextConstant.DIALOG_CONTXT_SELECTED);
 			newAnimal.getLocation().getAnimals().add(newAnimal);
 			final Farm farmLocation = newAnimal.getLocation();
-			if ((farmLocation != null) && (farmLocation.getFarmId() != null)) {
+			if (farmLocation != null && farmLocation.getFarmId() != null) {
 				farmRepository.save(newAnimal.getLocation());
 			}
 			refreshTableContents();
@@ -193,7 +193,7 @@ public class MemberLiveStockWidgetController extends BasicDirectoryController<Re
 			aniamlDialog.getController().setContext(ControllerContextConstant.DIALOG_CONTXT_SELECTED,
 					selectedAnimal);
 			aniamlDialog.getController().setContext(ControllerContextConstant.ENABLE_LOOKUP,"false");
-			
+
 			final List<Farm> farmList = new ArrayList<Farm>();
 			farmList.add(selectedAnimal.getLocation());
 			aniamlDialog.getController().setContext(ControllerContextConstant.LIVESTOCK_DIALOG_CONTXT_FARM_LIST,
@@ -208,7 +208,7 @@ public class MemberLiveStockWidgetController extends BasicDirectoryController<Re
 			final Farm farmLocation = selectedAnimal.getLocation();
 
 			if (returnCode == AbstractWindowController.OK) {
-				if ((farmLocation != null) && (farmLocation.getFarmId() != null)) {
+				if (farmLocation != null && farmLocation.getFarmId() != null) {
 					farmRepository.update(farmLocation);
 				}
 				refreshTableContents();
@@ -225,13 +225,14 @@ public class MemberLiveStockWidgetController extends BasicDirectoryController<Re
 		}
 
 	}
-	
+
+	@Override
 	protected void tableBindToModel(){
 		setColumnFormatters();
 		super.tableBindToModel();
 	}
 
-	
+
 	private void setColumnFormatters() {
 		table.setColumnFormatter(1, new ColumnFormatter() {
 
@@ -300,6 +301,6 @@ public class MemberLiveStockWidgetController extends BasicDirectoryController<Re
 		// TODO Auto-generated method stub
 		return ViewWidgetId.LIVESTOCK_ADD;
 	}
-	
-	
+
+
 }

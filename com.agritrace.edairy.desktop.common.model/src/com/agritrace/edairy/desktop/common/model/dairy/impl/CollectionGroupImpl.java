@@ -6,6 +6,20 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
+import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.Date;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
@@ -15,25 +29,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
-
-import java.math.BigDecimal;
-
-import java.util.Collection;
-import java.util.Date;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -379,6 +374,7 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Long getJournalId() {
 		return journalId;
 	}
@@ -388,11 +384,13 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setJournalId(Long newJournalId) {
-		Long oldJournalId = journalId;
+		final Long oldJournalId = journalId;
 		journalId = newJournalId;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_GROUP__JOURNAL_ID, oldJournalId, journalId));
+		}
 	}
 
 	/**
@@ -400,6 +398,7 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getReferenceNumber() {
 		return referenceNumber;
 	}
@@ -409,11 +408,13 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReferenceNumber(String newReferenceNumber) {
-		String oldReferenceNumber = referenceNumber;
+		final String oldReferenceNumber = referenceNumber;
 		referenceNumber = newReferenceNumber;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_GROUP__REFERENCE_NUMBER, oldReferenceNumber, referenceNumber));
+		}
 	}
 
 	/**
@@ -421,6 +422,7 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Date getJournalDate() {
 		return journalDate;
 	}
@@ -430,11 +432,13 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setJournalDate(Date newJournalDate) {
-		Date oldJournalDate = journalDate;
+		final Date oldJournalDate = journalDate;
 		journalDate = newJournalDate;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_GROUP__JOURNAL_DATE, oldJournalDate, journalDate));
+		}
 	}
 
 	/**
@@ -442,6 +446,7 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JournalStatus getStatus() {
 		return status;
 	}
@@ -451,11 +456,13 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStatus(JournalStatus newStatus) {
-		JournalStatus oldStatus = status;
+		final JournalStatus oldStatus = status;
 		status = newStatus == null ? STATUS_EDEFAULT : newStatus;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_GROUP__STATUS, oldStatus, status));
+		}
 	}
 
 	/**
@@ -463,13 +470,15 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Employee getDriver() {
 		if (driver != null && driver.eIsProxy()) {
-			InternalEObject oldDriver = (InternalEObject)driver;
+			final InternalEObject oldDriver = (InternalEObject)driver;
 			driver = (Employee)eResolveProxy(oldDriver);
 			if (driver != oldDriver) {
-				if (eNotificationRequired())
+				if (eNotificationRequired()) {
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_GROUP__DRIVER, oldDriver, driver));
+				}
 			}
 		}
 		return driver;
@@ -489,11 +498,13 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDriver(Employee newDriver) {
-		Employee oldDriver = driver;
+		final Employee oldDriver = driver;
 		driver = newDriver;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_GROUP__DRIVER, oldDriver, driver));
+		}
 	}
 
 	/**
@@ -501,13 +512,15 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Vehicle getVehicle() {
 		if (vehicle != null && vehicle.eIsProxy()) {
-			InternalEObject oldVehicle = (InternalEObject)vehicle;
+			final InternalEObject oldVehicle = (InternalEObject)vehicle;
 			vehicle = (Vehicle)eResolveProxy(oldVehicle);
 			if (vehicle != oldVehicle) {
-				if (eNotificationRequired())
+				if (eNotificationRequired()) {
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_GROUP__VEHICLE, oldVehicle, vehicle));
+				}
 			}
 		}
 		return vehicle;
@@ -527,11 +540,13 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setVehicle(Vehicle newVehicle) {
-		Vehicle oldVehicle = vehicle;
+		final Vehicle oldVehicle = vehicle;
 		vehicle = newVehicle;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_GROUP__VEHICLE, oldVehicle, vehicle));
+		}
 	}
 
 	/**
@@ -539,6 +554,7 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BigDecimal getDriverTotal() {
 		return driverTotal;
 	}
@@ -548,11 +564,13 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDriverTotal(BigDecimal newDriverTotal) {
-		BigDecimal oldDriverTotal = driverTotal;
+		final BigDecimal oldDriverTotal = driverTotal;
 		driverTotal = newDriverTotal;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_GROUP__DRIVER_TOTAL, oldDriverTotal, driverTotal));
+		}
 	}
 
 	/**
@@ -560,6 +578,7 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BigDecimal getRecordTotal() {
 		return recordTotal;
 	}
@@ -569,11 +588,13 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRecordTotal(BigDecimal newRecordTotal) {
-		BigDecimal oldRecordTotal = recordTotal;
+		final BigDecimal oldRecordTotal = recordTotal;
 		recordTotal = newRecordTotal;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_GROUP__RECORD_TOTAL, oldRecordTotal, recordTotal));
+		}
 	}
 
 	/**
@@ -581,6 +602,7 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<CollectionJournalLine> getJournalEntries() {
 		if (journalEntries == null) {
 			journalEntries = new EObjectContainmentWithInverseEList<CollectionJournalLine>(CollectionJournalLine.class, this, DairyPackage.COLLECTION_GROUP__JOURNAL_ENTRIES, DairyPackage.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL);
@@ -593,6 +615,7 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isSuspended() {
 		return suspended;
 	}
@@ -602,11 +625,13 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSuspended(boolean newSuspended) {
-		boolean oldSuspended = suspended;
+		final boolean oldSuspended = suspended;
 		suspended = newSuspended;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_GROUP__SUSPENDED, oldSuspended, suspended));
+		}
 	}
 
 	/**
@@ -614,6 +639,7 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getEntryCount() {
 		return entryCount;
 	}
@@ -623,11 +649,13 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEntryCount(int newEntryCount) {
-		int oldEntryCount = entryCount;
+		final int oldEntryCount = entryCount;
 		entryCount = newEntryCount;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_GROUP__ENTRY_COUNT, oldEntryCount, entryCount));
+		}
 	}
 
 	/**
@@ -635,6 +663,7 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getSuspendedCount() {
 		return suspendedCount;
 	}
@@ -644,11 +673,13 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSuspendedCount(int newSuspendedCount) {
-		int oldSuspendedCount = suspendedCount;
+		final int oldSuspendedCount = suspendedCount;
 		suspendedCount = newSuspendedCount;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_GROUP__SUSPENDED_COUNT, oldSuspendedCount, suspendedCount));
+		}
 	}
 
 	/**
@@ -656,6 +687,7 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getRejectedCount() {
 		return rejectedCount;
 	}
@@ -665,11 +697,13 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRejectedCount(int newRejectedCount) {
-		int oldRejectedCount = rejectedCount;
+		final int oldRejectedCount = rejectedCount;
 		rejectedCount = newRejectedCount;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_GROUP__REJECTED_COUNT, oldRejectedCount, rejectedCount));
+		}
 	}
 
 	/**
@@ -677,6 +711,7 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getJournalNumber() {
 		return journalNumber;
 	}
@@ -686,11 +721,13 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setJournalNumber(String newJournalNumber) {
-		String oldJournalNumber = journalNumber;
+		final String oldJournalNumber = journalNumber;
 		journalNumber = newJournalNumber;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_GROUP__JOURNAL_NUMBER, oldJournalNumber, journalNumber));
+		}
 	}
 
 	/**
@@ -698,13 +735,15 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CollectionSession getSession() {
 		if (session != null && session.eIsProxy()) {
-			InternalEObject oldSession = (InternalEObject)session;
+			final InternalEObject oldSession = (InternalEObject)session;
 			session = (CollectionSession)eResolveProxy(oldSession);
 			if (session != oldSession) {
-				if (eNotificationRequired())
+				if (eNotificationRequired()) {
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_GROUP__SESSION, oldSession, session));
+				}
 			}
 		}
 		return session;
@@ -724,11 +763,13 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSession(CollectionSession newSession) {
-		CollectionSession oldSession = session;
+		final CollectionSession oldSession = session;
 		session = newSession;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_GROUP__SESSION, oldSession, session));
+		}
 	}
 
 	/**
@@ -736,13 +777,15 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DairyLocation getCollectionCenter() {
 		if (collectionCenter != null && collectionCenter.eIsProxy()) {
-			InternalEObject oldCollectionCenter = (InternalEObject)collectionCenter;
+			final InternalEObject oldCollectionCenter = (InternalEObject)collectionCenter;
 			collectionCenter = (DairyLocation)eResolveProxy(oldCollectionCenter);
 			if (collectionCenter != oldCollectionCenter) {
-				if (eNotificationRequired())
+				if (eNotificationRequired()) {
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_GROUP__COLLECTION_CENTER, oldCollectionCenter, collectionCenter));
+				}
 			}
 		}
 		return collectionCenter;
@@ -762,11 +805,13 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCollectionCenter(DairyLocation newCollectionCenter) {
-		DairyLocation oldCollectionCenter = collectionCenter;
+		final DairyLocation oldCollectionCenter = collectionCenter;
 		collectionCenter = newCollectionCenter;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_GROUP__COLLECTION_CENTER, oldCollectionCenter, collectionCenter));
+		}
 	}
 
 	/**
@@ -774,6 +819,7 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CollectionGroupType getType() {
 		return type;
 	}
@@ -783,11 +829,13 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(CollectionGroupType newType) {
-		CollectionGroupType oldType = type;
+		final CollectionGroupType oldType = type;
 		type = newType == null ? TYPE_EDEFAULT : newType;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_GROUP__TYPE, oldType, type));
+		}
 	}
 
 	/**
@@ -836,10 +884,14 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 			case DairyPackage.COLLECTION_GROUP__STATUS:
 				return getStatus();
 			case DairyPackage.COLLECTION_GROUP__DRIVER:
-				if (resolve) return getDriver();
+				if (resolve) {
+					return getDriver();
+				}
 				return basicGetDriver();
 			case DairyPackage.COLLECTION_GROUP__VEHICLE:
-				if (resolve) return getVehicle();
+				if (resolve) {
+					return getVehicle();
+				}
 				return basicGetVehicle();
 			case DairyPackage.COLLECTION_GROUP__DRIVER_TOTAL:
 				return getDriverTotal();
@@ -858,10 +910,14 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 			case DairyPackage.COLLECTION_GROUP__JOURNAL_NUMBER:
 				return getJournalNumber();
 			case DairyPackage.COLLECTION_GROUP__SESSION:
-				if (resolve) return getSession();
+				if (resolve) {
+					return getSession();
+				}
 				return basicGetSession();
 			case DairyPackage.COLLECTION_GROUP__COLLECTION_CENTER:
-				if (resolve) return getCollectionCenter();
+				if (resolve) {
+					return getCollectionCenter();
+				}
 				return basicGetCollectionCenter();
 			case DairyPackage.COLLECTION_GROUP__TYPE:
 				return getType();
@@ -1050,9 +1106,11 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy()) {
+			return super.toString();
+		}
 
-		StringBuffer result = new StringBuffer(super.toString());
+		final StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (journalId: ");
 		result.append(journalId);
 		result.append(", referenceNumber: ");

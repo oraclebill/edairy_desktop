@@ -334,7 +334,7 @@ public enum ContactMethodType implements Enumerator {
 	 */
 	public static ContactMethodType get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			ContactMethodType result = VALUES_ARRAY[i];
+			final ContactMethodType result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -350,7 +350,7 @@ public enum ContactMethodType implements Enumerator {
 	 */
 	public static ContactMethodType getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			ContactMethodType result = VALUES_ARRAY[i];
+			final ContactMethodType result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -419,6 +419,7 @@ public enum ContactMethodType implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getValue() {
 	  return value;
 	}
@@ -428,6 +429,7 @@ public enum ContactMethodType implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 	  return name;
 	}
@@ -437,6 +439,7 @@ public enum ContactMethodType implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLiteral() {
 	  return literal;
 	}
@@ -451,5 +454,5 @@ public enum ContactMethodType implements Enumerator {
 	public String toString() {
 		return literal;
 	}
-	
+
 } //ContactMethodType

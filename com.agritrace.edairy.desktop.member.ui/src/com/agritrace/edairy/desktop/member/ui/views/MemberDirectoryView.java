@@ -13,7 +13,7 @@ import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class MemberDirectoryView extends AbstractDirectoryView {
-	
+
 	public static final String ID = MemberDirectoryView.class.getName();
 
 	public static final String FILTER_GROUP_TEXT = "Search for a Member";

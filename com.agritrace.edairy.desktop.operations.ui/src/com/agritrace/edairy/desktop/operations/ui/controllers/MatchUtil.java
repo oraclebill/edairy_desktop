@@ -4,7 +4,7 @@ import java.util.Collection;
 
 public class MatchUtil {
 	public static boolean matchContains(Object userValue, Collection<String> entityValue) {
-		if ((userValue == null) || (userValue.toString().trim().length() == 0)) {
+		if (userValue == null || userValue.toString().trim().length() == 0) {
 			return true;
 		}
 		if (entityValue.contains(userValue)) {
@@ -14,7 +14,7 @@ public class MatchUtil {
 	}
 
 	public static boolean matchContains(String userValue, String entityValue) {
-		if ((userValue == null) || (userValue.trim().length() == 0)) {
+		if (userValue == null || userValue.trim().length() == 0) {
 			return true;
 		}
 		if (entityValue.toLowerCase().contains(userValue.trim().toLowerCase())) {
@@ -31,7 +31,7 @@ public class MatchUtil {
 	}
 
 	public static boolean matchEquals(String userValue, String entityValue) {
-		if ((userValue == null) || (userValue.trim().length() == 0)) {
+		if (userValue == null || userValue.trim().length() == 0) {
 			return true;
 		}
 		if(entityValue == null){

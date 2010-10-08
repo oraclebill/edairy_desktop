@@ -56,11 +56,11 @@ public class MemberFarmWidgetController extends BasicDirectoryController<Farm> i
 		this.addDialogProvider = addDialogProvider;
 		this.viewDialogProvider = viewDialogProvider;
 		setEClass(TrackingPackage.Literals.FARM);
-		
+
 		for (int i = 0; i < farmPropertyNames.length; i++) {
 			addTableColumn(farmColumnHeaders[i], farmPropertyNames[i], String.class);
 		}
-		
+
 		configure();
 	}
 
@@ -212,7 +212,7 @@ public class MemberFarmWidgetController extends BasicDirectoryController<Farm> i
 					selectedMember.getMember().getFarms().remove(selObject);
 					((Farm) selObject).getAnimals().clear();
 					((Farm) selObject).setLocation(null);
-					selectedMember.getMember().getFarms().remove((selObject));
+					selectedMember.getMember().getFarms().remove(selObject);
 					farms.remove(selObject);
 					farmRepository.delete((Farm) selObject);
 					memberRepository.update(selectedMember);
@@ -241,13 +241,15 @@ public class MemberFarmWidgetController extends BasicDirectoryController<Farm> i
 		return null;
 	}
 
+	@Override
 	protected void tableBindToModel() {
 		if (table != null) {
 			// location formatter
 			table.setColumnFormatter(2, new ColumnFormatter() {
+				@Override
 				public String getText(Object element) {
 					if (element instanceof Farm) {
-						Location location = ((Farm) element).getLocation();
+						final Location location = ((Farm) element).getLocation();
 						if (location != null) {
 							final PostalLocation postalLocation = location.getPostalLocation();
 							// StringBuffer sb = new StringBuffer();
@@ -323,6 +325,7 @@ public class MemberFarmWidgetController extends BasicDirectoryController<Farm> i
 			}
 		}
 	}
+	@Override
 	protected List<Farm> getTableContents() {
 		return farms;
 	}

@@ -6,16 +6,23 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.account.impl;
 
-import com.agritrace.edairy.desktop.common.model.dairy.account.*;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountFactory;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountStatus;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AdjustmentTransaction;
+import com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint;
+import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
+import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
+import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,12 +39,12 @@ public class AccountFactoryImpl extends EFactoryImpl implements AccountFactory {
 	 */
 	public static AccountFactory init() {
 		try {
-			AccountFactory theAccountFactory = (AccountFactory)EPackage.Registry.INSTANCE.getEFactory("http://com.agritrace.edairy.desktop.common.model/account"); 
+			final AccountFactory theAccountFactory = (AccountFactory)EPackage.Registry.INSTANCE.getEFactory("http://com.agritrace.edairy.desktop.common.model/account");
 			if (theAccountFactory != null) {
 				return theAccountFactory;
 			}
 		}
-		catch (Exception exception) {
+		catch (final Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new AccountFactoryImpl();
@@ -114,8 +121,9 @@ public class AccountFactoryImpl extends EFactoryImpl implements AccountFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Account createAccount() {
-		AccountImpl account = new AccountImpl();
+		final AccountImpl account = new AccountImpl();
 		return account;
 	}
 
@@ -124,8 +132,9 @@ public class AccountFactoryImpl extends EFactoryImpl implements AccountFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Transaction createTransaction() {
-		TransactionImpl transaction = new TransactionImpl();
+		final TransactionImpl transaction = new TransactionImpl();
 		return transaction;
 	}
 
@@ -134,8 +143,9 @@ public class AccountFactoryImpl extends EFactoryImpl implements AccountFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AccountTransaction createAccountTransaction() {
-		AccountTransactionImpl accountTransaction = new AccountTransactionImpl();
+		final AccountTransactionImpl accountTransaction = new AccountTransactionImpl();
 		return accountTransaction;
 	}
 
@@ -144,8 +154,9 @@ public class AccountFactoryImpl extends EFactoryImpl implements AccountFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AdjustmentTransaction createAdjustmentTransaction() {
-		AdjustmentTransactionImpl adjustmentTransaction = new AdjustmentTransactionImpl();
+		final AdjustmentTransactionImpl adjustmentTransaction = new AdjustmentTransactionImpl();
 		return adjustmentTransaction;
 	}
 
@@ -154,8 +165,9 @@ public class AccountFactoryImpl extends EFactoryImpl implements AccountFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BalancePoint createBalancePoint() {
-		BalancePointImpl balancePoint = new BalancePointImpl();
+		final BalancePointImpl balancePoint = new BalancePointImpl();
 		return balancePoint;
 	}
 
@@ -165,8 +177,10 @@ public class AccountFactoryImpl extends EFactoryImpl implements AccountFactory {
 	 * @generated
 	 */
 	public TransactionType createTransactionTypeFromString(EDataType eDataType, String initialValue) {
-		TransactionType result = TransactionType.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		final TransactionType result = TransactionType.get(initialValue);
+		if (result == null) {
+			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		}
 		return result;
 	}
 
@@ -185,8 +199,10 @@ public class AccountFactoryImpl extends EFactoryImpl implements AccountFactory {
 	 * @generated
 	 */
 	public TransactionSource createTransactionSourceFromString(EDataType eDataType, String initialValue) {
-		TransactionSource result = TransactionSource.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		final TransactionSource result = TransactionSource.get(initialValue);
+		if (result == null) {
+			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		}
 		return result;
 	}
 
@@ -205,8 +221,10 @@ public class AccountFactoryImpl extends EFactoryImpl implements AccountFactory {
 	 * @generated
 	 */
 	public AccountStatus createAccountStatusFromString(EDataType eDataType, String initialValue) {
-		AccountStatus result = AccountStatus.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		final AccountStatus result = AccountStatus.get(initialValue);
+		if (result == null) {
+			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		}
 		return result;
 	}
 
@@ -224,6 +242,7 @@ public class AccountFactoryImpl extends EFactoryImpl implements AccountFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AccountPackage getAccountPackage() {
 		return (AccountPackage)getEPackage();
 	}

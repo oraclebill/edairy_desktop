@@ -19,7 +19,7 @@ public class LocationTabFolder extends CompositePanel {
 		super(parent, style);
 		setLayout(new FillLayout());
 		setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
-		
+
 		tabs = new CTabFolder(this, SWT.None);
 		final Color startColor = LnfManager.getLnf().getColor(
 				LnfKeyConstants.EMBEDDED_TITLEBAR_ACTIVE_BACKGROUND_START_COLOR);

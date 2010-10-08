@@ -26,7 +26,6 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -54,12 +53,8 @@ public class DairyProfileView extends SubModuleView {
 	public static final String SUBLOCATION_LABEL = "Sublocation";
 	public static final String VILLAGE_LABEL = "Village:";
 	private static final String DAIRY_IMAGE_GROUP_HEADER = "Dairy Image";
-//	private static final String DAIRY_IMAGE_LINK_TEXT = "<a>click here to update</a>";
-	private Button cancelButton;
-	private ProfilePhotoComposite lblDairyImage;
+private ProfilePhotoComposite lblDairyImage;
 //	private Link linkDairyImage;
-
-	private Button saveButton;
 
 	private Text txtDairyDescription;
 	private Text txtId;
@@ -68,7 +63,7 @@ public class DairyProfileView extends SubModuleView {
 	// info panel
 	private Text txtName;
 
-	private Color stdBackgroundColor;
+	private final Color stdBackgroundColor;
 
 	public DairyProfileView() {
 		stdBackgroundColor = LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND);
@@ -83,8 +78,8 @@ public class DairyProfileView extends SubModuleView {
 		addressWidget.setBackground(stdBackgroundColor);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(addressWidget);
 
-		CTabFolder tabs = addressWidget.getTabFolder();
-		
+		final CTabFolder tabs = addressWidget.getTabFolder();
+
 		final CTabItem tab = new CTabItem(tabs, SWT.NONE);
 		tab.setText("Contacts");
 		final ContactMethodsGroup contacts = new ContactMethodsGroup(tabs, SWT.NONE);
@@ -172,7 +167,7 @@ public class DairyProfileView extends SubModuleView {
 				DairyProfileViewWidgetID.DAIRY_MANAGER_NAME));
 
 		// description field
-		Label label = UIControlsFactory.createLabel(nameArea, "Description:");
+		final Label label = UIControlsFactory.createLabel(nameArea, "Description:");
 		labelGridDataFactory.applyTo(label);
 		fieldGridDataFactory
 				.copy()
@@ -183,7 +178,7 @@ public class DairyProfileView extends SubModuleView {
 						txtDairyDescription = UIControlsFactory.createText(nameArea, SWT.BORDER | SWT.WRAP
 								| SWT.SCROLL_LINE | SWT.V_SCROLL | SWT.MULTI,
 								DairyProfileViewWidgetID.DAIRY_PUBLIC_DESCRIPTION));
-		GridData gd_txtDairyDescription = new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1);
+		final GridData gd_txtDairyDescription = new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1);
 		gd_txtDairyDescription.heightHint = 50;
 		txtDairyDescription.setLayoutData(gd_txtDairyDescription);
 
@@ -191,7 +186,7 @@ public class DairyProfileView extends SubModuleView {
 		labelGridDataFactory.applyTo(UIControlsFactory.createLabel(nameArea, "Member Count:"));
 		fieldGridDataFactory.applyTo(txtMemberCount = UIControlsFactory.createTextNumeric(nameArea,
 				DairyProfileViewWidgetID.DAIRY_MEMBER_COUNT));
-		GridData gd_txtMemberCount = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		final GridData gd_txtMemberCount = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_txtMemberCount.widthHint = 50;
 		txtMemberCount.setLayoutData(gd_txtMemberCount);
 
@@ -302,9 +297,9 @@ public class DairyProfileView extends SubModuleView {
 	@Override
 	protected void basicCreatePartControl(Composite mainParent) {
 		mainParent.setLayout(new FillLayout());
-		ScrolledComposite scrollParent = new ScrolledComposite(mainParent, SWT.V_SCROLL);
+		final ScrolledComposite scrollParent = new ScrolledComposite(mainParent, SWT.V_SCROLL);
 		scrollParent.setBackground(stdBackgroundColor);
-		Composite parent = new Composite(scrollParent, 0);
+		final Composite parent = new Composite(scrollParent, 0);
 		parent.setBackground(stdBackgroundColor);
 
 		// create top row containing dairy info and dairy image

@@ -7,11 +7,11 @@ import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 public class MemberLookupProvider implements IMemberInfoProvider {
 
 	private final IDairyRepository memberRepo;
-	
+
 	public MemberLookupProvider( IDairyRepository repo ) {
 		memberRepo = repo;
 	}
-	
+
 	@Override
 	public Membership getMember(String memberNumber) {
 		return memberRepo.findMemberByMemberNo(memberNumber);

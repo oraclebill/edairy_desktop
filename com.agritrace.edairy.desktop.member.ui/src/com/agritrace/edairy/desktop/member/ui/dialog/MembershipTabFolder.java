@@ -35,7 +35,7 @@ public class MembershipTabFolder {
 
 	static class TabItemSet extends HashSet<TabItem> {
 		/**
-		 * 
+		 *
 		 */
 		private static final long serialVersionUID = 1L;
 
@@ -54,7 +54,7 @@ public class MembershipTabFolder {
 
 	private Composite tabComposite;
 
-	
+
 	public MembershipTabFolder(Composite parent) {
 		initGUI(parent, ALL_TABS);
 	}

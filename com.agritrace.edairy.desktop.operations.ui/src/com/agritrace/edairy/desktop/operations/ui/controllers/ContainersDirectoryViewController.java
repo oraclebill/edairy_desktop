@@ -55,7 +55,7 @@ public class ContainersDirectoryViewController extends BasicDirectoryController<
 
 	/**
 	 * Create new model while creating a new record
-	 * 
+	 *
 	 * @return
 	 */
 	@Override
@@ -92,7 +92,7 @@ public class ContainersDirectoryViewController extends BasicDirectoryController<
 
 	@Override
 	protected RecordDialog<DairyContainer> getRecordDialog(Shell shell) {
-		ContainerEditDialog dialog = new ContainerEditDialog(shell);
+		final ContainerEditDialog dialog = new ContainerEditDialog(shell);
 		dialog.setTitle("Edit Dairy Bin Information");
 		return dialog;
 	}

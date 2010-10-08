@@ -29,12 +29,12 @@ import com.agritrace.edairy.desktop.member.ui.Activator;
  * Extension of SubModuleController which provides some utility methods for
  * standard EDairyDesktop views. The controller expects it will be used with the
  * AbstractDirectoryView component.
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
  * @author
- * 
+ *
  */
 public abstract class AbstractDirectoryController<T extends EObject> {
 
@@ -61,7 +61,7 @@ public abstract class AbstractDirectoryController<T extends EObject> {
 	private IRepository<T> myRepo;
 
 	private T selectedEObject;
-	
+
 	private final List<T> tableContents = new ArrayList<T>();
 	protected final ISelectionListener selectionListener = new ISelectionListener() {
 
@@ -73,7 +73,7 @@ public abstract class AbstractDirectoryController<T extends EObject> {
 	};
 
 	protected ITableRidget table;
-	
+
 	protected IRidgetContainer controller;
 
 	/**
@@ -85,7 +85,7 @@ public abstract class AbstractDirectoryController<T extends EObject> {
 
 	/**
 	 * Controller with sub model node
-	 * 
+	 *
 	 * @param navigationNode
 	 */
 	public AbstractDirectoryController(IController controller) {
@@ -117,7 +117,7 @@ public abstract class AbstractDirectoryController<T extends EObject> {
 
 	/**
 	 * Gets the selectedObject
-	 * 
+	 *
 	 * @return
 	 */
 	public T getSelectedEObject() {
@@ -144,9 +144,9 @@ public abstract class AbstractDirectoryController<T extends EObject> {
 	protected void configureButtonsRidget() {
 		if(controller != null){
 			configureNewItemButton(controller.getRidget(IActionRidget.class, getAddActionId()));
-			configureViewItemButton(controller.getRidget(IActionRidget.class, getViewActionId()));		
+			configureViewItemButton(controller.getRidget(IActionRidget.class, getViewActionId()));
 		}
-	
+
 	}
 
 	protected void configureViewItemButton(final IActionRidget viewBtnRidget) {
@@ -159,7 +159,7 @@ public abstract class AbstractDirectoryController<T extends EObject> {
 				}
 			});
 		}
-		
+
 	}
 
 	protected void configureNewItemButton(final IActionRidget newBtnRidget) {
@@ -171,7 +171,7 @@ public abstract class AbstractDirectoryController<T extends EObject> {
 				}
 			});
 		}
-		
+
 	}
 
 	abstract protected void configureFilterRidgets();
@@ -193,12 +193,12 @@ public abstract class AbstractDirectoryController<T extends EObject> {
 
 			table.updateFromModel();
 		}
-		
+
 	}
 
 	/**
 	 * Create new model while createing a new record
-	 * 
+	 *
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
@@ -208,14 +208,14 @@ public abstract class AbstractDirectoryController<T extends EObject> {
 
 	/**
 	 * Gets entity class
-	 * 
+	 *
 	 * @return
 	 */
 	protected abstract EClass getEClass();
 
 	/**
 	 * Gets entity class
-	 * 
+	 *
 	 * @return
 	 */
 	final protected Class<?> getEntityClass() {
@@ -229,13 +229,13 @@ public abstract class AbstractDirectoryController<T extends EObject> {
 
 	/**
 	 * Gets filter class
-	 * 
+	 *
 	 * @return
 	 */
 	protected abstract List<T> getFilteredResult();
 
 	/**
-	 * 
+	 *
 	 * @param shell
 	 * @return
 	 */
@@ -243,14 +243,14 @@ public abstract class AbstractDirectoryController<T extends EObject> {
 
 	/**
 	 * Gets table column header
-	 * 
+	 *
 	 * @return
 	 */
 	protected abstract String[] getTableColumnHeaders();
 
 	/**
 	 * Gets table column property name
-	 * 
+	 *
 	 * @return
 	 */
 	protected abstract String[] getTableColumnPropertyNames();
@@ -291,7 +291,7 @@ public abstract class AbstractDirectoryController<T extends EObject> {
 	@SuppressWarnings("unchecked")
 	protected void handleViewItemAction() {
 		final RecordDialog<T> dialog = getRecordDialog(getShell());
-		T selectedObject =  getSelectedEObject();
+		final T selectedObject =  getSelectedEObject();
 		getRepository().load(selectedObject);
 		dialog.getController().setContext(EDITED_OBJECT_ID, selectedObject);
 		dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_VIEW);
@@ -314,7 +314,7 @@ public abstract class AbstractDirectoryController<T extends EObject> {
 
 
 	protected void updateEntity(T updateableEntity) {
-		getRepository().update(updateableEntity);		
+		getRepository().update(updateableEntity);
 	}
 
 	protected void itemSelected(SelectionEvent event) {
@@ -333,8 +333,8 @@ public abstract class AbstractDirectoryController<T extends EObject> {
 
 
 	/**
-	 * A utility to get the current display. 
-	 * 
+	 * A utility to get the current display.
+	 *
 	 * @return the current display, safe for rcp or non-rcp.
 	 */
 	public static final Display getDisplay() {
@@ -342,7 +342,7 @@ public abstract class AbstractDirectoryController<T extends EObject> {
 		try {
 			display = PlatformUI.getWorkbench().getDisplay();
 		}
-		catch( Exception e) {
+		catch( final Exception e) {
 			display = Display.getCurrent();
 			if (display == null) {
 				display = Display.getDefault();
@@ -352,8 +352,8 @@ public abstract class AbstractDirectoryController<T extends EObject> {
 	}
 
 	/**
-	 * A utility to get the current active shell. 
-	 * 
+	 * A utility to get the current active shell.
+	 *
 	 * @return the current shell, safe for rcp or non-rcp.
 	 */
 	public static final Shell getShell() {
@@ -361,17 +361,17 @@ public abstract class AbstractDirectoryController<T extends EObject> {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param level
 	 * @param message
 	 */
 	private void log(int level, String message) {
-		org.eclipse.equinox.log.Logger logger = Log4r.getLogger(Activator.getDefault(), this.getClass().getName());
+		final org.eclipse.equinox.log.Logger logger = Log4r.getLogger(Activator.getDefault(), this.getClass().getName());
 		logger.log(level, message);
 	}
 
 	public abstract String getTableWidgetId() ;
-		
+
 
 
 
@@ -381,5 +381,5 @@ public abstract class AbstractDirectoryController<T extends EObject> {
 
 	public abstract String getAddActionId();
 
-	
+
 }

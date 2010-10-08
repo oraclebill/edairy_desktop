@@ -12,7 +12,7 @@ import com.google.inject.Provider;
 
 public class SessionProvider implements Provider<Session> {
 	private static final Logger LOG = Log4r.getLogger(Activator.getDefault(), "com.agritrace.edairy.desktop.internal.common.persistence.SessionProvider");
-	
+
 	private final SessionFactory sessionFactory;
 	private Session session;
 

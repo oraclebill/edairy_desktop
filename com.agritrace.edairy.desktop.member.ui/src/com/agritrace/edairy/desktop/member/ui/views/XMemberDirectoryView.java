@@ -22,7 +22,7 @@ import org.eclipse.swt.widgets.Text;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class XMemberDirectoryView extends SubModuleView {
-	
+
 	public XMemberDirectoryView() {
 	}
 

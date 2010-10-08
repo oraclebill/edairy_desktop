@@ -42,15 +42,15 @@ public class TransactionJournalView extends AbstractDirectoryView {
 		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(batchButton);
 	}
 
-	
+
 	@Override
 	protected void createFilterConditions(Composite parent) {
-		Composite comp = UIControlsFactory.createComposite(parent);
+		final Composite comp = UIControlsFactory.createComposite(parent);
 		comp.setLayoutData(
 				new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		comp.setLayout(
 				new GridLayout(2, false));
-		
+
 		GridDataFactory.fillDefaults().applyTo(
 				new TransactionJournalFilterPanel(comp));
 

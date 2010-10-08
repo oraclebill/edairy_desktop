@@ -13,14 +13,14 @@ import org.eclipse.swt.widgets.Composite;
 /**
  * This is a base class for List view, which has a filter group at the top and a
  * list table at the bottom.
- * 
+ *
  * @author cin
- * 
+ *
  */
 public abstract class BaseListView extends ScrolledSubModuleView {
 	public BaseListView() {
 	}
-	
+
 	public static final String BIND_ID_FILTER_SEARCH = "filter.button.search";
 	public static final String BIND_ID_FILTER_RESET = "filter.button.resets";
 
@@ -36,7 +36,7 @@ public abstract class BaseListView extends ScrolledSubModuleView {
 
 	/**
 	 * Create button panel, it contains two buttons,View Button and Add Button
-	 * 
+	 *
 	 * @param parent
 	 *            the parent composite
 	 * @param viewButtonId
@@ -59,12 +59,12 @@ public abstract class BaseListView extends ScrolledSubModuleView {
 
 	/**
 	 * Create upper filter group
-	 * 
+	 *
 	 * @param parent
 	 */
 	/**
 	 * Creates filter
-	 * 
+	 *
 	 * @param parent
 	 */
 	protected void createFilterGroup(Composite parent) {
@@ -74,17 +74,17 @@ public abstract class BaseListView extends ScrolledSubModuleView {
 
 	/**
 	 * Create filter conditions
-	 * 
+	 *
 	 * @param comp
 	 */
 	protected void createFilterConditions(Composite comp) {
-		
+
 	}
 
 	protected void createFilterButtonPanel(Composite parent) {
 		// Reset Apply buttons
 		final Composite buttonPanel = UIControlsFactory.createComposite(parent);
-		GridLayoutFactory.swtDefaults().spacing(40,-1).numColumns(2).applyTo(buttonPanel);		
+		GridLayoutFactory.swtDefaults().spacing(40,-1).numColumns(2).applyTo(buttonPanel);
 		GridDataFactory.fillDefaults().align(SWT.CENTER, SWT.CENTER).span(3, 1).applyTo(buttonPanel);
 
 		UIControlsFactory.createButton(buttonPanel, "Search", BIND_ID_FILTER_SEARCH);
@@ -93,10 +93,10 @@ public abstract class BaseListView extends ScrolledSubModuleView {
 
 	/**
 	 * Create list table
-	 * 
+	 *
 	 * @param parent
 	 */
 	protected abstract void createListGroup(Composite parent);
- 
+
 
 }

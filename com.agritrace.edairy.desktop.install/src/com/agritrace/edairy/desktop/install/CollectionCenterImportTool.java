@@ -23,9 +23,9 @@ import com.google.inject.Inject;
 
 /**
  * Create a dairy configuration by importing excel data in standard format.
- * 
+ *
  * @author bjones
- * 
+ *
  */
 public class CollectionCenterImportTool extends AbstractImportTool {
 
@@ -44,7 +44,7 @@ public class CollectionCenterImportTool extends AbstractImportTool {
 	private Collection<DairyLocation> centers;
 	private Map<String, List<String[]>> failedRecords;
 	private Map<String, Object> centerCache;
-	private IDairyLocationRepository repo;
+	private final IDairyLocationRepository repo;
 
 	private int count = 0, errCount = 0;
 
@@ -52,44 +52,46 @@ public class CollectionCenterImportTool extends AbstractImportTool {
 	public CollectionCenterImportTool(IDairyLocationRepository repo) {
 		this.repo = repo;
 	}
-	
+
 	public void processFile(InputStream input, Collection<DairyLocation> locs,
 			Map<String, List<String[]>> errors, IProgressMonitor monitor) throws IOException {
 		setReader(new InputStreamReader(input));
 		setMonitor(monitor);
-		
+
 		this.centers = locs;
 		this.failedRecords = errors;
 
 		centerCache = new HashMap<String, Object>();
-		
-		for (DairyLocation loc : repo.allCollectionCenters()) {
+
+		for (final DairyLocation loc : repo.allCollectionCenters()) {
 			centerCache.put(loc.getCode(), loc);
 		}
-		
+
 		super.processFile();
 	}
-	
+
 	@Override
 	protected String[] getExpectedHeaders() {
 		return new String[] { "code", "name", null, null, "scale", null };
 	}
 
+	@Override
 	protected void validateRecord(String[] values) {
 		super.validateRecord(values);
-		Object center = centerCache.get(values[CENTER_CODE]);
-		
+		final Object center = centerCache.get(values[CENTER_CODE]);
+
 		if (center instanceof DairyLocation) {
 			throw new ValidationException("Collection center exists in database.");
 		}
-		
+
 		if (center instanceof String[]) {
 			throw new ValidationException("Duplicate collection center during import.");
 		}
-		
+
 		centerCache.put(values[CENTER_CODE], values);
 	}
-	
+
+	@Override
 	protected int[] getMandatoryFieldIndexes() {
 		return mandatoryFields;
 	}
@@ -100,23 +102,24 @@ public class CollectionCenterImportTool extends AbstractImportTool {
 		centers.add((DairyLocation) entity);
 	}
 
+	@Override
 	protected void doImportRecordFailed(String[] values, Exception e) {
 		errCount++;
-		String message = e.getMessage();
+		final String message = e.getMessage();
 		List<String[]> records = failedRecords.get(message);
-		
+
 		if (records == null) {
 			records = new LinkedList<String[]>();
 			failedRecords.put(message, records);
 		}
-		
+
 		records.add(values);
 	}
 
 
 	@Override
 	protected EObject createBlankEntity() {
-		DairyLocation loc = DairyFactory.eINSTANCE.createDairyLocation();
+		final DairyLocation loc = DairyFactory.eINSTANCE.createDairyLocation();
 		loc.getFunctions().add(DairyFunction.MILK_COLLECTION);
 		// TODO: These should be filled from somewhere.
 		loc.setLocation(DairyUtil.createLocation(null, null, null));

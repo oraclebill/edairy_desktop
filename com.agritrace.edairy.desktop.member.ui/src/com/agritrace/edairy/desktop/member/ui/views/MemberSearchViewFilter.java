@@ -15,7 +15,7 @@ public class MemberSearchViewFilter extends ViewerFilter {
 	private int searchColumn;
 
 	/**
-	 * 
+	 *
 	 */
 	private String searchValue;
 
@@ -38,7 +38,7 @@ public class MemberSearchViewFilter extends ViewerFilter {
 
 	@Override
 	public boolean select(Viewer viewer, Object parentElement, Object element) {
-		if ((searchValue == null) || (searchValue.length() == 0)) {
+		if (searchValue == null || searchValue.length() == 0) {
 			return true;
 		}
 		if (element == null) {

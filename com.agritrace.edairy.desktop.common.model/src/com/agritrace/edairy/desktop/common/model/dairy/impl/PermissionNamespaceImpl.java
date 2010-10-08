@@ -6,15 +6,13 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.PermissionNamespace;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.PermissionNamespace;
 
 /**
  * <!-- begin-user-doc -->
@@ -95,6 +93,7 @@ public class PermissionNamespaceImpl extends EObjectImpl implements PermissionNa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Long getId() {
 		return id;
 	}
@@ -104,11 +103,13 @@ public class PermissionNamespaceImpl extends EObjectImpl implements PermissionNa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setId(Long newId) {
-		Long oldId = id;
+		final Long oldId = id;
 		id = newId;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.PERMISSION_NAMESPACE__ID, oldId, id));
+		}
 	}
 
 	/**
@@ -116,6 +117,7 @@ public class PermissionNamespaceImpl extends EObjectImpl implements PermissionNa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -125,11 +127,13 @@ public class PermissionNamespaceImpl extends EObjectImpl implements PermissionNa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
-		String oldName = name;
+		final String oldName = name;
 		name = newName;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.PERMISSION_NAMESPACE__NAME, oldName, name));
+		}
 	}
 
 	/**
@@ -207,9 +211,11 @@ public class PermissionNamespaceImpl extends EObjectImpl implements PermissionNa
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy()) {
+			return super.toString();
+		}
 
-		StringBuffer result = new StringBuffer(super.toString());
+		final StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (id: ");
 		result.append(id);
 		result.append(", name: ");

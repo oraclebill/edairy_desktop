@@ -61,7 +61,7 @@ public final class AdjustmentTransactionJournalController extends TransactionJou
 
 	// private final IMemberRepository memberRepo = RepositoryFactory.getMemberRepository();
 	private IMultipleChoiceRidget typeSetRidget;
-	
+
 	private final Provider<AdjustmentTransactionEditDialog> dialogProvider;
 
 	@Inject
@@ -70,7 +70,7 @@ public final class AdjustmentTransactionJournalController extends TransactionJou
 			final Provider<AdjustmentTransactionEditDialog> dialogProvider) {
 		super(memberSearchProvider);
 		this.dialogProvider = dialogProvider;
-		
+
 		setEClass(AccountPackage.Literals.ADJUSTMENT_TRANSACTION);
 		setRepository(repo);
 
@@ -93,7 +93,7 @@ public final class AdjustmentTransactionJournalController extends TransactionJou
 			}
 
 		});
-		
+
 		this.addTableColumn("Type", AccountPackage.Literals.TRANSACTION__TRANSACTION_TYPE);
 		this.addTableColumn("Amount", AccountPackage.Literals.TRANSACTION__AMOUNT);
 	}
@@ -101,7 +101,7 @@ public final class AdjustmentTransactionJournalController extends TransactionJou
 	@Override
 	public void configureFilterRidgets() {
 		super.configureFilterRidgets();
-		
+
 		typeSetRidget = getRidget(IMultipleChoiceRidget.class, FinanceBindingConstants.FILTER_CHOICE_TX_SOURCE);
 	}
 
@@ -110,15 +110,16 @@ public final class AdjustmentTransactionJournalController extends TransactionJou
 	public void afterBind() {
 		super.afterBind();
 
-		List<String> optionValues = Arrays.asList("Credit Adjustment", "Debit Adjustment");
+		final List<String> optionValues = Arrays.asList("Credit Adjustment", "Debit Adjustment");
 		typeSetRidget.bindToModel(TransactionType.VALUES, optionValues, filterBean, "typeSelections");
 		typeSetRidget.updateFromModel();
 	}
 
-	
+
+	@Override
 	protected Predicate buildFilterPredicate() {
-		Predicate superPredicate = super.buildFilterPredicate();
-		
+		final Predicate superPredicate = super.buildFilterPredicate();
+
 		final List<Predicate> predicateList = new ArrayList<Predicate>();
 		predicateList.add(superPredicate);
 		predicateList.add(NullIsTruePredicate.getInstance(

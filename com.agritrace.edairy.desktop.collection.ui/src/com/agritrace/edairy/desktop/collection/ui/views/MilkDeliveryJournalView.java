@@ -16,7 +16,7 @@ public class MilkDeliveryJournalView extends AbstractDirectoryView {
 
 	/**
 	 * Create contents of the view part.
-	 * 
+	 *
 	 * @param parent
 	 */
 	@Override

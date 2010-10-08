@@ -23,7 +23,7 @@ import com.google.inject.Inject;
 
 public class RouteEditDialogController extends RecordDialogController<Route> {
 	private final IDairyRepository dairyRepo;
-	
+
 	@Inject
 	public RouteEditDialogController(final IDairyRepository dairyRepo) {
 		this.dairyRepo = dairyRepo;
@@ -39,21 +39,21 @@ public class RouteEditDialogController extends RecordDialogController<Route> {
 		vehicles.add(null);
 		vehicles.addAll(localDairy.getVehicles());
 		addComboMap(ViewConstants.ID_TXT_ROUTE_VEHICLE, vehicles, "getRegistrationNumber", DairyPackage.Literals.ROUTE__VEHICLE);
-		
+
 		final ITextRidget routeName = getRidget(ITextRidget.class, ViewConstants.ID_TXT_ROUTE_NAME);
 		getRidget(IComboRidget.class, ViewConstants.ID_TXT_ROUTE_VEHICLE).addSelectionListener(new ISelectionListener() {
 			@Override
 			public void ridgetSelected(SelectionEvent event) {
 				final Route route = getWorkingCopy();
 				final Vehicle vehicle = route.getVehicle();
-				
+
 				if (vehicle != null && StringUtils.isEmpty(route.getName())) {
 					route.setName(vehicle.getLogBookNumber());
 					routeName.updateFromModel();
 				}
 			}
 		});
-		
+
 		final IListRidget stopsList = getRidget(IListRidget.class, ViewConstants.ID_LST_ROUTE_STOPS);
 		stopsList.bindToModel(EMFObservables.observeList(this.getWorkingCopy(), DairyPackage.Literals.ROUTE__STOPS),
 				DairyLocation.class, "name");
@@ -61,5 +61,5 @@ public class RouteEditDialogController extends RecordDialogController<Route> {
 		stopsList.setOutputOnly(true);
 		stopsList.setFocusable(false);
 		stopsList.setEnabled(false);
-	}	
+	}
 }

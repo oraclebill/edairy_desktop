@@ -16,7 +16,7 @@ import com.agritrace.edairy.desktop.common.ui.controls.location.ViewWidgetId;
 import com.agritrace.edairy.desktop.common.ui.validators.DoubleNumberValidator;
 
 public class MapGroupController implements WidgetController<MapLocation> {
-	private ListenerList<IDataChangeListener> listeners = new ListenerList<IDataChangeListener>(IDataChangeListener.class);
+	private final ListenerList<IDataChangeListener> listeners = new ListenerList<IDataChangeListener>(IDataChangeListener.class);
 
 	private IRidgetContainer container;
 	private IDecimalTextRidget latituteTxt;
@@ -38,24 +38,24 @@ public class MapGroupController implements WidgetController<MapLocation> {
 
 			@Override
 			public void focusLost(FocusEvent event) {
-				for (IDataChangeListener listener: listeners.getListeners()) {
+				for (final IDataChangeListener listener: listeners.getListeners()) {
 					listener.dataChanged();
 				}
 			}
 		};
-		
+
 		latituteTxt = container.getRidget(IDecimalTextRidget.class, ViewWidgetId.LATITUDE_TEXT);
 		latituteTxt.setPrecision(4);
 		latituteTxt.setSigned(true);
 		latituteTxt.setMarkNegative(false);
 		latituteTxt.addFocusListener(listener);
-		
+
 		longtituteTxt = container.getRidget(IDecimalTextRidget.class, ViewWidgetId.LONGTITUDE_TEXT);
 		longtituteTxt.setPrecision(4);
 		longtituteTxt.setSigned(true);
 		longtituteTxt.setMarkNegative(false);
 		longtituteTxt.addFocusListener(listener);
-		
+
 		final DoubleNumberValidator validator = new DoubleNumberValidator();
 		latituteTxt.addValidationRule(validator, ValidationTime.ON_UI_CONTROL_EDIT);
 		longtituteTxt.addValidationRule(validator, ValidationTime.ON_UI_CONTROL_EDIT);
@@ -80,7 +80,7 @@ public class MapGroupController implements WidgetController<MapLocation> {
 
 	@Override
 	public void setInputModel(MapLocation model) {
-		map = (MapLocation) model;
+		map = model;
 		if (container != null) {
 			updateBinding();
 		}

@@ -25,12 +25,12 @@ public final class RoleDirectoryController extends BasicDirectoryController<Role
 	private ITextRidget nameSearch;
 	private ITextRidget permSearch;
 	private final Provider<RoleEditDialog> dialogProvider;
-	
+
 	@Override
 	protected String getFullTitle() {
 		return "Security Roles";
 	}
-	
+
 	@Inject
 	public RoleDirectoryController(final IRepository<Role> repo, final Provider<RoleEditDialog> dialogProvider) {
 		super();
@@ -43,23 +43,26 @@ public final class RoleDirectoryController extends BasicDirectoryController<Role
 		addTableColumn("Permissions", DairyPackage.Literals.ROLE__PERMISSIONS, new ColumnFormatter() {
 			@Override
 			public String getText(Object element) {
-				if (!(element instanceof Role))
+				if (!(element instanceof Role)) {
 					return "[error]";
-				
-				List<Permission> permissions = ((Role) element).getPermissions();
-				
-				if (permissions == null)
+				}
+
+				final List<Permission> permissions = ((Role) element).getPermissions();
+
+				if (permissions == null) {
 					return "";
-				
-				StringBuilder sb = new StringBuilder();
-				
-				for (Permission perm: permissions) {
-					if (sb.length() > 0)
+				}
+
+				final StringBuilder sb = new StringBuilder();
+
+				for (final Permission perm: permissions) {
+					if (sb.length() > 0) {
 						sb.append(" | ");
-					
+					}
+
 					sb.append(perm.toString());
 				}
-				
+
 				return sb.toString();
 			}
 		});
@@ -76,15 +79,15 @@ public final class RoleDirectoryController extends BasicDirectoryController<Role
 		final List<Role> all = new ArrayList<Role>();
 		final String name = nameSearch.getText();
 		final String permText = permSearch.getText();
-		
-		for (Role role: getRepository().all()) {
+
+		for (final Role role: getRepository().all()) {
 			if (StringUtils.isEmpty(name) || role.getName().indexOf(name) != -1) {
 				if (StringUtils.isEmpty(permText)) {
 					all.add(role);
 					continue;
 				}
-				
-				for (Permission perm: role.getPermissions()) {
+
+				for (final Permission perm: role.getPermissions()) {
 					if (perm.toString().indexOf(permText) != -1) {
 						all.add(role);
 						break;
@@ -92,7 +95,7 @@ public final class RoleDirectoryController extends BasicDirectoryController<Role
 				}
 			}
 		}
-		
+
 		return all;
 	}
 

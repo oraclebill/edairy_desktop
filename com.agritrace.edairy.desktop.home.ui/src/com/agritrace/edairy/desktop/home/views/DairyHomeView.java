@@ -52,17 +52,18 @@ public class DairyHomeView extends ViewPart {
 			super(browser, name);
 		}
 
+		@Override
 		public Object function(Object[] arguments) {
-			Date today = new Date();
-			List<CollectionGroup> groups = journalRepository.allForDate(today);
+			final Date today = new Date();
+			final List<CollectionGroup> groups = journalRepository.allForDate(today);
 
 			Object[] retVal;
-			HashMap<String, Object[]> centerSums = new HashMap<String, Object[]>();
+			final HashMap<String, Object[]> centerSums = new HashMap<String, Object[]>();
 
 			// for each group, add its collections to the proper sum
 			for (int i = 0; i < groups.size(); i++) {
-				CollectionGroup group = groups.get(i);
-				String centerName = group.getCollectionCenter().getCode();
+				final CollectionGroup group = groups.get(i);
+				final String centerName = group.getCollectionCenter().getCode();
 
 				// get or create a slot to accumulate the sum of the groups
 				// collections
@@ -79,20 +80,23 @@ public class DairyHomeView extends ViewPart {
 				// identify it.
 				// default to 'am'
 				int sessionIndex = 1;
-				CollectionSession session = group.getSession();
+				final CollectionSession session = group.getSession();
 				if (session != null) {
-					if ("PM".equals(session.getCode()))
+					if ("PM".equals(session.getCode())) {
 						sessionIndex = 2;
+					}
 				}
 
 				// calculate the sum of collections and store it
 				// values that are flagged or rejected are ignored.
-				List<CollectionJournalLine> lines = group.getJournalEntries();
-				for (CollectionJournalLine line : lines) {
-					if (line.isRejected())
+				final List<CollectionJournalLine> lines = group.getJournalEntries();
+				for (final CollectionJournalLine line : lines) {
+					if (line.isRejected()) {
 						continue;
-					if (line.isFlagged())
+					}
+					if (line.isFlagged()) {
 						continue;
+					}
 
 					sumArray[sessionIndex] = line.getQuantity().add(
 							(BigDecimal) sumArray[sessionIndex]);
@@ -111,7 +115,7 @@ public class DairyHomeView extends ViewPart {
 
 	@Inject
 	private static ICollectionJournalLineRepository journalRepository;
-	
+
 	public DairyHomeView() {
 	}
 
@@ -131,7 +135,7 @@ public class DairyHomeView extends ViewPart {
 			browser.setUrl(FileLocator.resolve(
 					new URL(HomeActivator.PLUGIN_WEB_PATH + "index.html"))
 					.toString());
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}

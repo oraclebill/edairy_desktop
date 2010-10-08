@@ -30,9 +30,9 @@ import com.google.inject.Inject;
 
 /**
  * Create a dairy configuration by importing excel data in standard format.
- * 
+ *
  * @author bjones
- * 
+ *
  */
 public class MemberTransactionImportTool extends AbstractImportTool {
 
@@ -40,7 +40,7 @@ public class MemberTransactionImportTool extends AbstractImportTool {
 	public static final String STORE_PREFIX 		= "Stores:";
 	public static final String CLINICAL_PREFIX 		= "Vet Services:Clinical Services";
 	public static final String AI_PREFIX 			= "Vet Services:A.I";
-	
+
 	public static final int BASE = 0;
 	public static final int TX_TYPE = 		BASE;
 	public static final int TX_DATE = 		BASE + 1;
@@ -49,15 +49,15 @@ public class MemberTransactionImportTool extends AbstractImportTool {
 	public static final int TX_CLASS = 		BASE + 4;
 	public static final int TX_AMOUNT = 	BASE + 5;
 
-		
+
 	private static final Entry[] fieldMap = {
 			new Entry(TX_TYPE, AccountPackage.Literals.TRANSACTION__TRANSACTION_TYPE),
 			new Entry(TX_DATE, AccountPackage.Literals.TRANSACTION__TRANSACTION_DATE),
 			new Entry(TX_REFNO, AccountPackage.Literals.ACCOUNT_TRANSACTION__REFERENCE_NUMBER),
-			new Entry(TX_MEMBERNO, AccountPackage.Literals.TRANSACTION__ACCOUNT), // 
+			new Entry(TX_MEMBERNO, AccountPackage.Literals.TRANSACTION__ACCOUNT), //
 			new Entry(TX_CLASS, AccountPackage.Literals.ACCOUNT_TRANSACTION__SOURCE),
 			new Entry(TX_AMOUNT,
-					AccountPackage.Literals.TRANSACTION__AMOUNT), 
+					AccountPackage.Literals.TRANSACTION__AMOUNT),
 	};
 
 	private static final int[] mandatoryFields = { TX_TYPE, TX_DATE, TX_REFNO, TX_CLASS, TX_AMOUNT };
@@ -66,7 +66,7 @@ public class MemberTransactionImportTool extends AbstractImportTool {
 	final private Map<String, DairyLocation> locationCache = new HashMap<String, DairyLocation>();
 	private Map<String, List<String[]>> failedRecords;
 	private List<AccountTransaction> transactions;
-	
+
 	private final IDairyRepository dairyRepo;
 	private final IMemberRepository memberRepo;
 
@@ -78,30 +78,30 @@ public class MemberTransactionImportTool extends AbstractImportTool {
 		this.dairyRepo = dairyRepo;
 		this.memberRepo = memberRepo;
 	}
-	
+
 	public void processFile(InputStream input, List<AccountTransaction> transactions,
 			Map<String, List<String[]>> errors, IProgressMonitor monitor) throws IOException {
 		setReader(new InputStreamReader(input));
 		setMonitor(monitor);
-		
+
 		setMonitorDelta(100);
 		this.transactions = transactions;
 		this.failedRecords = errors;
 		this.dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-		for (DairyLocation location : dairyRepo.getLocalDairyLocations()) {
+		for (final DairyLocation location : dairyRepo.getLocalDairyLocations()) {
 			locationCache.put(location.getCode(), location);
 		}
-		
+
 		//List<Account> accounts = RepositoryFactory.getRepository(Account.class).all();
-		List<Account> accounts = memberRepo.allAccounts();
+		final List<Account> accounts = memberRepo.allAccounts();
 		System.err.println("======== retrieved allaccounts ============");
-		for (Account account : accounts) {
+		for (final Account account : accounts) {
 			memberAccountCache.put(account.getAccountNumber().substring(1), account);
 		}
-		
+
 		super.processFile();
 	}
-	
+
 	@Override
 	protected String[] getExpectedHeaders() {
 		return new String[] { "Type", "Date", "Reference", "Member No.", "Class", "Amount" };
@@ -110,15 +110,16 @@ public class MemberTransactionImportTool extends AbstractImportTool {
 	@Override
 	protected void processRecord(String[] values) {
 		validateRecord(values);
-		EObject entity = createEntityFromRecord(values);
+		final EObject entity = createEntityFromRecord(values);
 		saveImportedEntity(entity);
 	}
 
+	@Override
 	protected void validateRecord(String[] values) {
-		super.validateRecord(values);		
+		super.validateRecord(values);
 		// check for valid member number, and account.
-		String memberNo = values[TX_MEMBERNO];		
-		Account account = memberAccountCache.get(memberNo);
+		final String memberNo = values[TX_MEMBERNO];
+		final Account account = memberAccountCache.get(memberNo);
 		if (account == null) {
 //			account = RepositoryFactory.getDairyRepository().findAccountByMemberNo(memberNo);
 //			if ( account != null ) {
@@ -128,56 +129,56 @@ public class MemberTransactionImportTool extends AbstractImportTool {
 				throw new ValidationException("Unable to find member " + memberNo);
 //			}
 		}
-		String source = values[TX_CLASS];
+		final String source = values[TX_CLASS];
 		if ( !source.startsWith(AI_PREFIX) && !source.startsWith(CLINICAL_PREFIX) && !source.startsWith( STORE_PREFIX)) {
 			throw new ValidationException("Unknown transaction class " + source);
 		}
 	}
-	
+
 	/**
 	 * Create an AccountTransaction based on values array.
-	 * 
-	 * We will create a transaction and set the account by lookup in memberAccountCache, 
+	 *
+	 * We will create a transaction and set the account by lookup in memberAccountCache,
 	 * as well as parse the 'class' field to determine the proper 'source'.
-	 * 
+	 *
 	 * If the source is 'store', then we will attempt to parse the store code from the
 	 * 'class' field, trying both 'S' and 'R' based prefixes for the route number.
-	 * 
+	 *
 	 * There is no error checking here as it is assumed the record has been validated
 	 * already in the 'validateRecord' method.
 	 */
 	@Override protected EObject createEntityFromRecord(String[] values) {
-		AccountTransaction tx = AccountFactory.eINSTANCE.createAccountTransaction();
+		final AccountTransaction tx = AccountFactory.eINSTANCE.createAccountTransaction();
 		System.err.println("Creating transaction for account V" + values[TX_MEMBERNO]);
-		
+
 		tx.setAccount(memberAccountCache.get(values[TX_MEMBERNO]));
 		try {
-			Number num = NumberFormat.getInstance().parse(values[TX_AMOUNT]);
+			final Number num = NumberFormat.getInstance().parse(values[TX_AMOUNT]);
 			tx.setAmount(new BigDecimal(num.doubleValue()));
-		} catch (ParseException e) {
+		} catch (final ParseException e) {
 			throw new ValidationException("Unable to parse transaction amount: " + values[TX_AMOUNT] );
 		}
 		try {
-			Date transactionDate = dateFormat.parse(values[TX_DATE]);
-			tx.setTransactionDate(transactionDate);			
+			final Date transactionDate = dateFormat.parse(values[TX_DATE]);
+			tx.setTransactionDate(transactionDate);
 		}
-		catch( Exception e) {
+		catch( final Exception e) {
 			throw new ValidationException("Unable to parse transaction date: " + values[TX_DATE]);
 		}
 		tx.setReferenceNumber(values[TX_REFNO]);
-		
-		if ( CREDIT_SALE.equals(values[TX_TYPE]) ) { 
+
+		if ( CREDIT_SALE.equals(values[TX_TYPE]) ) {
 			tx.setTransactionType(TransactionType.CREDIT);
 		}
-		
+
 		if ( values[TX_CLASS].startsWith(STORE_PREFIX)) {
 			tx.setSource(TransactionSource.STORE_CREDIT);
-			String storeNumber = values[TX_CLASS].substring(STORE_PREFIX.length());
+			final String storeNumber = values[TX_CLASS].substring(STORE_PREFIX.length());
 			DairyLocation location = locationCache.get(storeNumber);
 			if ( location == null && storeNumber.startsWith("R") ) {
 				location = locationCache.get("S"+storeNumber.substring(1));  // replace 'R' with 'S'
 			}
-			tx.setRelatedLocation(location);			
+			tx.setRelatedLocation(location);
 		}
 		else if (values[TX_CLASS].startsWith(AI_PREFIX)) {
 			tx.setSource(TransactionSource.CLINICAL_SERVICES);
@@ -185,11 +186,12 @@ public class MemberTransactionImportTool extends AbstractImportTool {
 		else if (values[TX_CLASS].startsWith(CLINICAL_PREFIX)) {
 			tx.setSource(TransactionSource.CLINICAL_SERVICES);
 		}
-		
+
 		System.err.println("New transaction created ");
 		return tx;
 	}
-	
+
+	@Override
 	protected int[] getMandatoryFieldIndexes() {
 		return mandatoryFields;
 	}
@@ -200,9 +202,10 @@ public class MemberTransactionImportTool extends AbstractImportTool {
 		transactions.add((AccountTransaction)entity);
 	}
 
+	@Override
 	protected void doImportRecordFailed(String[] values, Exception e) {
 		errCount++;
-		String message = e.getMessage();
+		final String message = e.getMessage();
 		List<String[]> records = failedRecords.get(message);
 		if (records == null) {
 			records = new LinkedList<String[]>();

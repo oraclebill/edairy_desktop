@@ -13,7 +13,6 @@ import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.TransactionException;
-import org.hibernate.metadata.ClassMetadata;
 import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
@@ -54,8 +53,6 @@ public abstract class HibernateRepository<T extends EObject> implements
 	@Inject
 	protected HibernateRepository(Provider<Session> sessionProvider) {
 		String className;
-		ClassMetadata metaData;
-
 		LOGGER.log(LogService.LOG_INFO, String.format(
 				"Creating HibernateRepository [%s:%d]", getClassType()
 						.getName(), hashCode()));
@@ -83,18 +80,19 @@ public abstract class HibernateRepository<T extends EObject> implements
 	}
 
 	protected List<T> allWithEagerFetch(final String... paths) {
-		SessionRunnable<List<T>> runner = new SessionRunnable<List<T>>() {
+		final SessionRunnable<List<T>> runner = new SessionRunnable<List<T>>() {
 			@Override
 			public void run(Session s) {
 				final Criteria crit = s.createCriteria(getClassType());
 
 				if (paths != null) {
-					for (String path : paths) {
+					for (final String path : paths) {
 						crit.setFetchMode(path, FetchMode.JOIN);
 					}
 				}
 
 				@SuppressWarnings("unchecked")
+				final
 				List<T> result = crit.list();
 				setResult(result);
 			}
@@ -126,11 +124,12 @@ public abstract class HibernateRepository<T extends EObject> implements
 		if (key == null) {
 			throw new IllegalArgumentException("key cannot be null");
 		}
-		
-		Session session = sessionProvider.get();
 
-		if (!session.contains(obj))
+		final Session session = sessionProvider.get();
+
+		if (!session.contains(obj)) {
 			session.load(obj, key);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -140,7 +139,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 	}
 
 	/**
-	 * 
+	 *
 	 * @param <X>
 	 * @param entityClass
 	 * @param entityKey
@@ -152,19 +151,19 @@ public abstract class HibernateRepository<T extends EObject> implements
 	}
 
 	/**
-	 * 
+	 *
 	 * @param eClass
 	 * @return
 	 */
 	private String getEntityName(Class<?> eClass) {
-		String className = eClass.getName();
+		final String className = eClass.getName();
 		return className.substring(className.lastIndexOf('.') + 1);
 	}
 
 	/**
 	 * Merge
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	public void merge(T obj) {
 		update(obj);
@@ -175,9 +174,9 @@ public abstract class HibernateRepository<T extends EObject> implements
 		runWithTransaction(new Runnable() {
 			@Override
 			public void run() {
-				Session session = sessionProvider.get();
+				final Session session = sessionProvider.get();
 				if (changedItem instanceof Collection) {
-					for(Object item : (Collection) changedItem) {
+					for(final Object item : (Collection) changedItem) {
 						session.saveOrUpdate(item);
 					}
 				}
@@ -219,20 +218,20 @@ public abstract class HibernateRepository<T extends EObject> implements
 
 	/**
 	 * Subclasses must implement this as follows:
-	 * 
+	 *
 	 * <code>
 	 *     return T.class;
 	 * </code>
-	 * 
+	 *
 	 * Where 'T' is the type parameter used in the subclass declaration.
-	 * 
+	 *
 	 * @return
 	 */
 	protected abstract Class<?> getClassType();
 
 	/**
 	 * The hibernate entity name of the parameterized class.
-	 * 
+	 *
 	 * @return
 	 */
 	protected String getEntityName() {
@@ -242,7 +241,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 //	/**
 //	 * The name of the identifier property (primary key) of the parameterized
 //	 * class.
-//	 * 
+//	 *
 //	 * @return
 //	 */
 //	protected String getIdentifierName() {
@@ -251,7 +250,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 
 	protected void run(Runnable r) {
 		sessionProvider.get();
-		
+
 		try {
 			r.run();
 		} finally {
@@ -260,8 +259,8 @@ public abstract class HibernateRepository<T extends EObject> implements
 	}
 
 	protected void runWithTransaction(Runnable r) {
-		Session session = sessionProvider.get();
-		
+		final Session session = sessionProvider.get();
+
 		final Transaction t = session.beginTransaction();
 		try {
 			r.run();

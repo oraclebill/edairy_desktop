@@ -35,11 +35,11 @@ public class TransactionRepository extends HibernateRepository<Transaction> impl
 
 	@Override
 	public List<Transaction> findAccountTransactions(final Account account, final Date start, final Date end) {
-		SessionRunnable<List<Transaction>> runnable = new SessionRunnable<List<Transaction>>() {
+		final SessionRunnable<List<Transaction>> runnable = new SessionRunnable<List<Transaction>>() {
 			@SuppressWarnings("unchecked")
 			@Override
 			public void run(Session session) {
-				Criteria criteria = session.createCriteria("Transaction");
+				final Criteria criteria = session.createCriteria("Transaction");
 
 				if (account != null) {
 					criteria.add(Restrictions.eq("account", account));
@@ -60,8 +60,8 @@ public class TransactionRepository extends HibernateRepository<Transaction> impl
 
 //	/**
 //	 * Create a balance point as of specified date.
-//	 * 
-//	 * 
+//	 *
+//	 *
 //	 * @param account
 //	 * @param type
 //	 *            the balance type determines if we use start-of-day or
@@ -110,8 +110,8 @@ public class TransactionRepository extends HibernateRepository<Transaction> impl
 //	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 * @param account
 	 * @param balanceDate
 	 * @param amount
@@ -121,7 +121,7 @@ public class TransactionRepository extends HibernateRepository<Transaction> impl
 	@Override
 	public BalancePoint createBalancePoint(final Account account, Calendar balanceDate, BigDecimal amount)
 			throws IllegalStateException {
-		BalancePoint latest = AccountFactory.eINSTANCE.createBalancePoint();
+		final BalancePoint latest = AccountFactory.eINSTANCE.createBalancePoint();
 
 		latest.setAsOf(balanceDate.getTime());
 		latest.setAccount(account);
@@ -134,7 +134,7 @@ public class TransactionRepository extends HibernateRepository<Transaction> impl
 
 	/**
 	 * Create a Calendar-type date based on the payment period.
-	 * 
+	 *
 	 * @param type
 	 * @param year
 	 * @param month
@@ -143,15 +143,15 @@ public class TransactionRepository extends HibernateRepository<Transaction> impl
 	@Override
 	public Calendar createPeriodDate(BalanceType type, int year, int month) {
 		// initialize balance date
-		Calendar balanceDate = Calendar.getInstance();
+		final Calendar balanceDate = Calendar.getInstance();
 		balanceDate.clear();
 		balanceDate.set(Calendar.YEAR, year);
 		balanceDate.set(Calendar.MONTH, month);
 
 		// floor or ceil the date, as appropriate for the type of balancepoint
-		List<Integer> timeFields = Arrays.asList(Calendar.DAY_OF_MONTH, Calendar.HOUR, Calendar.MINUTE,
+		final List<Integer> timeFields = Arrays.asList(Calendar.DAY_OF_MONTH, Calendar.HOUR, Calendar.MINUTE,
 				Calendar.SECOND, Calendar.MILLISECOND);
-		for (int field : timeFields) {
+		for (final int field : timeFields) {
 			if (type.equals(BalanceType.STARTING)) {
 				balanceDate.set(field, balanceDate.getMinimum(field));
 			} else {
@@ -163,7 +163,7 @@ public class TransactionRepository extends HibernateRepository<Transaction> impl
 
 	/**
 	 * Find the latest balance point, by date, for the specified account
-	 * 
+	 *
 	 * @param account
 	 * @return
 	 */
@@ -182,13 +182,13 @@ public class TransactionRepository extends HibernateRepository<Transaction> impl
 		Date startDate = new Date(0);
 		BigDecimal sum = Constants.BIGZERO;
 
-		BalancePoint point = findLatestBalancePoint(primaryAcct);
+		final BalancePoint point = findLatestBalancePoint(primaryAcct);
 		if (point != null) {
 			startDate = point.getAsOf();
 			sum = point.getAmount();
 		}
 
-		List<Transaction> transactions = findAccountTransactions(primaryAcct, startDate, cutoffDate);
+		final List<Transaction> transactions = findAccountTransactions(primaryAcct, startDate, cutoffDate);
 		return sum.add(sumTransactions(transactions));
 	}
 
@@ -204,16 +204,16 @@ public class TransactionRepository extends HibernateRepository<Transaction> impl
 
 	/**
 	 * Find the latest balance point, before date, for the specified account
-	 * 
+	 *
 	 * @param account
 	 * @return
 	 */
 	private BalancePoint findLatestBalancePoint(final Account account, Date cutoff) {
-		List<BalancePoint> balances = account.getBalances();
+		final List<BalancePoint> balances = account.getBalances();
 		BalancePoint lastBalance = null;
 		Date newest = new Date(0l);
 
-		for (BalancePoint point : balances) {
+		for (final BalancePoint point : balances) {
 			final Date balanceDate = point.getAsOf();
 			if (balanceDate.after(newest) && balanceDate.before(cutoff)) {
 				newest = balanceDate;
@@ -226,14 +226,14 @@ public class TransactionRepository extends HibernateRepository<Transaction> impl
 	/**
 	 * Add a set of transactions where credits decrease and debits increase the
 	 * result.
-	 * 
+	 *
 	 * @param transactionList
 	 * @return
 	 */
 	private BigDecimal sumTransactions(List<Transaction> transactionList) {
 		BigDecimal sum = Constants.BIGZERO;
-		for (Transaction tx : transactionList) {
-			BigDecimal amount = tx.getAmount();
+		for (final Transaction tx : transactionList) {
+			final BigDecimal amount = tx.getAmount();
 			if (TransactionType.CREDIT.equals(tx.getTransactionType())) {
 				sum = sum.subtract(amount);
 			} else {
@@ -251,10 +251,11 @@ public class TransactionRepository extends HibernateRepository<Transaction> impl
 	private AccountTransaction createTransaction(Account account, Date date, TransactionType type,
 			TransactionSource source, BigDecimal amount, String desc) {
 
-		if (account == null)
+		if (account == null) {
 			throw new IllegalArgumentException("Account must not be null.");
+		}
 
-		AccountTransaction tx = AccountFactory.eINSTANCE.createAccountTransaction();
+		final AccountTransaction tx = AccountFactory.eINSTANCE.createAccountTransaction();
 		tx.setAccount(account);
 		tx.setTransactionType(type);
 		tx.setSource(source);

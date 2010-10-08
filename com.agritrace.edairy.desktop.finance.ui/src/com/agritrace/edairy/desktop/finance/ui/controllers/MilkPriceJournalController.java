@@ -50,7 +50,7 @@ public class MilkPriceJournalController extends BasicDirectoryController<MemberP
 		}
 
 		public void setStartDate(Date startDate) {
-			Object oldValue = this.startDate;
+			final Object oldValue = this.startDate;
 			this.startDate = startDate;
 			firePropertyChanged(START_DATE, oldValue, startDate);
 		}
@@ -60,13 +60,13 @@ public class MilkPriceJournalController extends BasicDirectoryController<MemberP
 		}
 
 		public void setEndDate(Date endDate) {
-			Object oldValue = this.endDate;
+			final Object oldValue = this.endDate;
 			this.endDate = endDate;
 			firePropertyChanged(END_DATE, oldValue, endDate);
 		}
 
 	}
-	
+
 	private final IDairyRepository dairyRepo;
 	private final FilterBean filterBean = new FilterBean();
 	private ILabelRidget currentPriceLabel;
@@ -95,7 +95,7 @@ public class MilkPriceJournalController extends BasicDirectoryController<MemberP
 
 			private String getMonth(int month) {
 				return MONTHS[month];
-			}			
+			}
 		});
 		addTableColumn("Year", DairyPackage.Literals.MEMBER_PAYMENT__YEAR);
 		addTableColumn("Price", DairyPackage.Literals.MEMBER_PAYMENT__PAYMENT_RATE);
@@ -131,16 +131,16 @@ public class MilkPriceJournalController extends BasicDirectoryController<MemberP
 		// selectedObject.setUpdatedBy(currentUser());
 		// }
 	}
-	
+
 
 	@Override
 	public boolean allowsActivate(INavigationNode<?> pNode, INavigationContext context) {
-		boolean isOk = super.allowsActivate(pNode, context);
+		final boolean isOk = super.allowsActivate(pNode, context);
 		if (isOk) {
 			try {
 				updateMilkPrice();
 			}
-			catch(Exception e) {
+			catch(final Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -162,18 +162,18 @@ public class MilkPriceJournalController extends BasicDirectoryController<MemberP
 
 	/**
 	 * Update the milk price that is displayed above the date filter in the list view.
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	private void updateMilkPrice() {
-		MemberPayment currentPrice = getCurrentPrice();
+		final MemberPayment currentPrice = getCurrentPrice();
 		if (currentPrice != null) {
-			Calendar cal = Calendar.getInstance();
+			final Calendar cal = Calendar.getInstance();
 			cal.set(Calendar.MONTH, currentPrice.getMonth());
 			currentPriceLabel.setText(String.format(
-					MilkPriceJournalConstants.CURRENT_PRICE_LABEL_FMT, 
-					cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()), 
-					currentPrice.getYear(), 
+					MilkPriceJournalConstants.CURRENT_PRICE_LABEL_FMT,
+					cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()),
+					currentPrice.getYear(),
 					currentPrice.getPaymentRate().toString()));
 		} else {
 			currentPriceLabel.setText(MilkPriceJournalConstants.CURRENT_PRICE_DEFAULT);
@@ -182,9 +182,9 @@ public class MilkPriceJournalController extends BasicDirectoryController<MemberP
 
 	/**
 	 * Gets the current milk price.
-	 * 
+	 *
 	 * Note: (TODO) we may want to cache this...
-	 * 
+	 *
 	 * @return
 	 */
 	private MemberPayment getCurrentPrice() {
@@ -222,9 +222,10 @@ public class MilkPriceJournalController extends BasicDirectoryController<MemberP
 	 * FIXME
 	 */
 	private Employee getUser() {
-		IPrincipal principal = PrincipalManager.getInstance().getPrincipal();
-		if (principal instanceof EmployeePrincipal)
-			return(((EmployeePrincipal) principal).getEmployee());
+		final IPrincipal principal = PrincipalManager.getInstance().getPrincipal();
+		if (principal instanceof EmployeePrincipal) {
+			return ((EmployeePrincipal) principal).getEmployee();
+		}
 		return null;
 	}
 
@@ -233,7 +234,7 @@ public class MilkPriceJournalController extends BasicDirectoryController<MemberP
 	 */
 	@Override
 	protected void resetFilterConditions() {
-		Calendar now = Calendar.getInstance();
+		final Calendar now = Calendar.getInstance();
 		now.roll(Calendar.YEAR, false);
 		filterBean.setStartDate(now.getTime());
 		filterBean.setEndDate(new Date());

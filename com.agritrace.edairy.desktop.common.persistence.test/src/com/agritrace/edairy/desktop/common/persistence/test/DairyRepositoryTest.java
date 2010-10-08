@@ -1,6 +1,7 @@
 package com.agritrace.edairy.desktop.common.persistence.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.junit.Before;
@@ -17,7 +18,7 @@ import com.google.inject.Scopes;
 
 public class DairyRepositoryTest {
 	private IMemberRepository repo;
-	
+
 	static class TestModule extends AbstractModule {
 		@Override
 		protected void configure() {
@@ -27,17 +28,17 @@ public class DairyRepositoryTest {
 			bind(HsqlDbDataStoreProvider.class).in(Scopes.SINGLETON);
 		}
 	}
-	
+
 	@Before
 	public void setUp() {
 		repo = Guice.createInjector(new TestModule()).getInstance(IMemberRepository.class);
 	}
 
-	@Test 
+	@Test
 	public void testEmptyRepo() {
 		assertEquals(0, repo.all().size());
 	}
-	
+
 	@Test
 	public void testAccountForMemberNoQuery() throws Exception {
 		System.err.println("RUNNING");

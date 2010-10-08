@@ -19,14 +19,15 @@ public class ContainerValidator {
 
 	/**
 	 * Validates a ridgetContainer by analyzing error/mandatory markers.
-	 * 
+	 *
 	 * @return a list of invalid ridgets, or null if no errors.
 	 */
 	public static Collection<IMarkableRidget> validateContainer(IRidgetContainer container) {
-		Collection<IMarkableRidget> errorRidgets = new LinkedList<IMarkableRidget>();
+		final Collection<IMarkableRidget> errorRidgets = new LinkedList<IMarkableRidget>();
 		for (final IRidget test : container.getRidgets()) {
-			if (!(test instanceof IMarkableRidget))
+			if (!(test instanceof IMarkableRidget)) {
 				continue;
+			}
 
 			final IMarkableRidget markable = (IMarkableRidget) test;
 
@@ -47,9 +48,9 @@ public class ContainerValidator {
 	}
 
 	private static void clearSelfRemovingErrorMarkers(IMarkableRidget markable) {
-		Collection<? extends IMarker> markers = markable
+		final Collection<? extends IMarker> markers = markable
 				.getMarkersOfType(ContainerValidator.MandatoryErrorMarker.class);
-		for (IMarker marker : markers) {
+		for (final IMarker marker : markers) {
 			markable.removeMarker(marker);
 		}
 	}

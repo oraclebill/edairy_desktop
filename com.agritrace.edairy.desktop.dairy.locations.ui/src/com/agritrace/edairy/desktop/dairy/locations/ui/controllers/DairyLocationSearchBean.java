@@ -28,7 +28,7 @@ public class DairyLocationSearchBean extends AbstractBean {
 		return routeSearchValue;
 	}
 
-	
+
 
 	public void setFunctionSearchValue(List<DairyFunction> functionSearchValues) {
 		final Object oldValue = this.functionSearchValues;
@@ -42,5 +42,5 @@ public class DairyLocationSearchBean extends AbstractBean {
 		firePropertyChanged(PROP_ROUTE, oldValue, routeSearchValue);
 	}
 
-	
+
 }

@@ -47,7 +47,7 @@ public class VehicleLogDirectoryViewController extends BasicDirectoryController<
 		localDairy = dairyRepository.getLocalDairy();
 		setEClass(DairyPackage.Literals.VEHICLE);
 		setRepository(this.vehicleRepository = vehicleRepository);
-	
+
 		addTableColumn("Log Book Number", DairyPackage.Literals.VEHICLE__LOG_BOOK_NUMBER);
 		addTableColumn("VIN Nubmer", DairyPackage.Literals.VEHICLE__REGISTRATION_NUMBER);
 		addTableColumn("Type", DairyPackage.Literals.VEHICLE__TYPE);
@@ -60,23 +60,23 @@ public class VehicleLogDirectoryViewController extends BasicDirectoryController<
 
 	@Override
 	protected void configureFilterRidgets() {
-		
+
 		driverCombo = getRidget(IComboRidget.class,
 				VehicleLogDetailBindConstants.BIND_ID_DRIVER_NAME);
 		driverCombo.bindToModel(new WritableList(dairyRepository.employeesByPosition("Driver"), Employee.class),
 				Employee.class, "getFamilyName",BeansObservables.observeValue(searchBean, "driver"));
 		driverCombo.updateFromModel();
-		
+
 		vehicleTypeCombo = getRidget(IComboRidget.class,VehicleLogDetailBindConstants.BIND_ID_VEHICLE_TYPE);
 		vehicleTypeCombo.bindToModel(new WritableList(VehicleType.getValues(), String.class), String.class, null,
 				BeansObservables.observeValue(searchBean, "type"));
 		vehicleTypeCombo.updateFromModel();
-	
+
 	}
 
 	/**
 	 * Create new model while creating a new record
-	 * 
+	 *
 	 * @return
 	 */
 	@Override
@@ -92,7 +92,7 @@ public class VehicleLogDirectoryViewController extends BasicDirectoryController<
 		final List<Vehicle> allVehicles =  vehicleRepository.all();
 		System.err.println("allVehicles: " + allVehicles);
 		for (final Vehicle v: allVehicles) {
-			if ((searchBean.getDriver() == null || MatchUtil.matchEquals(searchBean.getDriver().getPersonId(),v.getDriver().getPersonId())) 
+			if ((searchBean.getDriver() == null || MatchUtil.matchEquals(searchBean.getDriver().getPersonId(),v.getDriver().getPersonId()))
 				&&(searchBean.getType() == null || MatchUtil.matchContains(searchBean.getType(),v.getType()))	){
 				filtered.add(v);
 			}
@@ -103,7 +103,7 @@ public class VehicleLogDirectoryViewController extends BasicDirectoryController<
 
 	@Override
 	protected RecordDialog<Vehicle> getRecordDialog(Shell shell) {
-		VehicleEditDialog dialog = editDialogProvider.get();
+		final VehicleEditDialog dialog = editDialogProvider.get();
 		dialog.setTitle("Edit Vehicle Information");
 		return dialog;
 	}
@@ -114,7 +114,7 @@ public class VehicleLogDirectoryViewController extends BasicDirectoryController<
 		vehicleTypeCombo.setSelection(vehicleTypeCombo.getEmptySelectionItem());
 	}
 
-	
+
 	@Override
 	protected void createEntity(Vehicle newEntity) {
 		localDairy.getVehicles().add(newEntity);

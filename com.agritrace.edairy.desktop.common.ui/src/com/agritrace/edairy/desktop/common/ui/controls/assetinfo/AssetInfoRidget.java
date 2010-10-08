@@ -25,7 +25,7 @@ public class AssetInfoRidget extends AbstractCompositeRidget implements IAssetIn
 
 	@Override
 	public void configureRidgets() {
-		
+
 		dateAcquiredText = getRidget(IDateTimeRidget.class,
 				AssetInfo.BIND_ID_ASSET_DATE_ACQUIRED);
 		dateAcquiredText.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
@@ -49,7 +49,7 @@ public class AssetInfoRidget extends AbstractCompositeRidget implements IAssetIn
 				AssetInfo.BIND_ID_ASSET_WITNESS_DISPOSAL);
 		disposalWitness.setDirectWriting(true);
 
-		
+
 	}
 
 	@Override
@@ -65,19 +65,19 @@ public class AssetInfoRidget extends AbstractCompositeRidget implements IAssetIn
 		modelObject = observableValue;
 		dateAcquiredText.bindToModel(
 				PojoObservables.observeDetailValue(modelObject, DairyPackage.Literals.ASSET__DATE_ACQUIRED.getName(), Date.class));
-		
+
 		disposalWitness.bindToModel(
 				PojoObservables.observeDetailValue(modelObject, DairyPackage.Literals.ASSET__DISPOSAL_WITNESS.getName(), String.class));
-		
+
 		disposalReason.bindToModel(
 				PojoObservables.observeDetailValue(modelObject, DairyPackage.Literals.ASSET__DISPOSAL_REASON.getName(), String.class));
-		
+
 		disposalDate.bindToModel(
 				PojoObservables.observeDetailValue(modelObject, DairyPackage.Literals.ASSET__DATE_DISPOSED.getName(), Date.class));
-		
+
 		damageDesText.bindToModel(
 				PojoObservables.observeDetailValue(modelObject, DairyPackage.Literals.ASSET__DAMAGE_DESCRIPTION.getName(), String.class));
-		
+
 		damangeDateText.bindToModel(
 				PojoObservables.observeDetailValue(modelObject, DairyPackage.Literals.ASSET__DAMAGE_DATE.getName(), Date.class));
 	}
@@ -91,7 +91,7 @@ public class AssetInfoRidget extends AbstractCompositeRidget implements IAssetIn
 		damangeDateText.updateFromModel();
 		dateAcquiredText.updateFromModel();
 	}
-	
+
 	@Override
 	public void bindToModel(Object valueHolder, String valuePropertyName) {
 		throw new UnsupportedOperationException();
@@ -106,5 +106,5 @@ public class AssetInfoRidget extends AbstractCompositeRidget implements IAssetIn
 	public void setModelToUIControlConverter(IConverter converter) {
 		throw new UnsupportedOperationException();
 	}
-	
+
 }

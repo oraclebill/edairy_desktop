@@ -13,9 +13,9 @@ import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryContr
 
 /**
  * Record List Dialog
- * 
+ *
  * @author Hui(Spark) Wan
- * 
+ *
  */
 public abstract class RecordDialog<T extends EObject> extends BaseDialogView
 		implements DialogConstants {
@@ -33,7 +33,7 @@ public abstract class RecordDialog<T extends EObject> extends BaseDialogView
 	/**
 	 * Gets dialog style which will indicate the dialog is a new/view/edit
 	 * dialog
-	 * 
+	 *
 	 * @return RecordDialog.DIALOG_STYLE_NEW or RecordDialog.DIALOG_STYLE_VIEW
 	 *         or RecordDialog.DIALOG_STYLE_EDIT
 	 */
@@ -44,7 +44,7 @@ public abstract class RecordDialog<T extends EObject> extends BaseDialogView
 	/**
 	 * Gets the selected object in table list. If user doesn't select any row,
 	 * this object will be null
-	 * 
+	 *
 	 * @return
 	 */
 	public T getSelectedEObject() {
@@ -53,7 +53,7 @@ public abstract class RecordDialog<T extends EObject> extends BaseDialogView
 
 	/**
 	 * Create UI components in this dialog
-	 * 
+	 *
 	 * @param comp
 	 *            Parent composite
 	 */

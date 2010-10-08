@@ -21,8 +21,8 @@ import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
@@ -184,15 +184,15 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 
 	private List<CollectionJournalLine> filterDate(List<CollectionJournalLine> inputRecords, Date startDate,
 			Date endDate) {
-		DateFilterUtil<CollectionJournalLine> filterUtil = new DateFilterUtil<CollectionJournalLine>(
+		final DateFilterUtil<CollectionJournalLine> filterUtil = new DateFilterUtil<CollectionJournalLine>(
 				CollectionJournalLine.class, DairyPackage.Literals.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL,
 				DairyPackage.Literals.COLLECTION_GROUP__JOURNAL_DATE);
-		return filterUtil.filterDate(inputRecords, startDate, endDate);		
+		return filterUtil.filterDate(inputRecords, startDate, endDate);
 	}
 
 	private List<CollectionJournalLine> filterNPR() {
 		final List<CollectionJournalLine> filteredRecords = new ArrayList<CollectionJournalLine>();
-		if ((records == null) || records.isEmpty()) {
+		if (records == null || records.isEmpty()) {
 			return filteredRecords;
 		}
 		final List<EObjectCondition> condtions = new ArrayList<EObjectCondition>();
@@ -257,7 +257,7 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 		if (membership != null) {
 			final String selectedMemberId = "" + membership.getMemberId();
 			final EObject container = membership.eContainer();
-			if ((container != null) && (container instanceof Dairy)) {
+			if (container != null && container instanceof Dairy) {
 				final List<CollectionGroup> allRecords = ((Dairy) container).getCollectionJournals();
 				for (final CollectionGroup j : allRecords) {
 					final List<CollectionJournalLine> jEntries = j.getJournalEntries();

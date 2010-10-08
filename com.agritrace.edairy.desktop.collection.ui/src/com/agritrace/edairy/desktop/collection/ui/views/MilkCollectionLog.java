@@ -27,25 +27,25 @@ public class MilkCollectionLog extends AbstractDirectoryView {
 	protected void createButtonPanel(Composite parent, String viewButtonId, String addButtonId) {
 		final Composite buttonsPanel = UIControlsFactory.createComposite(parent, SWT.NULL);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(buttonsPanel);
-		
+
 		// create three sections - center section is filler
-		Composite leftPanel = UIControlsFactory.createComposite(buttonsPanel);
-		Control filler = UIControlsFactory.createLabel(buttonsPanel, "");
-		Composite rightPanel = UIControlsFactory.createComposite(buttonsPanel);
-		
+		final Composite leftPanel = UIControlsFactory.createComposite(buttonsPanel);
+		final Control filler = UIControlsFactory.createLabel(buttonsPanel, "");
+		final Composite rightPanel = UIControlsFactory.createComposite(buttonsPanel);
+
 		UIControlsFactory.createButton(rightPanel, "View Journal", viewButtonId);
 		UIControlsFactory.createButton(rightPanel, "Post Journal Details", addButtonId);
-		
+
 		UIControlsFactory.createButton(leftPanel, "Import From Scale",  "import-file-button");
 		UIControlsFactory.createButton(leftPanel, "Post Journal Totals",  "log-journals-button");
-		
+
 		buttonsPanel.setLayout(new GridLayout(3, false));
-		
+
 		leftPanel.setLayout(new RowLayout(SWT.HORIZONTAL));
 		leftPanel.setLayoutData(GridDataFactory.swtDefaults().align(SWT.LEFT, SWT.BOTTOM).create());
-		
+
 		filler.setLayoutData(GridDataFactory.fillDefaults().grab(true,false).create());
-		
+
 		rightPanel.setLayout(new RowLayout(SWT.HORIZONTAL));
 		rightPanel.setLayoutData(GridDataFactory.swtDefaults().align(SWT.RIGHT, SWT.BOTTOM).create());
 

@@ -6,6 +6,14 @@
  */
 package com.agritrace.edairy.desktop.common.model.base.impl;
 
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import com.agritrace.edairy.desktop.common.model.base.Audited;
 import com.agritrace.edairy.desktop.common.model.base.Company;
 import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
@@ -24,31 +32,14 @@ import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
 import com.agritrace.edairy.desktop.common.model.base.StatutoryLocation;
 import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
 import com.agritrace.edairy.desktop.common.model.base.Versioned;
-
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
-
 import com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountPackageImpl;
-
 import com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl;
-
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
-
 import com.agritrace.edairy.desktop.common.model.requests.impl.RequestsPackageImpl;
-
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
-
 import com.agritrace.edairy.desktop.common.model.tracking.impl.TrackingPackageImpl;
-
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-
-import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -218,7 +209,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link ModelPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -229,18 +220,20 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public static ModelPackage init() {
-		if (isInited) return (ModelPackage)EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
+		if (isInited) {
+			return (ModelPackage)EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
+		}
 
 		// Obtain or create and register package
-		ModelPackageImpl theModelPackage = (ModelPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ModelPackageImpl());
+		final ModelPackageImpl theModelPackage = (ModelPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ModelPackageImpl());
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		DairyPackageImpl theDairyPackage = (DairyPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DairyPackage.eNS_URI) instanceof DairyPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DairyPackage.eNS_URI) : DairyPackage.eINSTANCE);
-		AccountPackageImpl theAccountPackage = (AccountPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(AccountPackage.eNS_URI) instanceof AccountPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(AccountPackage.eNS_URI) : AccountPackage.eINSTANCE);
-		TrackingPackageImpl theTrackingPackage = (TrackingPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TrackingPackage.eNS_URI) instanceof TrackingPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TrackingPackage.eNS_URI) : TrackingPackage.eINSTANCE);
-		RequestsPackageImpl theRequestsPackage = (RequestsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(RequestsPackage.eNS_URI) instanceof RequestsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(RequestsPackage.eNS_URI) : RequestsPackage.eINSTANCE);
+		final DairyPackageImpl theDairyPackage = (DairyPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DairyPackage.eNS_URI) instanceof DairyPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DairyPackage.eNS_URI) : DairyPackage.eINSTANCE);
+		final AccountPackageImpl theAccountPackage = (AccountPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(AccountPackage.eNS_URI) instanceof AccountPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(AccountPackage.eNS_URI) : AccountPackage.eINSTANCE);
+		final TrackingPackageImpl theTrackingPackage = (TrackingPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TrackingPackage.eNS_URI) instanceof TrackingPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TrackingPackage.eNS_URI) : TrackingPackage.eINSTANCE);
+		final RequestsPackageImpl theRequestsPackage = (RequestsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(RequestsPackage.eNS_URI) instanceof RequestsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(RequestsPackage.eNS_URI) : RequestsPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theModelPackage.createPackageContents();
@@ -259,7 +252,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		// Mark meta-data to indicate it can't be changed
 		theModelPackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(ModelPackage.eNS_URI, theModelPackage);
 		return theModelPackage;
@@ -919,7 +912,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public void createPackageContents() {
-		if (isCreated) return;
+		if (isCreated) {
+			return;
+		}
 		isCreated = true;
 
 		// Create classes and their features
@@ -1025,7 +1020,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	public void initializePackageContents() {
-		if (isInitialized) return;
+		if (isInitialized) {
+			return;
+		}
 		isInitialized = true;
 
 		// Initialize package
@@ -1166,111 +1163,111 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		
+		final String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";
 		addAnnotation
-		  (mapLocationEClass, 
-		   source, 
+		  (mapLocationEClass,
+		   source,
 		   new String[] {
 			 "name", "MapLocation",
 			 "kind", "elementOnly"
-		   });			
+		   });
 		addAnnotation
-		  (postalLocationEClass, 
-		   source, 
+		  (postalLocationEClass,
+		   source,
 		   new String[] {
 			 "name", "PostalLocation",
 			 "kind", "elementOnly"
-		   });			
+		   });
 		addAnnotation
-		  (statutoryLocationEClass, 
-		   source, 
+		  (statutoryLocationEClass,
+		   source,
 		   new String[] {
 			 "name", "StatutoryLocation",
 			 "kind", "elementOnly"
-		   });			
+		   });
 		addAnnotation
-		  (auditedEClass, 
-		   source, 
+		  (auditedEClass,
+		   source,
 		   new String[] {
 			 "name", "Audited",
 			 "kind", "elementOnly"
-		   });			
+		   });
 		addAnnotation
-		  (getAudited_VoidDate(), 
-		   source, 
+		  (getAudited_VoidDate(),
+		   source,
 		   new String[] {
 			 "kind", "element"
-		   });		
+		   });
 		addAnnotation
-		  (versionedEClass, 
-		   source, 
+		  (versionedEClass,
+		   source,
 		   new String[] {
 			 "name", "Versioned",
 			 "kind", "elementOnly"
-		   });			
+		   });
 		addAnnotation
-		  (contactableEClass, 
-		   source, 
+		  (contactableEClass,
+		   source,
 		   new String[] {
 			 "name", "Contactable",
 			 "kind", "elementOnly"
-		   });			
+		   });
 		addAnnotation
-		  (getPerson_Location(), 
-		   source, 
+		  (getPerson_Location(),
+		   source,
 		   new String[] {
 			 "name", "location",
 			 "kind", "elementOnly"
-		   });			
+		   });
 		addAnnotation
-		  (companyEClass, 
-		   source, 
+		  (companyEClass,
+		   source,
 		   new String[] {
 			 "name", "Company",
 			 "kind", "elementOnly"
-		   });			
+		   });
 		addAnnotation
-		  (descriptiveLocationEClass, 
-		   source, 
+		  (descriptiveLocationEClass,
+		   source,
 		   new String[] {
 			 "name", "DescriptiveLocation",
 			 "kind", "elementOnly"
-		   });			
+		   });
 		addAnnotation
-		  (getLocation_PostalLocation(), 
-		   source, 
+		  (getLocation_PostalLocation(),
+		   source,
 		   new String[] {
 			 "name", "postalLocation",
 			 "kind", "elementOnly"
-		   });			
+		   });
 		addAnnotation
-		  (getLocation_MapLocation(), 
-		   source, 
+		  (getLocation_MapLocation(),
+		   source,
 		   new String[] {
 			 "name", "mapLocation",
 			 "kind", "elementOnly"
-		   });			
+		   });
 		addAnnotation
-		  (getLocation_StatutoryLocation(), 
-		   source, 
+		  (getLocation_StatutoryLocation(),
+		   source,
 		   new String[] {
 			 "name", "statutoryLocation",
 			 "kind", "elementOnly"
-		   });			
+		   });
 		addAnnotation
-		  (getLocation_DescriptiveLocation(), 
-		   source, 
+		  (getLocation_DescriptiveLocation(),
+		   source,
 		   new String[] {
 			 "name", "descriptiveLocation",
 			 "kind", "elementOnly"
-		   });			
+		   });
 		addAnnotation
-		  (getImageEntry_ImageData(), 
-		   source, 
+		  (getImageEntry_ImageData(),
+		   source,
 		   new String[] {
 			 "name", "imageData",
 			 "kind", "elementOnly"
-		   });	
+		   });
 	}
 
 	/**
@@ -1280,88 +1277,88 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	protected void createTeneoAnnotations() {
-		String source = "teneo.jpa";			
+		final String source = "teneo.jpa";
 		addAnnotation
-		  (mapLocationEClass, 
-		   source, 
+		  (mapLocationEClass,
+		   source,
 		   new String[] {
 			 "appinfo", "@Embeddable"
-		   });			
+		   });
 		addAnnotation
-		  (postalLocationEClass, 
-		   source, 
+		  (postalLocationEClass,
+		   source,
 		   new String[] {
 			 "appinfo", "@Embeddable"
-		   });			
+		   });
 		addAnnotation
-		  (statutoryLocationEClass, 
-		   source, 
+		  (statutoryLocationEClass,
+		   source,
 		   new String[] {
 			 "appinfo", "@Embeddable"
-		   });			
+		   });
 		addAnnotation
-		  (auditedEClass, 
-		   source, 
+		  (auditedEClass,
+		   source,
 		   new String[] {
 			 "appinfo", "@Embeddable"
-		   });				
+		   });
 		addAnnotation
-		  (versionedEClass, 
-		   source, 
+		  (versionedEClass,
+		   source,
 		   new String[] {
 			 "appinfo", "@MappedSuperclass"
-		   });			
+		   });
 		addAnnotation
-		  (contactableEClass, 
-		   source, 
+		  (contactableEClass,
+		   source,
 		   new String[] {
 			 "appinfo", "@MappedSuperclass"
-		   });			
+		   });
 		addAnnotation
-		  (getPerson_Location(), 
-		   source, 
+		  (getPerson_Location(),
+		   source,
 		   new String[] {
 			 "appinfo", "@OneToOne"
-		   });			
+		   });
 		addAnnotation
-		  (companyEClass, 
-		   source, 
+		  (companyEClass,
+		   source,
 		   new String[] {
 			 "appinfo", "@MappedSuperclass"
-		   });			
+		   });
 		addAnnotation
-		  (descriptiveLocationEClass, 
-		   source, 
+		  (descriptiveLocationEClass,
+		   source,
 		   new String[] {
 			 "appinfo", "@Embeddable"
-		   });			
+		   });
 		addAnnotation
-		  (getLocation_PostalLocation(), 
-		   source, 
+		  (getLocation_PostalLocation(),
+		   source,
 		   new String[] {
 			 "appinfo", "@Embedded"
-		   });			
+		   });
 		addAnnotation
-		  (getLocation_MapLocation(), 
-		   source, 
+		  (getLocation_MapLocation(),
+		   source,
 		   new String[] {
 			 "appinfo", "@Embedded"
-		   });			
+		   });
 		addAnnotation
-		  (getLocation_StatutoryLocation(), 
-		   source, 
+		  (getLocation_StatutoryLocation(),
+		   source,
 		   new String[] {
 			 "appinfo", "@Embedded"
-		   });			
+		   });
 		addAnnotation
-		  (getLocation_DescriptiveLocation(), 
-		   source, 
+		  (getLocation_DescriptiveLocation(),
+		   source,
 		   new String[] {
 			 "appinfo", "@Embedded"
-		   });			
+		   });
 		addAnnotation
-		  (getImageEntry_ImageData(), 
-		   source, 
+		  (getImageEntry_ImageData(),
+		   source,
 		   new String[] {
 			 "appinfo", "@Lob\n@Column(length=1048576)"
 		   });

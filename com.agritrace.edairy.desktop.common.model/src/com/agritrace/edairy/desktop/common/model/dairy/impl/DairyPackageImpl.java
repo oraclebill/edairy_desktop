@@ -6,10 +6,16 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
-
 import com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl;
-
 import com.agritrace.edairy.desktop.common.model.dairy.Asset;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType;
@@ -41,27 +47,12 @@ import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.Trip;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
-
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
-
 import com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountPackageImpl;
-
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
-
 import com.agritrace.edairy.desktop.common.model.requests.impl.RequestsPackageImpl;
-
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
-
 import com.agritrace.edairy.desktop.common.model.tracking.impl.TrackingPackageImpl;
-
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-
-import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -308,7 +299,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link DairyPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -319,18 +310,20 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	public static DairyPackage init() {
-		if (isInited) return (DairyPackage)EPackage.Registry.INSTANCE.getEPackage(DairyPackage.eNS_URI);
+		if (isInited) {
+			return (DairyPackage)EPackage.Registry.INSTANCE.getEPackage(DairyPackage.eNS_URI);
+		}
 
 		// Obtain or create and register package
-		DairyPackageImpl theDairyPackage = (DairyPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof DairyPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new DairyPackageImpl());
+		final DairyPackageImpl theDairyPackage = (DairyPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof DairyPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new DairyPackageImpl());
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		AccountPackageImpl theAccountPackage = (AccountPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(AccountPackage.eNS_URI) instanceof AccountPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(AccountPackage.eNS_URI) : AccountPackage.eINSTANCE);
-		ModelPackageImpl theModelPackage = (ModelPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) : ModelPackage.eINSTANCE);
-		TrackingPackageImpl theTrackingPackage = (TrackingPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TrackingPackage.eNS_URI) instanceof TrackingPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TrackingPackage.eNS_URI) : TrackingPackage.eINSTANCE);
-		RequestsPackageImpl theRequestsPackage = (RequestsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(RequestsPackage.eNS_URI) instanceof RequestsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(RequestsPackage.eNS_URI) : RequestsPackage.eINSTANCE);
+		final AccountPackageImpl theAccountPackage = (AccountPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(AccountPackage.eNS_URI) instanceof AccountPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(AccountPackage.eNS_URI) : AccountPackage.eINSTANCE);
+		final ModelPackageImpl theModelPackage = (ModelPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) : ModelPackage.eINSTANCE);
+		final TrackingPackageImpl theTrackingPackage = (TrackingPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TrackingPackage.eNS_URI) instanceof TrackingPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TrackingPackage.eNS_URI) : TrackingPackage.eINSTANCE);
+		final RequestsPackageImpl theRequestsPackage = (RequestsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(RequestsPackage.eNS_URI) instanceof RequestsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(RequestsPackage.eNS_URI) : RequestsPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theDairyPackage.createPackageContents();
@@ -349,7 +342,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		// Mark meta-data to indicate it can't be changed
 		theDairyPackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(DairyPackage.eNS_URI, theDairyPackage);
 		return theDairyPackage;
@@ -2242,7 +2235,9 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	public void createPackageContents() {
-		if (isCreated) return;
+		if (isCreated) {
+			return;
+		}
 		isCreated = true;
 
 		// Create classes and their features
@@ -2496,7 +2491,9 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	public void initializePackageContents() {
-		if (isInitialized) return;
+		if (isInitialized) {
+			return;
+		}
 		isInitialized = true;
 
 		// Initialize package
@@ -2505,10 +2502,10 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		AccountPackage theAccountPackage = (AccountPackage)EPackage.Registry.INSTANCE.getEPackage(AccountPackage.eNS_URI);
-		ModelPackage theModelPackage = (ModelPackage)EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
-		TrackingPackage theTrackingPackage = (TrackingPackage)EPackage.Registry.INSTANCE.getEPackage(TrackingPackage.eNS_URI);
-		RequestsPackage theRequestsPackage = (RequestsPackage)EPackage.Registry.INSTANCE.getEPackage(RequestsPackage.eNS_URI);
+		final AccountPackage theAccountPackage = (AccountPackage)EPackage.Registry.INSTANCE.getEPackage(AccountPackage.eNS_URI);
+		final ModelPackage theModelPackage = (ModelPackage)EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
+		final TrackingPackage theTrackingPackage = (TrackingPackage)EPackage.Registry.INSTANCE.getEPackage(TrackingPackage.eNS_URI);
+		final RequestsPackage theRequestsPackage = (RequestsPackage)EPackage.Registry.INSTANCE.getEPackage(RequestsPackage.eNS_URI);
 
 		// Add subpackages
 		getESubpackages().add(theAccountPackage);
@@ -2815,84 +2812,84 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		
+		final String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";
 		addAnnotation
-		  (getVehicle_AssetInfo(), 
-		   source, 
+		  (getVehicle_AssetInfo(),
+		   source,
 		   new String[] {
 			 "name", "assetInfo",
 			 "kind", "elementOnly"
-		   });			
+		   });
 		addAnnotation
-		  (getEmployee_Id(), 
-		   source, 
+		  (getEmployee_Id(),
+		   source,
 		   new String[] {
 			 "name", "id",
 			 "kind", "elementOnly"
-		   });				
+		   });
 		addAnnotation
-		  (getDairyLocation_Id(), 
-		   source, 
+		  (getDairyLocation_Id(),
+		   source,
 		   new String[] {
 			 "name", "Id",
 			 "kind", "elementOnly"
-		   });			
+		   });
 		addAnnotation
-		  (getRoute_Id(), 
-		   source, 
+		  (getRoute_Id(),
+		   source,
 		   new String[] {
 			 "name", "Id",
 			 "kind", "elementOnly"
-		   });			
+		   });
 		addAnnotation
-		  (getTrip_TripId(), 
-		   source, 
+		  (getTrip_TripId(),
+		   source,
 		   new String[] {
 			 "name", "tripId",
 			 "kind", "elementOnly"
-		   });			
+		   });
 		addAnnotation
-		  (getDairy_Version(), 
-		   source, 
+		  (getDairy_Version(),
+		   source,
 		   new String[] {
 			 "name", "version",
 			 "kind", "elementOnly"
-		   });			
+		   });
 		addAnnotation
-		  (getMembership_MemberId(), 
-		   source, 
+		  (getMembership_MemberId(),
+		   source,
 		   new String[] {
 			 "name", "memberId",
 			 "kind", "elementOnly"
-		   });		
+		   });
 		addAnnotation
-		  (assetEClass, 
-		   source, 
+		  (assetEClass,
+		   source,
 		   new String[] {
 			 "name", "Asset",
 			 "kind", "elementOnly"
-		   });			
+		   });
 		addAnnotation
-		  (getDairyContainer_AssetInfo(), 
-		   source, 
+		  (getDairyContainer_AssetInfo(),
+		   source,
 		   new String[] {
 			 "name", "assetInfo",
 			 "kind", "elementOnly"
-		   });			
+		   });
 		addAnnotation
-		  (getSupplier_Id(), 
-		   source, 
+		  (getSupplier_Id(),
+		   source,
 		   new String[] {
 			 "name", "id",
 			 "kind", "elementOnly"
-		   });		
+		   });
 		addAnnotation
-		  (getCustomer_Id(), 
-		   source, 
+		  (getCustomer_Id(),
+		   source,
 		   new String[] {
 			 "name", "id",
 			 "kind", "elementOnly"
-		   });			
+		   });
 	}
 
 	/**
@@ -2902,76 +2899,76 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	protected void createTeneoAnnotations() {
-		String source = "teneo.jpa";			
+		final String source = "teneo.jpa";
 		addAnnotation
-		  (getVehicle_AssetInfo(), 
-		   source, 
+		  (getVehicle_AssetInfo(),
+		   source,
 		   new String[] {
 			 "appinfo", "@Embedded"
-		   });			
+		   });
 		addAnnotation
-		  (getEmployee_Username(), 
-		   source, 
+		  (getEmployee_Username(),
+		   source,
 		   new String[] {
 			 "appinfo", "@Column(unique=\"true\")"
-		   });		
+		   });
 		addAnnotation
-		  (getEmployee_Password(), 
-		   source, 
+		  (getEmployee_Password(),
+		   source,
 		   new String[] {
 			 "appinfo", "@Column(length=64)"
-		   });			
+		   });
 		addAnnotation
-		  (getDairyLocation_Id(), 
-		   source, 
+		  (getDairyLocation_Id(),
+		   source,
 		   new String[] {
 			 "appinfo", "@Id\n@GeneratedValue"
-		   });			
+		   });
 		addAnnotation
-		  (getRoute_Id(), 
-		   source, 
+		  (getRoute_Id(),
+		   source,
 		   new String[] {
 			 "appinfo", "@Id\n@GeneratedValue"
-		   });			
+		   });
 		addAnnotation
-		  (getTrip_TripId(), 
-		   source, 
+		  (getTrip_TripId(),
+		   source,
 		   new String[] {
 			 "appinfo", "@Id\n@GeneratedValue"
-		   });			
+		   });
 		addAnnotation
-		  (getDairy_Version(), 
-		   source, 
+		  (getDairy_Version(),
+		   source,
 		   new String[] {
 			 "appinfo", "@Version"
-		   });				
+		   });
 		addAnnotation
-		  (assetEClass, 
-		   source, 
+		  (assetEClass,
+		   source,
 		   new String[] {
 			 "appinfo", "@Embeddable"
-		   });			
+		   });
 		addAnnotation
-		  (getDairyContainer_AssetInfo(), 
-		   source, 
+		  (getDairyContainer_AssetInfo(),
+		   source,
 		   new String[] {
 			 "appinfo", "@Embedded"
-		   });				
+		   });
 		addAnnotation
-		  (getRole_Name(), 
-		   source, 
+		  (getRole_Name(),
+		   source,
 		   new String[] {
 			 "appinfo", "@Column(unique=\"true\")"
-		   });		
+		   });
 		addAnnotation
-		  (getPermissionNamespace_Name(), 
-		   source, 
+		  (getPermissionNamespace_Name(),
+		   source,
 		   new String[] {
 			 "appinfo", "@Column(unique=\"true\")"
-		   });		
+		   });
 		addAnnotation
-		  (getCollectionSession_Code(), 
-		   source, 
+		  (getCollectionSession_Code(),
+		   source,
 		   new String[] {
 			 "appinfo", "@Column(unique=\"true\")"
 		   });

@@ -82,7 +82,7 @@ public class CustomerDirectoryController extends BasicDirectoryController<Custom
 
 	/**
 	 * Create new model while createing a new record
-	 * 
+	 *
 	 * @return
 	 */
 	@Override
@@ -117,7 +117,7 @@ public class CustomerDirectoryController extends BasicDirectoryController<Custom
 
 	@Override
 	protected RecordDialog<Customer> getRecordDialog(Shell shell) {
-		CustomerEditDialog dialog = new CustomerEditDialog(shell);
+		final CustomerEditDialog dialog = new CustomerEditDialog(shell);
 		dialog.setTitle("Edit Customer");
 		return dialog;
 	}

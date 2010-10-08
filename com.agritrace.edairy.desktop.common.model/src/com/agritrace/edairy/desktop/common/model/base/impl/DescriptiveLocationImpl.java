@@ -6,15 +6,13 @@
  */
 package com.agritrace.edairy.desktop.common.model.base.impl;
 
-import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
-import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
+import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -95,6 +93,7 @@ public class DescriptiveLocationImpl extends EObjectImpl implements DescriptiveL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDirections() {
 		return directions;
 	}
@@ -104,11 +103,13 @@ public class DescriptiveLocationImpl extends EObjectImpl implements DescriptiveL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDirections(String newDirections) {
-		String oldDirections = directions;
+		final String oldDirections = directions;
 		directions = newDirections;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DESCRIPTIVE_LOCATION__DIRECTIONS, oldDirections, directions));
+		}
 	}
 
 	/**
@@ -116,6 +117,7 @@ public class DescriptiveLocationImpl extends EObjectImpl implements DescriptiveL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLandmarks() {
 		return landmarks;
 	}
@@ -125,11 +127,13 @@ public class DescriptiveLocationImpl extends EObjectImpl implements DescriptiveL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLandmarks(String newLandmarks) {
-		String oldLandmarks = landmarks;
+		final String oldLandmarks = landmarks;
 		landmarks = newLandmarks;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DESCRIPTIVE_LOCATION__LANDMARKS, oldLandmarks, landmarks));
+		}
 	}
 
 	/**
@@ -207,9 +211,11 @@ public class DescriptiveLocationImpl extends EObjectImpl implements DescriptiveL
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy()) {
+			return super.toString();
+		}
 
-		StringBuffer result = new StringBuffer(super.toString());
+		final StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (directions: ");
 		result.append(directions);
 		result.append(", landmarks: ");

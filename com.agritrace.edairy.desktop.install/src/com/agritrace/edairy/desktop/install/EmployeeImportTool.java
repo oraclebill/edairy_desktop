@@ -24,9 +24,9 @@ import com.google.inject.Inject;
 
 /**
  * Create a dairy configuration by importing excel data in standard format.
- * 
+ *
  * @author bjones
- * 
+ *
  */
 public class EmployeeImportTool extends AbstractImportTool {
 
@@ -51,58 +51,55 @@ public class EmployeeImportTool extends AbstractImportTool {
 			new Entry(NATIONAL_ID, ModelPackage.Literals.PERSON__NATIONAL_ID),
 			new Entry(NSSF_NUMBER, ModelPackage.Literals.PERSON__NSSF_NUMBER),
 			new Entry(NHIF_NUMBER, ModelPackage.Literals.PERSON__NHIF_NUMBER), };
-	
+
 	String[] expectedHeaders = { "employee id","given name","middle name","family name","job title","date started","national id","nssf number","nhif number" };
 
 	private List<Employee> empList;
 	Map<String, List<String[]>> errors;
-	private IProgressMonitor monitor;
 	private Map<String, Object> employeeCache;
-	
+
 	private final IDairyRepository dairyRepo;
-	
+
 	private Reader reader;
 	private int count = 0, errCount = 0;
 
 	@Inject
 	public EmployeeImportTool(final IDairyRepository dairyRepo) {
 		this.dairyRepo = dairyRepo;
-		
+
 	}
 
 	public void processFile(InputStream input, List<Employee> successes,
 			Map<String, List<String[]>> errors, IProgressMonitor monitor) throws IOException {
 		this.empList = successes;
 		this.errors = errors;
-		this.monitor = monitor;
-
 		reader = new BufferedReader(new InputStreamReader(input));
-		
-		Dairy dairy = dairyRepo.getLocalDairy();
+
+		final Dairy dairy = dairyRepo.getLocalDairy();
 		employeeCache = new HashMap<String, Object>();
-		for (Employee member : dairy.getEmployees()) {
+		for (final Employee member : dairy.getEmployees()) {
 			employeeCache.put(member.getId(), member);
 		}
 
-		CsvReader csvReader = new CsvReader(reader);
+		final CsvReader csvReader = new CsvReader(reader);
 		csvReader.readRecord();
-		String[] headers = csvReader.getValues();
+		final String[] headers = csvReader.getValues();
 		validateHeaders(headers);
 		while (csvReader.readRecord()) {
 			checkCancelled();
-			String[] values = csvReader.getValues();
+			final String[] values = csvReader.getValues();
 			try {
 				validateCurrentRecord(values);
-				Employee employee = DairyFactory.eINSTANCE.createEmployee();
+				final Employee employee = DairyFactory.eINSTANCE.createEmployee();
 				// EMFUtil.populate(employee);
-				for (Entry entry : fieldMap) {
-					String value = csvReader.get(entry.field);
+				for (final Entry entry : fieldMap) {
+					final String value = csvReader.get(entry.field);
 					employee.eSet(entry.feature, convert(entry.feature, value));
 				}
 				count++;
 				empList.add(employee);
 
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				errCount++;
 				doImportRecordFailed(csvReader.getValues(), e);
 			}
@@ -111,10 +108,11 @@ public class EmployeeImportTool extends AbstractImportTool {
 	}
 
 	protected void validateCurrentRecord(String[] values) {
-		String val = values[EMPLOYEE_ID];
-		if (val == null || val.trim().length() == 0)
+		final String val = values[EMPLOYEE_ID];
+		if (val == null || val.trim().length() == 0) {
 			throw new ValidationException("Record has no ID");
-		Object obj = employeeCache.get(val);
+		}
+		final Object obj = employeeCache.get(val);
 		if (obj instanceof Employee) {
 			throw new ValidationException("Employee ID already exists in database.");
 		}
@@ -124,6 +122,7 @@ public class EmployeeImportTool extends AbstractImportTool {
 		employeeCache.put(val, values);
 	}
 
+	@Override
 	protected void doImportRecordFailed(String[] values, Exception e) {
 		List<String[]> recList = errors.get(e.getMessage());
 		if (recList == null) {

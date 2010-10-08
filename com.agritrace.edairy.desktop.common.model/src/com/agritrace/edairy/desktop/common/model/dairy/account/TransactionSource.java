@@ -178,7 +178,7 @@ public enum TransactionSource implements Enumerator {
 	 */
 	public static TransactionSource get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			TransactionSource result = VALUES_ARRAY[i];
+			final TransactionSource result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -194,7 +194,7 @@ public enum TransactionSource implements Enumerator {
 	 */
 	public static TransactionSource getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			TransactionSource result = VALUES_ARRAY[i];
+			final TransactionSource result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -257,6 +257,7 @@ public enum TransactionSource implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getValue() {
 	  return value;
 	}
@@ -266,6 +267,7 @@ public enum TransactionSource implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 	  return name;
 	}
@@ -275,6 +277,7 @@ public enum TransactionSource implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLiteral() {
 	  return literal;
 	}
@@ -289,5 +292,5 @@ public enum TransactionSource implements Enumerator {
 	public String toString() {
 		return literal;
 	}
-	
+
 } //TransactionSource

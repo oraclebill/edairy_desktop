@@ -10,11 +10,12 @@ import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 
 public class TransactionSourceComposite extends Composite {
 	private static final String DEFAULT_LABEL_TEXT = "Transaction Source";
-	
+
 	private final boolean isMultipleChoice;
 	private final Label label;
 
@@ -69,5 +70,5 @@ public class TransactionSourceComposite extends Composite {
 	public void setLabelText(String string) {
 		label.setText(string);
 	}
-	
+
 }

@@ -49,17 +49,18 @@ public class PersistenceModule extends AbstractModule {
 		AccountPackage.eINSTANCE,
 		RequestsPackage.eINSTANCE
 	};
-	
+
 	private class HibernateRepositoryProvider implements Provider<IRepository<?>> {
-		private Class<?> klass;
-		
+		private final Class<?> klass;
+
 		@Inject
 		private Provider<Session> sessionProvider;
 
 		public HibernateRepositoryProvider(Class<?> klass) {
 			this.klass = klass;
 		}
-		
+
+		@Override
 		public IRepository<?> get() {
 			return new HibernateRepository<EObject>(sessionProvider) {
 				@Override
@@ -69,9 +70,9 @@ public class PersistenceModule extends AbstractModule {
 			};
 		}
 	}
-	
+
 	private static Map<Class<? extends EObject>, Class<? extends IRepository<? extends EObject>>> customRepositories;
-	
+
 	static {
 		customRepositories = new HashMap<Class<? extends EObject>, Class<? extends IRepository<? extends EObject>>>();
 		customRepositories.put(CollectionJournalLine.class, ICollectionJournalLineRepository.class);
@@ -81,32 +82,34 @@ public class PersistenceModule extends AbstractModule {
 		customRepositories.put(Farm.class, IFarmRepository.class);
 		customRepositories.put(Supplier.class, ISupplierRepository.class);
 	}
-	
+
 	@Override
 	protected void configure() {
 		bind(Session.class).toProvider(SessionProvider.class);
 		bind(SessionProvider.class).in(Scopes.SINGLETON);
 		bindDataStore();
-		
-		for (EPackage pkg: EPACKAGES) {
-			for (EClassifier klass: pkg.getEClassifiers()) {
+
+		for (final EPackage pkg: EPACKAGES) {
+			for (final EClassifier klass: pkg.getEClassifiers()) {
 				if (klass instanceof EClass) {
 					// We have to write all this just so we can @Inject IRepository<Foo> anywhere.
-					
+
 					@SuppressWarnings("unchecked")
+					final
 					Class<? extends EObject> instanceClass = (Class<? extends EObject>) klass.getInstanceClass();
-					
+
 					@SuppressWarnings("unchecked")
+					final
 					Key<IRepository<? extends EObject>> key = (Key<IRepository<? extends EObject>>)
 						Key.get(Types.newParameterizedType(IRepository.class, instanceClass));
-					
-					Class<? extends IRepository<? extends EObject>> repositoryClass = customRepositories.get(instanceClass);
-					
+
+					final Class<? extends IRepository<? extends EObject>> repositoryClass = customRepositories.get(instanceClass);
+
 					if (repositoryClass == null) {
 						// We have no registered repository - bind a typical one
-						HibernateRepositoryProvider provider = new HibernateRepositoryProvider(instanceClass);
+						final HibernateRepositoryProvider provider = new HibernateRepositoryProvider(instanceClass);
 						requestInjection(provider);
-						
+
 						bind(key).toProvider(provider).in(Scopes.SINGLETON);
 					} else {
 						// We have a registered repository - bind it
@@ -116,15 +119,15 @@ public class PersistenceModule extends AbstractModule {
 				}
 			}
 		}
-		
+
 		bind(IDairyRepository.class).to(DairyRepository.class);
 		bind(IMemberRepository.class).to(DairyRepository.class);
 		bind(DairyRepository.class).in(Scopes.SINGLETON);
-		
+
 		// Ideally we shouldn't need this...
 		requestStaticInjection(ImageDataUtil.class);
 	}
-	
+
 	protected void bindDataStore() {
 		bind(HbDataStore.class).toProvider(HbDataStoreProvider.class);
 		bind(HbDataStoreProvider.class).in(Scopes.SINGLETON);

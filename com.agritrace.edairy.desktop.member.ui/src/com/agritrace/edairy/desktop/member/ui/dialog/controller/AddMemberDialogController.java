@@ -118,7 +118,7 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 		enableSaveButton(validate());
 
 	}
-	
+
 	protected void configureTabs(){
 		memberProfileController = new MemberProfileWidgetController(this);
 	}
@@ -184,7 +184,7 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 				DairyPackage.Literals.MEMBERSHIP__MEMBER,
 				ModelPackage.Literals.PERSON__NATIONAL_ID));
 
-		return (aMap);
+		return aMap;
 	}
 
 	protected void updateBindings() {
@@ -234,7 +234,7 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 		nssfRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_nssfId);
 		nhifRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_nhifId);
 		nationalIdRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_nationalId);
-		
+
 		// extended setup
 		// titleRidget.setOutputOnly(true);
 		titleRidget.setEmptySelectionItem("(None)");
@@ -268,14 +268,15 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 
 	protected void updateUpperPanelBinding() {
 		final Membership selectedMember = getWorkingCopy();
-		
-		if((null == selectedMember) || (null == selectedMember.getMember())) 
+
+		if(null == selectedMember || null == selectedMember.getMember()) {
 			throw new IllegalStateException();
-		
+		}
+
 		if (selectedMember.getMember() != null) {
 			// loop through the text ridgets
 			for (final IRidget r : memberBindings.keySet()) {
-				
+
 				if (r instanceof IValueRidget) {
 
 					final IObservableValue oberservModel = EMFProperties.value(

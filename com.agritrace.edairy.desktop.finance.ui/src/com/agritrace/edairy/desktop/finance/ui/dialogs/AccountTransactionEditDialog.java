@@ -35,7 +35,7 @@ public class AccountTransactionEditDialog extends RecordDialog<AccountTransactio
 			panelController.checkValid();
 			super.handleSaveAction();
 		}
-		
+
 		@Override
 		public void afterBind() {
 			super.afterBind();

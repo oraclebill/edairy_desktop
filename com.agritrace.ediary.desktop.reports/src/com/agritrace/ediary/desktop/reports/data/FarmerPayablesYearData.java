@@ -9,9 +9,9 @@ public class FarmerPayablesYearData {
 	private String credits;
 	private String adjustments;
 	private String payables;
-	
-	
-	
+
+
+
 	public FarmerPayablesYearData(String farmerName, String memberNumber,
 			String accountNumber, String income, String credits,
 			String adjustments, String payables) {
@@ -25,19 +25,19 @@ public class FarmerPayablesYearData {
 		this.payables = payables;
 	}
 	public String getFarmerName() {
-		return (farmerName == null || farmerName.isEmpty())?"":farmerName;
+		return farmerName == null || farmerName.isEmpty()?"":farmerName;
 	}
 	public void setFarmerName(String farmerName) {
 		this.farmerName = farmerName;
 	}
 	public String getMemberNumber() {
-		return (memberNumber == null || memberNumber.isEmpty())?"":memberNumber;
+		return memberNumber == null || memberNumber.isEmpty()?"":memberNumber;
 	}
 	public void setMemberNumber(String memberNumber) {
 		this.memberNumber = memberNumber;
 	}
 	public String getAccountNumber() {
-		return (accountNumber == null || accountNumber.isEmpty())?"":accountNumber;
+		return accountNumber == null || accountNumber.isEmpty()?"":accountNumber;
 	}
 	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
@@ -66,5 +66,5 @@ public class FarmerPayablesYearData {
 	public void setPayables(String payables) {
 		this.payables = payables;
 	}
-	
+
 }

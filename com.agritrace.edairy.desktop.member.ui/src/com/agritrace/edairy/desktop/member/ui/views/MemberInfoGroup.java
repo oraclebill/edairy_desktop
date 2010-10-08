@@ -118,16 +118,16 @@ public class MemberInfoGroup {
 		fieldFactory.grab(true, true).applyTo(UIControlsFactory.createLabel(leftColumn, "", SWT.NONE));
 		fieldFactory.grab(true, true).applyTo(UIControlsFactory.createLabel(leftColumn, "", SWT.NONE));
 
-		// row 8: National ID 
-		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, "National ID"));		
+		// row 8: National ID
+		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, "National ID"));
 		fieldFactory.applyTo(UIControlsFactory.createText(leftColumn, SWT.BORDER, ViewWidgetId.memberInfo_nationalId));
 
 		// row 9: NSSF #
-		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, "NSSF #"));		
+		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, "NSSF #"));
 		fieldFactory.applyTo(UIControlsFactory.createText(leftColumn, SWT.BORDER, ViewWidgetId.memberInfo_nssfId));
 
 		// row 10: NHIF #
-		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, "NHIF #"));		
+		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, "NHIF #"));
 		fieldFactory.applyTo(UIControlsFactory.createText(leftColumn, SWT.BORDER, ViewWidgetId.memberInfo_nhifId));
 
 

@@ -78,7 +78,7 @@ public interface IDairyRepository {
 	List<CollectionJournalLine> getMemberCollectionsForSession(CollectionSession session, Membership value);
 
 	Collection<Membership> getMembersForRoute(Route currentRoute);
-	
+
 	void deleteRoute(final Route object);
 
 	void save();

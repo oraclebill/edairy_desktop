@@ -22,7 +22,7 @@ public class FarmerPayablesYearData {
 	}
 
 	public String getFarmerName() {
-		return (farmerName == null || farmerName.isEmpty()) ? "" : farmerName;
+		return farmerName == null || farmerName.isEmpty()?"":farmerName;
 	}
 
 	public void setFarmerName(String farmerName) {
@@ -30,7 +30,7 @@ public class FarmerPayablesYearData {
 	}
 
 	public String getMemberNumber() {
-		return (memberNumber == null || memberNumber.isEmpty()) ? "" : memberNumber;
+		return memberNumber == null || memberNumber.isEmpty()?"":memberNumber;
 	}
 
 	public void setMemberNumber(String memberNumber) {
@@ -38,7 +38,7 @@ public class FarmerPayablesYearData {
 	}
 
 	public String getAccountNumber() {
-		return (accountNumber == null || accountNumber.isEmpty()) ? "" : accountNumber;
+		return accountNumber == null || accountNumber.isEmpty()?"":accountNumber;
 	}
 
 	public void setAccountNumber(String accountNumber) {

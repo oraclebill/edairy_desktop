@@ -25,8 +25,8 @@ import com.agritrace.edairy.desktop.collection.ui.beans.MilkCollectionLogFilterB
 import com.agritrace.edairy.desktop.collection.ui.dialogs.BulkCollectionsEntryDialog;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.JournalPersistenceDelegate;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.NewMilkCollectionJournalDialog;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
@@ -62,8 +62,8 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		@Override
 		public String getText(Object element) {
 			if (element instanceof CollectionGroup) {
-				CollectionGroup page = (CollectionGroup) element;
-				JournalStatus status = page.getStatus();
+				final CollectionGroup page = (CollectionGroup) element;
+				final JournalStatus status = page.getStatus();
 				switch (status) {
 				case NEW:
 				case PENDING:
@@ -72,12 +72,14 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 					}
 					return "ERR";
 				case SUSPENDED:
-					
+
 					String result = "";
-					if (page.getRecordTotal() != null)
+					if (page.getRecordTotal() != null) {
 						result =  String.valueOf(page.getRecordTotal());
-					else
-						result =  "ERR";// means there was an error getting the proper result - see #273					
+					}
+					else {
+						result =  "ERR";// means there was an error getting the proper result - see #273
+					}
 					return result;
 				case COMPLETE:
 				case ARCHIVED:
@@ -91,9 +93,10 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		@Override
 		public Color getBackground(Object element) {
 			if (element instanceof CollectionGroup) {
-				CollectionGroup page = (CollectionGroup) element;
-				if (page.getDriverTotal() != page.getRecordTotal())
+				final CollectionGroup page = (CollectionGroup) element;
+				if (page.getDriverTotal() != page.getRecordTotal()) {
 					return TABLE_HIGHLIGHT_BACKGROUND;
+				}
 			}
 			return super.getBackground(element);
 		}
@@ -117,7 +120,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	private final Provider<BulkCollectionsEntryDialog> entryDialogProvider;
 	private final Color TABLE_HIGHLIGHT_BACKGROUND = PlatformUI.getWorkbench().getDisplay()
 			.getSystemColor(SWT.COLOR_YELLOW);
-	private List<DairyLocation> collectionCenters;
+	private final List<DairyLocation> collectionCenters;
 
 	@Inject
 	public MilkCollectionLogController(final IRepository<CollectionGroup> journalRepo,
@@ -174,15 +177,15 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		collectionCenter.bindToModel(new WritableList(collectionCenters, DairyLocation.class), DairyLocation.class,
 				"getCode", BeansObservables.observeValue(filterBean, "collectionCenter"));
 
-		List<JournalStatus> statuses = new ArrayList<JournalStatus>();
+		final List<JournalStatus> statuses = new ArrayList<JournalStatus>();
 		statuses.add(null); // Do not filter by status
 		statuses.addAll(JournalStatus.VALUES);
-		
+
 		status.bindToModel(new WritableList(statuses, JournalStatus.class), JournalStatus.class, "getName",
 				BeansObservables.observeValue(filterBean, "status"));
 
-		
-		List<CollectionSession> sessions = new ArrayList<CollectionSession>();
+
+		final List<CollectionSession> sessions = new ArrayList<CollectionSession>();
 		sessions.add(null); // Do not filter by status
 		sessions.addAll(sessionRepo.all());
 		session.bindToModel(
@@ -190,66 +193,74 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 				CollectionSession.class,
 				"getCode",
 				BeansObservables.observeValue(filterBean, "session"));
-		
+
 		mprMissing.bindToModel(filterBean, "mprMissing");
 		suspended.bindToModel(filterBean, "suspended");
 		rejected.bindToModel(filterBean, "rejected");
 
 		updateAllRidgetsFromModel();
 	}
-	
+
 	/**
-	 * Checks whether the given journal page matches the given filter conditions. 
-	 * 
+	 * Checks whether the given journal page matches the given filter conditions.
+	 *
 	 * @param bean Filter conditions
 	 * @param cj Journal page
 	 * @return Whether the page matches the conditions
 	 */
 	private static final boolean matches(MilkCollectionLogFilterBean bean, CollectionGroup cj) {
-		if (bean.getStartDate() != null && cj.getJournalDate().compareTo(bean.getStartDate()) < 0)
+		if (bean.getStartDate() != null && cj.getJournalDate().compareTo(bean.getStartDate()) < 0) {
 			return false;
-		
+		}
+
 		if (bean.getEndDate() != null) {
 			// We need to compare it with the day after, to get records for today as well
 			Calendar cld = Calendar.getInstance();
 			cld.setTime(bean.getEndDate());
 			cld = new GregorianCalendar(cld.get(Calendar.YEAR), cld.get(Calendar.MONTH), cld.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
 			cld.add(Calendar.DAY_OF_MONTH, 1);
-			
-			if (cj.getJournalDate().compareTo(cld.getTime()) >= 0)
+
+			if (cj.getJournalDate().compareTo(cld.getTime()) >= 0) {
 				return false;
+			}
 		}
-		
+
 		if (bean.getCollectionCenter() != null && (cj.getCollectionCenter() == null ||
-				cj.getCollectionCenter().getId() != bean.getCollectionCenter().getId()))
-		 	return false;
-		
-		if (bean.getStatus() != null && cj.getStatus() != bean.getStatus())
+				cj.getCollectionCenter().getId() != bean.getCollectionCenter().getId())) {
 			return false;
-		
-		if (bean.getSession() != null && (cj.getSession() == null || !cj.getSession().getId().equals(bean.getSession().getId())))
+		}
+
+		if (bean.getStatus() != null && cj.getStatus() != bean.getStatus()) {
 			return false;
-		
-		if (bean.isSuspended() && cj.getSuspendedCount() == 0)
+		}
+
+		if (bean.getSession() != null && (cj.getSession() == null || !cj.getSession().getId().equals(bean.getSession().getId()))) {
 			return false;
-		
-		if (bean.isRejected() && cj.getRejectedCount() == 0)
+		}
+
+		if (bean.isSuspended() && cj.getSuspendedCount() == 0) {
 			return false;
-		
+		}
+
+		if (bean.isRejected() && cj.getRejectedCount() == 0) {
+			return false;
+		}
+
 		if (bean.isMprMissing()) {
 			boolean found = false;
-			
-			for (CollectionJournalLine line: cj.getJournalEntries()) {
+
+			for (final CollectionJournalLine line: cj.getJournalEntries()) {
 				if (line.isNotRecorded()) {
 					found = true;
 					break;
 				}
 			}
-			
-			if (!found)
+
+			if (!found) {
 				return false;
+			}
 		}
-		
+
 		return true;
 	}
 
@@ -263,7 +274,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 				filteredJournals.add(cj);
 			}
 		}
-		
+
 		return filteredJournals;
 	}
 
@@ -277,13 +288,13 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		final NewMilkCollectionJournalDialog dialog = newDialogProvider.get();
 		final int returnCode = dialog.open();
 		if (Window.OK == returnCode) {
-			final CollectionGroup newPage = dialog.getNewJournalPage();			
-			BulkCollectionsEntryDialog journalEntryDialog = entryDialogProvider.get();
-			final BulkCollectionsEntryDialogController controller = ( BulkCollectionsEntryDialogController)journalEntryDialog.getController(); 
+			final CollectionGroup newPage = dialog.getNewJournalPage();
+			final BulkCollectionsEntryDialog journalEntryDialog = entryDialogProvider.get();
+			final BulkCollectionsEntryDialogController controller = ( BulkCollectionsEntryDialogController)journalEntryDialog.getController();
 
 			controller.setPersistenceDelegate(new CollectionLogJournalPersister(controller));
 			controller.setContextJournalPage(newPage);
-			
+
 			journalEntryDialog.open();
 		}
 		refreshTableContents();
@@ -292,16 +303,16 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	@Override
 	protected void handleViewItemAction() {
 		if(table != null && table.getSelection().size()>0){
-			BulkCollectionsEntryDialog journalEntryDialog = entryDialogProvider.get();
-			final BulkCollectionsEntryDialogController controller = (BulkCollectionsEntryDialogController)journalEntryDialog.getController(); 
+			final BulkCollectionsEntryDialog journalEntryDialog = entryDialogProvider.get();
+			final BulkCollectionsEntryDialogController controller = (BulkCollectionsEntryDialogController)journalEntryDialog.getController();
 
 			controller.setPersistenceDelegate(new CollectionLogJournalPersister(controller));
-			controller.setContextJournalPage((CollectionGroup) table.getSelection().get(0));		
+			controller.setContextJournalPage((CollectionGroup) table.getSelection().get(0));
 			journalEntryDialog.open();
 		}
-	
+
 	}
-	
+
 	@Override
 	protected void resetFilterConditions() {
 		Calendar cal = Calendar.getInstance();
@@ -320,7 +331,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	}
 
 	void log(int level, String message, Throwable t) {
-		org.eclipse.equinox.log.Logger logger = Log4r.getLogger(Activator.getDefault(), this.getClass().getName());
+		final org.eclipse.equinox.log.Logger logger = Log4r.getLogger(Activator.getDefault(), this.getClass().getName());
 		logger.log(level, message, t);
 	}
 

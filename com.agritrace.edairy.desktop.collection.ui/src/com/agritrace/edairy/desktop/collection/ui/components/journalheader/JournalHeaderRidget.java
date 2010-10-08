@@ -16,16 +16,16 @@ import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
 
 /**
-	 * 
+	 *
 	 */
 public class JournalHeaderRidget extends AbstractCompositeRidget implements IJournalHeaderRidget {
-	
+
 	public class JournalHeaderValidationListener implements PropertyChangeListener {
 		private transient Boolean lastValue = null;
 
 		@Override
 		public void propertyChange(PropertyChangeEvent evt) {
-			Boolean oldValue = lastValue;
+			final Boolean oldValue = lastValue;
 			lastValue = isHeaderValid();
 			firePropertyChange(HEADER_VALID, oldValue, lastValue);
 			log(LogService.LOG_DEBUG, String.format( "propertyChange: %s - %s", oldValue, lastValue) );
@@ -54,21 +54,21 @@ public class JournalHeaderRidget extends AbstractCompositeRidget implements IJou
 	//
 //	private IObservableValue model;
 	private boolean driverTotalEditable = false;
-	private PropertyChangeListener validationListener;
+	private final PropertyChangeListener validationListener;
 
 	public JournalHeaderRidget() {
 		validationListener = new JournalHeaderValidationListener();
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private void log(int level, String message) {
 		Log4r.getLogger(Activator.getDefault(), getClass()).log(level, message);
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public void configureRidgets() {
@@ -126,7 +126,7 @@ public class JournalHeaderRidget extends AbstractCompositeRidget implements IJou
 		driverTotalText.setMandatory(true);
 
 		driverTotalText.addPropertyChangeListener("text", validationListener);
-		
+
 		statusRidget = getRidget(ITextRidget.class, ViewWidgetId.journalStatus);
 		statusRidget.setOutputOnly(true);
 		statusRidget.setFocusable(false);
@@ -138,16 +138,17 @@ public class JournalHeaderRidget extends AbstractCompositeRidget implements IJou
 		referenceNumber.requestFocus();
 	}
 
-	
+
 	@Override
 	protected void updateEnabled() {
 		super.updateEnabled();
 		statusRidget.setOutputOnly(true);
-		boolean enabled = isEnabled();
+		final boolean enabled = isEnabled();
 		driverTotalText.setOutputOnly(!enabled && !driverTotalEditable);
 		referenceNumber.setOutputOnly(!enabled);
 	}
-	
+
+	@Override
 	public void forceDriverTotalEditable() {
 		driverTotalEditable = true;
 		updateEnabled();

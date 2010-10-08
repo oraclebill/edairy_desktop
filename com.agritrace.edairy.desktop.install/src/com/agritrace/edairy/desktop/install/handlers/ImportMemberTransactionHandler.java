@@ -14,7 +14,7 @@ import java.util.Map;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.window.Window;
 import org.eclipse.riena.ui.core.uiprocess.UIProcess;
 import org.eclipse.ui.handlers.HandlerUtil;
 
@@ -27,7 +27,7 @@ import com.google.inject.Provider;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
- * 
+ *
  * @see org.eclipse.core.commands.IHandler
  * @see org.eclipse.core.commands.AbstractHandler
  */
@@ -38,7 +38,7 @@ public class ImportMemberTransactionHandler extends HandlerBase {
 	private class TransactionImportProcess extends UIProcess {
 		final File importFile;
 		final int lineCount;
-		private List<String> msgList;
+		private final List<String> msgList;
 		private List<AccountTransaction> transactions;
 		private Map<String, List<String[]>> errors;
 
@@ -57,10 +57,10 @@ public class ImportMemberTransactionHandler extends HandlerBase {
 
 		@Override
 		public void finalUpdateUI() {
-			boolean importEnabled = transactions.size() > 0;
-			ImportResultsDialog irDialog = new ImportResultsDialog(
+			final boolean importEnabled = transactions.size() > 0;
+			final ImportResultsDialog irDialog = new ImportResultsDialog(
 					HandlerUtil.getActiveShell(event), msgList, importEnabled);
-			if (irDialog.open() == Dialog.OK) {
+			if (irDialog.open() == Window.OK) {
 				saveTransactions(transactions);
 			}
 		}
@@ -75,26 +75,26 @@ public class ImportMemberTransactionHandler extends HandlerBase {
 				input = new BufferedInputStream(new FileInputStream(importFile));
 
 				monitor.subTask("Importing records...");
-				
+
 				transactions = new LinkedList<AccountTransaction>();
 				errors = new HashMap<String, List<String[]>>();
 
-				MemberTransactionImportTool tool = toolProvider.get();
+				final MemberTransactionImportTool tool = toolProvider.get();
 				tool.processFile(input, transactions, errors, monitor);
 
 				msgList.add(String.format(
 						"%-4d records imported successfully.", transactions.size()));
-				for (String err : errors.keySet()) {
+				for (final String err : errors.keySet()) {
 					msgList.add(String.format(
 							"%-4d records failed with a '%s' error.", errors
 									.get(err).size(), err));
 				}
 				monitor.setTaskName("Saving members...");
 
-			} catch (FileNotFoundException e) {
+			} catch (final FileNotFoundException e) {
 				e.printStackTrace();
 				return false;
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				e.printStackTrace();
 				return false;
 			} finally {
@@ -102,7 +102,7 @@ public class ImportMemberTransactionHandler extends HandlerBase {
 				if (input != null) {
 					try {
 						input.close();
-					} catch (IOException ioe) {
+					} catch (final IOException ioe) {
 						;
 					}
 				}
@@ -112,7 +112,7 @@ public class ImportMemberTransactionHandler extends HandlerBase {
 		}
 
 		private void saveTransactions(List<AccountTransaction> transactions) {
-			IRepository<AccountTransaction> transactionRepo = accountRepo.get();
+			final IRepository<AccountTransaction> transactionRepo = accountRepo.get();
 			transactionRepo.save(transactions);
 //			for (AccountTransaction newEntity : transactions) {
 //				transactionRepo.saveNew(newEntity);
@@ -121,7 +121,7 @@ public class ImportMemberTransactionHandler extends HandlerBase {
 		}
 
 	}
-	
+
 	@Inject private static Provider<MemberTransactionImportTool> toolProvider;
 	@Inject private static Provider<IRepository<AccountTransaction>> accountRepo;
 
@@ -135,21 +135,22 @@ public class ImportMemberTransactionHandler extends HandlerBase {
 	 * the command has been executed, so extract extract the needed information
 	 * from the application context.
 	 */
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		this.event = event;
 
-		Object navigationContext = getNavigationContext(event);
+		final Object navigationContext = getNavigationContext(event);
 		try {
 
-			File importFile = new File(getImportFile(event));
-			int lineCount = countLines(importFile);
-			UIProcess process = new TransactionImportProcess(importFile, lineCount,
+			final File importFile = new File(getImportFile(event));
+			final int lineCount = countLines(importFile);
+			final UIProcess process = new TransactionImportProcess(importFile, lineCount,
 					navigationContext);
 
 			process.setTitle("Import Transcations");
 			process.setNote("Importing...");
 			process.start();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			throw new ExecutionException("Import operation failed.", e);
 		}
 		return null;

@@ -11,9 +11,9 @@ import org.eclipse.riena.navigation.NavigationArgument;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
+import org.eclipse.riena.ui.ridgets.IInfoFlyoutRidget.InfoFlyoutData;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
-import org.eclipse.riena.ui.ridgets.IInfoFlyoutRidget.InfoFlyoutData;
 import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
@@ -40,24 +40,24 @@ public class ScaleImportViewController extends SubModuleController {
 	private static Logger LOG = Log4r.getLogger(Activator.getDefault(), ScaleImportViewController.class);
 	static IStatus ERROR_STATUS = new Status(Status.ERROR, Activator.PLUGIN_ID, "Invalid membership number");
 
-	private static final String[] columnHeaders = { 
+	private static final String[] columnHeaders = {
 		TIME_COLUMNN_HEADER, MEMBER_COLUMN_HEADER, CAN_COLUMN_HEADER, QUANTITY_COLUMN_HEADER, CENTER_NUMBER_HEADER, SUSPENDED_COLUMN_HEADER };
-	
+
 	private static final String[] columnPropertyNames = {
 			"collectionTime", "recordedMember", "numCans", "quantity", "centerNumber", "flagged" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
-	
+
 
 	static final HashMap<String, String> validatedMemberNames = new HashMap<String, String>();
 
-	
+
 	private final IDairyRepository dairyRepo;
 
-	private CollectionGroup importedData; 
+	private CollectionGroup importedData;
 	private IJournalHeaderRidget journalHeaderRidget;
 	private ITableRidget table;
 	private ILabelRidget calculatedTotalRidget;
 	/**
-	 * 
+	 *
 	 */
 	@Inject
 	public ScaleImportViewController(final IDairyRepository dairyRepo) {
@@ -65,7 +65,7 @@ public class ScaleImportViewController extends SubModuleController {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public void configureRidgets() {
@@ -75,7 +75,7 @@ public class ScaleImportViewController extends SubModuleController {
 		journalHeaderRidget = getRidget(JournalHeaderRidget.class, "journal-header");
 		journalHeaderRidget.bindToModel(importedData);
 		journalHeaderRidget.updateFromModel();
-				
+
 		table = getRidget(ITableRidget.class, ViewWidgetId.milkEntryTable);
 //		table.setColumnFormatter(2, new ColumnFormatter() {
 //			@Override
@@ -89,14 +89,14 @@ public class ScaleImportViewController extends SubModuleController {
 //			}
 //		});
 		table.bindToModel(
-				new WritableList(importedData.getJournalEntries(), ScaleImportRecord.class), 
-				ScaleImportRecord.class, 
+				new WritableList(importedData.getJournalEntries(), ScaleImportRecord.class),
+				ScaleImportRecord.class,
 				columnPropertyNames, columnHeaders);
-		
+
 		calculatedTotalRidget = getRidget(ILabelRidget.class, ViewWidgetId.totalLabel);
 		calculatedTotalRidget.bindToModel(importedData, "driverTotal");
-		
-		IActionRidget cancelAction = getRidget(IActionRidget.class, ViewWidgetId.cancelButton);
+
+		final IActionRidget cancelAction = getRidget(IActionRidget.class, ViewWidgetId.cancelButton);
 		cancelAction.addListener(new IActionListener() {
 			@Override
 			public void callback() {
@@ -104,7 +104,7 @@ public class ScaleImportViewController extends SubModuleController {
 			}
 		});
 
-		IActionRidget saveActionRidget = getRidget(IActionRidget.class, DialogConstants.BIND_ID_BUTTON_SAVE);
+		final IActionRidget saveActionRidget = getRidget(IActionRidget.class, DialogConstants.BIND_ID_BUTTON_SAVE);
 //		saveActionRidget.setText("Save Imported Data");
 		saveActionRidget.addListener(new IActionListener() {
 			@Override
@@ -117,7 +117,7 @@ public class ScaleImportViewController extends SubModuleController {
 
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public void afterBind() {
@@ -130,15 +130,15 @@ public class ScaleImportViewController extends SubModuleController {
 	 * Called when 'Save Page' is clicked.
 	 */
 	private void saveImportedScaleData() {
-		Dairy localDairy  = dairyRepo.getLocalDairy();
-		
+		final Dairy localDairy  = dairyRepo.getLocalDairy();
+
 		getInfoFlyout().addInfo(new InfoFlyoutData("message", "Saving imported scale data..."));
 		localDairy.getCollectionJournals().add(importedData);
 		try {
 			dairyRepo.save(localDairy);
 			getInfoFlyout().addInfo(new InfoFlyoutData("message", "File saved."));
 		}
-		catch(Exception e) {
+		catch(final Exception e) {
 			getInfoFlyout().addInfo(new InfoFlyoutData("error", "Save failed - " + e.getMessage() + "\nPlease contact support."));
 			e.printStackTrace();
 		}
@@ -146,7 +146,7 @@ public class ScaleImportViewController extends SubModuleController {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	protected CollectionGroup getContextData() {
 		CollectionGroup  scaleRecords = null;

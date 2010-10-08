@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.agritrace.edairy.desktop.common.persistence;
 
@@ -18,7 +18,7 @@ import com.google.inject.ImplementedBy;
 
 /**
  * @author bjones
- * 
+ *
  */
 @ImplementedBy(TransactionRepository.class)
 public interface ITransactionRepository extends IRepository<Transaction> {

@@ -6,13 +6,12 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy;
 
-import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
-
-import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
-
 import java.util.Date;
 
 import org.eclipse.emf.ecore.EObject;
+
+import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
+import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 
 /**
  * <!-- begin-user-doc -->

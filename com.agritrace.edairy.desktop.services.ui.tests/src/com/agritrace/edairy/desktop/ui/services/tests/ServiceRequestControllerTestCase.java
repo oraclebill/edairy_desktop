@@ -28,6 +28,7 @@ import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.ManagedMemoryDataStoreProvider;
 import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
+import com.agritrace.edairy.desktop.common.ui.views.BaseListView;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.agritrace.edairy.desktop.services.ui.controllers.AnimalHealthRequestViewController;
 import com.agritrace.edairy.desktop.services.ui.views.AnimalHealthRequestView;
@@ -36,14 +37,14 @@ import com.google.inject.Injector;
 
 /**
  * Test case for service request controller
- * 
+ *
  * @author Hui(Spark) Wan
- * 
+ *
  */
 public class ServiceRequestControllerTestCase extends AbstractSubModuleControllerTest<AnimalHealthRequestViewController> {
 	Injector injector = Guice.createInjector(new PersistenceModule() {
 		@Override protected void bindDataStore() {
-			ManagedMemoryDataStoreProvider provider = new ManagedMemoryDataStoreProvider();
+			final ManagedMemoryDataStoreProvider provider = new ManagedMemoryDataStoreProvider();
 			bind(HbDataStore.class).toProvider(provider);
 		}
 	});
@@ -51,7 +52,7 @@ public class ServiceRequestControllerTestCase extends AbstractSubModuleControlle
 
 //	@Inject
 //	private static Provider<Session> sessionProvider;
-//	
+//
 //
 //	static {
 //		Guice.createInjector(new TestPersistenceModule(), new AbstractModule() {
@@ -74,17 +75,17 @@ public class ServiceRequestControllerTestCase extends AbstractSubModuleControlle
 
 	/**
 	 * Initial model from the XML file
-	 * 
+	 *
 	 * @throws ParseException
 	 * @throws CoreException
 	 */
 	private void initModel() {
-		Farm farm = DairyUtil.createFarm("daisy dukes", DairyUtil.createLocation(null, null, null));
-		Farmer farmer = DairyUtil.createFarmer("Joe", "", "Gibbs", "1234567", Arrays.asList(farm));
-		Date now = new Date();
-		
-		Membership membership = DairyUtil.createMembership(now, now, farmer);
-		Dairy testDairy = DairyFactory.eINSTANCE.createDairy();
+		final Farm farm = DairyUtil.createFarm("daisy dukes", DairyUtil.createLocation(null, null, null));
+		final Farmer farmer = DairyUtil.createFarmer("Joe", "", "Gibbs", "1234567", Arrays.asList(farm));
+		final Date now = new Date();
+
+		final Membership membership = DairyUtil.createMembership(now, now, farmer);
+		final Dairy testDairy = DairyFactory.eINSTANCE.createDairy();
 
 		testDairy.setLegalName("test");
 		testDairy.setCompanyName("test co");
@@ -101,7 +102,7 @@ public class ServiceRequestControllerTestCase extends AbstractSubModuleControlle
 
 		initModel();
 
-		IController controller = getController();
+		final IController controller = getController();
 
 		// Default value of Start Date
 		final ITextRidget startDate = controller.getRidget(ITextRidget.class, AnimalHealthRequestView.START_DATE_TEXT);
@@ -138,10 +139,10 @@ public class ServiceRequestControllerTestCase extends AbstractSubModuleControlle
 		assertNotNull(masterTable);
 		assertNotNull(masterTable.getObservableList());
 
-		controller.getRidget(IActionRidget.class, AnimalHealthRequestView.BIND_ID_FILTER_SEARCH);
+		controller.getRidget(IActionRidget.class, BaseListView.BIND_ID_FILTER_SEARCH);
 
 		// Test Reset Button
-		final IActionRidget reset = controller.getRidget(IActionRidget.class, AnimalHealthRequestView.BIND_ID_FILTER_RESET);
+		final IActionRidget reset = controller.getRidget(IActionRidget.class, BaseListView.BIND_ID_FILTER_RESET);
 		reset.fireAction();
 
 

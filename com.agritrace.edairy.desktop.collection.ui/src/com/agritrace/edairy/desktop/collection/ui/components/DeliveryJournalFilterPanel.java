@@ -16,7 +16,7 @@ public class DeliveryJournalFilterPanel extends Composite {
 
 	/**
 	 * Create the composite.
-	 * 
+	 *
 	 * @param parent
 	 * @param style
 	 */
@@ -26,7 +26,7 @@ public class DeliveryJournalFilterPanel extends Composite {
 		setLayout(new FillLayout());
 
 		final Group group = UIControlsFactory.createGroup(this, "Delivery Log Filter");
-		FieldUtil fieldUtil = new FieldUtil();
+		final FieldUtil fieldUtil = new FieldUtil();
 		fieldUtil.addLabeledDateField(group, "Start Date", "filter-min-date");
 		fieldUtil.addLabeledDateField(group, "End Date", "filter-max-date");
 		fieldUtil.addLabeledComboField(group, "Transport Route", "filter-route");

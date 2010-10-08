@@ -45,7 +45,7 @@ public class MemberTransactionWidget {
 				ViewWidgetId.TRANSACTION_TABLE);
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
-		
+
 		final TableColumn columnID = new TableColumn(table, SWT.LEFT);
 		columnID.setText("ID");
 		final TableColumn columnDate = new TableColumn(table, SWT.LEFT);

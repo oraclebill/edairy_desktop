@@ -11,7 +11,7 @@ public class CustomerType {
 	public static CustomerType getByName(String name) {
 
 		for (final CustomerType cType : CUST_TYPES) {
-			if ((cType != null) && (cType.getName() != null) && cType.getName().equals(name)) {
+			if (cType != null && cType.getName() != null && cType.getName().equals(name)) {
 				return cType;
 			}
 		}

@@ -6,17 +6,15 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
-import com.agritrace.edairy.desktop.common.model.dairy.Asset;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import com.agritrace.edairy.desktop.common.model.dairy.Asset;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -223,6 +221,7 @@ public class AssetImpl extends EObjectImpl implements Asset {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getTagType() {
 		return tagType;
 	}
@@ -232,11 +231,13 @@ public class AssetImpl extends EObjectImpl implements Asset {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTagType(String newTagType) {
-		String oldTagType = tagType;
+		final String oldTagType = tagType;
 		tagType = newTagType;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ASSET__TAG_TYPE, oldTagType, tagType));
+		}
 	}
 
 	/**
@@ -244,6 +245,7 @@ public class AssetImpl extends EObjectImpl implements Asset {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getTagValue() {
 		return tagValue;
 	}
@@ -253,11 +255,13 @@ public class AssetImpl extends EObjectImpl implements Asset {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTagValue(String newTagValue) {
-		String oldTagValue = tagValue;
+		final String oldTagValue = tagValue;
 		tagValue = newTagValue;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ASSET__TAG_VALUE, oldTagValue, tagValue));
+		}
 	}
 
 	/**
@@ -265,6 +269,7 @@ public class AssetImpl extends EObjectImpl implements Asset {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Date getDateAcquired() {
 		return dateAcquired;
 	}
@@ -274,11 +279,13 @@ public class AssetImpl extends EObjectImpl implements Asset {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDateAcquired(Date newDateAcquired) {
-		Date oldDateAcquired = dateAcquired;
+		final Date oldDateAcquired = dateAcquired;
 		dateAcquired = newDateAcquired;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ASSET__DATE_ACQUIRED, oldDateAcquired, dateAcquired));
+		}
 	}
 
 	/**
@@ -286,6 +293,7 @@ public class AssetImpl extends EObjectImpl implements Asset {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Date getDamageDate() {
 		return damageDate;
 	}
@@ -295,11 +303,13 @@ public class AssetImpl extends EObjectImpl implements Asset {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDamageDate(Date newDamageDate) {
-		Date oldDamageDate = damageDate;
+		final Date oldDamageDate = damageDate;
 		damageDate = newDamageDate;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ASSET__DAMAGE_DATE, oldDamageDate, damageDate));
+		}
 	}
 
 	/**
@@ -307,6 +317,7 @@ public class AssetImpl extends EObjectImpl implements Asset {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDamageDescription() {
 		return damageDescription;
 	}
@@ -316,11 +327,13 @@ public class AssetImpl extends EObjectImpl implements Asset {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDamageDescription(String newDamageDescription) {
-		String oldDamageDescription = damageDescription;
+		final String oldDamageDescription = damageDescription;
 		damageDescription = newDamageDescription;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ASSET__DAMAGE_DESCRIPTION, oldDamageDescription, damageDescription));
+		}
 	}
 
 	/**
@@ -328,6 +341,7 @@ public class AssetImpl extends EObjectImpl implements Asset {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Date getDateDisposed() {
 		return dateDisposed;
 	}
@@ -337,11 +351,13 @@ public class AssetImpl extends EObjectImpl implements Asset {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDateDisposed(Date newDateDisposed) {
-		Date oldDateDisposed = dateDisposed;
+		final Date oldDateDisposed = dateDisposed;
 		dateDisposed = newDateDisposed;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ASSET__DATE_DISPOSED, oldDateDisposed, dateDisposed));
+		}
 	}
 
 	/**
@@ -349,6 +365,7 @@ public class AssetImpl extends EObjectImpl implements Asset {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDisposalReason() {
 		return disposalReason;
 	}
@@ -358,11 +375,13 @@ public class AssetImpl extends EObjectImpl implements Asset {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDisposalReason(String newDisposalReason) {
-		String oldDisposalReason = disposalReason;
+		final String oldDisposalReason = disposalReason;
 		disposalReason = newDisposalReason;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ASSET__DISPOSAL_REASON, oldDisposalReason, disposalReason));
+		}
 	}
 
 	/**
@@ -370,6 +389,7 @@ public class AssetImpl extends EObjectImpl implements Asset {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDisposalWitness() {
 		return disposalWitness;
 	}
@@ -379,11 +399,13 @@ public class AssetImpl extends EObjectImpl implements Asset {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDisposalWitness(String newDisposalWitness) {
-		String oldDisposalWitness = disposalWitness;
+		final String oldDisposalWitness = disposalWitness;
 		disposalWitness = newDisposalWitness;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ASSET__DISPOSAL_WITNESS, oldDisposalWitness, disposalWitness));
+		}
 	}
 
 	/**
@@ -521,9 +543,11 @@ public class AssetImpl extends EObjectImpl implements Asset {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy()) {
+			return super.toString();
+		}
 
-		StringBuffer result = new StringBuffer(super.toString());
+		final StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (tagType: ");
 		result.append(tagType);
 		result.append(", tagValue: ");

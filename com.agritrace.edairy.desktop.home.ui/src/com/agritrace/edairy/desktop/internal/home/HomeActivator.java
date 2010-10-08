@@ -12,14 +12,14 @@ public class HomeActivator extends AbstractUIPlugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "com.agritrace.edairy.desktop.home"; //$NON-NLS-1$
-	public static String PLUGIN_WEB_PATH;	
+	public static String PLUGIN_WEB_PATH;
 
 	// The shared instance
 	private static HomeActivator plugin;
 
 	/**
 	 * Returns the shared instance
-	 * 
+	 *
 	 * @return the shared instance
 	 */
 	public static HomeActivator getDefault() {
@@ -29,7 +29,7 @@ public class HomeActivator extends AbstractUIPlugin {
 	/**
 	 * Returns an image descriptor for the image file at the given plug-in
 	 * relative path
-	 * 
+	 *
 	 * @param path
 	 *            the path
 	 * @return the image descriptor
@@ -46,7 +46,7 @@ public class HomeActivator extends AbstractUIPlugin {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
 	 * )
@@ -60,7 +60,7 @@ public class HomeActivator extends AbstractUIPlugin {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
 	 * )

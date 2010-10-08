@@ -11,8 +11,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 public interface ICollectionLineRidget extends IComplexRidget {
 
 	String VALIDATED_VALUE = "validatedValue";
-	
-	
+
+
 	public void setBinList(List<DairyContainer> binList);
 	public List<DairyContainer> getBinList();
 
@@ -20,7 +20,7 @@ public interface ICollectionLineRidget extends IComplexRidget {
 	public void removeValidator(IValidator vc);
 
 	public void createCollectionLine();
-	
+
 	public void setMemberInfoProvider(IMemberInfoProvider provider);
 	public IMemberInfoProvider getMemberInfoProvider();
 	public void clearValidators();

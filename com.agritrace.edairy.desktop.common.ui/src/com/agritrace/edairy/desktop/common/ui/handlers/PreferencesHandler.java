@@ -11,7 +11,7 @@ import com.google.inject.Provider;
 public class PreferencesHandler extends AbstractHandler {
 	@Inject
 	private Provider<PreferencesDialog> dialogProvider;
-	
+
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		dialogProvider.get().open();

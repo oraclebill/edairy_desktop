@@ -7,11 +7,9 @@
 package com.agritrace.edairy.desktop.common.model.dairy;
 
 import java.math.BigDecimal;
-
 import java.util.Date;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**

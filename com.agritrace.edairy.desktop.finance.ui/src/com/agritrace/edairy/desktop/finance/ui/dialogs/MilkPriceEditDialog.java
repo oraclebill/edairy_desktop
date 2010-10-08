@@ -32,61 +32,61 @@ public class MilkPriceEditDialog extends RecordDialog<MemberPayment> {
 	protected void buildWorkArea(Composite comp) {
 		comp.setLayout(new GridLayout(1, false));
 		{
-			Composite row = UIControlsFactory.createComposite(comp);
+			final Composite row = UIControlsFactory.createComposite(comp);
 			row.setLayout(new GridLayout(2, false));
 			row.setLayoutData(GridDataFactory.defaultsFor(row).grab(true, false).create());
-			
-			Label lblMonth = UIControlsFactory.createLabel(row, "Month");
+
+			final Label lblMonth = UIControlsFactory.createLabel(row, "Month");
 			GridDataFactory.defaultsFor(lblMonth).hint(FormUtil.WIDTH_UNIT * 2, SWT.DEFAULT).applyTo(lblMonth);
 
-			CCombo control = UIControlsFactory.createCCombo(row, MilkPriceJournalConstants.ID_COMBO_RATEMONTH);			
+			final CCombo control = UIControlsFactory.createCCombo(row, MilkPriceJournalConstants.ID_COMBO_RATEMONTH);
 			GridDataFactory.defaultsFor(control).grab(true,true).align(SWT.FILL, SWT.FILL).applyTo(control);
 			control.setItems(MONTHS);
 		}
 		{
-			Composite row = UIControlsFactory.createComposite(comp);
+			final Composite row = UIControlsFactory.createComposite(comp);
 			row.setLayout(new GridLayout(2, false));
 			row.setLayoutData(GridDataFactory.defaultsFor(row).grab(true, false).create());
-			
-			Label lbl = UIControlsFactory.createLabel(row, "Year");
+
+			final Label lbl = UIControlsFactory.createLabel(row, "Year");
 			GridDataFactory.defaultsFor(lbl).hint(FormUtil.WIDTH_UNIT * 2, SWT.DEFAULT).applyTo(lbl);
 
-			CCombo control = UIControlsFactory.createCCombo(row, MilkPriceJournalConstants.ID_COMBO_RATEYEAR);			
+			final CCombo control = UIControlsFactory.createCCombo(row, MilkPriceJournalConstants.ID_COMBO_RATEYEAR);
 			GridDataFactory.defaultsFor(control).grab(true,true).align(SWT.FILL, SWT.FILL).applyTo(control);
-			int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-			for (int i = (currentYear-2); i< currentYear+2; i++) {
+			final int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+			for (int i = currentYear-2; i< currentYear+2; i++) {
 				control.add(String.valueOf(i));
 			}
 		}
 		UIControlsFactory.createLabel(comp, ""); // filler
 		{
-			Composite row = UIControlsFactory.createComposite(comp);
+			final Composite row = UIControlsFactory.createComposite(comp);
 			row.setLayout(new GridLayout(2, false));
 			row.setLayoutData(GridDataFactory.defaultsFor(row).grab(true, false).create());
 
-			Label label = UIControlsFactory.createLabel(row, "Amount");
+			final Label label = UIControlsFactory.createLabel(row, "Amount");
 			GridDataFactory.defaultsFor(label).hint(FormUtil.WIDTH_UNIT * 2, SWT.DEFAULT).applyTo(label);
 
-			Control control = UIControlsFactory.createTextDecimal(row, MilkPriceJournalConstants.ID_TEXT_PRICE1);			
+			final Control control = UIControlsFactory.createTextDecimal(row, MilkPriceJournalConstants.ID_TEXT_PRICE1);
 			GridDataFactory.defaultsFor(control).hint(FormUtil.WIDTH_UNIT, SWT.DEFAULT).applyTo(control);
 		}
 		{
-			Composite row = UIControlsFactory.createComposite(comp);
+			final Composite row = UIControlsFactory.createComposite(comp);
 			row.setLayout(new GridLayout(2, false));
 			row.setLayoutData(GridDataFactory.defaultsFor(row).grab(true, false).create());
 
-			Label label = UIControlsFactory.createLabel(row, "Re-enter Amount");
+			final Label label = UIControlsFactory.createLabel(row, "Re-enter Amount");
 			GridDataFactory.defaultsFor(label).hint(FormUtil.WIDTH_UNIT * 2, SWT.DEFAULT).applyTo(label);
 
-			Control control = UIControlsFactory.createTextDecimal(row, MilkPriceJournalConstants.ID_TEXT_PRICE2);			
+			final Control control = UIControlsFactory.createTextDecimal(row, MilkPriceJournalConstants.ID_TEXT_PRICE2);
 			GridDataFactory.defaultsFor(control).hint(FormUtil.WIDTH_UNIT , SWT.DEFAULT).applyTo(control);
 		}
 	}
 
-	
+
 	@Override
 	protected AbstractWindowController createController() {
-		return new MilkPriceEditController(); 
+		return new MilkPriceEditController();
 	}
 
 }

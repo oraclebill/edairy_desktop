@@ -6,15 +6,13 @@
  */
 package com.agritrace.edairy.desktop.common.model.base.util;
 
-import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
-
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.resource.Resource;
-
 import org.eclipse.emf.ecore.xmi.util.XMLProcessor;
+
+import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 
 /**
  * This class contains helper methods to serialize and deserialize XML documents
@@ -31,10 +29,10 @@ public class ModelXMLProcessor extends XMLProcessor {
 	 * @generated
 	 */
 	public ModelXMLProcessor() {
-		super((EPackage.Registry.INSTANCE));
+		super(EPackage.Registry.INSTANCE);
 		ModelPackage.eINSTANCE.eClass();
 	}
-	
+
 	/**
 	 * Register for "*" and "xml" file extensions the ModelResourceFactoryImpl factory.
 	 * <!-- begin-user-doc -->

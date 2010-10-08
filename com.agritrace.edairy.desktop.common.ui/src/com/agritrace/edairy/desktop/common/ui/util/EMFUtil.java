@@ -15,10 +15,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 public class EMFUtil {
 	public static boolean compare(EObject src, EObject dst) {
-		if ((src == null) && (dst == null)) {
+		if (src == null && dst == null) {
 			return true;
 		}
-		if ((src == null) || (dst == null)) {
+		if (src == null || dst == null) {
 			return false;
 		}
 		final String str1 = src.toString();
@@ -29,13 +29,13 @@ public class EMFUtil {
 
 	/**
 	 * Compares EObject feature by feature
-	 * 
+	 *
 	 * @param source
 	 * @param target
 	 * @return
 	 */
 	public static boolean compareAllFeatures(EObject source, EObject target) {
-		if ((source == null) || (target == null)) {
+		if (source == null || target == null) {
 			return false;
 		}
 		if (!source.getClass().equals(target.getClass())) {
@@ -51,11 +51,11 @@ public class EMFUtil {
 					Object srcVal, targVal;
 					srcVal = source.eGet(feature);
 					targVal = target.eGet(feature);
-					if ((srcVal != null) && (targVal != null)) {
+					if (srcVal != null && targVal != null) {
 						if (!srcVal.equals(targVal)) {
 							return false;
 						}
-					} else if ((srcVal == null) || (targVal == null)) {
+					} else if (srcVal == null || targVal == null) {
 						return false;
 					}
 				} catch (final Exception e) {
@@ -65,8 +65,8 @@ public class EMFUtil {
 			}
 			// references should equal each other..
 			// if one is a ref, both must be refs
-			else if ((feature instanceof EReference) && (source.eGet(feature) instanceof EObject)
-					&& (target.eGet(feature) instanceof EObject) && (source.eGet(feature) != target.eGet(feature))) {
+			else if (feature instanceof EReference && source.eGet(feature) instanceof EObject
+					&& target.eGet(feature) instanceof EObject && source.eGet(feature) != target.eGet(feature)) {
 				return false;
 			}
 		}
@@ -75,7 +75,7 @@ public class EMFUtil {
 
 	/**
 	 * Copy EMF objects from source to target
-	 * 
+	 *
 	 * @param source
 	 *            Source EMF Object
 	 * @param target
@@ -84,7 +84,7 @@ public class EMFUtil {
 	@SuppressWarnings("unchecked")
 	public static void copy(EObject source, EObject target, int depth) {
 //		System.out.println("Source:" + source.eClass().getName() + " Target:" + target.eClass().getName());
-		if ((source == null) || (target == null)) {
+		if (source == null || target == null) {
 			return;
 		}
 		if (!source.getClass().equals(target.getClass())) {
@@ -101,11 +101,11 @@ public class EMFUtil {
 					} catch (final Exception e) {
 
 					}
-				} else if ((feature instanceof EReference) && (source.eGet(feature) instanceof EObject)
-						&& (target.eGet(feature) instanceof EObject)) {
+				} else if (feature instanceof EReference && source.eGet(feature) instanceof EObject
+						&& target.eGet(feature) instanceof EObject) {
 					copy((EObject) source.eGet(feature), (EObject) target.eGet(feature), depth - 1);
-				} else if ((feature instanceof EReference) && (source.eGet(feature) instanceof List)
-						&& (target.eGet(feature) instanceof List)) {
+				} else if (feature instanceof EReference && source.eGet(feature) instanceof List
+						&& target.eGet(feature) instanceof List) {
 					{
 						final List<EObject> sourceList = (List<EObject>) source.eGet(feature);
 						final List<EObject> targetList = (List<EObject>) target.eGet(feature);
@@ -130,7 +130,7 @@ public class EMFUtil {
 
 	/**
 	 * Creates EObject
-	 * 
+	 *
 	 * @param className
 	 * @return
 	 */
@@ -142,7 +142,7 @@ public class EMFUtil {
 
 	/**
 	 * Create working copy
-	 * 
+	 *
 	 * @param className
 	 * @return
 	 */
@@ -191,7 +191,7 @@ public class EMFUtil {
 			if (containedIn.isTransient() || containedIn.isVolatile() || containedIn.isDerived()) {
 				continue;
 			}
-			if (onlyRequired && (containedIn.getLowerBound() < 1)) {
+			if (onlyRequired && containedIn.getLowerBound() < 1) {
 				continue;
 			}
 			if (onlyRequired && !containedIn.isRequired()) {
@@ -202,11 +202,11 @@ public class EMFUtil {
 			if (containedIn.isMany()) {
 				final int upper = containedIn.getUpperBound();
 				final int lower = containedIn.getLowerBound();
-				assert (lower >= 0);
-				assert ((upper < 0) || (upper >= lower));
+				assert lower >= 0;
+				assert upper < 0 || upper >= lower;
 				final EList<EObject> theList = (EList<EObject>) parent.eGet(containedIn);
 				theList.add(child);
-				if ((upper - lower > 1) || (upper < 0)) {
+				if (upper - lower > 1 || upper < 0) {
 					theList.add(child);
 				}
 			} else {
@@ -221,13 +221,13 @@ public class EMFUtil {
 
 	public static boolean compareFeatures(EObject src, EObject tgt, EStructuralFeature[] featuresToCompare) {
 		boolean same = true;
-		for (EStructuralFeature feature : featuresToCompare) {
+		for (final EStructuralFeature feature : featuresToCompare) {
 			if (src == null && tgt == null) {
 				return true;
 			} else if (src == null || tgt == null) {
 				return false;
 			}
-			
+
 			if (src.eGet(feature) != tgt.eGet(feature)) {
 				same = false;
 				break;

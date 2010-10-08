@@ -32,7 +32,7 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.agritrace.edairy.desktop.internal.collection.services.
 	 * ICollectionJournalLineRepository
 	 * #countByMemberCenterDate(com.agritrace.edairy
@@ -40,27 +40,28 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 	 * com.agritrace.edairy.desktop.common.model.dairy.DairyLocation,
 	 * java.util.Date)
 	 */
+	@Override
 	public long countByMemberCenterDate(final Membership member, final DairyLocation center, final Date date) {
 		final Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 
-		String queryText = "SELECT count(*) " + "  FROM CollectionJournalLine l "
+		final String queryText = "SELECT count(*) " + "  FROM CollectionJournalLine l "
 				+ " WHERE l.validatedMember = :member " + "   AND l.collectionJournal.journalDate = :cal "
 				+ "   AND l.collectionJournal.collectionCenter = :center ";
 
-		Query query = getCurrentSession().createQuery(queryText);
+		final Query query = getCurrentSession().createQuery(queryText);
 		query.setEntity("member", member);
 		query.setEntity("center", center);
 		query.setCalendarDate("cal", cal);
 
-		return ((Long) query.uniqueResult());
+		return (Long) query.uniqueResult();
 	}
 
 	@Override
 	public List<CollectionGroup> allForDate(final Date date) {
 		int year, month, day;
 
-		Calendar cal = Calendar.getInstance();
+		final Calendar cal = Calendar.getInstance();
 
 		if (date != null) {
 			cal.setTime(date);
@@ -72,86 +73,90 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 		month = cal.get(Calendar.MONTH);
 		day = cal.get(Calendar.DAY_OF_MONTH);
 
-		String queryText = // "SELECT grp " +
+		final String queryText = // "SELECT grp " +
 		"FROM CollectionGroup as grp " + "          where day(grp.journalDate) = :day"
 				+ "          and  month(grp.journalDate) = :month" + "          and  year(grp.journalDate) = :year";
 
-		Query query = getCurrentSession().createQuery(queryText);
+		final Query query = getCurrentSession().createQuery(queryText);
 
 		query.setInteger("year", year);
 		query.setInteger("month", month + 1);
 		query.setInteger("day", day);
 
-		List<CollectionGroup> results = query.list();
+		final List<CollectionGroup> results = query.list();
 
 		// debug
 		System.err.format("XXXXXX: Day = %d, month = %d, year = %d\n", day, month, year);
 		System.err.format("XXXXXX: results count = %d\n", results.size());
-		return (results);
+		return results;
 
 	}
 
 	@Override
 	public BigDecimal getMilkPrice(final int month, final int year) {
-		String queryString = "SELECT value " + "FROM MilkPrice m " + "WHERE m.year = :year "
+		final String queryString = "SELECT value " + "FROM MilkPrice m " + "WHERE m.year = :year "
 				+ "  AND m.month = :month ";
 
-		Query query = getCurrentSession().createQuery(queryString);
+		final Query query = getCurrentSession().createQuery(queryString);
 		query.setInteger("year", year);
 		query.setInteger("month", month);
 
 		Object value = query.uniqueResult();
-		if (value == null) value = "0";
-		return (new BigDecimal(value.toString()));
+		if (value == null) {
+			value = "0";
+		}
+		return new BigDecimal(value.toString());
 	}
 
 	@Override
 	public List<Membership> getMembersWithDeliveriesFor(final int month, final int year) {
-		String queryString = "SELECT distinct validatedMember " 
+		final String queryString = "SELECT distinct validatedMember "
 			+ " FROM CollectionJournalLine l "
-			+ " WHERE 1 = 1" 
+			+ " WHERE 1 = 1"
 			+ "   AND year(l.collectionJournal.journalDate) = :year "
 			+ "   AND month(l.collectionJournal.journalDate) = :month ";
 
-		Query query = getCurrentSession().createQuery(queryString);
+		final Query query = getCurrentSession().createQuery(queryString);
 		query.setInteger("year", year);
 		query.setInteger("month", month+1);
 
-		return (query.list());
+		return query.list();
 	}
 
 	@Override
 	public List<CollectionJournalLine> getPayableDeliveriesForMember(final Membership member, final int month,
 			final int year) {
-		String queryString = "FROM CollectionJournalLine l " + "WHERE l.validatedMember = :member "
+		final String queryString = "FROM CollectionJournalLine l " + "WHERE l.validatedMember = :member "
 				+ "  AND l.rejected = False " + "  AND l.flagged = False "
 				+ "  AND year(l.collectionJournal.journalDate) = :year "
 				+ "  AND month(l.collectionJournal.journalDate) = :month ";
 
-		Query query = getCurrentSession().createQuery(queryString);
+		final Query query = getCurrentSession().createQuery(queryString);
 		query.setEntity("member", member);
 		query.setInteger("year", year);
 		query.setInteger("month", month);
 
-		return (query.list());
+		return query.list();
 
 	}
 
 	@Override
 	public BigDecimal getSumOfPayableDeliveries(final Membership member, final int month, final int year) {
-		String queryString = "SELECT sum(l.quantity) " + "FROM CollectionJournalLine l "
+		final String queryString = "SELECT sum(l.quantity) " + "FROM CollectionJournalLine l "
 				+ "WHERE l.validatedMember = :member " + "  AND l.rejected = False " + "  AND l.flagged = False "
 				+ "  AND year(l.collectionJournal.journalDate) = :year "
 				+ "  AND month(l.collectionJournal.journalDate) = :month ";
 
-		Query query = getCurrentSession().createQuery(queryString);
+		final Query query = getCurrentSession().createQuery(queryString);
 		query.setEntity("member", member);
 		query.setInteger("year", year);
 		query.setInteger("month", month);
 
 		Object sum = query.uniqueResult();
-		if (sum == null) sum = "0";
-		return (new BigDecimal(sum.toString()));
+		if (sum == null) {
+			sum = "0";
+		}
+		return new BigDecimal(sum.toString());
 	}
 
 

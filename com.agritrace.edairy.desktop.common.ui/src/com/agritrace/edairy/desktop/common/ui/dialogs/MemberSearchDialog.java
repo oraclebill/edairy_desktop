@@ -46,8 +46,8 @@ import com.google.inject.name.Named;
 public class MemberSearchDialog extends TitleAreaDialog {
 
 	private final class MemberViewerFilter extends ViewerFilter {
-		private CCombo combo;
-		private Text text;
+		private final CCombo combo;
+		private final Text text;
 
 		public MemberViewerFilter(CCombo field, Text text) {
 //			System.err.printf("MemberViewerFilter: %s, %s\n", field, text);
@@ -57,9 +57,9 @@ public class MemberSearchDialog extends TitleAreaDialog {
 
 		@Override
 		public boolean select(Viewer viewer, Object parentElement, Object element) {
-			
+
 			boolean selected = true;
-			
+
 			if (combo == null || combo.getText().trim().length() == 0) {
 				return true;
 			}
@@ -67,15 +67,15 @@ public class MemberSearchDialog extends TitleAreaDialog {
 			if (text == null || text.getText().trim().length() == 0) {
 				return true;
 			}
-			String textStr = text.getText().trim().toLowerCase();
-			String comboStr = combo.getText();
-			
+			final String textStr = text.getText().trim().toLowerCase();
+			final String comboStr = combo.getText();
+
 			if (element instanceof Membership) {
-				Membership membership = (Membership) element;
+				final Membership membership = (Membership) element;
 				if (comboStr.equals("ID")) {
 					selected = membership.getMemberNumber().toLowerCase().contains(textStr);
 				} else if (comboStr.equals("Name")) {
-					Person member = membership.getMember();
+					final Person member = membership.getMember();
 					if (member != null) {
 						String name = member.getGivenName().toLowerCase();
 						if (name != null && name.trim().length() > 0) {
@@ -103,7 +103,7 @@ public class MemberSearchDialog extends TitleAreaDialog {
 		public LookupSelection(TableViewer tableView) {
 			myTable = tableView;
 		}
-		
+
 		@Override
 		public void modifyText(ModifyEvent e) {
 			if (e.widget == searchType) {
@@ -122,7 +122,7 @@ public class MemberSearchDialog extends TitleAreaDialog {
 		@Override
 		public void widgetSelected(SelectionEvent event) {
 //			System.err.println("widgetSelected: " + e);
-			ViewerFilter filter = new MemberViewerFilter(searchType, filterText);
+			final ViewerFilter filter = new MemberViewerFilter(searchType, filterText);
 //			System.err.println("widgetSelected: adding filter " + filter);
 			myTable.setFilters(new ViewerFilter[] { filter });
 		}
@@ -130,7 +130,7 @@ public class MemberSearchDialog extends TitleAreaDialog {
 	}
 
 	public class MemberLabelProvider extends BaseLabelProvider implements ITableLabelProvider {
-		
+
 		@Override
 		public Image getColumnImage(Object element, int columnIndex) {
 			return null;
@@ -141,7 +141,7 @@ public class MemberSearchDialog extends TitleAreaDialog {
 			if (element instanceof Membership) {
 				final Membership membership = (Membership) element;
 				final Person member = membership.getMember();
-				assert (member != null);
+				assert member != null;
 				switch (columnIndex) {
 				case 0:
 					return membership.getMemberNumber();
@@ -174,7 +174,7 @@ public class MemberSearchDialog extends TitleAreaDialog {
 
 	/**
 	 * MyTitleAreaDialog constructor
-	 * 
+	 *
 	 * @param shell
 	 *            the parent shell
 	 */
@@ -218,7 +218,7 @@ public class MemberSearchDialog extends TitleAreaDialog {
 
 	/**
 	 * Creates the buttons for the button bar
-	 * 
+	 *
 	 * @param parent
 	 *            the parent composite
 	 */
@@ -229,7 +229,7 @@ public class MemberSearchDialog extends TitleAreaDialog {
 
 	/**
 	 * Creates the dialog's contents
-	 * 
+	 *
 	 * @param parent
 	 *            the parent composite
 	 * @return Control
@@ -244,7 +244,7 @@ public class MemberSearchDialog extends TitleAreaDialog {
 
 	/**
 	 * Creates the gray area
-	 * 
+	 *
 	 * @param parent
 	 *            the parent composite
 	 * @return Control
@@ -273,7 +273,7 @@ public class MemberSearchDialog extends TitleAreaDialog {
 		lookupButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false));
 
 //		getShell().setDefaultButton(lookupButton);
-//		
+//
 		final Composite panel = new Composite(dialogArea, SWT.NULL);
 		panel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 4, 1));
 		final TableViewer tableView = new TableViewer(panel, SWT.FULL_SELECTION | SWT.BORDER | SWT.SINGLE);
@@ -281,21 +281,21 @@ public class MemberSearchDialog extends TitleAreaDialog {
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 
-		LookupSelection refreshListener = new LookupSelection(tableView);
-		
+		final LookupSelection refreshListener = new LookupSelection(tableView);
+
 		lookupButton.addSelectionListener(refreshListener);
 		filterText.addModifyListener(refreshListener);
 		searchType.addModifyListener(refreshListener);
-		
-		tableView.addDoubleClickListener(new IDoubleClickListener() {			
+
+		tableView.addDoubleClickListener(new IDoubleClickListener() {
 			@Override
 			public void doubleClick(DoubleClickEvent event) {
-				ISelection selection = event.getSelection();
+				final ISelection selection = event.getSelection();
 				handleSelection(selection);
 				close();
 			}
 		});
-		
+
 		// Create two columns and show
 		final TableColumn id = new TableColumn(table, SWT.LEFT);
 		id.setText("ID");
@@ -327,11 +327,11 @@ public class MemberSearchDialog extends TitleAreaDialog {
 		});
 
 		parent.getShell().setDefaultButton(lookupButton);
-		
+
 		panel.setLayout(layout);
 		return composite;
 	}
-	
+
 	void handleSelection(ISelection sel) {
 		if (sel instanceof IStructuredSelection) {
 			final IStructuredSelection selected = (IStructuredSelection) sel;

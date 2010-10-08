@@ -39,13 +39,13 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 
 	/**
 	 * Template method for configuring the dialog widgets.
-	 * 
+	 *
 	 * Will call subclass implemented 'configureUserRidgets', then configure any
 	 * mapped ridgets and finally upate the button panel.
-	 * 
+	 *
 	 * Subclasses should implement 'afterBind' to manipulate any mapped bindings
 	 * or modify buttons based on context.
-	 * 
+	 *
 	 * @return
 	 */
 	@Override
@@ -60,11 +60,11 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 	@SuppressWarnings("unchecked")
 	@Override
 	public T getWorkingCopy() {
-		T workingCopy = (T) this.getContext(AbstractDirectoryController.EDITED_OBJECT_ID);
+		final T workingCopy = (T) this.getContext(AbstractDirectoryController.EDITED_OBJECT_ID);
 		return workingCopy;
 	}
 
-	
+
 	@Override
 	public void afterBind() {
 		super.afterBind();
@@ -72,14 +72,14 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 			mapper.updateAllRidgetsFromModel();
 		}
 	}
-	
+
 	private void configureMappedRidgets() {
 		if (mapper != null) {
 			mapper.configureRidgets();
 		}
 	}
-	
-	
+
+
 	private final BindingHelper<T> getOrCreateMapper() {
 		if (mapper == null) {
 			mapper = new BindingHelper<T>(this, getWorkingCopy());
@@ -90,10 +90,10 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 	/**
 	 * Subclasses should override to perform mappings and configure any
 	 * unmappable ridgets.. The default implementation does nothing.
-	 * 
+	 *
 	 */
 	protected void configureUserRidgets() {
-		
+
 	}
 
 	protected int getActionType() {

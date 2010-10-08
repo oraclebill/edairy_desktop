@@ -4,7 +4,7 @@ public interface NavigationConstants {
 
 	public static final String SUBAPP_MILK_VIEWID = "com.agritrace.edairy.desktop.milk";
 
-	
+
 	public static final String MODULE_GROUP_MILK = "milk.navgroup";//$NON-NLS-1$
 	public static final String MODULE_MILK_COLLECTIONS = "edm.milk.collection";//$NON-NLS-1$
 	public static final String MODULE_MILK_DELIVERY = "edm.milk.delivery";//$NON-NLS-1$
@@ -14,7 +14,7 @@ public interface NavigationConstants {
 	public static final String SUBMODULE_MILK_COLLECTIONS_DETAIL_REGISTER = "edm.milkcollection.detail.log";//$NON-NLS-1$
 	public static final String SUBMODULE_MILK_COLLECTIONS_REGISTER = "edm.milk.collection.log";//$NON-NLS-1$
 
-	public static final String SUBMODULE_MILK_DELIVERY_REGISTER = "edm.milk.delivery.log";//$NON-NLS-1$ 
+	public static final String SUBMODULE_MILK_DELIVERY_REGISTER = "edm.milk.delivery.log";//$NON-NLS-1$
 
 
 	/**
@@ -37,8 +37,8 @@ public interface NavigationConstants {
 	- milk collections
 		- by route
 			- by status
-		
-	**/ 
+
+	**/
 //	public static final String MILK_COLLECTION_JOURNAL_DETAIL_NODE = "milk.collection.working-journals";
 	public static final String MILK_COLLECTION_JOURNAL_DETAIL_NODE = "milk.collection.working-journals";
 

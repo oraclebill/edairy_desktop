@@ -23,8 +23,8 @@ import com.google.inject.Provider;
 public final class ImageDataUtil {
 	@Inject
 	private static ImageDataUtil INSTANCE;
-	private Provider<Session> sessionProvider;
-	
+	private final Provider<Session> sessionProvider;
+
 	@Inject
 	protected ImageDataUtil(Provider<Session> sessionProvider) {
 		this.sessionProvider = sessionProvider;
@@ -34,21 +34,21 @@ public final class ImageDataUtil {
 	public static ImageDataUtil getInstance() {
 		return INSTANCE;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 */
 	public ImageData getImageData(String key) {
 		ImageData ret = null;
 		if (key != null) {
 			try {
-				ImageEntry entry = (ImageEntry) sessionProvider.get().load("ImageEntry", key);
+				final ImageEntry entry = (ImageEntry) sessionProvider.get().load("ImageEntry", key);
 				final byte[] data = entry.getImageData();
 				debug_print(key, data);
-				InputStream stream = new ByteArrayInputStream(
+				final InputStream stream = new ByteArrayInputStream(
 						entry.getImageData());
 				ret = new ImageData(stream);
-			} catch (HibernateException hbe) {
+			} catch (final HibernateException hbe) {
 				log(LogService.LOG_WARNING, hbe.getMessage(), hbe);
 			}
 		}
@@ -56,17 +56,17 @@ public final class ImageDataUtil {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void saveImageData(String key, ImageData data) {
 		if (key == null) {
 			return;
 		}
-		
-		Session session = sessionProvider.get();
-		
+
+		final Session session = sessionProvider.get();
+
 		try {
-			Transaction tx = session.beginTransaction();
+			final Transaction tx = session.beginTransaction();
 			ImageEntry entry = (ImageEntry) session.get("ImageEntry", key);
 			if (entry == null) {
 				entry = ModelFactory.eINSTANCE.createImageEntry();
@@ -81,7 +81,7 @@ public final class ImageDataUtil {
 			entry.setImageData(baos.toByteArray());
 			entry.setMimeType(decodeMimeType(data.type));
 			tx.commit();
-		} catch (HibernateException hbe) {
+		} catch (final HibernateException hbe) {
 			log(LogService.LOG_WARNING, "Error saving ImageEntry: " + key, hbe);
 		} finally {
 			if (session != null) {
@@ -130,18 +130,19 @@ public final class ImageDataUtil {
 	}
 
 	private static void debug_print(String tag, byte[] array) {
-		int COUNT = 64;
+		final int COUNT = 64;
 		System.err
 				.println(String.format("First %d bytes of %s\n ", COUNT, tag));
 		for (int i = 0; i < COUNT; i++) {
 			System.err.print(String.format("%02x ", array[i]));
-			if ((i + 1) % 32 == 0)
+			if ((i + 1) % 32 == 0) {
 				System.err.print("\n");
+			}
 		}
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private static void log(int level, String message, Throwable exception) {
 		Log4r.getLogger(Activator.getDefault(), DairyRepository.class).log(level, message,

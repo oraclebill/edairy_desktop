@@ -36,20 +36,20 @@ import com.google.inject.Provider;
 
 /**
  * A controller type thing for the account transaction edit panel.
- * 
+ *
  * Lifecycle is - instantiate -
- * 
+ *
  * @author oraclebill
- * 
+ *
  */
 public class AccountTransactionEditPanelController extends AbstractDetailPanelController<AccountTransaction> {
 
 	public class TransactionSourceSelectionListener implements ISelectionListener {
 		@Override
 		public void ridgetSelected(SelectionEvent event) {
-			List<Object> selected = event.getNewSelection();
+			final List<Object> selected = event.getNewSelection();
 			if (selected != null && selected.size() > 0) {
-				Object obj = selected.get(0);
+				final Object obj = selected.get(0);
 				if (obj instanceof TransactionSource) {
 					updateWidgetsForSource((TransactionSource) obj);
 				}
@@ -60,10 +60,10 @@ public class AccountTransactionEditPanelController extends AbstractDetailPanelCo
 
 	private IComboRidget storeLocation;
 	private ITextRidget memberName;
-	
+
 	private final IDairyRepository dairyRepo;
 	private final Provider<MemberSearchDialog> memberSearchProvider;
-	
+
 	@Inject
 	public AccountTransactionEditPanelController(final IDairyRepository dairyRepo,
 			final Provider<MemberSearchDialog> memberSearchProvider) {
@@ -79,7 +79,7 @@ public class AccountTransactionEditPanelController extends AbstractDetailPanelCo
 
 	@Override
 	protected void bindRidgets() {
-		BindingHelper<AccountTransaction> mapper = getMapper();
+		final BindingHelper<AccountTransaction> mapper = getMapper();
 		mapper.addMapping(FinanceBindingConstants.ID_TRANSACTION_DATE,
 				AccountPackage.Literals.TRANSACTION__TRANSACTION_DATE);
 		mapper.addMapping(FinanceBindingConstants.ID_REF_NUMBER_TEXT,
@@ -91,8 +91,8 @@ public class AccountTransactionEditPanelController extends AbstractDetailPanelCo
 		mapper.addMapping(FinanceBindingConstants.ID_SIGNED_BY_TEXT,
 				AccountPackage.Literals.ACCOUNT_TRANSACTION__SIGNED_BY);
 
-		IRidgetContainer container = getRidgetContainer();
-		AccountTransaction model = getModel();
+		final IRidgetContainer container = getRidgetContainer();
+		final AccountTransaction model = getModel();
 
 		// configure and bind transaction source
 		final ISingleChoiceRidget sourceRidget = container.getRidget(ISingleChoiceRidget.class,
@@ -114,8 +114,9 @@ public class AccountTransactionEditPanelController extends AbstractDetailPanelCo
 
 		memberName = container.getRidget(ITextRidget.class, FinanceBindingConstants.ID_MEMBER_NAME_TEXT);
 		memberName.setOutputOnly(true);
-		if (model.getAccount() != null)
+		if (model.getAccount() != null) {
 			setSelectedMember(model.getAccount().getMember());
+		}
 
 		// configure member lookup action
 		final IActionRidget memberLookup = container.getRidget(IActionRidget.class,
@@ -137,30 +138,30 @@ public class AccountTransactionEditPanelController extends AbstractDetailPanelCo
 		if (locations.size() == 0) {
 			locations = Arrays.asList();
 		}
-		IObservableList optionList = Observables.staticObservableList(locations);
-		IObservableValue selectedValue = PojoObservables.observeValue(model, "relatedLocation"); 
+		final IObservableList optionList = Observables.staticObservableList(locations);
+		final IObservableValue selectedValue = PojoObservables.observeValue(model, "relatedLocation");
 		storeLocation.bindToModel(optionList, DairyLocation.class, "getName", selectedValue);
 		System.err.println("Binding: >>>> " + dairyRepo.getLocalDairyLocations());
 		System.err.println(" to Model: >>>> " + model);
 		storeLocation.updateFromModel();
 
 	}
-	
+
 	private void setSelectedMember(Membership selectedMember) {
 		Account memberAccount = selectedMember.getAccount();
 		if (memberAccount == null) {
 			memberAccount = AccountFactory.eINSTANCE.createAccount();
 			selectedMember.setAccount(memberAccount);
 		}
-		
+
 		getModel().setAccount(memberAccount);
 		memberName.setText(MemberUtil.formattedMemberName(selectedMember.getMember()));
 	}
 
 	void updateWidgetsForSource(TransactionSource source) {
-		IRidgetContainer container = getRidgetContainer();
+		final IRidgetContainer container = getRidgetContainer();
 		boolean showStoreLocation = false, showCheckNo = false, showSignedBy = false;
-		
+
 		if (container.getRidget(FinanceBindingConstants.ID_TRANSACTION_CHOICE).isEnabled()) {
 			if (source == TransactionSource.CASH_PAYMENT) {
 				showCheckNo = true;
@@ -169,7 +170,7 @@ public class AccountTransactionEditPanelController extends AbstractDetailPanelCo
 				showStoreLocation = true;
 			}
 		}
-		
+
 		enableMandatoryRidget(container.getRidget(ITextRidget.class, FinanceBindingConstants.ID_CHECK_NUMBER_TEXT),
 				showCheckNo);
 		enableMandatoryRidget(

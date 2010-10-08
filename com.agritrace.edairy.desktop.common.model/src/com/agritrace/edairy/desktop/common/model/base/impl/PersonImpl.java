@@ -6,16 +6,14 @@
  */
 package com.agritrace.edairy.desktop.common.model.base.impl;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.base.Person;
-
-import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -338,6 +336,7 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getPhoto() {
 		return photo;
 	}
@@ -347,11 +346,13 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPhoto(String newPhoto) {
-		String oldPhoto = photo;
+		final String oldPhoto = photo;
 		photo = newPhoto;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__PHOTO, oldPhoto, photo));
+		}
 	}
 
 	/**
@@ -359,6 +360,7 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getHonorific() {
 		return honorific;
 	}
@@ -368,11 +370,13 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setHonorific(String newHonorific) {
-		String oldHonorific = honorific;
+		final String oldHonorific = honorific;
 		honorific = newHonorific;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__HONORIFIC, oldHonorific, honorific));
+		}
 	}
 
 	/**
@@ -380,6 +384,7 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getFamilyName() {
 		return familyName;
 	}
@@ -389,11 +394,13 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFamilyName(String newFamilyName) {
-		String oldFamilyName = familyName;
+		final String oldFamilyName = familyName;
 		familyName = newFamilyName;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__FAMILY_NAME, oldFamilyName, familyName));
+		}
 	}
 
 	/**
@@ -401,6 +408,7 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getGivenName() {
 		return givenName;
 	}
@@ -410,11 +418,13 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setGivenName(String newGivenName) {
-		String oldGivenName = givenName;
+		final String oldGivenName = givenName;
 		givenName = newGivenName;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__GIVEN_NAME, oldGivenName, givenName));
+		}
 	}
 
 	/**
@@ -422,6 +432,7 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getMiddleName() {
 		return middleName;
 	}
@@ -431,11 +442,13 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMiddleName(String newMiddleName) {
-		String oldMiddleName = middleName;
+		final String oldMiddleName = middleName;
 		middleName = newMiddleName;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__MIDDLE_NAME, oldMiddleName, middleName));
+		}
 	}
 
 	/**
@@ -443,6 +456,7 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getAdditionalNames() {
 		return additionalNames;
 	}
@@ -452,11 +466,13 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAdditionalNames(String newAdditionalNames) {
-		String oldAdditionalNames = additionalNames;
+		final String oldAdditionalNames = additionalNames;
 		additionalNames = newAdditionalNames;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__ADDITIONAL_NAMES, oldAdditionalNames, additionalNames));
+		}
 	}
 
 	/**
@@ -464,6 +480,7 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getSuffix() {
 		return suffix;
 	}
@@ -473,11 +490,13 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSuffix(String newSuffix) {
-		String oldSuffix = suffix;
+		final String oldSuffix = suffix;
 		suffix = newSuffix;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__SUFFIX, oldSuffix, suffix));
+		}
 	}
 
 	/**
@@ -485,6 +504,7 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getNickName() {
 		return nickName;
 	}
@@ -494,11 +514,13 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNickName(String newNickName) {
-		String oldNickName = nickName;
+		final String oldNickName = nickName;
 		nickName = newNickName;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__NICK_NAME, oldNickName, nickName));
+		}
 	}
 
 	/**
@@ -506,6 +528,7 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
@@ -515,11 +538,13 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPhoneNumber(String newPhoneNumber) {
-		String oldPhoneNumber = phoneNumber;
+		final String oldPhoneNumber = phoneNumber;
 		phoneNumber = newPhoneNumber;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__PHONE_NUMBER, oldPhoneNumber, phoneNumber));
+		}
 	}
 
 	/**
@@ -527,13 +552,15 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Location getLocation() {
 		if (location != null && location.eIsProxy()) {
-			InternalEObject oldLocation = (InternalEObject)location;
+			final InternalEObject oldLocation = (InternalEObject)location;
 			location = (Location)eResolveProxy(oldLocation);
 			if (location != oldLocation) {
-				if (eNotificationRequired())
+				if (eNotificationRequired()) {
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.PERSON__LOCATION, oldLocation, location));
+				}
 			}
 		}
 		return location;
@@ -553,11 +580,13 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLocation(Location newLocation) {
-		Location oldLocation = location;
+		final Location oldLocation = location;
 		location = newLocation;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__LOCATION, oldLocation, location));
+		}
 	}
 
 	/**
@@ -565,6 +594,7 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Long getPersonId() {
 		return personId;
 	}
@@ -574,11 +604,13 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPersonId(Long newPersonId) {
-		Long oldPersonId = personId;
+		final Long oldPersonId = personId;
 		personId = newPersonId;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__PERSON_ID, oldPersonId, personId));
+		}
 	}
 
 	/**
@@ -586,6 +618,7 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getNssfNumber() {
 		return nssfNumber;
 	}
@@ -595,11 +628,13 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNssfNumber(String newNssfNumber) {
-		String oldNssfNumber = nssfNumber;
+		final String oldNssfNumber = nssfNumber;
 		nssfNumber = newNssfNumber;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__NSSF_NUMBER, oldNssfNumber, nssfNumber));
+		}
 	}
 
 	/**
@@ -607,6 +642,7 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getNhifNumber() {
 		return nhifNumber;
 	}
@@ -616,11 +652,13 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNhifNumber(String newNhifNumber) {
-		String oldNhifNumber = nhifNumber;
+		final String oldNhifNumber = nhifNumber;
 		nhifNumber = newNhifNumber;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__NHIF_NUMBER, oldNhifNumber, nhifNumber));
+		}
 	}
 
 	/**
@@ -628,6 +666,7 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getNationalId() {
 		return nationalId;
 	}
@@ -637,11 +676,13 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNationalId(String newNationalId) {
-		String oldNationalId = nationalId;
+		final String oldNationalId = nationalId;
 		nationalId = newNationalId;
-		if (eNotificationRequired())
+		if (eNotificationRequired()) {
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__NATIONAL_ID, oldNationalId, nationalId));
+		}
 	}
 
 	/**
@@ -671,7 +712,9 @@ public class PersonImpl extends ContactableImpl implements Person {
 			case ModelPackage.PERSON__PHONE_NUMBER:
 				return getPhoneNumber();
 			case ModelPackage.PERSON__LOCATION:
-				if (resolve) return getLocation();
+				if (resolve) {
+					return getLocation();
+				}
 				return basicGetLocation();
 			case ModelPackage.PERSON__PERSON_ID:
 				return getPersonId();
@@ -840,9 +883,11 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy()) {
+			return super.toString();
+		}
 
-		StringBuffer result = new StringBuffer(super.toString());
+		final StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (photo: ");
 		result.append(photo);
 		result.append(", honorific: ");

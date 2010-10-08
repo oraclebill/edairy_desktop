@@ -204,7 +204,7 @@ public enum PreferenceType implements Enumerator {
 	 */
 	public static PreferenceType get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			PreferenceType result = VALUES_ARRAY[i];
+			final PreferenceType result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -220,7 +220,7 @@ public enum PreferenceType implements Enumerator {
 	 */
 	public static PreferenceType getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			PreferenceType result = VALUES_ARRAY[i];
+			final PreferenceType result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -284,6 +284,7 @@ public enum PreferenceType implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getValue() {
 	  return value;
 	}
@@ -293,6 +294,7 @@ public enum PreferenceType implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 	  return name;
 	}
@@ -302,6 +304,7 @@ public enum PreferenceType implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLiteral() {
 	  return literal;
 	}
@@ -316,5 +319,5 @@ public enum PreferenceType implements Enumerator {
 	public String toString() {
 		return literal;
 	}
-	
+
 } //PreferenceType

@@ -10,15 +10,15 @@ public class HsqlDbDataStoreProvider extends HbDataStoreProvider {
 	protected Properties getDatastoreProperties() {
 		final Properties props = new Properties();
 
-		File dbFile = new File(getDatabaseFileArea(), getDatabaseName());
-		
+		final File dbFile = new File(getDatabaseFileArea(), getDatabaseName());
+
 		// file based hsqldb
 		props.setProperty(Environment.DRIVER, "org.hsqldb.jdbcDriver");
 		props.setProperty(Environment.USER, "SA");
 		props.setProperty(Environment.URL, String.format("jdbc:hsqldb:file:%s.db", dbFile));
 		props.setProperty(Environment.PASS, "");
 		props.setProperty(Environment.DIALECT, "org.hibernate.dialect.HSQLDialect");
-		
+
 
 		// TODO: test this - perhaps JTA or 'managed' is better...
 		props.setProperty(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
@@ -34,5 +34,5 @@ public class HsqlDbDataStoreProvider extends HbDataStoreProvider {
 		props.setProperty(Environment.HBM2DDL_AUTO, "update");
 		return props;
 	}
-	
+
 }

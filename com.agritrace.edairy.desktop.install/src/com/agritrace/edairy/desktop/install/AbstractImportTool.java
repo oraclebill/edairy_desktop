@@ -43,23 +43,23 @@ public abstract class AbstractImportTool {
 	public AbstractImportTool(Reader reader) {
 		setReader(reader);
 	}
-	
+
 	protected void setReader(Reader reader) {
 		this.reader = reader;
 	}
 
 	public void processFile() throws IOException {
-		CsvReader csvReader = new CsvReader(reader);
+		final CsvReader csvReader = new CsvReader(reader);
 		csvReader.readRecord();
-		String[] headers = csvReader.getValues();
+		final String[] headers = csvReader.getValues();
 		validateHeaders(headers);
 		while (csvReader.readRecord()) {
 			checkCancelled();
-			String[] values = csvReader.getValues();
+			final String[] values = csvReader.getValues();
 			try {
 				processRecord(values);
 				count++;
-			}  catch (ValidationException e) {
+			}  catch (final ValidationException e) {
 				errCount++;
 				log(LogService.LOG_WARNING, "%s error importing record: %s", e.getMessage(), Arrays.toString(values));
 				doImportRecordFailed(values, e);
@@ -72,22 +72,22 @@ public abstract class AbstractImportTool {
 
 	protected void processRecord(String[] values) {
 		validateRecord(values);
-		EObject entity = createEntityFromRecord(values);
+		final EObject entity = createEntityFromRecord(values);
 		saveImportedEntity(entity);
 	}
 
 	abstract protected void saveImportedEntity(Object entity);
 
 	protected EObject createEntityFromRecord(String[] values) {
-		EObject entity = createBlankEntity();		
-		return initializeEntityFromRecord( entity,  values);		
+		final EObject entity = createBlankEntity();
+		return initializeEntityFromRecord( entity,  values);
 	}
-	
-	protected EObject initializeEntityFromRecord(EObject entity, String[] values) {		
+
+	protected EObject initializeEntityFromRecord(EObject entity, String[] values) {
 		// EMFUtil.populate(vehicle);
-		for (Entry entry : getFields()) {
-			String value = values[entry.field];
-			Object converted = convert(entry.feature, value);
+		for (final Entry entry : getFields()) {
+			final String value = values[entry.field];
+			final Object converted = convert(entry.feature, value);
 			// System.err.printf("Setting %s: '%s'\n", entry.feature.getName(),
 			// converted);
 			entity.eSet(entry.feature, converted);
@@ -97,7 +97,7 @@ public abstract class AbstractImportTool {
 
 	/**
 	 * create a fresh entity, initialized with any defaults.
-	 * 
+	 *
 	 * @return
 	 */
 	abstract protected EObject createBlankEntity();
@@ -105,24 +105,27 @@ public abstract class AbstractImportTool {
 	/**
 	 * Called from 'createEntityFromRecord', provides the field mappings necessary to construct a new
 	 * entity from an import record (string array).
-	 * 
+	 *
 	 * @return a list of field to attribute mappings.
 	 */
 	abstract protected List<Entry> getFields();
 
-	abstract protected void doImportComplete(int okCount, int failCount); 
+	abstract protected void doImportComplete(int okCount, int failCount);
 
 	protected void validateHeaders(String[] actualHeaders) {
 		String errorMessage = null;
-		String[] expectedHeaders = getExpectedHeaders();
+		final String[] expectedHeaders = getExpectedHeaders();
 		if (expectedHeaders != null) {
-			if (actualHeaders.length != expectedHeaders.length)
+			if (actualHeaders.length != expectedHeaders.length) {
 				throw new ValidationException("Number of fields does not match - found " + actualHeaders.length
 						+ " expected " + expectedHeaders.length);
+			}
 			for (int i = 0; i < expectedHeaders.length; i++) {
-				if (expectedHeaders[i] == null) continue;
-				String expected = expectedHeaders[i].trim();
-				String actual = actualHeaders[i].trim();
+				if (expectedHeaders[i] == null) {
+					continue;
+				}
+				final String expected = expectedHeaders[i].trim();
+				final String actual = actualHeaders[i].trim();
 				if (!expected.equals(actual)) {
 					if (errorMessage == null) {
 						errorMessage = "Mismatched headers: \n";
@@ -131,8 +134,9 @@ public abstract class AbstractImportTool {
 							+ "'\n";
 				}
 			}
-			if (errorMessage != null)
+			if (errorMessage != null) {
 				throw new ValidationException(errorMessage);
+			}
 		}
 	}
 
@@ -140,7 +144,7 @@ public abstract class AbstractImportTool {
 
 	protected void validateRecord(String[] values) {
 		String val;
-		for (int i : getMandatoryFieldIndexes()) {
+		for (final int i : getMandatoryFieldIndexes()) {
 			val = values[i];
 			if (val == null || val.trim().length() == 0) {
 				throw new ValidationException("missing mandatory field " + i);
@@ -157,35 +161,35 @@ public abstract class AbstractImportTool {
 	}
 
 	protected Object convert(EStructuralFeature feature, String value) {
-		Class<?> instanceClass = feature.getEType().getInstanceClass();
+		final Class<?> instanceClass = feature.getEType().getInstanceClass();
 		Object retVal = value;
 		if (Date.class.isAssignableFrom(instanceClass)) {
 			try {
 				retVal = new Date(value);
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				retVal = null;
 			}
 		} else if (Integer.class.isAssignableFrom(instanceClass)) {
 			System.err.println(">> Converting from " + value + " (" + instanceClass + ") to Integer");
 			try {
 				retVal = new Integer(value);
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				retVal = null;
 			}
 		}
 		return retVal;
 	}
-	
+
 	protected void setMonitor(IProgressMonitor monitor) {
 		this.monitor = monitor;
 	}
-	
+
 	protected IProgressMonitor getMonitor() {
 		return this.monitor;
 	}
-	
 
-	
+
+
 	public void log(int level, String message, Object... args) {
 		final Logger logger = Log4r.getLogger(getClass());
 		logger.log(level, String.format(message, args));
@@ -195,18 +199,22 @@ public abstract class AbstractImportTool {
 	public void setMonitorDelta(int delta) {
 		this.delta = delta;
 	}
-	
+
 	protected void worked(int cumulativeWork) {
 		if (monitor != null) {
 			if(cumulativeWork % delta == 0)
+			 {
 				monitor.worked(delta);
 //			monitor.setTaskName("Imports: " + count + ", Errors: " + errCount);
+			}
 		}
 	}
 
 	protected void checkCancelled() {
 		if (monitor != null) {
-			if(monitor.isCanceled()) throw new RuntimeException("Cancelled!");
+			if(monitor.isCanceled()) {
+				throw new RuntimeException("Cancelled!");
+			}
 		}
 	}
 }

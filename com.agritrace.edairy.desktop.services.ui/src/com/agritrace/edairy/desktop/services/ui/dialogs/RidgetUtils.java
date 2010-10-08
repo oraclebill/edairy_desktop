@@ -22,9 +22,9 @@ import org.osgi.framework.BundleContext;
 
 /**
  * Utilies class for ridget
- * 
+ *
  * @author Hui(Spark Wans
- * 
+ *
  */
 public class RidgetUtils {
 
@@ -45,7 +45,7 @@ public class RidgetUtils {
 
 	/**
 	 * Inject ridgets without configRidgets
-	 * 
+	 *
 	 * @param ridgetContainer
 	 *            Ridget container
 	 * @param uiControls

@@ -27,9 +27,9 @@ public class PersonToFormattedName extends ColumnFormatter {
 			System.err.println("(null) recieved by PersonToFormattedName ColumnFormatter.");
 		} else {
 			try {
-				Person p = (Person) element;
+				final Person p = (Person) element;
 				return String.format("%s, %s", p.getFamilyName(), p.getGivenName());
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				System.err.printf("Invalid type recieved by PersonToFormattedName ColumnFormatter: %s (%s)\n",
 						element.getClass(), element);
 			}
@@ -41,13 +41,13 @@ public class PersonToFormattedName extends ColumnFormatter {
 		Object property = null;
 		try {
 			property = PropertyUtils.getNestedProperty(element, propertyName2);
-		} catch (IllegalAccessException e) {
+		} catch (final IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (InvocationTargetException e) {
+		} catch (final InvocationTargetException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
+		} catch (final NoSuchMethodException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

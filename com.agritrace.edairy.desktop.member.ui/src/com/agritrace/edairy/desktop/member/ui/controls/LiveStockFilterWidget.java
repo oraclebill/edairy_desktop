@@ -13,7 +13,7 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 public class LiveStockFilterWidget {
 
 	private Composite composite;
-	private boolean filterFarm;
+	private final boolean filterFarm;
 
 	public LiveStockFilterWidget(Composite parent, boolean filterFarm) {
 		composite = UIControlsFactory.createComposite(parent);
@@ -40,9 +40,9 @@ public class LiveStockFilterWidget {
 
 		if(filterFarm){
 			final CCombo farmCombo = UIControlsFactory.createCCombo(filterPanel2, ViewWidgetId.LIVESTOCK_FarmFilterCombo);
-			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(farmCombo);	
+			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(farmCombo);
 		}
-		
+
 
 		final CCombo speciesText = UIControlsFactory.createCCombo(filterPanel2,
 				ViewWidgetId.LIVESTOCK_ContainerSpeciesFilter);

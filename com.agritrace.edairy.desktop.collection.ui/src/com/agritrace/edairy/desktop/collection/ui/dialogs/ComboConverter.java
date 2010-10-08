@@ -4,7 +4,7 @@ import org.eclipse.core.databinding.conversion.Converter;
 import org.eclipse.riena.core.util.ReflectionUtils;
 
 public class ComboConverter extends Converter {
-	private String renderMethod;
+	private final String renderMethod;
 	public ComboConverter(String renderMethod) {
 		super(Object.class, String.class);
 		this.renderMethod = renderMethod;
@@ -19,5 +19,5 @@ public class ComboConverter extends Converter {
 			valueObject = "";
 		}
 		return valueObject.toString();
-	}			
+	}
 }

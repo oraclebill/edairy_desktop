@@ -25,15 +25,15 @@ public class SessionEditDialog extends RecordDialog<CollectionSession> {
 	protected void buildWorkArea(Composite panel) {
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(panel);
 		GridDataFactory.fillDefaults().hint(350, SWT.DEFAULT).applyTo(panel);
-		
+
 		UIControlsFactory.createLabel(panel, "Code");
 		final Text code = UIControlsFactory.createText(panel, SWT.SINGLE, SessionBindingConstants.SESSION_BIND_CODE.name());
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(code);
-		
+
 		UIControlsFactory.createLabel(panel, "Description");
 		final Text desc = UIControlsFactory.createText(panel, SWT.MULTI, SessionBindingConstants.SESSION_BIND_DESCRIPTION.name());
 		GridDataFactory.fillDefaults().grab(true, true).hint(SWT.DEFAULT, 60).applyTo(desc);
-		
+
 		UIControlsFactory.createLabel(panel, "Time of day");
 		final DateTime time = UIControlsFactory.createTime(panel, SWT.BORDER | SWT.SHORT, SessionBindingConstants.SESSION_BIND_TIME.name());
 		GridDataFactory.fillDefaults().applyTo(time);

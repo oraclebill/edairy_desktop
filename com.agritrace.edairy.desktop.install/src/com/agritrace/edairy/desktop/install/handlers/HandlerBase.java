@@ -28,9 +28,9 @@ public abstract class HandlerBase extends AbstractHandler {
 
 	protected String getImportFile(ExecutionEvent event)
 			throws ExecutionException {
-		IWorkbenchWindow window = HandlerUtil
+		final IWorkbenchWindow window = HandlerUtil
 				.getActiveWorkbenchWindowChecked(event);
-		FileDialog fileDialog = new FileDialog(window.getShell(), SWT.OPEN);
+		final FileDialog fileDialog = new FileDialog(window.getShell(), SWT.OPEN);
 		fileDialog.setFilterExtensions(new String[] { "*.csv", });
 		final String importFileName = fileDialog.open();
 		return importFileName;
@@ -41,13 +41,13 @@ public abstract class HandlerBase extends AbstractHandler {
 		int ret = -1;
 		try {
 			is = new BufferedInputStream(new FileInputStream(f));
-			ret = countLines(is);			
+			ret = countLines(is);
 		} finally {
 			try {
 				if (is != null) {
 					is.close();
 				}
-			} catch (Exception e) {
+			} catch (final Exception e) {
 			}
 		}
 		return ret;
@@ -70,7 +70,7 @@ public abstract class HandlerBase extends AbstractHandler {
 	}
 
 	protected void displayErrors(Map<String, List<String[]>> errors) {
-		for (Map.Entry<String, List<String[]>> entry : errors.entrySet()) {
+		for (final Map.Entry<String, List<String[]>> entry : errors.entrySet()) {
 			System.err.printf("key: %s, value: %s\n", entry.getKey(),
 					entry.getValue());
 		}
@@ -79,17 +79,18 @@ public abstract class HandlerBase extends AbstractHandler {
 	protected Object getNavigationContext(ExecutionEvent event)
 			throws ExecutionException {
 		INavigationNode<?> node = null;
-		IWorkbenchPart part = HandlerUtil.getActivePartChecked(event);
-		SubModuleView view = (SubModuleView) part
+		final IWorkbenchPart part = HandlerUtil.getActivePartChecked(event);
+		final SubModuleView view = (SubModuleView) part
 				.getAdapter(SubModuleView.class);
 		if (view != null) {
 			node = view.getNavigationNode();
 		}
 		if (node == null) {
-			NavigationViewPart nvp = (NavigationViewPart) part
+			final NavigationViewPart nvp = (NavigationViewPart) part
 					.getAdapter(NavigationViewPart.class);
-			if (nvp != null)
+			if (nvp != null) {
 				node = nvp.getSubApplicationNode();
+			}
 		}
 		if (node == null) {
 			System.err.println("part: " + part);
