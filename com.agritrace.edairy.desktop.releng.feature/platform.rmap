@@ -44,7 +44,6 @@
 		</rm:provider>
 	</rm:searchPath>
 
-
 	<rm:searchPath name="org.hibernate">
 		<rm:provider componentTypes="osgi.bundle,eclipse.feature"
 			readerType="p2" source="false" mutable="false">

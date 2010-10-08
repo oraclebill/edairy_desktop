@@ -4,12 +4,8 @@
 <target name="edairy-developer">
 <locations>
 <location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
-<unit id="org.eclipse.birt.osgi.runtime.sdk.feature.group" version="2.6.1.v20100617a-57B185wFfAqPz0Ef8mBsMkG-0hfS"/>
-<unit id="org.eclipse.rcp.source.feature.group" version="3.6.1.r361_v20100827-9OArFLdFjY-ThSQXmKvKz0_T"/>
-<unit id="org.eclipse.emf.sdk.feature.group" version="2.6.1.v20100914-1218"/>
-<unit id="org.eclipse.equinox.sdk.feature.group" version="3.6.1.r361_v20100903-7H7R07v8rtOZyYbv1I6aZgou5z07"/>
-<unit id="org.eclipse.riena.build.feature.sdk.feature.group" version="2.0.0.v20100615_2_0_0"/>
-<unit id="org.eclipse.emf.teneo.hibernate.sdk.feature.group" version="1.1.2.v201006151458"/>
+<unit id="org.eclipse.emf.query.feature.group" version="1.4.0.v20100428-2315-218Z7w311A142A1142"/>
+<unit id="org.eclipse.pde.junit.runtime.addon.feature.group" version="1.0.0.v20100831"/>
 <repository location="http://download.eclipse.org/releases/helios/"/>
 </location>
 <location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
@@ -27,12 +23,21 @@
 <repository location="http://download.eclipse.org/eclipse/updates/3.6"/>
 </location>
 <location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
-<unit id="com.instantiations.designer.layout.group.feature.feature.group" version="8.0.0.r36x201009160635"/>
-<repository location="http://dl.google.com/eclipse/inst/d2wbpro/latest/3.6"/>
+<unit id="org.eclipse.birt.osgi.runtime.sdk.feature.group" version="2.6.1.v20100617a-57B185wFfAqPz0Ef8mBsMkG-0hfS"/>
+<unit id="org.eclipse.rcp.source.feature.group" version="3.6.1.r361_v20100827-9OArFLdFjY-ThSQXmKvKz0_T"/>
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.6.1.v20100914-1218"/>
+<unit id="org.eclipse.equinox.sdk.feature.group" version="3.6.1.r361_v20100903-7H7R07v8rtOZyYbv1I6aZgou5z07"/>
+<unit id="org.eclipse.riena.build.feature.sdk.feature.group" version="2.0.0.v20100615_2_0_0"/>
+<unit id="org.eclipse.emf.teneo.hibernate.sdk.feature.group" version="1.1.2.v201006151458"/>
+<repository location="http://download.eclipse.org/releases/helios/"/>
 </location>
 <location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
-<unit id="org.eclipse.emf.query.feature.group" version="1.4.0.v20100428-2315-218Z7w311A142A1142"/>
-<unit id="org.eclipse.pde.junit.runtime.addon.feature.group" version="1.0.0.v20100831"/>
+<unit id="org.eclipse.datatools.connectivity.feature.feature.group" version="1.8.1.v20100618-7C7b8hEt1ZvtiLkdlO7BVoL_wm6"/>
+<unit id="org.eclipse.datatools.enablement.feature.feature.group" version="1.8.1.v20100618-7J8x7FBWwUL6z-2z-fcrYC2s55KI"/>
+<unit id="org.eclipse.datatools.enablement.hsqldb.feature.feature.group" version="1.8.1.v20100618-67C1AqGBJVKbHlH1GU7QBR"/>
+<unit id="org.eclipse.datatools.enablement.jdbc.feature.feature.group" version="1.8.1.v20100618-4-29oB56N5N7L6PAQ"/>
+<unit id="org.eclipse.datatools.enablement.mysql.feature.feature.group" version="1.8.1.v20100618-546AkF78Y7R9PAX77"/>
+<unit id="org.eclipse.datatools.enablement.oda.feature.feature.group" version="1.8.1.v20100618-7A7T78DZRDKDDdFyFiKD"/>
 <repository location="http://download.eclipse.org/releases/helios/"/>
 </location>
 </locations>

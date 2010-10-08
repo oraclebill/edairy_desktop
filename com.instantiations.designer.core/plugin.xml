@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+	<!-- ======================================================== -->
+	<!-- Extension points -->
+	<!-- ======================================================== -->
+	<extension-point id="exceptions" name="Exception description files"
+		schema="schema/exceptions.exsd"/>
+	<extension-point id="adaptableFactories" name="Adaptable factories"
+		schema="schema/adaptableFactories.exsd"/>
+	<extension-point id="projectClasspathListeners"
+		name="Listener for Java project classpath changes"
+		schema="schema/projectClasspathListeners.exsd"/>
+	<extension-point id="designerContentPatterns" name="Patterns for detecting Designer GUI"
+		schema="schema/designerContentPatterns.exsd"/>
+	<!-- descriptions -->
+	<extension-point id="descriptionProcessors" name="Processors for loaded descriptions"
+		schema="schema/descriptionProcessors.exsd"/>
+	<extension-point id="descriptionVersionsProviderFactories"
+		name="Factory for provider of description resources versions"
+		schema="schema/descriptionVersionsProviderFactories.exsd"/>
+	<!-- toolkit -->
+	<extension-point id="toolkits" name="GUI toolkits" schema="schema/toolkits.exsd"/>
+	<extension-point id="componentsHierarchyProviders" name="Components hierarchy providers"
+		schema="schema/componentsHierarchyProviders.exsd"/>
+	<extension-point id="layoutManagers" name="Layout managers for toolkit"
+		schema="schema/layoutManagers.exsd"/>
+	<extension-point id="surroundWith" name="Targets for surrounding components with some container"
+		schema="schema/surroundWith.exsd"/>
+	<!-- parsing -->
+	<extension-point id="executionFlowProviders" name="Provider for execution flow tweaks"
+		schema="schema/executionFlowProviders.exsd"/>
+	<extension-point id="parseFactories" name="Factories for parsing support"
+		schema="schema/parseFactories.exsd"/>
+	<extension-point id="classLoadingContributor"
+		name="Contributor for loading class from Designer plugins"
+		schema="schema/classLoadingContributor.exsd"/>
+	<extension-point id="classLoaderInitializers"
+		name="Listener for loading classes from project ClassLoader"
+		schema="schema/classLoaderInitializers.exsd"/>
+	<extension-point id="parseContextProcessors" name="Processors for parsing context"
+		schema="schema/parseContextProcessors.exsd"/>
+	<extension-point id="javaInfoInitializationParticipators"
+		name="Participators of JavaInfo initialization"
+		schema="schema/javaInfoInitializationParticipators.exsd"/>
+	<extension-point id="rootProcessors" name="Root JavaInfo processors"
+		schema="schema/rootProcessors.exsd"/>
+	<extension-point id="unknownParameterEvaluators" name="Evaluators for unknown method parameters"
+		schema="schema/unknownParameterEvaluators.exsd"/>
+	<!-- property -->
+	<extension-point id="propertyEditors" name="Property editors"
+		schema="schema/propertyEditors.exsd"/>
+	<extension-point id="expressionEvaluators" name="Evaluators for AST Expressions"
+		schema="schema/expressionEvaluators.exsd"/>
+	<extension-point id="invocationEvaluatorInterceptors"
+		name="Interceptor for MethodInvocation/ClassInstanceCreation evaluation"
+		schema="schema/invocationEvaluatorInterceptors.exsd"/>
+	<extension-point id="propertyConverters" name="Property value to Java source converter"
+		schema="schema/propertyConverters.exsd"/>
+	<extension-point id="standardToolkitPackages" schema="schema/standardToolkitPackages.exsd"
+		name="Package prefixes for standard toolkit components"/>
+	<!-- Property UI -->
+	<extension-point id="propertiesPage_CategoryProviders"
+		name="Providers of PropertyCategoryProvider"
+		schema="schema/propertiesPage_CategoryProviders.exsd"/>
+	<extension-point id="propertiesPage_Processors"
+		name="Processors for List for Property before displaying"
+		schema="schema/propertiesPage_Processors.exsd"/>
+	<!-- NLS -->
+	<extension-point id="nlsSources" name="NLS sources" schema="schema/nlsSources.exsd"/>
+	<!-- GEF -->
+	<extension-point id="editPartFactories" name="GEF EditPart factories"
+		schema="schema/editPartFactories.exsd"/>
+	<extension-point id="editPolicyFactories" name="LayoutEditPolicy factories"
+		schema="schema/editPolicyFactories.exsd"/>
+	<extension-point id="editPartConfigurators" name="EditPart configurators"
+		schema="schema/editPartConfigurators.exsd"/>
+	<!-- GEF for tree -->
+	<extension-point id="treeEditPartFactories" name="GEF EditPart factories for TreeViewer"
+		schema="schema/treeEditPartFactories.exsd"/>
+	<extension-point id="treeEditPolicyFactories" name="LayoutEditPolicy factories for TreeViewer"
+		schema="schema/treeEditPolicyFactories.exsd"/>
+	<extension-point id="treeEditPartConfigurators" name="EditPart configurators for TreeViewer"
+		schema="schema/treeEditPartConfigurators.exsd"/>
+	<!-- Baseline -->
+	<extension-point id="baselineSupport" name="Component&apos;s baseline offset provider"
+		schema="schema/baselineSupport.exsd"/>
+	<extension-point id="configurablePropertyFactories"
+		name="Factories for creating configurable (not generic) properties"
+		schema="schema/configurablePropertyFactories.exsd"/>
+	<!-- DesignPages -->
+	<extension-point id="designPageFactories" name="Factories for design pages"
+		schema="schema/designPageFactories.exsd"/>
+	<extension-point id="errorLogsProviders"
+		name="Provider for error logs which further will be included into error report"
+		schema="schema/errorLogsProviders.exsd"/>
+	<!-- Branding -->
+	<extension-point id="branding" name="Branding descriptions" schema="schema/branding.exsd"/>
+
+
+
+	<!-- ======================================================== -->
+	<!-- Exceptions -->
+	<!-- ======================================================== -->
+	<extension point="com.instantiations.designer.core.exceptions">
+		<file path="resources/exceptions.xml"/>
+	</extension>
+
+
+	<!-- ======================================================== -->
+	<!-- Description driven features -->
+	<!-- ======================================================== -->
+	<extension point="com.instantiations.designer.core.javaInfoInitializationParticipators">
+		<participator
+			class="com.instantiations.designer.core.model.util.generic.DescriptionDrivenFeatures_Participator"
+		/>
+	</extension>
+
+	<extension point="com.instantiations.designer.core.rootProcessors">
+		<processor class="com.instantiations.designer.core.model.JavaInfo_RootProcessor"/>
+		<processor
+			class="com.instantiations.designer.core.model.util.generic.LocalStaticFactories_RootProcessor"/>
+		<processor
+			class="com.instantiations.designer.core.model.generic.SimpleContainer_ClipboardSupport"/>
+		<processor
+			class="com.instantiations.designer.core.model.creation.factory.InstanceFactory_RootProcessor"/>
+		<processor class="com.instantiations.designer.core.model.layout.GeneralLayoutData_Remover"/>
+		<processor
+			class="com.instantiations.designer.core.model.nonvisual.NonVisualBean_RootProcessor"
+			priority="-1"/>
+	</extension>
+
+
+	<!-- ======================================================== -->
+	<!-- Parser -->
+	<!-- ======================================================== -->
+	<extension point="com.instantiations.designer.core.parseFactories">
+		<noModel_CIC class="com.instantiations.designer.core.parser.ParseFactory_noModel"/>
+	</extension>
+
+
+	<!-- ======================================================== -->
+	<!-- Expression evaluators -->
+	<!-- ======================================================== -->
+	<extension point="com.instantiations.designer.core.expressionEvaluators">
+		<!-- primitives -->
+		<evaluator class="com.instantiations.designer.core.eval.evaluators.BooleanEvaluator"/>
+		<evaluator class="com.instantiations.designer.core.eval.evaluators.CharEvaluator"/>
+		<evaluator class="com.instantiations.designer.core.eval.evaluators.IntegerEvaluator"/>
+		<evaluator class="com.instantiations.designer.core.eval.evaluators.LongEvaluator"/>
+		<evaluator class="com.instantiations.designer.core.eval.evaluators.FloatEvaluator"/>
+		<evaluator class="com.instantiations.designer.core.eval.evaluators.DoubleEvaluator"/>
+		<!-- java.lang.String -->
+		<evaluator class="com.instantiations.designer.core.eval.evaluators.StringEvaluator"/>
+		<!-- NLS -->
+		<evaluator class="com.instantiations.designer.core.nls.NLSStringEvaluator" priority="1"/>
+		<!-- other -->
+		<evaluator class="com.instantiations.designer.core.eval.evaluators.AssignmentEvaluator"/>
+		<evaluator class="com.instantiations.designer.core.eval.evaluators.ArrayEvaluator"/>
+		<evaluator class="com.instantiations.designer.core.eval.evaluators.ClassEvaluator"/>
+		<evaluator class="com.instantiations.designer.core.eval.evaluators.CastEvaluator"/>
+		<evaluator class="com.instantiations.designer.core.eval.evaluators.FieldAccessEvaluator"/>
+		<evaluator class="com.instantiations.designer.core.eval.evaluators.InvocationEvaluator"/>
+		<evaluator class="com.instantiations.designer.core.eval.evaluators.QualifiedNameEvaluator"/>
+		<evaluator class="com.instantiations.designer.core.eval.evaluators.SimpleNameEvaluator"/>
+		<evaluator
+			class="com.instantiations.designer.core.eval.evaluators.ConditionalExpressionEvaluator"
+		/>
+	</extension>
+
+
+	<!-- ======================================================== -->
+	<!-- ExpressionConverter -->
+	<!-- ======================================================== -->
+	<extension point="com.instantiations.designer.core.propertyConverters">
+		<!-- primitives -->
+		<converter type="boolean"
+			class="com.instantiations.designer.core.model.property.converter.BooleanConverter"/>
+		<converter type="char"
+			class="com.instantiations.designer.core.model.property.converter.CharacterConverter"/>
+		<converter type="byte"
+			class="com.instantiations.designer.core.model.property.converter.ByteConverter"/>
+		<converter type="short"
+			class="com.instantiations.designer.core.model.property.converter.ShortConverter"/>
+		<converter type="int"
+			class="com.instantiations.designer.core.model.property.converter.IntegerConverter"/>
+		<converter type="long"
+			class="com.instantiations.designer.core.model.property.converter.LongConverter"/>
+		<converter type="float"
+			class="com.instantiations.designer.core.model.property.converter.FloatConverter"/>
+		<converter type="double"
+			class="com.instantiations.designer.core.model.property.converter.DoubleConverter"/>
+		<!-- wrappers -->
+		<converter type="java.lang.Boolean"
+			class="com.instantiations.designer.core.model.property.converter.BooleanObjectConverter"/>
+		<converter type="java.lang.Byte"
+			class="com.instantiations.designer.core.model.property.converter.ByteObjectConverter"/>
+		<converter type="java.lang.Short"
+			class="com.instantiations.designer.core.model.property.converter.ShortObjectConverter"/>
+		<converter type="java.lang.Integer"
+			class="com.instantiations.designer.core.model.property.converter.IntegerObjectConverter"/>
+		<converter type="java.lang.Long"
+			class="com.instantiations.designer.core.model.property.converter.LongObjectConverter"/>
+		<converter type="java.lang.Double"
+			class="com.instantiations.designer.core.model.property.converter.DoubleObjectConverter"/>
+		<!-- other -->
+		<converter type="java.lang.String"
+			class="com.instantiations.designer.core.model.property.converter.StringConverter"/>
+		<converter type="java.lang.String[]"
+			class="com.instantiations.designer.core.model.property.converter.StringArrayConverter"/>
+		<converter type="java.util.Locale"
+			class="com.instantiations.designer.core.model.property.converter.LocaleConverter"/>
+	</extension>
+
+
+	<!-- ======================================================== -->
+	<!-- PropertyEditor -->
+	<!-- ======================================================== -->
+	<extension point="com.instantiations.designer.core.propertyEditors">
+		<!-- primitives -->
+		<editor type="boolean"
+			class="com.instantiations.designer.core.model.property.editor.BooleanPropertyEditor"/>
+		<editor type="byte"
+			class="com.instantiations.designer.core.model.property.editor.BytePropertyEditor"/>
+		<editor type="char"
+			class="com.instantiations.designer.core.model.property.editor.CharacterPropertyEditor"/>
+		<editor type="short"
+			class="com.instantiations.designer.core.model.property.editor.ShortPropertyEditor"/>
+		<editor type="int"
+			class="com.instantiations.designer.core.model.property.editor.IntegerPropertyEditor"/>
+		<editor type="long"
+			class="com.instantiations.designer.core.model.property.editor.LongPropertyEditor"/>
+		<editor type="float"
+			class="com.instantiations.designer.core.model.property.editor.FloatPropertyEditor"/>
+		<editor type="double"
+			class="com.instantiations.designer.core.model.property.editor.DoublePropertyEditor"/>
+		<!-- wrappers -->
+		<editor type="java.lang.Boolean"
+			class="com.instantiations.designer.core.model.property.editor.BooleanObjectPropertyEditor"/>
+		<editor type="java.lang.Byte"
+			class="com.instantiations.designer.core.model.property.editor.ByteObjectPropertyEditor"/>
+		<editor type="java.lang.Short"
+			class="com.instantiations.designer.core.model.property.editor.ShortObjectPropertyEditor"/>
+		<editor type="java.lang.Integer"
+			class="com.instantiations.designer.core.model.property.editor.IntegerObjectPropertyEditor"/>
+		<editor type="java.lang.Long"
+			class="com.instantiations.designer.core.model.property.editor.LongObjectPropertyEditor"/>
+		<editor type="java.lang.Double"
+			class="com.instantiations.designer.core.model.property.editor.DoubleObjectPropertyEditor"/>
+		<!-- typed -->
+		<editor type="java.lang.String"
+			class="com.instantiations.designer.core.model.property.editor.string.StringPropertyEditor"/>
+		<editor type="java.lang.String[]"
+			class="com.instantiations.designer.core.model.property.editor.StringArrayPropertyEditor"/>
+		<editor type="java.util.Locale"
+			class="com.instantiations.designer.core.model.property.editor.LocalePropertyEditor"/>
+		<!-- configurable -->
+		<configurableEditor id="staticField"
+			class="com.instantiations.designer.core.model.property.editor.StaticFieldPropertyEditor"/>
+		<configurableEditor id="innerClass"
+			class="com.instantiations.designer.core.model.property.editor.InnerClassPropertyEditor"/>
+		<configurableEditor id="constantSelection"
+			class="com.instantiations.designer.core.model.property.editor.ConstantSelection_PropertyEditor"/>
+		<configurableEditor id="displayExpression"
+			class="com.instantiations.designer.core.model.property.editor.DisplayExpressionPropertyEditor"/>
+		<configurableEditor id="stringList"
+			class="com.instantiations.designer.core.model.property.editor.StringListPropertyEditor"/>
+		<configurableEditor id="instanceList"
+			class="com.instantiations.designer.core.model.property.editor.InstanceListPropertyEditor"/>
+		<configurableEditor id="expressionList"
+			class="com.instantiations.designer.core.model.property.editor.ExpressionListPropertyEditor"/>
+		<configurableEditor id="instanceObject"
+			class="com.instantiations.designer.core.model.property.editor.complex.InstanceObjectPropertyEditor"/>
+		<configurableEditor id="customDate"
+			class="com.instantiations.designer.core.model.property.editor.DatePropertyEditor"/>
+		<configurableEditor id="style"
+			class="com.instantiations.designer.core.model.property.editor.style.StylePropertyEditor"/>
+		<!-- providers -->
+		<provider
+			class="com.instantiations.designer.core.model.property.editor.PropertyDescriptor_EditorProvider"
+		/>
+	</extension>
+
+
+	<!-- ======================================================== -->
+	<!-- Configurable properties -->
+	<!-- ======================================================== -->
+	<extension point="com.instantiations.designer.core.configurablePropertyFactories">
+		<factory id="stringsAdd"
+			class="com.instantiations.designer.core.model.property.configurable.StringsAdd_PropertyFactory"
+		/>
+	</extension>
+
+
+	<!-- ======================================================== -->
+	<!-- NLS sources -->
+	<!-- ======================================================== -->
+	<extension point="com.instantiations.designer.core.nlsSources">
+		<description id="com.instantiations.designer.core.nls.bundle.eclipse.old.EclipseSource"
+			source="com.instantiations.designer.core.nls.bundle.eclipse.old.EclipseSource"
+			composite="com.instantiations.designer.core.nls.bundle.eclipse.old.EclipseSource_NewComposite"/>
+		<description
+			id="com.instantiations.designer.core.nls.bundle.eclipse.modern.ModernEclipseSource"
+			source="com.instantiations.designer.core.nls.bundle.eclipse.modern.ModernEclipseSource"
+			composite="com.instantiations.designer.core.nls.bundle.eclipse.modern.ModernEclipseSource_NewComposite"/>
+		<description id="com.instantiations.designer.core.nls.bundle.pure.direct.DirectSource"
+			source="com.instantiations.designer.core.nls.bundle.pure.direct.DirectSource"
+			composite="com.instantiations.designer.core.nls.bundle.pure.direct.DirectSource_NewComposite"/>
+		<description id="com.instantiations.designer.core.nls.bundle.pure.field.FieldSource"
+			source="com.instantiations.designer.core.nls.bundle.pure.field.FieldSource"
+			composite="com.instantiations.designer.core.nls.bundle.pure.field.FieldSource_NewComposite"
+		/>
+	</extension>
+
+
+	<!-- ======================================================== -->
+	<!-- Baseline -->
+	<!-- ======================================================== -->
+	<extension point="com.instantiations.designer.core.baselineSupport">
+		<support class="com.instantiations.designer.core.laf.DefaultBaselineSupport" priority="-100"
+		/>
+	</extension>
+
+
+	<!-- ======================================================== -->
+	<!-- Preferences -->
+	<!-- ======================================================== -->
+	<extension point="org.eclipse.ui.preferenceTransfer">
+		<transfer id="com.instantiations.designer.core.preferencesTransfer"
+			icon="icons/preference_transfer.png" name="Designer Core Preferences">
+			<mapping scope="instance">
+				<entry node="com.instantiations.designer.core"/>
+			</mapping>
+		</transfer>
+	</extension>
+
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="com.instantiations.designer.core.preferences.PreferenceInitializer"/>
+	</extension>
+
+	<extension point="org.eclipse.ui.preferencePages">
+		<page id="com.instantiations.designer.core.preferences.DesignerPreferencePage"
+			class="com.instantiations.designer.core.preferences.DesignerPreferencePage"
+			name="WindowBuilder">
+			<keywordReference id="com.instantiations.designer.kw.root"/>
+		</page>
+		<page id="com.instantiations.designer.core.preferences.CorePreferencePage"
+			category="com.instantiations.designer.core.preferences.DesignerPreferencePage"
+			class="com.instantiations.designer.core.preferences.CorePreferencePage" name="Common">
+			<keywordReference id="com.instantiations.designer.kw.general"/>
+		</page>
+		<page id="com.instantiations.designer.core.preferences.ParsingPreferencePage"
+			category="com.instantiations.designer.core.preferences.CorePreferencePage"
+			class="com.instantiations.designer.core.preferences.ParsingPreferencePage"
+			name="Code Parsing">
+			<keywordReference id="com.instantiations.designer.kw.codeParsing"/>
+		</page>
+		<page id="com.instantiations.designer.core.preferences.EditorPreferencePage"
+			category="com.instantiations.designer.core.preferences.CorePreferencePage"
+			class="com.instantiations.designer.core.preferences.EditorPreferencePage" name="Editor">
+			<keywordReference id="com.instantiations.designer.kw.editor"/>
+		</page>
+		<page id="com.instantiations.designer.core.preferences.DesignerUsageProfilerPreferencePage"
+			category="com.instantiations.designer.core.preferences.CorePreferencePage"
+			class="com.instantiations.designer.core.preferences.DesignerUsageProfilerPreferencePage"
+			name="Usage Profiler">
+			<keywordReference id="com.instantiations.designer.kw.usageProfiler"/>
+		</page>
+	</extension>
+
+	<extension point="org.eclipse.ui.keywords">
+		<keyword label="%preferenceKeywords.root" id="com.instantiations.designer.kw.root"/>
+		<keyword label="%preferenceKeywords.general" id="com.instantiations.designer.kw.general"/>
+		<keyword label="%preferenceKeywords.editor" id="com.instantiations.designer.kw.editor"/>
+		<keyword label="%preferenceKeywords.codeParsing"
+			id="com.instantiations.designer.kw.codeParsing"/>
+		<keyword label="%preferenceKeywords.license" id="com.instantiations.designer.kw.license"/>
+		<keyword label="%preferenceKeywords.usageProfiler"
+			id="com.instantiations.designer.kw.usageProfiler"/>
+	</extension>
+
+
+	<!-- ======================================================== -->
+	<!-- New Wizards -->
+	<!-- ======================================================== -->
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="com.instantiations.designer" name="WindowBuilder"/>
+		<wizard category="com.instantiations.designer"
+			class="com.instantiations.designer.core.wizards.palette.NewProjectPaletteWizard"
+			icon="icons/wizard/palette/wizard.gif"
+			id="com.instantiations.designer.core.wizards.palette.NewPalettePluginWizard"
+			name="Project Palette" wbp-menu-visible="false">
+			<description> Create a palette extension for selected project. </description>
+		</wizard>
+	</extension>
+
+
+	<!-- ======================================================== -->
+	<!-- Toolkit -->
+	<!-- ======================================================== -->
+	<extension point="com.instantiations.designer.core.toolkits">
+		<toolkit id="com.instantiations.designer.core">
+			<provider class="com.instantiations.designer.core.ToolkitProvider"/>
+		</toolkit>
+	</extension>
+
+
+	<!-- ======================================================== -->
+	<!-- GEF canvas -->
+	<!-- ======================================================== -->
+	<extension point="com.instantiations.designer.core.editPartConfigurators">
+		<configurator class="com.instantiations.designer.core.gef.Core_EditPartConfigurator"/>
+		<configurator class="com.instantiations.designer.core.gef.GenericContainers_Configurator"/>
+	</extension>
+
+	<extension point="com.instantiations.designer.core.editPolicyFactories">
+		<factory
+			class="com.instantiations.designer.core.gef.GenericContainers_LayoutEditPolicyFactory"/>
+	</extension>
+
+
+	<!-- ======================================================== -->
+	<!-- GEF tree -->
+	<!-- ======================================================== -->
+	<extension point="com.instantiations.designer.core.treeEditPartConfigurators">
+		<configurator
+			class="com.instantiations.designer.core.gefTree.GenericContainers_Configurator"/>
+	</extension>
+
+	<extension point="com.instantiations.designer.core.treeEditPolicyFactories">
+		<factory
+			class="com.instantiations.designer.core.gefTree.GenericContainers_LayoutEditPolicyFactory"
+		/>
+	</extension>
+
+
+	<!-- ======================================================== -->
+	<!-- GUI editor -->
+	<!-- ======================================================== -->
+	<extension point="org.eclipse.ui.editors">
+		<editor class="com.instantiations.designer.core.editor.multi.MultiPageEditor"
+			contributorClass="com.instantiations.designer.core.editor.multi.MultiPageEditorContributor"
+			extensions="java" icon="icons/gui_editor.gif"
+			id="com.instantiations.designer.core.guiEditor" name="WindowBuilder Editor">
+			<contentTypeBinding contentTypeId="com.instantiations.designer.core.javaSourceGUI"/>
+		</editor>
+	</extension>
+
+
+	<!-- =================================================================================== -->
+	<!-- GUI editor: content type -->
+	<!-- =================================================================================== -->
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="javaSourceGUI" base-type="org.eclipse.jdt.core.javaSource"
+			name="GUI Java file" file-extensions="java" priority="high"
+			describer="com.instantiations.designer.core.editor.describer.JavaSourceGUIDescriber"/>
+	</extension>
+
+	<!-- ======================================================== -->
+	<!-- GUI editor: standard actions -->
+	<!-- ======================================================== -->
+	<extension point="org.eclipse.ui.actionSetPartAssociations">
+		<actionSetPartAssociation targetID="org.eclipse.jdt.ui.A_OpenActionSet">
+			<part id="com.instantiations.designer.core.guiEditor"/>
+		</actionSetPartAssociation>
+		<actionSetPartAssociation targetID="org.eclipse.jdt.ui.CodingActionSet">
+			<part id="com.instantiations.designer.core.guiEditor"/>
+		</actionSetPartAssociation>
+		<actionSetPartAssociation targetID="org.eclipse.jdt.ui.SearchActionSet">
+			<part id="com.instantiations.designer.core.guiEditor"/>
+		</actionSetPartAssociation>
+	</extension>
+
+	<extension point="org.eclipse.ui.editorActions">
+		<editorContribution targetID="com.instantiations.designer.core.guiEditor"
+			id="org.eclipse.jdt.debug.CompilationUnitEditor.BreakpointRulerActions">
+			<action label="%AddBreakpoint.label"
+				class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
+				actionID="RulerDoubleClick"
+				id="org.eclipse.jdt.debug.ui.actions.ManageBreakpointRulerAction"/>
+		</editorContribution>
+	</extension>
+
+	<extension point="org.eclipse.ui.editorActions">
+		<editorContribution targetID="com.instantiations.designer.core.guiEditor"
+			id="org.eclipse.ui.texteditor.ruler.actions">
+			<action actionID="RulerClick"
+				class="org.eclipse.jdt.internal.ui.javaeditor.JavaSelectRulerAction"
+				id="org.eclipse.jdt.internal.ui.javaeditor.JavaSelectRulerAction" label="label"
+			> </action>
+		</editorContribution>
+	</extension>
+
+	<!-- ======================================================== -->
+	<!-- GUI editor: our actions and commands -->
+	<!-- ======================================================== -->
+	<extension point="org.eclipse.ui.editorActions">
+		<editorContribution targetID="com.instantiations.designer.core.guiEditor"
+			id="org.eclipse.ui.texteditor.ruler.actions">
+			<!--<action definitionId="com.swtdesigner.commands.test" label="Test" icon="icons/test.gif"
+				tooltip="Test Designer Window" class="com.swtdesigner.actions.editor.TestAction"
+				toolbarPath="swt-designer" helpContextId="test_launch"
+				id="com.swtdesigner.actions.editor.TestAction"/>-->
+			<action definitionId="com.instantiations.designer.core.commands.switch"
+				label="%actions.switch.name" tooltip="%actions.switch.text"
+				class="com.instantiations.designer.core.editor.actions.SwitchAction"
+				menubarPath="navigate/open.ext2" helpContextId="switch_page"
+				id="com.swtdesigner.actions.editor.SwitchAction"/>
+		</editorContribution>
+	</extension>
+
+	<extension point="org.eclipse.ui.commands">
+		<category name="WindowBuilder Pro" description="WindowBuilder Pro actions"
+			id="com.instantiations.designer.core.actions.category"/>
+		<command name="%actions.switch.name" description="%actions.switch.text"
+			categoryId="com.instantiations.designer.core.actions.category"
+			id="com.instantiations.designer.core.commands.switch"/>
+		<!--<command name="Test Designer Window" description="Show designed window in separate Shell"
+			category="com.swtdesigner.actions.category" id="com.swtdesigner.commands.test"/>
+		<keyBinding string="Ctrl+Alt+T" scope="org.eclipse.ui.textEditorScope"
+			command="com.swtdesigner.commands.test"
+			configuration="org.eclipse.ui.defaultAcceleratorConfiguration"/>-->
+	</extension>
+
+	<extension point="org.eclipse.ui.bindings">
+		<key sequence="F12" commandId="com.instantiations.designer.core.commands.switch"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			contextId="org.eclipse.ui.textEditorScope"/>
+	</extension>
+
+	<!-- ======================================================== -->
+	<!-- Perspectives and views -->
+	<!-- ======================================================== -->
+	<extension point="org.eclipse.ui.views">
+		<category id="com.instantiations.designer.core.category" name="WindowBuilder"/>
+		<view category="com.instantiations.designer.core.category"
+			id="com.instantiations.designer.core.StructureView"
+			class="com.instantiations.designer.core.views.StructureView"
+			icon="icons/structure/properties_view.gif" name="Structure"/>
+		<view category="com.instantiations.designer.core.category"
+			id="com.instantiations.designer.core.PaletteView"
+			class="com.instantiations.designer.core.views.PaletteView"
+			icon="icons/structure/palette.png" name="Palette"/>
+	</extension>
+
+	<extension point="org.eclipse.ui.perspectiveExtensions">
+		<perspectiveExtension targetID="org.eclipse.jdt.ui.JavaPerspective">
+			<viewShortcut id="com.instantiations.designer.core.StructureView"/>
+			<viewShortcut id="com.instantiations.designer.core.PaletteView"/>
+			<view id="com.instantiations.designer.core.StructureView" relationship="stack"
+				relative="org.eclipse.jdt.ui.PackageExplorer" visible="false"/>
+			<view id="com.instantiations.designer.core.PaletteView" relationship="stack"
+				relative="org.eclipse.jdt.ui.PackageExplorer" visible="false"/>
+		</perspectiveExtension>
+	</extension>
+
+	<extension point="org.eclipse.ui.actionSets">
+		<actionSet label="Designer Actions" visible="true" id="com.swtdesigner.actionset">
+			<action
+				id="com.instantiations.designer.core.wizards.actions.NewDesignerTypeDropDownAction"
+				toolbarPath="swt-designer"
+				class="com.instantiations.designer.core.wizards.actions.NewDesignerTypeDropDownAction"
+				icon="icons/wizard/new_wizard.gif" label="New Visual Class" pulldown="true"
+				tooltip="Create new visual classes"/>
+			<!--<action label="New SWT/JFace Java Project" icon="icons/wizard/newjprj_wiz.gif"
+				tooltip="Create a Java project with SWT/JFace support"
+				class="com.swtdesigner.actions.wizard.OpenSWTProjectWizardAction" toolbarPath="swt-designer"
+				id="com.swtdesigner.actions.wizard.OpenSWTProjectWizardAction"/>-->
+		</actionSet>
+	</extension>
+
+	<!-- ======================================================== -->
+	<!-- Error report: log files								  -->
+	<!-- ======================================================== -->
+	<extension point="com.instantiations.designer.core.errorLogsProviders">
+		<provider
+			class="com.instantiations.designer.core.editor.errors.report.logs.EclipseErrorLogsProvider"/>
+		<provider
+			class="com.instantiations.designer.core.editor.errors.report.logs.ParseErrorsLogProvider"
+		/>
+	</extension>
+
+	<!-- ======================================================== -->
+	<!-- Early startup -->
+	<!-- ======================================================== -->
+	<extension point="org.eclipse.ui.startup"/>
+</plugin>
