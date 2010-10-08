@@ -6,22 +6,22 @@ import org.osgi.framework.BundleContext;
 /**
  * The activator class controls the plug-in life cycle
  */
-public class Activator extends AbstractUIPlugin {
+public class OperationsActivator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "com.agritrace.edairy.desktop.suppliers.ui"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "com.agritrace.edairy.desktop.operations.ui"; //$NON-NLS-1$
 
 	private static BundleContext context;
 
 	// The shared instance
-	private static Activator plugin;
+	private static OperationsActivator plugin;
 
 	/**
 	 * Returns the shared instance
 	 * 
 	 * @return the shared instance
 	 */
-	public static Activator getDefault() {
+	public static OperationsActivator getDefault() {
 		return plugin;
 	}
 
@@ -38,7 +38,7 @@ public class Activator extends AbstractUIPlugin {
 	 */
 	@Override
 	public void start(BundleContext bundleContext) throws Exception {
-		Activator.context = bundleContext;
+		OperationsActivator.context = bundleContext;
 
 	}
 
@@ -50,7 +50,7 @@ public class Activator extends AbstractUIPlugin {
 	 */
 	@Override
 	public void stop(BundleContext bundleContext) throws Exception {
-		Activator.context = null;
+		OperationsActivator.context = null;
 	}
 
 }
