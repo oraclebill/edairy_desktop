@@ -25,6 +25,14 @@
          id="org.eclipse.rcp"
          version="0.0.0"/>
 
+   <includes
+         id="org.eclipse.datatools.enablement.hsqldb.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.datatools.enablement.mysql.feature"
+         version="0.0.0"/>
+
    <plugin
          id="com.agritrace.edairy.desktop.birt"
          download-size="0"
