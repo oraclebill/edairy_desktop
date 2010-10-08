@@ -5,9 +5,6 @@
 
    <aboutInfo>
       <image path="/com.agritrace.edairy.desktop/resources/edairy_helpabout.png"/>
-      <text>
-         eDairy Manager v0.99
-      </text>
    </aboutInfo>
 
    <configIni use="default">
@@ -16,7 +13,7 @@
 
    <launcherArgs>
       <programArgs>-debug</programArgs>
-      <vmArgs>-Driena.application.width=1150 -Driena.application.height=750 -Xmx384m -XX:+UseConcMarkSweepGC -XX:MaxPermSize=128m</vmArgs>
+      <vmArgs>-Driena.application.width=1150 -Driena.application.height=750 -Xmx384m</vmArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts 
 -Dedairy.xmldb.basedir=/var/db</vmArgsMac>
    </launcherArgs>
@@ -32,6 +29,7 @@
          <bmp/>
       </win>
    </launcher>
+
 
    <vm>
    </vm>
@@ -160,26 +158,8 @@
    </plugins>
 
    <features>
-      <feature id="org.eclipse.equinox.core.sdk" version="3.6.0.v20100603-7sF99FsFFUu63a35g6s"/>
-      <feature id="com.agritrace.edairy.desktop.feature" version="1.0.0.qualifier"/>
-      <feature id="com.mysql.jdbc" version="5.1.11.201005082216"/>
-      <feature id="javax.persistence" version="1.99.0.201005082216"/>
-      <feature id="org.apache.commons.logging" version="1.1.1.201005082216"/>
-      <feature id="org.apache.log4j" version="1.2.16.201005082216"/>
-      <feature id="org.eclipse.emf.databinding" version="1.2.0.v20100614-1136"/>
-      <feature id="org.eclipse.emf.ecore" version="2.6.0.v20100614-1136"/>
-      <feature id="org.eclipse.emf.query" version="1.4.0.v20100428-2315-218Z7w311A142A1142"/>
-      <feature id="org.eclipse.nebula.widgets.compositetable.feature" version="1.0.0.HEAD"/>
-      <feature id="org.eclipse.rcp" version="3.6.0.v20100519-9OArFKvFtsd7WLUKh-DcYTS"/>
-      <feature id="org.hsqldb" version="1.8.1.201005082216"/>
-      <feature id="com.agritrace.edairy.desktop.birt.feature" version="1.0.0.qualifier"/>
+      <feature id="com.agritrace.edairy.desktop.product.feature" version="1.0.0.qualifier"/>
    </features>
 
-   <configurations>
-      <plugin id="com.agritrace.edairy.desktop" autoStart="true" startLevel="0" />
-      <plugin id="org.eclipse.core.runtime" autoStart="false" startLevel="0" />
-      <plugin id="org.eclipse.core.variables" autoStart="false" startLevel="1" />
-      <plugin id="org.eclipse.riena.ui.ridgets.swt.optional" autoStart="true" startLevel="0" />
-   </configurations>
 
 </product>

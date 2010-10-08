@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description name="Agritrace eDairy Manager Update Site">
+      The update site for the Agritrace eDairy Manager Product Family
+   </description>
+   <feature url="features/com.agritrace.edairy.desktop.product.feature_1.0.0.qualifier.jar" id="com.agritrace.edairy.desktop.product.feature" version="1.0.0.qualifier" os="linux,macosx,win32" ws="cocoa,gtk,win32" arch="x86,x86_64">
+      <category name="com.agritrace.edairy"/>
+   </feature>
+   <category-def name="com.agritrace.edairy" label="Agritrace eDairy Manager"/>
+</site>

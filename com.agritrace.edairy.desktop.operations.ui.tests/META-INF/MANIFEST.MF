@@ -3,7 +3,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Tests
 Bundle-SymbolicName: com.agritrace.edairy.desktop.operations.ui.tests
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: com.agritrace.ediary.desktop.operations.ui.tests.Activator
 Bundle-Vendor: AGRITRACE
 Require-Bundle: com.agritrace.edairy.desktop.common.model;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.suppliers.ui;bundle-version="1.0.0",

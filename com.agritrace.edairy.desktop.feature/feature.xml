@@ -547,13 +547,6 @@
          unpack="false"/>
 
    <plugin
-         id="com.agritrace.ediary.desktop.reports"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="com.agritrace.edairy.desktop.finance.payments"
          download-size="0"
          install-size="0"
