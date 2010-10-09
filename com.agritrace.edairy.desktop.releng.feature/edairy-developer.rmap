@@ -58,13 +58,13 @@
 	<searchPath name="maven">
 		<!--
 		<provider xsi:type="mp:MavenProvider" readerType="maven2"
-			componentTypes="maven" mutable="false" source="false">
+			componentTypes="maven,osgi.bundle,buckminster" mutable="false" source="false">
 			<uri format="https://repository.sonatype.org/content/repositories/central/" />
 		</provider>
 		-->
 		<provider xsi:type="mp:MavenProvider" readerType="maven2"
 			componentTypes="maven,osgi.bundle,buckminster" mutable="false" source="false">
-			<uri format="http://repo1.maven.org/maven2" />
+			<uri format="http://repo1.maven.org/maven2/" />
 			<mp:mappings>
 				<mp:entry name="org.ops4j.peaberry" groupId="org.ops4j" artifactId="peaberry"/>
 				<mp:entry name="org.ops4j.peaberry.eclipse" groupId="org.ops4j" artifactId="peaberry.eclipse"/>
