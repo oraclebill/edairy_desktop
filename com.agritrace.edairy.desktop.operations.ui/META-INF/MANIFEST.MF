@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: suppliers.ui
-Bundle-SymbolicName: com.agritrace.edairy.desktop.suppliers.ui;singleton:=true
+Bundle-Name: operations.ui
+Bundle-SymbolicName: com.agritrace.edairy.desktop.operations.ui;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: com.agritrace.edairy.desktop.operations.ui.OperationsActivator
 Bundle-Vendor: AGRITRACE
