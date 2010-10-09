@@ -26,9 +26,7 @@ Require-Bundle: com.agritrace.edairy.desktop.common.model;bundle-version="1.0.0"
  org.apache.commons.beanutils;bundle-version="1.7.0",
  com.google.inject,
  org.ops4j.peaberry;bundle-version="1.1.1",
- org.ops4j.peaberry.eclipse;bundle-version="1.1.1",
- org.eclipse.swt.layout.grouplayout;bundle-version="1.1.0";visibility:=reexport,
- org.eclipse.swt.widgets.baseline;bundle-version="1.1.0";visibility:=reexport
+ org.ops4j.peaberry.eclipse;bundle-version="1.1.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.desktop.common.ui,
