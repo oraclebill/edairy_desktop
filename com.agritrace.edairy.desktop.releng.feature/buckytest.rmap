@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rm:rmap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.eclipse.org/buckminster/RMap-1.0" 
+	xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0"
+	xmlns:mp="http://www.eclipse.org/buckminster/MavenProvider-1.0"
+	xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
+
+
+	<searchPath name="agritrace-edairy">
+		<provider readerType="git" componentTypes="osgi.bundle,eclipse.feature" resolutionFilter="">
+			<uri format="{0}/github,{1}">
+				<bc:propertyRef key="workspace.root" />
+				<bc:propertyRef key="buckminster.component" />
+			</uri>
+			<property key="git.remote.uri" value="git@github.com:oraclebill/edairy_desktop.git" />
+			<property key="git.remote.name" value="origin" />
+		</provider>
+	</searchPath>
+
+	<searchPath name="bpmn.plugins">
+		<provider readerType="git" componentTypes="osgi.bundle,eclipse.feature"
+			resolutionFilter="">
+			<uri format="{0}/bpmnmodeler,{1}">
+				<bc:propertyRef key="workspace.root" />
+				<bc:propertyRef key="buckminster.component" />
+			</uri>
+			<property key="git.remote.uri" value="git://git.eclipse.org/gitroot/bpmnmodeler" />
+			<property key="git.remote.name" value="bpmnmodeler" />
+		</provider>
+	</searchPath>
+
+
+	<searchPath name="helios">
+		<provider readerType="p2" componentTypes="osgi.bundle,eclipse.feature"
+			mutable="false" source="false">
+			<uri format="http://download.eclipse.org/releases/helios/" />
+		</provider>
+	</searchPath>
+
+	<searchPath name="elvers">
+		<provider readerType="p2" componentTypes="osgi.bundle,eclipse.feature,buckminster"
+			mutable="false" source="false">
+			<uri format="http://www.elver.org/eclipse/update" />
+		</provider>
+	</searchPath>
+
+	<searchPath name="orbit">
+		<provider readerType="p2" componentTypes="osgi.bundle"
+			mutable="false" source="false">
+			<uri
+				format="http://download.eclipse.org/tools/orbit/downloads/drops/R20100519200754/updateSite" />
+		</provider>
+	</searchPath>
+
+	<searchPath name="maven">
+		<provider xsi:type="mp:MavenProvider" readerType="maven2"
+			componentTypes="maven" mutable="false" source="false">
+			<uri format="https://repository.sonatype.org/content/repositories/central/" />
+		</provider>
+		<provider xsi:type="mp:MavenProvider" readerType="maven2"
+			componentTypes="maven" mutable="false" source="false">
+			<uri format="http://repo1.maven.org/maven2" />
+		</provider>
+	</searchPath>
+
+ 
+	
+	<rm:locator pattern="^com\.agritrace(\..+)*" searchPathRef="agritrace-edairy" />
+	<rm:locator pattern="^org\.eclipse\.riena\.ui\.ridgets(\.swt)?$" searchPathRef="agritrace-edairy" />
+
+	<rm:locator pattern="^org\.eclipse\.swt(\..+)+" searchPathRef="maven" failOnError="false" />
+	<rm:locator pattern="^org\.eclipse(\..+)*" searchPathRef="helios" />
+
+	<rm:locator pattern="^org\.hibernate(\..+)*" searchPathRef="elvers" failOnError="false"/>
+
+	<rm:locator searchPathRef="helios" failOnError="false" />
+	<rm:locator searchPathRef="orbit" failOnError="false" />
+	<rm:locator searchPathRef="maven" />
+
+</rm:rmap>
