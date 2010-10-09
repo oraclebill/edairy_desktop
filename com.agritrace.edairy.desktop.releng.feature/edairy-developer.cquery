@@ -4,5 +4,5 @@
     <cq:property key="target.arch" value="x86, x86_64"/>
     <cq:property key="target.os" value="macosx,win32,linux"/>
     <cq:property key="target.ws" value="gtk,cocoa,win32"/>
-    <cq:advisorNode namePattern=".*" useTargetPlatform="false" branchTagPath="dependency-updates"/>
+    <cq:advisorNode namePattern=".*" useTargetPlatform="false"/>
 </cq:componentQuery>
