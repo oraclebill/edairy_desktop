@@ -8,12 +8,15 @@
 
 	<searchPath name="agritrace-edairy">
 		<provider readerType="git" componentTypes="osgi.bundle,eclipse.feature" resolutionFilter="">
+			<!-- <uri format="/Users/bjones/Development/Projects/edairy_desktop,{1}"> -->
 			<uri format="{0}/github,{1}">
 				<bc:propertyRef key="workspace.root" />
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
-			<property key="git.remote.uri" value="git@github.com:oraclebill/edairy_desktop.git" />
-			<property key="git.remote.name" value="origin" />
+			<!--property key="git.remote.uri" value="git@github.com:oraclebill/edairy_desktop.git" /-->
+			<!--property key="git.remote.name" value="origin" /-->
+			<property key="git.remote.uri" value="/Users/bjones/Development/Projects/edairy_desktop" />
+			<property key="git.remote.name" value="local" />
 		</provider>
 	</searchPath>
 
@@ -53,28 +56,37 @@
 	</searchPath>
 
 	<searchPath name="maven">
+		<!--
 		<provider xsi:type="mp:MavenProvider" readerType="maven2"
 			componentTypes="maven" mutable="false" source="false">
 			<uri format="https://repository.sonatype.org/content/repositories/central/" />
 		</provider>
+		-->
 		<provider xsi:type="mp:MavenProvider" readerType="maven2"
-			componentTypes="maven" mutable="false" source="false">
+			componentTypes="maven,osgi.bundle,buckminster" mutable="false" source="false">
 			<uri format="http://repo1.maven.org/maven2" />
+			<mp:mappings>
+				<mp:entry name="org.ops4j.peaberry" groupId="org.ops4j" artifactId="peaberry"/>
+				<mp:entry name="org.ops4j.peaberry.eclipse" groupId="org.ops4j" artifactId="peaberry.eclipse"/>
+			</mp:mappings>
 		</provider>
 	</searchPath>
 
  
 	
-	<rm:locator pattern="^com\.agritrace(\..+)*" searchPathRef="agritrace-edairy" />
-	<rm:locator pattern="^org\.eclipse\.riena\.ui\.ridgets(\.swt)?$" searchPathRef="agritrace-edairy" />
+	<rm:locator pattern="^com\.agritrace(\..+)*" 						searchPathRef="agritrace-edairy" />
+	<rm:locator pattern="^org\.eclipse\.riena\.ui\.ridgets(\.swt)?$" 	searchPathRef="agritrace-edairy" />
+	<rm:locator pattern="^com\.csvreader(\..+)?" 						searchPathRef="agritrace-edairy" />
 
-	<rm:locator pattern="^org\.eclipse\.swt(\..+)+" searchPathRef="maven" failOnError="false" />
-	<rm:locator pattern="^org\.eclipse(\..+)*" searchPathRef="helios" />
+	<rm:locator pattern="^org\.eclipse\.swt(\..+)+" 					searchPathRef="maven" failOnError="false" />
+	<rm:locator pattern="^org\.eclipse(\..+)*" 							searchPathRef="helios" />
 
-	<rm:locator pattern="^org\.hibernate(\..+)*" searchPathRef="elvers" failOnError="false"/>
+	<rm:locator pattern="^org\.ops4j(\..+)+" 							searchPathRef="maven" />
 
-	<rm:locator searchPathRef="helios" failOnError="false" />
-	<rm:locator searchPathRef="orbit" failOnError="false" />
-	<rm:locator searchPathRef="maven" />
+	<rm:locator pattern="^org\.hibernate(\..+)*" 						searchPathRef="elvers" failOnError="false"/>
+
+	<rm:locator 														searchPathRef="helios" failOnError="false" />
+	<rm:locator 														searchPathRef="orbit" failOnError="false" />
+	<rm:locator 														searchPathRef="maven" />
 
 </rm:rmap>
