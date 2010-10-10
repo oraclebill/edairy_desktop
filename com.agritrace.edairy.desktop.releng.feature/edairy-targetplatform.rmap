@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rm:rmap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.eclipse.org/buckminster/RMap-1.0" 
+	xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0"
+	xmlns:mp="http://www.eclipse.org/buckminster/MavenProvider-1.0"
+	xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
+
+
+	<searchPath name="local">
+		<provider readerType="local" componentTypes="osgi.bundle,eclipse.feature,buckminster" resolutionFilter="">
+			<uri format="{0}">
+				<bc:propertyRef key="workspace.root" />
+			</uri>
+		</provider>
+	</searchPath>
+
+	<searchPath name="helios">
+		<provider readerType="p2" componentTypes="osgi.bundle,eclipse.feature"
+			mutable="false" source="false">
+			<uri format="http://download.eclipse.org/eclipse/updates/3.6" />
+		</provider>
+		<provider readerType="p2" componentTypes="osgi.bundle,eclipse.feature"
+			mutable="false" source="false">
+			<uri format="http://download.eclipse.org/releases/helios/" />
+		</provider>
+	</searchPath>
+
+	<searchPath name="elvers">
+		<provider readerType="p2" componentTypes="osgi.bundle,eclipse.feature,buckminster"
+			mutable="false" source="false">
+			<uri format="http://www.elver.org/eclipse/update" />
+		</provider>
+	</searchPath>
+
+	<searchPath name="orbit">
+		<provider readerType="p2" componentTypes="osgi.bundle"
+			mutable="false" source="false">
+			<uri
+				format="http://download.eclipse.org/tools/orbit/downloads/drops/R20100519200754/updateSite" />
+		</provider>
+	</searchPath>
+
+	<searchPath name="maven">
+		<provider xsi:type="mp:MavenProvider" readerType="maven2"
+			componentTypes="maven,osgi.bundle,buckminster" mutable="false" source="false">
+			<uri format="https://repository.sonatype.org/content/repositories/central/" />
+			<mp:mappings>
+				<mp:entry name="org.ops4j.peaberry" groupId="org.ops4j" artifactId="peaberry"/>
+				<mp:entry name="org.ops4j.peaberry.eclipse" groupId="org.ops4j" artifactId="peaberry.eclipse"/>
+			</mp:mappings>
+		</provider>
+		<!--
+		<provider xsi:type="mp:MavenProvider" readerType="maven2"
+			componentTypes="maven,osgi.bundle,buckminster" mutable="false" source="false">
+			<uri format="http://repo1.maven.org/maven2/" />
+			<mp:mappings>
+				<mp:entry name="org.ops4j.peaberry" groupId="org.ops4j" artifactId="peaberry"/>
+				<mp:entry name="org.ops4j.peaberry.eclipse" groupId="org.ops4j" artifactId="peaberry.eclipse"/>
+			</mp:mappings>
+		</provider>
+		-->
+	</searchPath>
+
+ 
+	<!-- 
+	<rm:locator pattern="^com\.agritrace(\..+)*" 						searchPathRef="local" />	
+	<rm:locator pattern="^org\.eclipse\.riena\.ui\.ridgets(\.swt)?$" 	searchPathRef="agritrace-edairy" />
+	<rm:locator pattern="^com\.csvreader(\..+)?" 						searchPathRef="agritrace-edairy" />
+	<rm:locator pattern="^org\.eclipse(\..+)*" 							searchPathRef="helios" />
+	<rm:locator pattern="^org\.ops4j(\..+)+" 							searchPathRef="maven" />
+	 -->
+	
+	<!-- force resolution of hibernate from elvers site --> 
+	<rm:locator pattern="^org\.hibernate(\..+)*" 						searchPathRef="elvers" />
+	
+	<!-- otherwise just search in order from local to most broad repository. --> 
+	<rm:locator 														searchPathRef="local" failOnError="false"  />
+	<rm:locator 														searchPathRef="helios" failOnError="false" />
+	<rm:locator 														searchPathRef="orbit" failOnError="false" />
+	<rm:locator 														searchPathRef="maven" />
+
+</rm:rmap>
