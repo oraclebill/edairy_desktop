@@ -16,10 +16,6 @@
                value="resources/edairy_helpabout.png">
          </property>
          <property
-               name="aboutText"
-               value="eDairy Manager v0.99">
-         </property>
-         <property
                name="windowImages"
                value="resources/edairy_icon.png">
          </property>
