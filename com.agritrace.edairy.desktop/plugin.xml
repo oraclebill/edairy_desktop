@@ -50,11 +50,15 @@
    <extension
          point="org.eclipse.ui.splashHandlers">
       <splashHandler
-            class="org.ops4j.peaberry.eclipse.GuiceExtensionFactory:com.agritrace.edairy.desktop.splashHandlers.EdairySplashHandler"
+            class="com.agritrace.edairy.desktop.splashHandlers.EdairySplashHandler"
             id="com.agritrace.edairy.desktop.splashHandlers.edairy">
       </splashHandler>
       <splashHandlerProductBinding
             productId="com.agritrace.edairy.desktop.product"
+            splashId="com.agritrace.edairy.desktop.splashHandlers.edairy">
+      </splashHandlerProductBinding>
+      <splashHandlerProductBinding
+            productId="com.agritrace.edairy.desktop.dairy_manager_prod"
             splashId="com.agritrace.edairy.desktop.splashHandlers.edairy">
       </splashHandlerProductBinding>
    </extension>
@@ -209,6 +213,10 @@
        <property
              name="preferenceCustomization"
              value="plugin_customization.ini">
+       </property>
+       <property
+             name="appName"
+             value="eDairy Manager Desktop">
        </property>
     </product>
  </extension>
