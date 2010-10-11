@@ -9,7 +9,7 @@
 	<searchPath name="local">
 		<provider readerType="local" componentTypes="osgi.bundle,eclipse.feature,buckminster" resolutionFilter="">
 			<uri format="{0}">
-				<bc:propertyRef key="workspace.root" />
+				<bc:propertyRef key="buckminster.component" />
 			</uri>
 		</provider>
 	</searchPath>
@@ -42,7 +42,7 @@
 
 	<searchPath name="maven">
 		<provider xsi:type="mp:MavenProvider" readerType="maven2"
-			componentTypes="maven,osgi.bundle,buckminster" mutable="false" source="false">
+			componentTypes="osgi.bundle" mutable="false" source="false">
 			<uri format="https://repository.sonatype.org/content/repositories/central/" />
 			<mp:mappings>
 				<mp:entry name="org.ops4j.peaberry" groupId="org.ops4j" artifactId="peaberry"/>
@@ -70,13 +70,16 @@
 	<rm:locator pattern="^org\.ops4j(\..+)+" 							searchPathRef="maven" />
 	 -->
 	
+	<!-- my stuff is local -->
+	<rm:locator pattern="^com\.agritrace(\..+)*" 						searchPathRef="local" />	
+
 	<!-- force resolution of hibernate from elvers site --> 
 	<rm:locator pattern="^org\.hibernate(\..+)*" 						searchPathRef="elvers" />
 	
 	<!-- otherwise just search in order from local to most broad repository. --> 
-	<rm:locator 														searchPathRef="local" failOnError="false"  />
 	<rm:locator 														searchPathRef="helios" failOnError="false" />
 	<rm:locator 														searchPathRef="orbit" failOnError="false" />
-	<rm:locator 														searchPathRef="maven" />
+	<rm:locator 														searchPathRef="maven" failOnError="false"  />
+	<rm:locator 														searchPathRef="local" />
 
 </rm:rmap>

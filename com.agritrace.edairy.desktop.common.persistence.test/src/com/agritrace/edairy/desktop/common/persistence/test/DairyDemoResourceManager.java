@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.common.ui.managers;
+package com.agritrace.edairy.desktop.common.persistence.test;
 
 import static com.agritrace.edairy.desktop.common.persistence.DairyUtil.createAnimal;
 import static com.agritrace.edairy.desktop.common.persistence.DairyUtil.createDescriptiveLocation;
@@ -62,6 +62,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.RearingMode;
 import com.agritrace.edairy.desktop.common.model.tracking.ReferenceAnimalType;
 import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
+import com.agritrace.edairy.desktop.common.ui.managers.IDairyResourceManager;
 
 public class DairyDemoResourceManager implements IDairyResourceManager {
 

@@ -13,7 +13,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.tracking.ReferenceAnimalType;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
-import com.agritrace.edairy.desktop.common.ui.managers.DairyDemoResourceManager;
 
 public class ModelPersistenceTestCase extends ModelPersistenceBase {
 

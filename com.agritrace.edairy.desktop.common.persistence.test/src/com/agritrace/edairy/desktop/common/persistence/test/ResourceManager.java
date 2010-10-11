@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.common.ui.managers;
+package com.agritrace.edairy.desktop.common.persistence.test;
 
 import java.io.IOException;
 import java.util.HashMap;

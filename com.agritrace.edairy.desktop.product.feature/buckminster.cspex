@@ -10,7 +10,7 @@
             </actorProperties>
             <properties>
                 <property key="profile" value="EDMProfile"/>
-                <property key="iu" value="com.agritrace.edairy.desktop.dairy_manager_prod"/>
+                <property key="iu" value="com.agritrace.edairy.desktop.product"/>
             </properties>
 			<prerequisites alias="repository">
 				<attribute name="site.p2"/>

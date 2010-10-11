@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="eDairy Manager Destop" id="com.agritrace.edairy.desktop.dairy_manager_prod" application="com.agritrace.edairy.desktop.dairy_manager_app" useFeatures="true" includeLaunchers="true">
+<product name="eDairy Manager Desktop" id="com.agritrace.edairy.desktop.product" application="com.agritrace.edairy.desktop.dairy_manager_app" useFeatures="true" includeLaunchers="true">
 
    <aboutInfo>
       <image path="/com.agritrace.edairy.desktop/resources/edairy_helpabout.png"/>
    </aboutInfo>
-
-   <configIni use="default">
-      <win32>/com.agritrace.edairy.desktop/config.ini</win32>
-   </configIni>
-
+   
    <launcherArgs>
-      <programArgs>-debug -consoleLog</programArgs>
       <vmArgs>-Driena.application.width=1150 -Driena.application.height=750 -Xmx384m</vmArgs>
       <vmArgsMac>-XstartOnFirstThread 
 -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>

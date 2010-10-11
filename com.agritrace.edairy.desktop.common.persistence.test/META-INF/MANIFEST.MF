@@ -15,3 +15,4 @@ Require-Bundle: org.eclipse.core.runtime,
  com.ibm.icu;bundle-version="4.2.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Fragment-Host: com.agritrace.edairy.desktop.common.persistence
+Import-Package: org.eclipse.emf.ecore.xmi
