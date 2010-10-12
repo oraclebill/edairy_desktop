@@ -78,48 +78,52 @@ public class FarmerPayablesYearDao {
 	}
 
 	public List<FarmerPayablesYearData> getReportValuesX(String year, String month) {
-
-//		ICollectionJournalLineRepository collectionsRepo = RepositoryFactory
-//				.getRegisteredRepository(ICollectionJournalLineRepository.class);
-		final List<FarmerPayablesYearData> ret = new ArrayList<FarmerPayablesYearData>();
-
-		for (Membership membership : collectionsRepo.getMembersWithDeliveriesFor(Integer.parseInt(month), Integer
-				.parseInt(year))) {
-			Farmer farmer = membership.getMember();
-
-			// Income = (Total quantity of milk collected - quantity of rejected
-			// milk) * Posted Milk Price for that month
-			final BigDecimal income = calculateMemberMonthlyIncome(membership, month,
-					year);
-
-			// Credits = 0 - (Sum of all credits attributed to member for
-			// current month)
-			final BigDecimal[] creditsAndAdjustments = calculateMemberMonthlyCreditsAndAdjustments(
-					membership, month, year);
-
-			if (income.equals(ZERO) && creditsAndAdjustments[0].equals(ZERO)
-					&& creditsAndAdjustments[1].equals(ZERO)) {
-				continue;
+		try {
+	//		ICollectionJournalLineRepository collectionsRepo = RepositoryFactory
+	//				.getRegisteredRepository(ICollectionJournalLineRepository.class);
+			final List<FarmerPayablesYearData> ret = new ArrayList<FarmerPayablesYearData>();
+	
+			for (Membership membership : collectionsRepo.getMembersWithDeliveriesFor(Integer.parseInt(month), Integer
+					.parseInt(year))) {
+				Farmer farmer = membership.getMember();
+	
+				// Income = (Total quantity of milk collected - quantity of rejected
+				// milk) * Posted Milk Price for that month
+				final BigDecimal income = calculateMemberMonthlyIncome(membership, month,
+						year);
+	
+				// Credits = 0 - (Sum of all credits attributed to member for
+				// current month)
+				final BigDecimal[] creditsAndAdjustments = calculateMemberMonthlyCreditsAndAdjustments(
+						membership, month, year);
+	
+				if (income.equals(ZERO) && creditsAndAdjustments[0].equals(ZERO)
+						&& creditsAndAdjustments[1].equals(ZERO)) {
+					continue;
+				}
+	
+				// Payables = Sum of Income, credits and adjustments
+				final BigDecimal payables = income.add(creditsAndAdjustments[0]).add(
+						creditsAndAdjustments[1]);
+	
+				final String name = farmer.getGivenName();
+				final String memberNumber = membership.getMemberNumber();
+				final String accountNumber = membership.getAccount().getAccountNumber();
+	
+				final FarmerPayablesYearData data = new FarmerPayablesYearData(name,
+						memberNumber, accountNumber,
+						this.floatFormater.format(income),
+						this.floatFormater.format(creditsAndAdjustments[0]),
+						this.floatFormater.format(creditsAndAdjustments[1]),
+						this.floatFormater.format(payables));
+				ret.add(data);
 			}
-
-			// Payables = Sum of Income, credits and adjustments
-			final BigDecimal payables = income.add(creditsAndAdjustments[0]).add(
-					creditsAndAdjustments[1]);
-
-			final String name = farmer.getGivenName();
-			final String memberNumber = membership.getMemberNumber();
-			final String accountNumber = membership.getAccount().getAccountNumber();
-
-			final FarmerPayablesYearData data = new FarmerPayablesYearData(name,
-					memberNumber, accountNumber,
-					this.floatFormater.format(income),
-					this.floatFormater.format(creditsAndAdjustments[0]),
-					this.floatFormater.format(creditsAndAdjustments[1]),
-					this.floatFormater.format(payables));
-			ret.add(data);
+	
+			return ret;
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			throw e;
 		}
-
-		return ret;
 	}
 
 	private BigDecimal calculateMemberMonthlyIncome(

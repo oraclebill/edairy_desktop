@@ -6,22 +6,20 @@ import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.equinox.log.Logger;
-import org.eclipse.riena.core.Log4r;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.TransactionException;
-import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
+import com.agritrace.edairy.desktop.common.persistence.services.Transactional;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public abstract class HibernateRepository<T extends EObject> implements
+public class HibernateRepository<T extends EObject> implements
 		IRepository<T> {
 	protected abstract class SessionRunnable<X> implements Runnable {
 		@Override
@@ -43,35 +41,27 @@ public abstract class HibernateRepository<T extends EObject> implements
 
 	}
 
-	private static final Logger LOGGER = Log4r.getLogger(
-			Activator.getDefault(), HibernateRepository.class);
-	private final String entityName;
-//	private final String identifierName;
-
 	private final Provider<Session> sessionProvider;
+	
+	private Class<?> classType;
+	private String entityName;
 
 	@Inject
 	protected HibernateRepository(Provider<Session> sessionProvider) {
-		String className;
-		LOGGER.log(LogService.LOG_INFO, String.format(
-				"Creating HibernateRepository [%s:%d]", getClassType()
-						.getName(), hashCode()));
-
 		// set the persistence manager
 		this.sessionProvider = sessionProvider;
-
+		
+		if (getClassType() != null) {
+			initEntityName();
+		}
+	}
+	
+	private void initEntityName() {
 		// get metadata about the class we will be persisting..
-		className = getClassType().getName();
+		String className = getClassType().getName();
 		// entity name
 		entityName = className.substring(className.lastIndexOf('.') + 1);
 		Assert.isLegal(!entityName.startsWith("."));
-
-//		metaData = sessionProvider.get().getSessionFactory().getClassMetadata(entityName);
-//		Assert.isNotNull(metaData);
-//		// identifier (pk) name
-//		identifierName = metaData.getIdentifierPropertyName();
-//		Assert.isNotNull(identifierName);
-
 	}
 
 	@Override
@@ -79,26 +69,19 @@ public abstract class HibernateRepository<T extends EObject> implements
 		return allWithEagerFetch((String[]) null);
 	}
 
+	@Transactional
 	protected List<T> allWithEagerFetch(final String... paths) {
-		final SessionRunnable<List<T>> runner = new SessionRunnable<List<T>>() {
-			@Override
-			public void run(Session s) {
-				final Criteria crit = s.createCriteria(getClassType());
+		final Criteria crit = sessionProvider.get().createCriteria(getClassType());
 
-				if (paths != null) {
-					for (final String path : paths) {
-						crit.setFetchMode(path, FetchMode.JOIN);
-					}
-				}
-
-				@SuppressWarnings("unchecked")
-				final
-				List<T> result = crit.list();
-				setResult(result);
+		if (paths != null) {
+			for (final String path : paths) {
+				crit.setFetchMode(path, FetchMode.JOIN);
 			}
-		};
-		run(runner);
-		return runner.getResult();
+		}
+
+		@SuppressWarnings("unchecked")
+		final List<T> result = crit.list();
+		return result;
 	}
 
 	@Override
@@ -120,6 +103,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 	}
 
 	@Override
+	@Transactional
 	public void load(final EObject obj, final Serializable key) {
 		if (key == null) {
 			throw new IllegalArgumentException("key cannot be null");
@@ -146,6 +130,7 @@ public abstract class HibernateRepository<T extends EObject> implements
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
+	@Transactional
 	public <X> X findByKey(Class<X> entityClass, long entityKey) {
 		return (X) sessionProvider.get().get(getEntityName(entityClass), new Long(entityKey));
 	}
@@ -227,7 +212,18 @@ public abstract class HibernateRepository<T extends EObject> implements
 	 *
 	 * @return
 	 */
-	protected abstract Class<?> getClassType();
+	protected Class<?> getClassType() {
+		return classType;
+	}
+	
+	/**
+	 * Non-API method for classes created by PersistenceModule internal provider.
+	 * 
+	 */
+	public void setClassType(Class<?> klass) {
+		classType = klass;
+		initEntityName();
+	}
 
 	/**
 	 * The hibernate entity name of the parameterized class.

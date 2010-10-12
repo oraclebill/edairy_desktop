@@ -43,6 +43,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
+import com.agritrace.edairy.desktop.common.persistence.services.Transactional;
 import com.agritrace.edairy.desktop.internal.common.persistence.Activator;
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
@@ -90,7 +91,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	 * @author bjones
 	 *
 	 */
-	protected final static class DairyRepoInternal extends HibernateRepository<Dairy> {
+	protected static class DairyRepoInternal extends HibernateRepository<Dairy> {
 		@Inject
 		protected DairyRepoInternal(Provider<Session> sessionProvider) {
 			super(sessionProvider);
@@ -173,8 +174,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 				criteria.setFetchMode("transactions", FetchMode.SELECT);
 
 				@SuppressWarnings("unchecked")
-				final
-				List<Account> result = criteria.list();
+				final List<Account> result = criteria.list();
 				setResult(result);
 			}
 		}
@@ -184,26 +184,25 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 			runWithTransaction(query);
 
 			@SuppressWarnings("unchecked")
-			final
-			List<Membership> result = (List<Membership>) query.getResult();
+			final List<Membership> result = (List<Membership>) query.getResult();
 			return result;
 		}
 
 		public Membership memberByNumber(String memberNumber) {
 			final MemberByNumber query = new MemberByNumber(memberNumber);
-			run(query);
+			runWithTransaction(query);
 			return query.getResult();
 		}
 
 		public Account primaryAccountForMemberNo(String memberNo) {
 			final AccountForMemberNo query = new AccountForMemberNo(memberNo);
-			run(query);
+			runWithTransaction(query);
 			return query.getResult();
 		}
 
 		public List<Account> allAccounts() {
 			final SkinnyAccountsQuery query = new SkinnyAccountsQuery();
-			run(query);
+			runWithTransaction(query);
 			return query.getResult();
 		}
 	};
@@ -219,13 +218,16 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	}
 
 	@Override
+	@Transactional
 	public Dairy getLocalDairy() {
 		if (localDairy == null) {
 			localDairy = dairyRepository.findByKey(1L);
+			
 			if (localDairy == null) {
 				localDairy = createLocalDairy();
 				dairyRepository.saveNew(localDairy);
 			}
+			
 			initLocalDairy();
 		}
 		return localDairy;
@@ -242,6 +244,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 				DairyPackage.Literals.DAIRY__DAIRY_BINS,
 				DairyPackage.Literals.DAIRY__EMPLOYEES,
 				DairyPackage.Literals.DAIRY__ROUTES,
+				DairyPackage.Literals.DAIRY__COLLECTION_JOURNALS,
 				DairyPackage.Literals.DAIRY__VEHICLES,
 				DairyPackage.Literals.DAIRY__SUPPLIERS,
 				ModelPackage.Literals.CONTACTABLE__CONTACT_METHODS);

@@ -13,12 +13,12 @@ import com.google.inject.Provider;
 public class SessionProvider implements Provider<Session> {
 	private static final Logger LOG = Log4r.getLogger(Activator.getDefault(), "com.agritrace.edairy.desktop.internal.common.persistence.SessionProvider");
 
-	private final SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 	private Session session;
 
 	@Inject
 	protected SessionProvider(HbDataStore hbds) {
-		LOG.log(LogService.LOG_INFO, " ** Creating PersistenceManager [" + getClass().getName() + ":" + hashCode()
+		LOG.log(LogService.LOG_INFO, " ** Creating SessionProvider [" + getClass().getName() + ":" + hashCode()
 				+ "]");
 
 		sessionFactory = hbds.getSessionFactory();
@@ -26,13 +26,21 @@ public class SessionProvider implements Provider<Session> {
 
 	@Override
 	public Session get() {
-		if (null == session) {
-			session = sessionFactory.openSession();
-			LOG.log(LogService.LOG_DEBUG, "--> created session: " + session);
-		} else if (!session.isConnected()) {
-			session = sessionFactory.openSession();
-			LOG.log(LogService.LOG_DEBUG, "--> creatied session: " + session);
+		// Managed contexts, disabled for now, until future comments from Bill.
+		/*
+		if (sessionFactory == null) {
+			this.sessionFactory = store.getSessionFactory();
+			final Session session = sessionFactory.openSession();
+			System.err.println(" --> Binding session@" + session.hashCode() + " to managed context." );
+			ManagedSessionContext.bind(sessionFactory.openSession());
 		}
+		return sessionFactory.getCurrentSession();
+		*/
+		
+		if (session == null || !session.isOpen()) {
+			session = sessionFactory.openSession();
+		}
+		
 		return session;
 	}
 }

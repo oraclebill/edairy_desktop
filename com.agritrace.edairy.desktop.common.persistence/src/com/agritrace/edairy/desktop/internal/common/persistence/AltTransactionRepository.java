@@ -6,7 +6,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -19,7 +18,9 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
 import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
+import com.agritrace.edairy.desktop.common.persistence.services.Transactional;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 @SuppressWarnings("unchecked")
 public class AltTransactionRepository extends RepositoryUtil<Transaction> implements ITransactionRepository {
@@ -29,8 +30,8 @@ public class AltTransactionRepository extends RepositoryUtil<Transaction> implem
 	 * @param store
 	 */
 	@Inject
-	public AltTransactionRepository(HbDataStore store) {
-		super(store);
+	public AltTransactionRepository(Provider<Session> provider) {
+		super(provider);
 	}
 
 	@Override
@@ -39,6 +40,7 @@ public class AltTransactionRepository extends RepositoryUtil<Transaction> implem
 	}
 
 	@Override
+	@Transactional
 	public List<Transaction> findAccountTransactions(Account account, Date start, Date end) {
 		final Session session = getCurrentSession();
 		final Criteria criteria = session.createCriteria("Transaction");
@@ -56,6 +58,7 @@ public class AltTransactionRepository extends RepositoryUtil<Transaction> implem
 		return criteria.list();
 	}
 
+	@Transactional
 	private List<Transaction> runQuery(String q) {
 		final Session session = getCurrentSession();
 		return session.createQuery(q).list();

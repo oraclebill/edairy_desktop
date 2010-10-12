@@ -3,7 +3,6 @@ package com.agritrace.edairy.desktop.internal.common.persistence;
 import java.io.Serializable;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -11,11 +10,12 @@ import org.hibernate.Transaction;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
+import com.google.inject.Provider;
 
 public abstract class RepositoryUtil<T extends EObject> extends DataStoreManager implements IRepository<T> {
 
-	public RepositoryUtil(HbDataStore store) {
-		super(store);
+	public RepositoryUtil(Provider<Session> provider) {
+		super(provider);
 	}
 
 	@Override

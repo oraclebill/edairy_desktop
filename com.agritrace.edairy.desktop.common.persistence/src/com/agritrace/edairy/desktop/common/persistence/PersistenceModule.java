@@ -23,9 +23,11 @@ import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.services.ImageDataUtil;
+import com.agritrace.edairy.desktop.common.persistence.services.Transactional;
 import com.agritrace.edairy.desktop.internal.common.persistence.HbDataStoreProvider;
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
 import com.agritrace.edairy.desktop.internal.common.persistence.SessionProvider;
+import com.agritrace.edairy.desktop.internal.common.persistence.TransactionInterceptor;
 import com.agritrace.edairy.desktop.internal.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.internal.operations.services.customer.CustomerRepository;
 import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
@@ -38,6 +40,7 @@ import com.google.inject.Inject;
 import com.google.inject.Key;
 import com.google.inject.Provider;
 import com.google.inject.Scopes;
+import com.google.inject.matcher.Matchers;
 import com.google.inject.util.Types;
 
 public class PersistenceModule extends AbstractModule {
@@ -54,7 +57,7 @@ public class PersistenceModule extends AbstractModule {
 		private final Class<?> klass;
 
 		@Inject
-		private Provider<Session> sessionProvider;
+		private Provider<HibernateRepository<EObject>> baseProvider;
 
 		public HibernateRepositoryProvider(Class<?> klass) {
 			this.klass = klass;
@@ -62,12 +65,9 @@ public class PersistenceModule extends AbstractModule {
 
 		@Override
 		public IRepository<?> get() {
-			return new HibernateRepository<EObject>(sessionProvider) {
-				@Override
-				protected Class<?> getClassType() {
-					return klass;
-				}
-			};
+			HibernateRepository<EObject> repo = baseProvider.get();
+			repo.setClassType(klass);
+			return repo;
 		}
 	}
 
@@ -123,6 +123,11 @@ public class PersistenceModule extends AbstractModule {
 		bind(IDairyRepository.class).to(DairyRepository.class);
 		bind(IMemberRepository.class).to(DairyRepository.class);
 		bind(DairyRepository.class).in(Scopes.SINGLETON);
+		
+		// Install AOP interceptor for transactions
+		TransactionInterceptor interceptor = new TransactionInterceptor();
+		requestInjection(interceptor);
+		bindInterceptor(Matchers.any(), Matchers.annotatedWith(Transactional.class), interceptor);
 
 		// Ideally we shouldn't need this...
 		requestStaticInjection(ImageDataUtil.class);

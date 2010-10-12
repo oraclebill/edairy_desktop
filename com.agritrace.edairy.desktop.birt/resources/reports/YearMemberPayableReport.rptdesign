@@ -160,13 +160,17 @@
                 </list-property>
             </structure>
             <property name="dataSource">Data Source</property>
-            <method name="open"><![CDATA[count = 0;
-importPackage(Packages.com.google.inject);
-importPackage(Packages.com.agritrace.edairy.desktop.birt.data);
+            <method name="open"><![CDATA[
+
+count = 0;
 dao = Packages.com.agritrace.edairy.desktop.birt.data.YearReportDao.instance();
-data = dao.getReportValuesX(reportContext.getParameterValue("Year"), reportContext.getParameterValue("Month"));
+yearParam = reportContext.getParameterValue("Year");
+monthParam = reportContext.getParameterValue("Month");
+data = dao.getReportValuesX(yearParam, monthParam);
+
 ]]></method>
-            <method name="fetch"><![CDATA[//
+            <method name="fetch"><![CDATA[
+
 if(count < data.size()){
 	var dataLine = data.get(count);
 	row["farmerName"] = dataLine.getFarmerName();
@@ -179,7 +183,9 @@ if(count < data.size()){
 	count++;
 	return true;
 }
-return false;]]></method>
+return false;
+
+]]></method>
         </script-data-set>
     </data-sets>
     <styles>

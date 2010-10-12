@@ -5,24 +5,26 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.hibernate.Query;
+import org.hibernate.Session;
 
 import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.persistence.services.Transactional;
 import com.agritrace.edairy.desktop.internal.common.persistence.RepositoryUtil;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 @SuppressWarnings("unchecked")
 public class MilkCollectionJournalLineRepository extends RepositoryUtil<CollectionJournalLine> implements
 		ICollectionJournalLineRepository {
 
 	@Inject
-	public MilkCollectionJournalLineRepository(HbDataStore store) {
-		super(store);
+	public MilkCollectionJournalLineRepository(Provider<Session> provider) {
+		super(provider);
 	}
 
 	@Override
@@ -41,6 +43,7 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 	 * java.util.Date)
 	 */
 	@Override
+	@Transactional
 	public long countByMemberCenterDate(final Membership member, final DairyLocation center, final Date date) {
 		final Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
@@ -58,6 +61,7 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 	}
 
 	@Override
+	@Transactional
 	public List<CollectionGroup> allForDate(final Date date) {
 		int year, month, day;
 
@@ -93,7 +97,10 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 	}
 
 	@Override
+	@Transactional
 	public BigDecimal getMilkPrice(final int month, final int year) {
+		// TODO: There is no MilkPrice class!
+		
 		final String queryString = "SELECT value " + "FROM MilkPrice m " + "WHERE m.year = :year "
 				+ "  AND m.month = :month ";
 
@@ -109,6 +116,7 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 	}
 
 	@Override
+	@Transactional
 	public List<Membership> getMembersWithDeliveriesFor(final int month, final int year) {
 		final String queryString = "SELECT distinct validatedMember "
 			+ " FROM CollectionJournalLine l "
@@ -124,6 +132,7 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 	}
 
 	@Override
+	@Transactional
 	public List<CollectionJournalLine> getPayableDeliveriesForMember(final Membership member, final int month,
 			final int year) {
 		final String queryString = "FROM CollectionJournalLine l " + "WHERE l.validatedMember = :member "
@@ -141,6 +150,7 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 	}
 
 	@Override
+	@Transactional
 	public BigDecimal getSumOfPayableDeliveries(final Membership member, final int month, final int year) {
 		final String queryString = "SELECT sum(l.quantity) " + "FROM CollectionJournalLine l "
 				+ "WHERE l.validatedMember = :member " + "  AND l.rejected = False " + "  AND l.flagged = False "

@@ -19,7 +19,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class EmployeeRepository implements IEmployeeRepository, IRepository<Employee> {
-	protected static final class EmployeeRepositoryInternal extends HibernateRepository<Employee> {
+	protected static class EmployeeRepositoryInternal extends HibernateRepository<Employee> {
 		@Inject
 		protected EmployeeRepositoryInternal(Provider<Session> sessionProvider) {
 			super(sessionProvider);
