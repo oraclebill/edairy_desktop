@@ -1,4 +1,4 @@
-package com.agritrace.ediary.desktop.operations.ui.tests;
+package com.agritrace.edairy.desktop.operations.ui.tests;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;

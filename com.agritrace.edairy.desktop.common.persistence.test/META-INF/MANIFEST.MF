@@ -7,10 +7,9 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Require-Bundle: org.eclipse.core.runtime,
  org.junit;bundle-version="4.8.1",
- com.google.inject,
+ com.agritrace.edairy.guice,
  com.agritrace.edairy.desktop.collections.scaledata,
  com.csvreader;bundle-version="1.0.0",
- aopalliance;bundle-version="0.0.0",
  org.apache.commons.collections;bundle-version="3.2.0",
  com.ibm.icu;bundle-version="4.2.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

@@ -1,4 +1,4 @@
-package com.agritrace.ediary.desktop.operations.ui.tests;
+package com.agritrace.edairy.desktop.operations.ui.tests;
 
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.eclipse.riena.core.RienaStatus;

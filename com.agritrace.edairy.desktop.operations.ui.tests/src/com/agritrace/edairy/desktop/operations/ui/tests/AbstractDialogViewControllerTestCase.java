@@ -1,4 +1,4 @@
-package com.agritrace.ediary.desktop.operations.ui.tests;
+package com.agritrace.edairy.desktop.operations.ui.tests;
 
 import org.easymock.EasyMock;
 import org.eclipse.core.databinding.observable.Realm;

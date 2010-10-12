@@ -11,9 +11,7 @@ Require-Bundle: org.eclipse.ui,
  com.agritrace.edairy.desktop.common.model;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.common.persistence;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.common.ui;bundle-version="1.0.0",
- com.google.inject,
- org.ops4j.peaberry;bundle-version="1.1.1",
- org.ops4j.peaberry.eclipse;bundle-version="1.1.1"
+ com.agritrace.edairy.guice
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.desktop.install.navigation

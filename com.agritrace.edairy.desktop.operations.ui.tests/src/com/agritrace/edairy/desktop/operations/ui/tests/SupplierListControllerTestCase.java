@@ -1,4 +1,4 @@
-package com.agritrace.ediary.desktop.operations.ui.tests;
+package com.agritrace.edairy.desktop.operations.ui.tests;
 
 import java.util.ArrayList;
 import java.util.List;

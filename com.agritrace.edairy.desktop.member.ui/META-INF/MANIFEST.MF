@@ -11,7 +11,7 @@ Require-Bundle: com.agritrace.edairy.desktop.common.model;bundle-version="1.0.0"
  org.eclipse.emf.query;bundle-version="1.2.100",
  com.ibm.icu;bundle-version="4.2.1",
  com.agritrace.edairy.desktop.common.persistence;bundle-version="1.0.0",
- com.google.inject
+ com.agritrace.edairy.guice
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.desktop.member.ui,

@@ -254,7 +254,7 @@
                                                 <property name="fontSize">small</property>
                                                 <property name="color">#0080FF</property>
                                                 <property name="textAlign">right</property>
-                                                <text-property name="text">www.ediary.co.ke/limurudairy</text-property>
+                                                <text-property name="text">www.edairy.co.ke/limurudairy</text-property>
                                             </label>
                                         </cell>
                                     </row>

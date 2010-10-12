@@ -9,9 +9,9 @@
     <data-sources>
         <script-data-source name="Report Data Source" id="39">
             <method name="open"><![CDATA[importPackage(Packages.org.eclipse.birt.samples.scripted.hibernate);
-importPackage(Packages.com.agritrace.ediary.desktop.reports.data);
+importPackage(Packages.com.agritrace.edairy.desktop.reports.data);
 count = 0;
-gsh = Packages.com.agritrace.ediary.desktop.reports.data.YearReportDao.instance();
+gsh = Packages.com.agritrace.edairy.desktop.reports.data.YearReportDao.instance();
 data = gsh.getReportValues("2009");
 ]]></method>
         </script-data-source>
