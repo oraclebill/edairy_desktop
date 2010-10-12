@@ -213,7 +213,7 @@ return false;]]></method>
             </row>
             <row id="414">
                 <cell id="415">
-                    <extended-item extensionName="Chart" name="Bar chart" id="409">
+                    <extended-item extensionName="Chart" id="416">
                         <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:data="http://www.birt.eclipse.org/ChartModelData" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
   <Version>2.5.1</Version>
   <Type>Bar Chart</Type>
@@ -442,8 +442,8 @@ return false;]]></method>
     <Bounds>
       <Left>0.0</Left>
       <Top>0.0</Top>
-      <Width>566.25</Width>
-      <Height>108.0</Height>
+      <Width>561.75</Width>
+      <Height>130.0</Height>
     </Bounds>
     <Insets>
       <Top>3.0</Top>
@@ -516,7 +516,7 @@ return false;]]></method>
       <Bottom>10.0</Bottom>
       <Right>10.0</Right>
     </Insets>
-    <Visible>false</Visible>
+    <Visible>true</Visible>
   </EmptyMessage>
   <Axes>
     <Type>Text</Type>
@@ -836,7 +836,7 @@ return false;]]></method>
               <AggregateExpression>Sum</AggregateExpression>
             </Grouping>
           </DataDefinition>
-          <SeriesIdentifier>Series 1</SeriesIdentifier>
+          <SeriesIdentifier>Change</SeriesIdentifier>
           <DataPoint>
             <Components>
               <Type>Orthogonal_Value</Type>
@@ -1202,7 +1202,6 @@ return false;]]></method>
         <GroupType>Text</GroupType>
         <AggregateExpression>Sum</AggregateExpression>
       </Grouping>
-      <SortKey/>
     </SeriesDefinitions>
     <Orientation>Horizontal</Orientation>
     <LineAttributes>
@@ -1310,20 +1309,31 @@ return false;]]></method>
   <Rotation/>
 </model:ChartWithAxes>
 ]]></xml-property>
-                        <property name="outputFormat">SVG</property>
-                        <property name="inheritColumns">true</property>
+                        <property name="outputFormat">PNG</property>
+                        <property name="inheritColumns">false</property>
+                        <structure name="toc"/>
                         <property name="dataSet">Data Set</property>
-                        <property name="height">1.5in</property>
-                        <property name="width">7.864583333333333in</property>
+                        <property name="height">130pt</property>
+                        <property name="width">7.802083333333333in</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">YEAR_STRING</property>
-                                <expression name="expression" type="javascript">dataSetRow["YEAR_STRING"]</expression>
+                                <property name="name">YEAR</property>
+                                <expression name="expression" type="javascript">dataSetRow["YEAR"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">MILKCOLLECTION</property>
+                                <expression name="expression" type="javascript">dataSetRow["MILKCOLLECTION"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                             <structure>
                                 <property name="name">CHANGE</property>
                                 <expression name="expression" type="javascript">dataSetRow["CHANGE"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">YEAR_STRING</property>
+                                <expression name="expression" type="javascript">dataSetRow["YEAR_STRING"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                         </list-property>

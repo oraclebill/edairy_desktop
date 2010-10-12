@@ -29,6 +29,10 @@
          id="org.eclipse.equinox.executable"
          version="0.0.0"/>
 
+   <includes
+         id="com.agritrace.edairy.desktop.birt.feature"
+         version="0.0.0"/>
+
    <requires>
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.core.runtime"/>
@@ -90,22 +94,13 @@
       <import plugin="com.agritrace.edairy.desktop.dairy.vehicles.ui" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="com.agritrace.edairy.desktop.install" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="com.agritrace.edairy.desktop.system.ui" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="com.agritrace.edairy.desktop.birt" version="1.0.0" match="greaterOrEqual"/> 
+      <import plugin="com.agritrace.edairy.desktop.birt" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="com.agritrace.edairy.desktop.operations.ui" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="aopalliance"/>
       <import plugin="javax.persistence"/>
       <import plugin="org.eclipse.datatools.enablement.mysql"/>
       <import plugin="org.jdom"/>
    </requires>
-
-<!--
-   <plugin
-         id="com.agritrace.edairy.desktop.birt"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
--->
 
    <plugin
          id="com.agritrace.edairy.desktop.collection.ui"

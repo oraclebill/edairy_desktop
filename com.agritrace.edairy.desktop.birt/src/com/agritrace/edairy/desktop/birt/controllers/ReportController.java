@@ -17,6 +17,7 @@ import org.eclipse.birt.report.engine.api.EngineConstants;
 import org.eclipse.birt.report.engine.api.EngineException;
 import org.eclipse.birt.report.engine.api.HTMLCompleteImageHandler;
 import org.eclipse.birt.report.engine.api.HTMLRenderOption;
+import org.eclipse.birt.report.engine.api.HTMLServerImageHandler;
 import org.eclipse.birt.report.engine.api.IHTMLRenderOption;
 import org.eclipse.birt.report.engine.api.IRenderOption;
 import org.eclipse.birt.report.engine.api.IReportEngine;
@@ -300,7 +301,7 @@ public class ReportController {
 		options.setOutputFormat("pdf");
 
 		//ImageHandlerTest
-		options.setImageHandler(new HTMLCompleteImageHandler());
+		options.setImageHandler(new HTMLServerImageHandler());
 		task.setRenderOption(options);
 		task.run();
 
