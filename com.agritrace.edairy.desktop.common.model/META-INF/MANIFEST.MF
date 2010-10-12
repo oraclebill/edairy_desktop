@@ -24,7 +24,6 @@ Export-Package: com.agritrace.edairy.desktop.common.model.base,
  com.agritrace.edairy.desktop.common.model.tracking.impl,
  com.agritrace.edairy.desktop.common.model.tracking.util
 Require-Bundle: org.eclipse.core.runtime
-Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.emf.common,
  org.eclipse.emf.common.archive,
  org.eclipse.emf.common.command,

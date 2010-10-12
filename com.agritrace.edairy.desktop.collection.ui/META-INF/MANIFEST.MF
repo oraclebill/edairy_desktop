@@ -18,6 +18,9 @@ Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.desktop.collection.ui,
  com.agritrace.edairy.desktop.collection.ui.beans;uses:="com.agritrace.edairy.desktop.common.model.dairy,org.eclipse.riena.beans.common",
  com.agritrace.edairy.desktop.collection.ui.components;uses:="org.eclipse.swt.events,org.eclipse.swt.widgets",
+ com.agritrace.edairy.desktop.collection.ui.components.collectionline,
+ com.agritrace.edairy.desktop.collection.ui.components.journalheader,
+ com.agritrace.edairy.desktop.collection.ui.components.validators,
  com.agritrace.edairy.desktop.collection.ui.controllers;
   uses:="org.eclipse.core.runtime,
    org.eclipse.core.databinding.validation,
@@ -42,4 +45,5 @@ Export-Package: com.agritrace.edairy.desktop.collection.ui,
    com.agritrace.edairy.desktop.common.ui.views,
    org.eclipse.swt.events,
    org.eclipse.swt.widgets",
+ com.agritrace.edairy.desktop.collection.ui.wizards,
  com.agritrace.edairy.desktop.internal.collection.ui;x-internal:=true

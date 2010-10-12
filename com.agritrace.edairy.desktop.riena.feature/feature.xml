@@ -17,6 +17,10 @@
       [Enter License Description here.]
    </license>
 
+   <requires>
+      <import plugin="org.eclipse.swt"/>
+   </requires>
+
    <plugin
          id="org.eclipse.riena.core"
          download-size="0"
@@ -145,6 +149,13 @@
 
    <plugin
          id="org.apache.oro"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.pushingpixels.trident"
          download-size="0"
          install-size="0"
          version="0.0.0"

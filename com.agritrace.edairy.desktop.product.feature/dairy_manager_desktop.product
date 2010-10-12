@@ -7,11 +7,10 @@
       <image path="/com.agritrace.edairy.desktop/resources/edairy_helpabout.png"/>
    </aboutInfo>
 
-   <configIni>
+   <configIni use="">
    </configIni>
 
    <launcherArgs>
-      <programArgs>-console -noExit</programArgs>
       <vmArgs>-Driena.application.width=1150 -Driena.application.height=750 -Xmx384m</vmArgs>
       <vmArgsMac>-XstartOnFirstThread 
 -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
