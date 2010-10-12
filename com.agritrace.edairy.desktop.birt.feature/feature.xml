@@ -69,6 +69,26 @@
       <import plugin="org.eclipse.equinox.registry" version="3.2.0" match="compatible"/>
       <import plugin="org.eclipse.osgi" version="3.2.0" match="compatible"/>
       <import plugin="org.eclipse.text" version="3.5.0" match="compatible"/>
+      <import plugin="com.agritrace.edairy.desktop.common.model"/>
+      <import plugin="com.agritrace.edairy.desktop.common.persistence"/>
+      <import plugin="com.agritrace.edairy.guice"/>
+      <import plugin="org.eclipse.emf.common"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.apache.axis" version="1.3.0" match="compatible"/>
+      <import plugin="javax.xml.rpc" version="1.1.0" match="compatible"/>
+      <import plugin="org.apache.jasper" version="5.5.17" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.equinox.jsp.jasper.registry" version="1.0.0" match="compatible"/>
+      <import plugin="org.eclipse.equinox.http.registry" version="1.0.0" match="compatible"/>
+      <import plugin="org.eclipse.help.base" version="3.2.0" match="compatible"/>
+      <import plugin="org.eclipse.ui" version="3.2.0" match="compatible"/>
+      <import plugin="org.eclipse.birt.report.data.adapter" version="2.1.0" match="compatible"/>
+      <import plugin="org.eclipse.birt.report.designer.ui" version="2.5.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.birt.report.engine.dataextraction" version="2.3.0" match="compatible"/>
+      <import plugin="javax.servlet"/>
+      <import plugin="javax.servlet.jsp"/>
+      <import plugin="org.apache.commons.logging"/>
+      <import plugin="org.eclipse.equinox.http.jetty"/>
+      <import plugin="org.eclipse.osgi.services"/>
    </requires>
 
    <plugin
@@ -336,6 +356,55 @@
 
    <plugin
          id="com.agritrace.edairy.desktop.birt"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.compare"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.compare.core"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.ui.forms"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.ui.views"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.ui.workbench.texteditor"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.jface.text"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.text"
          download-size="0"
          install-size="0"
          version="0.0.0"

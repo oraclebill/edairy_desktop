@@ -20,7 +20,7 @@ Require-Bundle: com.agritrace.edairy.desktop.common.persistence;bundle-version="
  com.agritrace.edairy.desktop.install;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.icons;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.system.ui;bundle-version="1.0.0",
- com.agritrace.edairy.guice,
+ com.agritrace.edairy.guice;visibility:=reexport,
  com.agritrace.edairy.desktop.birt;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.operations.ui;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
