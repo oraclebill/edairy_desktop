@@ -12,6 +12,16 @@ import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsExc
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
 import com.google.inject.Provider;
 
+/**
+ * Abstract implementation of the IRepository interface.
+ * 
+ * RepositoryUtil relies on the 'getCurrentSession' method of it's superclass to get
+ * access to a session. The superclass simply hides the underlying hibernate code.
+ * 
+ * @author bjones
+ *
+ * @param <T>
+ */
 public abstract class RepositoryUtil<T extends EObject> extends DataStoreManager implements IRepository<T> {
 
 	public RepositoryUtil(Provider<Session> provider) {

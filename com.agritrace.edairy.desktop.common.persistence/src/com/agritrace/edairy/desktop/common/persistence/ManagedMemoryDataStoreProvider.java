@@ -34,6 +34,7 @@ public class  ManagedMemoryDataStoreProvider implements Provider<HbDataStore> {
 
 		System.err.println(" --> returngin data store : " + hbds );
 		System.err.println("     " + hbds.getProperties().get(Environment.URL));
+//		Thread.dumpStack();
 
 		return hbds;
 	}

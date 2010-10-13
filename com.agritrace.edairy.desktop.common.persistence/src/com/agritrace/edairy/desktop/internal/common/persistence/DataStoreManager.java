@@ -12,6 +12,18 @@ public class DataStoreManager {
 	}
 
 	protected Session getCurrentSession() {
-		return sessionProvider.get();
+		Session session = sessionProvider.get();
+		
+		debugPrint(session);
+		
+		return session;
 	}
+
+	private void debugPrint(Session session) {
+		System.err.println(" >> DataStoreManager@" + hashCode() + " using session provider: "
+				+ sessionProvider.getClass().getName() + "@" + sessionProvider.hashCode());
+		System.err.println(" >> DataStoreManager@" + hashCode() + " returning session: " + session.getClass().getName()
+				+ "@" + session.hashCode());		
+	}
+	
 }
