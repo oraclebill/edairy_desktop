@@ -3,6 +3,6 @@
 
 <target name="NewTarget">
 <locations>
-<location path="/Users/bjones/Development/Projects/edairy_desktop_lib/exported_target" type="Directory"/>
+<location path="${workspace_loc}/../edairy_desktop_lib/exported_target" type="Directory"/>
 </locations>
 </target>
