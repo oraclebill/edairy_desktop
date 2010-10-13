@@ -17,80 +17,6 @@
       [Enter License Description here.]
    </license>
 
-   <requires>
-      <import plugin="org.eclipse.core.runtime" version="3.2.0" match="compatible"/>
-      <import plugin="org.mozilla.rhino" version="1.6.0" match="compatible"/>
-      <import plugin="com.ibm.icu"/>
-      <import plugin="org.eclipse.birt.core" version="2.1.0" match="compatible"/>
-      <import plugin="org.eclipse.birt.report.model" version="2.1.0" match="compatible"/>
-      <import plugin="org.eclipse.birt.data" version="2.1.0" match="compatible"/>
-      <import plugin="org.eclipse.core.expressions" version="3.2.0" match="compatible"/>
-      <import plugin="org.eclipse.core.filesystem" version="1.1.0" match="compatible"/>
-      <import plugin="org.eclipse.core.runtime" version="3.5.0" match="compatible"/>
-      <import plugin="org.eclipse.ui.ide" version="3.5.0" match="compatible"/>
-      <import plugin="org.eclipse.ui" version="3.5.0" match="compatible"/>
-      <import plugin="org.eclipse.jface.text" version="3.5.0" match="compatible"/>
-      <import plugin="org.eclipse.ui.workbench.texteditor" version="3.6.0" match="compatible"/>
-      <import plugin="org.eclipse.core.filebuffers" version="3.5.0" match="compatible"/>
-      <import plugin="org.eclipse.core.resources" version="3.5.0" match="compatible"/>
-      <import plugin="org.eclipse.core.filesystem" version="1.2.0" match="compatible"/>
-      <import plugin="org.eclipse.core.filesystem" version="1.0.0" match="compatible"/>
-      <import plugin="org.eclipse.help" version="3.2.0" match="compatible"/>
-      <import plugin="org.eclipse.jface.text" version="3.2.0" match="compatible"/>
-      <import plugin="org.eclipse.equinox.p2.engine" version="2.0.0" match="compatible"/>
-      <import plugin="org.eclipse.equinox.p2.metadata" version="2.0.0" match="compatible"/>
-      <import plugin="org.eclipse.datatools.connectivity.oda.consumer" version="3.2.2" match="compatible"/>
-      <import plugin="org.eclipse.datatools.connectivity.oda.profile" version="3.2.0" match="compatible"/>
-      <import plugin="org.eclipse.birt.data.aggregation" version="1.0.0"/>
-      <import plugin="org.w3c.css.sac" version="1.3.0" match="compatible"/>
-      <import plugin="org.eclipse.datatools.connectivity.oda" version="3.0.2" match="compatible"/>
-      <import plugin="org.apache.commons.codec" version="1.3.0" match="compatible"/>
-      <import plugin="org.w3c.sac" version="1.3.0" match="compatible"/>
-      <import plugin="org.eclipse.osgi"/>
-      <import plugin="org.apache.xerces"/>
-      <import plugin="org.eclipse.datatools.connectivity.oda" version="3.2.0" match="compatible"/>
-      <import plugin="org.eclipse.datatools.connectivity" version="1.1.3" match="compatible"/>
-      <import plugin="org.eclipse.datatools.connectivity.oda.consumer" version="3.2.3" match="compatible"/>
-      <import plugin="org.eclipse.birt.core" version="2.3.0" match="compatible"/>
-      <import plugin="org.eclipse.birt.data" version="2.3.0" match="compatible"/>
-      <import plugin="org.eclipse.core.runtime" version="3.3.0" match="compatible"/>
-      <import plugin="com.ibm.icu" version="3.4.4"/>
-      <import plugin="org.eclipse.core.resources" version="3.2.0" match="compatible"/>
-      <import plugin="com.ibm.icu" version="3.4.0"/>
-      <import plugin="org.eclipse.birt.report.engine" version="2.1.0" match="compatible"/>
-      <import plugin="org.eclipse.birt.core" version="2.5.0" match="compatible"/>
-      <import plugin="com.ibm.icu" version="4.0.1" match="compatible"/>
-      <import plugin="org.eclipse.birt.report.engine" version="2.5.1" match="compatible"/>
-      <import plugin="org.eclipse.birt.data" version="2.5.1" match="compatible"/>
-      <import plugin="org.eclipse.birt.report.engine.fonts" version="2.1.0" match="compatible"/>
-      <import plugin="com.lowagie.text" version="1.3.0"/>
-      <import plugin="org.apache.batik.transcoder" version="1.6.0" match="compatible"/>
-      <import plugin="org.eclipse.equinox.common" version="3.2.0" match="compatible"/>
-      <import plugin="org.eclipse.equinox.registry" version="3.2.0" match="compatible"/>
-      <import plugin="org.eclipse.osgi" version="3.2.0" match="compatible"/>
-      <import plugin="org.eclipse.text" version="3.5.0" match="compatible"/>
-      <import plugin="com.agritrace.edairy.desktop.common.model"/>
-      <import plugin="com.agritrace.edairy.desktop.common.persistence"/>
-      <import plugin="com.agritrace.edairy.guice"/>
-      <import plugin="org.eclipse.emf.common"/>
-      <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="org.apache.axis" version="1.3.0" match="compatible"/>
-      <import plugin="javax.xml.rpc" version="1.1.0" match="compatible"/>
-      <import plugin="org.apache.jasper" version="5.5.17" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.equinox.jsp.jasper.registry" version="1.0.0" match="compatible"/>
-      <import plugin="org.eclipse.equinox.http.registry" version="1.0.0" match="compatible"/>
-      <import plugin="org.eclipse.help.base" version="3.2.0" match="compatible"/>
-      <import plugin="org.eclipse.ui" version="3.2.0" match="compatible"/>
-      <import plugin="org.eclipse.birt.report.data.adapter" version="2.1.0" match="compatible"/>
-      <import plugin="org.eclipse.birt.report.designer.ui" version="2.5.1" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.birt.report.engine.dataextraction" version="2.3.0" match="compatible"/>
-      <import plugin="javax.servlet"/>
-      <import plugin="javax.servlet.jsp"/>
-      <import plugin="org.apache.commons.logging"/>
-      <import plugin="org.eclipse.equinox.http.jetty"/>
-      <import plugin="org.eclipse.osgi.services"/>
-   </requires>
-
    <plugin
          id="org.eclipse.birt.chart"
          download-size="0"
@@ -133,13 +59,6 @@
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.birt.chart.doc.isv"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.eclipse.birt.chart.engine.extension"
          download-size="0"
          install-size="0"
@@ -148,27 +67,6 @@
 
    <plugin
          id="org.eclipse.birt.chart.reportitem"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.birt.chart.reportitem.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.birt.chart.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.birt.chart.ui.extension"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -488,6 +386,69 @@
 
    <plugin
          id="org.eclipse.text"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.batik.pdf"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.xerces"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.birt.report.item.crosstab.core"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="javax.xml"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.xml.resolver"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.xml.serializer"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.draw2d"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.birt.chart.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.birt.core.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
