@@ -19,6 +19,7 @@ import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.swt.widgets.Shell;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
@@ -91,11 +92,10 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 		setEClass(AccountPackage.Literals.ACCOUNT_TRANSACTION);
 		setRepository(repo);
 
-		this.addTableColumn("ID", AccountPackage.Literals.TRANSACTION__TRANSACTION_ID);
 		this.addTableColumn("Date", AccountPackage.Literals.TRANSACTION__TRANSACTION_DATE);
 		this.addTableColumn("Source", AccountPackage.Literals.ACCOUNT_TRANSACTION__SOURCE);
 		this.addTableColumn("Ref. Num.", AccountPackage.Literals.ACCOUNT_TRANSACTION__REFERENCE_NUMBER);
-		this.addTableColumn("Account ID", "account.member.member.familyName", String.class );
+		this.addTableColumn("Member", "account.member", Membership.class );
 		this.addTableColumn("Amount", AccountPackage.Literals.TRANSACTION__AMOUNT);
 	}
 

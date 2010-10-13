@@ -4,6 +4,7 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
+import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberCollectionRecordsWidgetController;
@@ -19,6 +20,7 @@ public class ViewMemberDialogController extends AddMemberDialogController {
 	@Inject	private IMemberRepository memberRepository;
 	@Inject	private Provider<AddFarmDialog> addDialogProvider;
 	@Inject private Provider<ViewFarmDialog> viewDialogProvider;
+	@Inject private ITransactionRepository transactionRepository;
 
 	// collection tab
 	private MemberCollectionRecordsWidgetController collectionController;
@@ -50,6 +52,6 @@ public class ViewMemberDialogController extends AddMemberDialogController {
 		farmController = new MemberFarmWidgetController(this, farmRepository, memberRepository,
 				addDialogProvider, viewDialogProvider);
 		collectionController = new MemberCollectionRecordsWidgetController(this);
-		transactionController = new MemberTransactionWidgetController(this);
+		transactionController = new MemberTransactionWidgetController(transactionRepository, this);
 	}
 }

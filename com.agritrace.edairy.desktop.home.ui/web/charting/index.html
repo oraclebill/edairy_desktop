@@ -20,7 +20,21 @@
 			#related-links { font-size: .8em; }
 		</style>
 		<script type="text/javascript" src="_shared/EnhanceJS/enhance.js"></script>		
-		<script type="text/javascript">enhance({appendToggleLink: false});</script>
+		<script type="text/javascript">
+			enhance({
+				appendToggleLink: false,
+				loadScripts: [
+					'js/excanvas.js',
+					'../_shared/jquery.min.js',
+					'js/visualize.jQuery.js',
+					'js/example.js'
+				],
+				loadStyles: [
+					'css/visualize.css',
+					'css/visualize-light.css'
+				]
+			});
+		</script>
 	</head>
 	<body>
 		<h1><span class="title-dw">Designing with</span> <span class="title-pe">Progressive Enhancement</span> <span class="title-sub">Building the Web that Works for Everyone</span></h1>

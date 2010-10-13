@@ -47,7 +47,7 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 	public static final String DELETE_DIALOG_MESSAGE = "Do you want to remove selected farms?";
 	public static final String DELETE_DIALOG_TITLE = "Remove Farm";
 
-	private final String[] farmColumnHeaders = { "Member ID", "Member Given Name", "Family Name", "Farm Name", "Location", "Number of LiveStocks", "Number of Container" };
+	private final String[] farmColumnHeaders = { "Member ID", "Member First Name", "Last Name", "Farm Name", "Location", "Number of LiveStocks", "Number of Container" };
 
 	private final String[] farmPropertyNames = { "membership.memberNumber", "membership.member.givenName", "membership.member.familyName", "farm.name", "farm.location", "farm.numberOfAnimals",
 	"farm.numberOfContainers" };

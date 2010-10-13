@@ -301,10 +301,10 @@ public class MemberSearchDialog extends TitleAreaDialog {
 		id.setText("ID");
 
 		final TableColumn givenName = new TableColumn(table, SWT.LEFT);
-		givenName.setText("Given Name");
+		givenName.setText("First Name");
 
 		final TableColumn familyName = new TableColumn(table, SWT.LEFT);
-		familyName.setText("Family Name");
+		familyName.setText("Last Name");
 
 		final TableColumn location = new TableColumn(table, SWT.LEFT);
 		location.setText("Location");

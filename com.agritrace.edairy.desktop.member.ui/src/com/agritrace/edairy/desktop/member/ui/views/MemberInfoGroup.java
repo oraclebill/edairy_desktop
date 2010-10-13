@@ -23,12 +23,12 @@ public class MemberInfoGroup {
 	public static final int DEFAULT_FIELD_WIDTH = 150;
 
 	public static final int DEFAULT_LABEL_WIDTH = 90;
-	public static final String FIRST_NAME = "Given";
+	public static final String FIRST_NAME = "First";
 	public static final String HONORIFIC = "Hon.";
-	public static final String LAST_NAME = "Family:";
-	public static final String MEMBERID = "Member ID:";
-	public static final String MEMBERNUMBER = "Member Number:";
-	public static final String MIDDLE_NAME = "Middle :";
+	public static final String LAST_NAME = "Last";
+	public static final String MEMBERID = "Member ID";
+	public static final String MEMBERNUMBER = "Member Number";
+	public static final String MIDDLE_NAME = "Middle";
 	public static final String SUFFIX = "Suffix";
 
 	private CCombo cmbHonorable;

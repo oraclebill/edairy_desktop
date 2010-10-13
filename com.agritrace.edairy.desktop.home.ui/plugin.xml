@@ -7,16 +7,7 @@
             allowMultiple="true"
             class="com.agritrace.edairy.desktop.home.views.DairyHomeView"
             id="desktop.home.view"
-            name="name"
-            restorable="true">
-      </view>
-   </extension>
-   <extension
-         point="org.eclipse.ui.views">
-      <view
-            class="com.agritrace.edairy.desktop.home.views.DairyHomeView"
-            id="desktop.home.view"
-            name="name"
+            name="eDairy Dashboard"
             restorable="true">
       </view>
    </extension>

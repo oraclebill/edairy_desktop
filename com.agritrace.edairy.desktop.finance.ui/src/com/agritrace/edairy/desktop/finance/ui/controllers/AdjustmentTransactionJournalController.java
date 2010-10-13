@@ -13,6 +13,7 @@ import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.widgets.Shell;
 
+import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AdjustmentTransaction;
@@ -74,7 +75,7 @@ public final class AdjustmentTransactionJournalController extends TransactionJou
 		setEClass(AccountPackage.Literals.ADJUSTMENT_TRANSACTION);
 		setRepository(repo);
 
-		this.addTableColumn("ID", AccountPackage.Literals.TRANSACTION__TRANSACTION_ID);
+//		this.addTableColumn("ID", AccountPackage.Literals.TRANSACTION__TRANSACTION_ID);
 		this.addTableColumn("Date", AccountPackage.Literals.TRANSACTION__TRANSACTION_DATE);
 		this.addTableColumn("Account ID", AccountPackage.Literals.TRANSACTION__ACCOUNT, new ColumnFormatter() {
 
@@ -84,7 +85,8 @@ public final class AdjustmentTransactionJournalController extends TransactionJou
 				if (element instanceof Account) {
 					final Account acct = (Account) element;
 					try {
-						ret = acct.getMember().getMember().getFamilyName();
+						Person member = acct.getMember().getMember();
+						ret = String.format("%s %s", member.getGivenName(), member.getFamilyName());
 					} catch (final Exception e) {
 						ret = "account # " + acct.getAccountId();
 					}
@@ -96,6 +98,8 @@ public final class AdjustmentTransactionJournalController extends TransactionJou
 
 		this.addTableColumn("Type", AccountPackage.Literals.TRANSACTION__TRANSACTION_TYPE);
 		this.addTableColumn("Amount", AccountPackage.Literals.TRANSACTION__AMOUNT);
+//		this.addTableColumn("Approver", AccountPackage.Literals.ADJUSTMENT_TRANSACTION__SIGNED_OFF_BY);
+		this.addTableColumn("Description", AccountPackage.Literals.TRANSACTION__DESCRIPTION);
 	}
 
 	@Override
