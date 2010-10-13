@@ -6,24 +6,16 @@
  */
 package com.agritrace.edairy.desktop.common.model.tracking.impl;
 
+import com.agritrace.edairy.desktop.common.model.tracking.*;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.impl.EFactoryImpl;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import com.agritrace.edairy.desktop.common.model.tracking.AcquisitionType;
-import com.agritrace.edairy.desktop.common.model.tracking.AnimalIdentifier;
-import com.agritrace.edairy.desktop.common.model.tracking.Farm;
-import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
-import com.agritrace.edairy.desktop.common.model.tracking.Mechanism;
-import com.agritrace.edairy.desktop.common.model.tracking.Purpose;
-import com.agritrace.edairy.desktop.common.model.tracking.RearingMode;
-import com.agritrace.edairy.desktop.common.model.tracking.ReferenceAnimalType;
-import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
-import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
-import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
+import org.eclipse.emf.ecore.impl.EFactoryImpl;
+
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,12 +32,12 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 	 */
 	public static TrackingFactory init() {
 		try {
-			final TrackingFactory theTrackingFactory = (TrackingFactory)EPackage.Registry.INSTANCE.getEFactory("http://com.agritrace.edairy.desktop.common.model/tracking/");
+			TrackingFactory theTrackingFactory = (TrackingFactory)EPackage.Registry.INSTANCE.getEFactory("http://com.agritrace.edairy.desktop.common.model/tracking/"); 
 			if (theTrackingFactory != null) {
 				return theTrackingFactory;
 			}
 		}
-		catch (final Exception exception) {
+		catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new TrackingFactoryImpl();
@@ -127,9 +119,8 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Farm createFarm() {
-		final FarmImpl farm = new FarmImpl();
+		FarmImpl farm = new FarmImpl();
 		return farm;
 	}
 
@@ -138,9 +129,8 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Farmer createFarmer() {
-		final FarmerImpl farmer = new FarmerImpl();
+		FarmerImpl farmer = new FarmerImpl();
 		return farmer;
 	}
 
@@ -149,9 +139,8 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public com.agritrace.edairy.desktop.common.model.tracking.Container createContainer() {
-		final ContainerImpl container = new ContainerImpl();
+		ContainerImpl container = new ContainerImpl();
 		return container;
 	}
 
@@ -160,9 +149,8 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public RegisteredAnimal createRegisteredAnimal() {
-		final RegisteredAnimalImpl registeredAnimal = new RegisteredAnimalImpl();
+		RegisteredAnimalImpl registeredAnimal = new RegisteredAnimalImpl();
 		return registeredAnimal;
 	}
 
@@ -171,9 +159,8 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public ReferenceAnimalType createReferenceAnimalType() {
-		final ReferenceAnimalTypeImpl referenceAnimalType = new ReferenceAnimalTypeImpl();
+		ReferenceAnimalTypeImpl referenceAnimalType = new ReferenceAnimalTypeImpl();
 		return referenceAnimalType;
 	}
 
@@ -182,9 +169,8 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public AnimalIdentifier createAnimalIdentifier() {
-		final AnimalIdentifierImpl animalIdentifier = new AnimalIdentifierImpl();
+		AnimalIdentifierImpl animalIdentifier = new AnimalIdentifierImpl();
 		return animalIdentifier;
 	}
 
@@ -194,10 +180,8 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 	 * @generated
 	 */
 	public AcquisitionType createAcquisitionTypeFromString(EDataType eDataType, String initialValue) {
-		final AcquisitionType result = AcquisitionType.get(initialValue);
-		if (result == null) {
-			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		}
+		AcquisitionType result = AcquisitionType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
@@ -216,10 +200,8 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 	 * @generated
 	 */
 	public Purpose createPurposeFromString(EDataType eDataType, String initialValue) {
-		final Purpose result = Purpose.get(initialValue);
-		if (result == null) {
-			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		}
+		Purpose result = Purpose.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
@@ -238,10 +220,8 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 	 * @generated
 	 */
 	public RearingMode createRearingModeFromString(EDataType eDataType, String initialValue) {
-		final RearingMode result = RearingMode.get(initialValue);
-		if (result == null) {
-			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		}
+		RearingMode result = RearingMode.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
@@ -260,10 +240,8 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 	 * @generated
 	 */
 	public Mechanism createMechanismFromString(EDataType eDataType, String initialValue) {
-		final Mechanism result = Mechanism.get(initialValue);
-		if (result == null) {
-			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		}
+		Mechanism result = Mechanism.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
@@ -281,7 +259,6 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TrackingPackage getTrackingPackage() {
 		return (TrackingPackage)getEPackage();
 	}

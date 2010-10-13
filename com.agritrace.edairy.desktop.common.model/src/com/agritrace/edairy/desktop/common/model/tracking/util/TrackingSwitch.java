@@ -6,20 +6,15 @@
  */
 package com.agritrace.edairy.desktop.common.model.tracking.util;
 
+import com.agritrace.edairy.desktop.common.model.base.Contactable;
+import com.agritrace.edairy.desktop.common.model.base.Person;
+
+import com.agritrace.edairy.desktop.common.model.tracking.*;
+
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-
-import com.agritrace.edairy.desktop.common.model.base.Contactable;
-import com.agritrace.edairy.desktop.common.model.base.Person;
-import com.agritrace.edairy.desktop.common.model.tracking.AnimalIdentifier;
-import com.agritrace.edairy.desktop.common.model.tracking.Container;
-import com.agritrace.edairy.desktop.common.model.tracking.Farm;
-import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
-import com.agritrace.edairy.desktop.common.model.tracking.ReferenceAnimalType;
-import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
-import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -78,7 +73,7 @@ public class TrackingSwitch<T> {
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
 		else {
-			final List<EClass> eSuperTypes = theEClass.getESuperTypes();
+			List<EClass> eSuperTypes = theEClass.getESuperTypes();
 			return
 				eSuperTypes.isEmpty() ?
 					defaultCase(theEObject) :
@@ -96,57 +91,41 @@ public class TrackingSwitch<T> {
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case TrackingPackage.FARM: {
-				final Farm farm = (Farm)theEObject;
+				Farm farm = (Farm)theEObject;
 				T result = caseFarm(farm);
-				if (result == null) {
-					result = defaultCase(theEObject);
-				}
+				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackingPackage.FARMER: {
-				final Farmer farmer = (Farmer)theEObject;
+				Farmer farmer = (Farmer)theEObject;
 				T result = caseFarmer(farmer);
-				if (result == null) {
-					result = casePerson(farmer);
-				}
-				if (result == null) {
-					result = caseContactable(farmer);
-				}
-				if (result == null) {
-					result = defaultCase(theEObject);
-				}
+				if (result == null) result = casePerson(farmer);
+				if (result == null) result = caseContactable(farmer);
+				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackingPackage.CONTAINER: {
-				final Container container = (Container)theEObject;
+				Container container = (Container)theEObject;
 				T result = caseContainer(container);
-				if (result == null) {
-					result = defaultCase(theEObject);
-				}
+				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackingPackage.REGISTERED_ANIMAL: {
-				final RegisteredAnimal registeredAnimal = (RegisteredAnimal)theEObject;
+				RegisteredAnimal registeredAnimal = (RegisteredAnimal)theEObject;
 				T result = caseRegisteredAnimal(registeredAnimal);
-				if (result == null) {
-					result = defaultCase(theEObject);
-				}
+				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackingPackage.REFERENCE_ANIMAL_TYPE: {
-				final ReferenceAnimalType referenceAnimalType = (ReferenceAnimalType)theEObject;
+				ReferenceAnimalType referenceAnimalType = (ReferenceAnimalType)theEObject;
 				T result = caseReferenceAnimalType(referenceAnimalType);
-				if (result == null) {
-					result = defaultCase(theEObject);
-				}
+				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackingPackage.ANIMAL_IDENTIFIER: {
-				final AnimalIdentifier animalIdentifier = (AnimalIdentifier)theEObject;
+				AnimalIdentifier animalIdentifier = (AnimalIdentifier)theEObject;
 				T result = caseAnimalIdentifier(animalIdentifier);
-				if (result == null) {
-					result = defaultCase(theEObject);
-				}
+				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			default: return defaultCase(theEObject);

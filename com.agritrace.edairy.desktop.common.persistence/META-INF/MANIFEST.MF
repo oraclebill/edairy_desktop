@@ -1,9 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: ModelPersistence
-Bundle-SymbolicName: com.agritrace.edairy.desktop.common.persistence
+Bundle-SymbolicName: com.agritrace.edairy.desktop.common.persistence;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: com.agritrace.edairy.desktop.internal.common.persistence.Activator
+Bundle-Activator: 
+ com.agritrace.edairy.desktop.internal.common.persistence.PersistenceActivator
 Bundle-Vendor: AGRITRACE
 Require-Bundle: org.eclipse.core.runtime,
  com.agritrace.edairy.desktop.common.model,

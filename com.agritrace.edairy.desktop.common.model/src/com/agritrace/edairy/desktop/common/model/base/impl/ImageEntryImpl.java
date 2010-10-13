@@ -6,13 +6,15 @@
  */
 package com.agritrace.edairy.desktop.common.model.base.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import com.agritrace.edairy.desktop.common.model.base.ImageEntry;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -114,7 +116,6 @@ public class ImageEntryImpl extends EObjectImpl implements ImageEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getImageId() {
 		return imageId;
 	}
@@ -124,13 +125,11 @@ public class ImageEntryImpl extends EObjectImpl implements ImageEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setImageId(String newImageId) {
-		final String oldImageId = imageId;
+		String oldImageId = imageId;
 		imageId = newImageId;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.IMAGE_ENTRY__IMAGE_ID, oldImageId, imageId));
-		}
 	}
 
 	/**
@@ -138,7 +137,6 @@ public class ImageEntryImpl extends EObjectImpl implements ImageEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getMimeType() {
 		return mimeType;
 	}
@@ -148,13 +146,11 @@ public class ImageEntryImpl extends EObjectImpl implements ImageEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setMimeType(String newMimeType) {
-		final String oldMimeType = mimeType;
+		String oldMimeType = mimeType;
 		mimeType = newMimeType;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.IMAGE_ENTRY__MIME_TYPE, oldMimeType, mimeType));
-		}
 	}
 
 	/**
@@ -162,7 +158,6 @@ public class ImageEntryImpl extends EObjectImpl implements ImageEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public byte[] getImageData() {
 		return imageData;
 	}
@@ -172,13 +167,11 @@ public class ImageEntryImpl extends EObjectImpl implements ImageEntry {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setImageData(byte[] newImageData) {
-		final byte[] oldImageData = imageData;
+		byte[] oldImageData = imageData;
 		imageData = newImageData;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.IMAGE_ENTRY__IMAGE_DATA, oldImageData, imageData));
-		}
 	}
 
 	/**
@@ -266,11 +259,9 @@ public class ImageEntryImpl extends EObjectImpl implements ImageEntry {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) {
-			return super.toString();
-		}
+		if (eIsProxy()) return super.toString();
 
-		final StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (imageId: ");
 		result.append(imageId);
 		result.append(", mimeType: ");

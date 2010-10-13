@@ -6,13 +6,16 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl;
+
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -114,7 +117,6 @@ public class CustomerImpl extends CompanyImpl implements Customer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getId() {
 		return id;
 	}
@@ -124,13 +126,11 @@ public class CustomerImpl extends CompanyImpl implements Customer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setId(String newId) {
-		final String oldId = id;
+		String oldId = id;
 		id = newId;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.CUSTOMER__ID, oldId, id));
-		}
 	}
 
 	/**
@@ -138,7 +138,6 @@ public class CustomerImpl extends CompanyImpl implements Customer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getCustomerType() {
 		return customerType;
 	}
@@ -148,13 +147,11 @@ public class CustomerImpl extends CompanyImpl implements Customer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setCustomerType(String newCustomerType) {
-		final String oldCustomerType = customerType;
+		String oldCustomerType = customerType;
 		customerType = newCustomerType;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.CUSTOMER__CUSTOMER_TYPE, oldCustomerType, customerType));
-		}
 	}
 
 	/**
@@ -162,7 +159,6 @@ public class CustomerImpl extends CompanyImpl implements Customer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getStatus() {
 		return status;
 	}
@@ -172,13 +168,11 @@ public class CustomerImpl extends CompanyImpl implements Customer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setStatus(String newStatus) {
-		final String oldStatus = status;
+		String oldStatus = status;
 		status = newStatus;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.CUSTOMER__STATUS, oldStatus, status));
-		}
 	}
 
 	/**
@@ -266,11 +260,9 @@ public class CustomerImpl extends CompanyImpl implements Customer {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) {
-			return super.toString();
-		}
+		if (eIsProxy()) return super.toString();
 
-		final StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (id: ");
 		result.append(id);
 		result.append(", customerType: ");

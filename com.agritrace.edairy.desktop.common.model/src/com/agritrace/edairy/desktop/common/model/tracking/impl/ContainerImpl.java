@@ -6,16 +6,19 @@
  */
 package com.agritrace.edairy.desktop.common.model.tracking.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
+
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
+
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -149,7 +152,6 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Long getContainerId() {
 		return containerId;
 	}
@@ -159,13 +161,11 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setContainerId(Long newContainerId) {
-		final Long oldContainerId = containerId;
+		Long oldContainerId = containerId;
 		containerId = newContainerId;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.CONTAINER__CONTAINER_ID, oldContainerId, containerId));
-		}
 	}
 
 	/**
@@ -173,7 +173,6 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getTrackingNumber() {
 		return trackingNumber;
 	}
@@ -183,13 +182,11 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setTrackingNumber(String newTrackingNumber) {
-		final String oldTrackingNumber = trackingNumber;
+		String oldTrackingNumber = trackingNumber;
 		trackingNumber = newTrackingNumber;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.CONTAINER__TRACKING_NUMBER, oldTrackingNumber, trackingNumber));
-		}
 	}
 
 	/**
@@ -197,15 +194,13 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Farm getOwner() {
 		if (owner != null && owner.eIsProxy()) {
-			final InternalEObject oldOwner = (InternalEObject)owner;
+			InternalEObject oldOwner = (InternalEObject)owner;
 			owner = (Farm)eResolveProxy(oldOwner);
 			if (owner != oldOwner) {
-				if (eNotificationRequired()) {
+				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TrackingPackage.CONTAINER__OWNER, oldOwner, owner));
-				}
 			}
 		}
 		return owner;
@@ -225,13 +220,11 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setOwner(Farm newOwner) {
-		final Farm oldOwner = owner;
+		Farm oldOwner = owner;
 		owner = newOwner;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.CONTAINER__OWNER, oldOwner, owner));
-		}
 	}
 
 	/**
@@ -239,7 +232,6 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public double getCapacity() {
 		return capacity;
 	}
@@ -249,13 +241,11 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setCapacity(double newCapacity) {
-		final double oldCapacity = capacity;
+		double oldCapacity = capacity;
 		capacity = newCapacity;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.CONTAINER__CAPACITY, oldCapacity, capacity));
-		}
 	}
 
 	/**
@@ -263,7 +253,6 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public UnitOfMeasure getMeasureType() {
 		return measureType;
 	}
@@ -273,13 +262,11 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setMeasureType(UnitOfMeasure newMeasureType) {
-		final UnitOfMeasure oldMeasureType = measureType;
+		UnitOfMeasure oldMeasureType = measureType;
 		measureType = newMeasureType == null ? MEASURE_TYPE_EDEFAULT : newMeasureType;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.CONTAINER__MEASURE_TYPE, oldMeasureType, measureType));
-		}
 	}
 
 	/**
@@ -295,9 +282,7 @@ public class ContainerImpl extends EObjectImpl implements Container {
 			case TrackingPackage.CONTAINER__TRACKING_NUMBER:
 				return getTrackingNumber();
 			case TrackingPackage.CONTAINER__OWNER:
-				if (resolve) {
-					return getOwner();
-				}
+				if (resolve) return getOwner();
 				return basicGetOwner();
 			case TrackingPackage.CONTAINER__CAPACITY:
 				return getCapacity();
@@ -390,11 +375,9 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) {
-			return super.toString();
-		}
+		if (eIsProxy()) return super.toString();
 
-		final StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (containerId: ");
 		result.append(containerId);
 		result.append(", trackingNumber: ");

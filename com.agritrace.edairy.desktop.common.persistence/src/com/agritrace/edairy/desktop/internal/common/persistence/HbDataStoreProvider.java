@@ -24,7 +24,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class HbDataStoreProvider implements Provider<HbDataStore>, IDbPropertiesManager {
-	private static final org.eclipse.equinox.log.Logger LOG = Log4r.getLogger(Activator.getDefault(),
+	private static final org.eclipse.equinox.log.Logger LOG = Log4r.getLogger(PersistenceActivator.getDefault(),
 			HbDataStoreProvider.class);
 
 	public static final String DB_TYPE_PROPERTY = "edairy.database.type";
@@ -151,7 +151,7 @@ public class HbDataStoreProvider implements Provider<HbDataStore>, IDbProperties
 	protected static File getDatabaseFileArea() {
 		File ret = null;
 		try {
-			ret = RienaLocations.getDataArea(Activator.getDefault().getContext().getBundle());
+			ret = RienaLocations.getDataArea(PersistenceActivator.getDefault().getContext().getBundle());
 
 		} catch (final Exception e) {
 			ret = new File("./db/");

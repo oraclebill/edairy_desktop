@@ -9,6 +9,7 @@
  *     Ola Spjuth - initial API and implementation
  ******************************************************************************/
 package com.agritrace.edairy.desktop.birt;
+
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -20,77 +21,75 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IStartup;
 
 /**
- *
+ * 
  * @author ola
- *
+ * 
  */
 public class Startup implements IStartup {
 
-    Browser browser;
+	Browser browser;
 
-    @Override
+	@Override
 	public void earlyStartup() {
 
-        Display.getDefault().syncExec( new Runnable(){
+		Display.getDefault().syncExec(new Runnable() {
 
-            @Override
+			@Override
 			public void run() {
-                final Shell shell = new Shell(Display.getDefault());
-                browser=new Browser(shell, SWT.NONE);
-            }} );
+				final Shell shell = new Shell(Display.getDefault());
+				browser = new Browser(shell, SWT.NONE);
+			}
+		});
 
+		// Start up a background job for starting BIRT
+		final Job loadBirtJob = new Job("Starting BIRT engine") {
 
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
 
+				monitor.beginTask("Initializing BIRT ", 3);
+				monitor.worked(1);
 
-        //Start up a background job for starting BIRT
-        final Job loadBirtJob=new Job("Starting BIRT engine"){
+				// WebViewer.startup();
+				//
+				// Bundle bundle = org.eclipse.core.runtime.Platform.getBundle(
+				// Activator.PLUGIN_ID);
+				// URL url = FileLocator.find(bundle,
+				// new Path("/reports/empty.rptdesign"),
+				// null);
+				// final String rpt;
+				// try {
+				// rpt = FileLocator.toFileURL(url).getPath();
+				//
+				// //Do new viewer
+				// // ViewerPlugin.getDefault( ).getPluginPreferences(
+				// ).setValue("APPCONTEXT_EXTENSION_KEY", "MyAppContext");
+				//
+				// final HashMap myparms = new HashMap();
+				// myparms.put("SERVLET_NAME_KEY", "frameset");
+				// myparms.put("FORMAT_KEY", "html");
+				//
+				// monitor.worked( 1 );
+				//
+				// Display.getDefault().syncExec( new Runnable(){
+				//
+				// public void run() {
+				// WebViewer.display(rpt, browser, myparms);
+				// }} );
+				//
+				//
+				// } catch ( IOException e ) {
+				// e.printStackTrace();
+				// }
 
-            @Override
-            protected IStatus run( IProgressMonitor monitor ) {
+				monitor.done();
+				return Status.OK_STATUS;
+			}
 
-                monitor.beginTask( "Initializing BIRT ", 3 );
-                monitor.worked( 1 );
+		};
+		loadBirtJob.setUser(false);
+		loadBirtJob.schedule();
 
-//                WebViewer.startup();
-//
-//                Bundle bundle = org.eclipse.core.runtime.Platform.getBundle(
-//                                                           Activator.PLUGIN_ID);
-//                URL url = FileLocator.find(bundle,
-//                                           new Path("/reports/empty.rptdesign"),
-//                                           null);
-//                final String rpt;
-//                try {
-//                    rpt = FileLocator.toFileURL(url).getPath();
-//
-//                    //Do new viewer
-////                    ViewerPlugin.getDefault( ).getPluginPreferences( ).setValue("APPCONTEXT_EXTENSION_KEY", "MyAppContext");
-//
-//                    final HashMap myparms = new HashMap();
-//                    myparms.put("SERVLET_NAME_KEY", "frameset");
-//                    myparms.put("FORMAT_KEY", "html");
-//
-//                    monitor.worked( 1 );
-//
-//                    Display.getDefault().syncExec( new Runnable(){
-//
-//                        public void run() {
-//                            WebViewer.display(rpt, browser, myparms);
-//                        }} );
-//
-//
-//                } catch ( IOException e ) {
-//                    e.printStackTrace();
-//                }
-
-                monitor.done();
-                return Status.OK_STATUS;
-            }
-
-        };
-        loadBirtJob.setUser( false );
-        loadBirtJob.schedule();
-
-
-    }
+	}
 
 }

@@ -6,13 +6,15 @@
  */
 package com.agritrace.edairy.desktop.common.model.base.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.base.StatutoryLocation;
+
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -72,7 +74,6 @@ public class StatutoryLocationImpl extends EObjectImpl implements StatutoryLocat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getLandReferenceNumber() {
 		return landReferenceNumber;
 	}
@@ -82,13 +83,11 @@ public class StatutoryLocationImpl extends EObjectImpl implements StatutoryLocat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setLandReferenceNumber(String newLandReferenceNumber) {
-		final String oldLandReferenceNumber = landReferenceNumber;
+		String oldLandReferenceNumber = landReferenceNumber;
 		landReferenceNumber = newLandReferenceNumber;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.STATUTORY_LOCATION__LAND_REFERENCE_NUMBER, oldLandReferenceNumber, landReferenceNumber));
-		}
 	}
 
 	/**
@@ -156,11 +155,9 @@ public class StatutoryLocationImpl extends EObjectImpl implements StatutoryLocat
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) {
-			return super.toString();
-		}
+		if (eIsProxy()) return super.toString();
 
-		final StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (landReferenceNumber: ");
 		result.append(landReferenceNumber);
 		result.append(')');

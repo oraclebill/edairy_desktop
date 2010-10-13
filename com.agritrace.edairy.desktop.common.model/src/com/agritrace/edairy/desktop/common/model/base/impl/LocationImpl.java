@@ -6,19 +6,21 @@
  */
 package com.agritrace.edairy.desktop.common.model.base.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
 import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.base.MapLocation;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
 import com.agritrace.edairy.desktop.common.model.base.StatutoryLocation;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -122,7 +124,6 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public PostalLocation getPostalLocation() {
 		return postalLocation;
 	}
@@ -133,15 +134,11 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * @generated
 	 */
 	public NotificationChain basicSetPostalLocation(PostalLocation newPostalLocation, NotificationChain msgs) {
-		final PostalLocation oldPostalLocation = postalLocation;
+		PostalLocation oldPostalLocation = postalLocation;
 		postalLocation = newPostalLocation;
 		if (eNotificationRequired()) {
-			final ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__POSTAL_LOCATION, oldPostalLocation, newPostalLocation);
-			if (msgs == null) {
-				msgs = notification;
-			} else {
-				msgs.add(notification);
-			}
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__POSTAL_LOCATION, oldPostalLocation, newPostalLocation);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -151,24 +148,18 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setPostalLocation(PostalLocation newPostalLocation) {
 		if (newPostalLocation != postalLocation) {
 			NotificationChain msgs = null;
-			if (postalLocation != null) {
+			if (postalLocation != null)
 				msgs = ((InternalEObject)postalLocation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__POSTAL_LOCATION, null, msgs);
-			}
-			if (newPostalLocation != null) {
+			if (newPostalLocation != null)
 				msgs = ((InternalEObject)newPostalLocation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__POSTAL_LOCATION, null, msgs);
-			}
 			msgs = basicSetPostalLocation(newPostalLocation, msgs);
-			if (msgs != null) {
-				msgs.dispatch();
-			}
+			if (msgs != null) msgs.dispatch();
 		}
-		else if (eNotificationRequired()) {
+		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__POSTAL_LOCATION, newPostalLocation, newPostalLocation));
-		}
 	}
 
 	/**
@@ -176,7 +167,6 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public MapLocation getMapLocation() {
 		return mapLocation;
 	}
@@ -187,15 +177,11 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * @generated
 	 */
 	public NotificationChain basicSetMapLocation(MapLocation newMapLocation, NotificationChain msgs) {
-		final MapLocation oldMapLocation = mapLocation;
+		MapLocation oldMapLocation = mapLocation;
 		mapLocation = newMapLocation;
 		if (eNotificationRequired()) {
-			final ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__MAP_LOCATION, oldMapLocation, newMapLocation);
-			if (msgs == null) {
-				msgs = notification;
-			} else {
-				msgs.add(notification);
-			}
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__MAP_LOCATION, oldMapLocation, newMapLocation);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -205,24 +191,18 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setMapLocation(MapLocation newMapLocation) {
 		if (newMapLocation != mapLocation) {
 			NotificationChain msgs = null;
-			if (mapLocation != null) {
+			if (mapLocation != null)
 				msgs = ((InternalEObject)mapLocation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__MAP_LOCATION, null, msgs);
-			}
-			if (newMapLocation != null) {
+			if (newMapLocation != null)
 				msgs = ((InternalEObject)newMapLocation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__MAP_LOCATION, null, msgs);
-			}
 			msgs = basicSetMapLocation(newMapLocation, msgs);
-			if (msgs != null) {
-				msgs.dispatch();
-			}
+			if (msgs != null) msgs.dispatch();
 		}
-		else if (eNotificationRequired()) {
+		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__MAP_LOCATION, newMapLocation, newMapLocation));
-		}
 	}
 
 	/**
@@ -230,7 +210,6 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public StatutoryLocation getStatutoryLocation() {
 		return statutoryLocation;
 	}
@@ -241,15 +220,11 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * @generated
 	 */
 	public NotificationChain basicSetStatutoryLocation(StatutoryLocation newStatutoryLocation, NotificationChain msgs) {
-		final StatutoryLocation oldStatutoryLocation = statutoryLocation;
+		StatutoryLocation oldStatutoryLocation = statutoryLocation;
 		statutoryLocation = newStatutoryLocation;
 		if (eNotificationRequired()) {
-			final ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__STATUTORY_LOCATION, oldStatutoryLocation, newStatutoryLocation);
-			if (msgs == null) {
-				msgs = notification;
-			} else {
-				msgs.add(notification);
-			}
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__STATUTORY_LOCATION, oldStatutoryLocation, newStatutoryLocation);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -259,24 +234,18 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setStatutoryLocation(StatutoryLocation newStatutoryLocation) {
 		if (newStatutoryLocation != statutoryLocation) {
 			NotificationChain msgs = null;
-			if (statutoryLocation != null) {
+			if (statutoryLocation != null)
 				msgs = ((InternalEObject)statutoryLocation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__STATUTORY_LOCATION, null, msgs);
-			}
-			if (newStatutoryLocation != null) {
+			if (newStatutoryLocation != null)
 				msgs = ((InternalEObject)newStatutoryLocation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__STATUTORY_LOCATION, null, msgs);
-			}
 			msgs = basicSetStatutoryLocation(newStatutoryLocation, msgs);
-			if (msgs != null) {
-				msgs.dispatch();
-			}
+			if (msgs != null) msgs.dispatch();
 		}
-		else if (eNotificationRequired()) {
+		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__STATUTORY_LOCATION, newStatutoryLocation, newStatutoryLocation));
-		}
 	}
 
 	/**
@@ -284,7 +253,6 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public DescriptiveLocation getDescriptiveLocation() {
 		return descriptiveLocation;
 	}
@@ -295,15 +263,11 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * @generated
 	 */
 	public NotificationChain basicSetDescriptiveLocation(DescriptiveLocation newDescriptiveLocation, NotificationChain msgs) {
-		final DescriptiveLocation oldDescriptiveLocation = descriptiveLocation;
+		DescriptiveLocation oldDescriptiveLocation = descriptiveLocation;
 		descriptiveLocation = newDescriptiveLocation;
 		if (eNotificationRequired()) {
-			final ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__DESCRIPTIVE_LOCATION, oldDescriptiveLocation, newDescriptiveLocation);
-			if (msgs == null) {
-				msgs = notification;
-			} else {
-				msgs.add(notification);
-			}
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__DESCRIPTIVE_LOCATION, oldDescriptiveLocation, newDescriptiveLocation);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -313,24 +277,18 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setDescriptiveLocation(DescriptiveLocation newDescriptiveLocation) {
 		if (newDescriptiveLocation != descriptiveLocation) {
 			NotificationChain msgs = null;
-			if (descriptiveLocation != null) {
+			if (descriptiveLocation != null)
 				msgs = ((InternalEObject)descriptiveLocation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__DESCRIPTIVE_LOCATION, null, msgs);
-			}
-			if (newDescriptiveLocation != null) {
+			if (newDescriptiveLocation != null)
 				msgs = ((InternalEObject)newDescriptiveLocation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__DESCRIPTIVE_LOCATION, null, msgs);
-			}
 			msgs = basicSetDescriptiveLocation(newDescriptiveLocation, msgs);
-			if (msgs != null) {
-				msgs.dispatch();
-			}
+			if (msgs != null) msgs.dispatch();
 		}
-		else if (eNotificationRequired()) {
+		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__DESCRIPTIVE_LOCATION, newDescriptiveLocation, newDescriptiveLocation));
-		}
 	}
 
 	/**
@@ -338,7 +296,6 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Long getLocationId() {
 		return locationId;
 	}
@@ -348,13 +305,11 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setLocationId(Long newLocationId) {
-		final Long oldLocationId = locationId;
+		Long oldLocationId = locationId;
 		locationId = newLocationId;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__LOCATION_ID, oldLocationId, locationId));
-		}
 	}
 
 	/**
@@ -482,11 +437,9 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) {
-			return super.toString();
-		}
+		if (eIsProxy()) return super.toString();
 
-		final StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (locationId: ");
 		result.append(locationId);
 		result.append(')');

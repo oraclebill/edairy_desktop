@@ -5,12 +5,14 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.riena.navigation.IAction;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.swt.widgets.Shell;
 
+import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
@@ -103,10 +105,17 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 	protected Employee createNewModel() {
 		final Employee employee = (Employee) EMFUtil.createWorkingCopy(this.getEClass(), 3);
 		employee.setRole(null);
+		setDefaults(employee);
 		// employee.setPhoneNumber("");
 		return employee;
 	}
 
+
+	private void setDefaults(Employee employee) {
+		Location defaultLocation = EcoreUtil.copy(localDairy.getLocation());
+		employee.setLocation(defaultLocation);
+		employee.setPhoneNumber("254 ");
+	}
 
 	@Override
 	protected List<Employee> getFilteredResult() {

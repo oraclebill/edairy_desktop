@@ -3,10 +3,10 @@ package com.agritrace.edairy.desktop.internal.common.persistence;
 import org.eclipse.riena.core.RienaActivator;
 import org.osgi.framework.BundleContext;
 
-public class Activator extends RienaActivator {
-	private static Activator DEFAULT = null;
+public class PersistenceActivator extends RienaActivator {
+	private static PersistenceActivator DEFAULT = null;
 
-	public static Activator getDefault() {
+	public static PersistenceActivator getDefault() {
 		return DEFAULT;
 	}
 

@@ -6,10 +6,11 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy;
 
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
-
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->

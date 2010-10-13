@@ -26,6 +26,7 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.operations.ui.controllers.EmployeeEditDialogController;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
+import org.eclipse.swt.widgets.Label;
 
 /**
  * Employee list dialog to add/view/edit customer
@@ -52,6 +53,7 @@ public class EmployeeEditDialog extends RecordDialog<Employee> {
 		createPhotoPanel(comonComp).setLayoutData(GridDataFactory.fillDefaults().create());
 
 		createContactGroup(comonComp).setLayoutData(GridDataFactory.fillDefaults().grab(true,true).span(2,1).create());
+		setTitle("Edit Employee");
 	}
 
 	protected Composite createPhotoPanel(Composite parent) {
@@ -74,15 +76,13 @@ public class EmployeeEditDialog extends RecordDialog<Employee> {
 		factory.applyTo(txtId);
 		addUIControl(txtId, EmployeeBindingConstants.BIND_ID_EMPLOYEE_NUM);
 
-		UIControlsFactory.createLabel(employeeInfo, "Family Name");
+		UIControlsFactory.createLabel(employeeInfo, "Last Name");
 		final Text familyName = UIControlsFactory.createText(employeeInfo);
-		familyName.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
-		factory.copy().applyTo(familyName);
+		factory.applyTo(familyName);
 		addUIControl(familyName, EmployeeBindingConstants.BIND_ID_FAMILY_NAME);
 
-		UIControlsFactory.createLabel(employeeInfo, "Given Name");
+		UIControlsFactory.createLabel(employeeInfo, "First Name");
 		final Text givenName = UIControlsFactory.createText(employeeInfo);
-		givenName.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		factory.copy().applyTo(givenName);
 		addUIControl(givenName, EmployeeBindingConstants.BIND_ID_GIVEN_NAME);
 
@@ -118,21 +118,19 @@ public class EmployeeEditDialog extends RecordDialog<Employee> {
 
 		UIControlsFactory.createLabel(employeeInfo, "User Name");
 		final Text username = UIControlsFactory.createText(employeeInfo);
-		familyName.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		factory.copy().applyTo(username);
 		addUIControl(username, EmployeeBindingConstants.BIND_ID_USERNAME);
 
 		UIControlsFactory.createLabel(employeeInfo, "Password");
 		final Text password = UIControlsFactory.createText(employeeInfo, SWT.SINGLE | SWT.PASSWORD);
-		familyName.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		factory.copy().applyTo(password);
 		addUIControl(password, EmployeeBindingConstants.BIND_ID_PASSWORD);
 
 		final Button localEnabled = UIControlsFactory.createButtonCheck(employeeInfo);
 		localEnabled.setText("Allow local machine authentication");
-		familyName.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 2, 1));
 		factory.copy().applyTo(localEnabled);
 		addUIControl(localEnabled, EmployeeBindingConstants.BIND_ID_LOCAL_ENABLED);
+		new Label(employeeInfo, SWT.NONE);
 
 		return employeeInfo;
 	}

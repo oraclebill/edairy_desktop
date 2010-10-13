@@ -6,44 +6,16 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
+import com.agritrace.edairy.desktop.common.model.dairy.*;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.impl.EFactoryImpl;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import com.agritrace.edairy.desktop.common.model.dairy.Asset;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
-import com.agritrace.edairy.desktop.common.model.dairy.Customer;
-import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
-import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine;
-import com.agritrace.edairy.desktop.common.model.dairy.Employee;
-import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
-import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
-import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus;
-import com.agritrace.edairy.desktop.common.model.dairy.Permission;
-import com.agritrace.edairy.desktop.common.model.dairy.PermissionNamespace;
-import com.agritrace.edairy.desktop.common.model.dairy.Preference;
-import com.agritrace.edairy.desktop.common.model.dairy.PreferenceKey;
-import com.agritrace.edairy.desktop.common.model.dairy.PreferenceType;
-import com.agritrace.edairy.desktop.common.model.dairy.Role;
-import com.agritrace.edairy.desktop.common.model.dairy.Route;
-import com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord;
-import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
-import com.agritrace.edairy.desktop.common.model.dairy.Trip;
-import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
-import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
+import org.eclipse.emf.ecore.impl.EFactoryImpl;
+
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 /**
  * <!-- begin-user-doc -->
@@ -60,12 +32,12 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 */
 	public static DairyFactory init() {
 		try {
-			final DairyFactory theDairyFactory = (DairyFactory)EPackage.Registry.INSTANCE.getEFactory("http://com.agritrace.edairy.desktop.common.model/dairy/");
+			DairyFactory theDairyFactory = (DairyFactory)EPackage.Registry.INSTANCE.getEFactory("http://com.agritrace.edairy.desktop.common.model/dairy/"); 
 			if (theDairyFactory != null) {
 				return theDairyFactory;
 			}
 		}
-		catch (final Exception exception) {
+		catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new DairyFactoryImpl();
@@ -176,9 +148,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Vehicle createVehicle() {
-		final VehicleImpl vehicle = new VehicleImpl();
+		VehicleImpl vehicle = new VehicleImpl();
 		return vehicle;
 	}
 
@@ -187,9 +158,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public CollectionJournalLine createCollectionJournalLine() {
-		final CollectionJournalLineImpl collectionJournalLine = new CollectionJournalLineImpl();
+		CollectionJournalLineImpl collectionJournalLine = new CollectionJournalLineImpl();
 		return collectionJournalLine;
 	}
 
@@ -198,9 +168,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public ScaleImportRecord createScaleImportRecord() {
-		final ScaleImportRecordImpl scaleImportRecord = new ScaleImportRecordImpl();
+		ScaleImportRecordImpl scaleImportRecord = new ScaleImportRecordImpl();
 		return scaleImportRecord;
 	}
 
@@ -209,9 +178,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Employee createEmployee() {
-		final EmployeeImpl employee = new EmployeeImpl();
+		EmployeeImpl employee = new EmployeeImpl();
 		return employee;
 	}
 
@@ -220,9 +188,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public DairyLocation createDairyLocation() {
-		final DairyLocationImpl dairyLocation = new DairyLocationImpl();
+		DairyLocationImpl dairyLocation = new DairyLocationImpl();
 		return dairyLocation;
 	}
 
@@ -231,9 +198,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public CollectionGroup createCollectionGroup() {
-		final CollectionGroupImpl collectionGroup = new CollectionGroupImpl();
+		CollectionGroupImpl collectionGroup = new CollectionGroupImpl();
 		return collectionGroup;
 	}
 
@@ -242,9 +208,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Route createRoute() {
-		final RouteImpl route = new RouteImpl();
+		RouteImpl route = new RouteImpl();
 		return route;
 	}
 
@@ -253,9 +218,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Trip createTrip() {
-		final TripImpl trip = new TripImpl();
+		TripImpl trip = new TripImpl();
 		return trip;
 	}
 
@@ -264,9 +228,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public DeliveryJournal createDeliveryJournal() {
-		final DeliveryJournalImpl deliveryJournal = new DeliveryJournalImpl();
+		DeliveryJournalImpl deliveryJournal = new DeliveryJournalImpl();
 		return deliveryJournal;
 	}
 
@@ -275,9 +238,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public DeliveryJournalLine createDeliveryJournalLine() {
-		final DeliveryJournalLineImpl deliveryJournalLine = new DeliveryJournalLineImpl();
+		DeliveryJournalLineImpl deliveryJournalLine = new DeliveryJournalLineImpl();
 		return deliveryJournalLine;
 	}
 
@@ -286,9 +248,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Dairy createDairy() {
-		final DairyImpl dairy = new DairyImpl();
+		DairyImpl dairy = new DairyImpl();
 		return dairy;
 	}
 
@@ -297,9 +258,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Membership createMembership() {
-		final MembershipImpl membership = new MembershipImpl();
+		MembershipImpl membership = new MembershipImpl();
 		return membership;
 	}
 
@@ -308,9 +268,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Asset createAsset() {
-		final AssetImpl asset = new AssetImpl();
+		AssetImpl asset = new AssetImpl();
 		return asset;
 	}
 
@@ -319,9 +278,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public DairyContainer createDairyContainer() {
-		final DairyContainerImpl dairyContainer = new DairyContainerImpl();
+		DairyContainerImpl dairyContainer = new DairyContainerImpl();
 		return dairyContainer;
 	}
 
@@ -330,9 +288,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Supplier createSupplier() {
-		final SupplierImpl supplier = new SupplierImpl();
+		SupplierImpl supplier = new SupplierImpl();
 		return supplier;
 	}
 
@@ -341,9 +298,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Customer createCustomer() {
-		final CustomerImpl customer = new CustomerImpl();
+		CustomerImpl customer = new CustomerImpl();
 		return customer;
 	}
 
@@ -352,9 +308,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public MemberPayment createMemberPayment() {
-		final MemberPaymentImpl memberPayment = new MemberPaymentImpl();
+		MemberPaymentImpl memberPayment = new MemberPaymentImpl();
 		return memberPayment;
 	}
 
@@ -363,9 +318,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Preference createPreference() {
-		final PreferenceImpl preference = new PreferenceImpl();
+		PreferenceImpl preference = new PreferenceImpl();
 		return preference;
 	}
 
@@ -374,9 +328,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public PreferenceKey createPreferenceKey() {
-		final PreferenceKeyImpl preferenceKey = new PreferenceKeyImpl();
+		PreferenceKeyImpl preferenceKey = new PreferenceKeyImpl();
 		return preferenceKey;
 	}
 
@@ -385,9 +338,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Role createRole() {
-		final RoleImpl role = new RoleImpl();
+		RoleImpl role = new RoleImpl();
 		return role;
 	}
 
@@ -396,9 +348,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public PermissionNamespace createPermissionNamespace() {
-		final PermissionNamespaceImpl permissionNamespace = new PermissionNamespaceImpl();
+		PermissionNamespaceImpl permissionNamespace = new PermissionNamespaceImpl();
 		return permissionNamespace;
 	}
 
@@ -407,9 +358,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Permission createPermission() {
-		final PermissionImpl permission = new PermissionImpl();
+		PermissionImpl permission = new PermissionImpl();
 		return permission;
 	}
 
@@ -418,9 +368,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public CollectionSession createCollectionSession() {
-		final CollectionSessionImpl collectionSession = new CollectionSessionImpl();
+		CollectionSessionImpl collectionSession = new CollectionSessionImpl();
 		return collectionSession;
 	}
 
@@ -430,10 +379,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * @generated
 	 */
 	public JournalStatus createJournalStatusFromString(EDataType eDataType, String initialValue) {
-		final JournalStatus result = JournalStatus.get(initialValue);
-		if (result == null) {
-			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		}
+		JournalStatus result = JournalStatus.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
@@ -452,10 +399,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * @generated
 	 */
 	public MembershipStatus createMembershipStatusFromString(EDataType eDataType, String initialValue) {
-		final MembershipStatus result = MembershipStatus.get(initialValue);
-		if (result == null) {
-			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		}
+		MembershipStatus result = MembershipStatus.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
@@ -474,10 +419,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * @generated
 	 */
 	public VendorStatus createVendorStatusFromString(EDataType eDataType, String initialValue) {
-		final VendorStatus result = VendorStatus.get(initialValue);
-		if (result == null) {
-			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		}
+		VendorStatus result = VendorStatus.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
@@ -496,10 +439,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * @generated
 	 */
 	public DairyFunction createDairyFunctionFromString(EDataType eDataType, String initialValue) {
-		final DairyFunction result = DairyFunction.get(initialValue);
-		if (result == null) {
-			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		}
+		DairyFunction result = DairyFunction.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
@@ -518,10 +459,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * @generated
 	 */
 	public PreferenceType createPreferenceTypeFromString(EDataType eDataType, String initialValue) {
-		final PreferenceType result = PreferenceType.get(initialValue);
-		if (result == null) {
-			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		}
+		PreferenceType result = PreferenceType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
@@ -540,10 +479,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * @generated
 	 */
 	public CollectionGroupType createCollectionGroupTypeFromString(EDataType eDataType, String initialValue) {
-		final CollectionGroupType result = CollectionGroupType.get(initialValue);
-		if (result == null) {
-			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		}
+		CollectionGroupType result = CollectionGroupType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
@@ -579,7 +516,6 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public DairyPackage getDairyPackage() {
 		return (DairyPackage)getEPackage();
 	}

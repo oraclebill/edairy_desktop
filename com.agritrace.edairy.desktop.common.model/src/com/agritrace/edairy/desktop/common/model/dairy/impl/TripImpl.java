@@ -6,20 +6,24 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
-import java.util.Collection;
-import java.util.Date;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.Trip;
+
+import java.util.Collection;
+import java.util.Date;
+
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -143,7 +147,6 @@ public class TripImpl extends EObjectImpl implements Trip {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EList<CollectionGroup> getCollections() {
 		if (collections == null) {
 			collections = new EObjectResolvingEList<CollectionGroup>(CollectionGroup.class, this, DairyPackage.TRIP__COLLECTIONS);
@@ -156,7 +159,6 @@ public class TripImpl extends EObjectImpl implements Trip {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EList<DeliveryJournal> getDeliveries() {
 		if (deliveries == null) {
 			deliveries = new EObjectResolvingEList<DeliveryJournal>(DeliveryJournal.class, this, DairyPackage.TRIP__DELIVERIES);
@@ -169,7 +171,6 @@ public class TripImpl extends EObjectImpl implements Trip {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Date getStarted() {
 		return started;
 	}
@@ -179,13 +180,11 @@ public class TripImpl extends EObjectImpl implements Trip {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setStarted(Date newStarted) {
-		final Date oldStarted = started;
+		Date oldStarted = started;
 		started = newStarted;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.TRIP__STARTED, oldStarted, started));
-		}
 	}
 
 	/**
@@ -193,7 +192,6 @@ public class TripImpl extends EObjectImpl implements Trip {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Date getEnded() {
 		return ended;
 	}
@@ -203,13 +201,11 @@ public class TripImpl extends EObjectImpl implements Trip {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setEnded(Date newEnded) {
-		final Date oldEnded = ended;
+		Date oldEnded = ended;
 		ended = newEnded;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.TRIP__ENDED, oldEnded, ended));
-		}
 	}
 
 	/**
@@ -217,7 +213,6 @@ public class TripImpl extends EObjectImpl implements Trip {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public long getTripId() {
 		return tripId;
 	}
@@ -324,11 +319,9 @@ public class TripImpl extends EObjectImpl implements Trip {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) {
-			return super.toString();
-		}
+		if (eIsProxy()) return super.toString();
 
-		final StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (started: ");
 		result.append(started);
 		result.append(", ended: ");

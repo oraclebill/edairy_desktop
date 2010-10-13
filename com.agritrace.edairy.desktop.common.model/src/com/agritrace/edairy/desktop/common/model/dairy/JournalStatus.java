@@ -178,7 +178,7 @@ public enum JournalStatus implements Enumerator {
 	 */
 	public static JournalStatus get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			final JournalStatus result = VALUES_ARRAY[i];
+			JournalStatus result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -194,7 +194,7 @@ public enum JournalStatus implements Enumerator {
 	 */
 	public static JournalStatus getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			final JournalStatus result = VALUES_ARRAY[i];
+			JournalStatus result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -257,7 +257,6 @@ public enum JournalStatus implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public int getValue() {
 	  return value;
 	}
@@ -267,7 +266,6 @@ public enum JournalStatus implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getName() {
 	  return name;
 	}
@@ -277,7 +275,6 @@ public enum JournalStatus implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getLiteral() {
 	  return literal;
 	}
@@ -292,5 +289,5 @@ public enum JournalStatus implements Enumerator {
 	public String toString() {
 		return literal;
 	}
-
+	
 } //JournalStatus

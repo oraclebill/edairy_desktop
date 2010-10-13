@@ -126,7 +126,7 @@ public enum UnitOfMeasure implements Enumerator {
 	 */
 	public static UnitOfMeasure get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			final UnitOfMeasure result = VALUES_ARRAY[i];
+			UnitOfMeasure result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -142,7 +142,7 @@ public enum UnitOfMeasure implements Enumerator {
 	 */
 	public static UnitOfMeasure getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			final UnitOfMeasure result = VALUES_ARRAY[i];
+			UnitOfMeasure result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -203,7 +203,6 @@ public enum UnitOfMeasure implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public int getValue() {
 	  return value;
 	}
@@ -213,7 +212,6 @@ public enum UnitOfMeasure implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getName() {
 	  return name;
 	}
@@ -223,7 +221,6 @@ public enum UnitOfMeasure implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getLiteral() {
 	  return literal;
 	}
@@ -238,5 +235,5 @@ public enum UnitOfMeasure implements Enumerator {
 	public String toString() {
 		return literal;
 	}
-
+	
 } //UnitOfMeasure

@@ -9,6 +9,7 @@ import org.eclipse.riena.navigation.IModuleNode;
 import org.eclipse.riena.navigation.INavigationNode;
 import org.eclipse.riena.navigation.ISubApplicationNode;
 import org.eclipse.riena.navigation.NavigationNodeId;
+import org.eclipse.riena.navigation.listener.ApplicationNodeListener;
 import org.eclipse.riena.navigation.model.ApplicationNode;
 import org.eclipse.riena.navigation.model.ModuleGroupNode;
 import org.eclipse.riena.navigation.model.SubApplicationNode;
@@ -29,6 +30,7 @@ import com.agritrace.edairy.desktop.dairy.profile.ui.views.DairyProfileView;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.controllers.VehicleLogDirectoryViewController;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.views.VehicleLogDirectoryView;
 import com.agritrace.edairy.desktop.home.views.DairyHomeView;
+import com.agritrace.edairy.desktop.internal.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.member.ui.controllers.ContainerListViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.FarmListViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.LiveStockListController;
@@ -60,7 +62,7 @@ import com.agritrace.edairy.desktop.ui.views.MonthlyCreditReportView;
 
 /**
  * @author oraclebill
- *
+ * 
  */
 public class EDairyManagerApplication extends SwtApplication {
 
@@ -100,7 +102,7 @@ public class EDairyManagerApplication extends SwtApplication {
 	private static final String MODULE_VETERINARY = "edm.services";
 	// FINANCE
 	private static final String SUBAPP_FINANCE = "com.agritrace.edairy.desktop.finance";//$NON-NLS-1$
-//	private static final String SUBAPP_INSTALL = "com.agritrace.edairy.desktop.install";//$NON-NLS-1$
+	//	private static final String SUBAPP_INSTALL = "com.agritrace.edairy.desktop.install";//$NON-NLS-1$
 	//	private static final String MODULE_GROUP_FINANCE = "modulegroup.desktop.finance"; //$NON-NLS-1$
 	//	private static final String MODULE_FINANCE = "edm.finances";//$NON-NLS-1$
 	//	private static final String SUBMODULE_FINANCE_TRANSACTION_BATCH_ENTRY = "edm.finances.blog";//$NON-NLS-1$
@@ -157,9 +159,28 @@ public class EDairyManagerApplication extends SwtApplication {
 	protected IApplicationNode createModel() {
 
 		// ExtensionRegistryAnalyzer.dumpRegistry("org.eclipse.ui");
+		// ExtensionRegistryAnalyzer.dumpRegistry(null);
 
 		final ApplicationNode app = new ApplicationNode(new NavigationNodeId("application"), LABEL_APPLICATION);
 		final WorkareaManager workarea = WorkareaManager.getInstance();
+
+		IApplicationNode model = buildModel(app, workarea);
+		model.addListener(new ApplicationNodeListener() {
+			@Override
+			public void activated(IApplicationNode source) {
+				initApplicationContext(source);
+			}
+
+		});
+		return model;
+	}
+
+	private void initApplicationContext(IApplicationNode source) {
+		System.err.println("<<<<<<<<<<<<< BILL HERE >>>>>>>>>>>>>>>>>>>");
+		// source.setContext("site.local.dairy", DairyRepository.)
+	}
+
+	private IApplicationNode buildModel(ApplicationNode app, WorkareaManager workarea) {
 
 		ISubApplicationNode subAppNode;
 		IModuleGroupNode moduleGroupNode;
@@ -307,8 +328,10 @@ public class EDairyManagerApplication extends SwtApplication {
 		{
 			final IModuleNode moduleSystem = NodeFactory.createModule(MODULE_OPERATIONS_BRANCH_LOCATIONS,
 					"Dairy Locations", moduleGroupNode); //$NON-NLS-1$
-			NodeFactory.createSubModule(SUBMODULE_OPERATIONS_BRANCH_LOCATIONS,
-					"Branch Locations", moduleSystem, DairyLocationDirectoryView.ID, DairyLocationDirectoryController.class); //$NON-NLS-1$
+			NodeFactory
+					.createSubModule(
+							SUBMODULE_OPERATIONS_BRANCH_LOCATIONS,
+							"Branch Locations", moduleSystem, DairyLocationDirectoryView.ID, DairyLocationDirectoryController.class); //$NON-NLS-1$
 
 		}
 		{
@@ -404,17 +427,15 @@ public class EDairyManagerApplication extends SwtApplication {
 		subAppNode.addChild(moduleGroupNode);
 
 		moduleNode = NodeFactory.createModule(MODULE_SYSTEM, "Security", moduleGroupNode); //$NON-NLS-1$
-		NodeFactory.createSubModule("edm.system.roles", "Roles", moduleNode,
-				RoleDirectoryView.ID, RoleDirectoryController.class);
+		NodeFactory.createSubModule("edm.system.roles", "Roles", moduleNode, RoleDirectoryView.ID,
+				RoleDirectoryController.class);
 
 		/*
-		app.addSimpleListener(new SimpleNavigationNodeAdapter() {
-			@Override
-			public void afterActivated(INavigationNode<?> source) {
-				app.getNavigationProcessor().activate(app.getChild(1));
-			}
-		});
-		*/
+		 * app.addSimpleListener(new SimpleNavigationNodeAdapter() {
+		 * 
+		 * @Override public void afterActivated(INavigationNode<?> source) {
+		 * app.getNavigationProcessor().activate(app.getChild(1)); } });
+		 */
 
 		return app;
 

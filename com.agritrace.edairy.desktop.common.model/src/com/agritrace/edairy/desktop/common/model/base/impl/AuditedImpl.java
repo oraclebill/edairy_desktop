@@ -6,15 +6,17 @@
  */
 package com.agritrace.edairy.desktop.common.model.base.impl;
 
+import com.agritrace.edairy.desktop.common.model.base.Audited;
+import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import com.agritrace.edairy.desktop.common.model.base.Audited;
-import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -95,7 +97,6 @@ public class AuditedImpl extends EObjectImpl implements Audited {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Date getLastUpdated() {
 		return lastUpdated;
 	}
@@ -105,13 +106,11 @@ public class AuditedImpl extends EObjectImpl implements Audited {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setLastUpdated(Date newLastUpdated) {
-		final Date oldLastUpdated = lastUpdated;
+		Date oldLastUpdated = lastUpdated;
 		lastUpdated = newLastUpdated;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.AUDITED__LAST_UPDATED, oldLastUpdated, lastUpdated));
-		}
 	}
 
 	/**
@@ -119,7 +118,6 @@ public class AuditedImpl extends EObjectImpl implements Audited {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Date getVoidDate() {
 		return voidDate;
 	}
@@ -129,13 +127,11 @@ public class AuditedImpl extends EObjectImpl implements Audited {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setVoidDate(Date newVoidDate) {
-		final Date oldVoidDate = voidDate;
+		Date oldVoidDate = voidDate;
 		voidDate = newVoidDate;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.AUDITED__VOID_DATE, oldVoidDate, voidDate));
-		}
 	}
 
 	/**
@@ -213,11 +209,9 @@ public class AuditedImpl extends EObjectImpl implements Audited {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) {
-			return super.toString();
-		}
+		if (eIsProxy()) return super.toString();
 
-		final StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (lastUpdated: ");
 		result.append(lastUpdated);
 		result.append(", voidDate: ");

@@ -100,7 +100,7 @@ public interface Person extends Contactable {
 	 * @return the value of the '<em>Family Name</em>' attribute.
 	 * @see #setFamilyName(String)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getPerson_FamilyName()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	String getFamilyName();
@@ -126,7 +126,7 @@ public interface Person extends Contactable {
 	 * @return the value of the '<em>Given Name</em>' attribute.
 	 * @see #setGivenName(String)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getPerson_GivenName()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	String getGivenName();

@@ -238,7 +238,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends
 	}
 
 	/**
-	 * Create new model while createing a new record
+	 * Create new model while creating a new record
 	 *
 	 * @return
 	 */

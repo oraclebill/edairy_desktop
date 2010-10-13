@@ -6,14 +6,16 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
+import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord;
+
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord;
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -199,7 +201,6 @@ public class ScaleImportRecordImpl extends CollectionJournalLineImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getScaleSerial() {
 		return scaleSerial;
 	}
@@ -209,13 +210,11 @@ public class ScaleImportRecordImpl extends CollectionJournalLineImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setScaleSerial(String newScaleSerial) {
-		final String oldScaleSerial = scaleSerial;
+		String oldScaleSerial = scaleSerial;
 		scaleSerial = newScaleSerial;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.SCALE_IMPORT_RECORD__SCALE_SERIAL, oldScaleSerial, scaleSerial));
-		}
 	}
 
 	/**
@@ -223,7 +222,6 @@ public class ScaleImportRecordImpl extends CollectionJournalLineImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Date getCollectionTime() {
 		return collectionTime;
 	}
@@ -233,13 +231,11 @@ public class ScaleImportRecordImpl extends CollectionJournalLineImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setCollectionTime(Date newCollectionTime) {
-		final Date oldCollectionTime = collectionTime;
+		Date oldCollectionTime = collectionTime;
 		collectionTime = newCollectionTime;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.SCALE_IMPORT_RECORD__COLLECTION_TIME, oldCollectionTime, collectionTime));
-		}
 	}
 
 	/**
@@ -247,7 +243,6 @@ public class ScaleImportRecordImpl extends CollectionJournalLineImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getCenterNumber() {
 		return centerNumber;
 	}
@@ -257,13 +252,11 @@ public class ScaleImportRecordImpl extends CollectionJournalLineImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setCenterNumber(String newCenterNumber) {
-		final String oldCenterNumber = centerNumber;
+		String oldCenterNumber = centerNumber;
 		centerNumber = newCenterNumber;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.SCALE_IMPORT_RECORD__CENTER_NUMBER, oldCenterNumber, centerNumber));
-		}
 	}
 
 	/**
@@ -271,7 +264,6 @@ public class ScaleImportRecordImpl extends CollectionJournalLineImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getNumCans() {
 		return numCans;
 	}
@@ -281,13 +273,11 @@ public class ScaleImportRecordImpl extends CollectionJournalLineImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setNumCans(String newNumCans) {
-		final String oldNumCans = numCans;
+		String oldNumCans = numCans;
 		numCans = newNumCans;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.SCALE_IMPORT_RECORD__NUM_CANS, oldNumCans, numCans));
-		}
 	}
 
 	/**
@@ -295,7 +285,6 @@ public class ScaleImportRecordImpl extends CollectionJournalLineImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getTripNumber() {
 		return tripNumber;
 	}
@@ -305,13 +294,11 @@ public class ScaleImportRecordImpl extends CollectionJournalLineImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setTripNumber(String newTripNumber) {
-		final String oldTripNumber = tripNumber;
+		String oldTripNumber = tripNumber;
 		tripNumber = newTripNumber;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.SCALE_IMPORT_RECORD__TRIP_NUMBER, oldTripNumber, tripNumber));
-		}
 	}
 
 	/**
@@ -319,7 +306,6 @@ public class ScaleImportRecordImpl extends CollectionJournalLineImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getOperatorCode() {
 		return operatorCode;
 	}
@@ -329,13 +315,11 @@ public class ScaleImportRecordImpl extends CollectionJournalLineImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setOperatorCode(String newOperatorCode) {
-		final String oldOperatorCode = operatorCode;
+		String oldOperatorCode = operatorCode;
 		operatorCode = newOperatorCode;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.SCALE_IMPORT_RECORD__OPERATOR_CODE, oldOperatorCode, operatorCode));
-		}
 	}
 
 	/**
@@ -343,7 +327,6 @@ public class ScaleImportRecordImpl extends CollectionJournalLineImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public boolean isValidated() {
 		return validated;
 	}
@@ -353,13 +336,11 @@ public class ScaleImportRecordImpl extends CollectionJournalLineImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setValidated(boolean newValidated) {
-		final boolean oldValidated = validated;
+		boolean oldValidated = validated;
 		validated = newValidated;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.SCALE_IMPORT_RECORD__VALIDATED, oldValidated, validated));
-		}
 	}
 
 	/**
@@ -487,11 +468,9 @@ public class ScaleImportRecordImpl extends CollectionJournalLineImpl implements 
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) {
-			return super.toString();
-		}
+		if (eIsProxy()) return super.toString();
 
-		final StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (scaleSerial: ");
 		result.append(scaleSerial);
 		result.append(", collectionTime: ");

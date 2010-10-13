@@ -6,15 +6,18 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.account.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
+
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
+
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -148,7 +151,6 @@ public class AccountTransactionImpl extends TransactionImpl implements AccountTr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getReferenceNumber() {
 		return referenceNumber;
 	}
@@ -158,13 +160,11 @@ public class AccountTransactionImpl extends TransactionImpl implements AccountTr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setReferenceNumber(String newReferenceNumber) {
-		final String oldReferenceNumber = referenceNumber;
+		String oldReferenceNumber = referenceNumber;
 		referenceNumber = newReferenceNumber;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.ACCOUNT_TRANSACTION__REFERENCE_NUMBER, oldReferenceNumber, referenceNumber));
-		}
 	}
 
 	/**
@@ -172,7 +172,6 @@ public class AccountTransactionImpl extends TransactionImpl implements AccountTr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public TransactionSource getSource() {
 		return source;
 	}
@@ -182,13 +181,11 @@ public class AccountTransactionImpl extends TransactionImpl implements AccountTr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setSource(TransactionSource newSource) {
-		final TransactionSource oldSource = source;
+		TransactionSource oldSource = source;
 		source = newSource == null ? SOURCE_EDEFAULT : newSource;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.ACCOUNT_TRANSACTION__SOURCE, oldSource, source));
-		}
 	}
 
 	/**
@@ -196,15 +193,13 @@ public class AccountTransactionImpl extends TransactionImpl implements AccountTr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public DairyLocation getRelatedLocation() {
 		if (relatedLocation != null && relatedLocation.eIsProxy()) {
-			final InternalEObject oldRelatedLocation = (InternalEObject)relatedLocation;
+			InternalEObject oldRelatedLocation = (InternalEObject)relatedLocation;
 			relatedLocation = (DairyLocation)eResolveProxy(oldRelatedLocation);
 			if (relatedLocation != oldRelatedLocation) {
-				if (eNotificationRequired()) {
+				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AccountPackage.ACCOUNT_TRANSACTION__RELATED_LOCATION, oldRelatedLocation, relatedLocation));
-				}
 			}
 		}
 		return relatedLocation;
@@ -224,13 +219,11 @@ public class AccountTransactionImpl extends TransactionImpl implements AccountTr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setRelatedLocation(DairyLocation newRelatedLocation) {
-		final DairyLocation oldRelatedLocation = relatedLocation;
+		DairyLocation oldRelatedLocation = relatedLocation;
 		relatedLocation = newRelatedLocation;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.ACCOUNT_TRANSACTION__RELATED_LOCATION, oldRelatedLocation, relatedLocation));
-		}
 	}
 
 	/**
@@ -238,7 +231,6 @@ public class AccountTransactionImpl extends TransactionImpl implements AccountTr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getCheckNumber() {
 		return checkNumber;
 	}
@@ -248,13 +240,11 @@ public class AccountTransactionImpl extends TransactionImpl implements AccountTr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setCheckNumber(String newCheckNumber) {
-		final String oldCheckNumber = checkNumber;
+		String oldCheckNumber = checkNumber;
 		checkNumber = newCheckNumber;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.ACCOUNT_TRANSACTION__CHECK_NUMBER, oldCheckNumber, checkNumber));
-		}
 	}
 
 	/**
@@ -262,7 +252,6 @@ public class AccountTransactionImpl extends TransactionImpl implements AccountTr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getSignedBy() {
 		return signedBy;
 	}
@@ -272,13 +261,11 @@ public class AccountTransactionImpl extends TransactionImpl implements AccountTr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setSignedBy(String newSignedBy) {
-		final String oldSignedBy = signedBy;
+		String oldSignedBy = signedBy;
 		signedBy = newSignedBy;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.ACCOUNT_TRANSACTION__SIGNED_BY, oldSignedBy, signedBy));
-		}
 	}
 
 	/**
@@ -294,9 +281,7 @@ public class AccountTransactionImpl extends TransactionImpl implements AccountTr
 			case AccountPackage.ACCOUNT_TRANSACTION__SOURCE:
 				return getSource();
 			case AccountPackage.ACCOUNT_TRANSACTION__RELATED_LOCATION:
-				if (resolve) {
-					return getRelatedLocation();
-				}
+				if (resolve) return getRelatedLocation();
 				return basicGetRelatedLocation();
 			case AccountPackage.ACCOUNT_TRANSACTION__CHECK_NUMBER:
 				return getCheckNumber();
@@ -389,11 +374,9 @@ public class AccountTransactionImpl extends TransactionImpl implements AccountTr
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) {
-			return super.toString();
-		}
+		if (eIsProxy()) return super.toString();
 
-		final StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (referenceNumber: ");
 		result.append(referenceNumber);
 		result.append(", source: ");

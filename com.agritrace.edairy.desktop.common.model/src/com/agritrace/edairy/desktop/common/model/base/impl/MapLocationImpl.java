@@ -6,13 +6,15 @@
  */
 package com.agritrace.edairy.desktop.common.model.base.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import com.agritrace.edairy.desktop.common.model.base.MapLocation;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -93,7 +95,6 @@ public class MapLocationImpl extends EObjectImpl implements MapLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public double getLongitude() {
 		return longitude;
 	}
@@ -103,13 +104,11 @@ public class MapLocationImpl extends EObjectImpl implements MapLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setLongitude(double newLongitude) {
-		final double oldLongitude = longitude;
+		double oldLongitude = longitude;
 		longitude = newLongitude;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.MAP_LOCATION__LONGITUDE, oldLongitude, longitude));
-		}
 	}
 
 	/**
@@ -117,7 +116,6 @@ public class MapLocationImpl extends EObjectImpl implements MapLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public double getLatitude() {
 		return latitude;
 	}
@@ -127,13 +125,11 @@ public class MapLocationImpl extends EObjectImpl implements MapLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setLatitude(double newLatitude) {
-		final double oldLatitude = latitude;
+		double oldLatitude = latitude;
 		latitude = newLatitude;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.MAP_LOCATION__LATITUDE, oldLatitude, latitude));
-		}
 	}
 
 	/**
@@ -211,11 +207,9 @@ public class MapLocationImpl extends EObjectImpl implements MapLocation {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) {
-			return super.toString();
-		}
+		if (eIsProxy()) return super.toString();
 
-		final StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (longitude: ");
 		result.append(longitude);
 		result.append(", latitude: ");

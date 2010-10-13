@@ -6,24 +6,29 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
-import java.util.Collection;
-import java.util.Date;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
-
 import com.agritrace.edairy.desktop.common.model.base.Location;
+
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
+
+import java.util.Collection;
+import java.util.Date;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -232,7 +237,6 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public long getId() {
 		return id;
 	}
@@ -242,13 +246,11 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setId(long newId) {
-		final long oldId = id;
+		long oldId = id;
 		id = newId;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__ID, oldId, id));
-		}
 	}
 
 	/**
@@ -256,7 +258,6 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getName() {
 		return name;
 	}
@@ -266,13 +267,11 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setName(String newName) {
-		final String oldName = name;
+		String oldName = name;
 		name = newName;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__NAME, oldName, name));
-		}
 	}
 
 	/**
@@ -280,7 +279,6 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Date getDateOpened() {
 		return dateOpened;
 	}
@@ -290,13 +288,11 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setDateOpened(Date newDateOpened) {
-		final Date oldDateOpened = dateOpened;
+		Date oldDateOpened = dateOpened;
 		dateOpened = newDateOpened;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__DATE_OPENED, oldDateOpened, dateOpened));
-		}
 	}
 
 	/**
@@ -304,7 +300,6 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getPhone() {
 		return phone;
 	}
@@ -314,13 +309,11 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setPhone(String newPhone) {
-		final String oldPhone = phone;
+		String oldPhone = phone;
 		phone = newPhone;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__PHONE, oldPhone, phone));
-		}
 	}
 
 	/**
@@ -328,15 +321,13 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Route getRoute() {
 		if (route != null && route.eIsProxy()) {
-			final InternalEObject oldRoute = (InternalEObject)route;
+			InternalEObject oldRoute = (InternalEObject)route;
 			route = (Route)eResolveProxy(oldRoute);
 			if (route != oldRoute) {
-				if (eNotificationRequired()) {
+				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DAIRY_LOCATION__ROUTE, oldRoute, route));
-				}
 			}
 		}
 		return route;
@@ -357,15 +348,11 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * @generated
 	 */
 	public NotificationChain basicSetRoute(Route newRoute, NotificationChain msgs) {
-		final Route oldRoute = route;
+		Route oldRoute = route;
 		route = newRoute;
 		if (eNotificationRequired()) {
-			final ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__ROUTE, oldRoute, newRoute);
-			if (msgs == null) {
-				msgs = notification;
-			} else {
-				msgs.add(notification);
-			}
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__ROUTE, oldRoute, newRoute);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -375,24 +362,18 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setRoute(Route newRoute) {
 		if (newRoute != route) {
 			NotificationChain msgs = null;
-			if (route != null) {
+			if (route != null)
 				msgs = ((InternalEObject)route).eInverseRemove(this, DairyPackage.ROUTE__STOPS, Route.class, msgs);
-			}
-			if (newRoute != null) {
+			if (newRoute != null)
 				msgs = ((InternalEObject)newRoute).eInverseAdd(this, DairyPackage.ROUTE__STOPS, Route.class, msgs);
-			}
 			msgs = basicSetRoute(newRoute, msgs);
-			if (msgs != null) {
-				msgs.dispatch();
-			}
+			if (msgs != null) msgs.dispatch();
 		}
-		else if (eNotificationRequired()) {
+		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__ROUTE, newRoute, newRoute));
-		}
 	}
 
 	/**
@@ -400,7 +381,6 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -410,13 +390,11 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setDescription(String newDescription) {
-		final String oldDescription = description;
+		String oldDescription = description;
 		description = newDescription;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__DESCRIPTION, oldDescription, description));
-		}
 	}
 
 	/**
@@ -424,7 +402,6 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getCode() {
 		return code;
 	}
@@ -434,13 +411,11 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setCode(String newCode) {
-		final String oldCode = code;
+		String oldCode = code;
 		code = newCode;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__CODE, oldCode, code));
-		}
 	}
 
 	/**
@@ -448,7 +423,6 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Location getLocation() {
 		return location;
 	}
@@ -459,15 +433,11 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * @generated
 	 */
 	public NotificationChain basicSetLocation(Location newLocation, NotificationChain msgs) {
-		final Location oldLocation = location;
+		Location oldLocation = location;
 		location = newLocation;
 		if (eNotificationRequired()) {
-			final ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__LOCATION, oldLocation, newLocation);
-			if (msgs == null) {
-				msgs = notification;
-			} else {
-				msgs.add(notification);
-			}
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__LOCATION, oldLocation, newLocation);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -477,24 +447,18 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setLocation(Location newLocation) {
 		if (newLocation != location) {
 			NotificationChain msgs = null;
-			if (location != null) {
+			if (location != null)
 				msgs = ((InternalEObject)location).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DairyPackage.DAIRY_LOCATION__LOCATION, null, msgs);
-			}
-			if (newLocation != null) {
+			if (newLocation != null)
 				msgs = ((InternalEObject)newLocation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - DairyPackage.DAIRY_LOCATION__LOCATION, null, msgs);
-			}
 			msgs = basicSetLocation(newLocation, msgs);
-			if (msgs != null) {
-				msgs.dispatch();
-			}
+			if (msgs != null) msgs.dispatch();
 		}
-		else if (eNotificationRequired()) {
+		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__LOCATION, newLocation, newLocation));
-		}
 	}
 
 	/**
@@ -502,7 +466,6 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EList<DairyFunction> getFunctions() {
 		if (functions == null) {
 			functions = new EDataTypeUniqueEList<DairyFunction>(DairyFunction.class, this, DairyPackage.DAIRY_LOCATION__FUNCTIONS);
@@ -515,15 +478,13 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public DairyContainer getContainers() {
 		if (containers != null && containers.eIsProxy()) {
-			final InternalEObject oldContainers = (InternalEObject)containers;
+			InternalEObject oldContainers = (InternalEObject)containers;
 			containers = (DairyContainer)eResolveProxy(oldContainers);
 			if (containers != oldContainers) {
-				if (eNotificationRequired()) {
+				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DAIRY_LOCATION__CONTAINERS, oldContainers, containers));
-				}
 			}
 		}
 		return containers;
@@ -543,13 +504,11 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setContainers(DairyContainer newContainers) {
-		final DairyContainer oldContainers = containers;
+		DairyContainer oldContainers = containers;
 		containers = newContainers;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__CONTAINERS, oldContainers, containers));
-		}
 	}
 
 	/**
@@ -561,9 +520,8 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case DairyPackage.DAIRY_LOCATION__ROUTE:
-				if (route != null) {
+				if (route != null)
 					msgs = ((InternalEObject)route).eInverseRemove(this, DairyPackage.ROUTE__STOPS, Route.class, msgs);
-				}
 				return basicSetRoute((Route)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -602,9 +560,7 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 			case DairyPackage.DAIRY_LOCATION__PHONE:
 				return getPhone();
 			case DairyPackage.DAIRY_LOCATION__ROUTE:
-				if (resolve) {
-					return getRoute();
-				}
+				if (resolve) return getRoute();
 				return basicGetRoute();
 			case DairyPackage.DAIRY_LOCATION__DESCRIPTION:
 				return getDescription();
@@ -615,9 +571,7 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 			case DairyPackage.DAIRY_LOCATION__FUNCTIONS:
 				return getFunctions();
 			case DairyPackage.DAIRY_LOCATION__CONTAINERS:
-				if (resolve) {
-					return getContainers();
-				}
+				if (resolve) return getContainers();
 				return basicGetContainers();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -748,11 +702,9 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) {
-			return super.toString();
-		}
+		if (eIsProxy()) return super.toString();
 
-		final StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (Id: ");
 		result.append(id);
 		result.append(", name: ");

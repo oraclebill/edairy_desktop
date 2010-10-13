@@ -48,8 +48,11 @@ public class DairyHomeView extends ViewPart {
 	}
 
 	private static class GetIntakeData extends BrowserFunction {
-		GetIntakeData(Browser browser, String name) {
+		private ICollectionJournalLineRepository journalRepository;
+
+		GetIntakeData(ICollectionJournalLineRepository journalRepository, Browser browser, String name) {
 			super(browser, name);
+			this.journalRepository = journalRepository;
 		}
 
 		@Override
@@ -118,7 +121,7 @@ public class DairyHomeView extends ViewPart {
 
 	public DairyHomeView() {
 	}
-
+	
 	@Override
 	public void createPartControl(Composite parent) {
 		GridLayoutFactory.fillDefaults().generateLayout(parent);
@@ -129,7 +132,7 @@ public class DairyHomeView extends ViewPart {
 		browser = new Browser(parent, SWT.NONE);
 		browser.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		browser.addLocationListener(new HomepageLocationListener());
-		new GetIntakeData(browser, "getIntakeData");
+		new GetIntakeData(journalRepository, browser, "getIntakeData");
 
 		try {
 			browser.setUrl(FileLocator.resolve(

@@ -100,7 +100,7 @@ public enum AccountStatus implements Enumerator {
 	 */
 	public static AccountStatus get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			final AccountStatus result = VALUES_ARRAY[i];
+			AccountStatus result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -116,7 +116,7 @@ public enum AccountStatus implements Enumerator {
 	 */
 	public static AccountStatus getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			final AccountStatus result = VALUES_ARRAY[i];
+			AccountStatus result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -175,7 +175,6 @@ public enum AccountStatus implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public int getValue() {
 	  return value;
 	}
@@ -185,7 +184,6 @@ public enum AccountStatus implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getName() {
 	  return name;
 	}
@@ -195,7 +193,6 @@ public enum AccountStatus implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getLiteral() {
 	  return literal;
 	}
@@ -210,5 +207,5 @@ public enum AccountStatus implements Enumerator {
 	public String toString() {
 		return literal;
 	}
-
+	
 } //AccountStatus

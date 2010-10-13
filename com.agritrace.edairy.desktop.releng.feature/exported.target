@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.6"?>
+
+<target name="NewTarget">
+<locations>
+<location path="/Users/bjones/Development/Projects/edairy_desktop_lib/datatools-1.8.1" type="Profile"/>
+<location path="/Users/bjones/Development/Projects/edairy_desktop_lib/exported_target" type="Profile"/>
+</locations>
+</target>

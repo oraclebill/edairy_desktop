@@ -6,17 +6,14 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.account.util;
 
+import com.agritrace.edairy.desktop.common.model.dairy.account.*;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-import org.eclipse.emf.ecore.EObject;
 
-import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
-import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
-import com.agritrace.edairy.desktop.common.model.dairy.account.AdjustmentTransaction;
-import com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint;
-import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
+import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
+
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->

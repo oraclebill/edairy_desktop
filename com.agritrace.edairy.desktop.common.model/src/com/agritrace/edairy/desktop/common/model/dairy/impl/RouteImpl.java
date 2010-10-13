@@ -6,22 +6,26 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
+
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -145,7 +149,6 @@ public class RouteImpl extends EObjectImpl implements Route {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Long getId() {
 		return id;
 	}
@@ -155,13 +158,11 @@ public class RouteImpl extends EObjectImpl implements Route {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setId(Long newId) {
-		final Long oldId = id;
+		Long oldId = id;
 		id = newId;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ROUTE__ID, oldId, id));
-		}
 	}
 
 	/**
@@ -169,7 +170,6 @@ public class RouteImpl extends EObjectImpl implements Route {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getName() {
 		return name;
 	}
@@ -179,13 +179,11 @@ public class RouteImpl extends EObjectImpl implements Route {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setName(String newName) {
-		final String oldName = name;
+		String oldName = name;
 		name = newName;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ROUTE__NAME, oldName, name));
-		}
 	}
 
 	/**
@@ -193,7 +191,6 @@ public class RouteImpl extends EObjectImpl implements Route {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EList<DairyLocation> getStops() {
 		if (stops == null) {
 			stops = new EObjectWithInverseResolvingEList<DairyLocation>(DairyLocation.class, this, DairyPackage.ROUTE__STOPS, DairyPackage.DAIRY_LOCATION__ROUTE);
@@ -206,7 +203,6 @@ public class RouteImpl extends EObjectImpl implements Route {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -216,13 +212,11 @@ public class RouteImpl extends EObjectImpl implements Route {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setDescription(String newDescription) {
-		final String oldDescription = description;
+		String oldDescription = description;
 		description = newDescription;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ROUTE__DESCRIPTION, oldDescription, description));
-		}
 	}
 
 	/**
@@ -230,15 +224,13 @@ public class RouteImpl extends EObjectImpl implements Route {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Vehicle getVehicle() {
 		if (vehicle != null && vehicle.eIsProxy()) {
-			final InternalEObject oldVehicle = (InternalEObject)vehicle;
+			InternalEObject oldVehicle = (InternalEObject)vehicle;
 			vehicle = (Vehicle)eResolveProxy(oldVehicle);
 			if (vehicle != oldVehicle) {
-				if (eNotificationRequired()) {
+				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.ROUTE__VEHICLE, oldVehicle, vehicle));
-				}
 			}
 		}
 		return vehicle;
@@ -258,13 +250,11 @@ public class RouteImpl extends EObjectImpl implements Route {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setVehicle(Vehicle newVehicle) {
-		final Vehicle oldVehicle = vehicle;
+		Vehicle oldVehicle = vehicle;
 		vehicle = newVehicle;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ROUTE__VEHICLE, oldVehicle, vehicle));
-		}
 	}
 
 	/**
@@ -313,9 +303,7 @@ public class RouteImpl extends EObjectImpl implements Route {
 			case DairyPackage.ROUTE__DESCRIPTION:
 				return getDescription();
 			case DairyPackage.ROUTE__VEHICLE:
-				if (resolve) {
-					return getVehicle();
-				}
+				if (resolve) return getVehicle();
 				return basicGetVehicle();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -406,11 +394,9 @@ public class RouteImpl extends EObjectImpl implements Route {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) {
-			return super.toString();
-		}
+		if (eIsProxy()) return super.toString();
 
-		final StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (Id: ");
 		result.append(id);
 		result.append(", name: ");

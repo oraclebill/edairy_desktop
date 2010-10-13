@@ -6,14 +6,16 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.PreferenceKey;
 import com.agritrace.edairy.desktop.common.model.dairy.PreferenceType;
+
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -136,7 +138,6 @@ public class PreferenceKeyImpl extends EObjectImpl implements PreferenceKey {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Long getId() {
 		return id;
 	}
@@ -146,13 +147,11 @@ public class PreferenceKeyImpl extends EObjectImpl implements PreferenceKey {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setId(Long newId) {
-		final Long oldId = id;
+		Long oldId = id;
 		id = newId;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.PREFERENCE_KEY__ID, oldId, id));
-		}
 	}
 
 	/**
@@ -160,7 +159,6 @@ public class PreferenceKeyImpl extends EObjectImpl implements PreferenceKey {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getName() {
 		return name;
 	}
@@ -170,13 +168,11 @@ public class PreferenceKeyImpl extends EObjectImpl implements PreferenceKey {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setName(String newName) {
-		final String oldName = name;
+		String oldName = name;
 		name = newName;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.PREFERENCE_KEY__NAME, oldName, name));
-		}
 	}
 
 	/**
@@ -184,7 +180,6 @@ public class PreferenceKeyImpl extends EObjectImpl implements PreferenceKey {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getDefaultValue() {
 		return defaultValue;
 	}
@@ -194,13 +189,11 @@ public class PreferenceKeyImpl extends EObjectImpl implements PreferenceKey {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setDefaultValue(String newDefaultValue) {
-		final String oldDefaultValue = defaultValue;
+		String oldDefaultValue = defaultValue;
 		defaultValue = newDefaultValue;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.PREFERENCE_KEY__DEFAULT_VALUE, oldDefaultValue, defaultValue));
-		}
 	}
 
 	/**
@@ -208,7 +201,6 @@ public class PreferenceKeyImpl extends EObjectImpl implements PreferenceKey {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public PreferenceType getType() {
 		return type;
 	}
@@ -218,13 +210,11 @@ public class PreferenceKeyImpl extends EObjectImpl implements PreferenceKey {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setType(PreferenceType newType) {
-		final PreferenceType oldType = type;
+		PreferenceType oldType = type;
 		type = newType == null ? TYPE_EDEFAULT : newType;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.PREFERENCE_KEY__TYPE, oldType, type));
-		}
 	}
 
 	/**
@@ -322,11 +312,9 @@ public class PreferenceKeyImpl extends EObjectImpl implements PreferenceKey {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) {
-			return super.toString();
-		}
+		if (eIsProxy()) return super.toString();
 
-		final StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (id: ");
 		result.append(id);
 		result.append(", name: ");

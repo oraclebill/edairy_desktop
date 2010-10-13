@@ -6,20 +6,8 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
-import java.util.Collection;
-import java.util.Date;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
 import com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl;
+
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
@@ -33,8 +21,26 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
+
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
+
+import java.util.Collection;
+import java.util.Date;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -394,7 +400,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getRegistrationNumber() {
 		return registrationNumber;
 	}
@@ -404,13 +409,11 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setRegistrationNumber(String newRegistrationNumber) {
-		final String oldRegistrationNumber = registrationNumber;
+		String oldRegistrationNumber = registrationNumber;
 		registrationNumber = newRegistrationNumber;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY__REGISTRATION_NUMBER, oldRegistrationNumber, registrationNumber));
-		}
 	}
 
 	/**
@@ -418,7 +421,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Date getEstablishedDate() {
 		return establishedDate;
 	}
@@ -428,13 +430,11 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setEstablishedDate(Date newEstablishedDate) {
-		final Date oldEstablishedDate = establishedDate;
+		Date oldEstablishedDate = establishedDate;
 		establishedDate = newEstablishedDate;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY__ESTABLISHED_DATE, oldEstablishedDate, establishedDate));
-		}
 	}
 
 	/**
@@ -442,7 +442,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getManagerName() {
 		return managerName;
 	}
@@ -452,13 +451,11 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setManagerName(String newManagerName) {
-		final String oldManagerName = managerName;
+		String oldManagerName = managerName;
 		managerName = newManagerName;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY__MANAGER_NAME, oldManagerName, managerName));
-		}
 	}
 
 	/**
@@ -466,7 +463,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getNssfNumber() {
 		return nssfNumber;
 	}
@@ -476,13 +472,11 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setNssfNumber(String newNssfNumber) {
-		final String oldNssfNumber = nssfNumber;
+		String oldNssfNumber = nssfNumber;
 		nssfNumber = newNssfNumber;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY__NSSF_NUMBER, oldNssfNumber, nssfNumber));
-		}
 	}
 
 	/**
@@ -490,7 +484,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getNhifNumber() {
 		return nhifNumber;
 	}
@@ -500,13 +493,11 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setNhifNumber(String newNhifNumber) {
-		final String oldNhifNumber = nhifNumber;
+		String oldNhifNumber = nhifNumber;
 		nhifNumber = newNhifNumber;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY__NHIF_NUMBER, oldNhifNumber, nhifNumber));
-		}
 	}
 
 	/**
@@ -514,7 +505,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getFederalPin() {
 		return federalPin;
 	}
@@ -524,13 +514,11 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setFederalPin(String newFederalPin) {
-		final String oldFederalPin = federalPin;
+		String oldFederalPin = federalPin;
 		federalPin = newFederalPin;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY__FEDERAL_PIN, oldFederalPin, federalPin));
-		}
 	}
 
 	/**
@@ -538,7 +526,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Date getLicenseEffectiveDate() {
 		return licenseEffectiveDate;
 	}
@@ -548,13 +535,11 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setLicenseEffectiveDate(Date newLicenseEffectiveDate) {
-		final Date oldLicenseEffectiveDate = licenseEffectiveDate;
+		Date oldLicenseEffectiveDate = licenseEffectiveDate;
 		licenseEffectiveDate = newLicenseEffectiveDate;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY__LICENSE_EFFECTIVE_DATE, oldLicenseEffectiveDate, licenseEffectiveDate));
-		}
 	}
 
 	/**
@@ -562,7 +547,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Date getLicenseExpirationDate() {
 		return licenseExpirationDate;
 	}
@@ -572,13 +556,11 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setLicenseExpirationDate(Date newLicenseExpirationDate) {
-		final Date oldLicenseExpirationDate = licenseExpirationDate;
+		Date oldLicenseExpirationDate = licenseExpirationDate;
 		licenseExpirationDate = newLicenseExpirationDate;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY__LICENSE_EXPIRATION_DATE, oldLicenseExpirationDate, licenseExpirationDate));
-		}
 	}
 
 	/**
@@ -586,7 +568,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EList<Route> getRoutes() {
 		if (routes == null) {
 			routes = new EObjectContainmentEList<Route>(Route.class, this, DairyPackage.DAIRY__ROUTES);
@@ -599,7 +580,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EList<Vehicle> getVehicles() {
 		if (vehicles == null) {
 			vehicles = new EObjectContainmentEList<Vehicle>(Vehicle.class, this, DairyPackage.DAIRY__VEHICLES);
@@ -612,7 +592,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EList<Employee> getEmployees() {
 		if (employees == null) {
 			employees = new EObjectContainmentEList<Employee>(Employee.class, this, DairyPackage.DAIRY__EMPLOYEES);
@@ -625,7 +604,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EList<Membership> getMemberships() {
 		if (memberships == null) {
 			memberships = new EObjectContainmentEList<Membership>(Membership.class, this, DairyPackage.DAIRY__MEMBERSHIPS);
@@ -638,7 +616,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EList<DairyLocation> getBranchLocations() {
 		if (branchLocations == null) {
 			branchLocations = new EObjectContainmentEList<DairyLocation>(DairyLocation.class, this, DairyPackage.DAIRY__BRANCH_LOCATIONS);
@@ -651,7 +628,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EList<CollectionGroup> getCollectionJournals() {
 		if (collectionJournals == null) {
 			collectionJournals = new EObjectContainmentEList<CollectionGroup>(CollectionGroup.class, this, DairyPackage.DAIRY__COLLECTION_JOURNALS);
@@ -664,7 +640,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EList<DeliveryJournal> getDeliveryJournals() {
 		if (deliveryJournals == null) {
 			deliveryJournals = new EObjectContainmentEList<DeliveryJournal>(DeliveryJournal.class, this, DairyPackage.DAIRY__DELIVERY_JOURNALS);
@@ -677,7 +652,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EList<Supplier> getSuppliers() {
 		if (suppliers == null) {
 			suppliers = new EObjectContainmentEList<Supplier>(Supplier.class, this, DairyPackage.DAIRY__SUPPLIERS);
@@ -690,7 +664,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EList<Customer> getCustomers() {
 		if (customers == null) {
 			customers = new EObjectContainmentEList<Customer>(Customer.class, this, DairyPackage.DAIRY__CUSTOMERS);
@@ -703,7 +676,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EList<AnimalHealthRequest> getAnimalHealthRequests() {
 		if (animalHealthRequests == null) {
 			animalHealthRequests = new EObjectContainmentWithInverseEList<AnimalHealthRequest>(AnimalHealthRequest.class, this, DairyPackage.DAIRY__ANIMAL_HEALTH_REQUESTS, RequestsPackage.ANIMAL_HEALTH_REQUEST__DAIRY);
@@ -716,7 +688,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EList<DairyContainer> getDairyBins() {
 		if (dairyBins == null) {
 			dairyBins = new EObjectContainmentEList<DairyContainer>(DairyContainer.class, this, DairyPackage.DAIRY__DAIRY_BINS);
@@ -729,7 +700,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EList<MemberPayment> getPriceHistory() {
 		if (priceHistory == null) {
 			priceHistory = new EObjectContainmentEList<MemberPayment>(MemberPayment.class, this, DairyPackage.DAIRY__PRICE_HISTORY);
@@ -742,7 +712,6 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public long getVersion() {
 		return version;
 	}
@@ -752,13 +721,11 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setVersion(long newVersion) {
-		final long oldVersion = version;
+		long oldVersion = version;
 		version = newVersion;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY__VERSION, oldVersion, version));
-		}
 	}
 
 	/**
@@ -1090,11 +1057,9 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) {
-			return super.toString();
-		}
+		if (eIsProxy()) return super.toString();
 
-		final StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (registrationNumber: ");
 		result.append(registrationNumber);
 		result.append(", establishedDate: ");

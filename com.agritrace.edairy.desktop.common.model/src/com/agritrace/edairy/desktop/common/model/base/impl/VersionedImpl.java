@@ -6,13 +6,15 @@
  */
 package com.agritrace.edairy.desktop.common.model.base.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.base.Versioned;
+
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -72,7 +74,6 @@ public class VersionedImpl extends EObjectImpl implements Versioned {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public long getVersion() {
 		return version;
 	}
@@ -82,13 +83,11 @@ public class VersionedImpl extends EObjectImpl implements Versioned {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setVersion(long newVersion) {
-		final long oldVersion = version;
+		long oldVersion = version;
 		version = newVersion;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.VERSIONED__VERSION, oldVersion, version));
-		}
 	}
 
 	/**
@@ -156,11 +155,9 @@ public class VersionedImpl extends EObjectImpl implements Versioned {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) {
-			return super.toString();
-		}
+		if (eIsProxy()) return super.toString();
 
-		final StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (version: ");
 		result.append(version);
 		result.append(')');

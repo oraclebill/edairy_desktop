@@ -152,7 +152,7 @@ public enum MembershipStatus implements Enumerator {
 	 */
 	public static MembershipStatus get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			final MembershipStatus result = VALUES_ARRAY[i];
+			MembershipStatus result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -168,7 +168,7 @@ public enum MembershipStatus implements Enumerator {
 	 */
 	public static MembershipStatus getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			final MembershipStatus result = VALUES_ARRAY[i];
+			MembershipStatus result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -230,7 +230,6 @@ public enum MembershipStatus implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public int getValue() {
 	  return value;
 	}
@@ -240,7 +239,6 @@ public enum MembershipStatus implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getName() {
 	  return name;
 	}
@@ -250,7 +248,6 @@ public enum MembershipStatus implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getLiteral() {
 	  return literal;
 	}
@@ -265,5 +262,5 @@ public enum MembershipStatus implements Enumerator {
 	public String toString() {
 		return literal;
 	}
-
+	
 } //MembershipStatus

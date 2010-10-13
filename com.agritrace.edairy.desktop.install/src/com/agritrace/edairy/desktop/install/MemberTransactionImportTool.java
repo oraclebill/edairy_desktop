@@ -96,7 +96,10 @@ public class MemberTransactionImportTool extends AbstractImportTool {
 		final List<Account> accounts = memberRepo.allAccounts();
 		System.err.println("======== retrieved allaccounts ============");
 		for (final Account account : accounts) {
-			memberAccountCache.put(account.getAccountNumber().substring(1), account);
+			String accountNumber = account.getAccountNumber();
+			if (accountNumber != null && accountNumber.length() > 1) { 
+				memberAccountCache.put(account.getAccountNumber().substring(1), account);
+			}
 		}
 
 		super.processFile();

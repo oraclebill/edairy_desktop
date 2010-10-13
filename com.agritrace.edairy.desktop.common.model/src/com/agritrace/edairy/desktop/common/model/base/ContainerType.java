@@ -100,7 +100,7 @@ public enum ContainerType implements Enumerator {
 	 */
 	public static ContainerType get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			final ContainerType result = VALUES_ARRAY[i];
+			ContainerType result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -116,7 +116,7 @@ public enum ContainerType implements Enumerator {
 	 */
 	public static ContainerType getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			final ContainerType result = VALUES_ARRAY[i];
+			ContainerType result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -176,7 +176,6 @@ public enum ContainerType implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public int getValue() {
 	  return value;
 	}
@@ -186,7 +185,6 @@ public enum ContainerType implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getName() {
 	  return name;
 	}
@@ -196,7 +194,6 @@ public enum ContainerType implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getLiteral() {
 	  return literal;
 	}
@@ -211,5 +208,5 @@ public enum ContainerType implements Enumerator {
 	public String toString() {
 		return literal;
 	}
-
+	
 } //ContainerType

@@ -44,7 +44,7 @@ import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
 import com.agritrace.edairy.desktop.common.persistence.services.Transactional;
-import com.agritrace.edairy.desktop.internal.common.persistence.Activator;
+import com.agritrace.edairy.desktop.internal.common.persistence.PersistenceActivator;
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.google.inject.Inject;
@@ -612,7 +612,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	 *
 	 */
 	private void log(int level, String message) {
-		Log4r.getLogger(Activator.getDefault(), getClass()).log(level, message);
+		Log4r.getLogger(PersistenceActivator.getDefault(), getClass()).log(level, message);
 	}
 
 }

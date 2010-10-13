@@ -6,24 +6,29 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
-import java.math.BigDecimal;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-
 import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
+
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+
+import java.math.BigDecimal;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -359,7 +364,6 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public int getLineNumber() {
 		return lineNumber;
 	}
@@ -369,13 +373,11 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setLineNumber(int newLineNumber) {
-		final int oldLineNumber = lineNumber;
+		int oldLineNumber = lineNumber;
 		lineNumber = newLineNumber;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__LINE_NUMBER, oldLineNumber, lineNumber));
-		}
 	}
 
 	/**
@@ -383,7 +385,6 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getRecordedMember() {
 		return recordedMember;
 	}
@@ -393,13 +394,11 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setRecordedMember(String newRecordedMember) {
-		final String oldRecordedMember = recordedMember;
+		String oldRecordedMember = recordedMember;
 		recordedMember = newRecordedMember;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__RECORDED_MEMBER, oldRecordedMember, recordedMember));
-		}
 	}
 
 	/**
@@ -407,7 +406,6 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public BigDecimal getQuantity() {
 		return quantity;
 	}
@@ -417,13 +415,11 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQuantity(BigDecimal newQuantity) {
-		final BigDecimal oldQuantity = quantity;
+		BigDecimal oldQuantity = quantity;
 		quantity = newQuantity;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__QUANTITY, oldQuantity, quantity));
-		}
 	}
 
 	/**
@@ -431,7 +427,6 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public boolean isFlagged() {
 		return flagged;
 	}
@@ -441,13 +436,11 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setFlagged(boolean newFlagged) {
-		final boolean oldFlagged = flagged;
+		boolean oldFlagged = flagged;
 		flagged = newFlagged;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__FLAGGED, oldFlagged, flagged));
-		}
 	}
 
 	/**
@@ -455,7 +448,6 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public UnitOfMeasure getUnitOfMeasure() {
 		return unitOfMeasure;
 	}
@@ -465,13 +457,11 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setUnitOfMeasure(UnitOfMeasure newUnitOfMeasure) {
-		final UnitOfMeasure oldUnitOfMeasure = unitOfMeasure;
+		UnitOfMeasure oldUnitOfMeasure = unitOfMeasure;
 		unitOfMeasure = newUnitOfMeasure == null ? UNIT_OF_MEASURE_EDEFAULT : newUnitOfMeasure;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__UNIT_OF_MEASURE, oldUnitOfMeasure, unitOfMeasure));
-		}
 	}
 
 	/**
@@ -479,7 +469,6 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public boolean isNotRecorded() {
 		return notRecorded;
 	}
@@ -489,13 +478,11 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setNotRecorded(boolean newNotRecorded) {
-		final boolean oldNotRecorded = notRecorded;
+		boolean oldNotRecorded = notRecorded;
 		notRecorded = newNotRecorded;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__NOT_RECORDED, oldNotRecorded, notRecorded));
-		}
 	}
 
 	/**
@@ -503,15 +490,13 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Membership getValidatedMember() {
 		if (validatedMember != null && validatedMember.eIsProxy()) {
-			final InternalEObject oldValidatedMember = (InternalEObject)validatedMember;
+			InternalEObject oldValidatedMember = (InternalEObject)validatedMember;
 			validatedMember = (Membership)eResolveProxy(oldValidatedMember);
 			if (validatedMember != oldValidatedMember) {
-				if (eNotificationRequired()) {
+				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_JOURNAL_LINE__VALIDATED_MEMBER, oldValidatedMember, validatedMember));
-				}
 			}
 		}
 		return validatedMember;
@@ -531,13 +516,11 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setValidatedMember(Membership newValidatedMember) {
-		final Membership oldValidatedMember = validatedMember;
+		Membership oldValidatedMember = validatedMember;
 		validatedMember = newValidatedMember;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__VALIDATED_MEMBER, oldValidatedMember, validatedMember));
-		}
 	}
 
 	/**
@@ -545,7 +528,6 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public boolean isOffRoute() {
 		return offRoute;
 	}
@@ -555,13 +537,11 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setOffRoute(boolean newOffRoute) {
-		final boolean oldOffRoute = offRoute;
+		boolean oldOffRoute = offRoute;
 		offRoute = newOffRoute;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__OFF_ROUTE, oldOffRoute, offRoute));
-		}
 	}
 
 	/**
@@ -569,15 +549,13 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Farm getFrom() {
 		if (from != null && from.eIsProxy()) {
-			final InternalEObject oldFrom = (InternalEObject)from;
+			InternalEObject oldFrom = (InternalEObject)from;
 			from = (Farm)eResolveProxy(oldFrom);
 			if (from != oldFrom) {
-				if (eNotificationRequired()) {
+				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_JOURNAL_LINE__FROM, oldFrom, from));
-				}
 			}
 		}
 		return from;
@@ -597,13 +575,11 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setFrom(Farm newFrom) {
-		final Farm oldFrom = from;
+		Farm oldFrom = from;
 		from = newFrom;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__FROM, oldFrom, from));
-		}
 	}
 
 	/**
@@ -611,15 +587,13 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Container getFarmContainer() {
 		if (farmContainer != null && farmContainer.eIsProxy()) {
-			final InternalEObject oldFarmContainer = (InternalEObject)farmContainer;
+			InternalEObject oldFarmContainer = (InternalEObject)farmContainer;
 			farmContainer = (Container)eResolveProxy(oldFarmContainer);
 			if (farmContainer != oldFarmContainer) {
-				if (eNotificationRequired()) {
+				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_JOURNAL_LINE__FARM_CONTAINER, oldFarmContainer, farmContainer));
-				}
 			}
 		}
 		return farmContainer;
@@ -639,13 +613,11 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setFarmContainer(Container newFarmContainer) {
-		final Container oldFarmContainer = farmContainer;
+		Container oldFarmContainer = farmContainer;
 		farmContainer = newFarmContainer;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__FARM_CONTAINER, oldFarmContainer, farmContainer));
-		}
 	}
 
 	/**
@@ -653,15 +625,13 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public DairyContainer getDairyContainer() {
 		if (dairyContainer != null && dairyContainer.eIsProxy()) {
-			final InternalEObject oldDairyContainer = (InternalEObject)dairyContainer;
+			InternalEObject oldDairyContainer = (InternalEObject)dairyContainer;
 			dairyContainer = (DairyContainer)eResolveProxy(oldDairyContainer);
 			if (dairyContainer != oldDairyContainer) {
-				if (eNotificationRequired()) {
+				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER, oldDairyContainer, dairyContainer));
-				}
 			}
 		}
 		return dairyContainer;
@@ -681,13 +651,11 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setDairyContainer(DairyContainer newDairyContainer) {
-		final DairyContainer oldDairyContainer = dairyContainer;
+		DairyContainer oldDairyContainer = dairyContainer;
 		dairyContainer = newDairyContainer;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER, oldDairyContainer, dairyContainer));
-		}
 	}
 
 	/**
@@ -695,11 +663,8 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public CollectionGroup getCollectionJournal() {
-		if (eContainerFeatureID() != DairyPackage.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL) {
-			return null;
-		}
+		if (eContainerFeatureID() != DairyPackage.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL) return null;
 		return (CollectionGroup)eContainer();
 	}
 
@@ -718,27 +683,20 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setCollectionJournal(CollectionGroup newCollectionJournal) {
-		if (newCollectionJournal != eInternalContainer() || eContainerFeatureID() != DairyPackage.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL && newCollectionJournal != null) {
-			if (EcoreUtil.isAncestor(this, newCollectionJournal)) {
+		if (newCollectionJournal != eInternalContainer() || (eContainerFeatureID() != DairyPackage.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL && newCollectionJournal != null)) {
+			if (EcoreUtil.isAncestor(this, newCollectionJournal))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			}
 			NotificationChain msgs = null;
-			if (eInternalContainer() != null) {
+			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			}
-			if (newCollectionJournal != null) {
+			if (newCollectionJournal != null)
 				msgs = ((InternalEObject)newCollectionJournal).eInverseAdd(this, DairyPackage.COLLECTION_GROUP__JOURNAL_ENTRIES, CollectionGroup.class, msgs);
-			}
 			msgs = basicSetCollectionJournal(newCollectionJournal, msgs);
-			if (msgs != null) {
-				msgs.dispatch();
-			}
+			if (msgs != null) msgs.dispatch();
 		}
-		else if (eNotificationRequired()) {
+		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL, newCollectionJournal, newCollectionJournal));
-		}
 	}
 
 	/**
@@ -746,7 +704,6 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public boolean isRejected() {
 		return rejected;
 	}
@@ -756,13 +713,11 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setRejected(boolean newRejected) {
-		final boolean oldRejected = rejected;
+		boolean oldRejected = rejected;
 		rejected = newRejected;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__REJECTED, oldRejected, rejected));
-		}
 	}
 
 	/**
@@ -770,7 +725,6 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getRejectionReason() {
 		return rejectionReason;
 	}
@@ -780,13 +734,11 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setRejectionReason(String newRejectionReason) {
-		final String oldRejectionReason = rejectionReason;
+		String oldRejectionReason = rejectionReason;
 		rejectionReason = newRejectionReason;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__REJECTION_REASON, oldRejectionReason, rejectionReason));
-		}
 	}
 
 	/**
@@ -794,7 +746,6 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public BigDecimal getMilkFatPercentage() {
 		return milkFatPercentage;
 	}
@@ -804,13 +755,11 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setMilkFatPercentage(BigDecimal newMilkFatPercentage) {
-		final BigDecimal oldMilkFatPercentage = milkFatPercentage;
+		BigDecimal oldMilkFatPercentage = milkFatPercentage;
 		milkFatPercentage = newMilkFatPercentage;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__MILK_FAT_PERCENTAGE, oldMilkFatPercentage, milkFatPercentage));
-		}
 	}
 
 	/**
@@ -818,7 +767,6 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public BigDecimal getAlcoholPercentage() {
 		return alcoholPercentage;
 	}
@@ -828,13 +776,11 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAlcoholPercentage(BigDecimal newAlcoholPercentage) {
-		final BigDecimal oldAlcoholPercentage = alcoholPercentage;
+		BigDecimal oldAlcoholPercentage = alcoholPercentage;
 		alcoholPercentage = newAlcoholPercentage;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__ALCOHOL_PERCENTAGE, oldAlcoholPercentage, alcoholPercentage));
-		}
 	}
 
 	/**
@@ -842,7 +788,6 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public boolean isWaterAdded() {
 		return waterAdded;
 	}
@@ -852,13 +797,11 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setWaterAdded(boolean newWaterAdded) {
-		final boolean oldWaterAdded = waterAdded;
+		boolean oldWaterAdded = waterAdded;
 		waterAdded = newWaterAdded;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__WATER_ADDED, oldWaterAdded, waterAdded));
-		}
 	}
 
 	/**
@@ -870,9 +813,8 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case DairyPackage.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL:
-				if (eInternalContainer() != null) {
+				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				}
 				return basicSetCollectionJournal((CollectionGroup)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -927,26 +869,18 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 			case DairyPackage.COLLECTION_JOURNAL_LINE__NOT_RECORDED:
 				return isNotRecorded();
 			case DairyPackage.COLLECTION_JOURNAL_LINE__VALIDATED_MEMBER:
-				if (resolve) {
-					return getValidatedMember();
-				}
+				if (resolve) return getValidatedMember();
 				return basicGetValidatedMember();
 			case DairyPackage.COLLECTION_JOURNAL_LINE__OFF_ROUTE:
 				return isOffRoute();
 			case DairyPackage.COLLECTION_JOURNAL_LINE__FROM:
-				if (resolve) {
-					return getFrom();
-				}
+				if (resolve) return getFrom();
 				return basicGetFrom();
 			case DairyPackage.COLLECTION_JOURNAL_LINE__FARM_CONTAINER:
-				if (resolve) {
-					return getFarmContainer();
-				}
+				if (resolve) return getFarmContainer();
 				return basicGetFarmContainer();
 			case DairyPackage.COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER:
-				if (resolve) {
-					return getDairyContainer();
-				}
+				if (resolve) return getDairyContainer();
 				return basicGetDairyContainer();
 			case DairyPackage.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL:
 				return getCollectionJournal();
@@ -1143,11 +1077,9 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) {
-			return super.toString();
-		}
+		if (eIsProxy()) return super.toString();
 
-		final StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (lineNumber: ");
 		result.append(lineNumber);
 		result.append(", recordedMember: ");

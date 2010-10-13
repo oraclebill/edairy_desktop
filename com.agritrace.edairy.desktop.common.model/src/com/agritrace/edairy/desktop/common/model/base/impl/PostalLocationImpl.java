@@ -6,13 +6,15 @@
  */
 package com.agritrace.edairy.desktop.common.model.base.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
+
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -261,7 +263,6 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getAddress() {
 		return address;
 	}
@@ -271,13 +272,11 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAddress(String newAddress) {
-		final String oldAddress = address;
+		String oldAddress = address;
 		address = newAddress;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.POSTAL_LOCATION__ADDRESS, oldAddress, address));
-		}
 	}
 
 	/**
@@ -285,7 +284,6 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getSection() {
 		return section;
 	}
@@ -295,13 +293,11 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setSection(String newSection) {
-		final String oldSection = section;
+		String oldSection = section;
 		section = newSection;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.POSTAL_LOCATION__SECTION, oldSection, section));
-		}
 	}
 
 	/**
@@ -309,7 +305,6 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getEstate() {
 		return estate;
 	}
@@ -319,13 +314,11 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setEstate(String newEstate) {
-		final String oldEstate = estate;
+		String oldEstate = estate;
 		estate = newEstate;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.POSTAL_LOCATION__ESTATE, oldEstate, estate));
-		}
 	}
 
 	/**
@@ -333,7 +326,6 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getVillage() {
 		return village;
 	}
@@ -343,13 +335,11 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setVillage(String newVillage) {
-		final String oldVillage = village;
+		String oldVillage = village;
 		village = newVillage;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.POSTAL_LOCATION__VILLAGE, oldVillage, village));
-		}
 	}
 
 	/**
@@ -357,7 +347,6 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getSubLocation() {
 		return subLocation;
 	}
@@ -367,13 +356,11 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setSubLocation(String newSubLocation) {
-		final String oldSubLocation = subLocation;
+		String oldSubLocation = subLocation;
 		subLocation = newSubLocation;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.POSTAL_LOCATION__SUB_LOCATION, oldSubLocation, subLocation));
-		}
 	}
 
 	/**
@@ -381,7 +368,6 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getLocation() {
 		return location;
 	}
@@ -391,13 +377,11 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setLocation(String newLocation) {
-		final String oldLocation = location;
+		String oldLocation = location;
 		location = newLocation;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.POSTAL_LOCATION__LOCATION, oldLocation, location));
-		}
 	}
 
 	/**
@@ -405,7 +389,6 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getDistrict() {
 		return district;
 	}
@@ -415,13 +398,11 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setDistrict(String newDistrict) {
-		final String oldDistrict = district;
+		String oldDistrict = district;
 		district = newDistrict;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.POSTAL_LOCATION__DISTRICT, oldDistrict, district));
-		}
 	}
 
 	/**
@@ -429,7 +410,6 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getDivision() {
 		return division;
 	}
@@ -439,13 +419,11 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setDivision(String newDivision) {
-		final String oldDivision = division;
+		String oldDivision = division;
 		division = newDivision;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.POSTAL_LOCATION__DIVISION, oldDivision, division));
-		}
 	}
 
 	/**
@@ -453,7 +431,6 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getProvince() {
 		return province;
 	}
@@ -463,13 +440,11 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setProvince(String newProvince) {
-		final String oldProvince = province;
+		String oldProvince = province;
 		province = newProvince;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.POSTAL_LOCATION__PROVINCE, oldProvince, province));
-		}
 	}
 
 	/**
@@ -477,7 +452,6 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getPostalCode() {
 		return postalCode;
 	}
@@ -487,13 +461,11 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setPostalCode(String newPostalCode) {
-		final String oldPostalCode = postalCode;
+		String oldPostalCode = postalCode;
 		postalCode = newPostalCode;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.POSTAL_LOCATION__POSTAL_CODE, oldPostalCode, postalCode));
-		}
 	}
 
 	/**
@@ -651,11 +623,9 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) {
-			return super.toString();
-		}
+		if (eIsProxy()) return super.toString();
 
-		final StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (address: ");
 		result.append(address);
 		result.append(", section: ");

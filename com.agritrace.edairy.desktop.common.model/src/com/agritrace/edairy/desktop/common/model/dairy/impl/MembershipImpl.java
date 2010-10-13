@@ -6,22 +6,26 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
-import java.util.Date;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
+
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
+
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
+
+import java.util.Date;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -198,7 +202,6 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Long getMemberId() {
 		return memberId;
 	}
@@ -208,13 +211,11 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setMemberId(Long newMemberId) {
-		final Long oldMemberId = memberId;
+		Long oldMemberId = memberId;
 		memberId = newMemberId;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__MEMBER_ID, oldMemberId, memberId));
-		}
 	}
 
 	/**
@@ -222,7 +223,6 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getMemberNumber() {
 		return memberNumber;
 	}
@@ -232,13 +232,11 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setMemberNumber(String newMemberNumber) {
-		final String oldMemberNumber = memberNumber;
+		String oldMemberNumber = memberNumber;
 		memberNumber = newMemberNumber;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__MEMBER_NUMBER, oldMemberNumber, memberNumber));
-		}
 	}
 
 	/**
@@ -246,7 +244,6 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Date getApplicationDate() {
 		return applicationDate;
 	}
@@ -256,13 +253,11 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setApplicationDate(Date newApplicationDate) {
-		final Date oldApplicationDate = applicationDate;
+		Date oldApplicationDate = applicationDate;
 		applicationDate = newApplicationDate;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__APPLICATION_DATE, oldApplicationDate, applicationDate));
-		}
 	}
 
 	/**
@@ -270,7 +265,6 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Date getEffectiveDate() {
 		return effectiveDate;
 	}
@@ -280,13 +274,11 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setEffectiveDate(Date newEffectiveDate) {
-		final Date oldEffectiveDate = effectiveDate;
+		Date oldEffectiveDate = effectiveDate;
 		effectiveDate = newEffectiveDate;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__EFFECTIVE_DATE, oldEffectiveDate, effectiveDate));
-		}
 	}
 
 	/**
@@ -294,7 +286,6 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public MembershipStatus getStatus() {
 		return status;
 	}
@@ -304,13 +295,11 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setStatus(MembershipStatus newStatus) {
-		final MembershipStatus oldStatus = status;
+		MembershipStatus oldStatus = status;
 		status = newStatus == null ? STATUS_EDEFAULT : newStatus;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__STATUS, oldStatus, status));
-		}
 	}
 
 	/**
@@ -318,15 +307,13 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Route getDefaultRoute() {
 		if (defaultRoute != null && defaultRoute.eIsProxy()) {
-			final InternalEObject oldDefaultRoute = (InternalEObject)defaultRoute;
+			InternalEObject oldDefaultRoute = (InternalEObject)defaultRoute;
 			defaultRoute = (Route)eResolveProxy(oldDefaultRoute);
 			if (defaultRoute != oldDefaultRoute) {
-				if (eNotificationRequired()) {
+				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.MEMBERSHIP__DEFAULT_ROUTE, oldDefaultRoute, defaultRoute));
-				}
 			}
 		}
 		return defaultRoute;
@@ -346,13 +333,11 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setDefaultRoute(Route newDefaultRoute) {
-		final Route oldDefaultRoute = defaultRoute;
+		Route oldDefaultRoute = defaultRoute;
 		defaultRoute = newDefaultRoute;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__DEFAULT_ROUTE, oldDefaultRoute, defaultRoute));
-		}
 	}
 
 	/**
@@ -360,7 +345,6 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Farmer getMember() {
 		return member;
 	}
@@ -371,15 +355,11 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * @generated
 	 */
 	public NotificationChain basicSetMember(Farmer newMember, NotificationChain msgs) {
-		final Farmer oldMember = member;
+		Farmer oldMember = member;
 		member = newMember;
 		if (eNotificationRequired()) {
-			final ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__MEMBER, oldMember, newMember);
-			if (msgs == null) {
-				msgs = notification;
-			} else {
-				msgs.add(notification);
-			}
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__MEMBER, oldMember, newMember);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -389,24 +369,18 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setMember(Farmer newMember) {
 		if (newMember != member) {
 			NotificationChain msgs = null;
-			if (member != null) {
+			if (member != null)
 				msgs = ((InternalEObject)member).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DairyPackage.MEMBERSHIP__MEMBER, null, msgs);
-			}
-			if (newMember != null) {
+			if (newMember != null)
 				msgs = ((InternalEObject)newMember).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - DairyPackage.MEMBERSHIP__MEMBER, null, msgs);
-			}
 			msgs = basicSetMember(newMember, msgs);
-			if (msgs != null) {
-				msgs.dispatch();
-			}
+			if (msgs != null) msgs.dispatch();
 		}
-		else if (eNotificationRequired()) {
+		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__MEMBER, newMember, newMember));
-		}
 	}
 
 	/**
@@ -414,7 +388,6 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Account getAccount() {
 		return account;
 	}
@@ -425,15 +398,11 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * @generated
 	 */
 	public NotificationChain basicSetAccount(Account newAccount, NotificationChain msgs) {
-		final Account oldAccount = account;
+		Account oldAccount = account;
 		account = newAccount;
 		if (eNotificationRequired()) {
-			final ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__ACCOUNT, oldAccount, newAccount);
-			if (msgs == null) {
-				msgs = notification;
-			} else {
-				msgs.add(notification);
-			}
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__ACCOUNT, oldAccount, newAccount);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -443,24 +412,18 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAccount(Account newAccount) {
 		if (newAccount != account) {
 			NotificationChain msgs = null;
-			if (account != null) {
+			if (account != null)
 				msgs = ((InternalEObject)account).eInverseRemove(this, AccountPackage.ACCOUNT__MEMBER, Account.class, msgs);
-			}
-			if (newAccount != null) {
+			if (newAccount != null)
 				msgs = ((InternalEObject)newAccount).eInverseAdd(this, AccountPackage.ACCOUNT__MEMBER, Account.class, msgs);
-			}
 			msgs = basicSetAccount(newAccount, msgs);
-			if (msgs != null) {
-				msgs.dispatch();
-			}
+			if (msgs != null) msgs.dispatch();
 		}
-		else if (eNotificationRequired()) {
+		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__ACCOUNT, newAccount, newAccount));
-		}
 	}
 
 	/**
@@ -472,9 +435,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case DairyPackage.MEMBERSHIP__ACCOUNT:
-				if (account != null) {
+				if (account != null)
 					msgs = ((InternalEObject)account).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DairyPackage.MEMBERSHIP__ACCOUNT, null, msgs);
-				}
 				return basicSetAccount((Account)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -515,9 +477,7 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 			case DairyPackage.MEMBERSHIP__STATUS:
 				return getStatus();
 			case DairyPackage.MEMBERSHIP__DEFAULT_ROUTE:
-				if (resolve) {
-					return getDefaultRoute();
-				}
+				if (resolve) return getDefaultRoute();
 				return basicGetDefaultRoute();
 			case DairyPackage.MEMBERSHIP__MEMBER:
 				return getMember();
@@ -634,11 +594,9 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) {
-			return super.toString();
-		}
+		if (eIsProxy()) return super.toString();
 
-		final StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (memberId: ");
 		result.append(memberId);
 		result.append(", memberNumber: ");

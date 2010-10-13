@@ -76,8 +76,8 @@
       <xsd:extension base="base:Contactable">
         <xsd:attribute name="photo" type="xsd:string"/>
         <xsd:attribute name="honorific" type="xsd:string"/>
-        <xsd:attribute name="familyName" type="xsd:string"/>
-        <xsd:attribute name="givenName" type="xsd:string"/>
+        <xsd:attribute name="familyName" type="xsd:string" use="required"/>
+        <xsd:attribute name="givenName" type="xsd:string" use="required"/>
         <xsd:attribute name="middleName" type="xsd:string"/>
         <xsd:attribute name="additionalNames" type="xsd:string"/>
         <xsd:attribute name="suffix" type="xsd:string"/>

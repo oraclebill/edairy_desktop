@@ -6,13 +6,15 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.util;
 
+import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.xmi.util.XMLProcessor;
 
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+
+import org.eclipse.emf.ecore.xmi.util.XMLProcessor;
 
 /**
  * This class contains helper methods to serialize and deserialize XML documents
@@ -29,10 +31,10 @@ public class DairyXMLProcessor extends XMLProcessor {
 	 * @generated
 	 */
 	public DairyXMLProcessor() {
-		super(EPackage.Registry.INSTANCE);
+		super((EPackage.Registry.INSTANCE));
 		DairyPackage.eINSTANCE.eClass();
 	}
-
+	
 	/**
 	 * Register for "*" and "xml" file extensions the DairyResourceFactoryImpl factory.
 	 * <!-- begin-user-doc -->

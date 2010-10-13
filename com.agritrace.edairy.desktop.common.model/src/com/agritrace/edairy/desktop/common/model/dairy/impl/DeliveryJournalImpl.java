@@ -6,20 +6,6 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
-import java.math.BigDecimal;
-import java.util.Collection;
-import java.util.Date;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
@@ -28,6 +14,25 @@ import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
+
+import java.math.BigDecimal;
+
+import java.util.Collection;
+import java.util.Date;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -195,7 +200,6 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getReferenceNumber() {
 		return referenceNumber;
 	}
@@ -205,13 +209,11 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setReferenceNumber(String newReferenceNumber) {
-		final String oldReferenceNumber = referenceNumber;
+		String oldReferenceNumber = referenceNumber;
 		referenceNumber = newReferenceNumber;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL__REFERENCE_NUMBER, oldReferenceNumber, referenceNumber));
-		}
 	}
 
 	/**
@@ -219,7 +221,6 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Date getDate() {
 		return date;
 	}
@@ -229,13 +230,11 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setDate(Date newDate) {
-		final Date oldDate = date;
+		Date oldDate = date;
 		date = newDate;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL__DATE, oldDate, date));
-		}
 	}
 
 	/**
@@ -243,15 +242,13 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Route getRoute() {
 		if (route != null && route.eIsProxy()) {
-			final InternalEObject oldRoute = (InternalEObject)route;
+			InternalEObject oldRoute = (InternalEObject)route;
 			route = (Route)eResolveProxy(oldRoute);
 			if (route != oldRoute) {
-				if (eNotificationRequired()) {
+				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DELIVERY_JOURNAL__ROUTE, oldRoute, route));
-				}
 			}
 		}
 		return route;
@@ -271,13 +268,11 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setRoute(Route newRoute) {
-		final Route oldRoute = route;
+		Route oldRoute = route;
 		route = newRoute;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL__ROUTE, oldRoute, route));
-		}
 	}
 
 	/**
@@ -285,15 +280,13 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Customer getCustomer() {
 		if (customer != null && customer.eIsProxy()) {
-			final InternalEObject oldCustomer = (InternalEObject)customer;
+			InternalEObject oldCustomer = (InternalEObject)customer;
 			customer = (Customer)eResolveProxy(oldCustomer);
 			if (customer != oldCustomer) {
-				if (eNotificationRequired()) {
+				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DELIVERY_JOURNAL__CUSTOMER, oldCustomer, customer));
-				}
 			}
 		}
 		return customer;
@@ -313,13 +306,11 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setCustomer(Customer newCustomer) {
-		final Customer oldCustomer = customer;
+		Customer oldCustomer = customer;
 		customer = newCustomer;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL__CUSTOMER, oldCustomer, customer));
-		}
 	}
 
 	/**
@@ -327,15 +318,13 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Employee getDriver() {
 		if (driver != null && driver.eIsProxy()) {
-			final InternalEObject oldDriver = (InternalEObject)driver;
+			InternalEObject oldDriver = (InternalEObject)driver;
 			driver = (Employee)eResolveProxy(oldDriver);
 			if (driver != oldDriver) {
-				if (eNotificationRequired()) {
+				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DELIVERY_JOURNAL__DRIVER, oldDriver, driver));
-				}
 			}
 		}
 		return driver;
@@ -355,13 +344,11 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setDriver(Employee newDriver) {
-		final Employee oldDriver = driver;
+		Employee oldDriver = driver;
 		driver = newDriver;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL__DRIVER, oldDriver, driver));
-		}
 	}
 
 	/**
@@ -369,15 +356,13 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Vehicle getVehicle() {
 		if (vehicle != null && vehicle.eIsProxy()) {
-			final InternalEObject oldVehicle = (InternalEObject)vehicle;
+			InternalEObject oldVehicle = (InternalEObject)vehicle;
 			vehicle = (Vehicle)eResolveProxy(oldVehicle);
 			if (vehicle != oldVehicle) {
-				if (eNotificationRequired()) {
+				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DELIVERY_JOURNAL__VEHICLE, oldVehicle, vehicle));
-				}
 			}
 		}
 		return vehicle;
@@ -397,13 +382,11 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setVehicle(Vehicle newVehicle) {
-		final Vehicle oldVehicle = vehicle;
+		Vehicle oldVehicle = vehicle;
 		vehicle = newVehicle;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL__VEHICLE, oldVehicle, vehicle));
-		}
 	}
 
 	/**
@@ -411,7 +394,6 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EList<DeliveryJournalLine> getLines() {
 		if (lines == null) {
 			lines = new EObjectContainmentEList<DeliveryJournalLine>(DeliveryJournalLine.class, this, DairyPackage.DELIVERY_JOURNAL__LINES);
@@ -424,7 +406,6 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public BigDecimal getTotal() {
 		return total;
 	}
@@ -434,13 +415,11 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setTotal(BigDecimal newTotal) {
-		final BigDecimal oldTotal = total;
+		BigDecimal oldTotal = total;
 		total = newTotal;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL__TOTAL, oldTotal, total));
-		}
 	}
 
 	/**
@@ -448,15 +427,13 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public CollectionSession getSession() {
 		if (session != null && session.eIsProxy()) {
-			final InternalEObject oldSession = (InternalEObject)session;
+			InternalEObject oldSession = (InternalEObject)session;
 			session = (CollectionSession)eResolveProxy(oldSession);
 			if (session != oldSession) {
-				if (eNotificationRequired()) {
+				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DELIVERY_JOURNAL__SESSION, oldSession, session));
-				}
 			}
 		}
 		return session;
@@ -476,13 +453,11 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setSession(CollectionSession newSession) {
-		final CollectionSession oldSession = session;
+		CollectionSession oldSession = session;
 		session = newSession;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL__SESSION, oldSession, session));
-		}
 	}
 
 	/**
@@ -512,33 +487,23 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 			case DairyPackage.DELIVERY_JOURNAL__DATE:
 				return getDate();
 			case DairyPackage.DELIVERY_JOURNAL__ROUTE:
-				if (resolve) {
-					return getRoute();
-				}
+				if (resolve) return getRoute();
 				return basicGetRoute();
 			case DairyPackage.DELIVERY_JOURNAL__CUSTOMER:
-				if (resolve) {
-					return getCustomer();
-				}
+				if (resolve) return getCustomer();
 				return basicGetCustomer();
 			case DairyPackage.DELIVERY_JOURNAL__DRIVER:
-				if (resolve) {
-					return getDriver();
-				}
+				if (resolve) return getDriver();
 				return basicGetDriver();
 			case DairyPackage.DELIVERY_JOURNAL__VEHICLE:
-				if (resolve) {
-					return getVehicle();
-				}
+				if (resolve) return getVehicle();
 				return basicGetVehicle();
 			case DairyPackage.DELIVERY_JOURNAL__LINES:
 				return getLines();
 			case DairyPackage.DELIVERY_JOURNAL__TOTAL:
 				return getTotal();
 			case DairyPackage.DELIVERY_JOURNAL__SESSION:
-				if (resolve) {
-					return getSession();
-				}
+				if (resolve) return getSession();
 				return basicGetSession();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -661,11 +626,9 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) {
-			return super.toString();
-		}
+		if (eIsProxy()) return super.toString();
 
-		final StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (referenceNumber: ");
 		result.append(referenceNumber);
 		result.append(", date: ");

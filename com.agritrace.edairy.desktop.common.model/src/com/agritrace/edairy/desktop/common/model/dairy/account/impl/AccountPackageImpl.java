@@ -6,16 +6,12 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.account.impl;
 
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+
 import com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl;
+
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
@@ -26,11 +22,24 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
+
 import com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl;
+
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
+
 import com.agritrace.edairy.desktop.common.model.requests.impl.RequestsPackageImpl;
+
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
+
 import com.agritrace.edairy.desktop.common.model.tracking.impl.TrackingPackageImpl;
+
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+
+import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -123,7 +132,7 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 *
+	 * 
 	 * <p>This method is used to initialize {@link AccountPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -134,20 +143,18 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * @generated
 	 */
 	public static AccountPackage init() {
-		if (isInited) {
-			return (AccountPackage)EPackage.Registry.INSTANCE.getEPackage(AccountPackage.eNS_URI);
-		}
+		if (isInited) return (AccountPackage)EPackage.Registry.INSTANCE.getEPackage(AccountPackage.eNS_URI);
 
 		// Obtain or create and register package
-		final AccountPackageImpl theAccountPackage = (AccountPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof AccountPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new AccountPackageImpl());
+		AccountPackageImpl theAccountPackage = (AccountPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof AccountPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new AccountPackageImpl());
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		final DairyPackageImpl theDairyPackage = (DairyPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DairyPackage.eNS_URI) instanceof DairyPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DairyPackage.eNS_URI) : DairyPackage.eINSTANCE);
-		final ModelPackageImpl theModelPackage = (ModelPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) : ModelPackage.eINSTANCE);
-		final TrackingPackageImpl theTrackingPackage = (TrackingPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TrackingPackage.eNS_URI) instanceof TrackingPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TrackingPackage.eNS_URI) : TrackingPackage.eINSTANCE);
-		final RequestsPackageImpl theRequestsPackage = (RequestsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(RequestsPackage.eNS_URI) instanceof RequestsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(RequestsPackage.eNS_URI) : RequestsPackage.eINSTANCE);
+		DairyPackageImpl theDairyPackage = (DairyPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DairyPackage.eNS_URI) instanceof DairyPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DairyPackage.eNS_URI) : DairyPackage.eINSTANCE);
+		ModelPackageImpl theModelPackage = (ModelPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) : ModelPackage.eINSTANCE);
+		TrackingPackageImpl theTrackingPackage = (TrackingPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TrackingPackage.eNS_URI) instanceof TrackingPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TrackingPackage.eNS_URI) : TrackingPackage.eINSTANCE);
+		RequestsPackageImpl theRequestsPackage = (RequestsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(RequestsPackage.eNS_URI) instanceof RequestsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(RequestsPackage.eNS_URI) : RequestsPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theAccountPackage.createPackageContents();
@@ -166,7 +173,7 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 		// Mark meta-data to indicate it can't be changed
 		theAccountPackage.freeze();
 
-
+  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(AccountPackage.eNS_URI, theAccountPackage);
 		return theAccountPackage;
@@ -177,7 +184,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EClass getAccount() {
 		return accountEClass;
 	}
@@ -187,7 +193,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EAttribute getAccount_AccountId() {
 		return (EAttribute)accountEClass.getEStructuralFeatures().get(0);
 	}
@@ -197,7 +202,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EAttribute getAccount_AccountNumber() {
 		return (EAttribute)accountEClass.getEStructuralFeatures().get(1);
 	}
@@ -207,7 +211,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EReference getAccount_Member() {
 		return (EReference)accountEClass.getEStructuralFeatures().get(2);
 	}
@@ -217,7 +220,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EAttribute getAccount_Established() {
 		return (EAttribute)accountEClass.getEStructuralFeatures().get(3);
 	}
@@ -227,7 +229,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EAttribute getAccount_Status() {
 		return (EAttribute)accountEClass.getEStructuralFeatures().get(4);
 	}
@@ -237,7 +238,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EAttribute getAccount_Type() {
 		return (EAttribute)accountEClass.getEStructuralFeatures().get(5);
 	}
@@ -247,7 +247,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EReference getAccount_Transactions() {
 		return (EReference)accountEClass.getEStructuralFeatures().get(6);
 	}
@@ -257,7 +256,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EReference getAccount_Balances() {
 		return (EReference)accountEClass.getEStructuralFeatures().get(7);
 	}
@@ -267,7 +265,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EClass getTransaction() {
 		return transactionEClass;
 	}
@@ -277,7 +274,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EReference getTransaction_Account() {
 		return (EReference)transactionEClass.getEStructuralFeatures().get(0);
 	}
@@ -287,7 +283,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EAttribute getTransaction_TransactionId() {
 		return (EAttribute)transactionEClass.getEStructuralFeatures().get(1);
 	}
@@ -297,7 +292,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EAttribute getTransaction_TransactionDate() {
 		return (EAttribute)transactionEClass.getEStructuralFeatures().get(2);
 	}
@@ -307,7 +301,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EAttribute getTransaction_TransactionType() {
 		return (EAttribute)transactionEClass.getEStructuralFeatures().get(3);
 	}
@@ -317,7 +310,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EAttribute getTransaction_Amount() {
 		return (EAttribute)transactionEClass.getEStructuralFeatures().get(4);
 	}
@@ -327,7 +319,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EAttribute getTransaction_Description() {
 		return (EAttribute)transactionEClass.getEStructuralFeatures().get(5);
 	}
@@ -337,7 +328,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EClass getAccountTransaction() {
 		return accountTransactionEClass;
 	}
@@ -347,7 +337,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EAttribute getAccountTransaction_ReferenceNumber() {
 		return (EAttribute)accountTransactionEClass.getEStructuralFeatures().get(0);
 	}
@@ -357,7 +346,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EAttribute getAccountTransaction_Source() {
 		return (EAttribute)accountTransactionEClass.getEStructuralFeatures().get(1);
 	}
@@ -367,7 +355,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EReference getAccountTransaction_RelatedLocation() {
 		return (EReference)accountTransactionEClass.getEStructuralFeatures().get(2);
 	}
@@ -377,7 +364,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EAttribute getAccountTransaction_CheckNumber() {
 		return (EAttribute)accountTransactionEClass.getEStructuralFeatures().get(3);
 	}
@@ -387,7 +373,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EAttribute getAccountTransaction_SignedBy() {
 		return (EAttribute)accountTransactionEClass.getEStructuralFeatures().get(4);
 	}
@@ -397,7 +382,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EClass getAdjustmentTransaction() {
 		return adjustmentTransactionEClass;
 	}
@@ -407,7 +391,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EReference getAdjustmentTransaction_SignedOffBy() {
 		return (EReference)adjustmentTransactionEClass.getEStructuralFeatures().get(0);
 	}
@@ -417,7 +400,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EClass getBalancePoint() {
 		return balancePointEClass;
 	}
@@ -427,7 +409,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EAttribute getBalancePoint_AccountBalanceId() {
 		return (EAttribute)balancePointEClass.getEStructuralFeatures().get(0);
 	}
@@ -437,7 +418,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EReference getBalancePoint_Account() {
 		return (EReference)balancePointEClass.getEStructuralFeatures().get(1);
 	}
@@ -447,7 +427,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EAttribute getBalancePoint_AsOf() {
 		return (EAttribute)balancePointEClass.getEStructuralFeatures().get(2);
 	}
@@ -457,7 +436,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EAttribute getBalancePoint_Amount() {
 		return (EAttribute)balancePointEClass.getEStructuralFeatures().get(3);
 	}
@@ -467,7 +445,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EEnum getTransactionType() {
 		return transactionTypeEEnum;
 	}
@@ -477,7 +454,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EEnum getTransactionSource() {
 		return transactionSourceEEnum;
 	}
@@ -487,7 +463,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public EEnum getAccountStatus() {
 		return accountStatusEEnum;
 	}
@@ -497,7 +472,6 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public AccountFactory getAccountFactory() {
 		return (AccountFactory)getEFactoryInstance();
 	}
@@ -517,9 +491,7 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * @generated
 	 */
 	public void createPackageContents() {
-		if (isCreated) {
-			return;
-		}
+		if (isCreated) return;
 		isCreated = true;
 
 		// Create classes and their features
@@ -578,9 +550,7 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 	 * @generated
 	 */
 	public void initializePackageContents() {
-		if (isInitialized) {
-			return;
-		}
+		if (isInitialized) return;
 		isInitialized = true;
 
 		// Initialize package
@@ -589,7 +559,7 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		final DairyPackage theDairyPackage = (DairyPackage)EPackage.Registry.INSTANCE.getEPackage(DairyPackage.eNS_URI);
+		DairyPackage theDairyPackage = (DairyPackage)EPackage.Registry.INSTANCE.getEPackage(DairyPackage.eNS_URI);
 
 		// Create type parameters
 

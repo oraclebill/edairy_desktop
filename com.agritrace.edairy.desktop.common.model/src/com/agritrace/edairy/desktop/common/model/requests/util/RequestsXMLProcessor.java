@@ -6,13 +6,15 @@
  */
 package com.agritrace.edairy.desktop.common.model.requests.util;
 
+import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
+
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.xmi.util.XMLProcessor;
 
-import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+
+import org.eclipse.emf.ecore.xmi.util.XMLProcessor;
 
 /**
  * This class contains helper methods to serialize and deserialize XML documents
@@ -29,10 +31,10 @@ public class RequestsXMLProcessor extends XMLProcessor {
 	 * @generated
 	 */
 	public RequestsXMLProcessor() {
-		super(EPackage.Registry.INSTANCE);
+		super((EPackage.Registry.INSTANCE));
 		RequestsPackage.eINSTANCE.eClass();
 	}
-
+	
 	/**
 	 * Register for "*" and "xml" file extensions the RequestsResourceFactoryImpl factory.
 	 * <!-- begin-user-doc -->

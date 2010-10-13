@@ -100,7 +100,7 @@ public enum RequestType implements Enumerator {
 	 */
 	public static RequestType get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			final RequestType result = VALUES_ARRAY[i];
+			RequestType result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -116,7 +116,7 @@ public enum RequestType implements Enumerator {
 	 */
 	public static RequestType getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			final RequestType result = VALUES_ARRAY[i];
+			RequestType result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -176,7 +176,6 @@ public enum RequestType implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public int getValue() {
 	  return value;
 	}
@@ -186,7 +185,6 @@ public enum RequestType implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getName() {
 	  return name;
 	}
@@ -196,7 +194,6 @@ public enum RequestType implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getLiteral() {
 	  return literal;
 	}
@@ -211,5 +208,5 @@ public enum RequestType implements Enumerator {
 	public String toString() {
 		return literal;
 	}
-
+	
 } //RequestType

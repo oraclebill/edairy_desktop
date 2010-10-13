@@ -6,31 +6,16 @@
  */
 package com.agritrace.edairy.desktop.common.model.base.impl;
 
+import com.agritrace.edairy.desktop.common.model.base.*;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.impl.EFactoryImpl;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import com.agritrace.edairy.desktop.common.model.base.Audited;
-import com.agritrace.edairy.desktop.common.model.base.Company;
-import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
-import com.agritrace.edairy.desktop.common.model.base.ContactMethodType;
-import com.agritrace.edairy.desktop.common.model.base.Contactable;
-import com.agritrace.edairy.desktop.common.model.base.ContainerType;
-import com.agritrace.edairy.desktop.common.model.base.DescriptiveLocation;
-import com.agritrace.edairy.desktop.common.model.base.Gender;
-import com.agritrace.edairy.desktop.common.model.base.ImageEntry;
-import com.agritrace.edairy.desktop.common.model.base.Location;
-import com.agritrace.edairy.desktop.common.model.base.MapLocation;
-import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
-import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
-import com.agritrace.edairy.desktop.common.model.base.Person;
-import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
-import com.agritrace.edairy.desktop.common.model.base.StatutoryLocation;
-import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
-import com.agritrace.edairy.desktop.common.model.base.Versioned;
+import org.eclipse.emf.ecore.impl.EFactoryImpl;
+
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 /**
  * <!-- begin-user-doc -->
@@ -47,12 +32,12 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public static ModelFactory init() {
 		try {
-			final ModelFactory theModelFactory = (ModelFactory)EPackage.Registry.INSTANCE.getEFactory("http://com.agritrace.edairy.desktop.common.model/base/");
+			ModelFactory theModelFactory = (ModelFactory)EPackage.Registry.INSTANCE.getEFactory("http://com.agritrace.edairy.desktop.common.model/base/"); 
 			if (theModelFactory != null) {
 				return theModelFactory;
 			}
 		}
-		catch (final Exception exception) {
+		catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new ModelFactoryImpl();
@@ -152,9 +137,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public MapLocation createMapLocation() {
-		final MapLocationImpl mapLocation = new MapLocationImpl();
+		MapLocationImpl mapLocation = new MapLocationImpl();
 		return mapLocation;
 	}
 
@@ -163,9 +147,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public PostalLocation createPostalLocation() {
-		final PostalLocationImpl postalLocation = new PostalLocationImpl();
+		PostalLocationImpl postalLocation = new PostalLocationImpl();
 		return postalLocation;
 	}
 
@@ -174,9 +157,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public StatutoryLocation createStatutoryLocation() {
-		final StatutoryLocationImpl statutoryLocation = new StatutoryLocationImpl();
+		StatutoryLocationImpl statutoryLocation = new StatutoryLocationImpl();
 		return statutoryLocation;
 	}
 
@@ -185,9 +167,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Audited createAudited() {
-		final AuditedImpl audited = new AuditedImpl();
+		AuditedImpl audited = new AuditedImpl();
 		return audited;
 	}
 
@@ -196,9 +177,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Versioned createVersioned() {
-		final VersionedImpl versioned = new VersionedImpl();
+		VersionedImpl versioned = new VersionedImpl();
 		return versioned;
 	}
 
@@ -207,9 +187,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Contactable createContactable() {
-		final ContactableImpl contactable = new ContactableImpl();
+		ContactableImpl contactable = new ContactableImpl();
 		return contactable;
 	}
 
@@ -218,9 +197,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Person createPerson() {
-		final PersonImpl person = new PersonImpl();
+		PersonImpl person = new PersonImpl();
 		return person;
 	}
 
@@ -229,9 +207,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Company createCompany() {
-		final CompanyImpl company = new CompanyImpl();
+		CompanyImpl company = new CompanyImpl();
 		return company;
 	}
 
@@ -240,9 +217,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public DescriptiveLocation createDescriptiveLocation() {
-		final DescriptiveLocationImpl descriptiveLocation = new DescriptiveLocationImpl();
+		DescriptiveLocationImpl descriptiveLocation = new DescriptiveLocationImpl();
 		return descriptiveLocation;
 	}
 
@@ -251,9 +227,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Location createLocation() {
-		final LocationImpl location = new LocationImpl();
+		LocationImpl location = new LocationImpl();
 		return location;
 	}
 
@@ -262,9 +237,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public ContactMethod createContactMethod() {
-		final ContactMethodImpl contactMethod = new ContactMethodImpl();
+		ContactMethodImpl contactMethod = new ContactMethodImpl();
 		return contactMethod;
 	}
 
@@ -273,9 +247,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public ImageEntry createImageEntry() {
-		final ImageEntryImpl imageEntry = new ImageEntryImpl();
+		ImageEntryImpl imageEntry = new ImageEntryImpl();
 		return imageEntry;
 	}
 
@@ -285,10 +258,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * @generated
 	 */
 	public Gender createGenderFromString(EDataType eDataType, String initialValue) {
-		final Gender result = Gender.get(initialValue);
-		if (result == null) {
-			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		}
+		Gender result = Gender.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
@@ -307,10 +278,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * @generated
 	 */
 	public ContactMethodType createContactMethodTypeFromString(EDataType eDataType, String initialValue) {
-		final ContactMethodType result = ContactMethodType.get(initialValue);
-		if (result == null) {
-			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		}
+		ContactMethodType result = ContactMethodType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
@@ -329,10 +298,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * @generated
 	 */
 	public UnitOfMeasure createUnitOfMeasureFromString(EDataType eDataType, String initialValue) {
-		final UnitOfMeasure result = UnitOfMeasure.get(initialValue);
-		if (result == null) {
-			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		}
+		UnitOfMeasure result = UnitOfMeasure.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
@@ -351,10 +318,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * @generated
 	 */
 	public ContainerType createContainerTypeFromString(EDataType eDataType, String initialValue) {
-		final ContainerType result = ContainerType.get(initialValue);
-		if (result == null) {
-			throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		}
+		ContainerType result = ContainerType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 
@@ -426,7 +391,6 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public ModelPackage getModelPackage() {
 		return (ModelPackage)getEPackage();
 	}

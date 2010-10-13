@@ -178,7 +178,7 @@ public enum VendorStatus implements Enumerator {
 	 */
 	public static VendorStatus get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			final VendorStatus result = VALUES_ARRAY[i];
+			VendorStatus result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -194,7 +194,7 @@ public enum VendorStatus implements Enumerator {
 	 */
 	public static VendorStatus getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			final VendorStatus result = VALUES_ARRAY[i];
+			VendorStatus result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -257,7 +257,6 @@ public enum VendorStatus implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public int getValue() {
 	  return value;
 	}
@@ -267,7 +266,6 @@ public enum VendorStatus implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getName() {
 	  return name;
 	}
@@ -277,7 +275,6 @@ public enum VendorStatus implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getLiteral() {
 	  return literal;
 	}
@@ -292,5 +289,5 @@ public enum VendorStatus implements Enumerator {
 	public String toString() {
 		return literal;
 	}
-
+	
 } //VendorStatus

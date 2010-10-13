@@ -6,17 +6,19 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
-import java.math.BigDecimal;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine;
+
+import java.math.BigDecimal;
+
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -129,7 +131,6 @@ public class DeliveryJournalLineImpl extends EObjectImpl implements DeliveryJour
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public int getLineNumber() {
 		return lineNumber;
 	}
@@ -139,13 +140,11 @@ public class DeliveryJournalLineImpl extends EObjectImpl implements DeliveryJour
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setLineNumber(int newLineNumber) {
-		final int oldLineNumber = lineNumber;
+		int oldLineNumber = lineNumber;
 		lineNumber = newLineNumber;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL_LINE__LINE_NUMBER, oldLineNumber, lineNumber));
-		}
 	}
 
 	/**
@@ -153,15 +152,13 @@ public class DeliveryJournalLineImpl extends EObjectImpl implements DeliveryJour
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public DairyContainer getBin() {
 		if (bin != null && bin.eIsProxy()) {
-			final InternalEObject oldBin = (InternalEObject)bin;
+			InternalEObject oldBin = (InternalEObject)bin;
 			bin = (DairyContainer)eResolveProxy(oldBin);
 			if (bin != oldBin) {
-				if (eNotificationRequired()) {
+				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DELIVERY_JOURNAL_LINE__BIN, oldBin, bin));
-				}
 			}
 		}
 		return bin;
@@ -181,13 +178,11 @@ public class DeliveryJournalLineImpl extends EObjectImpl implements DeliveryJour
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setBin(DairyContainer newBin) {
-		final DairyContainer oldBin = bin;
+		DairyContainer oldBin = bin;
 		bin = newBin;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL_LINE__BIN, oldBin, bin));
-		}
 	}
 
 	/**
@@ -195,7 +190,6 @@ public class DeliveryJournalLineImpl extends EObjectImpl implements DeliveryJour
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public BigDecimal getQuantity() {
 		return quantity;
 	}
@@ -205,13 +199,11 @@ public class DeliveryJournalLineImpl extends EObjectImpl implements DeliveryJour
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setQuantity(BigDecimal newQuantity) {
-		final BigDecimal oldQuantity = quantity;
+		BigDecimal oldQuantity = quantity;
 		quantity = newQuantity;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL_LINE__QUANTITY, oldQuantity, quantity));
-		}
 	}
 
 	/**
@@ -219,7 +211,6 @@ public class DeliveryJournalLineImpl extends EObjectImpl implements DeliveryJour
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -229,13 +220,11 @@ public class DeliveryJournalLineImpl extends EObjectImpl implements DeliveryJour
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setDescription(String newDescription) {
-		final String oldDescription = description;
+		String oldDescription = description;
 		description = newDescription;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL_LINE__DESCRIPTION, oldDescription, description));
-		}
 	}
 
 	/**
@@ -249,9 +238,7 @@ public class DeliveryJournalLineImpl extends EObjectImpl implements DeliveryJour
 			case DairyPackage.DELIVERY_JOURNAL_LINE__LINE_NUMBER:
 				return getLineNumber();
 			case DairyPackage.DELIVERY_JOURNAL_LINE__BIN:
-				if (resolve) {
-					return getBin();
-				}
+				if (resolve) return getBin();
 				return basicGetBin();
 			case DairyPackage.DELIVERY_JOURNAL_LINE__QUANTITY:
 				return getQuantity();
@@ -336,11 +323,9 @@ public class DeliveryJournalLineImpl extends EObjectImpl implements DeliveryJour
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) {
-			return super.toString();
-		}
+		if (eIsProxy()) return super.toString();
 
-		final StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (lineNumber: ");
 		result.append(lineNumber);
 		result.append(", quantity: ");

@@ -6,13 +6,15 @@
  */
 package com.agritrace.edairy.desktop.common.model.tracking.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import com.agritrace.edairy.desktop.common.model.tracking.ReferenceAnimalType;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
+
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -93,7 +95,6 @@ public class ReferenceAnimalTypeImpl extends EObjectImpl implements ReferenceAni
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getSpecies() {
 		return species;
 	}
@@ -103,13 +104,11 @@ public class ReferenceAnimalTypeImpl extends EObjectImpl implements ReferenceAni
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setSpecies(String newSpecies) {
-		final String oldSpecies = species;
+		String oldSpecies = species;
 		species = newSpecies;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REFERENCE_ANIMAL_TYPE__SPECIES, oldSpecies, species));
-		}
 	}
 
 	/**
@@ -117,7 +116,6 @@ public class ReferenceAnimalTypeImpl extends EObjectImpl implements ReferenceAni
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getBreed() {
 		return breed;
 	}
@@ -127,13 +125,11 @@ public class ReferenceAnimalTypeImpl extends EObjectImpl implements ReferenceAni
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setBreed(String newBreed) {
-		final String oldBreed = breed;
+		String oldBreed = breed;
 		breed = newBreed;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REFERENCE_ANIMAL_TYPE__BREED, oldBreed, breed));
-		}
 	}
 
 	/**
@@ -211,11 +207,9 @@ public class ReferenceAnimalTypeImpl extends EObjectImpl implements ReferenceAni
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) {
-			return super.toString();
-		}
+		if (eIsProxy()) return super.toString();
 
-		final StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (species: ");
 		result.append(species);
 		result.append(", breed: ");

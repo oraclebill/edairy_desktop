@@ -6,9 +6,9 @@
  */
 package com.agritrace.edairy.desktop.common.model.tracking;
 
-import org.eclipse.emf.common.util.EList;
-
 import com.agritrace.edairy.desktop.common.model.base.Person;
+
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->

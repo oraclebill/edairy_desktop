@@ -12,11 +12,15 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class TransactionInterceptor implements MethodInterceptor {
-	private static Logger log = Log4r.getLogger(Activator.getDefault(), TransactionInterceptor.class);
+	private static Logger log = Log4r.getLogger(PersistenceActivator.getDefault(), TransactionInterceptor.class);
 	
 	@Inject
 	private Provider<Session> sessionProvider;
 
+	public TransactionInterceptor() {
+		System.err.println("::::::::::::::: creating transaction interceptor @ " + this.hashCode());
+	}
+	
 	@Override
 	public Object invoke(MethodInvocation invocation) throws Throwable {
 		Session session = sessionProvider.get();

@@ -6,20 +6,24 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.account.impl;
 
+import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint;
+
 import java.math.BigDecimal;
+
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
-import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -122,7 +126,6 @@ public class BalancePointImpl extends EObjectImpl implements BalancePoint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public long getAccountBalanceId() {
 		return accountBalanceId;
 	}
@@ -132,13 +135,11 @@ public class BalancePointImpl extends EObjectImpl implements BalancePoint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAccountBalanceId(long newAccountBalanceId) {
-		final long oldAccountBalanceId = accountBalanceId;
+		long oldAccountBalanceId = accountBalanceId;
 		accountBalanceId = newAccountBalanceId;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.BALANCE_POINT__ACCOUNT_BALANCE_ID, oldAccountBalanceId, accountBalanceId));
-		}
 	}
 
 	/**
@@ -146,11 +147,8 @@ public class BalancePointImpl extends EObjectImpl implements BalancePoint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Account getAccount() {
-		if (eContainerFeatureID() != AccountPackage.BALANCE_POINT__ACCOUNT) {
-			return null;
-		}
+		if (eContainerFeatureID() != AccountPackage.BALANCE_POINT__ACCOUNT) return null;
 		return (Account)eContainer();
 	}
 
@@ -169,27 +167,20 @@ public class BalancePointImpl extends EObjectImpl implements BalancePoint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAccount(Account newAccount) {
-		if (newAccount != eInternalContainer() || eContainerFeatureID() != AccountPackage.BALANCE_POINT__ACCOUNT && newAccount != null) {
-			if (EcoreUtil.isAncestor(this, newAccount)) {
+		if (newAccount != eInternalContainer() || (eContainerFeatureID() != AccountPackage.BALANCE_POINT__ACCOUNT && newAccount != null)) {
+			if (EcoreUtil.isAncestor(this, newAccount))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			}
 			NotificationChain msgs = null;
-			if (eInternalContainer() != null) {
+			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			}
-			if (newAccount != null) {
+			if (newAccount != null)
 				msgs = ((InternalEObject)newAccount).eInverseAdd(this, AccountPackage.ACCOUNT__BALANCES, Account.class, msgs);
-			}
 			msgs = basicSetAccount(newAccount, msgs);
-			if (msgs != null) {
-				msgs.dispatch();
-			}
+			if (msgs != null) msgs.dispatch();
 		}
-		else if (eNotificationRequired()) {
+		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.BALANCE_POINT__ACCOUNT, newAccount, newAccount));
-		}
 	}
 
 	/**
@@ -197,7 +188,6 @@ public class BalancePointImpl extends EObjectImpl implements BalancePoint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Date getAsOf() {
 		return asOf;
 	}
@@ -207,13 +197,11 @@ public class BalancePointImpl extends EObjectImpl implements BalancePoint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAsOf(Date newAsOf) {
-		final Date oldAsOf = asOf;
+		Date oldAsOf = asOf;
 		asOf = newAsOf;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.BALANCE_POINT__AS_OF, oldAsOf, asOf));
-		}
 	}
 
 	/**
@@ -221,7 +209,6 @@ public class BalancePointImpl extends EObjectImpl implements BalancePoint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public BigDecimal getAmount() {
 		return amount;
 	}
@@ -231,13 +218,11 @@ public class BalancePointImpl extends EObjectImpl implements BalancePoint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setAmount(BigDecimal newAmount) {
-		final BigDecimal oldAmount = amount;
+		BigDecimal oldAmount = amount;
 		amount = newAmount;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, AccountPackage.BALANCE_POINT__AMOUNT, oldAmount, amount));
-		}
 	}
 
 	/**
@@ -249,9 +234,8 @@ public class BalancePointImpl extends EObjectImpl implements BalancePoint {
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case AccountPackage.BALANCE_POINT__ACCOUNT:
-				if (eInternalContainer() != null) {
+				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				}
 				return basicSetAccount((Account)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -380,11 +364,9 @@ public class BalancePointImpl extends EObjectImpl implements BalancePoint {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) {
-			return super.toString();
-		}
+		if (eIsProxy()) return super.toString();
 
-		final StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (accountBalanceId: ");
 		result.append(accountBalanceId);
 		result.append(", asOf: ");

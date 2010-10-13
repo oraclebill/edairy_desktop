@@ -7,10 +7,13 @@ import java.util.List;
 import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.list.WritableList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.swt.widgets.Shell;
+import org.osgi.service.application.ApplicationAdminPermission;
 
+import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
@@ -96,7 +99,15 @@ public class DairyLocationDirectoryController extends
 		final DairyLocation dairyLocation = DairyFactory.eINSTANCE
 				.createDairyLocation();
 		EMFUtil.populate(dairyLocation);
+		setDefaults(dairyLocation);
 		return dairyLocation;
+	}
+	
+	private void setDefaults(DairyLocation employee) {
+		getNavigationNode().getParent();
+		Location defaultLocation = EcoreUtil.copy(dairyRepo.getLocalDairy().getLocation());
+		employee.setLocation(defaultLocation);
+		employee.setPhone("254 ");
 	}
 
 	@Override

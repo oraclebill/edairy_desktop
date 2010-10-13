@@ -6,13 +6,12 @@
  */
 package com.agritrace.edairy.desktop.common.model.requests.util;
 
+import com.agritrace.edairy.desktop.common.model.requests.*;
+
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-
-import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
-import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -71,7 +70,7 @@ public class RequestsSwitch<T> {
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
 		else {
-			final List<EClass> eSuperTypes = theEClass.getESuperTypes();
+			List<EClass> eSuperTypes = theEClass.getESuperTypes();
 			return
 				eSuperTypes.isEmpty() ?
 					defaultCase(theEObject) :
@@ -89,11 +88,9 @@ public class RequestsSwitch<T> {
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST: {
-				final AnimalHealthRequest animalHealthRequest = (AnimalHealthRequest)theEObject;
+				AnimalHealthRequest animalHealthRequest = (AnimalHealthRequest)theEObject;
 				T result = caseAnimalHealthRequest(animalHealthRequest);
-				if (result == null) {
-					result = defaultCase(theEObject);
-				}
+				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			default: return defaultCase(theEObject);

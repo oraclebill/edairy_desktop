@@ -6,14 +6,16 @@
  */
 package com.agritrace.edairy.desktop.common.model.base.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
 import com.agritrace.edairy.desktop.common.model.base.ContactMethodType;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -94,7 +96,6 @@ public class ContactMethodImpl extends EObjectImpl implements ContactMethod {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public ContactMethodType getCmType() {
 		return cmType;
 	}
@@ -104,13 +105,11 @@ public class ContactMethodImpl extends EObjectImpl implements ContactMethod {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setCmType(ContactMethodType newCmType) {
-		final ContactMethodType oldCmType = cmType;
+		ContactMethodType oldCmType = cmType;
 		cmType = newCmType == null ? CM_TYPE_EDEFAULT : newCmType;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.CONTACT_METHOD__CM_TYPE, oldCmType, cmType));
-		}
 	}
 
 	/**
@@ -118,7 +117,6 @@ public class ContactMethodImpl extends EObjectImpl implements ContactMethod {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String getCmValue() {
 		return cmValue;
 	}
@@ -128,13 +126,11 @@ public class ContactMethodImpl extends EObjectImpl implements ContactMethod {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setCmValue(String newCmValue) {
-		final String oldCmValue = cmValue;
+		String oldCmValue = cmValue;
 		cmValue = newCmValue;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.CONTACT_METHOD__CM_VALUE, oldCmValue, cmValue));
-		}
 	}
 
 	/**
@@ -212,11 +208,9 @@ public class ContactMethodImpl extends EObjectImpl implements ContactMethod {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) {
-			return super.toString();
-		}
+		if (eIsProxy()) return super.toString();
 
-		final StringBuffer result = new StringBuffer(super.toString());
+		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (cmType: ");
 		result.append(cmType);
 		result.append(", cmValue: ");

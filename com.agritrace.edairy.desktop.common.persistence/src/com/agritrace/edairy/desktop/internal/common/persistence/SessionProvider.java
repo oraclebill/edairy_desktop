@@ -11,7 +11,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class SessionProvider implements Provider<Session> {
-	private static final Logger LOG = Log4r.getLogger(Activator.getDefault(), "com.agritrace.edairy.desktop.internal.common.persistence.SessionProvider");
+	private static final Logger LOG = Log4r.getLogger(PersistenceActivator.getDefault(), "com.agritrace.edairy.desktop.internal.common.persistence.SessionProvider");
 
 	private SessionFactory sessionFactory;
 	private Session session;
