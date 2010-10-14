@@ -6,4 +6,8 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: AGRITRACE
 Fragment-Host: com.agritrace.edairy.desktop.finance.payments;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: org.junit
+Require-Bundle: org.junit,
+ com.agritrace.edairy.desktop.common.persistence,
+ org.hibernate;bundle-version="3.3.2",
+ org.eclipse.emf.teneo.hibernate;bundle-version="1.1.2",
+ aopalliance;bundle-version="0.0.0"

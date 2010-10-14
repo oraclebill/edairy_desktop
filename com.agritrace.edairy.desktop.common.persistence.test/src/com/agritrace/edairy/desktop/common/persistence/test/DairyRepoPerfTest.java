@@ -21,7 +21,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 
 public class DairyRepoPerfTest extends ModelPersistenceBase {
 
-	@Test
+//	@Test
 	public void testDairyRepoSizePerformance() throws Exception {
 		final Session session = getSessionFactory().openSession();
 

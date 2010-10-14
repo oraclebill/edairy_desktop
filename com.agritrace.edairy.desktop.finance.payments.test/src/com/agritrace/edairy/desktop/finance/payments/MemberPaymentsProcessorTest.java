@@ -1,8 +1,20 @@
 package com.agritrace.edairy.desktop.finance.payments;
 
-import static org.junit.Assert.fail;
+import java.math.BigDecimal;
+import java.util.List;
 
+import junit.framework.Assert;
+
+import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.junit.Test;
+
+
+import com.agritrace.edairy.desktop.common.persistence.ManagedMemoryDataStoreProvider;
+import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
+import com.google.inject.Binder;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Module;
 
 /**
  * The member payments processor performs the typical end-of-month accounting
@@ -65,10 +77,23 @@ import org.junit.Test;
  *
  */
 public class MemberPaymentsProcessorTest {
+	
+	Injector injector = Guice.createInjector(new PersistenceModule() {
+		@Override protected void bindDataStore() {
+			final ManagedMemoryDataStoreProvider provider = new ManagedMemoryDataStoreProvider();
+			bind(HbDataStore.class).toProvider(provider);
+		}
+	});
 
-	@Test
-	public void testGeneratePaymentReport() throws Exception {
-		fail("unimplemented");
+	/**
+	 * Test the member payment list generator.
+	 * 
+	 * @throws Exception
+	 */
+	@Test public void generatePaymentsList() throws Exception {
+		MemberPaymentsProcessor processor = injector.getInstance(MemberPaymentsProcessor.class);
+		List<PaymentRecord> records = processor.generatePaymentsList(new BigDecimal("10"), 0, 1979);
+		Assert.assertNotNull(records);		
 	}
 
 //	@Test

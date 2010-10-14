@@ -17,6 +17,7 @@ public class MemberCollectionsManagerTest {
 
 	@Test
 	public void getActiveMembers() throws Exception {
+		fail("unimplemented");
 
 	}
 }
