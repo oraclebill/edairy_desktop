@@ -44,8 +44,8 @@ import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
 import com.agritrace.edairy.desktop.common.persistence.services.Transactional;
-import com.agritrace.edairy.desktop.internal.common.persistence.PersistenceActivator;
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
+import com.agritrace.edairy.desktop.internal.common.persistence.PersistenceActivator;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -87,15 +87,15 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	public static final String EDAIRY_SITE_DAIRYID = "edairy.site.dairyid";
 
 	/**
-	 *
+	 * 
 	 * @author bjones
-	 *
+	 * 
 	 */
 	protected static class DairyRepoInternal extends HibernateRepository<Dairy> {
 		@Inject
 		protected DairyRepoInternal(Provider<Session> sessionProvider) {
 			super(sessionProvider);
-	}
+		}
 
 		@Override
 		protected Class<Dairy> getClassType() {
@@ -133,8 +133,8 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 				System.err
 						.println("AccountForMemberNo: finding member account: "
 								+ memberNumber);
-				final Criteria query = session.createCriteria("Membership").add(
-						Restrictions.eq(
+				final Criteria query = session.createCriteria("Membership")
+						.add(Restrictions.eq(
 								DairyPackage.Literals.MEMBERSHIP__MEMBER_NUMBER
 										.getName(), memberNumber));
 				final Membership member = (Membership) query.uniqueResult();
@@ -156,8 +156,8 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 			@Override
 			public void run(Session session) {
 				@SuppressWarnings("unchecked")
-				final
-				List<Membership> result = session.createCriteria("Membership")
+				final List<Membership> result = session
+						.createCriteria("Membership")
 						.add(Restrictions.eq("defaultRoute", route)).list();
 				setResult(result);
 			}
@@ -184,7 +184,8 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 			runWithTransaction(query);
 
 			@SuppressWarnings("unchecked")
-			final List<Membership> result = (List<Membership>) query.getResult();
+			final List<Membership> result = (List<Membership>) query
+					.getResult();
 			return result;
 		}
 
@@ -212,32 +213,40 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	private Dairy localDairy = null;
 
 	@Inject
-	public DairyRepository(final Provider<Session> sessionProvider, final DairyRepoInternal dairyRepository) {
+	public DairyRepository(final Provider<Session> sessionProvider,
+			final DairyRepoInternal dairyRepository) {
 		this.sessionProvider = sessionProvider;
 		this.dairyRepository = dairyRepository;
 	}
 
 	@Override
-	@Transactional
 	public Dairy getLocalDairy() {
 		if (localDairy == null) {
-			localDairy = dairyRepository.findByKey(1L);
-			
-			if (localDairy == null) {
-				localDairy = createLocalDairy();
-				dairyRepository.saveNew(localDairy);
-			}
-			
-			initLocalDairy();
+			localDairy = getOrCreateDairy();
 		}
 		return localDairy;
 	}
 
-	/**
-	 * Initialize local dairy collections -
-	 */
-	private void initLocalDairy() {
-		Hibernate.initialize(getLocalDairy());
+	@Transactional
+	protected Dairy getOrCreateDairy() {
+		
+		Session session = getSession();
+		
+		Dairy dairy = (Dairy) session.createQuery("FROM Dairy").uniqueResult();
+
+		if (dairy == null) {
+			dairy = DairyFactory.eINSTANCE.createDairy();
+			dairy.setLocation(DairyUtil.createLocation(null, null, null));
+			dairy.setCompanyName("");
+			dairy.setDescription("");
+			dairy.setPhoneNumber("");
+			dairy.setRegistrationNumber("");
+
+			session.save(dairy);
+		}
+		
+		// initialize the instance..
+		Hibernate.initialize(dairy);
 		final List<EReference> persistentCollections = Arrays.asList(
 				DairyPackage.Literals.DAIRY__BRANCH_LOCATIONS,
 				DairyPackage.Literals.DAIRY__CUSTOMERS,
@@ -249,10 +258,11 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 				DairyPackage.Literals.DAIRY__SUPPLIERS,
 				ModelPackage.Literals.CONTACTABLE__CONTACT_METHODS);
 		for (final EStructuralFeature feature : persistentCollections) {
-			Hibernate.initialize(getLocalDairy().eGet(feature));
+			Hibernate.initialize(dairy.eGet(feature));
 		}
-	}
 
+		return dairy;
+	}
 
 	@Override
 	public void updateDairy() {
@@ -267,19 +277,6 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	public void addRoute(final Route newRoute) {
 		getLocalDairy().getRoutes().add(newRoute);
 		dairyRepository.save(getLocalDairy());
-	}
-
-	protected Dairy createLocalDairy() {
-		final Dairy dairy = DairyFactory.eINSTANCE.createDairy();
-		dairy.setLocation(DairyUtil.createLocation(null, null, null));
-		// dairy.setCompanyId(Long.decode(System.getProperty(EDAIRY_SITE_DAIRYID,
-		// "0")));
-		dairy.setCompanyId(1l);
-		dairy.setCompanyName("");
-		dairy.setDescription("");
-		dairy.setPhoneNumber("");
-		dairy.setRegistrationNumber("");
-		return dairy;
 	}
 
 	@Override
@@ -321,8 +318,8 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	@Override
 	public void deleteRoute(final Route object) {
 		if (getLocalDairy().getRoutes().remove(object)) {
-			sessionProvider.get().delete(object);
-			sessionProvider.get().flush();
+			getSession().delete(object);
+			getSession().flush();
 			save(getLocalDairy());
 
 		} else {
@@ -379,7 +376,8 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	@Override
 	public CollectionGroup getJournalPageById(String pageId) {
 		CollectionGroup found = null;
-		for (final CollectionGroup page : getLocalDairy().getCollectionJournals()) {
+		for (final CollectionGroup page : getLocalDairy()
+				.getCollectionJournals()) {
 			if (page.getReferenceNumber().equals(pageId)) {
 				found = page;
 				break;
@@ -439,7 +437,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Farm> getMemberFarms() {
-		return sessionProvider.get().createCriteria(Farm.class).list();
+		return getSession().createCriteria(Farm.class).list();
 	}
 
 	@Override
@@ -452,7 +450,8 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 			// throw new RepositoryException("Member number cannot be null");
 		}
 		if (newEntity.getAccount() == null) {
-			final Account memberAccount = AccountFactory.eINSTANCE.createAccount();
+			final Account memberAccount = AccountFactory.eINSTANCE
+					.createAccount();
 			memberAccount.setMember(newEntity);
 			memberAccount.setAccountNumber("V" + newEntity.getMemberNumber());
 		}
@@ -501,7 +500,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 		} else {
 			getLocalDairy().getBranchLocations().add(changedDairyLocation);
 		}
-		sessionProvider.get().flush();
+		getSession().flush();
 	}
 
 	@Override
@@ -515,16 +514,16 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	@Override
 	public void deleteBranchLocation(DairyLocation oldItem) {
 		getLocalDairy().getBranchLocations().remove(oldItem);
-		sessionProvider.get().delete(oldItem);
-		sessionProvider.get().flush();
+		getSession().delete(oldItem);
+		getSession().flush();
 
 	}
 
 	@Override
 	public MemberPayment getCurrentMilkPrice() {
-		final Session session = sessionProvider.get();
-		DetachedCriteria.forEntityName("MemberPayment")
-				.setProjection(Property.forName("priceDate").max());
+		final Session session = getSession();
+		DetachedCriteria.forEntityName("MemberPayment").setProjection(
+				Property.forName("priceDate").max());
 		final MemberPayment currentPrice = (MemberPayment) session
 				.createCriteria("MemberPayment").addOrder(Order.desc("year"))
 				.addOrder(Order.desc("month")).setFetchSize(1).setMaxResults(1)
@@ -535,22 +534,20 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
 	public List<MemberPayment> getMilkPrices(Date startDate, Date endDate) {
-		final Session session = sessionProvider.get();
+		final Session session = getSession();
 		return session.createCriteria("MemberPayment")
-				.addOrder(Order.desc("year"))
-				.addOrder(Order.desc("month"))
-				.add(Restrictions.ge("year", startDate.getYear()+1900))
+				.addOrder(Order.desc("year")).addOrder(Order.desc("month"))
+				.add(Restrictions.ge("year", startDate.getYear() + 1900))
 				.add(Restrictions.ge("month", startDate.getMonth()))
-				.add(Restrictions.le("year", endDate.getYear()+1900))
-				.add(Restrictions.le("month", endDate.getMonth()))
-				.list();
+				.add(Restrictions.le("year", endDate.getYear() + 1900))
+				.add(Restrictions.le("month", endDate.getMonth())).list();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<DeliveryJournal> getDeliveryJournals(Date minDate,
 			Date maxDate, Route route, Customer customer) {
-		final Session session = sessionProvider.get();
+		final Session session = getSession();
 		final Criteria djCriteria = session.createCriteria("DeliveryJournal");
 
 		if (minDate != null) {
@@ -580,7 +577,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<DairyContainer> getBinsByRoute(Route journalRoute) {
-		final Session session = sessionProvider.get();
+		final Session session = getSession();
 		final Criteria dcCriteria = session.createCriteria("DairyContainer");
 		if (journalRoute != null) {
 			dcCriteria.add(Restrictions.eq("", journalRoute));
@@ -590,8 +587,10 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 
 	@Override
 	public Membership findMemberByMemberNo(String searchMemberNumber) {
-		if(searchMemberNumber.length() < 5) {
-			searchMemberNumber = "00000".substring(0, 5-searchMemberNumber.length()) + searchMemberNumber;
+		if (searchMemberNumber.length() < 5) {
+			searchMemberNumber = "00000".substring(0,
+					5 - searchMemberNumber.length())
+					+ searchMemberNumber;
 		}
 		return dairyRepository.memberByNumber(searchMemberNumber);
 	}
@@ -609,10 +608,20 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	}
 
 	/**
+	 * Get the current session.
+	 * 
+	 * @return the current session.
+	 */
+	private Session getSession() {
+		return sessionProvider.get();
+	}
+	
+	/**
 	 *
 	 */
 	private void log(int level, String message) {
-		Log4r.getLogger(PersistenceActivator.getDefault(), getClass()).log(level, message);
+		Log4r.getLogger(PersistenceActivator.getDefault(), getClass()).log(
+				level, message);
 	}
 
 }
