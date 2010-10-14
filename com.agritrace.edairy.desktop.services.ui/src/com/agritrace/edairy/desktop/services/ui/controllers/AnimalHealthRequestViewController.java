@@ -311,7 +311,7 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 
 					@Override
 					public Boolean getBoolean(Object object) {
-						return object.equals(RequestType.VETERINARY);
+						return object.equals(RequestType.CLINICAL);
 					}
 
 				};

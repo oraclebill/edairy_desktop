@@ -366,7 +366,7 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 
 		// Initialize enums and add enum literals
 		initEEnum(requestTypeEEnum, RequestType.class, "RequestType");
-		addEEnumLiteral(requestTypeEEnum, RequestType.VETERINARY);
+		addEEnumLiteral(requestTypeEEnum, RequestType.CLINICAL);
 		addEEnumLiteral(requestTypeEEnum, RequestType.INSEMINATION);
 
 		// Create resource

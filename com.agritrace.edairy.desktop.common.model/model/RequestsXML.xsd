@@ -2,7 +2,7 @@
 <xsd:schema xmlns:requests="http://edairy.agritrace.com/requests/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://edairy.agritrace.com/requests/">
   <xsd:simpleType name="RequestType">
     <xsd:restriction base="xsd:NCName">
-      <xsd:enumeration value="Veterinary"/>
+      <xsd:enumeration value="Clinical"/>
       <xsd:enumeration value="Insemination"/>
     </xsd:restriction>
   </xsd:simpleType>

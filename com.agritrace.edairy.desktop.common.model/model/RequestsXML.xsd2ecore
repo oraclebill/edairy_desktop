@@ -4,7 +4,7 @@
     outputs="RequestsXML.xsd#/">
   <nested inputs="requests.ecore#/" outputs="RequestsXML.xsd#/">
     <nested inputs="requests.ecore#//RequestType" outputs="RequestsXML.xsd#//RequestType;XSDSimpleTypeDefinition">
-      <nested inputs="requests.ecore#//RequestType/Veterinary" outputs="RequestsXML.xsd#//RequestType;XSDSimpleTypeDefinition/XSDEnumerationFacet"/>
+      <nested inputs="requests.ecore#//RequestType/Clinical" outputs="RequestsXML.xsd#//RequestType;XSDSimpleTypeDefinition/XSDEnumerationFacet"/>
       <nested inputs="requests.ecore#//RequestType/Insemination" outputs="RequestsXML.xsd#//RequestType;XSDSimpleTypeDefinition/XSDEnumerationFacet=1"/>
     </nested>
     <nested inputs="requests.ecore#//AnimalHealthRequest" outputs="RequestsXML.xsd#//AnimalHealthRequest;XSDComplexTypeDefinition">

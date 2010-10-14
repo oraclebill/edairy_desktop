@@ -115,7 +115,7 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * @generated
 	 * @ordered
 	 */
-	protected static final RequestType TYPE_EDEFAULT = RequestType.VETERINARY;
+	protected static final RequestType TYPE_EDEFAULT = RequestType.CLINICAL;
 
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.

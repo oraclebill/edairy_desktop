@@ -282,7 +282,7 @@ public class DairyUtil {
 	public static AnimalHealthRequest createGenericRequest(Dairy dairy, Membership member, Farm farm, Date reqDate) {
 		final AnimalHealthRequest req = RequestsFactory.eINSTANCE.createAnimalHealthRequest();
 		req.setDairy(dairy);
-		req.setType(RequestType.VETERINARY);
+		req.setType(RequestType.CLINICAL);
 		// req.setRequestId(id);
 		req.setDate(reqDate);
 		req.setFarm(farm);

@@ -112,7 +112,7 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 
 		@Override
 		public void callback() {
-			request.setType(RequestType.VETERINARY);
+			request.setType(RequestType.CLINICAL);
 			requestTypeChanged();
 		}
 	}
@@ -127,7 +127,7 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 		@Override
 		public Object convert(Object fromObject) {
 			if (fromObject instanceof RequestType) {
-				return RequestType.VETERINARY.equals(fromObject);
+				return RequestType.CLINICAL.equals(fromObject);
 			}
 			return null;
 		}

@@ -30,7 +30,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredTo" eType="ecore:EClass dairy.ecore#//Supplier"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="RequestType">
-    <eLiterals name="Veterinary"/>
-    <eLiterals name="Insemination" value="1"/>
+    <eLiterals name="Clinical" literal="Clinical"/>
+    <eLiterals name="Insemination" value="1" literal="A.I."/>
   </eClassifiers>
 </ecore:EPackage>

@@ -142,7 +142,7 @@ public class AnimalHealthRequestView extends AbstractDirectoryView {
 		// Text startText = UIControlsFactory.createText(dateComp);
 		// By default the start text is the beginning of current month
 		UIControlsFactory.createButtonRadio(requestTypeComp, "All", REQUEST_TYPE_ALL);
-		UIControlsFactory.createButtonRadio(requestTypeComp, "Veterinary", REQUEST_TYPE_VERTERNARY);
-		UIControlsFactory.createButtonRadio(requestTypeComp, "Insemination", REQUEST_TYPE_INSEMINATION);
+		UIControlsFactory.createButtonRadio(requestTypeComp, "Clinical", REQUEST_TYPE_VERTERNARY);
+		UIControlsFactory.createButtonRadio(requestTypeComp, "A.I.", REQUEST_TYPE_INSEMINATION);
 	}
 }

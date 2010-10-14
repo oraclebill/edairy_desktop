@@ -74,7 +74,7 @@ public class AnimalHealthRequestDialog extends RecordDialog<AnimalHealthRequest>
 
 	public void updateUI(RequestType type) {
 
-		final boolean isVeterinary = RequestType.VETERINARY.equals(type);
+		final boolean isVeterinary = RequestType.CLINICAL.equals(type);
 
 		// If type doesn't change,we didn't need to do anything here
 		if (type.equals(this.previousType)) {
@@ -144,19 +144,19 @@ public class AnimalHealthRequestDialog extends RecordDialog<AnimalHealthRequest>
 				.applyTo(typeComposite);
 
 		final Button veterinaryBtn = UIControlsFactory.createButtonRadio(typeComposite);
-		veterinaryBtn.setText("Veterinary");
+		veterinaryBtn.setText("Clinical");
 		addUIControl(veterinaryBtn, "veterinary"); //$NON-NLS-1$
 		veterinaryBtn.addSelectionListener(new SelectionListener() {
 
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
-				updateTypeSpecificControlls(RequestType.VETERINARY);
+				updateTypeSpecificControlls(RequestType.CLINICAL);
 
 			}
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				updateTypeSpecificControlls(RequestType.VETERINARY);
+				updateTypeSpecificControlls(RequestType.CLINICAL);
 			}
 		});
 		final Button inseminationBtn = UIControlsFactory.createButtonRadio(typeComposite);

@@ -23,16 +23,14 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum RequestType implements Enumerator {
 	/**
-	 * The '<em><b>Veterinary</b></em>' literal object.
+	 * The '<em><b>Clinical</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #VETERINARY_VALUE
+	 * @see #CLINICAL_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	VETERINARY(0, "Veterinary", "Veterinary"),
-
-	/**
+	CLINICAL(0, "Clinical", "Clinical"), /**
 	 * The '<em><b>Insemination</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -40,22 +38,22 @@ public enum RequestType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	INSEMINATION(1, "Insemination", "Insemination");
+	INSEMINATION(1, "Insemination", "A.I.");
 
 	/**
-	 * The '<em><b>Veterinary</b></em>' literal value.
+	 * The '<em><b>Clinical</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Veterinary</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Clinical</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #VETERINARY
-	 * @model name="Veterinary"
+	 * @see #CLINICAL
+	 * @model name="Clinical"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int VETERINARY_VALUE = 0;
+	public static final int CLINICAL_VALUE = 0;
 
 	/**
 	 * The '<em><b>Insemination</b></em>' literal value.
@@ -66,7 +64,7 @@ public enum RequestType implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #INSEMINATION
-	 * @model name="Insemination"
+	 * @model name="Insemination" literal="A.I."
 	 * @generated
 	 * @ordered
 	 */
@@ -80,7 +78,7 @@ public enum RequestType implements Enumerator {
 	 */
 	private static final RequestType[] VALUES_ARRAY =
 		new RequestType[] {
-			VETERINARY,
+			CLINICAL,
 			INSEMINATION,
 		};
 
@@ -132,7 +130,7 @@ public enum RequestType implements Enumerator {
 	 */
 	public static RequestType get(int value) {
 		switch (value) {
-			case VETERINARY_VALUE: return VETERINARY;
+			case CLINICAL_VALUE: return CLINICAL;
 			case INSEMINATION_VALUE: return INSEMINATION;
 		}
 		return null;
