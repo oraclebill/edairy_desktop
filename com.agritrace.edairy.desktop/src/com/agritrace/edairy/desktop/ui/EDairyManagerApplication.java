@@ -69,10 +69,8 @@ public class EDairyManagerApplication extends SwtApplication {
 	private static final String LABEL_APPLICATION = "eDairy Manager Desktop";
 	private static final String LABEL_FARMS = "Farms";
 	private static final String LABEL_HOME = "Home";
-	// private static final String LABEL_MILK = "Milk";
-	private static final String LABEL_MEMBERS = "Membership";
-	// private static final String LABEL_FINANCE = "Finance";
-	private static final String LABEL_OPERATIONS = "Operations";
+	private static final String LABEL_MEMBERS = "Registration";
+	private static final String LABEL_OPERATIONS = "Administration";
 	private static final String LABEL_REPORTS = "Reports";
 	// labels (translatable)
 	private static final String LABEL_SYSTEM = "System";

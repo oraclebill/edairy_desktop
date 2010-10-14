@@ -41,7 +41,7 @@ public class MilkNavigationNodeAssembler extends AbstractNavigationAssembler {
 	public INavigationNode<?>[] buildNode(NavigationNodeId nodeId, NavigationArgument navigationArgument) {
 
 		final ISubApplicationNode subAppNode = new SubApplicationNode(new NavigationNodeId(
-				NavigationConstants.SUBAPP_MILK), "Milk");
+				NavigationConstants.SUBAPP_MILK), "Dairy Operations");
 		WorkareaManager.getInstance().registerDefinition(subAppNode, NavigationConstants.SUBAPP_MILK_VIEWID);
 
 		//
