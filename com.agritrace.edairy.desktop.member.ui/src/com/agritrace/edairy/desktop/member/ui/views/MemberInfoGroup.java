@@ -167,7 +167,7 @@ public class MemberInfoGroup {
 	private Font bigAndBold(Font currentFont, boolean bold) {
 		final FontData[] fontData = currentFont.getFontData();
 		for (final FontData element : fontData) {
-			element.setHeight(22);
+			element.setHeight(18);
 			if (bold) {
 				element.setStyle(SWT.BOLD);
 			}
