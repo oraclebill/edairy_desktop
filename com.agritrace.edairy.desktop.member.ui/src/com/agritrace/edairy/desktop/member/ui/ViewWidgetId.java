@@ -270,4 +270,8 @@ public class ViewWidgetId implements DialogConstants {
 	public static final String memberInfo_nationalId = "memberInfo_nationalId";
 	public static final String memberInfo_nssfId = "memberInfo_nssfId";
 	public static final String memberInfo_nhifId = "memberInfo_nhifId";
+
+	public static final String TRANSACTION_DATERANGE = "TRANSACTION_DATERANGE";
+
+	public static final String TRANSACTION_UPDATE_BTN = "TRANSACTION_UPDATE_BTN";
 }

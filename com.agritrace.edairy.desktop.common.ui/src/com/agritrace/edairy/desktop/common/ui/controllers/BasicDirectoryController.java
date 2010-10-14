@@ -2,6 +2,7 @@ package com.agritrace.edairy.desktop.common.ui.controllers;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.list.WritableList;
@@ -14,9 +15,32 @@ import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 
+import com.agritrace.edairy.desktop.common.model.base.Person;
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.ui.columnformatters.DirectoryDateColumnFormatter;
+import com.agritrace.edairy.desktop.common.ui.columnformatters.MemberIDAndNameFormatter;
+import com.agritrace.edairy.desktop.common.ui.columnformatters.PersonToFormattedName;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 
 public abstract class BasicDirectoryController<T extends EObject> extends AbstractDirectoryController<T> {
+
+	public static class MemberComparator implements Comparator<Membership> {
+		@Override
+		public int compare(Membership o1, Membership o2) {
+			return o1.getMemberNumber().compareTo(o2.getMemberNumber());
+		}
+	}
+
+	public static class PersonComparator implements Comparator<Person> {
+		@Override
+		public int compare(Person o1, Person o2) {
+			int cmp = o1.getFamilyName().compareTo(o2.getFamilyName());
+			if (cmp == 0) {
+				cmp = o1.getGivenName().compareTo(o2.getGivenName());
+			}
+			return cmp;
+		}
+	}
 
 	public static final String EMPTY_SELECTION_TEXT = "ANY";
 
@@ -52,17 +76,44 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 		addTableColumn(colHeader, colPropertyName, colType, null);
 	}
 
-	protected void addTableColumn(String colHeader, String colPropertyName, Class<?> colType, ColumnFormatter formatter) {
+	protected void addTableColumn(String colHeader, final String colPropertyName, Class<?> colType,
+			ColumnFormatter formatter) {
 		columnHeaders.add(colHeader);
 		columnProperties.add(colPropertyName);
+		if (formatter == null) {
+			formatter = getDefaultFormatter(colType, colPropertyName);
+		}
 		columnFormatters.add(formatter);
 		if (String.class.isAssignableFrom(colType)) {
 			columnComparators.add(new TypedComparator<String>());
-		} else if (Integer.class.isAssignableFrom(colType)) {
+		} 
+		else if (Integer.class.isAssignableFrom(colType)) {
 			columnComparators.add(new TypedComparator<Integer>());
-		} else {
+		} 
+		else if (Date.class.isAssignableFrom(colType)) {
+			columnComparators.add(new TypedComparator<Date>());
+		} 
+		else if (Person.class.isAssignableFrom(colType)) {
+			columnComparators.add(new PersonComparator());
+		} 
+		else if (Membership.class.isAssignableFrom(colType)) {
+			columnComparators.add(new MemberComparator());
+		} 
+		else {
 			columnComparators.add(null);
 		}
+	}
+
+	private ColumnFormatter getDefaultFormatter(Class<?> colType, final String propName) {
+		ColumnFormatter formatter = null;
+		if (colType.isAssignableFrom(Date.class)) {
+			formatter = new DirectoryDateColumnFormatter(propName);
+		} else if (colType.isAssignableFrom(Membership.class)) {
+			formatter = new MemberIDAndNameFormatter(propName);
+		} else if (colType.isAssignableFrom(Person.class)) {
+			formatter = new PersonToFormattedName(propName);
+		}
+		return formatter;
 	}
 
 	@Override
@@ -92,8 +143,7 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 			if (comparators[i] != null) {
 				table.setComparator(i, comparators[i]);
 				table.setColumnSortable(i, true);
-			}
-			else {
+			} else {
 				table.setColumnSortable(i, false);
 			}
 		}
@@ -101,8 +151,8 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 		tableBindToModel();
 	}
 
-	protected void tableBindToModel(){
-		if(table != null){
+	protected void tableBindToModel() {
+		if (table != null) {
 			final String[] tableColumnProperties = getTableColumnPropertyNames();
 			final String[] tableColumnHeaders = getTableColumnHeaders();
 			table.bindToModel(new WritableList(getTableContents(), getEntityClass()), getEntityClass(),
@@ -113,7 +163,7 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 	}
 
 	protected Comparator[] getTableColumnComparators() {
-		return columnComparators.toArray(new Comparator[columnComparators.size()] );
+		return columnComparators.toArray(new Comparator[columnComparators.size()]);
 	}
 
 	@Override

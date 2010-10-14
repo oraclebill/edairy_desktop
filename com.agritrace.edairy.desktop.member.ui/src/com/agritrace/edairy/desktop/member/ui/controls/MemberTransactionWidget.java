@@ -1,17 +1,20 @@
 package com.agritrace.edairy.desktop.member.ui.controls;
 
 import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ColumnWeightData;
+import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
-import com.agritrace.edairy.desktop.common.ui.controls.DateRangeSearchWidget;
+import com.agritrace.edairy.desktop.common.ui.controls.daterange.DateRange;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class MemberTransactionWidget {
@@ -32,11 +35,23 @@ public class MemberTransactionWidget {
 
 	public void initGUI() {
 		// fitler panel
-		final DateRangeSearchWidget dateRangeWidget = new DateRangeSearchWidget(composite, "Transaction Date Range: ",
-				ViewWidgetId.TRANSACTION_FILTER_STARTDATE, ViewWidgetId.TRANSACTION_FILTER_ENDDATE,
-				ViewWidgetId.TRANSACTION_FILTER_STARTDATE_BUTTON, ViewWidgetId.TRANSACTION_FILTER_ENDDATE_BUTTON);
-		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.FILL).grab(false, false)
-				.applyTo(dateRangeWidget.getComposite());
+		Composite datePanel = UIControlsFactory.createComposite(composite);
+		DateRange dateRange = new DateRange(datePanel, SWT.BORDER);
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(dateRange, ViewWidgetId.TRANSACTION_DATERANGE);
+		Button updateButton = UIControlsFactory.createButton(datePanel, "Update");
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(updateButton, ViewWidgetId.TRANSACTION_UPDATE_BTN);
+
+		GridLayoutFactory.swtDefaults().numColumns(2).applyTo(datePanel);
+		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.FILL).grab(false, false).applyTo(datePanel);
+		// final DateRangeSearchWidget dateRangeWidget = new
+		// DateRangeSearchWidget(composite, "Transaction Date Range: ",
+		// ViewWidgetId.TRANSACTION_FILTER_STARTDATE,
+		// ViewWidgetId.TRANSACTION_FILTER_ENDDATE,
+		// ViewWidgetId.TRANSACTION_FILTER_STARTDATE_BUTTON,
+		// ViewWidgetId.TRANSACTION_FILTER_ENDDATE_BUTTON);
+		// GridDataFactory.swtDefaults().align(SWT.BEGINNING,
+		// SWT.FILL).grab(false, false)
+		// .applyTo(dateRangeWidget.getComposite());
 
 		final Composite tablePanel = UIControlsFactory.createComposite(composite, SWT.NULL);
 		tablePanel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
@@ -71,13 +86,17 @@ public class MemberTransactionWidget {
 		buttonPanel.setLayout(new GridLayout(2, false));
 		buttonPanel.setLayoutData(new GridData(SWT.END, SWT.FILL, true, false));
 
-//		final Button addButton = UIControlsFactory.createButton(buttonPanel, ADD_BUTTON,
-//				ViewWidgetId.TRANSACTION_ADD_BUTTON);
-//		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(addButton);
+		// final Button addButton = UIControlsFactory.createButton(buttonPanel,
+		// ADD_BUTTON,
+		// ViewWidgetId.TRANSACTION_ADD_BUTTON);
+		// GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false,
+		// false).applyTo(addButton);
 
-//		final Button vButton = UIControlsFactory.createButton(buttonPanel, View_BUTTON,
-//				ViewWidgetId.TRANSACTION_VIEW_BUTTON);
-//		GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false, false).applyTo(vButton);
+		// final Button vButton = UIControlsFactory.createButton(buttonPanel,
+		// View_BUTTON,
+		// ViewWidgetId.TRANSACTION_VIEW_BUTTON);
+		// GridDataFactory.swtDefaults().align(SWT.END, SWT.FILL).grab(false,
+		// false).applyTo(vButton);
 
 	}
 

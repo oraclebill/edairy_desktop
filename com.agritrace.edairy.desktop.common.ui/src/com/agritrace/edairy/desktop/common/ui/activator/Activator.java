@@ -1,6 +1,6 @@
 package com.agritrace.edairy.desktop.common.ui.activator;
 
-import org.eclipse.riena.internal.ui.ridgets.swt.optional.CompositeTableRidget;
+import org.eclipse.riena.ui.ridgets.swt.optional.OptionalUIControlsFactory;
 import org.eclipse.riena.ui.ridgets.swt.uibinding.SwtControlRidgetMapper;
 import org.osgi.framework.BundleContext;
 
@@ -50,7 +50,8 @@ public class Activator extends DesktopBaseActivator {
 		super.start(context);
 		plugin = this;
 		// touch the riena optional plugin to ensure CompositeTableRidget is registered ..
-		Class<?> c = CompositeTableRidget.class;
+		Class<?> clazz = OptionalUIControlsFactory.class;
+		clazz.getName();
 		
 		SwtControlRidgetMapper.getInstance().addMapping(ProfilePhotoComposite.class, ProfilePhotoRidget.class);
 		SwtControlRidgetMapper.getInstance().addMapping(DateRange.class, DateRangeRidget.class);
