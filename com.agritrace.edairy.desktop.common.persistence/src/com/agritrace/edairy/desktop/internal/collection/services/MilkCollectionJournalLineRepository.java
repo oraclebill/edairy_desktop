@@ -101,7 +101,7 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 	public BigDecimal getMilkPrice(final int month, final int year) {
 		// TODO: There is no MilkPrice class!
 		
-		final String queryString = "SELECT value " + "FROM MemberPayment m " + "WHERE m.year = :year "
+		final String queryString = "SELECT m.paymentRate " + "FROM MemberPayment m " + "WHERE m.year = :year "
 				+ "  AND m.month = :month ";
 
 		final Query query = getCurrentSession().createQuery(queryString);

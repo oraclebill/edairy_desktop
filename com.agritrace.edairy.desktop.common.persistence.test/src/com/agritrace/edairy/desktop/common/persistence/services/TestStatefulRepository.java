@@ -8,11 +8,9 @@ import org.hibernate.SessionFactory;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.common.model.dairy.Role;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.ManagedMemoryDataStoreProvider;
-import com.agritrace.edairy.desktop.internal.collection.services.MilkCollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
 import com.agritrace.edairy.desktop.internal.common.persistence.RepositoryUtil;
 import com.google.inject.AbstractModule;
@@ -20,7 +18,6 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
-import com.google.inject.Scope;
 import com.google.inject.Scopes;
 
 public class TestStatefulRepository {
