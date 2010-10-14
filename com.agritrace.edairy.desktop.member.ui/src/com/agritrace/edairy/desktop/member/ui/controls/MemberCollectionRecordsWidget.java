@@ -37,9 +37,6 @@ public class MemberCollectionRecordsWidget {
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(filterPanel);
 		filterPanel.setLayout(new GridLayout(2, false));
 
-//		final DateRangeSearchWidget dateRangeWidget = new DateRangeSearchWidget(filterPanel, "Collection Date Range: ",
-//				ViewWidgetId.COLLECTION_FILTER_STARTDATE, ViewWidgetId.COLLECTION_FILTER_ENDDATE,
-//				ViewWidgetId.COLLECTION_FILTER_STARTBUTTON, ViewWidgetId.COLLECTION_FILTER_ENDBUTTON);
 		final DateRange dateRangeWidget = new DateRange(filterPanel, SWT.BORDER);
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.FILL).grab(false, false)
 				.applyTo(dateRangeWidget.getComposite());

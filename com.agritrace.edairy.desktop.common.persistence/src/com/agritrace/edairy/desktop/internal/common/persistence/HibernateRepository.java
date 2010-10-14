@@ -19,8 +19,7 @@ import com.agritrace.edairy.desktop.common.persistence.services.Transactional;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class HibernateRepository<T extends EObject> implements
-		IRepository<T> {
+public class HibernateRepository<T extends EObject> implements IRepository<T> {
 	protected abstract class SessionRunnable<X> implements Runnable {
 		@Override
 		public void run() {
@@ -42,7 +41,7 @@ public class HibernateRepository<T extends EObject> implements
 	}
 
 	private final Provider<Session> sessionProvider;
-	
+
 	private Class<?> classType;
 	private String entityName;
 
@@ -50,12 +49,12 @@ public class HibernateRepository<T extends EObject> implements
 	protected HibernateRepository(Provider<Session> sessionProvider) {
 		// set the persistence manager
 		this.sessionProvider = sessionProvider;
-		
+
 		if (getClassType() != null) {
 			initEntityName();
 		}
 	}
-	
+
 	private void initEntityName() {
 		// get metadata about the class we will be persisting..
 		String className = getClassType().getName();
@@ -71,7 +70,8 @@ public class HibernateRepository<T extends EObject> implements
 
 	@Transactional
 	protected List<T> allWithEagerFetch(final String... paths) {
-		final Criteria crit = sessionProvider.get().createCriteria(getClassType());
+		final Criteria crit = sessionProvider.get().createCriteria(
+				getClassType());
 
 		if (paths != null) {
 			for (final String path : paths) {
@@ -123,7 +123,7 @@ public class HibernateRepository<T extends EObject> implements
 	}
 
 	/**
-	 *
+	 * 
 	 * @param <X>
 	 * @param entityClass
 	 * @param entityKey
@@ -132,11 +132,12 @@ public class HibernateRepository<T extends EObject> implements
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public <X> X findByKey(Class<X> entityClass, long entityKey) {
-		return (X) sessionProvider.get().get(getEntityName(entityClass), new Long(entityKey));
+		return (X) sessionProvider.get().get(getEntityName(entityClass),
+				new Long(entityKey));
 	}
 
 	/**
-	 *
+	 * 
 	 * @param eClass
 	 * @return
 	 */
@@ -147,8 +148,8 @@ public class HibernateRepository<T extends EObject> implements
 
 	/**
 	 * Merge
-	 *
-	 *
+	 * 
+	 * 
 	 */
 	public void merge(T obj) {
 		update(obj);
@@ -161,11 +162,10 @@ public class HibernateRepository<T extends EObject> implements
 			public void run() {
 				final Session session = sessionProvider.get();
 				if (changedItem instanceof Collection) {
-					for(final Object item : (Collection) changedItem) {
+					for (final Object item : (Collection) changedItem) {
 						session.saveOrUpdate(item);
 					}
-				}
-				else {
+				} else {
 					session.saveOrUpdate(changedItem);
 				}
 			}
@@ -203,21 +203,22 @@ public class HibernateRepository<T extends EObject> implements
 
 	/**
 	 * Subclasses must implement this as follows:
-	 *
+	 * 
 	 * <code>
 	 *     return T.class;
 	 * </code>
-	 *
+	 * 
 	 * Where 'T' is the type parameter used in the subclass declaration.
-	 *
+	 * 
 	 * @return
 	 */
 	protected Class<?> getClassType() {
 		return classType;
 	}
-	
+
 	/**
-	 * Non-API method for classes created by PersistenceModule internal provider.
+	 * Non-API method for classes created by PersistenceModule internal
+	 * provider.
 	 * 
 	 */
 	public void setClassType(Class<?> klass) {
@@ -227,22 +228,22 @@ public class HibernateRepository<T extends EObject> implements
 
 	/**
 	 * The hibernate entity name of the parameterized class.
-	 *
+	 * 
 	 * @return
 	 */
 	protected String getEntityName() {
 		return entityName;
 	}
 
-//	/**
-//	 * The name of the identifier property (primary key) of the parameterized
-//	 * class.
-//	 *
-//	 * @return
-//	 */
-//	protected String getIdentifierName() {
-//		return identifierName;
-//	}
+	// /**
+	// * The name of the identifier property (primary key) of the parameterized
+	// * class.
+	// *
+	// * @return
+	// */
+	// protected String getIdentifierName() {
+	// return identifierName;
+	// }
 
 	protected void run(Runnable r) {
 		sessionProvider.get();
@@ -254,20 +255,9 @@ public class HibernateRepository<T extends EObject> implements
 		}
 	}
 
+	@Transactional
 	protected void runWithTransaction(Runnable r) {
-		final Session session = sessionProvider.get();
-
-//		final Transaction t = session.beginTransaction();
-		try {
-			r.run();
-//			t.commit();
-		} catch (final Exception ex) {
-//			t.rollback();
-//			session.clear();
-			throw new TransactionException(entityName, ex);
-		} finally {
-//			closeSession();
-		}
+		r.run();
 	}
 
 }
