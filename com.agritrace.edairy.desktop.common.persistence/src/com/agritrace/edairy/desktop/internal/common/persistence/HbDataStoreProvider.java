@@ -136,9 +136,9 @@ public class HbDataStoreProvider implements Provider<HbDataStore>, IDbProperties
 
 
 			// show all sql for debugging
-			props.setProperty(Environment.SHOW_SQL, "true");
-			props.setProperty(Environment.FORMAT_SQL, "true");
-			props.setProperty(Environment.USE_SQL_COMMENTS, "true");
+//			props.setProperty(Environment.SHOW_SQL, "true");
+//			props.setProperty(Environment.FORMAT_SQL, "true");
+//			props.setProperty(Environment.USE_SQL_COMMENTS, "true");
 //			props.setProperty(Environment.GENERATE_STATISTICS, "true");
 
 			// drop and recreate db on startup
