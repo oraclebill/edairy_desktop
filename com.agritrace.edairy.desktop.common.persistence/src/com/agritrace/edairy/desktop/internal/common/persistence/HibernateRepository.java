@@ -257,16 +257,16 @@ public class HibernateRepository<T extends EObject> implements
 	protected void runWithTransaction(Runnable r) {
 		final Session session = sessionProvider.get();
 
-		final Transaction t = session.beginTransaction();
+//		final Transaction t = session.beginTransaction();
 		try {
 			r.run();
-			t.commit();
+//			t.commit();
 		} catch (final Exception ex) {
-			t.rollback();
-			session.clear();
+//			t.rollback();
+//			session.clear();
 			throw new TransactionException(entityName, ex);
 		} finally {
-			closeSession();
+//			closeSession();
 		}
 	}
 

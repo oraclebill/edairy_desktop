@@ -120,7 +120,6 @@ public class DairyProfileViewController extends SubModuleController {
 	// private ILinkRidget txtPROFILE_IMAGE_LINK;
 
 	private ITextRidget txtPUBLIC_DESCRIPTION;
-
 	private ITextRidget txtREGISTRATION_NBR;
 
 	/**

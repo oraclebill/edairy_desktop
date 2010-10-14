@@ -32,17 +32,18 @@ public class TransactionInterceptor implements MethodInterceptor {
 		}
 		
 		String methodName = invocation.getMethod().getDeclaringClass().getSimpleName() + "." + invocation.getMethod().getName();
-		log.log(LogService.LOG_DEBUG, "Starting transaction for method " + methodName);
+		log.log(LogService.LOG_DEBUG, "Starting new transaction in method " + methodName);
 		tx = session.beginTransaction();
-		
+		log.log(LogService.LOG_DEBUG, "TX["+tx+"] started.");
+
 		try {
 			Object result = invocation.proceed();
 			tx.commit();
-			log.log(LogService.LOG_DEBUG, "Committed: " + methodName);
+			log.log(LogService.LOG_DEBUG, "TX["+tx+"] Committed for: " + methodName);
 			return result;
 		} catch (Throwable e) {
 			tx.rollback();
-			log.log(LogService.LOG_DEBUG, "Rolled back: " + methodName);
+			log.log(LogService.LOG_DEBUG, "TX["+tx+"] Rolled back in: " + methodName);
 			throw e;
 		}
 	}

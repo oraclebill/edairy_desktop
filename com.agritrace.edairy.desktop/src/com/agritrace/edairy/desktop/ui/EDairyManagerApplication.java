@@ -69,7 +69,8 @@ public class EDairyManagerApplication extends SwtApplication {
 	private static final String LABEL_APPLICATION = "eDairy Manager Desktop";
 	private static final String LABEL_FARMS = "Farms";
 	private static final String LABEL_HOME = "Home";
-	private static final String LABEL_MEMBERS = "Registration";
+	private static final String LABEL_MEMBERS = "Members";
+	private static final String LABEL_REGISTRATION = "Registration";
 	private static final String LABEL_OPERATIONS = "Administration";
 	private static final String LABEL_REPORTS = "Reports";
 	// labels (translatable)
@@ -111,8 +112,8 @@ public class EDairyManagerApplication extends SwtApplication {
 	// HOME
 	private static final String SUBAPP_HOME = "com.agritrace.edairy.desktop.home"; //$NON-NLS-1$
 	// MEMBERSHIP
-	private static final String SUBAPP_MEMBERS = "com.agritrace.edairy.desktop.members";//$NON-NLS-1$
-	private static final String SUBAPP_MEMBERS_VIEWID = SUBAPP_MEMBERS;
+	private static final String SUBAPP_REGISTRATION = "com.agritrace.edairy.desktop.members";//$NON-NLS-1$
+	private static final String SUBAPP_MEMBERS_VIEWID = SUBAPP_REGISTRATION;
 	// OPERATIONS
 	private static final String SUBAPP_OPERATIONS = "com.agritrace.edairy.desktop.operations";//$NON-NLS-1$
 	// REPORTS
@@ -211,7 +212,7 @@ public class EDairyManagerApplication extends SwtApplication {
 		// MEMBER TAB
 		//
 
-		subAppNode = new SubApplicationNode(new NavigationNodeId(SUBAPP_MEMBERS), LABEL_MEMBERS);
+		subAppNode = new SubApplicationNode(new NavigationNodeId(SUBAPP_REGISTRATION), LABEL_REGISTRATION);
 		app.addChild(subAppNode);
 		workarea.registerDefinition(subAppNode, SUBAPP_MEMBERS_VIEWID);
 
