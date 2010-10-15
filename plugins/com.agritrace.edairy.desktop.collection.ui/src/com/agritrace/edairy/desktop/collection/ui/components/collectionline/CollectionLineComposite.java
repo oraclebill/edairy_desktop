@@ -128,16 +128,15 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 		binWidget = fu.addLabeledCompletionComboField(panel, BIN_LABEL, ViewWidgetId.binCombo);
 		binWidget.addTraverseListener(this);
 
-
-		canWidget = fu.addLabeledTextField(panel, CAN_ID_LABEL, ViewWidgetId.canIdText);
-		canWidget.addTraverseListener(this);
+		memberIdWidget = fu.addLabeledTextField(panel, MEMBER_ID_LABEL, ViewWidgetId.memberIdText);
+		// memberIdWidget.setSize(70, 19);
+		memberIdWidget.addTraverseListener(this);
 
 		qtyWidget = fu.addLabeledDecimalTextField(panel, QUANTITY_LABEL, ViewWidgetId.quantityText);
 		qtyWidget.addTraverseListener(this);
 
-		memberIdWidget = fu.addLabeledTextField(panel, MEMBER_ID_LABEL, ViewWidgetId.memberIdText);
-		// memberIdWidget.setSize(70, 19);
-		memberIdWidget.addTraverseListener(this);
+		canWidget = fu.addLabeledTextField(panel, CAN_ID_LABEL, ViewWidgetId.canIdText);
+		canWidget.addTraverseListener(this);
 
 		panel.setTabList(new Control[] { binWidget, memberIdWidget, qtyWidget, canWidget});
 
