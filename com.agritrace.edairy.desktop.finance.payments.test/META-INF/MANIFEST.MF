@@ -10,4 +10,4 @@ Require-Bundle: org.junit,
  com.agritrace.edairy.desktop.common.persistence,
  org.hibernate;bundle-version="3.3.2",
  org.eclipse.emf.teneo.hibernate;bundle-version="1.1.2",
- aopalliance;bundle-version="0.0.0"
+ com.agritrace.edairy.guice;bundle-version="0.0.0"
