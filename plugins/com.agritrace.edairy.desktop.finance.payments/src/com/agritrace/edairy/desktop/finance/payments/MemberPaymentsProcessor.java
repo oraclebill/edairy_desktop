@@ -10,6 +10,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
 import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
 import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository.BalanceType;
+import com.agritrace.edairy.desktop.common.persistence.services.Transactional;
 import com.google.inject.Inject;
 
 /**
@@ -110,16 +111,19 @@ public class MemberPaymentsProcessor {
 	 *            if true, apply payments to account.
 	 * @return a list of payment records for reporting.
 	 */
+	@Transactional
 	public List<PaymentRecord> generatePaymentsList(BigDecimal paymentRate, int priceMonth, int priceYear) {
 		final List<PaymentRecord> paymentList = new LinkedList<PaymentRecord>();
 
-		// TODO: Lock database
 		final List<Membership> activeMembers = collectionsManager.getActiveMembers(priceMonth, priceYear);
+		
 		// for each member
 		PaymentRecord payment;
+		
 		for (final Membership member : activeMembers) {
 			try {
 				payment = generatePaymentRecord(paymentRate, priceMonth, priceYear, member);
+				
 				if (payment.getTotalPayment().compareTo(Constants.BIGZERO) > 0) {
 					paymentList.add(payment);
 				}
@@ -178,13 +182,12 @@ public class MemberPaymentsProcessor {
 	}
 
 	public void processPayment(PaymentRecord payment) {
-
 		final Account primaryAcct = payment.getMember().getAccount();
 
 		Calendar balanceDate = repository.createPeriodDate(BalanceType.STARTING, payment.getMonth(), payment.getYear());
 		repository.createBalancePoint(primaryAcct, balanceDate, payment.getStartingBalance());
 
-		final String debitMessage = String.format("dairy payment for milk recieved during %s %d: %f kg @  %f ksh/kg",
+		final String debitMessage = String.format("dairy payment for milk received during %s %d: %f kg @  %f ksh/kg",
 				Constants.MONTHS[payment.getMonth()], payment.getYear(), payment.getPayableMilkQuantity(),
 				payment.getPaymentRate());
 

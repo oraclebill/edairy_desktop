@@ -2,6 +2,7 @@ package com.agritrace.edairy.desktop.finance.ui.dialogs.paymentwizard;
 
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +23,8 @@ import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
+import com.agritrace.edairy.desktop.common.persistence.IRepository;
+import com.agritrace.edairy.desktop.common.persistence.services.Transactional;
 import com.agritrace.edairy.desktop.finance.payments.Constants;
 import com.agritrace.edairy.desktop.finance.payments.MemberPaymentsProcessor;
 import com.agritrace.edairy.desktop.finance.payments.PaymentRecord;
@@ -44,16 +47,20 @@ public class PWPaymentComplete extends PWPage {
 	private Table table;
 	private ITableRidget tableRidget;
 	private final MemberPaymentsProcessor processor;
+	private final IRepository<MemberPayment> paymentRepo;
+	private List<PaymentRecord> paymentsList = Collections.emptyList();
 
 	/**
 	 * Create the wizard.
 	 */
 	@Inject
-	public PWPaymentComplete(MemberPaymentsProcessor processor) {
+	public PWPaymentComplete(MemberPaymentsProcessor processor, IRepository<MemberPayment> paymentRepo) {
 		super("previewAndComplete");
 		setTitle("Apply Payments");
 		setDescription("This table displays the payments that have been calculated. If you complete the wizard, these payments will be entered.");
 		this.processor = processor;
+		this.paymentRepo = paymentRepo;
+		setPageComplete(false);
 	}
 
 	public final int getPaymentMonth() {
@@ -78,6 +85,24 @@ public class PWPaymentComplete extends PWPage {
 
 	public final int getPaymentCount() {
 		return getInt("paymentCount");
+	}
+	
+	@Transactional
+	public void performFinish() {
+		BigDecimal total = Constants.BIGZERO;
+		
+		for (PaymentRecord record: paymentsList) {
+			processor.processPayment(record);
+			total = total.add(record.getTotalPayment());
+		}
+
+		final MemberPayment memberPayment = DairyFactory.eINSTANCE.createMemberPayment();
+		memberPayment.setEntryDate(new Date());
+		memberPayment.setMonth(getPaymentMonth());
+		memberPayment.setYear(getPaymentYear());
+		memberPayment.setPaymentRate(getPaymentRate());
+		memberPayment.setPaymentsTotal(total);
+		paymentRepo.saveNew(memberPayment);
 	}
 
 	/**
@@ -210,59 +235,63 @@ public class PWPaymentComplete extends PWPage {
 		if (visible) {
 			previewPayments();
 		}
+		
 		super.setVisible(visible);
 	}
 
 	private Text[] headerWidgets = { runDate, paymentRate, payPeriod, paymentAverage, paymentCount, paymentTotal };
 	private final Object[] headerValues = new Object[6];
+	
 	private void previewPayments() {
 		try {
 			getContainer().run(false, false, new IRunnableWithProgress() {
 				@Override
 				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
-					monitor.beginTask("Generating paymentRecords", 0);
-
-					final List<PaymentRecord> paymentsList = processor.generatePaymentsList(
-							getPaymentRate(),
-							getPaymentMonth(),
-							getPaymentYear());
-					headerValues[0] = new Date();
-					headerValues[1] = getPaymentRate();
-					headerValues[2] = String.format("%s-%s", getPaymentMonth(), getPaymentYear());
-
-					final BigDecimal total = Constants.BIGZERO;
-					for (final PaymentRecord record : paymentsList) {
-						total.add(record.getTotalPayment());
-					}
-					final int count = paymentsList.size();
-					headerValues[3] = count > 0 ? total.divide(new BigDecimal(count), Constants.MONEYCONTEXT) : new BigDecimal(0);
-					headerValues[4] = new BigDecimal(paymentsList.size());
-					headerValues[5] = total;
-
-					final MemberPayment paymentRecord = DairyFactory.eINSTANCE.createMemberPayment();
-					paymentRecord.setEntryDate(new Date());
-					paymentRecord.setMonth(getPaymentMonth());
-					paymentRecord.setYear(getPaymentYear());
-					paymentRecord.setPaymentRate(getPaymentRate());
-
-					headerWidgets = new Text[] { runDate, paymentRate, payPeriod, paymentAverage, paymentCount, paymentTotal };
-					for (int i = 0; i < headerWidgets.length; i++) {
-						headerWidgets[i].setText( headerValues[i] != null ? headerValues[i].toString() : "");
-					}
-
-					tableRidget.bindToModel(Observables.staticObservableList(paymentsList), PaymentRecord.class,
-							COLUMN_PROPS, COLUMN_HEADERS);
-					tableRidget.updateFromModel();
-					monitor.done();
+					previewPayments(monitor);
 				}
 			});
 		} catch (final InvocationTargetException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (final InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	private void previewPayments(final IProgressMonitor monitor) {
+		monitor.beginTask("Generating payment records...", 0);
+
+		paymentsList = processor.generatePaymentsList(
+				getPaymentRate(),
+				getPaymentMonth(),
+				getPaymentYear());
+		
+		headerValues[0] = new Date();
+		headerValues[1] = getPaymentRate();
+		headerValues[2] = String.format("%s-%s", getPaymentMonth(), getPaymentYear());
+
+		final BigDecimal total = Constants.BIGZERO;
+		
+		for (final PaymentRecord record : paymentsList) {
+			total.add(record.getTotalPayment());
+		}
+		
+		final int count = paymentsList.size();
+		headerValues[3] = count > 0 ? total.divide(new BigDecimal(count), Constants.MONEYCONTEXT) : new BigDecimal(0);
+		headerValues[4] = new BigDecimal(paymentsList.size());
+		headerValues[5] = total;
+
+		headerWidgets = new Text[] { runDate, paymentRate, payPeriod, paymentAverage, paymentCount, paymentTotal };
+		
+		for (int i = 0; i < headerWidgets.length; i++) {
+			headerWidgets[i].setText( headerValues[i] != null ? headerValues[i].toString() : "");
+		}
+
+		tableRidget.bindToModel(Observables.staticObservableList(paymentsList), PaymentRecord.class,
+				COLUMN_PROPS, COLUMN_HEADERS);
+		tableRidget.updateFromModel();
+		monitor.done();
+		setPageComplete(true);
 	}
 
 	/**

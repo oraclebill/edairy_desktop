@@ -6,8 +6,7 @@ import java.util.Date;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 
 public class PaymentRecord {
-
-	private  int year, month;
+	private int year, month;
 	private Long transactionId;
 	private Date transactionDate;
 	private Membership member;
@@ -18,7 +17,6 @@ public class PaymentRecord {
 	private BigDecimal accountAdjustments;
 	private BigDecimal totalPayment;
 	private BigDecimal startingBalance;
-
 
 	public PaymentRecord(Long transactionId, Date transactionDate, Membership member, BigDecimal amount) {
 		this.transactionId = transactionId;
@@ -212,9 +210,9 @@ public class PaymentRecord {
 	public void setStartingBalance(BigDecimal startingBalance) {
 		this.startingBalance = startingBalance;
 	}
-
-
-
-
-
+	
+	@Override
+	public String toString() {
+		return String.format("[Payment: year = %s, month = %s, amount = %s, member = %s]", year, month, totalPayment, member); 
+	}
 }

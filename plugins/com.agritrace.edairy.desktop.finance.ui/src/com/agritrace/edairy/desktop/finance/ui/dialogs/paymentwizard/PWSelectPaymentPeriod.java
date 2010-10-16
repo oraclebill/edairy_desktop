@@ -19,9 +19,12 @@ import org.eclipse.swt.widgets.Label;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
 import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
 import com.agritrace.edairy.desktop.common.ui.util.FormUtil;
+import com.agritrace.edairy.desktop.finance.payments.MemberCollectionsManager;
+import com.agritrace.edairy.desktop.finance.payments.MemberPaymentsProcessor;
 import com.agritrace.edairy.desktop.finance.ui.MilkPriceJournalConstants;
 import com.agritrace.edairy.desktop.persistence.finance.IMemberPaymentsRepository;
 import com.google.inject.Inject;
@@ -36,6 +39,7 @@ public class PWSelectPaymentPeriod extends PWPage {
 
 	private final IMemberPaymentsRepository paymentsRepo;
 	private final ITransactionRepository transactionRepo;
+	private final MemberCollectionsManager collectionsManager;
 
 	/**
 	 * Create the wizard.
@@ -44,12 +48,14 @@ public class PWSelectPaymentPeriod extends PWPage {
 	 * @param pmtRepo
 	 */
 	@Inject
-	public PWSelectPaymentPeriod(IMemberPaymentsRepository pmtRepo, ITransactionRepository transactionRepo) {
+	public PWSelectPaymentPeriod(IMemberPaymentsRepository pmtRepo, ITransactionRepository transactionRepo,
+			MemberCollectionsManager collectionsManager) {
 		super("paymentPeriod");
 		setTitle("Select Payment Period");
 		setDescription("Select the payment period you want to calculate member payments for.");
 		this.paymentsRepo = pmtRepo;
 		this.transactionRepo = transactionRepo;
+		this.collectionsManager = collectionsManager;
 	}
 
 	/**
@@ -84,11 +90,14 @@ public class PWSelectPaymentPeriod extends PWPage {
 			final int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 			final String[] items = new String[5];
 			int count = 0;
+			
 			for (int i = currentYear - 2; i < currentYear + 3; i++) {
 				items[count++] = String.valueOf(i);
 			}
+			
 			control.setItems(items);
 			int paymentYear;
+			
 			try {
 				paymentYear = getInt(PAYMENT_YEAR);
 				control.setText(items[currentYear - paymentYear + 2]);
@@ -127,6 +136,7 @@ public class PWSelectPaymentPeriod extends PWPage {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
 					final int selected = control.getSelectionIndex();
+					
 					if (selected >= 0) {
 						put(PAYMENT_MONTH, selected);
 						validateModel();
@@ -152,6 +162,7 @@ public class PWSelectPaymentPeriod extends PWPage {
 		final int paymentMonth = getInt(PAYMENT_MONTH);
 
 		final MemberPayment paymentRecord = paymentsRepo.getPaymentForPeriod(paymentYear, paymentMonth);
+		
 		if (paymentRecord != null) {
 			final Employee first = paymentRecord.getEnteredBy();
 			setErrorMessage(String.format(
@@ -159,22 +170,10 @@ public class PWSelectPaymentPeriod extends PWPage {
 					paymentRecord.getEntryDate(), first.getGivenName(), first.getFamilyName(), first.getId()));
 			setPageComplete(false);
 		} else {
-			Date startDate, endDate;
-			final Calendar cal = Calendar.getInstance();
-
-			cal.clear();
-			cal.set(Calendar.YEAR, paymentYear);
-			cal.set(Calendar.MONTH, paymentMonth);
-
-			cal.set(Calendar.DAY_OF_MONTH, cal.getActualMinimum(Calendar.DAY_OF_MONTH));
-			startDate = cal.getTime();
-
-			cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
-			endDate = cal.getTime();
-
-			final List<Transaction> transactions = transactionRepo.findAccountTransactions(null, startDate, endDate);
-			if (transactions.size() == 0) {
-				setErrorMessage("There are no transactions for this time period. Please select an active period.");
+			List<Membership> members = collectionsManager.getActiveMembers(paymentMonth, paymentYear);
+			
+			if (members.size() == 0) {
+				setErrorMessage("There are no transactions or milk collections for this time period. Please select an active period.");
 				setPageComplete(false);
 			} else {
 				setErrorMessage(null);

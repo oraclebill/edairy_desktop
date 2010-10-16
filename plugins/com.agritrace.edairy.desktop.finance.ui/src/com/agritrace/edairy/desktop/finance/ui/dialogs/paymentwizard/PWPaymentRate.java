@@ -3,6 +3,7 @@ package com.agritrace.edairy.desktop.finance.ui.dialogs.paymentwizard;
 import java.math.BigDecimal;
 
 import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.riena.core.util.StringUtils;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
@@ -117,13 +118,22 @@ public class PWPaymentRate extends PWPage {
 
 		try {
 			final boolean valid = values[1] != null && values[1].equals(values[0]);
+			setErrorMessage(null);
+			
 			if (valid) {
 				put("paymentRate", new BigDecimal(values[1]).toPlainString());
+				setPageComplete(true);
+			} else {
+				setPageComplete(false);
+				
+				if (!StringUtils.isEmpty(values[1]) && !StringUtils.isEmpty(values[0]) && !values[1].equals(values[0])) {
+					setErrorMessage("The entered amounts do not match. Please enter the same amount twice.");
+				}
 			}
-			setPageComplete(valid);
 		}
 		catch(final Exception e) {
 			setPageComplete(false);
+			setErrorMessage("You have not entered valid numbers.");
 		}
 	}
 }

@@ -1,21 +1,30 @@
 package com.agritrace.edairy.desktop.finance.payments;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
+import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
+import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
 import com.google.inject.Inject;
 
 public class MemberCollectionsManager {
-	ICollectionJournalLineRepository repository;
-	int priceMonth;
-	int priceYear;
+	private ICollectionJournalLineRepository repository;
+	private ITransactionRepository transactionRepo;
+	private int priceMonth;
+	private int priceYear;
 
 	@Inject
-	public MemberCollectionsManager(ICollectionJournalLineRepository repo) {
+	public MemberCollectionsManager(ICollectionJournalLineRepository repo, ITransactionRepository transactionRepo) {
 		this.repository = repo;
+		this.transactionRepo = transactionRepo;
 	}
 
 	public void setContext(int pMon, int pYear) {
@@ -51,7 +60,32 @@ public class MemberCollectionsManager {
 		return repository.getMilkPrice(priceMonth, priceYear);
 	}
 
-	List<Membership> getActiveMembers(int priceMonth, int priceYear) {
-		return repository.getMembersWithDeliveriesFor(priceMonth, priceYear);
+	public List<Membership> getActiveMembers(int priceMonth, int priceYear) {
+		Date startDate, endDate;
+		final Calendar cal = Calendar.getInstance();
+
+		cal.clear();
+		cal.set(Calendar.YEAR, priceYear);
+		cal.set(Calendar.MONTH, priceMonth);
+
+		cal.set(Calendar.DAY_OF_MONTH, cal.getActualMinimum(Calendar.DAY_OF_MONTH));
+		startDate = cal.getTime();
+
+		cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+		endDate = cal.getTime();
+
+		// A member is "active" if there are either milk sales or credit sales for that month
+		final Set<Membership> members = new HashSet<Membership>(repository.getMembersWithDeliveriesFor(priceMonth, priceYear));
+		final List<Transaction> transactions = transactionRepo.findAccountTransactions(null, startDate, endDate);
+		
+		for (final Transaction transaction: transactions) {
+			final Membership member = transaction.getAccount().getMember();
+			
+			if (transaction.getTransactionType() == TransactionType.CREDIT && member != null) {
+				members.add(member);
+			}
+		}
+		
+		return new ArrayList<Membership>(members);
 	}
 }
