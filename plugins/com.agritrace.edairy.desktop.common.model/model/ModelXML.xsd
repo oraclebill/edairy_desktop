@@ -101,7 +101,7 @@
         </xsd:sequence>
         <xsd:attribute name="legalName" type="xsd:string"/>
         <xsd:attribute name="companyName" type="xsd:string" use="required"/>
-        <xsd:attribute name="phoneNumber" type="xsd:string" use="required"/>
+        <xsd:attribute default="+254" name="phoneNumber" type="xsd:string" use="required"/>
         <xsd:attribute name="companyId" type="xsd:string" use="required"/>
         <xsd:attribute name="description" type="xsd:string"/>
         <xsd:attribute name="profilePhoto" type="xsd:string"/>

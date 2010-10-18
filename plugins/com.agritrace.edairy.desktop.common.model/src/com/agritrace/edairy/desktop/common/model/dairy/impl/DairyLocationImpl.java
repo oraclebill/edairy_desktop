@@ -121,7 +121,7 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String PHONE_EDEFAULT = null;
+	protected static final String PHONE_EDEFAULT = "+254";
 
 	/**
 	 * The cached value of the '{@link #getPhone() <em>Phone</em>}' attribute.

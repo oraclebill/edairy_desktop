@@ -129,6 +129,7 @@ public interface Company extends Contactable {
 
 	/**
 	 * Returns the value of the '<em><b>Phone Number</b></em>' attribute.
+	 * The default value is <code>"+254"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Phone Number</em>' attribute isn't clear,
@@ -138,7 +139,7 @@ public interface Company extends Contactable {
 	 * @return the value of the '<em>Phone Number</em>' attribute.
 	 * @see #setPhoneNumber(String)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getCompany_PhoneNumber()
-	 * @model required="true"
+	 * @model default="+254" required="true"
 	 * @generated
 	 */
 	String getPhoneNumber();

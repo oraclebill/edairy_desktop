@@ -529,7 +529,7 @@
   <genPackages prefix="Requests" basePackage="com.agritrace.edairy.desktop.common.model"
       resource="XML" ecorePackage="requests.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="requests.ecore#//RequestType">
-      <genEnumLiterals ecoreEnumLiteral="requests.ecore#//RequestType/Veterinary"/>
+      <genEnumLiterals ecoreEnumLiteral="requests.ecore#//RequestType/Clinical"/>
       <genEnumLiterals ecoreEnumLiteral="requests.ecore#//RequestType/Insemination"/>
     </genEnums>
     <genClasses ecoreClass="requests.ecore#//AnimalHealthRequest">

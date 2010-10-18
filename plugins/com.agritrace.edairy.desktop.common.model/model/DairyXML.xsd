@@ -132,7 +132,7 @@
     <xsd:attribute name="Id" type="xsd:long"/>
     <xsd:attribute name="name" type="xsd:string" use="required"/>
     <xsd:attribute name="dateOpened" type="xsd:string"/>
-    <xsd:attribute name="phone" type="xsd:string"/>
+    <xsd:attribute default="+254" name="phone" type="xsd:string"/>
     <xsd:attribute name="description" type="xsd:string"/>
     <xsd:attribute name="code" type="xsd:string"/>
     <xsd:attribute name="route" type="xsd:string"/>

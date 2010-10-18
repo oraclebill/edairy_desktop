@@ -122,6 +122,7 @@ public interface DairyLocation extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Phone</b></em>' attribute.
+	 * The default value is <code>"+254"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Phone</em>' attribute isn't clear,
@@ -131,7 +132,7 @@ public interface DairyLocation extends EObject {
 	 * @return the value of the '<em>Phone</em>' attribute.
 	 * @see #setPhone(String)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairyLocation_Phone()
-	 * @model
+	 * @model default="+254"
 	 * @generated
 	 */
 	String getPhone();

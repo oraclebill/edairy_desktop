@@ -115,7 +115,7 @@ public class CompanyImpl extends ContactableImpl implements Company {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String PHONE_NUMBER_EDEFAULT = null;
+	protected static final String PHONE_NUMBER_EDEFAULT = "+254";
 
 	/**
 	 * The cached value of the '{@link #getPhoneNumber() <em>Phone Number</em>}' attribute.

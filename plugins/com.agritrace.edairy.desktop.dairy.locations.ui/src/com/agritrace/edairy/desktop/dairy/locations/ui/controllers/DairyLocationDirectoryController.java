@@ -107,7 +107,7 @@ public class DairyLocationDirectoryController extends
 		getNavigationNode().getParent();
 		Location defaultLocation = EcoreUtil.copy(dairyRepo.getLocalDairy().getLocation());
 		employee.setLocation(defaultLocation);
-		employee.setPhone("254 ");
+		//employee.setPhone("254 ");
 	}
 
 	@Override
