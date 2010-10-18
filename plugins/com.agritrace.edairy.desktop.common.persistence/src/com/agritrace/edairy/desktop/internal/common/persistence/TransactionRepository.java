@@ -21,7 +21,7 @@ import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class TransactionRepository extends HibernateRepository<Transaction> implements ITransactionRepository {
+public class TransactionRepository extends HibernateRepository<AccountTransaction> implements ITransactionRepository {
 
 	@Inject
 	protected TransactionRepository(Provider<Session> sessionProvider) {
@@ -29,17 +29,20 @@ public class TransactionRepository extends HibernateRepository<Transaction> impl
 	}
 
 	@Override
-	protected Class<Transaction> getClassType() {
-		return Transaction.class;
+	protected Class<AccountTransaction> getClassType() {
+		return AccountTransaction.class;
 	}
-
+	
 	@Override
-	public List<Transaction> findAccountTransactions(final Account account, final Date start, final Date end) {
-		final SessionRunnable<List<Transaction>> runnable = new SessionRunnable<List<Transaction>>() {
+	public List<AccountTransaction> findAccountTransactions(final Account account,
+			final Date start, final Date end, final String refNum, final List<TransactionSource> sources) {
+		final SessionRunnable<List<AccountTransaction>> runnable = new SessionRunnable<List<AccountTransaction>>() {
 			@SuppressWarnings("unchecked")
 			@Override
 			public void run(Session session) {
-				final Criteria criteria = session.createCriteria("Transaction");
+				final Criteria criteria = session.createCriteria("AccountTransaction");
+				// filter out erroneous data..
+				criteria.add(Restrictions.isNotNull("account"));
 
 				if (account != null) {
 					criteria.add(Restrictions.eq("account", account));
@@ -50,12 +53,23 @@ public class TransactionRepository extends HibernateRepository<Transaction> impl
 				if (end != null) {
 					criteria.add(Restrictions.le("transactionDate", end));
 				}
-
+				if (refNum != null && !refNum.trim().isEmpty()) {
+					criteria.add(Restrictions.like("referenceNumber", refNum));
+				}
+				if (sources != null && sources.size() > 0 ) {
+					criteria.add(Restrictions.in("source", sources));
+				}
 				setResult(criteria.list());
 			}
 		};
 		run(runnable);
 		return runnable.getResult();
+	}
+
+
+	@Override
+	public List<AccountTransaction> findAccountTransactions(final Account account, final Date start, final Date end) {
+		return findAccountTransactions(account, start, end, null, null);
 	}
 
 //	/**
@@ -100,7 +114,7 @@ public class TransactionRepository extends HibernateRepository<Transaction> impl
 //
 //		latest.setAccount(account);
 //		latest.setAsOf(balanceDate.getTime());
-//		List<Transaction> intermediate = findAccountTransactionsInRange(account, previousTime.getTime(),
+//		List<AccountTransaction> intermediate = findAccountTransactionsInRange(account, previousTime.getTime(),
 //				latest.getAsOf());
 //
 //		// amount is sum of previous
@@ -188,7 +202,7 @@ public class TransactionRepository extends HibernateRepository<Transaction> impl
 			sum = point.getAmount();
 		}
 
-		final List<Transaction> transactions = findAccountTransactions(primaryAcct, startDate, cutoffDate);
+		final List<AccountTransaction> transactions = findAccountTransactions(primaryAcct, startDate, cutoffDate);
 		return sum.add(sumTransactions(transactions));
 	}
 
@@ -230,7 +244,7 @@ public class TransactionRepository extends HibernateRepository<Transaction> impl
 	 * @param transactionList
 	 * @return
 	 */
-	private BigDecimal sumTransactions(List<Transaction> transactionList) {
+	private BigDecimal sumTransactions(List<AccountTransaction> transactionList) {
 		BigDecimal sum = Constants.BIGZERO;
 		for (final Transaction tx : transactionList) {
 			final BigDecimal amount = tx.getAmount();

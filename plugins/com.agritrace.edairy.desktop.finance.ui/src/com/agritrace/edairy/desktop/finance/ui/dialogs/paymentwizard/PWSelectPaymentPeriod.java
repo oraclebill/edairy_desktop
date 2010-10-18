@@ -1,7 +1,6 @@
 package com.agritrace.edairy.desktop.finance.ui.dialogs.paymentwizard;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.eclipse.jface.layout.GridDataFactory;
@@ -20,11 +19,9 @@ import org.eclipse.swt.widgets.Label;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
 import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
 import com.agritrace.edairy.desktop.common.ui.util.FormUtil;
 import com.agritrace.edairy.desktop.finance.payments.MemberCollectionsManager;
-import com.agritrace.edairy.desktop.finance.payments.MemberPaymentsProcessor;
 import com.agritrace.edairy.desktop.finance.ui.MilkPriceJournalConstants;
 import com.agritrace.edairy.desktop.persistence.finance.IMemberPaymentsRepository;
 import com.google.inject.Inject;

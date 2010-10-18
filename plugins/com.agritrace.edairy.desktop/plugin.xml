@@ -5,7 +5,6 @@
          id="dairy_manager_prod"
          point="org.eclipse.core.runtime.products">
       <product
-            id="com.agritrace.edairy.desktop.product"
             application="com.agritrace.edairy.desktop.dairy_manager_app"
             name="eDairy Manager Destop">
          <property

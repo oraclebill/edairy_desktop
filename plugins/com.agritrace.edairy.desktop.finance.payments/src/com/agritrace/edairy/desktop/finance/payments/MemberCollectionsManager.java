@@ -10,6 +10,7 @@ import java.util.Set;
 
 import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
 import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
@@ -76,7 +77,7 @@ public class MemberCollectionsManager {
 
 		// A member is "active" if there are either milk sales or credit sales for that month
 		final Set<Membership> members = new HashSet<Membership>(repository.getMembersWithDeliveriesFor(priceMonth, priceYear));
-		final List<Transaction> transactions = transactionRepo.findAccountTransactions(null, startDate, endDate);
+		final List<AccountTransaction> transactions = transactionRepo.findAccountTransactions(null, startDate, endDate);
 		
 		for (final Transaction transaction: transactions) {
 			final Membership member = transaction.getAccount().getMember();

@@ -101,8 +101,8 @@ update collections
     where session_id is null;
 
 insert into collectiongroup 
-        (journaldate, collectionsession_session_e_id, dairylocation_collectioncenter_id, recordtotal, employee_driver_personid, vehicle_vehicle_vehicleid)
-    select txn_date, session_id, dairylocationid, sum(quantity), driverid, vehicleid
+        (status, type, journaldate, collectionsession_session_e_id, dairylocation_collectioncenter_id, recordtotal, employee_driver_personid, vehicle_vehicle_vehicleid)
+    select 'NEW', 'ScaleGroup', txn_date, session_id, dairylocationid, sum(quantity), driverid, vehicleid
   from collections 
 group by txn_date, session_id, dairylocationid 
 ;

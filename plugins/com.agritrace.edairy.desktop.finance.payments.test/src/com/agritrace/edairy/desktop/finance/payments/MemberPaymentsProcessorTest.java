@@ -11,10 +11,8 @@ import org.junit.Test;
 
 import com.agritrace.edairy.desktop.common.persistence.ManagedMemoryDataStoreProvider;
 import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
-import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Module;
 
 /**
  * The member payments processor performs the typical end-of-month accounting

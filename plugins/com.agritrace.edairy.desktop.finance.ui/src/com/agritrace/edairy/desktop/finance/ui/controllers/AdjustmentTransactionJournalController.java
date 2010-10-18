@@ -1,14 +1,11 @@
 package com.agritrace.edairy.desktop.finance.ui.controllers;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.collections.Predicate;
-import org.apache.commons.collections.functors.AllPredicate;
-import org.apache.commons.collections.functors.NullIsTruePredicate;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.widgets.Shell;
@@ -120,22 +117,28 @@ public final class AdjustmentTransactionJournalController extends TransactionJou
 	}
 
 
-	@Override
-	protected Predicate buildFilterPredicate() {
-		final Predicate superPredicate = super.buildFilterPredicate();
-
-		final List<Predicate> predicateList = new ArrayList<Predicate>();
-		predicateList.add(superPredicate);
-		predicateList.add(NullIsTruePredicate.getInstance(
-				new TransactionTypeMatchPredicate(filterBean.getTypeOptions())));
-
-		return new AllPredicate(predicateList.toArray(new Predicate[predicateList.size()]));
-	}
-
+//	@Override
+//	protected Predicate buildFilterPredicate() {
+//		final Predicate superPredicate = super.buildFilterPredicate();
+//
+//		final List<Predicate> predicateList = new ArrayList<Predicate>();
+//		predicateList.add(superPredicate);
+//		predicateList.add(NullIsTruePredicate.getInstance(
+//				new TransactionTypeMatchPredicate(filterBean.getTypeOptions())));
+//
+//		return new AllPredicate(predicateList.toArray(new Predicate[predicateList.size()]));
+//	}
+//
 
 	@Override
 	protected RecordDialog<AdjustmentTransaction> getRecordDialog(Shell shell) {
 		return dialogProvider.get();
+	}
+
+	@Override
+	protected List<AdjustmentTransaction> getFilteredResult() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

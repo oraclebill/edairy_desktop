@@ -26,7 +26,6 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.ImportResultsDialog;
 import com.agritrace.edairy.desktop.install.CollectionCenterImportTool;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.

@@ -11,8 +11,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IMultipleChoiceRidget;
 import org.eclipse.swt.widgets.Shell;
-import org.osgi.service.application.ApplicationAdminPermission;
-
 import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;

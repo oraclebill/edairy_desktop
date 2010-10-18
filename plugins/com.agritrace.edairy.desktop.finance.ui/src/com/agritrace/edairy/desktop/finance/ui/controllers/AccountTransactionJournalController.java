@@ -7,9 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.collections.Predicate;
-import org.apache.commons.collections.functors.AllPredicate;
-import org.apache.commons.collections.functors.EqualPredicate;
-import org.apache.commons.collections.functors.NullIsTruePredicate;
 import org.eclipse.equinox.log.Logger;
 import org.eclipse.jface.window.Window;
 import org.eclipse.riena.core.Log4r;
@@ -25,7 +22,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransactio
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
-import com.agritrace.edairy.desktop.common.persistence.IRepository;
+import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
@@ -76,12 +73,13 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 	private IMultipleChoiceRidget sourceListRidget;
 	private ITextRidget referenceNumRidget;
 	private IActionRidget batchEditRidget;
+	private ITransactionRepository txRepo;
 
 	private final Provider<AccountTransactionEditDialog> editDialogProvider;
 	private final Provider<AccountTransactionBatchEntryDialog> batchEntryProvider;
 
 	@Inject
-	public AccountTransactionJournalController(final IRepository<AccountTransaction> repo,
+	public AccountTransactionJournalController(final ITransactionRepository repo,
 			final Provider<MemberSearchDialog> memberSearchProvider,
 			final Provider<AccountTransactionEditDialog> editDialogProvider,
 			final Provider<AccountTransactionBatchEntryDialog> batchEntryProvider) {
@@ -91,12 +89,15 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 
 		setEClass(AccountPackage.Literals.ACCOUNT_TRANSACTION);
 		setRepository(repo);
+		txRepo = repo;
 
 		this.addTableColumn("Date", AccountPackage.Literals.TRANSACTION__TRANSACTION_DATE);
 		this.addTableColumn("Source", AccountPackage.Literals.ACCOUNT_TRANSACTION__SOURCE);
 		this.addTableColumn("Ref. Num.", AccountPackage.Literals.ACCOUNT_TRANSACTION__REFERENCE_NUMBER);
 		this.addTableColumn("Member", "account.member", Membership.class );
 		this.addTableColumn("Amount", AccountPackage.Literals.TRANSACTION__AMOUNT);
+		
+		AccountTransaction tx;
 	}
 
 	@Override
@@ -147,33 +148,33 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 		getRepository().all();
 	}
 
-	@Override
-	protected Predicate buildFilterPredicate() {
-
-		final Predicate superPredicate = super.buildFilterPredicate();
-
-		final List<Predicate> predicateList = new ArrayList<Predicate>();
-
-		predicateList.add(superPredicate);
-
-		final String refNum = filterBean.getReferenceNumber();
-		if (refNum != null && refNum.length() > 0) {
-			predicateList.add(NullIsTruePredicate.getInstance(new EqualPredicate(refNum)));
-		}
-
-		final List<TransactionSource> sources = filterBean.getSourceSelections();
-		System.err.println("Sources: " + sources);
-		if (sources != null && sources.size() > 0) {
-			predicateList.add(NullIsTruePredicate.getInstance(new TransactionSourceMatchPredicate(sources)));
-		}
-
-		final Predicate[] predicates = new Predicate[predicateList.size()];
-		for (int i = 0; i < predicates.length; i++) {
-			predicates[i] = predicateList.get(i);
-		}
-
-		return new AllPredicate(predicates);
-	}
+//	@Override
+//	protected Predicate buildFilterPredicate() {
+//
+//		final Predicate superPredicate = super.buildFilterPredicate();
+//
+//		final List<Predicate> predicateList = new ArrayList<Predicate>();
+//
+//		predicateList.add(superPredicate);
+//
+//		final String refNum = filterBean.getReferenceNumber();
+//		if (refNum != null && refNum.length() > 0) {
+//			predicateList.add(NullIsTruePredicate.getInstance(new EqualPredicate(refNum)));
+//		}
+//
+//		final List<TransactionSource> sources = filterBean.getSourceSelections();
+//		System.err.println("Sources: " + sources);
+//		if (sources != null && sources.size() > 0) {
+//			predicateList.add(NullIsTruePredicate.getInstance(new TransactionSourceMatchPredicate(sources)));
+//		}
+//
+//		final Predicate[] predicates = new Predicate[predicateList.size()];
+//		for (int i = 0; i < predicates.length; i++) {
+//			predicates[i] = predicateList.get(i);
+//		}
+//
+//		return new AllPredicate(predicates);
+//	}
 
 	private void handleBatchEntryAction() {
 		final AccountTransactionBatchEntryDialog dialog = batchEntryProvider.get();
@@ -201,6 +202,16 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 	@Override
 	protected RecordDialog<AccountTransaction> getRecordDialog(Shell shell) {
 		return editDialogProvider.get();
+	}
+
+	@Override
+	protected List<AccountTransaction> getFilteredResult() {
+		Membership member = filterBean.getMember();
+		ITransactionRepository repo = (ITransactionRepository)getRepository();
+		List<AccountTransaction> list = repo.findAccountTransactions(
+				member != null ? member.getAccount() : null,
+				filterBean.getStartDate(), filterBean.getEndDate(), filterBean.getReferenceNumber(), filterBean.getSourceSelections());
+		return list;
 	}
 
 }

@@ -1,3 +1,5 @@
+drop table tximport;
+
 CREATE TABLE `tximport` (
   `type` varchar(40) DEFAULT NULL,
   `date` datetime DEFAULT NULL,
@@ -7,23 +9,142 @@ CREATE TABLE `tximport` (
   `amount` decimal(19,2) DEFAULT NULL
 ) ENGINE=InnoDB ;
 
-load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/01-2010-Clinical-CreditSales-xlsx.csv' into table tximport fields terminated by ',' ignore 1 lines;
-load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/01-2010-Stores-CreditSales-xlsx.csv' into table tximport fields terminated by ',' ignore 1 lines;
-load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/02-2010-A-I-CrediSales-xlsx.csv' into table tximport fields terminated by ',' ignore 1 lines;
-load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/02-2010-Clinical-CreditSales-xlsx.csv' into table tximport fields terminated by ',' ignore 1 lines;
-load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/02-2010-Stores-CreditSales-xlsx.csv' into table tximport fields terminated by ',' ignore 1 lines;
-load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/03-2010-A-I-CrediSales-xlsx.csv' into table tximport fields terminated by ',' ignore 1 lines;
-load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/03-2010-Clinical-CreditSales-xlsx.csv' into table tximport fields terminated by ',' ignore 1 lines;
-load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/03-2010-Stores-CreditSales-xlsx.csv' into table tximport fields terminated by ',' ignore 1 lines;
-load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/04-2010-A-I-CrediSales-xlsx.csv' into table tximport fields terminated by ',' ignore 1 lines;
-load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/04-2010-Clinical-CreditSales-xlsx.csv' into table tximport fields terminated by ',' ignore 1 lines;
-load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/04-2010-Stores-CreditSales-xlsx.csv' into table tximport fields terminated by ',' ignore 1 lines;
-load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/05-2010-A-I-CrediSales-xlsx.csv' into table tximport fields terminated by ',' ignore 1 lines;
-load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/05-2010-Clinical-CreditSales-xlsx.csv' into table tximport fields terminated by ',' ignore 1 lines;
-load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/05-2010-Stores-CreditSales-xlsx.csv' into table tximport fields terminated by ',' ignore 1 lines;
-load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/06-2010-A-I-CrediSales-xlsx.csv' into table tximport fields terminated by ',' ignore 1 lines;
-load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/06-2010-Clinical-CreditSales-xlsx.csv' into table tximport fields terminated by ',' ignore 1 lines;
-load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/06-2010-Stores-CreditSales-xlsx.csv' into table tximport fields terminated by ',' ignore 1 lines;
+load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/01-2010-Clinical-CreditSales-xlsx.csv' 
+	into table tximport 
+	fields terminated by ',' 
+	ignore 1 lines
+	( type, @date, reference, member_num, class, amount )
+	set `date` = str_to_date(@date, '%d.%m.%Y')
+;
+
+load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/01-2010-Stores-CreditSales-xlsx.csv'
+	into table tximport 
+	fields terminated by ',' 
+	ignore 1 lines
+	( type, @date, reference, member_num, class, amount )
+	set `date` = str_to_date(@date, '%d.%m.%Y')
+;
+
+load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/02-2010-A-I-CrediSales-xlsx.csv'
+	into table tximport 
+	fields terminated by ',' 
+	ignore 1 lines
+	( type, @date, reference, member_num, class, amount )
+	set `date` = str_to_date(@date, '%d.%m.%Y')
+;
+
+load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/02-2010-Clinical-CreditSales-xlsx.csv'
+	into table tximport 
+	fields terminated by ',' 
+	ignore 1 lines
+	( type, @date, reference, member_num, class, amount )
+	set `date` = str_to_date(@date, '%d.%m.%Y')
+;
+
+load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/02-2010-Stores-CreditSales-xlsx.csv'
+	into table tximport 
+	fields terminated by ',' 
+	ignore 1 lines
+	( type, @date, reference, member_num, class, amount )
+	set `date` = str_to_date(@date, '%d.%m.%Y')
+;
+
+load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/03-2010-A-I-CrediSales-xlsx.csv'
+	into table tximport 
+	fields terminated by ',' 
+	ignore 1 lines
+	( type, @date, reference, member_num, class, amount )
+	set `date` = str_to_date(@date, '%d.%m.%Y')
+;
+
+load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/03-2010-Clinical-CreditSales-xlsx.csv'
+	into table tximport 
+	fields terminated by ',' 
+	ignore 1 lines
+	( type, @date, reference, member_num, class, amount )
+	set `date` = str_to_date(@date, '%d.%m.%Y')
+;
+
+load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/03-2010-Stores-CreditSales-xlsx.csv'
+	into table tximport 
+	fields terminated by ',' 
+	ignore 1 lines
+	( type, @date, reference, member_num, class, amount )
+	set `date` = str_to_date(@date, '%d.%m.%Y')
+;
+
+load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/04-2010-A-I-CrediSales-xlsx.csv'
+	into table tximport 
+	fields terminated by ',' 
+	ignore 1 lines
+	( type, @date, reference, member_num, class, amount )
+	set `date` = str_to_date(@date, '%d.%m.%Y')
+;
+
+load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/04-2010-Clinical-CreditSales-xlsx.csv'
+	into table tximport 
+	fields terminated by ',' 
+	ignore 1 lines
+	( type, @date, reference, member_num, class, amount )
+	set `date` = str_to_date(@date, '%d.%m.%Y')
+;
+
+load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/04-2010-Stores-CreditSales-xlsx.csv'
+	into table tximport 
+	fields terminated by ',' 
+	ignore 1 lines
+	( type, @date, reference, member_num, class, amount )
+	set `date` = str_to_date(@date, '%d.%m.%Y')
+;
+
+load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/05-2010-A-I-CrediSales-xlsx.csv'
+	into table tximport 
+	fields terminated by ',' 
+	ignore 1 lines
+	( type, @date, reference, member_num, class, amount )
+	set `date` = str_to_date(@date, '%d.%m.%Y')
+;
+
+load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/05-2010-Clinical-CreditSales-xlsx.csv'
+	into table tximport 
+	fields terminated by ',' 
+	ignore 1 lines
+	( type, @date, reference, member_num, class, amount )
+	set `date` = str_to_date(@date, '%d.%m.%Y')
+;
+
+load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/05-2010-Stores-CreditSales-xlsx.csv'
+	into table tximport 
+	fields terminated by ',' 
+	ignore 1 lines
+	( type, @date, reference, member_num, class, amount )
+	set `date` = str_to_date(@date, '%d.%m.%Y')
+;
+
+load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/06-2010-A-I-CrediSales-xlsx.csv'
+	into table tximport 
+	fields terminated by ',' 
+	ignore 1 lines
+	( type, @date, reference, member_num, class, amount )
+	set `date` = str_to_date(@date, '%d.%m.%Y')
+;
+
+load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/06-2010-Clinical-CreditSales-xlsx.csv'
+	into table tximport 
+	fields terminated by ',' 
+	ignore 1 lines
+	( type, @date, reference, member_num, class, amount )
+	set `date` = str_to_date(@date, '%d.%m.%Y')
+;
+
+load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/transaction-csv/06-2010-Stores-CreditSales-xlsx.csv'
+	into table tximport 
+	fields terminated by ',' 
+	ignore 1 lines
+	( type, @date, reference, member_num, class, amount )
+	set `date` = str_to_date(@date, '%d.%m.%Y')
+;
+
 
 alter table tximport 
   add column accountid bigint(20),
@@ -40,7 +161,9 @@ update tximport t, membership m
 
 
 -- delete non-credit sale transactions (all null in sammpel data)
-delete tximport where type != 'Credit Sale'
+delete from tximport where type != 'Credit Sale'
+;
+
 update tximport
 	set transactiontype = 'CREDIT' 
 ;
@@ -51,16 +174,16 @@ update tximport
 	where class = 'Vet Services:Clinical Services' 
 ;
 update tximport
-	set source = 'ClinicalServices'
+	set source = 'Clinical Svcs'
 	where class = 'Vet Services:A.I' 
 ;
 update tximport
-	set source = 'StoreCredit'
+	set source = 'Store Credit'
 	where class like 'Stores:%' 
 ;
 update tximport 
 	set class = concat('R',substr(class, 9))
-	where source = 'StoreCredit'
+	where source = 'Store Credit'
 ;
 
 -- lookup store codes

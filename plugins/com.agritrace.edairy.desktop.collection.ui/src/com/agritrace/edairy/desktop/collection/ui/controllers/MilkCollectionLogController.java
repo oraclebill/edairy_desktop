@@ -33,6 +33,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
+import com.agritrace.edairy.desktop.common.persistence.IMilkCollectionRepository;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
@@ -90,16 +91,16 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 			return super.getText(element);
 		}
 
-		@Override
-		public Color getBackground(Object element) {
-			if (element instanceof CollectionGroup) {
-				final CollectionGroup page = (CollectionGroup) element;
-				if (page.getDriverTotal() != page.getRecordTotal()) {
-					return TABLE_HIGHLIGHT_BACKGROUND;
-				}
-			}
-			return super.getBackground(element);
-		}
+//		@Override
+//		public Color getBackground(Object element) {
+//			if (element instanceof CollectionGroup) {
+//				final CollectionGroup page = (CollectionGroup) element;
+//				if (page.getDriverTotal() != page.getRecordTotal()) {
+//					return TABLE_HIGHLIGHT_BACKGROUND;
+//				}
+//			}
+//			return super.getBackground(element);
+//		}
 	}
 
 	private IDateTimeRidget startDate;
@@ -123,7 +124,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	private final List<DairyLocation> collectionCenters;
 
 	@Inject
-	public MilkCollectionLogController(final IRepository<CollectionGroup> journalRepo,
+	public MilkCollectionLogController(final IMilkCollectionRepository journalRepo,
 			final IDairyLocationRepository dairyLocationRepo, final IDairyRepository dairyRepo,
 			final IRepository<CollectionSession> sessionRepo,
 			final Provider<NewMilkCollectionJournalDialog> newDialogProvider,
@@ -208,74 +209,76 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	 * @param cj Journal page
 	 * @return Whether the page matches the conditions
 	 */
-	private static final boolean matches(MilkCollectionLogFilterBean bean, CollectionGroup cj) {
-		if (bean.getStartDate() != null && cj.getJournalDate().compareTo(bean.getStartDate()) < 0) {
-			return false;
-		}
-
-		if (bean.getEndDate() != null) {
-			// We need to compare it with the day after, to get records for today as well
-			Calendar cld = Calendar.getInstance();
-			cld.setTime(bean.getEndDate());
-			cld = new GregorianCalendar(cld.get(Calendar.YEAR), cld.get(Calendar.MONTH), cld.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
-			cld.add(Calendar.DAY_OF_MONTH, 1);
-
-			if (cj.getJournalDate().compareTo(cld.getTime()) >= 0) {
-				return false;
-			}
-		}
-
-		if (bean.getCollectionCenter() != null && (cj.getCollectionCenter() == null ||
-				cj.getCollectionCenter().getId() != bean.getCollectionCenter().getId())) {
-			return false;
-		}
-
-		if (bean.getStatus() != null && cj.getStatus() != bean.getStatus()) {
-			return false;
-		}
-
-		if (bean.getSession() != null && (cj.getSession() == null || !cj.getSession().getId().equals(bean.getSession().getId()))) {
-			return false;
-		}
-
-		if (bean.isSuspended() && cj.getSuspendedCount() == 0) {
-			return false;
-		}
-
-		if (bean.isRejected() && cj.getRejectedCount() == 0) {
-			return false;
-		}
-
-		if (bean.isMprMissing()) {
-			boolean found = false;
-
-			for (final CollectionJournalLine line: cj.getJournalEntries()) {
-				if (line.isNotRecorded()) {
-					found = true;
-					break;
-				}
-			}
-
-			if (!found) {
-				return false;
-			}
-		}
-
-		return true;
-	}
+//	private static final boolean matches(MilkCollectionLogFilterBean bean, CollectionGroup cj) {
+//		if (bean.getStartDate() != null && cj.getJournalDate().compareTo(bean.getStartDate()) < 0) {
+//			return false;
+//		}
+//
+//		if (bean.getEndDate() != null) {
+//			// We need to compare it with the day after, to get records for today as well
+//			Calendar cld = Calendar.getInstance();
+//			cld.setTime(bean.getEndDate());
+//			cld = new GregorianCalendar(cld.get(Calendar.YEAR), cld.get(Calendar.MONTH), cld.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
+//			cld.add(Calendar.DAY_OF_MONTH, 1);
+//
+//			if (cj.getJournalDate().compareTo(cld.getTime()) >= 0) {
+//				return false;
+//			}
+//		}
+//
+//		if (bean.getCollectionCenter() != null && (cj.getCollectionCenter() == null ||
+//				cj.getCollectionCenter().getId() != bean.getCollectionCenter().getId())) {
+//			return false;
+//		}
+//
+//		if (bean.getStatus() != null && cj.getStatus() != bean.getStatus()) {
+//			return false;
+//		}
+//
+//		if (bean.getSession() != null && (cj.getSession() == null || !cj.getSession().getId().equals(bean.getSession().getId()))) {
+//			return false;
+//		}
+//
+//		if (bean.isSuspended() && cj.getSuspendedCount() == 0) {
+//			return false;
+//		}
+//
+//		if (bean.isRejected() && cj.getRejectedCount() == 0) {
+//			return false;
+//		}
+//
+//		if (bean.isMprMissing()) {
+//			boolean found = false;
+//
+//			for (final CollectionJournalLine line: cj.getJournalEntries()) {
+//				if (line.isNotRecorded()) {
+//					found = true;
+//					break;
+//				}
+//			}
+//
+//			if (!found) {
+//				return false;
+//			}
+//		}
+//
+//		return true;
+//	}
 
 	// TODO: make this a query..
 	@Override
 	protected List<CollectionGroup> getFilteredResult() {
-		final List<CollectionGroup> filteredJournals = new ArrayList<CollectionGroup>();
-
-		for (final CollectionGroup cj : allJournals) {
-			if (matches(filterBean, cj)) {
-				filteredJournals.add(cj);
-			}
-		}
-
-		return filteredJournals;
+		IMilkCollectionRepository groupRepo = (IMilkCollectionRepository) getRepository();
+		return groupRepo.findCollectionGroups(
+				filterBean.getCollectionCenter(), 
+				filterBean.getSession(),
+				filterBean.getStartDate(),
+				filterBean.getEndDate(),
+				filterBean.getStatus(),
+				filterBean.isRejected(),
+				filterBean.isMprMissing(),
+				filterBean.isSuspended()
+				);
 	}
 
 	@Override

@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import com.agritrace.edairy.desktop.collection.services.TestingPersistenceModule;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
-import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
 import com.google.inject.Guice;
 
@@ -26,7 +26,7 @@ public class TransactionRepositoryTest  extends TransactionTestCase {
 
 	@Test
 	public void testAccountTransactionsInRange() throws Exception {
-		List<Transaction> transactions;
+		List<AccountTransaction> transactions;
 
 		assertTrue(repo.all().size() > 10);
 

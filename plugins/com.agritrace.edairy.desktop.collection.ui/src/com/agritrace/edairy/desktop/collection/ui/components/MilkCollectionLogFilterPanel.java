@@ -83,11 +83,6 @@ public class MilkCollectionLogFilterPanel extends Composite {
 		fd_btnSearch.top = new FormAttachment(0, 13);
 		fd_btnSearch.right = new FormAttachment(100, -10);
 		btnSearch.setLayoutData(fd_btnSearch);
-		btnSearch.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
 		btnSearch.setText("Search");
 		SWTBindingPropertyLocator.getInstance().setBindingProperty(btnSearch,
 				BaseListView.BIND_ID_FILTER_SEARCH);

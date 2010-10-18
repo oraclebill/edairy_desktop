@@ -23,7 +23,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 @SuppressWarnings("unchecked")
-public class AltTransactionRepository extends RepositoryUtil<Transaction> implements ITransactionRepository {
+public class AltTransactionRepository extends RepositoryUtil<AccountTransaction> implements ITransactionRepository {
 
 	/**
 	 *
@@ -35,13 +35,13 @@ public class AltTransactionRepository extends RepositoryUtil<Transaction> implem
 	}
 
 	@Override
-	public List<Transaction> all() {
-		return runQuery("from Transaction");
+	public List<AccountTransaction> all() {
+		return runQuery("from AccountTransaction");
 	}
 
 	@Override
 	@Transactional
-	public List<Transaction> findAccountTransactions(Account account, Date start, Date end) {
+	public List<AccountTransaction> findAccountTransactions(Account account, Date start, Date end, String refNum, List<TransactionSource> sources) {
 		final Session session = getCurrentSession();
 		final Criteria criteria = session.createCriteria("Transaction");
 
@@ -55,11 +55,25 @@ public class AltTransactionRepository extends RepositoryUtil<Transaction> implem
 			criteria.add(Restrictions.le("transactionDate", end));
 		}
 
+		if (refNum != null) {
+			criteria.add(Restrictions.like("referenceNumber", end));
+		}
+
+		if (sources != null && sources.size() > 0) {
+			criteria.add(Restrictions.in("source", sources));
+		}
+
 		return criteria.list();
 	}
 
+	@Override
+	public List<AccountTransaction> findAccountTransactions(Account account, Date start, Date end)
+	{
+		return findAccountTransactions(account, start, end, null, null);
+	}
+
 	@Transactional
-	private List<Transaction> runQuery(String q) {
+	List<AccountTransaction> runQuery(String q) {
 		final Session session = getCurrentSession();
 		return session.createQuery(q).list();
 	}
@@ -143,7 +157,7 @@ public class AltTransactionRepository extends RepositoryUtil<Transaction> implem
 			sum = point.getAmount();
 		}
 
-		final List<Transaction> transactions = findAccountTransactions(primaryAcct, startDate, cutoffDate);
+		final List<AccountTransaction> transactions = findAccountTransactions(primaryAcct, startDate, cutoffDate);
 		return sum.add(sumTransactions(transactions));
 	}
 
@@ -185,7 +199,7 @@ public class AltTransactionRepository extends RepositoryUtil<Transaction> implem
 	 * @param transactionList
 	 * @return
 	 */
-	private BigDecimal sumTransactions(List<Transaction> transactionList) {
+	private BigDecimal sumTransactions(List<AccountTransaction> transactionList) {
 		BigDecimal sum = Constants.BIGZERO;
 		for (final Transaction tx : transactionList) {
 			final BigDecimal amount = tx.getAmount();
@@ -242,4 +256,5 @@ public class AltTransactionRepository extends RepositoryUtil<Transaction> implem
 
 		return tx;
 	}
+
 }
