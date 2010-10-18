@@ -12,6 +12,7 @@
 	<script type="text/javascript" src="js/visualize.jQuery.js"></script>	
 	<style>
 	</style>
+	<script src='js/dairyhome.js'></script>
 	<script type="text/javascript"> 
 		// Run capabilities test
 		enhance({
@@ -19,7 +20,7 @@
 				{src: 'js/excanvas.js', iecondition: 'all'},
 				'js/jquery.min.js',
 				'js/visualize.jQuery.js',
-				'js/dairyhome.hs'
+				'js/jquery-ui-1.8.5.custom.min.js'
 			],
 			loadStyles: [
 				'css/visualize.css',
@@ -35,6 +36,12 @@
 	</div>
 	<div id='wrapper'>
 		<div id='body'>
+			<div id='dateselector'>
+				<form action="#">
+					<label for="datepicker">Select Date: </label>
+					<input type="text"  id="datepicker">
+				</form>
+			</div>
 			<div id='charts'>
 				<div id='pie-chart' class='chart-box'>
 					<h2>Total Intake Today</h2>
