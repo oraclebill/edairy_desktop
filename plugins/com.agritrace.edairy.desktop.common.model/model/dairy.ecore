@@ -524,6 +524,7 @@
       <eLiterals name="ShareRecovery" value="2" literal="Share Recovery"/>
       <eLiterals name="CashPayment" value="3" literal="Cash Payment"/>
       <eLiterals name="Other" value="4" literal="OTHER"/>
+      <eLiterals name="AIServices" value="5"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="AccountStatus">
       <eLiterals name="ACTIVE"/>

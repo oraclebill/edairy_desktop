@@ -283,6 +283,7 @@
         <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//account/TransactionSource/ShareRecovery"/>
         <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//account/TransactionSource/CashPayment"/>
         <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//account/TransactionSource/Other"/>
+        <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//account/TransactionSource/AIServices"/>
       </genEnums>
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="dairy.ecore#//account/AccountStatus">
         <genEnumLiterals ecoreEnumLiteral="dairy.ecore#//account/AccountStatus/ACTIVE"/>

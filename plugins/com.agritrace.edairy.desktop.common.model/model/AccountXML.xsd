@@ -13,6 +13,7 @@
       <xsd:enumeration value="ShareRecovery"/>
       <xsd:enumeration value="CashPayment"/>
       <xsd:enumeration value="Other"/>
+      <xsd:enumeration value="AIServices"/>
     </xsd:restriction>
   </xsd:simpleType>
   <xsd:simpleType name="AccountStatus">

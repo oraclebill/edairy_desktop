@@ -70,7 +70,15 @@ public enum TransactionSource implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	OTHER(4, "Other", "OTHER");
+	OTHER(4, "Other", "OTHER"), /**
+	 * The '<em><b>AI Services</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #AI_SERVICES_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	AI_SERVICES(5, "AIServices", "AIServices");
 
 	/**
 	 * The '<em><b>Store Credit</b></em>' literal value.
@@ -148,6 +156,21 @@ public enum TransactionSource implements Enumerator {
 	public static final int OTHER_VALUE = 4;
 
 	/**
+	 * The '<em><b>AI Services</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>AI Services</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #AI_SERVICES
+	 * @model name="AIServices"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int AI_SERVICES_VALUE = 5;
+
+	/**
 	 * An array of all the '<em><b>Transaction Source</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -160,6 +183,7 @@ public enum TransactionSource implements Enumerator {
 			SHARE_RECOVERY,
 			CASH_PAYMENT,
 			OTHER,
+			AI_SERVICES,
 		};
 
 	/**
@@ -215,6 +239,7 @@ public enum TransactionSource implements Enumerator {
 			case SHARE_RECOVERY_VALUE: return SHARE_RECOVERY;
 			case CASH_PAYMENT_VALUE: return CASH_PAYMENT;
 			case OTHER_VALUE: return OTHER;
+			case AI_SERVICES_VALUE: return AI_SERVICES;
 		}
 		return null;
 	}

@@ -616,6 +616,7 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 		addEEnumLiteral(transactionSourceEEnum, TransactionSource.SHARE_RECOVERY);
 		addEEnumLiteral(transactionSourceEEnum, TransactionSource.CASH_PAYMENT);
 		addEEnumLiteral(transactionSourceEEnum, TransactionSource.OTHER);
+		addEEnumLiteral(transactionSourceEEnum, TransactionSource.AI_SERVICES);
 
 		initEEnum(accountStatusEEnum, AccountStatus.class, "AccountStatus");
 		addEEnumLiteral(accountStatusEEnum, AccountStatus.ACTIVE);

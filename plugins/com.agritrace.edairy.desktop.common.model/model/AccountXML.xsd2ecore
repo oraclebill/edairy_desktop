@@ -13,6 +13,7 @@
       <nested inputs="dairy.ecore#//account/TransactionSource/ShareRecovery" outputs="AccountXML.xsd#//TransactionSource;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=2"/>
       <nested inputs="dairy.ecore#//account/TransactionSource/CashPayment" outputs="AccountXML.xsd#//TransactionSource;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=3"/>
       <nested inputs="dairy.ecore#//account/TransactionSource/Other" outputs="AccountXML.xsd#//TransactionSource;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=4"/>
+      <nested inputs="dairy.ecore#//account/TransactionSource/AIServices" outputs="AccountXML.xsd#//TransactionSource;XSDSimpleTypeDefinition=1/XSDEnumerationFacet=5"/>
     </nested>
     <nested inputs="dairy.ecore#//account/AccountStatus" outputs="AccountXML.xsd#//AccountStatus;XSDSimpleTypeDefinition=2">
       <nested inputs="dairy.ecore#//account/AccountStatus/ACTIVE" outputs="AccountXML.xsd#//AccountStatus;XSDSimpleTypeDefinition=2/XSDEnumerationFacet"/>
