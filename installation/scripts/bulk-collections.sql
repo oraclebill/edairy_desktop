@@ -1,4 +1,5 @@
 
+select dairyid into @dairyid from dairy limit 1;
 
 drop table collections;
 
@@ -25,7 +26,6 @@ CREATE TABLE collections
 ;
 
 load data infile '/Users/bjones/tmp/database2/436.dat' into table collections fields terminated by ',' enclosed by '\'' ;
-
 
 alter table collections 
   add column memberid bigint(20) ,
@@ -101,8 +101,8 @@ update collections
     where session_id is null;
 
 insert into collectiongroup 
-        (status, type, journaldate, collectionsession_session_e_id, dairylocation_collectioncenter_id, recordtotal, employee_driver_personid, vehicle_vehicle_vehicleid)
-    select 'NEW', 'ScaleGroup', txn_date, session_id, dairylocationid, sum(quantity), driverid, vehicleid
+        (dairy_collectionjournals_companyid, status, type, journaldate, collectionsession_session_e_id, dairylocation_collectioncenter_id, recordtotal, employee_driver_personid, vehicle_vehicle_vehicleid)
+    select @dairyid, 'NEW', 'ScaleGroup', txn_date, session_id, dairylocationid, sum(quantity), driverid, vehicleid
   from collections 
 group by txn_date, session_id, dairylocationid 
 ;

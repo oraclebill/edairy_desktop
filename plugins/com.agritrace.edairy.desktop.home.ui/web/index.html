@@ -7,12 +7,13 @@
 	<link href="css/basic.css" type="text/css" rel="stylesheet" />
 	<link href="css/visualize.css" type="text/css" rel="stylesheet" />
 	<link href="css/visualize-light.css" type="text/css" rel="stylesheet" />
+	<link href='css/smoothness/jquery-ui-1.8.5.custom.css' type="text/css" rel="stylesheet" />
 	
-	<script type="text/javascript" src="js/jquery.min.js"></script>	
-	<script type="text/javascript" src="js/visualize.jQuery.js"></script>	
-	<style>
-	</style>
+	<script src="js/jquery.min.js"></script>	
+	<script src="js/visualize.jQuery.js"></script>	
 	<script src='js/dairyhome.js'></script>
+	<script src='js/jquery-ui-1.8.5.custom.min.js'></script>
+	
 	<script type="text/javascript"> 
 		// Run capabilities test
 		enhance({
@@ -20,11 +21,12 @@
 				{src: 'js/excanvas.js', iecondition: 'all'},
 				'js/jquery.min.js',
 				'js/visualize.jQuery.js',
-				'js/jquery-ui-1.8.5.custom.min.js'
+				
 			],
 			loadStyles: [
 				'css/visualize.css',
 				'css/visualize-dark.css'
+				
 			]	
 		});   
     </script> 
@@ -37,10 +39,20 @@
 	<div id='wrapper'>
 		<div id='body'>
 			<div id='dateselector'>
-				<form action="#">
-					<label for="datepicker">Select Date: </label>
+				<script>
+					$(function() {
+						$( "#datepicker" ).datepicker();
+					});
+				</script>
+				<p>
+					Date:
+					<select id="dateoption">
+						<option value="today">Today</option>
+						<option value="yesterday">Yesterday</option>
+						<option value="select">Select a date</option>
+					</select>
 					<input type="text"  id="datepicker">
-				</form>
+				</p>
 			</div>
 			<div id='charts'>
 				<div id='pie-chart' class='chart-box'>

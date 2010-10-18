@@ -51,10 +51,21 @@ function genTableData(data) {
 
 }
 
+function getReportDate() {
+	return ("05/01/2010");
+}
+
 $(document).ready(function() {
 	/** build the table * */
-	// data = getIntakeData();
-	data = getIntakeData();
+	date = getReportDate();
+	alert(date);
+	try {
+		data = getIntakeData(date);
+	}
+	catch (e) {
+		alert(e);
+	}
+//	alert("in document ready: " + data);
 	genTableData(data);
 	/** visualize with a line graph * */
 	pieProps = {

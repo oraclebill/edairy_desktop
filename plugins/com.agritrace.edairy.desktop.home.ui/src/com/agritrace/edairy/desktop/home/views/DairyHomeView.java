@@ -12,6 +12,8 @@ package com.agritrace.edairy.desktop.home.views;
 
 import java.math.BigDecimal;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -57,7 +59,20 @@ public class DairyHomeView extends ViewPart {
 
 		@Override
 		public Object function(Object[] arguments) {
-			final Date today = new Date();
+			Date dateArg = new Date();
+			if (arguments.length > 0) {
+				if (arguments[0] instanceof String) {
+					String s = (String)arguments[0];
+					try {					
+						dateArg = new SimpleDateFormat("MM/dd/yyyy").parse(s);
+					}
+					catch(Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			final Date today = dateArg;
+
 			final List<CollectionGroup> groups = journalRepository.allForDate(today);
 
 			Object[] retVal;
@@ -132,8 +147,7 @@ public class DairyHomeView extends ViewPart {
 		browser = new Browser(parent, SWT.NONE);
 		browser.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		browser.addLocationListener(new HomepageLocationListener());
-		new GetIntakeData(journalRepository, browser, "getIntakeData");
-
+		BrowserFunction bf = new GetIntakeData(journalRepository, browser, "getIntakeData");
 		try {
 			browser.setUrl(FileLocator.resolve(
 					new URL(HomeActivator.PLUGIN_WEB_PATH + "index.html"))

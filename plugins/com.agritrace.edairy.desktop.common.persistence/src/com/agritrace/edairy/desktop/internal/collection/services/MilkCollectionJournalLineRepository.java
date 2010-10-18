@@ -19,7 +19,8 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 @SuppressWarnings("unchecked")
-public class MilkCollectionJournalLineRepository extends RepositoryUtil<CollectionJournalLine> implements
+public class MilkCollectionJournalLineRepository extends
+		RepositoryUtil<CollectionJournalLine> implements
 		ICollectionJournalLineRepository {
 
 	@Inject
@@ -29,12 +30,13 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 
 	@Override
 	public List<CollectionJournalLine> all() {
-		return getCurrentSession().createCriteria("CollectionJournalLine").list();
+		return getCurrentSession().createCriteria("CollectionJournalLine")
+				.list();
 	}
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see com.agritrace.edairy.desktop.internal.collection.services.
 	 * ICollectionJournalLineRepository
 	 * #countByMemberCenterDate(com.agritrace.edairy
@@ -44,12 +46,15 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 	 */
 	@Override
 	@Transactional
-	public long countByMemberCenterDate(final Membership member, final DairyLocation center, final Date date) {
+	public long countByMemberCenterDate(final Membership member,
+			final DairyLocation center, final Date date) {
 		final Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 
-		final String queryText = "SELECT count(*) " + "  FROM CollectionJournalLine l "
-				+ " WHERE l.validatedMember = :member " + "   AND l.collectionJournal.journalDate = :cal "
+		final String queryText = "SELECT count(*) "
+				+ "  FROM CollectionJournalLine l "
+				+ " WHERE l.validatedMember = :member "
+				+ "   AND l.collectionJournal.journalDate = :cal "
 				+ "   AND l.collectionJournal.collectionCenter = :center ";
 
 		final Query query = getCurrentSession().createQuery(queryText);
@@ -78,8 +83,10 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 		day = cal.get(Calendar.DAY_OF_MONTH);
 
 		final String queryText = // "SELECT grp " +
-		"FROM CollectionGroup as grp " + "          where day(grp.journalDate) = :day"
-				+ "          and  month(grp.journalDate) = :month" + "          and  year(grp.journalDate) = :year";
+		"FROM CollectionGroup as grp "
+				+ "          where day(grp.journalDate) = :day"
+				+ "          and  month(grp.journalDate) = :month"
+				+ "          and  year(grp.journalDate) = :year";
 
 		final Query query = getCurrentSession().createQuery(queryText);
 
@@ -90,7 +97,8 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 		final List<CollectionGroup> results = query.list();
 
 		// debug
-		System.err.format("XXXXXX: Day = %d, month = %d, year = %d\n", day, month, year);
+		System.err.format("XXXXXX: Day = %d, month = %d, year = %d\n", day,
+				month, year);
 		System.err.format("XXXXXX: results count = %d\n", results.size());
 		return results;
 
@@ -100,8 +108,9 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 	@Transactional
 	public BigDecimal getMilkPrice(final int month, final int year) {
 		// TODO: There is no MilkPrice class!
-		
-		final String queryString = "SELECT m.paymentRate " + "FROM MemberPayment m " + "WHERE m.year = :year "
+
+		final String queryString = "SELECT m.paymentRate "
+				+ "FROM MemberPayment m " + "WHERE m.year = :year "
 				+ "  AND m.month = :month ";
 
 		final Query query = getCurrentSession().createQuery(queryString);
@@ -117,25 +126,26 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 
 	@Override
 	@Transactional
-	public List<Membership> getMembersWithDeliveriesFor(final int month, final int year) {
+	public List<Membership> getMembersWithDeliveriesFor(final int month,
+			final int year) {
 		final String queryString = "SELECT distinct validatedMember "
-			+ " FROM CollectionJournalLine l "
-			+ " WHERE 1 = 1"
-			+ "   AND year(l.collectionJournal.journalDate) = :year "
-			+ "   AND month(l.collectionJournal.journalDate) = :month ";
+				+ " FROM CollectionJournalLine l " + " WHERE 1 = 1"
+				+ "   AND year(l.collectionJournal.journalDate) = :year "
+				+ "   AND month(l.collectionJournal.journalDate) = :month ";
 
 		final Query query = getCurrentSession().createQuery(queryString);
 		query.setInteger("year", year);
-		query.setInteger("month", month+1);
+		query.setInteger("month", month + 1);
 
 		return query.list();
 	}
 
 	@Override
 	@Transactional
-	public List<CollectionJournalLine> getPayableDeliveriesForMember(final Membership member, final int month,
-			final int year) {
-		final String queryString = "FROM CollectionJournalLine l " + "WHERE l.validatedMember = :member "
+	public List<CollectionJournalLine> getPayableDeliveriesForMember(
+			final Membership member, final int month, final int year) {
+		final String queryString = "FROM CollectionJournalLine l "
+				+ "WHERE l.validatedMember = :member "
 				+ "  AND l.rejected = False " + "  AND l.flagged = False "
 				+ "  AND year(l.collectionJournal.journalDate) = :year "
 				+ "  AND month(l.collectionJournal.journalDate) = :month ";
@@ -151,9 +161,12 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 
 	@Override
 	@Transactional
-	public BigDecimal getSumOfPayableDeliveries(final Membership member, final int month, final int year) {
-		final String queryString = "SELECT sum(l.quantity) " + "FROM CollectionJournalLine l "
-				+ "WHERE l.validatedMember = :member " + "  AND l.rejected = False " + "  AND l.flagged = False "
+	public BigDecimal getSumOfPayableDeliveries(final Membership member,
+			final int month, final int year) {
+		final String queryString = "SELECT sum(l.quantity) "
+				+ "FROM CollectionJournalLine l "
+				+ "WHERE l.validatedMember = :member "
+				+ "  AND l.rejected = False " + "  AND l.flagged = False "
 				+ "  AND year(l.collectionJournal.journalDate) = :year "
 				+ "  AND month(l.collectionJournal.journalDate) = :month ";
 
@@ -168,6 +181,5 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 		}
 		return new BigDecimal(sum.toString());
 	}
-
 
 }
