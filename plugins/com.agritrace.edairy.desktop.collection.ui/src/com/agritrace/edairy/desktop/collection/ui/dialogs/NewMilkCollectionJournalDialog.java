@@ -54,7 +54,7 @@ import com.google.inject.name.Named;
 public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 
 	private final IDairyRepository dairyRepository;
-	private final IDairyLocationRepository dairyLocationRepo;
+//	private final IDairyLocationRepository dairyLocationRepo;
 	private final IRepository<CollectionSession> sessionRepo;
 	private DateTime datePicker;
 	private CCombo driverCombo;
@@ -72,7 +72,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 			final IRepository<CollectionSession> sessionRepo) {
 		super(parentShell);
 		this.dairyRepository = dairyRepository;
-		this.dairyLocationRepo = dairyLocationRepo;
+//		this.dairyLocationRepo = dairyLocationRepo;
 		this.sessionRepo = sessionRepo;
 		newJournalPage = DairyFactory.eINSTANCE.createCollectionGroup();
 		newJournalPage.setType(CollectionGroupType.JOURNAL_GROUP);
@@ -169,7 +169,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		final Dairy localDairy = dairyRepository.getLocalDairy();
 
 		try {
-			final List<DairyLocation> centers = dairyLocationRepo.allCollectionCenters();
+			final List<DairyLocation> centers = localDairy.getBranchLocations();
 			center.bindToModel(new WritableList(centers, DairyLocation.class), DairyLocation.class, "getCode",
 					PojoObservables.observeValue( newJournalPage,
 							DairyPackage.Literals.COLLECTION_GROUP__COLLECTION_CENTER.getName()));

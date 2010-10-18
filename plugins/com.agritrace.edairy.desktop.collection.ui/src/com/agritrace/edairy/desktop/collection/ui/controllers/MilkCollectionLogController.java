@@ -149,7 +149,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 
 		collectionCenters = new ArrayList<DairyLocation>();
 		collectionCenters.add(null); // First, empty entry - means "show all"
-		collectionCenters.addAll(dairyLocationRepo.allCollectionCenters());
+		collectionCenters.addAll(dairyRepo.getLocalDairy().getBranchLocations());
 	}
 
 	@Override

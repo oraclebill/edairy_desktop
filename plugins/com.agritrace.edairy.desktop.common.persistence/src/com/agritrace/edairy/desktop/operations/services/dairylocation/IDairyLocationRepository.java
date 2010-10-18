@@ -11,7 +11,7 @@ import com.google.inject.ImplementedBy;
 
 @ImplementedBy(DairyLocationRepository.class)
 public interface IDairyLocationRepository extends IRepository<DairyLocation> {
-	List<DairyLocation> allCollectionCenters();
-	List<Route> getRoutes();
-	void saveAll(Collection<? extends DairyLocation> locs);
+//	List<DairyLocation> allCollectionCenters();
+//	List<Route> getRoutes();
+//	void saveAll(Collection<? extends DairyLocation> locs);
 }

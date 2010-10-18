@@ -6,6 +6,7 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
+import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus;
@@ -156,7 +157,7 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * @generated
 	 * @ordered
 	 */
-	protected Route defaultRoute;
+	protected DairyLocation defaultRoute;
 
 	/**
 	 * The cached value of the '{@link #getMember() <em>Member</em>}' containment reference.
@@ -307,10 +308,10 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Route getDefaultRoute() {
+	public DairyLocation getDefaultRoute() {
 		if (defaultRoute != null && defaultRoute.eIsProxy()) {
 			InternalEObject oldDefaultRoute = (InternalEObject)defaultRoute;
-			defaultRoute = (Route)eResolveProxy(oldDefaultRoute);
+			defaultRoute = (DairyLocation)eResolveProxy(oldDefaultRoute);
 			if (defaultRoute != oldDefaultRoute) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.MEMBERSHIP__DEFAULT_ROUTE, oldDefaultRoute, defaultRoute));
@@ -324,7 +325,7 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Route basicGetDefaultRoute() {
+	public DairyLocation basicGetDefaultRoute() {
 		return defaultRoute;
 	}
 
@@ -333,8 +334,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDefaultRoute(Route newDefaultRoute) {
-		Route oldDefaultRoute = defaultRoute;
+	public void setDefaultRoute(DairyLocation newDefaultRoute) {
+		DairyLocation oldDefaultRoute = defaultRoute;
 		defaultRoute = newDefaultRoute;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__DEFAULT_ROUTE, oldDefaultRoute, defaultRoute));
@@ -511,7 +512,7 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 				setStatus((MembershipStatus)newValue);
 				return;
 			case DairyPackage.MEMBERSHIP__DEFAULT_ROUTE:
-				setDefaultRoute((Route)newValue);
+				setDefaultRoute((DairyLocation)newValue);
 				return;
 			case DairyPackage.MEMBERSHIP__MEMBER:
 				setMember((Farmer)newValue);
@@ -547,7 +548,7 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 				setStatus(STATUS_EDEFAULT);
 				return;
 			case DairyPackage.MEMBERSHIP__DEFAULT_ROUTE:
-				setDefaultRoute((Route)null);
+				setDefaultRoute((DairyLocation)null);
 				return;
 			case DairyPackage.MEMBERSHIP__MEMBER:
 				setMember((Farmer)null);

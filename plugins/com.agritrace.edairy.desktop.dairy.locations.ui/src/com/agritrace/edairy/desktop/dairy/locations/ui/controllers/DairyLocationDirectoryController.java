@@ -83,7 +83,7 @@ public class DairyLocationDirectoryController extends
 		//
 		routeTypeSearchCombo = getRidget(IComboRidget.class,
 				DairyLocationUIConstants.RIDGET_ID_ROUTE);
-		routeTypeSearchCombo.bindToModel(new WritableList(dairyLocationRepo.getRoutes(), Route.class), Route.class,
+		routeTypeSearchCombo.bindToModel(new WritableList(dairyRepo.getLocalDairy().getRoutes(), Route.class), Route.class,
 				"getName", BeansObservables.observeValue(searchBean, "routeSearchValue"));
 		routeTypeSearchCombo.updateFromModel();
 
@@ -145,7 +145,7 @@ public class DairyLocationDirectoryController extends
 	protected RecordDialog<DairyLocation> getRecordDialog(Shell shell) {
 		final DairyLocationEditDialog dialog = new DairyLocationEditDialog(shell);
 		dialog.getController().setContext("routes",
-				dairyLocationRepo.getRoutes());
+				dairyRepo.getLocalDairy().getRoutes());
 		dialog.setTitle("Edit Dairy Location");
 		return dialog;
 	}

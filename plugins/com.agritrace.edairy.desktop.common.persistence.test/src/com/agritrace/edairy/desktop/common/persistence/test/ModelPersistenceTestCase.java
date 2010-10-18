@@ -49,45 +49,6 @@ public class ModelPersistenceTestCase extends ModelPersistenceBase {
 
 	}
 
-	// @Test
-	public void testCreateDairyData() throws Exception {
 
-		Session session = getSessionFactory().openSession();
-		Transaction tx = session.beginTransaction();
-
-		// save some reference data
-		final ReferenceAnimalType animalType = TrackingFactory.eINSTANCE.createReferenceAnimalType();
-		animalType.setBreed("Guersney");
-		animalType.setSpecies("Cow");
-
-		session.save(animalType);
-
-		tx.commit();
-		session.close();
-
-		// create new session for bulk of work
-		session = getSessionFactory().openSession();
-		tx = session.beginTransaction();
-
-		// DairyDemoResourceManager.INSTANCE.createDairyResource();
-		// dairyResource =
-		// DairyDemoResourceManager.INSTANCE.getLocalDairy().eResource();
-		// TreeIterator<EObject> dairyIter = dairyResource.getAllContents() ;
-		// for (EObject obj = dairyIter.next(); dairyIter.hasNext(); obj =
-		// dairyIter.next() ) {
-		// System.err.println( "Saving: " + obj );
-		// session.save(obj);
-		// }
-
-		Dairy dairy;
-
-		dairy = DairyDemoResourceManager.INSTANCE.createDairyData();
-
-		dairy.setLegalName("test");
-		session.save(dairy);
-		tx.commit();
-		session.close();
-
-	}
 
 }

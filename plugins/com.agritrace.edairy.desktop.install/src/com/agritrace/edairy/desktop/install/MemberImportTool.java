@@ -16,6 +16,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
@@ -40,7 +41,7 @@ public class MemberImportTool extends AbstractImportTool {
 	// private DairyRepository dairyRepo;
 	// private Dairy dairy;
 	private final Map<String, Membership> memberCache = new HashMap<String, Membership>();
-	private final Map<String, Route> routeCache = new HashMap<String, Route>();
+	private final Map<String, DairyLocation> routeCache = new HashMap<String, DairyLocation>();
 	private Collection<Membership> memberCollection;
 	private Map<String, List<String[]>> failedRecords;
 	public int count = 0;
@@ -61,10 +62,14 @@ public class MemberImportTool extends AbstractImportTool {
 		this.failedRecords = failedRecords;
 
 		final Dairy dairy = repo.getLocalDairy();
-		for (final Route route : dairy.getRoutes()) {
-			routeCache.put(route.getName(), route);
+		System.err.println(">>>>>>>>> Adding branches to cache");
+		for (final DairyLocation route : dairy.getBranchLocations()) {
+			System.err.println(">>>>>>>>> Adding " + route + " to cache");
+			routeCache.put(route.getCode(), route);
 		}
+		System.err.println(">>>>>>>>> Adding existing members to cache");
 		for (final Membership member : dairy.getMemberships()) {
+			System.err.println(">>>>>>>>> Adding " + member + " to cache");
 			memberCache.put(member.getMemberNumber(), member);
 		}
 
@@ -129,7 +134,7 @@ public class MemberImportTool extends AbstractImportTool {
 		return membership;
 	}
 
-	private Route getRoute(String string) {
+	private DairyLocation getRoute(String string) {
 		return routeCache.get(string);
 	}
 

@@ -18,6 +18,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
+import com.agritrace.edairy.desktop.common.ui.reference.EmployeeReference;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.csvreader.CsvReader;
 import com.google.inject.Inject;
@@ -96,6 +97,7 @@ public class EmployeeImportTool extends AbstractImportTool {
 					final String value = csvReader.get(entry.field);
 					employee.eSet(entry.feature, convert(entry.feature, value));
 				}
+				employee.setDepartment(EmployeeReference.getDepartmentForPosition(employee.getJobFunction()));
 				count++;
 				empList.add(employee);
 

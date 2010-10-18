@@ -181,12 +181,12 @@ public interface Membership extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Default Route</em>' reference.
-	 * @see #setDefaultRoute(Route)
+	 * @see #setDefaultRoute(DairyLocation)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMembership_DefaultRoute()
 	 * @model
 	 * @generated
 	 */
-	Route getDefaultRoute();
+	DairyLocation getDefaultRoute();
 
 	/**
 	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getDefaultRoute <em>Default Route</em>}' reference.
@@ -196,7 +196,7 @@ public interface Membership extends EObject {
 	 * @see #getDefaultRoute()
 	 * @generated
 	 */
-	void setDefaultRoute(Route value);
+	void setDefaultRoute(DairyLocation value);
 
 	/**
 	 * Returns the value of the '<em><b>Member</b></em>' containment reference.

@@ -14,7 +14,7 @@ import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRe
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
@@ -32,7 +32,6 @@ import com.agritrace.edairy.desktop.internal.operations.services.DairyRepository
 import com.agritrace.edairy.desktop.internal.operations.services.customer.CustomerRepository;
 import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
-import com.agritrace.edairy.desktop.operations.services.dairylocation.IDairyLocationRepository;
 import com.agritrace.edairy.desktop.operations.services.employee.IEmployeeRepository;
 import com.agritrace.edairy.desktop.operations.services.supplier.ISupplierRepository;
 import com.google.inject.AbstractModule;
@@ -77,7 +76,7 @@ public class PersistenceModule extends AbstractModule {
 		customRepositories = new HashMap<Class<? extends EObject>, Class<? extends IRepository<? extends EObject>>>();
 		customRepositories.put(CollectionJournalLine.class, ICollectionJournalLineRepository.class);
 		customRepositories.put(Customer.class, CustomerRepository.class);
-		customRepositories.put(DairyLocation.class, IDairyLocationRepository.class);
+//		customRepositories.put(DairyLocation.class, IDairyLocationRepository.class);
 		customRepositories.put(Employee.class, IEmployeeRepository.class);
 		customRepositories.put(Farm.class, IFarmRepository.class);
 		customRepositories.put(Supplier.class, ISupplierRepository.class);

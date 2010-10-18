@@ -17,6 +17,13 @@
             name="Permissions"
             restorable="true">
       </view>
+      <view
+            allowMultiple="true"
+            class="com.agritrace.edairy.desktop.system.ui.views.UserDirectoryView"
+            id="edairy.system.users.directory"
+            name="Users"
+            restorable="true">
+      </view>
    </extension>
 
 </plugin>

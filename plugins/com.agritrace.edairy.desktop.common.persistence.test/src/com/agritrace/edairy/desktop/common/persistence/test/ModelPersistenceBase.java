@@ -13,9 +13,9 @@ import org.hibernate.cfg.Environment;
 import org.junit.Before;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
@@ -146,7 +146,7 @@ public class ModelPersistenceBase {
 	protected void printout(Membership membership, long count) {
 		final Account a = membership.getAccount();
 		final Farmer f = membership.getMember();
-		final Route r = membership.getDefaultRoute();
+		final DairyLocation r = membership.getDefaultRoute();
 		final Formatter formatter = new Formatter();
 		formatter.format("Member: %s, Account: %s, Farmer: %s, Route: %s\n",
 				membership.getApplicationDate(), a.getEstablished(),

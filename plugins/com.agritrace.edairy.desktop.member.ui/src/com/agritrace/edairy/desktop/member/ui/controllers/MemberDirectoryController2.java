@@ -62,11 +62,11 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 	private static final String DELETE_DIALOG_MESSAGE = "Do you want to delete the selected member %s ?";
 	private static final String DELETE_DIALOG_TITLE = "Delete Member";
 
-	private final String[] memberColumnHeaders = { "ID", "First Name", "Last Name", "Transport Route",
+	private final String[] memberColumnHeaders = { "ID", "First Name", "Last Name", "Default Route",
 			"Status", "Phone", "Milk Collection", "Monthly Credit Sales", "Credit Balance" };
 
 	private final String[] memberPropertyNames = { "memberNumber", "member.givenName", "member.familyName",
-			"defaultRoute.name", "status.name", "member.phoneNumber" }; // "account",
+			"defaultRoute.code", "status.name", "member.phoneNumber" }; // "account",
 																		// "account",
 	// "account" };
 

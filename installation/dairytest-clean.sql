@@ -582,7 +582,7 @@ CREATE TABLE `membership` (
   `applicationdate` datetime NOT NULL,
   `effectivedate` datetime DEFAULT NULL,
   `status` varchar(255) NOT NULL,
-  `route_defaultroute_id` bigint(20) DEFAULT NULL,
+  `dairylocation_defaultroute_id` bigint(20) DEFAULT NULL,
   `farmer_member_personid` bigint(20) NOT NULL,
   `account` bigint(20) NOT NULL,
   `dairy_memberships_companyid` bigint(20) DEFAULT NULL,
@@ -590,12 +590,12 @@ CREATE TABLE `membership` (
   PRIMARY KEY (`memberid`),
   UNIQUE KEY `account` (`account`),
   KEY `dairy_memberships` (`dairy_memberships_companyid`),
-  KEY `membership_defaultroute` (`route_defaultroute_id`),
+  KEY `membership_defaultroute` (`dairylocation_defaultroute_id`),
   KEY `membership_member` (`farmer_member_personid`),
   KEY `FKB01D87D6D6DFAC3A` (`account`),
   CONSTRAINT `dairy_memberships` FOREIGN KEY (`dairy_memberships_companyid`) REFERENCES `dairy` (`dairyid`),
   CONSTRAINT `FKB01D87D6D6DFAC3A` FOREIGN KEY (`account`) REFERENCES `account` (`accountid`),
-  CONSTRAINT `membership_defaultroute` FOREIGN KEY (`route_defaultroute_id`) REFERENCES `route` (`id`),
+  CONSTRAINT `membership_defaultroute` FOREIGN KEY (`dairylocation_defaultroute_id`) REFERENCES `dairylocation` (`id`),
   CONSTRAINT `membership_member` FOREIGN KEY (`farmer_member_personid`) REFERENCES `person` (`personid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;

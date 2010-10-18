@@ -54,8 +54,9 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 		addTableColumn("ID", DairyPackage.Literals.EMPLOYEE__ID);
 		addTableColumn("Last Name", ModelPackage.Literals.PERSON__FAMILY_NAME);
 		addTableColumn("First Name", ModelPackage.Literals.PERSON__GIVEN_NAME);
+		addTableColumn("Department", DairyPackage.Literals.EMPLOYEE__DEPARTMENT);
 		addTableColumn("Position", DairyPackage.Literals.EMPLOYEE__JOB_FUNCTION);
-		addTableColumn("Since", DairyPackage.Literals.EMPLOYEE__START_DATE);
+		addTableColumn("Start Date", DairyPackage.Literals.EMPLOYEE__START_DATE);
 	}
 
 	@Override

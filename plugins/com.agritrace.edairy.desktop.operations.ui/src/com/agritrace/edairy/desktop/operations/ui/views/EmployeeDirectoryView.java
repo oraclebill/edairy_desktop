@@ -9,7 +9,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
@@ -55,7 +54,7 @@ public class EmployeeDirectoryView extends AbstractDirectoryView {
 		}
 		{
 			UIControlsFactory.createLabel(filterGroup, "Position");
-			final Combo job = UIControlsFactory.createCombo(filterGroup);
+			final CCombo job = UIControlsFactory.createCCombo(filterGroup);
 			job.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(job);
 			addUIControl(job, BIND_ID_FILTER_JOBFUNC);

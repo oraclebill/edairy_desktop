@@ -19,10 +19,12 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.riena.ui.core.uiprocess.UIProcess;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
+import com.agritrace.edairy.desktop.common.persistence.services.Transactional;
 import com.agritrace.edairy.desktop.common.ui.dialogs.ImportResultsDialog;
 import com.agritrace.edairy.desktop.install.CollectionCenterImportTool;
-import com.agritrace.edairy.desktop.operations.services.dairylocation.IDairyLocationRepository;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -79,7 +81,7 @@ public class ImportCollectionCentersHandler extends HandlerBase {
 				centers = new ArrayList<DairyLocation>();
 				errors = new HashMap<String, List<String[]>>();
 
-				final CollectionCenterImportTool tool = toolProvider.get();
+				final CollectionCenterImportTool tool = new CollectionCenterImportTool(centers);
 //				tool.setMonitorDelta(lineCount / 2);
 				tool.processFile(input, centers, errors, monitor);
 
@@ -112,17 +114,11 @@ public class ImportCollectionCentersHandler extends HandlerBase {
 			return true;
 		}
 
-		private void saveCenters(List<DairyLocation> successes2) {
-			repo.saveAll(successes2);
-		}
-
 	}
 
 	@Inject
-	private static IDairyLocationRepository repo;
-	@Inject
-	private static Provider<CollectionCenterImportTool> toolProvider;
-
+	private static IDairyRepository repo;
+	
 	/**
 	 * The constructor.
 	 */
@@ -152,5 +148,14 @@ public class ImportCollectionCentersHandler extends HandlerBase {
 			throw new ExecutionException("Import operation failed.", e);
 		}
 		return null;
+	}
+	
+	@Transactional
+	protected void saveCenters(List<DairyLocation> successes2) {
+		Dairy local = repo.getLocalDairy();
+		for (DairyLocation location : successes2) {
+			local.getBranchLocations().add(location);
+		}
+		repo.save(local);
 	}
 }
