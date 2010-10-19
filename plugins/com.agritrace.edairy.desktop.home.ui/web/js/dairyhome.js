@@ -58,7 +58,6 @@ function getReportDate() {
 $(document).ready(function() {
 	/** build the table * */
 	date = getReportDate();
-	alert(date);
 	try {
 		data = getIntakeData(date);
 	}

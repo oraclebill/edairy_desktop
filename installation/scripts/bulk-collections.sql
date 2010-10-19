@@ -25,7 +25,7 @@ CREATE TABLE collections
 )
 ;
 
-load data infile '/Users/bjones/tmp/database2/436.dat' into table collections fields terminated by ',' enclosed by '\'' ;
+load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/collections/436.dat' into table collections fields terminated by ',' enclosed by '\'' ;
 
 alter table collections 
   add column memberid bigint(20) ,
@@ -123,5 +123,14 @@ insert into collectionjournalline
     (dtype, e_version, collectionjournalline_collectionjournal_e_id, recordedmember, quantity, unitofmeasure, membership_validatedmember_e_id, collectiontime, scaleserial, operatorcode, numcans, tripnumber, centernumber)
 select 'ScaleImportRecord', 0, groupid, member_number, quantity, 'KILOGRAM', memberid, txn_time, scale_serial, operator_code, num_cans, trip_number, center_num
 from collections;    
+
+update collectionjournalline
+    set collectiontime = null
+    where collectiontime = '0000-00-00 00:00:00'
+;
+
+update collectionjournalline 
+    set collectiongroup_journalentries_idx = 0
+;
 
 -- drop table collections;
