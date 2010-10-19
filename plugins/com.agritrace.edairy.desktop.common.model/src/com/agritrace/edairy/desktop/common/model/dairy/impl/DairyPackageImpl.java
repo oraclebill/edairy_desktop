@@ -2817,6 +2817,13 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	protected void createExtendedMetaDataAnnotations() {
 		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		
 		addAnnotation
+		  (getVehicle_RegistrationNumber(), 
+		   source, 
+		   new String[] {
+			 "name", "registrationNumber",
+			 "kind", "elementOnly"
+		   });			
+		addAnnotation
 		  (getVehicle_AssetInfo(), 
 		   source, 
 		   new String[] {
@@ -2838,10 +2845,22 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
+		  (getDairyLocation_Code(), 
+		   source, 
+		   new String[] {
+			 "kind", "elementOnly"
+		   });			
+		addAnnotation
 		  (getRoute_Id(), 
 		   source, 
 		   new String[] {
 			 "name", "Id",
+			 "kind", "elementOnly"
+		   });			
+		addAnnotation
+		  (getRoute_Name(), 
+		   source, 
+		   new String[] {
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
@@ -2865,6 +2884,12 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 			 "name", "memberId",
 			 "kind", "elementOnly"
 		   });		
+		addAnnotation
+		  (getMembership_MemberNumber(), 
+		   source, 
+		   new String[] {
+			 "kind", "elementOnly"
+		   });			
 		addAnnotation
 		  (assetEClass, 
 		   source, 
@@ -2904,6 +2929,12 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	protected void createTeneoAnnotations() {
 		String source = "teneo.jpa";			
 		addAnnotation
+		  (getVehicle_RegistrationNumber(), 
+		   source, 
+		   new String[] {
+			 "appinfo", "@NaturalId\n"
+		   });			
+		addAnnotation
 		  (getVehicle_AssetInfo(), 
 		   source, 
 		   new String[] {
@@ -2928,10 +2959,22 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 			 "appinfo", "@Id\n@GeneratedValue"
 		   });			
 		addAnnotation
+		  (getDairyLocation_Code(), 
+		   source, 
+		   new String[] {
+			 "appinfo", "@NaturalId"
+		   });			
+		addAnnotation
 		  (getRoute_Id(), 
 		   source, 
 		   new String[] {
 			 "appinfo", "@Id\n@GeneratedValue"
+		   });			
+		addAnnotation
+		  (getRoute_Name(), 
+		   source, 
+		   new String[] {
+			 "appinfo", "@NaturalId"
 		   });			
 		addAnnotation
 		  (getTrip_TripId(), 
@@ -2945,6 +2988,12 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		   new String[] {
 			 "appinfo", "@Version"
 		   });				
+		addAnnotation
+		  (getMembership_MemberNumber(), 
+		   source, 
+		   new String[] {
+			 "appinfo", "@NaturalId"
+		   });			
 		addAnnotation
 		  (assetEClass, 
 		   source, 

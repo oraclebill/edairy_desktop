@@ -77,6 +77,8 @@ public interface Membership extends EObject {
 	 * @see #setMemberNumber(String)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMembership_MemberNumber()
 	 * @model required="true" ordered="false"
+	 *        extendedMetaData="kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@NaturalId'"
 	 * @generated
 	 */
 	String getMemberNumber();

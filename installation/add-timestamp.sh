@@ -9,4 +9,4 @@ DBPASS=
 
 ${MYSQL} -u ${DBUSER} -B -N -e 'show tables ' ${DBNAME} \
   | ${AWK} '{ print "alter table " $1 " add column tstamp TIMESTAMP; " }' \
-  | ${MYSQL} -u ${DBUSER} ${DBNAME}
+  | ${MYSQL} -v -v -v -u ${DBUSER} ${DBNAME}

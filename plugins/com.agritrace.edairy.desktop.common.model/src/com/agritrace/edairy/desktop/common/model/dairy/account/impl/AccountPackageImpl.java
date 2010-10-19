@@ -621,6 +621,44 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 		initEEnum(accountStatusEEnum, AccountStatus.class, "AccountStatus");
 		addEEnumLiteral(accountStatusEEnum, AccountStatus.ACTIVE);
 		addEEnumLiteral(accountStatusEEnum, AccountStatus.INACTIVE);
+
+		// Create annotations
+		// http:///org/eclipse/emf/ecore/util/ExtendedMetaData
+		createExtendedMetaDataAnnotations();
+		// teneo.jpa
+		createTeneoAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http:///org/eclipse/emf/ecore/util/ExtendedMetaData</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createExtendedMetaDataAnnotations() {
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		
+		addAnnotation
+		  (getAccount_AccountNumber(), 
+		   source, 
+		   new String[] {
+			 "kind", "elementOnly"
+		   });	
+	}
+
+	/**
+	 * Initializes the annotations for <b>teneo.jpa</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createTeneoAnnotations() {
+		String source = "teneo.jpa";			
+		addAnnotation
+		  (getAccount_AccountNumber(), 
+		   source, 
+		   new String[] {
+			 "appinfo", "@NaturalId"
+		   });
 	}
 
 } //AccountPackageImpl

@@ -80,6 +80,8 @@ public interface Vehicle extends EObject {
 	 * @see #setRegistrationNumber(String)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getVehicle_RegistrationNumber()
 	 * @model default=" " required="true"
+	 *        extendedMetaData="name='registrationNumber' kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@NaturalId\n'"
 	 * @generated
 	 */
 	String getRegistrationNumber();

@@ -76,6 +76,8 @@ public interface Account extends EObject {
 	 * @see #setAccountNumber(String)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage#getAccount_AccountNumber()
 	 * @model required="true"
+	 *        extendedMetaData="kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@NaturalId'"
 	 * @generated
 	 */
 	String getAccountNumber();

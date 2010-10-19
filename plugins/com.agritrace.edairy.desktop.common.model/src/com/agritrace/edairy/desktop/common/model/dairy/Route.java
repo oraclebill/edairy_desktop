@@ -70,7 +70,8 @@ public interface Route extends EObject {
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getRoute_Name()
-	 * @model
+	 * @model extendedMetaData="kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@NaturalId'"
 	 * @generated
 	 */
 	String getName();

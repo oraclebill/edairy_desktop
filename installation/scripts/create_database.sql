@@ -31,8 +31,9 @@ CREATE TABLE `account` (
   `status` varchar(255) NOT NULL,
   `type` varchar(60) DEFAULT NULL,
   `tstamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`accountid`)
-) ENGINE=InnoDB AUTO_INCREMENT=7228 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`accountid`),
+  UNIQUE KEY `accountnumber` (`accountnumber`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -156,7 +157,7 @@ CREATE TABLE `collectiongroup` (
   CONSTRAINT `collectiongroup_session` FOREIGN KEY (`collectionsession_session_e_id`) REFERENCES `collectionsession` (`id`),
   CONSTRAINT `collectiongroup_vehicle` FOREIGN KEY (`vehicle_vehicle_vehicleid`) REFERENCES `vehicle` (`vehicleid`),
   CONSTRAINT `dairy_collectionjournals` FOREIGN KEY (`dairy_collectionjournals_companyid`) REFERENCES `dairy` (`dairyid`)
-) ENGINE=InnoDB AUTO_INCREMENT=16384 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -207,7 +208,7 @@ CREATE TABLE `collectionjournalline` (
   CONSTRAINT `collectionjournalline_farmcontainer` FOREIGN KEY (`container_farmcontainer_containerid`) REFERENCES `container` (`containerid`),
   CONSTRAINT `collectionjournalline_from` FOREIGN KEY (`farm_from_farmid`) REFERENCES `farm` (`farmid`),
   CONSTRAINT `collectionjournalline_validatedmember` FOREIGN KEY (`membership_validatedmember_e_id`) REFERENCES `membership` (`memberid`)
-) ENGINE=InnoDB AUTO_INCREMENT=655351 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -227,7 +228,7 @@ CREATE TABLE `collectionsession` (
   `tstamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `code` (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -348,7 +349,7 @@ CREATE TABLE `dairy` (
   `licenseexpirationdate` datetime DEFAULT NULL,
   `tstamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`dairyid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -362,31 +363,27 @@ CREATE TABLE `dairylocation` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `dtype` varchar(255) NOT NULL,
   `e_version` int(11) NOT NULL,
+  `code` varchar(60) DEFAULT NULL,
   `name` varchar(60) NOT NULL,
   `dateopened` datetime DEFAULT NULL,
   `phone` varchar(60) DEFAULT NULL,
   `route` bigint(20) DEFAULT NULL,
   `description` varchar(60) DEFAULT NULL,
-  `code` varchar(60) DEFAULT NULL,
   `location_location_e_id` bigint(20) NOT NULL,
   `dairycontainer_containers_containerid` bigint(20) DEFAULT NULL,
   `dairy_branchlocations_companyid` bigint(20) DEFAULT NULL,
   `tstamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `code` (`code`),
   KEY `dairylocation_route` (`route`),
   KEY `dairylocation_containers` (`dairycontainer_containers_containerid`),
   KEY `dairylocation_location` (`location_location_e_id`),
   KEY `dairy_branchlocations` (`dairy_branchlocations_companyid`),
-  KEY `code` (`code`),
-  KEY `code_2` (`code`),
-  KEY `code_3` (`code`),
-  KEY `code_4` (`code`),
-  KEY `code_5` (`code`),
   CONSTRAINT `dairylocation_containers` FOREIGN KEY (`dairycontainer_containers_containerid`) REFERENCES `container` (`containerid`),
   CONSTRAINT `dairylocation_location` FOREIGN KEY (`location_location_e_id`) REFERENCES `location` (`locationid`),
   CONSTRAINT `dairylocation_route` FOREIGN KEY (`route`) REFERENCES `route` (`id`),
   CONSTRAINT `dairy_branchlocations` FOREIGN KEY (`dairy_branchlocations_companyid`) REFERENCES `dairy` (`dairyid`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -492,7 +489,7 @@ CREATE TABLE `farm` (
   KEY `farm_owner` (`farm_owner_e_id`),
   CONSTRAINT `farm_location` FOREIGN KEY (`location_location_e_id`) REFERENCES `location` (`locationid`),
   CONSTRAINT `farm_owner` FOREIGN KEY (`farm_owner_e_id`) REFERENCES `person` (`personid`)
-) ENGINE=InnoDB AUTO_INCREMENT=7228 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -541,7 +538,7 @@ CREATE TABLE `location` (
   `landmarks` varchar(60) DEFAULT NULL,
   `tstamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`locationid`)
-) ENGINE=InnoDB AUTO_INCREMENT=7291 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -592,23 +589,18 @@ CREATE TABLE `membership` (
   `account` bigint(20) NOT NULL,
   `dairy_memberships_companyid` bigint(20) DEFAULT NULL,
   `tstamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `route_defaultroute_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`memberid`),
   UNIQUE KEY `account` (`account`),
+  UNIQUE KEY `membernumber` (`membernumber`),
   KEY `dairy_memberships` (`dairy_memberships_companyid`),
   KEY `membership_defaultroute` (`dairylocation_defaultroute_id`),
   KEY `membership_member` (`farmer_member_personid`),
   KEY `FKB01D87D6D6DFAC3A` (`account`),
-  KEY `membernumber` (`membernumber`),
-  KEY `membernumber_2` (`membernumber`),
-  KEY `membernumber_3` (`membernumber`),
-  KEY `membernumber_4` (`membernumber`),
-  KEY `membernumber_5` (`membernumber`),
   CONSTRAINT `dairy_memberships` FOREIGN KEY (`dairy_memberships_companyid`) REFERENCES `dairy` (`dairyid`),
   CONSTRAINT `FKB01D87D6D6DFAC3A` FOREIGN KEY (`account`) REFERENCES `account` (`accountid`),
   CONSTRAINT `membership_defaultroute` FOREIGN KEY (`dairylocation_defaultroute_id`) REFERENCES `dairylocation` (`id`),
   CONSTRAINT `membership_member` FOREIGN KEY (`farmer_member_personid`) REFERENCES `person` (`personid`)
-) ENGINE=InnoDB AUTO_INCREMENT=7228 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -698,12 +690,11 @@ CREATE TABLE `person` (
   KEY `person_location` (`location`),
   KEY `employee_role` (`role_role_e_id`),
   KEY `dairy_employees` (`dairy_employees_companyid`),
-  KEY `operatorcode` (`operatorcode`),
   CONSTRAINT `company_contacts` FOREIGN KEY (`customer_contacts_e_id`) REFERENCES `customer` (`customerid`),
   CONSTRAINT `dairy_employees` FOREIGN KEY (`dairy_employees_companyid`) REFERENCES `dairy` (`dairyid`),
   CONSTRAINT `employee_role` FOREIGN KEY (`role_role_e_id`) REFERENCES `role` (`id`),
   CONSTRAINT `person_location` FOREIGN KEY (`location`) REFERENCES `location` (`locationid`)
-) ENGINE=InnoDB AUTO_INCREMENT=7354 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -885,6 +876,7 @@ CREATE TABLE `route` (
   `dairy_routes_companyid` bigint(20) DEFAULT NULL,
   `tstamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
   KEY `route_vehicle` (`vehicle_vehicle_vehicleid`),
   KEY `dairy_routes` (`dairy_routes_companyid`),
   CONSTRAINT `dairy_routes` FOREIGN KEY (`dairy_routes_companyid`) REFERENCES `dairy` (`dairyid`),
@@ -993,7 +985,7 @@ CREATE TABLE `transaction` (
   CONSTRAINT `accounttransaction_relatedlocation` FOREIGN KEY (`dairylocation_relatedlocation_id`) REFERENCES `dairylocation` (`id`),
   CONSTRAINT `adjustmenttransaction_signedoffby` FOREIGN KEY (`employee_signedoffby_personid`) REFERENCES `person` (`personid`),
   CONSTRAINT `transaction_account` FOREIGN KEY (`transaction_account_accountid`) REFERENCES `account` (`accountid`)
-) ENGINE=InnoDB AUTO_INCREMENT=32768 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1055,27 +1047,6 @@ CREATE TABLE `trip_deliveries` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `tximport`
---
-
-DROP TABLE IF EXISTS `tximport`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tximport` (
-  `type` varchar(40) DEFAULT NULL,
-  `date` datetime DEFAULT NULL,
-  `reference` varchar(10) DEFAULT NULL,
-  `member_num` varchar(8) DEFAULT NULL,
-  `class` varchar(60) DEFAULT NULL,
-  `amount` decimal(19,2) DEFAULT NULL,
-  `accountid` bigint(20) DEFAULT NULL,
-  `transactiontype` varchar(60) DEFAULT NULL,
-  `source` varchar(60) DEFAULT NULL,
-  `storeid` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `vehicle`
 --
 
@@ -1110,11 +1081,12 @@ CREATE TABLE `vehicle` (
   `dairy_vehicles_companyid` bigint(20) DEFAULT NULL,
   `tstamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`vehicleid`),
+  UNIQUE KEY `registrationnumber` (`registrationnumber`),
   KEY `dairy_vehicles` (`dairy_vehicles_companyid`),
   KEY `vehicle_driver` (`employee_driver_personid`),
   CONSTRAINT `dairy_vehicles` FOREIGN KEY (`dairy_vehicles_companyid`) REFERENCES `dairy` (`dairyid`),
   CONSTRAINT `vehicle_driver` FOREIGN KEY (`employee_driver_personid`) REFERENCES `person` (`personid`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -1126,4 +1098,4 @@ CREATE TABLE `vehicle` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2010-10-18  8:47:49
+-- Dump completed on 2010-10-19 18:15:42

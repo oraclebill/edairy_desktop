@@ -212,7 +212,8 @@ public interface DairyLocation extends EObject {
 	 * @return the value of the '<em>Code</em>' attribute.
 	 * @see #setCode(String)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairyLocation_Code()
-	 * @model
+	 * @model extendedMetaData="kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@NaturalId'"
 	 * @generated
 	 */
 	String getCode();
