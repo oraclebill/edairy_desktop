@@ -12,8 +12,12 @@ package com.agritrace.edairy.desktop.home.views;
 
 import java.math.BigDecimal;
 import java.net.URL;
-import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -122,7 +126,30 @@ public class DairyHomeView extends ViewPart {
 			}
 
 			if (centerSums.size() > 0) {
-				retVal = centerSums.values().toArray();
+				List<Object[]> values = new ArrayList<Object[]>(centerSums.values());
+				Collections.sort(values, new Comparator<Object[]>() {
+					@Override
+					public int compare(Object[] o1, Object[] o2) {
+						return ((String)o1[0]).compareTo((String)o2[0]);
+					}					
+				});
+//				NumberFormat formatter = DecimalFormat.getInstance();
+//				for (Object obj[] : values) {
+//					try {
+//						obj[1] = formatter.format((BigDecimal)obj[1]);
+//					}
+//					catch(IllegalArgumentException ie) {
+//						ie.printStackTrace();
+//					}
+//					try {
+//						obj[2] = formatter.format((BigDecimal)obj[2]);
+//					}
+//					catch(IllegalArgumentException ie) {
+//						ie.printStackTrace();
+//					}
+//				}
+				retVal = values.toArray();
+				
 			} else {
 				retVal = new Object[] { new Object[] { "", 0.0, 0.0 }, };
 			}
