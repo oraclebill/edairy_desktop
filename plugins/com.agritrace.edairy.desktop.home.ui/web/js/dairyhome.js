@@ -76,8 +76,7 @@ $(document).ready(function() {
 		height : 100,
 		title : ' ',
 		pieLablePos : 'outside'
-	}
-	$('table#intake-data-table').visualize(pieProps).appendTo('#pie-chart');
+	};
 
 	barProps = {
 		type : 'bar',
@@ -85,10 +84,12 @@ $(document).ready(function() {
 		colors : COLORS,
 		colFilter : '.chart',
 		barMargin : 0,
-		barGroupMargin : 4,
-		width : 300,
+		barGroupMargin : 2,
+		width : 950,
 		height : 100,
 		title : ' '
-	}
+	};
 	$('table#intake-data-table').visualize(barProps).appendTo('#bar-chart');
+//	$('table#intake-data-table').visualize(pieProps).appendTo('#pie-chart');
+
 });

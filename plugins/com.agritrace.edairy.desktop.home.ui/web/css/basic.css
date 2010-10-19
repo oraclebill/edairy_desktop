@@ -21,11 +21,11 @@ h2 { margin-bottom: 1.5em; color: #205b75; }
 
 div#header 	{  text-align: center; margin-bottom: 1em; }
 
-#wrapper { width: 1100px;	margin-left: auto; margin-right: auto; }
+#wrapper { width: 1100px;	margin-left: auto; margin-right: auto; margin-top: 25px;}
 #wrapper > div 	{ background-color: #ffffff; -moz-border-radius: 15px; border-radius: 15px;	 }
 
-#body { width: 700px; position: absolute; left: 15px; top: 45px; }
-#sidebar { width: 350px; position: absolute; left: 730px; top: 45px; }
+#body { width: 700px; position: absolute; left: 15px;  }
+#sidebar { width: 350px; position: absolute; left: 730px;  }
 #sidebar > div {  background-color: #ffffff; margin:1em; padding: 1em; padding-top: .3em; margin-top: .3em; min-height: 5em; }
 #sidebar > div:nth-child(2n+1) { background-color: #f5f5ff; }
 #sidebar  h2 { color: #009245;  } 
@@ -48,4 +48,4 @@ div#intake-data { text-align: center; }
 div#finance-data { }
 
 #pie-chart .visualize-info { display: none; }
-#bar-chart .visualize-info { position: absolute; left: 110%; top: 0px; }
+#bar-chart .visualize-info { position: absolute; left: 101%; bottom: 0px; }

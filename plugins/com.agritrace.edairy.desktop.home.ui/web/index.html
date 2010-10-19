@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-	<title>eDairy Dashboard</title>
-	<title>Charting</title>
-	
-	<link href="css/basic.css" type="text/css" rel="stylesheet" />
-	<script type="text/javascript" src="js/enhance.js"></script>	
-	<script type="text/javascript"> 
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<title>eDairy Dashboard</title>
+<title>Charting</title>
+
+<link href="css/basic.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="js/enhance.js"></script>
+<script type="text/javascript"> 
 		// Run capabilities test
 		enhance({
 			loadScripts: [
@@ -21,128 +21,230 @@
 				'css/visualize-light.css'
 			]	
 		});   
-    </script> 
+    </script>
 </head>
 <body>
+
 <div id='content'>
-	<div id='header'>
-		<h1>LIMURU DAIRY OWNERS COOPERATIVE UNION</h1>
+<div id='header'>
+<h1>LIMURU DAIRY OWNERS COOPERATIVE UNION</h1>
+</div>
+<div id='charts'>
+	<div id='bar-chart' class='chart-box'>
+		<h2>Intake By Collection Center (Route)</h2>
 	</div>
-	<div id='wrapper'>
-		<div id='body'>
-			<div id='dateselector'>
-				<script>
+	<!-- 
+	<div id='xpie-chart' class='chart-box'>
+		<h2>By Session</h2>
+	</div>
+	 -->
+</div>
+
+
+<div id='wrapper'>
+<div id='body'>
+<!-- 
+<div id='dateselector'><script>
 					$(function() {
 						$( "#datepicker" ).datepicker();
 					});
 				</script>
-				<p>
-					Date:
-					<select id="dateoption">
-						<option value="today">Today</option>
-						<option value="yesterday">Yesterday</option>
-						<option value="select">Select a date</option>
-					</select>
-					<input type="text"  id="datepicker">
-				</p>
-			</div>
-			<div id='charts'>
-				<div id='pie-chart' class='chart-box'>
-					<h2>Total Intake Today</h2>
-				</div>
-				<div id='bar-chart'  class='chart-box''>
-					<h2>Intake By Collection Center (Route)</h2>
-				</div>
-				<hr>
-			</div>
-			<div id='intake-data'>
-				<h2>REAL TIME DAILY MILK INTAKE MONITOR </h2>
-				<table id='intake-data-table'>
-				  <thead>		
-				  	<tr> 
-				  		<td></td> 
-				  		<th scope="col" class="chart">Session 1</th>
-				  		<th scope="col" class="chart">Session 2</th>
-				  		<th scope="col">Total</th>
-				  	</tr>
-				  </thead>
-				  <tbody>
-				  </tbody>
-				  <tfoot>
-				  </tfoot>
-				</table>
-				<hr>
-			</div>
-			<div id='finance-data'></div>
-		</div>
-		<div id='sidebar'>
-			<h2>Dairy Snapshot Statistics</h2>
-			<div>
-				<h3>Milk Collection</h3>
-				<table id='milk-collection-averages'>
-					<tr><th>Average Daily Volume</th><td></td></tr>
-					<tr><th>Average Daily Count</th><td></td></tr>
-					<tr><th>Average Weekly Volume</th><td></td></tr>
-					<tr><th>Average Weekly Count</th><td></td></tr>
-					<tr><th>Average Monthly Volume</th><td></td></tr>
-					<tr><th>Average Monthly Count</th><td></td></tr>
-					<tr><th>Average Annual Volume</th><td></td></tr>
-				</table>
-			</div>
-			<div>
-				<h3>Top 5 Collection Centers</h3>
-				<table id='top-collection-centers'>
-					<tr><th></th><td></td></tr>
-					<tr><th></th><td></td></tr>
-					<tr><th></th><td></td></tr>
-					<tr><th></th><td></td></tr>
-					<tr><th></th><td></td></tr>
-				</table>
-			</div>
-			<div>
-				<h3>Membership</h3>
-				<table>
-					<tr><th>Total Registered</th><td></td></tr>
-					<tr><th>Active This Year</th><td></td></tr>
-					<tr><th>Active This Month</th><td></td></tr>
-					<tr><th>Active Past Month</th><td></td></tr>
-					<tr><th>% Change</th><td></td></tr>
-					<tr><th>New Members This Year</th><td></td></tr>
-					<tr><th>New Members This Month</th><td></td></tr>
-					<tr><th>Total Membership Loss</th><td></td></tr>
-				</table>
-			</div>
-			<div>
-				<h3>Finance</h3>
-				<table>
-					<tr><th>Credit Sales This Month</th><td></td></tr>
-					<tr><th>Credit Sales Past Month</th><td></td></tr>
-					<tr><th>Sales This Year</th><td></td></tr>
-					<tr><th>Sales Last Year</th><td></td></tr>
-				</table>
-			</div>
-			<div>
-				<h3>Veterinary</h3>
-				<table>
-					<tr><th>Average Monthly AI Visits</th><td></td></tr>
-					<tr><th>AI Visits This Month</th><td></td></tr>
-					<tr><th>Average Monthly Veterinary Visits</th><td></td></tr>
-					<tr><th>Veterinary Visits This Month</th><td></td></tr>
-				</table>
-			</div>
-			<div>
-				<h3>Operations</h3>
-				<table>
-					<tr><th>Number of Employees</th><td></td></tr>
-					<tr><th>Number of Vehicles</th><td></td></tr>
-					<tr><th>Number of Stores</th><td></td></tr>
-					<tr><th></th><td></td></tr>
-					<tr><th></th><td></td></tr>
-				</table>
-			</div>
-		</div>
-	</div>
-	<div id='footer'></div>
-	</div>
+<p>Date: <select id="dateoption">
+	<option value="today">Today</option>
+	<option value="yesterday">Yesterday</option>
+	<option value="select">Select a date</option>
+</select> <input type="text" id="datepicker"></p>
+</div>
+ -->
+ 
+<div id='intake-data'>
+<h2>REAL TIME DAILY MILK INTAKE MONITOR</h2>
+<table id='intake-data-table'>
+	<thead>
+		<tr>
+			<td></td>
+			<th scope="col" class="chart">AM</th>
+			<th scope="col" class="chart">PM</th>
+			<th scope="col">Total</th>
+		</tr>
+	</thead>
+	<tbody>
+	</tbody>
+	<tfoot>
+	</tfoot>
+</table>
+<hr>
+</div>
+<div id='finance-data'></div>
+</div>
+<div id='sidebar'>
+<h2>Dairy Snapshot Statistics</h2>
+<div>
+<h3>Milk Collection</h3>
+<table id='milk-collection-averages'>
+	<tr>
+		<th>Average Daily Volume</th>
+		<td></td>
+	</tr>
+	<tr>
+		<th>Average Daily Count</th>
+		<td></td>
+	</tr>
+	<tr>
+		<th>Average Weekly Volume</th>
+		<td></td>
+	</tr>
+	<tr>
+		<th>Average Weekly Count</th>
+		<td></td>
+	</tr>
+	<tr>
+		<th>Average Monthly Volume</th>
+		<td></td>
+	</tr>
+	<tr>
+		<th>Average Monthly Count</th>
+		<td></td>
+	</tr>
+	<tr>
+		<th>Average Annual Volume</th>
+		<td></td>
+	</tr>
+</table>
+</div>
+<div>
+<h3>Top 5 Collection Centers</h3>
+<table id='top-collection-centers'>
+	<tr>
+		<th></th>
+		<td></td>
+	</tr>
+	<tr>
+		<th></th>
+		<td></td>
+	</tr>
+	<tr>
+		<th></th>
+		<td></td>
+	</tr>
+	<tr>
+		<th></th>
+		<td></td>
+	</tr>
+	<tr>
+		<th></th>
+		<td></td>
+	</tr>
+</table>
+</div>
+<div>
+<h3>Membership</h3>
+<table>
+	<tr>
+		<th>Total Registered</th>
+		<td></td>
+	</tr>
+	<tr>
+		<th>Active This Year</th>
+		<td></td>
+	</tr>
+	<tr>
+		<th>Active This Month</th>
+		<td></td>
+	</tr>
+	<tr>
+		<th>Active Past Month</th>
+		<td></td>
+	</tr>
+	<tr>
+		<th>% Change</th>
+		<td></td>
+	</tr>
+	<tr>
+		<th>New Members This Year</th>
+		<td></td>
+	</tr>
+	<tr>
+		<th>New Members This Month</th>
+		<td></td>
+	</tr>
+	<tr>
+		<th>Total Membership Loss</th>
+		<td></td>
+	</tr>
+</table>
+</div>
+<div>
+<h3>Finance</h3>
+<table>
+	<tr>
+		<th>Credit Sales This Month</th>
+		<td></td>
+	</tr>
+	<tr>
+		<th>Credit Sales Past Month</th>
+		<td></td>
+	</tr>
+	<tr>
+		<th>Sales This Year</th>
+		<td></td>
+	</tr>
+	<tr>
+		<th>Sales Last Year</th>
+		<td></td>
+	</tr>
+</table>
+</div>
+<div>
+<h3>Veterinary</h3>
+<table>
+	<tr>
+		<th>Average Monthly AI Visits</th>
+		<td></td>
+	</tr>
+	<tr>
+		<th>AI Visits This Month</th>
+		<td></td>
+	</tr>
+	<tr>
+		<th>Average Monthly Veterinary Visits</th>
+		<td></td>
+	</tr>
+	<tr>
+		<th>Veterinary Visits This Month</th>
+		<td></td>
+	</tr>
+</table>
+</div>
+<div>
+<h3>Operations</h3>
+<table>
+	<tr>
+		<th>Number of Employees</th>
+		<td></td>
+	</tr>
+	<tr>
+		<th>Number of Vehicles</th>
+		<td></td>
+	</tr>
+	<tr>
+		<th>Number of Stores</th>
+		<td></td>
+	</tr>
+	<tr>
+		<th></th>
+		<td></td>
+	</tr>
+	<tr>
+		<th></th>
+		<td></td>
+	</tr>
+</table>
+</div>
+</div>
+</div>
+
+<div id='footer'></div>
+</div>
 </body>
 </html>
