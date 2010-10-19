@@ -23,14 +23,17 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.BrowserFunction;
 import org.eclipse.swt.browser.LocationAdapter;
 import org.eclipse.swt.browser.LocationEvent;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.part.ViewPart;
@@ -41,6 +44,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.internal.home.HomeActivator;
 import com.google.inject.Inject;
+import com.swtdesigner.SWTResourceManager;
 
 public class DairyHomeView extends ViewPart {
 	public static final String ID = "desktop.home.view";
@@ -161,6 +165,9 @@ public class DairyHomeView extends ViewPart {
 	@Inject
 	private static ICollectionJournalLineRepository journalRepository;
 
+//	@Inject
+//	private static ScaleImportAction scaleImportAction;
+	
 	public DairyHomeView() {
 	}
 	
@@ -170,7 +177,64 @@ public class DairyHomeView extends ViewPart {
 		parent.setBackground(Display.getCurrent().getSystemColor(
 				SWT.COLOR_WHITE));
 		parent.setLayout(new GridLayout(1, false));
-
+		Composite buttonbar = new Composite(parent, SWT.BORDER); 
+		buttonbar.setBackground(SWTResourceManager.getColor(SWT.COLOR_TITLE_BACKGROUND_GRADIENT));
+		buttonbar.setLayout( new GridLayout( 7, true) );
+		buttonbar.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		
+		GridDataFactory buttonDataFactory = GridDataFactory.fillDefaults().grab(true, true).hint(-1,40);
+		Font buttonFont = SWTResourceManager.getFont("Lucida Grande", 12, SWT.BOLD);
+		
+		final Button btnImportScale = new Button(buttonbar, SWT.BORDER | SWT.FLAT);
+		btnImportScale.setFont(buttonFont);
+		btnImportScale.setText("Scale Import");
+		buttonDataFactory.applyTo(btnImportScale);
+//		btnImportScale.addSelectionListener(scaleImportAction);
+//		final Image buttonImage = HomeActivator.getDefault().getImageDescriptor(ImageRegistry.sample_memberphoto);
+//		System.err.println("IMAGE: " + buttonImage);
+//		btnImportScale.addFocusListener(new FocusAdapter() {
+//			@Override
+//			public void focusGained(FocusEvent e) {
+//				btnImportScale.setImage(buttonImage);
+//			}
+//
+//			@Override
+//			public void focusLost(FocusEvent e) {
+//				btnImportScale.setImage(null);
+//			}
+//			
+//		});
+		
+		Button button_1 = new Button(buttonbar, SWT.FLAT);
+		button_1.setFont(buttonFont);
+		button_1.setText("Milk Delivery");
+		buttonDataFactory.applyTo(button_1);
+		
+		Button button_2 = new Button(buttonbar, SWT.FLAT);
+		button_2.setFont(buttonFont);
+		button_2.setText("Farmer Registration");
+		buttonDataFactory.applyTo(button_2);
+		
+		Button button_3 = new Button(buttonbar, SWT.FLAT);
+		button_3.setFont(buttonFont);
+		button_3.setText("Livestock Registration");
+		buttonDataFactory.applyTo(button_3);
+		
+		Button button_4 = new Button(buttonbar, SWT.FLAT);
+		button_4.setFont(buttonFont);
+		button_4.setText("Veterinary Requests");
+		buttonDataFactory.applyTo(button_4);
+		
+		Button button_5 = new Button(buttonbar, SWT.FLAT);
+		button_5.setFont(buttonFont);
+		button_5.setText("Credit Sales");
+		buttonDataFactory.applyTo(button_5);
+		
+		Button button_6 = new Button(buttonbar, SWT.FLAT);
+		button_6.setFont(buttonFont);
+		button_6.setText("Supplier Directory");
+		buttonDataFactory.applyTo(button_6);
+		
 		browser = new Browser(parent, SWT.NONE);
 		browser.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		browser.addLocationListener(new HomepageLocationListener());
@@ -188,5 +252,4 @@ public class DairyHomeView extends ViewPart {
 	public void setFocus() {
 		browser.refresh();
 	}
-
 }

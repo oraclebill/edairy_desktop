@@ -19,6 +19,8 @@ import org.eclipse.riena.navigation.ui.swt.views.SubModuleView;
 import org.eclipse.riena.ui.core.uiprocess.UIProcess;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.ui.PlatformUI;
 import org.osgi.service.log.LogService;
@@ -41,8 +43,9 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.ImportResultsDialog;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.agritrace.edairy.desktop.operations.services.dairylocation.IDairyLocationRepository;
+import com.google.inject.Inject;
 
-final class ScaleImportAction implements IActionListener {
+ public class ScaleImportAction implements IActionListener, SelectionListener {
 
 	private class ScaleImportProcess extends UIProcess {
 		/**
@@ -488,6 +491,16 @@ final class ScaleImportAction implements IActionListener {
 		formatter.format("%s-%s-%s-%2s", record.getScaleSerial(), record.getRouteNumber(), record.getTransactionDate(),
 				record.getSessionCode());
 		return buffer.toString();
+	}
+
+	@Override
+	public void widgetSelected(SelectionEvent e) {
+		callback();		
+	}
+
+	@Override
+	public void widgetDefaultSelected(SelectionEvent e) {
+//		callback();		
 	}
 
 }

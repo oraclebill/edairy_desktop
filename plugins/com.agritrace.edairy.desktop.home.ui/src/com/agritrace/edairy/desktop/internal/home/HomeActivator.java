@@ -2,13 +2,14 @@ package com.agritrace.edairy.desktop.internal.home;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+
+import com.agritrace.edairy.desktop.common.ui.DesktopBaseActivator;
 
 /**
  * The activator class controls the plug-in life cycle
  */
-public class HomeActivator extends AbstractUIPlugin {
+public class HomeActivator extends DesktopBaseActivator {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "com.agritrace.edairy.desktop.home"; //$NON-NLS-1$
