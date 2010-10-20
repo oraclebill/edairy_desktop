@@ -1,4 +1,4 @@
-drop table tximport;
+drop table if exists tximport;
 
 CREATE TABLE `tximport` (
   `type` varchar(40) DEFAULT NULL,
