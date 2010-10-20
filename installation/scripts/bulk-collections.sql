@@ -3,7 +3,7 @@ select dairyid into @dairyid from dairy limit 1;
 
 drop table if exists collections;
 
-CREATE TABLE collections
+CREATE TEMPORARY TABLE collections
 (
 	trxn_id       		integer NOT NULL AUTO_INCREMENT ,
 	member_number 		varchar(10) NOT NULL ,
@@ -25,7 +25,8 @@ CREATE TABLE collections
 )
 ;
 
-load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/collections/436.dat' into table collections fields terminated by ',' enclosed by '\'' ;
+load data infile '/Users/bjones/Development/Projects/edairy_desktop/test-data/collections/436.dat' into table collections fields terminated by ',' enclosed by '\'' 
+;
 
 alter table collections 
   add column memberid bigint(20) ,
@@ -46,7 +47,8 @@ alter table collections
 
 alter table collections 
     add index (txn_date, session_id, dairylocationid),
-    add index (operator_code)
+    add index (operator_code),
+    add index (vehicle_num)
 ;
   
 update collections 
@@ -134,4 +136,39 @@ update collectionjournalline
     set collectiongroup_journalentries_idx = 0
 ;
 
+--
+-- Update employees - set operator codes from best match in collections data
+--
+-- create temporary table codes 
+-- 	select distinct operator_code, substr(operator_code,1,1) as f, substr(operator_code,2,1) as m, substr(operator_code,3,1) as l 
+-- 	from collections 
+-- 	order by 1
+-- ;
+-- 
+-- update person p, codes c
+-- 	set p.operatorcode = c.operator_code
+-- 	where c.f = left(p.givenname,1)
+--     and c.m = left(p.middlename,1)
+--     and c.l = left(p.familyname,1)
+-- 	and p.operatorcode is null
+-- ;
+-- 	
+-- update person p, codes c
+-- 	set p.operatorcode = c.operator_code
+-- 	where c.f = left(p.givenname,1)
+--     and c.l = left(p.familyname,1)
+-- 	and p.operatorcode is null
+-- 	and p.dtype = 'Employee'
+-- ;
+-- 	
+-- select personid, jobfunction, operator_code, givenname, middlename, familyname
+-- from codes c left outer
+--         join person p
+--                 on  c.f = left(givenname,1)
+--                 and     c.l = left(familyname,1)
+--                 and p.dtype = 'Employee'
+-- where personid is null
+-- and operatorcode is null
+-- order by 3
+-- 	
 -- drop table collections;
