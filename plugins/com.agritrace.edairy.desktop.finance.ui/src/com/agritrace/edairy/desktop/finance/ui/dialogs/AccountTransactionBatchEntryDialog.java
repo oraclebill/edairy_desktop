@@ -44,7 +44,9 @@ public class AccountTransactionBatchEntryDialog extends BaseDialogView {
 		@Override
 		public void configureRidgets() {
 			super.configureRidgets();
-
+			
+			getWindowRidget().setTitle("Batch Transaction Entry");
+			
 			final String[] headers = new String[] { "ID", "Source", "Date", "Reference #", "Member ", "Amount" };
 			final String[] properties = new String[] {
 					AccountPackage.Literals.TRANSACTION__TRANSACTION_ID.getName(),
