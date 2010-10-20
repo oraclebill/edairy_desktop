@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
@@ -30,12 +31,13 @@ public class MilkCollectionRepository extends RepositoryUtil<CollectionGroup>
 		throw new UnsupportedOperationException();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public List<CollectionGroup> findCollectionGroups(DairyLocation route,
 			CollectionSession collectionSession, Date startDate, Date endDate,
-			JournalStatus status, boolean rejected, boolean missing,
-			boolean flagged) {
+			JournalStatus status, Boolean rejected, Boolean missing,
+			Boolean flagged) {
 		Session session = getCurrentSession();
 		Criteria criteria = session.createCriteria("CollectionGroup");
 
@@ -59,16 +61,24 @@ public class MilkCollectionRepository extends RepositoryUtil<CollectionGroup>
 			criteria.add(Restrictions.eq("status", status));
 		}
 
-		if (rejected)
-			criteria.add(Restrictions.gt("rejectedCount", 0));
+		if (rejected != null)
+			criteria.add(Restrictions.gt("rejectedCount", rejected));
 		
-//		if (missing)
-//			criteria.add(Restrictions.eq("", true));
+//		if (missing != null)
+//			criteria.add(Restrictions.eq("", missing));
 //		
-		if (flagged)
-			criteria.add(Restrictions.eq("suspended", true));
+		if (flagged != null)
+			criteria.add(Restrictions.eq("suspended", flagged));
 
 		return (List<CollectionGroup>) criteria.list();
+	}
+
+	@Override
+	public List<CollectionJournalLine> findCollections(DairyLocation route,
+			CollectionSession session, Date startDate, Date endDate,
+			Boolean isMissing, Boolean isRejected, Boolean flagged) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
