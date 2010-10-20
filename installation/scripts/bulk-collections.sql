@@ -1,7 +1,7 @@
 
 select dairyid into @dairyid from dairy limit 1;
 
-drop table collections;
+drop table if exists collections;
 
 CREATE TABLE collections
 (
@@ -36,16 +36,17 @@ alter table collections
   add column groupid bigint(20)
 ;
 
-alter table dairylocation 
-    add index (code)
-;
+-- alter table dairylocation 
+--     add index (code)
+-- ;
 
-alter table membership 
-    add index (membernumber)
-;
+-- alter table membership 
+--     add index (membernumber)
+-- ;
 
 alter table collections 
-    add index (txn_date, session_id, dairylocationid)
+    add index (txn_date, session_id, dairylocationid),
+    add index (operator_code)
 ;
   
 update collections 
