@@ -5,8 +5,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
@@ -65,7 +68,26 @@ public class MilkCollectionJournalLineRepository extends
 		return (Long) query.uniqueResult();
 	}
 
-	@Override
+	@Override @Transactional
+	public List<Object[]> collectionsSummary(Date startDate, Date endDate) {
+		final String sqlString = "select journaldate as date, dairylocation.code as route, collectionsession.code as session, sum(quantity) as sum  "
+				+ "  from collectiongroup join collectionjournalline on collectionjournalline_collectionjournal_e_id = journalid "
+				+ "    join collectionsession on collectionsession.id = collectionsession_session_e_id "
+				+ "    join dairylocation on dairylocation.id = dairylocation_collectioncenter_id "
+				+ "  where journaldate between ? and ? "
+				+ " group by 2,3 "
+				+ " order by 1,2,3;";
+		return getCurrentSession().createSQLQuery(sqlString)
+				.addScalar("date", Hibernate.DATE)
+				.addScalar("route", Hibernate.STRING)
+				.addScalar("session", Hibernate.STRING)
+				.addScalar("sum", Hibernate.DOUBLE)
+				.setDate(0, startDate)
+				.setDate(1, endDate)
+				.list();
+	}
+
+//	@Override
 	@Transactional
 	public List<CollectionGroup> allForDate(final Date date) {
 		int year, month, day;
@@ -78,27 +100,48 @@ public class MilkCollectionJournalLineRepository extends
 			cal.setTime(new Date());
 		}
 
-		year = cal.get(Calendar.YEAR);
-		month = cal.get(Calendar.MONTH);
-		day = cal.get(Calendar.DAY_OF_MONTH);
+		Calendar startDate = (Calendar) cal.clone(), endDate = (Calendar) cal
+				.clone();
 
-		final String queryText = // "SELECT grp " +
-		"FROM CollectionGroup as grp "
-				+ "          where day(grp.journalDate) = :day"
-				+ "          and  month(grp.journalDate) = :month"
-				+ "          and  year(grp.journalDate) = :year";
+		int[] timeFields = new int[] { Calendar.HOUR, Calendar.MINUTE,
+				Calendar.SECOND, Calendar.MILLISECOND };
+		for (int field : timeFields) {
+			startDate.set(field, startDate.getActualMinimum(field));
+			endDate.set(field, startDate.getActualMaximum(field));
+		}
+		return findJournalsInRange(startDate, endDate);
+	}
 
-		final Query query = getCurrentSession().createQuery(queryText);
+	public List<CollectionGroup> findJournalsInRange(Calendar startDate,
+			Calendar endDate) {
 
-		query.setInteger("year", year);
-		query.setInteger("month", month + 1);
-		query.setInteger("day", day);
+		// year = cal.get(Calendar.YEAR);
+		// month = cal.get(Calendar.MONTH);
+		// day = cal.get(Calendar.DAY_OF_MONTH);
+		//
+		// final String queryText = // "SELECT grp " +
+		// "FROM CollectionGroup as grp "
+		// + "          where day(grp.journalDate) = :day"
+		// + "          and  month(grp.journalDate) = :month"
+		// + "          and  year(grp.journalDate) = :year";
+		//
+		// // final Query query = getCurrentSession().createQuery(queryText);
+		// // query.setInteger("year", year);
+		// // query.setInteger("month", month + 1);
+		// // query.setInteger("day", day);
 
+		final Criteria query = getCurrentSession().createCriteria(
+				"CollectionGroup");
+		if (startDate != null) {
+			query.add(Restrictions.ge("journalDate", startDate.getTime()));
+		}
+		if (endDate != null) {
+			query.add(Restrictions.le("journalDate", endDate.getTime()));
+		}
 		final List<CollectionGroup> results = query.list();
 
 		// debug
-		System.err.format("XXXXXX: Day = %d, month = %d, year = %d\n", day,
-				month, year);
+		System.err.format("XXXXXX: Start: %s, End: %s", startDate, endDate);
 		System.err.format("XXXXXX: results count = %d\n", results.size());
 		return results;
 

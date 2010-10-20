@@ -18,7 +18,7 @@ public interface ICollectionJournalLineRepository extends
 	long countByMemberCenterDate(final Membership member,
 			final DairyLocation center, final Date date);
 
-	List<CollectionGroup> allForDate(Date date);
+//	List<CollectionGroup> allForDate(Date date);
 
 	BigDecimal getMilkPrice(int priceMonth, int priceYear);
 
@@ -27,4 +27,6 @@ public interface ICollectionJournalLineRepository extends
 			int paymentMonth, int paymentYear);
 	BigDecimal getSumOfPayableDeliveries(Membership member, int paymentMonth,
 			int paymentYear);
+
+	List<Object[]> collectionsSummary(Date startDate, Date endDate);
 }
