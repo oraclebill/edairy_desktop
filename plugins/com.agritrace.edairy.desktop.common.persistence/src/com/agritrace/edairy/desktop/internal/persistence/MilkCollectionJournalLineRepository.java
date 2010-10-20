@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.internal.collection.services;
+package com.agritrace.edairy.desktop.internal.persistence;
 
 import java.math.BigDecimal;
 import java.util.Calendar;

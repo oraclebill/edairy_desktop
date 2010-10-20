@@ -33,7 +33,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.ManagedMemoryDataStoreProvider;
-import com.agritrace.edairy.desktop.internal.collection.services.MilkCollectionJournalLineRepository;
+import com.agritrace.edairy.desktop.internal.persistence.MilkCollectionJournalLineRepository;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
