@@ -66,65 +66,40 @@ public class BulkCollectionsEntryDialogController extends
 		BaseDialogController<CollectionGroup> {
 
 	/*
-	private final class GenericMemberInfo implements IMemberInfoProvider {
-		// private final Route currentRoute;
-		private final IMemberInfoProvider lookupProvider;
-//		private final LRUCache<String, Integer> failed = new LRUCache<String, Integer>();
-		private final MemberCacheProvider routeCache;
-
-		private GenericMemberInfo(Route currentRoute,
-				IMemberInfoProvider lookupProvider) {
-			// this.currentRoute = currentRoute;
-			this.lookupProvider = lookupProvider;
-			routeCache = new MemberCacheProvider(dairyRepo.getMembersForRoute(currentRoute));
-//			failed.setMinimumSize(50);
-		}
-
-		@Override
-		public Membership getMember(String memberNumber) {
-			// fail fast
-//			Integer count = failed.get(memberNumber);
-//			if (count != null) {
-//				count = count + 1;
-//				failed.put(memberNumber, count);
-//				return null;
-//			}
-			// lookup in route
-			Membership member = routeCache.getMember(memberNumber);
-			if (member == null) {
-				// lookup in db
-				member = lookupProvider.getMember(memberNumber);
-			}
-			// fill fail cache
-//			if (member == null) {
-//				failed.put(memberNumber, new Integer(1));
-//			}
-			return member;
-		}
-	}
-
-	private class RouteMatchValidator implements IValidator {
-		Route route;
-
-		RouteMatchValidator(Route route) {
-			this.route = route;
-		}
-
-		@Override
-		public IStatus validate(Object value) {
-			boolean pass = false;
-			if (value instanceof Membership) {
-				Membership member = (Membership) value;
-				pass = route.equals(member.getDefaultRoute());
-			}
-			return pass ?
-					ValidationStatus.ok() :
-						ValidationStatus.error("routes not equal");
-
-		}
-
-	}
-	*/
+	 * private final class GenericMemberInfo implements IMemberInfoProvider { //
+	 * private final Route currentRoute; private final IMemberInfoProvider
+	 * lookupProvider; // private final LRUCache<String, Integer> failed = new
+	 * LRUCache<String, Integer>(); private final MemberCacheProvider
+	 * routeCache;
+	 * 
+	 * private GenericMemberInfo(Route currentRoute, IMemberInfoProvider
+	 * lookupProvider) { // this.currentRoute = currentRoute;
+	 * this.lookupProvider = lookupProvider; routeCache = new
+	 * MemberCacheProvider(dairyRepo.getMembersForRoute(currentRoute)); //
+	 * failed.setMinimumSize(50); }
+	 * 
+	 * @Override public Membership getMember(String memberNumber) { // fail fast
+	 * // Integer count = failed.get(memberNumber); // if (count != null) { //
+	 * count = count + 1; // failed.put(memberNumber, count); // return null; //
+	 * } // lookup in route Membership member =
+	 * routeCache.getMember(memberNumber); if (member == null) { // lookup in db
+	 * member = lookupProvider.getMember(memberNumber); } // fill fail cache //
+	 * if (member == null) { // failed.put(memberNumber, new Integer(1)); // }
+	 * return member; } }
+	 * 
+	 * private class RouteMatchValidator implements IValidator { Route route;
+	 * 
+	 * RouteMatchValidator(Route route) { this.route = route; }
+	 * 
+	 * @Override public IStatus validate(Object value) { boolean pass = false;
+	 * if (value instanceof Membership) { Membership member = (Membership)
+	 * value; pass = route.equals(member.getDefaultRoute()); } return pass ?
+	 * ValidationStatus.ok() : ValidationStatus.error("routes not equal");
+	 * 
+	 * }
+	 * 
+	 * }
+	 */
 
 	public static final String CONTEXT_JOURNAL_PAGE = "CONTEXT_JOURNAL_PAGE";
 	public static final String CONTEXT_PERSISTENCE_DELEGATE = "CONTEXT_PERSISTENCE_DELEGATE";
@@ -170,7 +145,8 @@ public class BulkCollectionsEntryDialogController extends
 	 *
 	 */
 	@Inject
-	public BulkCollectionsEntryDialogController(final IDairyRepository dairyRepo,
+	public BulkCollectionsEntryDialogController(
+			final IDairyRepository dairyRepo,
 			final ICollectionJournalLineRepository lineRepo) {
 		super();
 		this.dairyRepo = dairyRepo;
@@ -237,9 +213,13 @@ public class BulkCollectionsEntryDialogController extends
 	@Override
 	public void configureRidgets() {
 		super.configureRidgets();
+		
+		getWindowRidget().setTitle("Manual Collection Journal Entry");
+		
 		System.out.println("configureRidgets : " + this);
 
-		journalHeaderRidget = getRidget(IJournalHeaderRidget.class, "journal-header");
+		journalHeaderRidget = getRidget(IJournalHeaderRidget.class,
+				"journal-header");
 		collectionLineRidget = getRidget(ICollectionLineRidget.class,
 				"journal-entry");
 		journalEntryTable = getRidget(ITableRidget.class,
@@ -316,7 +296,8 @@ public class BulkCollectionsEntryDialogController extends
 		tableDeleteAction.setEnabled(true);
 		enableBottomButtons(false);
 
-		if (PrincipalManager.getInstance().hasPermission(Permission.EDIT_DRIVER_TOTAL)) {
+		if (PrincipalManager.getInstance().hasPermission(
+				Permission.EDIT_DRIVER_TOTAL)) {
 			System.out.println("Forcing driver total editable");
 			journalHeaderRidget.forceDriverTotalEditable();
 		}
@@ -369,7 +350,8 @@ public class BulkCollectionsEntryDialogController extends
 			@Override
 			public void callback(ClickEvent event) {
 				if (event.getColumnIndex() == 6) {
-					final CollectionJournalLine line = (CollectionJournalLine) event.getRow();
+					final CollectionJournalLine line = (CollectionJournalLine) event
+							.getRow();
 
 					if (line != null) {
 						line.setRejected(!line.isRejected());
@@ -441,11 +423,10 @@ public class BulkCollectionsEntryDialogController extends
 		@Override
 		public String getText(Object element) {
 
-				return "";
+			return "";
 		}
 
 	}
-
 
 	/**
 	 *
@@ -464,9 +445,9 @@ public class BulkCollectionsEntryDialogController extends
 		final int lineCount = page.getJournalEntries().size();
 		if (lineCount > 0) {
 			CollectionJournalLine lastLine, workingLine;
-			lastLine = page.getJournalEntries().get(lineCount-1);
+			lastLine = page.getJournalEntries().get(lineCount - 1);
 			workingLine = collectionLineRidget.getWorkingCollectionLine();
-			if (workingLine != null ) {
+			if (workingLine != null) {
 				workingLine.setDairyContainer(lastLine.getDairyContainer());
 			}
 		}
@@ -481,29 +462,32 @@ public class BulkCollectionsEntryDialogController extends
 		//
 		final CollectionGroup workingJournalPage = getContextJournalPage();
 		// final Route currentRoute = workingJournalPage.getRoute();
-		final IMemberInfoProvider lookupProvider = new MemberLookupProvider(dairyRepo);
+		final IMemberInfoProvider lookupProvider = new MemberLookupProvider(
+				dairyRepo);
 
 		collectionLineRidget.clearValidators();
 		collectionLineRidget.addValidator(new MandatoryFieldsCheck(
 				collectionLineRidget));
 		// TODO: RouteMatchValidator
 		// collectionLineRidget.setRouteValidator(new RouteMatchValidator(
-		//		workingJournalPage.getRoute()));
+		// workingJournalPage.getRoute()));
 
 		// too slow??
 		collectionLineRidget.addValidator(new MemberLookupValidator(
 				lookupProvider));
 
 		/*
-		if (currentRoute != null) {
-			// collectionLineRidget.setBinList(dairyRepo.getBinsForRoute(currentRoute));
-			// // todo;
-//			collectionLineRidget.setMemberInfoProvider(
-//					new MemberCacheProvider(dairyRepo.getMembersForRoute(currentRoute)));
-			collectionLineRidget.setMemberInfoProvider( new GenericMemberInfo(currentRoute, lookupProvider));
-
-		} else { */
-			collectionLineRidget.setMemberInfoProvider(lookupProvider);
+		 * if (currentRoute != null) { //
+		 * collectionLineRidget.setBinList(dairyRepo
+		 * .getBinsForRoute(currentRoute)); // // todo; //
+		 * collectionLineRidget.setMemberInfoProvider( // new
+		 * MemberCacheProvider(dairyRepo.getMembersForRoute(currentRoute)));
+		 * collectionLineRidget.setMemberInfoProvider( new
+		 * GenericMemberInfo(currentRoute, lookupProvider));
+		 * 
+		 * } else {
+		 */
+		collectionLineRidget.setMemberInfoProvider(lookupProvider);
 		// }
 
 		final Dairy dairy = dairyRepo.getLocalDairy();
@@ -517,11 +501,13 @@ public class BulkCollectionsEntryDialogController extends
 			public IStatus validate(Object value) {
 				final CollectionJournalLine line = (CollectionJournalLine) value;
 				final Membership member = line.getValidatedMember();
-				final DairyLocation center = getContextJournalPage().getCollectionCenter();
+				final DairyLocation center = getContextJournalPage()
+						.getCollectionCenter();
 				final Date date = getContextJournalPage().getJournalDate();
 
 				if (lineRepo.countByMemberCenterDate(member, center, date) > 0) {
-					return ValidationStatus.error("Another entry for this member, center and date already exists");
+					return ValidationStatus
+							.error("Another entry for this member, center and date already exists");
 				} else {
 					return ValidationStatus.ok();
 				}
@@ -542,8 +528,7 @@ public class BulkCollectionsEntryDialogController extends
 				columnHeaderNames);
 
 		totalLabelRidget.bindToModel(workingJournalPage,
-				DairyPackage.Literals.COLLECTION_GROUP__RECORD_TOTAL
-						.getName());
+				DairyPackage.Literals.COLLECTION_GROUP__RECORD_TOTAL.getName());
 		totalLabelRidget.setModelToUIControlConverter(NumberToStringConverter
 				.fromBigDecimal());
 	}
@@ -581,7 +566,7 @@ public class BulkCollectionsEntryDialogController extends
 	/**
 	 * Updates the journal with a new journal line (and any calculated
 	 * attributes).
-	 *
+	 * 
 	 * @param journal
 	 * @param line
 	 */
@@ -591,7 +576,8 @@ public class BulkCollectionsEntryDialogController extends
 		journal.getJournalEntries().add(line);
 		BigDecimal sum = new BigDecimal(0);
 		int hasSuspendedLine = 0, hasRejectedLine = 0, hasMPRLine = 0, hasOffRoute = 0;
-		for (final CollectionJournalLine journalLine : journal.getJournalEntries()) {
+		for (final CollectionJournalLine journalLine : journal
+				.getJournalEntries()) {
 			final BigDecimal currentTotal = journalLine.getQuantity();
 			if (currentTotal != null) {
 				sum = sum.add(currentTotal);
@@ -644,7 +630,7 @@ public class BulkCollectionsEntryDialogController extends
 
 	/**
 	 * @return
-	 *
+	 * 
 	 */
 	@Override
 	protected boolean handleCancelAction() {
@@ -691,16 +677,14 @@ public class BulkCollectionsEntryDialogController extends
 		return ret;
 	}
 
-
-
 	private void displayActuallyPendingNote() {
 		final StringBuffer message = new StringBuffer();
 		final Formatter formatter = new Formatter(message);
 		try {
 			formatter
 					.format("\n\n NOTE the journal will be set to status PENDING, not SUSPENDED, due to empty list of entries");
-			MessageDialog.openInformation(getShell(),
-					"Pending Confirmation", message.toString());
+			MessageDialog.openInformation(getShell(), "Pending Confirmation",
+					message.toString());
 		} catch (final Exception e) {
 			e.printStackTrace();
 			System.err.println(message.toString());
@@ -713,7 +697,8 @@ public class BulkCollectionsEntryDialogController extends
 	private boolean doSave() {
 		final boolean doSave = true;
 
-		if (!ContainerValidator.validateContainer(this.journalHeaderRidget).isEmpty()) {
+		if (!ContainerValidator.validateContainer(this.journalHeaderRidget)
+				.isEmpty()) {
 			return false;
 		}
 
@@ -756,7 +741,7 @@ public class BulkCollectionsEntryDialogController extends
 	}
 
 	/**
-	 *
+	 * 
 	 * @param validationResult
 	 */
 	protected void displayMessage(final IStatus validationResult) {
@@ -801,7 +786,7 @@ public class BulkCollectionsEntryDialogController extends
 	}
 
 	/**
-	 *
+	 * 
 	 * @param enable
 	 */
 	private void enableBottomButtons(boolean enable) {

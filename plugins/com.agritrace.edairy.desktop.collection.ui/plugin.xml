@@ -19,6 +19,7 @@
             name="Milk Collection Jounal View"
             restorable="true">
       </view>
+      <!--
       <view
             allowMultiple="true"
             category="com.agritrace.edairy.desktop.collection.ui.category"
@@ -27,6 +28,7 @@
             name="Milk Collection Journal Detail View"
             restorable="true">
       </view>
+      -->
       <view
             allowMultiple="true"
             category="com.agritrace.edairy.desktop.collection.ui.category"

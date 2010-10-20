@@ -14,6 +14,7 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
+import org.eclipse.riena.ui.ridgets.IWindowRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
@@ -116,11 +117,10 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	private final IDairyRepository dairyRepo;
 	private final IDairyLocationRepository dairyLocationRepo;
 	private final IRepository<CollectionSession> sessionRepo;
-	private final List<CollectionGroup> allJournals;
 	private final Provider<NewMilkCollectionJournalDialog> newDialogProvider;
 	private final Provider<BulkCollectionsEntryDialog> entryDialogProvider;
-	private final Color TABLE_HIGHLIGHT_BACKGROUND = PlatformUI.getWorkbench().getDisplay()
-			.getSystemColor(SWT.COLOR_YELLOW);
+//	private final Color TABLE_HIGHLIGHT_BACKGROUND = PlatformUI.getWorkbench().getDisplay()
+//			.getSystemColor(SWT.COLOR_YELLOW);
 	private final List<DairyLocation> collectionCenters;
 
 	@Inject
@@ -136,7 +136,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		this.sessionRepo = sessionRepo;
 		this.newDialogProvider = newDialogProvider;
 		this.entryDialogProvider = entryDialogProvider;
-		allJournals = dairyRepo.allCollectionGroups();
+//		allJournals = dairyRepo.allCollectionGroups();
 
 		addTableColumn("Date", DairyPackage.Literals.COLLECTION_GROUP__JOURNAL_DATE);
 		addTableColumn("Collection Center", "collectionCenter.code", String.class);
@@ -159,6 +159,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_NEW_BUTTON).setText("Enter Collection Journals");
 		getRidget(IActionRidget.class, "import-file-button").addListener(
 				new ScaleImportAction(this, dairyLocationRepo, dairyRepo, sessionRepo));
+		getWindowRidget().setTitle(getNavigationNode().getLabel());
 	}
 
 	@Override
@@ -209,61 +210,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	 * @param cj Journal page
 	 * @return Whether the page matches the conditions
 	 */
-//	private static final boolean matches(MilkCollectionLogFilterBean bean, CollectionGroup cj) {
-//		if (bean.getStartDate() != null && cj.getJournalDate().compareTo(bean.getStartDate()) < 0) {
-//			return false;
-//		}
-//
-//		if (bean.getEndDate() != null) {
-//			// We need to compare it with the day after, to get records for today as well
-//			Calendar cld = Calendar.getInstance();
-//			cld.setTime(bean.getEndDate());
-//			cld = new GregorianCalendar(cld.get(Calendar.YEAR), cld.get(Calendar.MONTH), cld.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
-//			cld.add(Calendar.DAY_OF_MONTH, 1);
-//
-//			if (cj.getJournalDate().compareTo(cld.getTime()) >= 0) {
-//				return false;
-//			}
-//		}
-//
-//		if (bean.getCollectionCenter() != null && (cj.getCollectionCenter() == null ||
-//				cj.getCollectionCenter().getId() != bean.getCollectionCenter().getId())) {
-//			return false;
-//		}
-//
-//		if (bean.getStatus() != null && cj.getStatus() != bean.getStatus()) {
-//			return false;
-//		}
-//
-//		if (bean.getSession() != null && (cj.getSession() == null || !cj.getSession().getId().equals(bean.getSession().getId()))) {
-//			return false;
-//		}
-//
-//		if (bean.isSuspended() && cj.getSuspendedCount() == 0) {
-//			return false;
-//		}
-//
-//		if (bean.isRejected() && cj.getRejectedCount() == 0) {
-//			return false;
-//		}
-//
-//		if (bean.isMprMissing()) {
-//			boolean found = false;
-//
-//			for (final CollectionJournalLine line: cj.getJournalEntries()) {
-//				if (line.isNotRecorded()) {
-//					found = true;
-//					break;
-//				}
-//			}
-//
-//			if (!found) {
-//				return false;
-//			}
-//		}
-//
-//		return true;
-//	}
+
 
 	// TODO: make this a query..
 	@Override

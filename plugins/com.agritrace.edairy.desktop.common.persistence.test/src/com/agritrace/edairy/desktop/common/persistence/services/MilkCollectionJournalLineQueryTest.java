@@ -108,15 +108,16 @@ public class MilkCollectionJournalLineQueryTest {
 	}
 
 //	@Test
-	public void testAllForDate() throws Exception {
-		initTestContext("../test-data/collections/test-collections.csv");
-
-		Date queryDate = DateFormat.getDateInstance().parse("Jun 2, 2010");
-		assertEquals(2, repo.allForDate(queryDate).size());
-
-		queryDate = DateFormat.getDateInstance().parse("Jun 2, 2011");
-		assertEquals(0, repo.allForDate(queryDate).size());
-	}
+//	public void testAllForDate() throws Exception {
+//		initTestContext("../test-data/collections/test-collections.csv");
+//
+//		Date startDate = DateFormat.getDateInstance().parse("Jun 2, 2010");
+//		Date endDate = DateFormat.getDateInstance().parse("Jun 2, 2010");
+//		assertEquals(2, repo.allForDate(startDate, endDate).size());
+//
+//		queryDate = DateFormat.getDateInstance().parse("Jun 2, 2011");
+//		assertEquals(0, repo.allForDate(queryDate).size());
+//	}
 
 	@Test
 	public void testGetMilkPrice() throws Exception {
