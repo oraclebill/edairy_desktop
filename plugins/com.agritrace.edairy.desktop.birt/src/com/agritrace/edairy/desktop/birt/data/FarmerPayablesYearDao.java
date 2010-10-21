@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
+import com.agritrace.edairy.desktop.common.persistence.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
 import com.google.inject.Inject;
 

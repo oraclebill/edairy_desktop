@@ -8,11 +8,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
+import com.agritrace.edairy.desktop.common.persistence.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
 import com.google.inject.Inject;
 

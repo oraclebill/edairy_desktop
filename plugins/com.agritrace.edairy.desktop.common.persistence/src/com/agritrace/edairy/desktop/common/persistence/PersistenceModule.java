@@ -10,7 +10,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.hibernate.Session;
 
-import com.agritrace.edairy.desktop.collection.services.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;

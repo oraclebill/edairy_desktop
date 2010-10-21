@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.collection.services;
+package com.agritrace.edairy.desktop.common.persistence;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -7,7 +7,6 @@ import java.util.List;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.internal.persistence.MilkCollectionJournalLineRepository;
 import com.google.inject.ImplementedBy;
 
