@@ -173,7 +173,7 @@ public class MilkCollectionJournalLineRepository extends
 	@Override
 	@Transactional
 	public List<Membership> getMembersWithDeliveriesFor(final int month, final int year) {
-		final String queryString = "SELECT distinct validatedMember "
+		final String queryString = "SELECT DISTINCT l.validatedMember "
 				+ " FROM CollectionJournalLine l " + " WHERE 1 = 1"
 				+ "   AND year(l.collectionJournal.journalDate) = :year "
 				+ "   AND month(l.collectionJournal.journalDate) = :month ";

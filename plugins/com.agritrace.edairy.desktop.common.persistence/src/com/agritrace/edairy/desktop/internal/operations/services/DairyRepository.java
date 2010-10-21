@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.internal.operations.services;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
@@ -622,6 +623,24 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	private void log(int level, String message) {
 		Log4r.getLogger(PersistenceActivator.getDefault(), getClass()).log(
 				level, message);
+	}
+
+	@Override
+	public List<CollectionGroup> getCollectionGroups(Date startDate, Date endDate) {
+		// Currently filters from all groups, since the list is preloaded when
+		// loading the dairy. Apparently.
+		
+		final List<CollectionGroup> result = new ArrayList<CollectionGroup>();
+		
+		for (final CollectionGroup group: allCollectionGroups()) {
+			final Date date = group.getJournalDate();
+			
+			if (date.compareTo(startDate) >= 0 && date.compareTo(endDate) < 0) {
+				result.add(group);
+			}
+		}
+		
+		return result;
 	}
 
 }

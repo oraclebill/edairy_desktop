@@ -82,7 +82,9 @@
             <method name="open"><![CDATA[count = 0;
 //importPackage(Packages.org.eclipse.birt.samples.scripted.hibernate);
 dao = Packages.com.agritrace.edairy.desktop.birt.data.YearReportDao.instance();
-data = dao.getReportValues("2009");
+yearParam = reportContext.getParameterValue("Year");
+monthParam = reportContext.getParameterValue("Month");
+data = dao.getReportValues(yearParam, monthParam);
 ]]></method>
             <method name="fetch"><![CDATA[if(count < data.size()){
 var dataLine = data.get(count);

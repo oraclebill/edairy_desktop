@@ -84,4 +84,6 @@ public interface IDairyRepository {
 	void save();
 
 	List<CollectionGroup> allCollectionGroups();
+
+	List<CollectionGroup> getCollectionGroups(Date startDate, Date endDate);
 }
