@@ -59,8 +59,8 @@ public class MilkCollectionRepository extends RepositoryUtil<CollectionGroup> im
 			criteria.add(Restrictions.eq("status", status));
 		}
 
-		if (rejected != null)
-			criteria.add(Restrictions.gt("rejectedCount", rejected));
+		if (rejected != null && rejected.booleanValue())
+			criteria.add(Restrictions.gt("rejectedCount", 0));
 
 		// if (missing != null)
 		// criteria.add(Restrictions.eq("??", missing));

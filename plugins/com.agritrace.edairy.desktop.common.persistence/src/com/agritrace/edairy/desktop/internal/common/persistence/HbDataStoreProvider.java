@@ -123,6 +123,7 @@ public class HbDataStoreProvider implements Provider<HbDataStore>, IDbProperties
 			}
 			props.setProperty("teneo.mapping.disable_econtainer", "true");
 			props.setProperty("teneo.mapping.default_varchar_length", "60");
+			props.setProperty("teneo.mapping.always_map_list_as_bag", "true"); // will cause hb to ignore index columns if they exist, 
 
 			// TODO: improve performance...
 //			props.setProperty("teneo.mapping.set_proxy", "true");  // classloading issues
