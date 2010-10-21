@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 
-import com.agritrace.edairy.desktop.member.ui.controls.MemberAccountWidget;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberAccountWidget2;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberCollectionRecordsWidget;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberFarmWidget;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberProfileWidget;
@@ -111,9 +111,9 @@ public class MembershipTabFolder {
 			accountTab.setText("Account Summary");
 			final Composite accountComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 			accountComposite.setLayout(new GridLayout(1, true));
-			final MemberAccountWidget accountWidget = new MemberAccountWidget(accountComposite);
+			final MemberAccountWidget2 accountWidget = new MemberAccountWidget2(accountComposite, SWT.NULL);
 			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
-					.applyTo(accountWidget.getComposite());
+					.applyTo(accountWidget);
 			accountTab.setControl(accountComposite);
 			accountTab.setControl(accountComposite);
 		}

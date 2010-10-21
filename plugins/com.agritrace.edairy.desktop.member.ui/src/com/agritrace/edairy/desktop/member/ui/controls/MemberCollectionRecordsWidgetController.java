@@ -18,36 +18,31 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.persistence.IMilkCollectionRepository;
+import com.agritrace.edairy.desktop.common.ui.columnformatters.BooleanPropertyColumnFormatter;
 import com.agritrace.edairy.desktop.common.ui.columnformatters.DatePropertyColumnFormatter;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.common.ui.controls.daterange.IDateRangeRidget;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
-public class MemberCollectionRecordsWidgetController implements
-		WidgetController<Membership>, IActionListener {
+public class MemberCollectionRecordsWidgetController implements WidgetController<Membership>, IActionListener {
 
-	public final static class DairyContainerIdColumnFormatter extends
-			ColumnFormatter {
+	public final static class DairyContainerIdColumnFormatter extends ColumnFormatter {
 		@Override
 		public String getText(Object element) {
 			if (element instanceof CollectionJournalLine) {
 				if (((CollectionJournalLine) element).getDairyContainer() != null) {
-					return ""
-							+ ((CollectionJournalLine) element)
-									.getDairyContainer().getContainerId();
+					return "" + ((CollectionJournalLine) element).getDairyContainer().getContainerId();
 				}
 			}
 			return null;
 		}
 	}
 
-	public final static class JournalSessionColumnFormatter extends
-			ColumnFormatter {
+	public final static class JournalSessionColumnFormatter extends ColumnFormatter {
 		@Override
 		public String getText(Object element) {
 			if (element instanceof CollectionJournalLine) {
-				final CollectionGroup journal = ((CollectionJournalLine) element)
-						.getCollectionJournal();
+				final CollectionGroup journal = ((CollectionJournalLine) element).getCollectionJournal();
 				if (journal != null) {
 					return journal.getSession().toString();
 				}
@@ -56,11 +51,11 @@ public class MemberCollectionRecordsWidgetController implements
 		}
 	}
 
-	private final String[] collectionColumnHeaders = { "Session", "Date",
-			"Container", "Quantity", "NPR Missing", "Rejected", "Suspended" };
-	private final String[] collectionPropertyNames = { "collectionJournal.session.code",
-			"collectionJournal.journalDate", "dairyContainer.trackingNumber", "quantity", "notRecorded",
-			"rejected", "flagged" };
+	private final String[] collectionColumnHeaders = { "Route", "Session", "Date", "Container", "Quantity",
+			"MPR Present", "Quality OK", "Validated" };
+	private final String[] collectionPropertyNames = { "collectionJournal.collectionCenter.code",
+			"collectionJournal.session.code", "collectionJournal.journalDate", "dairyContainer.trackingNumber",
+			"quantity", "notRecorded", "rejected", "flagged" };
 
 	private ITableRidget collectionTable;
 
@@ -73,8 +68,7 @@ public class MemberCollectionRecordsWidgetController implements
 	private IToggleButtonRidget suspended;
 	private IMilkCollectionRepository collectionsRepo;
 
-	public MemberCollectionRecordsWidgetController(IController controller,
-			IMilkCollectionRepository collectionsRepo) {
+	public MemberCollectionRecordsWidgetController(IController controller, IMilkCollectionRepository collectionsRepo) {
 		this.container = controller;
 		this.collectionsRepo = collectionsRepo;
 		configure();
@@ -86,31 +80,21 @@ public class MemberCollectionRecordsWidgetController implements
 			return;
 		}
 
-		collectionTable = container.getRidget(ITableRidget.class,
-				ViewWidgetId.COLLECTION_TABLE);
-		// if (null == collectionTable) {
-		// return;
-		// }
+		collectionTable = container.getRidget(ITableRidget.class, ViewWidgetId.COLLECTION_TABLE);
 
-//		collectionTable.setColumnFormatter(0,
-//				new JournalSessionColumnFormatter());
-		collectionTable.setColumnFormatter(1, new DatePropertyColumnFormatter(collectionPropertyNames[1]));
-//		collectionTable.setColumnFormatter(2,
-//				new DairyContainerIdColumnFormatter());
+		collectionTable.setColumnFormatter(2, new DatePropertyColumnFormatter(collectionPropertyNames[2]));
+		collectionTable.setColumnFormatter(5, new BooleanPropertyColumnFormatter(collectionPropertyNames[5], false));
+		collectionTable.setColumnFormatter(6, new BooleanPropertyColumnFormatter(collectionPropertyNames[6], false));
+		collectionTable.setColumnFormatter(7, new BooleanPropertyColumnFormatter(collectionPropertyNames[7], false));
 
-		collectionTable.bindToModel(new WritableList(records,
-				CollectionJournalLine.class), CollectionJournalLine.class,
-				collectionPropertyNames, collectionColumnHeaders);
+		collectionTable.bindToModel(new WritableList(records, CollectionJournalLine.class),
+				CollectionJournalLine.class, collectionPropertyNames, collectionColumnHeaders);
 
-		nprMissing = container.getRidget(IToggleButtonRidget.class,
-				ViewWidgetId.COLLECTION_FILTER_NPRMISSING);
-		rejected = container.getRidget(IToggleButtonRidget.class,
-				ViewWidgetId.COLLECTION_FILTER_REJECTED);
-		suspended = container.getRidget(IToggleButtonRidget.class,
-				ViewWidgetId.COLLECTION_FILTER_FLAG);
-		dateRangeRidget = container.getRidget(IDateRangeRidget.class,
-				ViewWidgetId.COLLECTION_FILTER_DATE_RANGE);
-		
+		nprMissing = container.getRidget(IToggleButtonRidget.class, ViewWidgetId.COLLECTION_FILTER_NPRMISSING);
+		rejected = container.getRidget(IToggleButtonRidget.class, ViewWidgetId.COLLECTION_FILTER_REJECTED);
+		suspended = container.getRidget(IToggleButtonRidget.class, ViewWidgetId.COLLECTION_FILTER_FLAG);
+		dateRangeRidget = container.getRidget(IDateRangeRidget.class, ViewWidgetId.COLLECTION_FILTER_DATE_RANGE);
+
 		dateRangeRidget.addPropertyChangeListener(new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
@@ -128,7 +112,6 @@ public class MemberCollectionRecordsWidgetController implements
 		updateBinding();
 	}
 
-
 	@Override
 	public IRidgetContainer getContainer() {
 		return container;
@@ -141,8 +124,8 @@ public class MemberCollectionRecordsWidgetController implements
 
 	@Override
 	public void setController(IRidgetContainer container) {
-//		this.container = container;
-//		configure();
+		// this.container = container;
+		// configure();
 		throw new UnsupportedOperationException();
 	}
 
@@ -168,9 +151,7 @@ public class MemberCollectionRecordsWidgetController implements
 	private List<CollectionJournalLine> getCollectionJournalLines() {
 		final Date startDate = dateRangeRidget.getStartDate();
 		final Date endDate = dateRangeRidget.getEndDate();
-		final boolean isMissing = nprMissing.isSelected(), isRejected = rejected
-				.isSelected();
-		return collectionsRepo.findCollections(membership, null, null, startDate, endDate,
-				isMissing, isRejected, null);
+		final boolean isMissing = nprMissing.isSelected(), isRejected = rejected.isSelected();
+		return collectionsRepo.findCollections(membership, null, null, startDate, endDate, isMissing, isRejected, null);
 	}
 }

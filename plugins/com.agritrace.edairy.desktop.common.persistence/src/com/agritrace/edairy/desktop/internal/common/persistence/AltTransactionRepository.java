@@ -19,6 +19,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
+import com.agritrace.edairy.desktop.common.persistence.IPaymentRecord;
 import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.Transactional;
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository.SessionRunnable;
@@ -238,6 +239,12 @@ public class AltTransactionRepository extends RepositoryUtil<AccountTransaction>
 		save(tx);
 
 		return tx;
+	}
+
+	@Override
+	public List<IPaymentRecord> findPayments(Membership member, int year) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -61,4 +61,5 @@ public interface ITransactionRepository extends IRepository<AccountTransaction> 
 	// Utility
 	//
 	Calendar createPeriodDate(BalanceType starting, int priceMonth, int priceYear);
+	List<IPaymentRecord> findPayments(Membership member, int year);
 }

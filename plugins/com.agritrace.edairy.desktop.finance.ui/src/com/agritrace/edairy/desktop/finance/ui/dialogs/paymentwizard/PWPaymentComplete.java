@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
+import com.agritrace.edairy.desktop.common.persistence.IPaymentRecord;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.Transactional;
 import com.agritrace.edairy.desktop.finance.payments.Constants;
@@ -91,7 +92,7 @@ public class PWPaymentComplete extends PWPage {
 	public void performFinish() {
 		BigDecimal total = Constants.BIGZERO;
 		
-		for (PaymentRecord record: paymentsList) {
+		for (IPaymentRecord record: paymentsList) {
 			processor.processPayment(record);
 			total = total.add(record.getTotalPayment());
 		}
@@ -272,7 +273,7 @@ public class PWPaymentComplete extends PWPage {
 
 		final BigDecimal total = Constants.BIGZERO;
 		
-		for (final PaymentRecord record : paymentsList) {
+		for (final IPaymentRecord record : paymentsList) {
 			total.add(record.getTotalPayment());
 		}
 		
