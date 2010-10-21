@@ -4,8 +4,9 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.persistence.IPaymentRecord;
 
-public class PaymentRecord {
+public class PaymentRecord implements IPaymentRecord {
 	private int year, month;
 	private Long transactionId;
 	private Date transactionDate;
@@ -32,9 +33,10 @@ public class PaymentRecord {
 		this.year = priceYear;
 	}
 
-	/**
-	 * @return the transactionId
+	/* (non-Javadoc)
+	 * @see com.agritrace.edairy.desktop.finance.payments.IPaymentRecord#getTransactionId()
 	 */
+	@Override
 	public Long getTransactionId() {
 		return transactionId;
 	}
@@ -46,9 +48,10 @@ public class PaymentRecord {
 		this.transactionId = transactionId;
 	}
 
-	/**
-	 * @return the transactionDate
+	/* (non-Javadoc)
+	 * @see com.agritrace.edairy.desktop.finance.payments.IPaymentRecord#getTransactionDate()
 	 */
+	@Override
 	public Date getTransactionDate() {
 		return transactionDate;
 	}
@@ -60,9 +63,10 @@ public class PaymentRecord {
 		this.transactionDate = transactionDate;
 	}
 
-	/**
-	 * @return the member
+	/* (non-Javadoc)
+	 * @see com.agritrace.edairy.desktop.finance.payments.IPaymentRecord#getMember()
 	 */
+	@Override
 	public Membership getMember() {
 		return member;
 	}
@@ -74,9 +78,10 @@ public class PaymentRecord {
 		this.member = member;
 	}
 
-	/**
-	 * @return the milkIncome
+	/* (non-Javadoc)
+	 * @see com.agritrace.edairy.desktop.finance.payments.IPaymentRecord#getMilkIncome()
 	 */
+	@Override
 	public BigDecimal getMilkIncome() {
 		if (milkIncome == null
 			&& getPaymentRate() != null
@@ -93,9 +98,10 @@ public class PaymentRecord {
 		this.milkIncome = milkIncome;
 	}
 
-	/**
-	 * @return the accountCredits
+	/* (non-Javadoc)
+	 * @see com.agritrace.edairy.desktop.finance.payments.IPaymentRecord#getAccountCredits()
 	 */
+	@Override
 	public BigDecimal getAccountCredits() {
 		return accountCredits;
 	}
@@ -107,9 +113,10 @@ public class PaymentRecord {
 		this.accountCredits = accountCredits;
 	}
 
-	/**
-	 * @return the accountAdjustments
+	/* (non-Javadoc)
+	 * @see com.agritrace.edairy.desktop.finance.payments.IPaymentRecord#getAccountAdjustments()
 	 */
+	@Override
 	public BigDecimal getAccountAdjustments() {
 		return accountAdjustments;
 	}
@@ -121,9 +128,10 @@ public class PaymentRecord {
 		this.accountAdjustments = accountAdjustments;
 	}
 
-	/**
-	 * @return the totalPayment
+	/* (non-Javadoc)
+	 * @see com.agritrace.edairy.desktop.finance.payments.IPaymentRecord#getTotalPayment()
 	 */
+	@Override
 	public BigDecimal getTotalPayment() {
 		if (totalPayment == null
 				&& getAccountCredits() != null
@@ -141,9 +149,10 @@ public class PaymentRecord {
 		this.totalPayment = totalPayment;
 	}
 
-	/**
-	 * @return the payableMilkQuantity
+	/* (non-Javadoc)
+	 * @see com.agritrace.edairy.desktop.finance.payments.IPaymentRecord#getPayableMilkQuantity()
 	 */
+	@Override
 	public BigDecimal getPayableMilkQuantity() {
 		return payableMilkQuantity;
 	}
@@ -155,9 +164,10 @@ public class PaymentRecord {
 		this.payableMilkQuantity = payableMilkQuantity;
 	}
 
-	/**
-	 * @return the paymentRate
+	/* (non-Javadoc)
+	 * @see com.agritrace.edairy.desktop.finance.payments.IPaymentRecord#getPaymentRate()
 	 */
+	@Override
 	public BigDecimal getPaymentRate() {
 		return paymentRate;
 	}
@@ -169,9 +179,10 @@ public class PaymentRecord {
 		this.paymentRate = paymentRate;
 	}
 
-	/**
-	 * @return the year
+	/* (non-Javadoc)
+	 * @see com.agritrace.edairy.desktop.finance.payments.IPaymentRecord#getYear()
 	 */
+	@Override
 	public int getYear() {
 		return year;
 	}
@@ -183,9 +194,10 @@ public class PaymentRecord {
 		this.year = year;
 	}
 
-	/**
-	 * @return the month
+	/* (non-Javadoc)
+	 * @see com.agritrace.edairy.desktop.finance.payments.IPaymentRecord#getMonth()
 	 */
+	@Override
 	public int getMonth() {
 		return month;
 	}
@@ -197,9 +209,10 @@ public class PaymentRecord {
 		this.month = month;
 	}
 
-	/**
-	 * @return the startingBalance
+	/* (non-Javadoc)
+	 * @see com.agritrace.edairy.desktop.finance.payments.IPaymentRecord#getStartingBalance()
 	 */
+	@Override
 	public BigDecimal getStartingBalance() {
 		return startingBalance;
 	}

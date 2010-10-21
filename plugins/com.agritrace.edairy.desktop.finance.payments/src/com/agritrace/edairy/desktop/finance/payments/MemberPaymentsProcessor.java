@@ -8,6 +8,7 @@ import java.util.List;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
+import com.agritrace.edairy.desktop.common.persistence.IPaymentRecord;
 import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
 import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository.BalanceType;
 import com.agritrace.edairy.desktop.common.persistence.services.Transactional;
@@ -181,7 +182,7 @@ public class MemberPaymentsProcessor {
 		return paymentRecord;
 	}
 
-	public void processPayment(PaymentRecord payment) {
+	public void processPayment(IPaymentRecord payment) {
 		final Account primaryAcct = payment.getMember().getAccount();
 
 		Calendar balanceDate = repository.createPeriodDate(BalanceType.STARTING, payment.getMonth(), payment.getYear());

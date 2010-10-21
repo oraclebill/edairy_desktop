@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint;
@@ -64,4 +65,5 @@ public interface ITransactionRepository extends IRepository<AccountTransaction> 
 	// Utility
 	//
 	Calendar createPeriodDate(BalanceType starting, int priceMonth, int priceYear);
+	List<IPaymentRecord> findPayments(Membership member, int year);
 }
