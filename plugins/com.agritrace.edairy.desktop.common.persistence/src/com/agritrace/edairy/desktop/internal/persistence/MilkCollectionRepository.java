@@ -71,6 +71,7 @@ public class MilkCollectionRepository extends RepositoryUtil<CollectionGroup> im
 		return criteria.list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<CollectionJournalLine> findCollections(Membership member, DairyLocation route, CollectionSession collectionSession,
 			Date startDate, Date endDate, Boolean isMissing, Boolean isRejected, Boolean flagged) {
@@ -81,7 +82,7 @@ public class MilkCollectionRepository extends RepositoryUtil<CollectionGroup> im
 		if (member != null) {
 			criteria.add(Restrictions.eq("validatedMember", member));
 		}
-		
+		/*
 		if (isRejected != null) {
 			criteria.add(Restrictions.gt("rejected", isRejected));
 		}
@@ -93,6 +94,7 @@ public class MilkCollectionRepository extends RepositoryUtil<CollectionGroup> im
 		if (flagged != null) {
 			criteria.add(Restrictions.eq("flagged", flagged));
 		}
+		*/
 		
 		if (route != null || collectionSession != null || startDate != null || endDate != null ) {
 			criteria = criteria.createCriteria("collectionJournal");
@@ -107,11 +109,12 @@ public class MilkCollectionRepository extends RepositoryUtil<CollectionGroup> im
 			if (startDate != null) {
 				criteria.add(Restrictions.ge("journalDate", startDate));
 			}
-	
+
 			if (endDate != null) {
 				criteria.add(Restrictions.le("journalDate", endDate));
 			}
 		}
+		
 
 		return criteria.list();
 	}

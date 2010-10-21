@@ -1,5 +1,7 @@
 package com.agritrace.edairy.desktop.member.ui.controls;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,7 +17,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
 import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
-import com.agritrace.edairy.desktop.common.ui.columnformatters.DirectoryDateColumnFormatter;
+import com.agritrace.edairy.desktop.common.ui.columnformatters.DatePropertyColumnFormatter;
 import com.agritrace.edairy.desktop.common.ui.controllers.DateRangeFilter;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
 import com.agritrace.edairy.desktop.common.ui.controls.daterange.IDateRangeRidget;
@@ -54,16 +56,23 @@ public class MemberTransactionWidgetController implements WidgetController<Objec
 		}
 		transactionTable.bindToModel(new WritableList(transactionRecords, AccountTransaction.class),
 				AccountTransaction.class, transactionPropertyNames, transactionColumnHeaders);
-		transactionTable.setColumnFormatter(0, new DirectoryDateColumnFormatter(transactionPropertyNames[0]));
+		transactionTable.setColumnFormatter(0, new DatePropertyColumnFormatter(transactionPropertyNames[0]));
 
 		dateRangeRidget = container.getRidget(IDateRangeRidget.class, ViewWidgetId.TRANSACTION_DATERANGE);
-		updateButtonRidget = container.getRidget(IActionRidget.class, ViewWidgetId.TRANSACTION_UPDATE_BTN);
-		updateButtonRidget.addListener(new IActionListener() {
+		dateRangeRidget.addPropertyChangeListener(new PropertyChangeListener() {
 			@Override
-			public void callback() {
+			public void propertyChange(PropertyChangeEvent evt) {
 				updateBinding();
 			}
 		});
+		updateButtonRidget = container.getRidget(IActionRidget.class, ViewWidgetId.TRANSACTION_UPDATE_BTN);
+		updateButtonRidget.setVisible(false);
+//		updateButtonRidget.addListener(new IActionListener() {
+//			@Override
+//			public void callback() {
+//				updateBinding();
+//			}
+//		});
 	}
 
 	@Override

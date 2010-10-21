@@ -1,19 +1,12 @@
 package com.agritrace.edairy.desktop.member.ui.controls;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.list.WritableList;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.query.conditions.Condition;
-import org.eclipse.emf.query.conditions.booleans.BooleanCondition;
-import org.eclipse.emf.query.conditions.eobjects.EObjectCondition;
-import org.eclipse.emf.query.conditions.eobjects.structuralfeatures.EObjectAttributeValueCondition;
-import org.eclipse.emf.query.statements.FROM;
-import org.eclipse.emf.query.statements.IQueryResult;
-import org.eclipse.emf.query.statements.SELECT;
-import org.eclipse.emf.query.statements.WHERE;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
@@ -23,12 +16,10 @@ import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.persistence.IMilkCollectionRepository;
-import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
+import com.agritrace.edairy.desktop.common.ui.columnformatters.DatePropertyColumnFormatter;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
-import com.agritrace.edairy.desktop.common.ui.controllers.util.DateFilterUtil;
 import com.agritrace.edairy.desktop.common.ui.controls.daterange.IDateRangeRidget;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
@@ -65,24 +56,10 @@ public class MemberCollectionRecordsWidgetController implements
 		}
 	}
 
-	private final class EntryDateColumnFormatter extends ColumnFormatter {
-		@Override
-		public String getText(Object element) {
-			if (element instanceof CollectionJournalLine) {
-				final Date entryDate = ((CollectionJournalLine) element)
-						.getCollectionJournal().getJournalDate();
-				final SimpleFormattedDateBean dateFormatter = new SimpleFormattedDateBean();
-				dateFormatter.setDate(entryDate);
-				return dateFormatter.getFormattedDate();
-			}
-			return null;
-		}
-	}
-
 	private final String[] collectionColumnHeaders = { "Session", "Date",
 			"Container", "Quantity", "NPR Missing", "Rejected", "Suspended" };
-	private final String[] collectionPropertyNames = { "collectionJournal",
-			"collectionJournal", "dairyContainer", "quantity", "notRecorded",
+	private final String[] collectionPropertyNames = { "collectionJournal.session.code",
+			"collectionJournal.journalDate", "dairyContainer.trackingNumber", "quantity", "notRecorded",
 			"rejected", "flagged" };
 
 	private ITableRidget collectionTable;
@@ -104,11 +81,6 @@ public class MemberCollectionRecordsWidgetController implements
 	}
 
 	@Override
-	public void callback() {
-		updateBinding();
-	}
-
-	@Override
 	public void configure() {
 		if (container == null) {
 			return;
@@ -120,11 +92,11 @@ public class MemberCollectionRecordsWidgetController implements
 		// return;
 		// }
 
-		collectionTable.setColumnFormatter(0,
-				new JournalSessionColumnFormatter());
-		collectionTable.setColumnFormatter(1, new EntryDateColumnFormatter());
-		collectionTable.setColumnFormatter(2,
-				new DairyContainerIdColumnFormatter());
+//		collectionTable.setColumnFormatter(0,
+//				new JournalSessionColumnFormatter());
+		collectionTable.setColumnFormatter(1, new DatePropertyColumnFormatter(collectionPropertyNames[1]));
+//		collectionTable.setColumnFormatter(2,
+//				new DairyContainerIdColumnFormatter());
 
 		collectionTable.bindToModel(new WritableList(records,
 				CollectionJournalLine.class), CollectionJournalLine.class,
@@ -138,11 +110,24 @@ public class MemberCollectionRecordsWidgetController implements
 				ViewWidgetId.COLLECTION_FILTER_FLAG);
 		dateRangeRidget = container.getRidget(IDateRangeRidget.class,
 				ViewWidgetId.COLLECTION_FILTER_DATE_RANGE);
+		
+		dateRangeRidget.addPropertyChangeListener(new PropertyChangeListener() {
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				callback();
+			}
+		});
 		nprMissing.addListener(this);
 		rejected.addListener(this);
 		suspended.addListener(this);
 
 	}
+
+	@Override
+	public void callback() {
+		updateBinding();
+	}
+
 
 	@Override
 	public IRidgetContainer getContainer() {

@@ -7,21 +7,29 @@ import org.eclipse.riena.ui.ridgets.swt.DateColumnFormatter;
 
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 
-public class DirectoryDateColumnFormatter extends DateColumnFormatter {
+public class DatePropertyColumnFormatter extends DateColumnFormatter {
 	private String propName;
-	
-	public DirectoryDateColumnFormatter(String propertyName) {
+
+	public DatePropertyColumnFormatter(String propertyName) {
 		super(DateTimeUtils.DEFAULT_DATE_PATTERN);
 		propName = propertyName;
 	}
-	
+
 	@Override
 	protected java.util.Date getDate(Object element) {
 		Date date = null;
-		try {
-			date = (Date) PropertyUtils.getProperty(element, propName);
-		} catch (Exception e) {
-			e.printStackTrace();
+		if (propName == null) {
+			try {
+				date = (Date) element;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			try {
+				date = (Date) PropertyUtils.getProperty(element, propName);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		return date;
 	}

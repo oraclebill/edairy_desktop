@@ -17,7 +17,7 @@ import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.ui.columnformatters.DirectoryDateColumnFormatter;
+import com.agritrace.edairy.desktop.common.ui.columnformatters.DatePropertyColumnFormatter;
 import com.agritrace.edairy.desktop.common.ui.columnformatters.MemberIDAndNameFormatter;
 import com.agritrace.edairy.desktop.common.ui.columnformatters.PersonToFormattedName;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
@@ -107,7 +107,7 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 	private ColumnFormatter getDefaultFormatter(Class<?> colType, final String propName) {
 		ColumnFormatter formatter = null;
 		if (colType.isAssignableFrom(Date.class)) {
-			formatter = new DirectoryDateColumnFormatter(propName);
+			formatter = new DatePropertyColumnFormatter(propName);
 		} else if (colType.isAssignableFrom(Membership.class)) {
 			formatter = new MemberIDAndNameFormatter(propName);
 		} else if (colType.isAssignableFrom(Person.class)) {
