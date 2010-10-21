@@ -46,7 +46,7 @@ public class MemberCollectionRecordsWidget {
 		filterButtonPanel.setLayout(new GridLayout(3, false));
 		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.FILL).grab(true, false).applyTo(filterButtonPanel);
 
-		final Button nprMissing = UIControlsFactory.createButtonCheck(filterButtonPanel, "NPR Missing",
+		final Button nprMissing = UIControlsFactory.createButtonCheck(filterButtonPanel, "MPR Missing",
 				ViewWidgetId.COLLECTION_FILTER_NPRMISSING);
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(nprMissing);
 
