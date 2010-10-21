@@ -24,7 +24,7 @@ public class MemberAccountWidget {
 
 	public MemberAccountWidget(Composite parent) {
 		composite = UIControlsFactory.createComposite(parent);
-		composite.setLayout(new GridLayout(3, true));
+		composite.setLayout(new GridLayout(2, true));
 		initGUI();
 
 	}
@@ -35,7 +35,7 @@ public class MemberAccountWidget {
 
 	public void initGUI() {
 		createDeliveriesGroup();
-		createShareGroup();
+//		createShareGroup();
 		createCreditsGroup();
 
 	}

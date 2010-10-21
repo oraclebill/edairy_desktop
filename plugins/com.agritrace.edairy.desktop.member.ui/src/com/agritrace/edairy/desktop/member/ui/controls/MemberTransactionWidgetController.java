@@ -24,8 +24,8 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class MemberTransactionWidgetController implements WidgetController<Object>, DateRangeFilter {
 
-	private static final String[] transactionColumnHeaders = { "Date", "Type", "Description", "Amount" };
-	private static final String[] transactionPropertyNames = { "transactionDate", "transactionType", "description",
+	private static final String[] transactionColumnHeaders = { "Date", "Source", "Type", "Description", "Amount" };
+	private static final String[] transactionPropertyNames = { "transactionDate", "source", "transactionType", "description",
 			"amount" };
 
 	private final IRidgetContainer container;
@@ -50,9 +50,6 @@ public class MemberTransactionWidgetController implements WidgetController<Objec
 			return;
 		}
 		transactionTable = container.getRidget(ITableRidget.class, ViewWidgetId.TRANSACTION_TABLE);
-		if (transactionTable == null) {
-			return;
-		}
 		transactionTable.bindToModel(new WritableList(transactionRecords, AccountTransaction.class),
 				AccountTransaction.class, transactionPropertyNames, transactionColumnHeaders);
 		transactionTable.setColumnFormatter(0, new DatePropertyColumnFormatter(transactionPropertyNames[0]));

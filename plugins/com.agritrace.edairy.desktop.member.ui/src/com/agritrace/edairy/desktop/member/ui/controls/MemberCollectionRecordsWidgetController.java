@@ -82,7 +82,7 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 
 		collectionTable = container.getRidget(ITableRidget.class, ViewWidgetId.COLLECTION_TABLE);
 
-		collectionTable.setColumnFormatter(1, new DatePropertyColumnFormatter(collectionPropertyNames[1]));
+		collectionTable.setColumnFormatter(2, new DatePropertyColumnFormatter(collectionPropertyNames[2]));
 		collectionTable.setColumnFormatter(5, new BooleanPropertyColumnFormatter(collectionPropertyNames[5], false));
 		collectionTable.setColumnFormatter(6, new BooleanPropertyColumnFormatter(collectionPropertyNames[6], false));
 		collectionTable.setColumnFormatter(7, new BooleanPropertyColumnFormatter(collectionPropertyNames[7], false));
