@@ -185,7 +185,7 @@ public class MemberCollectionRecordsWidgetController implements
 		final Date endDate = dateRangeRidget.getEndDate();
 		final boolean isMissing = nprMissing.isSelected(), isRejected = rejected
 				.isSelected();
-		return collectionsRepo.findCollections(null, null, startDate, endDate,
+		return collectionsRepo.findCollections(membership, null, null, startDate, endDate,
 				isMissing, isRejected, null);
 	}
 }

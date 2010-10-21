@@ -8,6 +8,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.internal.persistence.MilkCollectionRepository;
 import com.google.inject.ImplementedBy;
 
@@ -18,7 +19,8 @@ public interface IMilkCollectionRepository extends IRepository<CollectionGroup> 
 			DairyLocation route, CollectionSession session, Date startDate, Date endDate, 
 			JournalStatus status, Boolean rejected, Boolean missing, Boolean flagged );
 
-	public List<CollectionJournalLine> findCollections(DairyLocation route, CollectionSession session, 
-			Date startDate, Date endDate, Boolean isMissing, Boolean isRejected, Boolean flagged);
+	public List<CollectionJournalLine> findCollections(Membership member, DairyLocation route,
+			CollectionSession collectionSession, Date startDate, Date endDate, Boolean isMissing, Boolean isRejected,
+			Boolean flagged);
 	
 }

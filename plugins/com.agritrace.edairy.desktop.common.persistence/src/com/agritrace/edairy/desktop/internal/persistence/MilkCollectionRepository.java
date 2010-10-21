@@ -12,14 +12,14 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.persistence.IMilkCollectionRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.Transactional;
 import com.agritrace.edairy.desktop.internal.common.persistence.RepositoryUtil;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class MilkCollectionRepository extends RepositoryUtil<CollectionGroup>
-		implements IMilkCollectionRepository {
+public class MilkCollectionRepository extends RepositoryUtil<CollectionGroup> implements IMilkCollectionRepository {
 
 	@Inject
 	public MilkCollectionRepository(Provider<Session> provider) {
@@ -34,10 +34,8 @@ public class MilkCollectionRepository extends RepositoryUtil<CollectionGroup>
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
-	public List<CollectionGroup> findCollectionGroups(DairyLocation route,
-			CollectionSession collectionSession, Date startDate, Date endDate,
-			JournalStatus status, Boolean rejected, Boolean missing,
-			Boolean flagged) {
+	public List<CollectionGroup> findCollectionGroups(DairyLocation route, CollectionSession collectionSession,
+			Date startDate, Date endDate, JournalStatus status, Boolean rejected, Boolean missing, Boolean flagged) {
 		Session session = getCurrentSession();
 		Criteria criteria = session.createCriteria("CollectionGroup");
 
@@ -63,22 +61,59 @@ public class MilkCollectionRepository extends RepositoryUtil<CollectionGroup>
 
 		if (rejected != null)
 			criteria.add(Restrictions.gt("rejectedCount", rejected));
-		
-//		if (missing != null)
-//			criteria.add(Restrictions.eq("", missing));
-//		
+
+		// if (missing != null)
+		// criteria.add(Restrictions.eq("??", missing));
+		//
 		if (flagged != null)
 			criteria.add(Restrictions.eq("suspended", flagged));
 
-		return (List<CollectionGroup>) criteria.list();
+		return criteria.list();
 	}
 
 	@Override
-	public List<CollectionJournalLine> findCollections(DairyLocation route,
-			CollectionSession session, Date startDate, Date endDate,
-			Boolean isMissing, Boolean isRejected, Boolean flagged) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CollectionJournalLine> findCollections(Membership member, DairyLocation route, CollectionSession collectionSession,
+			Date startDate, Date endDate, Boolean isMissing, Boolean isRejected, Boolean flagged) {
+		Session session = getCurrentSession();
+		Criteria criteria = session.createCriteria("CollectionJournalLine");
+//									.createAlias("collectionJournal", "jrnl");
+		
+		if (member != null) {
+			criteria.add(Restrictions.eq("validatedMember", member));
+		}
+		
+		if (isRejected != null) {
+			criteria.add(Restrictions.gt("rejected", isRejected));
+		}
+
+		if (isMissing != null) {
+			criteria.add(Restrictions.eq("notRecorded", isMissing));
+		}
+
+		if (flagged != null) {
+			criteria.add(Restrictions.eq("flagged", flagged));
+		}
+		
+		if (route != null || collectionSession != null || startDate != null || endDate != null ) {
+			criteria = criteria.createCriteria("collectionJournal");
+			if (route != null) {
+				criteria.add(Restrictions.eq("collectionCenter", route));
+			}
+	
+			if (collectionSession != null) {
+				criteria.add(Restrictions.eq("session", collectionSession));
+			}
+	
+			if (startDate != null) {
+				criteria.add(Restrictions.ge("journalDate", startDate));
+			}
+	
+			if (endDate != null) {
+				criteria.add(Restrictions.le("journalDate", endDate));
+			}
+		}
+
+		return criteria.list();
 	}
 
 }
