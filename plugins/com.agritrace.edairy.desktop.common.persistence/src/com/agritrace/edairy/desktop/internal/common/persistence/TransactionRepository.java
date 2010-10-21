@@ -7,9 +7,14 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
+import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
@@ -43,29 +48,38 @@ public class TransactionRepository extends HibernateRepository<AccountTransactio
 				final Criteria criteria = session.createCriteria("AccountTransaction");
 				// filter out erroneous data..
 				criteria.add(Restrictions.isNotNull("account"));
-
+				criteria.setFetchMode("account.member.member", FetchMode.JOIN);
+				criteria.setFetchMode("account.member.member.location", FetchMode.JOIN);
+				criteria.setFetchMode("account.balances", FetchMode.JOIN);
+				criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+				
 				if (account != null) {
 					criteria.add(Restrictions.eq("account", account));
 				}
+				
 				if (start != null) {
 					criteria.add(Restrictions.ge("transactionDate", start));
 				}
+				
 				if (end != null) {
 					criteria.add(Restrictions.le("transactionDate", end));
 				}
+				
 				if (refNum != null && !refNum.trim().isEmpty()) {
 					criteria.add(Restrictions.like("referenceNumber", refNum));
 				}
+				
 				if (sources != null && sources.size() > 0 ) {
 					criteria.add(Restrictions.in("source", sources));
 				}
+				
 				setResult(criteria.list());
 			}
 		};
+		
 		run(runnable);
 		return runnable.getResult();
 	}
-
 
 	@Override
 	public List<AccountTransaction> findAccountTransactions(final Account account, final Date start, final Date end) {
@@ -187,26 +201,6 @@ public class TransactionRepository extends HibernateRepository<AccountTransactio
 	}
 
 	@Override
-	public BigDecimal calculateBalance(Account primaryAcct) {
-		return calculateBalance(primaryAcct, new Date());
-	}
-
-	@Override
-	public BigDecimal calculateBalance(Account primaryAcct, Date cutoffDate) {
-		Date startDate = new Date(0);
-		BigDecimal sum = Constants.BIGZERO;
-
-		final BalancePoint point = findLatestBalancePoint(primaryAcct);
-		if (point != null) {
-			startDate = point.getAsOf();
-			sum = point.getAmount();
-		}
-
-		final List<AccountTransaction> transactions = findAccountTransactions(primaryAcct, startDate, cutoffDate);
-		return sum.add(sumTransactions(transactions));
-	}
-
-	@Override
 	public AccountTransaction createDebit(Account account, TransactionSource source, BigDecimal amount, String desc) {
 		return createTransaction(account, TransactionType.DEBIT, source, amount, desc);
 	}
@@ -235,26 +229,6 @@ public class TransactionRepository extends HibernateRepository<AccountTransactio
 			}
 		}
 		return lastBalance;
-	}
-
-	/**
-	 * Add a set of transactions where credits decrease and debits increase the
-	 * result.
-	 *
-	 * @param transactionList
-	 * @return
-	 */
-	private BigDecimal sumTransactions(List<AccountTransaction> transactionList) {
-		BigDecimal sum = Constants.BIGZERO;
-		for (final Transaction tx : transactionList) {
-			final BigDecimal amount = tx.getAmount();
-			if (TransactionType.CREDIT.equals(tx.getTransactionType())) {
-				sum = sum.subtract(amount);
-			} else {
-				sum = sum.add(amount);
-			}
-		}
-		return sum;
 	}
 
 	private AccountTransaction createTransaction(Account account, TransactionType type, TransactionSource source, BigDecimal amount,

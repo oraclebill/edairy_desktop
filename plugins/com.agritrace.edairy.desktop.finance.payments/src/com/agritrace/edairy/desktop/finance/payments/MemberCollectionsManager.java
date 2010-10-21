@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
@@ -33,9 +34,11 @@ public class MemberCollectionsManager {
 		priceYear = pYear;
 	}
 
+	/* // Unused
 	public BigDecimal calculatePayableDeliveries(Membership member) {
 		return calculatePayableDeliveries(member, priceMonth, priceYear);
 	}
+	*/
 
 	public BigDecimal getMilkPriceForPeriod() {
 		return getMilkPriceForPeriod(priceMonth, priceYear);
@@ -45,20 +48,25 @@ public class MemberCollectionsManager {
 		return getActiveMembers(priceMonth, priceYear);
 	}
 
-	BigDecimal calculatePayableDeliveries(Membership member, int paymentMonth, int paymentYear) {
-		final BigDecimal totalQuantity = repository.getSumOfPayableDeliveries(member, paymentMonth, paymentYear);
-		final BigDecimal periodRate = getMilkPriceForPeriod(paymentMonth, paymentYear);
-		return periodRate.multiply(totalQuantity, Constants.MONEYCONTEXT);
+	Map<Membership, BigDecimal> getMapOfPayableDeliveries(int paymentMonth, int paymentYear) {
+		return repository.getMapOfPayableDeliveries(paymentMonth, paymentYear);
 	}
 
+	/*// Unused
+	
 	BigDecimal calculatePayableDeliveries(Membership member, Date date) {
 		final BigDecimal totalQuantity = repository.getSumOfPayableDeliveries(member, date.getMonth(), date.getYear());
 		final BigDecimal periodRate = getMilkPriceForPeriod(priceMonth, priceYear);
 		return periodRate.multiply(totalQuantity, Constants.MONEYCONTEXT);
 	}
+	*/
 
 	BigDecimal getMilkPriceForPeriod(int priceMonth, int priceYear) {
 		return repository.getMilkPrice(priceMonth, priceYear);
+	}
+	
+	public List<Membership> getFlaggedMembers(int priceMonth, int priceYear) {
+		return repository.getMembersWithFlaggedDeliveriesFor(priceMonth, priceYear);
 	}
 
 	public List<Membership> getActiveMembers(int priceMonth, int priceYear) {

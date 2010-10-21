@@ -16,12 +16,14 @@ import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
+import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.services.ImageDataUtil;
 import com.agritrace.edairy.desktop.common.persistence.services.Transactional;
+import com.agritrace.edairy.desktop.internal.common.persistence.AccountRepository;
 import com.agritrace.edairy.desktop.internal.common.persistence.HbDataStoreProvider;
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
 import com.agritrace.edairy.desktop.internal.common.persistence.SessionProvider;
@@ -72,6 +74,7 @@ public class PersistenceModule extends AbstractModule {
 
 	static {
 		customRepositories = new HashMap<Class<? extends EObject>, Class<? extends IRepository<? extends EObject>>>();
+		customRepositories.put(Account.class, AccountRepository.class);
 		customRepositories.put(CollectionJournalLine.class, ICollectionJournalLineRepository.class);
 		customRepositories.put(Customer.class, CustomerRepository.class);
 //		customRepositories.put(DairyLocation.class, IDairyLocationRepository.class);

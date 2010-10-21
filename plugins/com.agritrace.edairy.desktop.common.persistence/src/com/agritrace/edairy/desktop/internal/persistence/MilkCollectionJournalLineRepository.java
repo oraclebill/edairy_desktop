@@ -3,7 +3,9 @@ package com.agritrace.edairy.desktop.internal.persistence;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
@@ -17,6 +19,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.persistence.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.Transactional;
+import com.agritrace.edairy.desktop.internal.common.persistence.Constants;
 import com.agritrace.edairy.desktop.internal.common.persistence.RepositoryUtil;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -169,8 +172,7 @@ public class MilkCollectionJournalLineRepository extends
 
 	@Override
 	@Transactional
-	public List<Membership> getMembersWithDeliveriesFor(final int month,
-			final int year) {
+	public List<Membership> getMembersWithDeliveriesFor(final int month, final int year) {
 		final String queryString = "SELECT distinct validatedMember "
 				+ " FROM CollectionJournalLine l " + " WHERE 1 = 1"
 				+ "   AND year(l.collectionJournal.journalDate) = :year "
@@ -185,8 +187,24 @@ public class MilkCollectionJournalLineRepository extends
 
 	@Override
 	@Transactional
-	public List<CollectionJournalLine> getPayableDeliveriesForMember(
-			final Membership member, final int month, final int year) {
+	public List<Membership> getMembersWithFlaggedDeliveriesFor(final int month, final int year) {
+		final String queryString = "SELECT DISTINCT validatedMember "
+				+ " FROM CollectionJournalLine l " + " WHERE 1 = 1"
+				+ "   AND year(l.collectionJournal.journalDate) = :year "
+				+ "   AND month(l.collectionJournal.journalDate) = :month"
+				+ "   AND l.flagged = TRUE";
+
+		final Query query = getCurrentSession().createQuery(queryString);
+		query.setInteger("year", year);
+		query.setInteger("month", month + 1);
+
+		return query.list();
+	}
+
+	@Override
+	@Transactional
+	public List<CollectionJournalLine> getPayableDeliveriesForMember(final Membership member,
+			final int month, final int year) {
 		final String queryString = "FROM CollectionJournalLine l "
 				+ "WHERE l.validatedMember = :member "
 				+ "  AND l.rejected = False " + "  AND l.flagged = False "
@@ -199,7 +217,6 @@ public class MilkCollectionJournalLineRepository extends
 		query.setInteger("month", month);
 
 		return query.list();
-
 	}
 
 	@Override
@@ -225,4 +242,28 @@ public class MilkCollectionJournalLineRepository extends
 		return new BigDecimal(sum.toString());
 	}
 
+	@Override
+	public Map<Membership, BigDecimal> getMapOfPayableDeliveries(int paymentMonth, int paymentYear) {
+		final String queryString = "SELECT l.validatedMember, sum(l.quantity) "
+			+ "FROM CollectionJournalLine l "
+			+ "WHERE 1 = 1 "
+			+ "  AND l.rejected = False " + "  AND l.flagged = False "
+			+ "  AND year(l.collectionJournal.journalDate) = :year "
+			+ "  AND month(l.collectionJournal.journalDate) = :month "
+			+ "  GROUP BY l.validatedMember";
+
+		final Query query = getCurrentSession().createQuery(queryString);
+		query.setInteger("year", paymentYear);
+		query.setInteger("month", paymentMonth);
+	
+		Map<Membership, BigDecimal> result = new HashMap<Membership, BigDecimal>();
+		List<Object[]> sums = query.list();
+		
+		for (Object[] array: sums) {
+			result.put((Membership) array[0], array[1] == null ?
+					Constants.BIGZERO : new BigDecimal(array[1].toString()));
+		}
+		
+		return result;
+	}
 }

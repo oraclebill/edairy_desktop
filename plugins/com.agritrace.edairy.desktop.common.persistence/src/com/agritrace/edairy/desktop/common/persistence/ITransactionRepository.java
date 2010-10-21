@@ -8,10 +8,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
+import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
 import com.agritrace.edairy.desktop.internal.common.persistence.TransactionRepository;
 import com.google.inject.ImplementedBy;
 
@@ -30,15 +32,10 @@ public interface ITransactionRepository extends IRepository<AccountTransaction> 
 	//
 	// QUERIES
 	//
-
 	List<AccountTransaction> findAccountTransactions(Account account, Date start, Date end);
 	List<AccountTransaction> findAccountTransactions(Account account, Date start, Date end, String refNum, List<TransactionSource> sources);
 
 	BalancePoint findLatestBalancePoint(Account primaryAcct);
-
-	BigDecimal calculateBalance(Account primaryAcct, Date cutoffDate);
-
-	BigDecimal calculateBalance(Account primaryAcct);
 
 	//
 	// MUTATORS

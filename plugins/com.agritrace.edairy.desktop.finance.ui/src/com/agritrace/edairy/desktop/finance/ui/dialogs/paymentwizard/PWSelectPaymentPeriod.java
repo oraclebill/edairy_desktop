@@ -21,6 +21,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
 import com.agritrace.edairy.desktop.common.ui.util.FormUtil;
+import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.finance.payments.MemberCollectionsManager;
 import com.agritrace.edairy.desktop.finance.ui.MilkPriceJournalConstants;
 import com.agritrace.edairy.desktop.persistence.finance.IMemberPaymentsRepository;
@@ -166,16 +167,31 @@ public class PWSelectPaymentPeriod extends PWPage {
 					"A payment run for the selected period was already executed on %s by %s %s (%s).",
 					paymentRecord.getEntryDate(), first.getGivenName(), first.getFamilyName(), first.getId()));
 			setPageComplete(false);
-		} else {
-			List<Membership> members = collectionsManager.getActiveMembers(paymentMonth, paymentYear);
+			return;
+		}
+		
+		List<Membership> flaggedMembers = collectionsManager.getFlaggedMembers(paymentMonth, paymentYear);
+		
+		if (!flaggedMembers.isEmpty()) {
+			String message = "Some members have flagged deliveries for this month. Please correct them before proceeding.";
 			
-			if (members.size() == 0) {
-				setErrorMessage("There are no transactions or milk collections for this time period. Please select an active period.");
-				setPageComplete(false);
-			} else {
-				setErrorMessage(null);
-				setPageComplete(true);
+			for (Membership member: flaggedMembers) {
+				message += "\n - " + MemberUtil.formattedMemberName(member.getMember());
 			}
+			
+			setErrorMessage(message);
+			setPageComplete(false);
+			return;
+		}
+			
+		List<Membership> members = collectionsManager.getActiveMembers(paymentMonth, paymentYear);
+		
+		if (members.isEmpty()) {
+			setErrorMessage("There are no transactions or milk collections for this time period. Please select an active period.");
+			setPageComplete(false);
+		} else {
+			setErrorMessage(null);
+			setPageComplete(true);
 		}
 	}
 

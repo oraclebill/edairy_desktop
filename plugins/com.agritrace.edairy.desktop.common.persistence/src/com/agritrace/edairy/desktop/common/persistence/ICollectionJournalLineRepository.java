@@ -3,6 +3,7 @@ package com.agritrace.edairy.desktop.common.persistence;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
@@ -23,8 +24,10 @@ public interface ICollectionJournalLineRepository extends
 	List<Membership> getMembersWithDeliveriesFor(int priceMonth, int priceYear);
 	List<CollectionJournalLine> getPayableDeliveriesForMember(Membership member,
 			int paymentMonth, int paymentYear);
-	BigDecimal getSumOfPayableDeliveries(Membership member, int paymentMonth,
-			int paymentYear);
+	BigDecimal getSumOfPayableDeliveries(Membership member, int paymentMonth, int paymentYear);
+	Map<Membership, BigDecimal> getMapOfPayableDeliveries(int paymentMonth, int paymentYear);
 
 	List<Object[]> collectionsSummary(Date startDate, Date endDate);
+
+	List<Membership> getMembersWithFlaggedDeliveriesFor(int month, int year);
 }

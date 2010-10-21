@@ -8,8 +8,10 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
@@ -19,6 +21,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
 import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.Transactional;
+import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository.SessionRunnable;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -139,26 +142,6 @@ public class AltTransactionRepository extends RepositoryUtil<AccountTransaction>
 	@Override
 	public BalancePoint findLatestBalancePoint(final Account account) {
 		return findLatestBalancePoint(account, new Date());
-	}
-
-	@Override
-	public BigDecimal calculateBalance(Account primaryAcct) {
-		return calculateBalance(primaryAcct, new Date());
-	}
-
-	@Override
-	public BigDecimal calculateBalance(Account primaryAcct, Date cutoffDate) {
-		Date startDate = new Date(0);
-		BigDecimal sum = Constants.BIGZERO;
-
-		final BalancePoint point = findLatestBalancePoint(primaryAcct);
-		if (point != null) {
-			startDate = point.getAsOf();
-			sum = point.getAmount();
-		}
-
-		final List<AccountTransaction> transactions = findAccountTransactions(primaryAcct, startDate, cutoffDate);
-		return sum.add(sumTransactions(transactions));
 	}
 
 	@Override

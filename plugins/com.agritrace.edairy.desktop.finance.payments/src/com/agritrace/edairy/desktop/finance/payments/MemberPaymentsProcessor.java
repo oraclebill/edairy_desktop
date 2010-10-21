@@ -1,16 +1,24 @@
 package com.agritrace.edairy.desktop.finance.payments;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
+import com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint;
+import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
+import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
 import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
 import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository.BalanceType;
 import com.agritrace.edairy.desktop.common.persistence.services.Transactional;
+import com.agritrace.edairy.desktop.internal.common.persistence.Constants;
 import com.google.inject.Inject;
 
 /**
@@ -114,15 +122,22 @@ public class MemberPaymentsProcessor {
 	@Transactional
 	public List<PaymentRecord> generatePaymentsList(BigDecimal paymentRate, int priceMonth, int priceYear) {
 		final List<PaymentRecord> paymentList = new LinkedList<PaymentRecord>();
+		final List<AccountTransaction> transactions = repository.all();
 
 		final List<Membership> activeMembers = collectionsManager.getActiveMembers(priceMonth, priceYear);
+		final Map<Membership, BigDecimal> deliveries = collectionsManager.getMapOfPayableDeliveries(priceMonth, priceYear);
 		
 		// for each member
 		PaymentRecord payment;
-		
+		BigDecimal periodRate = collectionsManager.getMilkPriceForPeriod(priceMonth, priceYear);
+				
 		for (final Membership member : activeMembers) {
 			try {
-				payment = generatePaymentRecord(paymentRate, priceMonth, priceYear, member);
+				final BigDecimal totalQuantity = deliveries.get(member);
+				final BigDecimal memberDeliveries = totalQuantity == null ?
+						Constants.BIGZERO : periodRate.multiply(totalQuantity, Constants.MONEYCONTEXT);
+				
+				payment = generatePaymentRecord(paymentRate, priceMonth, priceYear, member, transactions, memberDeliveries);
 				
 				if (payment.getTotalPayment().compareTo(Constants.BIGZERO) > 0) {
 					paymentList.add(payment);
@@ -135,6 +150,55 @@ public class MemberPaymentsProcessor {
 		return paymentList;
 	}
 
+	/**
+	 * Add a set of transactions where credits decrease and debits increase the
+	 * result.
+	 *
+	 * @param transactionList
+	 * @return
+	 */
+	private BigDecimal sumTransactions(List<AccountTransaction> transactionList) {
+		BigDecimal sum = Constants.BIGZERO;
+		
+		for (final Transaction tx : transactionList) {
+			final BigDecimal amount = tx.getAmount();
+			
+			if (TransactionType.CREDIT.equals(tx.getTransactionType())) {
+				sum = sum.subtract(amount);
+			} else {
+				sum = sum.add(amount);
+			}
+		}
+		
+		return sum;
+	}
+	
+	private List<AccountTransaction> filterTransactions(List<AccountTransaction> transactions, Account primaryAcct,
+			Date startDate, Date cutoffDate) {
+		List<AccountTransaction> result = new ArrayList<AccountTransaction>();
+		
+		for (AccountTransaction trans: transactions) {
+			if (trans.getAccount() != null && trans.getAccount().getAccountId() == primaryAcct.getAccountId()
+					&& trans.getTransactionDate().compareTo(startDate) >= 0
+					&& (cutoffDate == null || trans.getTransactionDate().compareTo(cutoffDate) <= 0))
+				result.add(trans);
+		}
+		
+		return result;
+	}
+	
+	private BigDecimal calculateBalance(Account primaryAcct, List<AccountTransaction> transactions, Date cutoffDate) {
+		Date startDate = new Date(0);
+		BigDecimal sum = Constants.BIGZERO;
+
+		final BalancePoint point = repository.findLatestBalancePoint(primaryAcct);
+		if (point != null) {
+			startDate = point.getAsOf();
+			sum = point.getAmount();
+		}
+
+		return sum.add(sumTransactions(filterTransactions(transactions, primaryAcct, startDate, cutoffDate)));
+	}
 	/**
 	 * Generate a payment record that can be applied later.
 	 *
@@ -149,19 +213,15 @@ public class MemberPaymentsProcessor {
 	 * @param member
 	 * @return
 	 */
-	public PaymentRecord generatePaymentRecord(BigDecimal rate, int priceMonth, int priceYear, Membership member) {
-
+	private PaymentRecord generatePaymentRecord(BigDecimal rate, int priceMonth, int priceYear, Membership member,
+			List<AccountTransaction> transactions, BigDecimal memberDeliveries) {
 		final PaymentRecord paymentRecord = new PaymentRecord(member, priceMonth, priceYear);
 		final Account primaryAcct = member.getAccount();
 
 		final Calendar periodStart = repository.createPeriodDate(BalanceType.STARTING, priceMonth, priceYear);
 		repository.createPeriodDate(BalanceType.ENDING, priceMonth, priceYear);
 
-		paymentRecord.setStartingBalance(repository.calculateBalance(primaryAcct, periodStart.getTime()));
-
-		// sum total deliveries
-		final BigDecimal memberDeliveries = collectionsManager
-				.calculatePayableDeliveries(member, priceMonth, priceYear);
+		paymentRecord.setStartingBalance(calculateBalance(primaryAcct, transactions, periodStart.getTime()));
 
 		// multiply by price
 		if (memberDeliveries.compareTo(Constants.BIGZERO) > 0) {
@@ -175,7 +235,7 @@ public class MemberPaymentsProcessor {
 			// paymentRecord.setMilkIncome(Constants.BIGZERO);
 		}
 
-		paymentRecord.setAccountCredits(repository.calculateBalance(primaryAcct));
+		paymentRecord.setAccountCredits(calculateBalance(primaryAcct, transactions, null));
 		paymentRecord.setAccountAdjustments(Constants.BIGZERO); // TODO: Fix
 
 		return paymentRecord;
