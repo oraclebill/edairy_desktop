@@ -22,7 +22,7 @@ public class MemberInfoGroup {
 	public static final String ADDITIONAL_NAMES = "Additional";
 	public static final int DEFAULT_FIELD_WIDTH = 150;
 
-	public static final int DEFAULT_LABEL_WIDTH = 90;
+	public static final int DEFAULT_LABEL_WIDTH = 140;
 	public static final String FIRST_NAME = "First";
 	public static final String HONORIFIC = "Hon.";
 	public static final String LAST_NAME = "Last";
@@ -130,6 +130,9 @@ public class MemberInfoGroup {
 		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, "NHIF #"));
 		fieldFactory.applyTo(UIControlsFactory.createText(leftColumn, SWT.BORDER, ViewWidgetId.memberInfo_nhifId));
 
+		// row 11: Default collection center
+		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, "Default collection center"));
+		fieldFactory.applyTo(UIControlsFactory.createCCombo(leftColumn, ViewWidgetId.memberInfo_defaultRoute));
 
 		// right column
 		//

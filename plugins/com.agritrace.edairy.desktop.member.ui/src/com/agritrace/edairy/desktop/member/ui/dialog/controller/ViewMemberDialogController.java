@@ -13,6 +13,7 @@ import com.agritrace.edairy.desktop.member.ui.controls.MemberFarmWidgetControlle
 import com.agritrace.edairy.desktop.member.ui.controls.MemberTransactionWidgetController;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddFarmDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewFarmDialog;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -31,6 +32,11 @@ public class ViewMemberDialogController extends AddMemberDialogController {
 	// transaction tab
 	private MemberTransactionWidgetController transactionController;
 
+	@Inject
+	protected ViewMemberDialogController(IDairyRepository dairyRepo) {
+		super(dairyRepo);
+	}
+	
 	@Override
 	protected void configureButtonsPanel() {
 		System.err.println(" ##### configureButtonsPanel");

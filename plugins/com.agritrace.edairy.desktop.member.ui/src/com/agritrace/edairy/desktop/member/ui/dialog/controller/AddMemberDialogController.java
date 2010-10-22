@@ -2,9 +2,11 @@ package com.agritrace.edairy.desktop.member.ui.dialog.controller;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.databinding.conversion.Converter;
@@ -27,6 +29,7 @@ import org.eclipse.riena.ui.ridgets.IValueRidget;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.base.Person;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
@@ -35,6 +38,8 @@ import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.IProfilePhot
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberProfileWidgetController;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
+import com.google.inject.Inject;
 
 public class AddMemberDialogController extends BaseDialogController<Membership> {
 
@@ -80,8 +85,8 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 	private IProfilePhotoRidget photoRidget;
 
 	private IComboRidget suffixRidget;
-
 	private IComboRidget titleRidget;
+	private IComboRidget defaultCollectionCenterRidget;
 
 	private final IValidator updateValidator = new IValidator() {
 		@Override
@@ -94,9 +99,12 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 	};
 
 	protected Farmer selectedMembershipOwner;
+	
+	private final IDairyRepository dairyRepo;
 
-	public AddMemberDialogController() {
-
+	@Inject
+	public AddMemberDialogController(final IDairyRepository dairyRepo) {
+		this.dairyRepo = dairyRepo;
 	}
 
 	@Override
@@ -234,6 +242,7 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 		nssfRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_nssfId);
 		nhifRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_nhifId);
 		nationalIdRidget = getRidget(ITextRidget.class, ViewWidgetId.memberInfo_nationalId);
+		defaultCollectionCenterRidget = getRidget(IComboRidget.class, ViewWidgetId.memberInfo_defaultRoute);
 
 		// extended setup
 		// titleRidget.setOutputOnly(true);
@@ -307,10 +316,19 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 					new WritableList(VALID_TITLES, String.class), String.class,
 					null, EMFObservables.observeValue(selectedMember,
 							ModelPackage.Literals.PERSON__HONORIFIC));
+			
 			suffixRidget.bindToModel(new WritableList(VALID_NAME_SUFFIXES,
 					String.class), String.class, null, EMFObservables
 					.observeValue(selectedMember,
 							ModelPackage.Literals.PERSON__SUFFIX));
+			
+			List<DairyLocation> collectionCenters = new ArrayList<DairyLocation>();
+			collectionCenters.add(null);
+			collectionCenters.addAll(dairyRepo.getLocalDairyLocations());
+			
+			defaultCollectionCenterRidget.bindToModel(new WritableList(collectionCenters, DairyLocation.class),
+					DairyLocation.class, "getCode",
+					EMFObservables.observeValue(selectedMember, DairyPackage.Literals.MEMBERSHIP__DEFAULT_ROUTE));
 
 			// tap, tap..
 			memberNbrRidget.updateFromModel();
@@ -321,6 +339,7 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 			}
 			titleRidget.updateFromModel();
 			suffixRidget.updateFromModel();
+			defaultCollectionCenterRidget.updateFromModel();
 		}
 	}
 
