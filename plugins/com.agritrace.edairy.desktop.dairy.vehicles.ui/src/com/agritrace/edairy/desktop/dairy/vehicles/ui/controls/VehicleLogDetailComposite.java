@@ -105,7 +105,7 @@ public class VehicleLogDetailComposite extends CompositePanel {
 
 	private void createIdentificationControls(Composite parent) {
 		final Group comonComp = UIControlsFactory.createGroup(parent, "");
-		comonComp.setLayout(new GridLayout(2, true));
+		comonComp.setLayout(new GridLayout(2, false));
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(comonComp);
 
 		final Label label = UIControlsFactory.createLabel(comonComp, "Log Book No.");
@@ -127,7 +127,7 @@ public class VehicleLogDetailComposite extends CompositePanel {
 		UIControlsFactory.createLabel(comonComp, "Driver");
 		final CCombo driverText = UIControlsFactory.createCCombo(comonComp,
 				VehicleLogDetailBindConstants.BIND_ID_DRIVER_NAME);
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(driverText);
+		GridDataFactory.fillDefaults().grab(true, false).minSize(150, SWT.DEFAULT).applyTo(driverText);
 		// addUIControl(driverText, BIND_ID_DRIVER_NAME);
 
 	}

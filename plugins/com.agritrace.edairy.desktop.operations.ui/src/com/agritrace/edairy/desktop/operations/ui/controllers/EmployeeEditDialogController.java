@@ -12,6 +12,8 @@ import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.ridgets.IValueRidget;
+import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
+import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 
 import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
@@ -39,6 +41,7 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 
 	private ITextRidget employeeId;
 	private ITextRidget passwordRidget;
+	private ITextRidget licenseNo;
 	private IProfilePhotoRidget photoRidget;
 	private IContactMethodsGroupRidget contacts;
 
@@ -82,12 +85,21 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		addTextMap(EmployeeBindingConstants.BIND_ID_SINCE, DairyPackage.Literals.EMPLOYEE__START_DATE);
 		addTextMap(EmployeeBindingConstants.BIND_ID_OPR_CODE, DairyPackage.Literals.EMPLOYEE__OPERATOR_CODE);
 		addTextMap(EmployeeBindingConstants.BIND_ID_USERNAME, DairyPackage.Literals.EMPLOYEE__USERNAME);
-
+		addTextMap(EmployeeBindingConstants.BIND_ID_LICENSE_NO, DairyPackage.Literals.EMPLOYEE__LICENSE_NO);
+		
+		getRidget(IComboRidget.class, EmployeeBindingConstants.BIND_ID_POSITION).addSelectionListener(new ISelectionListener() {
+			@Override
+			public void ridgetSelected(SelectionEvent event) {
+				updateLicenseNoRidget();
+			}
+		});
+		
 		// Role needs special care
 		final IComboRidget roleRidget = getRidget(IComboRidget.class, EmployeeBindingConstants.BIND_ID_SEC_ROLE);
 		roleRidget.bindToModel(new WritableList(allRoles, Role.class), Role.class, "getName",
 				EMFObservables.observeValue(getWorkingCopy(), DairyPackage.Literals.EMPLOYEE__ROLE));
 
+		licenseNo = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_LICENSE_NO);
 		// We pointedly do not display the current password.
 		passwordRidget = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_PASSWORD);
 
@@ -151,8 +163,22 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 				final IMarkableRidget imr = (IMarkableRidget) ridget;
 				imr.updateFromModel();
 			}
-
 		}
+		
+		updateLicenseNoRidget();
 	}
 
+	private void updateLicenseNoRidget() {
+		final Employee employee = getWorkingCopy();
+		
+		// TODO: Bad! Shouldn't be a string!
+		if ("Driver".equals(employee.getJobFunction())) {
+			licenseNo.setOutputOnly(false);
+			licenseNo.setMandatory(true);
+		} else {
+			licenseNo.setOutputOnly(true);
+			licenseNo.setMandatory(false);
+			licenseNo.setText("");
+		}
+	}
 }

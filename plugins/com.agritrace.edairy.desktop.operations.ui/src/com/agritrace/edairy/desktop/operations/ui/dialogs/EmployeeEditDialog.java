@@ -110,6 +110,11 @@ public class EmployeeEditDialog extends RecordDialog<Employee> {
 		factory.copy().applyTo(startDate);
 		addUIControl(startDate, EmployeeBindingConstants.BIND_ID_SINCE);
 
+		UIControlsFactory.createLabel(employeeInfo, "License Number");
+		final Text licenseNo = UIControlsFactory.createText(employeeInfo);
+		factory.copy().applyTo(licenseNo);
+		addUIControl(licenseNo, EmployeeBindingConstants.BIND_ID_LICENSE_NO);
+
 		UIControlsFactory.createLabel(employeeInfo, "Security Role");
 		final CCombo securityRole = UIControlsFactory.createCCombo(employeeInfo);
 		securityRole.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));

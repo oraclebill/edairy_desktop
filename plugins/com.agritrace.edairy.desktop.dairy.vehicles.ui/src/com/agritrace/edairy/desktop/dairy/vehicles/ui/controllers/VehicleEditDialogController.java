@@ -52,7 +52,7 @@ public class VehicleEditDialogController extends RecordDialogController<Vehicle>
 
 		addComboMap(VehicleLogDetailBindConstants.BIND_ID_DRIVER_NAME,
 				new WritableList(dairyRepo.employeesByPosition("Driver"), Employee.class),
-				"getFamilyName",
+				"getNameAndLicense",
 				DairyPackage.Literals.VEHICLE__DRIVER);
 
 		addComboMap(VehicleLogDetailBindConstants.BIND_ID_VEHICLE_TYPE,

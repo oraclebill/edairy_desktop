@@ -14,4 +14,5 @@ public interface EmployeeBindingConstants {
 	String BIND_ID_USERNAME = "BIND_ID_USERNAME";
 	String BIND_ID_PASSWORD = "BIND_ID_PASSWORD";
 	String BIND_ID_LOCAL_ENABLED = "BIND_ID_LOCAL_ENABLED";
+	String BIND_ID_LICENSE_NO = "BIND_ID_LICENSE_NO";
 }
