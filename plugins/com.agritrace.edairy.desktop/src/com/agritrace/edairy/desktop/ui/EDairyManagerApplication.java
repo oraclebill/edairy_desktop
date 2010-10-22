@@ -3,6 +3,7 @@
  */
 package com.agritrace.edairy.desktop.ui;
 
+import org.eclipse.riena.internal.ui.swt.utils.RcpUtilities;
 import org.eclipse.riena.navigation.IApplicationNode;
 import org.eclipse.riena.navigation.IModuleGroupNode;
 import org.eclipse.riena.navigation.IModuleNode;
@@ -72,7 +73,14 @@ public class EDairyManagerApplication extends SwtApplication implements Applicat
 
 	@Override
 	protected ApplicationController createApplicationController(IApplicationNode node) {
-		final ApplicationController controller = super.createApplicationController(node);
+		final ApplicationController controller = new ApplicationController(node) {
+			@Override
+			public void afterBind() {
+				super.afterBind();
+				RcpUtilities.getWorkbenchShell().setMaximized(true);
+			}
+		};
+		
 		controller.setMenubarVisible(true);
 		return controller;
 	}

@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.ui;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.riena.ui.swt.lnf.ColorLnfResource;
 import org.eclipse.riena.ui.swt.lnf.FontLnfResource;
 import org.eclipse.riena.ui.swt.lnf.ILnfCustomizer;
@@ -116,8 +117,9 @@ public class EDairyManagerUITheme extends RienaDefaultTheme {
 	 */
 	@Override
 	protected boolean hideOsBorder() {
-		// TODO Auto-generated method stub
-		return super.hideOsBorder();
+		// Under Linux, the window is for some reason not maximizable unless we use the standard
+		// window decorations.
+		return !Platform.getOS().equals(Platform.OS_LINUX);
 	}
 
 }
