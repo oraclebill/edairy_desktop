@@ -1,6 +1,7 @@
 package com.agritrace.edairy.desktop.finance.ui.controls;
 
 import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
@@ -20,10 +21,17 @@ public class AccountTransactionEditPanel extends AbstractTransactionEditPanel {
 		addDateField();
 
 		UIControlsFactory.createLabel(middlePanel, "Store", FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO_LBL);
-		final CCombo locationCombo = UIControlsFactory.createCCombo(middlePanel, FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO);
+		final Composite locationComposite = UIControlsFactory.createComposite(middlePanel);
+		GridLayoutFactory.fillDefaults().numColumns(3).equalWidth(true).applyTo(locationComposite);
+		GridDataFactory.fillDefaults().grab(true, true).span(2, 1).applyTo(locationComposite);
+		
+		final CCombo locationCombo = UIControlsFactory.createCCombo(locationComposite, FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO);
 		locationCombo.select(0);
-		GridDataFactory.fillDefaults().grab(true, true).span(2, 1).applyTo(locationCombo);
-
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(locationCombo);
+		
+		final Text locationText = UIControlsFactory.createText(locationComposite, SWT.SINGLE, FinanceBindingConstants.ID_DAIRY_LOCATION_TEXT);
+		GridDataFactory.fillDefaults().grab(true, true).span(2, 1).applyTo(locationText);
+		
 		addMemberField();
 
 		UIControlsFactory.createLabel(middlePanel, "Reference No.");

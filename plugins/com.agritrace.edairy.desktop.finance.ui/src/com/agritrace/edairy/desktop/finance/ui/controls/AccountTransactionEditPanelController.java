@@ -59,6 +59,7 @@ public class AccountTransactionEditPanelController extends AbstractDetailPanelCo
 	}
 
 	private IComboRidget storeLocation;
+	private ITextRidget storeLocText;
 	private ITextRidget memberName;
 
 	private final IDairyRepository dairyRepo;
@@ -132,19 +133,39 @@ public class AccountTransactionEditPanelController extends AbstractDetailPanelCo
 				return memberSearchProvider.get();
 			}
 		});
-
+		
+		storeLocText = container.getRidget(ITextRidget.class, FinanceBindingConstants.ID_DAIRY_LOCATION_TEXT);
+		storeLocText.setOutputOnly(true);
+		
 		storeLocation = container.getRidget(IComboRidget.class, FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO);
 		List<DairyLocation> locations = dairyRepo.getLocalDairyLocations();
+		
 		if (locations.size() == 0) {
 			locations = Arrays.asList();
 		}
+		
 		final IObservableList optionList = Observables.staticObservableList(locations);
 		final IObservableValue selectedValue = PojoObservables.observeValue(model, "relatedLocation");
-		storeLocation.bindToModel(optionList, DairyLocation.class, "getName", selectedValue);
-		System.err.println("Binding: >>>> " + dairyRepo.getLocalDairyLocations());
-		System.err.println(" to Model: >>>> " + model);
+		storeLocation.bindToModel(optionList, DairyLocation.class, "getCode", selectedValue);
 		storeLocation.updateFromModel();
-
+		updateStoreName();
+		
+		storeLocation.addSelectionListener(new ISelectionListener() {
+			@Override
+			public void ridgetSelected(SelectionEvent event) {
+				updateStoreName();
+			}
+		});
+	}
+	
+	private void updateStoreName() {
+		final AccountTransaction model = getModel();
+		
+		if (model.getRelatedLocation() != null) {
+			storeLocText.setText(model.getRelatedLocation().getName());
+		} else {
+			storeLocText.setText("");
+		}
 	}
 
 	private void setSelectedMember(Membership selectedMember) {
