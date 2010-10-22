@@ -837,6 +837,15 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getEmployee_LicenseNo() {
+		return (EAttribute)employeeEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDairyLocation() {
 		return dairyLocationEClass;
 	}
@@ -2302,6 +2311,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(employeeEClass, EMPLOYEE__LOCAL_ENABLED);
 		createEReference(employeeEClass, EMPLOYEE__ROLE);
 		createEAttribute(employeeEClass, EMPLOYEE__PASSWORD_HASHED);
+		createEAttribute(employeeEClass, EMPLOYEE__LICENSE_NO);
 
 		dairyLocationEClass = createEClass(DAIRY_LOCATION);
 		createEAttribute(dairyLocationEClass, DAIRY_LOCATION__ID);
@@ -2582,6 +2592,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getEmployee_LocalEnabled(), ecorePackage.getEBoolean(), "localEnabled", "true", 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEmployee_Role(), this.getRole(), null, "role", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEmployee_PasswordHashed(), ecorePackage.getEBoolean(), "passwordHashed", "false", 1, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEmployee_LicenseNo(), ecorePackage.getEString(), "licenseNo", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dairyLocationEClass, DairyLocation.class, "DairyLocation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDairyLocation_Id(), ecorePackage.getELong(), "Id", null, 0, 1, DairyLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

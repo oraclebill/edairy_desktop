@@ -104,6 +104,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/localEnabled"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//Employee/role"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/passwordHashed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Employee/licenseNo"/>
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//DairyLocation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//DairyLocation/Id"/>

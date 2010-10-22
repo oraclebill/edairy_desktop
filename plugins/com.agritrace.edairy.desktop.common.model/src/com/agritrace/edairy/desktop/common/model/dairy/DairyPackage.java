@@ -862,13 +862,22 @@ public interface DairyPackage extends EPackage {
 	int EMPLOYEE__PASSWORD_HASHED = ModelPackage.PERSON_FEATURE_COUNT + 9;
 
 	/**
+	 * The feature id for the '<em><b>License No</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPLOYEE__LICENSE_NO = ModelPackage.PERSON_FEATURE_COUNT + 10;
+
+	/**
 	 * The number of structural features of the '<em>Employee</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE_FEATURE_COUNT = ModelPackage.PERSON_FEATURE_COUNT + 10;
+	int EMPLOYEE_FEATURE_COUNT = ModelPackage.PERSON_FEATURE_COUNT + 11;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyLocationImpl <em>Location</em>}' class.
@@ -3322,6 +3331,17 @@ public interface DairyPackage extends EPackage {
 	EAttribute getEmployee_PasswordHashed();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getLicenseNo <em>License No</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>License No</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Employee#getLicenseNo()
+	 * @see #getEmployee()
+	 * @generated
+	 */
+	EAttribute getEmployee_LicenseNo();
+
+	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.DairyLocation <em>Location</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5443,6 +5463,14 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute EMPLOYEE__PASSWORD_HASHED = eINSTANCE.getEmployee_PasswordHashed();
+
+		/**
+		 * The meta object literal for the '<em><b>License No</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMPLOYEE__LICENSE_NO = eINSTANCE.getEmployee_LicenseNo();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyLocationImpl <em>Location</em>}' class.

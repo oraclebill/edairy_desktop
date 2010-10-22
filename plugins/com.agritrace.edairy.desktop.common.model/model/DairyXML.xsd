@@ -119,6 +119,7 @@
         <xsd:attribute default="" name="password" type="xsd:string"/>
         <xsd:attribute default="true" name="localEnabled" type="xsd:boolean"/>
         <xsd:attribute default="false" name="passwordHashed" type="xsd:boolean" use="required"/>
+        <xsd:attribute name="licenseNo" type="xsd:string"/>
         <xsd:attribute name="role" type="xsd:string"/>
       </xsd:extension>
     </xsd:complexContent>

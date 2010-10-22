@@ -28,6 +28,7 @@ import java.util.Date;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#isLocalEnabled <em>Local Enabled</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getRole <em>Role</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#isPasswordHashed <em>Password Hashed</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getLicenseNo <em>License No</em>}</li>
  * </ul>
  * </p>
  *
@@ -300,5 +301,31 @@ public interface Employee extends Person {
 	 * @generated
 	 */
 	void setPasswordHashed(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>License No</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>License No</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>License No</em>' attribute.
+	 * @see #setLicenseNo(String)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getEmployee_LicenseNo()
+	 * @model
+	 * @generated
+	 */
+	String getLicenseNo();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getLicenseNo <em>License No</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>License No</em>' attribute.
+	 * @see #getLicenseNo()
+	 * @generated
+	 */
+	void setLicenseNo(String value);
 
 } // Employee

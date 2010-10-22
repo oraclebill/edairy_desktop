@@ -38,6 +38,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#isLocalEnabled <em>Local Enabled</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getRole <em>Role</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#isPasswordHashed <em>Password Hashed</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getLicenseNo <em>License No</em>}</li>
  * </ul>
  * </p>
  *
@@ -233,6 +234,26 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * @ordered
 	 */
 	protected boolean passwordHashed = PASSWORD_HASHED_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLicenseNo() <em>License No</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLicenseNo()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String LICENSE_NO_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getLicenseNo() <em>License No</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLicenseNo()
+	 * @generated
+	 * @ordered
+	 */
+	protected String licenseNo = LICENSE_NO_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -485,6 +506,27 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getLicenseNo() {
+		return licenseNo;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLicenseNo(String newLicenseNo) {
+		String oldLicenseNo = licenseNo;
+		licenseNo = newLicenseNo;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__LICENSE_NO, oldLicenseNo, licenseNo));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -509,6 +551,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 				return basicGetRole();
 			case DairyPackage.EMPLOYEE__PASSWORD_HASHED:
 				return isPasswordHashed();
+			case DairyPackage.EMPLOYEE__LICENSE_NO:
+				return getLicenseNo();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -550,6 +594,9 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 				return;
 			case DairyPackage.EMPLOYEE__PASSWORD_HASHED:
 				setPasswordHashed((Boolean)newValue);
+				return;
+			case DairyPackage.EMPLOYEE__LICENSE_NO:
+				setLicenseNo((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -593,6 +640,9 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 			case DairyPackage.EMPLOYEE__PASSWORD_HASHED:
 				setPasswordHashed(PASSWORD_HASHED_EDEFAULT);
 				return;
+			case DairyPackage.EMPLOYEE__LICENSE_NO:
+				setLicenseNo(LICENSE_NO_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -625,6 +675,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 				return role != null;
 			case DairyPackage.EMPLOYEE__PASSWORD_HASHED:
 				return passwordHashed != PASSWORD_HASHED_EDEFAULT;
+			case DairyPackage.EMPLOYEE__LICENSE_NO:
+				return LICENSE_NO_EDEFAULT == null ? licenseNo != null : !LICENSE_NO_EDEFAULT.equals(licenseNo);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -657,6 +709,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 		result.append(localEnabled);
 		result.append(", passwordHashed: ");
 		result.append(passwordHashed);
+		result.append(", licenseNo: ");
+		result.append(licenseNo);
 		result.append(')');
 		return result.toString();
 	}
