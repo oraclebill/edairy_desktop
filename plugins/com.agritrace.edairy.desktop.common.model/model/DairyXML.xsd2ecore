@@ -100,7 +100,8 @@
       <nested inputs="dairy.ecore#//Employee/password" outputs="DairyXML.xsd#//Employee;XSDComplexTypeDefinition=3/XSDAttributeUse=6"/>
       <nested inputs="dairy.ecore#//Employee/localEnabled" outputs="DairyXML.xsd#//Employee;XSDComplexTypeDefinition=3/XSDAttributeUse=7"/>
       <nested inputs="dairy.ecore#//Employee/passwordHashed" outputs="DairyXML.xsd#//Employee;XSDComplexTypeDefinition=3/XSDAttributeUse=8"/>
-      <nested inputs="dairy.ecore#//Employee/role" outputs="DairyXML.xsd#//Employee;XSDComplexTypeDefinition=3/XSDAttributeUse=9"/>
+      <nested inputs="dairy.ecore#//Employee/licenseNo" outputs="DairyXML.xsd#//Employee;XSDComplexTypeDefinition=3/XSDAttributeUse=9"/>
+      <nested inputs="dairy.ecore#//Employee/role" outputs="DairyXML.xsd#//Employee;XSDComplexTypeDefinition=3/XSDAttributeUse=10"/>
     </nested>
     <nested inputs="dairy.ecore#//Employee" outputs="DairyXML.xsd#//Employee;XSDElementDeclaration=3"/>
     <nested inputs="dairy.ecore#//DairyLocation" outputs="DairyXML.xsd#//DairyLocation;XSDComplexTypeDefinition=4">
