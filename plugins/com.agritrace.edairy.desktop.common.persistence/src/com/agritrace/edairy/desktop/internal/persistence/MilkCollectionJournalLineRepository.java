@@ -68,11 +68,32 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 
 		return (Long) query.uniqueResult();
 	}
+	
+	@Override
+	public List<Object[]> dailyCollectionsSummary(Date day) {
+		Calendar startDate, endDate;
+		startDate = Calendar.getInstance();
+		startDate.setTime(day);
+		endDate = Calendar.getInstance();
+		endDate.setTime(day);
+
+		int[] timeFields = new int[] { Calendar.HOUR, Calendar.MINUTE,
+				Calendar.SECOND, Calendar.MILLISECOND };
+
+		for (int field : timeFields) {
+			startDate.set(field, startDate.getActualMinimum(field));
+			endDate.set(field, startDate.getActualMaximum(field));
+		}
+
+		return collectionsSummary(
+				startDate.getTime(), endDate.getTime());
+	}
 
 	@Override
 	@Transactional
 	public List<Object[]> collectionsSummary(Date startDate, Date endDate) {
-		final String sqlString = "select journaldate as date, dairylocation.code as route, collectionsession.code as session, sum(quantity) as sum  "
+		final String sqlString = "" +
+				"select journaldate as date, dairylocation.code as route, collectionsession.code as session, sum(quantity) as sum, count(*) as cnt, avg(quantity) as avg, min(quantity) as min, max(quantity) as max  "
 				+ "  from collectiongroup join collectionjournalline on collectionjournalline_collectionjournal_e_id = journalid "
 				+ "    join collectionsession on collectionsession.id = collectionsession_session_e_id "
 				+ "    join dairylocation on dairylocation.id = dairylocation_collectioncenter_id "
