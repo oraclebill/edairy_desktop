@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.internal.persistence.MilkCollectionJournalLineRepository;
@@ -18,7 +19,7 @@ public interface ICollectionJournalLineRepository extends
 			final DairyLocation center, final Date date);
 
 //	List<CollectionGroup> allForDate(Date date);
-
+  
 	BigDecimal getMilkPrice(int priceMonth, int priceYear);
 
 	List<Membership> getMembersWithDeliveriesFor(int priceMonth, int priceYear);
@@ -30,4 +31,7 @@ public interface ICollectionJournalLineRepository extends
 	List<Object[]> collectionsSummary(Date startDate, Date endDate);
 
 	List<Membership> getMembersWithFlaggedDeliveriesFor(int month, int year);
+
+	Map<String, Double> collectionStatistics(Date startDate, Date endDate, DairyLocation route,
+			CollectionSession session);
 }

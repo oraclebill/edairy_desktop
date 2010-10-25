@@ -60,6 +60,7 @@ $(document).ready(function() {
 	date = getReportDate();
 	try {
 		data = getIntakeData(date);
+//		data = getData();  // testing
 	}
 	catch (e) {
 		alert(e);
@@ -81,15 +82,17 @@ $(document).ready(function() {
 	barProps = {
 		type : 'bar',
 		parseDirection : 'y',
-		colors : COLORS,
+		//colors : COLORS,
 		colFilter : '.chart',
 		barMargin : 0,
 		barGroupMargin : 2,
-		width : 950,
+		width : 1000,
 		height : 100,
 		title : ' '
 	};
-	$('table#intake-data-table').visualize(barProps).appendTo('#bar-chart');
+	$('table#intake-data-table').visualize(barProps).insertAfter('#chart-by-route');
 //	$('table#intake-data-table').visualize(pieProps).appendTo('#pie-chart');
 
+	// for some reason in ie, we have to refresh after moving the table..
+	$('.visualize').trigger('visualizeRefresh');
 });
