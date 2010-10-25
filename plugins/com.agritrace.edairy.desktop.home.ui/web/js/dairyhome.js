@@ -59,8 +59,8 @@ $(document).ready(function() {
 	/** build the table * */
 	date = getReportDate();
 	try {
-//		data = getIntakeData(date);
-		data = getData();  // testing
+		data = getIntakeData(date);
+//		data = getData();  // testing
 	}
 	catch (e) {
 		alert(e);
