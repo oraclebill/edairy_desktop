@@ -35,6 +35,8 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.services.ui.Activator;
 import com.agritrace.edairy.desktop.services.ui.controllers.AnimalHealthRequestDialogController;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * Service request list dialog
@@ -68,8 +70,21 @@ public class AnimalHealthRequestDialog extends RecordDialog<AnimalHealthRequest>
 	private Composite specialComp;
 	private Composite verternaryComp;
 
-	public AnimalHealthRequestDialog(Shell parentShell) {
-		super(parentShell);
+	@Inject
+	public AnimalHealthRequestDialog(@Named("current") final Shell parentShell,
+			final AnimalHealthRequestDialogController controller) {
+		super(parentShell, controller);
+		controller.addListener(new IActionListener() {
+			@Override
+			public void callback() {
+				Display.getDefault().syncExec(new Runnable() {
+					@Override
+					public void run() {
+						updateTypeSpecificControlls(controller.getWorkingCopy().getType());
+					}
+				});
+			}
+		});
 	}
 
 	public void updateUI(RequestType type) {
@@ -250,7 +265,7 @@ public class AnimalHealthRequestDialog extends RecordDialog<AnimalHealthRequest>
 		verternaryComp.setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		UIControlsFactory.createLabel(verternaryComp, "Complaint");
-		final Text complaintText = UIControlsFactory.createText(verternaryComp);
+		final Text complaintText = UIControlsFactory.createText(verternaryComp, SWT.MULTI);
 		final GridData data = new GridData(GridData.FILL_HORIZONTAL);
 		data.heightHint = 100;
 		data.widthHint = 300;
@@ -284,27 +299,6 @@ public class AnimalHealthRequestDialog extends RecordDialog<AnimalHealthRequest>
 		this.setShellStyle(SWT.RESIZE | SWT.CLOSE | SWT.TITLE);
 		newShell.setSize(340, 380);
 		newShell.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
-	}
-
-	@Override
-	protected AnimalHealthRequestDialogController createController() {
-		final AnimalHealthRequestDialogController controller = new AnimalHealthRequestDialogController();
-		controller.addListener(new IActionListener() {
-
-			@Override
-			public void callback() {
-				Display.getDefault().syncExec(new Runnable() {
-
-					@Override
-					public void run() {
-
-						updateTypeSpecificControlls(controller.getWorkingCopy().getType());
-					}
-				});
-
-			}
-		});
-		return controller;
 	}
 
 	protected void updateTypeSpecificControlls(RequestType type) {

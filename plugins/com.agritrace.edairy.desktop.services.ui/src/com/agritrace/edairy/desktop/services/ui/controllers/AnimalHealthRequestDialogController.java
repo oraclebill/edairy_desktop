@@ -133,9 +133,7 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 		}
 	}
 
-	@Inject
 	private Provider<FarmSearchDialog> farmSearchDialogProvider;
-	@Inject
 	private Provider<MemberSearchDialog> memberSearchDialogProvider;
 
 	private IActionRidget farmLookupButton;
@@ -146,6 +144,13 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 	private AnimalHealthRequest request;
 
 	IDateTimeRidget textRidget;
+	
+	@Inject
+	public AnimalHealthRequestDialogController(final Provider<FarmSearchDialog> farmSearchDialogProvider,
+			final Provider<MemberSearchDialog> memberSearchDialogProvider) {
+		this.farmSearchDialogProvider = farmSearchDialogProvider;
+		this.memberSearchDialogProvider = memberSearchDialogProvider;
+	}
 
 	public void addListener(IActionListener listener) {
 		this.listeners.add(listener);

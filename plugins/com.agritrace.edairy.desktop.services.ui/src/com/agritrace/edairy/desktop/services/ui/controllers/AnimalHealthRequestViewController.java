@@ -115,14 +115,17 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 
 	private final Provider<FarmSearchDialog> farmSearchDialogProvider;
 	private final Provider<MemberSearchDialog> memberSearchDialogProvider;
+	private final Provider<AnimalHealthRequestDialog> dialogProvider;
 
 	@Inject
 	public AnimalHealthRequestViewController(final IRepository<AnimalHealthRequest> myRepo,
 			final Provider<FarmSearchDialog> farmSearchDialogProvider,
-			final Provider<MemberSearchDialog> memberSearchDialogProvider) {
+			final Provider<MemberSearchDialog> memberSearchDialogProvider,
+			final Provider<AnimalHealthRequestDialog> dialogProvider) {
 		setRepository(this.myRepo = myRepo);
 		this.farmSearchDialogProvider = farmSearchDialogProvider;
 		this.memberSearchDialogProvider = memberSearchDialogProvider;
+		this.dialogProvider = dialogProvider;
 	}
 
 	@Override
@@ -411,7 +414,7 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 
 	@Override
 	protected RecordDialog<AnimalHealthRequest> getRecordDialog(Shell shell) {
-		return new AnimalHealthRequestDialog(shell);
+		return dialogProvider.get();
 	}
 
 	@Override
