@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.hibernate.Session;
@@ -33,6 +34,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.common.persistence.ManagedMemoryDataStoreProvider;
+import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
 import com.agritrace.edairy.desktop.internal.persistence.MilkCollectionJournalLineRepository;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
@@ -40,6 +42,7 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
 import com.ibm.icu.text.DateFormat;
+import com.ibm.icu.util.Calendar;
 
 public class MilkCollectionJournalLineQueryTest {
 
@@ -61,14 +64,17 @@ public class MilkCollectionJournalLineQueryTest {
 		}
 	}
 
-	Injector injector = Guice.createInjector(new AbstractModule() {
-		@Override protected void configure() {
-			final ManagedMemoryDataStoreProvider provider = new ManagedMemoryDataStoreProvider();
-			bind(HbDataStore.class).toProvider(provider);
-			bind(Session.class).toProvider(SessionProvider.class);
-			bind(ICollectionJournalLineRepository.class).to(MilkCollectionJournalLineRepository.class);
-		}
-	});
+//	Injector injector = Guice.createInjector(new AbstractModule() {
+//		@Override
+//		protected void configure() {
+//			final ManagedMemoryDataStoreProvider provider = new ManagedMemoryDataStoreProvider();
+//			bind(HbDataStore.class).toProvider(provider);
+//			bind(Session.class).toProvider(SessionProvider.class);
+//			bind(ICollectionJournalLineRepository.class).to(MilkCollectionJournalLineRepository.class);
+//		}
+//	});
+
+	final Injector injector = Guice.createInjector(new PersistenceModule());
 
 	ICollectionJournalLineRepository repo;
 
@@ -77,14 +83,38 @@ public class MilkCollectionJournalLineQueryTest {
 		repo = injector.getInstance(ICollectionJournalLineRepository.class);
 	}
 
-//	@Test
+	@Test
+	public void testStatistics() throws Exception {
+//		repo = liveInjector.getInstance(ICollectionJournalLineRepository.class);
+		Map<String, Double> statMap ;
+		
+		statMap = repo.collectionStatistics(createDate(2010, 5, 1), createDate(2010, 5, 2), null, null);
+		assertNotNull(statMap);
+		
+		statMap = repo.collectionStatistics(createDate(2010, 5, 1), createDate(2010, 5, 1), null, null);
+		assertNotNull(statMap);
+		
+		System.err.println(statMap.entrySet());
+		
+	}
+
+	private Date createDate(int year, int month, int day) {
+		Calendar cal = Calendar.getInstance();
+		cal.clear();
+		cal.set(Calendar.YEAR, year);
+		cal.set(Calendar.MONTH, month-1);
+		cal.set(Calendar.DAY_OF_MONTH, day);
+
+		return cal.getTime();
+	}
+
+	// @Test
 	public void testCountByMemberCenterDate() throws Exception {
 		initTestContext("../test-data/collections/test-collections.csv");
 
 		Membership membership = null;
 		for (final Membership m : DAIRY.getMemberships()) {
-			if (m.getMemberNumber().equals("1975")
-					|| m.getMemberNumber().equals("01975")) {
+			if (m.getMemberNumber().equals("1975") || m.getMemberNumber().equals("01975")) {
 				membership = m;
 				break;
 			}
@@ -100,24 +130,22 @@ public class MilkCollectionJournalLineQueryTest {
 		final DairyLocation centerGood = centers.get("R012");
 		final Date date = DateFormat.getDateInstance().parse("June 20, 2010");
 
-		assertEquals(1,
-				repo.countByMemberCenterDate(membership, centerGood, date));
-		assertEquals(0,
-				repo.countByMemberCenterDate(membership, centerBad, date));
+		assertEquals(1, repo.countByMemberCenterDate(membership, centerGood, date));
+		assertEquals(0, repo.countByMemberCenterDate(membership, centerBad, date));
 		// assertEquals(0, repo.countByMemberCenterDate(null, null, null));
 	}
 
-//	@Test
-//	public void testAllForDate() throws Exception {
-//		initTestContext("../test-data/collections/test-collections.csv");
-//
-//		Date startDate = DateFormat.getDateInstance().parse("Jun 2, 2010");
-//		Date endDate = DateFormat.getDateInstance().parse("Jun 2, 2010");
-//		assertEquals(2, repo.allForDate(startDate, endDate).size());
-//
-//		queryDate = DateFormat.getDateInstance().parse("Jun 2, 2011");
-//		assertEquals(0, repo.allForDate(queryDate).size());
-//	}
+	// @Test
+	// public void testAllForDate() throws Exception {
+	// initTestContext("../test-data/collections/test-collections.csv");
+	//
+	// Date startDate = DateFormat.getDateInstance().parse("Jun 2, 2010");
+	// Date endDate = DateFormat.getDateInstance().parse("Jun 2, 2010");
+	// assertEquals(2, repo.allForDate(startDate, endDate).size());
+	//
+	// queryDate = DateFormat.getDateInstance().parse("Jun 2, 2011");
+	// assertEquals(0, repo.allForDate(queryDate).size());
+	// }
 
 	@Test
 	public void testGetMilkPrice() throws Exception {
@@ -144,7 +172,7 @@ public class MilkCollectionJournalLineQueryTest {
 
 	}
 
-//	@Test
+	// @Test
 	public void testGetMembersWithDeliveriesFor() throws Exception {
 		initTestContext("../test-data/collections/test-collections.csv");
 
@@ -157,15 +185,15 @@ public class MilkCollectionJournalLineQueryTest {
 
 	}
 
-//	@Test
+	// @Test
 	public void testGetPayableDeliveriesForMember() throws Exception {
 		initTestContext("../test-data/collections/test-collections.csv");
-//		ICollectionJournalLineRepository repo = new MilkCollectionJournalLineRepository();
+		// ICollectionJournalLineRepository repo = new
+		// MilkCollectionJournalLineRepository();
 
 		Membership member = null;
 		for (final Membership m : DAIRY.getMemberships()) {
-			if (m.getMemberNumber().equals("1975")
-					|| m.getMemberNumber().equals("01975")) {
+			if (m.getMemberNumber().equals("1975") || m.getMemberNumber().equals("01975")) {
 				member = m;
 				break;
 			}
@@ -182,15 +210,15 @@ public class MilkCollectionJournalLineQueryTest {
 		assertEquals(17, collections.size());
 	}
 
-//	@Test
+	// @Test
 	public void testGetSumOfPayableDeliveries() throws Exception {
 		initTestContext("../test-data/collections/test-collections.csv");
-//		ICollectionJournalLineRepository repo = new MilkCollectionJournalLineRepository();
+		// ICollectionJournalLineRepository repo = new
+		// MilkCollectionJournalLineRepository();
 
 		Membership member = null;
 		for (final Membership m : DAIRY.getMemberships()) {
-			if (m.getMemberNumber().equals("1975")
-					|| m.getMemberNumber().equals("01975")) {
+			if (m.getMemberNumber().equals("1975") || m.getMemberNumber().equals("01975")) {
 				member = m;
 				break;
 			}
@@ -211,21 +239,19 @@ public class MilkCollectionJournalLineQueryTest {
 		DAIRY.setLocation(DairyUtil.createLocation(null, null, null));
 		DAIRY.setPhoneNumber("");
 
-		DEFAULT_DRIVER = DairyUtil.createEmployee(null, "Driver", new Date(
-				100000), "Strom", "", "Thurmond", "", null, null);
+		DEFAULT_DRIVER = DairyUtil.createEmployee(null, "Driver", new Date(100000), "Strom", "", "Thurmond", "", null,
+				null);
 		DAIRY.getEmployees().add(DEFAULT_DRIVER);
 	}
-
-
 
 	private void initTestContext() throws Exception {
 		initTestContext(null);
 	}
 
 	private void initTestContext(String testFile) throws Exception {
-//		testPM = new HsqldbMemoryPersistenceManager();
-//		System.setProperty("riena.test", "true");
-//		PersistenceManager.reset(testPM);
+		// testPM = new HsqldbMemoryPersistenceManager();
+		// System.setProperty("riena.test", "true");
+		// PersistenceManager.reset(testPM);
 
 		initSampleDairy();
 
@@ -236,20 +262,17 @@ public class MilkCollectionJournalLineQueryTest {
 			final List<ScaleRecord> results = importer.getResults();
 
 			for (final ScaleRecord record : results) {
-				final CollectionJournalLine line = DairyFactory.eINSTANCE
-						.createCollectionJournalLine();
+				final CollectionJournalLine line = DairyFactory.eINSTANCE.createCollectionJournalLine();
 				line.setRecordedMember(record.getMemberNumber());
 				line.setValidatedMember(getMembership(record.getMemberNumber()));
 				line.setQuantity(new BigDecimal(record.getQuantity()));
 
-				final CollectionGroup group = getCollectionGroup(
-						record.getRouteNumber(), record.getSessionCode(),
+				final CollectionGroup group = getCollectionGroup(record.getRouteNumber(), record.getSessionCode(),
 						record.getValidDate());
 				line.setCollectionJournal(group);
 				group.getJournalEntries().add(line);
 				group.setEntryCount(group.getEntryCount() + 1);
-				group.setRecordTotal(group.getRecordTotal().add(
-						line.getQuantity()));
+				group.setRecordTotal(group.getRecordTotal().add(line.getQuantity()));
 			}
 			for (final CollectionGroup group : groups.values()) {
 				repo.save(group);
@@ -275,13 +298,11 @@ public class MilkCollectionJournalLineQueryTest {
 
 	HashMap<String, CollectionGroup> groups = new HashMap<String, CollectionGroup>();
 
-	private CollectionGroup getCollectionGroup(String routeNumber,
-			String sessionCode, Date date) {
+	private CollectionGroup getCollectionGroup(String routeNumber, String sessionCode, Date date) {
 		if (date == null) {
 			throw new IllegalArgumentException("date cannot be null");
 		}
-		final String key = String.format("%5s-%2s-%tF", routeNumber, sessionCode,
-				date);
+		final String key = String.format("%5s-%2s-%tF", routeNumber, sessionCode, date);
 		CollectionGroup group = groups.get(key);
 		if (group == null) {
 			group = DairyFactory.eINSTANCE.createCollectionGroup();
@@ -308,12 +329,10 @@ public class MilkCollectionJournalLineQueryTest {
 	}
 
 	protected Membership createMember(String accountNo) {
-		final Farmer farmer = DairyUtil.createFarmer(accountNo, "", "", "",
-				(Farm) null);
+		final Farmer farmer = DairyUtil.createFarmer(accountNo, "", "", "", (Farm) null);
 		farmer.setNickName(accountNo);
 
-		final Membership member = DairyUtil.createMembership(new Date(), new Date(),
-				farmer);
+		final Membership member = DairyUtil.createMembership(new Date(), new Date(), farmer);
 		member.setMemberNumber(accountNo);
 		member.setStatus(MembershipStatus.ACTIVE);
 
