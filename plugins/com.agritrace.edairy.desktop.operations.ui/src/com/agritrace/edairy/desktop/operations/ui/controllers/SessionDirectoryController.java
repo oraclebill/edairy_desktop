@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.operations.ui.controllers;
 
+import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -18,6 +19,8 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class SessionDirectoryController extends BasicDirectoryController<CollectionSession> {
+	private static final DateFormat TIME_FORMAT = DateFormat.getTimeInstance(DateFormat.SHORT);
+	
 	private final IRepository<CollectionSession> repository;
 	private final Provider<SessionEditDialog> dialogProvider;
 
@@ -33,7 +36,7 @@ public class SessionDirectoryController extends BasicDirectoryController<Collect
 		addTableColumn("Time of Day", DairyPackage.Literals.COLLECTION_SESSION__TIME_OF_DAY, new ColumnFormatter() {
 			@Override
 			public String getText(Object element) {
-				return ((CollectionSession) element).getTimeOfDay().toLocaleString();
+				return TIME_FORMAT.format(((CollectionSession) element).getTimeOfDay());
 			}
 		});
 		addTableColumn("Description", DairyPackage.Literals.COLLECTION_SESSION__DESCRIPTION);
