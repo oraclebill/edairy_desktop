@@ -25,6 +25,9 @@ import org.eclipse.birt.report.engine.api.IReportEngineFactory;
 import org.eclipse.birt.report.engine.api.IReportRunnable;
 import org.eclipse.birt.report.engine.api.IRunAndRenderTask;
 import org.eclipse.birt.report.engine.api.PDFRenderOption;
+import org.eclipse.emf.common.CommonPlugin;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.CCombo;
@@ -262,14 +265,14 @@ public class ReportController {
 
 		//will create html report from 3 independable parts:
 		IReportRunnable designHead, designFoot, designBody = null;
-		final URL reportHead = toURL("reports/header.rptdesign");
-		final URL reportFoot = toURL("reports/footer.rptdesign");
-		final URL reportBody = toURL(this.reportName);
+		final URI reportHead = toURL("reports/header.rptdesign");
+		final URI reportFoot = toURL("reports/footer.rptdesign");
+		final URI reportBody = toURL(this.reportName);
 
 		//acceptors for the rendered data:
-		final InputStream reportHeadIS = reportHead.openStream();
-		final InputStream reportFootIS = reportFoot.openStream();
-		final InputStream reportBodyIS = reportBody.openStream();
+		final InputStream reportHeadIS = URIConverter.INSTANCE.createInputStream(reportHead);
+		final InputStream reportFootIS = URIConverter.INSTANCE.createInputStream(reportFoot);
+		final InputStream reportBodyIS = URIConverter.INSTANCE.createInputStream(reportBody);
 
 		//accessing the design files:
 		designHead = engine.openReportDesign(""+reportHead, reportHeadIS);
@@ -411,14 +414,14 @@ public class ReportController {
 
 		//will create html report from 3 independable parts:
 		IReportRunnable designHead, designFoot, designBody = null;
-		final URL reportHead = toURL("reports/header.rptdesign");
-		final URL reportFoot = toURL("reports/footer.rptdesign");
-		final URL reportBody = toURL(this.reportName);
+		final URI reportHead = toURL("reports/header.rptdesign");
+		final URI reportFoot = toURL("reports/footer.rptdesign");
+		final URI reportBody = toURL(this.reportName);
 
 		//acceptors for the rendered data:
-		final InputStream reportHeadIS = reportHead.openStream();
-		final InputStream reportFootIS = reportFoot.openStream();
-		final InputStream reportBodyIS = reportBody.openStream();
+		final InputStream reportHeadIS = URIConverter.INSTANCE.createInputStream(reportHead);
+		final InputStream reportFootIS = URIConverter.INSTANCE.createInputStream(reportFoot);
+		final InputStream reportBodyIS = URIConverter.INSTANCE.createInputStream(reportBody);
 
 		//accessing the design files:
 		designHead = engine.openReportDesign(""+reportHead, reportHeadIS);
@@ -569,13 +572,6 @@ public class ReportController {
 		compositeBase = new Composite(parent, SWT.NONE);
 		final GridLayout gridLayout0 = new GridLayout(1, false);
 
-//		GridData gridData0 = new GridData();
-//		gridData0.grabExcessHorizontalSpace = true;
-//		gridData0.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
-//		gridData0.verticalAlignment = org.eclipse.swt.layout.GridData.FILL;
-//		gridData0.grabExcessVerticalSpace = true;
-
-		//compositeBase.setLayoutData(gridData0);
 		compositeBase.setLayout(gridLayout0);
 		compositeBase.setSize(800, 800);
 
@@ -604,40 +600,6 @@ public class ReportController {
 
 	}
 
-	/*
-	 * private void createSimpleBrowser(Composite parent) { final Composite top
-	 * = new Composite(parent, SWT.NONE); top.setSize(new Point(800, 800));
-	 * //top.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-	 * top.setLayout(new GridLayout(1, false));
-	 * 
-	 * this.browser = new Browser(top, SWT.NONE); GridData gd = new
-	 * GridData(SWT.FILL, SWT.FILL, true, true); browser.setLayoutData(gd);
-	 * 
-	 * previewReport();
-	 * 
-	 * }
-	 * 
-	 * private void previewReport() {
-	 * 
-	 * 
-	 * try { String report = this.reportName; URL url = toURL(report); //
-	 * HashMap params = new HashMap(); // params.put(WebViewer.SERVLET_NAME_KEY,
-	 * WebViewer.VIEWER_FRAMESET); // params.put(WebViewer.FORMAT_KEY,
-	 * WebViewer.HTML); // // // WebViewer.display(""+url, browser, params);
-	 * 
-	 * // WebViewer.startup(); // String myurl = "http://" +
-	 * WebappAccessor.getHost( ) + ":" // + WebappAccessor.getPort( "viewer" )+
-	 * "/viewer/"+ // "frameset"+ // "?__report="+url+ //
-	 * "&__format=html&__svg=false&__locale=us_US&__masterpage=true&__rtl=false"
-	 * + //
-	 * "&__cubememsize=10&__resourceFolder=&__dpi=96&__showtitle=false&__title=&"
-	 * +random.nextInt(); // // browser.setUrl(myurl);
-	 * 
-	 * 
-	 * } catch (Exception e) { e.printStackTrace(); }
-	 * 
-	 * }
-	 */
 
     public static URL getRCPRootURL() {
     	final Activator a = Activator.getDefault();
@@ -652,16 +614,11 @@ public class ReportController {
         return null;
     }
 
-    public static URL toURL(String relativeResoursePath) {
-        if(relativeResoursePath == null || "".equals(relativeResoursePath)) {
-            return null;
-        }
-        try {
-            return new URL(getRCPRootURL(), "resources/" + relativeResoursePath);
-        } catch (final Throwable e) {
-            e.printStackTrace();
-            return null;
-        }
+    public static URI toURL(String relativeResoursePath) {
+    	String BASE = "/com.agritrace.edairy.desktop.birt/resources/";
+    	URI uri = URI.createPlatformPluginURI(BASE + relativeResoursePath, true);
+    	uri = CommonPlugin.resolve(uri);
+    	return uri;
     }
 
 }
