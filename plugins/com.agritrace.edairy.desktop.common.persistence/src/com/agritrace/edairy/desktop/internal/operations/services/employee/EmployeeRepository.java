@@ -13,6 +13,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
 import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
+import com.agritrace.edairy.desktop.common.persistence.services.Transactional;
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
 import com.agritrace.edairy.desktop.operations.services.employee.IEmployeeRepository;
 import com.google.inject.Inject;
@@ -23,13 +24,15 @@ public class EmployeeRepository implements IEmployeeRepository, IRepository<Empl
 		@Inject
 		protected EmployeeRepositoryInternal(Provider<Session> sessionProvider) {
 			super(sessionProvider);
+			// Force DB initialization
+			sessionProvider.get();
 		}
 
 		@Override
 		protected Class<Employee> getClassType() {
 			return Employee.class;
 		}
-
+		
 		Employee find(final String username, final String password) {
 			if (username == null || password == null) {
 				throw new NullPointerException("Username and password must be non-null");
