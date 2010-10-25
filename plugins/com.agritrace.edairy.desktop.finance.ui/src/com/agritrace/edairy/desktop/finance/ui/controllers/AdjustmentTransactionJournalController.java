@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.finance.ui.controllers;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -137,8 +138,8 @@ public final class AdjustmentTransactionJournalController extends TransactionJou
 
 	@Override
 	protected List<AdjustmentTransaction> getFilteredResult() {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO: FIXME
+		return new ArrayList<AdjustmentTransaction>();
 	}
 
 }
