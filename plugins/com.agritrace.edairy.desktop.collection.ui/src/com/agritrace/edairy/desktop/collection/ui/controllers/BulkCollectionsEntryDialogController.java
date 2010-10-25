@@ -443,6 +443,7 @@ public class BulkCollectionsEntryDialogController extends
 
 		final CollectionGroup page = getContextJournalPage();
 		final int lineCount = page.getJournalEntries().size();
+		
 		if (lineCount > 0) {
 			CollectionJournalLine lastLine, workingLine;
 			lastLine = page.getJournalEntries().get(lineCount - 1);
@@ -451,6 +452,7 @@ public class BulkCollectionsEntryDialogController extends
 				workingLine.setDairyContainer(lastLine.getDairyContainer());
 			}
 		}
+		
 		collectionLineRidget.updateFromModel();
 
 		updateAllRidgetsFromModel();
@@ -504,16 +506,43 @@ public class BulkCollectionsEntryDialogController extends
 				final DairyLocation center = getContextJournalPage()
 						.getCollectionCenter();
 				final Date date = getContextJournalPage().getJournalDate();
+				
+				if (member == null) {
+					return ValidationStatus.error("No member is selected");
+				}
+
+				if (center == null) {
+					return ValidationStatus.error("The journal entry has no collection center assigned");
+				}
+
+				if (date == null) {
+					return ValidationStatus.error("The journal entry has no date assigned");
+				}
 
 				if (lineRepo.countByMemberCenterDate(member, center, date) > 0) {
 					return ValidationStatus
 							.error("Another entry for this member, center and date already exists");
-				} else {
-					return ValidationStatus.ok();
 				}
+				
+				return ValidationStatus.ok();
 			}
 		});
-
+		
+		// Quantity exceed check
+		collectionLineRidget.addValidator(new IValidator() {
+			@Override
+			public IStatus validate(Object value) {
+				final CollectionJournalLine line = (CollectionJournalLine) value;
+				final BigDecimal capacity = BigDecimal.valueOf(line.getDairyContainer().getCapacity());
+				
+				if (line.getQuantity().compareTo(capacity) > 0) {
+					// We exceed the bin capacity
+					line.setFlagged(true);
+				}
+				
+				return ValidationStatus.ok();
+			}
+		});
 	}
 
 	/**
@@ -804,10 +833,12 @@ public class BulkCollectionsEntryDialogController extends
 		BigDecimal total = BigDecimal.ZERO;
 
 		final CollectionGroup workingJournalPage = getContextJournalPage();
+		
 		for (final CollectionJournalLine line : workingJournalPage
 				.getJournalEntries()) {
 			line.setLineNumber(++counter);
 			total = total.add(line.getQuantity());
+			
 			if (line.isFlagged()) {
 				suspendedCount += 1;
 			}

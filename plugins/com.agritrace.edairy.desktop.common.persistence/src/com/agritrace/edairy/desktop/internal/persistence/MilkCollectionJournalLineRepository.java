@@ -61,6 +61,7 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 				+ "   AND l.collectionJournal.collectionCenter = :center ";
 
 		final Query query = getCurrentSession().createQuery(queryText);
+		CollectionJournalLine x = ((CollectionJournalLine) null);
 		query.setEntity("member", member);
 		query.setEntity("center", center);
 		query.setCalendarDate("cal", cal);
