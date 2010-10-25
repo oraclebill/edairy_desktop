@@ -1,7 +1,5 @@
 package com.agritrace.edairy.desktop.dairy.profile.ui.controllers;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -37,7 +35,7 @@ import com.google.inject.Inject;
  */
 @PermissionRequired(Permission.VIEW_DAIRY_PROFILE)
 public class DairyProfileViewController extends SubModuleController {
-	private class DairyProfileSaveAction implements PropertyChangeListener, IFocusListener, ISelectionListener, IDataChangeListener {
+	private class DairyProfileSaveAction implements IFocusListener, ISelectionListener, IDataChangeListener {
 		private void condenseContacts() {
 			// TODO: this is really not safe.. need to lock dairy as well?
 			synchronized (localDairy.getContactMethods()) {
@@ -59,7 +57,7 @@ public class DairyProfileViewController extends SubModuleController {
 				updateBindings();
 				// getInfoFlyout().addInfo(new InfoFlyoutData("message", "Dairy profile updated successfully."));
 			} catch (final Exception e) {
-//				getInfoFlyout().addInfo(new InfoFlyoutData("message", "Error updating dairy profile!"));
+				// getInfoFlyout().addInfo(new InfoFlyoutData("message", "Error updating dairy profile!"));
 			}
 		}
 
@@ -80,11 +78,6 @@ public class DairyProfileViewController extends SubModuleController {
 
 		@Override
 		public void dataChanged() {
-			update();
-		}
-
-		@Override
-		public void propertyChange(PropertyChangeEvent evt) {
 			update();
 		}
 	}
@@ -290,12 +283,10 @@ public class DairyProfileViewController extends SubModuleController {
 		txtNSSF_NUMBER.addFocusListener(changeListener);
 		txtNHIF_NUMBER.addFocusListener(changeListener);
 		txtFEDERAL_PIN.addFocusListener(changeListener);
-		txtLIC_EFFECTIVE_DATE.addFocusListener(changeListener);
-		txtLIC_EFFECTIVE_DATE.addFocusListener(changeListener);
 
-		txtESTABLISHED_DATE.addPropertyChangeListener("date", changeListener);
-		txtLIC_EFFECTIVE_DATE.addPropertyChangeListener("date", changeListener);
-		txtLIC_EXPIRATION_DATE.addPropertyChangeListener("date", changeListener);
+		txtESTABLISHED_DATE.addFocusListener(changeListener);
+		txtLIC_EFFECTIVE_DATE.addFocusListener(changeListener);
+		txtLIC_EXPIRATION_DATE.addFocusListener(changeListener);
 
 		locationController.addDataChangeListener(changeListener);
 		contactsGroup.addDataChangeListener(changeListener);
