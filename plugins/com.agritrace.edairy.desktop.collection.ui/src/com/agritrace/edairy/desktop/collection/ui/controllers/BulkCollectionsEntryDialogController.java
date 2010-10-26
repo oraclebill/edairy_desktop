@@ -55,6 +55,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager;
 import com.agritrace.edairy.desktop.common.persistence.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
+import com.agritrace.edairy.desktop.common.ui.columnformatters.BooleanPropertyColumnFormatter;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BaseDialogController;
 import com.agritrace.edairy.desktop.common.ui.controllers.util.ContainerValidator;
@@ -105,8 +106,8 @@ public class BulkCollectionsEntryDialogController extends
 	public static final String CONTEXT_PERSISTENCE_DELEGATE = "CONTEXT_PERSISTENCE_DELEGATE";
 
 	private static final String[] columnHeaderNames = { "Line", "Member ID",
-			"Member Name", "CAN Number", "Quantity", "MPR Missing", "Rejected",
-			"Flagged" };
+			"Member Name", "CAN Number", "Quantity", "MPR?", "Quality?",
+			"Valid?" };
 
 	private static final String[] columnPropertyNames = {
 			"lineNumber",
@@ -342,9 +343,9 @@ public class BulkCollectionsEntryDialogController extends
 
 		});
 
-		table.setColumnFormatter(5, new BooleanColumnFormatter());
-		table.setColumnFormatter(6, new BooleanColumnFormatter());
-		table.setColumnFormatter(7, new BooleanColumnFormatter());
+		table.setColumnFormatter(5, new BooleanPropertyColumnFormatter(columnPropertyNames[5]));
+		table.setColumnFormatter(6, new BooleanPropertyColumnFormatter(columnPropertyNames[6]));
+		table.setColumnFormatter(7, new BooleanPropertyColumnFormatter(columnPropertyNames[7]));
 
 		table.addClickListener(new IClickListener() {
 			@Override
@@ -419,14 +420,14 @@ public class BulkCollectionsEntryDialogController extends
 
 	}
 
-	class BooleanColumnFormatter extends ColumnFormatter {
-		@Override
-		public String getText(Object element) {
-
-			return "";
-		}
-
-	}
+//	class BooleanColumnFormatter extends ColumnFormatter {
+//		@Override
+//		public String getText(Object element) {
+//
+//			return "";
+//		}
+//
+//	}
 
 	/**
 	 *
