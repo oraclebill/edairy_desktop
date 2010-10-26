@@ -9,6 +9,7 @@ import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.conversion.NumberToStringConverter;
 import org.eclipse.core.databinding.observable.list.WritableList;
+import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.riena.ui.ridgets.AbstractCompositeRidget;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
@@ -18,6 +19,7 @@ import org.eclipse.riena.ui.ridgets.IDecimalTextRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.IRowRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
+import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 
 import com.agritrace.edairy.desktop.collection.ui.DeliveryJournalEditBindContants;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
@@ -84,11 +86,22 @@ public class MilkDeliveryJournalEditController extends RecordDialogController<De
 			amount.setModelToUIControlConverter(NumberToStringConverter.fromBigDecimal());
 			amount.bindToModel(rowData, DairyPackage.Literals.DELIVERY_JOURNAL_LINE__QUANTITY.getName());
 			amount.updateFromModel();
-
-			final  ITextRidget description =  getRidget(ITextRidget.class, DeliveryJournalEditBindContants.ROW_TXT_DESCRIPTION); //]
+			
+			final ITextRidget description = getRidget(ITextRidget.class, DeliveryJournalEditBindContants.ROW_TXT_DESCRIPTION); //]
 			description.setDirectWriting(true);
 			description.bindToModel(rowData, DairyPackage.Literals.DELIVERY_JOURNAL_LINE__DESCRIPTION.getName());
 			description.updateFromModel();
+			description.setMandatory(rowData.isRejected());
+
+			final IToggleButtonRidget rejected = getRidget(IToggleButtonRidget.class, DeliveryJournalEditBindContants.ROW_TXT_REJECTED);
+			rejected.bindToModel(EMFObservables.observeValue(rowData, DairyPackage.Literals.DELIVERY_JOURNAL_LINE__REJECTED));
+			rejected.updateFromModel();
+			rejected.addListener(new IActionListener() {
+				@Override
+				public void callback() {
+					description.setMandatory(rejected.isSelected());
+				}
+			});
 		}
 	}
 

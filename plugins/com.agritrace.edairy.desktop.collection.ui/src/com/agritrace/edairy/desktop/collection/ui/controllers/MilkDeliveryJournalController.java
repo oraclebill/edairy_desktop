@@ -20,6 +20,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
+import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
@@ -80,6 +81,19 @@ public class MilkDeliveryJournalController extends BasicDirectoryController<Deli
 			}
 		});
 		addTableColumn("Total", DairyPackage.Literals.DELIVERY_JOURNAL__TOTAL);
+		addTableColumn("# Rejected", DairyPackage.Literals.DELIVERY_JOURNAL__TOTAL, new DJColumnFormatter() {
+			@Override public String getFormattedText(DeliveryJournal element) {
+				int rejectedCount = 0;
+				
+				for (final DeliveryJournalLine line: element.getLines()) {
+					if (line.isRejected()) {
+						rejectedCount++;
+					}
+				}
+				
+				return Integer.toString(rejectedCount);
+			}
+		});
 	}
 
 	@Override

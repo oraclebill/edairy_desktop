@@ -29,6 +29,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.collection.ui.DeliveryJournalEditBindContants;
+import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 import com.swtdesigner.SWTResourceManager;
 
 public class DeliveryJournalEditPanel extends Composite {
@@ -44,8 +45,8 @@ public class DeliveryJournalEditPanel extends Composite {
 
 		public Header(Composite parent, int style) {
 			super(parent, style);
-			setWeights(new int[] { 50, 100, 300 });
-			setColumnText(new String[] { "Bin #", "Amount", "Description" });
+			setWeights(new int[] { 50, 100, 60, 300 });
+			setColumnText(new String[] { "Bin #", "Amount", "Rejected", "Description" });
 		}
 	}
 
@@ -67,6 +68,7 @@ public class DeliveryJournalEditPanel extends Composite {
 			addUIControl(UIControlsFactory.createCCombo(this), DeliveryJournalEditBindContants.ROW_TXT_BIN_ID);
 //			addUIControl(UIControlsFactory.createText(this, SWT.NULL), DeliveryJournalEditBindContants.ROW_TXT_BIN_ID);
 			addUIControl(UIControlsFactory.createTextDecimal(this), DeliveryJournalEditBindContants.ROW_TXT_AMOUNT);
+			addUIControl(UIControlsFactory.createButtonCheck(this), DeliveryJournalEditBindContants.ROW_TXT_REJECTED);
 			addUIControl(descriptionTxt = UIControlsFactory.createText(this, SWT.NULL), DeliveryJournalEditBindContants.ROW_TXT_DESCRIPTION);
 			descriptionTxt.addTraverseListener(new TraverseListener() {
 				@Override
