@@ -140,6 +140,9 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 
 		final Control groupFour = createMilkEntryGroup(parent);
 		gdf.grab(true, true).applyTo(groupFour);
+		
+		parent.setTabList(new Control[] { headerGroups, groupThree, groupFour });
+		headerGroups.setFocus();
 	}
 
 //	@Override
