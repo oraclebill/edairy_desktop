@@ -72,19 +72,22 @@ public class ReportController {
 	private CCombo monthCombo;
 	private Composite compositeBase;
 
-	private final String[] months = new String[]{"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+	private final String[] months = new String[] { "January", "February", "March", "April", "May", "June", "July",
+			"August", "September", "October", "November", "December" };
 	private Label monthLabel;
 	private Button exportToPDF;
 	private Button print;
 
-	@Inject private static IDairyRepository dairyRepo;
-	public ReportController(String reportName){
+	@Inject
+	private static IDairyRepository dairyRepo;
+
+	public ReportController(String reportName) {
 		this.reportName = reportName;
 
 	}
 
 	public void createPartControl(Composite parent) {
-		//createSimpleBrowser(parent);
+		// createSimpleBrowser(parent);
 		createComplexReportPage(parent);
 	}
 
@@ -92,7 +95,7 @@ public class ReportController {
 	 * complext report page contains from a set of controls that can be used to
 	 * manage report like year selection, refresh button and page management
 	 * buttons (if needed)
-	 *
+	 * 
 	 * @param parent
 	 */
 	private void createComplexReportPage(Composite parent) {
@@ -106,10 +109,10 @@ public class ReportController {
 		final Calendar c = Calendar.getInstance();
 
 		final int year = c.get(Calendar.YEAR);
-		for(int i = year-10; i<year+20; i++){
-			yearCombo.add(""+i);
+		for (int i = year - 10; i < year + 20; i++) {
+			yearCombo.add("" + i);
 		}
-		yearCombo.setText(year+"");
+		yearCombo.setText(year + "");
 
 		yearCombo.addSelectionListener(new SelectionListener() {
 
@@ -125,9 +128,9 @@ public class ReportController {
 		});
 
 		final int monthIndex = c.get(Calendar.MONTH);
-		for( int i = 0; i<this.months.length; i++){
+		for (int i = 0; i < this.months.length; i++) {
 			monthCombo.add(this.months[i]);
-			if(i == monthIndex){
+			if (i == monthIndex) {
 				monthCombo.setText(this.months[i]);
 			}
 		}
@@ -213,25 +216,24 @@ public class ReportController {
 
 	}
 
-	private void doPrint(){
+	private void doPrint() {
 		browser.setUrl("javascript:print()");
 	}
 
-	private void doPDFExport(){
+	private void doPDFExport() {
 		exportToPDF.setEnabled(false);
-		try{
+		try {
 			final String fileName = getFileNameToExport();
 			exportToPDF(fileName);
 		} catch (final Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		finally{
+		} finally {
 			exportToPDF.setEnabled(true);
 		}
 	}
 
-	private String getFileNameToExport(){
+	private String getFileNameToExport() {
 		final Shell shell = Display.getCurrent().getActiveShell();
 		final FileDialog fileDialog = new FileDialog(shell, SWT.SAVE);
 		fileDialog.setFilterExtensions(new String[] { "*.pdf", });
@@ -239,51 +241,53 @@ public class ReportController {
 		return importFileName;
 	}
 
-	private void exportToPDF(String pdfFile) throws Exception{
+	private void exportToPDF(String pdfFile) throws Exception {
 
 		final OutputStream output = new FileOutputStream(pdfFile);
 
-		IReportEngine engine=null;
+		IReportEngine engine = null;
 		EngineConfig config = null;
 
-		try{
-			//configure engine and platform; create factory object
-			config = new EngineConfig( );
-			//config.setBIRTHome("C:\\birt\\birt-runtime-2_2_0\\birt-runtime-2_2_0\\ReportEngine");
+		try {
+			// configure engine and platform; create factory object
+			config = new EngineConfig();
+			// config.setBIRTHome("C:\\birt\\birt-runtime-2_2_0\\birt-runtime-2_2_0\\ReportEngine");
 			config.setLogConfig(null, Level.OFF);
-			final HashMap hm = config.getAppContext();
-	        hm.put( EngineConstants.APPCONTEXT_CLASSLOADER_KEY, ReportController.class.getClassLoader());
-	        config.setAppContext(hm);
 
-			Platform.startup( config );
+			@SuppressWarnings("unchecked")
+			final HashMap<String, Object> hm = config.getAppContext();
+			hm.put(EngineConstants.APPCONTEXT_CLASSLOADER_KEY, ReportController.class.getClassLoader());
+			config.setAppContext(hm);
+
+			Platform.startup(config);
 			final IReportEngineFactory factory = (IReportEngineFactory) Platform
-			.createFactoryObject( IReportEngineFactory.EXTENSION_REPORT_ENGINE_FACTORY );
-			engine = factory.createReportEngine( config );
-		}catch( final Exception ex){
+					.createFactoryObject(IReportEngineFactory.EXTENSION_REPORT_ENGINE_FACTORY);
+			engine = factory.createReportEngine(config);
+		} catch (final Exception ex) {
 			ex.printStackTrace();
 		}
 
-		//will create html report from 3 independable parts:
+		// will create html report from 3 independable parts:
 		IReportRunnable designHead, designFoot, designBody = null;
 		final URI reportHead = toURL("reports/header.rptdesign");
 		final URI reportFoot = toURL("reports/footer.rptdesign");
 		final URI reportBody = toURL(this.reportName);
 
-		//acceptors for the rendered data:
+		// acceptors for the rendered data:
 		final InputStream reportHeadIS = URIConverter.INSTANCE.createInputStream(reportHead);
 		final InputStream reportFootIS = URIConverter.INSTANCE.createInputStream(reportFoot);
 		final InputStream reportBodyIS = URIConverter.INSTANCE.createInputStream(reportBody);
 
-		//accessing the design files:
-		designHead = engine.openReportDesign(""+reportHead, reportHeadIS);
-		designFoot = engine.openReportDesign(""+reportFoot, reportFootIS);
-		designBody = engine.openReportDesign(""+reportBody, reportBodyIS);
+		// accessing the design files:
+		designHead = engine.openReportDesign("" + reportHead, reportHeadIS);
+		designFoot = engine.openReportDesign("" + reportFoot, reportFootIS);
+		designBody = engine.openReportDesign("" + reportBody, reportBodyIS);
 
-		//setting the parameters for each report:
+		// setting the parameters for each report:
 		final String month = getMonthSelected();
 		final String year = getYearSelected();
 
-		//Create task to run and render the header report
+		// Create task to run and render the header report
 		IRunAndRenderTask task = engine.createRunAndRenderTask(designHead);
 		task.setParameterValue("Year", year);
 		task.setParameterValue("Month", month);
@@ -295,7 +299,7 @@ public class ReportController {
 
 		final PDFRenderOption options = new PDFRenderOption();
 
-		ByteArrayOutputStream fso=null, fso2=null, fso3 = null;
+		ByteArrayOutputStream fso = null, fso2 = null, fso3 = null;
 
 		fso = new ByteArrayOutputStream();
 
@@ -303,7 +307,7 @@ public class ReportController {
 		options.setOption(IRenderOption.HTML_PAGINATION, new Boolean(false));
 		options.setOutputFormat("pdf");
 
-		//ImageHandlerTest
+		// ImageHandlerTest
 		options.setImageHandler(new HTMLServerImageHandler());
 		task.setRenderOption(options);
 		task.run();
@@ -312,30 +316,30 @@ public class ReportController {
 		// options:
 		task = engine.createRunAndRenderTask(designBody);
 		task.setParameterValue("Year", year);
-		task.setParameterValue("Month", ""+getMonthIndex(month));
+		task.setParameterValue("Month", "" + getMonthIndex(month));
 		task.validateParameters();
 
-		try{
+		try {
 			fso.flush();
 			fso.close();
 			fso2 = new ByteArrayOutputStream();
-		}catch (final Exception e){
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 		options.setOutputStream(fso2);
 		task.setRenderOption(options);
 
-		//run the task (it will render from here):
+		// run the task (it will render from here):
 		task.run();
 
-		//task to render a footer:
+		// task to render a footer:
 		task = engine.createRunAndRenderTask(designFoot);
 
-		try{
+		try {
 			fso2.flush();
 			fso2.close();
 			fso3 = new ByteArrayOutputStream();
-		}catch(final Exception e){
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 		options.setOutputStream(fso3);
@@ -343,18 +347,18 @@ public class ReportController {
 
 		task.run();
 
-		try{
+		try {
 			fso3.flush();
 			fso3.close();
-		}catch(final Exception e){
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 
-		//report is done, closing now the staff involved:
+		// report is done, closing now the staff involved:
 		engine.destroy();
 		Platform.shutdown();
 
-		//merge PDFs:
+		// merge PDFs:
 
 		concatPDFs(new ByteArrayInputStream(fso.toByteArray()), new ByteArrayInputStream(fso2.toByteArray()),
 				new ByteArrayInputStream(fso3.toByteArray()), output, true);
@@ -363,25 +367,24 @@ public class ReportController {
 	private void concatPDFs(InputStream head, InputStream body, InputStream foot, OutputStream output, boolean paginate)
 			throws Exception {
 
-        final PdfReader reader1 = new PdfReader(head);
-        final PdfReader reader2 = new PdfReader(body);
-        final PdfReader reader3 = new PdfReader(foot);
-        final PdfCopyFields copy = new PdfCopyFields(output);
-        copy.addDocument(reader1);
-        copy.addDocument(reader2);
-        copy.addDocument(reader3);
-        copy.close();
+		final PdfReader reader1 = new PdfReader(head);
+		final PdfReader reader2 = new PdfReader(body);
+		final PdfReader reader3 = new PdfReader(foot);
+		final PdfCopyFields copy = new PdfCopyFields(output);
+		copy.addDocument(reader1);
+		copy.addDocument(reader2);
+		copy.addDocument(reader3);
+		copy.close();
 
-        output.flush();
-        output.close();
+		output.flush();
+		output.close();
 	}
 
-	private void updateReport(){
+	private void updateReport() {
 		browser.setText("");
-		try{
+		try {
 			runReport();
-		}
-		catch(final Exception e){
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -390,49 +393,51 @@ public class ReportController {
 		updateReport();
 	}
 
-	public void runReport() throws EngineException, IOException 	{
+	public void runReport() throws EngineException, IOException {
 
-		IReportEngine engine=null;
+		IReportEngine engine = null;
 		EngineConfig config = null;
 
-		try{
-			//configure engine and platform; create factory object
-			config = new EngineConfig( );
-			//config.setBIRTHome("C:\\birt\\birt-runtime-2_2_0\\birt-runtime-2_2_0\\ReportEngine");
+		try {
+			// configure engine and platform; create factory object
+			config = new EngineConfig();
+			// config.setBIRTHome("C:\\birt\\birt-runtime-2_2_0\\birt-runtime-2_2_0\\ReportEngine");
 			config.setLogConfig(null, Level.OFF);
-			final HashMap hm = config.getAppContext();
-	        hm.put( EngineConstants.APPCONTEXT_CLASSLOADER_KEY, ReportController.class.getClassLoader());
-	        config.setAppContext(hm);
+			
+			@SuppressWarnings("unchecked")
+			final HashMap<String, Object> hm = config.getAppContext();
+			hm.put(EngineConstants.APPCONTEXT_CLASSLOADER_KEY, ReportController.class.getClassLoader());
+			config.setAppContext(hm);
 
-			Platform.startup( config );
+			Platform.startup(config);
 			final IReportEngineFactory factory = (IReportEngineFactory) Platform
-			.createFactoryObject( IReportEngineFactory.EXTENSION_REPORT_ENGINE_FACTORY );
-			engine = factory.createReportEngine( config );
-		}catch( final Exception ex){
+					.createFactoryObject(IReportEngineFactory.EXTENSION_REPORT_ENGINE_FACTORY);
+			engine = factory.createReportEngine(config);
+		} catch (final Exception ex) {
 			ex.printStackTrace();
 		}
 
-		//will create html report from 3 independable parts:
+		// will create html report from 3 independable parts:
 		IReportRunnable designHead, designFoot, designBody = null;
 		final URI reportHead = toURL("reports/header.rptdesign");
 		final URI reportFoot = toURL("reports/footer.rptdesign");
 		final URI reportBody = toURL(this.reportName);
 
-		//acceptors for the rendered data:
+		// acceptors for the rendered data:
 		final InputStream reportHeadIS = URIConverter.INSTANCE.createInputStream(reportHead);
 		final InputStream reportFootIS = URIConverter.INSTANCE.createInputStream(reportFoot);
 		final InputStream reportBodyIS = URIConverter.INSTANCE.createInputStream(reportBody);
 
-		//accessing the design files:
-		designHead = engine.openReportDesign(""+reportHead, reportHeadIS);
-		designFoot = engine.openReportDesign(""+reportFoot, reportFootIS);
-		designBody = engine.openReportDesign(""+reportBody, reportBodyIS);
+		// accessing the design files:
+		designHead = engine.openReportDesign("" + reportHead, reportHeadIS);
+		designFoot = engine.openReportDesign("" + reportFoot, reportFootIS);
+		designBody = engine.openReportDesign("" + reportBody, reportBodyIS);
 
-		//setting the parameters for each report:
+		// setting the parameters for each report:
 		final String month = getMonthSelected();
 		final String year = getYearSelected();
 
-		//Create task to run and render the header report
+		// Create task to run and render the header report
 		IRunAndRenderTask task = engine.createRunAndRenderTask(designHead);
 		task.setParameterValue("Year", year);
 		task.setParameterValue("Month", month);
@@ -445,7 +450,7 @@ public class ReportController {
 		final HTMLRenderOption options = new HTMLRenderOption();
 		new PDFRenderOption();
 
-		ByteArrayOutputStream fso=null, fso2=null, fso3 = null;
+		ByteArrayOutputStream fso = null, fso2 = null, fso3 = null;
 
 		fso = new ByteArrayOutputStream();
 
@@ -457,7 +462,7 @@ public class ReportController {
 		options.setOutputFormat("html");
 		options.setImageDirectory("images");
 
-		//ImageHandlerTest
+		// ImageHandlerTest
 		options.setImageHandler(new HTMLCompleteImageHandler());
 		task.setRenderOption(options);
 		task.run();
@@ -466,30 +471,30 @@ public class ReportController {
 		// options:
 		task = engine.createRunAndRenderTask(designBody);
 		task.setParameterValue("Year", year);
-		task.setParameterValue("Month", ""+getMonthIndex(month));
+		task.setParameterValue("Month", "" + getMonthIndex(month));
 		task.validateParameters();
 
-		try{
+		try {
 			fso.flush();
 			fso.close();
 			fso2 = new ByteArrayOutputStream();
-		}catch (final Exception e){
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 		options.setOutputStream(fso2);
 		task.setRenderOption(options);
 
-		//run the task (it will render from here):
+		// run the task (it will render from here):
 		task.run();
 
-		//task to render a footer:
+		// task to render a footer:
 		task = engine.createRunAndRenderTask(designFoot);
 
-		try{
+		try {
 			fso2.flush();
 			fso2.close();
 			fso3 = new ByteArrayOutputStream();
-		}catch(final Exception e){
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 		options.setOutputStream(fso3);
@@ -497,18 +502,18 @@ public class ReportController {
 
 		task.run();
 
-		try{
+		try {
 			fso3.flush();
 			fso3.close();
-		}catch(final Exception e){
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 
-		//report is done, closing now the staff involved:
+		// report is done, closing now the staff involved:
 		engine.destroy();
 		Platform.shutdown();
 
-		//fill the browser object with this html:
+		// fill the browser object with this html:
 		final StringBuffer html = new StringBuffer();
 		html.append(fso.toString());
 		html.append(fso2.toString());
@@ -518,10 +523,10 @@ public class ReportController {
 
 	}
 
-	private Integer getMonthIndex(String monthName){
-		for(int i = 0; i<this.months.length; i++){
-			if(monthName.equals(this.months[i])){
-				return i+1;
+	private Integer getMonthIndex(String monthName) {
+		for (int i = 0; i < this.months.length; i++) {
+			if (monthName.equals(this.months[i])) {
+				return i + 1;
 			}
 		}
 		return 0;
@@ -534,17 +539,17 @@ public class ReportController {
 		final Location location = localDairy.getLocation();
 		final String address = location.getPostalLocation().getAddress();
 
-		task.setParameterValue("LegalName", name == null || name.isEmpty()?"No-name":name);
-		task.setParameterValue("Phone", phone == null || phone.isEmpty()?"No-phone":phone);
-		task.setParameterValue("Address", address == null || address.isEmpty()?"No-address":address);
+		task.setParameterValue("LegalName", name == null || name.isEmpty() ? "No-name" : name);
+		task.setParameterValue("Phone", phone == null || phone.isEmpty() ? "No-phone" : phone);
+		task.setParameterValue("Address", address == null || address.isEmpty() ? "No-address" : address);
 
 	}
 
 	private Object getReportName() {
-		if(this.reportName.equals(MILK_COLLECTION_YEAR)){
+		if (this.reportName.equals(MILK_COLLECTION_YEAR)) {
 			return MILK_COLLECTION_YEAR_REPORT_NAME;
 		}
-		if(this.reportName.equals(MEMBER_PAYABLE_YEAR)){
+		if (this.reportName.equals(MEMBER_PAYABLE_YEAR)) {
 			return MEMBER_PAYABLE_YEAR_REPORT_NAME;
 		}
 		return "";
@@ -559,13 +564,13 @@ public class ReportController {
 	}
 
 	private void createBrowser() {
-			final org.eclipse.swt.layout.GridData gridData3 = new org.eclipse.swt.layout.GridData();
-			browser = new Browser(compositeBase, SWT.BORDER);
-			gridData3.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
-			gridData3.verticalAlignment = org.eclipse.swt.layout.GridData.FILL;
-			gridData3.grabExcessVerticalSpace = true;
-			gridData3.grabExcessHorizontalSpace = true;
-			browser.setLayoutData(gridData3);
+		final org.eclipse.swt.layout.GridData gridData3 = new org.eclipse.swt.layout.GridData();
+		browser = new Browser(compositeBase, SWT.BORDER);
+		gridData3.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
+		gridData3.verticalAlignment = org.eclipse.swt.layout.GridData.FILL;
+		gridData3.grabExcessVerticalSpace = true;
+		gridData3.grabExcessHorizontalSpace = true;
+		browser.setLayoutData(gridData3);
 	}
 
 	private void createComposite(Composite parent) {
@@ -600,25 +605,24 @@ public class ReportController {
 
 	}
 
+	public static URL getRCPRootURL() {
+		final Activator a = Activator.getDefault();
 
-    public static URL getRCPRootURL() {
-    	final Activator a = Activator.getDefault();
+		if (a != null) {
+			final Bundle b = Activator.context.getBundle();
+			if (b != null) {
+				final URL rootURL = b.getEntry("/");
+				return rootURL;
+			}
+		}
+		return null;
+	}
 
-        if(a != null) {
-        	final Bundle b = Activator.context.getBundle();
-        	if(b != null){
-        		final URL rootURL = b.getEntry("/");
-        		return rootURL;
-        	}
-        }
-        return null;
-    }
-
-    public static URI toURL(String relativeResoursePath) {
-    	String BASE = "/com.agritrace.edairy.desktop.birt/resources/";
-    	URI uri = URI.createPlatformPluginURI(BASE + relativeResoursePath, true);
-    	uri = CommonPlugin.resolve(uri);
-    	return uri;
-    }
+	public static URI toURL(String relativeResoursePath) {
+		String BASE = "/com.agritrace.edairy.desktop.birt/resources/";
+		URI uri = URI.createPlatformPluginURI(BASE + relativeResoursePath, true);
+		uri = CommonPlugin.resolve(uri);
+		return uri;
+	}
 
 }
