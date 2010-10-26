@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine#getBin <em>Bin</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine#getQuantity <em>Quantity</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine#getDescription <em>Description</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine#isRejected <em>Rejected</em>}</li>
  * </ul>
  * </p>
  *
@@ -133,5 +134,32 @@ public interface DeliveryJournalLine extends EObject {
 	 * @generated
 	 */
 	void setDescription(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Rejected</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Rejected</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Rejected</em>' attribute.
+	 * @see #setRejected(boolean)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDeliveryJournalLine_Rejected()
+	 * @model default="false" required="true"
+	 * @generated
+	 */
+	boolean isRejected();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine#isRejected <em>Rejected</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Rejected</em>' attribute.
+	 * @see #isRejected()
+	 * @generated
+	 */
+	void setRejected(boolean value);
 
 } // DeliveryJournalLine

@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalLineImpl#getBin <em>Bin</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalLineImpl#getQuantity <em>Quantity</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalLineImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalLineImpl#isRejected <em>Rejected</em>}</li>
  * </ul>
  * </p>
  *
@@ -106,6 +107,26 @@ public class DeliveryJournalLineImpl extends EObjectImpl implements DeliveryJour
 	 * @ordered
 	 */
 	protected String description = DESCRIPTION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isRejected() <em>Rejected</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isRejected()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean REJECTED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isRejected() <em>Rejected</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isRejected()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean rejected = REJECTED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -232,6 +253,27 @@ public class DeliveryJournalLineImpl extends EObjectImpl implements DeliveryJour
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isRejected() {
+		return rejected;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRejected(boolean newRejected) {
+		boolean oldRejected = rejected;
+		rejected = newRejected;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL_LINE__REJECTED, oldRejected, rejected));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -244,6 +286,8 @@ public class DeliveryJournalLineImpl extends EObjectImpl implements DeliveryJour
 				return getQuantity();
 			case DairyPackage.DELIVERY_JOURNAL_LINE__DESCRIPTION:
 				return getDescription();
+			case DairyPackage.DELIVERY_JOURNAL_LINE__REJECTED:
+				return isRejected();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -267,6 +311,9 @@ public class DeliveryJournalLineImpl extends EObjectImpl implements DeliveryJour
 				return;
 			case DairyPackage.DELIVERY_JOURNAL_LINE__DESCRIPTION:
 				setDescription((String)newValue);
+				return;
+			case DairyPackage.DELIVERY_JOURNAL_LINE__REJECTED:
+				setRejected((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -292,6 +339,9 @@ public class DeliveryJournalLineImpl extends EObjectImpl implements DeliveryJour
 			case DairyPackage.DELIVERY_JOURNAL_LINE__DESCRIPTION:
 				setDescription(DESCRIPTION_EDEFAULT);
 				return;
+			case DairyPackage.DELIVERY_JOURNAL_LINE__REJECTED:
+				setRejected(REJECTED_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -312,6 +362,8 @@ public class DeliveryJournalLineImpl extends EObjectImpl implements DeliveryJour
 				return QUANTITY_EDEFAULT == null ? quantity != null : !QUANTITY_EDEFAULT.equals(quantity);
 			case DairyPackage.DELIVERY_JOURNAL_LINE__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+			case DairyPackage.DELIVERY_JOURNAL_LINE__REJECTED:
+				return rejected != REJECTED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -332,6 +384,8 @@ public class DeliveryJournalLineImpl extends EObjectImpl implements DeliveryJour
 		result.append(quantity);
 		result.append(", description: ");
 		result.append(description);
+		result.append(", rejected: ");
+		result.append(rejected);
 		result.append(')');
 		return result.toString();
 	}

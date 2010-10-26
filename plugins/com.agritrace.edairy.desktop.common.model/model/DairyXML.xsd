@@ -196,6 +196,7 @@
     <xsd:attribute name="lineNumber" type="xsd:int" use="required"/>
     <xsd:attribute name="quantity" type="xsd:string" use="required"/>
     <xsd:attribute name="description" type="xsd:string" use="required"/>
+    <xsd:attribute default="false" name="rejected" type="xsd:boolean" use="required"/>
     <xsd:attribute name="bin" type="xsd:string"/>
   </xsd:complexType>
   <xsd:element name="DeliveryJournalLine" type="dairy:DeliveryJournalLine"/>

@@ -1350,6 +1350,15 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getDeliveryJournalLine_Rejected() {
+		return (EAttribute)deliveryJournalLineEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDairy() {
 		return dairyEClass;
 	}
@@ -2374,6 +2383,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEReference(deliveryJournalLineEClass, DELIVERY_JOURNAL_LINE__BIN);
 		createEAttribute(deliveryJournalLineEClass, DELIVERY_JOURNAL_LINE__QUANTITY);
 		createEAttribute(deliveryJournalLineEClass, DELIVERY_JOURNAL_LINE__DESCRIPTION);
+		createEAttribute(deliveryJournalLineEClass, DELIVERY_JOURNAL_LINE__REJECTED);
 
 		dairyEClass = createEClass(DAIRY);
 		createEAttribute(dairyEClass, DAIRY__REGISTRATION_NUMBER);
@@ -2655,6 +2665,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEReference(getDeliveryJournalLine_Bin(), this.getDairyContainer(), null, "bin", null, 0, 1, DeliveryJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDeliveryJournalLine_Quantity(), ecorePackage.getEBigDecimal(), "quantity", null, 1, 1, DeliveryJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDeliveryJournalLine_Description(), ecorePackage.getEString(), "description", null, 1, 1, DeliveryJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDeliveryJournalLine_Rejected(), ecorePackage.getEBoolean(), "rejected", "false", 1, 1, DeliveryJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dairyEClass, Dairy.class, "Dairy", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDairy_RegistrationNumber(), ecorePackage.getEString(), "registrationNumber", null, 1, 1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
