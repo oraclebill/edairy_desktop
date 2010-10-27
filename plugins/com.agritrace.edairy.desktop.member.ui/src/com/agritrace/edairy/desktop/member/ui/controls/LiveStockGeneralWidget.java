@@ -70,12 +70,12 @@ public class LiveStockGeneralWidget {
 //		birthDayBtn.setImage(calendar);
 //		GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING).hint(17, 16).applyTo(birthDayBtn);
 
-		labelFactory.applyTo(UIControlsFactory.createLabel(leftPanel, "Birth Certificate Number :"));
+		labelFactory.applyTo(UIControlsFactory.createLabel(leftPanel, "Birth Cert. No. :"));
 		final Text certificateTxt = UIControlsFactory.createText(leftPanel, SWT.SINGLE | SWT.BORDER,
 				ViewWidgetId.LIVESTOCK_GENERAL_BIRTH_CERTIFICATE);
 		fieldFactory.span(2, 1).applyTo(certificateTxt);
 
-		labelFactory.applyTo(UIControlsFactory.createLabel(leftPanel, "Veterinary Confirmation :"));
+		labelFactory.applyTo(UIControlsFactory.createLabel(leftPanel, "Vet. Conf. No. :"));
 		final Text veterinaryTxt = UIControlsFactory.createText(leftPanel, SWT.SINGLE | SWT.BORDER,
 				ViewWidgetId.LIVESTOCK_GENERAL_VERTERINARY);
 		fieldFactory.span(2, 1).applyTo(veterinaryTxt);

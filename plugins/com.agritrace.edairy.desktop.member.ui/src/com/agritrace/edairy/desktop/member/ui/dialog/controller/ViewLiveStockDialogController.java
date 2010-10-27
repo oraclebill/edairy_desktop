@@ -467,7 +467,7 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 		farmCombo = getRidget(IComboRidget.class, ViewWidgetId.LIVE_STOCK_FARM_COMBO);
 		farmCombo.setMandatory(true);
 		purposeCombo = getRidget(IComboRidget.class, ViewWidgetId.LIVE_STOCK_PURPOSE_COMBO);
-		statusCombo = getRidget(IComboRidget.class, ViewWidgetId.LIVE_STOCK_STATUS_COMBO);
+//		statusCombo = getRidget(IComboRidget.class, ViewWidgetId.LIVE_STOCK_STATUS_COMBO);
 		memberNameRidget = getRidget(ITextRidget.class, ViewWidgetId.FARM_LIST_MEMBER_LOOKUP_TXT);
 		memberNameRidget.setOutputOnly(true);
 		memberNameRidget.setMandatory(true);

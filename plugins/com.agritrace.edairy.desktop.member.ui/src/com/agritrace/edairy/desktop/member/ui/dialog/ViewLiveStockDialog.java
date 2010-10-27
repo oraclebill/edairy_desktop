@@ -93,7 +93,8 @@ public class ViewLiveStockDialog extends BaseDialogView {
 		final Label statusLabel = UIControlsFactory.createLabel(headerPanel, "Status:");
 		labelFactory.applyTo(statusLabel);
 
-		final CCombo statusCombo = UIControlsFactory.createCCombo(headerPanel, ViewWidgetId.LIVE_STOCK_STATUS_COMBO);
+		final CCombo statusCombo = UIControlsFactory.createCCombo(headerPanel); //, ViewWidgetId.LIVE_STOCK_STATUS_COMBO);
+		statusCombo.setItems(new String[] { "Calf", "Producing", "Dry" }  );
 		fieldFactory.applyTo(statusCombo);
 
 	}
