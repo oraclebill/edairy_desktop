@@ -39,14 +39,14 @@ function genTableData(data) {
 		sums[1] += pm_qty;
 		sums[2] += sum;
 		html = '<tr><th scope="row">' + name + '</th><td class="chart">'
-				+ am_qty + '</td><td class="chart">' + pm_qty + '</td><td>'
-				+ sum + '</td></tr>';
+				+ am_qty.toFixed(2) + '</td><td class="chart">' + pm_qty.toFixed(2) + '</td><td>'
+				+ sum.toFixed(2) + '</td></tr>';
 		$('table#intake-data-table tbody').append(html);
 	}
 	$('table#intake-data-table tfoot').append("<tr><td></td></tr>");
-	html = '<tr><th >Total</th><td>' + Math.floor(sums[0] * 10) / 10
-			+ '</td><td>' + Math.floor(sums[1] * 10) / 10 + '</td><td>'
-			+ Math.floor(sums[2] * 10) / 10 + '</td></tr>';
+	html = '<tr><th >Total</th><td>' + sums[0].toFixed(2)
+			+ '</td><td>' + sums[1].toFixed(2) + '</td><td>'
+			+ sums[2].toFixed(2) + '</td></tr>';
 	$('table#intake-data-table tfoot').append(html);
 
 }
