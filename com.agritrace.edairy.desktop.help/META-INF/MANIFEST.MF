@@ -4,3 +4,5 @@ Bundle-Name: eDairy Desktop Help
 Bundle-SymbolicName: com.agritrace.edairy.desktop.help; singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: AGRITRACE
+Require-Bundle: org.eclipse.help.ui;bundle-version="3.5.2",
+ org.eclipse.help.webapp;bundle-version="3.5.2"
