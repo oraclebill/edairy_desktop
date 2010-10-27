@@ -55,6 +55,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager;
 import com.agritrace.edairy.desktop.common.persistence.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
+import com.agritrace.edairy.desktop.common.ui.columnformatters.BooleanPropertyColumnFormatter;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BaseDialogController;
 import com.agritrace.edairy.desktop.common.ui.controllers.util.ContainerValidator;
@@ -104,12 +105,13 @@ public class BulkCollectionsEntryDialogController extends
 	public static final String CONTEXT_JOURNAL_PAGE = "CONTEXT_JOURNAL_PAGE";
 	public static final String CONTEXT_PERSISTENCE_DELEGATE = "CONTEXT_PERSISTENCE_DELEGATE";
 
-	private static final String[] columnHeaderNames = { "Line", "Member ID",
-			"Member Name", "CAN Number", "Quantity", "MPR Missing", "Rejected",
-			"Flagged" };
+	private static final String[] columnHeaderNames = {
+			// "Line",
+			"Member ID", "Member Name", "CAN Number", "Quantity",
+			"MPR Missing", "Rejected", "Flagged" };
 
 	private static final String[] columnPropertyNames = {
-			"lineNumber",
+			// "lineNumber",
 			"recordedMember",
 			"validatedMember.member.familyName", "farmContainer.containerId", "quantity", "notRecorded", "rejected", "flagged" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 
@@ -213,9 +215,9 @@ public class BulkCollectionsEntryDialogController extends
 	@Override
 	public void configureRidgets() {
 		super.configureRidgets();
-		
+
 		getWindowRidget().setTitle("Manual Collection Journal Entry");
-		
+
 		System.out.println("configureRidgets : " + this);
 
 		journalHeaderRidget = getRidget(IJournalHeaderRidget.class,
@@ -321,7 +323,7 @@ public class BulkCollectionsEntryDialogController extends
 				}
 			}
 		});
-		table.setColumnFormatter(2, new ColumnFormatter() {
+		table.setColumnFormatter(1, new ColumnFormatter() {
 			@Override
 			public String getText(Object element) {
 				if (element == null) {
@@ -342,9 +344,9 @@ public class BulkCollectionsEntryDialogController extends
 
 		});
 
-		table.setColumnFormatter(5, new BooleanColumnFormatter());
-		table.setColumnFormatter(6, new BooleanColumnFormatter());
-		table.setColumnFormatter(7, new BooleanColumnFormatter());
+		table.setColumnFormatter(4, new BooleanPropertyColumnFormatter(columnPropertyNames[4]));
+		table.setColumnFormatter(5, new BooleanPropertyColumnFormatter(columnPropertyNames[5]));
+		table.setColumnFormatter(6, new BooleanPropertyColumnFormatter(columnPropertyNames[6]));
 
 		table.addClickListener(new IClickListener() {
 			@Override
@@ -419,15 +421,6 @@ public class BulkCollectionsEntryDialogController extends
 
 	}
 
-	class BooleanColumnFormatter extends ColumnFormatter {
-		@Override
-		public String getText(Object element) {
-
-			return "";
-		}
-
-	}
-
 	/**
 	 *
 	 */
@@ -443,7 +436,7 @@ public class BulkCollectionsEntryDialogController extends
 
 		final CollectionGroup page = getContextJournalPage();
 		final int lineCount = page.getJournalEntries().size();
-		
+
 		if (lineCount > 0) {
 			CollectionJournalLine lastLine, workingLine;
 			lastLine = page.getJournalEntries().get(lineCount - 1);
@@ -452,7 +445,7 @@ public class BulkCollectionsEntryDialogController extends
 				workingLine.setDairyContainer(lastLine.getDairyContainer());
 			}
 		}
-		
+
 		collectionLineRidget.updateFromModel();
 
 		updateAllRidgetsFromModel();
@@ -506,40 +499,43 @@ public class BulkCollectionsEntryDialogController extends
 				final DairyLocation center = getContextJournalPage()
 						.getCollectionCenter();
 				final Date date = getContextJournalPage().getJournalDate();
-				
+
 				if (member == null) {
 					return ValidationStatus.error("No member is selected");
 				}
 
 				if (center == null) {
-					return ValidationStatus.error("The journal entry has no collection center assigned");
+					return ValidationStatus
+							.error("The journal entry has no collection center assigned");
 				}
 
 				if (date == null) {
-					return ValidationStatus.error("The journal entry has no date assigned");
+					return ValidationStatus
+							.error("The journal entry has no date assigned");
 				}
 
 				if (lineRepo.countByMemberCenterDate(member, center, date) > 0) {
 					return ValidationStatus
 							.error("Another entry for this member, center and date already exists");
 				}
-				
+
 				return ValidationStatus.ok();
 			}
 		});
-		
+
 		// Quantity exceed check
 		collectionLineRidget.addValidator(new IValidator() {
 			@Override
 			public IStatus validate(Object value) {
 				final CollectionJournalLine line = (CollectionJournalLine) value;
-				final BigDecimal capacity = BigDecimal.valueOf(line.getDairyContainer().getCapacity());
-				
+				final BigDecimal capacity = BigDecimal.valueOf(line
+						.getDairyContainer().getCapacity());
+
 				if (line.getQuantity().compareTo(capacity) > 0) {
 					// We exceed the bin capacity
 					line.setFlagged(true);
 				}
-				
+
 				return ValidationStatus.ok();
 			}
 		});
@@ -833,12 +829,12 @@ public class BulkCollectionsEntryDialogController extends
 		BigDecimal total = BigDecimal.ZERO;
 
 		final CollectionGroup workingJournalPage = getContextJournalPage();
-		
+
 		for (final CollectionJournalLine line : workingJournalPage
 				.getJournalEntries()) {
 			line.setLineNumber(++counter);
 			total = total.add(line.getQuantity());
-			
+
 			if (line.isFlagged()) {
 				suspendedCount += 1;
 			}
