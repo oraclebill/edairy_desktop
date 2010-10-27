@@ -33,11 +33,15 @@ public class MapPanel extends CompositePanel {
 		final Browser map = UIControlsFactory.createBrowser(this, SWT.BORDER);
 		gd = new GridData();
 		gd.verticalSpan = 3;
-		gd.grabExcessHorizontalSpace = true;
+		gd.grabExcessHorizontalSpace = false;
 		gd.horizontalAlignment = SWT.FILL;
-		gd.grabExcessVerticalSpace = true;
+		gd.grabExcessVerticalSpace = false;
 		gd.verticalAlignment = SWT.FILL;
+		gd.heightHint = 150;
+		gd.widthHint = 150;
 		map.setLayoutData(gd);
+		map.setUrl("http://maps.google.com/maps/api/staticmap?center=limuru+kenya&zoom=11&size=150x150&sensor=false");
+		map.refresh();
 
 		final Label longitudeLabel = UIControlsFactory.createLabel(this, "Longitutde");
 		gd = new GridData();
