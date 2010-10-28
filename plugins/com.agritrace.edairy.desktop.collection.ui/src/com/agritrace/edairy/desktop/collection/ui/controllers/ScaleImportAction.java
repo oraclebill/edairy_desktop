@@ -37,6 +37,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord;
+import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.ImportResultsDialog;
@@ -83,6 +84,7 @@ import com.google.inject.Inject;
 
 			setNote("Reading raw data...");
 
+			final List<Membership> memberCache = memberRepo.all();
 			final ScaleImporter scaleImporter = new ScaleImporter(importFile);
 			final List<ScaleRecord> scaleData = new LinkedList<ScaleRecord>();
 			try {
@@ -112,10 +114,12 @@ import com.google.inject.Inject;
 				if (monitor.isCanceled()) {
 					return false;
 				}
+				
 				final CollectionGroup journalPage = getJournalForScaleRecord(scaleRecord);
 				/* boolean journalConsistent = */validateJournalInfo(journalPage, scaleRecord);
 				final ScaleImportRecord importRecord = DairyFactory.eINSTANCE.createScaleImportRecord();
 				// primary data
+				
 				try {
 					importRecord.setCollectionJournal(journalPage);
 					importRecord.setRecordedMember(scaleRecord.getMemberNumber());
@@ -127,7 +131,7 @@ import com.google.inject.Inject;
 					importRecord.setNumCans(scaleRecord.getNumCans());
 					importRecord.setOperatorCode(scaleRecord.getOperatorCode());
 
-					final Membership memberInfo = getMemberById(scaleRecord.getMemberNumber());
+					final Membership memberInfo = getMemberById(memberCache, scaleRecord.getMemberNumber());
 					if (memberInfo != null) {
 						importRecord.setValidatedMember(memberInfo);
 						// importRecord.setOffRoute(memberInfo.getDefaultRoute()
@@ -178,20 +182,19 @@ import com.google.inject.Inject;
 			final boolean importEnabled = pageMap.size() > 0;
 			final ImportResultsDialog irDialog = new ImportResultsDialog(AbstractDirectoryController.getShell(), msgList,
 					importEnabled);
+			
 			if (irDialog.open() == Window.OK) {
 				System.err.printf("Import completed with %d pages\n", pageMap.size());
 				int i = 0;
+				
 				for (final CollectionGroup page : pageMap.values()) {
 					System.err.printf("  page %d: %s - %d entries\n", ++i, page, page.getJournalEntries().size());
 					System.err.printf("  page %d: %s\n", i, page);
 					// }
-					try {
-						dairyRepo.getLocalDairy().getCollectionJournals().add(page);
-						dairyRepo.save();
-					} catch (final Exception e) {
-						e.getMessage();
-					}
+					dairyRepo.getLocalDairy().getCollectionJournals().add(page);
 				}
+				
+				dairyRepo.save();
 			}
 		}
 
@@ -327,11 +330,8 @@ import com.google.inject.Inject;
 
 	}
 
-	/**
-		 *
-		 */
-	private final MilkCollectionLogController milkCollectionLogController;
 	private final IDairyRepository dairyRepo;
+	private final IMemberRepository memberRepo;
 	private final IRepository<CollectionSession> sessionRepo;
 	private final IDairyLocationRepository dairyLocationRepo;
 	private final Map<String, CollectionGroup> pageMap = new HashMap<String, CollectionGroup>();
@@ -339,14 +339,13 @@ import com.google.inject.Inject;
 	private final Map<String, DairyLocation> centerMap = new HashMap<String, DairyLocation>();
 	Dairy localDairy;
 
-	// Pointedly not injected (for now)
-	public ScaleImportAction(final MilkCollectionLogController milkCollectionLogController,
-			final IDairyLocationRepository dairyLocationRepo, final IDairyRepository dairyRepo,
-			final IRepository<CollectionSession> sessionRepo) {
-		this.milkCollectionLogController = milkCollectionLogController;
+	@Inject
+	public ScaleImportAction(final IDairyLocationRepository dairyLocationRepo, final IDairyRepository dairyRepo,
+			final IRepository<CollectionSession> sessionRepo, final IMemberRepository memberRepo) {
 		this.dairyRepo = dairyRepo;
 		this.dairyLocationRepo = dairyLocationRepo;
 		this.sessionRepo = sessionRepo;
+		this.memberRepo = memberRepo;
 	}
 
 	@Override
@@ -438,8 +437,8 @@ import com.google.inject.Inject;
 			/* || page.getRoute() == null */) {
 				// TODO: add suspension reason
 				page.setSuspended(true);
-				this.milkCollectionLogController.log(LogService.LOG_INFO, "Suspending " + key
-						+ " for validation failure - null key item.");
+				// logger.log(LogService.LOG_INFO, "Suspending " + key
+				//		+ " for validation failure - null key item.");
 			}
 
 			pageMap.put(key, page);
@@ -465,17 +464,18 @@ import com.google.inject.Inject;
 		return retval;
 	}
 
-	private Membership getMemberById(String memberNumber) {
-		Membership member = null;
-		try {
-			member = dairyRepo.findMemberByMemberNo(memberNumber);
-			if (member == null) {
-				throw new RuntimeException("invalid member id " + memberNumber);
-			}
-		} catch (final Exception e) {
-			;
+	private Membership getMemberById(List<Membership> cache, String memberNumber) {
+		// TODO: Use String.format for clarity
+		if (memberNumber.length() < 5) {
+			memberNumber = "00000".substring(0, 5 - memberNumber.length()) + memberNumber;
 		}
-		return member;
+		
+		for (Membership member: cache) {
+			if (memberNumber.equals(member.getMemberNumber()))
+				return member;
+		}
+		
+		return null;
 	}
 
 	/**
