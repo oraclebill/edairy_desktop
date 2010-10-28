@@ -18,7 +18,6 @@ import org.eclipse.swt.nebula.widgets.compositetable.ResizableGridRowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.ui.controls.CompositePanel;
@@ -101,7 +100,9 @@ public class ContactMethodsGroup extends CompositePanel  implements IComplexComp
 
 	public ContactMethodsGroup(Composite parent, int style) {
 		super(parent, style);
-		setLayout(new GridLayout(1, false));
+		setLayout(new GridLayout(2, false));
+//		setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
+//		setBackground(parent.getBackground());
 
 		final CompositeTable table = new CompositeTable(this, SWT.BORDER);
 		new Header(table, SWT.BORDER);
@@ -120,18 +121,18 @@ public class ContactMethodsGroup extends CompositePanel  implements IComplexComp
 
 	private Control createButtons(Composite parent) {
 		final Composite buttonPanel = UIControlsFactory.createComposite(parent, SWT.NONE);
-		buttonPanel.setLayout(new GridLayout(3, false));
-		
+		buttonPanel.setLayout(new GridLayout(1, false));
+
 		final Button addButton = UIControlsFactory.createButton(buttonPanel, "Add");
-		GridDataFactory.defaultsFor(addButton).align(SWT.BEGINNING, SWT.FILL).applyTo(addButton);
+		GridDataFactory.defaultsFor(addButton).align(SWT.FILL, SWT.BEGINNING).applyTo(addButton);
 		addUIControl(addButton, BIND_ID_BTN_ADD);
 
 		final Button deleteButton = UIControlsFactory.createButton(buttonPanel, "Delete" );
-		GridDataFactory.defaultsFor(deleteButton).align(SWT.BEGINNING, SWT.FILL).applyTo(deleteButton);
+		GridDataFactory.defaultsFor(deleteButton).align(SWT.FILL, SWT.BEGINNING).applyTo(deleteButton);
 		addUIControl(deleteButton, BIND_ID_BTN_DELETE);
 
 		final Button deleteAllButton = UIControlsFactory.createButton(buttonPanel, "Delete All" );
-		GridDataFactory.defaultsFor(deleteAllButton).align(SWT.BEGINNING, SWT.FILL).applyTo(deleteAllButton);
+		GridDataFactory.defaultsFor(deleteAllButton).align(SWT.FILL, SWT.BEGINNING).applyTo(deleteAllButton);
 		addUIControl(deleteAllButton, BIND_ID_BTN_DELETEALL);
 
 		return buttonPanel;
