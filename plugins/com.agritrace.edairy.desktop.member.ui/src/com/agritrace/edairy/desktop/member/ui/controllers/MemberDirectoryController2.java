@@ -5,7 +5,9 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.riena.ui.core.uiprocess.UIProcess;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
@@ -129,6 +131,12 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 		});
 		addDefaultAction(searchText, getRidget(IActionRidget.class, BaseListView.BIND_ID_FILTER_SEARCH));
 
+	}
+	
+	@Override
+	public void refreshTableContents() {
+		// TODO: Figure out a way to implement the dialog safely
+		refreshTableContentsSafe();
 	}
 
 	@Override

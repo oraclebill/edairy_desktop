@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.list.WritableList;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.riena.core.Log4r;
+import org.eclipse.riena.navigation.IApplicationNode;
 import org.eclipse.riena.navigation.INavigationNode;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.model.SimpleNavigationNodeAdapter;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
+import org.eclipse.riena.ui.core.uiprocess.UIProcess;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
@@ -150,11 +153,46 @@ public abstract class AbstractDirectoryController<T extends EObject> extends
 	public T getSelectedEObject() {
 		return this.selectedEObject;
 	}
-
-	public void refreshTableContents() {
+	
+	protected void refreshTableContentsSafe() {
 		getTableContents().clear();
 		getTableContents().addAll(getFilteredResult());
 		table.updateFromModel();
+	}
+
+	public void refreshTableContents() {
+		final ISubModuleNode context = getNavigationNode();
+		
+		UIProcess process = new UIProcess("Refreshing table contents", true, context) {
+			@Override
+			public void initialUpdateUI(int totalWork) {
+				super.initialUpdateUI(totalWork);
+				setNote("Loading data...");
+				setBlocked(true);
+			}
+			
+			public boolean runJob(IProgressMonitor monitor) {
+				try {
+					monitor.beginTask("Loading data...", 1);
+					getTableContents().clear();
+					getTableContents().addAll(getFilteredResult());
+					monitor.worked(1);
+					return true;
+				} catch (RuntimeException e) {
+					e.printStackTrace();
+					return false;
+				}
+			};
+			
+			public void finalUpdateUI() {
+				table.updateFromModel();
+				setBlocked(false);
+			};
+			
+			
+		};
+		
+		process.start();
 	}
 
 	public void setRepository(IRepository<T> myRepo) {
