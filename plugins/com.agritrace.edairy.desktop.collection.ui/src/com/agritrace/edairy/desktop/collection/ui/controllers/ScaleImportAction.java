@@ -465,10 +465,7 @@ import com.google.inject.Inject;
 	}
 
 	private Membership getMemberById(List<Membership> cache, String memberNumber) {
-		// TODO: Use String.format for clarity
-		if (memberNumber.length() < 5) {
-			memberNumber = "00000".substring(0, 5 - memberNumber.length()) + memberNumber;
-		}
+		memberNumber = MemberUtil.expandMemberNumber(memberNumber);
 		
 		for (Membership member: cache) {
 			if (memberNumber.equals(member.getMemberNumber()))

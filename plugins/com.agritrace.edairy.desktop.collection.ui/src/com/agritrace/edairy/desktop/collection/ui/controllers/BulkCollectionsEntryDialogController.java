@@ -42,7 +42,6 @@ import com.agritrace.edairy.desktop.collection.ui.components.validators.Duplicat
 import com.agritrace.edairy.desktop.collection.ui.components.validators.MandatoryFieldsCheck;
 import com.agritrace.edairy.desktop.collection.ui.components.validators.MemberLookupValidator;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.JournalPersistenceDelegate;
-import com.agritrace.edairy.desktop.collection.ui.dialogs.MemberLookupProvider;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
@@ -62,45 +61,10 @@ import com.agritrace.edairy.desktop.common.ui.controllers.util.ContainerValidato
 import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class BulkCollectionsEntryDialogController extends
 		BaseDialogController<CollectionGroup> {
-
-	/*
-	 * private final class GenericMemberInfo implements IMemberInfoProvider { //
-	 * private final Route currentRoute; private final IMemberInfoProvider
-	 * lookupProvider; // private final LRUCache<String, Integer> failed = new
-	 * LRUCache<String, Integer>(); private final MemberCacheProvider
-	 * routeCache;
-	 * 
-	 * private GenericMemberInfo(Route currentRoute, IMemberInfoProvider
-	 * lookupProvider) { // this.currentRoute = currentRoute;
-	 * this.lookupProvider = lookupProvider; routeCache = new
-	 * MemberCacheProvider(dairyRepo.getMembersForRoute(currentRoute)); //
-	 * failed.setMinimumSize(50); }
-	 * 
-	 * @Override public Membership getMember(String memberNumber) { // fail fast
-	 * // Integer count = failed.get(memberNumber); // if (count != null) { //
-	 * count = count + 1; // failed.put(memberNumber, count); // return null; //
-	 * } // lookup in route Membership member =
-	 * routeCache.getMember(memberNumber); if (member == null) { // lookup in db
-	 * member = lookupProvider.getMember(memberNumber); } // fill fail cache //
-	 * if (member == null) { // failed.put(memberNumber, new Integer(1)); // }
-	 * return member; } }
-	 * 
-	 * private class RouteMatchValidator implements IValidator { Route route;
-	 * 
-	 * RouteMatchValidator(Route route) { this.route = route; }
-	 * 
-	 * @Override public IStatus validate(Object value) { boolean pass = false;
-	 * if (value instanceof Membership) { Membership member = (Membership)
-	 * value; pass = route.equals(member.getDefaultRoute()); } return pass ?
-	 * ValidationStatus.ok() : ValidationStatus.error("routes not equal");
-	 * 
-	 * }
-	 * 
-	 * }
-	 */
 
 	public static final String CONTEXT_JOURNAL_PAGE = "CONTEXT_JOURNAL_PAGE";
 	public static final String CONTEXT_PERSISTENCE_DELEGATE = "CONTEXT_PERSISTENCE_DELEGATE";
@@ -140,6 +104,7 @@ public class BulkCollectionsEntryDialogController extends
 	private IActionRidget clearButton;
 
 	private final ValidatorCollection journalPageValidators;
+	private final Provider<IMemberInfoProvider> lookupHandlerProvider;
 
 	private IActionRidget tableDeleteAction;
 
@@ -149,10 +114,12 @@ public class BulkCollectionsEntryDialogController extends
 	@Inject
 	public BulkCollectionsEntryDialogController(
 			final IDairyRepository dairyRepo,
-			final ICollectionJournalLineRepository lineRepo) {
+			final ICollectionJournalLineRepository lineRepo,
+			final Provider<IMemberInfoProvider> lookupHandlerProvider) {
 		super();
 		this.dairyRepo = dairyRepo;
 		this.lineRepo = lineRepo;
+		this.lookupHandlerProvider = lookupHandlerProvider;
 		journalPageValidators = new ValidatorCollection();
 		addJournalValidator(new BasicJournalValidator());
 		// drivers = dairyRepo.employeesByPosition("Driver");
@@ -457,8 +424,6 @@ public class BulkCollectionsEntryDialogController extends
 		//
 		final CollectionGroup workingJournalPage = getContextJournalPage();
 		// final Route currentRoute = workingJournalPage.getRoute();
-		final IMemberInfoProvider lookupProvider = new MemberLookupProvider(
-				dairyRepo);
 
 		collectionLineRidget.clearValidators();
 		collectionLineRidget.addValidator(new MandatoryFieldsCheck(
@@ -466,10 +431,8 @@ public class BulkCollectionsEntryDialogController extends
 		// TODO: RouteMatchValidator
 		// collectionLineRidget.setRouteValidator(new RouteMatchValidator(
 		// workingJournalPage.getRoute()));
-
-		// too slow??
-		collectionLineRidget.addValidator(new MemberLookupValidator(
-				lookupProvider));
+		final IMemberInfoProvider handler = lookupHandlerProvider.get();
+		collectionLineRidget.addValidator(new MemberLookupValidator(handler));
 
 		/*
 		 * if (currentRoute != null) { //
@@ -482,7 +445,7 @@ public class BulkCollectionsEntryDialogController extends
 		 * 
 		 * } else {
 		 */
-		collectionLineRidget.setMemberInfoProvider(lookupProvider);
+		collectionLineRidget.setMemberInfoProvider(handler);
 		// }
 
 		final Dairy dairy = dairyRepo.getLocalDairy();

@@ -1,20 +1,33 @@
 package com.agritrace.edairy.desktop.collection.ui.dialogs;
 
+import java.util.List;
+
 import com.agritrace.edairy.desktop.collection.ui.components.collectionline.IMemberInfoProvider;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
+import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
+import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
+import com.google.inject.Inject;
 
 public class MemberLookupProvider implements IMemberInfoProvider {
+	private List<Membership> allMembers;
 
-	private final IDairyRepository memberRepo;
-
-	public MemberLookupProvider( IDairyRepository repo ) {
-		memberRepo = repo;
+	@Inject
+	public MemberLookupProvider(IMemberRepository repo) {
+		allMembers = repo.all();
+		// Force prefetch
+		allMembers.size();
 	}
 
 	@Override
 	public Membership getMember(String memberNumber) {
-		return memberRepo.findMemberByMemberNo(memberNumber);
+		memberNumber = MemberUtil.expandMemberNumber(memberNumber);
+		
+		for (Membership member: allMembers) {
+			if (memberNumber.equals(member.getMemberNumber()))
+				return member;
+		}
+		
+		return null;
 	}
 
 }
