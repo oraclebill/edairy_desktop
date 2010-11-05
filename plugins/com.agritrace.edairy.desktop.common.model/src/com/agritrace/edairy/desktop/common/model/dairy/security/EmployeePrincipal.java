@@ -27,7 +27,7 @@ public final class EmployeePrincipal implements IPrincipal {
 	}
 
 	@Override
-	public boolean hasPermission(Permission perm) {
+	public boolean hasPermission(AllPermissions perm) {
 		final Role role = employee.getRole();
 
 		return role == null ? false : role.getPermissions().contains(perm);

@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Shell;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
+import com.agritrace.edairy.desktop.common.model.dairy.security.AllPermissions;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
@@ -22,7 +22,7 @@ import com.agritrace.edairy.desktop.operations.ui.dialogs.ContainerBindingConsta
 import com.agritrace.edairy.desktop.operations.ui.dialogs.ContainerEditDialog;
 import com.google.inject.Inject;
 
-@PermissionRequired(Permission.VIEW_DAIRY_BINS)
+@PermissionRequired(AllPermissions.VIEW_DAIRY_BINS)
 public class ContainersDirectoryViewController extends BasicDirectoryController<DairyContainer> {
 
 	private final ContainerSearchBean searchBean = new ContainerSearchBean();

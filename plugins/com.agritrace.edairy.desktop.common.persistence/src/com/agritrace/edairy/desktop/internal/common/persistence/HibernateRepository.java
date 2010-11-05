@@ -62,7 +62,10 @@ public class HibernateRepository<T extends EObject> implements IRepository<T> {
 
 	@Override
 	public List<T> all() {
-		return allWithEagerFetch((String[]) null);
+		final Criteria crit = sessionProvider.get().createCriteria(
+				getClassType());
+		final List<T> result = crit.list();
+		return result;
 	}
 
 	@Transactional

@@ -19,7 +19,7 @@ public final class DefaultPrincipal implements IPrincipal {
 	}
 
 	@Override
-	public boolean hasPermission(Permission perm) {
+	public boolean hasPermission(AllPermissions perm) {
 		return true;
 	}
 

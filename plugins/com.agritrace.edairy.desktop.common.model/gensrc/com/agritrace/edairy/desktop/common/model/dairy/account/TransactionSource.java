@@ -70,7 +70,9 @@ public enum TransactionSource implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	OTHER(4, "Other", "OTHER"), /**
+	OTHER(4, "Other", "OTHER"),
+
+	/**
 	 * The '<em><b>AI Services</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

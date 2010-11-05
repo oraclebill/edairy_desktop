@@ -30,7 +30,9 @@ public enum RequestType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	CLINICAL(0, "Clinical", "Clinical"), /**
+	CLINICAL(0, "Clinical", "Clinical"),
+
+	/**
 	 * The '<em><b>Insemination</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

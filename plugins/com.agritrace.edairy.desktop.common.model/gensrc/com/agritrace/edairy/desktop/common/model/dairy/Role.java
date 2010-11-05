@@ -6,7 +6,7 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy;
 
-import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
+import com.agritrace.edairy.desktop.common.model.dairy.security.AllPermissions;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -112,7 +112,7 @@ public interface Role extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Permissions</b></em>' attribute list.
-	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.security.Permission}.
+	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.security.AllPermissions}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Permissions</em>' attribute list isn't clear,
@@ -124,6 +124,6 @@ public interface Role extends EObject {
 	 * @model dataType="com.agritrace.edairy.desktop.common.model.dairy.PermissionT"
 	 * @generated
 	 */
-	EList<Permission> getPermissions();
+	EList<AllPermissions> getPermissions();
 
 } // Role

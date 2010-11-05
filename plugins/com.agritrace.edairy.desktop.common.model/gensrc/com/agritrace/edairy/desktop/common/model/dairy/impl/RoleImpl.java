@@ -9,7 +9,7 @@ package com.agritrace.edairy.desktop.common.model.dairy.impl;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Role;
 
-import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
+import com.agritrace.edairy.desktop.common.model.dairy.security.AllPermissions;
 
 import java.util.Collection;
 
@@ -109,7 +109,7 @@ public class RoleImpl extends EObjectImpl implements Role {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Permission> permissions;
+	protected EList<AllPermissions> permissions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -198,9 +198,9 @@ public class RoleImpl extends EObjectImpl implements Role {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Permission> getPermissions() {
+	public EList<AllPermissions> getPermissions() {
 		if (permissions == null) {
-			permissions = new EDataTypeUniqueEList<Permission>(Permission.class, this, DairyPackage.ROLE__PERMISSIONS);
+			permissions = new EDataTypeUniqueEList<AllPermissions>(AllPermissions.class, this, DairyPackage.ROLE__PERMISSIONS);
 		}
 		return permissions;
 	}
@@ -245,7 +245,7 @@ public class RoleImpl extends EObjectImpl implements Role {
 				return;
 			case DairyPackage.ROLE__PERMISSIONS:
 				getPermissions().clear();
-				getPermissions().addAll((Collection<? extends Permission>)newValue);
+				getPermissions().addAll((Collection<? extends AllPermissions>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

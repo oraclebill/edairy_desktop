@@ -27,7 +27,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
-import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
+import com.agritrace.edairy.desktop.common.model.dairy.security.AllPermissions;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.persistence.IMilkCollectionRepository;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
@@ -39,7 +39,7 @@ import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-@PermissionRequired(Permission.VIEW_MILK_COLLECTIONS)
+@PermissionRequired(AllPermissions.VIEW_MILK_COLLECTIONS)
 public class MilkCollectionLogController extends BasicDirectoryController<CollectionGroup> {
 
 	private final class CollectionLogJournalPersister implements JournalPersistenceDelegate {
