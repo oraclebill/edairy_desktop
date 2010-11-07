@@ -22,6 +22,7 @@ java -jar ${launcher} \
 	 -buildfile ${buildfile} \
 	 -Dbuilder=${workspace_directory}/build-config \
 	 -DbaseLocation=${baseLocation} \
+	 -Dworkspace_directory=${workspace_directory} \
 	 -Dbuild.compiler=javac1.6 \
      -DbuildId=dairymgr-${tag}
 
