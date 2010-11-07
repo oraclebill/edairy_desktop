@@ -10,7 +10,7 @@ then
 	echo "IN HUDSON ENV - BUILD # {BUILD_TAG}"
 	workspace_directory=${WORKSPACE}
 	baseLocation=../../edairy_desktop_target_build/lastSuccessful/archive/targetPlatform
-	sdkroot=${baseLocation}
+	sdkroot=../../../tools/buckminster/director
 	tag=${BUILD_TAG}
 fi
 
