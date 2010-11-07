@@ -9,8 +9,8 @@ if test ${BUILD_TAG}
 then
 	echo "IN HUDSON ENV - BUILD # {BUILD_TAG}"
 	workspace_directory=${WORKSPACE}
-	baseLocation=../../edairy_desktop_target_build/lastSuccessful/archive/targetPlatform
-	sdkroot=../../../tools/buckminster/director
+	baseLocation=/var/lib/hudson/jobs/edairy_desktop_target_build/lastSuccessful/archive/targetPlatform
+	sdkroot=/var/lib/hudson/tools/eclipse
 	tag=${BUILD_TAG}
 fi
 
