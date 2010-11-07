@@ -1,9 +1,7 @@
 #!/bin/sh
 
-workspace_directory=/Users/bjones/Development/Projects/edairy_desktop
 sdkroot=/Users/bjones/Development/Applications/eclipse/currentSDK
-launcher=${sdkroot}/plugins/org.eclipse.equinox.launcher_1.1.0.v20100507.jar
-buildfile=${sdkroot}/plugins/org.eclipse.pde.build_3.6.1.R36x_v20100823/scripts/productBuild/productBuild.xml
+workspace_directory=/Users/bjones/Development/Projects/edairy_desktop
 baseLocation=../edairy_desktop_lib/exported_target
 
 tag=`date "+%Y%m%d%H%M"`
@@ -15,6 +13,9 @@ then
 	sdkroot=${baseLocation}
 	tag=${BUILD_TAG}
 fi
+
+launcher=${sdkroot}/plugins/org.eclipse.equinox.launcher_1.1.0.v20100507.jar
+buildfile=${sdkroot}/plugins/org.eclipse.pde.build_3.6.1.R36x_v20100823/scripts/productBuild/productBuild.xml
 
 java -jar ${launcher} \
 	 -application org.eclipse.ant.core.antRunner \
