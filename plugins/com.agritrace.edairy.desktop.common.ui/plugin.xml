@@ -21,6 +21,10 @@
    </extension>
    <extension
          point="org.eclipse.ui.commands">
+      <category
+               id="com.agritrace.edairy.desktop.preferences.category"
+               name="eDairy Preferences">
+         </category>
       <command
             categoryId="com.agritrace.edairy.desktop.preferences.category"
             id="com.agritrace.edairy.desktop.common.commands.preferences"

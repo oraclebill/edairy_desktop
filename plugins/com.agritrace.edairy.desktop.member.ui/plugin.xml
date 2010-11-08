@@ -5,13 +5,6 @@
          point="org.eclipse.ui.views">
       <view
             allowMultiple="true"
-            class="com.agritrace.edairy.desktop.member.ui.views.CreateMemberView"
-            id="com.agritrace.edairy.desktop.member.ui.views.CreateMemberView"
-            name="Create New Member"
-            restorable="true">
-      </view>
-      <view
-            allowMultiple="true"
             class="com.agritrace.edairy.desktop.member.ui.views.MemberDirectoryView"
             id="com.agritrace.edairy.desktop.member.ui.views.MemberDirectoryView"
             name="Member Directory"

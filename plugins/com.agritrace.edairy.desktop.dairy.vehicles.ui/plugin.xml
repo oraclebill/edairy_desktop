@@ -5,13 +5,6 @@
          point="org.eclipse.ui.views">
       <view
             allowMultiple="true"
-            class="com.agritrace.edairy.desktop.dairy.vehicles.ui.views.VehicleLogView"
-            id="dairy.vehicle.masterdetail.view"
-            name="Vehicle Log"
-            restorable="true">
-      </view>
-      <view
-            allowMultiple="true"
             class="com.agritrace.edairy.desktop.dairy.vehicles.ui.views.VehicleLogDirectoryView"
             id="edairy.locations.vehicle.directory"
             name="Vehicle Log"
