@@ -13,7 +13,7 @@ Require-Bundle: org.eclipse.core.databinding;visibility:=reexport,org.
  clipse.riena.ui.ridgets;visibility:=reexport,org.eclipse.riena.ui.swt
  ;visibility:=reexport
 Bundle-Activator: org.eclipse.riena.internal.ui.ridgets.swt.Activator
-Bundle-Version: 2.0.0.v20100615_2_0_0
+Bundle-Version: 2.1.0.qualifier
 Export-Package: org.eclipse.riena.internal.ui.ridgets.swt;x-friends:="
  org.eclipse.riena.tests,org.eclipse.riena.navigation.ui.swt,org.eclip
  se.riena.ui.ridgets.swt.optional",org.eclipse.riena.internal.ui.ridge

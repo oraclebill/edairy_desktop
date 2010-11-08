@@ -93,6 +93,9 @@ public abstract class AbstractDialogView extends TrayDialog {
 		this(parentShell, null);
 	}
 	
+	/**
+	 * @since 2.1
+	 */
 	protected AbstractDialogView(Shell parentShell, AbstractWindowController controller) {
 		super(parentShell != null ? parentShell : getShellByGuessing());
 		title = ""; //$NON-NLS-1$

@@ -11,7 +11,6 @@ import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
@@ -19,9 +18,9 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.persistence.Constants;
 import com.agritrace.edairy.desktop.common.persistence.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.Transactional;
-import com.agritrace.edairy.desktop.internal.common.persistence.Constants;
 import com.agritrace.edairy.desktop.internal.common.persistence.RepositoryUtil;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -61,7 +60,6 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 				+ "   AND l.collectionJournal.collectionCenter = :center ";
 
 		final Query query = getCurrentSession().createQuery(queryText);
-		CollectionJournalLine x = ((CollectionJournalLine) null);
 		query.setEntity("member", member);
 		query.setEntity("center", center);
 		query.setCalendarDate("cal", cal);
@@ -106,8 +104,6 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 	// @Override
 	@Transactional
 	public List<CollectionGroup> allForDate(final Date date) {
-		int year, month, day;
-
 		final Calendar cal = Calendar.getInstance();
 
 		if (date != null) {
@@ -271,8 +267,7 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 		
   		final Query query = createStatisticsQuery(startDate, endDate, route, session);
 
-		return (Map) query.uniqueResult();
-
+		return (Map<String, Double>) query.uniqueResult();
 	}
 
 	private Query createStatisticsQuery(Date startDate, Date endDate, DairyLocation route, CollectionSession session) {
