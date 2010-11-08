@@ -1,4 +1,4 @@
-importtargetdefinition -A 'com.agritrace.edairy.desktop.product.site/desktop.target'
+importtargetdefinition -A 'releng/com.agritrace.edairy.desktop.product.site/desktop.target'
 import 'releng/com.agritrace.edairy.desktop.product.site/site.cquery'
 build
 perform -D target.os=* -D target.ws=* -D target.arch=* com.agritrace.edairy.desktop.product.site#site.p2
