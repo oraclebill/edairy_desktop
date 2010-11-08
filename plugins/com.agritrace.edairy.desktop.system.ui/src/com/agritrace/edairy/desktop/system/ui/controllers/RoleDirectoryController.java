@@ -110,5 +110,11 @@ public final class RoleDirectoryController extends BasicDirectoryController<Role
 		permSearch.setText("");
 		refreshTableContents();
 	}
+	
+	@Override
+	public void refreshTableContents() {
+		// TODO: Figure out a way to implement the dialog safely
+		refreshTableContentsSafe();
+	}
 
 }
