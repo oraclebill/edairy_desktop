@@ -1,6 +1,6 @@
 importtargetdefinition -A 'releng/com.agritrace.edairy.desktop.product.site/desktop.target'
 import 'releng/com.agritrace.edairy.desktop.product.site/site.cquery'
-build
+build -c
 perform -D target.os=* -D target.ws=* -D target.arch=* com.agritrace.edairy.desktop.product.site#site.p2
 perform -D target.os=win32 -D target.ws=win32 -D target.arch=x86 com.agritrace.edairy.desktop.product.site#create.product.zip
 perform -D target.os=win32 -D target.ws=win32 -D target.arch=x86_64 com.agritrace.edairy.desktop.product.site#create.product.zip
