@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.6"?>
+
+<target name="NewTarget">
+<locations>
+<location path="${workspace_loc}/../edairy_desktop_lib/exported_target" type="Directory"/>
+</locations>
+</target>
