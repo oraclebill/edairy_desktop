@@ -3,6 +3,6 @@
 
 <target name="NewTarget">
 <locations>
-<location path="${workspace_loc}/../edairy_desktop_lib/exported_target" type="Directory"/>
+<location path="/var/lib/hudson/jobs/edairy_desktop_target_build/lastSuccessful/archive/targetPlatform" type="Directory"/>
 </locations>
 </target>
