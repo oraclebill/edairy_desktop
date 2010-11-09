@@ -25,12 +25,9 @@ import org.eclipse.birt.report.engine.api.IReportEngineFactory;
 import org.eclipse.birt.report.engine.api.IReportRunnable;
 import org.eclipse.birt.report.engine.api.IRunAndRenderTask;
 import org.eclipse.birt.report.engine.api.PDFRenderOption;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.CommonPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.jface.dialogs.ProgressMonitorDialog;
-import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.CCombo;
@@ -48,7 +45,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.PlatformUI;
 import org.osgi.framework.Bundle;
 
 import com.agritrace.edairy.desktop.birt.Activator;
@@ -386,32 +382,9 @@ public class ReportController {
 
 	private void updateReport() {
 		browser.setText("");
-		
 		try {
 			runReport();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	private void runTask(final IRunAndRenderTask task) {
-		// TODO: Find a way to use UIProcess here
-		ProgressMonitorDialog pmd = new ProgressMonitorDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell());
-		
-		try {
-			pmd.run(true, false, new IRunnableWithProgress() {
-				@Override
-				public void run(IProgressMonitor monitor) {
-					try {
-					monitor.beginTask("Updating report...", 1);
-					task.run();
-					monitor.worked(1);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			});
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -512,7 +485,7 @@ public class ReportController {
 		task.setRenderOption(options);
 
 		// run the task (it will render from here):
-		runTask(task);
+		task.run();
 
 		// task to render a footer:
 		task = engine.createRunAndRenderTask(designFoot);

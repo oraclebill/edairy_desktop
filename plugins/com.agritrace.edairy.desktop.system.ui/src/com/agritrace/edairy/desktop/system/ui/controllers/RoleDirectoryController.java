@@ -111,10 +111,10 @@ public final class RoleDirectoryController extends BasicDirectoryController<Role
 		refreshTableContents();
 	}
 	
-	@Override
-	public void refreshTableContents() {
-		// TODO: Figure out a way to implement the dialog safely
-		refreshTableContentsSafe();
-	}
+//	@Override
+//	public void refreshTableContents() {
+//		// TODO: Figure out a way to implement the dialog safely
+//		refreshTableContentsSafe();
+//	}
 
 }
