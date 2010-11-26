@@ -17,6 +17,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.security.AllPermissions;
@@ -29,11 +30,10 @@ import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryControll
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.views.BaseListView;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.member.ui.dialog.AddMemberDialog;
-import com.agritrace.edairy.desktop.member.ui.dialog.ViewMemberDialog;
+import com.agritrace.edairy.desktop.member.ui.dialog.MemberEditDialog;
+import com.agritrace.edairy.desktop.member.ui.dialog.controller.MemberEditDialogController;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 @PermissionRequired(AllPermissions.VIEW_MEMBER_LIST)
 public class MemberDirectoryController2 extends BasicDirectoryController<Membership> {
@@ -63,8 +63,8 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 	private static final String DELETE_DIALOG_MESSAGE = "Do you want to delete the selected member %s ?";
 	private static final String DELETE_DIALOG_TITLE = "Delete Member";
 
-	private final String[] memberColumnHeaders = { "ID", "First Name", "Last Name", "Default Route",
-			"Status", "Phone", "Milk Collection", "Monthly Credit Sales", "Credit Balance" };
+	private final String[] memberColumnHeaders = { "ID", "First Name", "Last Name", "Default Route", "Status", "Phone",
+			"Milk Collection", "Monthly Credit Sales", "Credit Balance" };
 
 	private final String[] memberPropertyNames = { "memberNumber", "member.givenName", "member.familyName",
 			"defaultRoute.code", "status.name", "member.phoneNumber" }; // "account",
@@ -74,17 +74,16 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 	private ITextRidget searchText;
 	private final Dairy localDairy;
 	private final IMemberRepository repository;
-	private final Provider<ViewMemberDialog> viewDialogProvider;
-	private final Provider<AddMemberDialog> addDialogProvider;
+
+// private final Provider<MemberEditDialog> viewDialogProvider;
+// private final Provider<AddMemberDialog> addDialogProvider;
 
 	@Inject
-	public MemberDirectoryController2(final IMemberRepository repository, final IDairyRepository dairyRepo,
-			final Provider<ViewMemberDialog> viewDialogProvider,
-			final Provider<AddMemberDialog> addDialogProvider) {
+	public MemberDirectoryController2(final IMemberRepository repository, final IDairyRepository dairyRepo) {
 		this.repository = repository;
 		this.localDairy = dairyRepo.getLocalDairy();
-		this.viewDialogProvider = viewDialogProvider;
-		this.addDialogProvider = addDialogProvider;
+// this.viewDialogProvider = viewDialogProvider;
+// this.addDialogProvider = addDialogProvider;
 
 		setEClass(DairyPackage.Literals.MEMBERSHIP);
 
@@ -172,20 +171,14 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 	@Override
 	protected void handleNewItemAction() {
 		Membership selectedMember = DairyUtil.createMembership(null, null, null);
-		final AddMemberDialog memberDialog = addDialogProvider.get();
+		List<DairyLocation> centerList = localDairy.getBranchLocations();
+		final MemberEditDialog memberDialog = new MemberEditDialog(getShell(), new MemberEditDialogController(
+				centerList));
 		memberDialog.getController().setContext("selectedMember", selectedMember);
 
 		final int returnCode = memberDialog.open();
 		if (returnCode == AbstractWindowController.OK) {
 			selectedMember = (Membership) memberDialog.getController().getContext("selectedMember");
-			// final List<Farm> newFarms = new ArrayList<Farm>();
-			// newFarms.addAll(selectedMember.getMember().getFarms());
-			// selectedMember.getMember().getFarms().clear();
-			// repository.saveNew(selectedMember);
-			// for (final Farm newFarm : newFarms) {
-			// farmRepository.saveNew(newFarm);
-			// selectedMember.getMember().getFarms().add(newFarm);
-			// }
 			repository.saveNew(selectedMember);
 			refreshTableContents();
 		}
@@ -194,7 +187,8 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 	@Override
 	protected void handleViewItemAction() {
 		Membership selectedMember = (Membership) table.getSelection().get(0);
-		final ViewMemberDialog memberDialog = viewDialogProvider.get();
+		final MemberEditDialog memberDialog = new MemberEditDialog(getShell(), new MemberEditDialogController(
+				localDairy.getBranchLocations()));
 		memberDialog.getController().setContext("selectedMember", selectedMember);
 
 		final int returnCode = memberDialog.open();

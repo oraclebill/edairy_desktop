@@ -1,7 +1,10 @@
 package com.agritrace.edairy.desktop.member.ui.dialog.controller;
 
+import java.util.List;
+
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 
+import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
 import com.agritrace.edairy.desktop.common.persistence.IMilkCollectionRepository;
@@ -13,17 +16,16 @@ import com.agritrace.edairy.desktop.member.ui.controls.MemberFarmWidgetControlle
 import com.agritrace.edairy.desktop.member.ui.controls.MemberTransactionWidgetController;
 import com.agritrace.edairy.desktop.member.ui.dialog.AddFarmDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewFarmDialog;
-import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class ViewMemberDialogController extends AddMemberDialogController {
-	@Inject	private IFarmRepository farmRepository;
-	@Inject	private IMemberRepository memberRepository;
-	@Inject	private Provider<AddFarmDialog> addDialogProvider;
-	@Inject private Provider<ViewFarmDialog> viewDialogProvider;
-	@Inject private ITransactionRepository transactionRepository;
-	@Inject private IMilkCollectionRepository collectionsRepository;
+public class ViewMemberDialogController extends MemberEditDialogController {
+//	@Inject	private IFarmRepository farmRepository;
+//	@Inject	private IMemberRepository memberRepository;
+//	@Inject	private Provider<AddFarmDialog> addDialogProvider;
+//	@Inject private Provider<ViewFarmDialog> viewDialogProvider;
+//	@Inject private ITransactionRepository transactionRepository;
+//	@Inject private IMilkCollectionRepository collectionsRepository;
 
 	// collection tab
 	private MemberCollectionRecordsWidgetController collectionController;
@@ -32,9 +34,8 @@ public class ViewMemberDialogController extends AddMemberDialogController {
 	// transaction tab
 	private MemberTransactionWidgetController transactionController;
 
-	@Inject
-	protected ViewMemberDialogController(IDairyRepository dairyRepo) {
-		super(dairyRepo);
+	protected ViewMemberDialogController(List<DairyLocation> centerList) {
+		super(centerList);
 	}
 	
 	@Override
@@ -56,10 +57,10 @@ public class ViewMemberDialogController extends AddMemberDialogController {
 	protected void configureTabs() {
 		System.err.println(" ##### configureTabs");
 		super.configureTabs();
-		farmController = new MemberFarmWidgetController(this, farmRepository, memberRepository,
-				addDialogProvider, viewDialogProvider);
-		collectionController = new MemberCollectionRecordsWidgetController(this, collectionsRepository);
-		transactionController = new MemberTransactionWidgetController(transactionRepository, this);
+//		farmController = new MemberFarmWidgetController(this, farmRepository, memberRepository,
+//				addDialogProvider, viewDialogProvider);
+//		collectionController = new MemberCollectionRecordsWidgetController(this, collectionsRepository);
+//		transactionController = new MemberTransactionWidgetController(transactionRepository, this);
 	}
 
 

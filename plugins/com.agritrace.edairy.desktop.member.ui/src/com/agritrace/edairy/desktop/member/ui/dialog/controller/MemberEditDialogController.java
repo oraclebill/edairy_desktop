@@ -38,10 +38,8 @@ import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.IProfilePhot
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberProfileWidgetController;
-import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
-import com.google.inject.Inject;
 
-public class AddMemberDialogController extends BaseDialogController<Membership> {
+public class MemberEditDialogController extends BaseDialogController<Membership> {
 
 	private class AddMemberPropertyChangedListener implements
 			PropertyChangeListener {
@@ -100,11 +98,10 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 
 	protected Farmer selectedMembershipOwner;
 	
-	private final IDairyRepository dairyRepo;
+	private final List<DairyLocation> dairyLocations;
 
-	@Inject
-	public AddMemberDialogController(final IDairyRepository dairyRepo) {
-		this.dairyRepo = dairyRepo;
+	public MemberEditDialogController(final List<DairyLocation> dairyLocations) {
+		this.dairyLocations = dairyLocations;
 	}
 
 	@Override
@@ -324,7 +321,7 @@ public class AddMemberDialogController extends BaseDialogController<Membership> 
 			
 			List<DairyLocation> collectionCenters = new ArrayList<DairyLocation>();
 			collectionCenters.add(null);
-			collectionCenters.addAll(dairyRepo.getLocalDairyLocations());
+			collectionCenters.addAll(dairyLocations);
 			
 			defaultCollectionCenterRidget.bindToModel(new WritableList(collectionCenters, DairyLocation.class),
 					DairyLocation.class, "getCode",
