@@ -340,6 +340,8 @@ public abstract class AbstractDirectoryController<T extends EObject> extends
 	protected void handleViewItemAction() {
 		final RecordDialog<T> dialog = getRecordDialog(getShell());
 		final T selectedObject = getSelectedEObject();
+		if ( selectedObject == null)
+			return;
 		try {
 			getRepository().load(selectedObject);
 		} catch (final Exception e) {
