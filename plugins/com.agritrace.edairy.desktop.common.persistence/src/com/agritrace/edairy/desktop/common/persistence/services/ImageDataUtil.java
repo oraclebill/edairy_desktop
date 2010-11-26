@@ -145,7 +145,7 @@ public final class ImageDataUtil {
 	 *
 	 */
 	private static void log(int level, String message, Throwable exception) {
-		Log4r.getLogger(PersistenceActivator.getDefault(), DairyRepository.class).log(level, message,
+		Log4r.getLogger(PersistenceActivator.getDefault(), ImageDataUtil.class).log(level, message,
 				exception);
 	}
 }
