@@ -3,7 +3,6 @@
  */
 package com.agritrace.edairy.desktop.ui;
 
-import org.eclipse.riena.internal.ui.swt.utils.RcpUtilities;
 import org.eclipse.riena.navigation.IApplicationNode;
 import org.eclipse.riena.navigation.IModuleGroupNode;
 import org.eclipse.riena.navigation.IModuleNode;
@@ -18,6 +17,8 @@ import org.eclipse.riena.navigation.ui.controllers.ApplicationController;
 import org.eclipse.riena.navigation.ui.swt.application.SwtApplication;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
 import org.eclipse.riena.ui.workarea.WorkareaManager;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 import org.osgi.framework.Bundle;
 
 import com.agritrace.edairy.desktop.EDairyActivator;
@@ -77,7 +78,8 @@ public class EDairyManagerApplication extends SwtApplication implements Applicat
 			@Override
 			public void afterBind() {
 				super.afterBind();
-				RcpUtilities.getWorkbenchShell().setMaximized(true);
+				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+				shell.setMaximized(true);
 			}
 		};
 		

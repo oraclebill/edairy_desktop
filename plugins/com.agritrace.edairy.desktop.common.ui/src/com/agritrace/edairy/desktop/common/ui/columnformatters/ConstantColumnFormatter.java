@@ -1,8 +1,8 @@
-package com.agritrace.edairy.desktop.member.ui.controllers;
+package com.agritrace.edairy.desktop.common.ui.columnformatters;
 
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 
-final class ConstantColumnFormatter extends ColumnFormatter {
+public class ConstantColumnFormatter extends ColumnFormatter {
 	private final String text;
 	public ConstantColumnFormatter() {
 		this("N/A");
@@ -12,6 +12,7 @@ final class ConstantColumnFormatter extends ColumnFormatter {
 	}
 	@Override
 	public String getText(Object element) {
+		System.out.println("::called::"+this.hashCode()+"::");
 		return text;
 	}
 }
