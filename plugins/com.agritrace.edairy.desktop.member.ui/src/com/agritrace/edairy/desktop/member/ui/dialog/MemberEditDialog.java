@@ -1,5 +1,7 @@
 package com.agritrace.edairy.desktop.member.ui.dialog;
 
+import java.util.Set;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
@@ -7,23 +9,21 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.ui.dialogs.BaseDialogView;
 import com.agritrace.edairy.desktop.member.ui.dialog.controller.MemberEditDialogController;
-import com.agritrace.edairy.desktop.member.ui.dialog.controller.ViewMemberDialogController;
 import com.agritrace.edairy.desktop.member.ui.views.MemberInfoGroup;
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 public class MemberEditDialog extends BaseDialogView {
 	private MembershipTabFolder tabFolder;
+	private Set<MembershipTabFolder.TabItem> tabSet;
 
-	@Inject
-	public MemberEditDialog(@Named("current") Shell shell, MemberEditDialogController controller) {
+	public MemberEditDialog(Shell shell, MemberEditDialogController controller, Boolean newMember) {
 		super(shell, controller);
-	}
-
-//	// TODO: This kind of weird cross-inheritance really should be fixed.
-//	protected ViewMemberDialog(@Named("current") Shell shell, AddMemberDialogController controller) {
-//		super(shell, controller);
-//	}
+		if (newMember) {
+			tabSet = MembershipTabFolder.NEW_MEMBER_TABS;
+		}
+		else {
+			tabSet = MembershipTabFolder.ALL_TABS;
+		}
+ 	}
 
 	@Override
 	protected void buildWorkArea(Composite parent) {
@@ -37,8 +37,7 @@ public class MemberEditDialog extends BaseDialogView {
 	}
 
 	protected void createMemberTabFolderGroup(Composite parent) {
-		tabFolder = new MembershipTabFolder(parent, MembershipTabFolder.NEW_MEMBER_TABS);
-//		tabFolder = new MembershipTabFolder(parent);
+		tabFolder = new MembershipTabFolder(parent, tabSet);
 		tabFolder.getTabComposite().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 	}
 

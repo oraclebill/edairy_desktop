@@ -173,7 +173,7 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 		Membership selectedMember = DairyUtil.createMembership(null, null, null);
 		List<DairyLocation> centerList = localDairy.getBranchLocations();
 		final MemberEditDialog memberDialog = new MemberEditDialog(getShell(), new MemberEditDialogController(
-				centerList));
+				centerList), true);
 		memberDialog.getController().setContext("selectedMember", selectedMember);
 
 		final int returnCode = memberDialog.open();
@@ -188,7 +188,7 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 	protected void handleViewItemAction() {
 		Membership selectedMember = (Membership) table.getSelection().get(0);
 		final MemberEditDialog memberDialog = new MemberEditDialog(getShell(), new MemberEditDialogController(
-				localDairy.getBranchLocations()));
+				localDairy.getBranchLocations()), false);
 		memberDialog.getController().setContext("selectedMember", selectedMember);
 
 		final int returnCode = memberDialog.open();
