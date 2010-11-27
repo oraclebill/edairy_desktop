@@ -3,37 +3,43 @@ package com.agritrace.edairy.desktop.common.ui.util;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 
 public final class MemberUtil {
-	private MemberUtil() {}
+	private MemberUtil() {
+	}
 
 	public static boolean check(String s) {
 		return null != s && s.length() > 0;
 	}
 
-	public static String formattedMemberName(Person member) {
+	public static String formattedMemberName(Person person) {
+		return formattedMemberName(person.getHonorific(), person.getGivenName(), person.getMiddleName(),
+				person.getFamilyName(), person.getSuffix(), person.getAdditionalNames());
+	}
+
+	public static String formattedMemberName(String honorific, String first, String middle, String last, String additional,
+			String suffix) {
 		String ret = "";
-		final Person person = member;
-		if (check(person.getHonorific())) {
-			ret += person.getHonorific() + " ";
+		if (check(honorific)) {
+			ret += honorific + " ";
 		}
 
-		if (check(person.getFamilyName())) {
-			ret += person.getFamilyName() + ", ";
+		if (check(last)) {
+			ret += last + ", ";
 		}
 
-		if (check(person.getGivenName())) {
-			ret += person.getGivenName() + " ";
+		if (check(first)) {
+			ret += first + " ";
 		}
 
-		if (check(person.getMiddleName())) {
-			ret += person.getMiddleName() + " ";
+		if (check(middle)) {
+			ret += middle + " ";
 		}
 
-		if (check(person.getAdditionalNames())) {
-			ret += "(" + person.getAdditionalNames() + ") ";
+		if (check(additional)) {
+			ret += "(" + additional + ") ";
 		}
 
-		if (check(person.getSuffix())) {
-			ret += person.getSuffix() + " ";
+		if (check(suffix)) {
+			ret += suffix + " ";
 		}
 		return ret;
 	}
@@ -42,7 +48,7 @@ public final class MemberUtil {
 		if (memberNumber.length() < 5) {
 			memberNumber = "00000".substring(0, 5 - memberNumber.length()) + memberNumber;
 		}
-		
+
 		return memberNumber;
 	}
 }

@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.conversion.Converter;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.validation.IValidator;
@@ -44,18 +45,17 @@ public class MemberEditDialogController extends RecordDialogController<Membershi
 		@Override
 		public void propertyChange(PropertyChangeEvent arg0) {
 			enableSaveButton(validate());
+			if (getWorkingCopy() != null)
+				formattedMemberNameRidget.setText(
+						MemberUtil.formattedMemberName(
+								getRidget(IComboRidget.class, ViewWidgetId.memberInfo_honorific).getText(),
+								getRidget(ITextRidget.class, ViewWidgetId.memberInfo_firstName).getText(),
+								getRidget(ITextRidget.class, ViewWidgetId.memberInfo_middleName).getText(),
+								getRidget(ITextRidget.class, ViewWidgetId.memberInfo_lastName).getText(),
+								getRidget(ITextRidget.class, ViewWidgetId.memberInfo_additionalNames).getText(),
+								getRidget(IComboRidget.class, ViewWidgetId.memberInfo_suffix).getText()));
 		}
 	}
-
-	private final IValidator updateValidator = new IValidator() {
-		@Override
-		public IStatus validate(Object arg0) {
-			if (formattedMemberNameRidget != null) {
-				formattedMemberNameRidget.updateFromModel();
-			}
-			return Status.OK_STATUS;
-		}
-	};
 
 	public static final String DIALOG_TITLE = "Membership";
 
@@ -79,7 +79,8 @@ public class MemberEditDialogController extends RecordDialogController<Membershi
 		this(dairyLocations, null, null, null);
 	}
 
-	public MemberEditDialogController(final List<DairyLocation> dairyLocations, IMemberRepository memberRepo, IFarmRepository farmRepo, IMilkCollectionRepository collectionsRepo) {
+	public MemberEditDialogController(final List<DairyLocation> dairyLocations, IMemberRepository memberRepo,
+			IFarmRepository farmRepo, IMilkCollectionRepository collectionsRepo) {
 		collectionCenters = new ArrayList<DairyLocation>();
 		collectionCenters.add(null);
 		collectionCenters.addAll(dairyLocations);
@@ -94,12 +95,16 @@ public class MemberEditDialogController extends RecordDialogController<Membershi
 		getWindowRidget().setTitle(DIALOG_TITLE);
 
 		formattedMemberNameRidget = getRidget(ILabelRidget.class, ViewWidgetId.memberInfo_formattedName);
+		if (getWorkingCopy() != null)
+			formattedMemberNameRidget.setText(MemberUtil.formattedMemberName(getWorkingCopy().getMember()));
+
 		photoRidget = getRidget(IProfilePhotoRidget.class, ViewWidgetId.memberPhoto);
 		memberProfileController = new MemberProfileWidgetController(this);
 		memberProfileController.setInputModel(getWorkingCopy());
 
-		if ( memberRepo != null) {
-			MemberFarmWidgetController farmController = new MemberFarmWidgetController(this, farmRepo, memberRepo, null, null);
+		if (memberRepo != null) {
+			MemberFarmWidgetController farmController = new MemberFarmWidgetController(this, farmRepo, memberRepo,
+					null, null);
 			MemberCollectionRecordsWidgetController collectionController = new MemberCollectionRecordsWidgetController(
 					this, collectionsRepo);
 			MemberTransactionWidgetController transactionController = new MemberTransactionWidgetController(this,
@@ -109,7 +114,7 @@ public class MemberEditDialogController extends RecordDialogController<Membershi
 			collectionController.setInputModel(selectedMember);
 			transactionController.setInputModel(selectedMember);
 		}
-		
+
 		addRidgetMappings();
 		addPropertyChangedListener();
 		enableSaveButton(validate());
@@ -186,20 +191,6 @@ public class MemberEditDialogController extends RecordDialogController<Membershi
 				ModelPackage.Literals.PERSON__PHOTO));
 		photoRidget.updateFromModel();
 
-		// HACK
-		final IObservableValue oberservModel = EMFProperties.value(
-				FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER)).observe(selectedMember);
-		formattedMemberNameRidget
-				.setModelToUIControlConverter(new Converter(oberservModel.getValueType(), String.class) {
-					@Override
-					public Object convert(Object from) {
-						if (from instanceof Person) {
-							return MemberUtil.formattedMemberName((Person) from);
-						}
-						return "";
-					}
-				});
-
-		memberProfileController.setInputModel(getWorkingCopy());
+		memberProfileController.setInputModel(selectedMember);
 	}
 }
