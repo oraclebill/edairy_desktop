@@ -28,8 +28,8 @@ import com.agritrace.edairy.desktop.internal.common.persistence.HbDataStoreProvi
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
 import com.agritrace.edairy.desktop.internal.common.persistence.SessionProvider;
 import com.agritrace.edairy.desktop.internal.common.persistence.TransactionInterceptor;
-import com.agritrace.edairy.desktop.internal.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.internal.operations.services.customer.CustomerRepository;
+import com.agritrace.edairy.desktop.internal.persistence.DairyRepository;
 import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.agritrace.edairy.desktop.operations.services.employee.IEmployeeRepository;
