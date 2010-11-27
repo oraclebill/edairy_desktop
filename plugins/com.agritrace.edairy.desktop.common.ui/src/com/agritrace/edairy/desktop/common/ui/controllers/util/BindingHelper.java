@@ -252,10 +252,18 @@ public class BindingHelper<T extends EObject> {
 		}
 	}
 
+	/**
+	 * Mark ridgets as mandatory IFF all components of the featurepath are required.
+	 * 
+	 * @param binding
+	 * @param ridget
+	 */
 	void checkMandatory(FeatureProperties binding, IRidget ridget) {
-		final FeaturePath path = binding.getFeaturePath();
-		final EStructuralFeature testFeature = path.getFeaturePath()[0];
-		if (testFeature.isRequired() && ridget instanceof IMarkableRidget) {
+		boolean required = true;
+		for (EStructuralFeature testFeature : binding.getFeaturePath().getFeaturePath()) {
+			required = required && testFeature.isRequired();
+		}
+		if (required && ridget instanceof IMarkableRidget) {
 			final IMarkableRidget markableValue = (IMarkableRidget) ridget;
 			markableValue.setMandatory(true);
 		}
