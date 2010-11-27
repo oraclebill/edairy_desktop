@@ -43,6 +43,7 @@ public class TransactionInterceptor implements MethodInterceptor {
 			return result;
 		} catch (Throwable e) {
 			tx.rollback();
+			session.clear();
 			log.log(LogService.LOG_DEBUG, "TX["+tx+"] Rolled back in: " + methodName);
 			throw e;
 		}
