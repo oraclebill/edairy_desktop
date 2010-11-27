@@ -155,15 +155,15 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 	public void afterBind() {
 		super.afterBind();
 
-		// bind all
-		for (final IRidget ridget : getRidgets()) {
-			if (ridget instanceof IValueRidget) {
-				ridget.updateFromModel();
-			} else if (ridget instanceof IMarkableRidget) {
-				final IMarkableRidget imr = (IMarkableRidget) ridget;
-				imr.updateFromModel();
-			}
-		}
+//		// bind all
+//		for (final IRidget ridget : getRidgets()) {
+//			if (ridget instanceof IValueRidget) {
+//				ridget.updateFromModel();
+//			} else if (ridget instanceof IMarkableRidget) {
+//				final IMarkableRidget imr = (IMarkableRidget) ridget;
+//				imr.updateFromModel();
+//			}
+//		}
 		
 		updateLicenseNoRidget();
 	}

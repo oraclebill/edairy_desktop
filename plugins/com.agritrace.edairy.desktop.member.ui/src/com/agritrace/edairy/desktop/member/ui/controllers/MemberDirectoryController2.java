@@ -170,15 +170,17 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 
 	@Override
 	protected void handleNewItemAction() {
+		
+		final List<DairyLocation> centerList = localDairy.getBranchLocations();
+		final MemberEditDialogController controller = new MemberEditDialogController(centerList);
 		Membership selectedMember = DairyUtil.createMembership(null, null, null);
-		List<DairyLocation> centerList = localDairy.getBranchLocations();
-		final MemberEditDialog memberDialog = new MemberEditDialog(getShell(), new MemberEditDialogController(
-				centerList), true);
-		memberDialog.getController().setContext("selectedMember", selectedMember);
+		controller.setContext(AbstractDirectoryController.EDITED_OBJECT_ID, selectedMember);
+
+		final MemberEditDialog memberDialog = new MemberEditDialog(getShell(), controller, true);
 
 		final int returnCode = memberDialog.open();
 		if (returnCode == AbstractWindowController.OK) {
-			selectedMember = (Membership) memberDialog.getController().getContext("selectedMember");
+			selectedMember = (Membership) memberDialog.getController().getContext(AbstractDirectoryController.EDITED_OBJECT_ID);
 			repository.saveNew(selectedMember);
 			refreshTableContents();
 		}
@@ -189,11 +191,11 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 		Membership selectedMember = (Membership) table.getSelection().get(0);
 		final MemberEditDialog memberDialog = new MemberEditDialog(getShell(), new MemberEditDialogController(
 				localDairy.getBranchLocations()), false);
-		memberDialog.getController().setContext("selectedMember", selectedMember);
+		memberDialog.getController().setContext(AbstractDirectoryController.EDITED_OBJECT_ID, selectedMember);
 
 		final int returnCode = memberDialog.open();
 		if (returnCode == AbstractWindowController.OK) {
-			selectedMember = (Membership) memberDialog.getController().getContext("selectedMember");
+			selectedMember = (Membership) memberDialog.getController().getContext(AbstractDirectoryController.EDITED_OBJECT_ID);
 			repository.update(selectedMember);
 			refreshTableContents();
 		} else if (returnCode == 2) {
