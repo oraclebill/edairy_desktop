@@ -100,7 +100,7 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 				if (element instanceof ContainerListViewTableNode) {
 					final Membership membership = ((ContainerListViewTableNode) element).getMembership();
 					if (membership != null) {
-						return membership.getMemberId() + "";
+						return membership.getMemberNumber() + "";
 					}
 				}
 				return null;

@@ -151,7 +151,7 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 				if (element instanceof LiveStockListViewTableNode) {
 					final Membership membership = ((LiveStockListViewTableNode) element).getMembership();
 					if (membership != null) {
-						return membership.getMemberId() + "";
+						return membership.getMemberNumber() + "";
 					}
 				}
 				return null;
