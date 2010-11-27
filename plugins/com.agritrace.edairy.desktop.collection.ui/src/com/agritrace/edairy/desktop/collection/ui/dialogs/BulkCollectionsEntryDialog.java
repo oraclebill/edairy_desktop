@@ -13,6 +13,7 @@ import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.TraverseEvent;
 import org.eclipse.swt.events.TraverseListener;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -119,7 +120,16 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 	protected boolean canHandleShellCloseEvent() {
 		boolean ret = true;
 		try {
-			ret = MessageDialog.openConfirm(getShell(), "Confirm Cancel", "Are you sure you want to close this window without saving?");
+			MessageDialog dialog = new MessageDialog(
+					getShell(), 
+					"Confirm Cancel",
+					null,
+					"Are you sure you want to close this window without saving?",
+					MessageDialog.CONFIRM,
+					new String[] { "Close Window", "Continue Editing" },
+					0
+					);
+			ret = dialog.open() == 0;
 		}
 		catch(final Throwable t) {
 			t.printStackTrace();

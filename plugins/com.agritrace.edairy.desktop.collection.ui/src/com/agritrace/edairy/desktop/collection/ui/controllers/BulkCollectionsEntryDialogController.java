@@ -463,9 +463,9 @@ public class BulkCollectionsEntryDialogController extends
 						.getCollectionCenter();
 				final Date date = getContextJournalPage().getJournalDate();
 
-				if (member == null) {
-					return ValidationStatus.error("No member is selected");
-				}
+//				if (member == null) {
+//					return ValidationStatus.warning("Member number not found.");
+//				}
 
 				if (center == null) {
 					return ValidationStatus
@@ -477,9 +477,9 @@ public class BulkCollectionsEntryDialogController extends
 							.error("The journal entry has no date assigned");
 				}
 
-				if (lineRepo.countByMemberCenterDate(member, center, date) > 0) {
+				if (member != null && lineRepo.countByMemberCenterDate(member, center, date) > 0) {
 					return ValidationStatus
-							.error("Another entry for this member, center and date already exists");
+							.warning("Another entry for this member, center and date already exists");
 				}
 
 				return ValidationStatus.ok();

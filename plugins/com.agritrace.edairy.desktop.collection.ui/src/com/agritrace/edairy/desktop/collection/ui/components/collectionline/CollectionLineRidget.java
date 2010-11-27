@@ -80,12 +80,8 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	private IMemberInfoProvider memberInfoProvider;
 	private IValidator routeValidator;
 
-//	private IMessageMarkerViewer markerViewer;
-
 	public CollectionLineRidget() {
 		validatorCollection = new ValidatorCollection();
-//		markerViewer = new TooltipMessageMarkerViewer();
-
 	}
 
 	@Override
@@ -388,6 +384,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	}
 
 	/**
+	 *
 	 *
 	 */
 	private void handleSaveLine() {

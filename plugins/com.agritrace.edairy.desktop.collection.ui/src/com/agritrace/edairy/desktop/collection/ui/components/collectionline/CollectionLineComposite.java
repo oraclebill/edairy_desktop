@@ -29,19 +29,19 @@ import com.swtdesigner.ResourceManager;
 public class CollectionLineComposite extends Composite implements TraverseListener, IComplexComponent {
 
 	static {
-		SwtControlRidgetMapper.getInstance().addMapping(CollectionLineComposite.class, CollectionLineRidget.class);
+		SwtControlRidgetMapper.getInstance().addMapping(
+				CollectionLineComposite.class, CollectionLineRidget.class);
 	}
 
 	private static final String BIN_LABEL = "Bin No.";
 	private static final String CAN_ID_LABEL = "CAN No.";
 	private static final String MEMBER_ID_LABEL = "Member No.";
 	private static final String MILK_ENTRY_GROUP_TITLE = "Add New Entry";
-	private static final String MPR_COLUMN_HEADER = "MPR Missing";
 	private static final String QUANTITY_LABEL = "Quantity";
+	private static final String MPR_COLUMN_HEADER = "MPR Present";
+	private static final String REJECTED_COLUMN_HEADER = "Quality";
 
-	private static final String REJECTED_COLUMN_HEADER = "Rejected";
 	private final GridData layoutData;
-	boolean cachedHide;
 
 	private Control memberIdWidget;
 	private Control canWidget;
@@ -107,7 +107,6 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).hint(50, SWT.DEFAULT).applyTo(clearButton);
 		group.setTabList(new Control[] { addButton });
 		return group;
-
 	}
 
 	private Control addPhotoPanel(Composite parent) {
