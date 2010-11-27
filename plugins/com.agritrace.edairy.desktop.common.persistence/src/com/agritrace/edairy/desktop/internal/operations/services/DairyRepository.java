@@ -39,6 +39,9 @@ import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountFactory;
+import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
+import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
+import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
@@ -623,6 +626,39 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 		}
 
 		return result;
+	}
+
+//	@Override
+	@Transactional
+	public List<AccountTransaction> findAccountTransactions(Account account, Date start, Date end, String refNum, List<TransactionSource> sources) {
+		final Session session = getSession();
+		final Criteria criteria = session.createCriteria("Transaction");
+
+		if (account != null) {
+			criteria.add(Restrictions.eq("account", account));
+		}
+		if (start != null) {
+			criteria.add(Restrictions.ge("transactionDate", start));
+		}
+		if (end != null) {
+			criteria.add(Restrictions.le("transactionDate", end));
+		}
+
+		if (refNum != null) {
+			criteria.add(Restrictions.like("referenceNumber", end));
+		}
+
+		if (sources != null && sources.size() > 0) {
+			criteria.add(Restrictions.in("source", sources));
+		}
+
+		return criteria.list();
+	}
+
+	@Override
+	public List<AccountTransaction> findAccountTransactions(Account account, Date start, Date end)
+	{
+		return findAccountTransactions(account, start, end, null, null);
 	}
 
 }

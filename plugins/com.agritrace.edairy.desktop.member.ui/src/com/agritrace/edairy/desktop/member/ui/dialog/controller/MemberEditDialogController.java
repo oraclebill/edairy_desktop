@@ -4,8 +4,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.core.databinding.conversion.Converter;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
@@ -26,13 +26,17 @@ import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
-import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
+import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
+import com.agritrace.edairy.desktop.common.persistence.IMilkCollectionRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.IProfilePhotoRidget;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
+import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberCollectionRecordsWidgetController;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberFarmWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberProfileWidgetController;
+import com.agritrace.edairy.desktop.member.ui.controls.MemberTransactionWidgetController;
 
 public class MemberEditDialogController extends RecordDialogController<Membership> {
 
@@ -67,29 +71,53 @@ public class MemberEditDialogController extends RecordDialogController<Membershi
 	private MemberProfileWidgetController memberProfileController;
 	private final List<DairyLocation> collectionCenters;
 
+	private IMemberRepository memberRepo;
+	private IFarmRepository farmRepo;
+	private IMilkCollectionRepository collectionsRepo;
+
 	public MemberEditDialogController(final List<DairyLocation> dairyLocations) {
+		this(dairyLocations, null, null, null);
+	}
+
+	public MemberEditDialogController(final List<DairyLocation> dairyLocations, IMemberRepository memberRepo, IFarmRepository farmRepo, IMilkCollectionRepository collectionsRepo) {
 		collectionCenters = new ArrayList<DairyLocation>();
 		collectionCenters.add(null);
 		collectionCenters.addAll(dairyLocations);
+		this.memberRepo = memberRepo;
+		this.farmRepo = farmRepo;
+		this.collectionsRepo = collectionsRepo;
 	}
 
 	@Override
 	public void configureUserRidgets() {
 
 		getWindowRidget().setTitle(DIALOG_TITLE);
-		
+
 		formattedMemberNameRidget = getRidget(ILabelRidget.class, ViewWidgetId.memberInfo_formattedName);
 		photoRidget = getRidget(IProfilePhotoRidget.class, ViewWidgetId.memberPhoto);
 		memberProfileController = new MemberProfileWidgetController(this);
 		memberProfileController.setInputModel(getWorkingCopy());
+
+		if ( memberRepo != null) {
+			MemberFarmWidgetController farmController = new MemberFarmWidgetController(this, farmRepo, memberRepo, null, null);
+			MemberCollectionRecordsWidgetController collectionController = new MemberCollectionRecordsWidgetController(
+					this, collectionsRepo);
+			MemberTransactionWidgetController transactionController = new MemberTransactionWidgetController(this,
+					memberRepo);
+			final Membership selectedMember = getWorkingCopy();
+			farmController.setInputModel(selectedMember);
+			collectionController.setInputModel(selectedMember);
+			transactionController.setInputModel(selectedMember);
+		}
 		
-		addRidgetMappings();		
+		addRidgetMappings();
 		addPropertyChangedListener();
 		enableSaveButton(validate());
 
 	}
 
 	private void addRidgetMappings() {
+
 		addTextMap(ViewWidgetId.memberInfo_memberNbr, (DairyPackage.Literals.MEMBERSHIP__MEMBER_NUMBER));
 		addTextMap(ViewWidgetId.memberInfo_firstName, DairyPackage.Literals.MEMBERSHIP__MEMBER,
 				ModelPackage.Literals.PERSON__GIVEN_NAME);
@@ -113,7 +141,6 @@ public class MemberEditDialogController extends RecordDialogController<Membershi
 
 		addComboMap(ViewWidgetId.memberInfo_defaultRoute, collectionCenters, "getCode",
 				DairyPackage.Literals.MEMBERSHIP__DEFAULT_ROUTE);
-
 	}
 
 	private void addPropertyChangedListener() {
@@ -130,10 +157,24 @@ public class MemberEditDialogController extends RecordDialogController<Membershi
 		}
 	}
 
-
-
 	@Override
 	public void afterBind() {
+
+		Collection<? extends IRidget> ridgetsToList = getRidgets();
+		for (IRidget ridget : ridgetsToList) {
+			boolean bound = false;
+			try {
+				ridget.updateFromModel();
+				bound = true;
+			} catch (Exception e) {
+				System.err.println("** Ridget ID: " + ridget.getID());
+				System.err.println("\tType: " + ridget.getClass().getCanonicalName());
+				System.err.println("\tControl: " + ridget.getUIControl());
+				System.err.println("\tBound?: " + bound);
+				System.err.println(".");
+			}
+		}
+
 		super.afterBind();
 
 		final Membership selectedMember = getWorkingCopy();
@@ -141,12 +182,13 @@ public class MemberEditDialogController extends RecordDialogController<Membershi
 			throw new IllegalStateException();
 		}
 
-		photoRidget.bindToModel(EMFObservables.observeValue(selectedMember.getMember(), ModelPackage.Literals.PERSON__PHOTO));
+		photoRidget.bindToModel(EMFObservables.observeValue(selectedMember.getMember(),
+				ModelPackage.Literals.PERSON__PHOTO));
 		photoRidget.updateFromModel();
 
 		// HACK
-		final IObservableValue oberservModel = EMFProperties.value(FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER))
-				.observe(selectedMember);
+		final IObservableValue oberservModel = EMFProperties.value(
+				FeaturePath.fromList(DairyPackage.Literals.MEMBERSHIP__MEMBER)).observe(selectedMember);
 		formattedMemberNameRidget
 				.setModelToUIControlConverter(new Converter(oberservModel.getValueType(), String.class) {
 					@Override
@@ -158,34 +200,6 @@ public class MemberEditDialogController extends RecordDialogController<Membershi
 					}
 				});
 
-//		memberNbrRidget.updateFromModel();
 		memberProfileController.setInputModel(getWorkingCopy());
 	}
-
-//
-// @Override
-// protected boolean validate() {
-// for (final IRidget ridget : getRidgets()) {
-// IMarkableRidget markable;
-// if (ridget instanceof IMarkableRidget) {
-// markable = (IMarkableRidget) ridget;
-// if (markable.isErrorMarked()) {
-// return false;
-// }
-// if (markable.isMandatory()) {
-// if (ridget instanceof ITextRidget) {
-// if (((ITextRidget) ridget).getText().isEmpty()) {
-// return false;
-// }
-// } else if (ridget instanceof IComboRidget) {
-// if (((IComboRidget) ridget).getSelection() == null) {
-// return false;
-// }
-// }
-// }
-// }
-// }
-// return true;
-//
-// }
 }

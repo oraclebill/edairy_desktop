@@ -24,11 +24,13 @@ import com.agritrace.edairy.desktop.common.model.dairy.security.AllPermissions;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
+import com.agritrace.edairy.desktop.common.persistence.IMilkCollectionRepository;
 import com.agritrace.edairy.desktop.common.ui.columnformatters.ConstantColumnFormatter;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.views.BaseListView;
+import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.MemberEditDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.controller.MemberEditDialogController;
@@ -74,13 +76,17 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 	private ITextRidget searchText;
 	private final Dairy localDairy;
 	private final IMemberRepository repository;
+	private IMilkCollectionRepository collectionsRepo;
+	private IFarmRepository farmRepo;
 
 // private final Provider<MemberEditDialog> viewDialogProvider;
 // private final Provider<AddMemberDialog> addDialogProvider;
 
 	@Inject
-	public MemberDirectoryController2(final IMemberRepository repository, final IDairyRepository dairyRepo) {
+	public MemberDirectoryController2(final IMemberRepository repository, final IDairyRepository dairyRepo, IFarmRepository farmRepo, IMilkCollectionRepository collectionsRepo) {
 		this.repository = repository;
+		this.collectionsRepo = collectionsRepo;
+		this.farmRepo = farmRepo;
 		this.localDairy = dairyRepo.getLocalDairy();
 // this.viewDialogProvider = viewDialogProvider;
 // this.addDialogProvider = addDialogProvider;
@@ -170,7 +176,7 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 
 	@Override
 	protected void handleNewItemAction() {
-		
+
 		final List<DairyLocation> centerList = localDairy.getBranchLocations();
 		final MemberEditDialogController controller = new MemberEditDialogController(centerList);
 		Membership selectedMember = DairyUtil.createMembership(null, null, null);
@@ -180,7 +186,8 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 
 		final int returnCode = memberDialog.open();
 		if (returnCode == AbstractWindowController.OK) {
-			selectedMember = (Membership) memberDialog.getController().getContext(AbstractDirectoryController.EDITED_OBJECT_ID);
+			selectedMember = (Membership) memberDialog.getController().getContext(
+					AbstractDirectoryController.EDITED_OBJECT_ID);
 			repository.saveNew(selectedMember);
 			refreshTableContents();
 		}
@@ -189,13 +196,16 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 	@Override
 	protected void handleViewItemAction() {
 		Membership selectedMember = (Membership) table.getSelection().get(0);
-		final MemberEditDialog memberDialog = new MemberEditDialog(getShell(), new MemberEditDialogController(
-				localDairy.getBranchLocations()), false);
+		final MemberEditDialog memberDialog = new MemberEditDialog(
+				getShell(), 
+				new MemberEditDialogController(localDairy.getBranchLocations(), repository, farmRepo, collectionsRepo), 
+				false);
 		memberDialog.getController().setContext(AbstractDirectoryController.EDITED_OBJECT_ID, selectedMember);
 
 		final int returnCode = memberDialog.open();
 		if (returnCode == AbstractWindowController.OK) {
-			selectedMember = (Membership) memberDialog.getController().getContext(AbstractDirectoryController.EDITED_OBJECT_ID);
+			selectedMember = (Membership) memberDialog.getController().getContext(
+					AbstractDirectoryController.EDITED_OBJECT_ID);
 			repository.update(selectedMember);
 			refreshTableContents();
 		} else if (returnCode == 2) {
