@@ -42,7 +42,8 @@ public class LocationTabFolder extends CompositePanel {
 		mapTab.setText("Map");
 		final Composite tab3 = new MapPanel(tabs, SWT.NONE);
 		mapTab.setControl(tab3);
-		//by default select address tab
+		
+		// by default select address tab
 		tabs.setSelection(addressTab);
 	}
 
