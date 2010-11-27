@@ -37,31 +37,11 @@ import com.agritrace.edairy.desktop.member.ui.controls.MemberProfileWidgetContro
 public class MemberEditDialogController extends RecordDialogController<Membership> {
 
 	private class AddMemberPropertyChangedListener implements PropertyChangeListener {
-
 		@Override
 		public void propertyChange(PropertyChangeEvent arg0) {
 			enableSaveButton(validate());
 		}
-
 	}
-
-	public static final String DIALOG_TITLE = "Membership";
-	public static final List<String> VALID_NAME_SUFFIXES = Arrays.asList("Jr.", "Sr.", "Esq.", "II", "III", "IV", "V");
-
-	// reference data
-	public static final List<String> VALID_TITLES = Arrays.asList("Mr.", "Mrs.", "Miss", "Dr.", "Prof.", "Ms.", "Hon.",
-			"Lt.", "Maj.", "Col.", "Gen.");
-
-	// upper panel fields
-	private ILabelRidget formattedMemberNameRidget;
-	private ITextRidget memberNbrRidget;
-	private IProfilePhotoRidget photoRidget;
-
-	
-//	private Map<IRidget, FeaturePath> memberBindings;
-	
-	private MemberProfileWidgetController memberProfileController;
-
 
 	private final IValidator updateValidator = new IValidator() {
 		@Override
@@ -73,42 +53,50 @@ public class MemberEditDialogController extends RecordDialogController<Membershi
 		}
 	};
 
-	protected Farmer selectedMembershipOwner;
+	public static final String DIALOG_TITLE = "Membership";
 
-	private final List<DairyLocation> dairyLocations;
+	// reference data
+	public static final List<String> VALID_NAME_SUFFIXES = Arrays.asList("Jr.", "Sr.", "Esq.", "II", "III", "IV", "V");
+	public static final List<String> VALID_TITLES = Arrays.asList("Mr.", "Mrs.", "Miss", "Dr.", "Prof.", "Ms.", "Hon.",
+			"Lt.", "Maj.", "Col.", "Gen.");
+
+	// unmanaged upper panel fields
+	private ILabelRidget formattedMemberNameRidget;
+	private IProfilePhotoRidget photoRidget;
+
+	private MemberProfileWidgetController memberProfileController;
+	private final List<DairyLocation> collectionCenters;
 
 	public MemberEditDialogController(final List<DairyLocation> dairyLocations) {
-		this.dairyLocations = dairyLocations;
+		collectionCenters = new ArrayList<DairyLocation>();
+		collectionCenters.add(null);
+		collectionCenters.addAll(dairyLocations);
 	}
 
 	@Override
 	public void configureUserRidgets() {
 
 		getWindowRidget().setTitle(DIALOG_TITLE);
-//		AbstractDirectoryController.EDITED_OBJECT_ID
-		setWorkingCopy((Membership) getContext(AbstractDirectoryController.EDITED_OBJECT_ID));
-
-		configureUpperPanel();
-		configureTabs();
-
-		configureButtonsPanel();
+		
+		formattedMemberNameRidget = getRidget(ILabelRidget.class, ViewWidgetId.memberInfo_formattedName);
+		photoRidget = getRidget(IProfilePhotoRidget.class, ViewWidgetId.memberPhoto);
+		memberProfileController = new MemberProfileWidgetController(this);
+		memberProfileController.setInputModel(getWorkingCopy());
+		
+		addRidgetMappings();		
 		addPropertyChangedListener();
 		enableSaveButton(validate());
 
 	}
 
-	protected void configureUpperPanel() {
-		formattedMemberNameRidget = getRidget(ILabelRidget.class, ViewWidgetId.memberInfo_formattedName);
-
-		photoRidget = getRidget(IProfilePhotoRidget.class, ViewWidgetId.memberPhoto);
-
+	private void addRidgetMappings() {
 		addTextMap(ViewWidgetId.memberInfo_memberNbr, (DairyPackage.Literals.MEMBERSHIP__MEMBER_NUMBER));
 		addTextMap(ViewWidgetId.memberInfo_firstName, DairyPackage.Literals.MEMBERSHIP__MEMBER,
 				ModelPackage.Literals.PERSON__GIVEN_NAME);
 		addTextMap(ViewWidgetId.memberInfo_middleName, DairyPackage.Literals.MEMBERSHIP__MEMBER,
-				ModelPackage.Literals.PERSON__GIVEN_NAME);
+				ModelPackage.Literals.PERSON__MIDDLE_NAME);
 		addTextMap(ViewWidgetId.memberInfo_lastName, DairyPackage.Literals.MEMBERSHIP__MEMBER,
-				ModelPackage.Literals.PERSON__GIVEN_NAME);
+				ModelPackage.Literals.PERSON__FAMILY_NAME);
 		addTextMap(ViewWidgetId.memberInfo_additionalNames, DairyPackage.Literals.MEMBERSHIP__MEMBER,
 				ModelPackage.Literals.PERSON__ADDITIONAL_NAMES);
 		addTextMap(ViewWidgetId.memberInfo_nssfId, DairyPackage.Literals.MEMBERSHIP__MEMBER,
@@ -123,30 +111,12 @@ public class MemberEditDialogController extends RecordDialogController<Membershi
 		addComboMap(ViewWidgetId.memberInfo_suffix, VALID_NAME_SUFFIXES, "toString",
 				DairyPackage.Literals.MEMBERSHIP__MEMBER, ModelPackage.Literals.PERSON__SUFFIX);
 
-		collectionCenters.clear();
-		collectionCenters.add(null);
-		collectionCenters.addAll(dairyLocations);
-		addComboMap(ViewWidgetId.memberInfo_defaultRoute, collectionCenters, "toString",
+		addComboMap(ViewWidgetId.memberInfo_defaultRoute, collectionCenters, "getCode",
 				DairyPackage.Literals.MEMBERSHIP__DEFAULT_ROUTE);
 
-//		givenNameRidget.setMandatory(true);
-//		familyNameRidget.setMandatory(true);
-//
-//		// formattedMemberNameRidget.setModelToUIControlConverter(formattedNameConverter);
-//
-//		// add validator to update the header
-//		givenNameRidget.addValidationRule(updateValidator, ValidationTime.ON_UPDATE_TO_MODEL);
-//		middleNameRidget.addValidationRule(updateValidator, ValidationTime.ON_UPDATE_TO_MODEL);
-//		familyNameRidget.addValidationRule(updateValidator, ValidationTime.ON_UPDATE_TO_MODEL);
-//		addtlNameRidget.addValidationRule(updateValidator, ValidationTime.ON_UPDATE_TO_MODEL);
-
-	}
-	
-	protected void configureTabs() {
-		memberProfileController = new MemberProfileWidgetController(this);
 	}
 
-	protected void addPropertyChangedListener() {
+	private void addPropertyChangedListener() {
 		final AddMemberPropertyChangedListener propertyChangedListener = new AddMemberPropertyChangedListener();
 
 		for (final IRidget ridget : getRidgets()) {
@@ -160,11 +130,11 @@ public class MemberEditDialogController extends RecordDialogController<Membershi
 		}
 	}
 
-	private final List<DairyLocation> collectionCenters = new ArrayList<DairyLocation>();
 
 
 	@Override
 	public void afterBind() {
+		super.afterBind();
 
 		final Membership selectedMember = getWorkingCopy();
 		if (null == selectedMember || null == selectedMember.getMember()) {

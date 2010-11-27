@@ -93,7 +93,7 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 	 *
 	 */
 	protected void configureUserRidgets() {
-
+		
 	}
 
 	protected int getActionType() {

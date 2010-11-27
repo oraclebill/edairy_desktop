@@ -21,9 +21,9 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 /**
  * MemberProfile Tab widget
- *
+ * 
  * @author CJ
- *
+ * 
  */
 public class MemberProfileWidget {
 
@@ -51,12 +51,10 @@ public class MemberProfileWidget {
 	}
 
 	public void initGUI() {
-		createInfoGroup();
+		createApplicationInfoGroup();
 
-		final LocationTabFolder addressWidget = new LocationTabFolder(
-				composite, SWT.NONE);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
-				.grab(true, false).applyTo(addressWidget);
+		final LocationTabFolder addressWidget = new LocationTabFolder(composite, SWT.NONE);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(addressWidget);
 
 		final CTabFolder folder = addressWidget.getTabFolder();
 
@@ -65,47 +63,36 @@ public class MemberProfileWidget {
 		final ContactMethodsGroup contacts = new ContactMethodsGroup(folder);
 		contactsTab.setControl(contacts);
 
-		SWTBindingPropertyLocator.getInstance().setBindingProperty(contacts,
-				IContactMethodsGroupRidget.WIDGET_ID);
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(contacts, IContactMethodsGroupRidget.WIDGET_ID);
 		// GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true,
 		// true).applyTo(communication);
 	}
 
-	private void createInfoGroup() {
-		final Group infoGroup = UIControlsFactory.createGroup(composite,
-				INFO_GROUP);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL)
-				.grab(true, false).applyTo(infoGroup);
+	private void createApplicationInfoGroup() {
+		final Group infoGroup = UIControlsFactory.createGroup(composite, INFO_GROUP);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(infoGroup);
 		infoGroup.setLayout(new GridLayout(6, false));
 		UIControlsFactory.createLabel(infoGroup, applicationDate);
 
 		// application date
-		dateText = UIControlsFactory.createDate(infoGroup, SWT.BORDER,
-				ViewWidgetId.memberInfo_applicationDate);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).span(2, 1)
-				.grab(true, false).applyTo(dateText);
+		dateText = UIControlsFactory.createDate(infoGroup, SWT.BORDER, ViewWidgetId.memberInfo_applicationDate);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).span(2, 1).grab(true, false).applyTo(dateText);
 
 		// effective date
 		UIControlsFactory.createLabel(infoGroup, effectiveDate);
-		effectDateText = UIControlsFactory.createDate(infoGroup, SWT.BORDER,
-				ViewWidgetId.memberInfo_effectiveDate);
-		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).span(2, 1)
-				.grab(true, false).applyTo(effectDateText);
+		effectDateText = UIControlsFactory.createDate(infoGroup, SWT.BORDER, ViewWidgetId.memberInfo_effectiveDate);
+		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).span(2, 1).grab(true, false).applyTo(effectDateText);
 
 		// status
 		UIControlsFactory.createLabel(infoGroup, status);
-		comboStatus = new ComboViewer(UIControlsFactory.createCombo(infoGroup,
-				ViewWidgetId.memberInfo_status));
-		final GridData gd_comboStatus = new GridData(SWT.FILL, SWT.FILL, true,
-				false, 2, 1);
+		comboStatus = new ComboViewer(UIControlsFactory.createCombo(infoGroup, ViewWidgetId.memberInfo_status));
+		final GridData gd_comboStatus = new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1);
 		comboStatus.getControl().setLayoutData(gd_comboStatus);
 
 		// phone
 		UIControlsFactory.createLabel(infoGroup, phoneNumber);
-		txtPhone = UIControlsFactory.createText(infoGroup, SWT.BORDER,
-				ViewWidgetId.memberInfo_phone);
-		txtPhone.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false,
-				2, 1));
+		txtPhone = UIControlsFactory.createText(infoGroup, SWT.BORDER, ViewWidgetId.memberInfo_phone);
+		txtPhone.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 2, 1));
 
 	}
 
