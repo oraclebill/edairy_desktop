@@ -8,8 +8,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface CrudPermissions {
-	AllPermissions create();
-	AllPermissions read();
-	AllPermissions update();
-	AllPermissions delete();
+	UIPermission create();
+	UIPermission read();
+	UIPermission update();
+	UIPermission delete();
 }

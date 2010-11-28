@@ -16,7 +16,7 @@ import org.eclipse.riena.ui.ridgets.validation.RequiredField;
 
 import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
-import com.agritrace.edairy.desktop.common.model.dairy.security.AllPermissions;
+import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.LocationProfileWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controls.IDataChangeListener;
@@ -33,7 +33,7 @@ import com.google.inject.Inject;
  * @author Bill Jones
  *
  */
-@PermissionRequired(AllPermissions.VIEW_DAIRY_PROFILE)
+@PermissionRequired(UIPermission.VIEW_DAIRY_PROFILE)
 public class DairyProfileViewController extends SubModuleController {
 	private class DairyProfileSaveAction implements IFocusListener, ISelectionListener, IDataChangeListener {
 		private void condenseContacts() {

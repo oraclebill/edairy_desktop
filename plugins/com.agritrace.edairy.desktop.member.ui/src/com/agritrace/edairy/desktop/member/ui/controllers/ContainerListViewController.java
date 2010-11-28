@@ -20,7 +20,7 @@ import com.agritrace.edairy.desktop.common.model.base.ContainerType;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.dairy.security.AllPermissions;
+import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
@@ -39,7 +39,7 @@ import com.agritrace.edairy.desktop.member.ui.dialog.ViewContainerDialog;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-@PermissionRequired(AllPermissions.VIEW_CONTAINERS)
+@PermissionRequired(UIPermission.VIEW_CONTAINERS)
 public class ContainerListViewController extends BasicDirectoryController<Container> {
 
 	public static final String ALL_FARM = "All Farms";

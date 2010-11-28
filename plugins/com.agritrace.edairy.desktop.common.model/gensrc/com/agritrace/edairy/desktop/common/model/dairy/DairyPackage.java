@@ -2753,7 +2753,7 @@ public interface DairyPackage extends EPackage {
 	 * The meta object id for the '<em>Permission T</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.security.AllPermissions
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getPermissionT()
 	 * @generated
 	 */
@@ -5020,12 +5020,12 @@ public interface DairyPackage extends EPackage {
 	EEnum getCollectionGroupType();
 
 	/**
-	 * Returns the meta object for data type '{@link com.agritrace.edairy.desktop.common.model.dairy.security.AllPermissions <em>Permission T</em>}'.
+	 * Returns the meta object for data type '{@link com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission <em>Permission T</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Permission T</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.security.AllPermissions
-	 * @model instanceClass="com.agritrace.edairy.desktop.common.model.dairy.security.Permission"
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission
+	 * @model instanceClass="com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission"
 	 * @generated
 	 */
 	EDataType getPermissionT();
@@ -6778,7 +6778,7 @@ public interface DairyPackage extends EPackage {
 		 * The meta object literal for the '<em>Permission T</em>' data type.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see com.agritrace.edairy.desktop.common.model.dairy.security.AllPermissions
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission
 		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getPermissionT()
 		 * @generated
 		 */

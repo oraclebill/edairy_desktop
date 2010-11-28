@@ -29,7 +29,6 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.collection.ui.DeliveryJournalEditBindContants;
-import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 import com.swtdesigner.SWTResourceManager;
 
 public class DeliveryJournalEditPanel extends Composite {

@@ -7,6 +7,7 @@
 package com.agritrace.edairy.desktop.common.model.tracking;
 
 import com.agritrace.edairy.desktop.common.model.base.Gender;
+import com.agritrace.edairy.desktop.common.model.base.ImageEntry;
 
 import java.util.Date;
 
@@ -24,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getRegistrationId <em>Registration Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getGivenName <em>Given Name</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getPhoto <em>Photo</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getLocation <em>Location</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getGender <em>Gender</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getAnimalType <em>Animal Type</em>}</li>
@@ -109,6 +111,32 @@ public interface RegisteredAnimal extends EObject {
 	 * @generated
 	 */
 	void setGivenName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Photo</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Photo</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Photo</em>' attribute.
+	 * @see #setPhoto(String)
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getRegisteredAnimal_Photo()
+	 * @model dataType="com.agritrace.edairy.desktop.common.model.base.ImageReference"
+	 * @generated
+	 */
+	String getPhoto();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getPhoto <em>Photo</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Photo</em>' attribute.
+	 * @see #getPhoto()
+	 * @generated
+	 */
+	void setPhoto(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Location</b></em>' reference.

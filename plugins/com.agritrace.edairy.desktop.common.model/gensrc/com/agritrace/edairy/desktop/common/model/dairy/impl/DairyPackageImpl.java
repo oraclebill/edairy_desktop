@@ -46,6 +46,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 
 import com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountPackageImpl;
 
+import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 
 import com.agritrace.edairy.desktop.common.model.requests.impl.RequestsPackageImpl;
@@ -2820,7 +2821,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		addEEnumLiteral(collectionGroupTypeEEnum, CollectionGroupType.JOURNAL_GROUP);
 
 		// Initialize data types
-		initEDataType(permissionTEDataType, com.agritrace.edairy.desktop.common.model.dairy.security.AllPermissions.class, "PermissionT", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(permissionTEDataType, UIPermission.class, "PermissionT", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

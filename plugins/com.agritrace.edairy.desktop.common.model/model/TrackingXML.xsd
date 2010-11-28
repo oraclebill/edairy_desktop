@@ -75,6 +75,7 @@
     </xsd:sequence>
     <xsd:attribute name="registrationId" type="xsd:long" use="required"/>
     <xsd:attribute default="" name="givenName" type="xsd:string" use="required"/>
+    <xsd:attribute name="photo" type="xsd:string"/>
     <xsd:attribute default="" name="gender" type="base:Gender" use="required"/>
     <xsd:attribute default="" name="purpose" type="tracking:Purpose" use="required"/>
     <xsd:attribute name="dateOfAcquisition" type="xsd:string"/>

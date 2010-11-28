@@ -482,7 +482,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="displayName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="PermissionT" instanceClassName="com.agritrace.edairy.desktop.common.model.dairy.security.Permission"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="PermissionT" instanceClassName="com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission"/>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionSession">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType common.ecore#//UniqueID"
         iD="true"/>

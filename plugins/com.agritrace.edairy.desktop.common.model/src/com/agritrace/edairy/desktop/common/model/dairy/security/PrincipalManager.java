@@ -31,7 +31,7 @@ public class PrincipalManager {
 		return principal;
 	}
 
-	public boolean hasPermission(AllPermissions perm) {
+	public boolean hasPermission(UIPermission perm) {
 		return principal == null ? false : principal.hasPermission(perm);
 	}
 

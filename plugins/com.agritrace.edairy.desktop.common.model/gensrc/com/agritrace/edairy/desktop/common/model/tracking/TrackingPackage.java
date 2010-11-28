@@ -400,13 +400,22 @@ public interface TrackingPackage extends EPackage {
 	int REGISTERED_ANIMAL__GIVEN_NAME = 1;
 
 	/**
+	 * The feature id for the '<em><b>Photo</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGISTERED_ANIMAL__PHOTO = 2;
+
+	/**
 	 * The feature id for the '<em><b>Location</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REGISTERED_ANIMAL__LOCATION = 2;
+	int REGISTERED_ANIMAL__LOCATION = 3;
 
 	/**
 	 * The feature id for the '<em><b>Gender</b></em>' attribute.
@@ -415,7 +424,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGISTERED_ANIMAL__GENDER = 3;
+	int REGISTERED_ANIMAL__GENDER = 4;
 
 	/**
 	 * The feature id for the '<em><b>Animal Type</b></em>' reference.
@@ -424,7 +433,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGISTERED_ANIMAL__ANIMAL_TYPE = 4;
+	int REGISTERED_ANIMAL__ANIMAL_TYPE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Sire Type</b></em>' containment reference.
@@ -433,7 +442,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGISTERED_ANIMAL__SIRE_TYPE = 5;
+	int REGISTERED_ANIMAL__SIRE_TYPE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Purpose</b></em>' attribute.
@@ -442,7 +451,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGISTERED_ANIMAL__PURPOSE = 6;
+	int REGISTERED_ANIMAL__PURPOSE = 7;
 
 	/**
 	 * The feature id for the '<em><b>Date Of Acquisition</b></em>' attribute.
@@ -451,7 +460,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGISTERED_ANIMAL__DATE_OF_ACQUISITION = 7;
+	int REGISTERED_ANIMAL__DATE_OF_ACQUISITION = 8;
 
 	/**
 	 * The feature id for the '<em><b>Acquisition Type</b></em>' attribute.
@@ -460,7 +469,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGISTERED_ANIMAL__ACQUISITION_TYPE = 8;
+	int REGISTERED_ANIMAL__ACQUISITION_TYPE = 9;
 
 	/**
 	 * The feature id for the '<em><b>Identifiers</b></em>' containment reference list.
@@ -469,7 +478,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGISTERED_ANIMAL__IDENTIFIERS = 9;
+	int REGISTERED_ANIMAL__IDENTIFIERS = 10;
 
 	/**
 	 * The feature id for the '<em><b>Identifying Features</b></em>' attribute.
@@ -478,7 +487,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGISTERED_ANIMAL__IDENTIFYING_FEATURES = 10;
+	int REGISTERED_ANIMAL__IDENTIFYING_FEATURES = 11;
 
 	/**
 	 * The feature id for the '<em><b>Rearing Mode</b></em>' attribute.
@@ -487,7 +496,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGISTERED_ANIMAL__REARING_MODE = 11;
+	int REGISTERED_ANIMAL__REARING_MODE = 12;
 
 	/**
 	 * The feature id for the '<em><b>Past Owners</b></em>' attribute list.
@@ -496,7 +505,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGISTERED_ANIMAL__PAST_OWNERS = 12;
+	int REGISTERED_ANIMAL__PAST_OWNERS = 13;
 
 	/**
 	 * The feature id for the '<em><b>Insurance Number</b></em>' attribute.
@@ -505,7 +514,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGISTERED_ANIMAL__INSURANCE_NUMBER = 13;
+	int REGISTERED_ANIMAL__INSURANCE_NUMBER = 14;
 
 	/**
 	 * The feature id for the '<em><b>Date Of Birth</b></em>' attribute.
@@ -514,7 +523,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGISTERED_ANIMAL__DATE_OF_BIRTH = 14;
+	int REGISTERED_ANIMAL__DATE_OF_BIRTH = 15;
 
 	/**
 	 * The feature id for the '<em><b>Birth Certificate Number</b></em>' attribute.
@@ -523,7 +532,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGISTERED_ANIMAL__BIRTH_CERTIFICATE_NUMBER = 15;
+	int REGISTERED_ANIMAL__BIRTH_CERTIFICATE_NUMBER = 16;
 
 	/**
 	 * The feature id for the '<em><b>Veterinary Certificate Number</b></em>' attribute.
@@ -532,7 +541,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGISTERED_ANIMAL__VETERINARY_CERTIFICATE_NUMBER = 16;
+	int REGISTERED_ANIMAL__VETERINARY_CERTIFICATE_NUMBER = 17;
 
 	/**
 	 * The feature id for the '<em><b>Ministry Id</b></em>' attribute.
@@ -541,7 +550,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGISTERED_ANIMAL__MINISTRY_ID = 17;
+	int REGISTERED_ANIMAL__MINISTRY_ID = 18;
 
 	/**
 	 * The feature id for the '<em><b>Insurance Company</b></em>' attribute.
@@ -550,7 +559,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGISTERED_ANIMAL__INSURANCE_COMPANY = 18;
+	int REGISTERED_ANIMAL__INSURANCE_COMPANY = 19;
 
 	/**
 	 * The feature id for the '<em><b>Feeding Habit</b></em>' attribute.
@@ -559,7 +568,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGISTERED_ANIMAL__FEEDING_HABIT = 19;
+	int REGISTERED_ANIMAL__FEEDING_HABIT = 20;
 
 	/**
 	 * The feature id for the '<em><b>Feed Type</b></em>' attribute.
@@ -568,7 +577,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGISTERED_ANIMAL__FEED_TYPE = 20;
+	int REGISTERED_ANIMAL__FEED_TYPE = 21;
 
 	/**
 	 * The feature id for the '<em><b>Feed Brand</b></em>' attribute.
@@ -577,7 +586,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGISTERED_ANIMAL__FEED_BRAND = 21;
+	int REGISTERED_ANIMAL__FEED_BRAND = 22;
 
 	/**
 	 * The feature id for the '<em><b>Supplements</b></em>' attribute.
@@ -586,7 +595,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGISTERED_ANIMAL__SUPPLEMENTS = 22;
+	int REGISTERED_ANIMAL__SUPPLEMENTS = 23;
 
 	/**
 	 * The feature id for the '<em><b>Antibiotics</b></em>' attribute.
@@ -595,7 +604,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGISTERED_ANIMAL__ANTIBIOTICS = 23;
+	int REGISTERED_ANIMAL__ANTIBIOTICS = 24;
 
 	/**
 	 * The feature id for the '<em><b>Veterinary</b></em>' attribute.
@@ -604,7 +613,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGISTERED_ANIMAL__VETERINARY = 24;
+	int REGISTERED_ANIMAL__VETERINARY = 25;
 
 	/**
 	 * The feature id for the '<em><b>Awards</b></em>' attribute.
@@ -613,7 +622,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGISTERED_ANIMAL__AWARDS = 25;
+	int REGISTERED_ANIMAL__AWARDS = 26;
 
 	/**
 	 * The feature id for the '<em><b>Notes</b></em>' attribute.
@@ -622,7 +631,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGISTERED_ANIMAL__NOTES = 26;
+	int REGISTERED_ANIMAL__NOTES = 27;
 
 	/**
 	 * The number of structural features of the '<em>Registered Animal</em>' class.
@@ -631,7 +640,7 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGISTERED_ANIMAL_FEATURE_COUNT = 27;
+	int REGISTERED_ANIMAL_FEATURE_COUNT = 28;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.tracking.impl.ReferenceAnimalTypeImpl <em>Reference Animal Type</em>}' class.
@@ -952,6 +961,17 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getRegisteredAnimal_GivenName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getPhoto <em>Photo</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Photo</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getPhoto()
+	 * @see #getRegisteredAnimal()
+	 * @generated
+	 */
+	EAttribute getRegisteredAnimal_Photo();
 
 	/**
 	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal#getLocation <em>Location</em>}'.
@@ -1513,6 +1533,14 @@ public interface TrackingPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute REGISTERED_ANIMAL__GIVEN_NAME = eINSTANCE.getRegisteredAnimal_GivenName();
+
+		/**
+		 * The meta object literal for the '<em><b>Photo</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REGISTERED_ANIMAL__PHOTO = eINSTANCE.getRegisteredAnimal_Photo();
 
 		/**
 		 * The meta object literal for the '<em><b>Location</b></em>' reference feature.

@@ -19,7 +19,7 @@ import org.eclipse.swt.widgets.Shell;
 import com.agritrace.edairy.desktop.common.model.base.Gender;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.dairy.security.AllPermissions;
+import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.model.tracking.AcquisitionType;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
@@ -44,7 +44,7 @@ import com.agritrace.edairy.desktop.member.ui.dialog.LivestockEditDialog;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-@PermissionRequired(AllPermissions.VIEW_LIVESTOCK)
+@PermissionRequired(UIPermission.VIEW_LIVESTOCK)
 public class LiveStockListController extends BasicDirectoryController<RegisteredAnimal> {
 
 	public static final String ALL_FARM = "All Farms";

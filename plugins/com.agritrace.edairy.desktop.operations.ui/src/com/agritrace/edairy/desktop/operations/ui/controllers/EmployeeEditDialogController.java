@@ -7,11 +7,8 @@ import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.riena.core.util.StringUtils;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
-import org.eclipse.riena.ui.ridgets.IMarkableRidget;
-import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
-import org.eclipse.riena.ui.ridgets.IValueRidget;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 
@@ -62,9 +59,9 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		assert null != editEmployee;
 
 		photoRidget = getRidget(IProfilePhotoRidget.class, "profile-photo-widget");
-		photoRidget.bindToModel(EMFObservables.observeValue(editEmployee, ModelPackage.Literals.PERSON__PHOTO) );
+		photoRidget.bindToModel(EMFObservables.observeValue(editEmployee, ModelPackage.Literals.PERSON__PHOTO));
 
-//		addTextMap(EmployeeBindingConstants.BIND_ID_EMPLOYEE_NUM, DairyPackage.Literals.EMPLOYEE__ID);
+// addTextMap(EmployeeBindingConstants.BIND_ID_EMPLOYEE_NUM, DairyPackage.Literals.EMPLOYEE__ID);
 
 		// customer id
 		employeeId = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_EMPLOYEE_NUM);
@@ -80,20 +77,23 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 
 		addTextMap(EmployeeBindingConstants.BIND_ID_FAMILY_NAME, ModelPackage.Literals.PERSON__FAMILY_NAME);
 		addTextMap(EmployeeBindingConstants.BIND_ID_GIVEN_NAME, ModelPackage.Literals.PERSON__GIVEN_NAME);
-		addComboMap(EmployeeBindingConstants.BIND_ID_DEPARTMENT, EmployeeReference.getDepartments(), "toString", DairyPackage.Literals.EMPLOYEE__DEPARTMENT);
-		addComboMap(EmployeeBindingConstants.BIND_ID_POSITION, EmployeeReference.getPositions(), "toString", DairyPackage.Literals.EMPLOYEE__JOB_FUNCTION);
+		addComboMap(EmployeeBindingConstants.BIND_ID_DEPARTMENT, EmployeeReference.getDepartments(), "toString",
+				DairyPackage.Literals.EMPLOYEE__DEPARTMENT);
+		addComboMap(EmployeeBindingConstants.BIND_ID_POSITION, EmployeeReference.getPositions(), "toString",
+				DairyPackage.Literals.EMPLOYEE__JOB_FUNCTION);
 		addTextMap(EmployeeBindingConstants.BIND_ID_SINCE, DairyPackage.Literals.EMPLOYEE__START_DATE);
 		addTextMap(EmployeeBindingConstants.BIND_ID_OPR_CODE, DairyPackage.Literals.EMPLOYEE__OPERATOR_CODE);
 		addTextMap(EmployeeBindingConstants.BIND_ID_USERNAME, DairyPackage.Literals.EMPLOYEE__USERNAME);
 		addTextMap(EmployeeBindingConstants.BIND_ID_LICENSE_NO, DairyPackage.Literals.EMPLOYEE__LICENSE_NO);
-		
-		getRidget(IComboRidget.class, EmployeeBindingConstants.BIND_ID_POSITION).addSelectionListener(new ISelectionListener() {
-			@Override
-			public void ridgetSelected(SelectionEvent event) {
-				updateLicenseNoRidget();
-			}
-		});
-		
+
+		getRidget(IComboRidget.class, EmployeeBindingConstants.BIND_ID_POSITION).addSelectionListener(
+				new ISelectionListener() {
+					@Override
+					public void ridgetSelected(SelectionEvent event) {
+						updateLicenseNoRidget();
+					}
+				});
+
 		// Role needs special care
 		final IComboRidget roleRidget = getRidget(IComboRidget.class, EmployeeBindingConstants.BIND_ID_SEC_ROLE);
 		roleRidget.bindToModel(new WritableList(allRoles, Role.class), Role.class, "getName",
@@ -104,11 +104,12 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		passwordRidget = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_PASSWORD);
 
 		final IToggleButtonRidget localEnabled = (IToggleButtonRidget) getRidget(EmployeeBindingConstants.BIND_ID_LOCAL_ENABLED);
-		localEnabled.bindToModel(EMFObservables.observeValue(getWorkingCopy(), DairyPackage.Literals.EMPLOYEE__LOCAL_ENABLED));
+		localEnabled.bindToModel(EMFObservables.observeValue(getWorkingCopy(),
+				DairyPackage.Literals.EMPLOYEE__LOCAL_ENABLED));
 
 		// Configure address group
 		final AddressGroupWidgetController addressGroupController = new AddressGroupWidgetController(this);
-		if(editEmployee.getLocation() == null){
+		if (editEmployee.getLocation() == null) {
 			final Location employeeLocation = DairyUtil.createLocation(null, null, null);
 			editEmployee.setLocation(employeeLocation);
 		}
@@ -155,22 +156,22 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 	public void afterBind() {
 		super.afterBind();
 
-//		// bind all
-//		for (final IRidget ridget : getRidgets()) {
-//			if (ridget instanceof IValueRidget) {
-//				ridget.updateFromModel();
-//			} else if (ridget instanceof IMarkableRidget) {
-//				final IMarkableRidget imr = (IMarkableRidget) ridget;
-//				imr.updateFromModel();
-//			}
-//		}
-		
+// // bind all
+// for (final IRidget ridget : getRidgets()) {
+// if (ridget instanceof IValueRidget) {
+// ridget.updateFromModel();
+// } else if (ridget instanceof IMarkableRidget) {
+// final IMarkableRidget imr = (IMarkableRidget) ridget;
+// imr.updateFromModel();
+// }
+// }
+
 		updateLicenseNoRidget();
 	}
 
 	private void updateLicenseNoRidget() {
 		final Employee employee = getWorkingCopy();
-		
+
 		// TODO: Bad! Shouldn't be a string!
 		if ("Driver".equals(employee.getJobFunction())) {
 			licenseNo.setOutputOnly(false);

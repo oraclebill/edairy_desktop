@@ -33,7 +33,7 @@ import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.widgets.Shell;
 
-import com.agritrace.edairy.desktop.common.model.dairy.security.AllPermissions;
+import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.model.requests.RequestType;
@@ -57,7 +57,7 @@ import com.google.inject.Provider;
  * @author Hui(Spark) Wan
  *
  */
-@PermissionRequired(AllPermissions.VIEW_ANIMAL_HEALTH_REQUESTS)
+@PermissionRequired(UIPermission.VIEW_ANIMAL_HEALTH_REQUESTS)
 public class AnimalHealthRequestViewController extends AbstractDirectoryController<AnimalHealthRequest> {
 
 	private final class FarmLookupAction implements IActionListener {

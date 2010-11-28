@@ -13,7 +13,7 @@ import org.eclipse.swt.widgets.Shell;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.security.AllPermissions;
+import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
@@ -26,7 +26,7 @@ import com.agritrace.edairy.desktop.operations.ui.dialogs.CustomerEditDialog;
 import com.agritrace.edairy.desktop.operations.ui.views.CustomerDirectoryView;
 import com.google.inject.Inject;
 
-@PermissionRequired(AllPermissions.VIEW_CUSTOMERS)
+@PermissionRequired(UIPermission.VIEW_CUSTOMERS)
 public class CustomerDirectoryController extends BasicDirectoryController<Customer> {
 
 	private static final IObservableList CUSTOMER_STATUSES = Observables.staticObservableList(CompanyStatus

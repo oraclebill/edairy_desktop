@@ -10,5 +10,5 @@ package com.agritrace.edairy.desktop.common.model.dairy.security;
 public interface IPrincipal {
 	String getName();
 	String getDisplayName();
-	boolean hasPermission(AllPermissions perm);
+	boolean hasPermission(UIPermission perm);
 }

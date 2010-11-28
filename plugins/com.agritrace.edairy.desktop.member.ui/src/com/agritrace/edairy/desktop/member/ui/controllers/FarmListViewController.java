@@ -21,7 +21,7 @@ import org.osgi.service.log.LogService;
 import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.dairy.security.AllPermissions;
+import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
@@ -40,7 +40,7 @@ import com.agritrace.edairy.desktop.member.ui.dialog.ViewFarmDialog;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-@PermissionRequired(AllPermissions.VIEW_FARMS)
+@PermissionRequired(UIPermission.VIEW_FARMS)
 public class FarmListViewController extends BasicDirectoryController<Farm> {
 
 	public static final String ALL_FARM = "All Farms";

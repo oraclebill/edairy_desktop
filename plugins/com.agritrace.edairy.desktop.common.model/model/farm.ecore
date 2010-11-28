@@ -47,6 +47,7 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong" iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="givenName" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="photo" eType="ecore:EDataType common.ecore#//ImageReference"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="location" lowerBound="1"
         eType="#//Farm"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="gender" lowerBound="1"

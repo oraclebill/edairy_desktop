@@ -16,7 +16,6 @@ import org.osgi.service.log.LogService;
 import com.agritrace.edairy.desktop.common.model.base.ImageEntry;
 import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
 import com.agritrace.edairy.desktop.internal.common.persistence.PersistenceActivator;
-import com.agritrace.edairy.desktop.internal.persistence.DairyRepository;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 

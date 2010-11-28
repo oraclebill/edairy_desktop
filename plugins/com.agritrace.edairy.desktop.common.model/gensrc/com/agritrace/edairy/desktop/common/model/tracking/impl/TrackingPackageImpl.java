@@ -370,8 +370,17 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getRegisteredAnimal_Photo() {
+		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getRegisteredAnimal_Location() {
-		return (EReference)registeredAnimalEClass.getEStructuralFeatures().get(2);
+		return (EReference)registeredAnimalEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -380,7 +389,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * @generated
 	 */
 	public EAttribute getRegisteredAnimal_Gender() {
-		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -389,15 +398,6 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * @generated
 	 */
 	public EReference getRegisteredAnimal_AnimalType() {
-		return (EReference)registeredAnimalEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getRegisteredAnimal_SireType() {
 		return (EReference)registeredAnimalEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -406,8 +406,8 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRegisteredAnimal_Purpose() {
-		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(6);
+	public EReference getRegisteredAnimal_SireType() {
+		return (EReference)registeredAnimalEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -415,7 +415,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRegisteredAnimal_DateOfAcquisition() {
+	public EAttribute getRegisteredAnimal_Purpose() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -424,7 +424,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRegisteredAnimal_AcquisitionType() {
+	public EAttribute getRegisteredAnimal_DateOfAcquisition() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(8);
 	}
 
@@ -433,8 +433,17 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getRegisteredAnimal_AcquisitionType() {
+		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getRegisteredAnimal_Identifiers() {
-		return (EReference)registeredAnimalEClass.getEStructuralFeatures().get(9);
+		return (EReference)registeredAnimalEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -443,15 +452,6 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * @generated
 	 */
 	public EAttribute getRegisteredAnimal_IdentifyingFeatures() {
-		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(10);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getRegisteredAnimal_RearingMode() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(11);
 	}
 
@@ -460,7 +460,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRegisteredAnimal_PastOwners() {
+	public EAttribute getRegisteredAnimal_RearingMode() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(12);
 	}
 
@@ -469,7 +469,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRegisteredAnimal_InsuranceNumber() {
+	public EAttribute getRegisteredAnimal_PastOwners() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(13);
 	}
 
@@ -478,7 +478,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRegisteredAnimal_DateOfBirth() {
+	public EAttribute getRegisteredAnimal_InsuranceNumber() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(14);
 	}
 
@@ -487,7 +487,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRegisteredAnimal_BirthCertificateNumber() {
+	public EAttribute getRegisteredAnimal_DateOfBirth() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(15);
 	}
 
@@ -496,7 +496,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRegisteredAnimal_VeterinaryCertificateNumber() {
+	public EAttribute getRegisteredAnimal_BirthCertificateNumber() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(16);
 	}
 
@@ -505,7 +505,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRegisteredAnimal_MinistryId() {
+	public EAttribute getRegisteredAnimal_VeterinaryCertificateNumber() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(17);
 	}
 
@@ -514,7 +514,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRegisteredAnimal_InsuranceCompany() {
+	public EAttribute getRegisteredAnimal_MinistryId() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(18);
 	}
 
@@ -523,7 +523,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRegisteredAnimal_FeedingHabit() {
+	public EAttribute getRegisteredAnimal_InsuranceCompany() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(19);
 	}
 
@@ -532,7 +532,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRegisteredAnimal_FeedType() {
+	public EAttribute getRegisteredAnimal_FeedingHabit() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(20);
 	}
 
@@ -541,7 +541,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRegisteredAnimal_FeedBrand() {
+	public EAttribute getRegisteredAnimal_FeedType() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(21);
 	}
 
@@ -550,7 +550,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRegisteredAnimal_Supplements() {
+	public EAttribute getRegisteredAnimal_FeedBrand() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(22);
 	}
 
@@ -559,7 +559,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRegisteredAnimal_Antibiotics() {
+	public EAttribute getRegisteredAnimal_Supplements() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(23);
 	}
 
@@ -568,7 +568,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRegisteredAnimal_Veterinary() {
+	public EAttribute getRegisteredAnimal_Antibiotics() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(24);
 	}
 
@@ -577,7 +577,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRegisteredAnimal_Awards() {
+	public EAttribute getRegisteredAnimal_Veterinary() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(25);
 	}
 
@@ -586,8 +586,17 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRegisteredAnimal_Notes() {
+	public EAttribute getRegisteredAnimal_Awards() {
 		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(26);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRegisteredAnimal_Notes() {
+		return (EAttribute)registeredAnimalEClass.getEStructuralFeatures().get(27);
 	}
 
 	/**
@@ -730,6 +739,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 		registeredAnimalEClass = createEClass(REGISTERED_ANIMAL);
 		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__REGISTRATION_ID);
 		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__GIVEN_NAME);
+		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__PHOTO);
 		createEReference(registeredAnimalEClass, REGISTERED_ANIMAL__LOCATION);
 		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__GENDER);
 		createEReference(registeredAnimalEClass, REGISTERED_ANIMAL__ANIMAL_TYPE);
@@ -831,6 +841,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 		initEClass(registeredAnimalEClass, RegisteredAnimal.class, "RegisteredAnimal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRegisteredAnimal_RegistrationId(), ecorePackage.getELong(), "registrationId", null, 1, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRegisteredAnimal_GivenName(), ecorePackage.getEString(), "givenName", "", 1, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRegisteredAnimal_Photo(), theModelPackage.getImageReference(), "photo", null, 0, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRegisteredAnimal_Location(), this.getFarm(), null, "location", null, 1, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRegisteredAnimal_Gender(), theModelPackage.getGender(), "gender", "", 1, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRegisteredAnimal_AnimalType(), this.getReferenceAnimalType(), null, "animalType", null, 1, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

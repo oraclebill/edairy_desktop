@@ -7,6 +7,7 @@
 package com.agritrace.edairy.desktop.common.model.tracking.impl;
 
 import com.agritrace.edairy.desktop.common.model.base.Gender;
+import com.agritrace.edairy.desktop.common.model.base.ImageEntry;
 
 import com.agritrace.edairy.desktop.common.model.tracking.AcquisitionType;
 import com.agritrace.edairy.desktop.common.model.tracking.AnimalIdentifier;
@@ -44,6 +45,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl#getRegistrationId <em>Registration Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl#getGivenName <em>Given Name</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl#getPhoto <em>Photo</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl#getLocation <em>Location</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl#getGender <em>Gender</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl#getAnimalType <em>Animal Type</em>}</li>
@@ -114,6 +116,26 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * @ordered
 	 */
 	protected String givenName = GIVEN_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getPhoto() <em>Photo</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPhoto()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PHOTO_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getPhoto() <em>Photo</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPhoto()
+	 * @generated
+	 * @ordered
+	 */
+	protected String photo = PHOTO_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getLocation() <em>Location</em>}' reference.
@@ -624,6 +646,27 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 		givenName = newGivenName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__GIVEN_NAME, oldGivenName, givenName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getPhoto() {
+		return photo;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPhoto(String newPhoto) {
+		String oldPhoto = photo;
+		photo = newPhoto;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__PHOTO, oldPhoto, photo));
 	}
 
 	/**
@@ -1217,6 +1260,8 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 				return getRegistrationId();
 			case TrackingPackage.REGISTERED_ANIMAL__GIVEN_NAME:
 				return getGivenName();
+			case TrackingPackage.REGISTERED_ANIMAL__PHOTO:
+				return getPhoto();
 			case TrackingPackage.REGISTERED_ANIMAL__LOCATION:
 				if (resolve) return getLocation();
 				return basicGetLocation();
@@ -1287,6 +1332,9 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 				return;
 			case TrackingPackage.REGISTERED_ANIMAL__GIVEN_NAME:
 				setGivenName((String)newValue);
+				return;
+			case TrackingPackage.REGISTERED_ANIMAL__PHOTO:
+				setPhoto((String)newValue);
 				return;
 			case TrackingPackage.REGISTERED_ANIMAL__LOCATION:
 				setLocation((Farm)newValue);
@@ -1383,6 +1431,9 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 			case TrackingPackage.REGISTERED_ANIMAL__GIVEN_NAME:
 				setGivenName(GIVEN_NAME_EDEFAULT);
 				return;
+			case TrackingPackage.REGISTERED_ANIMAL__PHOTO:
+				setPhoto(PHOTO_EDEFAULT);
+				return;
 			case TrackingPackage.REGISTERED_ANIMAL__LOCATION:
 				setLocation((Farm)null);
 				return;
@@ -1474,6 +1525,8 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 				return registrationId != REGISTRATION_ID_EDEFAULT;
 			case TrackingPackage.REGISTERED_ANIMAL__GIVEN_NAME:
 				return GIVEN_NAME_EDEFAULT == null ? givenName != null : !GIVEN_NAME_EDEFAULT.equals(givenName);
+			case TrackingPackage.REGISTERED_ANIMAL__PHOTO:
+				return PHOTO_EDEFAULT == null ? photo != null : !PHOTO_EDEFAULT.equals(photo);
 			case TrackingPackage.REGISTERED_ANIMAL__LOCATION:
 				return location != null;
 			case TrackingPackage.REGISTERED_ANIMAL__GENDER:
@@ -1542,6 +1595,8 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 		result.append(registrationId);
 		result.append(", givenName: ");
 		result.append(givenName);
+		result.append(", photo: ");
+		result.append(photo);
 		result.append(", gender: ");
 		result.append(gender);
 		result.append(", purpose: ");

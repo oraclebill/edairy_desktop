@@ -50,7 +50,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.dairy.security.AllPermissions;
+import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager;
 import com.agritrace.edairy.desktop.common.persistence.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
@@ -266,7 +266,7 @@ public class BulkCollectionsEntryDialogController extends
 		enableBottomButtons(false);
 
 		if (PrincipalManager.getInstance().hasPermission(
-				AllPermissions.EDIT_DRIVER_TOTAL)) {
+				UIPermission.EDIT_DRIVER_TOTAL)) {
 			System.out.println("Forcing driver total editable");
 			journalHeaderRidget.forceDriverTotalEditable();
 		}

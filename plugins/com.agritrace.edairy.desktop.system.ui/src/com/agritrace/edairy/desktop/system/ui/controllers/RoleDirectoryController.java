@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Role;
-import com.agritrace.edairy.desktop.common.model.dairy.security.AllPermissions;
+import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
@@ -20,7 +20,7 @@ import com.agritrace.edairy.desktop.system.ui.dialogs.RoleEditDialog;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-@PermissionRequired(AllPermissions.VIEW_ROLES)
+@PermissionRequired(UIPermission.VIEW_ROLES)
 public final class RoleDirectoryController extends BasicDirectoryController<Role> {
 	private ITextRidget nameSearch;
 	private ITextRidget permSearch;
@@ -47,7 +47,7 @@ public final class RoleDirectoryController extends BasicDirectoryController<Role
 					return "[error]";
 				}
 
-				final List<AllPermissions> permissions = ((Role) element).getPermissions();
+				final List<UIPermission> permissions = ((Role) element).getPermissions();
 
 				if (permissions == null) {
 					return "";
@@ -55,7 +55,7 @@ public final class RoleDirectoryController extends BasicDirectoryController<Role
 
 				final StringBuilder sb = new StringBuilder();
 
-				for (final AllPermissions perm: permissions) {
+				for (final UIPermission perm: permissions) {
 					if (sb.length() > 0) {
 						sb.append(" | ");
 					}
@@ -87,7 +87,7 @@ public final class RoleDirectoryController extends BasicDirectoryController<Role
 					continue;
 				}
 
-				for (final AllPermissions perm: role.getPermissions()) {
+				for (final UIPermission perm: role.getPermissions()) {
 					if (perm.toString().indexOf(permText) != -1) {
 						all.add(role);
 						break;

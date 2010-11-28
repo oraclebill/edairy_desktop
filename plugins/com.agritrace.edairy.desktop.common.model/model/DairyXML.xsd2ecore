@@ -169,7 +169,8 @@
       <nested inputs="dairy.ecore#//DeliveryJournalLine/lineNumber" outputs="DairyXML.xsd#//DeliveryJournalLine;XSDComplexTypeDefinition=9/XSDAttributeUse"/>
       <nested inputs="dairy.ecore#//DeliveryJournalLine/quantity" outputs="DairyXML.xsd#//DeliveryJournalLine;XSDComplexTypeDefinition=9/XSDAttributeUse=1"/>
       <nested inputs="dairy.ecore#//DeliveryJournalLine/description" outputs="DairyXML.xsd#//DeliveryJournalLine;XSDComplexTypeDefinition=9/XSDAttributeUse=2"/>
-      <nested inputs="dairy.ecore#//DeliveryJournalLine/bin" outputs="DairyXML.xsd#//DeliveryJournalLine;XSDComplexTypeDefinition=9/XSDAttributeUse=3"/>
+      <nested inputs="dairy.ecore#//DeliveryJournalLine/rejected" outputs="DairyXML.xsd#//DeliveryJournalLine;XSDComplexTypeDefinition=9/XSDAttributeUse=3"/>
+      <nested inputs="dairy.ecore#//DeliveryJournalLine/bin" outputs="DairyXML.xsd#//DeliveryJournalLine;XSDComplexTypeDefinition=9/XSDAttributeUse=4"/>
     </nested>
     <nested inputs="dairy.ecore#//DeliveryJournalLine" outputs="DairyXML.xsd#//DeliveryJournalLine;XSDElementDeclaration=9"/>
     <nested inputs="dairy.ecore#//Dairy" outputs="DairyXML.xsd#//Dairy;XSDComplexTypeDefinition=10">

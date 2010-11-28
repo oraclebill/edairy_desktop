@@ -6,7 +6,7 @@ package com.agritrace.edairy.desktop.common.model.dairy.security;
  * @author Matvey Kozhev <inetperson@gmail.com>
  *
  */
-public enum AllPermissions {
+public enum UIPermission {
 	// Milk namespace
 	VIEW_MILK_COLLECTIONS(Namespace.MILK, "View Milk Collections"),
 	VIEW_MILK_DELIVERIES(Namespace.MILK, "View Milk Deliveries"),
@@ -49,7 +49,7 @@ public enum AllPermissions {
 	private Namespace namespace;
 	private String displayName;
 
-	private AllPermissions(Namespace namespace, String displayName) {
+	private UIPermission(Namespace namespace, String displayName) {
 		this.namespace = namespace;
 		this.displayName = displayName;
 	}

@@ -56,13 +56,14 @@ public class MembershipPerformanceTestCase extends ModelPersistenceBase {
 		final List<Membership> members = session.createCriteria("Membership").list();
 
 		long count = 0;
-		for (final Membership member : members) {
+		for (final Membership member : members) {			
 			if (++count % 100 == 0) {
 				System.out.print('.');
 			}
 			if (++count % 800 == 0) {
 				System.out.print('\n');
 			}
+			member.getAccount();
 		}
 
 		System.out.println("\n time elapsed: "
@@ -103,6 +104,7 @@ public class MembershipPerformanceTestCase extends ModelPersistenceBase {
 			if (++count % 800 == 0) {
 				System.out.print('\n');
 			}
+			member.getAccount();
 		}
 		printSessionStats(session);
 		tx.commit();

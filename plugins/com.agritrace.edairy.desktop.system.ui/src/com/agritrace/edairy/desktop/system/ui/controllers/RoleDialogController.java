@@ -25,7 +25,7 @@ import org.eclipse.ui.PlatformUI;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Role;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Namespace;
-import com.agritrace.edairy.desktop.common.model.dairy.security.AllPermissions;
+import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.system.ui.constants.RoleBinding;
 import com.agritrace.edairy.desktop.system.ui.util.ListMultiSelectionHolder;
@@ -33,20 +33,20 @@ import com.agritrace.edairy.desktop.system.ui.util.ListSelectionHolder;
 import com.google.inject.Inject;
 
 public final class RoleDialogController extends RecordDialogController<Role> {
-	private Map<Namespace, Set<AllPermissions>> perms;
+	private Map<Namespace, Set<UIPermission>> perms;
 	private ListSelectionHolder<Namespace> nsList;
-	private ListMultiSelectionHolder<AllPermissions> permList;
-	private List<AllPermissions> selectedModelPermissions = new ArrayList<AllPermissions>();
+	private ListMultiSelectionHolder<UIPermission> permList;
+	private List<UIPermission> selectedModelPermissions = new ArrayList<UIPermission>();
 
 	@Inject
 	public RoleDialogController() {}
 
 	@Override
 	protected void configureUserRidgets() {
-		perms = new EnumMap<Namespace, Set<AllPermissions>>(Namespace.class);
+		perms = new EnumMap<Namespace, Set<UIPermission>>(Namespace.class);
 
-		for (final AllPermissions perm: AllPermissions.values()) {
-			Set<AllPermissions> set = perms.get(perm.getNamespace());
+		for (final UIPermission perm: UIPermission.values()) {
+			Set<UIPermission> set = perms.get(perm.getNamespace());
 
 			if (set == null) {
 				set = EnumSet.of(perm);
@@ -70,7 +70,7 @@ public final class RoleDialogController extends RecordDialogController<Role> {
 		nsCombo.bindToModel(nsList, "list", Namespace.class, null /* toString */, nsList, "selected");
 
 		final IListRidget permListRidget = getRidget(IListRidget.class, RoleBinding.PERMISSION_LIST.name());
-		permListRidget.bindToModel(permList, "list", AllPermissions.class, new String[] { null }, null);
+		permListRidget.bindToModel(permList, "list", UIPermission.class, new String[] { null }, null);
 		permListRidget.setSelectionType(SelectionType.MULTI);
 		permListRidget.bindMultiSelectionToModel(permList, "selected");
 
@@ -84,17 +84,17 @@ public final class RoleDialogController extends RecordDialogController<Role> {
 		});
 
 		final ITableRidget permTable = getRidget(ITableRidget.class, RoleBinding.BIND_ID_ROLE_PERMISSIONS.name());
-		permTable.bindToModel(workingCopy, "permissions", AllPermissions.class,
+		permTable.bindToModel(workingCopy, "permissions", UIPermission.class,
 				new String[] { "namespace", "displayName" }, new String[] { "Group", "Permission" });
 		permTable.setSelectionType(SelectionType.MULTI);
 		permTable.bindMultiSelectionToModel(new Object() {
 			@SuppressWarnings("unused")
-			public List<AllPermissions> getSelected() {
+			public List<UIPermission> getSelected() {
 				return selectedModelPermissions;
 			}
 
 			@SuppressWarnings("unused")
-			public void setSelected(List<AllPermissions> selected) {
+			public void setSelected(List<UIPermission> selected) {
 				selectedModelPermissions = selected;
 			}
 		}, "selected");
@@ -104,10 +104,10 @@ public final class RoleDialogController extends RecordDialogController<Role> {
 		getRidget(IActionRidget.class, RoleBinding.ADD_BUTTON.name()).addListener(new IActionListener() {
 			@Override
 			public void callback() {
-				final Collection<AllPermissions> perms = permList.getSelected();
+				final Collection<UIPermission> perms = permList.getSelected();
 
 				if (!perms.isEmpty()) {
-					for (final AllPermissions perm: perms) {
+					for (final UIPermission perm: perms) {
 						if (!workingCopy.getPermissions().contains(perm)) {
 							workingCopy.getPermissions().add(perm);
 						}

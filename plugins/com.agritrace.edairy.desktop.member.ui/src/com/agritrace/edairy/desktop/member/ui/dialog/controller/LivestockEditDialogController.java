@@ -32,6 +32,7 @@ import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 
 import com.agritrace.edairy.desktop.common.model.base.Gender;
+import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.AcquisitionType;
 import com.agritrace.edairy.desktop.common.model.tracking.AnimalIdentifier;
@@ -46,16 +47,18 @@ import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.controllers.BaseDialogController;
+import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.IProfilePhotoRidget;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.reference.LivestockValues;
 import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
+import com.agritrace.edairy.desktop.common.ui.validators.PhoneNumberValidatiionRule;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.IOwnershipGroupRidget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class ViewLiveStockDialogController extends BaseDialogController<RegisteredAnimal> implements ISelectionListener {
+public class LivestockEditDialogController extends BaseDialogController<RegisteredAnimal> implements ISelectionListener {
 
 	private class AddPropertyChangedListener implements PropertyChangeListener {
 
@@ -77,6 +80,7 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 
 	private RegisteredAnimal selectedNode;
 	// identification tab
+	IProfilePhotoRidget livestockPhoto;
 	IDateTimeRidget acquisionDate;
 	IComboRidget acquisionTypeCombo;
 	ITextRidget antibioticsTxt;
@@ -125,7 +129,7 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 	private final Provider<MemberSearchDialog> memberSearchProvider;
 
 	@Inject
-	public ViewLiveStockDialogController(final Provider<MemberSearchDialog> memberSearchProvider) {
+	public LivestockEditDialogController(final Provider<MemberSearchDialog> memberSearchProvider) {
 		this.memberSearchProvider = memberSearchProvider;
 	}
 
@@ -143,7 +147,7 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 		}
 
 		final String enableLookup = (String) getContext(ControllerContextConstant.ENABLE_LOOKUP);
-		if(enableLookup != null && enableLookup.equalsIgnoreCase("false")){
+		if (enableLookup != null && enableLookup.equalsIgnoreCase("false")) {
 			enableLookupBtn = false;
 		}
 
@@ -162,6 +166,11 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 
 	}
 
+	@Override
+	public void afterBind() {
+		livestockPhoto.updateFromModel();	
+	}
+	
 	@Override
 	public RegisteredAnimal getWorkingCopy() {
 		return selectedNode;
@@ -211,13 +220,15 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 
 	private void bindReferenceAnimal(IComboRidget speciesCombo, IComboRidget breedsCombo, ReferenceAnimalType animalType) {
 		if (animalType != null) {
-			speciesCombo.bindToModel(Observables.staticObservableList(LivestockValues.getSpecies()), String.class, null, new WritableValue());
+			speciesCombo.bindToModel(Observables.staticObservableList(LivestockValues.getSpecies()), String.class,
+					null, new WritableValue());
 			speciesCombo.updateFromModel();
 			if (animalType.getSpecies() != null) {
 				speciesCombo.setSelection(animalType.getSpecies());
 				speciesCombo.addSelectionListener(this);
 			}
-			breedsCombo.bindToModel(Observables.staticObservableList(LivestockValues.getBreeds()), String.class, null, new WritableValue());
+			breedsCombo.bindToModel(Observables.staticObservableList(LivestockValues.getBreeds()), String.class, null,
+					new WritableValue());
 			breedsCombo.updateFromModel();
 			if (animalType.getBreed() != null) {
 				breedsCombo.addSelectionListener(this);
@@ -233,8 +244,10 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 		aMap.put(nameText, FeaturePath.fromList(TrackingPackage.Literals.REGISTERED_ANIMAL__GIVEN_NAME)); // uses
 		aMap.put(insuranceNumberTxt, FeaturePath.fromList(TrackingPackage.Literals.REGISTERED_ANIMAL__INSURANCE_NUMBER)); // uses
 		aMap.put(featureTxt, FeaturePath.fromList(TrackingPackage.Literals.REGISTERED_ANIMAL__IDENTIFYING_FEATURES)); // uses
-		aMap.put(certificateTxt, FeaturePath.fromList(TrackingPackage.Literals.REGISTERED_ANIMAL__BIRTH_CERTIFICATE_NUMBER));
-		aMap.put(veterinaryTxt, FeaturePath.fromList(TrackingPackage.Literals.REGISTERED_ANIMAL__VETERINARY_CERTIFICATE_NUMBER));
+		aMap.put(certificateTxt,
+				FeaturePath.fromList(TrackingPackage.Literals.REGISTERED_ANIMAL__BIRTH_CERTIFICATE_NUMBER));
+		aMap.put(veterinaryTxt,
+				FeaturePath.fromList(TrackingPackage.Literals.REGISTERED_ANIMAL__VETERINARY_CERTIFICATE_NUMBER));
 		aMap.put(ministryId, FeaturePath.fromList(TrackingPackage.Literals.REGISTERED_ANIMAL__MINISTRY_ID));
 		aMap.put(insuranceTxt, FeaturePath.fromList(TrackingPackage.Literals.REGISTERED_ANIMAL__INSURANCE_COMPANY));
 		aMap.put(feedBrand, FeaturePath.fromList(TrackingPackage.Literals.REGISTERED_ANIMAL__FEED_BRAND));
@@ -248,41 +261,43 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 	}
 
 	private void updateBindings() {
-		if ( null == selectedNode ) {
+		if (null == selectedNode) {
 			throw new IllegalStateException("selected node is null");
 		}
-		if (selectedNode != null) {
-			// loop through the text ridgets
-			for (final IRidget r : liveStockBindings.keySet()) {
-				if (r instanceof IValueRidget) {
+		
+		livestockPhoto.bindToModel(EMFObservables.observeValue(selectedNode, TrackingPackage.Literals.REGISTERED_ANIMAL__PHOTO));
 
-					final IObservableValue oberservModel = EMFProperties.value(liveStockBindings.get(r)).observe(selectedNode);
-					// need to bind model to UI control converter again, because
-					// the fromType instance changes every time
-					((IValueRidget) r).bindToModel(oberservModel);
-					((IValueRidget) r).updateFromModel();
+		// loop through the text ridgets
+		for (final IRidget r : liveStockBindings.keySet()) {
+			if (r instanceof IValueRidget) {
 
-				}
-			}
-			updateComboBindings();
-			final Object selected = getContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER);
-			Farmer selectedFarmer = null;
-			if(selected instanceof Membership){
-				selectedFarmer =((Membership) selected).getMember();
+				final IObservableValue oberservModel = EMFProperties.value(liveStockBindings.get(r)).observe(
+						selectedNode);
+				// need to bind model to UI control converter again, because
+				// the fromType instance changes every time
+				((IValueRidget) r).bindToModel(oberservModel);
+				((IValueRidget) r).updateFromModel();
 
-			}else if(selected instanceof Farmer){
-				selectedFarmer =(Farmer) selected;
-
-			}
-			if(selectedFarmer != null){
-				memberNameRidget.setText( MemberUtil.formattedMemberName(selectedFarmer));
 			}
 		}
+		updateComboBindings();
+		final Object selected = getContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER);
+		Farmer selectedFarmer = null;
+		if (selected instanceof Membership) {
+			selectedFarmer = ((Membership) selected).getMember();
 
+		} else if (selected instanceof Farmer) {
+			selectedFarmer = (Farmer) selected;
+
+		}
+		if (selectedFarmer != null) {
+			memberNameRidget.setText(MemberUtil.formattedMemberName(selectedFarmer));
+		}
 	}
 
 	private void updateComboBindings() {
 		if (selectedNode != null) {
+
 			// farmCombo
 			farmCombo.bindToModel(new WritableList(farmList, Farm.class), Farm.class, "getName", new WritableValue());
 			farmCombo.updateFromModel();
@@ -297,8 +312,12 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 			farmCombo.addSelectionListener(this);
 
 			// purposeCombo
-			purposeCombo.bindToModel(Observables.staticObservableList(Purpose.VALUES), Purpose.class, null, PojoObservables.observeValue(selectedNode,
-					TrackingPackage.Literals.REGISTERED_ANIMAL__PURPOSE.getName()));
+			purposeCombo.bindToModel(
+					Observables.staticObservableList(Purpose.VALUES),
+					Purpose.class,
+					null,
+					PojoObservables.observeValue(selectedNode,
+							TrackingPackage.Literals.REGISTERED_ANIMAL__PURPOSE.getName()));
 			purposeCombo.updateFromModel();
 			// gender buttons
 			final Gender gender = selectedNode.getGender();
@@ -329,12 +348,14 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 			acquisionDate.updateFromModel();
 
 			// acquisionTypeCombo
-			acquisionTypeCombo.bindToModel(Observables.staticObservableList(AcquisitionType.VALUES), AcquisitionType.class, null, PojoObservables.observeValue(selectedNode,
-					TrackingPackage.Literals.REGISTERED_ANIMAL__ACQUISITION_TYPE.getName()));
+			acquisionTypeCombo.bindToModel(Observables.staticObservableList(AcquisitionType.VALUES),
+					AcquisitionType.class, null, PojoObservables.observeValue(selectedNode,
+							TrackingPackage.Literals.REGISTERED_ANIMAL__ACQUISITION_TYPE.getName()));
 			acquisionTypeCombo.setMandatory(true);
 			acquisionTypeCombo.updateFromModel();
 			// idTypeCombo
-			idTypeCombo.bindToModel(Observables.staticObservableList(Mechanism.VALUES), Mechanism.class, null, new WritableValue());
+			idTypeCombo.bindToModel(Observables.staticObservableList(Mechanism.VALUES), Mechanism.class, null,
+					new WritableValue());
 			idTypeCombo.updateFromModel();
 
 			// todo, only show the first identifier.
@@ -351,7 +372,8 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 			final Mechanism issureType = Mechanism.get(issure);
 			idTypeCombo.setSelection(issureType);
 			idTypeCombo.addSelectionListener(this);
-			idNumberTxt.bindToModel(EMFObservables.observeValue(identifier, TrackingPackage.Literals.ANIMAL_IDENTIFIER__VALUE));
+			idNumberTxt.bindToModel(EMFObservables.observeValue(identifier,
+					TrackingPackage.Literals.ANIMAL_IDENTIFIER__VALUE));
 			idNumberTxt.updateFromModel();
 
 			// ReferencedAnimal
@@ -361,22 +383,28 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 			bindReferenceAnimal(sireSpecies, sireBreed, selectedNode.getSireType());
 
 			// habitsCombo
-			habitsCombo.bindToModel(Observables.staticObservableList(LivestockValues.getFeedHabits()), String.class, null, new WritableValue());
+			habitsCombo.bindToModel(Observables.staticObservableList(LivestockValues.getFeedHabits()), String.class,
+					null, new WritableValue());
 			habitsCombo.updateFromModel();
 			habitsCombo.setSelection(selectedNode.getFeedingHabit());
 			habitsCombo.addSelectionListener(this);
 			// farmingTypeCombo (RearingMode)
-			farmingTypeCombo.bindToModel(Observables.staticObservableList(RearingMode.VALUES), RearingMode.class, null, PojoObservables.observeValue(selectedNode,
-					TrackingPackage.Literals.REGISTERED_ANIMAL__REARING_MODE.getName()));
+			farmingTypeCombo.bindToModel(
+					Observables.staticObservableList(RearingMode.VALUES),
+					RearingMode.class,
+					null,
+					PojoObservables.observeValue(selectedNode,
+							TrackingPackage.Literals.REGISTERED_ANIMAL__REARING_MODE.getName()));
 			farmingTypeCombo.updateFromModel();
 
 			// feedCombo
-			feedCombo.bindToModel(Observables.staticObservableList(LivestockValues.getFeedTypes()), String.class, null, new WritableValue());
+			feedCombo.bindToModel(Observables.staticObservableList(LivestockValues.getFeedTypes()), String.class, null,
+					new WritableValue());
 			feedCombo.updateFromModel();
 			feedCombo.setSelection(selectedNode.getFeedType());
 			feedCombo.addSelectionListener(this);
 
-			//ownership
+			// ownership
 			ownershipRidget.bindToModel(selectedNode.getPastOwners());
 
 		}
@@ -463,13 +491,17 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 
 	protected void configureUpperPanel() {
 		titleLabel = getRidget(ILabelRidget.class, ViewWidgetId.LIVE_STOCK_NAME);
+		livestockPhoto = getRidget(IProfilePhotoRidget.class, ViewWidgetId.LIVESTOCK_PHOTO);
+
 		nameText = getRidget(ITextRidget.class, ViewWidgetId.LIVE_STOCK_NameText);
 		nameText.setDirectWriting(true);
 		nameText.setMandatory(true);
+
 		farmCombo = getRidget(IComboRidget.class, ViewWidgetId.LIVE_STOCK_FARM_COMBO);
 		farmCombo.setMandatory(true);
+
 		purposeCombo = getRidget(IComboRidget.class, ViewWidgetId.LIVE_STOCK_PURPOSE_COMBO);
-//		statusCombo = getRidget(IComboRidget.class, ViewWidgetId.LIVE_STOCK_STATUS_COMBO);
+// statusCombo = getRidget(IComboRidget.class, ViewWidgetId.LIVE_STOCK_STATUS_COMBO);
 		memberNameRidget = getRidget(ITextRidget.class, ViewWidgetId.FARM_LIST_MEMBER_LOOKUP_TXT);
 		memberNameRidget.setOutputOnly(true);
 		memberNameRidget.setMandatory(true);
@@ -515,7 +547,7 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 
 	/**
 	 * Open member search dialog, IActionListener for search button
-	 *
+	 * 
 	 */
 	public class MemberLookupAction implements IActionListener {
 		@Override

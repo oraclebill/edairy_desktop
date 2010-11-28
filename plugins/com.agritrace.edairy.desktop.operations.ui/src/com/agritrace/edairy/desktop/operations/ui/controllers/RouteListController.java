@@ -13,7 +13,7 @@ import org.eclipse.swt.widgets.Shell;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
-import com.agritrace.edairy.desktop.common.model.dairy.security.AllPermissions;
+import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
@@ -24,7 +24,7 @@ import com.agritrace.edairy.desktop.operations.ui.views.RouteDirectoryView;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-@PermissionRequired(AllPermissions.VIEW_ROUTES)
+@PermissionRequired(UIPermission.VIEW_ROUTES)
 public class RouteListController extends BasicDirectoryController<Route> {
 
 	public static class SearchBean extends AbstractBean {
