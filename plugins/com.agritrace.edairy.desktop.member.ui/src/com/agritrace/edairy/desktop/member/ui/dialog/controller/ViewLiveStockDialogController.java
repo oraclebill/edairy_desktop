@@ -16,7 +16,6 @@ import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.FeaturePath;
-import org.eclipse.jface.util.Assert;
 import org.eclipse.jface.window.Window;
 import org.eclipse.riena.core.marker.IMarkable;
 import org.eclipse.riena.ui.ridgets.IActionListener;
@@ -249,7 +248,9 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 	}
 
 	private void updateBindings() {
-		Assert.isLegal(null != selectedNode);
+		if ( null == selectedNode ) {
+			throw new IllegalStateException("selected node is null");
+		}
 		if (selectedNode != null) {
 			// loop through the text ridgets
 			for (final IRidget r : liveStockBindings.keySet()) {
@@ -383,6 +384,7 @@ public class ViewLiveStockDialogController extends BaseDialogController<Register
 
 	protected void addPropertyChangedListener() {
 		final AddPropertyChangedListener propertyChangedListener = new AddPropertyChangedListener();
+		@SuppressWarnings("unchecked")
 		final Iterator<IRidget> ridgetIterator = (Iterator<IRidget>) getRidgets().iterator();
 		while (ridgetIterator.hasNext()) {
 			final IRidget ridget = ridgetIterator.next();

@@ -24,7 +24,6 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.member.ui.dialog.AddContainerDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewContainerDialog;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -41,18 +40,15 @@ public class MemberContainerWidgetController extends BasicDirectoryController<Co
 
 	// private IComboRidget farmFilterCombo;
 	private final IFarmRepository farmRepository;
-	private final Provider<AddContainerDialog> addContainerProvider;
 	private final Provider<ViewContainerDialog> viewContainerProvider;
 	private final List<Farm> farms = new ArrayList<Farm>();
 	private Object inputModel;
 
 	@Inject
 	public MemberContainerWidgetController(final IController controller, final IFarmRepository farmRepository,
-			final Provider<AddContainerDialog> addContainerProvider,
 			final Provider<ViewContainerDialog> viewContainerProvider) {
 		this.controller = controller;
 		this.farmRepository = farmRepository;
-		this.addContainerProvider = addContainerProvider;
 		this.viewContainerProvider = viewContainerProvider;
 
 		setEClass(TrackingPackage.Literals.CONTAINER);
@@ -159,7 +155,7 @@ public class MemberContainerWidgetController extends BasicDirectoryController<Co
 			MessageDialog.openInformation(shell, "Add Containter", "Farms list is empty, can not create a container without a farm.");
 		} else {
 			Container container = DairyUtil.createContainer(ContainerType.BIN, UnitOfMeasure.LITRE, null, 0.0);
-			final AddContainerDialog memberDialog = addContainerProvider.get();
+			final ViewContainerDialog memberDialog = viewContainerProvider.get();
 			memberDialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER, container);
 			memberDialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST, farms);
 			memberDialog.getController().setContext(ControllerContextConstant.ENABLE_LOOKUP,"false");

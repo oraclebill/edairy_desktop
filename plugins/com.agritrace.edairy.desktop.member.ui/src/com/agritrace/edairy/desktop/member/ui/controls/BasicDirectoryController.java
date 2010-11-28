@@ -114,8 +114,11 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 		}
 	}
 
-	protected Comparator[] getTableColumnComparators() {
-		return columnComparators.toArray(new Comparator[columnComparators.size()] );
+	@SuppressWarnings("unchecked")
+	protected Comparator<Object>[] getTableColumnComparators() {
+		Comparator<Object>[] comparatorArray;
+		comparatorArray = new Comparator[ columnComparators.size() ];
+		return columnComparators.toArray( comparatorArray );
 	}
 
 	@Override

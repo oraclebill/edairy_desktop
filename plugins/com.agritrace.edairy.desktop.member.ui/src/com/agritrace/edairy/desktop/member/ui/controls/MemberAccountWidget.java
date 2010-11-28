@@ -96,7 +96,7 @@ public class MemberAccountWidget {
 				ViewWidgetId.DELIVERIES_GROUP_TOTOAL_REJECTED_TXT);
 		rejectField.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 	}
-
+	/*
 	private void createShareGroup() {
 		final Group sharesGroupd = UIControlsFactory.createGroup(composite, "Shares");
 		sharesGroupd.setLayout(new GridLayout(4, false));
@@ -120,5 +120,6 @@ public class MemberAccountWidget {
 		// recCobTxt2.setText("1250");
 
 	}
+	*/
 
 }

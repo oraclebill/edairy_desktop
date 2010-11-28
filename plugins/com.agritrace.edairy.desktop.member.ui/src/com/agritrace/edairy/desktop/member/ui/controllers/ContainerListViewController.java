@@ -35,7 +35,6 @@ import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.data.ContainerListViewTableNode;
-import com.agritrace.edairy.desktop.member.ui.dialog.AddContainerDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewContainerDialog;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -64,17 +63,14 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 
 	private final List<ContainerListViewTableNode> tableInput = new ArrayList<ContainerListViewTableNode>();
 	private final Provider<MemberSearchDialog> memberSearchProvider;
-	private final Provider<AddContainerDialog> addContainerProvider;
 	private final Provider<ViewContainerDialog> viewContainerProvider;
 
 	@Inject
 	public ContainerListViewController(final IFarmRepository farmRepository,
 			final Provider<MemberSearchDialog> memberSearchProvider,
-			final Provider<AddContainerDialog> addContainerProvider,
 			final Provider<ViewContainerDialog> viewContainerProvider) {
 		this.farmRepository = farmRepository;
 		this.memberSearchProvider = memberSearchProvider;
-		this.addContainerProvider = addContainerProvider;
 		this.viewContainerProvider = viewContainerProvider;
 
 		setEClass(TrackingPackage.Literals.CONTAINER);
@@ -302,7 +298,7 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 	protected void handleNewItemAction() {
 
 		Container container = DairyUtil.createContainer(ContainerType.BIN, UnitOfMeasure.LITRE, null, 0.0);
-		final AddContainerDialog memberDialog = addContainerProvider.get();
+		final ViewContainerDialog memberDialog = viewContainerProvider.get();
 		final List<Farm> inputFarms = new ArrayList<Farm>();
 		final int index = farmCombo.getSelectionIndex();
 		if (index == 0 || index == -1) {
