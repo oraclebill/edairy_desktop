@@ -7,9 +7,8 @@ import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberContainerWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberLiveStockWidgetController;
-import com.agritrace.edairy.desktop.member.ui.dialog.AddLiveStockDialog;
+import com.agritrace.edairy.desktop.member.ui.dialog.LivestockEditDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewContainerDialog;
-import com.agritrace.edairy.desktop.member.ui.dialog.ViewLiveStockDialog;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -21,17 +20,14 @@ public class ViewFarmDialogController extends AddFarmDialogController {
 
 	private final IFarmRepository farmRepository;
 	private final Provider<ViewContainerDialog> viewContainerProvider;
-	private final Provider<AddLiveStockDialog> addLiveStockProvider;
-	private final Provider<ViewLiveStockDialog> viewLiveStockProvider;
+	private final Provider<LivestockEditDialog> viewLiveStockProvider;
 
 	@Inject
 	public ViewFarmDialogController(final IFarmRepository farmRepository,
 			final Provider<ViewContainerDialog> viewContainerProvider,
-			final Provider<AddLiveStockDialog> addLiveStockProvider,
-			final Provider<ViewLiveStockDialog> viewLiveStockProvider) {
+			final Provider<LivestockEditDialog> viewLiveStockProvider) {
 		this.farmRepository = farmRepository;
 		this.viewContainerProvider = viewContainerProvider;
-		this.addLiveStockProvider = addLiveStockProvider;
 		this.viewLiveStockProvider = viewLiveStockProvider;
 	}
 
@@ -39,7 +35,7 @@ public class ViewFarmDialogController extends AddFarmDialogController {
 	protected void configureTabs(){
 		super.configureTabs();
 		liveStockController = new MemberLiveStockWidgetController(this, farmRepository,
-				addLiveStockProvider, viewLiveStockProvider);
+				viewLiveStockProvider);
 		containerController = new MemberContainerWidgetController(this, farmRepository, viewContainerProvider);
 	}
 

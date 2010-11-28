@@ -40,8 +40,7 @@ import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.controls.LiveStockFilterWidgetController;
 import com.agritrace.edairy.desktop.member.ui.data.LiveStockListViewTableNode;
-import com.agritrace.edairy.desktop.member.ui.dialog.AddLiveStockDialog;
-import com.agritrace.edairy.desktop.member.ui.dialog.ViewLiveStockDialog;
+import com.agritrace.edairy.desktop.member.ui.dialog.LivestockEditDialog;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -66,17 +65,14 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 	private final String[] propertyNames = { "membership", "membership", "animal", "animal", "animal", "animal", "animal", "animal", "animal" };
 
 	private Membership selectedMember;
-	private final Provider<AddLiveStockDialog> addLiveStockProvider;
-	private final Provider<ViewLiveStockDialog> viewLiveStockProvider;
+	private final Provider<LivestockEditDialog> viewLiveStockProvider;
 	private final Provider<MemberSearchDialog> memberSearchProvider;
 
 	@Inject
 	public LiveStockListController(final IFarmRepository farmRepository,
-			final Provider<AddLiveStockDialog> addLiveStockProvider,
-			final Provider<ViewLiveStockDialog> viewLiveStockProvider,
+			final Provider<LivestockEditDialog> viewLiveStockProvider,
 			final Provider<MemberSearchDialog> memberSearchProvider) {
 		this.farmRepository = farmRepository;
-		this.addLiveStockProvider = addLiveStockProvider;
 		this.viewLiveStockProvider = viewLiveStockProvider;
 		this.memberSearchProvider = memberSearchProvider;
 		setEClass(TrackingPackage.Literals.REGISTERED_ANIMAL);
@@ -338,7 +334,7 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 					.createReferenceAnimal("", ""), "", "", null, null, AcquisitionType.get(0), null);
 			newAnimal.setDateOfAcquisition(new Date());
 			newAnimal.setDateOfBirth(new Date());
-			final AddLiveStockDialog aniamlDialog = addLiveStockProvider.get();
+			final LivestockEditDialog aniamlDialog = viewLiveStockProvider.get();
 			aniamlDialog.getController().setContext(ControllerContextConstant.DIALOG_CONTXT_SELECTED, newAnimal);
 			final List<Farm> farmList = new ArrayList<Farm>();
 			if(selectedMember != null){
@@ -368,7 +364,7 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 		if (!table.getSelection().isEmpty()) {
 			final LiveStockListViewTableNode selectedNode = (LiveStockListViewTableNode) table.getSelection().get(0);
 			final RegisteredAnimal selectedAnimal = selectedNode.getAnimal();
-			final ViewLiveStockDialog aniamlDialog = viewLiveStockProvider.get();
+			final LivestockEditDialog aniamlDialog = viewLiveStockProvider.get();
 			aniamlDialog.getController().setContext(ControllerContextConstant.DIALOG_CONTXT_SELECTED, selectedAnimal);
 			final List<Farm> farmList = new ArrayList<Farm>();
 			farmList.add(selectedAnimal.getLocation());

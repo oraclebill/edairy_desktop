@@ -23,9 +23,9 @@ import com.agritrace.edairy.desktop.member.ui.dialog.controller.ViewLiveStockDia
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
-public class ViewLiveStockDialog extends BaseDialogView {
+public class LivestockEditDialog extends BaseDialogView {
 	@Inject
-	public ViewLiveStockDialog(@Named("current") final Shell parentShell,
+	public LivestockEditDialog(@Named("current") final Shell parentShell,
 			final ViewLiveStockDialogController controller) {
 		super(parentShell, controller);
 	}
