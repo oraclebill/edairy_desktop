@@ -90,6 +90,8 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 		listTableInput.addAll(getFilteredTableResult());
 		table.updateFromModel();
 	}
+	
+	
 
 	private List<LiveStockListViewTableNode> getFilteredTableResult() {
 		final List<LiveStockListViewTableNode> results = new ArrayList<LiveStockListViewTableNode>();

@@ -30,7 +30,7 @@ import com.agritrace.edairy.desktop.member.ui.dialog.ViewFarmDialog;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class MemberFarmWidgetController extends BasicDirectoryController<Farm> implements WidgetController<Object> {
+public class MemberFarmWidgetController extends WidgetDirectoryController<Farm> implements WidgetController<Object> {
 
 	public static final String farmRemoveMessage = "Do you want to remove selected farms?";
 

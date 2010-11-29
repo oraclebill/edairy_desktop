@@ -28,7 +28,7 @@ import com.agritrace.edairy.desktop.member.ui.dialog.ViewContainerDialog;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class MemberContainerWidgetController extends BasicDirectoryController<Container> implements WidgetController<Object> {
+public class MemberContainerWidgetController extends WidgetDirectoryController<Container> implements WidgetController<Object> {
 	public static final String ALL_FARM = "All Farms";
 
 	public static final String containerRemoveMessage = "Do you want to remove selected containers?";

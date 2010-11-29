@@ -32,7 +32,7 @@ import com.agritrace.edairy.desktop.member.ui.dialog.LivestockEditDialog;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class MemberLiveStockWidgetController extends BasicDirectoryController<RegisteredAnimal>implements WidgetController<Object> {
+public class MemberLiveStockWidgetController extends WidgetDirectoryController<RegisteredAnimal>implements WidgetController<Object> {
 
 	public static final String liveStockRemoveMessage = "Do you want to remove selected animals?";
 	public static final String liveStockRemoveTitle = "Remove Registered Animales";

@@ -14,7 +14,7 @@ import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 
-public abstract class BasicDirectoryController<T extends EObject> extends AbstractDirectoryController<T> {
+public abstract class WidgetDirectoryController<T extends EObject> extends AbstractDirectoryController<T> {
 
 	public static final String EMPTY_SELECTION_TEXT = "ANY";
 
@@ -25,10 +25,10 @@ public abstract class BasicDirectoryController<T extends EObject> extends Abstra
 
 	private EClass eClass;
 
-	public BasicDirectoryController(){
+	public WidgetDirectoryController(){
 		super();
 	}
-	public BasicDirectoryController(IController controller) {
+	public WidgetDirectoryController(IController controller) {
 		super(controller);
 
 	}
