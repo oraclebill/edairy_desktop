@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 
-import com.agritrace.edairy.desktop.member.ui.controls.LiveStockGeneralWidget;
+import com.agritrace.edairy.desktop.member.ui.controls.LivestockGeneralInfoPanel;
 import com.agritrace.edairy.desktop.member.ui.controls.LiveStockIdentificationWidget;
 import com.agritrace.edairy.desktop.member.ui.controls.LiveStockOtherWidget;
 import com.agritrace.edairy.desktop.member.ui.controls.LiveStockRearingWidget;
@@ -89,9 +89,9 @@ public class LiveStockTabFolder extends Composite {
 			profileTab.setText("General");
 			final Composite profileComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 			profileComposite.setLayout(new GridLayout(1, true));
-			final LiveStockGeneralWidget profileWidget = new LiveStockGeneralWidget(profileComposite);
-			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
-					.applyTo(profileWidget.getComposite());
+			final LivestockGeneralInfoPanel profileWidget = new LivestockGeneralInfoPanel(profileComposite, SWT.NONE);
+			profileWidget.setLayoutData(GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
+					.create());
 			profileTab.setControl(profileComposite);
 		}
 

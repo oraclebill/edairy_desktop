@@ -119,6 +119,16 @@ public class LivestockEditDialog extends RecordDialog<RegisteredAnimal> {
 		statusCombo.setItems(new String[] { "Calf", "Producing", "Dry" });
 		fieldFactory.applyTo(statusCombo);
 
+		labelFactory.applyTo(UIControlsFactory.createLabel(composite, "ID Type :"));
+		final CCombo idTypeCombo = UIControlsFactory.createCCombo(composite,
+				ViewWidgetId.LIVESTOCK_IDENTIFICATION_ID_TYPE);
+		fieldFactory.span(2, 1).applyTo(idTypeCombo);
+
+		labelFactory.applyTo(UIControlsFactory.createLabel(composite, "ID Number :"));
+		final Text idNumberTxt = UIControlsFactory.createText(composite, SWT.SINGLE | SWT.BORDER,
+				ViewWidgetId.LIVESTOCK_IDENTIFICATION_ID_NUMBER);
+		fieldFactory.span(2, 1).applyTo(idNumberTxt);
+
 		ProfilePhotoComposite photoComposite = new ProfilePhotoComposite(headerPanel, 2, SWT.BORDER);
 		addUIControl(photoComposite, ViewWidgetId.LIVESTOCK_PHOTO);
 
