@@ -119,7 +119,7 @@ public class LivestockEditDialog extends RecordDialog<RegisteredAnimal> {
 		statusCombo.setItems(new String[] { "Calf", "Producing", "Dry" });
 		fieldFactory.applyTo(statusCombo);
 
-		ProfilePhotoComposite photoComposite = new ProfilePhotoComposite(headerPanel, SWT.BORDER);
+		ProfilePhotoComposite photoComposite = new ProfilePhotoComposite(headerPanel, 2, SWT.BORDER);
 		addUIControl(photoComposite, ViewWidgetId.LIVESTOCK_PHOTO);
 
 	}
