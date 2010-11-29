@@ -52,9 +52,9 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 
 	public static final String liveStockRemoveTitle = "Remove Registered Animales";
 	private static final String[] columnHeaders = { "Member ID", "Member Name", "Farm Name", "Purpose", "Animal Name",
-			"Species", "Breed", "Acquisition Date", "Status" };
-	private static final String[] propertyNames = { "membership.memberNumber", "membership.formattedName",
-			"animal.location.name", "animal.givenName", "animal.species", "animal.breed", "animal.acquisitionDate", "animal.status" };
+			"Species", "Breed", "Acquisition Date" }; //, "Status" };
+	private static final String[] propertyNames = { "membership.memberNumber", "membership.member.formattedName", 
+			"animal.location.name", "animal.purpose", "animal.givenName", "animal.animalType.species", "animal.animalType.breed", "animal.dateOfAcquisition" }; //, "animal.status" };
 
 	private final IFarmRepository farmRepository;
 	private LiveStockFilterWidgetController filterController;

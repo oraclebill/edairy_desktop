@@ -146,6 +146,12 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="landmarks" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Location">
+    <eOperations name="getFormattedLocation" ordered="false" unique="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return com.agritrace.edairy.desktop.common.model.util.LocationUtil.formatLocation(this);"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="postalLocation" eType="#//PostalLocation"
         containment="true">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">

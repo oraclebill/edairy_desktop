@@ -167,4 +167,13 @@ public interface Location extends EObject {
 	 */
 	void setLocationId(Long value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false" required="true" ordered="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return com.agritrace.edairy.desktop.common.model.util.LocationUtil.formatLocation(this);'"
+	 * @generated
+	 */
+	String getFormattedLocation();
+
 } // Location

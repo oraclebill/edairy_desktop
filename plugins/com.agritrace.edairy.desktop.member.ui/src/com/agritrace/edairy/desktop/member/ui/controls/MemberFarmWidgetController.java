@@ -37,7 +37,7 @@ public class MemberFarmWidgetController extends BasicDirectoryController<Farm> i
 	public static final String farmRemoveTitle = "Remove Farm";
 
 	private final String[] farmColumnHeaders = { "ID", "Name", "Location", "Number of Animals", "Number of Conatiners" };
-	private final String[] farmPropertyNames = { "farmId", "name", "location", "numberOfAnimals", "numberOfContainers" };
+	private final String[] farmPropertyNames = { "farmId", "name", "location.formattedLocation", "numberOfAnimals", "numberOfContainers" };
 
 	private final IFarmRepository farmRepository;
 	private final IMemberRepository memberRepository;
@@ -139,35 +139,6 @@ public class MemberFarmWidgetController extends BasicDirectoryController<Farm> i
 	protected RecordDialog<Farm> getRecordDialog(Shell shell) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	protected void tableBindToModel() {
-		if (table != null) {
-			// location formatter
-			table.setColumnFormatter(2, new ColumnFormatter() {
-				@Override
-				public String getText(Object element) {
-					if (element instanceof Farm) {
-						final Location location = ((Farm) element).getLocation();
-						if (location != null) {
-							final PostalLocation postalLocation = location.getPostalLocation();
-							// StringBuffer sb = new StringBuffer();
-							if (postalLocation != null) {
-								return postalLocation.getAddress() + "," + postalLocation.getVillage() + "," + postalLocation.getPostalCode();
-							}
-						} else {
-							return "<Empty>";
-						}
-
-					}
-
-					return null;
-				}
-			});
-			super.tableBindToModel();
-		}
-
 	}
 
 	@Override

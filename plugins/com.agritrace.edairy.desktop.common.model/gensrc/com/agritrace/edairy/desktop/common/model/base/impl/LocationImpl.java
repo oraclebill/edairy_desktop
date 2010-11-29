@@ -317,6 +317,15 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getFormattedLocation() {
+		return com.agritrace.edairy.desktop.common.model.util.LocationUtil.formatLocation(this);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {

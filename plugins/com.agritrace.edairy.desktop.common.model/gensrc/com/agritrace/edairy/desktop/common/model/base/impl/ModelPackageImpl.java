@@ -1110,6 +1110,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getLocation_DescriptiveLocation(), this.getDescriptiveLocation(), null, "descriptiveLocation", null, 0, 1, Location.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLocation_LocationId(), this.getUniqueID(), "locationId", null, 0, 1, Location.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		addEOperation(locationEClass, ecorePackage.getEString(), "getFormattedLocation", 1, 1, !IS_UNIQUE, !IS_ORDERED);
+
 		initEClass(contactMethodEClass, ContactMethod.class, "ContactMethod", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getContactMethod_CmType(), this.getContactMethodType(), "cmType", null, 0, 1, ContactMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getContactMethod_CmValue(), ecorePackage.getEString(), "cmValue", null, 0, 1, ContactMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1237,7 +1239,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   new String[] {
 			 "name", "DescriptiveLocation",
 			 "kind", "elementOnly"
-		   });			
+		   });				
 		addAnnotation
 		  (getLocation_PostalLocation(), 
 		   source, 
@@ -1336,7 +1338,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "appinfo", "@Embeddable"
-		   });			
+		   });				
 		addAnnotation
 		  (getLocation_PostalLocation(), 
 		   source, 
