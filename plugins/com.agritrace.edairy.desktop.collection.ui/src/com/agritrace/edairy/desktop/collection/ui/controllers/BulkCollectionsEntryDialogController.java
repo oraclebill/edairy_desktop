@@ -72,7 +72,7 @@ public class BulkCollectionsEntryDialogController extends
 	private static final String[] columnHeaderNames = {
 			// "Line",
 			"Member ID", "Member Name", "CAN Number", "Quantity",
-			"MPR Missing", "Rejected", "Flagged" };
+			"MPR", "Quality", "Needs Review?" };
 
 	private static final String[] columnPropertyNames = {
 			// "lineNumber",
