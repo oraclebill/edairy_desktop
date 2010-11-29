@@ -65,12 +65,12 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 	private static final String DELETE_DIALOG_MESSAGE = "Do you want to delete the selected member %s ?";
 	private static final String DELETE_DIALOG_TITLE = "Delete Member";
 
-	private final String[] memberColumnHeaders = { "ID", "First Name", "Last Name", "Default Route", "Status", "Phone",
-			"Milk Collection", "Monthly Credit Sales", "Credit Balance" };
+	private final String[] memberColumnHeaders = { "ID", "Name", "Default Route", "Status", "Phone", "Milk Collection",
+			"Monthly Credit Sales", "Credit Balance" };
 
-	private final String[] memberPropertyNames = { "memberNumber", "member.givenName", "member.familyName",
-			"defaultRoute.code", "status.name", "member.phoneNumber" }; // "account",
-																		// "account",
+	private final String[] memberPropertyNames = { "memberNumber", "member.formattedName", "defaultRoute.code",
+			"status.name", "member.phoneNumber" }; // "account",
+													// "account",
 	// "account" };
 
 	private ITextRidget searchText;
@@ -83,7 +83,8 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 // private final Provider<AddMemberDialog> addDialogProvider;
 
 	@Inject
-	public MemberDirectoryController2(final IMemberRepository repository, final IDairyRepository dairyRepo, IFarmRepository farmRepo, IMilkCollectionRepository collectionsRepo) {
+	public MemberDirectoryController2(final IMemberRepository repository, final IDairyRepository dairyRepo,
+			IFarmRepository farmRepo, IMilkCollectionRepository collectionsRepo) {
 		this.repository = repository;
 		this.collectionsRepo = collectionsRepo;
 		this.farmRepo = farmRepo;
@@ -196,10 +197,8 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 	@Override
 	protected void handleViewItemAction() {
 		Membership selectedMember = (Membership) table.getSelection().get(0);
-		final MemberEditDialog memberDialog = new MemberEditDialog(
-				getShell(), 
-				new MemberEditDialogController(localDairy.getBranchLocations(), repository, farmRepo, collectionsRepo), 
-				false);
+		final MemberEditDialog memberDialog = new MemberEditDialog(getShell(), new MemberEditDialogController(
+				localDairy.getBranchLocations(), repository, farmRepo, collectionsRepo), false);
 		memberDialog.getController().setContext(AbstractDirectoryController.EDITED_OBJECT_ID, selectedMember);
 
 		final int returnCode = memberDialog.open();

@@ -47,10 +47,11 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 	public static final String DELETE_DIALOG_MESSAGE = "Do you want to remove selected farms?";
 	public static final String DELETE_DIALOG_TITLE = "Remove Farm";
 
-	private final String[] farmColumnHeaders = { "Member No.", "Member First Name", "Last Name", "Farm Name", "Location", "Herd Size", "Container Count" };
+	private final String[] farmColumnHeaders = { "Member No.", "Member Name", "Farm Name", "Location", "Herd Size",
+			"Container Count" };
 
-	private final String[] farmPropertyNames = { "membership.memberNumber", "membership.member.givenName", "membership.member.familyName", "farm.name", "farm.location", "farm.numberOfAnimals",
-	"farm.numberOfContainers" };
+	private final String[] farmPropertyNames = { "membership.memberNumber", "membership.member.formattedName",
+			"farm.name", "farm.location", "farm.numberOfAnimals", "farm.numberOfContainers" };
 
 	private IComboRidget farmCombo;
 
@@ -136,7 +137,7 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 	protected void tableBindToModel() {
 		if (table != null) {
 			// location formatter
-			table.setColumnFormatter(4, new ColumnFormatter() {
+			table.setColumnFormatter(3, new ColumnFormatter() {
 				@Override
 				public String getText(Object element) {
 					if (element instanceof FarmListViewTableNode) {
@@ -145,7 +146,8 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 							final PostalLocation postalLocation = location.getPostalLocation();
 							// StringBuffer sb = new StringBuffer();
 							if (postalLocation != null) {
-								return postalLocation.getAddress() + "," + postalLocation.getVillage() + "," + postalLocation.getPostalCode();
+								return postalLocation.getAddress() + "," + postalLocation.getVillage() + ","
+										+ postalLocation.getPostalCode();
 							}
 						} else {
 							return "<Empty>";
@@ -156,7 +158,8 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 					return null;
 				}
 			});
-			table.bindToModel(new WritableList(farmListTableInput, FarmListViewTableNode.class), FarmListViewTableNode.class, farmPropertyNames, farmColumnHeaders);
+			table.bindToModel(new WritableList(farmListTableInput, FarmListViewTableNode.class),
+					FarmListViewTableNode.class, farmPropertyNames, farmColumnHeaders);
 			table.updateFromModel();
 		}
 
@@ -174,7 +177,8 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 		if (farmCombo != null) {
 			final String farmName = farmCombo.getText();
 			for (final Farm farm : allFarms) {
-				if (farmName == null || farmName.isEmpty() || farmName.equals(ALL_FARM) || farmName.equals(farm.getName())) {
+				if (farmName == null || farmName.isEmpty() || farmName.equals(ALL_FARM)
+						|| farmName.equals(farm.getName())) {
 					results.add(new FarmListViewTableNode((Membership) farm.getOwner().eContainer(), farm));
 				}
 			}
@@ -194,17 +198,20 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 	@Override
 	protected void handleNewItemAction() {
 		if (selectedMember == null) {
-			MessageDialog.openInformation(Display.getDefault().getActiveShell(), "Add Farm", "Can not add a farm. You must select a Member first");
+			MessageDialog.openInformation(Display.getDefault().getActiveShell(), "Add Farm",
+					"Can not add a farm. You must select a Member first");
 		} else {
 			final Location newFarmLocation = DairyUtil.createLocation(null, null, null);
 			final Farm newFarm = DairyUtil.createFarm("", newFarmLocation);
 			FarmListViewTableNode selectedNode = new FarmListViewTableNode(selectedMember, newFarm);
 			final AddFarmDialog memberDialog = addDialogProvider.get();
-			memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM, selectedNode);
+			memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM,
+					selectedNode);
 
 			final int returnCode = memberDialog.open();
 			if (returnCode == AbstractWindowController.OK) {
-				selectedNode = (FarmListViewTableNode) memberDialog.getController().getContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM);
+				selectedNode = (FarmListViewTableNode) memberDialog.getController().getContext(
+						ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM);
 				selectedMember.getMember().getFarms().add(newFarm);
 				if (selectedMember.getMemberId() != 0) {
 					farmRepository.saveNew(newFarm);
@@ -219,7 +226,7 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 
 	/**
 	 * Open member search dialog, IActionListener for search button
-	 *
+	 * 
 	 */
 	public class MemberLookupAction implements IActionListener {
 		@Override
@@ -251,7 +258,8 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 		if (!table.getSelection().isEmpty()) {
 			FarmListViewTableNode selectedNode = (FarmListViewTableNode) table.getSelection().get(0);
 			final ViewFarmDialog memberDialog = viewDialogProvider.get();
-			memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM, selectedNode);
+			memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM,
+					selectedNode);
 
 			final int returnCode = memberDialog.open();
 			if (returnCode == AbstractWindowController.OK) {

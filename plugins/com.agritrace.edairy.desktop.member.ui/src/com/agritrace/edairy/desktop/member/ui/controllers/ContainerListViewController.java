@@ -46,9 +46,11 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 	public static final String DELETE_DIALOG_MESSAGE = "Do you want to delete the selected container?";
 	public static final String DELETE_DIALOG_TITLE = "Delete Container";
 
-	//table columns
-	private final String[] containerColumnHeaders = { "Member ID", "Member Name", "Farm Name", "Container ID", "Unit of Measure", "Capacity" };
-	private final String[] containerPropertyNames = { "membership", "membership", "container", "container", "container", "container" };
+	// table columns
+	private final String[] containerColumnHeaders = { "Member No.", "Member Name", "Farm Name", "Container ID",
+			"Unit of Measure", "Capacity" };
+	private final String[] containerPropertyNames = { "membership.memberNumber", "membership.member.formattedName",
+			"container.owner.name", "container.trackingNumber", "container.measureType", "container.capacity" };
 	// filter
 	private IComboRidget farmCombo;
 	private final List<Farm> farmCombofarms = new ArrayList<Farm>();
@@ -58,7 +60,7 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 	private ITextRidget memberNameFilter;
 	private IActionRidget searchButton;
 
-	//repository
+	// repository
 	private Membership selectedMember;
 
 	private final List<ContainerListViewTableNode> tableInput = new ArrayList<ContainerListViewTableNode>();
@@ -87,108 +89,6 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 		table.updateFromModel();
 	}
 
-	private void setColumnFormatters() {
-		int idx = 0;
-		// memberId
-		table.setColumnFormatter(idx++, new ColumnFormatter() {
-			@Override
-			public String getText(Object element) {
-				if (element instanceof ContainerListViewTableNode) {
-					final Membership membership = ((ContainerListViewTableNode) element).getMembership();
-					if (membership != null) {
-						return membership.getMemberNumber() + "";
-					}
-				}
-				return null;
-			}
-		});
-		table.setColumnSortable(0,true);
-		table.setComparator(0,new ContainerListTableComparator(0));
-		// memberName
-		table.setColumnFormatter(idx++, new ColumnFormatter() {
-			@Override
-			public String getText(Object element) {
-				if (element instanceof ContainerListViewTableNode) {
-					final Membership membership = ((ContainerListViewTableNode) element).getMembership();
-					if (membership != null) {
-						final Person member = membership.getMember();
-						if (member != null) {
-							return member.getFamilyName() + "," + member.getGivenName();
-						}
-					}
-				}
-				return null;
-			}
-		});
-		table.setColumnSortable(1,true);
-		table.setComparator(1,new ContainerListTableComparator(1));
-		table.setColumnFormatter(idx++, new ColumnFormatter() {
-			@Override
-			public String getText(Object element) {
-				if (element instanceof ContainerListViewTableNode) {
-					final Container container = ((ContainerListViewTableNode) element).getContainer();
-					if (container != null) {
-						return container.getOwner().getName();
-					}
-				}
-				return null;
-			}
-		});
-		table.setColumnSortable(2,true);
-		table.setComparator(2,new ContainerListTableComparator(2));
-		table.setColumnFormatter(idx++, new ColumnFormatter() {
-			@Override
-			public String getText(Object element) {
-				if (element instanceof ContainerListViewTableNode) {
-					final Container container = ((ContainerListViewTableNode) element).getContainer();
-					if (container != null) {
-						return String.valueOf(container.getContainerId());
-					}
-				}
-				return null;
-			}
-		});
-		table.setColumnSortable(3,true);
-		table.setComparator(3,new ContainerListTableComparator(3));
-		// containerListTable.setColumnFormatter(4, new ColumnFormatter() {
-		// @Override
-		// public String getText(Object element) {
-		// if (element instanceof ContainerListViewTableNode) {
-		// final Container container = ((ContainerListViewTableNode)
-		// element).getContainer();
-		// if (container != null) {
-		// return container.getType().toString();
-		// }
-		// }
-		// return null;
-		// }
-		// });
-		table.setColumnFormatter(idx++, new ColumnFormatter() {
-			@Override
-			public String getText(Object element) {
-				if (element instanceof ContainerListViewTableNode) {
-					final Container container = ((ContainerListViewTableNode) element).getContainer();
-					if (container != null) {
-						return String.valueOf(container.getMeasureType().toString());
-					}
-				}
-				return null;
-			}
-		});
-		table.setColumnFormatter(idx++, new ColumnFormatter() {
-			@Override
-			public String getText(Object element) {
-				if (element instanceof ContainerListViewTableNode) {
-					final Container container = ((ContainerListViewTableNode) element).getContainer();
-					if (container != null) {
-						return String.valueOf(container.getCapacity());
-					}
-				}
-				return null;
-			}
-		});
-	}
-
 	private void updateFarmCombo() {
 		farmNames.clear();
 		farmNames.add(ALL_FARM);
@@ -210,9 +110,7 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 						farmCombo.setSelection(index);
 						return;
 					}
-
 				}
-
 			}
 			// select the "All Farm" by default
 			farmCombo.setSelection(0);
@@ -233,8 +131,8 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 	@Override
 	protected void tableBindToModel() {
 		if (table != null) {
-			setColumnFormatters();
-			table.bindToModel(new WritableList(tableInput, ContainerListViewTableNode.class), ContainerListViewTableNode.class, containerPropertyNames, containerColumnHeaders);
+			table.bindToModel(new WritableList(tableInput, ContainerListViewTableNode.class),
+					ContainerListViewTableNode.class, containerPropertyNames, containerColumnHeaders);
 			table.updateFromModel();
 		}
 	}
@@ -243,23 +141,22 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 		final List<ContainerListViewTableNode> results = new ArrayList<ContainerListViewTableNode>();
 		final List<Farm> farms = new ArrayList<Farm>();
 		if (selectedMember != null) {
-			farms .addAll(selectedMember.getMember().getFarms());
-		}else{
+			farms.addAll(selectedMember.getMember().getFarms());
+		} else {
 			farms.addAll(farmRepository.all());
 		}
 		if (farmCombo != null) {
 			final String farmName = farmCombo.getText();
 			for (final Farm farm : farms) {
-				if (farmName.isEmpty()||farmName.equals(ALL_FARM) || farmName.equals(farm.getName())) {
+				if (farmName.isEmpty() || farmName.equals(ALL_FARM) || farmName.equals(farm.getName())) {
 					final List<Container> containerList = farm.getCans();
 					for (final Container container : containerList) {
-						if(selectedMember != null){
+						if (selectedMember != null) {
 							results.add(new ContainerListViewTableNode(selectedMember, container));
-						}else if( container.getOwner().getOwner().eContainer() instanceof Membership){
+						} else if (container.getOwner().getOwner().eContainer() instanceof Membership) {
 							final Membership member = (Membership) container.getOwner().getOwner().eContainer();
 							results.add(new ContainerListViewTableNode(member, container));
 						}
-
 					}
 				}
 			}
@@ -272,7 +169,7 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 
 	/**
 	 * Open member search dialog, IActionListener for search button
-	 *
+	 * 
 	 */
 	public class MemberLookupAction implements IActionListener {
 		@Override
@@ -281,7 +178,7 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 			final int retVal = memberDialog.open();
 			if (retVal == Window.OK) {
 				selectedMember = memberDialog.getSelectedMember();
-				if(selectedMember != null){
+				if (selectedMember != null) {
 					final String memberName = selectedMember.getMember().getFormattedName();
 					memberNameFilter.setText(memberName);
 					updateFarmCombo();
@@ -306,21 +203,24 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 		} else {
 			inputFarms.add(farmCombofarms.get(index - 1));
 		}
-		memberDialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER, container);
-		memberDialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST, inputFarms);
+		memberDialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER,
+				container);
+		memberDialog.getController()
+				.setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST, inputFarms);
 		if (selectedMember != null) {
-			memberDialog.getController().setContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER, selectedMember);
+			memberDialog.getController().setContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER,
+					selectedMember);
 		}
 
 		final int returnCode = memberDialog.open();
 		if (returnCode == AbstractWindowController.OK) {
-			container = (Container) memberDialog.getController().getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
+			container = (Container) memberDialog.getController().getContext(
+					ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
 			container.getOwner().getCans().add(container);
 			farmRepository.save(container.getOwner());
-			//				memberRepository.update(selectedMember);
+			// memberRepository.update(selectedMember);
 			refreshTableContents();
 		}
-
 
 	}
 
@@ -332,19 +232,23 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 		final List<Farm> inputFarms = new ArrayList<Farm>();
 		inputFarms.add(selectedNode.getContainer().getOwner());
 
-		dialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER, selectedNode.getContainer());
+		dialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER,
+				selectedNode.getContainer());
 		dialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST, inputFarms);
-		dialog.getController().setContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER, selectedNode.getMembership());
+		dialog.getController().setContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER,
+				selectedNode.getMembership());
 
 		final int returnCode = dialog.open();
 		if (returnCode == AbstractWindowController.OK) {
-			final Container container = (Container) dialog.getController().getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
+			final Container container = (Container) dialog.getController().getContext(
+					ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
 			farmRepository.update(container.getOwner());
 			refreshTableContents();
 		} else if (returnCode == 2) {
 			// confirm for delete
 			if (selectedNode != null) {
-				if (MessageDialog.openConfirm(AbstractDirectoryController.getShell(), DELETE_DIALOG_TITLE, DELETE_DIALOG_MESSAGE)) {
+				if (MessageDialog.openConfirm(AbstractDirectoryController.getShell(), DELETE_DIALOG_TITLE,
+						DELETE_DIALOG_MESSAGE)) {
 					final Farm farm = selectedNode.getContainer().getOwner();
 					farm.getCans().remove(selectedNode.getContainer());
 					farmRepository.update(farm);
@@ -377,57 +281,5 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 	protected List<Container> getFilteredResult() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	private class ContainerListTableComparator implements Comparator<Object> {
-		int columnIndex;
-
-		ContainerListTableComparator(int index) {
-			this.columnIndex = index;
-		}
-
-		@Override
-		public int compare(Object o1, Object o2) {
-			if (o1 instanceof Membership && o2 instanceof Membership || o1 instanceof Container && o2 instanceof Container) {
-				switch (columnIndex) {
-				case 0:
-					return ((Membership) o1).getMemberId().compareTo(((Membership) o2).getMemberId());
-				case 1:
-					final Membership node1 = (Membership) o1;
-					final Membership node2 = (Membership) o2;
-					final Person member1 = node1.getMember();
-					final Person member2 = node2.getMember();
-					if (member1 != null && member2 != null) {
-						final String name1 = member1.getFamilyName() + "," + member1.getGivenName();
-						final String name2 = member2.getFamilyName() + "," + member2.getGivenName();
-						return name1.compareTo(name2);
-					}
-
-					return 0;
-				case 2:
-					final Farm farm1 = ((Container) o1).getOwner();
-					final Farm farm2 = ((Container) o2).getOwner();
-					if (farm1 != null && farm2 != null) {
-						final String name1 = farm1.getName();
-						final String name2 = farm2.getName();
-						if (name1 != null && name2 != null) {
-							return name1.compareTo(name2);
-						}
-					}
-
-					return 0;
-				case 3:
-					final String number1 = ((Container) o1).getTrackingNumber();
-					final String number2 = ((Container) o2).getTrackingNumber();
-					if (number1 != null && number2 != null) {
-						return number1.compareTo(number2);
-					}
-				default:
-					return 0;
-				}
-			}
-			return 0;
-		}
-
 	}
 }
