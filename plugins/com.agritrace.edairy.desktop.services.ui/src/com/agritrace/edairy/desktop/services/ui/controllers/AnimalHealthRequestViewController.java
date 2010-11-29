@@ -90,7 +90,7 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 		}
 	}
 
-	public static String[] MASTER_HEADERS = { "ID", "Date", "Member", "Farm", "Type" };
+	public static String[] MASTER_HEADERS = { "Log No.", "Date", "Member", "Farm", "Type" };
 	public static String[] MASTER_PROPTIES = { RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REQUEST_ID.getName(),
 			RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE.getName(),
 			RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REQUESTING_MEMBER.getName(),
@@ -135,7 +135,6 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 		if (masterTable != null) {
 			// Date column
 			masterTable.setColumnFormatter(1, new ColumnFormatter() {
-
 				@Override
 				public String getText(Object element) {
 					if (element instanceof AnimalHealthRequest) {
@@ -143,7 +142,6 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 					}
 					return null;
 				}
-
 			});
 			// Member column
 			masterTable.setColumnFormatter(2, new ColumnFormatter() {

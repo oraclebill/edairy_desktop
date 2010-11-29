@@ -38,6 +38,19 @@ package com.agritrace.edairy.desktop.common.model.base;
  */
 public interface Person extends Contactable {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Formatted Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false" required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return com.agritrace.edairy.desktop.common.model.util.MemberUtil.formattedMemberName(this);'"
+	 * @generated
+	 */
+	String getFormattedName();
+
+	/**
 	 * Returns the value of the '<em><b>Photo</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>

@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.agritrace.edairy.desktop.collection.ui.components.collectionline.IMemberInfoProvider;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.util.MemberUtil;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
-import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.google.inject.Inject;
 
 public class MemberLookupProvider implements IMemberInfoProvider {

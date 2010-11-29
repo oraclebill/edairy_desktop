@@ -81,6 +81,11 @@
         upperBound="-1" eType="#//ContactMethod" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Person" eSuperTypes="#//Contactable">
+    <eOperations name="getFormattedName" unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return com.agritrace.edairy.desktop.common.model.util.MemberUtil.formattedMemberName(this);"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="photo" eType="#//ImageReference"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="honorific" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="familyName" lowerBound="1"

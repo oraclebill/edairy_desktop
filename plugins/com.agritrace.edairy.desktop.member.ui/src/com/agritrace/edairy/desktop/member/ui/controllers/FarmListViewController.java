@@ -25,12 +25,12 @@ import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
+import com.agritrace.edairy.desktop.common.model.util.MemberUtil;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
-import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
@@ -235,7 +235,7 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 					return;
 				}
 
-				final String memberName = MemberUtil.formattedMemberName(selectedMember.getMember());
+				final String memberName = selectedMember.getMember().getFormattedName();
 				memberNameFilter.setText(memberName);
 				updateFarmCombo();
 

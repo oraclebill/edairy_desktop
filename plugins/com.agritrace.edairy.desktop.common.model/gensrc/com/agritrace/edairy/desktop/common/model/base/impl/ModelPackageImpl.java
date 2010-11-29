@@ -1087,6 +1087,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getPerson_NhifNumber(), ecorePackage.getEString(), "nhifNumber", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_NationalId(), ecorePackage.getEString(), "nationalId", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		addEOperation(personEClass, ecorePackage.getEString(), "getFormattedName", 1, 1, !IS_UNIQUE, IS_ORDERED);
+
 		initEClass(companyEClass, Company.class, "Company", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCompany_LegalName(), ecorePackage.getEString(), "legalName", null, 0, 1, Company.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCompany_CompanyName(), ecorePackage.getEString(), "companyName", null, 1, 1, Company.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1214,7 +1216,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   new String[] {
 			 "name", "Contactable",
 			 "kind", "elementOnly"
-		   });			
+		   });				
 		addAnnotation
 		  (getPerson_Location(), 
 		   source, 
@@ -1316,7 +1318,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "appinfo", "@MappedSuperclass"
-		   });			
+		   });				
 		addAnnotation
 		  (getPerson_Location(), 
 		   source, 

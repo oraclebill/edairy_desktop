@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.common.ui.util;
+package com.agritrace.edairy.desktop.common.model.util;
 
 import com.agritrace.edairy.desktop.common.model.base.Person;
 

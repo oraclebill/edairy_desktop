@@ -44,13 +44,13 @@ import com.agritrace.edairy.desktop.common.model.tracking.RearingMode;
 import com.agritrace.edairy.desktop.common.model.tracking.ReferenceAnimalType;
 import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
+import com.agritrace.edairy.desktop.common.model.util.MemberUtil;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.controllers.BaseDialogController;
 import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.IProfilePhotoRidget;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.reference.LivestockValues;
-import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.common.ui.validators.PhoneNumberValidatiionRule;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
@@ -557,7 +557,7 @@ public class LivestockEditDialogController extends BaseDialogController<Register
 			if (retVal == Window.OK) {
 				selectedMember = memberDialog.getSelectedMember();
 				if (selectedMember != null) {
-					final String memberName = MemberUtil.formattedMemberName(selectedMember.getMember());
+					final String memberName = selectedMember.getMember().getFormattedName();
 					memberNameRidget.setText(memberName);
 					farmList.clear();
 					farmList.addAll(selectedMember.getMember().getFarms());

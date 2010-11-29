@@ -27,6 +27,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.Purpose;
 import com.agritrace.edairy.desktop.common.model.tracking.RearingMode;
 import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
+import com.agritrace.edairy.desktop.common.model.util.MemberUtil;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
@@ -34,7 +35,6 @@ import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryControll
 import com.agritrace.edairy.desktop.common.ui.controllers.util.DateFilterUtil;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
-import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
@@ -405,7 +405,7 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 				selectedMember = memberDialog.getSelectedMember();
 
 				if (selectedMember != null) {
-					final String memberName = MemberUtil.formattedMemberName(selectedMember.getMember());
+					final String memberName = selectedMember.getMember().getFormattedName();
 					memberNameFilter.setText(memberName);
 					filterController.setInputModel(selectedMember);
 					if (filterController.getSearch() != null) {
