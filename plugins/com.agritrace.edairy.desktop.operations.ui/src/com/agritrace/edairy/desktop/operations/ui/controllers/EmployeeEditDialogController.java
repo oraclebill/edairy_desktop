@@ -21,6 +21,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
+import com.agritrace.edairy.desktop.common.ui.controllers.PersistenceDelegate;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.controllers.SystemSettingsController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.AddressGroupWidgetController;
@@ -132,25 +133,25 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		contacts.updateFromModel();
 	}
 
-	@Override
-	protected void handleSaveAction() {
-		// Password requires special care. We'll only update it if something was entered.
-		final String password = passwordRidget.getText();
-
-		if (!StringUtils.isEmpty(password)) {
-			final Employee employee = getWorkingCopy();
-
-			if (preferenceStore.getBoolean(SystemSettingsController.ENCRYPT_PASSWORDS)) {
-				employee.setPassword(PrincipalManager.getInstance().hashPassword(password));
-				employee.setPasswordHashed(true);
-			} else {
-				employee.setPassword(password);
-				employee.setPasswordHashed(false);
-			}
-		}
-
-		super.handleSaveAction();
-	}
+// @Override
+// protected void handleSaveAction() {
+// // Password requires special care. We'll only update it if something was entered.
+// final String password = passwordRidget.getText();
+//
+// if (!StringUtils.isEmpty(password)) {
+// final Employee employee = getWorkingCopy();
+//
+// if (preferenceStore.getBoolean(SystemSettingsController.ENCRYPT_PASSWORDS)) {
+// employee.setPassword(PrincipalManager.getInstance().hashPassword(password));
+// employee.setPasswordHashed(true);
+// } else {
+// employee.setPassword(password);
+// employee.setPasswordHashed(false);
+// }
+// }
+//
+// super.handleSaveAction();
+// }
 
 	@Override
 	public void afterBind() {
@@ -182,4 +183,5 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 			licenseNo.setText("");
 		}
 	}
+	
 }

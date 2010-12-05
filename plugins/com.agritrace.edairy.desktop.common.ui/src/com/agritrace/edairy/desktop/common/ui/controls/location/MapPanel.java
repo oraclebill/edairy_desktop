@@ -24,8 +24,7 @@ public class MapPanel extends CompositePanel {
 		GridData gd = new GridData();
 		latitudeLabel.setLayoutData(gd);
 
-		final Text lattitudeText = UIControlsFactory.createTextDecimal(this,
-				ViewWidgetId.LATITUDE_TEXT);
+		final Text lattitudeText = UIControlsFactory.createTextDecimal(this, ViewWidgetId.LATITUDE_TEXT);
 		gd = new GridData();
 		gd.widthHint = FormUtil.WIDTH_UNIT;
 		lattitudeText.setLayoutData(gd);
@@ -40,15 +39,19 @@ public class MapPanel extends CompositePanel {
 		gd.heightHint = 150;
 		gd.widthHint = 150;
 		map.setLayoutData(gd);
-		map.setUrl("http://maps.google.com/maps/api/staticmap?center=limuru+kenya&zoom=11&size=150x150&sensor=false");
-		map.refresh();
+		try {
+			map.setUrl("http://maps.google.com/maps/api/staticmap?center=limuru+kenya&zoom=11&size=150x150&sensor=false");
+			map.refresh();
+		} catch (Exception e) {
+			;
+			
+		}
 
 		final Label longitudeLabel = UIControlsFactory.createLabel(this, "Longitutde");
 		gd = new GridData();
 		longitudeLabel.setLayoutData(gd);
 
-		final Text longitudeText = UIControlsFactory.createTextDecimal(this,
-				ViewWidgetId.LONGTITUDE_TEXT);
+		final Text longitudeText = UIControlsFactory.createTextDecimal(this, ViewWidgetId.LONGTITUDE_TEXT);
 		gd = new GridData();
 		gd.widthHint = FormUtil.WIDTH_UNIT;
 		longitudeText.setLayoutData(gd);
