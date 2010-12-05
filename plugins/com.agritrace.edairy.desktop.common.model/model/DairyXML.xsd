@@ -110,7 +110,7 @@
   <xsd:complexType name="Employee">
     <xsd:complexContent>
       <xsd:extension base="base:Person">
-        <xsd:attribute name="id" type="xsd:string" use="required"/>
+        <xsd:attribute name="employeeNumber" type="xsd:string" use="required"/>
         <xsd:attribute name="operatorCode" type="xsd:string"/>
         <xsd:attribute name="startDate" type="xsd:string" use="required"/>
         <xsd:attribute name="jobFunction" type="xsd:string"/>

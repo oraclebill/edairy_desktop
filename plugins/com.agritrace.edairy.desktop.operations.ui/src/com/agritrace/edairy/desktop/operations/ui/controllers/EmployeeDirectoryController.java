@@ -51,7 +51,7 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 		setRepository(repo);
 		setEClass(DairyPackage.Literals.EMPLOYEE);
 
-		addTableColumn("ID", DairyPackage.Literals.EMPLOYEE__ID);
+		addTableColumn("ID", DairyPackage.Literals.EMPLOYEE__EMPLOYEE_NUMBER);
 		addTableColumn("Last Name", ModelPackage.Literals.PERSON__FAMILY_NAME);
 		addTableColumn("First Name", ModelPackage.Literals.PERSON__GIVEN_NAME);
 		addTableColumn("Department", DairyPackage.Literals.EMPLOYEE__DEPARTMENT);

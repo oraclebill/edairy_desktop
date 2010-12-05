@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getId <em>Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getEmployeeNumber <em>Employee Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getOperatorCode <em>Operator Code</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getStartDate <em>Start Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getJobFunction <em>Job Function</em>}</li>
@@ -46,24 +46,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class EmployeeImpl extends PersonImpl implements Employee {
 	/**
-	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * The default value of the '{@link #getEmployeeNumber() <em>Employee Number</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getId()
+	 * @see #getEmployeeNumber()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String ID_EDEFAULT = null;
+	protected static final String EMPLOYEE_NUMBER_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * The cached value of the '{@link #getEmployeeNumber() <em>Employee Number</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getId()
+	 * @see #getEmployeeNumber()
 	 * @generated
 	 * @ordered
 	 */
-	protected String id = ID_EDEFAULT;
+	protected String employeeNumber = EMPLOYEE_NUMBER_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getOperatorCode() <em>Operator Code</em>}' attribute.
@@ -279,8 +279,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getId() {
-		return id;
+	public String getEmployeeNumber() {
+		return employeeNumber;
 	}
 
 	/**
@@ -288,11 +288,11 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setId(String newId) {
-		String oldId = id;
-		id = newId;
+	public void setEmployeeNumber(String newEmployeeNumber) {
+		String oldEmployeeNumber = employeeNumber;
+		employeeNumber = newEmployeeNumber;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__ID, oldId, id));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__EMPLOYEE_NUMBER, oldEmployeeNumber, employeeNumber));
 	}
 
 	/**
@@ -543,8 +543,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case DairyPackage.EMPLOYEE__ID:
-				return getId();
+			case DairyPackage.EMPLOYEE__EMPLOYEE_NUMBER:
+				return getEmployeeNumber();
 			case DairyPackage.EMPLOYEE__OPERATOR_CODE:
 				return getOperatorCode();
 			case DairyPackage.EMPLOYEE__START_DATE:
@@ -578,8 +578,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case DairyPackage.EMPLOYEE__ID:
-				setId((String)newValue);
+			case DairyPackage.EMPLOYEE__EMPLOYEE_NUMBER:
+				setEmployeeNumber((String)newValue);
 				return;
 			case DairyPackage.EMPLOYEE__OPERATOR_CODE:
 				setOperatorCode((String)newValue);
@@ -623,8 +623,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case DairyPackage.EMPLOYEE__ID:
-				setId(ID_EDEFAULT);
+			case DairyPackage.EMPLOYEE__EMPLOYEE_NUMBER:
+				setEmployeeNumber(EMPLOYEE_NUMBER_EDEFAULT);
 				return;
 			case DairyPackage.EMPLOYEE__OPERATOR_CODE:
 				setOperatorCode(OPERATOR_CODE_EDEFAULT);
@@ -668,8 +668,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case DairyPackage.EMPLOYEE__ID:
-				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+			case DairyPackage.EMPLOYEE__EMPLOYEE_NUMBER:
+				return EMPLOYEE_NUMBER_EDEFAULT == null ? employeeNumber != null : !EMPLOYEE_NUMBER_EDEFAULT.equals(employeeNumber);
 			case DairyPackage.EMPLOYEE__OPERATOR_CODE:
 				return OPERATOR_CODE_EDEFAULT == null ? operatorCode != null : !OPERATOR_CODE_EDEFAULT.equals(operatorCode);
 			case DairyPackage.EMPLOYEE__START_DATE:
@@ -704,8 +704,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (id: ");
-		result.append(id);
+		result.append(" (employeeNumber: ");
+		result.append(employeeNumber);
 		result.append(", operatorCode: ");
 		result.append(operatorCode);
 		result.append(", startDate: ");

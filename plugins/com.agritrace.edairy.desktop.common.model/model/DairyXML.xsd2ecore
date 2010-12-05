@@ -91,7 +91,7 @@
     </nested>
     <nested inputs="dairy.ecore#//ScaleImportRecord" outputs="DairyXML.xsd#//ScaleImportRecord;XSDElementDeclaration=2"/>
     <nested inputs="dairy.ecore#//Employee" outputs="DairyXML.xsd#//Employee;XSDComplexTypeDefinition=3">
-      <nested inputs="dairy.ecore#//Employee/id" outputs="DairyXML.xsd#//Employee;XSDComplexTypeDefinition=3/XSDAttributeUse"/>
+      <nested inputs="dairy.ecore#//Employee/employeeNumber" outputs="DairyXML.xsd#//Employee;XSDComplexTypeDefinition=3/XSDAttributeUse"/>
       <nested inputs="dairy.ecore#//Employee/operatorCode" outputs="DairyXML.xsd#//Employee;XSDComplexTypeDefinition=3/XSDAttributeUse=1"/>
       <nested inputs="dairy.ecore#//Employee/startDate" outputs="DairyXML.xsd#//Employee;XSDComplexTypeDefinition=3/XSDAttributeUse=2"/>
       <nested inputs="dairy.ecore#//Employee/jobFunction" outputs="DairyXML.xsd#//Employee;XSDComplexTypeDefinition=3/XSDAttributeUse=3"/>

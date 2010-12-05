@@ -94,7 +94,8 @@
         <details key="body" value="if (licenseNo != null &amp;&amp; !licenseNo.isEmpty()) {&#xA;&#x9;&#x9;&#x9;return String.format(&quot;%s (%s)&quot;, familyName, licenseNo);&#xA;&#x9;&#x9;} else {&#xA;&#x9;&#x9;&#x9;return familyName;&#xA;&#x9;&#x9;}"/>
       </eAnnotations>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="employeeNumber" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
         <details key="name" value="id"/>
         <details key="kind" value="elementOnly"/>

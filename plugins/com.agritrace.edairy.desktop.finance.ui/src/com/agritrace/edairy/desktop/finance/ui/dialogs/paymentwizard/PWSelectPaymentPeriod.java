@@ -165,7 +165,7 @@ public class PWSelectPaymentPeriod extends PWPage {
 			final Employee first = paymentRecord.getEnteredBy();
 			setErrorMessage(String.format(
 					"A payment run for the selected period was already executed on %s by %s %s (%s).",
-					paymentRecord.getEntryDate(), first.getGivenName(), first.getFamilyName(), first.getId()));
+					paymentRecord.getEntryDate(), first.getGivenName(), first.getFamilyName(), first.getEmployeeNumber()));
 			setPageComplete(false);
 			return;
 		}

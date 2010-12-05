@@ -18,7 +18,7 @@ import java.util.Date;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getId <em>Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getEmployeeNumber <em>Employee Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getOperatorCode <em>Operator Code</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getStartDate <em>Start Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getJobFunction <em>Job Function</em>}</li>
@@ -38,31 +38,31 @@ import java.util.Date;
  */
 public interface Employee extends Person {
 	/**
-	 * Returns the value of the '<em><b>Id</b></em>' attribute.
+	 * Returns the value of the '<em><b>Employee Number</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Id</em>' attribute.
-	 * @see #setId(String)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getEmployee_Id()
+	 * @return the value of the '<em>Employee Number</em>' attribute.
+	 * @see #setEmployeeNumber(String)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getEmployee_EmployeeNumber()
 	 * @model required="true"
 	 *        extendedMetaData="name='id' kind='elementOnly'"
 	 * @generated
 	 */
-	String getId();
+	String getEmployeeNumber();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getId <em>Id</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getEmployeeNumber <em>Employee Number</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Id</em>' attribute.
-	 * @see #getId()
+	 * @param value the new value of the '<em>Employee Number</em>' attribute.
+	 * @see #getEmployeeNumber()
 	 * @generated
 	 */
-	void setId(String value);
+	void setEmployeeNumber(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Operator Code</b></em>' attribute.

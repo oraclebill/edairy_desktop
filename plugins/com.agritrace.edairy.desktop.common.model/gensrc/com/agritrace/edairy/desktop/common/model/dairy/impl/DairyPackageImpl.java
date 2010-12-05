@@ -748,7 +748,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEmployee_Id() {
+	public EAttribute getEmployee_EmployeeNumber() {
 		return (EAttribute)employeeEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -2311,7 +2311,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(scaleImportRecordEClass, SCALE_IMPORT_RECORD__VALIDATED);
 
 		employeeEClass = createEClass(EMPLOYEE);
-		createEAttribute(employeeEClass, EMPLOYEE__ID);
+		createEAttribute(employeeEClass, EMPLOYEE__EMPLOYEE_NUMBER);
 		createEAttribute(employeeEClass, EMPLOYEE__OPERATOR_CODE);
 		createEAttribute(employeeEClass, EMPLOYEE__START_DATE);
 		createEAttribute(employeeEClass, EMPLOYEE__JOB_FUNCTION);
@@ -2593,7 +2593,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getScaleImportRecord_Validated(), ecorePackage.getEBoolean(), "validated", "false", 0, 1, ScaleImportRecord.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(employeeEClass, Employee.class, "Employee", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEmployee_Id(), ecorePackage.getEString(), "id", null, 1, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEmployee_EmployeeNumber(), ecorePackage.getEString(), "employeeNumber", null, 1, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEmployee_OperatorCode(), ecorePackage.getEString(), "operatorCode", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEmployee_StartDate(), ecorePackage.getEDate(), "startDate", null, 1, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEmployee_JobFunction(), ecorePackage.getEString(), "jobFunction", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2856,7 +2856,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 			 "kind", "elementOnly"
 		   });				
 		addAnnotation
-		  (getEmployee_Id(), 
+		  (getEmployee_EmployeeNumber(), 
 		   source, 
 		   new String[] {
 			 "name", "id",

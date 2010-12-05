@@ -181,7 +181,7 @@ public class DairyUtil {
 		emp.setNickName(p.getNickName());
 		emp.setPhoto(p.getPhoto());
 
-		emp.setId(id);
+		emp.setEmployeeNumber(id);
 		emp.setStartDate(startDate);
 		emp.setJobFunction(jobFunction);
 		emp.setNssfNumber(nssfNumber);

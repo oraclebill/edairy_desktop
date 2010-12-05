@@ -772,13 +772,13 @@ public interface DairyPackage extends EPackage {
 	int EMPLOYEE__NATIONAL_ID = ModelPackage.PERSON__NATIONAL_ID;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * The feature id for the '<em><b>Employee Number</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE__ID = ModelPackage.PERSON_FEATURE_COUNT + 0;
+	int EMPLOYEE__EMPLOYEE_NUMBER = ModelPackage.PERSON_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Operator Code</b></em>' attribute.
@@ -3230,15 +3230,15 @@ public interface DairyPackage extends EPackage {
 	EClass getEmployee();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getId <em>Id</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getEmployeeNumber <em>Employee Number</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Employee#getId()
+	 * @return the meta object for the attribute '<em>Employee Number</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Employee#getEmployeeNumber()
 	 * @see #getEmployee()
 	 * @generated
 	 */
-	EAttribute getEmployee_Id();
+	EAttribute getEmployee_EmployeeNumber();
 
 	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getOperatorCode <em>Operator Code</em>}'.
@@ -5405,12 +5405,12 @@ public interface DairyPackage extends EPackage {
 		EClass EMPLOYEE = eINSTANCE.getEmployee();
 
 		/**
-		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Employee Number</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute EMPLOYEE__ID = eINSTANCE.getEmployee_Id();
+		EAttribute EMPLOYEE__EMPLOYEE_NUMBER = eINSTANCE.getEmployee_EmployeeNumber();
 
 		/**
 		 * The meta object literal for the '<em><b>Operator Code</b></em>' attribute feature.
