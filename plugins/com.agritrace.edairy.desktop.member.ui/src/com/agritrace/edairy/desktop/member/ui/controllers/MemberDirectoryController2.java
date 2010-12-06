@@ -17,17 +17,17 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
+import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
 import com.agritrace.edairy.desktop.common.persistence.IMilkCollectionRepository;
 import com.agritrace.edairy.desktop.common.ui.columnformatters.ConstantColumnFormatter;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
+import com.agritrace.edairy.desktop.common.ui.controllers.DirectoryPersistenceDelegate;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.views.BaseListView;
 import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
@@ -61,6 +61,19 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 		}
 	}
 
+	class MemberPersistenceDelegate extends DirectoryPersistenceDelegate<Membership> {
+
+		public MemberPersistenceDelegate(AbstractDirectoryController<Membership> controller) {
+			super(controller);
+		}
+
+		@Override
+		public Membership createItem() {
+			return DairyUtil.createMembership(null, null, null);
+		}
+
+	}
+
 	private static final String DEFAULT_SEARCH_DISPLAY_TXT = "Type to search members";
 	private static final String DELETE_DIALOG_MESSAGE = "Do you want to delete the selected member %s ?";
 	private static final String DELETE_DIALOG_TITLE = "Delete Member";
@@ -79,8 +92,6 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 	private IMilkCollectionRepository collectionsRepo;
 	private IFarmRepository farmRepo;
 
-// private final Provider<MemberEditDialog> viewDialogProvider;
-// private final Provider<AddMemberDialog> addDialogProvider;
 
 	@Inject
 	public MemberDirectoryController2(final IMemberRepository repository, final IDairyRepository dairyRepo,
@@ -89,10 +100,9 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 		this.collectionsRepo = collectionsRepo;
 		this.farmRepo = farmRepo;
 		this.localDairy = dairyRepo.getLocalDairy();
-// this.viewDialogProvider = viewDialogProvider;
-// this.addDialogProvider = addDialogProvider;
 
 		setEClass(DairyPackage.Literals.MEMBERSHIP);
+		setPersistenceDelegate(new MemberPersistenceDelegate(this));
 
 		for (int i = 0; i < memberPropertyNames.length; i++) {
 			addTableColumn(memberColumnHeaders[i], memberPropertyNames[i], String.class);
@@ -164,9 +174,13 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 		return results;
 	}
 
+	private MemberEditDialogController controller;
+	
 	@Override
 	protected RecordDialog<Membership> getRecordDialog(Shell shell) {
-		return null;
+		assert controller != null;
+//		final MemberEditDialogController controller = new MemberEditDialogController(localDairy.getBranchLocations());
+		return new MemberEditDialog(getShell(), controller, true);
 	}
 
 	@Override
@@ -177,51 +191,14 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 
 	@Override
 	protected void handleNewItemAction() {
-
-		final List<DairyLocation> centerList = localDairy.getBranchLocations();
-		final MemberEditDialogController controller = new MemberEditDialogController(centerList);
-		Membership selectedMember = DairyUtil.createMembership(null, null, null);
-		controller.setContext(AbstractDirectoryController.EDITED_OBJECT_ID, selectedMember);
-
-		final MemberEditDialog memberDialog = new MemberEditDialog(getShell(), controller, true);
-
-		final int returnCode = memberDialog.open();
-		if (returnCode == AbstractWindowController.OK) {
-			selectedMember = (Membership) memberDialog.getController().getContext(
-					AbstractDirectoryController.EDITED_OBJECT_ID);
-			repository.saveNew(selectedMember);
-			refreshTableContents();
-		}
+		controller = new MemberEditDialogController(localDairy.getBranchLocations());
+		super.handleNewItemAction();
 	}
 
 	@Override
 	protected void handleViewItemAction() {
-		Membership selectedMember = (Membership) table.getSelection().get(0);
-		final MemberEditDialog memberDialog = new MemberEditDialog(getShell(), new MemberEditDialogController(
-				localDairy.getBranchLocations(), repository, farmRepo, collectionsRepo), false);
-		memberDialog.getController().setContext(AbstractDirectoryController.EDITED_OBJECT_ID, selectedMember);
-
-		final int returnCode = memberDialog.open();
-		if (returnCode == AbstractWindowController.OK) {
-			selectedMember = (Membership) memberDialog.getController().getContext(
-					AbstractDirectoryController.EDITED_OBJECT_ID);
-			repository.update(selectedMember);
-			refreshTableContents();
-		} else if (returnCode == 2) {
-			// confirm for delete
-			if (selectedMember != null) {
-				String message = "";
-				if (selectedMember.getMember() != null) {
-					message = "\"" + selectedMember.getMember().getGivenName() + " "
-							+ selectedMember.getMember().getFamilyName() + "\"";
-				}
-				message = String.format(DELETE_DIALOG_MESSAGE, message);
-				if (MessageDialog.openConfirm(AbstractDirectoryController.getShell(), DELETE_DIALOG_TITLE, message)) {
-					repository.delete(selectedMember);
-					refreshTableContents();
-				}
-			}
-		}
+		controller = new MemberEditDialogController(
+				localDairy.getBranchLocations(), repository, farmRepo, collectionsRepo);
+		super.handleViewItemAction();
 	}
-
 }

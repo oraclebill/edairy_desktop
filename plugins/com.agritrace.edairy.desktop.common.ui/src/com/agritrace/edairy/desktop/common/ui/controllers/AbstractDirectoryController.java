@@ -312,7 +312,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 		dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_NEW);
 		PersistenceDelegate<T> delegate = getPersistenceDelegate();
 		if (delegate != null) {
-			delegate.setItem(createNewModel());
+			delegate.setItem(delegate.createItem());
 			dialog.getController().setContext(PERSISTENCE_DELEGATE, delegate);
 			int ret = dialog.open();
 			if (ret == Dialog.OK) {

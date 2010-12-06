@@ -7,11 +7,12 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 
-import com.agritrace.edairy.desktop.common.ui.dialogs.BaseDialogView;
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.controller.MemberEditDialogController;
 import com.agritrace.edairy.desktop.member.ui.views.MemberInfoGroup;
 
-public class MemberEditDialog extends BaseDialogView {
+public class MemberEditDialog extends RecordDialog<Membership> {
 	private MembershipTabFolder tabFolder;
 	private Set<MembershipTabFolder.TabItem> tabSet;
 
