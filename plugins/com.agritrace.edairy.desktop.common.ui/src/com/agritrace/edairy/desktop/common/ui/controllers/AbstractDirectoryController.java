@@ -137,49 +137,13 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 		return myRepo;
 	}
 
-	public PersistenceDelegate<T> getPersistenceDelegate() {
+	protected final void setPersistenceDelegate(PersistenceDelegate<T> delegate) {
+		persistenceDelegate = delegate;
+	}
+	
+	protected final PersistenceDelegate<T> getPersistenceDelegate() {
 		if (persistenceDelegate == null) {
-			persistenceDelegate = new PersistenceDelegate<T>() {
-				private T item;
-
-				@Override
-				public void setItem(T item) {
-					this.item = item;
-				}
-
-				@Override
-				public T getOrCreateItem() {
-					if (item == null) {
-						item = createNewModel();
-					}
-					return item;
-				}
-
-				@Override
-				public T load(Object key) {
-					return getRepository().findByKey((Long) key);
-				}
-
-				@Override
-				public void save(T obj) {
-					getRepository().saveNew(obj);
-				}
-
-				@Override
-				public void delete(T obj) {
-					getRepository().delete(obj);
-				}
-
-				@Override
-				public void saveRelated(Object obj) {
-					getRepository().save(obj);
-				}
-
-				@Override
-				public void rollback(Object obj) {
-					throw new UnsupportedOperationException("unimplemented");
-				}
-			};
+			persistenceDelegate = new DirectoryPersistenceDelegate(this);
 		}
 		return persistenceDelegate;
 	}
@@ -365,28 +329,21 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 		refreshTableContents();
 	}
 
-	protected void createEntity(T newEntity) {
-		getRepository().saveNew(newEntity);
-	}
-
-	protected void handleResetFilterAction() {
-		// Rebind the updateFromModel to refresh the tables
-		resetFilterConditions();
-	}
-
 	@SuppressWarnings("unchecked")
 	protected void handleViewItemAction() {
 		final RecordDialog<T> dialog = getRecordDialog(getShell());
 		final T selectedObject = getSelectedEObject();
 		if (selectedObject == null)
 			return;
-
+		
+		// TODO: verify this is still necessary
 		try {
 			getRepository().load(selectedObject);
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 
+		// use the persistence delegate if it exists, otherwise fallback.
 		PersistenceDelegate<T> delegate = getPersistenceDelegate();
 		if (delegate != null) {
 			delegate.setItem(selectedObject);
@@ -433,6 +390,16 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 			viewBtnRidget.setEnabled(true);
 		}
 	}
+
+	protected void createEntity(T newEntity) {
+		getRepository().saveNew(newEntity);
+	}
+
+	protected void handleResetFilterAction() {
+		// Rebind the updateFromModel to refresh the tables
+		resetFilterConditions();
+	}
+
 
 	/**
 	 * Reset conditions

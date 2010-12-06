@@ -1,6 +1,8 @@
 package com.agritrace.edairy.desktop.common.ui.controllers;
 
-public interface PersistenceDelegate<X> {
+import org.eclipse.emf.ecore.EObject;
+
+public interface PersistenceDelegate<X extends EObject> {
 	public void setItem(X item);
 //	public X getItem();
 	public X getOrCreateItem();

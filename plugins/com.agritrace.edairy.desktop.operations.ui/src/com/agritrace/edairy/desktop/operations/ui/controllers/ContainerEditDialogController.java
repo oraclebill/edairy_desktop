@@ -10,7 +10,7 @@ import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController
 import com.agritrace.edairy.desktop.common.ui.controls.assetinfo.IAssetInfoRidget;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.ContainerBindingConstants;
 
-public class ContainerEditDialogController  extends RecordDialogController<DairyContainer> {
+public class ContainerEditDialogController extends RecordDialogController<DairyContainer> {
 
 	private DairyContainer editContainer = null;
 
@@ -27,7 +27,6 @@ public class ContainerEditDialogController  extends RecordDialogController<Dairy
 		assert null != editContainer;
 		bindContainerInfo();
 		bindAssetInfo();
-
 	}
 
 	private void bindContainerInfo() {
