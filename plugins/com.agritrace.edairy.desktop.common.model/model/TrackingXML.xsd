@@ -61,8 +61,8 @@
   <xsd:element name="Farmer" type="tracking:Farmer"/>
   <xsd:complexType name="Container">
     <xsd:attribute name="containerId" type="xsd:string"/>
-    <xsd:attribute name="trackingNumber" type="xsd:string"/>
-    <xsd:attribute default="25" name="capacity" type="xsd:double"/>
+    <xsd:attribute name="trackingNumber" type="xsd:string" use="required"/>
+    <xsd:attribute default="25" name="capacity" type="xsd:double" use="required"/>
     <xsd:attribute default="KILOGRAM" name="measureType" type="base:UnitOfMeasure"/>
     <xsd:attribute name="owner" type="xsd:string"/>
   </xsd:complexType>

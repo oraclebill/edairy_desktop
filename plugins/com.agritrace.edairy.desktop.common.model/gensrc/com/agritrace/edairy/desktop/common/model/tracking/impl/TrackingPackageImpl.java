@@ -833,9 +833,9 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 
 		initEClass(containerEClass, com.agritrace.edairy.desktop.common.model.tracking.Container.class, "Container", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getContainer_ContainerId(), theModelPackage.getUniqueID(), "containerId", null, 0, 1, com.agritrace.edairy.desktop.common.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getContainer_TrackingNumber(), ecorePackage.getEString(), "trackingNumber", null, 0, 1, com.agritrace.edairy.desktop.common.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getContainer_TrackingNumber(), ecorePackage.getEString(), "trackingNumber", null, 1, 1, com.agritrace.edairy.desktop.common.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getContainer_Owner(), this.getFarm(), null, "owner", null, 0, 1, com.agritrace.edairy.desktop.common.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getContainer_Capacity(), ecorePackage.getEDouble(), "capacity", "25", 0, 1, com.agritrace.edairy.desktop.common.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getContainer_Capacity(), ecorePackage.getEDouble(), "capacity", "25", 1, 1, com.agritrace.edairy.desktop.common.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getContainer_MeasureType(), theModelPackage.getUnitOfMeasure(), "measureType", "KILOGRAM", 0, 1, com.agritrace.edairy.desktop.common.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(registeredAnimalEClass, RegisteredAnimal.class, "RegisteredAnimal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -924,6 +924,12 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	protected void createExtendedMetaDataAnnotations() {
 		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";				
 		addAnnotation
+		  (getContainer_TrackingNumber(), 
+		   source, 
+		   new String[] {
+			 "kind", "elementOnly"
+		   });			
+		addAnnotation
 		  (getRegisteredAnimal_AnimalType(), 
 		   source, 
 		   new String[] {
@@ -940,6 +946,12 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 */
 	protected void createTeneoAnnotations() {
 		String source = "teneo.jpa";					
+		addAnnotation
+		  (getContainer_TrackingNumber(), 
+		   source, 
+		   new String[] {
+			 "appinfo", "@NaturalId"
+		   });			
 		addAnnotation
 		  (getRegisteredAnimal_AnimalType(), 
 		   source, 

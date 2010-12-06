@@ -68,7 +68,9 @@ public interface Container extends EObject {
 	 * @return the value of the '<em>Tracking Number</em>' attribute.
 	 * @see #setTrackingNumber(String)
 	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getContainer_TrackingNumber()
-	 * @model
+	 * @model required="true"
+	 *        extendedMetaData="kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@NaturalId'"
 	 * @generated
 	 */
 	String getTrackingNumber();
@@ -121,7 +123,7 @@ public interface Container extends EObject {
 	 * @return the value of the '<em>Capacity</em>' attribute.
 	 * @see #setCapacity(double)
 	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getContainer_Capacity()
-	 * @model default="25"
+	 * @model default="25" required="true"
 	 * @generated
 	 */
 	double getCapacity();

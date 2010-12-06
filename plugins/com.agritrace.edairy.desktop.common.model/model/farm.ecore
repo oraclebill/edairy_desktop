@@ -36,7 +36,14 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="containerId" eType="ecore:EDataType common.ecore#//UniqueID"
         iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="trackingNumber" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="elementOnly"/>
+      </eAnnotations>
+      <eAnnotations source="teneo.jpa">
+        <details key="appinfo" value="@NaturalId"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//Farm"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="capacity" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" defaultValueLiteral="25"/>
