@@ -34,6 +34,10 @@ public class DairyDialogController extends RecordDialogController<DairyLocation>
 	private ITextRidget txtCode;
 	private IComboRidget comboRoute;
 
+	public DairyDialogController() {
+		super("Dairy Branch Location");
+	}
+	
 	@Override
 	public void configureUserRidgets() {
 

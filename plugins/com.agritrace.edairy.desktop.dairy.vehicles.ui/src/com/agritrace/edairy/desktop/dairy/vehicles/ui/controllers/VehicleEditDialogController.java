@@ -22,6 +22,7 @@ public class VehicleEditDialogController extends RecordDialogController<Vehicle>
 
 	@Inject
 	public VehicleEditDialogController(final IDairyRepository dairyRepo) {
+		super("Vehicle");
 		this.dairyRepo = dairyRepo;
 	}
 

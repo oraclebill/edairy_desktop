@@ -8,10 +8,10 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.widgets.Shell;
 
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.Role;
-import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
+import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+import com.agritrace.edairy.desktop.common.model.base.Role;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
+import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
@@ -35,12 +35,12 @@ public final class RoleDirectoryController extends BasicDirectoryController<Role
 	public RoleDirectoryController(final IRepository<Role> repo, final Provider<RoleEditDialog> dialogProvider) {
 		super();
 		this.dialogProvider = dialogProvider;
-		setEClass(DairyPackage.Literals.ROLE);
+		setEClass(ModelPackage.Literals.ROLE);
 		setRepository(repo);
-		addTableColumn("ID", DairyPackage.Literals.ROLE__ID);
-		addTableColumn("Name", DairyPackage.Literals.ROLE__NAME);
-		addTableColumn("Description", DairyPackage.Literals.ROLE__DESCRIPTION);
-		addTableColumn("Permissions", DairyPackage.Literals.ROLE__PERMISSIONS, new ColumnFormatter() {
+		addTableColumn("ID", ModelPackage.Literals.ROLE__ID);
+		addTableColumn("Name", ModelPackage.Literals.ROLE__NAME);
+		addTableColumn("Description", ModelPackage.Literals.ROLE__DESCRIPTION);
+		addTableColumn("Permissions", ModelPackage.Literals.ROLE__PERMISSIONS, new ColumnFormatter() {
 			@Override
 			public String getText(Object element) {
 				if (!(element instanceof Role)) {

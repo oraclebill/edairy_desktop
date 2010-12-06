@@ -30,6 +30,7 @@ public class AdjustmentTransactionEditController extends RecordDialogController<
 
 	@Inject
 	public AdjustmentTransactionEditController(final Provider<MemberSearchDialog> memberSearchProvider) {
+		super("Account Adjustment");
 		this.memberSearchProvider = memberSearchProvider;
 	}
 

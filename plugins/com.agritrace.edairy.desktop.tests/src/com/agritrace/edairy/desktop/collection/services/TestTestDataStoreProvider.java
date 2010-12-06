@@ -7,8 +7,8 @@ import static org.junit.Assert.assertNotSame;
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.junit.Test;
 
-import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
-import com.agritrace.edairy.desktop.common.model.dairy.Role;
+import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
+import com.agritrace.edairy.desktop.common.model.base.Role;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
 import com.agritrace.edairy.desktop.common.persistence.ManagedMemoryDataStoreProvider;
@@ -59,7 +59,7 @@ public class TestTestDataStoreProvider {
 		final IRepository<Role> roleRepo = injector.getInstance(Key.get(new RoleRepoLiteral()));
 		assertNotNull(roleRepo);
 
-		final Role role1 = DairyFactory.eINSTANCE.createRole();
+		final Role role1 = ModelFactory.eINSTANCE.createRole();
 		role1.setDescription("Test Role #1");
 		role1.setName("testRole1");
 

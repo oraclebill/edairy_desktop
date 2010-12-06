@@ -14,6 +14,10 @@ public class ContainerEditDialogController  extends RecordDialogController<Dairy
 
 	private DairyContainer editContainer = null;
 
+	public ContainerEditDialogController() {
+		super("Dairy Milk Container");
+	}
+	
 
 	@Override
 	public void configureUserRidgets() {

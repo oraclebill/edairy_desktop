@@ -12,7 +12,6 @@ import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -817,58 +816,22 @@ public interface DairyPackage extends EPackage {
 	int EMPLOYEE__DEPARTMENT = ModelPackage.PERSON_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Username</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMPLOYEE__USERNAME = ModelPackage.PERSON_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Password</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMPLOYEE__PASSWORD = ModelPackage.PERSON_FEATURE_COUNT + 6;
-
-	/**
-	 * The feature id for the '<em><b>Local Enabled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMPLOYEE__LOCAL_ENABLED = ModelPackage.PERSON_FEATURE_COUNT + 7;
-
-	/**
-	 * The feature id for the '<em><b>Role</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMPLOYEE__ROLE = ModelPackage.PERSON_FEATURE_COUNT + 8;
-
-	/**
-	 * The feature id for the '<em><b>Password Hashed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMPLOYEE__PASSWORD_HASHED = ModelPackage.PERSON_FEATURE_COUNT + 9;
-
-	/**
 	 * The feature id for the '<em><b>License No</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE__LICENSE_NO = ModelPackage.PERSON_FEATURE_COUNT + 10;
+	int EMPLOYEE__LICENSE_NO = ModelPackage.PERSON_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>System Identity</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPLOYEE__SYSTEM_IDENTITY = ModelPackage.PERSON_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Employee</em>' class.
@@ -877,7 +840,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE_FEATURE_COUNT = ModelPackage.PERSON_FEATURE_COUNT + 11;
+	int EMPLOYEE_FEATURE_COUNT = ModelPackage.PERSON_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyLocationImpl <em>Location</em>}' class.
@@ -2488,153 +2451,6 @@ public interface DairyPackage extends EPackage {
 	int PREFERENCE_KEY_FEATURE_COUNT = 4;
 
 	/**
-	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RoleImpl <em>Role</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.RoleImpl
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getRole()
-	 * @generated
-	 */
-	int ROLE = 19;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE__ID = 0;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE__NAME = 1;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE__DESCRIPTION = 2;
-
-	/**
-	 * The feature id for the '<em><b>Permissions</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE__PERMISSIONS = 3;
-
-	/**
-	 * The number of structural features of the '<em>Role</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE_FEATURE_COUNT = 4;
-
-	/**
-	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.PermissionNamespaceImpl <em>Permission Namespace</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.PermissionNamespaceImpl
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getPermissionNamespace()
-	 * @generated
-	 */
-	int PERMISSION_NAMESPACE = 20;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERMISSION_NAMESPACE__ID = 0;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERMISSION_NAMESPACE__NAME = 1;
-
-	/**
-	 * The number of structural features of the '<em>Permission Namespace</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERMISSION_NAMESPACE_FEATURE_COUNT = 2;
-
-	/**
-	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.PermissionImpl <em>Permission</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.PermissionImpl
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getPermission()
-	 * @generated
-	 */
-	int PERMISSION = 21;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERMISSION__ID = 0;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERMISSION__NAMESPACE = 1;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERMISSION__NAME = 2;
-
-	/**
-	 * The feature id for the '<em><b>Display Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERMISSION__DISPLAY_NAME = 3;
-
-	/**
-	 * The number of structural features of the '<em>Permission</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERMISSION_FEATURE_COUNT = 4;
-
-	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionSessionImpl <em>Collection Session</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2642,7 +2458,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getCollectionSession()
 	 * @generated
 	 */
-	int COLLECTION_SESSION = 22;
+	int COLLECTION_SESSION = 19;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -2697,7 +2513,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getJournalStatus()
 	 * @generated
 	 */
-	int JOURNAL_STATUS = 23;
+	int JOURNAL_STATUS = 20;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus <em>Membership Status</em>}' enum.
@@ -2707,7 +2523,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getMembershipStatus()
 	 * @generated
 	 */
-	int MEMBERSHIP_STATUS = 24;
+	int MEMBERSHIP_STATUS = 21;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.VendorStatus <em>Vendor Status</em>}' enum.
@@ -2717,7 +2533,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getVendorStatus()
 	 * @generated
 	 */
-	int VENDOR_STATUS = 25;
+	int VENDOR_STATUS = 22;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.DairyFunction <em>Function</em>}' enum.
@@ -2727,7 +2543,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getDairyFunction()
 	 * @generated
 	 */
-	int DAIRY_FUNCTION = 26;
+	int DAIRY_FUNCTION = 23;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.PreferenceType <em>Preference Type</em>}' enum.
@@ -2737,7 +2553,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getPreferenceType()
 	 * @generated
 	 */
-	int PREFERENCE_TYPE = 27;
+	int PREFERENCE_TYPE = 24;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType <em>Collection Group Type</em>}' enum.
@@ -2747,17 +2563,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getCollectionGroupType()
 	 * @generated
 	 */
-	int COLLECTION_GROUP_TYPE = 28;
-
-	/**
-	 * The meta object id for the '<em>Permission T</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getPermissionT()
-	 * @generated
-	 */
-	int PERMISSION_T = 29;
+	int COLLECTION_GROUP_TYPE = 25;
 
 
 	/**
@@ -3285,61 +3091,6 @@ public interface DairyPackage extends EPackage {
 	EAttribute getEmployee_Department();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getUsername <em>Username</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Username</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Employee#getUsername()
-	 * @see #getEmployee()
-	 * @generated
-	 */
-	EAttribute getEmployee_Username();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getPassword <em>Password</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Password</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Employee#getPassword()
-	 * @see #getEmployee()
-	 * @generated
-	 */
-	EAttribute getEmployee_Password();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#isLocalEnabled <em>Local Enabled</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Local Enabled</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Employee#isLocalEnabled()
-	 * @see #getEmployee()
-	 * @generated
-	 */
-	EAttribute getEmployee_LocalEnabled();
-
-	/**
-	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getRole <em>Role</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Role</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Employee#getRole()
-	 * @see #getEmployee()
-	 * @generated
-	 */
-	EReference getEmployee_Role();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#isPasswordHashed <em>Password Hashed</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Password Hashed</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Employee#isPasswordHashed()
-	 * @see #getEmployee()
-	 * @generated
-	 */
-	EAttribute getEmployee_PasswordHashed();
-
-	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getLicenseNo <em>License No</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3349,6 +3100,17 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getEmployee_LicenseNo();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getSystemIdentity <em>System Identity</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>System Identity</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Employee#getSystemIdentity()
+	 * @see #getEmployee()
+	 * @generated
+	 */
+	EReference getEmployee_SystemIdentity();
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.DairyLocation <em>Location</em>}'.
@@ -4766,146 +4528,6 @@ public interface DairyPackage extends EPackage {
 	EAttribute getPreferenceKey_Type();
 
 	/**
-	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.Role <em>Role</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Role</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Role
-	 * @generated
-	 */
-	EClass getRole();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Role#getId <em>Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Role#getId()
-	 * @see #getRole()
-	 * @generated
-	 */
-	EAttribute getRole_Id();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Role#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Role#getName()
-	 * @see #getRole()
-	 * @generated
-	 */
-	EAttribute getRole_Name();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Role#getDescription <em>Description</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Role#getDescription()
-	 * @see #getRole()
-	 * @generated
-	 */
-	EAttribute getRole_Description();
-
-	/**
-	 * Returns the meta object for the attribute list '{@link com.agritrace.edairy.desktop.common.model.dairy.Role#getPermissions <em>Permissions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Permissions</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Role#getPermissions()
-	 * @see #getRole()
-	 * @generated
-	 */
-	EAttribute getRole_Permissions();
-
-	/**
-	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.PermissionNamespace <em>Permission Namespace</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Permission Namespace</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.PermissionNamespace
-	 * @generated
-	 */
-	EClass getPermissionNamespace();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.PermissionNamespace#getId <em>Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.PermissionNamespace#getId()
-	 * @see #getPermissionNamespace()
-	 * @generated
-	 */
-	EAttribute getPermissionNamespace_Id();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.PermissionNamespace#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.PermissionNamespace#getName()
-	 * @see #getPermissionNamespace()
-	 * @generated
-	 */
-	EAttribute getPermissionNamespace_Name();
-
-	/**
-	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.Permission <em>Permission</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Permission</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Permission
-	 * @generated
-	 */
-	EClass getPermission();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Permission#getId <em>Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Permission#getId()
-	 * @see #getPermission()
-	 * @generated
-	 */
-	EAttribute getPermission_Id();
-
-	/**
-	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.Permission#getNamespace <em>Namespace</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Namespace</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Permission#getNamespace()
-	 * @see #getPermission()
-	 * @generated
-	 */
-	EReference getPermission_Namespace();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Permission#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Permission#getName()
-	 * @see #getPermission()
-	 * @generated
-	 */
-	EAttribute getPermission_Name();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Permission#getDisplayName <em>Display Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Display Name</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Permission#getDisplayName()
-	 * @see #getPermission()
-	 * @generated
-	 */
-	EAttribute getPermission_DisplayName();
-
-	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionSession <em>Collection Session</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5018,17 +4640,6 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getCollectionGroupType();
-
-	/**
-	 * Returns the meta object for data type '{@link com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission <em>Permission T</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Permission T</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission
-	 * @model instanceClass="com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission"
-	 * @generated
-	 */
-	EDataType getPermissionT();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -5445,52 +5056,20 @@ public interface DairyPackage extends EPackage {
 		EAttribute EMPLOYEE__DEPARTMENT = eINSTANCE.getEmployee_Department();
 
 		/**
-		 * The meta object literal for the '<em><b>Username</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EMPLOYEE__USERNAME = eINSTANCE.getEmployee_Username();
-
-		/**
-		 * The meta object literal for the '<em><b>Password</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EMPLOYEE__PASSWORD = eINSTANCE.getEmployee_Password();
-
-		/**
-		 * The meta object literal for the '<em><b>Local Enabled</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EMPLOYEE__LOCAL_ENABLED = eINSTANCE.getEmployee_LocalEnabled();
-
-		/**
-		 * The meta object literal for the '<em><b>Role</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EMPLOYEE__ROLE = eINSTANCE.getEmployee_Role();
-
-		/**
-		 * The meta object literal for the '<em><b>Password Hashed</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EMPLOYEE__PASSWORD_HASHED = eINSTANCE.getEmployee_PasswordHashed();
-
-		/**
 		 * The meta object literal for the '<em><b>License No</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute EMPLOYEE__LICENSE_NO = eINSTANCE.getEmployee_LicenseNo();
+
+		/**
+		 * The meta object literal for the '<em><b>System Identity</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EMPLOYEE__SYSTEM_IDENTITY = eINSTANCE.getEmployee_SystemIdentity();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyLocationImpl <em>Location</em>}' class.
@@ -6563,116 +6142,6 @@ public interface DairyPackage extends EPackage {
 		EAttribute PREFERENCE_KEY__TYPE = eINSTANCE.getPreferenceKey_Type();
 
 		/**
-		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RoleImpl <em>Role</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.RoleImpl
-		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getRole()
-		 * @generated
-		 */
-		EClass ROLE = eINSTANCE.getRole();
-
-		/**
-		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ROLE__ID = eINSTANCE.getRole_Id();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ROLE__NAME = eINSTANCE.getRole_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ROLE__DESCRIPTION = eINSTANCE.getRole_Description();
-
-		/**
-		 * The meta object literal for the '<em><b>Permissions</b></em>' attribute list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ROLE__PERMISSIONS = eINSTANCE.getRole_Permissions();
-
-		/**
-		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.PermissionNamespaceImpl <em>Permission Namespace</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.PermissionNamespaceImpl
-		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getPermissionNamespace()
-		 * @generated
-		 */
-		EClass PERMISSION_NAMESPACE = eINSTANCE.getPermissionNamespace();
-
-		/**
-		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PERMISSION_NAMESPACE__ID = eINSTANCE.getPermissionNamespace_Id();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PERMISSION_NAMESPACE__NAME = eINSTANCE.getPermissionNamespace_Name();
-
-		/**
-		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.PermissionImpl <em>Permission</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.PermissionImpl
-		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getPermission()
-		 * @generated
-		 */
-		EClass PERMISSION = eINSTANCE.getPermission();
-
-		/**
-		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PERMISSION__ID = eINSTANCE.getPermission_Id();
-
-		/**
-		 * The meta object literal for the '<em><b>Namespace</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PERMISSION__NAMESPACE = eINSTANCE.getPermission_Namespace();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PERMISSION__NAME = eINSTANCE.getPermission_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Display Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PERMISSION__DISPLAY_NAME = eINSTANCE.getPermission_DisplayName();
-
-		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionSessionImpl <em>Collection Session</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -6773,16 +6242,6 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum COLLECTION_GROUP_TYPE = eINSTANCE.getCollectionGroupType();
-
-		/**
-		 * The meta object literal for the '<em>Permission T</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission
-		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getPermissionT()
-		 * @generated
-		 */
-		EDataType PERMISSION_T = eINSTANCE.getPermissionT();
 
 	}
 

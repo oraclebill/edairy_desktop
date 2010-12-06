@@ -4,12 +4,13 @@
  *
  * $Id$
  */
-package com.agritrace.edairy.desktop.common.model.dairy;
-
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
+package com.agritrace.edairy.desktop.common.model.base;
 
 import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,14 +20,14 @@ import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Role#getId <em>Id</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Role#getName <em>Name</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Role#getDescription <em>Description</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Role#getPermissions <em>Permissions</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Role#getId <em>Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Role#getName <em>Name</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Role#getDescription <em>Description</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Role#getPermissions <em>Permissions</em>}</li>
  * </ul>
  * </p>
  *
- * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getRole()
+ * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getRole()
  * @model
  * @generated
  */
@@ -41,14 +42,14 @@ public interface Role extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(Long)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getRole_Id()
+	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getRole_Id()
 	 * @model id="true" dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID" required="true"
 	 * @generated
 	 */
 	Long getId();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Role#getId <em>Id</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.base.Role#getId <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Id</em>' attribute.
@@ -67,14 +68,14 @@ public interface Role extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getRole_Name()
+	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getRole_Name()
 	 * @model annotation="teneo.jpa appinfo='@Column(unique=\"true\")'"
 	 * @generated
 	 */
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Role#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.base.Role#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Name</em>' attribute.
@@ -93,14 +94,14 @@ public interface Role extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Description</em>' attribute.
 	 * @see #setDescription(String)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getRole_Description()
+	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getRole_Description()
 	 * @model
 	 * @generated
 	 */
 	String getDescription();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Role#getDescription <em>Description</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.base.Role#getDescription <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Description</em>' attribute.
@@ -119,8 +120,8 @@ public interface Role extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Permissions</em>' attribute list.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getRole_Permissions()
-	 * @model dataType="com.agritrace.edairy.desktop.common.model.dairy.PermissionT"
+	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getRole_Permissions()
+	 * @model dataType="com.agritrace.edairy.desktop.common.model.base.PermissionT"
 	 * @generated
 	 */
 	EList<UIPermission> getPermissions();

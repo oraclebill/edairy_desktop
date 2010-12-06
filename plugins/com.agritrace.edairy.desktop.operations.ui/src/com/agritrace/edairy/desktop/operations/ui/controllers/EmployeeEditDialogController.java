@@ -3,7 +3,10 @@ package com.agritrace.edairy.desktop.operations.ui.controllers;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.list.WritableList;
+import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.emf.databinding.EMFProperties;
+import org.eclipse.emf.databinding.FeaturePath;
 import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.riena.core.util.StringUtils;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
@@ -13,10 +16,12 @@ import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 
 import com.agritrace.edairy.desktop.common.model.base.Location;
+import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+import com.agritrace.edairy.desktop.common.model.base.Role;
+import com.agritrace.edairy.desktop.common.model.base.SystemUser;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
-import com.agritrace.edairy.desktop.common.model.dairy.Role;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
@@ -48,6 +53,7 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 	@Inject
 	public EmployeeEditDialogController(@Named("db") final IPersistentPreferenceStore store,
 			final IRepository<Role> roleRepo) {
+		super("Employee");
 		this.preferenceStore = store;
 		this.roleRepo = roleRepo;
 	}
@@ -65,7 +71,8 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 
 		// customer id
 		employeeId = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_EMPLOYEE_NUM);
-		employeeId.bindToModel(EMFObservables.observeValue(editEmployee, DairyPackage.Literals.EMPLOYEE__EMPLOYEE_NUMBER));
+		employeeId.bindToModel(EMFObservables.observeValue(editEmployee,
+				DairyPackage.Literals.EMPLOYEE__EMPLOYEE_NUMBER));
 		employeeId.setOutputOnly(false);
 		employeeId.setMandatory(true);
 
@@ -83,7 +90,8 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 				DairyPackage.Literals.EMPLOYEE__JOB_FUNCTION);
 		addTextMap(EmployeeBindingConstants.BIND_ID_SINCE, DairyPackage.Literals.EMPLOYEE__START_DATE);
 		addTextMap(EmployeeBindingConstants.BIND_ID_OPR_CODE, DairyPackage.Literals.EMPLOYEE__OPERATOR_CODE);
-		addTextMap(EmployeeBindingConstants.BIND_ID_USERNAME, DairyPackage.Literals.EMPLOYEE__USERNAME);
+		addTextMap(EmployeeBindingConstants.BIND_ID_USERNAME, DairyPackage.Literals.EMPLOYEE__SYSTEM_IDENTITY,
+				ModelPackage.Literals.SYSTEM_USER__USERNAME);
 		addTextMap(EmployeeBindingConstants.BIND_ID_LICENSE_NO, DairyPackage.Literals.EMPLOYEE__LICENSE_NO);
 
 		getRidget(IComboRidget.class, EmployeeBindingConstants.BIND_ID_POSITION).addSelectionListener(
@@ -96,16 +104,18 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 
 		// Role needs special care
 		final IComboRidget roleRidget = getRidget(IComboRidget.class, EmployeeBindingConstants.BIND_ID_SEC_ROLE);
-		roleRidget.bindToModel(new WritableList(allRoles, Role.class), Role.class, "getName",
-				EMFObservables.observeValue(getWorkingCopy(), DairyPackage.Literals.EMPLOYEE__ROLE));
+		roleRidget.bindToModel(new WritableList(allRoles, Role.class), Role.class, "getName", EMFProperties.value(
+				FeaturePath.fromList(DairyPackage.Literals.EMPLOYEE__SYSTEM_IDENTITY,
+						ModelPackage.Literals.SYSTEM_USER__ROLE)).observe(getWorkingCopy()));
 
 		licenseNo = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_LICENSE_NO);
 		// We pointedly do not display the current password.
 		passwordRidget = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_PASSWORD);
 
 		final IToggleButtonRidget localEnabled = (IToggleButtonRidget) getRidget(EmployeeBindingConstants.BIND_ID_LOCAL_ENABLED);
-		localEnabled.bindToModel(EMFObservables.observeValue(getWorkingCopy(),
-				DairyPackage.Literals.EMPLOYEE__LOCAL_ENABLED));
+		localEnabled.bindToModel(EMFProperties.value(
+				FeaturePath.fromList(DairyPackage.Literals.EMPLOYEE__SYSTEM_IDENTITY,
+						ModelPackage.Literals.SYSTEM_USER__LOCAL_ENABLED)).observe(getWorkingCopy()));
 
 		// Configure address group
 		final AddressGroupWidgetController addressGroupController = new AddressGroupWidgetController(this);
@@ -140,12 +150,18 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		if (!StringUtils.isEmpty(password)) {
 			final Employee employee = getWorkingCopy();
 
+			SystemUser systemUser = employee.getSystemIdentity();
+			if (systemUser == null) {
+				systemUser = ModelFactory.eINSTANCE.createSystemUser();
+				employee.setSystemIdentity(systemUser);
+			}
+			
 			if (preferenceStore.getBoolean(SystemSettingsController.ENCRYPT_PASSWORDS)) {
-				employee.setPassword(PrincipalManager.getInstance().hashPassword(password));
-				employee.setPasswordHashed(true);
+				systemUser.setPassword(PrincipalManager.getInstance().hashPassword(password));
+				systemUser.setPasswordHashed(true);
 			} else {
-				employee.setPassword(password);
-				employee.setPasswordHashed(false);
+				systemUser.setPassword(password);
+				systemUser.setPasswordHashed(false);
 			}
 		}
 

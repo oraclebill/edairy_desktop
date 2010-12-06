@@ -197,33 +197,6 @@ public interface DairyFactory extends EFactory {
 	PreferenceKey createPreferenceKey();
 
 	/**
-	 * Returns a new object of class '<em>Role</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Role</em>'.
-	 * @generated
-	 */
-	Role createRole();
-
-	/**
-	 * Returns a new object of class '<em>Permission Namespace</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Permission Namespace</em>'.
-	 * @generated
-	 */
-	PermissionNamespace createPermissionNamespace();
-
-	/**
-	 * Returns a new object of class '<em>Permission</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Permission</em>'.
-	 * @generated
-	 */
-	Permission createPermission();
-
-	/**
 	 * Returns a new object of class '<em>Collection Session</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -8,6 +8,8 @@ package com.agritrace.edairy.desktop.common.model.base.impl;
 
 import com.agritrace.edairy.desktop.common.model.base.*;
 
+import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -73,6 +75,10 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.LOCATION: return createLocation();
 			case ModelPackage.CONTACT_METHOD: return createContactMethod();
 			case ModelPackage.IMAGE_ENTRY: return createImageEntry();
+			case ModelPackage.SYSTEM_USER: return createSystemUser();
+			case ModelPackage.ROLE: return createRole();
+			case ModelPackage.PERMISSION_NAMESPACE: return createPermissionNamespace();
+			case ModelPackage.PERMISSION: return createPermission();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -100,6 +106,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 				return createUniqueIDFromString(eDataType, initialValue);
 			case ModelPackage.IMAGE_REFERENCE:
 				return createImageReferenceFromString(eDataType, initialValue);
+			case ModelPackage.PERMISSION_T:
+				return createPermissionTFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -127,6 +135,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 				return convertUniqueIDToString(eDataType, instanceValue);
 			case ModelPackage.IMAGE_REFERENCE:
 				return convertImageReferenceToString(eDataType, instanceValue);
+			case ModelPackage.PERMISSION_T:
+				return convertPermissionTToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -250,6 +260,46 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public ImageEntry createImageEntry() {
 		ImageEntryImpl imageEntry = new ImageEntryImpl();
 		return imageEntry;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SystemUser createSystemUser() {
+		SystemUserImpl systemUser = new SystemUserImpl();
+		return systemUser;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Role createRole() {
+		RoleImpl role = new RoleImpl();
+		return role;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PermissionNamespace createPermissionNamespace() {
+		PermissionNamespaceImpl permissionNamespace = new PermissionNamespaceImpl();
+		return permissionNamespace;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Permission createPermission() {
+		PermissionImpl permission = new PermissionImpl();
+		return permission;
 	}
 
 	/**
@@ -383,6 +433,24 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * @generated
 	 */
 	public String convertImageReferenceToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UIPermission createPermissionTFromString(EDataType eDataType, String initialValue) {
+		return (UIPermission)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertPermissionTToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

@@ -31,9 +31,9 @@ import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;
 public class SupplierDialogController extends RecordDialogController<Supplier> {
 	IController parentController;
 
-	// public SupplierListDialogController(Supplier toBeEditedOrViewed) {
-	// super(toBeEditedOrViewed);
-	// }
+	 public SupplierDialogController() {
+		 super("Supplier");
+	 }
 
 	@Override
 	public void configureUserRidgets() {

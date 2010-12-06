@@ -4,10 +4,10 @@
  *
  * $Id$
  */
-package com.agritrace.edairy.desktop.common.model.dairy.impl;
+package com.agritrace.edairy.desktop.common.model.base.impl;
 
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.PermissionNamespace;
+import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+import com.agritrace.edairy.desktop.common.model.base.PermissionNamespace;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -23,8 +23,8 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.PermissionNamespaceImpl#getId <em>Id</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.PermissionNamespaceImpl#getName <em>Name</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.PermissionNamespaceImpl#getId <em>Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.PermissionNamespaceImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -87,7 +87,7 @@ public class PermissionNamespaceImpl extends EObjectImpl implements PermissionNa
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return DairyPackage.Literals.PERMISSION_NAMESPACE;
+		return ModelPackage.Literals.PERMISSION_NAMESPACE;
 	}
 
 	/**
@@ -108,7 +108,7 @@ public class PermissionNamespaceImpl extends EObjectImpl implements PermissionNa
 		Long oldId = id;
 		id = newId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.PERMISSION_NAMESPACE__ID, oldId, id));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERMISSION_NAMESPACE__ID, oldId, id));
 	}
 
 	/**
@@ -129,7 +129,7 @@ public class PermissionNamespaceImpl extends EObjectImpl implements PermissionNa
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.PERMISSION_NAMESPACE__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERMISSION_NAMESPACE__NAME, oldName, name));
 	}
 
 	/**
@@ -140,9 +140,9 @@ public class PermissionNamespaceImpl extends EObjectImpl implements PermissionNa
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case DairyPackage.PERMISSION_NAMESPACE__ID:
+			case ModelPackage.PERMISSION_NAMESPACE__ID:
 				return getId();
-			case DairyPackage.PERMISSION_NAMESPACE__NAME:
+			case ModelPackage.PERMISSION_NAMESPACE__NAME:
 				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -156,10 +156,10 @@ public class PermissionNamespaceImpl extends EObjectImpl implements PermissionNa
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case DairyPackage.PERMISSION_NAMESPACE__ID:
+			case ModelPackage.PERMISSION_NAMESPACE__ID:
 				setId((Long)newValue);
 				return;
-			case DairyPackage.PERMISSION_NAMESPACE__NAME:
+			case ModelPackage.PERMISSION_NAMESPACE__NAME:
 				setName((String)newValue);
 				return;
 		}
@@ -174,10 +174,10 @@ public class PermissionNamespaceImpl extends EObjectImpl implements PermissionNa
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case DairyPackage.PERMISSION_NAMESPACE__ID:
+			case ModelPackage.PERMISSION_NAMESPACE__ID:
 				setId(ID_EDEFAULT);
 				return;
-			case DairyPackage.PERMISSION_NAMESPACE__NAME:
+			case ModelPackage.PERMISSION_NAMESPACE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
 		}
@@ -192,9 +192,9 @@ public class PermissionNamespaceImpl extends EObjectImpl implements PermissionNa
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case DairyPackage.PERMISSION_NAMESPACE__ID:
+			case ModelPackage.PERMISSION_NAMESPACE__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-			case DairyPackage.PERMISSION_NAMESPACE__NAME:
+			case ModelPackage.PERMISSION_NAMESPACE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);

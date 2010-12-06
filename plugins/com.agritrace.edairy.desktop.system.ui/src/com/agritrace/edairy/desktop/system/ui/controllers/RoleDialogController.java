@@ -22,8 +22,8 @@ import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.Role;
+import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+import com.agritrace.edairy.desktop.common.model.base.Role;
 import com.agritrace.edairy.desktop.common.model.dairy.security.Namespace;
 import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
@@ -39,7 +39,9 @@ public final class RoleDialogController extends RecordDialogController<Role> {
 	private List<UIPermission> selectedModelPermissions = new ArrayList<UIPermission>();
 
 	@Inject
-	public RoleDialogController() {}
+	public RoleDialogController() {
+		super("System Role");
+	}
 
 	@Override
 	protected void configureUserRidgets() {
@@ -62,9 +64,9 @@ public final class RoleDialogController extends RecordDialogController<Role> {
 
 		getWindowRidget().setTitle(workingCopy.getId() == null ? "Add Role" : "Edit Role");
 
-		addTextMap(RoleBinding.BIND_ID_ROLE_NAME.name(), DairyPackage.Literals.ROLE__NAME);
+		addTextMap(RoleBinding.BIND_ID_ROLE_NAME.name(), ModelPackage.Literals.ROLE__NAME);
 		getRidget(ITextRidget.class, RoleBinding.BIND_ID_ROLE_NAME.name()).setMandatory(true);
-		addTextMap(RoleBinding.BIND_ID_ROLE_DESCRIPTION.name(), DairyPackage.Literals.ROLE__DESCRIPTION);
+		addTextMap(RoleBinding.BIND_ID_ROLE_DESCRIPTION.name(), ModelPackage.Literals.ROLE__DESCRIPTION);
 
 		final IComboRidget nsCombo = getRidget(IComboRidget.class, RoleBinding.NAMESPACE_COMBO.name());
 		nsCombo.bindToModel(nsList, "list", Namespace.class, null /* toString */, nsList, "selected");

@@ -4,20 +4,25 @@
  *
  * $Id$
  */
-package com.agritrace.edairy.desktop.common.model.dairy.impl;
+package com.agritrace.edairy.desktop.common.model.base.impl;
+
+import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+import com.agritrace.edairy.desktop.common.model.base.Role;
+
+import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.Role;
-import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,10 +31,10 @@ import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RoleImpl#getId <em>Id</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RoleImpl#getName <em>Name</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RoleImpl#getDescription <em>Description</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RoleImpl#getPermissions <em>Permissions</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.RoleImpl#getId <em>Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.RoleImpl#getName <em>Name</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.RoleImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.RoleImpl#getPermissions <em>Permissions</em>}</li>
  * </ul>
  * </p>
  *
@@ -122,7 +127,7 @@ public class RoleImpl extends EObjectImpl implements Role {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return DairyPackage.Literals.ROLE;
+		return ModelPackage.Literals.ROLE;
 	}
 
 	/**
@@ -143,7 +148,7 @@ public class RoleImpl extends EObjectImpl implements Role {
 		Long oldId = id;
 		id = newId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ROLE__ID, oldId, id));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ROLE__ID, oldId, id));
 	}
 
 	/**
@@ -164,7 +169,7 @@ public class RoleImpl extends EObjectImpl implements Role {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ROLE__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ROLE__NAME, oldName, name));
 	}
 
 	/**
@@ -185,7 +190,7 @@ public class RoleImpl extends EObjectImpl implements Role {
 		String oldDescription = description;
 		description = newDescription;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.ROLE__DESCRIPTION, oldDescription, description));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ROLE__DESCRIPTION, oldDescription, description));
 	}
 
 	/**
@@ -195,7 +200,7 @@ public class RoleImpl extends EObjectImpl implements Role {
 	 */
 	public EList<UIPermission> getPermissions() {
 		if (permissions == null) {
-			permissions = new EDataTypeUniqueEList<UIPermission>(UIPermission.class, this, DairyPackage.ROLE__PERMISSIONS);
+			permissions = new EDataTypeUniqueEList<UIPermission>(UIPermission.class, this, ModelPackage.ROLE__PERMISSIONS);
 		}
 		return permissions;
 	}
@@ -208,13 +213,13 @@ public class RoleImpl extends EObjectImpl implements Role {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case DairyPackage.ROLE__ID:
+			case ModelPackage.ROLE__ID:
 				return getId();
-			case DairyPackage.ROLE__NAME:
+			case ModelPackage.ROLE__NAME:
 				return getName();
-			case DairyPackage.ROLE__DESCRIPTION:
+			case ModelPackage.ROLE__DESCRIPTION:
 				return getDescription();
-			case DairyPackage.ROLE__PERMISSIONS:
+			case ModelPackage.ROLE__PERMISSIONS:
 				return getPermissions();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -229,16 +234,16 @@ public class RoleImpl extends EObjectImpl implements Role {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case DairyPackage.ROLE__ID:
+			case ModelPackage.ROLE__ID:
 				setId((Long)newValue);
 				return;
-			case DairyPackage.ROLE__NAME:
+			case ModelPackage.ROLE__NAME:
 				setName((String)newValue);
 				return;
-			case DairyPackage.ROLE__DESCRIPTION:
+			case ModelPackage.ROLE__DESCRIPTION:
 				setDescription((String)newValue);
 				return;
-			case DairyPackage.ROLE__PERMISSIONS:
+			case ModelPackage.ROLE__PERMISSIONS:
 				getPermissions().clear();
 				getPermissions().addAll((Collection<? extends UIPermission>)newValue);
 				return;
@@ -254,16 +259,16 @@ public class RoleImpl extends EObjectImpl implements Role {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case DairyPackage.ROLE__ID:
+			case ModelPackage.ROLE__ID:
 				setId(ID_EDEFAULT);
 				return;
-			case DairyPackage.ROLE__NAME:
+			case ModelPackage.ROLE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case DairyPackage.ROLE__DESCRIPTION:
+			case ModelPackage.ROLE__DESCRIPTION:
 				setDescription(DESCRIPTION_EDEFAULT);
 				return;
-			case DairyPackage.ROLE__PERMISSIONS:
+			case ModelPackage.ROLE__PERMISSIONS:
 				getPermissions().clear();
 				return;
 		}
@@ -278,13 +283,13 @@ public class RoleImpl extends EObjectImpl implements Role {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case DairyPackage.ROLE__ID:
+			case ModelPackage.ROLE__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-			case DairyPackage.ROLE__NAME:
+			case ModelPackage.ROLE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case DairyPackage.ROLE__DESCRIPTION:
+			case ModelPackage.ROLE__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
-			case DairyPackage.ROLE__PERMISSIONS:
+			case ModelPackage.ROLE__PERMISSIONS:
 				return permissions != null && !permissions.isEmpty();
 		}
 		return super.eIsSet(featureID);

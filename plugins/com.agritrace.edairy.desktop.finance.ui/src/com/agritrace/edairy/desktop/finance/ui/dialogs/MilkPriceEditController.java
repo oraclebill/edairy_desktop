@@ -88,7 +88,7 @@ public class MilkPriceEditController extends RecordDialogController<MemberPaymen
 	};
 
 	public MilkPriceEditController() {
-
+		super("Milk Price");
 	}
 
 	@Override

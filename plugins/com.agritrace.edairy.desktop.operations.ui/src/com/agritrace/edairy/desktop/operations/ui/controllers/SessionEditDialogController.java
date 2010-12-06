@@ -8,6 +8,11 @@ import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController
 import com.agritrace.edairy.desktop.operations.ui.dialogs.SessionBindingConstants;
 
 public class SessionEditDialogController extends RecordDialogController<CollectionSession> {
+	
+	public SessionEditDialogController() {
+		super("Collection Session");
+	}
+	
 	@Override
 	protected void configureUserRidgets() {
 		getWindowRidget().setTitle("Edit Session");

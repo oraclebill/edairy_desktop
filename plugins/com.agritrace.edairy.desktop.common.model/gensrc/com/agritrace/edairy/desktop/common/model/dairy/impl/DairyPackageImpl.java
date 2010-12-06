@@ -29,12 +29,9 @@ import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus;
-import com.agritrace.edairy.desktop.common.model.dairy.Permission;
-import com.agritrace.edairy.desktop.common.model.dairy.PermissionNamespace;
 import com.agritrace.edairy.desktop.common.model.dairy.Preference;
 import com.agritrace.edairy.desktop.common.model.dairy.PreferenceKey;
 import com.agritrace.edairy.desktop.common.model.dairy.PreferenceType;
-import com.agritrace.edairy.desktop.common.model.dairy.Role;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
@@ -46,7 +43,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 
 import com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountPackageImpl;
 
-import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 
 import com.agritrace.edairy.desktop.common.model.requests.impl.RequestsPackageImpl;
@@ -57,7 +53,6 @@ import com.agritrace.edairy.desktop.common.model.tracking.impl.TrackingPackageIm
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -209,27 +204,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass roleEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass permissionNamespaceEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass permissionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass collectionSessionEClass = null;
 
 	/**
@@ -273,13 +247,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	private EEnum collectionGroupTypeEEnum = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EDataType permissionTEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -793,7 +760,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEmployee_Username() {
+	public EAttribute getEmployee_LicenseNo() {
 		return (EAttribute)employeeEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -802,44 +769,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEmployee_Password() {
-		return (EAttribute)employeeEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEmployee_LocalEnabled() {
-		return (EAttribute)employeeEClass.getEStructuralFeatures().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEmployee_Role() {
-		return (EReference)employeeEClass.getEStructuralFeatures().get(8);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEmployee_PasswordHashed() {
-		return (EAttribute)employeeEClass.getEStructuralFeatures().get(9);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEmployee_LicenseNo() {
-		return (EAttribute)employeeEClass.getEStructuralFeatures().get(10);
+	public EReference getEmployee_SystemIdentity() {
+		return (EReference)employeeEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -2017,123 +1948,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getRole() {
-		return roleEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getRole_Id() {
-		return (EAttribute)roleEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getRole_Name() {
-		return (EAttribute)roleEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getRole_Description() {
-		return (EAttribute)roleEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getRole_Permissions() {
-		return (EAttribute)roleEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getPermissionNamespace() {
-		return permissionNamespaceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getPermissionNamespace_Id() {
-		return (EAttribute)permissionNamespaceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getPermissionNamespace_Name() {
-		return (EAttribute)permissionNamespaceEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getPermission() {
-		return permissionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getPermission_Id() {
-		return (EAttribute)permissionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getPermission_Namespace() {
-		return (EReference)permissionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getPermission_Name() {
-		return (EAttribute)permissionEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getPermission_DisplayName() {
-		return (EAttribute)permissionEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getCollectionSession() {
 		return collectionSessionEClass;
 	}
@@ -2233,15 +2047,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EDataType getPermissionT() {
-		return permissionTEDataType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public DairyFactory getDairyFactory() {
 		return (DairyFactory)getEFactoryInstance();
 	}
@@ -2316,12 +2121,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(employeeEClass, EMPLOYEE__START_DATE);
 		createEAttribute(employeeEClass, EMPLOYEE__JOB_FUNCTION);
 		createEAttribute(employeeEClass, EMPLOYEE__DEPARTMENT);
-		createEAttribute(employeeEClass, EMPLOYEE__USERNAME);
-		createEAttribute(employeeEClass, EMPLOYEE__PASSWORD);
-		createEAttribute(employeeEClass, EMPLOYEE__LOCAL_ENABLED);
-		createEReference(employeeEClass, EMPLOYEE__ROLE);
-		createEAttribute(employeeEClass, EMPLOYEE__PASSWORD_HASHED);
 		createEAttribute(employeeEClass, EMPLOYEE__LICENSE_NO);
+		createEReference(employeeEClass, EMPLOYEE__SYSTEM_IDENTITY);
 
 		dairyLocationEClass = createEClass(DAIRY_LOCATION);
 		createEAttribute(dairyLocationEClass, DAIRY_LOCATION__ID);
@@ -2468,22 +2269,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(preferenceKeyEClass, PREFERENCE_KEY__DEFAULT_VALUE);
 		createEAttribute(preferenceKeyEClass, PREFERENCE_KEY__TYPE);
 
-		roleEClass = createEClass(ROLE);
-		createEAttribute(roleEClass, ROLE__ID);
-		createEAttribute(roleEClass, ROLE__NAME);
-		createEAttribute(roleEClass, ROLE__DESCRIPTION);
-		createEAttribute(roleEClass, ROLE__PERMISSIONS);
-
-		permissionNamespaceEClass = createEClass(PERMISSION_NAMESPACE);
-		createEAttribute(permissionNamespaceEClass, PERMISSION_NAMESPACE__ID);
-		createEAttribute(permissionNamespaceEClass, PERMISSION_NAMESPACE__NAME);
-
-		permissionEClass = createEClass(PERMISSION);
-		createEAttribute(permissionEClass, PERMISSION__ID);
-		createEReference(permissionEClass, PERMISSION__NAMESPACE);
-		createEAttribute(permissionEClass, PERMISSION__NAME);
-		createEAttribute(permissionEClass, PERMISSION__DISPLAY_NAME);
-
 		collectionSessionEClass = createEClass(COLLECTION_SESSION);
 		createEAttribute(collectionSessionEClass, COLLECTION_SESSION__ID);
 		createEAttribute(collectionSessionEClass, COLLECTION_SESSION__CODE);
@@ -2497,9 +2282,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		dairyFunctionEEnum = createEEnum(DAIRY_FUNCTION);
 		preferenceTypeEEnum = createEEnum(PREFERENCE_TYPE);
 		collectionGroupTypeEEnum = createEEnum(COLLECTION_GROUP_TYPE);
-
-		// Create data types
-		permissionTEDataType = createEDataType(PERMISSION_T);
 	}
 
 	/**
@@ -2598,12 +2380,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getEmployee_StartDate(), ecorePackage.getEDate(), "startDate", null, 1, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEmployee_JobFunction(), ecorePackage.getEString(), "jobFunction", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEmployee_Department(), ecorePackage.getEString(), "department", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEmployee_Username(), ecorePackage.getEString(), "username", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEmployee_Password(), ecorePackage.getEString(), "password", "", 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEmployee_LocalEnabled(), ecorePackage.getEBoolean(), "localEnabled", "true", 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEmployee_Role(), this.getRole(), null, "role", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEmployee_PasswordHashed(), ecorePackage.getEBoolean(), "passwordHashed", "false", 1, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEmployee_LicenseNo(), ecorePackage.getEString(), "licenseNo", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEmployee_SystemIdentity(), theModelPackage.getSystemUser(), theModelPackage.getSystemUser_RelatedEmployee(), "systemIdentity", null, 0, 1, Employee.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(employeeEClass, ecorePackage.getEString(), "getNameAndLicense", 1, 1, !IS_UNIQUE, !IS_ORDERED);
 
@@ -2758,22 +2536,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getPreferenceKey_DefaultValue(), ecorePackage.getEString(), "defaultValue", null, 0, 1, PreferenceKey.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPreferenceKey_Type(), this.getPreferenceType(), "type", null, 0, 1, PreferenceKey.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(roleEClass, Role.class, "Role", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getRole_Id(), theModelPackage.getUniqueID(), "id", null, 1, 1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getRole_Name(), ecorePackage.getEString(), "name", null, 0, 1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getRole_Description(), ecorePackage.getEString(), "description", null, 0, 1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getRole_Permissions(), this.getPermissionT(), "permissions", null, 0, -1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(permissionNamespaceEClass, PermissionNamespace.class, "PermissionNamespace", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPermissionNamespace_Id(), theModelPackage.getUniqueID(), "id", null, 1, 1, PermissionNamespace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPermissionNamespace_Name(), ecorePackage.getEString(), "name", null, 0, 1, PermissionNamespace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(permissionEClass, Permission.class, "Permission", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPermission_Id(), theModelPackage.getUniqueID(), "id", null, 1, 1, Permission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPermission_Namespace(), this.getPermissionNamespace(), null, "namespace", null, 0, 1, Permission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPermission_Name(), ecorePackage.getEString(), "name", null, 0, 1, Permission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPermission_DisplayName(), ecorePackage.getEString(), "displayName", null, 0, 1, Permission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(collectionSessionEClass, CollectionSession.class, "CollectionSession", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCollectionSession_Id(), theModelPackage.getUniqueID(), "id", null, 1, 1, CollectionSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionSession_Code(), ecorePackage.getEString(), "code", null, 0, 1, CollectionSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2820,9 +2582,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		addEEnumLiteral(collectionGroupTypeEEnum, CollectionGroupType.SCALE_GROUP);
 		addEEnumLiteral(collectionGroupTypeEEnum, CollectionGroupType.JOURNAL_GROUP);
 
-		// Initialize data types
-		initEDataType(permissionTEDataType, UIPermission.class, "PermissionT", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-
 		// Create resource
 		createResource(eNS_URI);
 
@@ -2861,7 +2620,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		   new String[] {
 			 "name", "id",
 			 "kind", "elementOnly"
-		   });				
+		   });		
 		addAnnotation
 		  (getDairyLocation_Id(), 
 		   source, 
@@ -2942,7 +2701,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		   new String[] {
 			 "name", "id",
 			 "kind", "elementOnly"
-		   });			
+		   });	
 	}
 
 	/**
@@ -2964,19 +2723,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		   source, 
 		   new String[] {
 			 "appinfo", "@Embedded"
-		   });				
-		addAnnotation
-		  (getEmployee_Username(), 
-		   source, 
-		   new String[] {
-			 "appinfo", "@Column(unique=\"true\")"
-		   });		
-		addAnnotation
-		  (getEmployee_Password(), 
-		   source, 
-		   new String[] {
-			 "appinfo", "@Column(length=64)"
-		   });			
+		   });					
 		addAnnotation
 		  (getDairyLocation_Id(), 
 		   source, 
@@ -3031,18 +2778,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		   new String[] {
 			 "appinfo", "@Embedded"
 		   });				
-		addAnnotation
-		  (getRole_Name(), 
-		   source, 
-		   new String[] {
-			 "appinfo", "@Column(unique=\"true\")"
-		   });		
-		addAnnotation
-		  (getPermissionNamespace_Name(), 
-		   source, 
-		   new String[] {
-			 "appinfo", "@Column(unique=\"true\")"
-		   });		
 		addAnnotation
 		  (getCollectionSession_Code(), 
 		   source, 

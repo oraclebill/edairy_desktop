@@ -8,6 +8,7 @@ package com.agritrace.edairy.desktop.common.model.dairy;
 
 import com.agritrace.edairy.desktop.common.model.base.Person;
 
+import com.agritrace.edairy.desktop.common.model.base.SystemUser;
 import java.util.Date;
 
 /**
@@ -23,12 +24,8 @@ import java.util.Date;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getStartDate <em>Start Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getJobFunction <em>Job Function</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getDepartment <em>Department</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getUsername <em>Username</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getPassword <em>Password</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#isLocalEnabled <em>Local Enabled</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getRole <em>Role</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#isPasswordHashed <em>Password Hashed</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getLicenseNo <em>License No</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getSystemIdentity <em>System Identity</em>}</li>
  * </ul>
  * </p>
  *
@@ -41,7 +38,7 @@ public interface Employee extends Person {
 	 * Returns the value of the '<em><b>Employee Number</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Employee Number</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
@@ -169,140 +166,6 @@ public interface Employee extends Person {
 	void setDepartment(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Username</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Username</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Username</em>' attribute.
-	 * @see #setUsername(String)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getEmployee_Username()
-	 * @model annotation="teneo.jpa appinfo='@Column(unique=\"true\")'"
-	 * @generated
-	 */
-	String getUsername();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getUsername <em>Username</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Username</em>' attribute.
-	 * @see #getUsername()
-	 * @generated
-	 */
-	void setUsername(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Password</b></em>' attribute.
-	 * The default value is <code>""</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Password</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Password</em>' attribute.
-	 * @see #setPassword(String)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getEmployee_Password()
-	 * @model default=""
-	 *        annotation="teneo.jpa appinfo='@Column(length=64)'"
-	 * @generated
-	 */
-	String getPassword();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getPassword <em>Password</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Password</em>' attribute.
-	 * @see #getPassword()
-	 * @generated
-	 */
-	void setPassword(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Local Enabled</b></em>' attribute.
-	 * The default value is <code>"true"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Local Enabled</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Local Enabled</em>' attribute.
-	 * @see #setLocalEnabled(boolean)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getEmployee_LocalEnabled()
-	 * @model default="true"
-	 * @generated
-	 */
-	boolean isLocalEnabled();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#isLocalEnabled <em>Local Enabled</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Local Enabled</em>' attribute.
-	 * @see #isLocalEnabled()
-	 * @generated
-	 */
-	void setLocalEnabled(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Role</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Role</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Role</em>' reference.
-	 * @see #setRole(Role)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getEmployee_Role()
-	 * @model
-	 * @generated
-	 */
-	Role getRole();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getRole <em>Role</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Role</em>' reference.
-	 * @see #getRole()
-	 * @generated
-	 */
-	void setRole(Role value);
-
-	/**
-	 * Returns the value of the '<em><b>Password Hashed</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Password Hashed</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Password Hashed</em>' attribute.
-	 * @see #setPasswordHashed(boolean)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getEmployee_PasswordHashed()
-	 * @model default="false" required="true"
-	 * @generated
-	 */
-	boolean isPasswordHashed();
-
-	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#isPasswordHashed <em>Password Hashed</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Password Hashed</em>' attribute.
-	 * @see #isPasswordHashed()
-	 * @generated
-	 */
-	void setPasswordHashed(boolean value);
-
-	/**
 	 * Returns the value of the '<em><b>License No</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -327,6 +190,34 @@ public interface Employee extends Person {
 	 * @generated
 	 */
 	void setLicenseNo(String value);
+
+	/**
+	 * Returns the value of the '<em><b>System Identity</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.base.SystemUser#getRelatedEmployee <em>Related Employee</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>System Identity</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>System Identity</em>' reference.
+	 * @see #setSystemIdentity(SystemUser)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getEmployee_SystemIdentity()
+	 * @see com.agritrace.edairy.desktop.common.model.base.SystemUser#getRelatedEmployee
+	 * @model opposite="relatedEmployee"
+	 * @generated
+	 */
+	SystemUser getSystemIdentity();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getSystemIdentity <em>System Identity</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>System Identity</em>' reference.
+	 * @see #getSystemIdentity()
+	 * @generated
+	 */
+	void setSystemIdentity(SystemUser value);
 
 	/**
 	 * <!-- begin-user-doc -->

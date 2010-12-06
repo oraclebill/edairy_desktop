@@ -148,6 +148,7 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 	@Inject
 	public AnimalHealthRequestDialogController(final Provider<FarmSearchDialog> farmSearchDialogProvider,
 			final Provider<MemberSearchDialog> memberSearchDialogProvider) {
+		super("Animal Health Request");
 		this.farmSearchDialogProvider = farmSearchDialogProvider;
 		this.memberSearchDialogProvider = memberSearchDialogProvider;
 	}

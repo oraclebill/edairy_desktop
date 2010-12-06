@@ -7,7 +7,6 @@
 package com.agritrace.edairy.desktop.common.model.tracking;
 
 import com.agritrace.edairy.desktop.common.model.base.Gender;
-import com.agritrace.edairy.desktop.common.model.base.ImageEntry;
 
 import java.util.Date;
 
@@ -116,7 +115,7 @@ public interface RegisteredAnimal extends EObject {
 	 * Returns the value of the '<em><b>Photo</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Photo</em>' reference isn't clear,
+	 * If the meaning of the '<em>Photo</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->

@@ -116,5 +116,33 @@
       <nested inputs="common.ecore#//ImageEntry/imageData" outputs="ModelXML.xsd#//ImageEntry;XSDComplexTypeDefinition=11/XSDAttributeUse=2"/>
     </nested>
     <nested inputs="common.ecore#//ImageEntry" outputs="ModelXML.xsd#//ImageEntry;XSDElementDeclaration=11"/>
+    <nested inputs="common.ecore#//SystemUser" outputs="ModelXML.xsd#//SystemUser;XSDComplexTypeDefinition=12">
+      <nested inputs="common.ecore#//SystemUser/username" outputs="ModelXML.xsd#//SystemUser;XSDComplexTypeDefinition=12/XSDAttributeUse"/>
+      <nested inputs="common.ecore#//SystemUser/password" outputs="ModelXML.xsd#//SystemUser;XSDComplexTypeDefinition=12/XSDAttributeUse=1"/>
+      <nested inputs="common.ecore#//SystemUser/localEnabled" outputs="ModelXML.xsd#//SystemUser;XSDComplexTypeDefinition=12/XSDAttributeUse=2"/>
+      <nested inputs="common.ecore#//SystemUser/passwordHashed" outputs="ModelXML.xsd#//SystemUser;XSDComplexTypeDefinition=12/XSDAttributeUse=3"/>
+      <nested inputs="common.ecore#//SystemUser/relatedEmployee" outputs="ModelXML.xsd#//SystemUser;XSDComplexTypeDefinition=12/XSDAttributeUse=4"/>
+      <nested inputs="common.ecore#//SystemUser/role" outputs="ModelXML.xsd#//SystemUser;XSDComplexTypeDefinition=12/XSDAttributeUse=5"/>
+    </nested>
+    <nested inputs="common.ecore#//SystemUser" outputs="ModelXML.xsd#//SystemUser;XSDElementDeclaration=12"/>
+    <nested inputs="common.ecore#//Role" outputs="ModelXML.xsd#//Role;XSDComplexTypeDefinition=13">
+      <nested inputs="common.ecore#//Role/id" outputs="ModelXML.xsd#//Role;XSDComplexTypeDefinition=13/XSDAttributeUse"/>
+      <nested inputs="common.ecore#//Role/name" outputs="ModelXML.xsd#//Role;XSDComplexTypeDefinition=13/XSDAttributeUse=1"/>
+      <nested inputs="common.ecore#//Role/description" outputs="ModelXML.xsd#//Role;XSDComplexTypeDefinition=13/XSDAttributeUse=2"/>
+      <nested inputs="common.ecore#//Role/permissions" outputs="ModelXML.xsd#//Role;XSDComplexTypeDefinition=13/XSDParticle/XSDModelGroup/XSDParticle"/>
+    </nested>
+    <nested inputs="common.ecore#//Role" outputs="ModelXML.xsd#//Role;XSDElementDeclaration=13"/>
+    <nested inputs="common.ecore#//PermissionNamespace" outputs="ModelXML.xsd#//PermissionNamespace;XSDComplexTypeDefinition=14">
+      <nested inputs="common.ecore#//PermissionNamespace/id" outputs="ModelXML.xsd#//PermissionNamespace;XSDComplexTypeDefinition=14/XSDAttributeUse"/>
+      <nested inputs="common.ecore#//PermissionNamespace/name" outputs="ModelXML.xsd#//PermissionNamespace;XSDComplexTypeDefinition=14/XSDAttributeUse=1"/>
+    </nested>
+    <nested inputs="common.ecore#//PermissionNamespace" outputs="ModelXML.xsd#//PermissionNamespace;XSDElementDeclaration=14"/>
+    <nested inputs="common.ecore#//Permission" outputs="ModelXML.xsd#//Permission;XSDComplexTypeDefinition=15">
+      <nested inputs="common.ecore#//Permission/id" outputs="ModelXML.xsd#//Permission;XSDComplexTypeDefinition=15/XSDAttributeUse"/>
+      <nested inputs="common.ecore#//Permission/name" outputs="ModelXML.xsd#//Permission;XSDComplexTypeDefinition=15/XSDAttributeUse=1"/>
+      <nested inputs="common.ecore#//Permission/displayName" outputs="ModelXML.xsd#//Permission;XSDComplexTypeDefinition=15/XSDAttributeUse=2"/>
+      <nested inputs="common.ecore#//Permission/namespace" outputs="ModelXML.xsd#//Permission;XSDComplexTypeDefinition=15/XSDAttributeUse=3"/>
+    </nested>
+    <nested inputs="common.ecore#//Permission" outputs="ModelXML.xsd#//Permission;XSDElementDeclaration=15"/>
   </nested>
 </xsd2ecore:XSD2EcoreMappingRoot>

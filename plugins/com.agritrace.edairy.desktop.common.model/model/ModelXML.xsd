@@ -135,4 +135,34 @@
     <xsd:attribute name="imageData" type="xsd:string"/>
   </xsd:complexType>
   <xsd:element name="ImageEntry" type="base:ImageEntry"/>
+  <xsd:complexType name="SystemUser">
+    <xsd:attribute name="username" type="xsd:string"/>
+    <xsd:attribute default="" name="password" type="xsd:string"/>
+    <xsd:attribute default="true" name="localEnabled" type="xsd:boolean"/>
+    <xsd:attribute default="false" name="passwordHashed" type="xsd:boolean" use="required"/>
+    <xsd:attribute name="relatedEmployee" type="xsd:string"/>
+    <xsd:attribute name="role" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:element name="SystemUser" type="base:SystemUser"/>
+  <xsd:complexType name="Role">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="permissions" nillable="true" type="xsd:string"/>
+    </xsd:sequence>
+    <xsd:attribute name="id" type="xsd:string" use="required"/>
+    <xsd:attribute name="name" type="xsd:string"/>
+    <xsd:attribute name="description" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:element name="Role" type="base:Role"/>
+  <xsd:complexType name="PermissionNamespace">
+    <xsd:attribute name="id" type="xsd:string" use="required"/>
+    <xsd:attribute name="name" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:element name="PermissionNamespace" type="base:PermissionNamespace"/>
+  <xsd:complexType name="Permission">
+    <xsd:attribute name="id" type="xsd:string" use="required"/>
+    <xsd:attribute name="name" type="xsd:string"/>
+    <xsd:attribute name="displayName" type="xsd:string"/>
+    <xsd:attribute name="namespace" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:element name="Permission" type="base:Permission"/>
 </xsd:schema>

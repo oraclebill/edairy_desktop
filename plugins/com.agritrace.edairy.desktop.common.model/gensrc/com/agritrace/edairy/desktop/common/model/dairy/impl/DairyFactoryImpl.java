@@ -8,7 +8,6 @@ package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
 import com.agritrace.edairy.desktop.common.model.dairy.*;
 
-import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -81,9 +80,6 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 			case DairyPackage.MEMBER_PAYMENT: return createMemberPayment();
 			case DairyPackage.PREFERENCE: return createPreference();
 			case DairyPackage.PREFERENCE_KEY: return createPreferenceKey();
-			case DairyPackage.ROLE: return createRole();
-			case DairyPackage.PERMISSION_NAMESPACE: return createPermissionNamespace();
-			case DairyPackage.PERMISSION: return createPermission();
 			case DairyPackage.COLLECTION_SESSION: return createCollectionSession();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -110,8 +106,6 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 				return createPreferenceTypeFromString(eDataType, initialValue);
 			case DairyPackage.COLLECTION_GROUP_TYPE:
 				return createCollectionGroupTypeFromString(eDataType, initialValue);
-			case DairyPackage.PERMISSION_T:
-				return createPermissionTFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -137,8 +131,6 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 				return convertPreferenceTypeToString(eDataType, instanceValue);
 			case DairyPackage.COLLECTION_GROUP_TYPE:
 				return convertCollectionGroupTypeToString(eDataType, instanceValue);
-			case DairyPackage.PERMISSION_T:
-				return convertPermissionTToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -339,36 +331,6 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Role createRole() {
-		RoleImpl role = new RoleImpl();
-		return role;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public PermissionNamespace createPermissionNamespace() {
-		PermissionNamespaceImpl permissionNamespace = new PermissionNamespaceImpl();
-		return permissionNamespace;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Permission createPermission() {
-		PermissionImpl permission = new PermissionImpl();
-		return permission;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public CollectionSession createCollectionSession() {
 		CollectionSessionImpl collectionSession = new CollectionSessionImpl();
 		return collectionSession;
@@ -492,24 +454,6 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 */
 	public String convertCollectionGroupTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @NOT generated
-	 */
-	public UIPermission createPermissionTFromString(EDataType eDataType, String initialValue) {
-		return UIPermission.valueOf(initialValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @NOT generated
-	 */
-	public String convertPermissionTToString(EDataType eDataType, Object instanceValue) {
-		return ((UIPermission) instanceValue).name();
 	}
 
 	/**

@@ -6,19 +6,21 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
+import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+import com.agritrace.edairy.desktop.common.model.base.SystemUser;
 import com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
-import com.agritrace.edairy.desktop.common.model.dairy.Role;
 
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
@@ -33,12 +35,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getStartDate <em>Start Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getJobFunction <em>Job Function</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getDepartment <em>Department</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getUsername <em>Username</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getPassword <em>Password</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#isLocalEnabled <em>Local Enabled</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getRole <em>Role</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#isPasswordHashed <em>Password Hashed</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getLicenseNo <em>License No</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getSystemIdentity <em>System Identity</em>}</li>
  * </ul>
  * </p>
  *
@@ -146,96 +144,6 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	protected String department = DEPARTMENT_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getUsername() <em>Username</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getUsername()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String USERNAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getUsername() <em>Username</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getUsername()
-	 * @generated
-	 * @ordered
-	 */
-	protected String username = USERNAME_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getPassword() <em>Password</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPassword()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String PASSWORD_EDEFAULT = "";
-
-	/**
-	 * The cached value of the '{@link #getPassword() <em>Password</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPassword()
-	 * @generated
-	 * @ordered
-	 */
-	protected String password = PASSWORD_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isLocalEnabled() <em>Local Enabled</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isLocalEnabled()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean LOCAL_ENABLED_EDEFAULT = true;
-
-	/**
-	 * The cached value of the '{@link #isLocalEnabled() <em>Local Enabled</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isLocalEnabled()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean localEnabled = LOCAL_ENABLED_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getRole() <em>Role</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRole()
-	 * @generated
-	 * @ordered
-	 */
-	protected Role role;
-
-	/**
-	 * The default value of the '{@link #isPasswordHashed() <em>Password Hashed</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isPasswordHashed()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean PASSWORD_HASHED_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isPasswordHashed() <em>Password Hashed</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isPasswordHashed()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean passwordHashed = PASSWORD_HASHED_EDEFAULT;
-
-	/**
 	 * The default value of the '{@link #getLicenseNo() <em>License No</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -254,6 +162,16 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * @ordered
 	 */
 	protected String licenseNo = LICENSE_NO_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getSystemIdentity() <em>System Identity</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSystemIdentity()
+	 * @generated
+	 * @ordered
+	 */
+	protected SystemUser systemIdentity;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -384,128 +302,6 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getUsername() {
-		return username;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setUsername(String newUsername) {
-		String oldUsername = username;
-		username = newUsername;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__USERNAME, oldUsername, username));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getPassword() {
-		return password;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setPassword(String newPassword) {
-		String oldPassword = password;
-		password = newPassword;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__PASSWORD, oldPassword, password));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isLocalEnabled() {
-		return localEnabled;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setLocalEnabled(boolean newLocalEnabled) {
-		boolean oldLocalEnabled = localEnabled;
-		localEnabled = newLocalEnabled;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__LOCAL_ENABLED, oldLocalEnabled, localEnabled));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Role getRole() {
-		if (role != null && role.eIsProxy()) {
-			InternalEObject oldRole = (InternalEObject)role;
-			role = (Role)eResolveProxy(oldRole);
-			if (role != oldRole) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.EMPLOYEE__ROLE, oldRole, role));
-			}
-		}
-		return role;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Role basicGetRole() {
-		return role;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setRole(Role newRole) {
-		Role oldRole = role;
-		role = newRole;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__ROLE, oldRole, role));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isPasswordHashed() {
-		return passwordHashed;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setPasswordHashed(boolean newPasswordHashed) {
-		boolean oldPasswordHashed = passwordHashed;
-		passwordHashed = newPasswordHashed;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__PASSWORD_HASHED, oldPasswordHashed, passwordHashed));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getLicenseNo() {
 		return licenseNo;
 	}
@@ -527,12 +323,102 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public SystemUser getSystemIdentity() {
+		if (systemIdentity != null && systemIdentity.eIsProxy()) {
+			InternalEObject oldSystemIdentity = (InternalEObject)systemIdentity;
+			systemIdentity = (SystemUser)eResolveProxy(oldSystemIdentity);
+			if (systemIdentity != oldSystemIdentity) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.EMPLOYEE__SYSTEM_IDENTITY, oldSystemIdentity, systemIdentity));
+			}
+		}
+		return systemIdentity;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SystemUser basicGetSystemIdentity() {
+		return systemIdentity;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetSystemIdentity(SystemUser newSystemIdentity, NotificationChain msgs) {
+		SystemUser oldSystemIdentity = systemIdentity;
+		systemIdentity = newSystemIdentity;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__SYSTEM_IDENTITY, oldSystemIdentity, newSystemIdentity);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSystemIdentity(SystemUser newSystemIdentity) {
+		if (newSystemIdentity != systemIdentity) {
+			NotificationChain msgs = null;
+			if (systemIdentity != null)
+				msgs = ((InternalEObject)systemIdentity).eInverseRemove(this, ModelPackage.SYSTEM_USER__RELATED_EMPLOYEE, SystemUser.class, msgs);
+			if (newSystemIdentity != null)
+				msgs = ((InternalEObject)newSystemIdentity).eInverseAdd(this, ModelPackage.SYSTEM_USER__RELATED_EMPLOYEE, SystemUser.class, msgs);
+			msgs = basicSetSystemIdentity(newSystemIdentity, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__SYSTEM_IDENTITY, newSystemIdentity, newSystemIdentity));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getNameAndLicense() {
 		if (licenseNo != null && !licenseNo.isEmpty()) {
 					return String.format("%s (%s)", familyName, licenseNo);
 				} else {
 					return familyName;
 				}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case DairyPackage.EMPLOYEE__SYSTEM_IDENTITY:
+				if (systemIdentity != null)
+					msgs = ((InternalEObject)systemIdentity).eInverseRemove(this, ModelPackage.SYSTEM_USER__RELATED_EMPLOYEE, SystemUser.class, msgs);
+				return basicSetSystemIdentity((SystemUser)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case DairyPackage.EMPLOYEE__SYSTEM_IDENTITY:
+				return basicSetSystemIdentity(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -553,19 +439,11 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 				return getJobFunction();
 			case DairyPackage.EMPLOYEE__DEPARTMENT:
 				return getDepartment();
-			case DairyPackage.EMPLOYEE__USERNAME:
-				return getUsername();
-			case DairyPackage.EMPLOYEE__PASSWORD:
-				return getPassword();
-			case DairyPackage.EMPLOYEE__LOCAL_ENABLED:
-				return isLocalEnabled();
-			case DairyPackage.EMPLOYEE__ROLE:
-				if (resolve) return getRole();
-				return basicGetRole();
-			case DairyPackage.EMPLOYEE__PASSWORD_HASHED:
-				return isPasswordHashed();
 			case DairyPackage.EMPLOYEE__LICENSE_NO:
 				return getLicenseNo();
+			case DairyPackage.EMPLOYEE__SYSTEM_IDENTITY:
+				if (resolve) return getSystemIdentity();
+				return basicGetSystemIdentity();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -593,23 +471,11 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 			case DairyPackage.EMPLOYEE__DEPARTMENT:
 				setDepartment((String)newValue);
 				return;
-			case DairyPackage.EMPLOYEE__USERNAME:
-				setUsername((String)newValue);
-				return;
-			case DairyPackage.EMPLOYEE__PASSWORD:
-				setPassword((String)newValue);
-				return;
-			case DairyPackage.EMPLOYEE__LOCAL_ENABLED:
-				setLocalEnabled((Boolean)newValue);
-				return;
-			case DairyPackage.EMPLOYEE__ROLE:
-				setRole((Role)newValue);
-				return;
-			case DairyPackage.EMPLOYEE__PASSWORD_HASHED:
-				setPasswordHashed((Boolean)newValue);
-				return;
 			case DairyPackage.EMPLOYEE__LICENSE_NO:
 				setLicenseNo((String)newValue);
+				return;
+			case DairyPackage.EMPLOYEE__SYSTEM_IDENTITY:
+				setSystemIdentity((SystemUser)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -638,23 +504,11 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 			case DairyPackage.EMPLOYEE__DEPARTMENT:
 				setDepartment(DEPARTMENT_EDEFAULT);
 				return;
-			case DairyPackage.EMPLOYEE__USERNAME:
-				setUsername(USERNAME_EDEFAULT);
-				return;
-			case DairyPackage.EMPLOYEE__PASSWORD:
-				setPassword(PASSWORD_EDEFAULT);
-				return;
-			case DairyPackage.EMPLOYEE__LOCAL_ENABLED:
-				setLocalEnabled(LOCAL_ENABLED_EDEFAULT);
-				return;
-			case DairyPackage.EMPLOYEE__ROLE:
-				setRole((Role)null);
-				return;
-			case DairyPackage.EMPLOYEE__PASSWORD_HASHED:
-				setPasswordHashed(PASSWORD_HASHED_EDEFAULT);
-				return;
 			case DairyPackage.EMPLOYEE__LICENSE_NO:
 				setLicenseNo(LICENSE_NO_EDEFAULT);
+				return;
+			case DairyPackage.EMPLOYEE__SYSTEM_IDENTITY:
+				setSystemIdentity((SystemUser)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -678,18 +532,10 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 				return JOB_FUNCTION_EDEFAULT == null ? jobFunction != null : !JOB_FUNCTION_EDEFAULT.equals(jobFunction);
 			case DairyPackage.EMPLOYEE__DEPARTMENT:
 				return DEPARTMENT_EDEFAULT == null ? department != null : !DEPARTMENT_EDEFAULT.equals(department);
-			case DairyPackage.EMPLOYEE__USERNAME:
-				return USERNAME_EDEFAULT == null ? username != null : !USERNAME_EDEFAULT.equals(username);
-			case DairyPackage.EMPLOYEE__PASSWORD:
-				return PASSWORD_EDEFAULT == null ? password != null : !PASSWORD_EDEFAULT.equals(password);
-			case DairyPackage.EMPLOYEE__LOCAL_ENABLED:
-				return localEnabled != LOCAL_ENABLED_EDEFAULT;
-			case DairyPackage.EMPLOYEE__ROLE:
-				return role != null;
-			case DairyPackage.EMPLOYEE__PASSWORD_HASHED:
-				return passwordHashed != PASSWORD_HASHED_EDEFAULT;
 			case DairyPackage.EMPLOYEE__LICENSE_NO:
 				return LICENSE_NO_EDEFAULT == null ? licenseNo != null : !LICENSE_NO_EDEFAULT.equals(licenseNo);
+			case DairyPackage.EMPLOYEE__SYSTEM_IDENTITY:
+				return systemIdentity != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -714,14 +560,6 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 		result.append(jobFunction);
 		result.append(", department: ");
 		result.append(department);
-		result.append(", username: ");
-		result.append(username);
-		result.append(", password: ");
-		result.append(password);
-		result.append(", localEnabled: ");
-		result.append(localEnabled);
-		result.append(", passwordHashed: ");
-		result.append(passwordHashed);
 		result.append(", licenseNo: ");
 		result.append(licenseNo);
 		result.append(')');

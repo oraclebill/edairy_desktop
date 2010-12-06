@@ -114,6 +114,7 @@ public class MilkDeliveryJournalEditController extends RecordDialogController<De
 	@Inject
 	public MilkDeliveryJournalEditController(final IDairyRepository dairyRepository,
 			final IRepository<CollectionSession> sessionRepo) {
+		super("Milk Delivery");
 		dairyRepo = dairyRepository;
 		this.sessionRepo = sessionRepo;
 	}

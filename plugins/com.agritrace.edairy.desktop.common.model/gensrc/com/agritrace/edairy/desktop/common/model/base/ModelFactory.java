@@ -134,6 +134,42 @@ public interface ModelFactory extends EFactory {
 	ImageEntry createImageEntry();
 
 	/**
+	 * Returns a new object of class '<em>System User</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>System User</em>'.
+	 * @generated
+	 */
+	SystemUser createSystemUser();
+
+	/**
+	 * Returns a new object of class '<em>Role</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Role</em>'.
+	 * @generated
+	 */
+	Role createRole();
+
+	/**
+	 * Returns a new object of class '<em>Permission Namespace</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Permission Namespace</em>'.
+	 * @generated
+	 */
+	PermissionNamespace createPermissionNamespace();
+
+	/**
+	 * Returns a new object of class '<em>Permission</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Permission</em>'.
+	 * @generated
+	 */
+	Permission createPermission();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package com.agritrace.edairy.desktop.common.model.dairy;
+package com.agritrace.edairy.desktop.common.model.base;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -16,12 +16,12 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.PermissionNamespace#getId <em>Id</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.PermissionNamespace#getName <em>Name</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.PermissionNamespace#getId <em>Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.PermissionNamespace#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
- * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getPermissionNamespace()
+ * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getPermissionNamespace()
  * @model
  * @generated
  */
@@ -36,14 +36,14 @@ public interface PermissionNamespace extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(Long)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getPermissionNamespace_Id()
+	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getPermissionNamespace_Id()
 	 * @model id="true" dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID" required="true"
 	 * @generated
 	 */
 	Long getId();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.PermissionNamespace#getId <em>Id</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.base.PermissionNamespace#getId <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Id</em>' attribute.
@@ -62,14 +62,14 @@ public interface PermissionNamespace extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getPermissionNamespace_Name()
+	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getPermissionNamespace_Name()
 	 * @model annotation="teneo.jpa appinfo='@Column(unique=\"true\")'"
 	 * @generated
 	 */
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.PermissionNamespace#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.base.PermissionNamespace#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Name</em>' attribute.

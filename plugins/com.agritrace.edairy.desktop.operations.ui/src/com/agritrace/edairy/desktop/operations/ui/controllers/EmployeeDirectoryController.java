@@ -13,6 +13,7 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.base.Location;
+import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
@@ -105,7 +106,8 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 	@Override
 	protected Employee createNewModel() {
 		final Employee employee = (Employee) EMFUtil.createWorkingCopy(this.getEClass(), 3);
-		employee.setRole(null);
+		employee.setSystemIdentity(ModelFactory.eINSTANCE.createSystemUser());
+		employee.getSystemIdentity().setRole(null);
 		setDefaults(employee);
 		// employee.setPhoneNumber("");
 		return employee;

@@ -344,6 +344,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 	@SuppressWarnings("unchecked")
 	protected void handleNewItemAction() {
 		final RecordDialog<T> dialog = getRecordDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell());
+		dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_NEW);
 		PersistenceDelegate<T> delegate = getPersistenceDelegate();
 		if (delegate != null) {
 			delegate.setItem(createNewModel());
@@ -351,7 +352,6 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 			dialog.open();
 		} else {
 			dialog.getController().setContext(EDITED_OBJECT_ID, createNewModel());
-			dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_NEW);
 			final int returnCode = dialog.open();
 			if (DialogConstants.ACTION_SAVE == returnCode) {
 				log(LogService.LOG_INFO, "------ saving item: " + dialog.getController().getContext(EDITED_OBJECT_ID));

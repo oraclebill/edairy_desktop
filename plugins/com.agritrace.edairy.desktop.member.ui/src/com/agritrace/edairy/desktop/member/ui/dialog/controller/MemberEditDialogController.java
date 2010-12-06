@@ -72,6 +72,7 @@ public class MemberEditDialogController extends RecordDialogController<Membershi
 
 	public MemberEditDialogController(final List<DairyLocation> dairyLocations, IMemberRepository memberRepo,
 			IFarmRepository farmRepo, IMilkCollectionRepository collectionsRepo) {
+		super("Dairy Member Registration");
 		collectionCenters = new ArrayList<DairyLocation>();
 		collectionCenters.add(null);
 		collectionCenters.addAll(dairyLocations);

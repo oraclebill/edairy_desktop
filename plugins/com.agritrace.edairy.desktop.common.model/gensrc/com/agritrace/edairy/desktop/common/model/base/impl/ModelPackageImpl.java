@@ -19,9 +19,13 @@ import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.base.MapLocation;
 import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+import com.agritrace.edairy.desktop.common.model.base.Permission;
+import com.agritrace.edairy.desktop.common.model.base.PermissionNamespace;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
+import com.agritrace.edairy.desktop.common.model.base.Role;
 import com.agritrace.edairy.desktop.common.model.base.StatutoryLocation;
+import com.agritrace.edairy.desktop.common.model.base.SystemUser;
 import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
 import com.agritrace.edairy.desktop.common.model.base.Versioned;
 
@@ -32,6 +36,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountPackageImpl;
 
 import com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl;
+
+import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 
@@ -146,6 +152,34 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass systemUserEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass roleEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass permissionNamespaceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass permissionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum genderEEnum = null;
 
 	/**
@@ -189,6 +223,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EDataType imageReferenceEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType permissionTEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -837,6 +878,186 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getSystemUser() {
+		return systemUserEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSystemUser_Username() {
+		return (EAttribute)systemUserEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSystemUser_Password() {
+		return (EAttribute)systemUserEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSystemUser_RelatedEmployee() {
+		return (EReference)systemUserEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSystemUser_LocalEnabled() {
+		return (EAttribute)systemUserEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSystemUser_Role() {
+		return (EReference)systemUserEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSystemUser_PasswordHashed() {
+		return (EAttribute)systemUserEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getRole() {
+		return roleEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRole_Id() {
+		return (EAttribute)roleEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRole_Name() {
+		return (EAttribute)roleEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRole_Description() {
+		return (EAttribute)roleEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRole_Permissions() {
+		return (EAttribute)roleEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPermissionNamespace() {
+		return permissionNamespaceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPermissionNamespace_Id() {
+		return (EAttribute)permissionNamespaceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPermissionNamespace_Name() {
+		return (EAttribute)permissionNamespaceEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPermission() {
+		return permissionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPermission_Id() {
+		return (EAttribute)permissionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPermission_Namespace() {
+		return (EReference)permissionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPermission_Name() {
+		return (EAttribute)permissionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPermission_DisplayName() {
+		return (EAttribute)permissionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getGender() {
 		return genderEEnum;
 	}
@@ -893,6 +1114,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	public EDataType getImageReference() {
 		return imageReferenceEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getPermissionT() {
+		return permissionTEDataType;
 	}
 
 	/**
@@ -998,6 +1228,30 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(imageEntryEClass, IMAGE_ENTRY__MIME_TYPE);
 		createEAttribute(imageEntryEClass, IMAGE_ENTRY__IMAGE_DATA);
 
+		systemUserEClass = createEClass(SYSTEM_USER);
+		createEAttribute(systemUserEClass, SYSTEM_USER__USERNAME);
+		createEAttribute(systemUserEClass, SYSTEM_USER__PASSWORD);
+		createEReference(systemUserEClass, SYSTEM_USER__RELATED_EMPLOYEE);
+		createEAttribute(systemUserEClass, SYSTEM_USER__LOCAL_ENABLED);
+		createEReference(systemUserEClass, SYSTEM_USER__ROLE);
+		createEAttribute(systemUserEClass, SYSTEM_USER__PASSWORD_HASHED);
+
+		roleEClass = createEClass(ROLE);
+		createEAttribute(roleEClass, ROLE__ID);
+		createEAttribute(roleEClass, ROLE__NAME);
+		createEAttribute(roleEClass, ROLE__DESCRIPTION);
+		createEAttribute(roleEClass, ROLE__PERMISSIONS);
+
+		permissionNamespaceEClass = createEClass(PERMISSION_NAMESPACE);
+		createEAttribute(permissionNamespaceEClass, PERMISSION_NAMESPACE__ID);
+		createEAttribute(permissionNamespaceEClass, PERMISSION_NAMESPACE__NAME);
+
+		permissionEClass = createEClass(PERMISSION);
+		createEAttribute(permissionEClass, PERMISSION__ID);
+		createEReference(permissionEClass, PERMISSION__NAMESPACE);
+		createEAttribute(permissionEClass, PERMISSION__NAME);
+		createEAttribute(permissionEClass, PERMISSION__DISPLAY_NAME);
+
 		// Create enums
 		genderEEnum = createEEnum(GENDER);
 		contactMethodTypeEEnum = createEEnum(CONTACT_METHOD_TYPE);
@@ -1008,6 +1262,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		transactionIDEDataType = createEDataType(TRANSACTION_ID);
 		uniqueIDEDataType = createEDataType(UNIQUE_ID);
 		imageReferenceEDataType = createEDataType(IMAGE_REFERENCE);
+		permissionTEDataType = createEDataType(PERMISSION_T);
 	}
 
 	/**
@@ -1032,6 +1287,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		setName(eNAME);
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
+
+		// Obtain other dependent packages
+		DairyPackage theDairyPackage = (DairyPackage)EPackage.Registry.INSTANCE.getEPackage(DairyPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -1121,6 +1379,30 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getImageEntry_MimeType(), ecorePackage.getEString(), "mimeType", null, 1, 1, ImageEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getImageEntry_ImageData(), ecorePackage.getEByteArray(), "imageData", null, 0, 1, ImageEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(systemUserEClass, SystemUser.class, "SystemUser", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSystemUser_Username(), ecorePackage.getEString(), "username", null, 0, 1, SystemUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSystemUser_Password(), ecorePackage.getEString(), "password", "", 0, 1, SystemUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSystemUser_RelatedEmployee(), theDairyPackage.getEmployee(), theDairyPackage.getEmployee_SystemIdentity(), "relatedEmployee", null, 0, 1, SystemUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSystemUser_LocalEnabled(), ecorePackage.getEBoolean(), "localEnabled", "true", 0, 1, SystemUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSystemUser_Role(), this.getRole(), null, "role", null, 0, 1, SystemUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSystemUser_PasswordHashed(), ecorePackage.getEBoolean(), "passwordHashed", "false", 1, 1, SystemUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(roleEClass, Role.class, "Role", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getRole_Id(), this.getUniqueID(), "id", null, 1, 1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRole_Name(), ecorePackage.getEString(), "name", null, 0, 1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRole_Description(), ecorePackage.getEString(), "description", null, 0, 1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRole_Permissions(), this.getPermissionT(), "permissions", null, 0, -1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(permissionNamespaceEClass, PermissionNamespace.class, "PermissionNamespace", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPermissionNamespace_Id(), this.getUniqueID(), "id", null, 1, 1, PermissionNamespace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPermissionNamespace_Name(), ecorePackage.getEString(), "name", null, 0, 1, PermissionNamespace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(permissionEClass, Permission.class, "Permission", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPermission_Id(), this.getUniqueID(), "id", null, 1, 1, Permission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPermission_Namespace(), this.getPermissionNamespace(), null, "namespace", null, 0, 1, Permission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPermission_Name(), ecorePackage.getEString(), "name", null, 0, 1, Permission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPermission_DisplayName(), ecorePackage.getEString(), "displayName", null, 0, 1, Permission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(genderEEnum, Gender.class, "Gender");
 		addEEnumLiteral(genderEEnum, Gender.MALE);
@@ -1152,6 +1434,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEDataType(transactionIDEDataType, String.class, "TransactionID", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(uniqueIDEDataType, Long.class, "UniqueID", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(imageReferenceEDataType, String.class, "ImageReference", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(permissionTEDataType, UIPermission.class, "PermissionT", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -1274,7 +1557,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   new String[] {
 			 "name", "imageData",
 			 "kind", "elementOnly"
-		   });	
+		   });					
 	}
 
 	/**
@@ -1368,6 +1651,30 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "appinfo", "@Lob\n@Column(length=1048576)"
+		   });		
+		addAnnotation
+		  (getSystemUser_Username(), 
+		   source, 
+		   new String[] {
+			 "appinfo", "@Column(unique=\"true\")"
+		   });		
+		addAnnotation
+		  (getSystemUser_Password(), 
+		   source, 
+		   new String[] {
+			 "appinfo", "@Column(length=64)"
+		   });		
+		addAnnotation
+		  (getRole_Name(), 
+		   source, 
+		   new String[] {
+			 "appinfo", "@Column(unique=\"true\")"
+		   });		
+		addAnnotation
+		  (getPermissionNamespace_Name(), 
+		   source, 
+		   new String[] {
+			 "appinfo", "@Column(unique=\"true\")"
 		   });
 	}
 

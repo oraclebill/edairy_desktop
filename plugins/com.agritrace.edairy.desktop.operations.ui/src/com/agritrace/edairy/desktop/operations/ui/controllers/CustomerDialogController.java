@@ -23,6 +23,10 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 
 	private ITextRidget phone;
 
+	public CustomerDialogController() {
+		super("Customer");
+	}
+	
 	@Override
 	public void configureUserRidgets() {
 		Customer editCustomer = null;

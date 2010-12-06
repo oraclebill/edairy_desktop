@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package com.agritrace.edairy.desktop.common.model.dairy;
+package com.agritrace.edairy.desktop.common.model.base;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -16,14 +16,14 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Permission#getId <em>Id</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Permission#getNamespace <em>Namespace</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Permission#getName <em>Name</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Permission#getDisplayName <em>Display Name</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Permission#getId <em>Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Permission#getNamespace <em>Namespace</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Permission#getName <em>Name</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.Permission#getDisplayName <em>Display Name</em>}</li>
  * </ul>
  * </p>
  *
- * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getPermission()
+ * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getPermission()
  * @model
  * @generated
  */
@@ -38,14 +38,14 @@ public interface Permission extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(Long)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getPermission_Id()
+	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getPermission_Id()
 	 * @model id="true" dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID" required="true"
 	 * @generated
 	 */
 	Long getId();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Permission#getId <em>Id</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.base.Permission#getId <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Id</em>' attribute.
@@ -64,14 +64,14 @@ public interface Permission extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Namespace</em>' reference.
 	 * @see #setNamespace(PermissionNamespace)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getPermission_Namespace()
+	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getPermission_Namespace()
 	 * @model
 	 * @generated
 	 */
 	PermissionNamespace getNamespace();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Permission#getNamespace <em>Namespace</em>}' reference.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.base.Permission#getNamespace <em>Namespace</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Namespace</em>' reference.
@@ -90,14 +90,14 @@ public interface Permission extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getPermission_Name()
+	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getPermission_Name()
 	 * @model
 	 * @generated
 	 */
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Permission#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.base.Permission#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Name</em>' attribute.
@@ -116,14 +116,14 @@ public interface Permission extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Display Name</em>' attribute.
 	 * @see #setDisplayName(String)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getPermission_DisplayName()
+	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getPermission_DisplayName()
 	 * @model
 	 * @generated
 	 */
 	String getDisplayName();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Permission#getDisplayName <em>Display Name</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.base.Permission#getDisplayName <em>Display Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Display Name</em>' attribute.

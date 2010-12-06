@@ -6,14 +6,16 @@
  */
 package com.agritrace.edairy.desktop.common.model.base.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.base.Person;
+
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -336,15 +338,6 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getFormattedName() {
-		return com.agritrace.edairy.desktop.common.model.util.MemberUtil.formattedMemberName(this);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getPhoto() {
 		return photo;
 	}
@@ -649,6 +642,15 @@ public class PersonImpl extends ContactableImpl implements Person {
 		nationalId = newNationalId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERSON__NATIONAL_ID, oldNationalId, nationalId));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getFormattedName() {
+		return com.agritrace.edairy.desktop.common.model.util.MemberUtil.formattedMemberName(this);
 	}
 
 	/**

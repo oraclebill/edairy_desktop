@@ -15,12 +15,14 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 
 	private BindingHelper<T> mapper;
 	private PersistenceDelegate<T> persistenceDelegate;
+	private String entityName;
 
 	/**
 	 * Null constructor
 	 */
-	public RecordDialogController() {
+	public RecordDialogController(String entityName) {
 		super();
+		this.entityName = entityName;
 	}
 
 	public void addTextMap(String ridgetId, EStructuralFeature... featurePath) {
@@ -59,13 +61,22 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 		configureMappedRidgets();
 		configureButtonsPanel();
 		persistenceDelegate = getPersistenceDelegate();
+		
+		String actionTypeString = getActionType() == AbstractDirectoryController.ACTION_NEW ? "Create " : "Edit ";
+		String entityName = getEntityName();
+		String titleString = String.format("%s %s", actionTypeString, entityName); 
+		getWindowRidget().setTitle(titleString);
+	}
+
+	protected String getEntityName() {
+		return entityName;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public T getWorkingCopy() {
 		T workingCopy = null;
-
+		persistenceDelegate = getPersistenceDelegate();
 		if (persistenceDelegate != null) {
 			workingCopy = (T) persistenceDelegate.getOrCreateItem();
 		} else {

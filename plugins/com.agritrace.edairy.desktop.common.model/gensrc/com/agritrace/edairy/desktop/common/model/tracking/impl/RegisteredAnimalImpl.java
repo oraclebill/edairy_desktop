@@ -7,7 +7,6 @@
 package com.agritrace.edairy.desktop.common.model.tracking.impl;
 
 import com.agritrace.edairy.desktop.common.model.base.Gender;
-import com.agritrace.edairy.desktop.common.model.base.ImageEntry;
 
 import com.agritrace.edairy.desktop.common.model.tracking.AcquisitionType;
 import com.agritrace.edairy.desktop.common.model.tracking.AnimalIdentifier;

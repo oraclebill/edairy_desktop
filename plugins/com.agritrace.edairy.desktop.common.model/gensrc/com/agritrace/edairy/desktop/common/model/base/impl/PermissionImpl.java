@@ -4,11 +4,11 @@
  *
  * $Id$
  */
-package com.agritrace.edairy.desktop.common.model.dairy.impl;
+package com.agritrace.edairy.desktop.common.model.base.impl;
 
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.Permission;
-import com.agritrace.edairy.desktop.common.model.dairy.PermissionNamespace;
+import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+import com.agritrace.edairy.desktop.common.model.base.Permission;
+import com.agritrace.edairy.desktop.common.model.base.PermissionNamespace;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -25,10 +25,10 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.PermissionImpl#getId <em>Id</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.PermissionImpl#getNamespace <em>Namespace</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.PermissionImpl#getName <em>Name</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.PermissionImpl#getDisplayName <em>Display Name</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.PermissionImpl#getId <em>Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.PermissionImpl#getNamespace <em>Namespace</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.PermissionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.PermissionImpl#getDisplayName <em>Display Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -121,7 +121,7 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return DairyPackage.Literals.PERMISSION;
+		return ModelPackage.Literals.PERMISSION;
 	}
 
 	/**
@@ -142,7 +142,7 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 		Long oldId = id;
 		id = newId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.PERMISSION__ID, oldId, id));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERMISSION__ID, oldId, id));
 	}
 
 	/**
@@ -156,7 +156,7 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 			namespace = (PermissionNamespace)eResolveProxy(oldNamespace);
 			if (namespace != oldNamespace) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.PERMISSION__NAMESPACE, oldNamespace, namespace));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.PERMISSION__NAMESPACE, oldNamespace, namespace));
 			}
 		}
 		return namespace;
@@ -180,7 +180,7 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 		PermissionNamespace oldNamespace = namespace;
 		namespace = newNamespace;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.PERMISSION__NAMESPACE, oldNamespace, namespace));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERMISSION__NAMESPACE, oldNamespace, namespace));
 	}
 
 	/**
@@ -201,7 +201,7 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.PERMISSION__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERMISSION__NAME, oldName, name));
 	}
 
 	/**
@@ -222,7 +222,7 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 		String oldDisplayName = displayName;
 		displayName = newDisplayName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.PERMISSION__DISPLAY_NAME, oldDisplayName, displayName));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PERMISSION__DISPLAY_NAME, oldDisplayName, displayName));
 	}
 
 	/**
@@ -233,14 +233,14 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case DairyPackage.PERMISSION__ID:
+			case ModelPackage.PERMISSION__ID:
 				return getId();
-			case DairyPackage.PERMISSION__NAMESPACE:
+			case ModelPackage.PERMISSION__NAMESPACE:
 				if (resolve) return getNamespace();
 				return basicGetNamespace();
-			case DairyPackage.PERMISSION__NAME:
+			case ModelPackage.PERMISSION__NAME:
 				return getName();
-			case DairyPackage.PERMISSION__DISPLAY_NAME:
+			case ModelPackage.PERMISSION__DISPLAY_NAME:
 				return getDisplayName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -254,16 +254,16 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case DairyPackage.PERMISSION__ID:
+			case ModelPackage.PERMISSION__ID:
 				setId((Long)newValue);
 				return;
-			case DairyPackage.PERMISSION__NAMESPACE:
+			case ModelPackage.PERMISSION__NAMESPACE:
 				setNamespace((PermissionNamespace)newValue);
 				return;
-			case DairyPackage.PERMISSION__NAME:
+			case ModelPackage.PERMISSION__NAME:
 				setName((String)newValue);
 				return;
-			case DairyPackage.PERMISSION__DISPLAY_NAME:
+			case ModelPackage.PERMISSION__DISPLAY_NAME:
 				setDisplayName((String)newValue);
 				return;
 		}
@@ -278,16 +278,16 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case DairyPackage.PERMISSION__ID:
+			case ModelPackage.PERMISSION__ID:
 				setId(ID_EDEFAULT);
 				return;
-			case DairyPackage.PERMISSION__NAMESPACE:
+			case ModelPackage.PERMISSION__NAMESPACE:
 				setNamespace((PermissionNamespace)null);
 				return;
-			case DairyPackage.PERMISSION__NAME:
+			case ModelPackage.PERMISSION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case DairyPackage.PERMISSION__DISPLAY_NAME:
+			case ModelPackage.PERMISSION__DISPLAY_NAME:
 				setDisplayName(DISPLAY_NAME_EDEFAULT);
 				return;
 		}
@@ -302,13 +302,13 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case DairyPackage.PERMISSION__ID:
+			case ModelPackage.PERMISSION__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-			case DairyPackage.PERMISSION__NAMESPACE:
+			case ModelPackage.PERMISSION__NAMESPACE:
 				return namespace != null;
-			case DairyPackage.PERMISSION__NAME:
+			case ModelPackage.PERMISSION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case DairyPackage.PERMISSION__DISPLAY_NAME:
+			case ModelPackage.PERMISSION__DISPLAY_NAME:
 				return DISPLAY_NAME_EDEFAULT == null ? displayName != null : !DISPLAY_NAME_EDEFAULT.equals(displayName);
 		}
 		return super.eIsSet(featureID);

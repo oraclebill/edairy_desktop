@@ -8,7 +8,7 @@ import org.hibernate.SessionFactory;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.agritrace.edairy.desktop.common.model.dairy.Role;
+import com.agritrace.edairy.desktop.common.model.base.Role;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.ManagedMemoryDataStoreProvider;
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
