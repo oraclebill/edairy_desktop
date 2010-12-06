@@ -78,7 +78,7 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 		T workingCopy = null;
 		persistenceDelegate = getPersistenceDelegate();
 		if (persistenceDelegate != null) {
-			workingCopy = (T) persistenceDelegate.getOrCreateItem();
+			workingCopy = (T) persistenceDelegate.getItem();
 		} else {
 			workingCopy = (T) this.getContext(AbstractDirectoryController.EDITED_OBJECT_ID);
 		}

@@ -16,10 +16,7 @@ public class DirectoryPersistenceDelegate<P extends EObject> implements Persiste
 	}
 
 	@Override
-	public P getOrCreateItem() {
-		if (item == null) {
-			item = createItem();
-		}
+	public P getItem() {
 		return item;
 	}
 
@@ -48,7 +45,8 @@ public class DirectoryPersistenceDelegate<P extends EObject> implements Persiste
 		throw new UnsupportedOperationException("unimplemented");
 	}
 	
-	protected P createItem() {
+	@Override
+	public P createItem() {
 		return directoryController.createNewModel();
 	}
 

@@ -8,6 +8,7 @@ import javax.naming.OperationNotSupportedException;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.riena.core.Log4r;
 import org.eclipse.riena.navigation.INavigationNode;
@@ -140,10 +141,10 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 	protected final void setPersistenceDelegate(PersistenceDelegate<T> delegate) {
 		persistenceDelegate = delegate;
 	}
-	
+
 	protected final PersistenceDelegate<T> getPersistenceDelegate() {
 		if (persistenceDelegate == null) {
-			persistenceDelegate = new DirectoryPersistenceDelegate(this);
+			persistenceDelegate = new DirectoryPersistenceDelegate<T>(this);
 		}
 		return persistenceDelegate;
 	}
@@ -307,13 +308,17 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 
 	@SuppressWarnings("unchecked")
 	protected void handleNewItemAction() {
-		final RecordDialog<T> dialog = getRecordDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell());
+		final RecordDialog<T> dialog = getRecordDialog(getShell());
 		dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_NEW);
 		PersistenceDelegate<T> delegate = getPersistenceDelegate();
 		if (delegate != null) {
 			delegate.setItem(createNewModel());
 			dialog.getController().setContext(PERSISTENCE_DELEGATE, delegate);
-			dialog.open();
+			int ret = dialog.open();
+			if (ret == Dialog.OK) {
+				MessageDialog.openInformation(getShell(), "Success", 
+						String.format("%s created!", delegate.getItem().eClass().getName()));
+			}
 		} else {
 			dialog.getController().setContext(EDITED_OBJECT_ID, createNewModel());
 			final int returnCode = dialog.open();
@@ -335,7 +340,7 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 		final T selectedObject = getSelectedEObject();
 		if (selectedObject == null)
 			return;
-		
+
 		// TODO: verify this is still necessary
 		try {
 			getRepository().load(selectedObject);
@@ -349,7 +354,11 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 			delegate.setItem(selectedObject);
 			dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_VIEW);
 			dialog.getController().setContext(PERSISTENCE_DELEGATE, delegate);
-			dialog.open();
+			int ret = dialog.open();
+			if (ret == Dialog.OK) {
+				MessageDialog.openInformation(getShell(), "Success", 
+						String.format("%s created!", delegate.getItem().eClass().getName()));
+			}
 		} else {
 			dialog.getController().setContext(EDITED_OBJECT_ID, selectedObject);
 			final int returnCode = dialog.open();
@@ -399,7 +408,6 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 		// Rebind the updateFromModel to refresh the tables
 		resetFilterConditions();
 	}
-
 
 	/**
 	 * Reset conditions

@@ -24,7 +24,6 @@ import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.DirectoryPersistenceDelegate;
-import com.agritrace.edairy.desktop.common.ui.controllers.PersistenceDelegate;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
@@ -74,7 +73,7 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 		 * @return
 		 */
 		@Override
-		protected Employee createItem() {
+		public Employee createItem() {
 			final Employee employee = (Employee) EMFUtil.createWorkingCopy(DairyPackage.Literals.EMPLOYEE, 3);
 			employee.setSystemIdentity(ModelFactory.eINSTANCE.createSystemUser());
 			employee.getSystemIdentity().setRole(null);

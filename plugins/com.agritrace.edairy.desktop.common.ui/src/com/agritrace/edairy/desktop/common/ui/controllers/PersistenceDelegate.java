@@ -4,8 +4,9 @@ import org.eclipse.emf.ecore.EObject;
 
 public interface PersistenceDelegate<X extends EObject> {
 	public void setItem(X item);
-//	public X getItem();
-	public X getOrCreateItem();
+	public X getItem();
+	public X createItem();
+//	public X getOrCreateItem();
 	
 	public X load(Object key);
 	public void save(X obj);
