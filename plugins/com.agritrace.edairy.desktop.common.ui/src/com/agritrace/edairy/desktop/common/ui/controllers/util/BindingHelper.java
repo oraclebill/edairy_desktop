@@ -23,9 +23,9 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 
 /**
  * A utility class that eases binding of Ridgets to EMF properties.
- *
+ * 
  * @author oraclebill
- *
+ * 
  * @param <T>
  */
 public class BindingHelper<T extends EObject> {
@@ -39,7 +39,7 @@ public class BindingHelper<T extends EObject> {
 
 	/**
 	 * Create a new BindingHelper.
-	 *
+	 * 
 	 * @param ridgetContainer
 	 * @param modelObject
 	 */
@@ -58,7 +58,7 @@ public class BindingHelper<T extends EObject> {
 
 	/**
 	 * Get the model object this binding helper was instantiated with.
-	 *
+	 * 
 	 * @return
 	 */
 	public T getModelObject() {
@@ -66,9 +66,9 @@ public class BindingHelper<T extends EObject> {
 	}
 
 	/**
-	 * Adds a ridget - FeaturePath mapping to the mapping registry. Mapped
-	 * ridgets are bound automatically during the configuration process.
-	 *
+	 * Adds a ridget - FeaturePath mapping to the mapping registry. Mapped ridgets are bound automatically during the
+	 * configuration process.
+	 * 
 	 * @param ridgetId
 	 * @param featurePath
 	 */
@@ -80,9 +80,8 @@ public class BindingHelper<T extends EObject> {
 	}
 
 	/**
-	 * Adds a combo type ridget - FeaturePath mapping to the mapping registry.
-	 * Combo mappings include domain lists.
-	 *
+	 * Adds a combo type ridget - FeaturePath mapping to the mapping registry. Combo mappings include domain lists.
+	 * 
 	 * @param ridgetId
 	 * @param featurePath
 	 */
@@ -93,9 +92,8 @@ public class BindingHelper<T extends EObject> {
 	}
 
 	/**
-	 * Adds a combo type ridget - FeaturePath mapping to the mapping registry.
-	 * Combo mappings include domain lists.
-	 *
+	 * Adds a combo type ridget - FeaturePath mapping to the mapping registry. Combo mappings include domain lists.
+	 * 
 	 * @param ridgetId
 	 * @param featurePath
 	 */
@@ -106,7 +104,7 @@ public class BindingHelper<T extends EObject> {
 	}
 
 	/**
-	 *
+	 * 
 	 * @param ridgetId
 	 * @param domainList
 	 * @param renderMethod
@@ -161,14 +159,19 @@ public class BindingHelper<T extends EObject> {
 				try {
 					ridget.updateFromModel();
 				} catch (final org.eclipse.core.databinding.BindingException bindException) {
-					System.err.printf("Error binding ridget %s[%s] - no model binding: ", ridget, ridget.getUIControl());
+					System.err
+							.printf("Error [%s] binding ridget %s[%s] - no model binding: ",  bindException.getMessage(), ridget, ridget.getUIControl());
+
+				} catch (final IllegalArgumentException argException) {
+					System.err
+							.printf("%s error binding ridget %s[%s] - no model binding: ", argException.getMessage(), ridget, ridget.getUIControl());
 				}
 			}
 		}
 	}
 
 	/**
-	 *
+	 * 
 	 * @param binding
 	 * @param ridget
 	 * @param valueRidget
@@ -177,13 +180,13 @@ public class BindingHelper<T extends EObject> {
 		final IObservableValue observable = PojoObservables.observeValue(getModelObject(), binding.getPropertyName());
 		valueRidget.bindToModel(observable);
 
-		// bug-154: set directwriting by default on text ridgets.
+		// bug-154: set direct writing by default on text ridgets.
 		if (valueRidget instanceof ITextRidget) {
 			try {
-				((ITextRidget)valueRidget).setDirectWriting(true);
-			}
-			catch (final UnsupportedOperationException uoe) {
-				;;
+				((ITextRidget) valueRidget).setDirectWriting(true);
+			} catch (final UnsupportedOperationException uoe) {
+				;
+				;
 			}
 		}
 
@@ -202,7 +205,8 @@ public class BindingHelper<T extends EObject> {
 	void bindComboRidget(final FeatureProperties binding, final IComboRidget comboRidget) {
 		final IObservableList optionValues = binding.getDomainList();
 		final Class<?> rowClass = binding.getEntityClass();
-		final IObservableValue selectionValue = PojoProperties.value(binding.getPropertyName()).observe(getModelObject());
+		final IObservableValue selectionValue = PojoProperties.value(binding.getPropertyName()).observe(
+				getModelObject());
 
 		checkParameters(optionValues, rowClass, selectionValue);
 		comboRidget.bindToModel(optionValues, rowClass, binding.getRenderMethod(), selectionValue);
@@ -243,11 +247,9 @@ public class BindingHelper<T extends EObject> {
 		checkMandatory(binding, ridget);
 		ridget.bindToModel(optionValues, rowClass, binding.getRenderMethod());
 		if (binding.getTailFeature().isMany()) {
-			ridget.bindMultiSelectionToModel(
-					EMFProperties.list(binding.getFeaturePath()).observe(getModelObject()));
+			ridget.bindMultiSelectionToModel(EMFProperties.list(binding.getFeaturePath()).observe(getModelObject()));
 		} else {
-			ridget.bindSingleSelectionToModel(
-					EMFProperties.value(binding.getFeaturePath()).observe(getModelObject()));
+			ridget.bindSingleSelectionToModel(EMFProperties.value(binding.getFeaturePath()).observe(getModelObject()));
 		}
 	}
 

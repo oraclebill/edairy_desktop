@@ -3,7 +3,7 @@
 MYSQL=mysql
 AWK=awk
 
-DBNAME=dairytest
+DBNAME=dairytest1
 DBUSER=root
 DBPASS=
 

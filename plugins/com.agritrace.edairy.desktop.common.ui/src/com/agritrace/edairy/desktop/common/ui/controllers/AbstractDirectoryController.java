@@ -390,11 +390,11 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 		PersistenceDelegate<T> delegate = getPersistenceDelegate();
 		if (delegate != null) {
 			delegate.setItem(selectedObject);
+			dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_VIEW);
 			dialog.getController().setContext(PERSISTENCE_DELEGATE, delegate);
 			dialog.open();
 		} else {
 			dialog.getController().setContext(EDITED_OBJECT_ID, selectedObject);
-			dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_VIEW);
 			final int returnCode = dialog.open();
 			if (DialogConstants.ACTION_SAVE == returnCode) {
 				final Object contextObj = dialog.getController().getContext(EDITED_OBJECT_ID);

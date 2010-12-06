@@ -41,7 +41,7 @@ import com.google.inject.name.Named;
 public class EmployeeEditDialogController extends RecordDialogController<Employee> {
 	private Employee editEmployee = null;
 
-	private ITextRidget employeeId;
+	private ITextRidget employeeNumber;
 	private ITextRidget passwordRidget;
 	private ITextRidget licenseNo;
 	private IProfilePhotoRidget photoRidget;
@@ -67,17 +67,17 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		photoRidget = getRidget(IProfilePhotoRidget.class, "profile-photo-widget");
 		photoRidget.bindToModel(EMFObservables.observeValue(editEmployee, ModelPackage.Literals.PERSON__PHOTO));
 
-// addTextMap(EmployeeBindingConstants.BIND_ID_EMPLOYEE_NUM, DairyPackage.Literals.EMPLOYEE__ID);
+		addTextMap(EmployeeBindingConstants.BIND_ID_EMPLOYEE_NUM, DairyPackage.Literals.EMPLOYEE__EMPLOYEE_NUMBER);
 
 		// customer id
-		employeeId = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_EMPLOYEE_NUM);
-		employeeId.bindToModel(EMFObservables.observeValue(editEmployee,
+		employeeNumber = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_EMPLOYEE_NUM);
+		employeeNumber.bindToModel(EMFObservables.observeValue(editEmployee,
 				DairyPackage.Literals.EMPLOYEE__EMPLOYEE_NUMBER));
-		employeeId.setOutputOnly(false);
-		employeeId.setMandatory(true);
+		employeeNumber.setOutputOnly(false);
+		employeeNumber.setMandatory(true);
 
 		if (this.getActionType() == AbstractDirectoryController.ACTION_VIEW) {
-			employeeId.updateFromModel();
+			employeeNumber.updateFromModel();
 		}
 
 		final List<Role> allRoles = roleRepo.all();

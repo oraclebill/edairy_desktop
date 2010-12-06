@@ -62,8 +62,7 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 			restoreProgressWindow();
 			runLoginProgress(splash, usernameText, passwordText);
 	
-			final long endTime = System.currentTimeMillis() + WAIT_MSEC;
-	
+			final long endTime = System.currentTimeMillis() + WAIT_MSEC;	
 			while (!authFailed && (System.currentTimeMillis() < endTime || !authenticated)) {
 				if (splash.getDisplay().readAndDispatch() == false) {
 					splash.getDisplay().sleep();
@@ -149,7 +148,7 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 		final IProgressMonitor monitor = getBundleProgressMonitor();
 		monitor.beginTask("Logging in", 2);
 		
-		splash.getDisplay().asyncExec(new StartupRunnable() {
+		splash.getDisplay().syncExec(new StartupRunnable() {
 			@Override
 			public void runWithException() throws Throwable {
 				monitor.subTask("Initializing database connection");
