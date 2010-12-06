@@ -215,11 +215,6 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 		requestTypeChanged();
 	}
 
-	@Override
-	public AnimalHealthRequest getWorkingCopy() {
-		return (AnimalHealthRequest) getContext("editObject");
-	}
-
 	private void configureGeneralComplaintPanel(final AnimalHealthRequest request) {
 		final ITextRidget complaintTextBtn = getRidget(ITextRidget.class,
 				AnimalHealthRequestDialog.BIND_ID_VERY_THIRD_COMPLAINT);

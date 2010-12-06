@@ -42,7 +42,8 @@ public class DirectoryPersistenceDelegate<P extends EObject> implements Persiste
 
 	@Override
 	public void rollback(Object obj) {
-		throw new UnsupportedOperationException("unimplemented");
+		// TODO: 
+//		throw new UnsupportedOperationException("unimplemented");
 	}
 	
 	@Override

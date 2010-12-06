@@ -92,17 +92,11 @@ public class DairyDialogController extends RecordDialogController<DairyLocation>
 		mapController.setInputModel(editLocation.getLocation().getMapLocation());
 		mapController.updateBinding();
 	}
-
-	@Override
-	public DairyLocation getWorkingCopy() {
-		return (DairyLocation) getContext("editObject");
-	}
-
+	
 	@Override
 	public void afterBind() {
 		super.afterBind();
 		resetDetailArea();
-
 	}
 
 	@SuppressWarnings("unchecked")

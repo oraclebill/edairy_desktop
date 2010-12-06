@@ -1,7 +1,6 @@
 package com.agritrace.edairy.desktop.operations.ui.controllers;
 
 import org.eclipse.core.databinding.beans.PojoObservables;
-import org.eclipse.riena.ui.ridgets.ITextRidget;
 
 import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
@@ -20,7 +19,8 @@ public class ContainerEditDialogController extends RecordDialogController<DairyC
 
 	@Override
 	public void configureUserRidgets() {
-		// ensure model available
+		editContainer = getWorkingCopy();
+		assert editContainer != null;
 		
 		addTextMap(ContainerBindingConstants.BIND_ID_CONTAINER_TRACKING_NUM,
 				TrackingPackage.Literals.CONTAINER__TRACKING_NUMBER);
@@ -28,15 +28,9 @@ public class ContainerEditDialogController extends RecordDialogController<DairyC
 		addComboMap(ContainerBindingConstants.BIND_ID_CONTAINER_UOM, UnitOfMeasure.VALUES, "getName",
 				TrackingPackage.Literals.CONTAINER__MEASURE_TYPE);
 					
-		assert (editContainer = getWorkingCopy()) != null;
 
 		final IAssetInfoRidget assetInfo = getRidget(IAssetInfoRidget.class, IAssetInfoRidget.WIDGET_ID);
 		assetInfo.bindToModel(PojoObservables.observeValue(editContainer, "assetInfo"));
-	}
-
-	@Override
-	public void afterBind() {
-		super.afterBind();
-//		getRidget(IAssetInfoRidget.class, IAssetInfoRidget.WIDGET_ID).updateFromModel();
+		getRidget(IAssetInfoRidget.class, IAssetInfoRidget.WIDGET_ID).updateFromModel();
 	}
 }
