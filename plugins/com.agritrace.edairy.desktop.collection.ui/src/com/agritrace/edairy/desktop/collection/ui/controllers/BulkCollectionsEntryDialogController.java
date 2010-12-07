@@ -36,11 +36,12 @@ import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.collection.ui.components.collectionline.ICollectionLineRidget;
-import com.agritrace.edairy.desktop.collection.ui.components.collectionline.IMemberInfoProvider;
+import com.agritrace.edairy.desktop.collection.ui.components.collectionline.IMemberLookup;
 import com.agritrace.edairy.desktop.collection.ui.components.journalheader.IJournalHeaderRidget;
 import com.agritrace.edairy.desktop.collection.ui.components.validators.DuplicateDeliveryValidator;
 import com.agritrace.edairy.desktop.collection.ui.components.validators.MandatoryFieldsCheck;
 import com.agritrace.edairy.desktop.collection.ui.components.validators.MemberLookupValidator;
+import com.agritrace.edairy.desktop.collection.ui.dialogs.CachingMemberLookup;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.JournalPersistenceDelegate;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
@@ -54,6 +55,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager
 import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.persistence.ICollectionJournalLineRepository;
+import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.columnformatters.BooleanPropertyColumnFormatter;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
@@ -62,7 +64,6 @@ import com.agritrace.edairy.desktop.common.ui.controllers.util.ContainerValidato
 import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 public class BulkCollectionsEntryDialogController extends BaseDialogController<CollectionGroup> {
 
@@ -84,6 +85,7 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 	private static final Color RED = PlatformUI.getWorkbench().getDisplay().getSystemColor(SWT.COLOR_RED);
 
 	private final IDairyRepository dairyRepo;
+	private final IMemberRepository memberRepo;
 	private final ICollectionJournalLineRepository lineRepo;
 
 	// milk Entry group
@@ -101,7 +103,6 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 	private IActionRidget clearButton;
 
 	private final ValidatorCollection journalPageValidators;
-	private final Provider<IMemberInfoProvider> lookupHandlerProvider;
 
 	private IActionRidget tableDeleteAction;
 
@@ -109,17 +110,14 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 	 *
 	 */
 	@Inject
-	public BulkCollectionsEntryDialogController(final IDairyRepository dairyRepo,
-			final ICollectionJournalLineRepository lineRepo, final Provider<IMemberInfoProvider> lookupHandlerProvider) {
+	public BulkCollectionsEntryDialogController(final IDairyRepository dairyRepo, IMemberRepository memberRepo,
+			final ICollectionJournalLineRepository lineRepo) {
 		super();
 		this.dairyRepo = dairyRepo;
 		this.lineRepo = lineRepo;
-		this.lookupHandlerProvider = lookupHandlerProvider;
+		this.memberRepo = memberRepo;
 		journalPageValidators = new ValidatorCollection();
 		addJournalValidator(new BasicJournalValidator());
-		// drivers = dairyRepo.employeesByPosition("Driver");
-		// vehicles = dairyRepo.allVehicles();
-		// routes = dairyRepo.allRoutes();
 	}
 
 	/**
@@ -406,7 +404,7 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 		// TODO: RouteMatchValidator
 		// collectionLineRidget.setRouteValidator(new RouteMatchValidator(
 		// workingJournalPage.getRoute()));
-		final IMemberInfoProvider handler = lookupHandlerProvider.get();
+		final IMemberLookup handler = new CachingMemberLookup(memberRepo);
 		collectionLineRidget.addValidator(new MemberLookupValidator(handler));
 
 		/*
@@ -433,10 +431,6 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 				final Membership member = line.getValidatedMember();
 				final DairyLocation center = getContextJournalPage().getCollectionCenter();
 				final Date date = getContextJournalPage().getJournalDate();
-
-// if (member == null) {
-// return ValidationStatus.warning("Member number not found.");
-// }
 
 				if (center == null) {
 					return ValidationStatus.error("The journal entry has no collection center assigned");

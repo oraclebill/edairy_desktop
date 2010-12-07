@@ -55,7 +55,7 @@ import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class DairyRepository implements IDairyRepository, IMemberRepository {
+public class DairyRepository implements IDairyRepository {
 
 	/**
 	 *
@@ -369,74 +369,12 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 		}
 	}
 
-	@Override
-	public void delete(Membership member) {
-		// member.setStatus(MembershipStatus.DELETED);
-		// dairyRepository.save(member);
-		if (getLocalDairy().getMemberships().remove(member)) {
-			save();
-		} else {
-			throw new RepositoryException("Member not in memberlist");
-		}
-	}
-
-	@Override
-	public List<Membership> all() {
-		return getLocalDairy().getMemberships();
-	}
-
-	@Override
-	public List<Account> allAccounts() {
-		return dairyRepository.allAccounts();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Farm> getMemberFarms() {
-		return getSession().createCriteria(Farm.class).list();
-	}
-
-	@Transactional
-	@Override
-	public void saveNew(Membership newEntity) throws AlreadyExistsException {
-
-		if (newEntity.getMemberNumber() == null
-				|| newEntity.getMemberNumber().trim().length() == 0) {
-			final int size = getLocalDairy().getMemberships().size();
-			final long count = getLocalDairy().getVersion();
-			newEntity.setMemberNumber("A" + count + "" + size);
-			// throw new RepositoryException("Member number cannot be null");
-		}
-		
-		if ( newEntity.getMemberNumber() == null || 
-			 newEntity.getMemberNumber().length() == 0 ) {
-			throw new AssertionError("Invalid member number: '"+newEntity.getMemberNumber()+"'");
-		}
-		save();
-		
-		Account memberAccount = newEntity.getAccount();
-		if (newEntity.getAccount() == null) {
-			memberAccount = AccountFactory.eINSTANCE
-					.createAccount();
-			memberAccount.setMember(newEntity);
-		}
-		memberAccount.setAccountNumber("V" + newEntity.getMemberNumber());
-
-		if (!getLocalDairy().getMemberships().contains(newEntity)) {
-			getLocalDairy().getMemberships().add(newEntity);
-		}
-		save();
-	}
 
 	@Override
 	public Collection<Membership> getMembersForRoute(Route theRoute) {
 		return dairyRepository.membersForRoute(theRoute);
 	}
 
-	@Override
-	public void update(Membership member) {
-		save(member);
-	}
 
 	@Override
 	public Dairy reloadLocalDairy() {
@@ -556,10 +494,6 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 		return dairyRepository.memberByNumber(searchMemberNumber);
 	}
 
-	@Override
-	public Account findAccountByMemberNo(String memberNo) {
-		return dairyRepository.primaryAccountForMemberNo(memberNo);
-	}
 
 	@Override
 	public List<CollectionJournalLine> getMemberCollectionsForSession(CollectionSession session, Membership value) {
@@ -627,26 +561,4 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 
 		return criteria.list();
 	}
-
-	@Override
-	public List<AccountTransaction> findAccountTransactions(Account account, Date start, Date end)
-	{
-		return findAccountTransactions(account, start, end, null, null);
-	}
-
-	@Override
-	public void load(EObject object) {
-		throw new UnsupportedOperationException("unimplemented");
-	}
-
-	@Override
-	public void load(EObject obj, Serializable key) {
-		throw new UnsupportedOperationException("unimplemented");
-	}
-
-	@Override
-	public Membership findByKey(long key) {
-		throw new UnsupportedOperationException("unimplemented");
-	}
-
 }

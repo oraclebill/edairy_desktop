@@ -24,4 +24,6 @@ public interface IMemberRepository extends IRepository<Membership> {
 
 	public Collection<? extends Transaction> findAccountTransactions(Account account, Date startDate, Date endDate);
 
+	public Membership findByMemberNumber(String memberNumber);
+
 }

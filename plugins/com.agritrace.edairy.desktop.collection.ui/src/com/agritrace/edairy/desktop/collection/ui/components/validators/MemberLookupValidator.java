@@ -5,13 +5,13 @@ import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 
-import com.agritrace.edairy.desktop.collection.ui.components.collectionline.IMemberInfoProvider;
+import com.agritrace.edairy.desktop.collection.ui.components.collectionline.IMemberLookup;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 
 public class MemberLookupValidator implements IValidator {
-	IMemberInfoProvider memberProvider;
+	IMemberLookup memberProvider;
 
-	public MemberLookupValidator(IMemberInfoProvider memberProvider) {
+	public MemberLookupValidator(IMemberLookup memberProvider) {
 		this.memberProvider = memberProvider;
 	}
 

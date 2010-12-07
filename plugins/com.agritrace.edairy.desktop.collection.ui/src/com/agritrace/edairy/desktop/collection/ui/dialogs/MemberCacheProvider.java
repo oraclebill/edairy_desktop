@@ -4,10 +4,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.agritrace.edairy.desktop.collection.ui.components.collectionline.IMemberInfoProvider;
+import com.agritrace.edairy.desktop.collection.ui.components.collectionline.IMemberLookup;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 
-public class MemberCacheProvider implements IMemberInfoProvider {
+public class MemberCacheProvider implements IMemberLookup {
 
 	private final Map<String, Membership> memberCache = new HashMap<String, Membership>();
 

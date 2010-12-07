@@ -45,10 +45,9 @@ public final class MemberUtil {
 	}
 
 	public static String expandMemberNumber(String memberNumber) {
-		if (memberNumber.length() < 5) {
+		if (memberNumber != null && memberNumber.length() < 5) {
 			memberNumber = "00000".substring(0, 5 - memberNumber.length()) + memberNumber;
 		}
-
 		return memberNumber;
 	}
 }

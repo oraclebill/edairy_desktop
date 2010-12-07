@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
@@ -34,6 +35,15 @@ public class MemberRepository extends RepositoryUtil<Membership> implements IMem
 		super(provider);
 		this.dairyRepo = dairyRepo;
 	}
+
+	@Transactional
+	@Override
+	public Membership findByMemberNumber(String memberNumber) {
+		Query memberQuery = getCurrentSession().createQuery("FROM Membership where memberNumber = ?");
+		memberQuery.setString(0, memberNumber);
+		return (Membership) memberQuery.uniqueResult();
+	}
+
 
 	@Transactional
 	@Override
