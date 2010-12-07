@@ -80,7 +80,6 @@ import com.google.inject.Inject;
  *
  *
  * @author bjones
- *
  */
 public class MemberPaymentsProcessor {
 

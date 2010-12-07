@@ -69,7 +69,7 @@ public class CollectionCenterImportTool extends AbstractImportTool {
 
 	@Override
 	protected String[] getExpectedHeaders() {
-		return new String[] { "code", "name", null, null, "scale", null };
+		return new String[] { "code", "name", null, null, "scale" };
 	}
 
 	@Override
