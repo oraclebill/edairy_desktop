@@ -26,7 +26,6 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class MemberCollectionRecordsWidgetController implements WidgetController<Membership>, IActionListener {
 
-
 	private final String[] collectionColumnHeaders = { "Route", "Session", "Date", "Container", "Quantity",
 			"MPR Present", "Quality OK", "Validated" };
 	private final String[] collectionPropertyNames = { "collectionJournal.collectionCenter.code",

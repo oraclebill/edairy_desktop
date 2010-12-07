@@ -34,9 +34,11 @@ public class DirectoryPersistenceDelegate<P extends EObject> implements Persiste
 	@Override
 	public void save(P obj) {
 		if (created)
-			directoryController.getRepository().saveNew(obj);
+			directoryController.createEntity(obj);
+//			directoryController.getRepository().saveNew(obj);
 		else
-			directoryController.getRepository().save(obj);
+			directoryController.updateEntity(obj);
+//			directoryController.getRepository().save(obj);
 	}
 
 	@Override
