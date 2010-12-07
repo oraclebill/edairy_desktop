@@ -202,6 +202,7 @@
       <nested inputs="dairy.ecore#//Membership/defaultRoute" outputs="DairyXML.xsd#//Membership;XSDComplexTypeDefinition=11/XSDAttributeUse=5"/>
       <nested inputs="dairy.ecore#//Membership/member" outputs="DairyXML.xsd#//Membership;XSDComplexTypeDefinition=11/XSDParticle/XSDModelGroup/XSDParticle"/>
       <nested inputs="dairy.ecore#//Membership/account" outputs="DairyXML.xsd#//Membership;XSDComplexTypeDefinition=11/XSDParticle/XSDModelGroup/XSDParticle=1"/>
+      <nested inputs="dairy.ecore#//Membership/dairy" outputs="DairyXML.xsd#//Membership;XSDComplexTypeDefinition=11/XSDAttributeUse=6"/>
     </nested>
     <nested inputs="dairy.ecore#//Membership" outputs="DairyXML.xsd#//Membership;XSDElementDeclaration=11"/>
     <nested inputs="dairy.ecore#//Asset" outputs="DairyXML.xsd#//Asset;XSDComplexTypeDefinition=12">

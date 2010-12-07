@@ -3,9 +3,10 @@ package com.agritrace.edairy.desktop.common.ui.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.OperationNotSupportedException;
-
 import org.eclipse.core.databinding.observable.list.WritableList;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.dialogs.Dialog;
@@ -312,13 +313,13 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 		dialog.getController().setContext(EDITED_ACTION_TYPE, ACTION_NEW);
 		PersistenceDelegate<T> delegate = getPersistenceDelegate();
 		if (delegate != null) {
-			delegate.setItem(delegate.createItem());
+//			delegate.setItem(delegate.createItem());
+			delegate.setItem(null);
 			dialog.getController().setContext(PERSISTENCE_DELEGATE, delegate);
 			int ret = dialog.open();
 			if (ret == Dialog.OK) {
-				MessageDialog.openInformation(getShell(), "Success", 
-						String.format("New %s '%s' created!", delegate.getItem().eClass().getName(),
-								delegate.getItem().toString()));
+				MessageDialog.openInformation(getShell(), "Success", entityDescription(delegate.getItem())
+						+ " created successfully!");
 			}
 		} else {
 			dialog.getController().setContext(EDITED_OBJECT_ID, createNewModel());
@@ -357,8 +358,8 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 			dialog.getController().setContext(PERSISTENCE_DELEGATE, delegate);
 			int ret = dialog.open();
 			if (ret == Dialog.OK) {
-				MessageDialog.openInformation(getShell(), "Success", 
-						String.format("%s created!", delegate.getItem().eClass().getName()));
+				MessageDialog.openInformation(getShell(), "Success", entityDescription(delegate.getItem())
+						+ " updated successfully!");
 			}
 		} else {
 			dialog.getController().setContext(EDITED_OBJECT_ID, selectedObject);
@@ -381,6 +382,23 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 			}
 		}
 		refreshTableContents();
+	}
+
+	private String entityDescription(EObject entity) {
+		String entClassName = entity.eClass().getName();
+		String keyName = "";
+		for (EAttribute attr : entity.eClass().getEAllAttributes()) {
+			EList<EAnnotation> annotations = attr.getEAnnotations();
+			if (annotations != null && annotations.size() > 0) {
+				for (EAnnotation notation : annotations) {
+					if (notation.getSource().equals("teneo.jpa")
+							&& notation.getDetails().get("appinfo").equals("@NaturalId")) {
+						keyName = (String) entity.eGet(attr);
+					}
+				}
+			}
+		}
+		return String.format("%s %s", entClassName, keyName);
 	}
 
 	protected void updateEntity(T updateableEntity) {

@@ -6,6 +6,7 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
@@ -26,6 +27,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -42,6 +44,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl#getDefaultRoute <em>Default Route</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl#getMember <em>Member</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl#getAccount <em>Account</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl#getDairy <em>Dairy</em>}</li>
  * </ul>
  * </p>
  *
@@ -431,6 +434,47 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Dairy getDairy() {
+		if (eContainerFeatureID() != DairyPackage.MEMBERSHIP__DAIRY) return null;
+		return (Dairy)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetDairy(Dairy newDairy, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newDairy, DairyPackage.MEMBERSHIP__DAIRY, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDairy(Dairy newDairy) {
+		if (newDairy != eInternalContainer() || (eContainerFeatureID() != DairyPackage.MEMBERSHIP__DAIRY && newDairy != null)) {
+			if (EcoreUtil.isAncestor(this, newDairy))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newDairy != null)
+				msgs = ((InternalEObject)newDairy).eInverseAdd(this, DairyPackage.DAIRY__MEMBERSHIPS, Dairy.class, msgs);
+			msgs = basicSetDairy(newDairy, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__DAIRY, newDairy, newDairy));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -438,6 +482,10 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 				if (account != null)
 					msgs = ((InternalEObject)account).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DairyPackage.MEMBERSHIP__ACCOUNT, null, msgs);
 				return basicSetAccount((Account)otherEnd, msgs);
+			case DairyPackage.MEMBERSHIP__DAIRY:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetDairy((Dairy)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -454,8 +502,24 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 				return basicSetMember(null, msgs);
 			case DairyPackage.MEMBERSHIP__ACCOUNT:
 				return basicSetAccount(null, msgs);
+			case DairyPackage.MEMBERSHIP__DAIRY:
+				return basicSetDairy(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case DairyPackage.MEMBERSHIP__DAIRY:
+				return eInternalContainer().eInverseRemove(this, DairyPackage.DAIRY__MEMBERSHIPS, Dairy.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -483,6 +547,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 				return getMember();
 			case DairyPackage.MEMBERSHIP__ACCOUNT:
 				return getAccount();
+			case DairyPackage.MEMBERSHIP__DAIRY:
+				return getDairy();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -518,6 +584,9 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 				return;
 			case DairyPackage.MEMBERSHIP__ACCOUNT:
 				setAccount((Account)newValue);
+				return;
+			case DairyPackage.MEMBERSHIP__DAIRY:
+				setDairy((Dairy)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -555,6 +624,9 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 			case DairyPackage.MEMBERSHIP__ACCOUNT:
 				setAccount((Account)null);
 				return;
+			case DairyPackage.MEMBERSHIP__DAIRY:
+				setDairy((Dairy)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -583,6 +655,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 				return member != null;
 			case DairyPackage.MEMBERSHIP__ACCOUNT:
 				return account != null;
+			case DairyPackage.MEMBERSHIP__DAIRY:
+				return getDairy() != null;
 		}
 		return super.eIsSet(featureID);
 	}

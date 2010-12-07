@@ -49,7 +49,7 @@ public class MemberRepository extends RepositoryUtil<Membership> implements IMem
 		final Criteria criteria = getCurrentSession().createCriteria("Membership");
 //		criteria.setFetchMode("transactions", FetchMode.SELECT);
 		criteria.add(
-				Restrictions.eq(DairyPackage.Literals.DAIRY.getName(), getLocalDairy()));
+				Restrictions.eq(DairyPackage.Literals.MEMBERSHIP__DAIRY.getName(), getLocalDairy()));
 		criteria.add(
 				Restrictions.ne(DairyPackage.Literals.MEMBERSHIP__STATUS.getName(), MembershipStatus.DELETED));
 		return criteria.list();
@@ -85,15 +85,14 @@ public class MemberRepository extends RepositoryUtil<Membership> implements IMem
 			throw new RepositoryException("Invalid member number: '" + newEntity.getMemberNumber() + "'");
 		}
 
+		Account memberAccount = newEntity.getAccount();
 		if (newEntity.getAccount() == null) {
-			final Account memberAccount = AccountFactory.eINSTANCE.createAccount();
+			memberAccount = AccountFactory.eINSTANCE
+					.createAccount();
 			memberAccount.setMember(newEntity);
-			memberAccount.setAccountNumber("V" + newEntity.getMemberNumber());
 		}
-		if (newEntity.getAccount().getAccountNumber() == null
-				|| newEntity.getAccount().getAccountNumber().length() == 0) {
-			newEntity.getAccount().setAccountNumber("V" + newEntity.getMemberNumber());
-		}
+		memberAccount.setAccountNumber("V" + newEntity.getMemberNumber());
+
 		if (!getLocalDairy().getMemberships().contains(newEntity)) {
 			getLocalDairy().getMemberships().add(newEntity);
 		}

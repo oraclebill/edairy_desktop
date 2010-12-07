@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getDefaultRoute <em>Default Route</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getMember <em>Member</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getAccount <em>Account</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getDairy <em>Dairy</em>}</li>
  * </ul>
  * </p>
  *
@@ -253,5 +254,33 @@ public interface Membership extends EObject {
 	 * @generated
 	 */
 	void setAccount(Account value);
+
+	/**
+	 * Returns the value of the '<em><b>Dairy</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getMemberships <em>Memberships</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Dairy</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Dairy</em>' container reference.
+	 * @see #setDairy(Dairy)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMembership_Dairy()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Dairy#getMemberships
+	 * @model opposite="memberships" required="true" transient="false" ordered="false"
+	 * @generated
+	 */
+	Dairy getDairy();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getDairy <em>Dairy</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Dairy</em>' container reference.
+	 * @see #getDairy()
+	 * @generated
+	 */
+	void setDairy(Dairy value);
 
 } // Membership

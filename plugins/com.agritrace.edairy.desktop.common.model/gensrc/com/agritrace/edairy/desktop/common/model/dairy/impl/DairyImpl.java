@@ -606,7 +606,7 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 */
 	public EList<Membership> getMemberships() {
 		if (memberships == null) {
-			memberships = new EObjectContainmentEList<Membership>(Membership.class, this, DairyPackage.DAIRY__MEMBERSHIPS);
+			memberships = new EObjectContainmentWithInverseEList<Membership>(Membership.class, this, DairyPackage.DAIRY__MEMBERSHIPS, DairyPackage.MEMBERSHIP__DAIRY);
 		}
 		return memberships;
 	}
@@ -737,6 +737,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case DairyPackage.DAIRY__MEMBERSHIPS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getMemberships()).basicAdd(otherEnd, msgs);
 			case DairyPackage.DAIRY__ANIMAL_HEALTH_REQUESTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAnimalHealthRequests()).basicAdd(otherEnd, msgs);
 		}

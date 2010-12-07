@@ -237,6 +237,7 @@
     <xsd:attribute name="effectiveDate" type="xsd:string"/>
     <xsd:attribute name="status" type="dairy:MembershipStatus" use="required"/>
     <xsd:attribute name="defaultRoute" type="xsd:string"/>
+    <xsd:attribute name="dairy" type="xsd:string"/>
   </xsd:complexType>
   <xsd:element name="Membership" type="dairy:Membership"/>
   <xsd:complexType name="Asset">

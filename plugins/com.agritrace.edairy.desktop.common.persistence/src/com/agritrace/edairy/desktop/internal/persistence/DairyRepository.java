@@ -396,6 +396,7 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 		return getSession().createCriteria(Farm.class).list();
 	}
 
+	@Transactional
 	@Override
 	public void saveNew(Membership newEntity) throws AlreadyExistsException {
 
@@ -411,16 +412,16 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 			 newEntity.getMemberNumber().length() == 0 ) {
 			throw new AssertionError("Invalid member number: '"+newEntity.getMemberNumber()+"'");
 		}
+		save();
 		
+		Account memberAccount = newEntity.getAccount();
 		if (newEntity.getAccount() == null) {
-			final Account memberAccount = AccountFactory.eINSTANCE
+			memberAccount = AccountFactory.eINSTANCE
 					.createAccount();
 			memberAccount.setMember(newEntity);
-			memberAccount.setAccountNumber("V" + newEntity.getMemberNumber());
 		}
-		if (newEntity.getAccount().getAccountNumber() == null || newEntity.getAccount().getAccountNumber().length() == 0) {
-			newEntity.getAccount().setAccountNumber("V" + newEntity.getMemberNumber());
-		}
+		memberAccount.setAccountNumber("V" + newEntity.getMemberNumber());
+
 		if (!getLocalDairy().getMemberships().contains(newEntity)) {
 			getLocalDairy().getMemberships().add(newEntity);
 		}

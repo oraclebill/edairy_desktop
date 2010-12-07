@@ -263,7 +263,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="employees" ordered="false"
         upperBound="-1" eType="#//Employee" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="memberships" ordered="false"
-        upperBound="-1" eType="#//Membership" containment="true"/>
+        upperBound="-1" eType="#//Membership" containment="true" eOpposite="#//Membership/dairy"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="branchLocations" ordered="false"
         upperBound="-1" eType="#//DairyLocation" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="collectionJournals" ordered="false"
@@ -320,6 +320,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="account" lowerBound="1"
         eType="#//account/Account" containment="true" eOpposite="#//account/Account/member"
         eKeys="#//account/Account/accountId"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dairy" ordered="false"
+        lowerBound="1" eType="#//Dairy" eOpposite="#//Dairy/memberships"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="MembershipStatus">
     <eLiterals name="Active"/>

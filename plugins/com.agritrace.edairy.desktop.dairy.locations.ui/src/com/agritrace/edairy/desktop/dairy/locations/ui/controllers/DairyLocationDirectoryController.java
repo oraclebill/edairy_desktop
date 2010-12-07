@@ -35,9 +35,9 @@ import com.google.inject.Inject;
 @PermissionRequired(UIPermission.VIEW_DAIRY_LOCATIONS)
 public class DairyLocationDirectoryController extends BasicDirectoryController<DairyLocation> {
 	
-	class Delegate extends DirectoryPersistenceDelegate<DairyLocation> {
+	class DairyLocationPersistenceDelegate extends DirectoryPersistenceDelegate<DairyLocation> {
 
-		public Delegate(AbstractDirectoryController<DairyLocation> controller) {
+		public DairyLocationPersistenceDelegate(AbstractDirectoryController<DairyLocation> controller) {
 			super(controller);
 		}
 
@@ -89,7 +89,7 @@ public class DairyLocationDirectoryController extends BasicDirectoryController<D
 		this.dairyLocationRepo = dairyLocationRepo;
 		this.dairyRepo = dairyRepo;
 		setRepository(dairyLocationRepo);
-		setPersistenceDelegate(new Delegate(this));
+		setPersistenceDelegate(new DairyLocationPersistenceDelegate(this));
 
 		addTableColumn("Name", DairyPackage.Literals.DAIRY_LOCATION__NAME);
 		addTableColumn("Phone", DairyPackage.Literals.DAIRY_LOCATION__PHONE);

@@ -4,10 +4,12 @@ import org.eclipse.emf.ecore.EObject;
 
 public class DirectoryPersistenceDelegate<P extends EObject> implements PersistenceDelegate<P> {
 	private P item;
+	private boolean created;
 	private AbstractDirectoryController<P> directoryController;
 
 	public DirectoryPersistenceDelegate(AbstractDirectoryController<P> controller) {
 		this.directoryController = controller;
+		this.created = false;
 	}
 	
 	@Override
@@ -17,6 +19,10 @@ public class DirectoryPersistenceDelegate<P extends EObject> implements Persiste
 
 	@Override
 	public P getItem() {
+		if (item == null) {
+			setItem(createItem());
+			created =  true;
+		}
 		return item;
 	}
 
@@ -27,7 +33,10 @@ public class DirectoryPersistenceDelegate<P extends EObject> implements Persiste
 
 	@Override
 	public void save(P obj) {
-		directoryController.getRepository().saveNew(obj);
+		if (created)
+			directoryController.getRepository().saveNew(obj);
+		else
+			directoryController.getRepository().save(obj);
 	}
 
 	@Override

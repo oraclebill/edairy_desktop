@@ -1787,13 +1787,22 @@ public interface DairyPackage extends EPackage {
 	int MEMBERSHIP__ACCOUNT = 7;
 
 	/**
+	 * The feature id for the '<em><b>Dairy</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMBERSHIP__DAIRY = 8;
+
+	/**
 	 * The number of structural features of the '<em>Membership</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBERSHIP_FEATURE_COUNT = 8;
+	int MEMBERSHIP_FEATURE_COUNT = 9;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.AssetImpl <em>Asset</em>}' class.
@@ -4073,6 +4082,17 @@ public interface DairyPackage extends EPackage {
 	EReference getMembership_Account();
 
 	/**
+	 * Returns the meta object for the container reference '{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getDairy <em>Dairy</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Dairy</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Membership#getDairy()
+	 * @see #getMembership()
+	 * @generated
+	 */
+	EReference getMembership_Dairy();
+
+	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.Asset <em>Asset</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5790,6 +5810,14 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MEMBERSHIP__ACCOUNT = eINSTANCE.getMembership_Account();
+
+		/**
+		 * The meta object literal for the '<em><b>Dairy</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MEMBERSHIP__DAIRY = eINSTANCE.getMembership_Dairy();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.AssetImpl <em>Asset</em>}' class.
