@@ -50,8 +50,9 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager;
+import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
+import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.persistence.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.columnformatters.BooleanPropertyColumnFormatter;
@@ -458,11 +459,13 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 			@Override
 			public IStatus validate(Object value) {
 				final CollectionJournalLine line = (CollectionJournalLine) value;
-				final BigDecimal capacity = BigDecimal.valueOf(line.getDairyContainer().getCapacity());
-
+				final Container dairyContainer = line.getDairyContainer();
+				final BigDecimal capacity = dairyContainer == null ? BigDecimal.ZERO : BigDecimal.valueOf(line.getDairyContainer().getCapacity());
 				if (line.getQuantity().compareTo(capacity) > 0) {
 					// We exceed the bin capacity
 					line.setFlagged(true);
+// TODO: add 'warnings/errors' collections to journal entry entity					
+//					line.addWarning("Bin capacity exceeded");
 				}
 
 				return ValidationStatus.ok();
