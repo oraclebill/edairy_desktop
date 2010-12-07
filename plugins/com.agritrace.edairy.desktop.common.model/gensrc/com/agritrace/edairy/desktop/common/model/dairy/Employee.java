@@ -46,7 +46,6 @@ public interface Employee extends Person {
 	 * @see #setEmployeeNumber(String)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getEmployee_EmployeeNumber()
 	 * @model required="true"
-	 *        extendedMetaData="name='id' kind='elementOnly'"
 	 * @generated
 	 */
 	String getEmployeeNumber();

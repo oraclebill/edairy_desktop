@@ -16,9 +16,9 @@ public class MemberEditDialog extends RecordDialog<Membership> {
 	private MembershipTabFolder tabFolder;
 	private Set<MembershipTabFolder.TabItem> tabSet;
 
-	public MemberEditDialog(Shell shell, MemberEditDialogController controller, Boolean newMember) {
+	public MemberEditDialog(Shell shell, MemberEditDialogController controller) {
 		super(shell, controller);
-		if (newMember) {
+		if (controller.isNewMemberDialog()) {
 			tabSet = MembershipTabFolder.NEW_MEMBER_TABS;
 		}
 		else {

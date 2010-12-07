@@ -2615,13 +2615,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 			 "kind", "elementOnly"
 		   });				
 		addAnnotation
-		  (getEmployee_EmployeeNumber(), 
-		   source, 
-		   new String[] {
-			 "name", "id",
-			 "kind", "elementOnly"
-		   });		
-		addAnnotation
 		  (getDairyLocation_Id(), 
 		   source, 
 		   new String[] {
@@ -2723,7 +2716,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		   source, 
 		   new String[] {
 			 "appinfo", "@Embedded"
-		   });					
+		   });				
 		addAnnotation
 		  (getDairyLocation_Id(), 
 		   source, 

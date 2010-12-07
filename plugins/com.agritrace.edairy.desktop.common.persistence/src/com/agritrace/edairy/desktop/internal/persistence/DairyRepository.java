@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.internal.persistence;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -8,6 +9,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.riena.core.Log4r;
@@ -54,35 +56,6 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class DairyRepository implements IDairyRepository, IMemberRepository {
-
-	public static class RepositoryException extends RuntimeException {
-
-		/**
-		 *
-		 */
-		private static final long serialVersionUID = 1L;
-
-		public RepositoryException() {
-			super();
-			// TODO Auto-generated constructor stub
-		}
-
-		public RepositoryException(String message, Throwable cause) {
-			super(message, cause);
-			// TODO Auto-generated constructor stub
-		}
-
-		public RepositoryException(String message) {
-			super(message);
-			// TODO Auto-generated constructor stub
-		}
-
-		public RepositoryException(Throwable cause) {
-			super(cause);
-			// TODO Auto-generated constructor stub
-		}
-
-	}
 
 	/**
 	 *
@@ -658,6 +631,21 @@ public class DairyRepository implements IDairyRepository, IMemberRepository {
 	public List<AccountTransaction> findAccountTransactions(Account account, Date start, Date end)
 	{
 		return findAccountTransactions(account, start, end, null, null);
+	}
+
+	@Override
+	public void load(EObject object) {
+		throw new UnsupportedOperationException("unimplemented");
+	}
+
+	@Override
+	public void load(EObject obj, Serializable key) {
+		throw new UnsupportedOperationException("unimplemented");
+	}
+
+	@Override
+	public Membership findByKey(long key) {
+		throw new UnsupportedOperationException("unimplemented");
 	}
 
 }

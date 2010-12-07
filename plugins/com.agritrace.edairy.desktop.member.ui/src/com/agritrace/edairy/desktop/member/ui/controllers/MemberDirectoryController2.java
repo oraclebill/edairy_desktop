@@ -5,12 +5,10 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
-import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.ridgets.listener.FocusEvent;
 import org.eclipse.riena.ui.ridgets.listener.IFocusListener;
 import org.eclipse.swt.widgets.Shell;
@@ -82,21 +80,17 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 			"Monthly Credit Sales", "Credit Balance" };
 
 	private final String[] memberPropertyNames = { "memberNumber", "member.formattedName", "defaultRoute.code",
-			"status.name", "member.phoneNumber" }; // "account",
-													// "account",
-	// "account" };
+			"status.name", "member.phoneNumber" }; 
 
 	private ITextRidget searchText;
 	private final Dairy localDairy;
-	private final IMemberRepository repository;
 	private IMilkCollectionRepository collectionsRepo;
 	private IFarmRepository farmRepo;
-
 
 	@Inject
 	public MemberDirectoryController2(final IMemberRepository repository, final IDairyRepository dairyRepo,
 			IFarmRepository farmRepo, IMilkCollectionRepository collectionsRepo) {
-		this.repository = repository;
+		setRepository(repository);
 		this.collectionsRepo = collectionsRepo;
 		this.farmRepo = farmRepo;
 		this.localDairy = dairyRepo.getLocalDairy();
@@ -180,7 +174,7 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 	protected RecordDialog<Membership> getRecordDialog(Shell shell) {
 		assert controller != null;
 //		final MemberEditDialogController controller = new MemberEditDialogController(localDairy.getBranchLocations());
-		return new MemberEditDialog(getShell(), controller, true);
+		return new MemberEditDialog(getShell(), controller);
 	}
 
 	@Override
@@ -198,7 +192,7 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 	@Override
 	protected void handleViewItemAction() {
 		controller = new MemberEditDialogController(
-				localDairy.getBranchLocations(), repository, farmRepo, collectionsRepo);
+				localDairy.getBranchLocations(), (IMemberRepository)getRepository(), farmRepo, collectionsRepo);
 		super.handleViewItemAction();
 	}
 }

@@ -317,7 +317,8 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 			int ret = dialog.open();
 			if (ret == Dialog.OK) {
 				MessageDialog.openInformation(getShell(), "Success", 
-						String.format("%s created!", delegate.getItem().eClass().getName()));
+						String.format("New %s '%s' created!", delegate.getItem().eClass().getName(),
+								delegate.getItem().toString()));
 			}
 		} else {
 			dialog.getController().setContext(EDITED_OBJECT_ID, createNewModel());

@@ -37,14 +37,13 @@ public class MemberEditDialogController extends RecordDialogController<Membershi
 		public void propertyChange(PropertyChangeEvent arg0) {
 			enableSaveButton(validate());
 			if (getWorkingCopy() != null)
-				formattedMemberNameRidget.setText(
-						MemberUtil.formattedMemberName(
-								getRidget(IComboRidget.class, ViewWidgetId.memberInfo_honorific).getText(),
-								getRidget(ITextRidget.class, ViewWidgetId.memberInfo_firstName).getText(),
-								getRidget(ITextRidget.class, ViewWidgetId.memberInfo_middleName).getText(),
-								getRidget(ITextRidget.class, ViewWidgetId.memberInfo_lastName).getText(),
-								getRidget(ITextRidget.class, ViewWidgetId.memberInfo_additionalNames).getText(),
-								getRidget(IComboRidget.class, ViewWidgetId.memberInfo_suffix).getText()));
+				formattedMemberNameRidget.setText(MemberUtil.formattedMemberName(
+						getRidget(IComboRidget.class, ViewWidgetId.memberInfo_honorific).getText(),
+						getRidget(ITextRidget.class, ViewWidgetId.memberInfo_firstName).getText(),
+						getRidget(ITextRidget.class, ViewWidgetId.memberInfo_middleName).getText(),
+						getRidget(ITextRidget.class, ViewWidgetId.memberInfo_lastName).getText(),
+						getRidget(ITextRidget.class, ViewWidgetId.memberInfo_additionalNames).getText(),
+						getRidget(IComboRidget.class, ViewWidgetId.memberInfo_suffix).getText()));
 		}
 	}
 
@@ -79,6 +78,10 @@ public class MemberEditDialogController extends RecordDialogController<Membershi
 		this.memberRepo = memberRepo;
 		this.farmRepo = farmRepo;
 		this.collectionsRepo = collectionsRepo;
+	}
+
+	public boolean isNewMemberDialog() {
+		return memberRepo == null;
 	}
 
 	@Override
