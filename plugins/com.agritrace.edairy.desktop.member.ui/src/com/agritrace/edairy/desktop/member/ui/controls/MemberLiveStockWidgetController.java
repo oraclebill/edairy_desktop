@@ -128,7 +128,8 @@ public class MemberLiveStockWidgetController extends WidgetDirectoryController<R
 				}
 			}
 		}
-		resutls = filterDate(animals, filterController.getDateSearchController().getStartDate(),filterController.getDateSearchController().getEndDate() );
+		// TODO: this filter is not appropriate for the livestock directory, so for now (HACK) we just ignore it.
+		//		resutls = filterDate(animals, filterController.getDateSearchController().getStartDate(),filterController.getDateSearchController().getEndDate() );
 		return resutls;
 	}
 

@@ -28,18 +28,17 @@ public class MapPanel extends CompositePanel {
 		gd = new GridData();
 		gd.widthHint = FormUtil.WIDTH_UNIT;
 		lattitudeText.setLayoutData(gd);
-
-		final Browser map = UIControlsFactory.createBrowser(this, SWT.BORDER);
-		gd = new GridData();
-		gd.verticalSpan = 3;
-		gd.grabExcessHorizontalSpace = false;
-		gd.horizontalAlignment = SWT.FILL;
-		gd.grabExcessVerticalSpace = false;
-		gd.verticalAlignment = SWT.FILL;
-		gd.heightHint = 150;
-		gd.widthHint = 150;
-		map.setLayoutData(gd);
 		try {
+			final Browser map = UIControlsFactory.createBrowser(this, SWT.BORDER);
+			gd = new GridData();
+			gd.verticalSpan = 3;
+			gd.grabExcessHorizontalSpace = false;
+			gd.horizontalAlignment = SWT.FILL;
+			gd.grabExcessVerticalSpace = false;
+			gd.verticalAlignment = SWT.FILL;
+			gd.heightHint = 150;
+			gd.widthHint = 150;
+			map.setLayoutData(gd);
 			map.setUrl("http://maps.google.com/maps/api/staticmap?center=limuru+kenya&zoom=11&size=150x150&sensor=false");
 			map.refresh();
 		} catch (Exception e) {

@@ -48,12 +48,12 @@ public abstract class RepositoryUtil<T extends EObject> extends DataStoreManager
 
 	@Override
 	public void load(EObject object) {
-		throw new UnsupportedOperationException();
+//		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void load(EObject obj, Serializable key) {
-		throw new UnsupportedOperationException();
+//		throw new UnsupportedOperationException();
 	}
 
 	@Override

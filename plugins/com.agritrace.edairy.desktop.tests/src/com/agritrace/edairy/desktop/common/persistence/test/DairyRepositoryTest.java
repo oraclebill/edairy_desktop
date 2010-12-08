@@ -11,7 +11,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.IDbPropertiesManager;
 import com.agritrace.edairy.desktop.internal.common.persistence.HsqlDbDataStoreProvider;
-import com.agritrace.edairy.desktop.internal.persistence.DairyRepository;
+import com.agritrace.edairy.desktop.internal.persistence.MemberRepository;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Scopes;
@@ -22,7 +22,7 @@ public class DairyRepositoryTest {
 	static class TestModule extends AbstractModule {
 		@Override
 		protected void configure() {
-			bind(IMemberRepository.class).to(DairyRepository.class);
+			bind(IMemberRepository.class).to(MemberRepository.class);
 			bind(HbDataStore.class).toProvider(HsqlDbDataStoreProvider.class);
 			bind(IDbPropertiesManager.class).to(HsqlDbDataStoreProvider.class);
 			bind(HsqlDbDataStoreProvider.class).in(Scopes.SINGLETON);

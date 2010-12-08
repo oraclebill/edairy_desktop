@@ -16,7 +16,8 @@ import com.agritrace.edairy.desktop.common.ui.controls.location.ViewWidgetId;
 import com.agritrace.edairy.desktop.common.ui.validators.DoubleNumberValidator;
 
 public class MapGroupController implements WidgetController<MapLocation> {
-	private final ListenerList<IDataChangeListener> listeners = new ListenerList<IDataChangeListener>(IDataChangeListener.class);
+	private final ListenerList<IDataChangeListener> listeners = new ListenerList<IDataChangeListener>(
+			IDataChangeListener.class);
 
 	private IRidgetContainer container;
 	private IDecimalTextRidget latituteTxt;
@@ -38,7 +39,7 @@ public class MapGroupController implements WidgetController<MapLocation> {
 
 			@Override
 			public void focusLost(FocusEvent event) {
-				for (final IDataChangeListener listener: listeners.getListeners()) {
+				for (final IDataChangeListener listener : listeners.getListeners()) {
 					listener.dataChanged();
 				}
 			}
@@ -89,16 +90,20 @@ public class MapGroupController implements WidgetController<MapLocation> {
 
 	@Override
 	public void updateBinding() {
-		if (map != null) {
-			latituteTxt.bindToModel(map, ModelPackage.Literals.MAP_LOCATION__LATITUDE.getName());
-			latituteTxt.setModelToUIControlConverter(NumberToStringConverter.fromDouble(true));
-			latituteTxt.updateFromModel();
-			longtituteTxt.bindToModel(map, ModelPackage.Literals.MAP_LOCATION__LONGITUDE.getName());
-			latituteTxt.setModelToUIControlConverter(NumberToStringConverter.fromDouble(true));
-			longtituteTxt.updateFromModel();
-		} else {
-			latituteTxt.setText("");
-			longtituteTxt.setText("");
+		try {
+			if (map != null) {
+				latituteTxt.bindToModel(map, ModelPackage.Literals.MAP_LOCATION__LATITUDE.getName());
+				latituteTxt.setModelToUIControlConverter(NumberToStringConverter.fromDouble(true));
+				latituteTxt.updateFromModel();
+				longtituteTxt.bindToModel(map, ModelPackage.Literals.MAP_LOCATION__LONGITUDE.getName());
+				latituteTxt.setModelToUIControlConverter(NumberToStringConverter.fromDouble(true));
+				longtituteTxt.updateFromModel();
+			} else {
+				latituteTxt.setText("");
+				longtituteTxt.setText("");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 

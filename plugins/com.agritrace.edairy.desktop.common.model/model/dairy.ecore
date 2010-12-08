@@ -347,6 +347,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="disposalWitness" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DairyContainer" eSuperTypes="farm.ecore#//Container">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="IN_CIRCULATION"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="zone" eType="#//Route"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="assetInfo" eType="#//Asset"
         containment="true" eKeys="#//Asset/tagValue">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">

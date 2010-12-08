@@ -12,7 +12,6 @@ public class ConstantColumnFormatter extends ColumnFormatter {
 	}
 	@Override
 	public String getText(Object element) {
-		System.out.println("::called::"+this.hashCode()+"::");
 		return text;
 	}
 }

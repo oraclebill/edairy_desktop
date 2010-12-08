@@ -13,23 +13,20 @@ import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
-import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.base.Gender;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
+import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.tracking.AcquisitionType;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Purpose;
 import com.agritrace.edairy.desktop.common.model.tracking.RearingMode;
 import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
-import com.agritrace.edairy.desktop.common.model.util.MemberUtil;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
-import com.agritrace.edairy.desktop.common.ui.beans.SimpleFormattedDateBean;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.util.DateFilterUtil;
@@ -52,9 +49,10 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 
 	public static final String liveStockRemoveTitle = "Remove Registered Animales";
 	private static final String[] columnHeaders = { "Member ID", "Member Name", "Farm Name", "Purpose", "Animal Name",
-			"Species", "Breed", "Acquisition Date" }; //, "Status" };
-	private static final String[] propertyNames = { "membership.memberNumber", "membership.member.formattedName", 
-			"animal.location.name", "animal.purpose", "animal.givenName", "animal.animalType.species", "animal.animalType.breed", "animal.dateOfAcquisition" }; //, "animal.status" };
+			"Species", "Breed", "Acquisition Date" }; // , "Status" };
+	private static final String[] propertyNames = { "membership.memberNumber", "membership.member.formattedName",
+			"animal.location.name", "animal.purpose", "animal.givenName", "animal.animalType.species",
+			"animal.animalType.breed", "animal.dateOfAcquisition" }; // , "animal.status" };
 
 	private final IFarmRepository farmRepository;
 	private LiveStockFilterWidgetController filterController;
@@ -64,7 +62,6 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 
 	// filter group
 	private ITextRidget memberNameFilter;
-
 
 	private Membership selectedMember;
 	private final Provider<LivestockEditDialog> viewLiveStockProvider;
@@ -90,45 +87,50 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 		listTableInput.addAll(getFilteredTableResult());
 		table.updateFromModel();
 	}
-	
-	
 
 	private List<LiveStockListViewTableNode> getFilteredTableResult() {
 		final List<LiveStockListViewTableNode> results = new ArrayList<LiveStockListViewTableNode>();
 		List<RegisteredAnimal> selectedAnimals = new ArrayList<RegisteredAnimal>();
-		final List<RegisteredAnimal> animals = new ArrayList<RegisteredAnimal>();
-		final String farmName = filterController.getFarmCombo().getText();
-		final String speciesName = filterController.getSpeciesCombo().getText();
-		filterController.getStatusCombo().getText();
-		final List<Farm> farms = new ArrayList<Farm>();
+// final List<RegisteredAnimal> animals = new ArrayList<RegisteredAnimal>();
+// final String farmName = filterController.getFarmCombo().getText();
+		String speciesName = filterController.getSpeciesCombo().getText();
+		String status = filterController.getStatusCombo().getText();
+// final List<Farm> farms = new ArrayList<Farm>();
 
-		if (selectedMember != null) {
-			farms.addAll(selectedMember.getMember().getFarms());
-		} else {
-			farms.addAll(farmRepository.allWithAnimals());
+// if (selectedMember != null) {
+// farms.addAll(selectedMember.getMember().getFarms());
+// } else {
+// farms.addAll(farmRepository.allWithAnimals());
+// }
+//
+// for (final Farm farm : farms) {
+// if (farmName.equals("All Farms") || farmName.equals(farm.getName())) {
+// animals.addAll(farm.getAnimals());
+// }
+// }
+//
+// if (!speciesName.equals("All Species")) {
+// for (final RegisteredAnimal animal : animals) {
+// if (animal.getAnimalType().getSpecies().equals(speciesName)) {
+// selectedAnimals.add(animal);
+// }
+// }
+// }
+//
+// // selectedAnimals = filterDate(animals,
+// // filterController.getDateSearchController().getStartDate(),
+// // filterController.getDateSearchController().getEndDate());
+// final DateFilterUtil<RegisteredAnimal> filterUtil = new DateFilterUtil<RegisteredAnimal>(
+// RegisteredAnimal.class, TrackingPackage.Literals.REGISTERED_ANIMAL__DATE_OF_ACQUISITION);
+// selectedAnimals = filterUtil.filterDate(animals, filterController.getDateSearchController().getStartDate(),
+// filterController.getDateSearchController().getEndDate());
+
+		if (speciesName.equals("All Species")) {
+			speciesName = null;
 		}
 
-		for (final Farm farm : farms) {
-			if (farmName.equals("All Farms") || farmName.equals(farm.getName())) {
-				animals.addAll(farm.getAnimals());
-			}
-		}
-
-		if (!speciesName.equals("All Species")) {
-			for (final RegisteredAnimal animal : animals) {
-				if (animal.getAnimalType().getSpecies().equals(speciesName)) {
-					selectedAnimals.add(animal);
-				}
-			}
-		}
-
-		// selectedAnimals = filterDate(animals,
-		// filterController.getDateSearchController().getStartDate(),
-		// filterController.getDateSearchController().getEndDate());
-		final DateFilterUtil<RegisteredAnimal> filterUtil = new DateFilterUtil<RegisteredAnimal>(
-				RegisteredAnimal.class, TrackingPackage.Literals.REGISTERED_ANIMAL__DATE_OF_ACQUISITION);
-		selectedAnimals = filterUtil.filterDate(animals, filterController.getDateSearchController().getStartDate(),
-				filterController.getDateSearchController().getEndDate());
+		selectedAnimals = farmRepository.findRegisteredAnimals(selectedMember, filterController.getFarmCombo()
+				.getText(), speciesName, status);
 
 		for (final RegisteredAnimal animal : selectedAnimals) {
 			if (selectedMember != null) {
@@ -142,6 +144,7 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 			}
 
 		}
+
 		return results;
 	}
 

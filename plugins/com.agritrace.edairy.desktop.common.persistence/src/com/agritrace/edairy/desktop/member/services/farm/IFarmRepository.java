@@ -2,7 +2,9 @@ package com.agritrace.edairy.desktop.member.services.farm;
 
 import java.util.List;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.internal.member.services.farm.FarmRepository;
 import com.google.inject.ImplementedBy;
@@ -18,4 +20,7 @@ public interface IFarmRepository extends IRepository<Farm> {
 	List<Farm> allWithAnimals();
 
 	List<Farm> allWithAnimalsAndCans();
+
+	List<RegisteredAnimal> findRegisteredAnimals(Membership selectedMember, String farm,
+			String species, String status);
 }
