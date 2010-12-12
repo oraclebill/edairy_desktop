@@ -301,7 +301,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 			throw new IllegalArgumentException("No bin list. Call setBinList before binding!");
 			// binList = Collections.EMPTY_LIST;
 		}
-		binCombo.bindToModel(new WritableList(binList, DairyContainer.class), DairyContainer.class, "getContainerId",
+		binCombo.bindToModel(new WritableList(binList, DairyContainer.class), DairyContainer.class, "getTrackingNumber",
 				PojoObservables.observeValue(workingJournalLine,
 						DairyPackage.Literals.COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER.getName()));
 
