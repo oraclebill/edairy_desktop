@@ -33,13 +33,14 @@ class TransactionJournalFilterBean {
 	 */
 	public void clear() {
 		final Calendar today = Calendar.getInstance();
+		today.add(Calendar.DAY_OF_YEAR, 1);  // set to tomorrow
 
 		final Calendar todayMinusThirty = Calendar.getInstance();
 		todayMinusThirty.setTime(today.getTime());
 		todayMinusThirty.add(Calendar.DAY_OF_YEAR, -30);
 
-		startDate = todayMinusThirty.getTime();
-		endDate = today.getTime();
+		setStartDate(todayMinusThirty.getTime());
+		setEndDate(today.getTime() );
 
 		member = null;
 		referenceNumber = "";
@@ -103,7 +104,7 @@ class TransactionJournalFilterBean {
 	 * @param endDate
 	 */
 	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
+		this.endDate = stripTime(endDate);
 	}
 
 	/**
@@ -128,7 +129,7 @@ class TransactionJournalFilterBean {
 	 * @param startDate
 	 */
 	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
+		this.startDate = stripTime(startDate);
 	}
 
 	/**
@@ -163,5 +164,15 @@ class TransactionJournalFilterBean {
 	public void setSourceSelections(List<TransactionSource> sources) {
 		this.sourceSelections.clear();
 		this.sourceSelections.addAll(sources);
+	}
+	private Date stripTime(Date date) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		
+		final int[] timeFields = new int[] { Calendar.HOUR, Calendar.MINUTE, Calendar.SECOND, Calendar.MILLISECOND };
+		for (int i : timeFields ) {
+			cal.set(i, 0);
+		}
+		return cal.getTime();
 	}
 }
