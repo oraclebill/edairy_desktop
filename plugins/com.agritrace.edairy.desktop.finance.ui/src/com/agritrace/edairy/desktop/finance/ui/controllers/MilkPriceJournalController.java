@@ -108,7 +108,6 @@ public class MilkPriceJournalController extends BasicDirectoryController<MemberP
 
 	@Override
 	protected void configureFilterRidgets() {
-
 		currentPriceLabel = getRidget(ILabelRidget.class, MilkPriceJournalConstants.ID_LBL_CURRENT_MILK_PRICE);
 		dateRange = getRidget(IDateRangeRidget.class, MilkPriceJournalConstants.ID_COMBO_RATEMONTH);
 	}

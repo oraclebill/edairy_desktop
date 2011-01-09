@@ -20,8 +20,10 @@ import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
 import com.agritrace.edairy.desktop.finance.ui.controllers.AccountTransactionJournalController;
 import com.agritrace.edairy.desktop.finance.ui.controllers.AdjustmentTransactionJournalController;
 import com.agritrace.edairy.desktop.finance.ui.controllers.MemberPaymentsViewController;
+import com.agritrace.edairy.desktop.finance.ui.controllers.PaymentRequestViewController;
 import com.agritrace.edairy.desktop.finance.ui.views.AdjustmentTransactionJournalView;
 import com.agritrace.edairy.desktop.finance.ui.views.MemberPaymentsView;
+import com.agritrace.edairy.desktop.finance.ui.views.PaymentRequestView;
 import com.agritrace.edairy.desktop.finance.ui.views.TransactionJournalView;
 
 public class FinanceNavigationNodeAssembler extends AbstractNavigationAssembler {
@@ -38,11 +40,14 @@ public class FinanceNavigationNodeAssembler extends AbstractNavigationAssembler 
 	private static final String MODULE_GROUP_TRANSACTIONS = "modulegroup.finance.transactions"; 	//$NON-NLS-1$
 	private static final String MODULE_GROUP_MILK_PRICE = "modulegroup.finance.milk-price"; 	//$NON-NLS-1$
 	private static final String MODULE_GROUP_ADJUSTMENT = "modulegroup.finance.adjustment"; 	//$NON-NLS-1$
+	private static final String MODULE_GROUP_PAYMENTS = "modulegroup.finance.payments"; 	//$NON-NLS-1$
 	private static final String SUBMODULE_FINANCE_TRANSACTION_REGISTER = "edm.finances.log";	//$NON-NLS-1$
+	private static final String SUBMODULE_FINANCE_PAYMENT_REQUEST = "com.agritrace.edairy.desktop.finance.ui.views.PaymentRequestView";
 	private static final String SUBMODULE_FINANCE_MEMBER_PAYMENTS = "com.agritrace.edairy.desktop.finance.ui.views.MemberPaymentsView";	//$NON-NLS-1$
 	private static final String SUBMODULE_FINANCE_ADJUSTMENT_REGISTER = "adjustment.log";	//$NON-NLS-1$
 
 	private static final String TAB_FINANCE = SUBAPP_FINANCE;
+	private static final String LABEL_PAYMENT_REQUEST = "Payment Request";
 
 	private Set<String> knownTargetIds = null;
 
@@ -87,6 +92,8 @@ public class FinanceNavigationNodeAssembler extends AbstractNavigationAssembler 
 //					LABEL_MILKPRICE, moduleNode, MilkPriceJournalView.ID, MilkPriceJournalController.class); //$NON-NLS-1$
 			NodeFactory.createSubModule(SUBMODULE_FINANCE_MEMBER_PAYMENTS,
 					LABEL_PAYMENTS, moduleNode, MemberPaymentsView.ID, MemberPaymentsViewController.class);
+			NodeFactory.createSubModule(SUBMODULE_FINANCE_PAYMENT_REQUEST,
+					LABEL_PAYMENT_REQUEST, moduleNode, PaymentRequestView.ID, PaymentRequestViewController.class);
 		}
 		{
 			final IModuleGroupNode moduleGroupNode = new ModuleGroupNode(new NavigationNodeId(MODULE_GROUP_ADJUSTMENT));
@@ -96,7 +103,6 @@ public class FinanceNavigationNodeAssembler extends AbstractNavigationAssembler 
 			NodeFactory.createSubModule(SUBMODULE_FINANCE_ADJUSTMENT_REGISTER,
 							LABEL_ADJUSTMENT, moduleNode, AdjustmentTransactionJournalView.ID, AdjustmentTransactionJournalController.class);
 		}
-
 		return new INavigationNode<?>[] { subAppNode };
 	}
 

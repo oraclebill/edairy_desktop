@@ -41,6 +41,14 @@
             id="com.agritrace.edairy.desktop.finance.ui.views.MemberPaymentsView"
             name="Member Payments Register">
       </view>
+      <view
+            allowMultiple="true"
+            category="com.agritrace.edairy.desktop.finance.ui"
+            class="com.agritrace.edairy.desktop.finance.ui.views.PaymentRequestView"
+            id="com.agritrace.edairy.desktop.finance.ui.views.PaymentRequestView"
+            name="Generate Payment Request"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.help.contexts">
