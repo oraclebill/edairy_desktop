@@ -1,0 +1,127 @@
+employee id,given name,middle name,family name,job title,date started,national id,nssf number,nhif number
+5,Michael,Mburu,Ngoiya,Dairy Clerk,,5209078,131406620,R0175272
+7,Peter,Ndungu,Hungi,Transport Supervisor,,11336122,257115927,R0174847
+10,Charles,Kaaru,Mwangi,Mechanic,,13842572,363676929,R0735388
+11,Paul,Mungai,Miingi,Dairy Clerk,,11536715,213426927,R0174963
+12,Beatrice,Nduta,Mwaura,Dairy Clerk,,10714731,503755818,R0174944
+13,David,Kinyanjui,Kimani,Cashier,,13214782,257125922,R0175128
+14,Francis,Ngugi,Kimani,Dairy Clerk,,14402272,257119922,R0174934
+15,Jaziel,Kimunya,Kahare,Dairy Clerk,,13222500,55691927,R0735389
+18,Richard,Njuguna,Muniu,Petty Cashier,,10998696,213427923,R0174870
+20,Joram,Gitau,Kamau,Dairy Clerk,,20007976,257116923,RO174969
+23,Fredrick,Mungai,Mburu,Dairy Clerk,,13030904,36363892X,R0735392
+30,Joseph,Gituere,Kariuki,Dairy Clerk,,14717826,390908924,R0814375
+31,Anson,Njoi,Gatuna,Dairy Clerk,,21248932,390965928,R0814346
+32,Joseph,Kahiri,Kimani,Dairy Clerk,,711507,30556062X,R0175224
+37,Jane,Wanjiku,Mbugua,Dairy Clerk,,11309795,516924818,R0174817
+38,Gerald,Njoroge,Ngari,Loader,,9324789,17076592X,R0174822
+40,Peter,Chege,Murage,loader,,7249634,509987621,R0735405
+43,Ann,Wanjiku,Mwaura,Veterinery Clerk,,10952396,540802816,R1780286
+50,Peter,Muna,Kariuki,Driver,,11098602,401859924,R0814341
+51,Simon,Chege,Mwaniki,Driver,,4289350,583562620,R0735381
+52,Peter,Muira,Kihuria,Loader,,10882361,350783926,R0735407
+53,Christopher,Muigai,Muturi,Loader,,20673155,391013920,R0814369
+54,Patrick,Njuguna,Waitugi,Driver,,8554808,82117926,R0553702
+57,James,Wainaina,Mwaura,Accountant,,896393,410020621,R0174837
+58,Rachel,Ndiko,Mbugua,Secretary,,712212,107578816,R0174850
+59,Simon,Chege,Njoroge,Procurements Officer,,7466565,70170924,R0175136
+60,Margret,Mukuhi,Mbugua,Payments Supervisor,,5362995,403908817,R0174853
+61,Lucy,Nyambura,Kariuki,Payments Clerk,,10086006,403904811,R0174871
+62,Veronicah,Nyambura,Gichane,Banking Supervisor,,10767741,516923811,R0174811
+63,Teresiah,Wanjiku,Kamau,Extensions Officer,,10425275,516922815,R0174893
+64,Jessie,Wachira,Kimani,Internal Auditor,,10425837,257129928,R0174804
+65,Geoffrey,Miringu,Mbugua,Book-Keeper,,20211345,350669929,R0735412
+66,Hellen,Wanjiku,Nyamu,Payments Clerk,,20816591,584626819,R0735409
+67,Milkah,Wambui,Njoi,Secretary,,20358974,584627815,
+69,Joseph,Kariuki,Mungai,Dairy Supervisor,,5206503,10171920,R0175204
+73,Nathan,Waweru,Wambiro,Janitor,,11336116,213445921,R0174954
+80,George,Makena,Muiruri,Dairy Clerk,,10182758,39101692X,R0814363
+81,Earnest,Kimotho,Kabata,Security,,5207053,602251621,R0814306
+83,James,Njuguna,Kinyanjui,Loader,,22462555,86748939,R1319682
+85,Stephen,Nganga,Murage,Dairy Clerk,,22147447,10124934,R0873002
+87,Perminus,,Mungai,Dairy Clerk,,7583588,70172927,R0175218
+88,Owen,,Njoroge,Dairy Clerk,,10715837,213429926,R0174876
+90,Douglas,,Ngigi,Dairy Clerk,,11309600,257112928,R0174952
+91,Martin,,Njoroge,Dairy Clerk,,13412254,257109927,R0174958
+92,James,,Kesikar,Dairy Clerk,,22458781,10139931,R0995049
+93,Njoroge,,Gitau,Driver,,3086776,10138935,R0995045
+96,Joseph,,Thogo,Mechanic,,13412393,39366936,R0995044
+99,Joseph,,Kahia,Security,,7250592,382355628,R1129200
+100,Francis,,Ng'ang'a,Driver,,11574890,172853923,R0181757
+101,John,,Ngigi,Dairy Clerk,,7816485,350670927,R0735383
+102,Francis,,Mbugua,Quantity Controller,,7249542,257122923,R0175242
+108,James,,Nyoro,Driver,,2305673,70181926,R0175719
+109,Peter,,Maina,Accounts Clerk,,13223264,21342892X,R0175983
+112,Joseph,,Mwaura,Security,,5211817,305534629,R1129229
+113,Joseph,,Muigai,Dairy Clerk,,21475911,74617931,R1129234
+114,Peter,,Wambui,Security,,13511649,148711928,R1129243
+117,Walter,,Kahara,Vet Surgeon,,13214809,86732935,R1207257
+119,Jacob,,Wandati,Security,,9026626,86737937,R1207269
+120,Moses,,Magu,Security,,7250672,7924933,R1319679
+121,Stanley,,Chege,Can Controller,,10086014,118851934,R1319677
+123,Joseph,,Ng'ang'a,Driver,,6242161,118886932,R1319673
+125,George,,Gatuna,Security,,10344350,130109932,R1319624
+126,Lucy,,Ndung'u,Payments Clerk,,23485065,45682828,R1319661
+127,James,, Gitau,Dairy Clerk,,1440376,426469925,R1466521
+130,George,,Mbugua,Security,,715466,205075622,R1466536
+159,Jackson,,Ngigi,Dairy Clerk,,14717525,426039920,R1466531
+161,Njoroge,,Wakang'u,Security,,5752840,426334922,R1466269
+162,Kenneth,,Thuo,Security,,7552264,693797622,R1466519
+163,Bernand,,Kariuki,Security,,710489,436818922,R1466518
+164,Andrew,,Gichuki,Loader,,22189627,476218926,R1472937
+165,Julius,,Mbuthia,Dairy Clerk,,22877813,476216923,R1472934
+167,John,,Gichuho,Security,,3082831,328130621,R1723218
+169,David,,Njoroge,Security,,7261568,998882623,R1828549
+170,Joseph,,Waweru ,Security,,10086826,378881922,
+171,Peter,,Muiruri,Security,,8510964,628126921,R1846754
+172,Joseph,,Gathiaka,Security,,1351400,986858625,R1903120
+174,Peter,,Kimani ,Security,,6211518,65048262X,R0814318
+181,Paul,,Ngugi,Data Entry Clerk,,23135157,754477924,R1959701
+182,Rachel,,Njeri,Dairy Clerk,,25076811,873410815,R1959722
+183,Margret,,Njau,Dairy Clerk,,5362995,873412818,
+184,Jane,,Njoroge,Store Supervisor,,22007784,772156816,R1931484
+185,Edward,,Njoroge ,Driver,,21170134,754474925,
+186,Amos,,Mburu,Loader,,24563108,754481921,2163281
+187,Peter,,Waweru ,Loader,,23886274,754476928,R1959702
+188,Michael,,Njoroge,Loader,,24117477,754475921,
+189,Anthony,,Njung'e,Loader,,24377256,754479927,R1959723
+191,Michael,,Mungai,Security,,9618983,754472922,R2166006
+192,Harrison,,Ndung'u,Security,,5208046,904025624,R0834533
+194,James,,Giathi ,Security,,9237121,754473929,
+195,Stephen,,Kibatha,Manager,,11190731,831064927,2223780
+196,Joseph,,Chege ,Loader,,23608886,70137392X,R2131528
+197,Simon,,Waithira,Mechanic,,10572829,117459917,R0851753
+198,John,,Mburu,Dairy Clerk,,23075603,606618929,R2165898
+199,Perminus,,Njuguna ,loader,,22822184,817446923,R2167157
+200,Joel,,Mbugua ,Loader,,23811625,817443924,2180510
+202,Michael,,Ng'ang'a,Loader,,24635548,817444920,R2165904
+203,Ruth,,Gathura,Tea Girl,,24550344,882720813,
+205,Bosco,,Wanyoike ,Dairy Clerk,,24636050,81744792X,R2167165
+207,Joseph,,Njonge,Dairy Clerk,,22869237,817767924,2070679
+209,David,,Ndung'u,A. I Technician,,23007667,831319925,R2171425
+211,Stephen,,Wanjiku,Dairy Clerk,,24635970,830845925,R2166222
+212,Mary,,Hinga ,Dairy Clerk,,25144496,941318818,R2162620
+213,James,,Nduta ,Asst. Store Supervisor,,26189948,846838923,R2163237
+214,Mathew,,Kinyanjui ,Payments Clerk,,23538959,831378921,R2162618
+215,Bernand,,Ngugi,Dairy Clerk,,20486445,850441927,R2169304
+216,Alice,,Gathanwa ,Dairy Clerk,,26390449,93634815,2236836
+217,Hannah,,Karanja ,Dairy Clerk,,20072018,941316815,
+218,Jack,,Njung'e ,Dairy Clerk,,21951141,850445922,R2162623
+219,John,,Njuguna ,Store Clerk,,25125051,850447925,R2165990
+220,Rachel,,Komu,Dairy Clerk,,26461377,936367814,2167802
+221,Cyrus,,Njoroge ,Data Entry Clerk,,21926386,850442923,R2163261
+223,Joseph,,Kamau,Asst. Accountant,,24691116,858139928,
+224,Peter,,Makimi ,loader,,24122840,850448921,R2165903
+225,John,,Gitau ,Security,,11190124,301010921,
+226,John,,Mwicigi,Security,,3086677,479174628,2168326
+227,Mugo,,Ng'ang'a,Security,,6243485,632068,2167923
+229,Daniel,,Karanja ,Loader,,23666933,858132923,
+230,Francis,,Maina,Loader,,23153804,85813392X,R2031402
+232,George,,Gachuhi,Security,,6242483,858152924,
+233,Samuel,,Ndung'u,Security,,21320085,858149923,
+234,John,,Githuku,Security,,22560496,74060910,
+235,Zaphania,,Njenga,Security,,22560496,858151928,
+236,Joseph,,Njenga ,I.T. Administrator,,20073859,858269929,R2286469
+237,Zacharia,,Muchungu,Security,,7485167,11704918,
+238,Joseph,,Kinyanjui ,Security,,13125777,85826692X,R2286171
+239,Gerald,,Nyambura,Loader,,23976419,858271923,
