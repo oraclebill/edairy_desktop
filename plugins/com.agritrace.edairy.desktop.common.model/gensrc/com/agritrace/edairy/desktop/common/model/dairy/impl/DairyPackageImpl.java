@@ -2655,6 +2655,13 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 			 "kind", "elementOnly"
 		   });				
 		addAnnotation
+		  (getEmployee_EmployeeNumber(), 
+		   source, 
+		   new String[] {
+			 "name", "employeeNumber",
+			 "kind", "elementOnly"
+		   });			
+		addAnnotation
 		  (getDairyLocation_Id(), 
 		   source, 
 		   new String[] {
@@ -2763,6 +2770,12 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		   new String[] {
 			 "appinfo", "@Embedded"
 		   });				
+		addAnnotation
+		  (getEmployee_EmployeeNumber(), 
+		   source, 
+		   new String[] {
+			 "appinfo", "@Column(unique=true)\n"
+		   });			
 		addAnnotation
 		  (getDairyLocation_Id(), 
 		   source, 

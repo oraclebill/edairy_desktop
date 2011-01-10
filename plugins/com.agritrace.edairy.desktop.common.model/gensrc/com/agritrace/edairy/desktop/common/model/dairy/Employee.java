@@ -46,6 +46,8 @@ public interface Employee extends Person {
 	 * @see #setEmployeeNumber(String)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getEmployee_EmployeeNumber()
 	 * @model required="true"
+	 *        extendedMetaData="name='employeeNumber' kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@Column(unique=true)\n'"
 	 * @generated
 	 */
 	String getEmployeeNumber();

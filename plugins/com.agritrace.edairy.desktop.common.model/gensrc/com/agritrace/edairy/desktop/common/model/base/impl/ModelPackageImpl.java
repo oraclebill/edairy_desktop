@@ -1510,6 +1510,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
+		  (getPerson_NationalId(), 
+		   source, 
+		   new String[] {
+			 "name", "nationalId",
+			 "kind", "elementOnly"
+		   });			
+		addAnnotation
 		  (companyEClass, 
 		   source, 
 		   new String[] {
@@ -1609,6 +1616,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "appinfo", "@OneToOne"
+		   });			
+		addAnnotation
+		  (getPerson_NationalId(), 
+		   source, 
+		   new String[] {
+			 "appinfo", "@Column(unique=true)\n"
 		   });			
 		addAnnotation
 		  (companyEClass, 
