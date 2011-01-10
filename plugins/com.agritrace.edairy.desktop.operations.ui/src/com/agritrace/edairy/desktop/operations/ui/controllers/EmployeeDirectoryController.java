@@ -55,9 +55,10 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 			try {
 				localDairy.getEmployees().add(obj);
 				dairyRepo.save(localDairy);
-			} catch (final Exception e) {
-				e.printStackTrace();
-				handleException(e.getCause());
+			} catch (final RuntimeException e) {
+				localDairy.getEmployees().remove(obj);
+//				handleException(e.getCause());
+				throw e;
 			}
 		}
 
