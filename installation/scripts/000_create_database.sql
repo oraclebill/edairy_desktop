@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.1.41, for apple-darwin10.2.0 (i386)
+-- MySQL dump 10.13  Distrib 5.1.46, for apple-darwin10.2.0 (i386)
 --
--- Host: localhost    Database: dairytest1
+-- Host: localhost    Database: dairytest
 -- ------------------------------------------------------
--- Server version	5.1.41
+-- Server version	5.1.46-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -263,9 +263,9 @@ CREATE TABLE `container` (
   `containerid` bigint(20) NOT NULL AUTO_INCREMENT,
   `dtype` varchar(255) NOT NULL,
   `e_version` int(11) NOT NULL,
-  `trackingnumber` varchar(60) DEFAULT NULL,
+  `trackingnumber` varchar(60) NOT NULL,
   `farm_owner_farmid` bigint(20) DEFAULT NULL,
-  `capacity` double DEFAULT NULL,
+  `capacity` double NOT NULL,
   `measuretype` varchar(255) DEFAULT NULL,
   `tagtype` varchar(60) DEFAULT NULL,
   `tagvalue` varchar(60) DEFAULT NULL,
@@ -279,13 +279,14 @@ CREATE TABLE `container` (
   `dairy_dairybins_companyid` bigint(20) DEFAULT NULL,
   `tstamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`containerid`),
+  UNIQUE KEY `trackingnumber` (`trackingnumber`),
   KEY `farm_cans` (`farm_cans_farmid`),
   KEY `container_owner` (`farm_owner_farmid`),
   KEY `dairy_dairybins` (`dairy_dairybins_companyid`),
   CONSTRAINT `container_owner` FOREIGN KEY (`farm_owner_farmid`) REFERENCES `farm` (`farmid`),
   CONSTRAINT `dairy_dairybins` FOREIGN KEY (`dairy_dairybins_companyid`) REFERENCES `dairy` (`dairyid`),
   CONSTRAINT `farm_cans` FOREIGN KEY (`farm_cans_farmid`) REFERENCES `farm` (`farmid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -579,17 +580,17 @@ CREATE TABLE `membership` (
   `dairylocation_defaultroute_id` bigint(20) DEFAULT NULL,
   `farmer_member_personid` bigint(20) NOT NULL,
   `account` bigint(20) NOT NULL,
-  `dairy_memberships_companyid` bigint(20) DEFAULT NULL,
+  `membership_dairy_companyid` bigint(20) DEFAULT NULL,
   `tstamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`memberid`),
   UNIQUE KEY `account` (`account`),
   UNIQUE KEY `membernumber` (`membernumber`),
-  KEY `dairy_memberships` (`dairy_memberships_companyid`),
   KEY `membership_defaultroute` (`dairylocation_defaultroute_id`),
+  KEY `membership_dairy` (`membership_dairy_companyid`),
   KEY `membership_member` (`farmer_member_personid`),
   KEY `FKB01D87D6D6DFAC3A` (`account`),
-  CONSTRAINT `dairy_memberships` FOREIGN KEY (`dairy_memberships_companyid`) REFERENCES `dairy` (`dairyid`),
   CONSTRAINT `FKB01D87D6D6DFAC3A` FOREIGN KEY (`account`) REFERENCES `account` (`accountid`),
+  CONSTRAINT `membership_dairy` FOREIGN KEY (`membership_dairy_companyid`) REFERENCES `dairy` (`dairyid`),
   CONSTRAINT `membership_defaultroute` FOREIGN KEY (`dairylocation_defaultroute_id`) REFERENCES `dairylocation` (`id`),
   CONSTRAINT `membership_member` FOREIGN KEY (`farmer_member_personid`) REFERENCES `person` (`personid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1101,4 +1102,4 @@ CREATE TABLE `vehicle` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2010-12-06 11:40:08
+-- Dump completed on 2011-01-10  3:44:23
