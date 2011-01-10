@@ -1669,8 +1669,26 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getDairyContainer_Status() {
+		return (EAttribute)dairyContainerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDairyContainer_Zone() {
+		return (EReference)dairyContainerEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getDairyContainer_AssetInfo() {
-		return (EReference)dairyContainerEClass.getEStructuralFeatures().get(0);
+		return (EReference)dairyContainerEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -2241,6 +2259,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(assetEClass, ASSET__DISPOSAL_WITNESS);
 
 		dairyContainerEClass = createEClass(DAIRY_CONTAINER);
+		createEAttribute(dairyContainerEClass, DAIRY_CONTAINER__STATUS);
+		createEReference(dairyContainerEClass, DAIRY_CONTAINER__ZONE);
 		createEReference(dairyContainerEClass, DAIRY_CONTAINER__ASSET_INFO);
 
 		supplierEClass = createEClass(SUPPLIER);
@@ -2508,6 +2528,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getAsset_DisposalWitness(), ecorePackage.getEString(), "disposalWitness", null, 0, 1, Asset.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dairyContainerEClass, DairyContainer.class, "DairyContainer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDairyContainer_Status(), ecorePackage.getEString(), "status", "IN_CIRCULATION", 0, 1, DairyContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDairyContainer_Zone(), this.getRoute(), null, "zone", null, 0, 1, DairyContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDairyContainer_AssetInfo(), this.getAsset(), null, "assetInfo", null, 0, 1, DairyContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		getDairyContainer_AssetInfo().getEKeys().add(this.getAsset_TagValue());
 
@@ -2619,6 +2641,13 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
+		  (getVehicle_LogBookNumber(), 
+		   source, 
+		   new String[] {
+			 "name", "logBookNumber",
+			 "kind", "elementOnly"
+		   });			
+		addAnnotation
 		  (getVehicle_AssetInfo(), 
 		   source, 
 		   new String[] {
@@ -2721,6 +2750,12 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		   source, 
 		   new String[] {
 			 "appinfo", "@NaturalId\n"
+		   });			
+		addAnnotation
+		  (getVehicle_LogBookNumber(), 
+		   source, 
+		   new String[] {
+			 "appinfo", "@Column(unique=true)\n"
 		   });			
 		addAnnotation
 		  (getVehicle_AssetInfo(), 

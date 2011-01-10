@@ -27,7 +27,15 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="chassisNumber" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=" "/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="logBookNumber" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=" "/>
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=" ">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="name" value="logBookNumber"/>
+        <details key="kind" value="elementOnly"/>
+      </eAnnotations>
+      <eAnnotations source="teneo.jpa">
+        <details key="appinfo" value="@Column(unique=true)&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="insurancePolicyNumber"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=" "/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="insuranceExpirationDate"

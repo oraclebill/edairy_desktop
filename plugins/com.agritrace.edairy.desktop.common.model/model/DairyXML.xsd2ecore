@@ -217,6 +217,8 @@
     </nested>
     <nested inputs="dairy.ecore#//Asset" outputs="DairyXML.xsd#//Asset;XSDElementDeclaration=12"/>
     <nested inputs="dairy.ecore#//DairyContainer" outputs="DairyXML.xsd#//DairyContainer;XSDComplexTypeDefinition=13">
+      <nested inputs="dairy.ecore#//DairyContainer/status" outputs="DairyXML.xsd#//DairyContainer;XSDComplexTypeDefinition=13/XSDAttributeUse"/>
+      <nested inputs="dairy.ecore#//DairyContainer/zone" outputs="DairyXML.xsd#//DairyContainer;XSDComplexTypeDefinition=13/XSDAttributeUse=1"/>
       <nested inputs="dairy.ecore#//DairyContainer/assetInfo" outputs="DairyXML.xsd#//DairyContainer;XSDComplexTypeDefinition=13/XSDParticle/XSDModelGroup/XSDParticle"/>
     </nested>
     <nested inputs="dairy.ecore#//DairyContainer" outputs="DairyXML.xsd#//DairyContainer;XSDElementDeclaration=13"/>
