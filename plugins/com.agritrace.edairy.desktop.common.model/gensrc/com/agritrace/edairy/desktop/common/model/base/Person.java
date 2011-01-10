@@ -387,7 +387,8 @@ public interface Person extends Contactable {
 	 * @return the value of the '<em>National Id</em>' attribute.
 	 * @see #setNationalId(String)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getPerson_NationalId()
-	 * @model
+	 * @model extendedMetaData="name='nationalId' kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@Column(unique=true)\n'"
 	 * @generated
 	 */
 	String getNationalId();
