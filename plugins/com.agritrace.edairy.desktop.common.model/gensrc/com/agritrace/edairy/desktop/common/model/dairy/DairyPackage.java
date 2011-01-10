@@ -1951,13 +1951,31 @@ public interface DairyPackage extends EPackage {
 	int DAIRY_CONTAINER__MEASURE_TYPE = TrackingPackage.CONTAINER__MEASURE_TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY_CONTAINER__STATUS = TrackingPackage.CONTAINER_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Zone</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY_CONTAINER__ZONE = TrackingPackage.CONTAINER_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Asset Info</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY_CONTAINER__ASSET_INFO = TrackingPackage.CONTAINER_FEATURE_COUNT + 0;
+	int DAIRY_CONTAINER__ASSET_INFO = TrackingPackage.CONTAINER_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Container</em>' class.
@@ -1966,7 +1984,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY_CONTAINER_FEATURE_COUNT = TrackingPackage.CONTAINER_FEATURE_COUNT + 1;
+	int DAIRY_CONTAINER_FEATURE_COUNT = TrackingPackage.CONTAINER_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.SupplierImpl <em>Supplier</em>}' class.
@@ -4201,6 +4219,28 @@ public interface DairyPackage extends EPackage {
 	EClass getDairyContainer();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.DairyContainer#getStatus <em>Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Status</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyContainer#getStatus()
+	 * @see #getDairyContainer()
+	 * @generated
+	 */
+	EAttribute getDairyContainer_Status();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.DairyContainer#getZone <em>Zone</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Zone</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyContainer#getZone()
+	 * @see #getDairyContainer()
+	 * @generated
+	 */
+	EReference getDairyContainer_Zone();
+
+	/**
 	 * Returns the meta object for the containment reference '{@link com.agritrace.edairy.desktop.common.model.dairy.DairyContainer#getAssetInfo <em>Asset Info</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5902,6 +5942,22 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EClass DAIRY_CONTAINER = eINSTANCE.getDairyContainer();
+
+		/**
+		 * The meta object literal for the '<em><b>Status</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DAIRY_CONTAINER__STATUS = eINSTANCE.getDairyContainer_Status();
+
+		/**
+		 * The meta object literal for the '<em><b>Zone</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DAIRY_CONTAINER__ZONE = eINSTANCE.getDairyContainer_Zone();
 
 		/**
 		 * The meta object literal for the '<em><b>Asset Info</b></em>' containment reference feature.

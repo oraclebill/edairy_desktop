@@ -244,6 +244,8 @@ public interface Vehicle extends EObject {
 	 * @see #setLogBookNumber(String)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getVehicle_LogBookNumber()
 	 * @model default=" " required="true"
+	 *        extendedMetaData="name='logBookNumber' kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@Column(unique=true)\n'"
 	 * @generated
 	 */
 	String getLogBookNumber();

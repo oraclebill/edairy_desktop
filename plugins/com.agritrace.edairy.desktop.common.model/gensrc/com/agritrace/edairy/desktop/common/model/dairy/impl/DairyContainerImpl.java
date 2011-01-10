@@ -10,6 +10,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Asset;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -27,6 +28,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyContainerImpl#getStatus <em>Status</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyContainerImpl#getZone <em>Zone</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyContainerImpl#getAssetInfo <em>Asset Info</em>}</li>
  * </ul>
  * </p>
@@ -34,6 +37,33 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * @generated
  */
 public class DairyContainerImpl extends ContainerImpl implements DairyContainer {
+	/**
+	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String STATUS_EDEFAULT = "IN_CIRCULATION";
+	/**
+	 * The cached value of the '{@link #getStatus() <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected String status = STATUS_EDEFAULT;
+	/**
+	 * The cached value of the '{@link #getZone() <em>Zone</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getZone()
+	 * @generated
+	 * @ordered
+	 */
+	protected Route zone;
 	/**
 	 * The cached value of the '{@link #getAssetInfo() <em>Asset Info</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -61,6 +91,65 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 	@Override
 	protected EClass eStaticClass() {
 		return DairyPackage.Literals.DAIRY_CONTAINER;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getStatus() {
+		return status;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStatus(String newStatus) {
+		String oldStatus = status;
+		status = newStatus;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_CONTAINER__STATUS, oldStatus, status));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Route getZone() {
+		if (zone != null && zone.eIsProxy()) {
+			InternalEObject oldZone = (InternalEObject)zone;
+			zone = (Route)eResolveProxy(oldZone);
+			if (zone != oldZone) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DAIRY_CONTAINER__ZONE, oldZone, zone));
+			}
+		}
+		return zone;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Route basicGetZone() {
+		return zone;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setZone(Route newZone) {
+		Route oldZone = zone;
+		zone = newZone;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_CONTAINER__ZONE, oldZone, zone));
 	}
 
 	/**
@@ -128,6 +217,11 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case DairyPackage.DAIRY_CONTAINER__STATUS:
+				return getStatus();
+			case DairyPackage.DAIRY_CONTAINER__ZONE:
+				if (resolve) return getZone();
+				return basicGetZone();
 			case DairyPackage.DAIRY_CONTAINER__ASSET_INFO:
 				return getAssetInfo();
 		}
@@ -142,6 +236,12 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case DairyPackage.DAIRY_CONTAINER__STATUS:
+				setStatus((String)newValue);
+				return;
+			case DairyPackage.DAIRY_CONTAINER__ZONE:
+				setZone((Route)newValue);
+				return;
 			case DairyPackage.DAIRY_CONTAINER__ASSET_INFO:
 				setAssetInfo((Asset)newValue);
 				return;
@@ -157,6 +257,12 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case DairyPackage.DAIRY_CONTAINER__STATUS:
+				setStatus(STATUS_EDEFAULT);
+				return;
+			case DairyPackage.DAIRY_CONTAINER__ZONE:
+				setZone((Route)null);
+				return;
 			case DairyPackage.DAIRY_CONTAINER__ASSET_INFO:
 				setAssetInfo((Asset)null);
 				return;
@@ -172,10 +278,30 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case DairyPackage.DAIRY_CONTAINER__STATUS:
+				return STATUS_EDEFAULT == null ? status != null : !STATUS_EDEFAULT.equals(status);
+			case DairyPackage.DAIRY_CONTAINER__ZONE:
+				return zone != null;
 			case DairyPackage.DAIRY_CONTAINER__ASSET_INFO:
 				return assetInfo != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (status: ");
+		result.append(status);
+		result.append(')');
+		return result.toString();
 	}
 
 } //DairyContainerImpl

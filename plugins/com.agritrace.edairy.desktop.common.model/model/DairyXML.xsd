@@ -257,6 +257,8 @@
         <xsd:sequence>
           <xsd:element maxOccurs="1" minOccurs="0" name="assetInfo" type="dairy:Asset"/>
         </xsd:sequence>
+        <xsd:attribute default="IN_CIRCULATION" name="status" type="xsd:string"/>
+        <xsd:attribute name="zone" type="xsd:string"/>
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
