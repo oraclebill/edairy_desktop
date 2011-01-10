@@ -149,6 +149,7 @@ public abstract class RecordDialogController<T extends EObject> extends BaseDial
 					getWindowRidget().dispose();
 				}
 			} catch (Exception e) {
+				setReturnCode(DialogConstants.ACTION_CANCEL);
 				e.printStackTrace();
 				if (e.getClass().getName().contains("ConstraintViolation")) {
 					MessageDialog.openError(AbstractDirectoryController.getShell(), "Error: " +  e.getMessage(),
