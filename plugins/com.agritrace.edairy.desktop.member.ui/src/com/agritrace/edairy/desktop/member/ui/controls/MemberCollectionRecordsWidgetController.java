@@ -26,31 +26,6 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class MemberCollectionRecordsWidgetController implements WidgetController<Membership>, IActionListener {
 
-	public final static class DairyContainerIdColumnFormatter extends ColumnFormatter {
-		@Override
-		public String getText(Object element) {
-			if (element instanceof CollectionJournalLine) {
-				if (((CollectionJournalLine) element).getDairyContainer() != null) {
-					return "" + ((CollectionJournalLine) element).getDairyContainer().getContainerId();
-				}
-			}
-			return null;
-		}
-	}
-
-	public final static class JournalSessionColumnFormatter extends ColumnFormatter {
-		@Override
-		public String getText(Object element) {
-			if (element instanceof CollectionJournalLine) {
-				final CollectionGroup journal = ((CollectionJournalLine) element).getCollectionJournal();
-				if (journal != null) {
-					return journal.getSession().toString();
-				}
-			}
-			return null;
-		}
-	}
-
 	private final String[] collectionColumnHeaders = { "Route", "Session", "Date", "Container", "Quantity",
 			"MPR Present", "Quality OK", "Validated" };
 	private final String[] collectionPropertyNames = { "collectionJournal.collectionCenter.code",

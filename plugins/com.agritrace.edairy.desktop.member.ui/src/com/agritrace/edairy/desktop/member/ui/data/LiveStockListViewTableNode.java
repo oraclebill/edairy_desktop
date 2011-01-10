@@ -1,6 +1,9 @@
 package com.agritrace.edairy.desktop.member.ui.data;
 
+import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
 
 /**
@@ -15,9 +18,13 @@ public class LiveStockListViewTableNode {
 
 	private Membership membership;
 
+	public LiveStockListViewTableNode(RegisteredAnimal animal) {
+		this(getMembership(animal), animal);
+	}
+
 	public LiveStockListViewTableNode(Membership membership, RegisteredAnimal animal) {
-		this.membership = membership;
 		this.animal = animal;
+		this.membership = membership;
 	}
 
 	public RegisteredAnimal getAnimal() {
@@ -35,5 +42,11 @@ public class LiveStockListViewTableNode {
 	public void setMembership(Membership membership) {
 		this.membership = membership;
 	}
-
+	
+	private static Membership getMembership(RegisteredAnimal animal) {
+		Farm farm = (Farm) animal.eContainer();
+		Farmer farmer = farm.getOwner();
+		return (Membership) farmer.eContainer();
+	}
+	
 }

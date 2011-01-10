@@ -11,6 +11,7 @@ import com.google.inject.name.Named;
 
 public final class SystemSettingsController {
 	public static final String ENCRYPT_PASSWORDS = "edairy.security.encrypt_passwords";
+	
 	@Inject @Named("db")
 	private static Provider<IPersistentPreferenceStore> storeProvider;
 

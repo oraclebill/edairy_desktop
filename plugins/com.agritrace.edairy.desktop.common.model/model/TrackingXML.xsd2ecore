@@ -56,29 +56,30 @@
     <nested inputs="farm.ecore#//RegisteredAnimal" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3">
       <nested inputs="farm.ecore#//RegisteredAnimal/registrationId" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse"/>
       <nested inputs="farm.ecore#//RegisteredAnimal/givenName" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=1"/>
-      <nested inputs="farm.ecore#//RegisteredAnimal/gender" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=2"/>
-      <nested inputs="farm.ecore#//RegisteredAnimal/purpose" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=3"/>
-      <nested inputs="farm.ecore#//RegisteredAnimal/dateOfAcquisition" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=4"/>
-      <nested inputs="farm.ecore#//RegisteredAnimal/acquisitionType" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=5"/>
-      <nested inputs="farm.ecore#//RegisteredAnimal/identifyingFeatures" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=6"/>
-      <nested inputs="farm.ecore#//RegisteredAnimal/rearingMode" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=7"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/photo" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=2"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/gender" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=3"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/purpose" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=4"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/dateOfAcquisition" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=5"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/acquisitionType" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=6"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/identifyingFeatures" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=7"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/rearingMode" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=8"/>
       <nested inputs="farm.ecore#//RegisteredAnimal/pastOwners" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDParticle/XSDModelGroup/XSDParticle"/>
-      <nested inputs="farm.ecore#//RegisteredAnimal/insuranceNumber" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=8"/>
-      <nested inputs="farm.ecore#//RegisteredAnimal/dateOfBirth" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=9"/>
-      <nested inputs="farm.ecore#//RegisteredAnimal/birthCertificateNumber" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=10"/>
-      <nested inputs="farm.ecore#//RegisteredAnimal/veterinaryCertificateNumber" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=11"/>
-      <nested inputs="farm.ecore#//RegisteredAnimal/ministryId" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=12"/>
-      <nested inputs="farm.ecore#//RegisteredAnimal/insuranceCompany" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=13"/>
-      <nested inputs="farm.ecore#//RegisteredAnimal/feedingHabit" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=14"/>
-      <nested inputs="farm.ecore#//RegisteredAnimal/feedType" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=15"/>
-      <nested inputs="farm.ecore#//RegisteredAnimal/feedBrand" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=16"/>
-      <nested inputs="farm.ecore#//RegisteredAnimal/supplements" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=17"/>
-      <nested inputs="farm.ecore#//RegisteredAnimal/antibiotics" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=18"/>
-      <nested inputs="farm.ecore#//RegisteredAnimal/veterinary" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=19"/>
-      <nested inputs="farm.ecore#//RegisteredAnimal/awards" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=20"/>
-      <nested inputs="farm.ecore#//RegisteredAnimal/notes" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=21"/>
-      <nested inputs="farm.ecore#//RegisteredAnimal/location" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=22"/>
-      <nested inputs="farm.ecore#//RegisteredAnimal/animalType" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=23"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/insuranceNumber" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=9"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/dateOfBirth" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=10"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/birthCertificateNumber" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=11"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/veterinaryCertificateNumber" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=12"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/ministryId" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=13"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/insuranceCompany" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=14"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/feedingHabit" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=15"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/feedType" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=16"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/feedBrand" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=17"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/supplements" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=18"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/antibiotics" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=19"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/veterinary" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=20"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/awards" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=21"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/notes" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=22"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/location" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=23"/>
+      <nested inputs="farm.ecore#//RegisteredAnimal/animalType" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDAttributeUse=24"/>
       <nested inputs="farm.ecore#//RegisteredAnimal/sireType" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDParticle/XSDModelGroup/XSDParticle=1"/>
       <nested inputs="farm.ecore#//RegisteredAnimal/identifiers" outputs="TrackingXML.xsd#//RegisteredAnimal;XSDComplexTypeDefinition=3/XSDParticle/XSDModelGroup/XSDParticle=2"/>
     </nested>

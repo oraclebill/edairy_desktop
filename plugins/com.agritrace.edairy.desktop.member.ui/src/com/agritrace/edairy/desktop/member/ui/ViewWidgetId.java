@@ -275,4 +275,6 @@ public class ViewWidgetId implements DialogConstants {
 	public static final String TRANSACTION_DATERANGE = "TRANSACTION_DATERANGE";
 
 	public static final String TRANSACTION_UPDATE_BTN = "TRANSACTION_UPDATE_BTN";
+
+	public static final String LIVESTOCK_PHOTO = "LIVESTOCK_PHOTO";
 }

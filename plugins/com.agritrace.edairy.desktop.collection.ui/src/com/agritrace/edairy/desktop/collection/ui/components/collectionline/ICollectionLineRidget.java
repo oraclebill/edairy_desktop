@@ -21,8 +21,8 @@ public interface ICollectionLineRidget extends IComplexRidget {
 
 	public void createCollectionLine();
 
-	public void setMemberInfoProvider(IMemberInfoProvider provider);
-	public IMemberInfoProvider getMemberInfoProvider();
+	public void setMemberInfoProvider(IMemberLookup provider);
+	public IMemberLookup getMemberInfoProvider();
 	public void clearValidators();
 	void setRouteValidator(IValidator routeValidator);
 	public CollectionJournalLine getWorkingCollectionLine();

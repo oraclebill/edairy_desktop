@@ -3,27 +3,33 @@
 <plugin>
    <extension
          point="org.eclipse.ui.views">
+      <category
+            id="com.agritrace.edairy.desktop.finance.ui"
+            name="eDairy Desktop Finance Module">
+      </category>
       <view
             category="com.agritrace.edairy.desktop.finance.ui"
             class="com.agritrace.edairy.desktop.finance.ui.views.TransactionJournalView"
-            icon="icons/finance/member-transactions.gif"
+            icon="icons/member-transactions.gif"
             id="member.account.transaction.journal"
             allowMultiple="true"
             name="Member Transaction Register">
       </view>
+      <!--
       <view
             category="com.agritrace.edairy.desktop.finance.ui"
             class="com.agritrace.edairy.desktop.finance.ui.views.MilkPriceJournalView"
             id="milk.price.journal"
-            icon="icons/finance/milkprice.gif"
+            icon="icons//milkprice.gif"
             allowMultiple="true"
             name="Milk Price Log">
       </view>
+      -->
       <view
             allowMultiple="true"
             category="com.agritrace.edairy.desktop.finance.ui"
             class="com.agritrace.edairy.desktop.finance.ui.views.AdjustmentTransactionJournalView"
-            icon="icons/finance/adjustments.gif"
+            icon="icons/adjustment-transactions.gif"
             id="adjustment.journal"
             name="Adjustment Register">
       </view>
@@ -31,7 +37,7 @@
             allowMultiple="true"
             category="com.agritrace.edairy.desktop.finance.ui"
             class="com.agritrace.edairy.desktop.finance.ui.views.MemberPaymentsView"
-            icon="icons/finance/payments.png"
+            icon="icons/member-payments.gif"
             id="com.agritrace.edairy.desktop.finance.ui.views.MemberPaymentsView"
             name="Member Payments Register">
       </view>

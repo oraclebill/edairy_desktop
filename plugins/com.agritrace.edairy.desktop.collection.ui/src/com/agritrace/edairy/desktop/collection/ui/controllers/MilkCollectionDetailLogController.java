@@ -19,7 +19,6 @@
 //import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 //import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 //import com.agritrace.edairy.desktop.common.persistence.ICollectionJournalLineRepository;
-//import com.agritrace.edairy.desktop.common.ui.columnformatters.BooleanPropertyColumnFormatter;
 //import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 //import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 //import com.google.inject.Inject;
@@ -63,12 +62,9 @@
 //		addTableColumn("MemberID", DairyPackage.Literals.COLLECTION_JOURNAL_LINE__FROM);
 //		addTableColumn("CAN", DairyPackage.Literals.COLLECTION_JOURNAL_LINE__FARM_CONTAINER);
 //		addTableColumn("Quantity", DairyPackage.Literals.COLLECTION_JOURNAL_LINE__QUANTITY);
-//		addTableColumn("Suspended", DairyPackage.Literals.COLLECTION_JOURNAL_LINE__FLAGGED, 
-//				new BooleanPropertyColumnFormatter(DairyPackage.Literals.COLLECTION_JOURNAL_LINE__FLAGGED.toString()));
-//		addTableColumn("MPR Missing", DairyPackage.Literals.COLLECTION_JOURNAL_LINE__NOT_RECORDED, 
-//				new BooleanPropertyColumnFormatter(DairyPackage.Literals.COLLECTION_JOURNAL_LINE__NOT_RECORDED.toString()));
-//		addTableColumn("Rejected", DairyPackage.Literals.COLLECTION_JOURNAL_LINE__REJECTED, 
-//				new BooleanPropertyColumnFormatter(DairyPackage.Literals.COLLECTION_JOURNAL_LINE__REJECTED.toString()));
+//		addTableColumn("Suspended", DairyPackage.Literals.COLLECTION_JOURNAL_LINE__FLAGGED);
+//		addTableColumn("MPR Missing", DairyPackage.Literals.COLLECTION_JOURNAL_LINE__NOT_RECORDED);
+//		addTableColumn("Rejected", DairyPackage.Literals.COLLECTION_JOURNAL_LINE__REJECTED);
 //	}
 //
 //	@Override

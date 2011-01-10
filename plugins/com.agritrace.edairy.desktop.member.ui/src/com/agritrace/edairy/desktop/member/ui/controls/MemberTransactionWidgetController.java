@@ -10,12 +10,11 @@ import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
-import org.eclipse.riena.ui.ridgets.controller.IController;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
-import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
+import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
 import com.agritrace.edairy.desktop.common.ui.columnformatters.DatePropertyColumnFormatter;
 import com.agritrace.edairy.desktop.common.ui.controllers.DateRangeFilter;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;
@@ -24,7 +23,7 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class MemberTransactionWidgetController implements WidgetController<Object>, DateRangeFilter {
 
-	private static final String[] transactionColumnHeaders = { "Date", "Source", "Type", "Description", "Amount" };
+	private static final String[] transactionColumnHeaders = { "Date", "Source", "Type", "Description", "Axmount" };
 	private static final String[] transactionPropertyNames = { "transactionDate", "source", "transactionType", "description",
 			"amount" };
 
@@ -33,11 +32,11 @@ public class MemberTransactionWidgetController implements WidgetController<Objec
 	private IDateRangeRidget dateRangeRidget;
 	private IActionRidget updateButtonRidget;
 
-	private ITransactionRepository transactionRepo;
+	private IMemberRepository transactionRepo;
 	private final List<Transaction> transactionRecords;
 	private Membership member;
 
-	public MemberTransactionWidgetController(ITransactionRepository transactionRepo, IController controller) {
+	public MemberTransactionWidgetController(IRidgetContainer controller, IMemberRepository transactionRepo ) {
 		this.transactionRecords = new ArrayList<Transaction>();
 		this.transactionRepo = transactionRepo;
 		this.container = controller;

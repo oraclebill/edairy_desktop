@@ -13,14 +13,17 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.base.Location;
+import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
-import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
+import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
+import com.agritrace.edairy.desktop.common.ui.controllers.DirectoryPersistenceDelegate;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
@@ -29,34 +32,85 @@ import com.agritrace.edairy.desktop.operations.ui.views.EmployeeDirectoryView;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-@PermissionRequired(Permission.VIEW_EMPLOYEES)
+@PermissionRequired(UIPermission.VIEW_EMPLOYEES)
 public class EmployeeDirectoryController extends BasicDirectoryController<Employee> {
 	private IComboRidget departmentSearchCombo;
 	private ITextRidget nameSearchText;
 	private IComboRidget positionSearchCombo;
 
-	private final IDairyRepository dairyRepo;
 	private final Dairy localDairy;
 	private final List<Employee> allEmployees;
 	private final Provider<EmployeeEditDialog> editDialogProvider;
 	private final EmployeeSearchBean searchBean = new EmployeeSearchBean();
+	
+	private class EmployeePersistenceDelegate extends DirectoryPersistenceDelegate<Employee> {		
+		private final IDairyRepository dairyRepo;
+		public EmployeePersistenceDelegate(AbstractDirectoryController<Employee> controller, IDairyRepository dairyRepo) {
+			super(controller);
+			this.dairyRepo = dairyRepo;
+		}
+
+		@Override
+		public void save(Employee obj) {
+			try {
+				localDairy.getEmployees().add(obj);
+				dairyRepo.save(localDairy);
+			} catch (final Exception e) {
+				e.printStackTrace();
+				handleException(e.getCause());
+			}
+		}
+
+		@Override
+		public void delete(Employee obj) {
+			localDairy.getEmployees().remove(obj);
+			dairyRepo.save(localDairy);
+		}	
+		
+		/**
+		 * Create new model while creating a new record
+		 *
+		 * @return
+		 */
+		@Override
+		public Employee createItem() {
+			final Employee employee = (Employee) EMFUtil.createWorkingCopy(DairyPackage.Literals.EMPLOYEE, 3);
+			employee.setSystemIdentity(ModelFactory.eINSTANCE.createSystemUser());
+			employee.getSystemIdentity().setRole(null);
+			setDefaults(employee);
+			// employee.setPhoneNumber("");
+			return employee;
+		}
+
+		/**
+		 * 
+		 * @param employee
+		 */
+		private void setDefaults(Employee employee) {
+			Location defaultLocation = EcoreUtil.copy(localDairy.getLocation());
+			employee.setLocation(defaultLocation);
+			employee.setPhoneNumber("254 ");
+		}
+
+	};
 
 	@Inject
 	public EmployeeDirectoryController(final IDairyRepository dairyRepo, final IRepository<Employee> repo,
 			final Provider<EmployeeEditDialog> editDialogProvider) {
-		this.dairyRepo = dairyRepo;
 		this.editDialogProvider = editDialogProvider;
 		localDairy = dairyRepo.getLocalDairy();
 		allEmployees = dairyRepo.getLocalDairy().getEmployees();
 		setRepository(repo);
 		setEClass(DairyPackage.Literals.EMPLOYEE);
 
-		addTableColumn("ID", DairyPackage.Literals.EMPLOYEE__ID);
+		addTableColumn("ID", DairyPackage.Literals.EMPLOYEE__EMPLOYEE_NUMBER);
 		addTableColumn("Last Name", ModelPackage.Literals.PERSON__FAMILY_NAME);
 		addTableColumn("First Name", ModelPackage.Literals.PERSON__GIVEN_NAME);
 		addTableColumn("Department", DairyPackage.Literals.EMPLOYEE__DEPARTMENT);
 		addTableColumn("Position", DairyPackage.Literals.EMPLOYEE__JOB_FUNCTION);
 		addTableColumn("Start Date", DairyPackage.Literals.EMPLOYEE__START_DATE);
+		
+		setPersistenceDelegate(new EmployeePersistenceDelegate(this, dairyRepo));
 	}
 
 	@Override
@@ -97,27 +151,6 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 		});
 	}
 
-	/**
-	 * Create new model while creating a new record
-	 *
-	 * @return
-	 */
-	@Override
-	protected Employee createNewModel() {
-		final Employee employee = (Employee) EMFUtil.createWorkingCopy(this.getEClass(), 3);
-		employee.setRole(null);
-		setDefaults(employee);
-		// employee.setPhoneNumber("");
-		return employee;
-	}
-
-
-	private void setDefaults(Employee employee) {
-		Location defaultLocation = EcoreUtil.copy(localDairy.getLocation());
-		employee.setLocation(defaultLocation);
-		employee.setPhoneNumber("254 ");
-	}
-
 	@Override
 	protected List<Employee> getFilteredResult() {
 		final List<Employee> filtered = new ArrayList<Employee>();
@@ -140,11 +173,29 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	protected RecordDialog<Employee> getRecordDialog(Shell shell) {
 		return editDialogProvider.get();
 	}
 
+	/**
+	 * 
+	 */
+	@Override
+	protected void resetFilterConditions() {
+		nameSearchText.setText("");
+		positionSearchCombo.setSelection(positionSearchCombo.getEmptySelectionItem());
+		departmentSearchCombo.setSelection(departmentSearchCombo.getEmptySelectionItem());
+	}
+
+	
+	/**
+	 * 
+	 * @param e
+	 */
 	private void handleException(Throwable e) {
 		String message;
 
@@ -158,38 +209,22 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 		MessageDialog.openError(getShell(), "Error", message);
 	}
 
+
+	/**
+	 * 
+	 */
 	@Override
 	protected void createEntity(Employee newEntity) {
-		try {
-			localDairy.getEmployees().add(newEntity);
-			dairyRepo.save(localDairy);
-		} catch (final Exception e) {
-			e.printStackTrace();
-			handleException(e.getCause());
-		}
+		getPersistenceDelegate().save(newEntity);
 	}
 
 	@Override
 	protected void updateEntity(Employee updateableEntity) {
-		try {
-			dairyRepo.save(updateableEntity);
-		} catch (final Exception e) {
-			e.printStackTrace();
-			handleException(e.getCause());
-		}
-	}
-
-	@Override
-	protected void resetFilterConditions() {
-		nameSearchText.setText("");
-		positionSearchCombo.setSelection(positionSearchCombo.getEmptySelectionItem());
-		departmentSearchCombo.setSelection(departmentSearchCombo.getEmptySelectionItem());
+		throw new UnsupportedOperationException("Unimplemented");
 	}
 
 	@Override
 	protected void deleteEntity(Employee deletableEntity) {
-		localDairy.getEmployees().remove(deletableEntity);
-		dairyRepo.save(localDairy);
-
+		getPersistenceDelegate().delete(deletableEntity);
 	}
 }

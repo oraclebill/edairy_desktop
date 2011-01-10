@@ -11,7 +11,6 @@ import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
@@ -19,9 +18,9 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.persistence.Constants;
 import com.agritrace.edairy.desktop.common.persistence.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.Transactional;
-import com.agritrace.edairy.desktop.internal.common.persistence.Constants;
 import com.agritrace.edairy.desktop.internal.common.persistence.RepositoryUtil;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -61,18 +60,38 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 				+ "   AND l.collectionJournal.collectionCenter = :center ";
 
 		final Query query = getCurrentSession().createQuery(queryText);
-		CollectionJournalLine x = ((CollectionJournalLine) null);
 		query.setEntity("member", member);
 		query.setEntity("center", center);
 		query.setCalendarDate("cal", cal);
 
 		return (Long) query.uniqueResult();
 	}
+	
+	@Override
+	public List<Object[]> dailyCollectionsSummary(Date day) {
+		Calendar startDate, endDate;
+		startDate = Calendar.getInstance();
+		startDate.setTime(day);
+		endDate = Calendar.getInstance();
+		endDate.setTime(day);
+
+		int[] timeFields = new int[] { Calendar.HOUR, Calendar.MINUTE,
+				Calendar.SECOND, Calendar.MILLISECOND };
+
+		for (int field : timeFields) {
+			startDate.set(field, startDate.getActualMinimum(field));
+			endDate.set(field, startDate.getActualMaximum(field));
+		}
+
+		return collectionsSummary(
+				startDate.getTime(), endDate.getTime());
+	}
 
 	@Override
 	@Transactional
 	public List<Object[]> collectionsSummary(Date startDate, Date endDate) {
-		final String sqlString = "select journaldate as date, dairylocation.code as route, collectionsession.code as session, sum(quantity) as sum  "
+		final String sqlString = "" +
+				"select journaldate as date, dairylocation.code as route, collectionsession.code as session, sum(quantity) as sum, count(*) as cnt, avg(quantity) as avg, min(quantity) as min, max(quantity) as max  "
 				+ "  from collectiongroup join collectionjournalline on collectionjournalline_collectionjournal_e_id = journalid "
 				+ "    join collectionsession on collectionsession.id = collectionsession_session_e_id "
 				+ "    join dairylocation on dairylocation.id = dairylocation_collectioncenter_id "
@@ -85,8 +104,6 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 	// @Override
 	@Transactional
 	public List<CollectionGroup> allForDate(final Date date) {
-		int year, month, day;
-
 		final Calendar cal = Calendar.getInstance();
 
 		if (date != null) {
@@ -250,8 +267,7 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 		
   		final Query query = createStatisticsQuery(startDate, endDate, route, session);
 
-		return (Map) query.uniqueResult();
-
+		return (Map<String, Double>) query.uniqueResult();
 	}
 
 	private Query createStatisticsQuery(Date startDate, Date endDate, DairyLocation route, CollectionSession session) {

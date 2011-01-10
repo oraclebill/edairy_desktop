@@ -30,14 +30,14 @@ import com.agritrace.edairy.desktop.member.ui.dialog.ViewFarmDialog;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class MemberFarmWidgetController extends BasicDirectoryController<Farm> implements WidgetController<Object> {
+public class MemberFarmWidgetController extends WidgetDirectoryController<Farm> implements WidgetController<Object> {
 
 	public static final String farmRemoveMessage = "Do you want to remove selected farms?";
 
 	public static final String farmRemoveTitle = "Remove Farm";
 
 	private final String[] farmColumnHeaders = { "ID", "Name", "Location", "Number of Animals", "Number of Conatiners" };
-	private final String[] farmPropertyNames = { "farmId", "name", "location", "numberOfAnimals", "numberOfContainers" };
+	private final String[] farmPropertyNames = { "farmId", "name", "location.formattedLocation", "numberOfAnimals", "numberOfContainers" };
 
 	private final IFarmRepository farmRepository;
 	private final IMemberRepository memberRepository;
@@ -67,106 +67,6 @@ public class MemberFarmWidgetController extends BasicDirectoryController<Farm> i
 	@Override
 	public void configure() {
 		configureRidgets();
-
-
-		//		// farm table
-		//		farmTable = container.getRidget(ITableRidget.class, ViewWidgetId.FARM_TABLE);
-		//		farmTable.setColumnFormatter(2, new ColumnFormatter() {
-		//
-		//			@Override
-		//			public String getText(Object element) {
-		//				if (element instanceof Farm) {
-		//					final Location location = ((Farm) element).getLocation();
-		//					if (location != null) {
-		//						final PostalLocation postalLocation = location.getPostalLocation();
-		//						if (postalLocation != null) {
-		//							return postalLocation.getAddress() + "," + postalLocation.getVillage() + ","
-		//									+ postalLocation.getPostalCode();
-		//						}
-		//					}
-		//				}
-		//				return null;
-		//			}
-		//		});
-		//		// add button
-		//		farmAddButton = container.getRidget(IActionRidget.class, ViewWidgetId.FARM_ADD);
-		//		farmAddButton.addListener(new IActionListener() {
-		//
-		//			@Override
-		//			public void callback() {
-		//				final Shell shell = new Shell(Display.getDefault(), SWT.DIALOG_TRIM | SWT.RESIZE | SWT.MAX
-		//						| SWT.APPLICATION_MODAL);
-		//				shell.setSize(550, 450);
-		//				final Location newFarmLocation = DairyUtil.createLocation(null, null, null);
-		//				final Farm newFarm = DairyUtil.createFarm("", newFarmLocation);
-		//				FarmListViewTableNode newNode = new FarmListViewTableNode(selectedMember, newFarm);
-		//				final AddFarmDialog memberDialog = new AddFarmDialog(Display.getDefault().getActiveShell());
-		//				memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM,
-		//						newNode);
-		//
-		//				final int returnCode = memberDialog.open();
-		//				if (returnCode == AbstractWindowController.OK) {
-		//					newNode = (FarmListViewTableNode) memberDialog.getController().getContext(
-		//							ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM);
-		//					selectedMember.getMember().getFarms().add(newFarm);
-		//					if (selectedMember.getMemberId() != null) {
-		//						farmRepository.saveNew(newFarm);
-		//						memberRepository.update(selectedMember);
-		//					}
-		//
-		//					farms.add(newFarm);
-		//					farmTable.updateFromModel();
-		//				}
-		//			}
-		//		});
-		//		// viewButton
-		//		farmViewButton = container.getRidget(IActionRidget.class, ViewWidgetId.FARM_View);
-		//		// by default disable view button
-		//		farmViewButton.setEnabled(false);
-		//		farmViewButton.addListener(new IActionListener() {
-		//
-		//			@Override
-		//			public void callback() {
-		//				final Shell shell = new Shell(Display.getDefault(), SWT.DIALOG_TRIM | SWT.RESIZE | SWT.MAX
-		//						| SWT.APPLICATION_MODAL);
-		//				shell.setSize(550, 450);
-		//
-		//				final List<Object> selections = farmTable.getSelection();
-		//				if (selections.size() > 0) {
-		//					final Farm selectedFarm = (Farm) selections.get(0);
-		//					FarmListViewTableNode newNode = new FarmListViewTableNode(selectedMember, selectedFarm);
-		//					final ViewFarmDialog memberDialog = new ViewFarmDialog(Display.getDefault().getActiveShell());
-		//					memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM,
-		//							newNode);
-		//
-		//					final int returnCode = memberDialog.open();
-		//					if (returnCode == AbstractWindowController.OK) {
-		//						newNode = (FarmListViewTableNode) memberDialog.getController().getContext(
-		//								ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM);
-		//						farmRepository.update(selectedFarm);
-		//						memberRepository.update(selectedMember);
-		//						farmTable.updateFromModel();
-		//					} else if (returnCode == 2) {
-		//						deleteFarm();
-		//
-		//					}
-		//				}
-		//
-		//			}
-		//		});
-		//		farmRemoveButton = container.getRidget(IActionRidget.class, ViewWidgetId.FARM_Remove);
-		//		farmRemoveButton.setEnabled(false);
-		//		farmRemoveButton.addListener(new IActionListener() {
-		//
-		//			@Override
-		//			public void callback() {
-		//				deleteFarm();
-		//
-		//			}
-		//
-		//		});
-		//		farmTable.bindToModel(new WritableList(farms, Farm.class), Farm.class, farmPropertyNames, farmColumnHeaders);
-		//		farmTable.addSelectionListener(this);
 	}
 
 	@Override
@@ -239,35 +139,6 @@ public class MemberFarmWidgetController extends BasicDirectoryController<Farm> i
 	protected RecordDialog<Farm> getRecordDialog(Shell shell) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	protected void tableBindToModel() {
-		if (table != null) {
-			// location formatter
-			table.setColumnFormatter(2, new ColumnFormatter() {
-				@Override
-				public String getText(Object element) {
-					if (element instanceof Farm) {
-						final Location location = ((Farm) element).getLocation();
-						if (location != null) {
-							final PostalLocation postalLocation = location.getPostalLocation();
-							// StringBuffer sb = new StringBuffer();
-							if (postalLocation != null) {
-								return postalLocation.getAddress() + "," + postalLocation.getVillage() + "," + postalLocation.getPostalCode();
-							}
-						} else {
-							return "<Empty>";
-						}
-
-					}
-
-					return null;
-				}
-			});
-			super.tableBindToModel();
-		}
-
 	}
 
 	@Override

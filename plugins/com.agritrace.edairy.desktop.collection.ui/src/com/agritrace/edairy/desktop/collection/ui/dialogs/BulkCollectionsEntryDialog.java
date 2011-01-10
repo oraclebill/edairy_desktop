@@ -119,7 +119,16 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 	protected boolean canHandleShellCloseEvent() {
 		boolean ret = true;
 		try {
-			ret = MessageDialog.openConfirm(getShell(), "Confirm Cancel", "Are you sure you want to close this window without saving?");
+			MessageDialog dialog = new MessageDialog(
+					getShell(), 
+					"Confirm Cancel",
+					null,
+					"Are you sure you want to close this window without saving?",
+					MessageDialog.CONFIRM,
+					new String[] { "Close Window", "Continue Editing" },
+					0
+					);
+			ret = dialog.open() == 0;
 		}
 		catch(final Throwable t) {
 			t.printStackTrace();
@@ -140,6 +149,9 @@ public class BulkCollectionsEntryDialog extends BaseDialogView {
 
 		final Control groupFour = createMilkEntryGroup(parent);
 		gdf.grab(true, true).applyTo(groupFour);
+		
+		parent.setTabList(new Control[] { headerGroups, groupThree, groupFour });
+		headerGroups.setFocus();
 	}
 
 //	@Override

@@ -28,6 +28,7 @@ public interface ICollectionJournalLineRepository extends
 	BigDecimal getSumOfPayableDeliveries(Membership member, int paymentMonth, int paymentYear);
 	Map<Membership, BigDecimal> getMapOfPayableDeliveries(int paymentMonth, int paymentYear);
 
+	List<Object[]> dailyCollectionsSummary(Date day);
 	List<Object[]> collectionsSummary(Date startDate, Date endDate);
 
 	List<Membership> getMembersWithFlaggedDeliveriesFor(int month, int year);

@@ -55,14 +55,14 @@ public class ContainerEditDialog extends RecordDialog<DairyContainer> {
 				detailGroup.setLayout(GridLayoutFactory.swtDefaults().numColumns(2).create());
 				GridDataFactory.fillDefaults().grab(true, false).applyTo(detailGroup);
 
-				{
-					final Control sizingLabel = UIControlsFactory.createLabel(detailGroup, "Container ID:");
-					GridDataFactory.fillDefaults().hint(120, -1).applyTo(sizingLabel);
-					final Text text = UIControlsFactory.createText(detailGroup, SWT.NONE,
-							ContainerBindingConstants.BIND_ID_CONTAINER_ID);
-					text.setText("<generated>");
-					fieldDefault.applyTo(text);
-				}
+//				{
+//					final Control sizingLabel = UIControlsFactory.createLabel(detailGroup, "Container ID:");
+//					GridDataFactory.fillDefaults().hint(120, -1).applyTo(sizingLabel);
+//					final Text text = UIControlsFactory.createText(detailGroup, SWT.NONE,
+//							ContainerBindingConstants.BIND_ID_CONTAINER_ID);
+//					text.setText("<generated>");
+//					fieldDefault.applyTo(text);
+//				}
 				{
 					UIControlsFactory.createLabel(detailGroup, "Tracking Number:");
 					final Control text = UIControlsFactory.createText(detailGroup, SWT.NONE,

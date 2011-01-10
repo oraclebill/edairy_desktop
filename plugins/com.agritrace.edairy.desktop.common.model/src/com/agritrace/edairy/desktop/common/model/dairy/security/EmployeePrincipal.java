@@ -1,7 +1,7 @@
 package com.agritrace.edairy.desktop.common.model.dairy.security;
 
+import com.agritrace.edairy.desktop.common.model.base.Role;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
-import com.agritrace.edairy.desktop.common.model.dairy.Role;
 
 /**
  * Principal based on an Employee instance.
@@ -23,12 +23,12 @@ public final class EmployeePrincipal implements IPrincipal {
 
 	@Override
 	public String getName() {
-		return employee.getUsername();
+		return employee.getSystemIdentity().getUsername();
 	}
 
 	@Override
-	public boolean hasPermission(Permission perm) {
-		final Role role = employee.getRole();
+	public boolean hasPermission(UIPermission perm) {
+		final Role role = employee.getSystemIdentity() != null ? employee.getSystemIdentity().getRole() : null;
 
 		return role == null ? false : role.getPermissions().contains(perm);
 	}

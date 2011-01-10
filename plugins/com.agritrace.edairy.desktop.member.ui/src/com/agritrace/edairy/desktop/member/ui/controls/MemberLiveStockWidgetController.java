@@ -28,12 +28,11 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.member.ui.dialog.AddLiveStockDialog;
-import com.agritrace.edairy.desktop.member.ui.dialog.ViewLiveStockDialog;
+import com.agritrace.edairy.desktop.member.ui.dialog.LivestockEditDialog;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class MemberLiveStockWidgetController extends BasicDirectoryController<RegisteredAnimal>implements WidgetController<Object> {
+public class MemberLiveStockWidgetController extends WidgetDirectoryController<RegisteredAnimal>implements WidgetController<Object> {
 
 	public static final String liveStockRemoveMessage = "Do you want to remove selected animals?";
 	public static final String liveStockRemoveTitle = "Remove Registered Animales";
@@ -47,16 +46,13 @@ public class MemberLiveStockWidgetController extends BasicDirectoryController<Re
 			"animalType", "animalType", "dateOfAcquisition", "acquisitionType" };
 
 	private final IFarmRepository farmRepository;
-	private final Provider<AddLiveStockDialog> addLiveStockProvider;
-	private final Provider<ViewLiveStockDialog> viewLiveStockProvider;
+	private final Provider<LivestockEditDialog> viewLiveStockProvider;
 
 	@Inject
 	public MemberLiveStockWidgetController(final IController controller, IFarmRepository farmRepository,
-			final Provider<AddLiveStockDialog> addLiveStockProvider,
-			final Provider<ViewLiveStockDialog> viewLiveStockProvider) {
+			final Provider<LivestockEditDialog> viewLiveStockProvider) {
 		this.controller = controller;
 		this.farmRepository = farmRepository;
-		this.addLiveStockProvider = addLiveStockProvider;
 		this.viewLiveStockProvider = viewLiveStockProvider;
 
 		setEClass(TrackingPackage.Literals.REGISTERED_ANIMAL);
@@ -132,7 +128,8 @@ public class MemberLiveStockWidgetController extends BasicDirectoryController<Re
 				}
 			}
 		}
-		resutls = filterDate(animals, filterController.getDateSearchController().getStartDate(),filterController.getDateSearchController().getEndDate() );
+		// TODO: this filter is not appropriate for the livestock directory, so for now (HACK) we just ignore it.
+		//		resutls = filterDate(animals, filterController.getDateSearchController().getStartDate(),filterController.getDateSearchController().getEndDate() );
 		return resutls;
 	}
 
@@ -155,7 +152,7 @@ public class MemberLiveStockWidgetController extends BasicDirectoryController<Re
 				DairyUtil.createReferenceAnimal("", ""), "", "", null, null, AcquisitionType.get(0), null);
 		newAnimal.setDateOfAcquisition(new Date());
 		newAnimal.setDateOfBirth(new Date());
-		final AddLiveStockDialog aniamlDialog = addLiveStockProvider.get();
+		final LivestockEditDialog aniamlDialog = viewLiveStockProvider.get();
 		aniamlDialog.getController().setContext(ControllerContextConstant.DIALOG_CONTXT_SELECTED, newAnimal);
 		aniamlDialog.getController().setContext(ControllerContextConstant.ENABLE_LOOKUP,"false");
 
@@ -189,7 +186,7 @@ public class MemberLiveStockWidgetController extends BasicDirectoryController<Re
 	protected void handleViewItemAction() {
 		if (table != null && !table.getSelection().isEmpty()) {
 			final RegisteredAnimal selectedAnimal = (RegisteredAnimal) table.getSelection().get(0);
-			final ViewLiveStockDialog aniamlDialog = viewLiveStockProvider.get();
+			final LivestockEditDialog aniamlDialog = viewLiveStockProvider.get();
 			aniamlDialog.getController().setContext(ControllerContextConstant.DIALOG_CONTXT_SELECTED,
 					selectedAnimal);
 			aniamlDialog.getController().setContext(ControllerContextConstant.ENABLE_LOOKUP,"false");

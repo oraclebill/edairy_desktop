@@ -20,7 +20,6 @@ import com.swtdesigner.SWTResourceManager;
 
 public class ProfilePhotoComposite extends Composite implements IComplexComponent {
 
-
 	public static final String LINK_BIND_ID = "updateImageLink";
 	public static final String LABEL_BIND_ID = "profileImageLabel";
 
@@ -34,6 +33,10 @@ public class ProfilePhotoComposite extends Composite implements IComplexComponen
 	private Link updateLink;
 
 	public ProfilePhotoComposite(Composite parent, int style) {
+		this(parent, -1, style);
+	}
+
+	public ProfilePhotoComposite(Composite parent, int size, int style) {
 		super(parent, style);
 
 		this.setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
@@ -47,8 +50,13 @@ public class ProfilePhotoComposite extends Composite implements IComplexComponen
 		addUIControl(imageLabel = new Label(this, SWT.CENTER | SWT.BORDER), LABEL_BIND_ID);
 		imageLabel.setBackground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
 		final GridData gd_label = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
-		gd_label.heightHint = DEFAULT_PHOTO_HEIGHT;
-		gd_label.widthHint = DEFAULT_PHOTO_WIDTH;
+		if (size > 1) {
+			gd_label.heightHint = DEFAULT_PHOTO_HEIGHT / size;
+			gd_label.widthHint = DEFAULT_PHOTO_WIDTH / size;
+		} else {
+			gd_label.heightHint = DEFAULT_PHOTO_HEIGHT;
+			gd_label.widthHint = DEFAULT_PHOTO_WIDTH;
+		}
 		imageLabel.setLayoutData(gd_label);
 
 		addUIControl(updateLink = new Link(this, SWT.NONE), LINK_BIND_ID);

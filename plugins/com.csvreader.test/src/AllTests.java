@@ -1421,6 +1421,7 @@ public class AllTests {
 		Assert.assertEquals("1\r\n#blah\r\n2\r\n", data);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void test76() throws Exception {
 		final CsvReader reader = CsvReader.parse("user_id,name\r\n1,Bruce");

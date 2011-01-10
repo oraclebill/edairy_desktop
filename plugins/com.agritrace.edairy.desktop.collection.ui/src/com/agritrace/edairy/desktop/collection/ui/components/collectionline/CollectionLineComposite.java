@@ -29,19 +29,19 @@ import com.swtdesigner.ResourceManager;
 public class CollectionLineComposite extends Composite implements TraverseListener, IComplexComponent {
 
 	static {
-		SwtControlRidgetMapper.getInstance().addMapping(CollectionLineComposite.class, CollectionLineRidget.class);
+		SwtControlRidgetMapper.getInstance().addMapping(
+				CollectionLineComposite.class, CollectionLineRidget.class);
 	}
 
 	private static final String BIN_LABEL = "Bin No.";
 	private static final String CAN_ID_LABEL = "CAN No.";
 	private static final String MEMBER_ID_LABEL = "Member No.";
 	private static final String MILK_ENTRY_GROUP_TITLE = "Add New Entry";
-	private static final String MPR_COLUMN_HEADER = "MPR Missing";
 	private static final String QUANTITY_LABEL = "Quantity";
+	private static final String MPR_COLUMN_HEADER = "MPR Present";
+	private static final String REJECTED_COLUMN_HEADER = "Quality";
 
-	private static final String REJECTED_COLUMN_HEADER = "Rejected";
 	private final GridData layoutData;
-	boolean cachedHide;
 
 	private Control memberIdWidget;
 	private Control canWidget;
@@ -71,6 +71,7 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 				control.addTraverseListener(this);
 			}
 		}
+		
 		layoutData = GridDataFactory.fillDefaults().create();
 		group.setLayoutData(layoutData);
 
@@ -82,7 +83,7 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 	public void keyTraversed(TraverseEvent e) {
 //		log(LogService.LOG_DEBUG, "event in : " + e);
 		if (e.detail == SWT.TRAVERSE_RETURN) {
-			if (e.widget == canWidget && addButton.setFocus()) {
+			if (e.widget == qtyWidget && addButton.setFocus()) {
 				e.detail = SWT.TRAVERSE_NONE;
 				e.doit = true;
 			} else {
@@ -106,7 +107,6 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 		GridDataFactory.swtDefaults().align(SWT.FILL, SWT.BOTTOM).hint(50, SWT.DEFAULT).applyTo(clearButton);
 		group.setTabList(new Control[] { addButton });
 		return group;
-
 	}
 
 	private Control addPhotoPanel(Composite parent) {
@@ -132,13 +132,13 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 		// memberIdWidget.setSize(70, 19);
 		memberIdWidget.addTraverseListener(this);
 
-		qtyWidget = fu.addLabeledDecimalTextField(panel, QUANTITY_LABEL, ViewWidgetId.quantityText);
-		qtyWidget.addTraverseListener(this);
-
 		canWidget = fu.addLabeledTextField(panel, CAN_ID_LABEL, ViewWidgetId.canIdText);
 		canWidget.addTraverseListener(this);
 
-		panel.setTabList(new Control[] { binWidget, memberIdWidget, qtyWidget, canWidget});
+		qtyWidget = fu.addLabeledDecimalTextField(panel, QUANTITY_LABEL, ViewWidgetId.quantityText);
+		qtyWidget.addTraverseListener(this);
+
+		panel.setTabList(new Control[] { binWidget, memberIdWidget, canWidget, qtyWidget});
 
 		final Composite buttonComposite = UIControlsFactory.createComposite(panel);
 		// buttonComposite.setSize(162, 18);

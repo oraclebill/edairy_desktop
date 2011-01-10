@@ -8,10 +8,10 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.widgets.Shell;
 
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.Role;
-import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
+import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
+import com.agritrace.edairy.desktop.common.model.base.Role;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
+import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
@@ -20,7 +20,7 @@ import com.agritrace.edairy.desktop.system.ui.dialogs.RoleEditDialog;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-@PermissionRequired(Permission.VIEW_ROLES)
+@PermissionRequired(UIPermission.VIEW_ROLES)
 public final class RoleDirectoryController extends BasicDirectoryController<Role> {
 	private ITextRidget nameSearch;
 	private ITextRidget permSearch;
@@ -35,19 +35,19 @@ public final class RoleDirectoryController extends BasicDirectoryController<Role
 	public RoleDirectoryController(final IRepository<Role> repo, final Provider<RoleEditDialog> dialogProvider) {
 		super();
 		this.dialogProvider = dialogProvider;
-		setEClass(DairyPackage.Literals.ROLE);
+		setEClass(ModelPackage.Literals.ROLE);
 		setRepository(repo);
-		addTableColumn("ID", DairyPackage.Literals.ROLE__ID);
-		addTableColumn("Name", DairyPackage.Literals.ROLE__NAME);
-		addTableColumn("Description", DairyPackage.Literals.ROLE__DESCRIPTION);
-		addTableColumn("Permissions", DairyPackage.Literals.ROLE__PERMISSIONS, new ColumnFormatter() {
+		addTableColumn("ID", ModelPackage.Literals.ROLE__ID);
+		addTableColumn("Name", ModelPackage.Literals.ROLE__NAME);
+		addTableColumn("Description", ModelPackage.Literals.ROLE__DESCRIPTION);
+		addTableColumn("Permissions", ModelPackage.Literals.ROLE__PERMISSIONS, new ColumnFormatter() {
 			@Override
 			public String getText(Object element) {
 				if (!(element instanceof Role)) {
 					return "[error]";
 				}
 
-				final List<Permission> permissions = ((Role) element).getPermissions();
+				final List<UIPermission> permissions = ((Role) element).getPermissions();
 
 				if (permissions == null) {
 					return "";
@@ -55,7 +55,7 @@ public final class RoleDirectoryController extends BasicDirectoryController<Role
 
 				final StringBuilder sb = new StringBuilder();
 
-				for (final Permission perm: permissions) {
+				for (final UIPermission perm: permissions) {
 					if (sb.length() > 0) {
 						sb.append(" | ");
 					}
@@ -87,7 +87,7 @@ public final class RoleDirectoryController extends BasicDirectoryController<Role
 					continue;
 				}
 
-				for (final Permission perm: role.getPermissions()) {
+				for (final UIPermission perm: role.getPermissions()) {
 					if (perm.toString().indexOf(permText) != -1) {
 						all.add(role);
 						break;
@@ -110,5 +110,11 @@ public final class RoleDirectoryController extends BasicDirectoryController<Role
 		permSearch.setText("");
 		refreshTableContents();
 	}
+	
+//	@Override
+//	public void refreshTableContents() {
+//		// TODO: Figure out a way to implement the dialog safely
+//		refreshTableContentsSafe();
+//	}
 
 }

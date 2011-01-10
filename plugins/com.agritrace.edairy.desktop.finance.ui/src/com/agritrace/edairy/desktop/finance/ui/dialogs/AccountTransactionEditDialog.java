@@ -19,7 +19,7 @@ public class AccountTransactionEditDialog extends RecordDialog<AccountTransactio
 
 		@Inject
 		public AccountTransactionEditController(final AccountTransactionEditPanelController panelController) {
-			super();
+			super("Member Transaction");
 			this.panelController = panelController;
 			setReturnCode(ACTION_CANCEL);
 		}

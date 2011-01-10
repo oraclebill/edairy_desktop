@@ -15,12 +15,12 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
 import com.agritrace.edairy.desktop.common.model.dairy.security.EmployeePrincipal;
 import com.agritrace.edairy.desktop.common.model.dairy.security.IPrincipal;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager;
+import com.agritrace.edairy.desktop.common.model.util.MemberUtil;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberLookupAction;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
-import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -30,6 +30,7 @@ public class AdjustmentTransactionEditController extends RecordDialogController<
 
 	@Inject
 	public AdjustmentTransactionEditController(final Provider<MemberSearchDialog> memberSearchProvider) {
+		super("Account Adjustment");
 		this.memberSearchProvider = memberSearchProvider;
 	}
 

@@ -14,12 +14,8 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
-import org.eclipse.riena.ui.ridgets.IWindowRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.PlatformUI;
 
 import com.agritrace.edairy.desktop.collection.ui.ViewConstants;
 import com.agritrace.edairy.desktop.collection.ui.beans.MilkCollectionLogFilterBean;
@@ -27,12 +23,11 @@ import com.agritrace.edairy.desktop.collection.ui.dialogs.BulkCollectionsEntryDi
 import com.agritrace.edairy.desktop.collection.ui.dialogs.JournalPersistenceDelegate;
 import com.agritrace.edairy.desktop.collection.ui.dialogs.NewMilkCollectionJournalDialog;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
-import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
+import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.persistence.IMilkCollectionRepository;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
@@ -41,11 +36,10 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 import com.agritrace.edairy.desktop.internal.collection.ui.Activator;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
-import com.agritrace.edairy.desktop.operations.services.dairylocation.IDairyLocationRepository;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-@PermissionRequired(Permission.VIEW_MILK_COLLECTIONS)
+@PermissionRequired(UIPermission.VIEW_MILK_COLLECTIONS)
 public class MilkCollectionLogController extends BasicDirectoryController<CollectionGroup> {
 
 	private final class CollectionLogJournalPersister implements JournalPersistenceDelegate {
@@ -115,8 +109,8 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 
 	private final MilkCollectionLogFilterBean filterBean = new MilkCollectionLogFilterBean();
 	private final IDairyRepository dairyRepo;
-	private final IDairyLocationRepository dairyLocationRepo;
 	private final IRepository<CollectionSession> sessionRepo;
+	private final ScaleImportAction scaleImportAction;
 	private final Provider<NewMilkCollectionJournalDialog> newDialogProvider;
 	private final Provider<BulkCollectionsEntryDialog> entryDialogProvider;
 //	private final Color TABLE_HIGHLIGHT_BACKGROUND = PlatformUI.getWorkbench().getDisplay()
@@ -125,14 +119,15 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 
 	@Inject
 	public MilkCollectionLogController(final IMilkCollectionRepository journalRepo,
-			final IDairyLocationRepository dairyLocationRepo, final IDairyRepository dairyRepo,
+			final IDairyRepository dairyRepo,
 			final IRepository<CollectionSession> sessionRepo,
+			final ScaleImportAction scaleImportAction,
 			final Provider<NewMilkCollectionJournalDialog> newDialogProvider,
 			final Provider<BulkCollectionsEntryDialog> entryDialogProvider) {
 		setEClass(DairyPackage.Literals.COLLECTION_GROUP);
 		setRepository(journalRepo);
 		this.dairyRepo = dairyRepo;
-		this.dairyLocationRepo = dairyLocationRepo;
+		this.scaleImportAction = scaleImportAction;
 		this.sessionRepo = sessionRepo;
 		this.newDialogProvider = newDialogProvider;
 		this.entryDialogProvider = entryDialogProvider;
@@ -157,8 +152,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	public void afterBind() {
 		super.afterBind();
 		getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_NEW_BUTTON).setText("Enter Collection Journals");
-		getRidget(IActionRidget.class, "import-file-button").addListener(
-				new ScaleImportAction(this, dairyLocationRepo, dairyRepo, sessionRepo));
+		getRidget(IActionRidget.class, "import-file-button").addListener(scaleImportAction);
 		getWindowRidget().setTitle(getNavigationNode().getLabel());
 	}
 

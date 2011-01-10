@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import com.agritrace.edairy.desktop.common.model.dairy.Role;
+import com.agritrace.edairy.desktop.common.model.base.Role;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.services.Transactional;
 import com.google.inject.Inject;

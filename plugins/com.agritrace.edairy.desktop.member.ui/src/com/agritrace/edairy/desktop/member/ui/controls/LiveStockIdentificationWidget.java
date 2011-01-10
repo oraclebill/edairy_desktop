@@ -52,16 +52,6 @@ public class LiveStockIdentificationWidget {
 				ViewWidgetId.LIVESTOCK_IDENTIFICATION_ACQUISION_TYPE);
 		fieldFactory.span(2, 1).applyTo(acquisionTypeCombo);
 
-		labelFactory.applyTo(UIControlsFactory.createLabel(composite, "ID Type :"));
-		final CCombo idTypeCombo = UIControlsFactory.createCCombo(composite,
-				ViewWidgetId.LIVESTOCK_IDENTIFICATION_ID_TYPE);
-		fieldFactory.span(2, 1).applyTo(idTypeCombo);
-
-		labelFactory.applyTo(UIControlsFactory.createLabel(composite, "ID Number :"));
-		final Text idNumberTxt = UIControlsFactory.createText(composite, SWT.SINGLE | SWT.BORDER,
-				ViewWidgetId.LIVESTOCK_IDENTIFICATION_ID_NUMBER);
-		fieldFactory.span(2, 1).applyTo(idNumberTxt);
-
 		labelFactory.applyTo(UIControlsFactory.createLabel(composite, "Ministry of Livestock ID :"));
 		final Text ministryId = UIControlsFactory.createText(composite, SWT.SINGLE | SWT.BORDER,
 				ViewWidgetId.LIVESTOCK_IDENTIFICATION_MINISTRY_ID);

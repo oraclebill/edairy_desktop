@@ -28,9 +28,9 @@ import com.google.inject.Provider;
 
 /**
  * Dialog controller for Animal Health Request
- *
+ * 
  * @author Hui(Spark) Wan
- *
+ * 
  */
 public class AnimalHealthRequestDialogController extends RecordDialogController<AnimalHealthRequest> {
 
@@ -144,10 +144,11 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 	private AnimalHealthRequest request;
 
 	IDateTimeRidget textRidget;
-	
+
 	@Inject
 	public AnimalHealthRequestDialogController(final Provider<FarmSearchDialog> farmSearchDialogProvider,
 			final Provider<MemberSearchDialog> memberSearchDialogProvider) {
+		super("Animal Health Request");
 		this.farmSearchDialogProvider = farmSearchDialogProvider;
 		this.memberSearchDialogProvider = memberSearchDialogProvider;
 	}
@@ -212,105 +213,85 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 
 		// Type changed
 		requestTypeChanged();
-
 	}
 
-	@Override
-	public AnimalHealthRequest getWorkingCopy() {
-		return (AnimalHealthRequest) getContext("editObject");
-	}
-
-	private void configTypeSpecificRidgets(final AnimalHealthRequest request) {
-
-		if (RequestType.INSEMINATION == request.getType()) {
-
-			// Heated date
-			final IDateTextRidget heatTimeTextBtn = getRidget(IDateTextRidget.class,
-					AnimalHealthRequestDialog.BIND_ID_INSE_TIME_HEATED_DETECTED);
-			if (heatTimeTextBtn == null) {
-				return;
-			}
-			heatTimeTextBtn.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
-			heatTimeTextBtn.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
-			// heatTimeTextBtn.setOutputOnly(false);
-			heatTimeTextBtn.bindToModel(request,
-					RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE_HEAT_DETECTED.getName());
-			heatTimeTextBtn.updateFromModel();
-			// heatTimeTextBtn.setOutputOnly(true);
-
-			// First
-			final IDateTextRidget firstTextBtn = getRidget(IDateTextRidget.class,
-					AnimalHealthRequestDialog.BIND_ID_INSE_FIRST_TRETMENT);
-			firstTextBtn.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
-			firstTextBtn.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
-			firstTextBtn
-					.bindToModel(request, RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__FIRST_TREATMENT.getName());
-
-			firstTextBtn.updateFromModel();
-
-			// Second
-			final IDateTextRidget secondTextBtn = getRidget(IDateTextRidget.class,
-					AnimalHealthRequestDialog.BIND_ID_INSE_SECOND_TRETMENT);
-			secondTextBtn.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
-			secondTextBtn.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
-			// secondTextBtn.setOutputOnly(false);
-			secondTextBtn.bindToModel(request,
-					RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__SECOND_TREATMENT.getName());
-
-			secondTextBtn.updateFromModel();
-
-			// Third
-			final IDateTextRidget thirdTextBtn = getRidget(IDateTextRidget.class,
-					AnimalHealthRequestDialog.BIND_ID_INSE_THIRD_TRETMENT);
-			thirdTextBtn.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
-			thirdTextBtn.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
-			thirdTextBtn
-					.bindToModel(request, RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__THIRD_TREATMENT.getName());
-
-			thirdTextBtn.updateFromModel();
-
-		} else {
-			// Complaint
-			// Third
-			final ITextRidget complaintTextBtn = getRidget(ITextRidget.class,
-					AnimalHealthRequestDialog.BIND_ID_VERY_THIRD_COMPLAINT);
-			if (complaintTextBtn == null) {
-				return;
-			}
-			complaintTextBtn.addPropertyChangeListener(ITextRidget.PROPERTY_TEXT, new PropertyChangeListener() {
-
-				@Override
-				public void propertyChange(java.beans.PropertyChangeEvent arg0) {
-
-					request.setReportedProblem(arg0.getNewValue().toString());
-
-				}
-
-			}
-
-			);
-			complaintTextBtn.bindToModel(request,
-					RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REPORTED_PROBLEM.getName());
-			complaintTextBtn.updateFromModel();
+	private void configureGeneralComplaintPanel(final AnimalHealthRequest request) {
+		final ITextRidget complaintTextBtn = getRidget(ITextRidget.class,
+				AnimalHealthRequestDialog.BIND_ID_VERY_THIRD_COMPLAINT);
+		if (complaintTextBtn == null) {
+			return;
 		}
-
+		complaintTextBtn.addPropertyChangeListener(ITextRidget.PROPERTY_TEXT, new PropertyChangeListener() {
+			@Override
+			public void propertyChange(java.beans.PropertyChangeEvent arg0) {
+				request.setReportedProblem(arg0.getNewValue().toString());
+			}
+		});
+		complaintTextBtn.bindToModel(request,
+				RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REPORTED_PROBLEM.getName());
+		complaintTextBtn.updateFromModel();
 	}
 
-	//
-	// @Override
-	// protected EClass getEClass() {
-	// return RequestsPackage.eINSTANCE.getAnimalHealthRequest();
-	// }
+	private void configureInseminationPanel(final AnimalHealthRequest request) {
+		// Heated date
+		final IDateTextRidget heatTimeTextBtn = getRidget(IDateTextRidget.class,
+				AnimalHealthRequestDialog.BIND_ID_INSE_TIME_HEATED_DETECTED);
+		if (heatTimeTextBtn == null) {
+			return;
+		}
+		heatTimeTextBtn.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
+		heatTimeTextBtn.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
+		// heatTimeTextBtn.setOutputOnly(false);
+		heatTimeTextBtn.bindToModel(request,
+				RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE_HEAT_DETECTED.getName());
+		heatTimeTextBtn.updateFromModel();
+		// heatTimeTextBtn.setOutputOnly(true);
+
+		// First
+		final IDateTextRidget firstTextBtn = getRidget(IDateTextRidget.class,
+				AnimalHealthRequestDialog.BIND_ID_INSE_FIRST_TRETMENT);
+		firstTextBtn.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
+		firstTextBtn.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
+		firstTextBtn.bindToModel(request, RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__FIRST_TREATMENT.getName());
+
+		firstTextBtn.updateFromModel();
+
+		// Second
+		final IDateTextRidget secondTextBtn = getRidget(IDateTextRidget.class,
+				AnimalHealthRequestDialog.BIND_ID_INSE_SECOND_TRETMENT);
+		secondTextBtn.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
+		secondTextBtn.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
+		// secondTextBtn.setOutputOnly(false);
+		secondTextBtn.bindToModel(request, RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__SECOND_TREATMENT.getName());
+
+		secondTextBtn.updateFromModel();
+
+		// Third
+		final IDateTextRidget thirdTextBtn = getRidget(IDateTextRidget.class,
+				AnimalHealthRequestDialog.BIND_ID_INSE_THIRD_TRETMENT);
+		thirdTextBtn.setModelToUIControlConverter(DateTimeUtils.DEFAULT_DATE_STRING_CONVERTER);
+		thirdTextBtn.setFormat(DateTimeUtils.DEFAULT_DATE_PATTERN);
+		thirdTextBtn.bindToModel(request, RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__THIRD_TREATMENT.getName());
+
+		thirdTextBtn.updateFromModel();
+	}
+
 	private void requestTypeChanged() {
 
 		final AnimalHealthRequest request = getWorkingCopy();
 		// UIChanges
 		notifySaveListeners();
+
 		// Updates the bindings
-		configTypeSpecificRidgets(request);
+		if (RequestType.INSEMINATION == request.getType()) {
+			configureInseminationPanel(request);
+		} else {
+			configureGeneralComplaintPanel(request);
+		}
 
 	}
 
+	
 	protected void notifySaveListeners() {
 		for (final IActionListener listener : this.listeners) {
 			listener.callback();

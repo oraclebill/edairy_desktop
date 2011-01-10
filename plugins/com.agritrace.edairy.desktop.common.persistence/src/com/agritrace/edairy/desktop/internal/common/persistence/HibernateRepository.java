@@ -62,7 +62,11 @@ public class HibernateRepository<T extends EObject> implements IRepository<T> {
 
 	@Override
 	public List<T> all() {
-		return allWithEagerFetch((String[]) null);
+		final Criteria crit = sessionProvider.get().createCriteria(
+				getClassType());
+		@SuppressWarnings("unchecked")
+		final List<T> result = crit.list();
+		return result;
 	}
 
 	@Transactional
@@ -159,7 +163,7 @@ public class HibernateRepository<T extends EObject> implements IRepository<T> {
 			public void run() {
 				final Session session = sessionProvider.get();
 				if (changedItem instanceof Collection) {
-					for (final Object item : (Collection) changedItem) {
+					for (final Object item : (Collection<?>) changedItem) {
 						session.saveOrUpdate(item);
 					}
 				} else {

@@ -124,8 +124,8 @@ public abstract class AbstractImportTool {
 				if (expectedHeaders[i] == null) {
 					continue;
 				}
-				final String expected = expectedHeaders[i].trim();
-				final String actual = actualHeaders[i].trim();
+				final String expected = expectedHeaders[i].trim().toLowerCase();
+				final String actual = actualHeaders[i].trim().toLowerCase();
 				if (!expected.equals(actual)) {
 					if (errorMessage == null) {
 						errorMessage = "Mismatched headers: \n";

@@ -13,7 +13,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
-import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
 import com.agritrace.edairy.desktop.internal.common.persistence.TransactionRepository;
 import com.google.inject.ImplementedBy;
 

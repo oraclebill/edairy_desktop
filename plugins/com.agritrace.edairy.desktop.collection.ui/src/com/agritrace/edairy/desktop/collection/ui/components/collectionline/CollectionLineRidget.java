@@ -5,6 +5,7 @@ import java.beans.PropertyChangeListener;
 import java.util.Collection;
 import java.util.Formatter;
 import java.util.List;
+import java.util.logging.Level;
 
 import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.observable.list.WritableList;
@@ -24,6 +25,7 @@ import org.eclipse.riena.ui.ridgets.ILabelRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
+import org.eclipse.riena.ui.ridgets.validation.IValidationCallback;
 import org.eclipse.riena.ui.ridgets.validation.ValidatorCollection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
@@ -77,15 +79,11 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	private final ValidatorCollection validatorCollection;
 	private DairyContainer savedContainer;
 
-	private IMemberInfoProvider memberInfoProvider;
+	private IMemberLookup memberInfoProvider;
 	private IValidator routeValidator;
-
-//	private IMessageMarkerViewer markerViewer;
 
 	public CollectionLineRidget() {
 		validatorCollection = new ValidatorCollection();
-//		markerViewer = new TooltipMessageMarkerViewer();
-
 	}
 
 	@Override
@@ -94,12 +92,12 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	}
 
 	@Override
-	public void setMemberInfoProvider(IMemberInfoProvider provider) {
+	public void setMemberInfoProvider(IMemberLookup provider) {
 		this.memberInfoProvider = provider;
 	}
 
 	@Override
-	public IMemberInfoProvider getMemberInfoProvider() {
+	public IMemberLookup getMemberInfoProvider() {
 		return this.memberInfoProvider;
 	}
 
@@ -303,7 +301,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 			throw new IllegalArgumentException("No bin list. Call setBinList before binding!");
 			// binList = Collections.EMPTY_LIST;
 		}
-		binCombo.bindToModel(new WritableList(binList, DairyContainer.class), DairyContainer.class, "getContainerId",
+		binCombo.bindToModel(new WritableList(binList, DairyContainer.class), DairyContainer.class, "getTrackingNumber",
 				PojoObservables.observeValue(workingJournalLine,
 						DairyPackage.Literals.COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER.getName()));
 
@@ -389,9 +387,20 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 
 	/**
 	 *
+	 *
 	 */
 	private void handleSaveLine() {
-		final IStatus result = validatorCollection.validate(workingJournalLine);
+		IValidationCallback callback = new IValidationCallback() {
+			@Override
+			public void validationRuleChecked(IValidator validationRule, IStatus status) {
+				System.err.format("Validating %s: %s", validationRule, status);
+			}
+			@Override
+			public void validationResult(IStatus status) {
+				System.err.format("Result %s", status);
+			}			
+		};
+		final IStatus result = validatorCollection.validate(workingJournalLine, callback);
 		log(LogService.LOG_DEBUG, "handleSaveLine: journal-line: %s, validation result: [%s]\n", workingJournalLine, result);
 		if (result.isOK()) {
 			savedContainer = workingJournalLine.getDairyContainer();
@@ -491,40 +500,6 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		}
 	}
 
-	// /**
-	// * Reset the working memory used by the journal line widgets, saving the
-	// bin value if set.
-	// *
-	// */
-	// private void resetJournalEntryInputs() {
-	// resetJournalEntryInputs(true);
-	// }
-
-	// /**
-	// * Reset the working memory used by the journal line widgets, saving the
-	// bin value 'holdContainer' is 'true'.
-	// *
-	// * @param holdContainer
-	// * true if the value of 'bin' is to be held.
-	// */
-	// private void resetJournalEntryInputs(boolean holdContainer) {
-	// log(LogService.LOG_DEBUG, "resetJournalEntryInputs: " +
-	// workingJournalLine.getDairyContainer());
-	// for (EStructuralFeature feature :
-	// DairyPackage.Literals.COLLECTION_JOURNAL_LINE.getEAllStructuralFeatures())
-	// {
-	// if (holdContainer &&
-	// feature.equals(DairyPackage.Literals.COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER))
-	// continue;
-	// workingJournalLine.eSet(feature, feature.getDefaultValue());
-	// }
-	// log(LogService.LOG_DEBUG, " (after) resetJournalEntryInputs: " +
-	// workingJournalLine.getDairyContainer());
-	//
-	// updateAllRidgetsFromModel();
-	// setJournalLineFocus();
-	// }
-	//
 	private void setJournalLineFocus() {
 		if (workingJournalLine.getDairyContainer() != null) {
 			memberIDRidget.requestFocus();

@@ -20,14 +20,13 @@
 
    <splash
       location="com.agritrace.edairy.desktop"
-      startupProgressRect="100,270,320,15" />
-   <launcher name="edairymgr">
+      startupProgressRect="0,320,520,15" />
+   <launcher>
       <solaris/>
       <win useIco="false">
          <bmp/>
       </win>
    </launcher>
-
 
    <vm>
    </vm>

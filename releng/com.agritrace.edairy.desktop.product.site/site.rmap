@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rmap
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.eclipse.org/buckminster/RMap-1.0"
+    xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0">
+
+    <searchPath name="releng">
+        <provider readerType="local" componentTypes="eclipse.feature"
+                  mutable="true" source="true">
+            <uri format="file:///{0}/releng/{1}/">
+                <bc:propertyRef key="workspace.root" />
+                <bc:propertyRef key="buckminster.component" />
+            </uri>
+        </provider>
+    </searchPath>
+    
+    <searchPath name="features">
+        <provider readerType="local" componentTypes="eclipse.feature"
+                  mutable="true" source="true">
+            <uri format="file:///{0}/features/{1}/">
+                <bc:propertyRef key="workspace.root" />
+                <bc:propertyRef key="buckminster.component" />
+            </uri>
+        </provider>
+    </searchPath>
+    
+    <searchPath name="plugins">        
+        <provider readerType="local" componentTypes="osgi.bundle"
+                  mutable="true" source="true">
+            <uri format="file:///{0}/plugins/{1}/">
+                <bc:propertyRef key="workspace.root" />
+                <bc:propertyRef key="buckminster.component" />
+            </uri>
+        </provider>
+    </searchPath>
+    
+	<locator pattern="^.*\.site$" 	searchPathRef="releng" />  
+	<locator pattern="^.*\.feature$" 	searchPathRef="features" />  
+    <locator searchPathRef="plugins" />
+</rmap>

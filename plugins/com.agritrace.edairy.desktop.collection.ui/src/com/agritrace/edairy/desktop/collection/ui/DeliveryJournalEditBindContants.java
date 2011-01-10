@@ -13,6 +13,7 @@ public interface DeliveryJournalEditBindContants {
 	public static final String VEHICLE_COMBO = "vehicle-combo";
 	public static final String ROW_TXT_BIN_ID = "ROW_TXT_BIN_ID";
 	public static final String ROW_TXT_AMOUNT = "ROW_TXT_AMOUNT";
+	public static final String ROW_TXT_REJECTED = "ROW_TXT_REJECTED";
 	public static final String ROW_TXT_DESCRIPTION = "ROW_TXT_DESCRIPTION";
 	public static final String BTN_ADD_ROW = "BTN_ADD_ROW";
 

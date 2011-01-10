@@ -33,10 +33,11 @@ import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.widgets.Shell;
 
-import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
+import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.model.requests.RequestType;
+import com.agritrace.edairy.desktop.common.model.requests.RequestsFactory;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
@@ -46,6 +47,7 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
+import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.agritrace.edairy.desktop.services.ui.dialogs.AnimalHealthRequestDialog;
 import com.agritrace.edairy.desktop.services.ui.views.AnimalHealthRequestView;
 import com.google.inject.Inject;
@@ -57,7 +59,7 @@ import com.google.inject.Provider;
  * @author Hui(Spark) Wan
  *
  */
-@PermissionRequired(Permission.VIEW_ANIMAL_HEALTH_REQUESTS)
+@PermissionRequired(UIPermission.VIEW_ANIMAL_HEALTH_REQUESTS)
 public class AnimalHealthRequestViewController extends AbstractDirectoryController<AnimalHealthRequest> {
 
 	private final class FarmLookupAction implements IActionListener {
@@ -90,7 +92,7 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 		}
 	}
 
-	public static String[] MASTER_HEADERS = { "ID", "Date", "Member", "Farm", "Type" };
+	public static String[] MASTER_HEADERS = { "Log No.", "Date", "Member", "Farm", "Type" };
 	public static String[] MASTER_PROPTIES = { RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REQUEST_ID.getName(),
 			RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE.getName(),
 			RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REQUESTING_MEMBER.getName(),
@@ -116,13 +118,16 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 	private final Provider<FarmSearchDialog> farmSearchDialogProvider;
 	private final Provider<MemberSearchDialog> memberSearchDialogProvider;
 	private final Provider<AnimalHealthRequestDialog> dialogProvider;
+	private IDairyRepository dairyRepo;
 
 	@Inject
 	public AnimalHealthRequestViewController(final IRepository<AnimalHealthRequest> myRepo,
+			final IDairyRepository dairyRepo,
 			final Provider<FarmSearchDialog> farmSearchDialogProvider,
 			final Provider<MemberSearchDialog> memberSearchDialogProvider,
 			final Provider<AnimalHealthRequestDialog> dialogProvider) {
-		setRepository(this.myRepo = myRepo);
+		setRepository(myRepo);
+		this.dairyRepo = dairyRepo;
 		this.farmSearchDialogProvider = farmSearchDialogProvider;
 		this.memberSearchDialogProvider = memberSearchDialogProvider;
 		this.dialogProvider = dialogProvider;
@@ -135,7 +140,6 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 		if (masterTable != null) {
 			// Date column
 			masterTable.setColumnFormatter(1, new ColumnFormatter() {
-
 				@Override
 				public String getText(Object element) {
 					if (element instanceof AnimalHealthRequest) {
@@ -143,7 +147,6 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 					}
 					return null;
 				}
-
 			});
 			// Member column
 			masterTable.setColumnFormatter(2, new ColumnFormatter() {
@@ -245,6 +248,8 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 	protected AnimalHealthRequest createNewModel() {
 		final AnimalHealthRequest request = super.createNewModel();
 		request.setDate(Calendar.getInstance().getTime());
+		request.setDairy(dairyRepo.getLocalDairy());
+
 		return super.createNewModel();
 	}
 
@@ -255,7 +260,7 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 
 	@Override
 	protected List<AnimalHealthRequest> getFilteredResult() {
-		final List<AnimalHealthRequest> requests = myRepo.all();
+		final List<AnimalHealthRequest> requests = getRepository().all();
 
 		// shortcut if no requests to filter.
 		if (requests.size() == 0) {

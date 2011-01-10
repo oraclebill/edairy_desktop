@@ -18,12 +18,12 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 
-import com.agritrace.edairy.desktop.member.ui.controls.LiveStockGeneralWidget;
+import com.agritrace.edairy.desktop.member.ui.controls.LivestockGeneralInfoPanel;
 import com.agritrace.edairy.desktop.member.ui.controls.LiveStockIdentificationWidget;
 import com.agritrace.edairy.desktop.member.ui.controls.LiveStockOtherWidget;
 import com.agritrace.edairy.desktop.member.ui.controls.LiveStockRearingWidget;
 
-public class LiveStockTabFolder {
+public class LiveStockTabFolder extends Composite {
 
 	public static enum TabItem {
 		General, Identification, Other, Rearing
@@ -45,30 +45,28 @@ public class LiveStockTabFolder {
 
 	public static final String MEMBER_INFO_GROUP = "Animal Information";
 
-	private Composite tabComposite;
-
+	/**
+	 * @wbp.parser.constructor
+	 */
 	public LiveStockTabFolder(Composite parent) {
-		initGUI(parent, ALL_TABS);
+		this(parent, ALL_TABS);
 	}
 
 	public LiveStockTabFolder(Composite parent, Set<TabItem> enabledTabs) {
-		initGUI(parent, enabledTabs);
-	}
-
-	public Composite getTabComposite() {
-		return tabComposite;
-	}
-
-	private void initGUI(Composite parent, Set<TabItem> enabledTabs) {
-		tabComposite = UIControlsFactory.createComposite(parent);
+		super(parent, SWT.NONE);
+		
 		final GridData detailsGD = new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1);
 		detailsGD.minimumHeight = 200;
-		tabComposite.setLayoutData(detailsGD);
+		setLayoutData(detailsGD);
 		final GridLayout detaLayout = new GridLayout();
+		detaLayout.horizontalSpacing = 0;
+		detaLayout.verticalSpacing = 0;
+		detaLayout.marginWidth = 0;
+		detaLayout.marginHeight = 0;
 		detaLayout.numColumns = 1;
-		tabComposite.setLayout(detaLayout);
+		setLayout(detaLayout);
 
-		final Group detailGroup = UIControlsFactory.createGroup(tabComposite, MEMBER_INFO_GROUP);
+		final Group detailGroup = UIControlsFactory.createGroup(this, MEMBER_INFO_GROUP);
 		detailGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		final GridLayout groupLayout = new GridLayout();
 		groupLayout.numColumns = 1;
@@ -91,9 +89,9 @@ public class LiveStockTabFolder {
 			profileTab.setText("General");
 			final Composite profileComposite = UIControlsFactory.createComposite(tabfolder, SWT.NONE);
 			profileComposite.setLayout(new GridLayout(1, true));
-			final LiveStockGeneralWidget profileWidget = new LiveStockGeneralWidget(profileComposite);
-			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
-					.applyTo(profileWidget.getComposite());
+			final LivestockGeneralInfoPanel profileWidget = new LivestockGeneralInfoPanel(profileComposite, SWT.NONE);
+			profileWidget.setLayoutData(GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true)
+					.create());
 			profileTab.setControl(profileComposite);
 		}
 

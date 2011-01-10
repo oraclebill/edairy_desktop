@@ -14,7 +14,6 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -37,7 +36,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.part.ViewPart;
 
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.persistence.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.internal.home.HomeActivator;
 import com.google.inject.Inject;
@@ -65,38 +63,11 @@ public class DairyHomeView extends ViewPart {
 
 		@Override
 		public Object function(Object[] arguments) {
-			Date dateArg = new Date();
-			if (arguments.length > 0) {
-				if (arguments[0] instanceof String) {
-					String s = (String) arguments[0];
-					try {
-						dateArg = new SimpleDateFormat("MM/dd/yyyy").parse(s);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
+			Date dateArg = getDateArg(arguments, 0);
+			if (dateArg == null) {
+				dateArg = new Date();
 			}
-			final Date today = dateArg;
-
-			Calendar startDate, endDate;
-			startDate = Calendar.getInstance();
-			startDate.setTime(today);
-			endDate = Calendar.getInstance();
-			endDate.setTime(today);
-
-			int[] timeFields = new int[] { Calendar.HOUR, Calendar.MINUTE,
-					Calendar.SECOND, Calendar.MILLISECOND };
-
-			for (int field : timeFields) {
-				startDate.set(field, startDate.getActualMinimum(field));
-				endDate.set(field, startDate.getActualMaximum(field));
-			}
-
-			List<Object[]> sums = journalRepository.collectionsSummary(
-					startDate.getTime(), endDate.getTime());
-
-//			final List<CollectionGroup> groups = journalRepository
-//					.allForDate(today);
+			List<Object[]> sums = journalRepository.dailyCollectionsSummary(dateArg);
 
 			Object[] retVal;
 			final HashMap<String, Object[]> centerSums = new HashMap<String, Object[]>();
@@ -178,11 +149,31 @@ public class DairyHomeView extends ViewPart {
 
 			return retVal;
 		}
+
+		private Date getDateArg(Object[] arguments, int index) {
+			Date dateArg = null;
+			if (arguments.length > 0) {
+				if (arguments[index] instanceof String) {
+					String s = (String) arguments[index];
+					try {
+						dateArg = new SimpleDateFormat("MM/dd/yyyy").parse(s);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			return dateArg;
+		}
+
 	}
 
 	@Inject
 	private static ICollectionJournalLineRepository journalRepository;
 
+	public static ICollectionJournalLineRepository getRepository() {
+		return journalRepository;
+	}
+	
 //	@Inject
 //	private static ScaleImportAction scaleImportAction;
 	

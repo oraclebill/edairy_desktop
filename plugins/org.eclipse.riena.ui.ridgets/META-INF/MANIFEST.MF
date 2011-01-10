@@ -8,7 +8,7 @@ Require-Bundle: org.eclipse.core.databinding,org.eclipse.core.databind
  ing.beans,org.eclipse.riena.beans.common,org.eclipse.riena.core,org.e
  clipse.riena.ui.common,org.eclipse.riena.ui.core
 Bundle-Activator: org.eclipse.riena.internal.ui.ridgets.Activator
-Bundle-Version: 2.0.0.v20100615_2_0_0
+Bundle-Version: 2.1.0.qualifier
 Export-Package: org.eclipse.riena.internal.ui.ridgets;x-internal:=true
  ,org.eclipse.riena.ui.ridgets,org.eclipse.riena.ui.ridgets.controller
  ,org.eclipse.riena.ui.ridgets.databinding,org.eclipse.riena.ui.ridget

@@ -131,7 +131,7 @@ public class MemberInfoGroup {
 		fieldFactory.applyTo(UIControlsFactory.createText(leftColumn, SWT.BORDER, ViewWidgetId.memberInfo_nhifId));
 
 		// row 11: Default collection center
-		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, "Default collection center"));
+		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, "Default Collection Center"));
 		fieldFactory.applyTo(UIControlsFactory.createCCombo(leftColumn, ViewWidgetId.memberInfo_defaultRoute));
 
 		// right column

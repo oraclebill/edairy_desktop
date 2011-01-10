@@ -5,13 +5,17 @@ import java.util.List;
 
 public class LivestockValues {
 
-	public static String[] BREEDS = { "Brown Swiss" };
+	public static String[] BREEDS = { "Friesian", "Ayrshire", "Guernsey",
+			"Jersey", "Zebu", "Boran", "Sahiwal", "Hereford" };
 
-	public static String[] FEEDHABITS = { "Two Times", "Three Times" };
+	public static String[] FEEDHABITS = { "2x Daily", "3x Daily" };
 
-	public static String[] FEEDTYPES = { "Grass" };
+	public static String[] FEEDTYPES = { "Napier grass", "Bana grass ",
+			"Sudan grass", "Tree legumes", "Green maize", "Forage sorghum",
+			"Pigeon peas", "Cassava tops", "Banana leaves", "Sugarcane tops",
+			"Sweet-potato vines", "Other" };
 
-	public static String[] SPECIES = { "Cattle" };
+	public static String[] SPECIES = { "Cattle", "Goat", "Sheep", "Camel" };
 
 	public static List<String> getBreeds() {
 		return Arrays.asList(BREEDS);

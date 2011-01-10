@@ -20,7 +20,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
-import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
+import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
@@ -32,7 +32,7 @@ import com.agritrace.edairy.desktop.internal.finance.ui.Activator;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-@PermissionRequired(Permission.VIEW_TRANSACTIONS)
+@PermissionRequired(UIPermission.VIEW_TRANSACTIONS)
 public class AccountTransactionJournalController extends TransactionJournalController<AccountTransaction> {
 
 	static class TransactionSourceMatchPredicate implements Predicate {

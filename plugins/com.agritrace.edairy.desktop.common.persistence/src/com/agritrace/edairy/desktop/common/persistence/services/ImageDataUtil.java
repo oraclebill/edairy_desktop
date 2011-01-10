@@ -16,7 +16,6 @@ import org.osgi.service.log.LogService;
 import com.agritrace.edairy.desktop.common.model.base.ImageEntry;
 import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
 import com.agritrace.edairy.desktop.internal.common.persistence.PersistenceActivator;
-import com.agritrace.edairy.desktop.internal.operations.services.DairyRepository;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -145,7 +144,7 @@ public final class ImageDataUtil {
 	 *
 	 */
 	private static void log(int level, String message, Throwable exception) {
-		Log4r.getLogger(PersistenceActivator.getDefault(), DairyRepository.class).log(level, message,
+		Log4r.getLogger(PersistenceActivator.getDefault(), ImageDataUtil.class).log(level, message,
 				exception);
 	}
 }

@@ -256,6 +256,7 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 
 	private void updateDisplay() {
 		log(LogService.LOG_DEBUG, "updateDisplay: profileImageLabel: " + profileImageLabel);
+		log(LogService.LOG_DEBUG, "updateDisplay: imageData: " + imageData);
 
 		if (profileImageLabel == null) {
 			return;

@@ -294,7 +294,8 @@ public class TreeRidget extends AbstractSelectableRidget implements ITreeRidget 
 	}
 
 	private boolean isExpanded(Object element) {
-		return ReflectionUtils.invoke(element, checkExpandedMethod, new Object[0]);
+		Object o = ReflectionUtils.invoke(element, checkExpandedMethod, new Object[0]);
+		return (Boolean) o;
 	}
 
 	private void addExpansionCommand(Object element) {

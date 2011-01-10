@@ -18,6 +18,10 @@ import com.agritrace.edairy.desktop.system.ui.constants.RoleFilterBinding;
 public final class RoleDirectoryView extends AbstractDirectoryView {
 	public static final String ID = "edairy.system.roles.directory";
 
+	public RoleDirectoryView() {
+		super();
+	}
+
 	@Override
 	protected void createFilterConditions(Composite comp) {
 		setPartName("Security Roles");

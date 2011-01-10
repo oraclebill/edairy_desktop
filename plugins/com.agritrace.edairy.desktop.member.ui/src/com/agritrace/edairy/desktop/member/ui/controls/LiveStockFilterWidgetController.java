@@ -121,7 +121,7 @@ public class LiveStockFilterWidgetController implements WidgetController<Object>
 		speciesList.add("All Species");
 		speciesList.addAll(LivestockValues.getSpecies());
 		speciesCombo
-		.bindToModel(Observables.staticObservableList(speciesList), String.class, null, new WritableValue());
+				.bindToModel(Observables.staticObservableList(speciesList), String.class, null, new WritableValue());
 		speciesCombo.updateFromModel();
 		speciesCombo.setSelection(0);
 
@@ -142,7 +142,7 @@ public class LiveStockFilterWidgetController implements WidgetController<Object>
 			farmsList.add(((Farm) inputModel).getName());
 
 		}
-		if(farmCombo != null){
+		if (farmCombo != null) {
 			farmCombo.bindToModel(Observables.staticObservableList(farmsList), String.class, null, new WritableValue());
 			farmCombo.updateFromModel();
 			farmCombo.setSelection(0);
@@ -150,33 +150,34 @@ public class LiveStockFilterWidgetController implements WidgetController<Object>
 
 	}
 
-	public void clearFilters(){
+	public void clearFilters() {
 		speciesList.clear();
 		speciesList.add("All Species");
-		if(speciesCombo != null){
-			speciesCombo.bindToModel(Observables.staticObservableList(speciesList), String.class, null, new WritableValue());
+		if (speciesCombo != null) {
+			speciesCombo.bindToModel(Observables.staticObservableList(speciesList), String.class, null,
+					new WritableValue());
 			speciesCombo.updateFromModel();
 			speciesCombo.setSelection(0);
 		}
 
 		statusList.clear();
 		statusList.add("All Status");
-		if(statusCombo != null){
-			statusCombo.bindToModel(Observables.staticObservableList(statusList), String.class, null, new WritableValue());
+		if (statusCombo != null) {
+			statusCombo.bindToModel(Observables.staticObservableList(statusList), String.class, null,
+					new WritableValue());
 			statusCombo.updateFromModel();
 			statusCombo.setSelection(0);
 		}
 
-
 		farmsList.clear();
 		farmsList.add("All Farms");
-		if(farmCombo  != null){
+		if (farmCombo != null) {
 			farmCombo.bindToModel(Observables.staticObservableList(farmsList), String.class, null, new WritableValue());
 			farmCombo.updateFromModel();
 			farmCombo.setSelection(0);
 		}
 
-		if(dateSearchController != null){
+		if (dateSearchController != null) {
 			dateSearchController.resetDates();
 		}
 

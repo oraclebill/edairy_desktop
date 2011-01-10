@@ -13,10 +13,12 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
-import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
+import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
+import com.agritrace.edairy.desktop.common.ui.controllers.DirectoryPersistenceDelegate;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.reference.VehicleType;
 import com.agritrace.edairy.desktop.common.ui.util.EMFUtil;
@@ -25,10 +27,47 @@ import com.agritrace.edairy.desktop.dairy.vehicles.ui.controls.VehicleLogDetailB
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.dialogs.VehicleEditDialog;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
-@PermissionRequired(Permission.VIEW_VEHICLES)
+@PermissionRequired(UIPermission.VIEW_VEHICLES)
 public class VehicleLogDirectoryViewController extends BasicDirectoryController<Vehicle>{
+	
+	class VehiclePersistenceDelegate extends DirectoryPersistenceDelegate<Vehicle> {
+
+		public VehiclePersistenceDelegate(AbstractDirectoryController<Vehicle> controller) {
+			super(controller);
+			// TODO Auto-generated constructor stub
+		}
+		
+
+		/**
+		 * Create new model while creating a new record
+		 *
+		 * @return
+		 */
+		@Override
+		public Vehicle createItem() {
+			final Vehicle vehicle = DairyFactory.eINSTANCE.createVehicle();
+			EMFUtil.populate(vehicle);
+			vehicle.setRegistrationNumber(null);
+			vehicle.setLogBookNumber(null);
+			return vehicle;
+		}
+
+		@Override
+		public void save(Vehicle newEntity) {
+			localDairy.getVehicles().add(newEntity);
+			super.save(newEntity);
+		}
+
+		@Override
+		public void delete(Vehicle deletableEntity) {
+			localDairy.getVehicles().remove(deletableEntity);
+			super.delete(deletableEntity);
+			dairyRepository.save(localDairy);
+		}
+		
+	}
+	
 	private IComboRidget vehicleTypeCombo;
 	private IComboRidget driverCombo;
 
@@ -36,17 +75,19 @@ public class VehicleLogDirectoryViewController extends BasicDirectoryController<
 	private final IRepository<Vehicle> vehicleRepository;
 	private final IDairyRepository dairyRepository;
 	private final Dairy localDairy;
-	private final Provider<VehicleEditDialog> editDialogProvider;
+//	private final Provider<VehicleEditDialog> editDialogProvider;
 
 	@Inject
 	public VehicleLogDirectoryViewController(final IDairyRepository dairyRepository,
-			final IRepository<Vehicle> vehicleRepository,
-			final Provider<VehicleEditDialog> editDialogProvider) {
-		this.editDialogProvider = editDialogProvider;
+			final IRepository<Vehicle> vehicleRepository//,
+//			final Provider<VehicleEditDialog> editDialogProvider
+			) {
+//		this.editDialogProvider = editDialogProvider;
 		this.dairyRepository = dairyRepository;
 		localDairy = dairyRepository.getLocalDairy();
 		setEClass(DairyPackage.Literals.VEHICLE);
 		setRepository(this.vehicleRepository = vehicleRepository);
+		setPersistenceDelegate(new VehiclePersistenceDelegate(this));
 
 		addTableColumn("Log Book Number", DairyPackage.Literals.VEHICLE__LOG_BOOK_NUMBER);
 		addTableColumn("VIN Nubmer", DairyPackage.Literals.VEHICLE__REGISTRATION_NUMBER);
@@ -74,18 +115,6 @@ public class VehicleLogDirectoryViewController extends BasicDirectoryController<
 
 	}
 
-	/**
-	 * Create new model while creating a new record
-	 *
-	 * @return
-	 */
-	@Override
-	protected Vehicle createNewModel() {
-		final Vehicle vehicle = DairyFactory.eINSTANCE.createVehicle();
-		EMFUtil.populate(vehicle);
-		return vehicle;
-	}
-
 	@Override
 	protected List<Vehicle> getFilteredResult() {
 		final List<Vehicle> filtered = new ArrayList<Vehicle>();
@@ -103,8 +132,10 @@ public class VehicleLogDirectoryViewController extends BasicDirectoryController<
 
 	@Override
 	protected RecordDialog<Vehicle> getRecordDialog(Shell shell) {
-		final VehicleEditDialog dialog = editDialogProvider.get();
-		dialog.setTitle("Edit Vehicle Information");
+//		final VehicleEditDialog dialog = editDialogProvider.get();
+		VehicleEditDialogController controller = new VehicleEditDialogController(dairyRepository);
+		VehicleEditDialog dialog = new VehicleEditDialog(getShell(), controller);
+//		dialog.setTitle("Edit Vehicle Information");
 		return dialog;
 	}
 
@@ -115,16 +146,5 @@ public class VehicleLogDirectoryViewController extends BasicDirectoryController<
 	}
 
 
-	@Override
-	protected void createEntity(Vehicle newEntity) {
-		localDairy.getVehicles().add(newEntity);
-		super.createEntity(newEntity);
-	}
-
-	@Override
-	protected void deleteEntity(Vehicle deletableEntity) {
-		localDairy.getVehicles().remove(deletableEntity);
-		super.deleteEntity(deletableEntity);
-		dairyRepository.save(localDairy);
-	}
+	
 }

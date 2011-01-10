@@ -20,8 +20,9 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
+import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
-import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
+import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
@@ -30,7 +31,7 @@ import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-@PermissionRequired(Permission.VIEW_MILK_DELIVERIES)
+@PermissionRequired(UIPermission.VIEW_MILK_DELIVERIES)
 public class MilkDeliveryJournalController extends BasicDirectoryController<DeliveryJournal> {
 
 	private IComboRidget customerRidget;
@@ -80,6 +81,19 @@ public class MilkDeliveryJournalController extends BasicDirectoryController<Deli
 			}
 		});
 		addTableColumn("Total", DairyPackage.Literals.DELIVERY_JOURNAL__TOTAL);
+		addTableColumn("# Rejected", DairyPackage.Literals.DELIVERY_JOURNAL__TOTAL, new DJColumnFormatter() {
+			@Override public String getFormattedText(DeliveryJournal element) {
+				int rejectedCount = 0;
+				
+				for (final DeliveryJournalLine line: element.getLines()) {
+					if (line.isRejected()) {
+						rejectedCount++;
+					}
+				}
+				
+				return Integer.toString(rejectedCount);
+			}
+		});
 	}
 
 	@Override

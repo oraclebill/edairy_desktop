@@ -26,6 +26,7 @@ public class RouteEditDialogController extends RecordDialogController<Route> {
 
 	@Inject
 	public RouteEditDialogController(final IDairyRepository dairyRepo) {
+		super("Transport Route");
 		this.dairyRepo = dairyRepo;
 	}
 

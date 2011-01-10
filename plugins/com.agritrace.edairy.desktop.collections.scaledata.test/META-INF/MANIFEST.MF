@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: Test
-Bundle-SymbolicName: com.agritrace.edairy.desktop.collections.scaledata.test
-Bundle-Version: 1.0.0.qualifier
-Bundle-Vendor: AGRITRACE
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: com.agritrace.edairy.desktop.collections.scaledata;bundle-version="1.0.0",
- org.junit;bundle-version="4.8.1"

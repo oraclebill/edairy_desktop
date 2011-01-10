@@ -11,7 +11,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.model.dairy.Role;
+import com.agritrace.edairy.desktop.common.model.base.Role;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.system.ui.constants.RoleBinding;
 import com.agritrace.edairy.desktop.system.ui.controllers.RoleDialogController;

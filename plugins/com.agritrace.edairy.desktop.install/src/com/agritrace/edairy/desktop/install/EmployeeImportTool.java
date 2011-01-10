@@ -43,7 +43,7 @@ public class EmployeeImportTool extends AbstractImportTool {
 	public static final int NHIF_NUMBER = BASE + 8;
 
 	private static final Entry[] fieldMap = {
-			new Entry(EMPLOYEE_ID, DairyPackage.Literals.EMPLOYEE__ID),
+			new Entry(EMPLOYEE_ID, DairyPackage.Literals.EMPLOYEE__EMPLOYEE_NUMBER),
 			new Entry(GIVEN_NAME, ModelPackage.Literals.PERSON__GIVEN_NAME),
 			new Entry(MIDDLE_NAME, ModelPackage.Literals.PERSON__MIDDLE_NAME),
 			new Entry(FAMILY_NAME, ModelPackage.Literals.PERSON__FAMILY_NAME),
@@ -79,7 +79,7 @@ public class EmployeeImportTool extends AbstractImportTool {
 		final Dairy dairy = dairyRepo.getLocalDairy();
 		employeeCache = new HashMap<String, Object>();
 		for (final Employee member : dairy.getEmployees()) {
-			employeeCache.put(member.getId(), member);
+			employeeCache.put(member.getEmployeeNumber(), member);
 		}
 
 		final CsvReader csvReader = new CsvReader(reader);

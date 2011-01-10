@@ -4,7 +4,6 @@ import java.util.Arrays;
 
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.emf.databinding.EMFObservables;
-import org.eclipse.riena.ui.core.marker.ValidationTime;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
@@ -15,26 +14,21 @@ import com.agritrace.edairy.desktop.common.ui.controllers.location.LocationProfi
 import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.IContactMethodsGroupRidget;
 import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.IProfilePhotoRidget;
 import com.agritrace.edairy.desktop.common.ui.reference.CompanyStatus;
-import com.agritrace.edairy.desktop.common.ui.validators.PhoneNumberValidatiionRule;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.CustomerBindingConstants;
 
 public class CustomerDialogController extends RecordDialogController<Customer> {
 	public static String[] CUSTOMER_TYPES = { "Milk Processor", "Milk Bar", "Other" };
 
-	private ITextRidget phone;
-
+	public CustomerDialogController() {
+		super("Customer");
+	}
+	
 	@Override
 	public void configureUserRidgets() {
-		Customer editCustomer = null;
 		IProfilePhotoRidget profilePhoto;
-
-		// ensure model available
-		editCustomer = getWorkingCopy();
+		
+		Customer editCustomer = getWorkingCopy();
 		assert null != editCustomer;
-
-		phone = getRidget(ITextRidget.class,CustomerBindingConstants.BIND_ID_PHONE_NUMBER);
-		phone.addValidationRule(new PhoneNumberValidatiionRule(), ValidationTime.ON_UI_CONTROL_EDIT);
-		phone.setDirectWriting(true);
 
 		addTextMap(CustomerBindingConstants.BIND_ID_COMPANY_NAME, ModelPackage.Literals.COMPANY__COMPANY_NAME);
 		addTextMap(CustomerBindingConstants.BIND_ID_PHONE_NUMBER, ModelPackage.Literals.COMPANY__PHONE_NUMBER);
@@ -50,13 +44,6 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 				Observables.staticObservableList(Arrays.asList(CUSTOMER_TYPES)), null,
 				DairyPackage.Literals.CUSTOMER__CUSTOMER_TYPE);
 
-		/*
-		customerId = getRidget(ITextRidget.class, CustomerBindingConstants.BIND_ID_CUSTOMER_ID);
-		final IObservableValue oberservModel = PojoObservables.observeValue(editCustomer,
-				ModelPackage.Literals.COMPANY__COMPANY_ID.getName());
-		customerId.setModelToUIControlConverter(NumberToStringConverter.fromLong(false));
-		customerId.bindToModel(oberservModel);
-		*/
 		addTextMap(CustomerBindingConstants.BIND_ID_CUSTOMER_NUM, DairyPackage.Literals.CUSTOMER__ID);
 
 		// profile photo also needs manual binding..
@@ -75,17 +62,5 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 				IContactMethodsGroupRidget.WIDGET_ID);
 		contacts.bindToModel(editCustomer);
 		contacts.updateFromModel();
-	}
-
-	@Override
-	public Customer getWorkingCopy() {
-		return (Customer) getContext("editObject");
-	}
-
-	@Override
-	public void afterBind() {
-		super.afterBind();
-		// customerType.updateFromModel();
-		// profilePhoto.updateFromModel();
 	}
 }

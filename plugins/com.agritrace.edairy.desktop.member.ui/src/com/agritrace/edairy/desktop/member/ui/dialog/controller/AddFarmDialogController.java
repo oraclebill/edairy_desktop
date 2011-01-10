@@ -16,10 +16,10 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
+import com.agritrace.edairy.desktop.common.model.util.MemberUtil;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.controllers.BaseDialogController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.LocationProfileWidgetController;
-import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.data.FarmListViewTableNode;
@@ -172,7 +172,7 @@ public class AddFarmDialogController extends BaseDialogController<Farm> {
 
 			}
 			if (memberIdRidget != null) {
-				memberIdRidget.setText(FARM_MEMBER_ID_LABEL_PREFIX + selectedNode.getMembership().getMemberId());
+				memberIdRidget.setText(FARM_MEMBER_ID_LABEL_PREFIX + selectedNode.getMembership().getMemberNumber());
 			}
 			if (memberNameRidget != null) {
 				memberNameRidget.setText(FARM_MEMBER_NAME_LABEL_PREFIX

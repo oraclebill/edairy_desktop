@@ -13,15 +13,16 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.ui.DesktopBaseActivator;
-import com.agritrace.edairy.desktop.common.ui.dialogs.BaseDialogView;
+import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.controller.ViewContainerDialogController;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
-public class ViewContainerDialog extends BaseDialogView {
+public class ViewContainerDialog extends RecordDialog<Container> {
 
 	/**
 	 * AddContainerDialog constructor

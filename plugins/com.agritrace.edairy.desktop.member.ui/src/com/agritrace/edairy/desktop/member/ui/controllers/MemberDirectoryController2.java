@@ -5,12 +5,10 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
-import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.ridgets.listener.FocusEvent;
 import org.eclipse.riena.ui.ridgets.listener.IFocusListener;
 import org.eclipse.swt.widgets.Shell;
@@ -19,22 +17,25 @@ import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.dairy.security.Permission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
+import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
+import com.agritrace.edairy.desktop.common.persistence.IMilkCollectionRepository;
+import com.agritrace.edairy.desktop.common.ui.columnformatters.ConstantColumnFormatter;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
+import com.agritrace.edairy.desktop.common.ui.controllers.DirectoryPersistenceDelegate;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.views.BaseListView;
+import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.member.ui.dialog.AddMemberDialog;
-import com.agritrace.edairy.desktop.member.ui.dialog.ViewMemberDialog;
+import com.agritrace.edairy.desktop.member.ui.dialog.MemberEditDialog;
+import com.agritrace.edairy.desktop.member.ui.dialog.controller.MemberEditDialogController;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
-@PermissionRequired(Permission.VIEW_MEMBER_LIST)
+@PermissionRequired(UIPermission.VIEW_MEMBER_LIST)
 public class MemberDirectoryController2 extends BasicDirectoryController<Membership> {
 
 	private final class DefaultTextListener implements IFocusListener {
@@ -58,34 +59,44 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 		}
 	}
 
+	class MemberPersistenceDelegate extends DirectoryPersistenceDelegate<Membership> {
+
+		public MemberPersistenceDelegate(AbstractDirectoryController<Membership> controller) {
+			super(controller);
+		}
+
+		@Override
+		public Membership createItem() {
+			return DairyUtil.createMembership(null, null, null);
+		}
+
+	}
+
 	private static final String DEFAULT_SEARCH_DISPLAY_TXT = "Type to search members";
 	private static final String DELETE_DIALOG_MESSAGE = "Do you want to delete the selected member %s ?";
 	private static final String DELETE_DIALOG_TITLE = "Delete Member";
 
-	private final String[] memberColumnHeaders = { "ID", "First Name", "Last Name", "Default Route",
-			"Status", "Phone", "Milk Collection", "Monthly Credit Sales", "Credit Balance" };
+	private final String[] memberColumnHeaders = { "ID", "Name", "Default Route", "Status", "Phone", "Milk Collection",
+			"Monthly Credit Sales", "Credit Balance" };
 
-	private final String[] memberPropertyNames = { "memberNumber", "member.givenName", "member.familyName",
-			"defaultRoute.code", "status.name", "member.phoneNumber" }; // "account",
-																		// "account",
-	// "account" };
+	private final String[] memberPropertyNames = { "memberNumber", "member.formattedName", "defaultRoute.code",
+			"status.name", "member.phoneNumber" }; 
 
 	private ITextRidget searchText;
 	private final Dairy localDairy;
-	private final IMemberRepository repository;
-	private final Provider<ViewMemberDialog> viewDialogProvider;
-	private final Provider<AddMemberDialog> addDialogProvider;
+	private IMilkCollectionRepository collectionsRepo;
+	private IFarmRepository farmRepo;
 
 	@Inject
 	public MemberDirectoryController2(final IMemberRepository repository, final IDairyRepository dairyRepo,
-			final Provider<ViewMemberDialog> viewDialogProvider,
-			final Provider<AddMemberDialog> addDialogProvider) {
-		this.repository = repository;
+			IFarmRepository farmRepo, IMilkCollectionRepository collectionsRepo) {
+		setRepository(repository);
+		this.collectionsRepo = collectionsRepo;
+		this.farmRepo = farmRepo;
 		this.localDairy = dairyRepo.getLocalDairy();
-		this.viewDialogProvider = viewDialogProvider;
-		this.addDialogProvider = addDialogProvider;
 
 		setEClass(DairyPackage.Literals.MEMBERSHIP);
+		setPersistenceDelegate(new MemberPersistenceDelegate(this));
 
 		for (int i = 0; i < memberPropertyNames.length; i++) {
 			addTableColumn(memberColumnHeaders[i], memberPropertyNames[i], String.class);
@@ -157,9 +168,13 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 		return results;
 	}
 
+	private MemberEditDialogController controller;
+	
 	@Override
 	protected RecordDialog<Membership> getRecordDialog(Shell shell) {
-		return null;
+		assert controller != null;
+//		final MemberEditDialogController controller = new MemberEditDialogController(localDairy.getBranchLocations());
+		return new MemberEditDialog(getShell(), controller);
 	}
 
 	@Override
@@ -170,52 +185,14 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 
 	@Override
 	protected void handleNewItemAction() {
-		Membership selectedMember = DairyUtil.createMembership(null, null, null);
-		final AddMemberDialog memberDialog = addDialogProvider.get();
-		memberDialog.getController().setContext("selectedMember", selectedMember);
-
-		final int returnCode = memberDialog.open();
-		if (returnCode == AbstractWindowController.OK) {
-			selectedMember = (Membership) memberDialog.getController().getContext("selectedMember");
-			// final List<Farm> newFarms = new ArrayList<Farm>();
-			// newFarms.addAll(selectedMember.getMember().getFarms());
-			// selectedMember.getMember().getFarms().clear();
-			// repository.saveNew(selectedMember);
-			// for (final Farm newFarm : newFarms) {
-			// farmRepository.saveNew(newFarm);
-			// selectedMember.getMember().getFarms().add(newFarm);
-			// }
-			repository.saveNew(selectedMember);
-			refreshTableContents();
-		}
+		controller = new MemberEditDialogController(localDairy.getBranchLocations());
+		super.handleNewItemAction();
 	}
 
 	@Override
 	protected void handleViewItemAction() {
-		Membership selectedMember = (Membership) table.getSelection().get(0);
-		final ViewMemberDialog memberDialog = viewDialogProvider.get();
-		memberDialog.getController().setContext("selectedMember", selectedMember);
-
-		final int returnCode = memberDialog.open();
-		if (returnCode == AbstractWindowController.OK) {
-			selectedMember = (Membership) memberDialog.getController().getContext("selectedMember");
-			repository.update(selectedMember);
-			refreshTableContents();
-		} else if (returnCode == 2) {
-			// confirm for delete
-			if (selectedMember != null) {
-				String message = "";
-				if (selectedMember.getMember() != null) {
-					message = "\"" + selectedMember.getMember().getGivenName() + " "
-							+ selectedMember.getMember().getFamilyName() + "\"";
-				}
-				message = String.format(DELETE_DIALOG_MESSAGE, message);
-				if (MessageDialog.openConfirm(AbstractDirectoryController.getShell(), DELETE_DIALOG_TITLE, message)) {
-					repository.delete(selectedMember);
-					refreshTableContents();
-				}
-			}
-		}
+		controller = new MemberEditDialogController(
+				localDairy.getBranchLocations(), (IMemberRepository)getRepository(), farmRepo, collectionsRepo);
+		super.handleViewItemAction();
 	}
-
 }

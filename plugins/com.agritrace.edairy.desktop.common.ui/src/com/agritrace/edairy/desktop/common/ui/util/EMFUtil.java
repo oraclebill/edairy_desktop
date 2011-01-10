@@ -204,6 +204,7 @@ public class EMFUtil {
 				final int lower = containedIn.getLowerBound();
 				assert lower >= 0;
 				assert upper < 0 || upper >= lower;
+				@SuppressWarnings("unchecked")
 				final EList<EObject> theList = (EList<EObject>) parent.eGet(containedIn);
 				theList.add(child);
 				if (upper - lower > 1 || upper < 0) {

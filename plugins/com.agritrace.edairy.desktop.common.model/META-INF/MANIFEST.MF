@@ -22,20 +22,6 @@ Export-Package: com.agritrace.edairy.desktop.common.model.base,
  com.agritrace.edairy.desktop.common.model.requests.util,
  com.agritrace.edairy.desktop.common.model.tracking,
  com.agritrace.edairy.desktop.common.model.tracking.impl,
- com.agritrace.edairy.desktop.common.model.tracking.util
-Require-Bundle: org.eclipse.core.runtime
-Import-Package: org.eclipse.emf.common,
- org.eclipse.emf.common.archive,
- org.eclipse.emf.common.command,
- org.eclipse.emf.common.notify,
- org.eclipse.emf.common.notify.impl,
- org.eclipse.emf.common.util,
- org.eclipse.emf.ecore,
- org.eclipse.emf.ecore.impl,
- org.eclipse.emf.ecore.plugin,
- org.eclipse.emf.ecore.resource,
- org.eclipse.emf.ecore.resource.impl,
- org.eclipse.emf.ecore.util,
- org.eclipse.emf.ecore.xmi,
- org.eclipse.emf.ecore.xmi.impl,
- org.eclipse.emf.ecore.xmi.util
+ com.agritrace.edairy.desktop.common.model.tracking.util,
+ com.agritrace.edairy.desktop.common.model.util
+Require-Bundle: org.eclipse.emf.ecore.xmi;bundle-version="2.5.0";visibility:=reexport

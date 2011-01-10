@@ -1,8 +1,5 @@
 package com.agritrace.edairy.desktop.splashHandlers;
 
-import java.lang.management.ManagementFactory;
-import java.lang.management.RuntimeMXBean;
-
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.resource.FontDescriptor;
@@ -35,7 +32,10 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 	private static final int WAIT_MSEC = 5000;
 
 	private AuthController authController = null;
+	private boolean okPressed = false;
 	private boolean authenticated = false;
+	private boolean authFailed = false;
+	
 	private Label developerLabel;
 	private Text username;
 	private Text password;
@@ -46,46 +46,34 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 	@Override
 	public void init(Shell splash) {
 		super.init(splash);
-		final RuntimeMXBean mx = ManagementFactory.getRuntimeMXBean();
 
-		// Wait until the VM has been up for 5 seconds
-		while (mx.getUptime() < WAIT_MSEC) {
-			if (splash.getDisplay().readAndDispatch() == false) {
-				splash.getDisplay().sleep();
+		do {
+			createLoginControls();
+	
+			while (!okPressed) {
+				if (splash.getDisplay().readAndDispatch() == false) {
+					splash.getDisplay().sleep();
+				}
 			}
-		}
-
-		getContent().setBackgroundImage(Activator.getImage("splash/splash.bmp"));
-		final long endTime = System.currentTimeMillis() + WAIT_MSEC;
-
-		final IProgressMonitor monitor = getBundleProgressMonitor();
-		monitor.beginTask("Initializing database", 1);
-		splash.getDisplay().asyncExec(new StartupRunnable() {
-			@Override
-			public void runWithException() throws Throwable {
-				// Force initialization of the persistence layer
-				authController = PROVIDER.get();
+			
+			String usernameText = username.getText();
+			String passwordText = password.getText();
+			
+			restoreProgressWindow();
+			runLoginProgress(splash, usernameText, passwordText);
+	
+			final long endTime = System.currentTimeMillis() + WAIT_MSEC;	
+			while (!authFailed && (System.currentTimeMillis() < endTime || !authenticated)) {
+				if (splash.getDisplay().readAndDispatch() == false) {
+					splash.getDisplay().sleep();
+				}
 			}
-		});
-
-		while (System.currentTimeMillis() < endTime || authController == null) {
-			if (splash.getDisplay().readAndDispatch() == false) {
-				splash.getDisplay().sleep();
-			}
-		}
-
-		createLoginControls();
-
-		while (!authenticated) {
-			if (splash.getDisplay().readAndDispatch() == false) {
-				splash.getDisplay().sleep();
-			}
-		}
-
-		restoreProgressWindow();
+		} while (authFailed);
 	}
 
 	private void createLoginControls() {
+		okPressed = false;
+		
 		final Composite content = getContent();
 		content.setBackgroundImage(Activator.getImage("splash/loginSplash.bmp"));
 
@@ -126,12 +114,7 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 		buttonOK.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				authenticated = authController.authenticate(username.getText(), password.getText());
-
-				if (!authenticated) {
-					MessageDialog.openWarning(getSplash(), "Authentication Failure",
-							"You have entered an invalid username or password");
-				}
+				okPressed = true;
 			}
 
 		});
@@ -158,5 +141,34 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 		for (final Control child: content.getChildren()) {
 			child.setVisible(true);
 		}
+	}
+	
+	private void runLoginProgress(final Shell splash, final String username, final String password) {
+		authFailed = false;
+		final IProgressMonitor monitor = getBundleProgressMonitor();
+		monitor.beginTask("Logging in", 2);
+		
+		splash.getDisplay().syncExec(new StartupRunnable() {
+			@Override
+			public void runWithException() throws Throwable {
+				monitor.subTask("Initializing database connection");
+				
+				if (authController == null) {
+					authController = PROVIDER.get();
+				}
+				
+				monitor.worked(1);
+				monitor.subTask("Authenticating");
+				authenticated = authController.authenticate(username, password);
+				monitor.worked(1);
+				
+				if (!authenticated) {
+					MessageDialog.openWarning(getSplash(), "Authentication Failure",
+							"You have entered an invalid username or password");
+					
+					authFailed = true;
+				}
+			}
+		});
 	}
 }

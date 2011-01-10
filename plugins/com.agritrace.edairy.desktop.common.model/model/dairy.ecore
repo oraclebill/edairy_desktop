@@ -88,34 +88,22 @@
         defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Employee" eSuperTypes="common.ecore#//Person">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-        <details key="name" value="id"/>
-        <details key="kind" value="elementOnly"/>
+    <eOperations name="getNameAndLicense" ordered="false" unique="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="if (licenseNo != null &amp;&amp; !licenseNo.isEmpty()) {&#xA;&#x9;&#x9;&#x9;return String.format(&quot;%s (%s)&quot;, familyName, licenseNo);&#xA;&#x9;&#x9;} else {&#xA;&#x9;&#x9;&#x9;return familyName;&#xA;&#x9;&#x9;}"/>
       </eAnnotations>
-    </eStructuralFeatures>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="employeeNumber" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operatorCode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="startDate" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="jobFunction" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="department" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="username" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="teneo.jpa">
-        <details key="appinfo" value="@Column(unique=&quot;true&quot;)"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="password" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral="">
-      <eAnnotations source="teneo.jpa">
-        <details key="appinfo" value="@Column(length=64)"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="localEnabled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="role" eType="#//Role"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="passwordHashed" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="licenseNo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="systemIdentity" eType="ecore:EClass common.ecore#//SystemUser"
+        eOpposite="common.ecore#//SystemUser/relatedEmployee"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DairyLocation">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
@@ -254,6 +242,8 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rejected" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Dairy" eSuperTypes="common.ecore#//Company">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="registrationNumber" lowerBound="1"
@@ -273,7 +263,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="employees" ordered="false"
         upperBound="-1" eType="#//Employee" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="memberships" ordered="false"
-        upperBound="-1" eType="#//Membership" containment="true"/>
+        upperBound="-1" eType="#//Membership" containment="true" eOpposite="#//Membership/dairy"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="branchLocations" ordered="false"
         upperBound="-1" eType="#//DairyLocation" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="collectionJournals" ordered="false"
@@ -330,6 +320,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="account" lowerBound="1"
         eType="#//account/Account" containment="true" eOpposite="#//account/Account/member"
         eKeys="#//account/Account/accountId"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dairy" ordered="false"
+        lowerBound="1" eType="#//Dairy" eOpposite="#//Dairy/memberships"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="MembershipStatus">
     <eLiterals name="Active"/>
@@ -355,6 +347,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="disposalWitness" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DairyContainer" eSuperTypes="farm.ecore#//Container">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="IN_CIRCULATION"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="zone" eType="#//Route"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="assetInfo" eType="#//Asset"
         containment="true" eKeys="#//Asset/tagValue">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
@@ -446,35 +441,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//PreferenceType"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Role">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType common.ecore#//UniqueID"
-        iD="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="teneo.jpa">
-        <details key="appinfo" value="@Column(unique=&quot;true&quot;)"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="permissions" upperBound="-1"
-        eType="#//PermissionT"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PermissionNamespace">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType common.ecore#//UniqueID"
-        iD="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="teneo.jpa">
-        <details key="appinfo" value="@Column(unique=&quot;true&quot;)"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Permission">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType common.ecore#//UniqueID"
-        iD="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" eType="#//PermissionNamespace"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="displayName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="PermissionT" instanceClassName="com.agritrace.edairy.desktop.common.model.dairy.security.Permission"/>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionSession">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType common.ecore#//UniqueID"
         iD="true"/>

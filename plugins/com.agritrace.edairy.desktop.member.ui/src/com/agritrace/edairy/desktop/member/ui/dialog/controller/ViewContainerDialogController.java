@@ -27,10 +27,10 @@ import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
+import com.agritrace.edairy.desktop.common.model.util.MemberUtil;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.controllers.BaseDialogController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
-import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
@@ -234,7 +234,7 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 				final Membership memberShip = memberDialog.getSelectedMember();
 
 				if (memberShip != null) {
-					final String memberName = MemberUtil.formattedMemberName(memberShip.getMember());
+					final String memberName = memberShip.getMember().getFormattedName();
 					memberNameRidget.setText(memberName);
 					farmList.clear();
 					farmList.addAll(memberShip.getMember().getFarms());

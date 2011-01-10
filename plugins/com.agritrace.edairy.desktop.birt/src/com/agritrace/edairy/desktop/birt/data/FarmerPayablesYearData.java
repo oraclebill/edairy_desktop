@@ -20,9 +20,13 @@ public class FarmerPayablesYearData {
 		this.adjustments = adjustments;
 		this.payables = payables;
 	}
+	
+	private static String nullToEmpty(final String str) {
+		return str == null ? "" : str;
+	}
 
 	public String getFarmerName() {
-		return farmerName == null || farmerName.isEmpty()?"":farmerName;
+		return nullToEmpty(farmerName);
 	}
 
 	public void setFarmerName(String farmerName) {
@@ -30,7 +34,7 @@ public class FarmerPayablesYearData {
 	}
 
 	public String getMemberNumber() {
-		return memberNumber == null || memberNumber.isEmpty()?"":memberNumber;
+		return nullToEmpty(memberNumber);
 	}
 
 	public void setMemberNumber(String memberNumber) {
@@ -38,7 +42,7 @@ public class FarmerPayablesYearData {
 	}
 
 	public String getAccountNumber() {
-		return accountNumber == null || accountNumber.isEmpty()?"":accountNumber;
+		return nullToEmpty(accountNumber);
 	}
 
 	public void setAccountNumber(String accountNumber) {

@@ -110,17 +110,13 @@
   <xsd:complexType name="Employee">
     <xsd:complexContent>
       <xsd:extension base="base:Person">
-        <xsd:attribute name="id" type="xsd:string" use="required"/>
+        <xsd:attribute name="employeeNumber" type="xsd:string" use="required"/>
         <xsd:attribute name="operatorCode" type="xsd:string"/>
         <xsd:attribute name="startDate" type="xsd:string" use="required"/>
         <xsd:attribute name="jobFunction" type="xsd:string"/>
         <xsd:attribute name="department" type="xsd:string"/>
-        <xsd:attribute name="username" type="xsd:string"/>
-        <xsd:attribute default="" name="password" type="xsd:string"/>
-        <xsd:attribute default="true" name="localEnabled" type="xsd:boolean"/>
-        <xsd:attribute default="false" name="passwordHashed" type="xsd:boolean" use="required"/>
         <xsd:attribute name="licenseNo" type="xsd:string"/>
-        <xsd:attribute name="role" type="xsd:string"/>
+        <xsd:attribute name="systemIdentity" type="xsd:string"/>
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
@@ -196,6 +192,7 @@
     <xsd:attribute name="lineNumber" type="xsd:int" use="required"/>
     <xsd:attribute name="quantity" type="xsd:string" use="required"/>
     <xsd:attribute name="description" type="xsd:string" use="required"/>
+    <xsd:attribute default="false" name="rejected" type="xsd:boolean" use="required"/>
     <xsd:attribute name="bin" type="xsd:string"/>
   </xsd:complexType>
   <xsd:element name="DeliveryJournalLine" type="dairy:DeliveryJournalLine"/>
@@ -240,6 +237,7 @@
     <xsd:attribute name="effectiveDate" type="xsd:string"/>
     <xsd:attribute name="status" type="dairy:MembershipStatus" use="required"/>
     <xsd:attribute name="defaultRoute" type="xsd:string"/>
+    <xsd:attribute name="dairy" type="xsd:string"/>
   </xsd:complexType>
   <xsd:element name="Membership" type="dairy:Membership"/>
   <xsd:complexType name="Asset">
@@ -314,27 +312,6 @@
     <xsd:attribute name="type" type="dairy:PreferenceType"/>
   </xsd:complexType>
   <xsd:element name="PreferenceKey" type="dairy:PreferenceKey"/>
-  <xsd:complexType name="Role">
-    <xsd:sequence>
-      <xsd:element maxOccurs="unbounded" minOccurs="0" name="permissions" nillable="true" type="xsd:string"/>
-    </xsd:sequence>
-    <xsd:attribute name="id" type="xsd:string" use="required"/>
-    <xsd:attribute name="name" type="xsd:string"/>
-    <xsd:attribute name="description" type="xsd:string"/>
-  </xsd:complexType>
-  <xsd:element name="Role" type="dairy:Role"/>
-  <xsd:complexType name="PermissionNamespace">
-    <xsd:attribute name="id" type="xsd:string" use="required"/>
-    <xsd:attribute name="name" type="xsd:string"/>
-  </xsd:complexType>
-  <xsd:element name="PermissionNamespace" type="dairy:PermissionNamespace"/>
-  <xsd:complexType name="Permission">
-    <xsd:attribute name="id" type="xsd:string" use="required"/>
-    <xsd:attribute name="name" type="xsd:string"/>
-    <xsd:attribute name="displayName" type="xsd:string"/>
-    <xsd:attribute name="namespace" type="xsd:string"/>
-  </xsd:complexType>
-  <xsd:element name="Permission" type="dairy:Permission"/>
   <xsd:complexType name="CollectionSession">
     <xsd:attribute name="id" type="xsd:string" use="required"/>
     <xsd:attribute name="code" type="xsd:string"/>

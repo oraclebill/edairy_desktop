@@ -19,9 +19,9 @@ import org.eclipse.swt.widgets.Label;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.util.MemberUtil;
 import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
 import com.agritrace.edairy.desktop.common.ui.util.FormUtil;
-import com.agritrace.edairy.desktop.common.ui.util.MemberUtil;
 import com.agritrace.edairy.desktop.finance.payments.MemberCollectionsManager;
 import com.agritrace.edairy.desktop.finance.ui.MilkPriceJournalConstants;
 import com.agritrace.edairy.desktop.persistence.finance.IMemberPaymentsRepository;
@@ -165,7 +165,7 @@ public class PWSelectPaymentPeriod extends PWPage {
 			final Employee first = paymentRecord.getEnteredBy();
 			setErrorMessage(String.format(
 					"A payment run for the selected period was already executed on %s by %s %s (%s).",
-					paymentRecord.getEntryDate(), first.getGivenName(), first.getFamilyName(), first.getId()));
+					paymentRecord.getEntryDate(), first.getGivenName(), first.getFamilyName(), first.getEmployeeNumber()));
 			setPageComplete(false);
 			return;
 		}

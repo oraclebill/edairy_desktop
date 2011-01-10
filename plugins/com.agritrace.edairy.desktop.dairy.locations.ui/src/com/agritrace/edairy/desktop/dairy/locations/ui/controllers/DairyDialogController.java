@@ -17,6 +17,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
+import com.agritrace.edairy.desktop.common.ui.controllers.DirectoryPersistenceDelegate;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.AddressGroupWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.DirectionGroupController;
@@ -25,6 +27,7 @@ import com.agritrace.edairy.desktop.common.ui.validators.PhoneNumberValidatiionR
 import com.agritrace.edairy.desktop.dairy.locations.ui.DairyLocationUIConstants;
 
 public class DairyDialogController extends RecordDialogController<DairyLocation> {
+	
 	private DairyLocation editLocation = null;
 	//private IDateTimeRidget dateOpened;
 	private IMultipleChoiceRidget functions;
@@ -34,6 +37,10 @@ public class DairyDialogController extends RecordDialogController<DairyLocation>
 	private ITextRidget txtCode;
 	private IComboRidget comboRoute;
 
+	public DairyDialogController() {
+		super("Dairy Branch Location");
+	}
+	
 	@Override
 	public void configureUserRidgets() {
 
@@ -88,17 +95,11 @@ public class DairyDialogController extends RecordDialogController<DairyLocation>
 		mapController.setInputModel(editLocation.getLocation().getMapLocation());
 		mapController.updateBinding();
 	}
-
-	@Override
-	public DairyLocation getWorkingCopy() {
-		return (DairyLocation) getContext("editObject");
-	}
-
+	
 	@Override
 	public void afterBind() {
 		super.afterBind();
 		resetDetailArea();
-
 	}
 
 	@SuppressWarnings("unchecked")

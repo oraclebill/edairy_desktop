@@ -28,8 +28,9 @@ import com.agritrace.edairy.desktop.internal.common.persistence.HbDataStoreProvi
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
 import com.agritrace.edairy.desktop.internal.common.persistence.SessionProvider;
 import com.agritrace.edairy.desktop.internal.common.persistence.TransactionInterceptor;
-import com.agritrace.edairy.desktop.internal.operations.services.DairyRepository;
 import com.agritrace.edairy.desktop.internal.operations.services.customer.CustomerRepository;
+import com.agritrace.edairy.desktop.internal.persistence.DairyRepository;
+import com.agritrace.edairy.desktop.internal.persistence.MemberRepository;
 import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.agritrace.edairy.desktop.operations.services.employee.IEmployeeRepository;
@@ -121,8 +122,9 @@ public class PersistenceModule extends AbstractModule {
 		}
 
 		bind(IDairyRepository.class).to(DairyRepository.class);
-		bind(IMemberRepository.class).to(DairyRepository.class);
+		bind(IMemberRepository.class).to(MemberRepository.class);
 		bind(DairyRepository.class).in(Scopes.SINGLETON);
+		bind(MemberRepository.class).in(Scopes.SINGLETON);
 		
 		// Install AOP interceptor for transactions
 		TransactionInterceptor interceptor = new TransactionInterceptor();
