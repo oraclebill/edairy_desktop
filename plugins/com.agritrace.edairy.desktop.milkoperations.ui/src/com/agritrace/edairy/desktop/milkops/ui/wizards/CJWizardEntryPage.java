@@ -21,8 +21,8 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.milkops.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.milkops.ui.components.collectionline.CollectionLineComposite;
+import com.agritrace.edairy.desktop.milkops.ui.intake.ViewWidgetId;
+import com.agritrace.edairy.desktop.milkops.ui.intake.collectionline.CollectionLineComposite;
 import com.swtdesigner.ResourceManager;
 
 public class CJWizardEntryPage extends WizardPage {
