@@ -57,7 +57,7 @@ public class MemberCollectionsManager {
 	BigDecimal calculatePayableDeliveries(Membership member, Date date) {
 		final BigDecimal totalQuantity = repository.getSumOfPayableDeliveries(member, date.getMonth(), date.getYear());
 		final BigDecimal periodRate = getMilkPriceForPeriod(priceMonth, priceYear);
-		return periodRate.multiply(totalQuantity, Constants.MONEYCONTEXT);
+		return periodRate.multiply(totalQuantity, Constants.MONEY_CONTEXT);
 	}
 	*/
 

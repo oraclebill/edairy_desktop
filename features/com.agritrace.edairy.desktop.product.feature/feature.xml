@@ -51,13 +51,6 @@
          version="0.0.0"/>
 
    <plugin
-         id="com.agritrace.edairy.desktop.collection.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="com.agritrace.edairy.desktop.collections.scaledata"
          download-size="0"
          install-size="0"
@@ -947,6 +940,13 @@
 
    <plugin
          id="org.eclipse.equinox.http.registry"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.agritrace.edairy.desktop.milkoperations.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"

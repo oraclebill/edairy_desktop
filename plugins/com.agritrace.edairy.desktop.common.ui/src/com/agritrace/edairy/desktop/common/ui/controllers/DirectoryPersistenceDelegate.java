@@ -2,43 +2,16 @@ package com.agritrace.edairy.desktop.common.ui.controllers;
 
 import org.eclipse.emf.ecore.EObject;
 
-public class DirectoryPersistenceDelegate<P extends EObject> implements PersistenceDelegate<P> {
-	private P item;
-	private boolean created;
-	private AbstractDirectoryController<P> directoryController;
-
+public class DirectoryPersistenceDelegate<P extends EObject> extends AbstractPersistenceDelegate<P> {
+	AbstractDirectoryController<P> directoryController;
+	
 	public DirectoryPersistenceDelegate(AbstractDirectoryController<P> controller) {
 		this.directoryController = controller;
-		this.created = false;
 	}
 	
 	@Override
-	public void setItem(P item) {
-		this.item = item;
-	}
-
-	@Override
-	public P getItem() {
-		if (item == null) {
-			setItem(createItem());
-			created =  true;
-		}
-		return item;
-	}
-
-	@Override
 	public P load(Object key) {
 		return directoryController.getRepository().findByKey((Long) key);
-	}
-
-	@Override
-	public void save(P obj) {
-		if (created)
-			directoryController.createEntity(obj);
-//			directoryController.getRepository().saveNew(obj);
-		else
-			directoryController.updateEntity(obj);
-//			directoryController.getRepository().save(obj);
 	}
 
 	@Override
@@ -46,10 +19,10 @@ public class DirectoryPersistenceDelegate<P extends EObject> implements Persiste
 		directoryController.getRepository().delete( obj);
 	}
 
-	@Override
-	public void saveRelated(Object obj) {
-		directoryController.getRepository().save(obj);
-	}
+//	@Override
+//	public void saveRelated(Object obj) {
+//		directoryController.getRepository().save(obj);
+//	}
 
 	@Override
 	public void rollback(Object obj) {
@@ -60,6 +33,17 @@ public class DirectoryPersistenceDelegate<P extends EObject> implements Persiste
 	@Override
 	public P createItem() {
 		return directoryController.createNewModel();
+	}
+
+	@Override
+	public void persistNew(P obj) {
+		directoryController.createEntity(obj);
+	}
+
+	@Override
+	public P updateExisting(P obj) {
+		directoryController.updateEntity(obj);
+		return obj;
 	}
 
 }

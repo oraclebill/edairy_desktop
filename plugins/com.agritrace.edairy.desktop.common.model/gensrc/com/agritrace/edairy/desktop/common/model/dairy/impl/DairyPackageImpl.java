@@ -23,12 +23,15 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
-import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine;
+import com.agritrace.edairy.desktop.common.model.dairy.MilkSale;
+import com.agritrace.edairy.desktop.common.model.dairy.MilkSaleType;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus;
+import com.agritrace.edairy.desktop.common.model.dairy.MilkGrade;
+import com.agritrace.edairy.desktop.common.model.dairy.MilkGradeChange;
 import com.agritrace.edairy.desktop.common.model.dairy.Preference;
 import com.agritrace.edairy.desktop.common.model.dairy.PreferenceKey;
 import com.agritrace.edairy.desktop.common.model.dairy.PreferenceType;
@@ -134,7 +137,21 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass deliveryJournalLineEClass = null;
+	private EClass milkGradeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass milkGradeChangeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass milkSaleEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -212,6 +229,13 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	private EEnum journalStatusEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum milkSaleTypeEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1237,8 +1261,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getDeliveryJournalLine() {
-		return deliveryJournalLineEClass;
+	public EClass getMilkGrade() {
+		return milkGradeEClass;
 	}
 
 	/**
@@ -1246,8 +1270,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDeliveryJournalLine_LineNumber() {
-		return (EAttribute)deliveryJournalLineEClass.getEStructuralFeatures().get(0);
+	public EAttribute getMilkGrade_Code() {
+		return (EAttribute)milkGradeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1255,8 +1279,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDeliveryJournalLine_Bin() {
-		return (EReference)deliveryJournalLineEClass.getEStructuralFeatures().get(1);
+	public EAttribute getMilkGrade_Name() {
+		return (EAttribute)milkGradeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1264,8 +1288,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDeliveryJournalLine_Quantity() {
-		return (EAttribute)deliveryJournalLineEClass.getEStructuralFeatures().get(2);
+	public EAttribute getMilkGrade_Description() {
+		return (EAttribute)milkGradeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1273,8 +1297,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDeliveryJournalLine_Description() {
-		return (EAttribute)deliveryJournalLineEClass.getEStructuralFeatures().get(3);
+	public EClass getMilkGradeChange() {
+		return milkGradeChangeEClass;
 	}
 
 	/**
@@ -1282,8 +1306,206 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDeliveryJournalLine_Rejected() {
-		return (EAttribute)deliveryJournalLineEClass.getEStructuralFeatures().get(4);
+	public EAttribute getMilkGradeChange_Date() {
+		return (EAttribute)milkGradeChangeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMilkGradeChange_StartingGrade() {
+		return (EReference)milkGradeChangeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMilkGradeChange_EndingGrade() {
+		return (EReference)milkGradeChangeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMilkGradeChange_ChangedBy() {
+		return (EReference)milkGradeChangeEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMilkGradeChange_Reason() {
+		return (EAttribute)milkGradeChangeEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMilkSale() {
+		return milkSaleEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMilkSale_Id() {
+		return (EAttribute)milkSaleEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMilkSale_LineNumber() {
+		return (EAttribute)milkSaleEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMilkSale_ReferenceNumber() {
+		return (EAttribute)milkSaleEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMilkSale_SaleDate() {
+		return (EAttribute)milkSaleEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMilkSale_Bin() {
+		return (EReference)milkSaleEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMilkSale_SaleType() {
+		return (EAttribute)milkSaleEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMilkSale_Quantity() {
+		return (EAttribute)milkSaleEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMilkSale_Grade() {
+		return (EReference)milkSaleEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMilkSale_UnitPrice() {
+		return (EAttribute)milkSaleEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMilkSale_Description() {
+		return (EAttribute)milkSaleEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMilkSale_Rejected() {
+		return (EAttribute)milkSaleEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMilkSale_StoreOrRoute() {
+		return (EReference)milkSaleEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMilkSale_Customer() {
+		return (EReference)milkSaleEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMilkSale_SoldBy() {
+		return (EReference)milkSaleEClass.getEStructuralFeatures().get(13);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMilkSale_SaleAmount() {
+		return (EAttribute)milkSaleEClass.getEStructuralFeatures().get(14);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMilkSale_ContractSale() {
+		return (EAttribute)milkSaleEClass.getEStructuralFeatures().get(15);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMilkSale_SalesClerk() {
+		return (EReference)milkSaleEClass.getEStructuralFeatures().get(16);
 	}
 
 	/**
@@ -1786,7 +2008,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCustomer_Id() {
+	public EAttribute getCustomer_CustomerNumber() {
 		return (EAttribute)customerEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -2029,6 +2251,15 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getMilkSaleType() {
+		return milkSaleTypeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getMembershipStatus() {
 		return membershipStatusEEnum;
 	}
@@ -2207,12 +2438,36 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(deliveryJournalEClass, DELIVERY_JOURNAL__TOTAL);
 		createEReference(deliveryJournalEClass, DELIVERY_JOURNAL__SESSION);
 
-		deliveryJournalLineEClass = createEClass(DELIVERY_JOURNAL_LINE);
-		createEAttribute(deliveryJournalLineEClass, DELIVERY_JOURNAL_LINE__LINE_NUMBER);
-		createEReference(deliveryJournalLineEClass, DELIVERY_JOURNAL_LINE__BIN);
-		createEAttribute(deliveryJournalLineEClass, DELIVERY_JOURNAL_LINE__QUANTITY);
-		createEAttribute(deliveryJournalLineEClass, DELIVERY_JOURNAL_LINE__DESCRIPTION);
-		createEAttribute(deliveryJournalLineEClass, DELIVERY_JOURNAL_LINE__REJECTED);
+		milkGradeEClass = createEClass(MILK_GRADE);
+		createEAttribute(milkGradeEClass, MILK_GRADE__CODE);
+		createEAttribute(milkGradeEClass, MILK_GRADE__NAME);
+		createEAttribute(milkGradeEClass, MILK_GRADE__DESCRIPTION);
+
+		milkGradeChangeEClass = createEClass(MILK_GRADE_CHANGE);
+		createEAttribute(milkGradeChangeEClass, MILK_GRADE_CHANGE__DATE);
+		createEReference(milkGradeChangeEClass, MILK_GRADE_CHANGE__STARTING_GRADE);
+		createEReference(milkGradeChangeEClass, MILK_GRADE_CHANGE__ENDING_GRADE);
+		createEReference(milkGradeChangeEClass, MILK_GRADE_CHANGE__CHANGED_BY);
+		createEAttribute(milkGradeChangeEClass, MILK_GRADE_CHANGE__REASON);
+
+		milkSaleEClass = createEClass(MILK_SALE);
+		createEAttribute(milkSaleEClass, MILK_SALE__ID);
+		createEAttribute(milkSaleEClass, MILK_SALE__LINE_NUMBER);
+		createEAttribute(milkSaleEClass, MILK_SALE__REFERENCE_NUMBER);
+		createEAttribute(milkSaleEClass, MILK_SALE__SALE_DATE);
+		createEReference(milkSaleEClass, MILK_SALE__BIN);
+		createEAttribute(milkSaleEClass, MILK_SALE__SALE_TYPE);
+		createEAttribute(milkSaleEClass, MILK_SALE__QUANTITY);
+		createEReference(milkSaleEClass, MILK_SALE__GRADE);
+		createEAttribute(milkSaleEClass, MILK_SALE__UNIT_PRICE);
+		createEAttribute(milkSaleEClass, MILK_SALE__DESCRIPTION);
+		createEAttribute(milkSaleEClass, MILK_SALE__REJECTED);
+		createEReference(milkSaleEClass, MILK_SALE__STORE_OR_ROUTE);
+		createEReference(milkSaleEClass, MILK_SALE__CUSTOMER);
+		createEReference(milkSaleEClass, MILK_SALE__SOLD_BY);
+		createEAttribute(milkSaleEClass, MILK_SALE__SALE_AMOUNT);
+		createEAttribute(milkSaleEClass, MILK_SALE__CONTRACT_SALE);
+		createEReference(milkSaleEClass, MILK_SALE__SALES_CLERK);
 
 		dairyEClass = createEClass(DAIRY);
 		createEAttribute(dairyEClass, DAIRY__REGISTRATION_NUMBER);
@@ -2274,7 +2529,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(supplierEClass, SUPPLIER__RATING);
 
 		customerEClass = createEClass(CUSTOMER);
-		createEAttribute(customerEClass, CUSTOMER__ID);
+		createEAttribute(customerEClass, CUSTOMER__CUSTOMER_NUMBER);
 		createEAttribute(customerEClass, CUSTOMER__CUSTOMER_TYPE);
 		createEAttribute(customerEClass, CUSTOMER__STATUS);
 
@@ -2307,6 +2562,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 
 		// Create enums
 		journalStatusEEnum = createEEnum(JOURNAL_STATUS);
+		milkSaleTypeEEnum = createEEnum(MILK_SALE_TYPE);
 		membershipStatusEEnum = createEEnum(MEMBERSHIP_STATUS);
 		vendorStatusEEnum = createEEnum(VENDOR_STATUS);
 		dairyFunctionEEnum = createEEnum(DAIRY_FUNCTION);
@@ -2467,16 +2723,40 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEReference(getDeliveryJournal_Customer(), this.getCustomer(), null, "customer", null, 1, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDeliveryJournal_Driver(), this.getEmployee(), null, "driver", null, 0, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDeliveryJournal_Vehicle(), this.getVehicle(), null, "vehicle", null, 0, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDeliveryJournal_Lines(), this.getDeliveryJournalLine(), null, "lines", null, 1, -1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDeliveryJournal_Lines(), this.getMilkSale(), null, "lines", null, 1, -1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDeliveryJournal_Total(), ecorePackage.getEBigDecimal(), "total", "0.0", 1, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDeliveryJournal_Session(), this.getCollectionSession(), null, "session", null, 0, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(deliveryJournalLineEClass, DeliveryJournalLine.class, "DeliveryJournalLine", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDeliveryJournalLine_LineNumber(), ecorePackage.getEInt(), "lineNumber", null, 1, 1, DeliveryJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDeliveryJournalLine_Bin(), this.getDairyContainer(), null, "bin", null, 0, 1, DeliveryJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDeliveryJournalLine_Quantity(), ecorePackage.getEBigDecimal(), "quantity", null, 1, 1, DeliveryJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDeliveryJournalLine_Description(), ecorePackage.getEString(), "description", null, 1, 1, DeliveryJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDeliveryJournalLine_Rejected(), ecorePackage.getEBoolean(), "rejected", "false", 1, 1, DeliveryJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(milkGradeEClass, MilkGrade.class, "MilkGrade", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMilkGrade_Code(), ecorePackage.getEString(), "code", null, 1, 1, MilkGrade.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMilkGrade_Name(), ecorePackage.getEString(), "name", null, 1, 1, MilkGrade.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMilkGrade_Description(), ecorePackage.getEString(), "description", null, 0, 1, MilkGrade.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(milkGradeChangeEClass, MilkGradeChange.class, "MilkGradeChange", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMilkGradeChange_Date(), ecorePackage.getEDate(), "date", null, 1, 1, MilkGradeChange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMilkGradeChange_StartingGrade(), this.getMilkGrade(), null, "startingGrade", null, 1, 1, MilkGradeChange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMilkGradeChange_EndingGrade(), this.getMilkGrade(), null, "endingGrade", null, 1, 1, MilkGradeChange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMilkGradeChange_ChangedBy(), this.getEmployee(), null, "changedBy", null, 0, 1, MilkGradeChange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMilkGradeChange_Reason(), ecorePackage.getEString(), "reason", null, 0, 1, MilkGradeChange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(milkSaleEClass, MilkSale.class, "MilkSale", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMilkSale_Id(), theModelPackage.getUniqueID(), "id", null, 1, 1, MilkSale.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMilkSale_LineNumber(), ecorePackage.getEInt(), "lineNumber", null, 0, 1, MilkSale.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMilkSale_ReferenceNumber(), ecorePackage.getEString(), "referenceNumber", null, 0, 1, MilkSale.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMilkSale_SaleDate(), ecorePackage.getEDate(), "saleDate", null, 1, 1, MilkSale.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMilkSale_Bin(), this.getDairyContainer(), null, "bin", null, 0, 1, MilkSale.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMilkSale_SaleType(), this.getMilkSaleType(), "saleType", "", 1, 1, MilkSale.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMilkSale_Quantity(), ecorePackage.getEBigDecimal(), "quantity", null, 1, 1, MilkSale.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMilkSale_Grade(), this.getMilkGrade(), null, "grade", null, 1, 1, MilkSale.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMilkSale_UnitPrice(), ecorePackage.getEBigDecimal(), "unitPrice", null, 1, 1, MilkSale.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getMilkSale_Description(), ecorePackage.getEString(), "description", null, 0, 1, MilkSale.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMilkSale_Rejected(), ecorePackage.getEBoolean(), "rejected", "false", 1, 1, MilkSale.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMilkSale_StoreOrRoute(), this.getDairyLocation(), null, "storeOrRoute", null, 1, 1, MilkSale.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMilkSale_Customer(), this.getCustomer(), null, "customer", null, 0, 1, MilkSale.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMilkSale_SoldBy(), this.getEmployee(), null, "soldBy", null, 0, 1, MilkSale.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMilkSale_SaleAmount(), ecorePackage.getEBigDecimal(), "saleAmount", null, 1, 1, MilkSale.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getMilkSale_ContractSale(), ecorePackage.getEBoolean(), "contractSale", "false", 1, 1, MilkSale.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMilkSale_SalesClerk(), this.getEmployee(), null, "salesClerk", null, 0, 1, MilkSale.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dairyEClass, Dairy.class, "Dairy", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDairy_RegistrationNumber(), ecorePackage.getEString(), "registrationNumber", null, 1, 1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2544,7 +2824,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getSupplier_Rating(), ecorePackage.getEInt(), "rating", null, 0, 1, Supplier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(customerEClass, Customer.class, "Customer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCustomer_Id(), ecorePackage.getEString(), "id", null, 1, 1, Customer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCustomer_CustomerNumber(), ecorePackage.getEString(), "customerNumber", null, 1, 1, Customer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCustomer_CustomerType(), ecorePackage.getEString(), "customerType", "Milk Processor", 0, 1, Customer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCustomer_Status(), ecorePackage.getEString(), "status", "Active", 0, 1, Customer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -2582,6 +2862,10 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		addEEnumLiteral(journalStatusEEnum, JournalStatus.COMPLETE);
 		addEEnumLiteral(journalStatusEEnum, JournalStatus.SUSPENDED);
 		addEEnumLiteral(journalStatusEEnum, JournalStatus.ARCHIVED);
+
+		initEEnum(milkSaleTypeEEnum, MilkSaleType.class, "MilkSaleType");
+		addEEnumLiteral(milkSaleTypeEEnum, MilkSaleType.CASH);
+		addEEnumLiteral(milkSaleTypeEEnum, MilkSaleType.CREDIT);
 
 		initEEnum(membershipStatusEEnum, MembershipStatus.class, "MembershipStatus");
 		addEEnumLiteral(membershipStatusEEnum, MembershipStatus.ACTIVE);
@@ -2695,6 +2979,13 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
+		  (getMilkGrade_Code(), 
+		   source, 
+		   new String[] {
+			 "name", "code",
+			 "kind", "elementOnly"
+		   });			
+		addAnnotation
 		  (getDairy_Version(), 
 		   source, 
 		   new String[] {
@@ -2736,12 +3027,12 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 			 "kind", "elementOnly"
 		   });		
 		addAnnotation
-		  (getCustomer_Id(), 
+		  (getCustomer_CustomerNumber(), 
 		   source, 
 		   new String[] {
 			 "name", "id",
 			 "kind", "elementOnly"
-		   });	
+		   });		
 	}
 
 	/**
@@ -2807,6 +3098,12 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 			 "appinfo", "@Id\n@GeneratedValue"
 		   });			
 		addAnnotation
+		  (getMilkGrade_Code(), 
+		   source, 
+		   new String[] {
+			 "appinfo", "@NaturalId\n"
+		   });			
+		addAnnotation
 		  (getDairy_Version(), 
 		   source, 
 		   new String[] {
@@ -2830,6 +3127,12 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		   new String[] {
 			 "appinfo", "@Embedded"
 		   });				
+		addAnnotation
+		  (getCustomer_CustomerNumber(), 
+		   source, 
+		   new String[] {
+			 "appinfo", "@NaturalId"
+		   });		
 		addAnnotation
 		  (getCollectionSession_Code(), 
 		   source, 

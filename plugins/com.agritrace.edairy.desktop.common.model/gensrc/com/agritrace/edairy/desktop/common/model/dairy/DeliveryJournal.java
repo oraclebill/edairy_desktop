@@ -197,7 +197,7 @@ public interface DeliveryJournal extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Lines</b></em>' containment reference list.
-	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine}.
+	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Lines</em>' containment reference list isn't clear,
@@ -209,7 +209,7 @@ public interface DeliveryJournal extends EObject {
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList<DeliveryJournalLine> getLines();
+	EList<MilkSale> getLines();
 
 	/**
 	 * Returns the value of the '<em><b>Total</b></em>' attribute.

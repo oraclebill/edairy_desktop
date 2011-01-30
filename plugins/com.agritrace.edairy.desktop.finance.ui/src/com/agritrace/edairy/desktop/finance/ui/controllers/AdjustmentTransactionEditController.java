@@ -84,7 +84,7 @@ public class AdjustmentTransactionEditController extends RecordDialogController<
 			signedBy.setText(MemberUtil.formattedMemberName(model.getSignedOffBy()));
 		}
 
-		final ITextRidget memberName = getRidget(ITextRidget.class, FinanceBindingConstants.ID_MEMBER_NAME_TEXT);
+		final ITextRidget memberName = getRidget(ITextRidget.class, FinanceBindingConstants.ID_LOOKUP_RESULT_TXT);
 		memberName.setMandatory(true);
 		memberName.setOutputOnly(true);
 
@@ -96,7 +96,7 @@ public class AdjustmentTransactionEditController extends RecordDialogController<
 			}
 		}
 
-		getRidget(IActionRidget.class, FinanceBindingConstants.ID_MEMBER_LOOKUP_BTN).addListener(new MemberLookupAction() {
+		getRidget(IActionRidget.class, FinanceBindingConstants.ID_LOOKUP_BTN).addListener(new MemberLookupAction() {
 			@Override
 			protected void callback(Membership selectedMember) {
 				model.setAccount(selectedMember.getAccount());

@@ -15,6 +15,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.dairy.MilkGrade;
+import com.agritrace.edairy.desktop.common.model.dairy.MilkSale;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
@@ -69,7 +71,7 @@ public interface IDairyRepository {
 
 	List<MemberPayment> getMilkPrices(Date startDate, Date endDate);
 
-	public List<DeliveryJournal> getDeliveryJournals(Date minDate, Date maxDate, Route route, Customer customer);
+	public List<MilkSale> getMilkSales(Date minDate, Date maxDate, DairyLocation store, Customer customer);
 
 	List<DairyContainer> getBinsByRoute(Route journalRoute);
 
@@ -86,4 +88,6 @@ public interface IDairyRepository {
 	List<CollectionGroup> allCollectionGroups();
 
 	List<CollectionGroup> getCollectionGroups(Date startDate, Date endDate);
+	
+	List<MilkGrade> getMilkGrades();
 }

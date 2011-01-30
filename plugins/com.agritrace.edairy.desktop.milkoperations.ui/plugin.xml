@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="com.agritrace.edairy.desktop.milkops.ui.category"
+            name="Milk Operations">
+      </category>
+      <view
+            allowMultiple="true"
+            category="com.agritrace.edairy.desktop.milkops.ui.category"
+            class="com.agritrace.edairy.desktop.milkops.ui.views.MilkCollectionLog"
+            id="milk-collection-log"
+            name="Milk Collection Jounal View"
+            restorable="true">
+      </view>
+      <!--
+      viewpublic static final String SUBMODULE_MILK_INTAKE_REGISTER = "edm.milk.collection.log";//$NON-NLS-1$
+      viewpublic static final String SUBMODULE_MILK_SALES_REGISTER = "edm.milk.delivery.log";//$NON-NLS-1$
+      viewpublic static final String SUBMODULE_MILK_ADJUSTMENTS_REGISTER = "SUBMODULE_MILK_ADJUSTMENTS_REGISTER";//$NON-NLS-1$
+      viewpublic static final String SUBMODULE_MILK_TRANSFER_ADJUSTMENTS = "SUBMODULE_MILK_TRANSFER_ADJUSTMENTS";//$NON-NLS-1$
+      viewpublic static final String SUBMODULE_MILK_GRADE_ADJUSTMENTS = "SUBMODULE_MILK_GRADE_ADJUSTMENTS";//$NON-NLS-1$
+      viewpublic static final String SUBMODULE_MILK_QCC_VIEWS = "SUBMODULE_MILK_QCC_VIEWS";//$NON-NLS-1$
+      viewpublic static final String SUBMODULE_MILK_GRADE_LIST = "SUBMODULE_MILK_GRADE_LIST";//$NON-NLS-1$
+      -->
+      <view
+            allowMultiple="true"
+            category="com.agritrace.edairy.desktop.milkops.ui.category"
+            class="com.agritrace.edairy.desktop.milkops.ui.views.ScaleDataImportView"
+            id="edairy.scale.import.view"
+            name="Scale Data Import "
+            restorable="true">
+      </view>
+      <view
+            allowMultiple="true"
+            category="com.agritrace.edairy.desktop.milkops.ui.category"
+            class="com.agritrace.edairy.desktop.milkops.ui.sales.MilkSaleLogView"
+            id="com.agritrace.edairy.desktop.milkops.ui.views.MilkDeliveryLogView"
+            name="Milk Sales">
+      </view>
+      <view
+            allowMultiple="true"
+            category="com.agritrace.edairy.desktop.milkops.ui.category"
+            class="com.agritrace.edairy.desktop.milkops.ui.views.MilkAdjustmentsView"
+            id="com.agritrace.edairy.desktop.milkops.ui.views.MilkAdjustmentsView"
+            name="Rejections and Adjustments">
+      </view>
+      <view
+            allowMultiple="true"
+            category="com.agritrace.edairy.desktop.milkops.ui.category"
+            class="com.agritrace.edairy.desktop.milkops.ui.views.MilkQCCView"
+            id="com.agritrace.edairy.desktop.milkops.ui.views.MilkQCCView"
+            name="Quantity Control">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.riena.navigation.assemblies2">
+         
+      <assembly2
+            assembler="com.agritrace.edairy.desktop.milkops.ui.navigation.MilkNavigationNodeAssembler"
+            id="com.agritrace.edairy.desktop.milk"
+            parentNodeId="application">
+      </assembly2>
+      
+      <!-- assembly2
+            assembler="com.agritrace.edairy.desktop.milkops.ui.navigation.JournalDetailNavigationNodeAssembler"
+            id="milk.collection.working-journals"
+            parentNodeId="edm.milk.collection.log"
+            name="Edit Collection Journal Journal Node Assembler">
+      </assembly2 -->
+   </extension>
+
+</plugin>

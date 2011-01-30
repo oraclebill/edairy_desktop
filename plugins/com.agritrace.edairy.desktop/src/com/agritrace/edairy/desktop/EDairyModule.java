@@ -13,9 +13,6 @@ import org.ops4j.peaberry.eclipse.EclipseRegistry;
 import org.osgi.framework.BundleContext;
 
 import com.agritrace.edairy.desktop.birt.BirtModule;
-import com.agritrace.edairy.desktop.collection.ui.controllers.MilkCollectionLogController;
-import com.agritrace.edairy.desktop.collection.ui.controllers.MilkDeliveryJournalController;
-import com.agritrace.edairy.desktop.collection.ui.controllers.ScaleImportViewController;
 import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
 import com.agritrace.edairy.desktop.common.ui.UIModule;
 import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
@@ -29,6 +26,9 @@ import com.agritrace.edairy.desktop.member.ui.controllers.ContainerListViewContr
 import com.agritrace.edairy.desktop.member.ui.controllers.FarmListViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.LiveStockListController;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberDirectoryController2;
+import com.agritrace.edairy.desktop.milkops.ui.controllers.MilkCollectionLogController;
+import com.agritrace.edairy.desktop.milkops.ui.controllers.ScaleImportViewController;
+import com.agritrace.edairy.desktop.milkops.ui.sales.MilkSaleLogController;
 import com.agritrace.edairy.desktop.operations.ui.controllers.ContainersDirectoryViewController;
 import com.agritrace.edairy.desktop.operations.ui.controllers.CustomerDirectoryController;
 import com.agritrace.edairy.desktop.operations.ui.controllers.EmployeeDirectoryController;
@@ -58,7 +58,7 @@ public class EDairyModule extends AbstractModule {
 		CONTROLLERS.add(DairyLocationDirectoryController.class);
 		CONTROLLERS.add(ContainerListViewController.class);
 		CONTROLLERS.add(MilkCollectionLogController.class);
-		CONTROLLERS.add(MilkDeliveryJournalController.class);
+		CONTROLLERS.add(MilkSaleLogController.class);
 		CONTROLLERS.add(SupplierDirectoryController.class);
 		CONTROLLERS.add(SessionDirectoryController.class);
 		CONTROLLERS.add(MemberDirectoryController2.class);

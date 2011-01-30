@@ -22,7 +22,6 @@ import org.eclipse.ui.PlatformUI;
 import org.osgi.framework.Bundle;
 
 import com.agritrace.edairy.desktop.EDairyActivator;
-import com.agritrace.edairy.desktop.collection.ui.NavigationConstants;
 import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
 import com.agritrace.edairy.desktop.common.ui.views.BlankView;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationDirectoryController;
@@ -40,6 +39,7 @@ import com.agritrace.edairy.desktop.member.ui.views.ContainerListView;
 import com.agritrace.edairy.desktop.member.ui.views.FarmListView;
 import com.agritrace.edairy.desktop.member.ui.views.LivestockListView;
 import com.agritrace.edairy.desktop.member.ui.views.MemberDirectoryView;
+import com.agritrace.edairy.desktop.milkops.ui.NavigationConstants;
 import com.agritrace.edairy.desktop.operations.ui.controllers.ContainersDirectoryViewController;
 import com.agritrace.edairy.desktop.operations.ui.controllers.CustomerDirectoryController;
 import com.agritrace.edairy.desktop.operations.ui.controllers.EmployeeDirectoryController;

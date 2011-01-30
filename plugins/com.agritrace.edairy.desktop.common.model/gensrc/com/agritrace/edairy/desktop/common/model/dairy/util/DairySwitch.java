@@ -150,9 +150,21 @@ public class DairySwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.DELIVERY_JOURNAL_LINE: {
-				DeliveryJournalLine deliveryJournalLine = (DeliveryJournalLine)theEObject;
-				T result = caseDeliveryJournalLine(deliveryJournalLine);
+			case DairyPackage.MILK_GRADE: {
+				MilkGrade milkGrade = (MilkGrade)theEObject;
+				T result = caseMilkGrade(milkGrade);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DairyPackage.MILK_GRADE_CHANGE: {
+				MilkGradeChange milkGradeChange = (MilkGradeChange)theEObject;
+				T result = caseMilkGradeChange(milkGradeChange);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DairyPackage.MILK_SALE: {
+				MilkSale milkSale = (MilkSale)theEObject;
+				T result = caseMilkSale(milkSale);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -363,17 +375,47 @@ public class DairySwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Delivery Journal Line</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Milk Grade</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Delivery Journal Line</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Milk Grade</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseDeliveryJournalLine(DeliveryJournalLine object) {
+	public T caseMilkGrade(MilkGrade object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Milk Grade Change</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Milk Grade Change</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMilkGradeChange(MilkGradeChange object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Milk Sale</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Milk Sale</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMilkSale(MilkSale object) {
 		return null;
 	}
 

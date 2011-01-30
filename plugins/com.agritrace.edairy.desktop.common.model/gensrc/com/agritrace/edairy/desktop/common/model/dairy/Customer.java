@@ -16,7 +16,7 @@ import com.agritrace.edairy.desktop.common.model.base.Company;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Customer#getId <em>Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Customer#getCustomerNumber <em>Customer Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Customer#getCustomerType <em>Customer Type</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Customer#getStatus <em>Status</em>}</li>
  * </ul>
@@ -28,31 +28,32 @@ import com.agritrace.edairy.desktop.common.model.base.Company;
  */
 public interface Customer extends Company {
 	/**
-	 * Returns the value of the '<em><b>Id</b></em>' attribute.
+	 * Returns the value of the '<em><b>Customer Number</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Customer Number</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Id</em>' attribute.
-	 * @see #setId(String)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCustomer_Id()
+	 * @return the value of the '<em>Customer Number</em>' attribute.
+	 * @see #setCustomerNumber(String)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCustomer_CustomerNumber()
 	 * @model required="true"
 	 *        extendedMetaData="name='id' kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@NaturalId'"
 	 * @generated
 	 */
-	String getId();
+	String getCustomerNumber();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Customer#getId <em>Id</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Customer#getCustomerNumber <em>Customer Number</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Id</em>' attribute.
-	 * @see #getId()
+	 * @param value the new value of the '<em>Customer Number</em>' attribute.
+	 * @see #getCustomerNumber()
 	 * @generated
 	 */
-	void setId(String value);
+	void setCustomerNumber(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Customer Type</b></em>' attribute.

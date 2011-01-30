@@ -19,8 +19,8 @@ public class AdjustmentTransactionEditPanel extends AbstractTransactionEditPanel
 		final Group middlePanel = getContentArea();
 		middlePanel.setText("Account Adjustment");
 
-		addDateField();
-		addMemberField();
+		addDateField("Date");
+		addLookupField("Member");
 		addChoiceField("Adjustment type");
 		addAmountField();
 		addDescriptionField("Reason");

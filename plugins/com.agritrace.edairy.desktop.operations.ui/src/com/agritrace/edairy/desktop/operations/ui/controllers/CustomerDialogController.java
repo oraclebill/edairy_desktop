@@ -4,8 +4,6 @@ import java.util.Arrays;
 
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.emf.databinding.EMFObservables;
-import org.eclipse.riena.ui.ridgets.ITextRidget;
-
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
@@ -44,7 +42,7 @@ public class CustomerDialogController extends RecordDialogController<Customer> {
 				Observables.staticObservableList(Arrays.asList(CUSTOMER_TYPES)), null,
 				DairyPackage.Literals.CUSTOMER__CUSTOMER_TYPE);
 
-		addTextMap(CustomerBindingConstants.BIND_ID_CUSTOMER_NUM, DairyPackage.Literals.CUSTOMER__ID);
+		addTextMap(CustomerBindingConstants.BIND_ID_CUSTOMER_NUM, DairyPackage.Literals.CUSTOMER__CUSTOMER_NUMBER);
 
 		// profile photo also needs manual binding..
 		profilePhoto = getRidget(IProfilePhotoRidget.class, CustomerBindingConstants.BIND_ID_CUSTOMER_PHOTO);

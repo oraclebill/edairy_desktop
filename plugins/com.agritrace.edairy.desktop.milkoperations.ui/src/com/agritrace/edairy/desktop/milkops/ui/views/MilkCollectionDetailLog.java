@@ -1,0 +1,32 @@
+package com.agritrace.edairy.desktop.milkops.ui.views;
+//package com.agritrace.edairy.desktop.milkops.ui.views;
+//
+//import org.eclipse.jface.layout.GridLayoutFactory;
+//import org.eclipse.swt.SWT;
+//import org.eclipse.swt.widgets.Composite;
+//
+//import com.agritrace.edairy.desktop.milkops.ui.components.MilkCollectionDetailLogFilterPanel;
+//import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
+//
+//public class MilkCollectionDetailLog extends AbstractDirectoryView {
+//
+//	public static final String ID = "milk-collection-detail-log";
+//	public static final int STD_LABEL_WIDTH = 120;
+//
+//	public MilkCollectionDetailLog() {
+//	}
+//
+//	@Override
+//	protected void createFilterButtonPanel(Composite parent) {
+//
+//		// prevent superclass from updating buttons.
+//	}
+//
+//	@Override
+//	protected void createFilterConditions(Composite comp) {
+//		comp.setLayout(GridLayoutFactory.fillDefaults().create());
+//		new MilkCollectionDetailLogFilterPanel(comp, SWT.NONE);
+//		comp.pack();
+//	}
+//
+//}

@@ -1,6 +1,5 @@
 package com.agritrace.edairy.desktop.internal.persistence;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -9,7 +8,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.riena.core.Log4r;
@@ -37,17 +35,15 @@ import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.dairy.MilkGrade;
+import com.agritrace.edairy.desktop.common.model.dairy.MilkSale;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
-import com.agritrace.edairy.desktop.common.model.dairy.account.AccountFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
-import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
-import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
-import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
 import com.agritrace.edairy.desktop.common.persistence.services.Transactional;
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
 import com.agritrace.edairy.desktop.internal.common.persistence.PersistenceActivator;
@@ -447,31 +443,31 @@ public class DairyRepository implements IDairyRepository {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<DeliveryJournal> getDeliveryJournals(Date minDate, Date maxDate, Route route, Customer customer) {
+	public List<MilkSale> getMilkSales(Date minDate, Date maxDate, DairyLocation store, Customer customer) {
 		final Session session = getSession();
-		final Criteria djCriteria = session.createCriteria("DeliveryJournal");
+		final Criteria djCriteria = session.createCriteria("MilkSale");
 
 		if (minDate != null) {
-			djCriteria.add(Restrictions.ge("date", minDate));
+			djCriteria.add(Restrictions.ge("saleDate", minDate));
 		}
 
 		if (maxDate != null) {
 			final Calendar cld = Calendar.getInstance();
 			cld.setTime(maxDate);
 			cld.add(Calendar.DAY_OF_MONTH, 1);
-			djCriteria.add(Restrictions.lt("date", cld.getTime()));
+			djCriteria.add(Restrictions.lt("saleDate", cld.getTime()));
 		}
 
-		if (route != null) {
-			djCriteria.add(Restrictions.eq("route", route));
+		if (store != null) {
+			djCriteria.add(Restrictions.eq("storeOrRoute", store));
 		}
 
 		if (customer != null) {
 			djCriteria.add(Restrictions.eq("customer", customer));
 		}
 
-		djCriteria.addOrder(Order.asc("route"));
-		djCriteria.addOrder(Order.asc("date"));
+		djCriteria.addOrder(Order.asc("saleDate"));
+		djCriteria.addOrder(Order.asc("storeOrRoute"));
 		return djCriteria.list();
 	}
 
@@ -561,4 +557,23 @@ public class DairyRepository implements IDairyRepository {
 
 		return criteria.list();
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public List<MilkGrade> getMilkGrades()  {
+		// FIXME: !!! milk grades are not being mapped properly...
+		
+		List<MilkGrade> gradeList = (List<MilkGrade>) getSession().createCriteria("MilkGrade").list();
+		if (gradeList.size() < 1) {
+			MilkGrade defaultGrade = DairyFactory.eINSTANCE.createMilkGrade();
+			defaultGrade.setCode("RAW");
+			defaultGrade.setName("Raw Milk - Standard Grade");
+			defaultGrade.setDescription("The standard grade of raw milk");
+			save(defaultGrade);
+			gradeList = (List<MilkGrade>) getSession().createCriteria("MilkGrade").list();
+		}
+		return gradeList;
+	}
+	
 }

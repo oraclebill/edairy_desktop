@@ -1352,41 +1352,32 @@ public interface DairyPackage extends EPackage {
 	int DELIVERY_JOURNAL_FEATURE_COUNT = 9;
 
 	/**
-	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalLineImpl <em>Delivery Journal Line</em>}' class.
+	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkGradeImpl <em>Milk Grade</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalLineImpl
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getDeliveryJournalLine()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.MilkGradeImpl
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getMilkGrade()
 	 * @generated
 	 */
-	int DELIVERY_JOURNAL_LINE = 9;
+	int MILK_GRADE = 9;
 
 	/**
-	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * The feature id for the '<em><b>Code</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DELIVERY_JOURNAL_LINE__LINE_NUMBER = 0;
+	int MILK_GRADE__CODE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Bin</b></em>' reference.
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DELIVERY_JOURNAL_LINE__BIN = 1;
-
-	/**
-	 * The feature id for the '<em><b>Quantity</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DELIVERY_JOURNAL_LINE__QUANTITY = 2;
+	int MILK_GRADE__NAME = 1;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -1395,7 +1386,180 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DELIVERY_JOURNAL_LINE__DESCRIPTION = 3;
+	int MILK_GRADE__DESCRIPTION = 2;
+
+	/**
+	 * The number of structural features of the '<em>Milk Grade</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_GRADE_FEATURE_COUNT = 3;
+
+	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkGradeChangeImpl <em>Milk Grade Change</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.MilkGradeChangeImpl
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getMilkGradeChange()
+	 * @generated
+	 */
+	int MILK_GRADE_CHANGE = 10;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_GRADE_CHANGE__DATE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Starting Grade</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_GRADE_CHANGE__STARTING_GRADE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Ending Grade</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_GRADE_CHANGE__ENDING_GRADE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Changed By</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_GRADE_CHANGE__CHANGED_BY = 3;
+
+	/**
+	 * The feature id for the '<em><b>Reason</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_GRADE_CHANGE__REASON = 4;
+
+	/**
+	 * The number of structural features of the '<em>Milk Grade Change</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_GRADE_CHANGE_FEATURE_COUNT = 5;
+
+	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkSaleImpl <em>Milk Sale</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.MilkSaleImpl
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getMilkSale()
+	 * @generated
+	 */
+	int MILK_SALE = 11;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_SALE__ID = 0;
+
+	/**
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_SALE__LINE_NUMBER = 1;
+
+	/**
+	 * The feature id for the '<em><b>Reference Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_SALE__REFERENCE_NUMBER = 2;
+
+	/**
+	 * The feature id for the '<em><b>Sale Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_SALE__SALE_DATE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Bin</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_SALE__BIN = 4;
+
+	/**
+	 * The feature id for the '<em><b>Sale Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_SALE__SALE_TYPE = 5;
+
+	/**
+	 * The feature id for the '<em><b>Quantity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_SALE__QUANTITY = 6;
+
+	/**
+	 * The feature id for the '<em><b>Grade</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_SALE__GRADE = 7;
+
+	/**
+	 * The feature id for the '<em><b>Unit Price</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_SALE__UNIT_PRICE = 8;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_SALE__DESCRIPTION = 9;
 
 	/**
 	 * The feature id for the '<em><b>Rejected</b></em>' attribute.
@@ -1404,16 +1568,70 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DELIVERY_JOURNAL_LINE__REJECTED = 4;
+	int MILK_SALE__REJECTED = 10;
 
 	/**
-	 * The number of structural features of the '<em>Delivery Journal Line</em>' class.
+	 * The feature id for the '<em><b>Store Or Route</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DELIVERY_JOURNAL_LINE_FEATURE_COUNT = 5;
+	int MILK_SALE__STORE_OR_ROUTE = 11;
+
+	/**
+	 * The feature id for the '<em><b>Customer</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_SALE__CUSTOMER = 12;
+
+	/**
+	 * The feature id for the '<em><b>Sold By</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_SALE__SOLD_BY = 13;
+
+	/**
+	 * The feature id for the '<em><b>Sale Amount</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_SALE__SALE_AMOUNT = 14;
+
+	/**
+	 * The feature id for the '<em><b>Contract Sale</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_SALE__CONTRACT_SALE = 15;
+
+	/**
+	 * The feature id for the '<em><b>Sales Clerk</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_SALE__SALES_CLERK = 16;
+
+	/**
+	 * The number of structural features of the '<em>Milk Sale</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_SALE_FEATURE_COUNT = 17;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl <em>Dairy</em>}' class.
@@ -1423,7 +1641,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getDairy()
 	 * @generated
 	 */
-	int DAIRY = 10;
+	int DAIRY = 12;
 
 	/**
 	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
@@ -1712,7 +1930,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getMembership()
 	 * @generated
 	 */
-	int MEMBERSHIP = 11;
+	int MEMBERSHIP = 13;
 
 	/**
 	 * The feature id for the '<em><b>Member Id</b></em>' attribute.
@@ -1812,7 +2030,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getAsset()
 	 * @generated
 	 */
-	int ASSET = 12;
+	int ASSET = 14;
 
 	/**
 	 * The feature id for the '<em><b>Tag Type</b></em>' attribute.
@@ -1903,7 +2121,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getDairyContainer()
 	 * @generated
 	 */
-	int DAIRY_CONTAINER = 13;
+	int DAIRY_CONTAINER = 15;
 
 	/**
 	 * The feature id for the '<em><b>Container Id</b></em>' attribute.
@@ -1994,7 +2212,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getSupplier()
 	 * @generated
 	 */
-	int SUPPLIER = 14;
+	int SUPPLIER = 16;
 
 	/**
 	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
@@ -2166,7 +2384,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getCustomer()
 	 * @generated
 	 */
-	int CUSTOMER = 15;
+	int CUSTOMER = 17;
 
 	/**
 	 * The feature id for the '<em><b>Contact Methods</b></em>' containment reference list.
@@ -2250,13 +2468,13 @@ public interface DairyPackage extends EPackage {
 	int CUSTOMER__PROFILE_PHOTO = ModelPackage.COMPANY__PROFILE_PHOTO;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * The feature id for the '<em><b>Customer Number</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CUSTOMER__ID = ModelPackage.COMPANY_FEATURE_COUNT + 0;
+	int CUSTOMER__CUSTOMER_NUMBER = ModelPackage.COMPANY_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Customer Type</b></em>' attribute.
@@ -2293,7 +2511,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getMemberPayment()
 	 * @generated
 	 */
-	int MEMBER_PAYMENT = 16;
+	int MEMBER_PAYMENT = 18;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -2384,7 +2602,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getPreference()
 	 * @generated
 	 */
-	int PREFERENCE = 17;
+	int PREFERENCE = 19;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -2430,7 +2648,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getPreferenceKey()
 	 * @generated
 	 */
-	int PREFERENCE_KEY = 18;
+	int PREFERENCE_KEY = 20;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -2485,7 +2703,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getCollectionSession()
 	 * @generated
 	 */
-	int COLLECTION_SESSION = 19;
+	int COLLECTION_SESSION = 21;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -2540,7 +2758,17 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getJournalStatus()
 	 * @generated
 	 */
-	int JOURNAL_STATUS = 20;
+	int JOURNAL_STATUS = 22;
+
+	/**
+	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSaleType <em>Milk Sale Type</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkSaleType
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getMilkSaleType()
+	 * @generated
+	 */
+	int MILK_SALE_TYPE = 23;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus <em>Membership Status</em>}' enum.
@@ -2550,7 +2778,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getMembershipStatus()
 	 * @generated
 	 */
-	int MEMBERSHIP_STATUS = 21;
+	int MEMBERSHIP_STATUS = 24;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.VendorStatus <em>Vendor Status</em>}' enum.
@@ -2560,7 +2788,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getVendorStatus()
 	 * @generated
 	 */
-	int VENDOR_STATUS = 22;
+	int VENDOR_STATUS = 25;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.DairyFunction <em>Function</em>}' enum.
@@ -2570,7 +2798,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getDairyFunction()
 	 * @generated
 	 */
-	int DAIRY_FUNCTION = 23;
+	int DAIRY_FUNCTION = 26;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.PreferenceType <em>Preference Type</em>}' enum.
@@ -2580,7 +2808,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getPreferenceType()
 	 * @generated
 	 */
-	int PREFERENCE_TYPE = 24;
+	int PREFERENCE_TYPE = 27;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType <em>Collection Group Type</em>}' enum.
@@ -2590,7 +2818,7 @@ public interface DairyPackage extends EPackage {
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getCollectionGroupType()
 	 * @generated
 	 */
-	int COLLECTION_GROUP_TYPE = 25;
+	int COLLECTION_GROUP_TYPE = 28;
 
 
 	/**
@@ -3696,69 +3924,309 @@ public interface DairyPackage extends EPackage {
 	EReference getDeliveryJournal_Session();
 
 	/**
-	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine <em>Delivery Journal Line</em>}'.
+	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkGrade <em>Milk Grade</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Delivery Journal Line</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine
+	 * @return the meta object for class '<em>Milk Grade</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkGrade
 	 * @generated
 	 */
-	EClass getDeliveryJournalLine();
+	EClass getMilkGrade();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine#getLineNumber <em>Line Number</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkGrade#getCode <em>Code</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Line Number</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine#getLineNumber()
-	 * @see #getDeliveryJournalLine()
+	 * @return the meta object for the attribute '<em>Code</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkGrade#getCode()
+	 * @see #getMilkGrade()
 	 * @generated
 	 */
-	EAttribute getDeliveryJournalLine_LineNumber();
+	EAttribute getMilkGrade_Code();
 
 	/**
-	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine#getBin <em>Bin</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkGrade#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Bin</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine#getBin()
-	 * @see #getDeliveryJournalLine()
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkGrade#getName()
+	 * @see #getMilkGrade()
 	 * @generated
 	 */
-	EReference getDeliveryJournalLine_Bin();
+	EAttribute getMilkGrade_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine#getQuantity <em>Quantity</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Quantity</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine#getQuantity()
-	 * @see #getDeliveryJournalLine()
-	 * @generated
-	 */
-	EAttribute getDeliveryJournalLine_Quantity();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine#getDescription <em>Description</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkGrade#getDescription <em>Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine#getDescription()
-	 * @see #getDeliveryJournalLine()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkGrade#getDescription()
+	 * @see #getMilkGrade()
 	 * @generated
 	 */
-	EAttribute getDeliveryJournalLine_Description();
+	EAttribute getMilkGrade_Description();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine#isRejected <em>Rejected</em>}'.
+	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkGradeChange <em>Milk Grade Change</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Milk Grade Change</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkGradeChange
+	 * @generated
+	 */
+	EClass getMilkGradeChange();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkGradeChange#getDate <em>Date</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Date</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkGradeChange#getDate()
+	 * @see #getMilkGradeChange()
+	 * @generated
+	 */
+	EAttribute getMilkGradeChange_Date();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkGradeChange#getStartingGrade <em>Starting Grade</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Starting Grade</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkGradeChange#getStartingGrade()
+	 * @see #getMilkGradeChange()
+	 * @generated
+	 */
+	EReference getMilkGradeChange_StartingGrade();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkGradeChange#getEndingGrade <em>Ending Grade</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Ending Grade</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkGradeChange#getEndingGrade()
+	 * @see #getMilkGradeChange()
+	 * @generated
+	 */
+	EReference getMilkGradeChange_EndingGrade();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkGradeChange#getChangedBy <em>Changed By</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Changed By</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkGradeChange#getChangedBy()
+	 * @see #getMilkGradeChange()
+	 * @generated
+	 */
+	EReference getMilkGradeChange_ChangedBy();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkGradeChange#getReason <em>Reason</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Reason</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkGradeChange#getReason()
+	 * @see #getMilkGradeChange()
+	 * @generated
+	 */
+	EAttribute getMilkGradeChange_Reason();
+
+	/**
+	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale <em>Milk Sale</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Milk Sale</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkSale
+	 * @generated
+	 */
+	EClass getMilkSale();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getId()
+	 * @see #getMilkSale()
+	 * @generated
+	 */
+	EAttribute getMilkSale_Id();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getLineNumber <em>Line Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Line Number</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getLineNumber()
+	 * @see #getMilkSale()
+	 * @generated
+	 */
+	EAttribute getMilkSale_LineNumber();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getReferenceNumber <em>Reference Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Reference Number</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getReferenceNumber()
+	 * @see #getMilkSale()
+	 * @generated
+	 */
+	EAttribute getMilkSale_ReferenceNumber();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getSaleDate <em>Sale Date</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Sale Date</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getSaleDate()
+	 * @see #getMilkSale()
+	 * @generated
+	 */
+	EAttribute getMilkSale_SaleDate();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getBin <em>Bin</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Bin</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getBin()
+	 * @see #getMilkSale()
+	 * @generated
+	 */
+	EReference getMilkSale_Bin();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getSaleType <em>Sale Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Sale Type</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getSaleType()
+	 * @see #getMilkSale()
+	 * @generated
+	 */
+	EAttribute getMilkSale_SaleType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getQuantity <em>Quantity</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Quantity</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getQuantity()
+	 * @see #getMilkSale()
+	 * @generated
+	 */
+	EAttribute getMilkSale_Quantity();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getGrade <em>Grade</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Grade</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getGrade()
+	 * @see #getMilkSale()
+	 * @generated
+	 */
+	EReference getMilkSale_Grade();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getUnitPrice <em>Unit Price</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Unit Price</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getUnitPrice()
+	 * @see #getMilkSale()
+	 * @generated
+	 */
+	EAttribute getMilkSale_UnitPrice();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getDescription()
+	 * @see #getMilkSale()
+	 * @generated
+	 */
+	EAttribute getMilkSale_Description();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale#isRejected <em>Rejected</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Rejected</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine#isRejected()
-	 * @see #getDeliveryJournalLine()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkSale#isRejected()
+	 * @see #getMilkSale()
 	 * @generated
 	 */
-	EAttribute getDeliveryJournalLine_Rejected();
+	EAttribute getMilkSale_Rejected();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getStoreOrRoute <em>Store Or Route</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Store Or Route</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getStoreOrRoute()
+	 * @see #getMilkSale()
+	 * @generated
+	 */
+	EReference getMilkSale_StoreOrRoute();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getCustomer <em>Customer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Customer</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getCustomer()
+	 * @see #getMilkSale()
+	 * @generated
+	 */
+	EReference getMilkSale_Customer();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getSoldBy <em>Sold By</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Sold By</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getSoldBy()
+	 * @see #getMilkSale()
+	 * @generated
+	 */
+	EReference getMilkSale_SoldBy();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getSaleAmount <em>Sale Amount</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Sale Amount</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getSaleAmount()
+	 * @see #getMilkSale()
+	 * @generated
+	 */
+	EAttribute getMilkSale_SaleAmount();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale#isContractSale <em>Contract Sale</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Contract Sale</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkSale#isContractSale()
+	 * @see #getMilkSale()
+	 * @generated
+	 */
+	EAttribute getMilkSale_ContractSale();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getSalesClerk <em>Sales Clerk</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Sales Clerk</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getSalesClerk()
+	 * @see #getMilkSale()
+	 * @generated
+	 */
+	EReference getMilkSale_SalesClerk();
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy <em>Dairy</em>}'.
@@ -4360,15 +4828,15 @@ public interface DairyPackage extends EPackage {
 	EClass getCustomer();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Customer#getId <em>Id</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Customer#getCustomerNumber <em>Customer Number</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Customer#getId()
+	 * @return the meta object for the attribute '<em>Customer Number</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Customer#getCustomerNumber()
 	 * @see #getCustomer()
 	 * @generated
 	 */
-	EAttribute getCustomer_Id();
+	EAttribute getCustomer_CustomerNumber();
 
 	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Customer#getCustomerType <em>Customer Type</em>}'.
@@ -4650,6 +5118,16 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getJournalStatus();
+
+	/**
+	 * Returns the meta object for enum '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSaleType <em>Milk Sale Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Milk Sale Type</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkSaleType
+	 * @generated
+	 */
+	EEnum getMilkSaleType();
 
 	/**
 	 * Returns the meta object for enum '{@link com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus <em>Membership Status</em>}'.
@@ -5550,38 +6028,30 @@ public interface DairyPackage extends EPackage {
 		EReference DELIVERY_JOURNAL__SESSION = eINSTANCE.getDeliveryJournal_Session();
 
 		/**
-		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalLineImpl <em>Delivery Journal Line</em>}' class.
+		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkGradeImpl <em>Milk Grade</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalLineImpl
-		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getDeliveryJournalLine()
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.MilkGradeImpl
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getMilkGrade()
 		 * @generated
 		 */
-		EClass DELIVERY_JOURNAL_LINE = eINSTANCE.getDeliveryJournalLine();
+		EClass MILK_GRADE = eINSTANCE.getMilkGrade();
 
 		/**
-		 * The meta object literal for the '<em><b>Line Number</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Code</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute DELIVERY_JOURNAL_LINE__LINE_NUMBER = eINSTANCE.getDeliveryJournalLine_LineNumber();
+		EAttribute MILK_GRADE__CODE = eINSTANCE.getMilkGrade_Code();
 
 		/**
-		 * The meta object literal for the '<em><b>Bin</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DELIVERY_JOURNAL_LINE__BIN = eINSTANCE.getDeliveryJournalLine_Bin();
-
-		/**
-		 * The meta object literal for the '<em><b>Quantity</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DELIVERY_JOURNAL_LINE__QUANTITY = eINSTANCE.getDeliveryJournalLine_Quantity();
+		EAttribute MILK_GRADE__NAME = eINSTANCE.getMilkGrade_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
@@ -5589,7 +6059,147 @@ public interface DairyPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute DELIVERY_JOURNAL_LINE__DESCRIPTION = eINSTANCE.getDeliveryJournalLine_Description();
+		EAttribute MILK_GRADE__DESCRIPTION = eINSTANCE.getMilkGrade_Description();
+
+		/**
+		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkGradeChangeImpl <em>Milk Grade Change</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.MilkGradeChangeImpl
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getMilkGradeChange()
+		 * @generated
+		 */
+		EClass MILK_GRADE_CHANGE = eINSTANCE.getMilkGradeChange();
+
+		/**
+		 * The meta object literal for the '<em><b>Date</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MILK_GRADE_CHANGE__DATE = eINSTANCE.getMilkGradeChange_Date();
+
+		/**
+		 * The meta object literal for the '<em><b>Starting Grade</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MILK_GRADE_CHANGE__STARTING_GRADE = eINSTANCE.getMilkGradeChange_StartingGrade();
+
+		/**
+		 * The meta object literal for the '<em><b>Ending Grade</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MILK_GRADE_CHANGE__ENDING_GRADE = eINSTANCE.getMilkGradeChange_EndingGrade();
+
+		/**
+		 * The meta object literal for the '<em><b>Changed By</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MILK_GRADE_CHANGE__CHANGED_BY = eINSTANCE.getMilkGradeChange_ChangedBy();
+
+		/**
+		 * The meta object literal for the '<em><b>Reason</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MILK_GRADE_CHANGE__REASON = eINSTANCE.getMilkGradeChange_Reason();
+
+		/**
+		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkSaleImpl <em>Milk Sale</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.MilkSaleImpl
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getMilkSale()
+		 * @generated
+		 */
+		EClass MILK_SALE = eINSTANCE.getMilkSale();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MILK_SALE__ID = eINSTANCE.getMilkSale_Id();
+
+		/**
+		 * The meta object literal for the '<em><b>Line Number</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MILK_SALE__LINE_NUMBER = eINSTANCE.getMilkSale_LineNumber();
+
+		/**
+		 * The meta object literal for the '<em><b>Reference Number</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MILK_SALE__REFERENCE_NUMBER = eINSTANCE.getMilkSale_ReferenceNumber();
+
+		/**
+		 * The meta object literal for the '<em><b>Sale Date</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MILK_SALE__SALE_DATE = eINSTANCE.getMilkSale_SaleDate();
+
+		/**
+		 * The meta object literal for the '<em><b>Bin</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MILK_SALE__BIN = eINSTANCE.getMilkSale_Bin();
+
+		/**
+		 * The meta object literal for the '<em><b>Sale Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MILK_SALE__SALE_TYPE = eINSTANCE.getMilkSale_SaleType();
+
+		/**
+		 * The meta object literal for the '<em><b>Quantity</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MILK_SALE__QUANTITY = eINSTANCE.getMilkSale_Quantity();
+
+		/**
+		 * The meta object literal for the '<em><b>Grade</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MILK_SALE__GRADE = eINSTANCE.getMilkSale_Grade();
+
+		/**
+		 * The meta object literal for the '<em><b>Unit Price</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MILK_SALE__UNIT_PRICE = eINSTANCE.getMilkSale_UnitPrice();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MILK_SALE__DESCRIPTION = eINSTANCE.getMilkSale_Description();
 
 		/**
 		 * The meta object literal for the '<em><b>Rejected</b></em>' attribute feature.
@@ -5597,7 +6207,55 @@ public interface DairyPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute DELIVERY_JOURNAL_LINE__REJECTED = eINSTANCE.getDeliveryJournalLine_Rejected();
+		EAttribute MILK_SALE__REJECTED = eINSTANCE.getMilkSale_Rejected();
+
+		/**
+		 * The meta object literal for the '<em><b>Store Or Route</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MILK_SALE__STORE_OR_ROUTE = eINSTANCE.getMilkSale_StoreOrRoute();
+
+		/**
+		 * The meta object literal for the '<em><b>Customer</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MILK_SALE__CUSTOMER = eINSTANCE.getMilkSale_Customer();
+
+		/**
+		 * The meta object literal for the '<em><b>Sold By</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MILK_SALE__SOLD_BY = eINSTANCE.getMilkSale_SoldBy();
+
+		/**
+		 * The meta object literal for the '<em><b>Sale Amount</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MILK_SALE__SALE_AMOUNT = eINSTANCE.getMilkSale_SaleAmount();
+
+		/**
+		 * The meta object literal for the '<em><b>Contract Sale</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MILK_SALE__CONTRACT_SALE = eINSTANCE.getMilkSale_ContractSale();
+
+		/**
+		 * The meta object literal for the '<em><b>Sales Clerk</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MILK_SALE__SALES_CLERK = eINSTANCE.getMilkSale_SalesClerk();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl <em>Dairy</em>}' class.
@@ -6052,12 +6710,12 @@ public interface DairyPackage extends EPackage {
 		EClass CUSTOMER = eINSTANCE.getCustomer();
 
 		/**
-		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Customer Number</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CUSTOMER__ID = eINSTANCE.getCustomer_Id();
+		EAttribute CUSTOMER__CUSTOMER_NUMBER = eINSTANCE.getCustomer_CustomerNumber();
 
 		/**
 		 * The meta object literal for the '<em><b>Customer Type</b></em>' attribute feature.
@@ -6276,6 +6934,16 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum JOURNAL_STATUS = eINSTANCE.getJournalStatus();
+
+		/**
+		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSaleType <em>Milk Sale Type</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkSaleType
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getMilkSaleType()
+		 * @generated
+		 */
+		EEnum MILK_SALE_TYPE = eINSTANCE.getMilkSaleType();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus <em>Membership Status</em>}' enum.

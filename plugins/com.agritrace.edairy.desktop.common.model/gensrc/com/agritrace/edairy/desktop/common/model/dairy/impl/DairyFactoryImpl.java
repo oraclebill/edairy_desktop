@@ -70,7 +70,9 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 			case DairyPackage.ROUTE: return createRoute();
 			case DairyPackage.TRIP: return createTrip();
 			case DairyPackage.DELIVERY_JOURNAL: return createDeliveryJournal();
-			case DairyPackage.DELIVERY_JOURNAL_LINE: return createDeliveryJournalLine();
+			case DairyPackage.MILK_GRADE: return createMilkGrade();
+			case DairyPackage.MILK_GRADE_CHANGE: return createMilkGradeChange();
+			case DairyPackage.MILK_SALE: return createMilkSale();
 			case DairyPackage.DAIRY: return createDairy();
 			case DairyPackage.MEMBERSHIP: return createMembership();
 			case DairyPackage.ASSET: return createAsset();
@@ -96,6 +98,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 		switch (eDataType.getClassifierID()) {
 			case DairyPackage.JOURNAL_STATUS:
 				return createJournalStatusFromString(eDataType, initialValue);
+			case DairyPackage.MILK_SALE_TYPE:
+				return createMilkSaleTypeFromString(eDataType, initialValue);
 			case DairyPackage.MEMBERSHIP_STATUS:
 				return createMembershipStatusFromString(eDataType, initialValue);
 			case DairyPackage.VENDOR_STATUS:
@@ -121,6 +125,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 		switch (eDataType.getClassifierID()) {
 			case DairyPackage.JOURNAL_STATUS:
 				return convertJournalStatusToString(eDataType, instanceValue);
+			case DairyPackage.MILK_SALE_TYPE:
+				return convertMilkSaleTypeToString(eDataType, instanceValue);
 			case DairyPackage.MEMBERSHIP_STATUS:
 				return convertMembershipStatusToString(eDataType, instanceValue);
 			case DairyPackage.VENDOR_STATUS:
@@ -231,9 +237,29 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DeliveryJournalLine createDeliveryJournalLine() {
-		DeliveryJournalLineImpl deliveryJournalLine = new DeliveryJournalLineImpl();
-		return deliveryJournalLine;
+	public MilkGrade createMilkGrade() {
+		MilkGradeImpl milkGrade = new MilkGradeImpl();
+		return milkGrade;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MilkGradeChange createMilkGradeChange() {
+		MilkGradeChangeImpl milkGradeChange = new MilkGradeChangeImpl();
+		return milkGradeChange;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MilkSale createMilkSale() {
+		MilkSaleImpl milkSale = new MilkSaleImpl();
+		return milkSale;
 	}
 
 	/**
@@ -353,6 +379,26 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * @generated
 	 */
 	public String convertJournalStatusToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MilkSaleType createMilkSaleTypeFromString(EDataType eDataType, String initialValue) {
+		MilkSaleType result = MilkSaleType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertMilkSaleTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

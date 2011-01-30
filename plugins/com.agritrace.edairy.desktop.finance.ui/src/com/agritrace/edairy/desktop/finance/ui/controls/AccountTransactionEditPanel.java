@@ -18,7 +18,7 @@ public class AccountTransactionEditPanel extends AbstractTransactionEditPanel {
 		middlePanel.setText("Transaction Entry");
 
 		addChoiceField("Type");
-		addDateField();
+		addDateField("Date");
 
 		UIControlsFactory.createLabel(middlePanel, "Store", FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO_LBL);
 		final Composite locationComposite = UIControlsFactory.createComposite(middlePanel);
@@ -32,7 +32,7 @@ public class AccountTransactionEditPanel extends AbstractTransactionEditPanel {
 		final Text locationText = UIControlsFactory.createText(locationComposite, SWT.SINGLE, FinanceBindingConstants.ID_DAIRY_LOCATION_TEXT);
 		GridDataFactory.fillDefaults().grab(true, true).span(2, 1).applyTo(locationText);
 		
-		addMemberField();
+		addLookupField("Member");
 
 		UIControlsFactory.createLabel(middlePanel, "Reference No.");
 		final Text refNumText = UIControlsFactory.createText(middlePanel, SWT.NONE,

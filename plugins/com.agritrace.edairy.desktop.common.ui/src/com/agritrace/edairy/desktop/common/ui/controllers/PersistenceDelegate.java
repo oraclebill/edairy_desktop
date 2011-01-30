@@ -11,6 +11,6 @@ public interface PersistenceDelegate<X extends EObject> {
 	public X load(Object key);
 	public void save(X obj);
 	public void delete(X obj);
-	public void saveRelated(Object obj);
+//	public void saveRelated(Object obj);
 	public void rollback(Object obj);
 }

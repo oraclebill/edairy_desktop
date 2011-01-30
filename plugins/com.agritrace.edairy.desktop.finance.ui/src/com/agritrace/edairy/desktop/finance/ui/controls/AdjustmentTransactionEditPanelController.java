@@ -126,12 +126,12 @@ public class AdjustmentTransactionEditPanelController {
 
 		// configure member name ridget
 		final ITextRidget memberName = container.getRidget(ITextRidget.class,
-				FinanceBindingConstants.ID_MEMBER_NAME_TEXT);
+				FinanceBindingConstants.ID_LOOKUP_RESULT_TXT);
 		memberName.setOutputOnly(true);
 
 		// configure member lookup action
 		final IActionRidget memberLookup = container.getRidget(IActionRidget.class,
-				FinanceBindingConstants.ID_MEMBER_LOOKUP_BTN);
+				FinanceBindingConstants.ID_LOOKUP_BTN);
 		memberLookup.addListener(new MemberLookupAction(memberName));
 
 		// configure route combo
@@ -169,7 +169,7 @@ public class AdjustmentTransactionEditPanelController {
 		mapper.addMapping(FinanceBindingConstants.ID_REF_NUMBER_TEXT,
 				AccountPackage.Literals.ACCOUNT_TRANSACTION__REFERENCE_NUMBER);
 
-		// addMapping(FinanceBindingConstants.ID_MEMBER_NAME_TEXT,
+		// addMapping(FinanceBindingConstants.ID_LOOKUP_RESULT_TXT,
 		// AccountPackage.Literals.TRANSACTION__ACCOUNT,
 		// AccountPackage.Literals.ACCOUNT__MEMBER,
 		// DairyPackage.Literals.MEMBERSHIP__MEMBER,

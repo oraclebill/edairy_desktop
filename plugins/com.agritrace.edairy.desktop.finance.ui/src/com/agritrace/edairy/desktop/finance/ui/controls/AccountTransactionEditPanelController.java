@@ -113,7 +113,7 @@ public class AccountTransactionEditPanelController extends AbstractDetailPanelCo
 		transactionText.bindToModel(model, "amount");
 		transactionText.updateFromModel();
 
-		memberName = container.getRidget(ITextRidget.class, FinanceBindingConstants.ID_MEMBER_NAME_TEXT);
+		memberName = container.getRidget(ITextRidget.class, FinanceBindingConstants.ID_LOOKUP_RESULT_TXT);
 		memberName.setOutputOnly(true);
 		if (model.getAccount() != null) {
 			setSelectedMember(model.getAccount().getMember());
@@ -121,7 +121,7 @@ public class AccountTransactionEditPanelController extends AbstractDetailPanelCo
 
 		// configure member lookup action
 		final IActionRidget memberLookup = container.getRidget(IActionRidget.class,
-				FinanceBindingConstants.ID_MEMBER_LOOKUP_BTN);
+				FinanceBindingConstants.ID_LOOKUP_BTN);
 		memberLookup.addListener(new MemberLookupAction() {
 			@Override
 			protected void callback(Membership selectedMember) {

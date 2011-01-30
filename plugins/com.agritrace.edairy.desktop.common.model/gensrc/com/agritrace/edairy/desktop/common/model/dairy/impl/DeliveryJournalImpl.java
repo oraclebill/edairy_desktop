@@ -10,7 +10,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
-import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine;
+import com.agritrace.edairy.desktop.common.model.dairy.MilkSale;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
@@ -144,7 +144,7 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<DeliveryJournalLine> lines;
+	protected EList<MilkSale> lines;
 
 	/**
 	 * The default value of the '{@link #getTotal() <em>Total</em>}' attribute.
@@ -394,9 +394,9 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<DeliveryJournalLine> getLines() {
+	public EList<MilkSale> getLines() {
 		if (lines == null) {
-			lines = new EObjectContainmentEList<DeliveryJournalLine>(DeliveryJournalLine.class, this, DairyPackage.DELIVERY_JOURNAL__LINES);
+			lines = new EObjectContainmentEList<MilkSale>(MilkSale.class, this, DairyPackage.DELIVERY_JOURNAL__LINES);
 		}
 		return lines;
 	}
@@ -538,7 +538,7 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 				return;
 			case DairyPackage.DELIVERY_JOURNAL__LINES:
 				getLines().clear();
-				getLines().addAll((Collection<? extends DeliveryJournalLine>)newValue);
+				getLines().addAll((Collection<? extends MilkSale>)newValue);
 				return;
 			case DairyPackage.DELIVERY_JOURNAL__TOTAL:
 				setTotal((BigDecimal)newValue);

@@ -16,6 +16,7 @@ import org.eclipse.emf.teneo.hibernate.HbHelper;
 import org.eclipse.riena.core.Log4r;
 import org.eclipse.riena.core.RienaLocations;
 import org.hibernate.cfg.Environment;
+import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
@@ -33,7 +34,7 @@ public class HbDataStoreProvider implements Provider<HbDataStore>, IDbProperties
 	public static final String DB_TYPE_HSQLDB = "hsqldb";
 	public static final String DB_TYPE_SYBASE_ASA = "sybase-asa";
 
-	public static final String DEFAULT_DB_NAME = "dairytest";
+	public static final String DEFAULT_DB_NAME = "dairymgr";
 	public static final String DEFAULT_DB_TYPE = DB_TYPE_MYSQL;
 
 	private final HbDataStore hbds;
@@ -56,16 +57,28 @@ public class HbDataStoreProvider implements Provider<HbDataStore>, IDbProperties
 		hbds.setEPackages(PersistenceModule.EPACKAGES);
 
 		hbds.initialize();
-//		ManagedSessionContext.bind(hbds.getSessionFactory().openSession());
+// ManagedSessionContext.bind(hbds.getSessionFactory().openSession());
 
 		try {
-			final File file = new File(getConfigFileArea(), "hibernate-mapping.xml");
-			final FileWriter writer = new FileWriter(file);
-			final BufferedWriter buffered = new BufferedWriter(writer);
+			File file = new File(getConfigFileArea(), "hibernate-mapping.xml");
+			FileWriter writer = new FileWriter(file);
+			BufferedWriter buffered = new BufferedWriter(writer);
 			buffered.write(hbds.getMappingXML());
 			buffered.close();
 			writer.close();
 			LOG.log(LogService.LOG_INFO, "Saved mapping file to " + file);
+
+			file = new File(getConfigFileArea(), "edairy-schema.sql");			
+			SchemaExport se = 
+				new SchemaExport(hbds.getHibernateConfiguration())
+					.setHaltOnError(true)
+					.setOutputFile(file.getAbsolutePath())
+					.setDelimiter(";")
+					.setFormat(true);			
+			se.execute(true, false, false, true);
+
+			LOG.log(LogService.LOG_INFO, "Saved sql schema to " + file);
+
 		} catch (final Exception e) {
 			LOG.log(LogService.LOG_ERROR, e.getMessage(), e);
 		}
@@ -107,43 +120,75 @@ public class HbDataStoreProvider implements Provider<HbDataStore>, IDbProperties
 		} else {
 			LOG.log(LogService.LOG_INFO, "Using default hibernate properties.");
 
-			props.setProperty(Environment.DRIVER, "com.mysql.jdbc.Driver");
-			props.setProperty(Environment.USER, "root");
-			props.setProperty(Environment.URL, "jdbc:mysql://127.0.0.1:3306/" + DEFAULT_DB_NAME);
+//			props.setProperty(Environment.DIALECT, "org.hibernate.dialect.MySQLInnoDBDialect");
+//			props.setProperty(Environment.DRIVER, "com.mysql.jdbc.Driver");
+//			props.setProperty(Environment.USER, "root");
+//			props.setProperty(Environment.URL, "jdbc:mysql://127.0.0.1:3306/" + DEFAULT_DB_NAME);
+			
+			props.setProperty(Environment.DIALECT, "org.hibernate.dialect.PostgreSQLDialect");
+			props.setProperty(Environment.DRIVER, "org.postgresql.Driver");
+			props.setProperty(Environment.USER, "bjones");
+			props.setProperty(Environment.URL, "jdbc:postgresql://localhost/" + DEFAULT_DB_NAME + "/");
+			
 			// props.setProperty(Environment.PASS, "root");
-			props.setProperty(Environment.DIALECT, "org.hibernate.dialect.MySQLInnoDBDialect");
 
 			// TODO: test this - perhaps JTA or 'managed' is better...
 			props.setProperty(Environment.CURRENT_SESSION_CONTEXT_CLASS, "managed");
 
-			final URI mappingFileURI = URI.createPlatformPluginURI("/com.agritrace.edairy.desktop.common.persistence/etc/hibernate-mapping.xml", true);
+			final URI mappingFileURI = URI.createPlatformPluginURI(
+					"/com.agritrace.edairy.desktop.common.persistence/etc/hibernate-mapping.xml", true);
 			if (mappingFileURI.isFile()) {
 				LOG.log(LogService.LOG_INFO, "Using hibernate mapping from plugin.");
 				props.setProperty("teneo.mapping.mapping_file_name", mappingFileURI.toString());
 			}
+			
+			props.setProperty("teneo.naming.default_id_column", "id");
+			props.setProperty("teneo.naming.version_column", 	"opver");
+			props.setProperty("teneo.naming.set_foreign_key_name", "false");
 			props.setProperty("teneo.mapping.disable_econtainer", "true");
 			props.setProperty("teneo.mapping.default_varchar_length", "60");
-			props.setProperty("teneo.mapping.always_map_list_as_bag", "true"); // will cause hb to ignore index columns if they exist, 
+			props.setProperty("teneo.mapping.always_map_list_as_bag", "true"); // will cause hb to ignore index columns
+// if they exist,
 
 			// TODO: improve performance...
-//			props.setProperty("teneo.mapping.set_proxy", "true");  // classloading issues
-//			props.setProperty("teneo.mapping.fetch_containment_eagerly", "true");  // counterproductive
-//			props.setProperty("teneo.mapping.map_all_lists_as_idbag", "true"); // untried
-//			props.setProperty("teneo.mapping.always_map_list_as_bag", "true"); // untried
-//			props.setProperty("teneo.mapping.map_embeddable_as_embedded", "true");
+// props.setProperty("teneo.mapping.set_proxy", "true"); // classloading issues
+// props.setProperty("teneo.mapping.fetch_containment_eagerly", "true"); // counterproductive
+// props.setProperty("teneo.mapping.map_all_lists_as_idbag", "true"); // untried
+// props.setProperty("teneo.mapping.always_map_list_as_bag", "true"); // untried
+// props.setProperty("teneo.mapping.map_embeddable_as_embedded", "true");
 
 			// global extra-lazy wont work. contactmethods fouls it up (at least) probably teneo bug..
-			//			props.setProperty("teneo.mapping.fetch_one_to_many_extra_lazy", "true");
-
+			// props.setProperty("teneo.mapping.fetch_one_to_many_extra_lazy", "true");
 
 			// show all sql for debugging
-//			props.setProperty(Environment.SHOW_SQL, "true");
-//			props.setProperty(Environment.FORMAT_SQL, "true");
-//			props.setProperty(Environment.USE_SQL_COMMENTS, "true");
-//			props.setProperty(Environment.GENERATE_STATISTICS, "true");
+			String testval;
+			testval = System.getenv("EDAIRY_SHOW_SQL");
+			if (testval != null && !testval.isEmpty()) {
+				props.setProperty(Environment.SHOW_SQL, "true");
+			}
+
+			testval = System.getenv("EDAIRY_FORMAT_SQL");
+			if (testval != null && !testval.isEmpty()) {
+				props.setProperty(Environment.FORMAT_SQL, "true");
+			}
+			testval = System.getenv("EDAIRY_USE_SQL_COMMENTS");
+			if (testval != null && !testval.isEmpty()) {
+				props.setProperty(Environment.USE_SQL_COMMENTS, "true");
+			}
+
+			testval = System.getenv("EDAIRY_GENERATE_STATISTICS");
+			if (testval != null && !testval.isEmpty()) {
+				props.setProperty(Environment.GENERATE_STATISTICS, "true");
+			}
 
 			// drop and recreate db on startup
-			props.setProperty(Environment.HBM2DDL_AUTO, "update");
+			testval = System.getenv("EDAIRY_HBM2DDL_AUTO");
+			if (testval != null && !testval.isEmpty()) {
+				props.setProperty(Environment.HBM2DDL_AUTO, testval);
+			} else {
+				// don't update db, but check for changes
+				props.setProperty(Environment.HBM2DDL_AUTO, "validate");
+			}
 		}
 
 		return props;
@@ -163,7 +208,6 @@ public class HbDataStoreProvider implements Provider<HbDataStore>, IDbProperties
 	protected final String getDatabaseName() {
 		return System.getProperty(DB_NAME_PROPERTY, DEFAULT_DB_NAME);
 	}
-
 
 	@Override
 	public Properties getProperties() {

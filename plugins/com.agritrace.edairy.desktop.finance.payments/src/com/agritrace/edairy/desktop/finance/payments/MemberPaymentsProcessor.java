@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import com.agritrace.edairy.desktop.common.model.Constants;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
@@ -15,7 +16,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.BalancePoint;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
-import com.agritrace.edairy.desktop.common.persistence.Constants;
 import com.agritrace.edairy.desktop.common.persistence.IPaymentRecord;
 import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
 import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository.BalanceType;
@@ -135,7 +135,7 @@ public class MemberPaymentsProcessor {
 			try {
 				final BigDecimal totalQuantity = deliveries.get(member);
 				final BigDecimal memberDeliveries = totalQuantity == null ?
-						Constants.BIGZERO : periodRate.multiply(totalQuantity, Constants.MONEYCONTEXT);
+						Constants.BIGZERO : periodRate.multiply(totalQuantity, Constants.MONEY_CONTEXT);
 				
 				payment = generatePaymentRecord(paymentRate, priceMonth, priceYear, member, transactions, memberDeliveries);
 				
@@ -228,7 +228,7 @@ public class MemberPaymentsProcessor {
 			paymentRecord.setPayableMilkQuantity(memberDeliveries);
 			paymentRecord.setPaymentRate(rate);
 			// paymentRecord.setMilkIncome(memberDeliveries.multiply(rate,
-			// Constants.MONEYCONTEXT));
+			// Constants.MONEY_CONTEXT));
 		} else {
 			paymentRecord.setPayableMilkQuantity(Constants.BIGZERO);
 			paymentRecord.setPaymentRate(Constants.BIGZERO);

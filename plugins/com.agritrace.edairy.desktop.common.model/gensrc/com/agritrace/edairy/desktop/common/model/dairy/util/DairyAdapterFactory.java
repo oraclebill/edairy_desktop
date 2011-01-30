@@ -114,8 +114,16 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 				return createDeliveryJournalAdapter();
 			}
 			@Override
-			public Adapter caseDeliveryJournalLine(DeliveryJournalLine object) {
-				return createDeliveryJournalLineAdapter();
+			public Adapter caseMilkGrade(MilkGrade object) {
+				return createMilkGradeAdapter();
+			}
+			@Override
+			public Adapter caseMilkGradeChange(MilkGradeChange object) {
+				return createMilkGradeChangeAdapter();
+			}
+			@Override
+			public Adapter caseMilkSale(MilkSale object) {
+				return createMilkSaleAdapter();
 			}
 			@Override
 			public Adapter caseDairy(Dairy object) {
@@ -320,16 +328,44 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine <em>Delivery Journal Line</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkGrade <em>Milk Grade</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournalLine
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkGrade
 	 * @generated
 	 */
-	public Adapter createDeliveryJournalLineAdapter() {
+	public Adapter createMilkGradeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkGradeChange <em>Milk Grade Change</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkGradeChange
+	 * @generated
+	 */
+	public Adapter createMilkGradeChangeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale <em>Milk Sale</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkSale
+	 * @generated
+	 */
+	public Adapter createMilkSaleAdapter() {
 		return null;
 	}
 

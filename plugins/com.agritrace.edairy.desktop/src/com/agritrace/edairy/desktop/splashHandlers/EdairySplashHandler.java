@@ -35,7 +35,7 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 	private boolean okPressed = false;
 	private boolean authenticated = false;
 	private boolean authFailed = false;
-	
+
 	private Label developerLabel;
 	private Text username;
 	private Text password;
@@ -49,35 +49,38 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 
 		do {
 			createLoginControls();
-	
+
 			while (!okPressed) {
 				if (splash.getDisplay().readAndDispatch() == false) {
 					splash.getDisplay().sleep();
 				}
 			}
-			
+
 			String usernameText = username.getText();
 			String passwordText = password.getText();
-			
+
 			restoreProgressWindow();
 			runLoginProgress(splash, usernameText, passwordText);
-	
-			final long endTime = System.currentTimeMillis() + WAIT_MSEC;	
-			while (!authFailed && (System.currentTimeMillis() < endTime || !authenticated)) {
+
+			final long endTime = System.currentTimeMillis() + WAIT_MSEC;
+			while (!authFailed && !authenticated) {
 				if (splash.getDisplay().readAndDispatch() == false) {
 					splash.getDisplay().sleep();
 				}
+				System.out.println("0: authfailed? " + authFailed + ", authenticated? " + authenticated);
 			}
+			System.out.println("1: authfailed? " + authFailed + ", authenticated? " + authenticated);
 		} while (authFailed);
+		System.out.println("2: authfailed? " + authFailed + ", authenticated? " + authenticated);
 	}
 
 	private void createLoginControls() {
 		okPressed = false;
-		
+
 		final Composite content = getContent();
 		content.setBackgroundImage(Activator.getImage("splash/loginSplash.bmp"));
 
-		for (final Control child: content.getChildren()) {
+		for (final Control child : content.getChildren()) {
 			child.setVisible(false);
 		}
 
@@ -138,37 +141,45 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 		buttonOK.dispose();
 		font.dispose();
 
-		for (final Control child: content.getChildren()) {
+		for (final Control child : content.getChildren()) {
 			child.setVisible(true);
 		}
 	}
-	
+
 	private void runLoginProgress(final Shell splash, final String username, final String password) {
 		authFailed = false;
 		final IProgressMonitor monitor = getBundleProgressMonitor();
 		monitor.beginTask("Logging in", 2);
-		
-		splash.getDisplay().syncExec(new StartupRunnable() {
+
+		StartupRunnable loginRunner = new StartupRunnable() {
 			@Override
 			public void runWithException() throws Throwable {
 				monitor.subTask("Initializing database connection");
-				
+
 				if (authController == null) {
 					authController = PROVIDER.get();
 				}
-				
+
 				monitor.worked(1);
 				monitor.subTask("Authenticating");
 				authenticated = authController.authenticate(username, password);
 				monitor.worked(1);
-				
+
 				if (!authenticated) {
 					MessageDialog.openWarning(getSplash(), "Authentication Failure",
 							"You have entered an invalid username or password");
-					
+
 					authFailed = true;
 				}
 			}
-		});
+		};
+		splash.getDisplay().syncExec(loginRunner);
+		
+		// fail on error
+		final Throwable failureException = loginRunner.getThrowable();
+		if ( failureException != null) {
+			MessageDialog.openError(getSplash(), "System Error", failureException.getMessage());
+			System.exit(-1); // TODO: not the right way to close...
+		}
 	}
 }

@@ -31,6 +31,7 @@ public abstract class AbstractDetailPanelController<T extends EObject> {
 		bindMappedRidgets();
 	}
 
+	
 	public T getModel() {
 		return model;
 	}
@@ -41,6 +42,10 @@ public abstract class AbstractDetailPanelController<T extends EObject> {
 
 	public IRidgetContainer getRidgetContainer() {
 		return container;
+	}
+
+	public <R extends IRidget> R getRidget(Class<R> ridgetClazz, String id) {
+		return container.getRidget(ridgetClazz, id);
 	}
 
 	public void setRidgetContainer(IRidgetContainer container) {

@@ -20,6 +20,7 @@ import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ISingleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
+import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 
 /**
  * A utility class that eases binding of Ridgets to EMF properties.
@@ -131,6 +132,8 @@ public class BindingHelper<T extends EObject> {
 
 			if (ridget instanceof IEditableRidget) {
 				bindValueRidget(binding, (IEditableRidget) ridget);
+			} else if (ridget instanceof IToggleButtonRidget) {
+				bindToggleButtonRidget(binding, (IToggleButtonRidget) ridget);
 			} else if (ridget instanceof IComboRidget) {
 				bindComboRidget(binding, (IComboRidget) ridget);
 			} else if (ridget instanceof ISingleChoiceRidget) {
@@ -159,12 +162,12 @@ public class BindingHelper<T extends EObject> {
 				try {
 					ridget.updateFromModel();
 				} catch (final org.eclipse.core.databinding.BindingException bindException) {
-					System.err
-							.printf("Error [%s] binding ridget %s[%s] - no model binding: ",  bindException.getMessage(), ridget, ridget.getUIControl());
+					System.err.printf("Error [%s] binding ridget %s[%s] - no model binding: ",
+							bindException.getMessage(), ridget, ridget.getUIControl());
 
 				} catch (final IllegalArgumentException argException) {
-					System.err
-							.printf("%s error binding ridget %s[%s] - no model binding: ", argException.getMessage(), ridget, ridget.getUIControl());
+					System.err.printf("%s error binding ridget %s[%s] - no model binding: ", argException.getMessage(),
+							ridget, ridget.getUIControl());
 				}
 			}
 		}
@@ -195,6 +198,29 @@ public class BindingHelper<T extends EObject> {
 		} catch (final Exception e) {
 			System.err.printf("Error mapping ridget %s to feature %s: %s", valueRidget, binding.getFeaturePath(),
 					e.getMessage());
+		}
+	}
+
+	/**
+	 * @param binding
+	 * @param toggleRidget
+	 */
+	void bindToggleButtonRidget(final FeatureProperties binding, final IToggleButtonRidget toggleRidget) {
+		final IObservableValue observable = PojoObservables.observeValue(getModelObject(), binding.getPropertyName());
+		// validate
+		Object valueType = observable.getValueType();
+		if (valueType instanceof Class
+				&& (((Class) valueType).isAssignableFrom(Boolean.class) 
+						|| ((Class) valueType).isAssignableFrom(boolean.class))) {
+			toggleRidget.bindToModel(observable);
+			try {
+				toggleRidget.updateFromModel();
+			} catch (final Exception e) {
+				System.err.printf("Error mapping ridget %s to feature %s: %s", toggleRidget, binding.getFeaturePath(),
+						e.getMessage());
+			}
+		} else {
+			throw new UnsupportedOperationException("Toggle buttons can only be bound to 'Boolean' values: ");
 		}
 	}
 

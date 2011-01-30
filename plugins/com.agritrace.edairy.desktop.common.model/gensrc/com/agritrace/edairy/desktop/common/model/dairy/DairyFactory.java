@@ -107,13 +107,31 @@ public interface DairyFactory extends EFactory {
 	DeliveryJournal createDeliveryJournal();
 
 	/**
-	 * Returns a new object of class '<em>Delivery Journal Line</em>'.
+	 * Returns a new object of class '<em>Milk Grade</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Delivery Journal Line</em>'.
+	 * @return a new object of class '<em>Milk Grade</em>'.
 	 * @generated
 	 */
-	DeliveryJournalLine createDeliveryJournalLine();
+	MilkGrade createMilkGrade();
+
+	/**
+	 * Returns a new object of class '<em>Milk Grade Change</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Milk Grade Change</em>'.
+	 * @generated
+	 */
+	MilkGradeChange createMilkGradeChange();
+
+	/**
+	 * Returns a new object of class '<em>Milk Sale</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Milk Sale</em>'.
+	 * @generated
+	 */
+	MilkSale createMilkSale();
 
 	/**
 	 * Returns a new object of class '<em>Dairy</em>'.
