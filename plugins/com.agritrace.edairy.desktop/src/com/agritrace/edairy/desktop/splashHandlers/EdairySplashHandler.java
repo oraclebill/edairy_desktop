@@ -188,6 +188,7 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 		final Throwable failureException = loginRunner.getThrowable();
 		if (failureException != null) {
 			MessageDialog.openError(getSplash(), "System Error", failureException.getMessage());
+			failureException.printStackTrace();
 			System.exit(-1); // TODO: not the right way to close...
 		}
 	}

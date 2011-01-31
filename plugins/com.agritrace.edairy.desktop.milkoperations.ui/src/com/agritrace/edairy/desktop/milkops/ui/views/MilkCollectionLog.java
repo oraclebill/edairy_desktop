@@ -37,7 +37,7 @@ public class MilkCollectionLog extends AbstractDirectoryView {
 		UIControlsFactory.createButton(rightPanel, "Post Journal Details", addButtonId);
 
 		UIControlsFactory.createButton(leftPanel, "Import From Scale",  "import-file-button");
-		UIControlsFactory.createButton(leftPanel, "Post Journal Totals",  "log-journals-button");
+//		UIControlsFactory.createButton(leftPanel, "Post Journal Totals",  "log-journals-button");
 
 		buttonsPanel.setLayout(new GridLayout(3, false));
 

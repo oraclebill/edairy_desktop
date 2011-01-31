@@ -1,14 +1,8 @@
 package com.agritrace.edairy.desktop.member.ui.controllers;
 
-import java.util.Date;
 import java.util.List;
 
-import org.eclipse.core.databinding.beans.BeansObservables;
-import org.eclipse.core.databinding.observable.Observables;
-import org.eclipse.riena.ui.ridgets.IComboRidget;
-import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
-import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.controller.IController;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
@@ -25,11 +19,6 @@ public class MemberProfileWidgetController implements WidgetController<Membershi
 	private BindingHelper<Membership> mapper;
 	private List<DairyLocation> routeList;
 
-	private IDateTimeRidget appliedDate;
-	private IComboRidget statusCombo;
-	private IComboRidget defaultRouteCombo;
-	private IDateTimeRidget effectiveDate;
-	private ITextRidget phoneRidget;
 	private Membership selectedMember;
 
 	public MemberProfileWidgetController(IController controller, List<DairyLocation> routeList) {
@@ -39,22 +28,6 @@ public class MemberProfileWidgetController implements WidgetController<Membershi
 
 	@Override
 	public void configure() {
-// appliedDate = container.getRidget(IDateTimeRidget.class, ViewWidgetId.memberInfo_applicationDate);
-// effectiveDate = container.getRidget(IDateTimeRidget.class, ViewWidgetId.memberInfo_effectiveDate);
-// phoneRidget = container.getRidget(ITextRidget.class, ViewWidgetId.memberInfo_phone);
-//
-// statusCombo = container.getRidget(IComboRidget.class, ViewWidgetId.memberInfo_status);
-// defaultRouteCombo = container.getRidget(IComboRidget.class, ViewWidgetId.memberInfo_defaultRoute);
-//
-// appliedDate.setMandatory(true);
-// appliedDate.setOutputOnly(true);
-//
-// effectiveDate.setMandatory(true);
-// effectiveDate.setOutputOnly(true);
-//
-// phoneRidget.setMandatory(true);
-// // phoneRidget.addValidationRule(new PhoneNumberValidatiionRule(), ValidationTime.ON_UI_CONTROL_EDIT);
-// phoneRidget.setDirectWriting(true);
 	}
 
 	@Override
@@ -92,40 +65,10 @@ public class MemberProfileWidgetController implements WidgetController<Membershi
 
 		mapper.configureRidgets();
 		mapper.updateAllRidgetsFromModel();
-
-// if (appliedDate != null) {
-// updateBinding();
-// }
 	}
 
 	@Override
 	public void updateBinding() {
-
 		mapper.updateAllRidgetsFromModel();
-
-// if (selectedMember == null) {
-// phoneRidget.setText("");
-// appliedDate.setDate(new Date());
-// effectiveDate.setDate(new Date());
-// return;
-// }
-//
-// appliedDate.bindToModel(selectedMember, "applicationDate");
-// effectiveDate.bindToModel(selectedMember, "effectiveDate");
-// phoneRidget.bindToModel(selectedMember, "member.phoneNumber");
-// statusCombo.bindToModel(Observables.staticObservableList(MembershipStatus.VALUES), MembershipStatus.class,
-// null, BeansObservables.observeValue(selectedMember, "status"));
-// defaultRouteCombo.bindToModel(Observables.staticObservableList(routeList), DairyLocation.class,
-// "getCode", BeansObservables.observeValue(selectedMember, "defaultRoute"));
-//
-// appliedDate.updateFromModel();
-// effectiveDate.updateFromModel();
-// phoneRidget.updateFromModel();
-//
-// statusCombo.updateFromModel();
-// defaultRouteCombo.updateFromModel();
-//
-// // statusCombo.setSelection(selectedMember.getStatus().getValue());
-// // statusCombo.setSelection(selectedMember.getStatus().getValue());
 	}
 }
