@@ -23,9 +23,9 @@ import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
-import com.agritrace.edairy.desktop.common.persistence.IPaymentRecord;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
-import com.agritrace.edairy.desktop.common.persistence.services.Transactional;
+import com.agritrace.edairy.desktop.common.persistence.annotations.Transactional;
+import com.agritrace.edairy.desktop.common.persistence.dao.IPaymentRecord;
 import com.agritrace.edairy.desktop.finance.payments.Constants;
 import com.agritrace.edairy.desktop.finance.payments.MemberPaymentsProcessor;
 import com.agritrace.edairy.desktop.finance.payments.PaymentRecord;

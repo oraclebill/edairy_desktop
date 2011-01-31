@@ -23,7 +23,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
-import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
+import com.agritrace.edairy.desktop.common.model.util.DairyUtil;
 import com.csvreader.CsvReader;
 
 public class TransactionTestCase {

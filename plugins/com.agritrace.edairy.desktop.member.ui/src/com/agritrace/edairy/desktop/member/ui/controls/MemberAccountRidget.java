@@ -15,8 +15,8 @@ import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.riena.ui.ridgets.swt.AbstractSWTRidget;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.persistence.IPaymentRecord;
-import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
+import com.agritrace.edairy.desktop.common.persistence.dao.IPaymentRecord;
+import com.agritrace.edairy.desktop.common.persistence.dao.ITransactionRepository;
 import com.agritrace.edairy.desktop.finance.payments.PaymentRecord;
 import com.ibm.icu.util.Calendar;
 

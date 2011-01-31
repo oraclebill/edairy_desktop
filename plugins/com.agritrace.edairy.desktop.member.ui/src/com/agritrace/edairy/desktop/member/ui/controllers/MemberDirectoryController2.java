@@ -19,20 +19,20 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
-import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
-import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
-import com.agritrace.edairy.desktop.common.persistence.IMilkCollectionRepository;
+import com.agritrace.edairy.desktop.common.model.util.DairyUtil;
+import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
+import com.agritrace.edairy.desktop.common.persistence.dao.IFarmRepository;
+import com.agritrace.edairy.desktop.common.persistence.dao.IMemberRepository;
+import com.agritrace.edairy.desktop.common.persistence.dao.IMilkCollectionRepository;
 import com.agritrace.edairy.desktop.common.ui.columnformatters.ConstantColumnFormatter;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.DirectoryPersistenceDelegate;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.views.BaseListView;
-import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.MemberEditDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.controller.MemberEditDialogController;
-import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.google.inject.Inject;
 
 @PermissionRequired(UIPermission.VIEW_MEMBER_LIST)

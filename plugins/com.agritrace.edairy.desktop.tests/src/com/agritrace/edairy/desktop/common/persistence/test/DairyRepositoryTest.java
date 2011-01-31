@@ -8,10 +8,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
-import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
-import com.agritrace.edairy.desktop.common.persistence.services.IDbPropertiesManager;
-import com.agritrace.edairy.desktop.internal.common.persistence.HsqlDbDataStoreProvider;
-import com.agritrace.edairy.desktop.internal.persistence.MemberRepository;
+import com.agritrace.edairy.desktop.common.persistence.IDbPropertiesManager;
+import com.agritrace.edairy.desktop.common.persistence.dao.IMemberRepository;
+import com.agritrace.edairy.desktop.internal.common.persistence.dao.MemberRepository;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Scopes;

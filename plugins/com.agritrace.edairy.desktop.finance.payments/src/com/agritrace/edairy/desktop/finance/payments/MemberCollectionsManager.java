@@ -13,8 +13,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
-import com.agritrace.edairy.desktop.common.persistence.ICollectionJournalLineRepository;
-import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
+import com.agritrace.edairy.desktop.common.persistence.dao.ICollectionJournalLineRepository;
+import com.agritrace.edairy.desktop.common.persistence.dao.ITransactionRepository;
 import com.google.inject.Inject;
 
 public class MemberCollectionsManager {

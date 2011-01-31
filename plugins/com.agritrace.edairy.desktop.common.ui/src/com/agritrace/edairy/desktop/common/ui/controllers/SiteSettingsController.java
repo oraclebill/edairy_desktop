@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceStore;
 
-import com.agritrace.edairy.desktop.common.persistence.services.IDbPropertiesManager;
+import com.agritrace.edairy.desktop.common.persistence.IDbPropertiesManager;
 import com.google.inject.Inject;
 
 public class SiteSettingsController {

@@ -22,7 +22,7 @@ import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
-import com.agritrace.edairy.desktop.common.persistence.IMilkCollectionRepository;
+import com.agritrace.edairy.desktop.common.persistence.dao.IMilkCollectionRepository;
 import com.google.inject.Inject;
 
 public class PaymentRequestViewController extends SubModuleController {

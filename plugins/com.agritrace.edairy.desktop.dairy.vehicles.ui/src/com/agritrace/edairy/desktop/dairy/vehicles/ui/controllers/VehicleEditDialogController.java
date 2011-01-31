@@ -9,11 +9,11 @@ import org.eclipse.riena.ui.ridgets.ISpinnerRidget;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
+import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.controls.assetinfo.IAssetInfoRidget;
 import com.agritrace.edairy.desktop.common.ui.reference.VehicleType;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.controls.VehicleLogDetailBindConstants;
-import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.google.inject.Inject;
 
 public class VehicleEditDialogController extends RecordDialogController<Vehicle> {

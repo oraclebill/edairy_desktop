@@ -5,7 +5,7 @@
          point="org.eclipse.riena.core.startups">
       <startup
             activateSelf="true"
-            runClass="com.agritrace.edairy.desktop.internal.persistence.Startup">
+            runClass="com.agritrace.edairy.desktop.internal.common.persistence.Startup">
       </startup>
    </extension>
 

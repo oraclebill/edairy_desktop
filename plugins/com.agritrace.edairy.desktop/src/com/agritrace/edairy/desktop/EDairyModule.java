@@ -13,7 +13,6 @@ import org.ops4j.peaberry.eclipse.EclipseRegistry;
 import org.osgi.framework.BundleContext;
 
 import com.agritrace.edairy.desktop.birt.BirtModule;
-import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
 import com.agritrace.edairy.desktop.common.ui.UIModule;
 import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationDirectoryController;
@@ -22,6 +21,7 @@ import com.agritrace.edairy.desktop.dairy.vehicles.ui.controllers.VehicleLogDire
 import com.agritrace.edairy.desktop.finance.ui.navigation.FinanceModule;
 import com.agritrace.edairy.desktop.home.HomeModule;
 import com.agritrace.edairy.desktop.install.navigation.InstallModule;
+import com.agritrace.edairy.desktop.internal.common.persistence.PersistenceModule;
 import com.agritrace.edairy.desktop.member.ui.controllers.ContainerListViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.FarmListViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.LiveStockListController;

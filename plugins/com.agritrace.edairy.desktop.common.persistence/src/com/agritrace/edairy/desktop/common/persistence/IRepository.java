@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 
-import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
-import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
+import com.agritrace.edairy.desktop.common.persistence.exceptions.AlreadyExistsException;
+import com.agritrace.edairy.desktop.common.persistence.exceptions.NonExistingEntityException;
 
 /**
  * Core repository interface which encapsulates a concrete persistence

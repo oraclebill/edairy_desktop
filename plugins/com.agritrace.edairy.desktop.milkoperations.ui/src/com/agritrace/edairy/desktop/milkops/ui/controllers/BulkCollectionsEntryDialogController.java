@@ -45,8 +45,9 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager;
 import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
-import com.agritrace.edairy.desktop.common.persistence.ICollectionJournalLineRepository;
-import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
+import com.agritrace.edairy.desktop.common.persistence.dao.ICollectionJournalLineRepository;
+import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
+import com.agritrace.edairy.desktop.common.persistence.dao.IMemberRepository;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.columnformatters.BooleanPropertyColumnFormatter;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
@@ -62,7 +63,6 @@ import com.agritrace.edairy.desktop.milkops.ui.components.validators.MandatoryFi
 import com.agritrace.edairy.desktop.milkops.ui.components.validators.MemberLookupValidator;
 import com.agritrace.edairy.desktop.milkops.ui.dialogs.CachingMemberLookup;
 import com.agritrace.edairy.desktop.milkops.ui.dialogs.JournalPersistenceDelegate;
-import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.google.inject.Inject;
 
 public class BulkCollectionsEntryDialogController extends BaseDialogController<CollectionGroup> {
