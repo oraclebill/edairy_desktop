@@ -63,7 +63,7 @@ public class MilkNavigationNodeAssembler extends AbstractNavigationAssembler {
 		moduleNode = NodeFactory.createModule(NavigationConstants.MODULE_MILK_SALES, "Milk Sales", moduleGroupNode);
 		NodeFactory.createSubModule(NavigationConstants.SUBMODULE_MILK_SALES_REGISTER,
 				"Milk Sales Log", moduleNode, MilkSaleLogView.ID, MilkSaleLogController.class); //$NON-NLS-1$
-
+/*
 		//
 		// ADJUSTMENTS MODULE GROUP
 		//
@@ -89,8 +89,9 @@ public class MilkNavigationNodeAssembler extends AbstractNavigationAssembler {
 				moduleGroupNode);
 		NodeFactory.createSubModule(NavigationConstants.SUBMODULE_MILK_GRADE_LIST,
 				"Milk Grade List", moduleNode, MilkSaleLogView.ID, null); //$NON-NLS-1$
-
+*/
 		return new INavigationNode<?>[] { subAppNode };
+		
 	}
 
 }
