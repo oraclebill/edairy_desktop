@@ -18,13 +18,13 @@ import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
+import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.LocationProfileWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controls.IDataChangeListener;
 import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.IContactMethodsGroupRidget;
 import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.IProfilePhotoRidget;
 import com.agritrace.edairy.desktop.common.ui.validators.PhoneNumberValidatiionRule;
 import com.agritrace.edairy.desktop.dairy.profile.ui.DairyProfileViewWidgetID;
-import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.google.inject.Inject;
 
 /**

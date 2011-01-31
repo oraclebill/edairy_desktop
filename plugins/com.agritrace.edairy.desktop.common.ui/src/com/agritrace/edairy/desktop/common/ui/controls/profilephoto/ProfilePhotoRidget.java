@@ -32,7 +32,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.osgi.service.log.LogService;
 
-import com.agritrace.edairy.desktop.common.persistence.services.ImageDataUtil;
+import com.agritrace.edairy.desktop.common.persistence.ImageDataUtil;
 import com.agritrace.edairy.desktop.common.ui.activator.Activator;
 
 /**

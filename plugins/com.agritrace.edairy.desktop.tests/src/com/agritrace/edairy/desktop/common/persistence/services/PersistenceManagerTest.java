@@ -16,7 +16,7 @@ import com.agritrace.edairy.desktop.collection.services.TestingPersistenceModule
 import com.agritrace.edairy.desktop.common.model.base.ContainerType;
 import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
-import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
+import com.agritrace.edairy.desktop.common.model.util.DairyUtil;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 

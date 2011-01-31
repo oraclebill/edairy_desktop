@@ -12,7 +12,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AdjustmentTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
-import com.agritrace.edairy.desktop.common.model.dairy.security.EmployeePrincipal;
+import com.agritrace.edairy.desktop.common.model.dairy.security.SystemPrincipal;
 import com.agritrace.edairy.desktop.common.model.dairy.security.IPrincipal;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager;
 import com.agritrace.edairy.desktop.common.model.util.MemberUtil;
@@ -73,8 +73,8 @@ public class AdjustmentTransactionEditController extends RecordDialogController<
 
 		final IPrincipal principal = PrincipalManager.getInstance().getPrincipal();
 
-		if (getActionType() == AbstractDirectoryController.ACTION_NEW && principal instanceof EmployeePrincipal) {
-			model.setSignedOffBy(((EmployeePrincipal) principal).getEmployee());
+		if (getActionType() == AbstractDirectoryController.ACTION_NEW && principal instanceof SystemPrincipal) {
+			model.setSignedOffBy(((SystemPrincipal) principal).getEmployee());
 		}
 
 		final ITextRidget signedBy = getRidget(ITextRidget.class, FinanceBindingConstants.ID_SIGNED_BY_TEXT);

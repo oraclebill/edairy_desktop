@@ -17,7 +17,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
+import com.agritrace.edairy.desktop.common.model.util.DairyUtil;
 import com.google.inject.Inject;
 
 /**

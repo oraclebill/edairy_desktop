@@ -14,7 +14,7 @@ import org.eclipse.riena.ui.ridgets.ITableRidget;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Transaction;
-import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
+import com.agritrace.edairy.desktop.common.persistence.dao.IMemberRepository;
 import com.agritrace.edairy.desktop.common.ui.columnformatters.DatePropertyColumnFormatter;
 import com.agritrace.edairy.desktop.common.ui.controllers.DateRangeFilter;
 import com.agritrace.edairy.desktop.common.ui.controllers.WidgetController;

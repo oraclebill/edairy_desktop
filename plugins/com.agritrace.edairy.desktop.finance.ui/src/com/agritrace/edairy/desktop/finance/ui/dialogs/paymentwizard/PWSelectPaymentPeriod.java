@@ -20,11 +20,11 @@ import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.util.MemberUtil;
-import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
+import com.agritrace.edairy.desktop.common.persistence.dao.IMemberPaymentsRepository;
+import com.agritrace.edairy.desktop.common.persistence.dao.ITransactionRepository;
 import com.agritrace.edairy.desktop.common.ui.util.FormUtil;
 import com.agritrace.edairy.desktop.finance.payments.MemberCollectionsManager;
 import com.agritrace.edairy.desktop.finance.ui.MilkPriceJournalConstants;
-import com.agritrace.edairy.desktop.persistence.finance.IMemberPaymentsRepository;
 import com.google.inject.Inject;
 
 public class PWSelectPaymentPeriod extends PWPage {

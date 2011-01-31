@@ -18,8 +18,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
+import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
 import com.agritrace.edairy.desktop.common.ui.reference.EmployeeReference;
-import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.csvreader.CsvReader;
 import com.google.inject.Inject;
 

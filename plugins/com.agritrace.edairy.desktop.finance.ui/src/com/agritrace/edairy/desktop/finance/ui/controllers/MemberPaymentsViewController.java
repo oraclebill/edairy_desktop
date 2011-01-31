@@ -12,10 +12,10 @@ import org.eclipse.ui.PlatformUI;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
+import com.agritrace.edairy.desktop.common.persistence.dao.IMemberPaymentsRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.finance.ui.dialogs.paymentwizard.MemberPaymentProcessWizard;
-import com.agritrace.edairy.desktop.persistence.finance.IMemberPaymentsRepository;
 import com.google.inject.Inject;
 
 public class MemberPaymentsViewController extends

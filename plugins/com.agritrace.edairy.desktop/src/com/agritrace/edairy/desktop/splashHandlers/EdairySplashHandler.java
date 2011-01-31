@@ -35,6 +35,7 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 	private boolean okPressed = false;
 	private boolean authenticated = false;
 	private boolean authFailed = false;
+	private boolean developerMode = false;
 
 	private Label developerLabel;
 	private Text username;
@@ -46,6 +47,11 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 	@Override
 	public void init(Shell splash) {
 		super.init(splash);
+
+		String testval = System.getenv("EDAIRY_DEVELOPER_MODE");
+		if (null != testval && testval.equalsIgnoreCase("true")) {
+			developerMode = true;
+		}
 
 		do {
 			createLoginControls();
@@ -84,12 +90,14 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 			child.setVisible(false);
 		}
 
-		// TODO: Remove this in the final version
-		developerLabel = new Label(content, SWT.NONE);
-		developerLabel.setText("Developer version; empty login and password give administrator access");
-		developerLabel.setForeground(new Color(developerLabel.getDisplay(), 240, 240, 240));
-		developerLabel.setBounds(0, 153, content.getBounds().width, 20);
-		developerLabel.setAlignment(SWT.CENTER);
+		if (developerMode) {
+			// TODO: Remove this in the final version
+			developerLabel = new Label(content, SWT.NONE);
+			developerLabel.setText("Developer version; empty login and password give administrator access");
+			developerLabel.setForeground(new Color(developerLabel.getDisplay(), 240, 240, 240));
+			developerLabel.setBounds(0, 153, content.getBounds().width, 20);
+			developerLabel.setAlignment(SWT.CENTER);
+		}
 
 		username = new Text(content, SWT.NONE);
 		username.setBounds(276, 178, 226, 33);
@@ -134,7 +142,8 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 		final Composite content = getContent();
 		content.setBackgroundImage(Activator.getImage("splash/splash.bmp"));
 
-		developerLabel.dispose();
+		if (null != developerLabel)
+			developerLabel.dispose();
 		username.dispose();
 		password.dispose();
 		buttonCancel.dispose();
@@ -174,10 +183,10 @@ public class EdairySplashHandler extends EclipseSplashHandler {
 			}
 		};
 		splash.getDisplay().syncExec(loginRunner);
-		
+
 		// fail on error
 		final Throwable failureException = loginRunner.getThrowable();
-		if ( failureException != null) {
+		if (failureException != null) {
 			MessageDialog.openError(getSplash(), "System Error", failureException.getMessage());
 			System.exit(-1); // TODO: not the right way to close...
 		}

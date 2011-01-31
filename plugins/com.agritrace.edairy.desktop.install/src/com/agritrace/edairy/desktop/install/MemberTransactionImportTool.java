@@ -24,8 +24,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
-import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
-import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
+import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
+import com.agritrace.edairy.desktop.common.persistence.dao.IMemberRepository;
 import com.google.inject.Inject;
 
 /**

@@ -12,7 +12,7 @@ import org.junit.Test;
 import com.agritrace.edairy.desktop.collection.services.TestingPersistenceModule;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
-import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
+import com.agritrace.edairy.desktop.common.persistence.dao.ITransactionRepository;
 import com.google.inject.Guice;
 
 public class TransactionRepositoryTest  extends TransactionTestCase {

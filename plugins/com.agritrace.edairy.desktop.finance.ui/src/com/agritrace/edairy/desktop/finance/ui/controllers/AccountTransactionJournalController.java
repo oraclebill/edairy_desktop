@@ -22,7 +22,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransactio
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
 import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
-import com.agritrace.edairy.desktop.common.persistence.ITransactionRepository;
+import com.agritrace.edairy.desktop.common.persistence.dao.ITransactionRepository;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;

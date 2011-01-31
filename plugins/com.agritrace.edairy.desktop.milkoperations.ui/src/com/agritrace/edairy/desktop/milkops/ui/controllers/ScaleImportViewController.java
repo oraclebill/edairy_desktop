@@ -19,12 +19,12 @@ import org.osgi.service.log.LogService;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord;
+import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.internal.milkops.ui.Activator;
 import com.agritrace.edairy.desktop.milkops.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.milkops.ui.components.journalheader.IJournalHeaderRidget;
 import com.agritrace.edairy.desktop.milkops.ui.components.journalheader.JournalHeaderRidget;
-import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.google.inject.Inject;
 
 public class ScaleImportViewController extends SubModuleController {

@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.util.MemberUtil;
-import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
+import com.agritrace.edairy.desktop.common.persistence.dao.IMemberRepository;
 import com.agritrace.edairy.desktop.milkops.ui.components.collectionline.IMemberLookup;
 import com.google.inject.Inject;
 

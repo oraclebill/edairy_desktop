@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.persistence.IPaymentRecord;
+import com.agritrace.edairy.desktop.common.persistence.dao.IPaymentRecord;
 
 public class PaymentRecord implements IPaymentRecord {
 	private int year, month;

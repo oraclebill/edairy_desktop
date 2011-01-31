@@ -38,12 +38,12 @@ import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord;
 import com.agritrace.edairy.desktop.common.model.util.MemberUtil;
-import com.agritrace.edairy.desktop.common.persistence.IMemberRepository;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
+import com.agritrace.edairy.desktop.common.persistence.dao.IDairyLocationRepository;
+import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
+import com.agritrace.edairy.desktop.common.persistence.dao.IMemberRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.ImportResultsDialog;
-import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
-import com.agritrace.edairy.desktop.operations.services.dairylocation.IDairyLocationRepository;
 import com.google.inject.Inject;
 
  public class ScaleImportAction implements IActionListener, SelectionListener {

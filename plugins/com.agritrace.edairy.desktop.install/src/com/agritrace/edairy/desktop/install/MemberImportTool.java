@@ -24,8 +24,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountStatus;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
-import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
-import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
+import com.agritrace.edairy.desktop.common.model.util.DairyUtil;
+import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
 import com.google.inject.Inject;
 
 public class MemberImportTool extends AbstractImportTool {

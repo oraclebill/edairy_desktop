@@ -12,14 +12,14 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
-import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
+import com.agritrace.edairy.desktop.common.model.util.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
-import com.agritrace.edairy.desktop.common.persistence.ManagedMemoryDataStoreProvider;
-import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
+import com.agritrace.edairy.desktop.common.persistence.test.ManagedMemoryDataStoreProvider;
 import com.agritrace.edairy.desktop.common.ui.reference.CompanyStatus;
 import com.agritrace.edairy.desktop.common.ui.reference.CustomerType;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 import com.agritrace.edairy.desktop.common.ui.views.BaseListView;
+import com.agritrace.edairy.desktop.internal.common.persistence.PersistenceModule;
 import com.agritrace.edairy.desktop.operations.ui.controllers.CustomerDirectoryController;
 import com.agritrace.edairy.desktop.operations.ui.views.CustomerDirectoryView;
 import com.google.inject.Guice;

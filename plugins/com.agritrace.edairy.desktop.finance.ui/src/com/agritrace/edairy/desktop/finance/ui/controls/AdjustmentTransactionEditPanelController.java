@@ -22,10 +22,10 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
 import com.agritrace.edairy.desktop.common.model.util.MemberUtil;
+import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.util.BindingHelper;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
-import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 

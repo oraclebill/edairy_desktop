@@ -16,8 +16,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
+import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
-import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.agritrace.edairy.desktop.operations.ui.ViewConstants;
 import com.google.inject.Inject;
 

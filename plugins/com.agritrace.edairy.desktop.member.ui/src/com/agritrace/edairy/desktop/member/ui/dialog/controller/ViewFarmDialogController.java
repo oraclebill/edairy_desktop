@@ -3,8 +3,8 @@ package com.agritrace.edairy.desktop.member.ui.dialog.controller;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+import com.agritrace.edairy.desktop.common.persistence.dao.IFarmRepository;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
-import com.agritrace.edairy.desktop.member.services.farm.IFarmRepository;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberContainerWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberLiveStockWidgetController;
 import com.agritrace.edairy.desktop.member.ui.dialog.LivestockEditDialog;

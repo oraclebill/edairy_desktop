@@ -22,7 +22,7 @@ import com.agritrace.edairy.desktop.common.model.base.SystemUser;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager;
-import com.agritrace.edairy.desktop.common.persistence.DairyUtil;
+import com.agritrace.edairy.desktop.common.model.util.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;

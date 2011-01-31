@@ -17,19 +17,19 @@ import org.eclipse.swt.widgets.Shell;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
-import com.agritrace.edairy.desktop.common.model.dairy.security.EmployeePrincipal;
+import com.agritrace.edairy.desktop.common.model.dairy.security.SystemPrincipal;
 import com.agritrace.edairy.desktop.common.model.dairy.security.IPrincipal;
 import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
+import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
 import com.agritrace.edairy.desktop.common.ui.columnformatters.PersonToFormattedName;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controls.daterange.IDateRangeRidget;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.finance.ui.MilkPriceJournalConstants;
 import com.agritrace.edairy.desktop.finance.ui.dialogs.MilkPriceEditDialog;
-import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.google.inject.Inject;
 
 @PermissionRequired(UIPermission.VIEW_MILK_PRICES)
@@ -222,8 +222,8 @@ public class MilkPriceJournalController extends BasicDirectoryController<MemberP
 	 */
 	private Employee getUser() {
 		final IPrincipal principal = PrincipalManager.getInstance().getPrincipal();
-		if (principal instanceof EmployeePrincipal) {
-			return ((EmployeePrincipal) principal).getEmployee();
+		if (principal instanceof SystemPrincipal) {
+			return ((SystemPrincipal) principal).getEmployee();
 		}
 		return null;
 	}

@@ -25,10 +25,10 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
-import com.agritrace.edairy.desktop.common.persistence.ManagedMemoryDataStoreProvider;
-import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
+import com.agritrace.edairy.desktop.common.persistence.test.ManagedMemoryDataStoreProvider;
 import com.agritrace.edairy.desktop.dairy.locations.ui.DairyLocationUIConstants;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationDirectoryController;
+import com.agritrace.edairy.desktop.internal.common.persistence.PersistenceModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 

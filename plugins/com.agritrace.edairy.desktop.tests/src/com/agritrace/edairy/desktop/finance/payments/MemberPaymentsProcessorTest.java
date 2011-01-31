@@ -8,8 +8,8 @@ import junit.framework.Assert;
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.junit.Test;
 
-import com.agritrace.edairy.desktop.common.persistence.ManagedMemoryDataStoreProvider;
-import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
+import com.agritrace.edairy.desktop.common.persistence.test.ManagedMemoryDataStoreProvider;
+import com.agritrace.edairy.desktop.internal.common.persistence.PersistenceModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 

@@ -45,9 +45,9 @@ import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Route;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
+import com.agritrace.edairy.desktop.common.persistence.dao.IDairyLocationRepository;
+import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
 import com.agritrace.edairy.desktop.milkops.ui.ViewConstants;
-import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
-import com.agritrace.edairy.desktop.operations.services.dairylocation.IDairyLocationRepository;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 

@@ -8,8 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
-import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
-import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
+import com.agritrace.edairy.desktop.common.persistence.exceptions.AlreadyExistsException;
+import com.agritrace.edairy.desktop.common.persistence.exceptions.NonExistingEntityException;
 import com.google.inject.Provider;
 
 /**

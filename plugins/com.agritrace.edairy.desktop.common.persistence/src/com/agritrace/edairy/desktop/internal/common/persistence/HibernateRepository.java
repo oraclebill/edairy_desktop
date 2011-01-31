@@ -10,9 +10,9 @@ import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
-import com.agritrace.edairy.desktop.common.persistence.services.AlreadyExistsException;
-import com.agritrace.edairy.desktop.common.persistence.services.NonExistingEntityException;
-import com.agritrace.edairy.desktop.common.persistence.services.Transactional;
+import com.agritrace.edairy.desktop.common.persistence.annotations.Transactional;
+import com.agritrace.edairy.desktop.common.persistence.exceptions.AlreadyExistsException;
+import com.agritrace.edairy.desktop.common.persistence.exceptions.NonExistingEntityException;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 

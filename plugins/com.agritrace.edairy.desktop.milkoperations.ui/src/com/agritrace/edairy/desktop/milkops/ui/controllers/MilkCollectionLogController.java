@@ -24,8 +24,9 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
-import com.agritrace.edairy.desktop.common.persistence.IMilkCollectionRepository;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
+import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
+import com.agritrace.edairy.desktop.common.persistence.dao.IMilkCollectionRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
@@ -35,7 +36,6 @@ import com.agritrace.edairy.desktop.milkops.ui.beans.MilkCollectionLogFilterBean
 import com.agritrace.edairy.desktop.milkops.ui.dialogs.BulkCollectionsEntryDialog;
 import com.agritrace.edairy.desktop.milkops.ui.dialogs.JournalPersistenceDelegate;
 import com.agritrace.edairy.desktop.milkops.ui.dialogs.NewMilkCollectionJournalDialog;
-import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 

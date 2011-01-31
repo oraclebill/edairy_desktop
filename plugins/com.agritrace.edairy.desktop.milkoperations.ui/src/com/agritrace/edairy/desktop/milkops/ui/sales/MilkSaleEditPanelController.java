@@ -26,12 +26,12 @@ import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkGrade;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkSale;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkSaleType;
+import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDetailPanelController;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.util.BindingHelper;
 import com.agritrace.edairy.desktop.common.ui.dialogs.CustomerLookupDialog;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
-import com.agritrace.edairy.desktop.operations.services.IDairyRepository;
 import com.google.inject.Inject;
 
 /**

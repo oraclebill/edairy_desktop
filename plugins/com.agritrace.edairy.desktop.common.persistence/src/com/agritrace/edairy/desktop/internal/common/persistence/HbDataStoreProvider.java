@@ -19,8 +19,7 @@ import org.hibernate.cfg.Environment;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.osgi.service.log.LogService;
 
-import com.agritrace.edairy.desktop.common.persistence.PersistenceModule;
-import com.agritrace.edairy.desktop.common.persistence.services.IDbPropertiesManager;
+import com.agritrace.edairy.desktop.common.persistence.IDbPropertiesManager;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -57,7 +56,7 @@ public class HbDataStoreProvider implements Provider<HbDataStore>, IDbProperties
 		hbds.setEPackages(PersistenceModule.EPACKAGES);
 
 		hbds.initialize();
-// ManagedSessionContext.bind(hbds.getSessionFactory().openSession());
+		// ManagedSessionContext.bind(hbds.getSessionFactory().openSession());
 
 		try {
 			File file = new File(getConfigFileArea(), "hibernate-mapping.xml");
@@ -68,13 +67,9 @@ public class HbDataStoreProvider implements Provider<HbDataStore>, IDbProperties
 			writer.close();
 			LOG.log(LogService.LOG_INFO, "Saved mapping file to " + file);
 
-			file = new File(getConfigFileArea(), "edairy-schema.sql");			
-			SchemaExport se = 
-				new SchemaExport(hbds.getHibernateConfiguration())
-					.setHaltOnError(true)
-					.setOutputFile(file.getAbsolutePath())
-					.setDelimiter(";")
-					.setFormat(true);			
+			file = new File(getConfigFileArea(), "edairy-schema.sql");
+			SchemaExport se = new SchemaExport(hbds.getHibernateConfiguration()).setHaltOnError(true)
+					.setOutputFile(file.getAbsolutePath()).setDelimiter(";").setFormat(true);
 			se.execute(true, false, false, true);
 
 			LOG.log(LogService.LOG_INFO, "Saved sql schema to " + file);
@@ -118,18 +113,22 @@ public class HbDataStoreProvider implements Provider<HbDataStore>, IDbProperties
 				LOG.log(LogService.LOG_ERROR, e.getMessage(), e);
 			}
 		} else {
+			String testval;
+
 			LOG.log(LogService.LOG_INFO, "Using default hibernate properties.");
 
-//			props.setProperty(Environment.DIALECT, "org.hibernate.dialect.MySQLInnoDBDialect");
-//			props.setProperty(Environment.DRIVER, "com.mysql.jdbc.Driver");
-//			props.setProperty(Environment.USER, "root");
-//			props.setProperty(Environment.URL, "jdbc:mysql://127.0.0.1:3306/" + DEFAULT_DB_NAME);
-			
-			props.setProperty(Environment.DIALECT, "org.hibernate.dialect.PostgreSQLDialect");
-			props.setProperty(Environment.DRIVER, "org.postgresql.Driver");
-			props.setProperty(Environment.USER, "bjones");
-			props.setProperty(Environment.URL, "jdbc:postgresql://localhost/" + DEFAULT_DB_NAME + "/");
-			
+			testval = System.getenv("EDAIRY_DB_POSTGRES");
+			if (null != testval && testval.equalsIgnoreCase("true")) {
+				props.setProperty(Environment.DIALECT, "org.hibernate.dialect.PostgreSQLDialect");
+				props.setProperty(Environment.DRIVER, "org.postgresql.Driver");
+				props.setProperty(Environment.USER, "bjones");
+				props.setProperty(Environment.URL, "jdbc:postgresql://localhost/" + DEFAULT_DB_NAME + "/");
+			} else {
+				props.setProperty(Environment.DIALECT, "org.hibernate.dialect.MySQLInnoDBDialect");
+				props.setProperty(Environment.DRIVER, "com.mysql.jdbc.Driver");
+				props.setProperty(Environment.USER, "root");
+				props.setProperty(Environment.URL, "jdbc:mysql://127.0.0.1:3306/" + DEFAULT_DB_NAME);
+			}
 			// props.setProperty(Environment.PASS, "root");
 
 			// TODO: test this - perhaps JTA or 'managed' is better...
@@ -141,27 +140,44 @@ public class HbDataStoreProvider implements Provider<HbDataStore>, IDbProperties
 				LOG.log(LogService.LOG_INFO, "Using hibernate mapping from plugin.");
 				props.setProperty("teneo.mapping.mapping_file_name", mappingFileURI.toString());
 			}
-			
+
 			props.setProperty("teneo.naming.default_id_column", "id");
-			props.setProperty("teneo.naming.version_column", 	"opver");
+			props.setProperty("teneo.naming.version_column", "opver");
+			// teneo fk names are duplicated sometimes, so we disable this.. 
+			// the downside is the fk names change every time they are generated, and have
+			// no semantic content
 			props.setProperty("teneo.naming.set_foreign_key_name", "false");
+			
 			props.setProperty("teneo.mapping.disable_econtainer", "true");
 			props.setProperty("teneo.mapping.default_varchar_length", "60");
-			props.setProperty("teneo.mapping.always_map_list_as_bag", "true"); // will cause hb to ignore index columns
-// if they exist,
+			props.setProperty("teneo.mapping.always_map_list_as_bag", "true"); // will
+																				// cause
+																				// hb
+																				// to
+																				// ignore
+																				// index
+																				// columns
+			// if they exist,
 
 			// TODO: improve performance...
-// props.setProperty("teneo.mapping.set_proxy", "true"); // classloading issues
-// props.setProperty("teneo.mapping.fetch_containment_eagerly", "true"); // counterproductive
-// props.setProperty("teneo.mapping.map_all_lists_as_idbag", "true"); // untried
-// props.setProperty("teneo.mapping.always_map_list_as_bag", "true"); // untried
-// props.setProperty("teneo.mapping.map_embeddable_as_embedded", "true");
+			// props.setProperty("teneo.mapping.set_proxy", "true"); //
+			// classloading issues
+			// props.setProperty("teneo.mapping.fetch_containment_eagerly",
+			// "true"); // counterproductive
+			// props.setProperty("teneo.mapping.map_all_lists_as_idbag",
+			// "true"); // untried
+			// props.setProperty("teneo.mapping.always_map_list_as_bag",
+			// "true"); // untried
+			// props.setProperty("teneo.mapping.map_embeddable_as_embedded",
+			// "true");
 
-			// global extra-lazy wont work. contactmethods fouls it up (at least) probably teneo bug..
-			// props.setProperty("teneo.mapping.fetch_one_to_many_extra_lazy", "true");
+			// TODO: extra-lazy
+			// global extra-lazy wont work. contactmethods fouls it up (at
+			// least) probably teneo bug..
+			// props.setProperty("teneo.mapping.fetch_one_to_many_extra_lazy",
+			// "true");
 
 			// show all sql for debugging
-			String testval;
 			testval = System.getenv("EDAIRY_SHOW_SQL");
 			if (testval != null && !testval.isEmpty()) {
 				props.setProperty(Environment.SHOW_SQL, "true");
