@@ -94,12 +94,6 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 		return membership;
 	}
 
-	@Override
-	public void setController(IRidgetContainer container) {
-		// this.container = container;
-		// configure();
-		throw new UnsupportedOperationException();
-	}
 
 	@Override
 	public void setInputModel(Membership model) {

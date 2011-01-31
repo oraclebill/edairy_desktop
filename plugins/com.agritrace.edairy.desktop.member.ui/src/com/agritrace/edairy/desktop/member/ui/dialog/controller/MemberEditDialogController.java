@@ -25,9 +25,9 @@ import com.agritrace.edairy.desktop.common.persistence.dao.IMilkCollectionReposi
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.IProfilePhotoRidget;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
+import com.agritrace.edairy.desktop.member.ui.controllers.MemberProfileWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberCollectionRecordsWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberFarmWidgetController;
-import com.agritrace.edairy.desktop.member.ui.controls.MemberProfileWidgetController;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberTransactionWidgetController;
 
 public class MemberEditDialogController extends RecordDialogController<Membership> {
@@ -94,7 +94,7 @@ public class MemberEditDialogController extends RecordDialogController<Membershi
 			formattedMemberNameRidget.setText(MemberUtil.formattedMemberName(getWorkingCopy().getMember()));
 
 		photoRidget = getRidget(IProfilePhotoRidget.class, ViewWidgetId.memberPhoto);
-		memberProfileController = new MemberProfileWidgetController(this);
+		memberProfileController = new MemberProfileWidgetController(this, collectionCenters);
 		memberProfileController.setInputModel(getWorkingCopy());
 
 		if (memberRepo != null) {
@@ -139,8 +139,8 @@ public class MemberEditDialogController extends RecordDialogController<Membershi
 		addComboMap(ViewWidgetId.memberInfo_suffix, VALID_NAME_SUFFIXES, "toString",
 				DairyPackage.Literals.MEMBERSHIP__MEMBER, ModelPackage.Literals.PERSON__SUFFIX);
 
-		addComboMap(ViewWidgetId.memberInfo_defaultRoute, collectionCenters, "getCode",
-				DairyPackage.Literals.MEMBERSHIP__DEFAULT_ROUTE);
+//		addComboMap(ViewWidgetId.memberInfo_defaultRoute, collectionCenters, "getCode",
+//				DairyPackage.Literals.MEMBERSHIP__DEFAULT_ROUTE);
 	}
 
 	private void addPropertyChangedListener() {
@@ -186,6 +186,6 @@ public class MemberEditDialogController extends RecordDialogController<Membershi
 				ModelPackage.Literals.PERSON__PHOTO));
 		photoRidget.updateFromModel();
 
-		memberProfileController.setInputModel(selectedMember);
+//		memberProfileController.setInputModel(selectedMember);
 	}
 }

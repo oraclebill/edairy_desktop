@@ -45,6 +45,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl#getMember <em>Member</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl#getAccount <em>Account</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl#getDairy <em>Dairy</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl#getMaziwaCardNumber <em>Maziwa Card Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl#getMaziwaCardIssueDate <em>Maziwa Card Issue Date</em>}</li>
  * </ul>
  * </p>
  *
@@ -180,6 +182,46 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * @ordered
 	 */
 	protected Account account;
+
+	/**
+	 * The default value of the '{@link #getMaziwaCardNumber() <em>Maziwa Card Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMaziwaCardNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String MAZIWA_CARD_NUMBER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getMaziwaCardNumber() <em>Maziwa Card Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMaziwaCardNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected String maziwaCardNumber = MAZIWA_CARD_NUMBER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getMaziwaCardIssueDate() <em>Maziwa Card Issue Date</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMaziwaCardIssueDate()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Date MAZIWA_CARD_ISSUE_DATE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getMaziwaCardIssueDate() <em>Maziwa Card Issue Date</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMaziwaCardIssueDate()
+	 * @generated
+	 * @ordered
+	 */
+	protected Date maziwaCardIssueDate = MAZIWA_CARD_ISSUE_DATE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -475,6 +517,48 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getMaziwaCardNumber() {
+		return maziwaCardNumber;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMaziwaCardNumber(String newMaziwaCardNumber) {
+		String oldMaziwaCardNumber = maziwaCardNumber;
+		maziwaCardNumber = newMaziwaCardNumber;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__MAZIWA_CARD_NUMBER, oldMaziwaCardNumber, maziwaCardNumber));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Date getMaziwaCardIssueDate() {
+		return maziwaCardIssueDate;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMaziwaCardIssueDate(Date newMaziwaCardIssueDate) {
+		Date oldMaziwaCardIssueDate = maziwaCardIssueDate;
+		maziwaCardIssueDate = newMaziwaCardIssueDate;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__MAZIWA_CARD_ISSUE_DATE, oldMaziwaCardIssueDate, maziwaCardIssueDate));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -549,6 +633,10 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 				return getAccount();
 			case DairyPackage.MEMBERSHIP__DAIRY:
 				return getDairy();
+			case DairyPackage.MEMBERSHIP__MAZIWA_CARD_NUMBER:
+				return getMaziwaCardNumber();
+			case DairyPackage.MEMBERSHIP__MAZIWA_CARD_ISSUE_DATE:
+				return getMaziwaCardIssueDate();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -587,6 +675,12 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 				return;
 			case DairyPackage.MEMBERSHIP__DAIRY:
 				setDairy((Dairy)newValue);
+				return;
+			case DairyPackage.MEMBERSHIP__MAZIWA_CARD_NUMBER:
+				setMaziwaCardNumber((String)newValue);
+				return;
+			case DairyPackage.MEMBERSHIP__MAZIWA_CARD_ISSUE_DATE:
+				setMaziwaCardIssueDate((Date)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -627,6 +721,12 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 			case DairyPackage.MEMBERSHIP__DAIRY:
 				setDairy((Dairy)null);
 				return;
+			case DairyPackage.MEMBERSHIP__MAZIWA_CARD_NUMBER:
+				setMaziwaCardNumber(MAZIWA_CARD_NUMBER_EDEFAULT);
+				return;
+			case DairyPackage.MEMBERSHIP__MAZIWA_CARD_ISSUE_DATE:
+				setMaziwaCardIssueDate(MAZIWA_CARD_ISSUE_DATE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -657,6 +757,10 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 				return account != null;
 			case DairyPackage.MEMBERSHIP__DAIRY:
 				return getDairy() != null;
+			case DairyPackage.MEMBERSHIP__MAZIWA_CARD_NUMBER:
+				return MAZIWA_CARD_NUMBER_EDEFAULT == null ? maziwaCardNumber != null : !MAZIWA_CARD_NUMBER_EDEFAULT.equals(maziwaCardNumber);
+			case DairyPackage.MEMBERSHIP__MAZIWA_CARD_ISSUE_DATE:
+				return MAZIWA_CARD_ISSUE_DATE_EDEFAULT == null ? maziwaCardIssueDate != null : !MAZIWA_CARD_ISSUE_DATE_EDEFAULT.equals(maziwaCardIssueDate);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -681,6 +785,10 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 		result.append(effectiveDate);
 		result.append(", status: ");
 		result.append(status);
+		result.append(", maziwaCardNumber: ");
+		result.append(maziwaCardNumber);
+		result.append(", maziwaCardIssueDate: ");
+		result.append(maziwaCardIssueDate);
 		result.append(')');
 		return result.toString();
 	}

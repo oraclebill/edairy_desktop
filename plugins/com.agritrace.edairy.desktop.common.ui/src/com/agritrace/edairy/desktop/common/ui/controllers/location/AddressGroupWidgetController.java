@@ -119,11 +119,6 @@ public class AddressGroupWidgetController implements WidgetController<PostalLoca
 		}
 	}
 
-	@Override
-	public void setController(IRidgetContainer container) {
-		this.container = container;
-
-	}
 
 	@Override
 	public void setInputModel(PostalLocation model) {

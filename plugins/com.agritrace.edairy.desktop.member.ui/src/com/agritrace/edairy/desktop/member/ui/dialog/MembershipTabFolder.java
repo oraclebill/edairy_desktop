@@ -7,6 +7,7 @@ import java.util.Set;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
+import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
@@ -18,6 +19,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 
+import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.ContactMethodsGroup;
+import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.IContactMethodsGroupRidget;
+import com.agritrace.edairy.desktop.common.ui.controls.location.LocationTabFolder;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberAccountWidget2;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberCollectionRecordsWidget;
 import com.agritrace.edairy.desktop.member.ui.controls.MemberFarmWidget;
@@ -30,7 +34,7 @@ public class MembershipTabFolder {
 // AccountSummary, Collections, Containers, Farm, Livestock, Profile, Transactions
 // }
 	public static enum TabItem {
-		AccountSummary, Collections, Farm, Profile, Transactions
+		AccountSummary, Collections, Farm, Profile, Address, Transactions
 	}
 
 	static class TabItemSet extends HashSet<TabItem> {
@@ -48,9 +52,7 @@ public class MembershipTabFolder {
 	public static final Set<TabItem> ALL_TABS = new TabItemSet(TabItem.values());
 	public static final String MEMBER_INFO_GROUP = "Members Information";
 
-// public static final Set<TabItem> NEW_MEMBER_TABS = new TabItemSet(new TabItem[] { TabItem.Profile, TabItem.Farm,
-// TabItem.Livestock, TabItem.Containers });
-	public static final Set<TabItem> NEW_MEMBER_TABS = new TabItemSet(new TabItem[] { TabItem.Profile });
+	public static final Set<TabItem> NEW_MEMBER_TABS = new TabItemSet(new TabItem[] { TabItem.Profile, TabItem.Address });
 
 	private Composite tabComposite;
 
@@ -101,6 +103,25 @@ public class MembershipTabFolder {
 			final MemberProfileWidget profileWidget = new MemberProfileWidget(profileComposite, SWT.NONE);
 			GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(profileWidget);
 			profileTab.setControl(profileComposite);
+		}
+
+		// address tab
+		if (enabledTabs.contains(TabItem.Address)) {
+			final CTabItem profileTab = new CTabItem(tabfolder, SWT.NULL);
+			profileTab.setText("Contact Info");
+	
+			final LocationTabFolder addressWidget = new LocationTabFolder(tabfolder, SWT.NONE);
+			addressWidget.setLayoutData(GridDataFactory.swtDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).create());
+			
+			CTabFolder addressTabFolder = addressWidget.getTabFolder();
+	
+			CTabItem contactsTab = new CTabItem(addressTabFolder, SWT.NONE);
+			contactsTab.setText("Contacts");
+			ContactMethodsGroup contacts = new ContactMethodsGroup(addressTabFolder);
+			contactsTab.setControl(contacts);
+	
+			SWTBindingPropertyLocator.getInstance().setBindingProperty(contacts, IContactMethodsGroupRidget.WIDGET_ID);
+			profileTab.setControl(addressWidget);
 		}
 
 		// account summary

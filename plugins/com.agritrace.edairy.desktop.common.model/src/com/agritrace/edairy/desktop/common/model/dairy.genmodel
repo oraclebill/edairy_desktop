@@ -175,18 +175,23 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkGradeChange/reason"/>
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//MilkSale">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkSale/id"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkSale/lineNumber"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkSale/referenceNumber"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkSale/saleDate"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//MilkSale/bin"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkSale/saleType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkSale/quantity"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkSale/price"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//MilkSale/grade"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkSale/unitPrice"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkSale/description"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkSale/rejected"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//MilkSale/storeOrRoute"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//MilkSale/customer"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//MilkSale/soldBy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkSale/saleAmount"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//MilkSale/contractSale"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//MilkSale/salesClerk"/>
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//Dairy">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Dairy/registrationNumber"/>
@@ -221,6 +226,8 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//Membership/member"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dairy.ecore#//Membership/account"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference dairy.ecore#//Membership/dairy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Membership/maziwaCardNumber"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Membership/maziwaCardIssueDate"/>
     </genClasses>
     <genClasses ecoreClass="dairy.ecore#//Asset">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute dairy.ecore#//Asset/tagType"/>

@@ -73,11 +73,6 @@ public class MapGroupController implements WidgetController<MapLocation> {
 		return map;
 	}
 
-	@Override
-	public void setController(IRidgetContainer container) {
-		this.container = container;
-
-	}
 
 	@Override
 	public void setInputModel(MapLocation model) {

@@ -48,12 +48,6 @@ public class LocationProfileWidgetController implements WidgetController<Locatio
 	}
 
 	@Override
-	public void setController(IRidgetContainer container) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void setInputModel(Location model) {
 		this.location = model;
 		if (controller != null) {

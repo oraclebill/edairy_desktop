@@ -103,12 +103,6 @@ public class LiveStockFilterWidgetController implements WidgetController<Object>
 	}
 
 	@Override
-	public void setController(IRidgetContainer container) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void setInputModel(Object model) {
 		inputModel = model;
 		updateBinding();

@@ -19,17 +19,18 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class MemberInfoGroup {
 
-	public static final String ADDITIONAL_NAMES = "Additional";
 	public static final int DEFAULT_FIELD_WIDTH = 150;
 
 	public static final int DEFAULT_LABEL_WIDTH = 140;
-	public static final String FIRST_NAME = "First";
+
 	public static final String HONORIFIC = "Hon.";
-	public static final String LAST_NAME = "Last";
 	public static final String MEMBERID = "Member ID";
 	public static final String MEMBERNUMBER = "Member Number";
+	public static final String FIRST_NAME = "First";
 	public static final String MIDDLE_NAME = "Middle";
+	public static final String LAST_NAME = "Last";
 	public static final String SUFFIX = "Suffix";
+	public static final String ADDITIONAL_NAMES = "Additional";
 
 	private CCombo cmbHonorable;
 	private CCombo cmbSuffix;
@@ -118,21 +119,21 @@ public class MemberInfoGroup {
 		fieldFactory.grab(true, true).applyTo(UIControlsFactory.createLabel(leftColumn, "", SWT.NONE));
 		fieldFactory.grab(true, true).applyTo(UIControlsFactory.createLabel(leftColumn, "", SWT.NONE));
 
-		// row 8: National ID
-		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, "National ID"));
-		fieldFactory.applyTo(UIControlsFactory.createText(leftColumn, SWT.BORDER, ViewWidgetId.memberInfo_nationalId));
-
-		// row 9: NSSF #
-		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, "NSSF #"));
-		fieldFactory.applyTo(UIControlsFactory.createText(leftColumn, SWT.BORDER, ViewWidgetId.memberInfo_nssfId));
-
-		// row 10: NHIF #
-		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, "NHIF #"));
-		fieldFactory.applyTo(UIControlsFactory.createText(leftColumn, SWT.BORDER, ViewWidgetId.memberInfo_nhifId));
-
-		// row 11: Default collection center
-		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, "Default Collection Center"));
-		fieldFactory.applyTo(UIControlsFactory.createCCombo(leftColumn, ViewWidgetId.memberInfo_defaultRoute));
+//		// row 8: National ID
+//		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, "National ID"));
+//		fieldFactory.applyTo(UIControlsFactory.createText(leftColumn, SWT.BORDER, ViewWidgetId.memberInfo_nationalId));
+//
+//		// row 9: NSSF #
+//		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, "NSSF #"));
+//		fieldFactory.applyTo(UIControlsFactory.createText(leftColumn, SWT.BORDER, ViewWidgetId.memberInfo_nssfId));
+//
+//		// row 10: NHIF #
+//		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, "NHIF #"));
+//		fieldFactory.applyTo(UIControlsFactory.createText(leftColumn, SWT.BORDER, ViewWidgetId.memberInfo_nhifId));
+//
+//		// row 11: Default collection center
+//		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, "Default Collection Center"));
+//		fieldFactory.applyTo(UIControlsFactory.createCCombo(leftColumn, ViewWidgetId.memberInfo_defaultRoute));
 
 		// right column
 		//

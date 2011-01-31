@@ -91,11 +91,6 @@ public class MemberContainerWidgetController extends WidgetDirectoryController<C
 	}
 
 	@Override
-	public void setController(IRidgetContainer container) {
-		this.controller = container;
-	}
-
-	@Override
 	public void setInputModel(Object model) {
 		this.inputModel = model;
 		if (inputModel != null) {

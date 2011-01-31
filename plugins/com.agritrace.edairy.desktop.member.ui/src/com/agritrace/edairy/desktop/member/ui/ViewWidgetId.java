@@ -277,4 +277,7 @@ public class ViewWidgetId implements DialogConstants {
 	public static final String TRANSACTION_UPDATE_BTN = "TRANSACTION_UPDATE_BTN";
 
 	public static final String LIVESTOCK_PHOTO = "LIVESTOCK_PHOTO";
+
+	public static final String ID_MAZIWA_CARD_NUM = "ID_MAZIWA_CARD_NUM";
+	public static final String ID_MAZIWA_CARD_DATE = "ID_MAZIWA_CARD_DATE";
 }

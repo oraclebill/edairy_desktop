@@ -1801,6 +1801,24 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getMembership_MaziwaCardNumber() {
+		return (EAttribute)membershipEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMembership_MaziwaCardIssueDate() {
+		return (EAttribute)membershipEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getAsset() {
 		return assetEClass;
 	}
@@ -2502,6 +2520,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEReference(membershipEClass, MEMBERSHIP__MEMBER);
 		createEReference(membershipEClass, MEMBERSHIP__ACCOUNT);
 		createEReference(membershipEClass, MEMBERSHIP__DAIRY);
+		createEAttribute(membershipEClass, MEMBERSHIP__MAZIWA_CARD_NUMBER);
+		createEAttribute(membershipEClass, MEMBERSHIP__MAZIWA_CARD_ISSUE_DATE);
 
 		assetEClass = createEClass(ASSET);
 		createEAttribute(assetEClass, ASSET__TAG_TYPE);
@@ -2796,6 +2816,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEReference(getMembership_Account(), theAccountPackage.getAccount(), theAccountPackage.getAccount_Member(), "account", null, 1, 1, Membership.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		getMembership_Account().getEKeys().add(theAccountPackage.getAccount_AccountId());
 		initEReference(getMembership_Dairy(), this.getDairy(), this.getDairy_Memberships(), "dairy", null, 1, 1, Membership.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getMembership_MaziwaCardNumber(), ecorePackage.getEString(), "maziwaCardNumber", null, 0, 1, Membership.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMembership_MaziwaCardIssueDate(), ecorePackage.getEDate(), "maziwaCardIssueDate", null, 0, 1, Membership.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(assetEClass, Asset.class, "Asset", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAsset_TagType(), ecorePackage.getEString(), "tagType", null, 0, 1, Asset.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -96,11 +96,6 @@ public class MemberTransactionWidgetController implements WidgetController<Objec
 	}
 
 	@Override
-	public void setController(IRidgetContainer container) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public void setInputModel(Object model) {
 		// if (transactionTable == null) {
 		// return;

@@ -31,6 +31,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getMember <em>Member</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getAccount <em>Account</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getDairy <em>Dairy</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getMaziwaCardNumber <em>Maziwa Card Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getMaziwaCardIssueDate <em>Maziwa Card Issue Date</em>}</li>
  * </ul>
  * </p>
  *
@@ -282,5 +284,57 @@ public interface Membership extends EObject {
 	 * @generated
 	 */
 	void setDairy(Dairy value);
+
+	/**
+	 * Returns the value of the '<em><b>Maziwa Card Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Maziwa Card Number</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Maziwa Card Number</em>' attribute.
+	 * @see #setMaziwaCardNumber(String)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMembership_MaziwaCardNumber()
+	 * @model
+	 * @generated
+	 */
+	String getMaziwaCardNumber();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getMaziwaCardNumber <em>Maziwa Card Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Maziwa Card Number</em>' attribute.
+	 * @see #getMaziwaCardNumber()
+	 * @generated
+	 */
+	void setMaziwaCardNumber(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Maziwa Card Issue Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Maziwa Card Issue Date</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Maziwa Card Issue Date</em>' attribute.
+	 * @see #setMaziwaCardIssueDate(Date)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMembership_MaziwaCardIssueDate()
+	 * @model
+	 * @generated
+	 */
+	Date getMaziwaCardIssueDate();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getMaziwaCardIssueDate <em>Maziwa Card Issue Date</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Maziwa Card Issue Date</em>' attribute.
+	 * @see #getMaziwaCardIssueDate()
+	 * @generated
+	 */
+	void setMaziwaCardIssueDate(Date value);
 
 } // Membership

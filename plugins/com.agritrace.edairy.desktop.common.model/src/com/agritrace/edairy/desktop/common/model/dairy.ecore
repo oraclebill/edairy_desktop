@@ -382,6 +382,8 @@
         eKeys="#//account/Account/accountId"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dairy" ordered="false"
         lowerBound="1" eType="#//Dairy" eOpposite="#//Dairy/memberships"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maziwaCardNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maziwaCardIssueDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="MembershipStatus">
     <eLiterals name="Active"/>

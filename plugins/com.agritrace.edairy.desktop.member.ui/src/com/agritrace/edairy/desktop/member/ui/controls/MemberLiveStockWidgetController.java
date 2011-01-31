@@ -81,11 +81,6 @@ public class MemberLiveStockWidgetController extends WidgetDirectoryController<R
 
 
 	@Override
-	public void setController(IRidgetContainer container) {
-		this.controller = container;
-	}
-
-	@Override
 	public void setInputModel(Object model) {
 		this.inputModel = model;
 		filterController.setInputModel(model);

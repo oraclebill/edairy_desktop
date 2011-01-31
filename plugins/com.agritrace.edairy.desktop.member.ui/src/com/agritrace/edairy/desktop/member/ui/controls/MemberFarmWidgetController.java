@@ -80,11 +80,6 @@ public class MemberFarmWidgetController extends WidgetDirectoryController<Farm> 
 
 
 	@Override
-	public void setController(IRidgetContainer container) {
-		this.controller = container;
-	}
-
-	@Override
 	public void setInputModel(Object model) {
 		selectedMember = (Membership) model;
 		if (table != null) {

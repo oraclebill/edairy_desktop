@@ -10,8 +10,6 @@ public interface WidgetController<T extends Object> {
 
 	public T getInputModel();
 
-	public void setController(IRidgetContainer container);
-
 	public void setInputModel(T model);
 
 	public void updateBinding();

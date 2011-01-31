@@ -2014,13 +2014,31 @@ public interface DairyPackage extends EPackage {
 	int MEMBERSHIP__DAIRY = 8;
 
 	/**
+	 * The feature id for the '<em><b>Maziwa Card Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMBERSHIP__MAZIWA_CARD_NUMBER = 9;
+
+	/**
+	 * The feature id for the '<em><b>Maziwa Card Issue Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMBERSHIP__MAZIWA_CARD_ISSUE_DATE = 10;
+
+	/**
 	 * The number of structural features of the '<em>Membership</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBERSHIP_FEATURE_COUNT = 9;
+	int MEMBERSHIP_FEATURE_COUNT = 11;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.AssetImpl <em>Asset</em>}' class.
@@ -4579,6 +4597,28 @@ public interface DairyPackage extends EPackage {
 	EReference getMembership_Dairy();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getMaziwaCardNumber <em>Maziwa Card Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Maziwa Card Number</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Membership#getMaziwaCardNumber()
+	 * @see #getMembership()
+	 * @generated
+	 */
+	EAttribute getMembership_MaziwaCardNumber();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getMaziwaCardIssueDate <em>Maziwa Card Issue Date</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Maziwa Card Issue Date</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Membership#getMaziwaCardIssueDate()
+	 * @see #getMembership()
+	 * @generated
+	 */
+	EAttribute getMembership_MaziwaCardIssueDate();
+
+	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.Asset <em>Asset</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6516,6 +6556,22 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MEMBERSHIP__DAIRY = eINSTANCE.getMembership_Dairy();
+
+		/**
+		 * The meta object literal for the '<em><b>Maziwa Card Number</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEMBERSHIP__MAZIWA_CARD_NUMBER = eINSTANCE.getMembership_MaziwaCardNumber();
+
+		/**
+		 * The meta object literal for the '<em><b>Maziwa Card Issue Date</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEMBERSHIP__MAZIWA_CARD_ISSUE_DATE = eINSTANCE.getMembership_MaziwaCardIssueDate();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.AssetImpl <em>Asset</em>}' class.

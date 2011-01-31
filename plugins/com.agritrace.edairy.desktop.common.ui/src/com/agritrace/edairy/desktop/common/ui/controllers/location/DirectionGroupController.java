@@ -64,11 +64,6 @@ public class DirectionGroupController implements WidgetController<DescriptiveLoc
 	}
 
 	@Override
-	public void setController(IRidgetContainer container) {
-		this.container = container;
-	}
-
-	@Override
 	public void setInputModel(DescriptiveLocation model) {
 		this.location = model;
 		if (container != null) {
