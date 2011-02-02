@@ -49,3 +49,4 @@ Export-Package: com.agritrace.edairy.desktop.internal.milkops.ui;x-internal:=tru
    org.eclipse.swt.events,
    org.eclipse.swt.widgets",
  com.agritrace.edairy.desktop.milkops.ui.wizards
+Import-Package: org.hibernate

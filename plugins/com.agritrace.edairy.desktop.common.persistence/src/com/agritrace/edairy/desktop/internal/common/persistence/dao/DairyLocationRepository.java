@@ -14,7 +14,7 @@ public class DairyLocationRepository extends HibernateRepository<DairyLocation> 
 	private IDairyRepository dairyRepo;
 	
 	@Inject
-	protected DairyLocationRepository(Provider<Session> sessionProvider, IDairyRepository dairyRepo) {
+	public DairyLocationRepository(Provider<Session> sessionProvider, IDairyRepository dairyRepo) {
 		super(sessionProvider);
 		this.dairyRepo = dairyRepo;
 	}

@@ -27,14 +27,9 @@ public class HbDataStoreProvider implements Provider<HbDataStore>, IDbProperties
 	private static final org.eclipse.equinox.log.Logger LOG = Log4r.getLogger(PersistenceActivator.getDefault(),
 			HbDataStoreProvider.class);
 
-	public static final String DB_TYPE_PROPERTY = "edairy.database.type";
-	public static final String DB_NAME_PROPERTY = "edairy.database.name";
-	public static final String DB_TYPE_MYSQL = "mysql";
-	public static final String DB_TYPE_HSQLDB = "hsqldb";
-	public static final String DB_TYPE_SYBASE_ASA = "sybase-asa";
-
-	public static final String DEFAULT_DB_NAME = "dairymgr";
-	public static final String DEFAULT_DB_TYPE = DB_TYPE_MYSQL;
+	private static final String PROPERTIES_FILE_NAME = "edairydb.properties";	
+	private static final String DB_NAME_PROPERTY = "edairy.database.name";
+	private static final String DEFAULT_DB_NAME = "dairymgr";
 
 	private final HbDataStore hbds;
 
@@ -81,7 +76,7 @@ public class HbDataStoreProvider implements Provider<HbDataStore>, IDbProperties
 		LOG.log(LogService.LOG_DEBUG, ">>>>>> PersistenceManager[" + getClass().getName() + ":" + hashCode()
 				+ "] started on thread " + Thread.currentThread());
 
-		final File propFile = new File(getConfigFileArea(), PersistenceModule.PROPERTIES_FILE_NAME);
+		final File propFile = new File(getConfigFileArea(), PROPERTIES_FILE_NAME);
 
 		if (!propFile.exists()) {
 			try {
@@ -101,7 +96,7 @@ public class HbDataStoreProvider implements Provider<HbDataStore>, IDbProperties
 
 	protected Properties getDatastoreProperties() {
 		final Properties props = new Properties();
-		final File propFile = new File(getConfigFileArea(), PersistenceModule.PROPERTIES_FILE_NAME);
+		final File propFile = new File(getConfigFileArea(), PROPERTIES_FILE_NAME);
 
 		LOG.log(LogService.LOG_INFO, "Hibernate properties file found at: '" + propFile + "'");
 		if (propFile.canRead()) {
@@ -232,7 +227,7 @@ public class HbDataStoreProvider implements Provider<HbDataStore>, IDbProperties
 
 	@Override
 	public void setProperties(Properties props) throws IOException {
-		final File propFile = new File(getConfigFileArea(), PersistenceModule.PROPERTIES_FILE_NAME);
+		final File propFile = new File(getConfigFileArea(), PROPERTIES_FILE_NAME);
 		LOG.log(LogService.LOG_INFO, "Saving properties to " + propFile);
 
 		props.store(new FileOutputStream(propFile), "default properties, written on " + new Date());

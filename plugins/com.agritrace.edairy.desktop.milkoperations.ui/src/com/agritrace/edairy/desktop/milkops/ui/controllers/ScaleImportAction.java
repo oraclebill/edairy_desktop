@@ -23,6 +23,7 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.ui.PlatformUI;
+import org.hibernate.Session;
 import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.collections.scaledata.beans.ScaleRecord;
@@ -44,7 +45,12 @@ import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
 import com.agritrace.edairy.desktop.common.persistence.dao.IMemberRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.ImportResultsDialog;
+import com.agritrace.edairy.desktop.internal.common.persistence.RepositoryUtil;
+import com.agritrace.edairy.desktop.internal.common.persistence.dao.DairyLocationRepository;
+import com.agritrace.edairy.desktop.internal.common.persistence.dao.DairyRepository;
+import com.agritrace.edairy.desktop.internal.common.persistence.dao.MemberRepository;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
  public class ScaleImportAction implements IActionListener, SelectionListener {
 
@@ -330,6 +336,8 @@ import com.google.inject.Inject;
 
 	}
 
+	private final Provider<Session> sessionProvider;
+	
 	private final IDairyRepository dairyRepo;
 	private final IMemberRepository memberRepo;
 	private final IRepository<CollectionSession> sessionRepo;
@@ -340,12 +348,20 @@ import com.google.inject.Inject;
 	Dairy localDairy;
 
 	@Inject
-	public ScaleImportAction(final IDairyLocationRepository dairyLocationRepo, final IDairyRepository dairyRepo,
-			final IRepository<CollectionSession> sessionRepo, final IMemberRepository memberRepo) {
-		this.dairyRepo = dairyRepo;
-		this.dairyLocationRepo = dairyLocationRepo;
-		this.sessionRepo = sessionRepo;
-		this.memberRepo = memberRepo;
+	public ScaleImportAction(
+			Provider<Session> sessionProvider)
+	{
+		this.sessionProvider = sessionProvider;
+		
+		this.dairyRepo = new DairyRepository(sessionProvider);
+		this.dairyLocationRepo = new DairyLocationRepository(sessionProvider, dairyRepo);
+		this.sessionRepo = new RepositoryUtil<CollectionSession>(sessionProvider) {
+			@Override
+			public List<CollectionSession> all() {
+				return getCurrentSession().createCriteria("CollectionSession").list();
+			}			
+		};
+		this.memberRepo = new MemberRepository(sessionProvider, dairyRepo);
 	}
 
 	@Override

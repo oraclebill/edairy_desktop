@@ -10,26 +10,30 @@ import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.jface.window.Window;
 import org.eclipse.riena.core.Log4r;
+import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.widgets.Shell;
+import org.hibernate.Session;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
-import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
+import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
 import com.agritrace.edairy.desktop.common.persistence.dao.IMilkCollectionRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
+import com.agritrace.edairy.desktop.internal.common.persistence.RepositoryUtil;
+import com.agritrace.edairy.desktop.internal.common.persistence.dao.DairyRepository;
 import com.agritrace.edairy.desktop.internal.milkops.ui.Activator;
 import com.agritrace.edairy.desktop.milkops.ui.ViewConstants;
 import com.agritrace.edairy.desktop.milkops.ui.beans.MilkCollectionLogFilterBean;
@@ -110,7 +114,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	private final MilkCollectionLogFilterBean filterBean = new MilkCollectionLogFilterBean();
 	private final IDairyRepository dairyRepo;
 	private final IRepository<CollectionSession> sessionRepo;
-	private final ScaleImportAction scaleImportAction;
+	private final IActionListener scaleImportAction;
 	private final Provider<NewMilkCollectionJournalDialog> newDialogProvider;
 	private final Provider<BulkCollectionsEntryDialog> entryDialogProvider;
 //	private final Color TABLE_HIGHLIGHT_BACKGROUND = PlatformUI.getWorkbench().getDisplay()
@@ -118,17 +122,24 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	private final List<DairyLocation> collectionCenters;
 
 	@Inject
-	public MilkCollectionLogController(final IMilkCollectionRepository journalRepo,
-			final IDairyRepository dairyRepo,
-			final IRepository<CollectionSession> sessionRepo,
-			final ScaleImportAction scaleImportAction,
+	public MilkCollectionLogController(
+			final Provider<Session> sessionProvider,
 			final Provider<NewMilkCollectionJournalDialog> newDialogProvider,
 			final Provider<BulkCollectionsEntryDialog> entryDialogProvider) {
 		setEClass(DairyPackage.Literals.COLLECTION_GROUP);
-		setRepository(journalRepo);
-		this.dairyRepo = dairyRepo;
-		this.scaleImportAction = scaleImportAction;
-		this.sessionRepo = sessionRepo;
+		setRepository(new RepositoryUtil<CollectionGroup>(sessionProvider) {
+			@Override
+			public List<CollectionGroup> all() {
+				return (List<CollectionGroup>)getCurrentSession().createCriteria("CollectionGroup").list();
+			}			
+		});
+		this.dairyRepo = new DairyRepository(sessionProvider);
+		this.scaleImportAction = new ScaleImportAction(sessionProvider);
+		this.sessionRepo = new RepositoryUtil<CollectionSession>(sessionProvider) {
+			public List<CollectionSession> all() {
+				return (List<CollectionSession>)getCurrentSession().createCriteria("CollectionSession").list();
+			}			
+		};
 		this.newDialogProvider = newDialogProvider;
 		this.entryDialogProvider = entryDialogProvider;
 //		allJournals = dairyRepo.allCollectionGroups();

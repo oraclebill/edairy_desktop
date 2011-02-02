@@ -174,9 +174,9 @@ public class DairyRepository implements IDairyRepository {
 	private Dairy localDairy = null;
 
 	@Inject
-	public DairyRepository(final Provider<Session> sessionProvider, final DairyRepoInternal dairyRepository) {
+	public DairyRepository(final Provider<Session> sessionProvider) {
 		this.sessionProvider = sessionProvider;
-		this.dairyRepository = dairyRepository;
+		this.dairyRepository = new DairyRepoInternal(sessionProvider);
 	}
 
 	@Override
