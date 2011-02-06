@@ -2981,6 +2981,12 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
+		  (getCollectionGroup_JournalDate(), 
+		   source, 
+		   new String[] {
+			 "kind", "elementOnly"
+		   });			
+		addAnnotation
 		  (getRoute_Id(), 
 		   source, 
 		   new String[] {
@@ -3100,6 +3106,12 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		   source, 
 		   new String[] {
 			 "appinfo", "@NaturalId"
+		   });			
+		addAnnotation
+		  (getCollectionGroup_JournalDate(), 
+		   source, 
+		   new String[] {
+			 "appinfo", "@Temporal(TemporalType.DATE)"
 		   });			
 		addAnnotation
 		  (getRoute_Id(), 

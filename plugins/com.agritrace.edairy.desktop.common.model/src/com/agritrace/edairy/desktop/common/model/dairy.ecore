@@ -159,7 +159,14 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="referenceNumber" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="journalDate" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="elementOnly"/>
+      </eAnnotations>
+      <eAnnotations source="teneo.jpa">
+        <details key="appinfo" value="@Temporal(TemporalType.DATE)"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" lowerBound="1"
         eType="#//JournalStatus" defaultValueLiteral="NEW"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="driver" lowerBound="1"

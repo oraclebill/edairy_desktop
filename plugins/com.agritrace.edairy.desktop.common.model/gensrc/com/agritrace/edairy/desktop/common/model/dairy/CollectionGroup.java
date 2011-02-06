@@ -111,6 +111,8 @@ public interface CollectionGroup extends EObject {
 	 * @see #setJournalDate(Date)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_JournalDate()
 	 * @model required="true"
+	 *        extendedMetaData="kind='elementOnly'"
+	 *        annotation="teneo.jpa appinfo='@Temporal(TemporalType.DATE)'"
 	 * @generated
 	 */
 	Date getJournalDate();
