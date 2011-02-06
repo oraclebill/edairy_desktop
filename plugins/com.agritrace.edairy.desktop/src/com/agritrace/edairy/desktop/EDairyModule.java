@@ -26,8 +26,8 @@ import com.agritrace.edairy.desktop.member.ui.controllers.ContainerListViewContr
 import com.agritrace.edairy.desktop.member.ui.controllers.FarmListViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.LiveStockListController;
 import com.agritrace.edairy.desktop.member.ui.controllers.MemberDirectoryController2;
-import com.agritrace.edairy.desktop.milkops.ui.controllers.MilkCollectionLogController;
-import com.agritrace.edairy.desktop.milkops.ui.controllers.ScaleImportViewController;
+import com.agritrace.edairy.desktop.milkops.ui.intake.MilkCollectionLogController;
+import com.agritrace.edairy.desktop.milkops.ui.intake.ScaleImportViewController;
 import com.agritrace.edairy.desktop.milkops.ui.sales.MilkSaleLogController;
 import com.agritrace.edairy.desktop.operations.ui.controllers.ContainersDirectoryViewController;
 import com.agritrace.edairy.desktop.operations.ui.controllers.CustomerDirectoryController;
@@ -58,12 +58,12 @@ public class EDairyModule extends AbstractModule {
 		CONTROLLERS.add(DairyLocationDirectoryController.class);
 		CONTROLLERS.add(ContainerListViewController.class);
 		CONTROLLERS.add(MilkCollectionLogController.class);
+		CONTROLLERS.add(ScaleImportViewController.class);
 		CONTROLLERS.add(MilkSaleLogController.class);
 		CONTROLLERS.add(SupplierDirectoryController.class);
 		CONTROLLERS.add(SessionDirectoryController.class);
 		CONTROLLERS.add(MemberDirectoryController2.class);
 		CONTROLLERS.add(DairyProfileViewController.class);
-		CONTROLLERS.add(ScaleImportViewController.class);
 		CONTROLLERS.add(VehicleLogDirectoryViewController.class);
 		CONTROLLERS.add(ContainersDirectoryViewController.class);
 		CONTROLLERS.add(EmployeeDirectoryController.class);

@@ -17,36 +17,9 @@ Require-Bundle: com.agritrace.edairy.desktop.common.model;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.desktop.internal.milkops.ui;x-internal:=true,
- com.agritrace.edairy.desktop.milkops.ui,
- com.agritrace.edairy.desktop.milkops.ui.beans;uses:="com.agritrace.edairy.desktop.common.model.dairy,org.eclipse.riena.beans.common",
- com.agritrace.edairy.desktop.milkops.ui.components;uses:="org.eclipse.swt.events,org.eclipse.swt.widgets",
- com.agritrace.edairy.desktop.milkops.ui.components.collectionline,
- com.agritrace.edairy.desktop.milkops.ui.components.journalheader,
- com.agritrace.edairy.desktop.milkops.ui.components.validators,
- com.agritrace.edairy.desktop.milkops.ui.controllers;
-  uses:="org.eclipse.core.runtime,
-   org.eclipse.core.databinding.validation,
-   com.agritrace.edairy.desktop.common.ui.controllers,
-   com.agritrace.edairy.desktop.common.ui.dialogs,
-   org.eclipse.swt.widgets,
-   com.agritrace.edairy.desktop.common.model.dairy,
-   org.eclipse.riena.navigation.ui.controllers,
-   com.agritrace.edairy.desktop.common.model.base,
-   com.agritrace.edairy.desktop.common.persistence.services,
-   org.eclipse.riena.beans.common",
- com.agritrace.edairy.desktop.milkops.ui.dialogs;
-  uses:="com.agritrace.edairy.desktop.collection.ui.controllers,
-   com.agritrace.edairy.desktop.common.ui.dialogs,
-   org.eclipse.swt.widgets,
-   com.agritrace.edairy.desktop.common.model.dairy,
-   org.eclipse.jface.dialogs",
+ com.agritrace.edairy.desktop.milkops.ui.intake,
  com.agritrace.edairy.desktop.milkops.ui.navigation;uses:="org.eclipse.riena.navigation",
  com.agritrace.edairy.desktop.milkops.ui.sales,
  com.agritrace.edairy.desktop.milkops.ui.util;uses:="org.eclipse.swt.widgets",
- com.agritrace.edairy.desktop.milkops.ui.views;
-  uses:="org.eclipse.riena.navigation.ui.swt.views,
-   com.agritrace.edairy.desktop.common.ui.views,
-   org.eclipse.swt.events,
-   org.eclipse.swt.widgets",
  com.agritrace.edairy.desktop.milkops.ui.wizards
 Import-Package: org.hibernate

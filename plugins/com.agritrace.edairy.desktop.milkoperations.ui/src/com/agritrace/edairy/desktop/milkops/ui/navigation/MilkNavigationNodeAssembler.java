@@ -17,11 +17,10 @@ import org.eclipse.riena.navigation.model.SubApplicationNode;
 import org.eclipse.riena.ui.workarea.WorkareaManager;
 
 import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
-import com.agritrace.edairy.desktop.milkops.ui.NavigationConstants;
-import com.agritrace.edairy.desktop.milkops.ui.controllers.MilkCollectionLogController;
+import com.agritrace.edairy.desktop.milkops.ui.intake.MilkCollectionLog;
+import com.agritrace.edairy.desktop.milkops.ui.intake.MilkCollectionLogController;
 import com.agritrace.edairy.desktop.milkops.ui.sales.MilkSaleLogController;
 import com.agritrace.edairy.desktop.milkops.ui.sales.MilkSaleLogView;
-import com.agritrace.edairy.desktop.milkops.ui.views.MilkCollectionLog;
 
 public class MilkNavigationNodeAssembler extends AbstractNavigationAssembler {
 

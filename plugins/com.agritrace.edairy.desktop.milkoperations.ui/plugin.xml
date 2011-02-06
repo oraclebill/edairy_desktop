@@ -10,7 +10,7 @@
       <view
             allowMultiple="true"
             category="com.agritrace.edairy.desktop.milkops.ui.category"
-            class="com.agritrace.edairy.desktop.milkops.ui.views.MilkCollectionLog"
+            class="com.agritrace.edairy.desktop.milkops.ui.intake.MilkCollectionLog"
             id="milk-collection-log"
             name="Milk Collection Jounal View"
             restorable="true">
@@ -27,7 +27,7 @@
       <view
             allowMultiple="true"
             category="com.agritrace.edairy.desktop.milkops.ui.category"
-            class="com.agritrace.edairy.desktop.milkops.ui.views.ScaleDataImportView"
+            class="com.agritrace.edairy.desktop.milkops.ui.intake.ScaleDataImportView"
             id="edairy.scale.import.view"
             name="Scale Data Import "
             restorable="true">
