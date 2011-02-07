@@ -12,7 +12,7 @@ import com.agritrace.edairy.desktop.member.ui.dialog.ViewContainerDialog;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class ViewFarmDialogController extends AddFarmDialogController {
+public class ViewFarmDialogController extends FarmEditDialogController {
 
 	private MemberLiveStockWidgetController liveStockController;
 	// container tab

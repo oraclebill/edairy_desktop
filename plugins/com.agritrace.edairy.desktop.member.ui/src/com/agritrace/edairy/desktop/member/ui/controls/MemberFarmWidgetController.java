@@ -23,10 +23,9 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.data.FarmListViewTableNode;
-import com.agritrace.edairy.desktop.member.ui.dialog.AddFarmDialog;
-import com.agritrace.edairy.desktop.member.ui.dialog.ViewFarmDialog;
+import com.agritrace.edairy.desktop.member.ui.dialog.FarmEditDialog;
+import com.agritrace.edairy.desktop.member.ui.dialog.controller.FarmEditDialogController;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 public class MemberFarmWidgetController extends WidgetDirectoryController<Farm> implements WidgetController<Object> {
 
@@ -35,24 +34,25 @@ public class MemberFarmWidgetController extends WidgetDirectoryController<Farm> 
 	public static final String farmRemoveTitle = "Remove Farm";
 
 	private final String[] farmColumnHeaders = { "ID", "Name", "Location", "Number of Animals", "Number of Conatiners" };
-	private final String[] farmPropertyNames = { "farmId", "name", "location.formattedLocation", "numberOfAnimals", "numberOfContainers" };
+	private final String[] farmPropertyNames = { "farmId", "name", "location.formattedLocation", "numberOfAnimals",
+			"numberOfContainers" };
 
 	private final IFarmRepository farmRepository;
 	private final IMemberRepository memberRepository;
-	private final Provider<AddFarmDialog> addDialogProvider;
-	private final Provider<ViewFarmDialog> viewDialogProvider;
 	private final List<Farm> farms = new ArrayList<Farm>();
+	private FarmEditDialog farmDialog;
 	private Membership selectedMember;
 
 	@Inject
-	public MemberFarmWidgetController(final IController controller, final IFarmRepository farmRepository,
-			final IMemberRepository memberRepository,
-			final Provider<AddFarmDialog> addDialogProvider, final Provider<ViewFarmDialog> viewDialogProvider) {
+	public MemberFarmWidgetController(
+			final IController controller, 
+			final IFarmRepository farmRepository,
+			final IMemberRepository memberRepository, 
+			final FarmEditDialog farmDialog) {
 		this.memberRepository = memberRepository;
 		this.farmRepository = farmRepository;
+		this.farmDialog = farmDialog;
 		this.controller = controller;
-		this.addDialogProvider = addDialogProvider;
-		this.viewDialogProvider = viewDialogProvider;
 		setEClass(TrackingPackage.Literals.FARM);
 
 		for (int i = 0; i < farmPropertyNames.length; i++) {
@@ -76,8 +76,6 @@ public class MemberFarmWidgetController extends WidgetDirectoryController<Farm> 
 	public Object getInputModel() {
 		return selectedMember;
 	}
-
-
 
 	@Override
 	public void setInputModel(Object model) {
@@ -142,9 +140,8 @@ public class MemberFarmWidgetController extends WidgetDirectoryController<Farm> 
 		final Location newFarmLocation = DairyUtil.createLocation(null, null, null);
 		final Farm newFarm = DairyUtil.createFarm("", newFarmLocation);
 		FarmListViewTableNode newNode = new FarmListViewTableNode(selectedMember, newFarm);
-		final AddFarmDialog memberDialog = addDialogProvider.get();
-		memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM,
-				newNode);
+		final FarmEditDialog memberDialog = new FarmEditDialog(AbstractDirectoryController.getShell(), new FarmEditDialogController(), true);
+		memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM, newNode);
 
 		final int returnCode = memberDialog.open();
 		if (returnCode == AbstractWindowController.OK) {
@@ -161,7 +158,6 @@ public class MemberFarmWidgetController extends WidgetDirectoryController<Farm> 
 		}
 	}
 
-
 	@Override
 	protected void handleViewItemAction() {
 		final Shell shell = new Shell(Display.getDefault(), SWT.DIALOG_TRIM | SWT.RESIZE | SWT.MAX
@@ -172,13 +168,11 @@ public class MemberFarmWidgetController extends WidgetDirectoryController<Farm> 
 		if (selections.size() > 0) {
 			final Farm selectedFarm = (Farm) selections.get(0);
 			FarmListViewTableNode newNode = new FarmListViewTableNode(selectedMember, selectedFarm);
-			final ViewFarmDialog memberDialog = viewDialogProvider.get();
-			memberDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM,
-					newNode);
+			farmDialog.getController().setContext(ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM, newNode);
 
-			final int returnCode = memberDialog.open();
+			final int returnCode = farmDialog.open();
 			if (returnCode == AbstractWindowController.OK) {
-				newNode = (FarmListViewTableNode) memberDialog.getController().getContext(
+				newNode = (FarmListViewTableNode) farmDialog.getController().getContext(
 						ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM);
 				farmRepository.update(selectedFarm);
 				memberRepository.update(selectedMember);
@@ -189,6 +183,7 @@ public class MemberFarmWidgetController extends WidgetDirectoryController<Farm> 
 			}
 		}
 	}
+
 	@Override
 	protected List<Farm> getTableContents() {
 		return farms;

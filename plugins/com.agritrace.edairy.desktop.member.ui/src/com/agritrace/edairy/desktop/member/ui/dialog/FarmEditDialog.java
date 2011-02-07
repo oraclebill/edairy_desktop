@@ -21,31 +21,27 @@ import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.member.ui.dialog.controller.AddFarmDialogController;
+import com.agritrace.edairy.desktop.member.ui.dialog.controller.FarmEditDialogController;
 import com.agritrace.edairy.desktop.member.ui.dialog.controller.ViewFarmDialogController;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
 /**
  * 
- * ViewFarmDialog has "Address" "Directions" "Map","live stock" and "Container" tabs.
+ * FarmEditDialog has "Address" "Directions" "Map","live stock" and "Container" tabs.
  * 
  * user can use "Live stock" and "Containers" tabs to add/remove/view "Live stock" and "Containers"
  * 
  */
-public class ViewFarmDialog extends AbstractDialogView {
+public class FarmEditDialog extends AbstractDialogView {
 	private Button cancelButton;
 	private Button deleteButton;
 	private Composite main;
 	private Button saveButton;
-
-	@Inject
-	public ViewFarmDialog(@Named("current") final Shell parentShell, final ViewFarmDialogController controller) {
-		super(parentShell, controller);
-	}
+	private boolean addressOnly;
 
 	// Cross-inheritance: get rid of this
-	protected ViewFarmDialog(final Shell parentShell, final AddFarmDialogController controller) {
+	public FarmEditDialog(final Shell parentShell, final FarmEditDialogController controller, boolean addressOnly) {
 		super(parentShell, controller);
 	}
 
@@ -85,7 +81,7 @@ public class ViewFarmDialog extends AbstractDialogView {
 	}
 
 	protected void createTabs(Composite parent) {
-		new FarmTabFolder(parent, false);
+		new FarmTabFolder(parent, addressOnly);
 	}
 
 	@Override

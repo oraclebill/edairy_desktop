@@ -24,7 +24,7 @@ import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.data.FarmListViewTableNode;
 
-public class AddFarmDialogController extends BaseDialogController<Farm> {
+public class FarmEditDialogController extends BaseDialogController<Farm> {
 
 	private class AddPropertyChangedListener implements PropertyChangeListener {
 
@@ -60,7 +60,7 @@ public class AddFarmDialogController extends BaseDialogController<Farm> {
 
 	protected FarmListViewTableNode selectedNode;
 
-	public AddFarmDialogController() {
+	public FarmEditDialogController() {
 
 	}
 

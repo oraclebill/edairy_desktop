@@ -15,7 +15,7 @@
 //import com.agritrace.edairy.desktop.member.ui.controls.MemberFarmWidgetController;
 //import com.agritrace.edairy.desktop.member.ui.controls.MemberTransactionWidgetController;
 //import com.agritrace.edairy.desktop.member.ui.dialog.AddFarmDialog;
-//import com.agritrace.edairy.desktop.member.ui.dialog.ViewFarmDialog;
+//import com.agritrace.edairy.desktop.member.ui.dialog.FarmEditDialog;
 //import com.google.inject.Inject;
 //import com.google.inject.Provider;
 //
@@ -23,7 +23,7 @@
 ////	@Inject	private IFarmRepository farmRepository;
 ////	@Inject	private IMemberRepository memberRepository;
 ////	@Inject	private Provider<AddFarmDialog> addDialogProvider;
-////	@Inject private Provider<ViewFarmDialog> viewDialogProvider;
+////	@Inject private Provider<FarmEditDialog> viewDialogProvider;
 ////	@Inject private ITransactionRepository transactionRepository;
 ////	@Inject private IMilkCollectionRepository collectionsRepository;
 //
