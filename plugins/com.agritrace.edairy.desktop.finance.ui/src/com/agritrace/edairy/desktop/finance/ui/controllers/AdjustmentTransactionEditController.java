@@ -92,7 +92,7 @@ public class AdjustmentTransactionEditController extends RecordDialogController<
 			final Membership member = model.getAccount().getMember();
 
 			if (member != null) {
-				memberName.setText(MemberUtil.formattedMemberName(member.getMember()));
+				memberName.setText(MemberUtil.formattedMemberName(member.getFarmer()));
 			}
 		}
 
@@ -100,7 +100,7 @@ public class AdjustmentTransactionEditController extends RecordDialogController<
 			@Override
 			protected void callback(Membership selectedMember) {
 				model.setAccount(selectedMember.getAccount());
-				memberName.setText(MemberUtil.formattedMemberName(selectedMember.getMember()));
+				memberName.setText(MemberUtil.formattedMemberName(selectedMember.getFarmer()));
 			}
 
 			@Override

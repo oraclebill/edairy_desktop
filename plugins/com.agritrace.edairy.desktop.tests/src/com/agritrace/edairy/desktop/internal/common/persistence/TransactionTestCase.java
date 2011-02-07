@@ -123,7 +123,7 @@ public class TransactionTestCase {
 		member.setApplicationDate(new Date());
 		member.setStatus(MembershipStatus.ACTIVE);
 
-		member.setMember(farmer);
+		member.setFarmer(farmer);
 
 		final Account account = AccountFactory.eINSTANCE.createAccount();
 		account.setAccountNumber(accountNo);

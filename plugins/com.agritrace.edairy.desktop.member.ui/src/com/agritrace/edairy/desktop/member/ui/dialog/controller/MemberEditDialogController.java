@@ -93,7 +93,7 @@ public class MemberEditDialogController extends RecordDialogController<Membershi
 
 		formattedMemberNameRidget = getRidget(ILabelRidget.class, ViewWidgetId.memberInfo_formattedName);
 		if (getWorkingCopy() != null)
-			formattedMemberNameRidget.setText(MemberUtil.formattedMemberName(getWorkingCopy().getMember()));
+			formattedMemberNameRidget.setText(MemberUtil.formattedMemberName(getWorkingCopy().getFarmer()));
 
 		photoRidget = getRidget(IProfilePhotoRidget.class, ViewWidgetId.memberPhoto);
 		memberProfileController = new MemberProfileWidgetController(this, collectionCenters);
@@ -123,25 +123,25 @@ public class MemberEditDialogController extends RecordDialogController<Membershi
 	private void addRidgetMappings() {
 
 		addTextMap(ViewWidgetId.memberInfo_memberNbr, (DairyPackage.Literals.MEMBERSHIP__MEMBER_NUMBER));
-		addTextMap(ViewWidgetId.memberInfo_firstName, DairyPackage.Literals.MEMBERSHIP__MEMBER,
+		addTextMap(ViewWidgetId.memberInfo_firstName, DairyPackage.Literals.MEMBERSHIP__FARMER,
 				ModelPackage.Literals.PERSON__GIVEN_NAME);
-		addTextMap(ViewWidgetId.memberInfo_middleName, DairyPackage.Literals.MEMBERSHIP__MEMBER,
+		addTextMap(ViewWidgetId.memberInfo_middleName, DairyPackage.Literals.MEMBERSHIP__FARMER,
 				ModelPackage.Literals.PERSON__MIDDLE_NAME);
-		addTextMap(ViewWidgetId.memberInfo_lastName, DairyPackage.Literals.MEMBERSHIP__MEMBER,
+		addTextMap(ViewWidgetId.memberInfo_lastName, DairyPackage.Literals.MEMBERSHIP__FARMER,
 				ModelPackage.Literals.PERSON__FAMILY_NAME);
-		addTextMap(ViewWidgetId.memberInfo_additionalNames, DairyPackage.Literals.MEMBERSHIP__MEMBER,
+		addTextMap(ViewWidgetId.memberInfo_additionalNames, DairyPackage.Literals.MEMBERSHIP__FARMER,
 				ModelPackage.Literals.PERSON__ADDITIONAL_NAMES);
-		addTextMap(ViewWidgetId.memberInfo_nssfId, DairyPackage.Literals.MEMBERSHIP__MEMBER,
+		addTextMap(ViewWidgetId.memberInfo_nssfId, DairyPackage.Literals.MEMBERSHIP__FARMER,
 				ModelPackage.Literals.PERSON__NSSF_NUMBER);
-		addTextMap(ViewWidgetId.memberInfo_nhifId, DairyPackage.Literals.MEMBERSHIP__MEMBER,
+		addTextMap(ViewWidgetId.memberInfo_nhifId, DairyPackage.Literals.MEMBERSHIP__FARMER,
 				ModelPackage.Literals.PERSON__NHIF_NUMBER);
-		addTextMap(ViewWidgetId.memberInfo_nationalId, DairyPackage.Literals.MEMBERSHIP__MEMBER,
+		addTextMap(ViewWidgetId.memberInfo_nationalId, DairyPackage.Literals.MEMBERSHIP__FARMER,
 				ModelPackage.Literals.PERSON__NATIONAL_ID);
 
 		addComboMap(ViewWidgetId.memberInfo_honorific, VALID_TITLES, "toString",
-				DairyPackage.Literals.MEMBERSHIP__MEMBER, ModelPackage.Literals.PERSON__HONORIFIC);
+				DairyPackage.Literals.MEMBERSHIP__FARMER, ModelPackage.Literals.PERSON__HONORIFIC);
 		addComboMap(ViewWidgetId.memberInfo_suffix, VALID_NAME_SUFFIXES, "toString",
-				DairyPackage.Literals.MEMBERSHIP__MEMBER, ModelPackage.Literals.PERSON__SUFFIX);
+				DairyPackage.Literals.MEMBERSHIP__FARMER, ModelPackage.Literals.PERSON__SUFFIX);
 
 // addComboMap(ViewWidgetId.memberInfo_defaultRoute, collectionCenters, "getCode",
 // DairyPackage.Literals.MEMBERSHIP__DEFAULT_ROUTE);
@@ -182,11 +182,11 @@ public class MemberEditDialogController extends RecordDialogController<Membershi
 		super.afterBind();
 
 		final Membership selectedMember = getWorkingCopy();
-		if (null == selectedMember || null == selectedMember.getMember()) {
+		if (null == selectedMember || null == selectedMember.getFarmer()) {
 			throw new IllegalStateException();
 		}
 
-		photoRidget.bindToModel(EMFObservables.observeValue(selectedMember.getMember(),
+		photoRidget.bindToModel(EMFObservables.observeValue(selectedMember.getFarmer(),
 				ModelPackage.Literals.PERSON__PHOTO));
 		photoRidget.updateFromModel();
 

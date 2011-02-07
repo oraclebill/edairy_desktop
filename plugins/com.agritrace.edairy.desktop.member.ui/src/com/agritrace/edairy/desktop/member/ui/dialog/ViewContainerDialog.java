@@ -2,11 +2,9 @@ package com.agritrace.edairy.desktop.member.ui.dialog;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
-import org.eclipse.riena.ui.swt.ImageButton;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -19,7 +17,7 @@ import com.agritrace.edairy.desktop.common.ui.DesktopBaseActivator;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
-import com.agritrace.edairy.desktop.member.ui.dialog.controller.ViewContainerDialogController;
+import com.agritrace.edairy.desktop.member.ui.dialog.controller.ContainerEditDialogController;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
@@ -41,7 +39,7 @@ public class ViewContainerDialog extends RecordDialog<Container> {
 	 *            the parent shell
 	 */
 	@Inject
-	public ViewContainerDialog(@Named("current") Shell shell, ViewContainerDialogController controller) {
+	public ViewContainerDialog(@Named("current") Shell shell, ContainerEditDialogController controller) {
 		super(shell, controller);
 	}
 

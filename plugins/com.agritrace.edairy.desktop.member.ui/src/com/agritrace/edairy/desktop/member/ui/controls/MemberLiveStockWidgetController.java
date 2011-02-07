@@ -153,7 +153,7 @@ public class MemberLiveStockWidgetController extends WidgetDirectoryController<R
 
 		final List<Farm> farmList = new ArrayList<Farm>();
 		if (inputModel instanceof Membership) {
-			farmList.addAll(((Membership) inputModel).getMember().getFarms());
+			farmList.addAll(((Membership) inputModel).getFarmer().getFarms());
 			aniamlDialog.getController().setContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER, inputModel);
 
 		} else if (inputModel instanceof Farm) {

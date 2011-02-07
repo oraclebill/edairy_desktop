@@ -90,7 +90,7 @@ public class MemberFarmWidgetController extends WidgetDirectoryController<Farm> 
 	public void updateBinding() {
 		if (selectedMember != null) {
 			farms.clear();
-			farms.addAll(selectedMember.getMember().getFarms());
+			farms.addAll(selectedMember.getFarmer().getFarms());
 			table.updateFromModel();
 		}
 	}
@@ -100,10 +100,10 @@ public class MemberFarmWidgetController extends WidgetDirectoryController<Farm> 
 			final List<Object> selections = table.getSelection();
 			if (selectedMember != null) {
 				for (final Object selObject : selections) {
-					selectedMember.getMember().getFarms().remove(selObject);
+					selectedMember.getFarmer().getFarms().remove(selObject);
 					((Farm) selObject).getAnimals().clear();
 					((Farm) selObject).setLocation(null);
-					selectedMember.getMember().getFarms().remove(selObject);
+					selectedMember.getFarmer().getFarms().remove(selObject);
 					farms.remove(selObject);
 					farmRepository.delete((Farm) selObject);
 					memberRepository.update(selectedMember);
@@ -147,7 +147,7 @@ public class MemberFarmWidgetController extends WidgetDirectoryController<Farm> 
 		if (returnCode == AbstractWindowController.OK) {
 			newNode = (FarmListViewTableNode) memberDialog.getController().getContext(
 					ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM);
-			selectedMember.getMember().getFarms().add(newFarm);
+			selectedMember.getFarmer().getFarms().add(newFarm);
 			if (selectedMember.getMemberId() != null) {
 				farmRepository.saveNew(newFarm);
 				memberRepository.update(selectedMember);

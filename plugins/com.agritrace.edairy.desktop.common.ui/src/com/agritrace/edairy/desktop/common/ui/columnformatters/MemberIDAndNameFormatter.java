@@ -21,7 +21,7 @@ public class MemberIDAndNameFormatter extends ColumnFormatter {
 				element = PropertyUtils.getNestedProperty(element, propertyName);
 			}
 			final Membership m = (Membership) element;
-			Person p = m.getMember();
+			Person p = m.getFarmer();
 			s = String.format("%s - %s, %s", m.getMemberNumber(), p.getFamilyName(), p.getGivenName());
 		} catch (final Exception e) {
 			e.printStackTrace();

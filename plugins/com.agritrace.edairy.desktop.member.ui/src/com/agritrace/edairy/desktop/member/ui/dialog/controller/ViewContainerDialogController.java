@@ -111,7 +111,7 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 		selectedMember = null;
 		final Object selected = getContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER);
 		if (selected instanceof Membership) {
-			selectedMember = ((Membership) selected).getMember();
+			selectedMember = ((Membership) selected).getFarmer();
 		} else if (selected instanceof Farmer) {
 			selectedMember = (Farmer) selected;
 		}		
@@ -237,10 +237,10 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 				final Membership memberShip = memberDialog.getSelectedMember();
 
 				if (memberShip != null) {
-					final String memberName = memberShip.getMember().getFormattedName();
+					final String memberName = memberShip.getFarmer().getFormattedName();
 					memberNameRidget.setText(memberName);
 					farmList.clear();
-					farmList.addAll(memberShip.getMember().getFarms());
+					farmList.addAll(memberShip.getFarmer().getFarms());
 					farmCombo.updateFromModel();
 					farmCombo.setSelection(farmCombo.getEmptySelectionItem());
 					enableSaveButton(false);

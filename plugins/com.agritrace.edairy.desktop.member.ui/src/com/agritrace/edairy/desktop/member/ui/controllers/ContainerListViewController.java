@@ -29,6 +29,7 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.data.ContainerListViewTableNode;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewContainerDialog;
+import com.agritrace.edairy.desktop.member.ui.dialog.controller.ContainerEditDialogController;
 import com.agritrace.edairy.desktop.member.ui.dialog.controller.ViewContainerDialogController;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -77,6 +78,9 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 
 		@Override
 		public void persistNew(Container obj) {
+			if (obj.getTrackingNumber() == null) { 
+				obj.setTrackingNumber("" + obj.hashCode());
+			}
 			repository.save(obj);
 		}
 
@@ -94,7 +98,7 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 	// table columns
 	private final String[] containerColumnHeaders = { "Member No.", "Member Name", "Farm Name", "Container ID",
 			"Unit of Measure", "Capacity" };
-	private final String[] containerPropertyNames = { "membership.memberNumber", "membership.member.formattedName",
+	private final String[] containerPropertyNames = { "class", "membership.farmer.formattedName",
 			"container.owner.name", "container.trackingNumber", "container.measureType", "container.capacity" };
 	// filter
 	private IComboRidget farmCombo;
@@ -144,7 +148,7 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 			farmCombofarms.clear();
 			if (farmCombo != null) {
 				final String currentSelection = farmCombo.getText();
-				final List<Farm> farms = selectedMember.getMember().getFarms();
+				final List<Farm> farms = selectedMember.getFarmer().getFarms();
 				for (final Farm farm : farms) {
 					farmNames.add(farm.getName());
 					farmCombofarms.add(farm);
@@ -187,7 +191,7 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 		final List<ContainerListViewTableNode> results = new ArrayList<ContainerListViewTableNode>();
 		final List<Farm> farms = new ArrayList<Farm>();
 		if (selectedMember != null) {
-			farms.addAll(selectedMember.getMember().getFarms());
+			farms.addAll(selectedMember.getFarmer().getFarms());
 		} else {
 			farms.addAll(farmRepository.all());
 		}
@@ -225,7 +229,7 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 			if (retVal == Window.OK) {
 				selectedMember = memberDialog.getSelectedMember();
 				if (selectedMember != null) {
-					final String memberName = selectedMember.getMember().getFormattedName();
+					final String memberName = selectedMember.getFarmer().getFormattedName();
 					memberNameFilter.setText(memberName);
 					updateFarmCombo();
 					if (searchButton != null) {
@@ -248,8 +252,9 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 
 	@Override
 	protected RecordDialog<Container> getRecordDialog(Shell shell) {
-		ViewContainerDialogController controller = new ViewContainerDialogController(memberSearchProvider);
-		return new ViewContainerDialog(getShell(), controller);
+//		ViewContainerDialogController controller = new ViewContainerDialogController(memberSearchProvider);
+		
+		return new ViewContainerDialog(getShell(), new ContainerEditDialogController(memberSearchProvider));
 	}
 
 	@Override

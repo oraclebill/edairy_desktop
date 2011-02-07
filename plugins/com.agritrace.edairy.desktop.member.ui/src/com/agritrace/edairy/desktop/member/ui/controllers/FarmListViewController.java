@@ -51,7 +51,7 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 	private final String[] farmColumnHeaders = { "Member No.", "Member Name", "Farm Name", "Location", "Herd Size",
 			"Container Count" };
 
-	private final String[] farmPropertyNames = { "membership.memberNumber", "membership.member.formattedName",
+	private final String[] farmPropertyNames = { "membership.memberNumber", "membership.farmer.formattedName",
 			"farm.name", "farm.location", "farm.numberOfAnimals", "farm.numberOfContainers" };
 
 	private IComboRidget farmCombo;
@@ -96,7 +96,7 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 				final String currentSelection = farmCombo.getText();
 				farmNames.clear();
 				farmNames.add(ALL_FARM);
-				final List<Farm> farms = selectedMember.getMember().getFarms();
+				final List<Farm> farms = selectedMember.getFarmer().getFarms();
 				for (final Farm farm : farms) {
 					farmNames.add(farm.getName());
 				}
@@ -161,7 +161,7 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 	protected List<FarmListViewTableNode> getFilteredFarmResult() {
 		final List<Farm> allFarms = new ArrayList<Farm>();
 		if (selectedMember != null) {
-			allFarms.addAll(selectedMember.getMember().getFarms());
+			allFarms.addAll(selectedMember.getFarmer().getFarms());
 		} else {
 			allFarms.addAll(farmRepository.all());
 		}
@@ -207,7 +207,7 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 			if (returnCode == AbstractWindowController.OK) {
 				selectedNode = (FarmListViewTableNode) farmDialog.getController().getContext(
 						ControllerContextConstant.FARM_DIALOG_CONTXT_SELECTED_FARM);
-				selectedMember.getMember().getFarms().add(newFarm);
+				selectedMember.getFarmer().getFarms().add(newFarm);
 				if (selectedMember.getMemberId() != 0) {
 					farmRepository.saveNew(newFarm);
 					memberRepository.update(selectedMember);
@@ -238,7 +238,7 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 					return;
 				}
 
-				final String memberName = selectedMember.getMember().getFormattedName();
+				final String memberName = selectedMember.getFarmer().getFormattedName();
 				memberNameFilter.setText(memberName);
 				updateFarmCombo();
 
@@ -274,7 +274,7 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 					}
 					message = String.format(DELETE_DIALOG_MESSAGE, message);
 					if (MessageDialog.openConfirm(Display.getDefault().getActiveShell(), DELETE_DIALOG_TITLE, message)) {
-						selectedNode.getMembership().getMember().getFarms().remove(selectedNode.getFarm());
+						selectedNode.getMembership().getFarmer().getFarms().remove(selectedNode.getFarm());
 						selectedNode.getFarm().getAnimals().clear();
 						selectedNode.getFarm().setLocation(null);
 						farmRepository.delete(selectedNode.getFarm());

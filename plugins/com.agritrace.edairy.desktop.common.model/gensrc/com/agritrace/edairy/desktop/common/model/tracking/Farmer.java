@@ -49,7 +49,7 @@ public interface Farmer extends Person {
 
 	/**
 	 * Returns the value of the '<em><b>Membership</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getMember <em>Member</em>}'.
+	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getFarmer <em>Farmer</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Membership</em>' container reference isn't clear,
@@ -59,8 +59,8 @@ public interface Farmer extends Person {
 	 * @return the value of the '<em>Membership</em>' container reference.
 	 * @see #setMembership(Membership)
 	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getFarmer_Membership()
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Membership#getMember
-	 * @model opposite="member" transient="false"
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Membership#getFarmer
+	 * @model opposite="farmer" transient="false"
 	 * @generated
 	 */
 	Membership getMembership();

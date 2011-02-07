@@ -382,7 +382,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" lowerBound="1"
         eType="#//MembershipStatus"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="defaultRoute" eType="#//DairyLocation"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="member" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="farmer" lowerBound="1"
         eType="ecore:EClass farm.ecore#//Farmer" containment="true" eOpposite="farm.ecore#//Farmer/membership"
         eKeys="common.ecore#//Person/personId"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="account" lowerBound="1"

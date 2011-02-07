@@ -41,7 +41,7 @@ public class YearReportDao {
 		for (PaymentRecord rec: paymentRecords) {
 			final Membership member = rec.getMember();
 			
-			FarmerPayablesYearData data = new FarmerPayablesYearData(member.getMember().getGivenName(),
+			FarmerPayablesYearData data = new FarmerPayablesYearData(member.getFarmer().getGivenName(),
 					member.getMemberNumber(), member.getAccount().getAccountNumber(), rec.getMilkIncome().toString(),
 					rec.getAccountCredits().toString(), rec.getAccountAdjustments().toString(),
 					rec.getTotalPayment().toString());

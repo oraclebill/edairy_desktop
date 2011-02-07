@@ -96,7 +96,7 @@ public class MemberContainerWidgetController extends WidgetDirectoryController<C
 		if (inputModel != null) {
 			if (inputModel instanceof Membership) {
 				final Membership selectedMember = (Membership) inputModel;
-				farms.addAll(selectedMember.getMember().getFarms());
+				farms.addAll(selectedMember.getFarmer().getFarms());
 
 			} else if (inputModel instanceof Farm) {
 				final Farm farm = (Farm) inputModel;

@@ -79,8 +79,8 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 	private final String[] memberColumnHeaders = { "ID", "Name", "Default Route", "Status", "Phone", "Milk Collection",
 			"Monthly Credit Sales", "Credit Balance" };
 
-	private final String[] memberPropertyNames = { "memberNumber", "member.formattedName", "defaultRoute.code",
-			"status.name", "member.phoneNumber" }; 
+	private final String[] memberPropertyNames = { "memberNumber", "farmer.formattedName", "defaultRoute.code",
+			"status.name", "farmer.phoneNumber" }; 
 
 	private ITextRidget searchText;
 	private final Dairy localDairy;
@@ -155,7 +155,7 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 				results.addAll(allMembers);
 			} else {
 				for (final Membership member : allMembers) {
-					final Person person = member.getMember();
+					final Person person = member.getFarmer();
 					final String matchText = person.getGivenName() + " " + person.getFamilyName() + " "
 							+ person.getAdditionalNames();
 					if (matchText.toUpperCase().contains(memberName.toUpperCase())) {

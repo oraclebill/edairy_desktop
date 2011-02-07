@@ -75,7 +75,7 @@ public class MemberSearchDialog extends TitleAreaDialog {
 				if (comboStr.equals("ID")) {
 					selected = membership.getMemberNumber().toLowerCase().contains(textStr);
 				} else if (comboStr.equals("Name")) {
-					final Person member = membership.getMember();
+					final Person member = membership.getFarmer();
 					if (member != null) {
 						String name = member.getGivenName().toLowerCase();
 						if (name != null && name.trim().length() > 0) {
@@ -140,7 +140,7 @@ public class MemberSearchDialog extends TitleAreaDialog {
 		public String getColumnText(Object element, int columnIndex) {
 			if (element instanceof Membership) {
 				final Membership membership = (Membership) element;
-				final Person member = membership.getMember();
+				final Person member = membership.getFarmer();
 				assert member != null;
 				switch (columnIndex) {
 				case 0:

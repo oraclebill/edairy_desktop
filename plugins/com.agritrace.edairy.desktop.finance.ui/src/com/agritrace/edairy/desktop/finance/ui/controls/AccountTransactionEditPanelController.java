@@ -176,7 +176,7 @@ public class AccountTransactionEditPanelController extends AbstractDetailPanelCo
 		}
 
 		getModel().setAccount(memberAccount);
-		memberName.setText(MemberUtil.formattedMemberName(selectedMember.getMember()));
+		memberName.setText(MemberUtil.formattedMemberName(selectedMember.getFarmer()));
 	}
 
 	void updateWidgetsForSource(TransactionSource source) {

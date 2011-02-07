@@ -128,7 +128,7 @@ public class LiveStockFilterWidgetController implements WidgetController<Object>
 		farmsList.clear();
 		farmsList.add("All Farms");
 		if (inputModel instanceof Membership) {
-			final List<Farm> farms = ((Membership) inputModel).getMember().getFarms();
+			final List<Farm> farms = ((Membership) inputModel).getFarmer().getFarms();
 			for (final Farm farm : farms) {
 				farmsList.add(farm.getName());
 			}

@@ -83,7 +83,7 @@ public final class AdjustmentTransactionJournalController extends TransactionJou
 				if (element instanceof Account) {
 					final Account acct = (Account) element;
 					try {
-						Person member = acct.getMember().getMember();
+						Person member = acct.getMember().getFarmer();
 						ret = String.format("%s %s", member.getGivenName(), member.getFamilyName());
 					} catch (final Exception e) {
 						ret = "account # " + acct.getAccountId();

@@ -282,7 +282,7 @@ public class LivestockEditDialogController extends BaseDialogController<Register
 		final Object selected = getContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER);
 		Farmer selectedFarmer = null;
 		if (selected instanceof Membership) {
-			selectedFarmer = ((Membership) selected).getMember();
+			selectedFarmer = ((Membership) selected).getFarmer();
 
 		} else if (selected instanceof Farmer) {
 			selectedFarmer = (Farmer) selected;
@@ -555,10 +555,10 @@ public class LivestockEditDialogController extends BaseDialogController<Register
 			if (retVal == Window.OK) {
 				selectedMember = memberDialog.getSelectedMember();
 				if (selectedMember != null) {
-					final String memberName = selectedMember.getMember().getFormattedName();
+					final String memberName = selectedMember.getFarmer().getFormattedName();
 					memberNameRidget.setText(memberName);
 					farmList.clear();
-					farmList.addAll(selectedMember.getMember().getFarms());
+					farmList.addAll(selectedMember.getFarmer().getFarms());
 					farmCombo.updateFromModel();
 					farmCombo.setSelection(farmCombo.getEmptySelectionItem());
 					enableSaveButton(false);

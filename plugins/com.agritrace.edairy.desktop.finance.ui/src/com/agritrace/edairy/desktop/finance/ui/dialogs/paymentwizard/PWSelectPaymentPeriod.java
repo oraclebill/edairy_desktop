@@ -176,7 +176,7 @@ public class PWSelectPaymentPeriod extends PWPage {
 			String message = "Some members have flagged deliveries for this month. Please correct them before proceeding.";
 			
 			for (Membership member: flaggedMembers) {
-				message += "\n - " + MemberUtil.formattedMemberName(member.getMember());
+				message += "\n - " + MemberUtil.formattedMemberName(member.getFarmer());
 			}
 			
 			setErrorMessage(message);

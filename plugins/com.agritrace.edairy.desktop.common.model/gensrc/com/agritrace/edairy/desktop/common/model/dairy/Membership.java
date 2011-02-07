@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getEffectiveDate <em>Effective Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getStatus <em>Status</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getDefaultRoute <em>Default Route</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getMember <em>Member</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getFarmer <em>Farmer</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getAccount <em>Account</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getDairy <em>Dairy</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getMaziwaCardNumber <em>Maziwa Card Number</em>}</li>
@@ -204,7 +204,7 @@ public interface Membership extends EObject {
 	void setDefaultRoute(DairyLocation value);
 
 	/**
-	 * Returns the value of the '<em><b>Member</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Farmer</b></em>' containment reference.
 	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.tracking.Farmer#getMembership <em>Membership</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -212,24 +212,24 @@ public interface Membership extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Member</em>' containment reference.
-	 * @see #setMember(Farmer)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMembership_Member()
+	 * @return the value of the '<em>Farmer</em>' containment reference.
+	 * @see #setFarmer(Farmer)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMembership_Farmer()
 	 * @see com.agritrace.edairy.desktop.common.model.tracking.Farmer#getMembership
 	 * @model opposite="membership" containment="true" keys="personId" required="true"
 	 * @generated
 	 */
-	Farmer getMember();
+	Farmer getFarmer();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getMember <em>Member</em>}' containment reference.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getFarmer <em>Farmer</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Member</em>' containment reference.
-	 * @see #getMember()
+	 * @param value the new value of the '<em>Farmer</em>' containment reference.
+	 * @see #getFarmer()
 	 * @generated
 	 */
-	void setMember(Farmer value);
+	void setFarmer(Farmer value);
 
 	/**
 	 * Returns the value of the '<em><b>Account</b></em>' containment reference.

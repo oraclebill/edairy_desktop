@@ -552,7 +552,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		final Membership member = workingJournalLine.getValidatedMember();
 		if (member != null) {
 //			workingJournalLine.setValidatedMember(member);
-			memberNameText = formatPersonName(member.getMember());
+			memberNameText = formatPersonName(member.getFarmer());
 			if (label != null) {
 				if (routeValidator == null || routeValidator.validate(member).isOK()) {
 					label.setForeground(SUCCESS_COLOR);

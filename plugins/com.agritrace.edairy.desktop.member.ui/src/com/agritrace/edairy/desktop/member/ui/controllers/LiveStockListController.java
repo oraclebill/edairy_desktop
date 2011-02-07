@@ -49,7 +49,7 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 	public static final String liveStockRemoveTitle = "Remove Registered Animales";
 	private static final String[] columnHeaders = { "Member ID", "Member Name", "Farm Name", "Purpose", "Animal Name",
 			"Species", "Breed", "Acquisition Date" }; // , "Status" };
-	private static final String[] propertyNames = { "membership.memberNumber", "membership.member.formattedName",
+	private static final String[] propertyNames = { "membership.memberNumber", "membership.farmer.formattedName",
 			"animal.location.name", "animal.purpose", "animal.givenName", "animal.animalType.species",
 			"animal.animalType.breed", "animal.dateOfAcquisition" }; // , "animal.status" };
 
@@ -206,7 +206,7 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 		aniamlDialog.getController().setContext(ControllerContextConstant.DIALOG_CONTXT_SELECTED, newAnimal);
 		final List<Farm> farmList = new ArrayList<Farm>();
 		if (selectedMember != null) {
-			farmList.addAll(selectedMember.getMember().getFarms());
+			farmList.addAll(selectedMember.getFarmer().getFarms());
 		}
 
 		aniamlDialog.getController().setContext(ControllerContextConstant.LIVESTOCK_DIALOG_CONTXT_FARM_LIST, farmList);
@@ -274,7 +274,7 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 				selectedMember = memberDialog.getSelectedMember();
 
 				if (selectedMember != null) {
-					final String memberName = selectedMember.getMember().getFormattedName();
+					final String memberName = selectedMember.getFarmer().getFormattedName();
 					memberNameFilter.setText(memberName);
 					filterController.setInputModel(selectedMember);
 					if (filterController.getSearch() != null) {
@@ -303,8 +303,8 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 				case 1:
 					final Membership node1 = (Membership) o1;
 					final Membership node2 = (Membership) o2;
-					final Person member1 = node1.getMember();
-					final Person member2 = node2.getMember();
+					final Person member1 = node1.getFarmer();
+					final Person member2 = node2.getFarmer();
 					if (member1 != null && member2 != null) {
 						final String name1 = member1.getFamilyName() + "," + member1.getGivenName();
 						final String name2 = member2.getFamilyName() + "," + member2.getGivenName();

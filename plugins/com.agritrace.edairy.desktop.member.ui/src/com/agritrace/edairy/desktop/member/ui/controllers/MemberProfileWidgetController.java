@@ -47,13 +47,13 @@ public class MemberProfileWidgetController implements WidgetController<Membershi
 
 		mapper.addMapping(ViewWidgetId.memberInfo_applicationDate, DairyPackage.Literals.MEMBERSHIP__APPLICATION_DATE);
 		mapper.addMapping(ViewWidgetId.memberInfo_effectiveDate, DairyPackage.Literals.MEMBERSHIP__EFFECTIVE_DATE);
-		mapper.addMapping(ViewWidgetId.memberInfo_phone, DairyPackage.Literals.MEMBERSHIP__MEMBER,
+		mapper.addMapping(ViewWidgetId.memberInfo_phone, DairyPackage.Literals.MEMBERSHIP__FARMER,
 				ModelPackage.Literals.PERSON__PHONE_NUMBER);
-		mapper.addMapping(ViewWidgetId.memberInfo_nationalId, DairyPackage.Literals.MEMBERSHIP__MEMBER,
+		mapper.addMapping(ViewWidgetId.memberInfo_nationalId, DairyPackage.Literals.MEMBERSHIP__FARMER,
 				ModelPackage.Literals.PERSON__NATIONAL_ID);
-		mapper.addMapping(ViewWidgetId.memberInfo_nssfId, DairyPackage.Literals.MEMBERSHIP__MEMBER,
+		mapper.addMapping(ViewWidgetId.memberInfo_nssfId, DairyPackage.Literals.MEMBERSHIP__FARMER,
 				ModelPackage.Literals.PERSON__NSSF_NUMBER);
-		mapper.addMapping(ViewWidgetId.memberInfo_nhifId, DairyPackage.Literals.MEMBERSHIP__MEMBER,
+		mapper.addMapping(ViewWidgetId.memberInfo_nhifId, DairyPackage.Literals.MEMBERSHIP__FARMER,
 				ModelPackage.Literals.PERSON__NHIF_NUMBER);
 		mapper.addMapping(ViewWidgetId.ID_MAZIWA_CARD_NUM, DairyPackage.Literals.MEMBERSHIP__MAZIWA_CARD_NUMBER);
 		mapper.addMapping(ViewWidgetId.ID_MAZIWA_CARD_DATE, DairyPackage.Literals.MEMBERSHIP__MAZIWA_CARD_ISSUE_DATE);

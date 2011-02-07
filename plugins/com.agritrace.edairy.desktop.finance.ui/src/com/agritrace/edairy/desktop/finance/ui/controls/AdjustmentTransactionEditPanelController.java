@@ -58,7 +58,7 @@ public class AdjustmentTransactionEditPanelController {
 					Assert.isTrue(selectedMember.getAccount() == memberAccount);
 				}
 				AdjustmentTransactionEditPanelController.this.model.setAccount(memberAccount);
-				nameRidget.setText(MemberUtil.formattedMemberName(selectedMember.getMember()));
+				nameRidget.setText(MemberUtil.formattedMemberName(selectedMember.getFarmer()));
 			}
 		}
 	}

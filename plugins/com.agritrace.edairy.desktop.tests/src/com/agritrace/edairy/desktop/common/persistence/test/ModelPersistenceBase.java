@@ -145,7 +145,7 @@ public class ModelPersistenceBase {
 
 	protected void printout(Membership membership, long count) {
 		final Account a = membership.getAccount();
-		final Farmer f = membership.getMember();
+		final Farmer f = membership.getFarmer();
 		final DairyLocation r = membership.getDefaultRoute();
 		final Formatter formatter = new Formatter();
 		formatter.format("Member: %s, Account: %s, Farmer: %s, Route: %s\n",

@@ -341,7 +341,7 @@ public class DairyUtil {
 			// createLocation(null, null, null)));
 			farmer = createFarmer("", "", "", "", new ArrayList<Farm>());
 		}
-		member.setMember(farmer);
+		member.setFarmer(farmer);
 
 		if (null == effectiveDate) {
 			// effectiveDate = new Date(0);

@@ -176,7 +176,7 @@ public class FarmEditDialogController extends BaseDialogController<Farm> {
 			}
 			if (memberNameRidget != null) {
 				memberNameRidget.setText(FARM_MEMBER_NAME_LABEL_PREFIX
-						+ MemberUtil.formattedMemberName(selectedNode.getMembership().getMember()));
+						+ MemberUtil.formattedMemberName(selectedNode.getMembership().getFarmer()));
 			}
 		}
 	}

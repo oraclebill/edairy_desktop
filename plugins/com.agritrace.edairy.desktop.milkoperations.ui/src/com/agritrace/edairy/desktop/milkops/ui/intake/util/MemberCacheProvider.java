@@ -13,7 +13,7 @@ public class MemberCacheProvider implements IMemberLookup {
 
 	public MemberCacheProvider(Collection<Membership> members) {
 		for (final Membership member : members) {
-			System.err.printf("Adding member %s: %s \n", member.getMemberNumber(), member.getMember().getFamilyName());
+			System.err.printf("Adding member %s: %s \n", member.getMemberNumber(), member.getFarmer().getFamilyName());
 			memberCache.put(member.getMemberNumber(), member);
 		}
 	}

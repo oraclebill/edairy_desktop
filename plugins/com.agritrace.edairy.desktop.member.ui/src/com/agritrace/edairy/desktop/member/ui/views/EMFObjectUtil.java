@@ -35,7 +35,7 @@ public class EMFObjectUtil {
 		member1.setApplicationDate(appliedDate);
 
 		final Farmer member = TrackingFactory.eINSTANCE.createFarmer();
-		member1.setMember(member);
+		member1.setFarmer(member);
 
 		final Location memberLocation = ModelFactory.eINSTANCE.createLocation();
 		final PostalLocation defaultLocation = ModelFactory.eINSTANCE.createPostalLocation();

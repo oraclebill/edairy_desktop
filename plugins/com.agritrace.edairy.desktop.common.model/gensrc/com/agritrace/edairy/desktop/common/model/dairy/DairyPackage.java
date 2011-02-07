@@ -1987,13 +1987,13 @@ public interface DairyPackage extends EPackage {
 	int MEMBERSHIP__DEFAULT_ROUTE = 5;
 
 	/**
-	 * The feature id for the '<em><b>Member</b></em>' containment reference.
+	 * The feature id for the '<em><b>Farmer</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBERSHIP__MEMBER = 6;
+	int MEMBERSHIP__FARMER = 6;
 
 	/**
 	 * The feature id for the '<em><b>Account</b></em>' containment reference.
@@ -4564,15 +4564,15 @@ public interface DairyPackage extends EPackage {
 	EReference getMembership_DefaultRoute();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getMember <em>Member</em>}'.
+	 * Returns the meta object for the containment reference '{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getFarmer <em>Farmer</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Member</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Membership#getMember()
+	 * @return the meta object for the containment reference '<em>Farmer</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Membership#getFarmer()
 	 * @see #getMembership()
 	 * @generated
 	 */
-	EReference getMembership_Member();
+	EReference getMembership_Farmer();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link com.agritrace.edairy.desktop.common.model.dairy.Membership#getAccount <em>Account</em>}'.
@@ -6534,12 +6534,12 @@ public interface DairyPackage extends EPackage {
 		EReference MEMBERSHIP__DEFAULT_ROUTE = eINSTANCE.getMembership_DefaultRoute();
 
 		/**
-		 * The meta object literal for the '<em><b>Member</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Farmer</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MEMBERSHIP__MEMBER = eINSTANCE.getMembership_Member();
+		EReference MEMBERSHIP__FARMER = eINSTANCE.getMembership_Farmer();
 
 		/**
 		 * The meta object literal for the '<em><b>Account</b></em>' containment reference feature.

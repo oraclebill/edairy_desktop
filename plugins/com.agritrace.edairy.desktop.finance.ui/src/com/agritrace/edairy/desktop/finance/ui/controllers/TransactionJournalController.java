@@ -101,7 +101,7 @@ public abstract class TransactionJournalController<T extends Transaction>
 			protected void callback(Membership selectedMember) {
 				filterBean.setMember(selectedMember);
 				memberNameRidget.setText(MemberUtil
-						.formattedMemberName(selectedMember.getMember()));
+						.formattedMemberName(selectedMember.getFarmer()));
 			}
 
 			@Override

@@ -19,7 +19,7 @@ public class Member2StringConverter extends Converter {
 	public Object convert(Object fromObject) {
 		if (fromObject instanceof Membership) {
 			final Membership ship = (Membership) fromObject;
-			final Farmer farmer = ship.getMember();
+			final Farmer farmer = ship.getFarmer();
 			return farmer.getGivenName() + " " + farmer.getFamilyName();
 		}
 		return null;

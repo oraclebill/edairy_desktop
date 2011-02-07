@@ -43,7 +43,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl#getEffectiveDate <em>Effective Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl#getDefaultRoute <em>Default Route</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl#getMember <em>Member</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl#getFarmer <em>Farmer</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl#getAccount <em>Account</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl#getDairy <em>Dairy</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl#getMaziwaCardNumber <em>Maziwa Card Number</em>}</li>
@@ -165,14 +165,14 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	protected DairyLocation defaultRoute;
 
 	/**
-	 * The cached value of the '{@link #getMember() <em>Member</em>}' containment reference.
+	 * The cached value of the '{@link #getFarmer() <em>Farmer</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMember()
+	 * @see #getFarmer()
 	 * @generated
 	 * @ordered
 	 */
-	protected Farmer member;
+	protected Farmer farmer;
 
 	/**
 	 * The cached value of the '{@link #getAccount() <em>Account</em>}' containment reference.
@@ -391,8 +391,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Farmer getMember() {
-		return member;
+	public Farmer getFarmer() {
+		return farmer;
 	}
 
 	/**
@@ -400,11 +400,11 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetMember(Farmer newMember, NotificationChain msgs) {
-		Farmer oldMember = member;
-		member = newMember;
+	public NotificationChain basicSetFarmer(Farmer newFarmer, NotificationChain msgs) {
+		Farmer oldFarmer = farmer;
+		farmer = newFarmer;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__MEMBER, oldMember, newMember);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__FARMER, oldFarmer, newFarmer);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -415,18 +415,18 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMember(Farmer newMember) {
-		if (newMember != member) {
+	public void setFarmer(Farmer newFarmer) {
+		if (newFarmer != farmer) {
 			NotificationChain msgs = null;
-			if (member != null)
-				msgs = ((InternalEObject)member).eInverseRemove(this, TrackingPackage.FARMER__MEMBERSHIP, Farmer.class, msgs);
-			if (newMember != null)
-				msgs = ((InternalEObject)newMember).eInverseAdd(this, TrackingPackage.FARMER__MEMBERSHIP, Farmer.class, msgs);
-			msgs = basicSetMember(newMember, msgs);
+			if (farmer != null)
+				msgs = ((InternalEObject)farmer).eInverseRemove(this, TrackingPackage.FARMER__MEMBERSHIP, Farmer.class, msgs);
+			if (newFarmer != null)
+				msgs = ((InternalEObject)newFarmer).eInverseAdd(this, TrackingPackage.FARMER__MEMBERSHIP, Farmer.class, msgs);
+			msgs = basicSetFarmer(newFarmer, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__MEMBER, newMember, newMember));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__FARMER, newFarmer, newFarmer));
 	}
 
 	/**
@@ -563,10 +563,10 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case DairyPackage.MEMBERSHIP__MEMBER:
-				if (member != null)
-					msgs = ((InternalEObject)member).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DairyPackage.MEMBERSHIP__MEMBER, null, msgs);
-				return basicSetMember((Farmer)otherEnd, msgs);
+			case DairyPackage.MEMBERSHIP__FARMER:
+				if (farmer != null)
+					msgs = ((InternalEObject)farmer).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DairyPackage.MEMBERSHIP__FARMER, null, msgs);
+				return basicSetFarmer((Farmer)otherEnd, msgs);
 			case DairyPackage.MEMBERSHIP__ACCOUNT:
 				if (account != null)
 					msgs = ((InternalEObject)account).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DairyPackage.MEMBERSHIP__ACCOUNT, null, msgs);
@@ -587,8 +587,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case DairyPackage.MEMBERSHIP__MEMBER:
-				return basicSetMember(null, msgs);
+			case DairyPackage.MEMBERSHIP__FARMER:
+				return basicSetFarmer(null, msgs);
 			case DairyPackage.MEMBERSHIP__ACCOUNT:
 				return basicSetAccount(null, msgs);
 			case DairyPackage.MEMBERSHIP__DAIRY:
@@ -632,8 +632,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 			case DairyPackage.MEMBERSHIP__DEFAULT_ROUTE:
 				if (resolve) return getDefaultRoute();
 				return basicGetDefaultRoute();
-			case DairyPackage.MEMBERSHIP__MEMBER:
-				return getMember();
+			case DairyPackage.MEMBERSHIP__FARMER:
+				return getFarmer();
 			case DairyPackage.MEMBERSHIP__ACCOUNT:
 				return getAccount();
 			case DairyPackage.MEMBERSHIP__DAIRY:
@@ -672,8 +672,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 			case DairyPackage.MEMBERSHIP__DEFAULT_ROUTE:
 				setDefaultRoute((DairyLocation)newValue);
 				return;
-			case DairyPackage.MEMBERSHIP__MEMBER:
-				setMember((Farmer)newValue);
+			case DairyPackage.MEMBERSHIP__FARMER:
+				setFarmer((Farmer)newValue);
 				return;
 			case DairyPackage.MEMBERSHIP__ACCOUNT:
 				setAccount((Account)newValue);
@@ -717,8 +717,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 			case DairyPackage.MEMBERSHIP__DEFAULT_ROUTE:
 				setDefaultRoute((DairyLocation)null);
 				return;
-			case DairyPackage.MEMBERSHIP__MEMBER:
-				setMember((Farmer)null);
+			case DairyPackage.MEMBERSHIP__FARMER:
+				setFarmer((Farmer)null);
 				return;
 			case DairyPackage.MEMBERSHIP__ACCOUNT:
 				setAccount((Account)null);
@@ -756,8 +756,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 				return status != STATUS_EDEFAULT;
 			case DairyPackage.MEMBERSHIP__DEFAULT_ROUTE:
 				return defaultRoute != null;
-			case DairyPackage.MEMBERSHIP__MEMBER:
-				return member != null;
+			case DairyPackage.MEMBERSHIP__FARMER:
+				return farmer != null;
 			case DairyPackage.MEMBERSHIP__ACCOUNT:
 				return account != null;
 			case DairyPackage.MEMBERSHIP__DAIRY:

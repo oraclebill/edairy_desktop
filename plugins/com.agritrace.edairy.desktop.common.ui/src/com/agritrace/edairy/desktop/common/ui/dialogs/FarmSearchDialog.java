@@ -268,7 +268,7 @@ public class FarmSearchDialog extends TitleAreaDialog {
 				final Farm farm = (Farm) element;
 				assert farm != null;
 
-				if (null != selectedMember && !selectedMember.getMember().getFarms().contains(element)) {
+				if (null != selectedMember && !selectedMember.getFarmer().getFarms().contains(element)) {
 					return false;
 				}
 

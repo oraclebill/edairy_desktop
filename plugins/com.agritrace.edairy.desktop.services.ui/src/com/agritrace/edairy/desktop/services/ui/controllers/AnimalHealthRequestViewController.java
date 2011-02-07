@@ -153,10 +153,10 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 				@Override
 				public String getText(Object element) {
 					if (element instanceof AnimalHealthRequest) {
-						final String name = ((AnimalHealthRequest) element).getRequestingMember().getMember()
+						final String name = ((AnimalHealthRequest) element).getRequestingMember().getFarmer()
 								.getGivenName()
 								+ " "
-								+ ((AnimalHealthRequest) element).getRequestingMember().getMember().getFamilyName();
+								+ ((AnimalHealthRequest) element).getRequestingMember().getFarmer().getFamilyName();
 						return name == null ? "" : name;
 					}
 					return null;

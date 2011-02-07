@@ -53,7 +53,7 @@ public class MemberSearchViewFilter extends ViewerFilter {
 			return member.getMemberNumber().equals(searchValue);
 
 		case FILTER_NAME:
-			final String compareString = member.getMember().getGivenName() + " " + member.getMember().getFamilyName();
+			final String compareString = member.getFarmer().getGivenName() + " " + member.getFarmer().getFamilyName();
 			return compareString.matches(searchValue);
 		}
 		return false;

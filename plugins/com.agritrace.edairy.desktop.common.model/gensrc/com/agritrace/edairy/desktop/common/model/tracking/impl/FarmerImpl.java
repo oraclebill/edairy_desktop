@@ -118,7 +118,7 @@ public class FarmerImpl extends PersonImpl implements Farmer {
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newMembership != null)
-				msgs = ((InternalEObject)newMembership).eInverseAdd(this, DairyPackage.MEMBERSHIP__MEMBER, Membership.class, msgs);
+				msgs = ((InternalEObject)newMembership).eInverseAdd(this, DairyPackage.MEMBERSHIP__FARMER, Membership.class, msgs);
 			msgs = basicSetMembership(newMembership, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -170,7 +170,7 @@ public class FarmerImpl extends PersonImpl implements Farmer {
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case TrackingPackage.FARMER__MEMBERSHIP:
-				return eInternalContainer().eInverseRemove(this, DairyPackage.MEMBERSHIP__MEMBER, Membership.class, msgs);
+				return eInternalContainer().eInverseRemove(this, DairyPackage.MEMBERSHIP__FARMER, Membership.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
