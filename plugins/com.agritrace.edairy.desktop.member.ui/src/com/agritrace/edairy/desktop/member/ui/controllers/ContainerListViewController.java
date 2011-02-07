@@ -5,39 +5,87 @@ import java.util.List;
 
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.core.databinding.observable.value.WritableValue;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
-import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.swt.widgets.Shell;
 
-import com.agritrace.edairy.desktop.common.model.base.ContainerType;
-import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
+import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
+import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
-import com.agritrace.edairy.desktop.common.model.util.DairyUtil;
 import com.agritrace.edairy.desktop.common.model.util.MemberUtil;
+import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.dao.IFarmRepository;
-import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
+import com.agritrace.edairy.desktop.common.ui.controllers.AbstractPersistenceDelegate;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
-import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.data.ContainerListViewTableNode;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewContainerDialog;
+import com.agritrace.edairy.desktop.member.ui.dialog.controller.ViewContainerDialogController;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 @PermissionRequired(UIPermission.VIEW_CONTAINERS)
 public class ContainerListViewController extends BasicDirectoryController<Container> {
+	
+	private static class ContainerPersistenceDelegate extends AbstractPersistenceDelegate<Container> {
+		
+		final private IRepository<Farm> repository;
+
+		public ContainerPersistenceDelegate(IRepository<Farm> repository) {
+			this.repository = repository;
+		}
+		
+		@Override
+		public Container load(Object key) {
+			return null;
+		}
+
+		@Override
+		public void delete(Container obj) {
+			Farm farm = obj == null ? null : obj.getOwner();
+			if (null != farm) {
+				if (farm.getCans().remove(obj)) {
+					repository.save(farm);
+				}
+				else {
+					System.err.println("WARNING: container "+ obj +" not found in farm!");
+				}
+			}
+			else {
+				System.err.println("WARNING: container has no owner - unable to delete!");
+			}
+		}
+
+		@Override
+		public void rollback(Object obj) {
+			// TODO:
+		}
+
+		@Override
+		public Container createItem() {
+			return TrackingFactory.eINSTANCE.createContainer();
+		}
+
+		@Override
+		public void persistNew(Container obj) {
+			repository.save(obj);
+		}
+
+		@Override
+		public Container updateExisting(Container obj) {
+			repository.save(obj);
+			return obj;
+		}
+	}
 
 	public static final String ALL_FARM = "All Farms";
 	public static final String DELETE_DIALOG_MESSAGE = "Do you want to delete the selected container?";
@@ -73,6 +121,7 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 		this.viewContainerProvider = viewContainerProvider;
 
 		setEClass(TrackingPackage.Literals.CONTAINER);
+		setPersistenceDelegate(new ContainerPersistenceDelegate(farmRepository));
 
 		for (int i = 0; i < containerPropertyNames.length; i++) {
 			addTableColumn(containerColumnHeaders[i], containerPropertyNames[i], String.class);
@@ -188,78 +237,19 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 		}
 	}
 
+	
+	/* (non-Javadoc)
+	 * @see com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController#getSelectedEObject()
+	 */
 	@Override
-	protected void handleNewItemAction() {
-
-		Container container = DairyUtil.createContainer(ContainerType.BIN, UnitOfMeasure.LITRE, null, 0.0);
-		final ViewContainerDialog memberDialog = viewContainerProvider.get();
-		final List<Farm> inputFarms = new ArrayList<Farm>();
-		final int index = farmCombo.getSelectionIndex();
-		if (index == 0 || index == -1) {
-			inputFarms.addAll(farmCombofarms);
-		} else {
-			inputFarms.add(farmCombofarms.get(index - 1));
-		}
-		memberDialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER,
-				container);
-		memberDialog.getController()
-				.setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST, inputFarms);
-		if (selectedMember != null) {
-			memberDialog.getController().setContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER,
-					selectedMember);
-		}
-
-		final int returnCode = memberDialog.open();
-		if (returnCode == AbstractWindowController.OK) {
-			container = (Container) memberDialog.getController().getContext(
-					ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
-			container.getOwner().getCans().add(container);
-			farmRepository.save(container.getOwner());
-			// memberRepository.update(selectedMember);
-			refreshTableContents();
-		}
-
-	}
-
-	@Override
-	protected void handleViewItemAction() {
-
-		final ContainerListViewTableNode selectedNode = (ContainerListViewTableNode) table.getSelection().get(0);
-		final ViewContainerDialog dialog = viewContainerProvider.get();
-		final List<Farm> inputFarms = new ArrayList<Farm>();
-		inputFarms.add(selectedNode.getContainer().getOwner());
-
-		dialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER,
-				selectedNode.getContainer());
-		dialog.getController().setContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST, inputFarms);
-		dialog.getController().setContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER,
-				selectedNode.getMembership());
-
-		final int returnCode = dialog.open();
-		if (returnCode == AbstractWindowController.OK) {
-			final Container container = (Container) dialog.getController().getContext(
-					ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
-			farmRepository.update(container.getOwner());
-			refreshTableContents();
-		} else if (returnCode == 2) {
-			// confirm for delete
-			if (selectedNode != null) {
-				if (MessageDialog.openConfirm(AbstractDirectoryController.getShell(), DELETE_DIALOG_TITLE,
-						DELETE_DIALOG_MESSAGE)) {
-					final Farm farm = selectedNode.getContainer().getOwner();
-					farm.getCans().remove(selectedNode.getContainer());
-					farmRepository.update(farm);
-					refreshTableContents();
-				}
-			}
-		}
-
+	public Container getSelectedEObject() {
+		return ((ContainerListViewTableNode) table.getSelection().get(0)).getContainer();
 	}
 
 	@Override
 	protected RecordDialog<Container> getRecordDialog(Shell shell) {
-		// TODO Auto-generated method stub
-		return null;
+		ViewContainerDialogController controller = new ViewContainerDialogController(memberSearchProvider);
+		return new ViewContainerDialog(getShell(), controller);
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package com.agritrace.edairy.desktop.member.ui.dialog;
 
 import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.swt.ImageButton;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
@@ -24,6 +25,15 @@ import com.google.inject.name.Named;
 
 public class ViewContainerDialog extends RecordDialog<Container> {
 
+	// widgets
+	//	 Label idLabelValue   			ViewWidgetId.VIEW_CONTAINER_ID
+	//	 Text searchText   				ViewWidgetId.FARM_LIST_MEMBER_LOOKUP_TXT
+	//	 ImageButton lookupButton   	ViewWidgetId.FARM_LIST_SEARCH_BUTTON
+	//	 CCombo farmCombo   			ViewWidgetId.VIEW_CONTAINER_FARM
+	//	 CCombo measureCombo   			ViewWidgetId.VIEW_CONTAINER_UNIT
+	//	 Text capacityText   			ViewWidgetId.VIEW_CONTAINER_COMPACITY
+	
+	
 	/**
 	 * AddContainerDialog constructor
 	 *
@@ -61,14 +71,14 @@ public class ViewContainerDialog extends RecordDialog<Container> {
 		labelFactory.applyTo(memberLabel);
 
 		// member name text
-		final Text searchText = UIControlsFactory.createText(dialogArea, SWT.SINGLE | SWT.BORDER, ViewWidgetId.FARM_LIST_MEMBER_LOOKUP_TXT);
-		GridDataFactory.fillDefaults().hint(DEFAULT_FIELD_WIDTH, SWT.DEFAULT).grab(false, false).applyTo(searchText);
-
-		final ImageButton lookupButton = UIControlsFactory.createImageButton(dialogArea, SWT.NULL, ViewWidgetId.FARM_LIST_SEARCH_BUTTON);
-		final Image lookupIcon = Activator.getDefault().getImageRegistry().get(DesktopBaseActivator.MEMBER_SEARCH_ICON);
-		lookupButton.setImage(lookupIcon);
-		GridDataFactory.swtDefaults().align(SWT.LEFT, SWT.FILL).grab(false, false).applyTo(lookupButton);
-
+		final Composite lookupArea = UIControlsFactory.createComposite(dialogArea, SWT.NONE);
+		UIControlsFactory.createText(lookupArea, SWT.SINGLE | SWT.BORDER, ViewWidgetId.FARM_LIST_MEMBER_LOOKUP_TXT);
+		UIControlsFactory.createImageButton(lookupArea, SWT.NONE, ViewWidgetId.FARM_LIST_SEARCH_BUTTON).
+			setImage(Activator.getDefault().getImageRegistry().get(DesktopBaseActivator.MEMBER_SEARCH_ICON));
+		GridLayoutFactory.fillDefaults().numColumns(2).generateLayout(lookupArea);
+		fieldFactory.applyTo(lookupArea);
+		
+		
 		final Label farmLabel = UIControlsFactory.createLabel(dialogArea, "Farm:");
 		labelFactory.applyTo(farmLabel);
 

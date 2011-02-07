@@ -383,7 +383,8 @@
         eType="#//MembershipStatus"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="defaultRoute" eType="#//DairyLocation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="member" lowerBound="1"
-        eType="ecore:EClass farm.ecore#//Farmer" containment="true" eKeys="common.ecore#//Person/personId"/>
+        eType="ecore:EClass farm.ecore#//Farmer" containment="true" eOpposite="farm.ecore#//Farmer/membership"
+        eKeys="common.ecore#//Person/personId"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="account" lowerBound="1"
         eType="#//account/Account" containment="true" eOpposite="#//account/Account/member"
         eKeys="#//account/Account/accountId"/>

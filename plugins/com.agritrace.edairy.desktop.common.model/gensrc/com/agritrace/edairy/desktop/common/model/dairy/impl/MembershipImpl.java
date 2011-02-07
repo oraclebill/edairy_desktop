@@ -17,6 +17,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 
+import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -418,9 +419,9 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 		if (newMember != member) {
 			NotificationChain msgs = null;
 			if (member != null)
-				msgs = ((InternalEObject)member).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DairyPackage.MEMBERSHIP__MEMBER, null, msgs);
+				msgs = ((InternalEObject)member).eInverseRemove(this, TrackingPackage.FARMER__MEMBERSHIP, Farmer.class, msgs);
 			if (newMember != null)
-				msgs = ((InternalEObject)newMember).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - DairyPackage.MEMBERSHIP__MEMBER, null, msgs);
+				msgs = ((InternalEObject)newMember).eInverseAdd(this, TrackingPackage.FARMER__MEMBERSHIP, Farmer.class, msgs);
 			msgs = basicSetMember(newMember, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -562,6 +563,10 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case DairyPackage.MEMBERSHIP__MEMBER:
+				if (member != null)
+					msgs = ((InternalEObject)member).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DairyPackage.MEMBERSHIP__MEMBER, null, msgs);
+				return basicSetMember((Farmer)otherEnd, msgs);
 			case DairyPackage.MEMBERSHIP__ACCOUNT:
 				if (account != null)
 					msgs = ((InternalEObject)account).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DairyPackage.MEMBERSHIP__ACCOUNT, null, msgs);

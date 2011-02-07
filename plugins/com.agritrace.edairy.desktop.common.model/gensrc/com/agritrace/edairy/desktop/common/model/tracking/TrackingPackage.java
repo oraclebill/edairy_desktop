@@ -299,13 +299,22 @@ public interface TrackingPackage extends EPackage {
 	int FARMER__FARMS = ModelPackage.PERSON_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Membership</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FARMER__MEMBERSHIP = ModelPackage.PERSON_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Farmer</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FARMER_FEATURE_COUNT = ModelPackage.PERSON_FEATURE_COUNT + 1;
+	int FARMER_FEATURE_COUNT = ModelPackage.PERSON_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl <em>Container</em>}' class.
@@ -864,6 +873,17 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getFarmer_Farms();
+
+	/**
+	 * Returns the meta object for the container reference '{@link com.agritrace.edairy.desktop.common.model.tracking.Farmer#getMembership <em>Membership</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Membership</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.Farmer#getMembership()
+	 * @see #getFarmer()
+	 * @generated
+	 */
+	EReference getFarmer_Membership();
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.tracking.Container <em>Container</em>}'.
@@ -1457,6 +1477,14 @@ public interface TrackingPackage extends EPackage {
 		 * @generated
 		 */
 		EReference FARMER__FARMS = eINSTANCE.getFarmer_Farms();
+
+		/**
+		 * The meta object literal for the '<em><b>Membership</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FARMER__MEMBERSHIP = eINSTANCE.getFarmer_Membership();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl <em>Container</em>}' class.

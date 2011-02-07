@@ -8,12 +8,15 @@ package com.agritrace.edairy.desktop.common.model.tracking.impl;
 
 import com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl;
 
+import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -21,7 +24,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -32,6 +37,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.FarmerImpl#getFarms <em>Farms</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.FarmerImpl#getMembership <em>Membership</em>}</li>
  * </ul>
  * </p>
  *
@@ -84,12 +90,57 @@ public class FarmerImpl extends PersonImpl implements Farmer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Membership getMembership() {
+		if (eContainerFeatureID() != TrackingPackage.FARMER__MEMBERSHIP) return null;
+		return (Membership)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetMembership(Membership newMembership, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newMembership, TrackingPackage.FARMER__MEMBERSHIP, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMembership(Membership newMembership) {
+		if (newMembership != eInternalContainer() || (eContainerFeatureID() != TrackingPackage.FARMER__MEMBERSHIP && newMembership != null)) {
+			if (EcoreUtil.isAncestor(this, newMembership))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newMembership != null)
+				msgs = ((InternalEObject)newMembership).eInverseAdd(this, DairyPackage.MEMBERSHIP__MEMBER, Membership.class, msgs);
+			msgs = basicSetMembership(newMembership, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.FARMER__MEMBERSHIP, newMembership, newMembership));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case TrackingPackage.FARMER__FARMS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getFarms()).basicAdd(otherEnd, msgs);
+			case TrackingPackage.FARMER__MEMBERSHIP:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetMembership((Membership)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -104,8 +155,24 @@ public class FarmerImpl extends PersonImpl implements Farmer {
 		switch (featureID) {
 			case TrackingPackage.FARMER__FARMS:
 				return ((InternalEList<?>)getFarms()).basicRemove(otherEnd, msgs);
+			case TrackingPackage.FARMER__MEMBERSHIP:
+				return basicSetMembership(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case TrackingPackage.FARMER__MEMBERSHIP:
+				return eInternalContainer().eInverseRemove(this, DairyPackage.MEMBERSHIP__MEMBER, Membership.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -118,6 +185,8 @@ public class FarmerImpl extends PersonImpl implements Farmer {
 		switch (featureID) {
 			case TrackingPackage.FARMER__FARMS:
 				return getFarms();
+			case TrackingPackage.FARMER__MEMBERSHIP:
+				return getMembership();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -135,6 +204,9 @@ public class FarmerImpl extends PersonImpl implements Farmer {
 				getFarms().clear();
 				getFarms().addAll((Collection<? extends Farm>)newValue);
 				return;
+			case TrackingPackage.FARMER__MEMBERSHIP:
+				setMembership((Membership)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -150,6 +222,9 @@ public class FarmerImpl extends PersonImpl implements Farmer {
 			case TrackingPackage.FARMER__FARMS:
 				getFarms().clear();
 				return;
+			case TrackingPackage.FARMER__MEMBERSHIP:
+				setMembership((Membership)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -164,6 +239,8 @@ public class FarmerImpl extends PersonImpl implements Farmer {
 		switch (featureID) {
 			case TrackingPackage.FARMER__FARMS:
 				return farms != null && !farms.isEmpty();
+			case TrackingPackage.FARMER__MEMBERSHIP:
+				return getMembership() != null;
 		}
 		return super.eIsSet(featureID);
 	}

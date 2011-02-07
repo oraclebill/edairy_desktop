@@ -31,6 +31,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Farmer" eSuperTypes="common.ecore#//Person">
     <eStructuralFeatures xsi:type="ecore:EReference" name="farms" upperBound="-1"
         eType="#//Farm" containment="true" eOpposite="#//Farm/owner"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="membership" eType="ecore:EClass dairy.ecore#//Membership"
+        eOpposite="dairy.ecore#//Membership/member"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Container">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="containerId" eType="ecore:EDataType common.ecore#//UniqueID"

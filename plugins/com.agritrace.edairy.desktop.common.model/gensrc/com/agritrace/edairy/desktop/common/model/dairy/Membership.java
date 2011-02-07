@@ -205,6 +205,7 @@ public interface Membership extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Member</b></em>' containment reference.
+	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.tracking.Farmer#getMembership <em>Membership</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Member</em>' containment reference isn't clear,
@@ -214,7 +215,8 @@ public interface Membership extends EObject {
 	 * @return the value of the '<em>Member</em>' containment reference.
 	 * @see #setMember(Farmer)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMembership_Member()
-	 * @model containment="true" keys="personId" required="true"
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.Farmer#getMembership
+	 * @model opposite="membership" containment="true" keys="personId" required="true"
 	 * @generated
 	 */
 	Farmer getMember();

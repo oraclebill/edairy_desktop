@@ -2,6 +2,7 @@ package com.agritrace.edairy.desktop.member.ui.dialog.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.eclipse.core.databinding.conversion.NumberToStringConverter;
 import org.eclipse.core.databinding.observable.Observables;
@@ -87,27 +88,47 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 		memberLookupBtn = getRidget(IActionRidget.class, ViewWidgetId.FARM_LIST_SEARCH_BUTTON);
 		memberLookupBtn.addListener(new MemberLookupAction());
 
-		final String enableLookup = (String) getContext(ControllerContextConstant.ENABLE_LOOKUP);
-		if(enableLookup != null && enableLookup.equalsIgnoreCase("false")){
-			enableLookupBtn = false;
-		}
-		memberLookupBtn.setVisible(enableLookupBtn);
+		capacity.addValidationRule(new IValidator() {
 
-		selectedContainer = (Container) getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
-		farmList = (List<Farm>) getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST);
+			@Override
+			public IStatus validate(Object arg0) {
+				final String value = (String) arg0;
+				try {
+					capacityValue = Double.valueOf(value);
+					capacity.removeAllMarkers();
+					okAction.setEnabled(true);
+				} catch (final NumberFormatException ex) {
+					capacity.addMarker(capactiyError);
+					okAction.setEnabled(false);
+					return new Status(IStatus.ERROR, Activator.PLUGIN_ID, ex.getMessage(), ex);
+
+				}
+				return Status.OK_STATUS;
+			}
+		}, ValidationTime.ON_UI_CONTROL_EDIT);
+		
+		// Get selected member from context
+		selectedMember = null;
 		final Object selected = getContext(ControllerContextConstant.MEMBER_DIALOG_CONTXT_SELECTED_MEMBER);
-		if(selected instanceof Membership){
-			selectedMember =((Membership) selected).getMember();
-
-		}else if(selected instanceof Farmer){
-			selectedMember =(Farmer) selected;
-
+		if (selected instanceof Membership) {
+			selectedMember = ((Membership) selected).getMember();
+		} else if (selected instanceof Farmer) {
+			selectedMember = (Farmer) selected;
+		}		
+		
+		// if dialog initialized with a member, populate text and disable lookup
+		if (selectedMember != null) {
+			memberNameRidget.setText(MemberUtil.formattedMemberName(selectedMember));
+			memberLookupBtn.setEnabled(true);			
+			// farms should have been set by caller to the list associated with the selected member...
+			farmList = (List<Farm>) getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_FARM_LIST);
+			if (null == farmList || farmList.size() == 0) {
+				Logger.getLogger(this.getClass().getName()).warning("WARNING: farmlist should not be null if member selected");
+				System.err.println("WARNING: farmlist should not be null if member selected");				
+			}
 		}
-
-		if(selectedMember != null){
-			memberNameRidget.setText( MemberUtil.formattedMemberName(selectedMember));
-		}
-
+				
+		selectedContainer = (Container) getContext(ControllerContextConstant.CONTAINER_DIALOG_CONTXT_SELECTED_CONTAINER);
 		if (selectedContainer != null) {
 			if (selectedContainer.getContainerId() != null) {
 				idLabel.setText(selectedContainer.getContainerId().toString());
@@ -117,30 +138,12 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 
 			capacity.bindToModel(selectedContainer, TrackingPackage.Literals.CONTAINER__CAPACITY.getName());
 			capacity.updateFromModel();
-			capacity.addValidationRule(new IValidator() {
-
-				@Override
-				public IStatus validate(Object arg0) {
-					final String value = (String) arg0;
-					try {
-						capacityValue = Double.valueOf(value);
-						capacity.removeAllMarkers();
-						okAction.setEnabled(true);
-					} catch (final NumberFormatException ex) {
-						capacity.addMarker(capactiyError);
-						okAction.setEnabled(false);
-						return new Status(IStatus.ERROR, Activator.PLUGIN_ID, ex.getMessage(), ex);
-
-					}
-					return Status.OK_STATUS;
-				}
-
-			}, ValidationTime.ON_UI_CONTROL_EDIT);
 
 			if (farmList == null && selectedContainer.getOwner() != null) {
 				farmList = new ArrayList<Farm>();
 				farmList.add(selectedContainer.getOwner());
 			}
+			
 			if (farmList != null) {
 				farmCombo.bindToModel(new WritableList(farmList, Farm.class), Farm.class, "getName",
 						new WritableValue());
@@ -159,12 +162,11 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 			unitCombo.addSelectionListener(this);
 			unitCombo.setSelection(selectedContainer.getMeasureType());
 
-
-//			typeCombo.bindToModel(Observables.staticObservableList(ContainerType.VALUES), ContainerType.class, null,
-//					new WritableValue());
-//			typeCombo.updateFromModel();
-//			typeCombo.addSelectionListener(this);
-//			typeCombo.setSelection(selectedContainer.getType());
+// typeCombo.bindToModel(Observables.staticObservableList(ContainerType.VALUES), ContainerType.class, null,
+// new WritableValue());
+// typeCombo.updateFromModel();
+// typeCombo.addSelectionListener(this);
+// typeCombo.setSelection(selectedContainer.getType());
 		}
 		configureButtonsPanel();
 
@@ -176,10 +178,10 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 			if (selectedContainer != null) {
 				selectedContainer.setMeasureType((UnitOfMeasure) unitCombo.getSelection());
 			}
-//		} else if (event.getSource() == typeCombo) {
-//			if (selectedContainer != null) {
-//				selectedContainer.setType((ContainerType) typeCombo.getSelection());
-//			}
+// } else if (event.getSource() == typeCombo) {
+// if (selectedContainer != null) {
+// selectedContainer.setType((ContainerType) typeCombo.getSelection());
+// }
 		} else if (event.getSource() == farmCombo) {
 			if (selectedContainer != null) {
 				selectedContainer.setOwner((Farm) farmCombo.getSelection());
@@ -222,12 +224,13 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 
 	/**
 	 * Open member search dialog, IActionListener for search button
-	 *
+	 * 
 	 */
 	public class MemberLookupAction implements IActionListener {
 		@Override
 		public void callback() {
-			final MemberSearchDialog memberDialog = memberSearchProvider.get();;
+			final MemberSearchDialog memberDialog = memberSearchProvider.get();
+			;
 			final int retVal = memberDialog.open();
 
 			if (retVal == Window.OK) {

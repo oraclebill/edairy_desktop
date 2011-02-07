@@ -169,9 +169,9 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 		this.myRepo = myRepo;
 	}
 
-	public void setSelectedEObject(T selectedEObject) {
-		this.selectedEObject = selectedEObject;
-	}
+//	public void setSelectedEObject(T selectedEObject) {
+//		this.selectedEObject = selectedEObject;
+//	}
 
 	private void configureFilterRidgetsInternal() {
 		searchBtnRidget = getRidget(IActionRidget.class, BaseListView.BIND_ID_FILTER_SEARCH);

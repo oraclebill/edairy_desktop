@@ -17,6 +17,8 @@ import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 
 public class ContainerListView extends AbstractDirectoryView {
+	public ContainerListView() {
+	}
 	public static final String CONTAINER_GROUP = "Containers";
 
 	public static final String FILTER_GROUP_FARM_LOOKUP = "Show conatiners :";
