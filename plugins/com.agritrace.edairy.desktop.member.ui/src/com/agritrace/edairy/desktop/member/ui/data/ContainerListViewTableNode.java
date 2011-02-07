@@ -13,21 +13,21 @@ public class ContainerListViewTableNode {
 		this.container = container;
 
 	}
-
-	public Container getContainer() {
-		return container;
-	}
-
-	public Membership getMembership() {
-		return membership;
-	}
-
-	public void setContainer(Container container) {
-		this.container = container;
-	}
-
-	public void setMembership(Membership membership) {
-		this.membership = membership;
-	}
+//
+//	public Container getContainer() {
+//		return container;
+//	}
+//
+//	public Membership getMembership() {
+//		return membership;
+//	}
+//
+//	public void setContainer(Container container) {
+//		this.container = container;
+//	}
+//
+//	public void setMembership(Membership membership) {
+//		this.membership = membership;
+//	}
 
 }

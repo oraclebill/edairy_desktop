@@ -36,15 +36,15 @@ import com.google.inject.Provider;
 
 @PermissionRequired(UIPermission.VIEW_CONTAINERS)
 public class ContainerListViewController extends BasicDirectoryController<Container> {
-	
+
 	private static class ContainerPersistenceDelegate extends AbstractPersistenceDelegate<Container> {
-		
+
 		final private IRepository<Farm> repository;
 
 		public ContainerPersistenceDelegate(IRepository<Farm> repository) {
 			this.repository = repository;
 		}
-		
+
 		@Override
 		public Container load(Object key) {
 			return null;
@@ -56,12 +56,10 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 			if (null != farm) {
 				if (farm.getCans().remove(obj)) {
 					repository.save(farm);
+				} else {
+					System.err.println("WARNING: container " + obj + " not found in farm!");
 				}
-				else {
-					System.err.println("WARNING: container "+ obj +" not found in farm!");
-				}
-			}
-			else {
+			} else {
 				System.err.println("WARNING: container has no owner - unable to delete!");
 			}
 		}
@@ -78,7 +76,8 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 
 		@Override
 		public void persistNew(Container obj) {
-			if (obj.getTrackingNumber() == null) { 
+			if (obj.getTrackingNumber() == null) {
+				// FIXME:
 				obj.setTrackingNumber("" + obj.hashCode());
 			}
 			repository.save(obj);
@@ -98,8 +97,11 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 	// table columns
 	private final String[] containerColumnHeaders = { "Member No.", "Member Name", "Farm Name", "Container ID",
 			"Unit of Measure", "Capacity" };
-	private final String[] containerPropertyNames = { "class", "membership.farmer.formattedName",
-			"container.owner.name", "container.trackingNumber", "container.measureType", "container.capacity" };
+// private final String[] containerPropertyNames = { "membership.memberNumber", "membership.farmer.formattedName",
+// "container.owner.name", "container.trackingNumber", "container.measureType", "container.capacity" };
+	private final String[] containerPropertyNames = { "owner.owner.membership.memberNumber", "owner.owner.formattedName",
+			"owner.name", "trackingNumber", "measureType", "capacity" };
+	
 	// filter
 	private IComboRidget farmCombo;
 	private final List<Farm> farmCombofarms = new ArrayList<Farm>();
@@ -116,6 +118,9 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 	private final Provider<MemberSearchDialog> memberSearchProvider;
 	private final Provider<ViewContainerDialog> viewContainerProvider;
 
+	final private WritableList availableFarms;
+	final private WritableValue selectedFarm;
+
 	@Inject
 	public ContainerListViewController(final IFarmRepository farmRepository,
 			final Provider<MemberSearchDialog> memberSearchProvider,
@@ -130,42 +135,46 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 		for (int i = 0; i < containerPropertyNames.length; i++) {
 			addTableColumn(containerColumnHeaders[i], containerPropertyNames[i], String.class);
 		}
+
+		availableFarms = new WritableList();
+		selectedFarm = new WritableValue();
 	}
 
-	@Override
-	public void refreshTableContents() {
-		tableInput.clear();
-		tableInput.addAll(getFilteredTableResult());
-		table.updateFromModel();
-	}
+	//
+	// @Override
+	// public void refreshTableContents() {
+	// tableInput.clear();
+	// tableInput.addAll(getFilteredTableResult());
+	// table.updateFromModel();
+	// }
 
-	private void updateFarmCombo() {
-		farmNames.clear();
-		farmNames.add(ALL_FARM);
-		if (selectedMember != null) {
-			// selectedMember =
-			// memberRepository.findByKey(selectedMember.getMemberId());
-			farmCombofarms.clear();
-			if (farmCombo != null) {
-				final String currentSelection = farmCombo.getText();
-				final List<Farm> farms = selectedMember.getFarmer().getFarms();
-				for (final Farm farm : farms) {
-					farmNames.add(farm.getName());
-					farmCombofarms.add(farm);
-				}
-				farmCombo.updateFromModel();
-				if (MemberUtil.check(currentSelection)) {
-					final int index = farmNames.indexOf(currentSelection);
-					if (index != -1) {
-						farmCombo.setSelection(index);
-						return;
-					}
-				}
-			}
-			// select the "All Farm" by default
-			farmCombo.setSelection(0);
-		}
-	}
+// private void updateFarmCombo() {
+// farmNames.clear();
+// farmNames.add(ALL_FARM);
+// if (getSelectedMember() != null) {
+// // selectedMember =
+// // memberRepository.findByKey(selectedMember.getMemberId());
+// farmCombofarms.clear();
+// if (farmCombo != null) {
+// final String currentSelection = farmCombo.getText();
+// final List<Farm> farms = getSelectedMember().getFarmer().getFarms();
+// for (final Farm farm : farms) {
+// farmNames.add(farm.getName());
+// farmCombofarms.add(farm);
+// }
+// farmCombo.updateFromModel();
+// if (MemberUtil.check(currentSelection)) {
+// final int index = farmNames.indexOf(currentSelection);
+// if (index != -1) {
+// farmCombo.setSelection(index);
+// return;
+// }
+// }
+// }
+// // select the "All Farm" by default
+// farmCombo.setSelection(0);
+// }
+// }
 
 	@Override
 	protected void configureFilterRidgets() {
@@ -174,48 +183,47 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 		memberLookupBtn = getRidget(IActionRidget.class, ViewWidgetId.FARM_LIST_SEARCH_BUTTON);
 		memberLookupBtn.addListener(new MemberLookupAction());
 		farmCombo = getRidget(IComboRidget.class, ViewWidgetId.FARM_LIST_ROUTE_COMBO);
-		farmCombo.bindToModel(new WritableList(farmNames, String.class), String.class, null, new WritableValue());
-
+		farmCombo.bindToModel(availableFarms, Farm.class, "getName", selectedFarm);
 	}
 
-	@Override
-	protected void tableBindToModel() {
-		if (table != null) {
-			table.bindToModel(new WritableList(tableInput, ContainerListViewTableNode.class),
-					ContainerListViewTableNode.class, containerPropertyNames, containerColumnHeaders);
-			table.updateFromModel();
-		}
-	}
+// @Override
+// protected void tableBindToModel() {
+// if (table != null) {
+// table.bindToModel(new WritableList(tableInput, ContainerListViewTableNode.class),
+// ContainerListViewTableNode.class, containerPropertyNames, containerColumnHeaders);
+// table.updateFromModel();
+// }
+// }
 
-	protected List<ContainerListViewTableNode> getFilteredTableResult() {
-		final List<ContainerListViewTableNode> results = new ArrayList<ContainerListViewTableNode>();
-		final List<Farm> farms = new ArrayList<Farm>();
-		if (selectedMember != null) {
-			farms.addAll(selectedMember.getFarmer().getFarms());
-		} else {
-			farms.addAll(farmRepository.all());
-		}
-		if (farmCombo != null) {
-			final String farmName = farmCombo.getText();
-			for (final Farm farm : farms) {
-				if (farmName.isEmpty() || farmName.equals(ALL_FARM) || farmName.equals(farm.getName())) {
-					final List<Container> containerList = farm.getCans();
-					for (final Container container : containerList) {
-						if (selectedMember != null) {
-							results.add(new ContainerListViewTableNode(selectedMember, container));
-						} else if (container.getOwner().getOwner().eContainer() instanceof Membership) {
-							final Membership member = (Membership) container.getOwner().getOwner().eContainer();
-							results.add(new ContainerListViewTableNode(member, container));
-						}
-					}
-				}
-			}
-
-		}
-
-		return results;
-
-	}
+// protected List<ContainerListViewTableNode> getFilteredTableResult() {
+// final List<ContainerListViewTableNode> results = new ArrayList<ContainerListViewTableNode>();
+// final List<Farm> farms = new ArrayList<Farm>();
+// if (getSelectedMember() != null) {
+// farms.addAll(getSelectedMember().getFarmer().getFarms());
+// } else {
+// farms.addAll(farmRepository.all());
+// }
+// if (farmCombo != null) {
+// final String farmName = farmCombo.getText();
+// for (final Farm farm : farms) {
+// if (farmName.isEmpty() || farmName.equals(ALL_FARM) || farmName.equals(farm.getName())) {
+// final List<Container> containerList = farm.getCans();
+// for (final Container container : containerList) {
+// if (getSelectedMember() != null) {
+// results.add(new ContainerListViewTableNode(getSelectedMember(), container));
+// } else if (container.getOwner().getOwner().eContainer() instanceof Membership) {
+// final Membership member = (Membership) container.getOwner().getOwner().eContainer();
+// results.add(new ContainerListViewTableNode(member, container));
+// }
+// }
+// }
+// }
+//
+// }
+//
+// return results;
+//
+// }
 
 	/**
 	 * Open member search dialog, IActionListener for search button
@@ -227,51 +235,75 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 			final MemberSearchDialog memberDialog = memberSearchProvider.get();
 			final int retVal = memberDialog.open();
 			if (retVal == Window.OK) {
-				selectedMember = memberDialog.getSelectedMember();
-				if (selectedMember != null) {
-					final String memberName = selectedMember.getFarmer().getFormattedName();
+				setSelectedMember(memberDialog.getSelectedMember());
+				if (getSelectedMember() != null) {
+					final String memberName = getSelectedMember().getFarmer().getFormattedName();
 					memberNameFilter.setText(memberName);
-					updateFarmCombo();
+					availableFarms.clear();
+					availableFarms.addAll(getSelectedMember().getFarmer().getFarms());
 					if (searchButton != null) {
 						searchButton.setEnabled(true);
 					}
 				}
-
+			} else {
+				setSelectedMember(null);
+				availableFarms.clear();
 			}
+			farmCombo.updateFromModel();
 		}
 	}
 
-	
-	/* (non-Javadoc)
-	 * @see com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController#getSelectedEObject()
-	 */
-	@Override
-	public Container getSelectedEObject() {
-		return ((ContainerListViewTableNode) table.getSelection().get(0)).getContainer();
+	public void setSelectedMember(Membership member) {
+		this.selectedMember = member;
 	}
+
+	public Membership getSelectedMember() {
+		return selectedMember;
+	}
+
+	public void setSelectedFarm(Farm farm) {
+		this.selectedFarm.setValue(farm);
+	}
+
+	public Farm getSelectedFarm() {
+		return (Farm) this.selectedFarm.getValue();
+	}
+
+// /* (non-Javadoc)
+// * @see com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController#getSelectedEObject()
+// */
+// @Override
+// public Container getSelectedEObject() {
+// // return ((ContainerListViewTableNode) table.getSelection().get(0)).getContainer();
+// return ((ContainerListViewTableNode) table.getSelection().get(0)).getContainer();
+// }
 
 	@Override
 	protected RecordDialog<Container> getRecordDialog(Shell shell) {
-//		ViewContainerDialogController controller = new ViewContainerDialogController(memberSearchProvider);
-		
 		return new ViewContainerDialog(getShell(), new ContainerEditDialogController(memberSearchProvider));
 	}
 
 	@Override
 	protected void resetFilterConditions() {
-		selectedMember = null;
+		setSelectedMember(null);
+		setSelectedFarm(null);
+
 		memberNameFilter.setText("");
 		farmNames.clear();
 		farmNames.add(ALL_FARM);
 		if (farmCombo != null) {
 			farmCombo.setSelection(farmCombo.getEmptySelectionItem());
 		}
-
 	}
 
 	@Override
 	protected List<Container> getFilteredResult() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Farm> farms = new ArrayList<Farm>();
+		if (getSelectedFarm() != null) {
+			farms.add(getSelectedFarm());
+		} else if (getSelectedMember() != null) {
+			farms.addAll(getSelectedMember().getFarmer().getFarms());
+		}
+		return farmRepository.findFarmContainers(farms);
 	}
 }

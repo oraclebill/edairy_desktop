@@ -55,6 +55,8 @@ public class ContainerEditDialogController extends RecordDialogController<Contai
 	protected void configureUserRidgets() {
 		memberNameText = getRidget(ITextRidget.class, ViewWidgetId.FARM_LIST_MEMBER_LOOKUP_TXT);
 		memberNameText.setOutputOnly(true);
+		memberNameText.bindToModel(BeansObservables.observeValue(getWorkingCopy(), "owner.owner.formattedName"));
+		
 		getRidget(IActionRidget.class, ViewWidgetId.FARM_LIST_SEARCH_BUTTON).addListener(new IActionListener() {
 			@Override
 			public void callback() {
@@ -68,8 +70,8 @@ public class ContainerEditDialogController extends RecordDialogController<Contai
 		farmCombo.bindToModel(farmList, Farm.class, "getName", 
 				BeansObservables.observeValue(getWorkingCopy(), "owner"));
 
-		addTextMap(ViewWidgetId.VIEW_CONTAINER_COMPACITY, TrackingPackage.Literals.CONTAINER__CAPACITY);
 //		addComboMap(ViewWidgetId.VIEW_CONTAINER_FARM, farmList, "getName", TrackingPackage.Literals.CONTAINER__OWNER);
+		addTextMap(ViewWidgetId.VIEW_CONTAINER_COMPACITY, TrackingPackage.Literals.CONTAINER__CAPACITY);
 		addComboMap(ViewWidgetId.VIEW_CONTAINER_UNIT, UnitOfMeasure.VALUES, "getName",
 				TrackingPackage.Literals.CONTAINER__MEASURE_TYPE);
 	}

@@ -5,7 +5,10 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal;
 import com.agritrace.edairy.desktop.common.persistence.annotations.Transactional;
@@ -69,6 +72,18 @@ public class FarmRepository extends RepositoryUtil<Farm> implements IFarmReposit
 		@SuppressWarnings("unchecked")
 		final List<Farm> result = crit.list();
 		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Container> findFarmContainers(List<Farm> selectedFarms) {
+		Criteria crit = getCurrentSession().createCriteria("Container");
+		crit.add(Restrictions.isNotNull("owner"));
+
+		if (selectedFarms != null && selectedFarms.size() > 0) {
+			crit.add(Restrictions.in("owner", selectedFarms));
+		}
+		return (List<Container>) crit.list();
 	}
 
 
