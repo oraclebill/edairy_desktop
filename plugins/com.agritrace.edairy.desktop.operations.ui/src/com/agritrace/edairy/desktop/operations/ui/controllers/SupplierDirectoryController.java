@@ -82,7 +82,7 @@ public class SupplierDirectoryController extends BasicDirectoryController<Suppli
 	@Override
 	protected Supplier createNewModel() {
 		final Supplier supplier = super.createNewModel();
-		EMFUtil.populate(supplier);
+//		EMFUtil.populate(supplier);
 		supplier.setPhoneNumber("");
 		supplier.setRegistrationDate(Calendar.getInstance().getTime());
 		return supplier;
