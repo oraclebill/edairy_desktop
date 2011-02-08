@@ -1,4 +1,6 @@
 External\ Plug-in\ Libraries
+*.xsd
+*.xsd2ecore
 .metadata
 *.class
 org.eclipse.*/
