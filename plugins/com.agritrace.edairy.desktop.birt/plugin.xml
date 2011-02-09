@@ -15,7 +15,7 @@
 	<extension point="org.eclipse.ui.perspectives">
 		<perspective
 			class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
-			 id="com.agritrace.edairy.desktop.reports"
+			 id="com.agritrace.edairy.desktop.birt.subApplication"
 			name="Reports">
 		</perspective>
 	</extension>
@@ -41,5 +41,34 @@
          </subApplication>
       </assembly2>
    </extension>
+
+
+	<extension point="org.eclipse.ui.views">
+		
+		<view allowMultiple="true"
+			class="com.agritrace.edairy.desktop.birt.reports.MilkProductionReportView"
+			id="reports.milk.production" name="Milk Production Report"
+			restorable="true">
+		</view>
+
+		<view allowMultiple="true"
+			class="com.agritrace.edairy.desktop.birt.reports.MemberPayablesReportView"
+			id="com.agritrace.edairy.desktop.birt.reports.MemberPayablesReportView" name="Member Payables Report"
+			restorable="true">
+		</view>
+		
+		<view allowMultiple="true"
+			class="com.agritrace.edairy.desktop.birt.reports.MemberStatementReportView"
+			id="com.agritrace.edairy.desktop.birt.reports.MemberStatementReportView" name="Member Statement Report"
+			restorable="true">
+		</view>
+		
+		<view allowMultiple="true"
+			class="com.agritrace.edairy.desktop.birt.reports.MonthlyCreditReportView"
+			id="com.agritrace.edairy.desktop.birt.reports.MonthlyCreditReportView" name="Monthly Credit Report"
+			restorable="true">
+		</view>
+		
+	</extension>
 
 </plugin>

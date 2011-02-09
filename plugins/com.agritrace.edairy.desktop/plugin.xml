@@ -68,30 +68,6 @@
 			name="Blank" restorable="true">
 		</view>
 		
-		<view allowMultiple="true"
-			class="com.agritrace.edairy.desktop.ui.views.MilkProductionReportView"
-			id="reports.milk.production" name="Milk Production Report"
-			restorable="true">
-		</view>
-
-		<view allowMultiple="true"
-			class="com.agritrace.edairy.desktop.ui.views.MemberPayablesReportView"
-			id="com.agritrace.edairy.desktop.ui.views.MemberPayablesReportView" name="Member Payables Report"
-			restorable="true">
-		</view>
-		
-		<view allowMultiple="true"
-			class="com.agritrace.edairy.desktop.ui.views.MemberStatementReportView"
-			id="com.agritrace.edairy.desktop.ui.views.MemberStatementReportView" name="Member Statement Report"
-			restorable="true">
-		</view>
-		
-		<view allowMultiple="true"
-			class="com.agritrace.edairy.desktop.ui.views.MonthlyCreditReportView"
-			id="com.agritrace.edairy.desktop.ui.views.MonthlyCreditReportView" name="Monthly Credit Report"
-			restorable="true">
-		</view>
-		
 	</extension>
 
    <extension
@@ -135,6 +111,7 @@
           id="com.agritrace.edairy.desktop.markerSupport">
     </markerSupport>
  </extension>
+ 
  <extension
        id="product"
        point="org.eclipse.core.runtime.products">

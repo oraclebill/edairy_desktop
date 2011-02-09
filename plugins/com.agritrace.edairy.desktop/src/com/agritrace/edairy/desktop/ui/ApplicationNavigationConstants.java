@@ -44,7 +44,7 @@ public interface ApplicationNavigationConstants {
 	public static final String SUBAPP_OPERATIONS = "com.agritrace.edairy.desktop.operations";//$NON-NLS-1$
 	
 	// REPORTS
-	public static final String SUBAPP_REPORTS = "com.agritrace.edairy.desktop.reports";//$NON-NLS-1$
+	public static final String SUBAPP_REPORTS = "com.agritrace.edairy.desktop.birt.subApplication";//$NON-NLS-1$
 	
 	// SYSTEM ADMIN
 	public static final String SUBAPP_SYSTEM = "com.agritrace.edairy.desktop.system";//$NON-NLS-1$

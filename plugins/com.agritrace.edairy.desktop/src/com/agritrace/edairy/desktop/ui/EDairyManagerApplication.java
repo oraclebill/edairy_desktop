@@ -23,7 +23,6 @@ import org.osgi.framework.Bundle;
 
 import com.agritrace.edairy.desktop.EDairyActivator;
 import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
-import com.agritrace.edairy.desktop.common.ui.views.BlankView;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationDirectoryController;
 import com.agritrace.edairy.desktop.dairy.locations.ui.views.DairyLocationDirectoryView;
 import com.agritrace.edairy.desktop.dairy.profile.ui.controllers.DairyProfileViewController;
@@ -56,10 +55,6 @@ import com.agritrace.edairy.desktop.services.ui.controllers.AnimalHealthRequestV
 import com.agritrace.edairy.desktop.services.ui.views.AnimalHealthRequestView;
 import com.agritrace.edairy.desktop.system.ui.controllers.RoleDirectoryController;
 import com.agritrace.edairy.desktop.system.ui.views.RoleDirectoryView;
-import com.agritrace.edairy.desktop.ui.views.MemberPayablesReportView;
-import com.agritrace.edairy.desktop.ui.views.MemberStatementReportView;
-import com.agritrace.edairy.desktop.ui.views.MilkProductionReportView;
-import com.agritrace.edairy.desktop.ui.views.MonthlyCreditReportView;
 
 /**
  * @author oraclebill
@@ -320,33 +315,35 @@ public class EDairyManagerApplication extends SwtApplication implements Applicat
 		// REPORTS TAB
 		//
 
-		subAppNode = new SubApplicationNode(new NavigationNodeId(SUBAPP_REPORTS), LABEL_REPORTS);
-		app.addChild(subAppNode);
-		workarea.registerDefinition(subAppNode, TAB_REPORTS);
-		moduleGroupNode = new ModuleGroupNode(new NavigationNodeId(MODULE_GROUP_REPORTS));
-		subAppNode.addChild(moduleGroupNode);
+		app.create(new NavigationNodeId(SUBAPP_REPORTS));
+		
+//		subAppNode = new SubApplicationNode(new NavigationNodeId(SUBAPP_REPORTS), LABEL_REPORTS);
+//		app.addChild(subAppNode);
+//		workarea.registerDefinition(subAppNode, TAB_REPORTS);
+//		moduleGroupNode = new ModuleGroupNode(new NavigationNodeId(MODULE_GROUP_REPORTS));
+//		subAppNode.addChild(moduleGroupNode);
 
 		//
 		// REPORTS GRP
 		//
 
-		final IModuleNode moduleReports = NodeFactory.createModule(MODULE_REPORTS, "Reports", moduleGroupNode); //$NON-NLS-1$
-		NodeFactory
-				.createSubModule("edm.reports.intake", "Milk Collection", moduleReports, MilkProductionReportView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-		NodeFactory.createSubModule(
-				"edm.reports.members.payables", "Members Payables", moduleReports, MemberPayablesReportView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-		NodeFactory.createSubModule(
-				"edm.reports.members.statement", "Member Statement", moduleReports, MemberStatementReportView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-		NodeFactory.createSubModule(
-				"edm.reports.finance.credit", "Monthly Credit Sales", moduleReports, MonthlyCreditReportView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-
-		//		NodeFactory.createSubMobule("edm.reports.members", "Members", moduleReports, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-		//		NodeFactory.createSubMobule("edm.reports.finance", "Finance", moduleReports, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-		//		NodeFactory.createSubMobule("edm.reports.services", "Services", moduleReports, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-		//		NodeFactory.createSubMobule("edm.reports.events", "Events", moduleReports, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-		//		NodeFactory.createSubMobule("edm.reports.marketplace", "Marketplace", moduleReports, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-		//		NodeFactory.createSubMobule("edm.reports.dairy", "Dairy", moduleReports, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
-		NodeFactory.createSubModule("edm.reports.custom", "Custom", moduleReports, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+//		final IModuleNode moduleReports = NodeFactory.createModule(MODULE_REPORTS, "Reports", moduleGroupNode); //$NON-NLS-1$
+//		NodeFactory
+//				.createSubModule("edm.reports.intake", "Milk Collection", moduleReports, MilkProductionReportView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+//		NodeFactory.createSubModule(
+//				"edm.reports.members.payables", "Members Payables", moduleReports, MemberPayablesReportView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+//		NodeFactory.createSubModule(
+//				"edm.reports.members.statement", "Member Statement", moduleReports, MemberStatementReportView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+//		NodeFactory.createSubModule(
+//				"edm.reports.finance.credit", "Monthly Credit Sales", moduleReports, MonthlyCreditReportView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+//
+//		//		NodeFactory.createSubMobule("edm.reports.members", "Members", moduleReports, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+//		//		NodeFactory.createSubMobule("edm.reports.finance", "Finance", moduleReports, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+//		//		NodeFactory.createSubMobule("edm.reports.services", "Services", moduleReports, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+//		//		NodeFactory.createSubMobule("edm.reports.events", "Events", moduleReports, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+//		//		NodeFactory.createSubMobule("edm.reports.marketplace", "Marketplace", moduleReports, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+//		//		NodeFactory.createSubMobule("edm.reports.dairy", "Dairy", moduleReports, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
+//		NodeFactory.createSubModule("edm.reports.custom", "Custom", moduleReports, BlankView.ID); //$NON-NLS-1$ //$NON-NLS-2$
 
 		//
 		// SYSTEM TAB

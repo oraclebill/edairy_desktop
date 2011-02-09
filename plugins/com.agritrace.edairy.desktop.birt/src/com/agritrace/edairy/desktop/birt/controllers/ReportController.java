@@ -45,6 +45,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.part.ViewPart;
 import org.osgi.framework.Bundle;
 
 import com.agritrace.edairy.desktop.birt.Activator;
@@ -55,7 +56,7 @@ import com.google.inject.Inject;
 import com.lowagie.text.pdf.PdfCopyFields;
 import com.lowagie.text.pdf.PdfReader;
 
-public class ReportController {
+public class ReportController extends ViewPart {
 
 	public static final String MILK_COLLECTION_YEAR = "reports/YearReport.rptdesign";
 	public static final String MILK_COLLECTION_YEAR_REPORT_NAME = "MILK COLLECTION REPORT";
@@ -623,6 +624,12 @@ public class ReportController {
 		URI uri = URI.createPlatformPluginURI(BASE + relativeResoursePath, true);
 		uri = CommonPlugin.resolve(uri);
 		return uri;
+	}
+
+	@Override
+	public void setFocus() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

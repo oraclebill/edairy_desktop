@@ -27,6 +27,5 @@ Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.desktop,
  com.agritrace.edairy.desktop.splashHandlers,
  com.agritrace.edairy.desktop.ui,
- com.agritrace.edairy.desktop.ui.controllers,
- com.agritrace.edairy.desktop.ui.views
+ com.agritrace.edairy.desktop.ui.controllers
 
