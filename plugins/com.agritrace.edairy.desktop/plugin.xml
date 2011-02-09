@@ -138,14 +138,15 @@
    <extension
          point="org.eclipse.ui.commands">
       <command
-            id="org.eclipse.riena.demo.client.exitCommand"
-            name="Exit">
-      </command>
-      <command
             id="org.eclipse.ui.help.aboutAction"
             name="About eDairy Manager">
       </command>
+      <command
+            id="org.eclipse.riena.demo.client.exitCommand"
+            name="Exit">
+      </command>
     </extension>
+
    <extension
          point="org.eclipse.ui.menus">
       <menuContribution
@@ -158,18 +159,6 @@
                   commandId="org.eclipse.riena.navigation.ui.exit"
                   id="org.eclipse.riena.demo.client.exitMenuItem"
                   mnemonic="x">
-            </command>
-         </menu>
-      </menuContribution>
-      <menuContribution
-            locationURI="menu:org.eclipse.ui.main.menu?after=com.agritrace.edairy.desktop.install.menus.installMenu">
-         <menu
-               id="helpMenu"
-               label="Help"
-               mnemonic="H">
-            <command
-                  commandId="org.eclipse.ui.help.aboutAction"
-                  id="com.agritrace.edairy.desktop.aboutMenuItem">
             </command>
          </menu>
       </menuContribution>

@@ -126,6 +126,23 @@
          </menu>
       </menuContribution>
    </extension>
+   
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=com.agritrace.edairy.desktop.install.menus.installMenu">
+         <menu
+               id="helpMenu"
+               label="Help"
+               mnemonic="H">
+            <command
+                  commandId="org.eclipse.ui.help.aboutAction"
+                  id="com.agritrace.edairy.desktop.aboutMenuItem">
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>
+   
    <extension
          point="org.eclipse.riena.navigation.assemblies2">
       <assembly2
