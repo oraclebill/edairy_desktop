@@ -16,6 +16,7 @@ import org.eclipse.riena.internal.ui.workarea.registry.WorkareaDefinitionRegistr
 import org.eclipse.riena.navigation.IModuleGroupNode;
 import org.eclipse.riena.navigation.IModuleNode;
 import org.eclipse.riena.navigation.INavigationContext;
+import org.eclipse.riena.navigation.INavigationNode;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.NavigationNodeId;
 import org.eclipse.riena.navigation.model.ModuleNode;
@@ -93,7 +94,7 @@ public final class NodeFactory {
 		return result;
 	}
 
-	public static ISubModuleNode createSubModule(String nodeId, String caption, IModuleNode parent, String viewId) {
+	public static ISubModuleNode createSubModule(String nodeId, String caption, INavigationNode<ISubModuleNode> parent, String viewId) {
 		return createSubModule(nodeId, caption, parent, viewId, (Class<? extends IController>) null);
 	}
 
@@ -107,12 +108,12 @@ public final class NodeFactory {
 		return annotation == null || PrincipalManager.getInstance().hasPermission(annotation.value());
 	}
 
-	public static ISubModuleNode createSubModule(String nodeId, String caption, final IModuleNode parent,
+	public static ISubModuleNode createSubModule(String nodeId, String caption, final INavigationNode<ISubModuleNode> parent,
 			String viewId, final Class<? extends IController> controllerClass) {
 		return createSubModule(new NavigationNodeId(nodeId), caption, parent, viewId, controllerClass);
 	}
 
-	public static ISubModuleNode createSubModule(NavigationNodeId nodeId, String caption, final IModuleNode parent,
+	public static ISubModuleNode createSubModule(NavigationNodeId nodeId, String caption, final INavigationNode<ISubModuleNode> parent,
 			String viewId, final Class<? extends IController> controllerClass) {
 		final Provider<? extends IController> controllerProvider = PROVIDER_MAP.get(controllerClass);
 

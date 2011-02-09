@@ -31,12 +31,12 @@
                nodeId="com.agritrace.edairy.desktop.birt.subApplication"
                perspectiveId="com.agritrace.edairy.desktop.birt.subApplication">
             <moduleGroup
-                  name="Standard Reports"
-                  nodeId="com.agritrace.edairy.desktop.birt.standardReportsModuleGroup">
+                  name="Reports Index"
+                  nodeId="com.agritrace.edairy.desktop.birt.reportsIndexModuleGroup">
                <module
-                     closable="true"
-                     name="Standard Reports"
-                     nodeId="com.agritrace.edairy.desktop.birt.dummyModule">
+                     closable="false"
+                     name="All Reports"
+                     nodeId="com.agritrace.edairy.desktop.birt.indexModule">
                   <subModule
                         controller="com.agritrace.edairy.desktop.birt.viewer.ReportsIndexViewController"
                         expanded="false"
@@ -44,23 +44,20 @@
                         nodeId="com.agritrace.edairy.desktop.birt.placeHolderModule"
                         selectable="true"
                         sharedView="true"
-                        viewId="com.agritrace.edairy.desktop.birt.viewer.reportsIndexView"
+                        viewId="com.agritrace.edairy.desktop.birt.reportsIndexView"
                         visible="true">
                   </subModule>
                </module>
             </moduleGroup>
             <moduleGroup
+                  name="Standard Reports"
+                  nodeId="com.agritrace.edairy.desktop.birt.standardReportsModuleGroup">
+            </moduleGroup>
+            <moduleGroup
                   name="User Reports"
-                  nodeId="com.agritrace.edairy.desktop.birt.userModuleGroup">
+                  nodeId="com.agritrace.edairy.desktop.birt.userReportsModuleGroup">
             </moduleGroup>
          </subApplication>
-      </assembly2>
-      
-      <assembly2
-            assembler="com.agritrace.edairy.desktop.birt.navigation.BirtNavigationNodeAssembler"
-            id="com.agritrace.edairy.desktop.birt.navigation-assembly.module-builder"
-            name="BIRT Reports Assembly"
-            parentNodeId="application">
       </assembly2>
             
    </extension>
@@ -93,16 +90,16 @@
 		</view>
   <view
         allowMultiple="true"
-        class="com.agritrace.edairy.desktop.birt.viewer.ReportView"
-        id="com.agritrace.edairy.desktop.birt.standardReportView"
-        name="Standard Report View"
+        class="com.agritrace.edairy.desktop.birt.viewer.ReportsIndexView"
+        id="com.agritrace.edairy.desktop.birt.reportsIndexView"
+        name="Reports Index"
         restorable="true">
   </view>
   <view
         allowMultiple="true"
-        class="com.agritrace.edairy.desktop.birt.viewer.ReportsIndexView"
-        id="com.agritrace.edairy.desktop.birt.viewer.reportsIndexView"
-        name="Reports Index"
+        class="com.agritrace.edairy.desktop.birt.viewer.ReportView"
+        id="com.agritrace.edairy.desktop.birt.reportViewerView"
+        name="Standard Report View"
         restorable="true">
   </view>
 		

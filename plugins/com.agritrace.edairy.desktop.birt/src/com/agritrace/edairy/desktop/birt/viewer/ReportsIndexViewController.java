@@ -7,8 +7,15 @@ import java.util.List;
 
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.riena.core.RienaLocations;
+import org.eclipse.riena.navigation.ISubModuleNode;
+import org.eclipse.riena.navigation.NavigationArgument;
+import org.eclipse.riena.navigation.NavigationNodeId;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
+import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
+
+import com.agritrace.edairy.desktop.birt.navigation.NavigationConstants;
+import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
 
 public class ReportsIndexViewController extends SubModuleController {
 
@@ -69,7 +76,7 @@ public class ReportsIndexViewController extends SubModuleController {
 	@Override
 	public void configureRidgets() {
 		List<ReportInfo> reportFileList;
-		
+
 		reportFileList = new LinkedList<ReportInfo>();
 		File reportDir = new File(RienaLocations.getDataArea(), "reports");
 		for (File area : reportDir.listFiles(new DirFilter())) {
@@ -80,9 +87,30 @@ public class ReportsIndexViewController extends SubModuleController {
 				System.err.println("Adding report: " + reportInfo);
 			}
 		}
-		ITableRidget reportList = getRidget(ITableRidget.class, "report-list-table");
+
+		final ITableRidget reportList = getRidget(ITableRidget.class, "report-list-table");
 		reportList.bindToModel( //
 				new WritableList(reportFileList, ReportInfo.class), ReportInfo.class, properties, headers);
+		reportList.addDoubleClickListener(new IActionListener() {
+			@Override
+			public void callback() {
+				// create a report-view navigation node under current node
+				// with file as parameter
+				ISubModuleNode currentNode = getNavigationNode();
+				
+				Object selectedItem = reportList.getSelection().get(0);
+				if (selectedItem instanceof ReportInfo) {
+					String reportName = ((ReportInfo) selectedItem).getName();
+					NavigationNodeId childNodeId = new NavigationNodeId(
+							NavigationConstants.REPORTS_REPORTSUBMODULE_TYPEID, reportName);
+					
+					ISubModuleNode childNode = NodeFactory.createSubModule(childNodeId, reportName, currentNode,
+							NavigationConstants.REPORTS_VIEWERSUBMODULE_VIEWID, ReportViewController.class);
+					// go to that node
+					currentNode.navigate(childNodeId, new NavigationArgument(selectedItem));
+				}
+			}
+		});
 		reportList.updateFromModel();
 	}
 
