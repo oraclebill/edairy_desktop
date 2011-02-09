@@ -51,6 +51,14 @@
       </view>
    </extension>
    <extension
+         point="org.eclipse.riena.navigation.assemblies2">
+      <assembly2
+            assembler="com.agritrace.edairy.desktop.finance.ui.navigation.FinanceNavigationNodeAssembler"
+            id="com.agritrace.edairy.desktop.finance"
+            parentNodeId="application">
+      </assembly2>
+   </extension>
+   <extension
          point="org.eclipse.help.contexts">
       <contexts
             file="contexts.xml">
