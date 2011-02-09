@@ -107,11 +107,19 @@ public final class NodeFactory {
 		return annotation == null || PrincipalManager.getInstance().hasPermission(annotation.value());
 	}
 
-	public static ISubModuleNode createSubModule(String nodeId, String caption, final IModuleNode parent, String viewId,
-			final Class<? extends IController> controllerClass) {
+	public static ISubModuleNode createSubModule(String nodeId, String caption, final IModuleNode parent,
+			String viewId, final Class<? extends IController> controllerClass) {
+		return createSubModule(new NavigationNodeId(nodeId), caption, parent, viewId, controllerClass);
+	}
+
+	public static ISubModuleNode createSubModule(NavigationNodeId nodeId, String caption, final IModuleNode parent,
+			String viewId, final Class<? extends IController> controllerClass) {
 		final Provider<? extends IController> controllerProvider = PROVIDER_MAP.get(controllerClass);
 
-		final ISubModuleNode result = new SubModuleNode(new NavigationNodeId(nodeId), caption) {
+		System.err.format("##### Creating submodule node: %s: '%s', view: %s, controller: %s\n", nodeId, caption,
+				viewId, controllerClass);
+
+		final ISubModuleNode result = new SubModuleNode(nodeId, caption) {
 			@Override
 			public boolean allowsActivate(INavigationContext context) {
 				return super.allowsActivate(context) && havePermissions(controllerClass);

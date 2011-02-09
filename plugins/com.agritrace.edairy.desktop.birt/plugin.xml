@@ -19,8 +19,8 @@
 			name="Reports">
 		</perspective>
 	</extension>
-	   
-   <extension
+	      
+   <extension	
          point="org.eclipse.riena.navigation.assemblies2">
       <assembly2
             id="com.agritrace.edairy.desktop.birt.navigation-assembly"
@@ -33,6 +33,21 @@
             <moduleGroup
                   name="Standard Reports"
                   nodeId="com.agritrace.edairy.desktop.birt.standardReportsModuleGroup">
+               <module
+                     closable="true"
+                     name="Standard Reports"
+                     nodeId="com.agritrace.edairy.desktop.birt.dummyModule">
+                  <subModule
+                        controller="com.agritrace.edairy.desktop.birt.viewer.ReportsIndexViewController"
+                        expanded="false"
+                        name="Standard Reports Index"
+                        nodeId="com.agritrace.edairy.desktop.birt.placeHolderModule"
+                        selectable="true"
+                        sharedView="true"
+                        viewId="com.agritrace.edairy.desktop.birt.viewer.reportsIndexView"
+                        visible="true">
+                  </subModule>
+               </module>
             </moduleGroup>
             <moduleGroup
                   name="User Reports"
@@ -40,6 +55,14 @@
             </moduleGroup>
          </subApplication>
       </assembly2>
+      
+      <assembly2
+            assembler="com.agritrace.edairy.desktop.birt.navigation.BirtNavigationNodeAssembler"
+            id="com.agritrace.edairy.desktop.birt.navigation-assembly.module-builder"
+            name="BIRT Reports Assembly"
+            parentNodeId="application">
+      </assembly2>
+            
    </extension>
 
 
@@ -68,6 +91,20 @@
 			id="com.agritrace.edairy.desktop.birt.reports.MonthlyCreditReportView" name="Monthly Credit Report"
 			restorable="true">
 		</view>
+  <view
+        allowMultiple="true"
+        class="com.agritrace.edairy.desktop.birt.viewer.ReportView"
+        id="com.agritrace.edairy.desktop.birt.standardReportView"
+        name="Standard Report View"
+        restorable="true">
+  </view>
+  <view
+        allowMultiple="true"
+        class="com.agritrace.edairy.desktop.birt.viewer.ReportsIndexView"
+        id="com.agritrace.edairy.desktop.birt.viewer.reportsIndexView"
+        name="Reports Index"
+        restorable="true">
+  </view>
 		
 	</extension>
 
