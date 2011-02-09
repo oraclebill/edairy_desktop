@@ -4,5 +4,42 @@
    <extension point="org.eclipse.ui.startup">
      <startup class="com.agritrace.edairy.desktop.birt.Startup"/>
    </extension>
+  
+   <extension
+         point="org.eclipse.riena.navigation.ui.swt.statusLine">
+      <contentFactory
+            factory="com.agritrace.edairy.desktop.birt.StatusLineContentFactory">
+      </contentFactory>
+   </extension>
+  
+	<extension point="org.eclipse.ui.perspectives">
+		<perspective
+			class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
+			 id="com.agritrace.edairy.desktop.reports"
+			name="Reports">
+		</perspective>
+	</extension>
+	   
+   <extension
+         point="org.eclipse.riena.navigation.assemblies2">
+      <assembly2
+            id="com.agritrace.edairy.desktop.birt.navigation-assembly"
+            name="BIRT Reports Assembly"
+            parentNodeId="application">
+         <subApplication
+               name="BIRT Reports"
+               nodeId="com.agritrace.edairy.desktop.birt.subApplication"
+               perspectiveId="com.agritrace.edairy.desktop.birt.subApplication">
+            <moduleGroup
+                  name="Standard Reports"
+                  nodeId="com.agritrace.edairy.desktop.birt.standardReportsModuleGroup">
+            </moduleGroup>
+            <moduleGroup
+                  name="User Reports"
+                  nodeId="com.agritrace.edairy.desktop.birt.userModuleGroup">
+            </moduleGroup>
+         </subApplication>
+      </assembly2>
+   </extension>
 
 </plugin>

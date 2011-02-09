@@ -33,5 +33,11 @@
       </view>
    </extension>
    
-
+	<extension point="org.eclipse.ui.perspectives">
+		<perspective
+			class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
+			 id="com.agritrace.edairy.desktop.members"
+			name="Members">
+		</perspective>
+	</extension>
 </plugin>
