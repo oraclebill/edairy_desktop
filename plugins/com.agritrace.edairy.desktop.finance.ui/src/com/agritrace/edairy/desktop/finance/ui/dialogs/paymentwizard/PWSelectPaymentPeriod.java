@@ -22,7 +22,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.util.MemberUtil;
 import com.agritrace.edairy.desktop.common.persistence.dao.IMemberPaymentsRepository;
 import com.agritrace.edairy.desktop.common.persistence.dao.ITransactionRepository;
-import com.agritrace.edairy.desktop.common.ui.util.FormUtil;
+import com.agritrace.edairy.desktop.common.ui.util.FormToolkit;
 import com.agritrace.edairy.desktop.finance.payments.MemberCollectionsManager;
 import com.agritrace.edairy.desktop.finance.ui.MilkPriceJournalConstants;
 import com.google.inject.Inject;
@@ -81,7 +81,7 @@ public class PWSelectPaymentPeriod extends PWPage {
 			row.setLayoutData(GridDataFactory.defaultsFor(row).grab(true, false).create());
 
 			final Label lbl = UIControlsFactory.createLabel(row, "Year");
-			GridDataFactory.defaultsFor(lbl).hint(FormUtil.WIDTH_UNIT * 2, SWT.DEFAULT).applyTo(lbl);
+			GridDataFactory.defaultsFor(lbl).hint(FormToolkit.WIDTH_UNIT * 2, SWT.DEFAULT).applyTo(lbl);
 
 			final Combo control = UIControlsFactory.createCombo(row, MilkPriceJournalConstants.ID_COMBO_RATEYEAR);
 			GridDataFactory.defaultsFor(control).grab(true, true).align(SWT.FILL, SWT.FILL).applyTo(control);
@@ -123,7 +123,7 @@ public class PWSelectPaymentPeriod extends PWPage {
 			row.setLayoutData(GridDataFactory.defaultsFor(row).grab(true, false).create());
 
 			final Label lblMonth = UIControlsFactory.createLabel(row, "Month");
-			GridDataFactory.defaultsFor(lblMonth).hint(FormUtil.WIDTH_UNIT * 2, SWT.DEFAULT).applyTo(lblMonth);
+			GridDataFactory.defaultsFor(lblMonth).hint(FormToolkit.WIDTH_UNIT * 2, SWT.DEFAULT).applyTo(lblMonth);
 
 			final Combo control = UIControlsFactory.createCombo(row, MilkPriceJournalConstants.ID_COMBO_RATEMONTH);
 			GridDataFactory.defaultsFor(control).grab(true, true).align(SWT.FILL, SWT.FILL).applyTo(control);

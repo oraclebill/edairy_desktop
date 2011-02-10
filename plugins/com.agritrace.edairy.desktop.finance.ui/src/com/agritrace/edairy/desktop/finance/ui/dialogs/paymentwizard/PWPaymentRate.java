@@ -16,7 +16,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.ui.util.FormUtil;
+import com.agritrace.edairy.desktop.common.ui.util.FormToolkit;
 import com.agritrace.edairy.desktop.finance.ui.MilkPriceJournalConstants;
 import com.google.inject.Inject;
 
@@ -64,12 +64,12 @@ public class PWPaymentRate extends PWPage {
 
 			final Label label = UIControlsFactory.createLabel(row, "Amount");
 			GridDataFactory.defaultsFor(label)
-					.hint(FormUtil.WIDTH_UNIT * 2, SWT.DEFAULT).applyTo(label);
+					.hint(FormToolkit.WIDTH_UNIT * 2, SWT.DEFAULT).applyTo(label);
 
 			final Text control = UIControlsFactory.createTextDecimal(row,
 					MilkPriceJournalConstants.ID_TEXT_PRICE1);
 			GridDataFactory.defaultsFor(control)
-					.hint(FormUtil.WIDTH_UNIT, SWT.DEFAULT).applyTo(control);
+					.hint(FormToolkit.WIDTH_UNIT, SWT.DEFAULT).applyTo(control);
 			control.addModifyListener(new ModifyListener() {
 
 				@Override
@@ -87,12 +87,12 @@ public class PWPaymentRate extends PWPage {
 
 			final Label label = UIControlsFactory.createLabel(row, "Re-enter Amount");
 			GridDataFactory.defaultsFor(label)
-					.hint(FormUtil.WIDTH_UNIT * 2, SWT.DEFAULT).applyTo(label);
+					.hint(FormToolkit.WIDTH_UNIT * 2, SWT.DEFAULT).applyTo(label);
 
 			final Text control = UIControlsFactory.createTextDecimal(row,
 					MilkPriceJournalConstants.ID_TEXT_PRICE2);
 			GridDataFactory.defaultsFor(control)
-					.hint(FormUtil.WIDTH_UNIT, SWT.DEFAULT).applyTo(control);
+					.hint(FormToolkit.WIDTH_UNIT, SWT.DEFAULT).applyTo(control);
 			control.addModifyListener(new ModifyListener() {
 
 				@Override

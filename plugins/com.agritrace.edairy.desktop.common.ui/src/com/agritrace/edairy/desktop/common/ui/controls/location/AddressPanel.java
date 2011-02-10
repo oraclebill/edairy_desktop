@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.ui.controls.CompositePanel;
-import com.agritrace.edairy.desktop.common.ui.util.FormUtil;
+import com.agritrace.edairy.desktop.common.ui.util.FormToolkit;
 
 public class AddressPanel extends CompositePanel {
 
@@ -18,8 +18,8 @@ public class AddressPanel extends CompositePanel {
 			super(parent, style);
 
 			final GridLayout layout = new GridLayout(4, false);
-			layout.marginWidth = layout.marginHeight = FormUtil.FORM_MARGIN;
-			layout.horizontalSpacing = FormUtil.COLUMN_MARGIN;
+			layout.marginWidth = layout.marginHeight = FormToolkit.FORM_MARGIN;
+			layout.horizontalSpacing = FormToolkit.COLUMN_MARGIN;
 			this.setLayout(layout);
 
 			final Label addressLabel = UIControlsFactory.createLabel(this, "Address");
@@ -30,7 +30,7 @@ public class AddressPanel extends CompositePanel {
 					ViewWidgetId.ADDRESS_TXT);
 			gd = new GridData();
 			gd.horizontalSpan = 3;
-			gd.widthHint = FormUtil.WIDTH_UNIT * 3;
+			gd.widthHint = FormToolkit.WIDTH_UNIT * 3;
 			addressText.setLayoutData(gd);
 
 			final Label sectionLabel = UIControlsFactory.createLabel(this, "Section/Homestead");
@@ -40,7 +40,7 @@ public class AddressPanel extends CompositePanel {
 			final Text sectionText = UIControlsFactory.createText(this, SWT.BORDER | SWT.SINGLE,
 					ViewWidgetId.SECTION_TXT);
 			gd = new GridData();
-			gd.widthHint = FormUtil.WIDTH_UNIT * 2;
+			gd.widthHint = FormToolkit.WIDTH_UNIT * 2;
 			sectionText.setLayoutData(gd);
 
 			final Label townLabel = UIControlsFactory.createLabel(this, "Town/Village");
@@ -50,7 +50,7 @@ public class AddressPanel extends CompositePanel {
 			final Text townText = UIControlsFactory.createText(this, SWT.BORDER | SWT.SINGLE,
 					ViewWidgetId.VILLAGE_TXT);
 			gd = new GridData();
-			gd.widthHint = FormUtil.WIDTH_UNIT * 2;
+			gd.widthHint = FormToolkit.WIDTH_UNIT * 2;
 			townText.setLayoutData(gd);
 
 			final Label estateLabel = UIControlsFactory.createLabel(this, "Estate/Nearest Centre");
@@ -60,7 +60,7 @@ public class AddressPanel extends CompositePanel {
 			final Text estateText = UIControlsFactory.createText(this, SWT.BORDER | SWT.SINGLE,
 					ViewWidgetId.ESTATE_TXT);
 			gd = new GridData();
-			gd.widthHint = FormUtil.WIDTH_UNIT * 2;
+			gd.widthHint = FormToolkit.WIDTH_UNIT * 2;
 			estateText.setLayoutData(gd);
 
 			final Label locationLabel = UIControlsFactory.createLabel(this, "Location");
@@ -70,7 +70,7 @@ public class AddressPanel extends CompositePanel {
 			final Text locationText = UIControlsFactory.createText(this, SWT.BORDER | SWT.SINGLE,
 					ViewWidgetId.LOCATION_TXT);
 			gd = new GridData();
-			gd.widthHint = FormUtil.WIDTH_UNIT * 2;
+			gd.widthHint = FormToolkit.WIDTH_UNIT * 2;
 			locationText.setLayoutData(gd);
 
 			final Label subLocationLabel = UIControlsFactory.createLabel(this, "Sub");
@@ -80,7 +80,7 @@ public class AddressPanel extends CompositePanel {
 			final Text subLocationText = UIControlsFactory.createText(this, SWT.BORDER | SWT.SINGLE,
 					ViewWidgetId.SUBLOCATION_TXT);
 			gd = new GridData();
-			gd.widthHint = FormUtil.WIDTH_UNIT * 2;
+			gd.widthHint = FormToolkit.WIDTH_UNIT * 2;
 			subLocationText.setLayoutData(gd);
 
 			final Label districtLabel = UIControlsFactory.createLabel(this, "District");
@@ -90,7 +90,7 @@ public class AddressPanel extends CompositePanel {
 			final Text districtText = UIControlsFactory.createText(this, SWT.BORDER | SWT.SINGLE,
 					ViewWidgetId.DISTRICT_TXT);
 			gd = new GridData();
-			gd.widthHint = FormUtil.WIDTH_UNIT * 2;
+			gd.widthHint = FormToolkit.WIDTH_UNIT * 2;
 			districtText.setLayoutData(gd);
 
 			final Label divisionLabel = UIControlsFactory.createLabel(this, "Division");
@@ -100,7 +100,7 @@ public class AddressPanel extends CompositePanel {
 			final Text divisionText = UIControlsFactory.createText(this, SWT.BORDER | SWT.SINGLE,
 					ViewWidgetId.DIVISION_TXT);
 			gd = new GridData();
-			gd.widthHint = FormUtil.WIDTH_UNIT * 2;
+			gd.widthHint = FormToolkit.WIDTH_UNIT * 2;
 			divisionText.setLayoutData(gd);
 
 			final Label postalCodeLabel = UIControlsFactory.createLabel(this, "Postal Code");
@@ -110,7 +110,7 @@ public class AddressPanel extends CompositePanel {
 			final Text postalCodeText = UIControlsFactory.createText(this, SWT.BORDER | SWT.SINGLE,
 					ViewWidgetId.POSTAL_CODE_TXT);
 			gd = new GridData();
-			gd.widthHint = FormUtil.WIDTH_UNIT * 2;
+			gd.widthHint = FormToolkit.WIDTH_UNIT * 2;
 			postalCodeText.setLayoutData(gd);
 
 			final Label provinceLabel = UIControlsFactory.createLabel(this, "Province");
@@ -122,7 +122,7 @@ public class AddressPanel extends CompositePanel {
 			final CCombo provinceText = UIControlsFactory.createCCombo(this,
 					ViewWidgetId.PROVINCE_TXT);
 			gd = new GridData();
-			gd.widthHint = FormUtil.WIDTH_UNIT * 2;
+			gd.widthHint = FormToolkit.WIDTH_UNIT * 2;
 			provinceText.setLayoutData(gd);
 		}
 	}

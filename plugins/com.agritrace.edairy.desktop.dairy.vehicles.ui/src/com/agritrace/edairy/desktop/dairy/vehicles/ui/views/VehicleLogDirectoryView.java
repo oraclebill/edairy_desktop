@@ -10,7 +10,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 
-import com.agritrace.edairy.desktop.common.ui.util.FormUtil;
+import com.agritrace.edairy.desktop.common.ui.util.FormToolkit;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.controls.VehicleLogDetailBindConstants;
 
@@ -32,7 +32,7 @@ public class VehicleLogDirectoryView extends AbstractDirectoryView {
 		UIControlsFactory.createLabel(filterGroup, "Vehicle Type: ", SWT.LEFT);
 		final CCombo vehicleCombo = UIControlsFactory.createCCombo(filterGroup,  VehicleLogDetailBindConstants.BIND_ID_VEHICLE_TYPE);
 		final GridData gd = new GridData();
-		gd.widthHint = FormUtil.WIDTH_UNIT * 3;
+		gd.widthHint = FormToolkit.WIDTH_UNIT * 3;
 		gd.verticalAlignment = SWT.FILL;
 		vehicleCombo.setLayoutData(gd);
 
@@ -40,7 +40,7 @@ public class VehicleLogDirectoryView extends AbstractDirectoryView {
 		UIControlsFactory.createLabel(filterGroup, "Driver");
 		final CCombo driverText = UIControlsFactory.createCCombo(filterGroup,VehicleLogDetailBindConstants.BIND_ID_DRIVER_NAME);
 		final GridData gd2 = new GridData();
-		gd2.widthHint = FormUtil.WIDTH_UNIT * 3;
+		gd2.widthHint = FormToolkit.WIDTH_UNIT * 3;
 		gd2.verticalAlignment = SWT.FILL;
 		driverText.setLayoutData(gd2);
 	}

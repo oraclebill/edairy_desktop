@@ -1,13 +1,14 @@
 package com.agritrace.edairy.desktop.birt.viewer;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.riena.ui.ridgets.IDateTextRidget;
+import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 
 public class DailyReportViewController extends ReportViewController {
 
-	IDateTextRidget date;
+	IDateTimeRidget date;
 	
 	@Override
 	public void configureRidgets() {
@@ -16,13 +17,15 @@ public class DailyReportViewController extends ReportViewController {
 		// configure parameter ridgets
 		
 		// 
-		date = getRidget(IDateTextRidget.class, "report-parameter-date");
+		date = getRidget(IDateTimeRidget.class, "report-parameter-date");
+		date.setDate(Calendar.getInstance().getTime());
 	}
 	
 	protected Map<String, Object> getReportParameters() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("date", date.getText());
+		map.put("fromDate", date.getText());
 		
 		return map;
 	}

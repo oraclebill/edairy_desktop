@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.ui.controls.CompositePanel;
-import com.agritrace.edairy.desktop.common.ui.util.FormUtil;
+import com.agritrace.edairy.desktop.common.ui.util.FormToolkit;
 
 public class DirectionsPanel extends CompositePanel {
 
@@ -18,8 +18,8 @@ public class DirectionsPanel extends CompositePanel {
 		super(parent, style);
 
 		final GridLayout layout = new GridLayout(2, false);
-		layout.marginWidth = layout.marginHeight = FormUtil.FORM_MARGIN;
-		layout.horizontalSpacing = FormUtil.COLUMN_MARGIN;
+		layout.marginWidth = layout.marginHeight = FormToolkit.FORM_MARGIN;
+		layout.horizontalSpacing = FormToolkit.COLUMN_MARGIN;
 		setLayout(layout);
 
 		final Label landmarkLabel = UIControlsFactory.createLabel(this, "Landmark");
@@ -29,7 +29,7 @@ public class DirectionsPanel extends CompositePanel {
 		final Text landmarkText = UIControlsFactory.createText(this, SWT.BORDER | SWT.SINGLE,
 				ViewWidgetId.LANDMARK_TEXT);
 		gd = new GridData();
-		gd.widthHint = FormUtil.WIDTH_UNIT * 4;
+		gd.widthHint = FormToolkit.WIDTH_UNIT * 4;
 		landmarkText.setLayoutData(gd);
 
 		final Label directionsLabel = UIControlsFactory.createLabel(this, "Directions");
@@ -39,8 +39,8 @@ public class DirectionsPanel extends CompositePanel {
 		final Text directionsText = UIControlsFactory.createTextMulti(this, SWT.WRAP, false, true);
 		SWTBindingPropertyLocator.getInstance().setBindingProperty(directionsText,  ViewWidgetId.DIRECTIONS_TEXT);
 		gd = new GridData();
-		gd.widthHint = FormUtil.WIDTH_UNIT * 4;
-		gd.heightHint = FormUtil.ROW_MARGIN * 5;
+		gd.widthHint = FormToolkit.WIDTH_UNIT * 4;
+		gd.heightHint = FormToolkit.ROW_MARGIN * 5;
 		directionsText.setLayoutData(gd);
 	}
 }

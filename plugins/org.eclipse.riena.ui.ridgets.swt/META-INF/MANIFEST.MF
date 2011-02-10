@@ -3,15 +3,16 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Name: Ridgets Swt Plug-in 
 Bundle-SymbolicName: org.eclipse.riena.ui.ridgets.swt;singleton:=true
-Require-Bundle: org.eclipse.core.databinding;visibility:=reexport,org.
- eclipse.core.databinding.beans;visibility:=reexport,org.eclipse.core.
- databinding.property;visibility:=reexport,org.eclipse.jface.databindi
- ng;resolution:=optional;visibility:=reexport,org.eclipse.rap.jface.da
- tabinding;resolution:=optional;visibility:=reexport,org.eclipse.riena
- .beans.common,org.eclipse.riena.core,org.eclipse.riena.ui.core;visibi
- lity:=reexport,org.eclipse.riena.ui.common;visibility:=reexport,org.e
- clipse.riena.ui.ridgets;visibility:=reexport,org.eclipse.riena.ui.swt
- ;visibility:=reexport
+Require-Bundle: org.eclipse.core.databinding;visibility:=reexport,
+ org.eclipse.core.databinding.beans;visibility:=reexport,
+ org.eclipse.core.databinding.property;visibility:=reexport,
+ org.eclipse.jface.databinding;resolution:=optional;visibility:=reexport,
+ org.eclipse.riena.beans.common,
+ org.eclipse.riena.core,
+ org.eclipse.riena.ui.core;visibility:=reexport,
+ org.eclipse.riena.ui.common;visibility:=reexport,
+ org.eclipse.riena.ui.ridgets;visibility:=reexport,
+ org.eclipse.riena.ui.swt;visibility:=reexport
 Bundle-Activator: org.eclipse.riena.internal.ui.ridgets.swt.Activator
 Bundle-Version: 2.1.0.qualifier
 Export-Package: org.eclipse.riena.internal.ui.ridgets.swt;x-friends:="

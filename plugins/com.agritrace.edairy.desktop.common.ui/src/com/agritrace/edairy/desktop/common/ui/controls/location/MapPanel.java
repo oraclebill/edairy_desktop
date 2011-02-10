@@ -10,14 +10,14 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import com.agritrace.edairy.desktop.common.ui.controls.CompositePanel;
-import com.agritrace.edairy.desktop.common.ui.util.FormUtil;
+import com.agritrace.edairy.desktop.common.ui.util.FormToolkit;
 
 public class MapPanel extends CompositePanel {
 	public MapPanel(Composite parent, int style) {
 		super(parent, style);
 		final GridLayout layout = new GridLayout(3, false);
-		layout.marginWidth = layout.marginHeight = FormUtil.FORM_MARGIN;
-		layout.horizontalSpacing = FormUtil.COLUMN_MARGIN;
+		layout.marginWidth = layout.marginHeight = FormToolkit.FORM_MARGIN;
+		layout.horizontalSpacing = FormToolkit.COLUMN_MARGIN;
 		this.setLayout(layout);
 
 		final Label latitudeLabel = UIControlsFactory.createLabel(this, "Latitude");
@@ -26,7 +26,7 @@ public class MapPanel extends CompositePanel {
 
 		final Text lattitudeText = UIControlsFactory.createTextDecimal(this, ViewWidgetId.LATITUDE_TEXT);
 		gd = new GridData();
-		gd.widthHint = FormUtil.WIDTH_UNIT;
+		gd.widthHint = FormToolkit.WIDTH_UNIT;
 		lattitudeText.setLayoutData(gd);
 		try {
 			final Browser map = UIControlsFactory.createBrowser(this, SWT.BORDER);
@@ -52,7 +52,7 @@ public class MapPanel extends CompositePanel {
 
 		final Text longitudeText = UIControlsFactory.createTextDecimal(this, ViewWidgetId.LONGTITUDE_TEXT);
 		gd = new GridData();
-		gd.widthHint = FormUtil.WIDTH_UNIT;
+		gd.widthHint = FormToolkit.WIDTH_UNIT;
 		longitudeText.setLayoutData(gd);
 	}
 }

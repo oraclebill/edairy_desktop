@@ -14,7 +14,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
-import com.agritrace.edairy.desktop.common.ui.util.FormUtil;
+import com.agritrace.edairy.desktop.common.ui.util.FormToolkit;
 import com.agritrace.edairy.desktop.finance.ui.MilkPriceJournalConstants;
 import com.ibm.icu.util.Calendar;
 
@@ -37,7 +37,7 @@ public class MilkPriceEditDialog extends RecordDialog<MemberPayment> {
 			row.setLayoutData(GridDataFactory.defaultsFor(row).grab(true, false).create());
 
 			final Label lblMonth = UIControlsFactory.createLabel(row, "Month");
-			GridDataFactory.defaultsFor(lblMonth).hint(FormUtil.WIDTH_UNIT * 2, SWT.DEFAULT).applyTo(lblMonth);
+			GridDataFactory.defaultsFor(lblMonth).hint(FormToolkit.WIDTH_UNIT * 2, SWT.DEFAULT).applyTo(lblMonth);
 
 			final CCombo control = UIControlsFactory.createCCombo(row, MilkPriceJournalConstants.ID_COMBO_RATEMONTH);
 			GridDataFactory.defaultsFor(control).grab(true,true).align(SWT.FILL, SWT.FILL).applyTo(control);
@@ -49,7 +49,7 @@ public class MilkPriceEditDialog extends RecordDialog<MemberPayment> {
 			row.setLayoutData(GridDataFactory.defaultsFor(row).grab(true, false).create());
 
 			final Label lbl = UIControlsFactory.createLabel(row, "Year");
-			GridDataFactory.defaultsFor(lbl).hint(FormUtil.WIDTH_UNIT * 2, SWT.DEFAULT).applyTo(lbl);
+			GridDataFactory.defaultsFor(lbl).hint(FormToolkit.WIDTH_UNIT * 2, SWT.DEFAULT).applyTo(lbl);
 
 			final CCombo control = UIControlsFactory.createCCombo(row, MilkPriceJournalConstants.ID_COMBO_RATEYEAR);
 			GridDataFactory.defaultsFor(control).grab(true,true).align(SWT.FILL, SWT.FILL).applyTo(control);
@@ -65,10 +65,10 @@ public class MilkPriceEditDialog extends RecordDialog<MemberPayment> {
 			row.setLayoutData(GridDataFactory.defaultsFor(row).grab(true, false).create());
 
 			final Label label = UIControlsFactory.createLabel(row, "Amount");
-			GridDataFactory.defaultsFor(label).hint(FormUtil.WIDTH_UNIT * 2, SWT.DEFAULT).applyTo(label);
+			GridDataFactory.defaultsFor(label).hint(FormToolkit.WIDTH_UNIT * 2, SWT.DEFAULT).applyTo(label);
 
 			final Control control = UIControlsFactory.createTextDecimal(row, MilkPriceJournalConstants.ID_TEXT_PRICE1);
-			GridDataFactory.defaultsFor(control).hint(FormUtil.WIDTH_UNIT, SWT.DEFAULT).applyTo(control);
+			GridDataFactory.defaultsFor(control).hint(FormToolkit.WIDTH_UNIT, SWT.DEFAULT).applyTo(control);
 		}
 		{
 			final Composite row = UIControlsFactory.createComposite(comp);
@@ -76,10 +76,10 @@ public class MilkPriceEditDialog extends RecordDialog<MemberPayment> {
 			row.setLayoutData(GridDataFactory.defaultsFor(row).grab(true, false).create());
 
 			final Label label = UIControlsFactory.createLabel(row, "Re-enter Amount");
-			GridDataFactory.defaultsFor(label).hint(FormUtil.WIDTH_UNIT * 2, SWT.DEFAULT).applyTo(label);
+			GridDataFactory.defaultsFor(label).hint(FormToolkit.WIDTH_UNIT * 2, SWT.DEFAULT).applyTo(label);
 
 			final Control control = UIControlsFactory.createTextDecimal(row, MilkPriceJournalConstants.ID_TEXT_PRICE2);
-			GridDataFactory.defaultsFor(control).hint(FormUtil.WIDTH_UNIT , SWT.DEFAULT).applyTo(control);
+			GridDataFactory.defaultsFor(control).hint(FormToolkit.WIDTH_UNIT , SWT.DEFAULT).applyTo(control);
 		}
 	}
 

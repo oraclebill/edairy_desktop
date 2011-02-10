@@ -12,7 +12,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 
-import com.agritrace.edairy.desktop.common.ui.util.FormUtil;
+import com.agritrace.edairy.desktop.common.ui.util.FormToolkit;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 import com.agritrace.edairy.desktop.dairy.locations.ui.DairyLocationUIConstants;
 
@@ -41,7 +41,7 @@ public class DairyLocationDirectoryView extends AbstractDirectoryView {
 		UIControlsFactory.createLabel(filterGroup, "Transport Route: ", SWT.LEFT);
 		final CCombo combo = UIControlsFactory.createCCombo(filterGroup, DairyLocationUIConstants.RIDGET_ID_ROUTE);
 		final GridData gd = new GridData();
-		gd.widthHint = FormUtil.WIDTH_UNIT * 3;
+		gd.widthHint = FormToolkit.WIDTH_UNIT * 3;
 		gd.verticalAlignment = SWT.FILL;
 		combo.setLayoutData(gd);
 

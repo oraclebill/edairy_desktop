@@ -13,7 +13,8 @@ import org.ops4j.peaberry.eclipse.EclipseRegistry;
 import org.osgi.framework.BundleContext;
 
 import com.agritrace.edairy.desktop.birt.BirtModule;
-import com.agritrace.edairy.desktop.birt.viewer.ReportViewController;
+import com.agritrace.edairy.desktop.birt.viewer.DailyReportViewController;
+import com.agritrace.edairy.desktop.birt.viewer.MonthlyReportViewController;
 import com.agritrace.edairy.desktop.common.ui.UIModule;
 import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationDirectoryController;
@@ -56,7 +57,9 @@ public class EDairyModule extends AbstractModule {
 		CONTROLLERS.add(LiveStockListController.class);
 		CONTROLLERS.add(FarmListViewController.class);
 		CONTROLLERS.add(RoleDirectoryController.class);
-		CONTROLLERS.add(ReportViewController.class);
+		CONTROLLERS.add(DailyReportViewController.class);
+		CONTROLLERS.add(MonthlyReportViewController.class);
+//		CONTROLLERS.add(AnnualReportViewController.class);
 		CONTROLLERS.add(DairyLocationDirectoryController.class);
 		CONTROLLERS.add(ContainerListViewController.class);
 		CONTROLLERS.add(MilkCollectionLogController.class);

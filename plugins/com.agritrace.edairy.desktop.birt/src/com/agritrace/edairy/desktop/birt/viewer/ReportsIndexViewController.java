@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.birt.report.engine.api.EngineException;
+import org.eclipse.birt.report.engine.api.IGetParameterDefinitionTask;
 import org.eclipse.birt.report.engine.api.IReportEngine;
 import org.eclipse.birt.report.engine.api.IReportRunnable;
 import org.eclipse.birt.report.model.api.DesignElementHandle;
@@ -17,6 +18,7 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.URIUtil;
+import org.eclipse.riena.navigation.INavigationNode;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.NavigationArgument;
 import org.eclipse.riena.navigation.NavigationNodeId;
@@ -159,6 +161,7 @@ public class ReportsIndexViewController extends SubModuleController {
 				// create a report-view navigation node under current node
 				// with file as parameter
 				ISubModuleNode currentNode;
+				INavigationNode<?> childNode;
 				Object selectedItem;
 				String reportName;
 				NavigationNodeId childNodeId;
@@ -171,8 +174,12 @@ public class ReportsIndexViewController extends SubModuleController {
 					reportName = reportInfo.getName();
 
 					childNodeId = new NavigationNodeId(NavigationConstants.REPORTS_REPORTSUBMODULE_TYPEID, reportName);
-					NodeFactory.createSubModule(childNodeId, reportName, currentNode,
-							getViewIdForReport(reportInfo), ReportViewController.class);
+					childNode = currentNode.findNode(childNodeId);
+					if (childNode != null ) {
+						childNode.dispose();
+					}
+					NodeFactory.createSubModule(childNodeId, reportName, currentNode, getViewIdForReport(reportInfo),
+							DailyReportViewController.class);
 
 					// go to that node
 					currentNode.navigate(childNodeId, new NavigationArgument(selectedItem));
@@ -191,9 +198,13 @@ public class ReportsIndexViewController extends SubModuleController {
 
 	protected String getViewIdForReport(ReportInfo reportInfo) {
 		String viewId;
-		if (reportInfo.getReport().getDesignHandle().getPropertyDefn("month") != null) {
+		
+		IReportRunnable runnable = reportInfo.getReport();
+		IReportEngine engine = runnable.getReportEngine();
+		IGetParameterDefinitionTask task = engine.createGetParameterDefinitionTask(runnable);
+		if (task.getParameterDefn("month") != null) {
 			viewId = NavigationConstants.REPORTS_MONTHLYVIEWERSUBMODULE_VIEWID;
-		} else if (reportInfo.getReport().getDesignHandle().getPropertyDefn("date") != null) {
+		} else if (task.getParameterDefn("date") != null) {
 			viewId = NavigationConstants.REPORTS_DAILYVIEWERSUBMODULE_VIEWID;
 		} else {
 			viewId = NavigationConstants.REPORTS_ANNUALVIEWERSUBMODULE_VIEWID;

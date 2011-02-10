@@ -46,6 +46,7 @@
             id="com.agritrace.edairy.desktop.milkops.ui.views.MilkDeliveryLogView"
             name="Milk Sales">
       </view>
+      <!--
       <view
             allowMultiple="true"
             category="com.agritrace.edairy.desktop.milkops.ui.category"
@@ -60,6 +61,7 @@
             id="com.agritrace.edairy.desktop.milkops.ui.views.MilkQCCView"
             name="Quantity Control">
       </view>
+      -->
    </extension>
    <extension
          point="org.eclipse.riena.navigation.assemblies2">
