@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Standard BIRT Reports
+Bundle-SymbolicName: com.agritrace.edairy.desktop.birt.reports;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: AGRITRACE
