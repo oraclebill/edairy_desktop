@@ -1,6 +1,7 @@
 package com.agritrace.edairy.desktop.birt.viewer;
 
-import org.eclipse.riena.navigation.ui.swt.views.SubModuleView;
+import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
@@ -8,7 +9,12 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 
-public class ReportView extends SubModuleView {
+import com.agritrace.edairy.desktop.common.ui.views.ScrolledSubModuleView;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+
+public class ReportView extends ScrolledSubModuleView {
 
 	public static final String MILK_COLLECTION_YEAR = "reports/YearReport.rptdesign";
 	public static final String MILK_COLLECTION_YEAR_REPORT_NAME = "MILK COLLECTION REPORT";
@@ -19,7 +25,10 @@ public class ReportView extends SubModuleView {
 	// private Random random = new Random();
 
 // private final String reportName;
-	private Composite composite;
+	private Composite parameterBar;
+	private Composite paramArea;
+	private Composite controlArea;
+	private Composite reportArea;
 	private Composite compositeBase;
 
 
@@ -34,48 +43,45 @@ public class ReportView extends SubModuleView {
 	 */
 	@Override
 	protected void basicCreatePartControl(Composite parent) {
-		createComposite(parent);
-		createBrowser();
+		parent.setLayout(new GridLayout(1, false));
+		
+		// param bar above report area contains parameters and control areas
+		parameterBar = UIControlsFactory.createComposite(parent, SWT.NONE);
+		parameterBar.setLayoutData(
+				GridDataFactory.fillDefaults().grab(true, false).create());
+	
+		// param area contents will be determined based on the selected report
+		paramArea = UIControlsFactory.createGroup(parameterBar, "Report Parameters", "report-parameter-area");
+		paramArea.setLayoutData(
+				GridDataFactory.fillDefaults().grab(true, false).create());
+		setupParameterArea(paramArea);
+//		GridLayoutFactory.fillDefaults().generateLayout(controlArea);
+		
+		// control area contains the 'Run' button (maybe print/export later)
+		controlArea = UIControlsFactory.createComposite(parameterBar);
+//		controlArea.setLayoutData(
+//				GridDataFactory.fillDefaults().grab(true, false).create());
+		UIControlsFactory.createButton(controlArea, "Run", "report-run-action");
+		GridLayoutFactory.fillDefaults().generateLayout(controlArea);
+		GridLayoutFactory.fillDefaults().numColumns(2).generateLayout(parameterBar);
+
+		// report area contains the browser used to display RI
+		reportArea = UIControlsFactory.createComposite(parent, SWT.NONE);
+		reportArea.setLayoutData(
+				GridDataFactory.fillDefaults().grab(true, true).create());
+		browser = UIControlsFactory.createBrowser(reportArea, SWT.BORDER, "browser");
+		browser.setLayoutData(
+				GridDataFactory.fillDefaults().grab(true, true).create());
+		GridLayoutFactory.fillDefaults().generateLayout(reportArea);
 	}
 
-	private void createComposite(Composite parent) {
-		compositeBase = UIControlsFactory.createComposite(parent, SWT.NONE);
-		final GridLayout gridLayout0 = new GridLayout(1, false);
-
-		compositeBase.setLayout(gridLayout0);
-		compositeBase.setSize(800, 800);
-
-		final GridLayout gridLayout = new GridLayout();
-		gridLayout.numColumns = 6;
-		final GridData gridData = new GridData();
-		gridData.grabExcessHorizontalSpace = false;
-		gridData.horizontalAlignment = GridData.FILL;
-		gridData.verticalAlignment = GridData.BEGINNING;
-		gridData.grabExcessVerticalSpace = false;
+	/**
+	 * Called within 'createBasicPartControl' to add parameter UI. parent has no layout.
+	 *  
+	 * @param paramArea2
+	 */
+	protected void setupParameterArea(Composite parent) {
+		// TODO Auto-generated method stub
 		
-		composite = UIControlsFactory.createComposite(compositeBase, SWT.NONE);
-		composite.setLayoutData(gridData);
-		composite.setLayout(gridLayout);
-		
-		UIControlsFactory.createLabel(composite, "Year:");
-		UIControlsFactory.createCCombo(composite, "year-combo");
-		
-		UIControlsFactory.createLabel(composite, "Month:");
-		UIControlsFactory.createCCombo(composite, "month-combo");
-
-		UIControlsFactory.createButton(composite, "Export to PDF", "export-pdf-action");
-		UIControlsFactory.createButton(composite, "Print", "print-action");
-
 	}
-
-	private void createBrowser() {
-		final GridData gridData3 = new GridData();
-		browser = UIControlsFactory.createBrowser(compositeBase, SWT.BORDER, "browser");
-		gridData3.horizontalAlignment = GridData.FILL;
-		gridData3.verticalAlignment = GridData.FILL;
-		gridData3.grabExcessVerticalSpace = true;
-		gridData3.grabExcessHorizontalSpace = true;
-		browser.setLayoutData(gridData3);
-	}
-
 }

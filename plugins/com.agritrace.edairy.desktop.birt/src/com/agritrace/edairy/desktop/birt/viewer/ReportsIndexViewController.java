@@ -65,7 +65,7 @@ public class ReportsIndexViewController extends SubModuleController {
 		}
 
 		private void setDescription(String desc) {
-			 description = desc;
+			description = desc;
 		}
 
 		public File getFile() {
@@ -76,10 +76,10 @@ public class ReportsIndexViewController extends SubModuleController {
 			this.file = file;
 			isValid = false;
 			try {
-				report = Activator.getDefault().getReportEngine().openReportDesign(file.getAbsolutePath());		
+				report = Activator.getDefault().getReportEngine().openReportDesign(file.getAbsolutePath());
 				DesignElementHandle reportDesign = report.getDesignHandle();
 				setName(reportDesign.getStringProperty("displayName"));
-//				setArea(reportDesign.getStringProperty("title"));
+// setArea(reportDesign.getStringProperty("title"));
 				setArea(file.getParentFile().getName());
 				setDescription(reportDesign.getStringProperty("description"));
 				isValid = true;
@@ -158,20 +158,27 @@ public class ReportsIndexViewController extends SubModuleController {
 			public void callback() {
 				// create a report-view navigation node under current node
 				// with file as parameter
-				ISubModuleNode currentNode = getNavigationNode();
+				ISubModuleNode currentNode;
+				Object selectedItem;
+				String reportName;
+				NavigationNodeId childNodeId;
+				ReportInfo reportInfo;
 
-				Object selectedItem = reportList.getSelection().get(0);
+				currentNode = getNavigationNode();
+				selectedItem = reportList.getSelection().get(0);
 				if (selectedItem instanceof ReportInfo) {
-					String reportName = ((ReportInfo) selectedItem).getName();
-					NavigationNodeId childNodeId = new NavigationNodeId(
-							NavigationConstants.REPORTS_REPORTSUBMODULE_TYPEID, reportName);
+					reportInfo = ((ReportInfo) selectedItem);
+					reportName = reportInfo.getName();
 
-					ISubModuleNode childNode = NodeFactory.createSubModule(childNodeId, reportName, currentNode,
-							NavigationConstants.REPORTS_VIEWERSUBMODULE_VIEWID, ReportViewController.class);
+					childNodeId = new NavigationNodeId(NavigationConstants.REPORTS_REPORTSUBMODULE_TYPEID, reportName);
+					NodeFactory.createSubModule(childNodeId, reportName, currentNode,
+							getViewIdForReport(reportInfo), ReportViewController.class);
+
 					// go to that node
 					currentNode.navigate(childNodeId, new NavigationArgument(selectedItem));
 				}
 			}
+
 		});
 		reportList.updateFromModel();
 	}
@@ -180,6 +187,18 @@ public class ReportsIndexViewController extends SubModuleController {
 	public void afterBind() {
 		// TODO Auto-generated method stub
 		super.afterBind();
+	}
+
+	protected String getViewIdForReport(ReportInfo reportInfo) {
+		String viewId;
+		if (reportInfo.getReport().getDesignHandle().getPropertyDefn("month") != null) {
+			viewId = NavigationConstants.REPORTS_MONTHLYVIEWERSUBMODULE_VIEWID;
+		} else if (reportInfo.getReport().getDesignHandle().getPropertyDefn("date") != null) {
+			viewId = NavigationConstants.REPORTS_DAILYVIEWERSUBMODULE_VIEWID;
+		} else {
+			viewId = NavigationConstants.REPORTS_ANNUALVIEWERSUBMODULE_VIEWID;
+		}
+		return viewId;
 	}
 
 }

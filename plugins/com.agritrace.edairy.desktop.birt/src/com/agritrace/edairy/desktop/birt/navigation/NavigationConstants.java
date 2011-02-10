@@ -12,7 +12,9 @@ public interface NavigationConstants {
 	String REPORTS_REPORTMODULE_TYPEID = "com.agritrace.edairy.desktop.birt.reportModule";
 	String REPORTS_REPORTSUBMODULE_TYPEID = "com.agritrace.edairy.desktop.birt.reportSubModule";
 
-	String REPORTS_VIEWERSUBMODULE_VIEWID = "com.agritrace.edairy.desktop.birt.reportViewerView";
 	String REPORTS_INDEXSUBMODULE_VIEWID = "com.agritrace.edairy.desktop.birt.reportsIndexView";
+	String REPORTS_DAILYVIEWERSUBMODULE_VIEWID = "com.agritrace.edairy.desktop.birt.dailyReportViewerView";
+	String REPORTS_MONTHLYVIEWERSUBMODULE_VIEWID = "com.agritrace.edairy.desktop.birt.monthlyReportViewerView";
+	String REPORTS_ANNUALVIEWERSUBMODULE_VIEWID = "com.agritrace.edairy.desktop.birt.annualReportViewerView";
 	
 }
