@@ -23,6 +23,8 @@ public class EDairyActivator extends AbstractUIPlugin {
 	@Inject
 	private static EDairyActivator plugin;
 
+	private Injector injector;
+
 	/**
 	 * Returns the shared instance
 	 *
@@ -75,7 +77,7 @@ public class EDairyActivator extends AbstractUIPlugin {
 	 */
 	@Override
 	public void start(BundleContext context) throws Exception {
-		final Injector injector = Guice.createInjector(new EDairyModule(context), new AbstractModule() {
+		injector = Guice.createInjector(new EDairyModule(context), new AbstractModule() {
 			@Override
 			protected void configure() {
 				bind(EDairyActivator.class).toInstance(EDairyActivator.this);
@@ -97,5 +99,9 @@ public class EDairyActivator extends AbstractUIPlugin {
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
 		super.stop(context);
+	}
+
+	public void injectMembers(Object obj) {
+		injector.injectMembers(obj);		
 	}
 }

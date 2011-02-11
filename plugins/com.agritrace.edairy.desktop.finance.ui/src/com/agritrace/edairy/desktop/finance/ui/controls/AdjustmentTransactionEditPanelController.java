@@ -24,7 +24,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource
 import com.agritrace.edairy.desktop.common.model.util.MemberUtil;
 import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.util.BindingHelper;
-import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
+import com.agritrace.edairy.desktop.common.ui.dialogs.MemberLookupDialog;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -39,7 +39,7 @@ public class AdjustmentTransactionEditPanelController {
 
 		@Override
 		public void callback() {
-			final MemberSearchDialog memberDialog = memberSearchProvider.get();
+			final MemberLookupDialog memberDialog = memberSearchProvider.get();
 			final int retVal = memberDialog.open();
 			if (retVal == Window.OK) {
 				final Membership selectedMember = memberDialog.getSelectedMember();
@@ -68,11 +68,11 @@ public class AdjustmentTransactionEditPanelController {
 	private AccountTransaction model;
 
 	private final IDairyRepository dairyRepo;
-	private final Provider<MemberSearchDialog> memberSearchProvider;
+	private final Provider<MemberLookupDialog> memberSearchProvider;
 
 	@Inject
 	public AdjustmentTransactionEditPanelController(final IDairyRepository dairyRepo,
-			final Provider<MemberSearchDialog> memberSearchProvider) {
+			final Provider<MemberLookupDialog> memberSearchProvider) {
 		this.dairyRepo = dairyRepo;
 		this.memberSearchProvider = memberSearchProvider;
 	}

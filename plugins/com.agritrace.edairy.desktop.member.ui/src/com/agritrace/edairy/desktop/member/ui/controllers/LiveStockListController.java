@@ -30,7 +30,7 @@ import com.agritrace.edairy.desktop.common.model.util.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.dao.IFarmRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
-import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
+import com.agritrace.edairy.desktop.common.ui.dialogs.MemberLookupDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
@@ -64,12 +64,12 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 
 	private Membership selectedMember;
 	private final Provider<LivestockEditDialog> viewLiveStockProvider;
-	private final Provider<MemberSearchDialog> memberSearchProvider;
+	private final Provider<MemberLookupDialog> memberSearchProvider;
 
 	@Inject
 	public LiveStockListController(final IFarmRepository farmRepository,
 			final Provider<LivestockEditDialog> viewLiveStockProvider,
-			final Provider<MemberSearchDialog> memberSearchProvider) {
+			final Provider<MemberLookupDialog> memberSearchProvider) {
 		this.farmRepository = farmRepository;
 		this.viewLiveStockProvider = viewLiveStockProvider;
 		this.memberSearchProvider = memberSearchProvider;
@@ -267,7 +267,7 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 	public class MemberLookupAction implements IActionListener {
 		@Override
 		public void callback() {
-			final MemberSearchDialog memberDialog = memberSearchProvider.get();
+			final MemberLookupDialog memberDialog = memberSearchProvider.get();
 			final int retVal = memberDialog.open();
 
 			if (retVal == Window.OK) {

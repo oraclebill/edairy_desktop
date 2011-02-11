@@ -40,7 +40,7 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
 /**
- * This is a demo dialog copied from MemberSearchDialog
+ * This is a demo dialog copied from MemberLookupDialog
  *
  * @author Hui(Spark) Wan
  *

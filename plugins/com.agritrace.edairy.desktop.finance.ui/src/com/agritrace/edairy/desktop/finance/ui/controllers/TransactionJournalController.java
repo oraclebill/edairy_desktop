@@ -17,7 +17,7 @@ import com.agritrace.edairy.desktop.common.model.util.MemberUtil;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controls.daterange.IDateRangeRidget;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberLookupAction;
-import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
+import com.agritrace.edairy.desktop.common.ui.dialogs.MemberLookupDialog;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.agritrace.edairy.desktop.internal.finance.ui.Activator;
 import com.google.inject.Provider;
@@ -68,19 +68,19 @@ public abstract class TransactionJournalController<T extends Transaction>
 	protected ITextRidget memberNameRidget;
 	protected IDateRangeRidget dateRangeRidget;
 	private IActionRidget memberLookupRidget;
-	private final Provider<MemberSearchDialog> memberSearchProvider;
+	private final Provider<MemberLookupDialog> memberSearchProvider;
 
 	// protected ITextRidget referenceNumberRidget;
 	// protected ISingleChoiceRidget transactionSourceRidget;
 
 	// abstract class requires subclass to
 	protected TransactionJournalController(
-			final Provider<MemberSearchDialog> memberSearchProvider) {
+			final Provider<MemberLookupDialog> memberSearchProvider) {
 		this(null, memberSearchProvider);
 	}
 
 	protected TransactionJournalController(final ISubModuleNode node,
-			final Provider<MemberSearchDialog> memberSearchProvider) {
+			final Provider<MemberLookupDialog> memberSearchProvider) {
 		super(node);
 		this.memberSearchProvider = memberSearchProvider;
 	}
@@ -105,7 +105,7 @@ public abstract class TransactionJournalController<T extends Transaction>
 			}
 
 			@Override
-			protected MemberSearchDialog getMemberSearchDialog() {
+			protected MemberLookupDialog getMemberSearchDialog() {
 				return memberSearchProvider.get();
 			}
 		});

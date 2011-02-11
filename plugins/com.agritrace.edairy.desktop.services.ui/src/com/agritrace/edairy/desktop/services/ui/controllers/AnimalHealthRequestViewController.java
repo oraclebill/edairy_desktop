@@ -43,7 +43,7 @@ import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.FarmSearchDialog;
-import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
+import com.agritrace.edairy.desktop.common.ui.dialogs.MemberLookupDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
@@ -79,7 +79,7 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 	private final class MemberLookupAction implements IActionListener {
 		@Override
 		public void callback() {
-			final MemberSearchDialog dialog = memberSearchDialogProvider.get();
+			final MemberLookupDialog dialog = memberSearchDialogProvider.get();
 			dialog.setSelectedMember(condtionsBean.getSelectedMember());
 			dialog.setSelectedFarm(condtionsBean.getSelectedFarm());
 			final int ret = dialog.open();
@@ -91,12 +91,13 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 		}
 	}
 
-	public static String[] MASTER_HEADERS = { "Log No.", "Date", "Member", "Farm", "Type" };
-	public static String[] MASTER_PROPTIES = { RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REQUEST_ID.getName(),
+	private static String[] MASTER_HEADERS = { "Log No.", "Date", "Member", "Farm", "Type" };
+	private static String[] MASTER_PROPTIES = { RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REQUEST_ID.getName(),
 			RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__DATE.getName(),
 			RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__REQUESTING_MEMBER.getName(),
 			RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__FARM.getName(),
 			RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__TYPE.getName() };
+	
 	private IToggleButtonRidget allRidget;
 	private final AnimalHealthRequestCondtionsBean condtionsBean = new AnimalHealthRequestCondtionsBean();
 	private IDateTimeRidget endDateText;
@@ -115,7 +116,7 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 	private IToggleButtonRidget vertRidget;
 
 	private final Provider<FarmSearchDialog> farmSearchDialogProvider;
-	private final Provider<MemberSearchDialog> memberSearchDialogProvider;
+	private final Provider<MemberLookupDialog> memberSearchDialogProvider;
 	private final Provider<AnimalHealthRequestDialog> dialogProvider;
 	private IDairyRepository dairyRepo;
 
@@ -123,7 +124,7 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 	public AnimalHealthRequestViewController(final IRepository<AnimalHealthRequest> myRepo,
 			final IDairyRepository dairyRepo,
 			final Provider<FarmSearchDialog> farmSearchDialogProvider,
-			final Provider<MemberSearchDialog> memberSearchDialogProvider,
+			final Provider<MemberLookupDialog> memberSearchDialogProvider,
 			final Provider<AnimalHealthRequestDialog> dialogProvider) {
 		setRepository(myRepo);
 		this.dairyRepo = dairyRepo;
@@ -249,7 +250,7 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 		request.setDate(Calendar.getInstance().getTime());
 		request.setDairy(dairyRepo.getLocalDairy());
 
-		return super.createNewModel();
+		return request;
 	}
 
 	@Override

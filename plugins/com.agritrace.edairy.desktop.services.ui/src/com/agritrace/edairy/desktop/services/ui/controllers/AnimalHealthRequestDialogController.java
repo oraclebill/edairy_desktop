@@ -20,7 +20,7 @@ import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.dialogs.FarmSearchDialog;
-import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
+import com.agritrace.edairy.desktop.common.ui.dialogs.MemberLookupDialog;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.services.ui.dialogs.AnimalHealthRequestDialog;
 import com.google.inject.Inject;
@@ -34,57 +34,6 @@ import com.google.inject.Provider;
  */
 public class AnimalHealthRequestDialogController extends RecordDialogController<AnimalHealthRequest> {
 
-	public class FarmLookupAction implements IActionListener {
-		@Override
-		public void callback() {
-			final FarmSearchDialog farmDialog = farmSearchDialogProvider.get();
-			farmDialog.setSelectedMember(request.getRequestingMember());
-
-			final int retVal = farmDialog.open();
-			if (retVal == Window.OK) {
-				final Farm farm = farmDialog.getSelectedFarm();
-				request.setFarm(farm);
-				// // FIXME: fix.
-				// try {
-				// Farmer farmer= (Farmer)farm.eContainer();
-				// }
-				// catch(Exception e) {
-				// e.printStackTrace();
-				// }
-				farmLookupText.updateFromModel();
-			}
-		}
-	}
-
-	public class MemberLookupAction implements IActionListener {
-		@Override
-		public void callback() {
-			final MemberSearchDialog memberDialog = memberSearchDialogProvider.get();
-			memberDialog.setSelectedMember(request.getRequestingMember());
-			memberDialog.setSelectedFarm(request.getFarm());
-			final int retVal = memberDialog.open();
-			if (retVal == Window.OK) {
-				request.setRequestingMember(memberDialog.getSelectedMember());
-				memberLookupText.updateFromModel();
-			}
-		}
-
-	}
-
-	private final class InseminationTypeChangeAction implements IActionListener {
-		private final AnimalHealthRequest request;
-
-		private InseminationTypeChangeAction(AnimalHealthRequest request) {
-			this.request = request;
-		}
-
-		@Override
-		public void callback() {
-			// Update working copy first
-			request.setType(RequestType.INSEMINATION);
-			requestTypeChanged();
-		}
-	}
 
 	private final class InseminationTypeConverter extends Converter {
 		private InseminationTypeConverter(AnimalHealthRequest request) {
@@ -103,20 +52,6 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 
 	}
 
-	private final class RequestTypeChangeAction implements IActionListener {
-		private final AnimalHealthRequest request;
-
-		private RequestTypeChangeAction(AnimalHealthRequest request) {
-			this.request = request;
-		}
-
-		@Override
-		public void callback() {
-			request.setType(RequestType.CLINICAL);
-			requestTypeChanged();
-		}
-	}
-
 	private final class RequestTypeConverter extends Converter {
 
 		private RequestTypeConverter(AnimalHealthRequest request) {
@@ -133,9 +68,6 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 		}
 	}
 
-	private Provider<FarmSearchDialog> farmSearchDialogProvider;
-	private Provider<MemberSearchDialog> memberSearchDialogProvider;
-
 	private IActionRidget farmLookupButton;
 	private ITextRidget farmLookupText;
 	private final List<IActionListener> listeners = new ArrayList<IActionListener>();
@@ -146,11 +78,13 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 	IDateTimeRidget textRidget;
 
 	@Inject
-	public AnimalHealthRequestDialogController(final Provider<FarmSearchDialog> farmSearchDialogProvider,
-			final Provider<MemberSearchDialog> memberSearchDialogProvider) {
-		super("Animal Health Request");
-		this.farmSearchDialogProvider = farmSearchDialogProvider;
-		this.memberSearchDialogProvider = memberSearchDialogProvider;
+	MemberLookupDialog memberLookupDialog;
+
+	@Inject
+	FarmSearchDialog farmLookupDialog;
+
+	public AnimalHealthRequestDialogController() {
+		super("AnimalHealthRequest");
 	}
 
 	public void addListener(IActionListener listener) {
@@ -167,28 +101,32 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 
 		// Request Type/Veterinary
 		final IToggleButtonRidget veterinaryRadioBtn = getRidget(IToggleButtonRidget.class, "veterinary"); //$NON-NLS-1$
-		//
 		veterinaryRadioBtn.setModelToUIControlConverter(new RequestTypeConverter(request));
-
-		// veterinaryRadioBtn.setOutputOnly(false);
-		veterinaryRadioBtn.addListener(new RequestTypeChangeAction(request));
+		veterinaryRadioBtn.addListener(new IActionListener() {
+			@Override
+			public void callback() {
+				request.setType(RequestType.CLINICAL);
+				requestTypeChanged();
+			}
+		});
 		veterinaryRadioBtn.bindToModel(EMFObservables.observeValue(request,
 				RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__TYPE));
-		// RequestsPackage.Literals.REQUEST_TYPE));
 		veterinaryRadioBtn.updateFromModel();
-		// veterinaryRadioBtn.setOutputOnly(true);
 
 		// Request Type/Insemination
 		final IToggleButtonRidget insementationRadionBtn = getRidget(IToggleButtonRidget.class, "insemination"); //$NON-NLS-1$
-		//
 		insementationRadionBtn.setModelToUIControlConverter(new InseminationTypeConverter(request));
-		// insementationRadionBtn.setOutputOnly(false);
 		insementationRadionBtn.bindToModel(EMFObservables.observeValue(request,
 				RequestsPackage.Literals.ANIMAL_HEALTH_REQUEST__TYPE));
-		// RequestsPackage.Literals.REQUEST_TYPE));
-		insementationRadionBtn.addListener(new InseminationTypeChangeAction(request));
+		insementationRadionBtn.addListener(new IActionListener() {
+			@Override
+			public void callback() {
+				request.setType(RequestType.INSEMINATION);
+				requestTypeChanged();
+			}
+		});
+
 		insementationRadionBtn.updateFromModel();
-		// insementationRadionBtn.setOutputOnly(true);
 
 		memberLookupText = getRidget(ITextRidget.class, AnimalHealthRequestDialog.BIND_ID_MEMBER_TEXT);
 		memberLookupText.setModelToUIControlConverter(new Member2StringConverter());
@@ -199,7 +137,13 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 		memberLookupText.updateFromModel();
 
 		memberLookupButton = getRidget(IActionRidget.class, AnimalHealthRequestDialog.BIND_ID_MEMBER_BUTTON);
-		memberLookupButton.addListener(new MemberLookupAction());
+		memberLookupButton.addListener(new IActionListener() {
+			@Override
+			public void callback() {
+				doMemberLookup();
+			}
+
+		});
 
 		farmLookupText = getRidget(ITextRidget.class, AnimalHealthRequestDialog.BIND_ID_FARM_TEXT);
 		farmLookupText.setModelToUIControlConverter(new Farm2StringConverter());
@@ -209,7 +153,12 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 		farmLookupText.updateFromModel();
 
 		farmLookupButton = getRidget(IActionRidget.class, AnimalHealthRequestDialog.BIND_ID_FARM_BUTTON);
-		farmLookupButton.addListener(new FarmLookupAction());
+		farmLookupButton.addListener(new IActionListener() {
+			@Override
+			public void callback() {
+				doFarmLookup();
+			}
+		});
 
 		// Type changed
 		requestTypeChanged();
@@ -291,7 +240,23 @@ public class AnimalHealthRequestDialogController extends RecordDialogController<
 
 	}
 
-	
+	private void doMemberLookup() {
+		memberLookupDialog.setSelectedFarm(request.getFarm());
+		if (memberLookupDialog.open() == Window.OK) {
+			request.setRequestingMember(memberLookupDialog.getSelectedMember());
+			memberLookupText.updateFromModel();
+		}
+	}
+
+	private void doFarmLookup() {
+		farmLookupDialog.setSelectedMember(request.getRequestingMember());
+		if (farmLookupDialog.open() == Window.OK) {
+			final Farm farm = farmLookupDialog.getSelectedFarm();
+			request.setFarm(farm);
+			farmLookupText.updateFromModel();
+		}
+	}
+
 	protected void notifySaveListeners() {
 		for (final IActionListener listener : this.listeners) {
 			listener.callback();

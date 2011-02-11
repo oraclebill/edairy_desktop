@@ -22,6 +22,7 @@ import org.eclipse.ui.PlatformUI;
 import org.osgi.framework.Bundle;
 
 import com.agritrace.edairy.desktop.EDairyActivator;
+import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
 import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationDirectoryController;
 import com.agritrace.edairy.desktop.dairy.locations.ui.views.DairyLocationDirectoryView;
@@ -30,6 +31,7 @@ import com.agritrace.edairy.desktop.dairy.profile.ui.views.DairyProfileView;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.controllers.VehicleLogDirectoryViewController;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.views.VehicleLogDirectoryView;
 import com.agritrace.edairy.desktop.home.views.DairyHomeView;
+import com.agritrace.edairy.desktop.internal.common.persistence.dao.DairyRepository;
 import com.agritrace.edairy.desktop.member.ui.controllers.ContainerListViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.FarmListViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.LiveStockListController;
@@ -55,6 +57,7 @@ import com.agritrace.edairy.desktop.services.ui.controllers.AnimalHealthRequestV
 import com.agritrace.edairy.desktop.services.ui.views.AnimalHealthRequestView;
 import com.agritrace.edairy.desktop.system.ui.controllers.RoleDirectoryController;
 import com.agritrace.edairy.desktop.system.ui.views.RoleDirectoryView;
+import com.google.inject.Inject;
 
 /**
  * @author oraclebill
@@ -62,19 +65,26 @@ import com.agritrace.edairy.desktop.system.ui.views.RoleDirectoryView;
  */
 public class EDairyManagerApplication extends SwtApplication implements ApplicationNavigationConstants {
 
+	@Inject
+	IDairyRepository dairyRepo;
+		
 	public EDairyManagerApplication() {
 		super();
 		LnfManager.setLnf(new EDairyManagerLookAndFeel());
+		EDairyActivator.getDefault().injectMembers(this);
 	}
 
 	@Override
 	protected ApplicationController createApplicationController(IApplicationNode node) {
 		final ApplicationController controller = new ApplicationController(node) {
+			
 			@Override
 			public void afterBind() {
 				super.afterBind();
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 				shell.setMaximized(true);
+				
+				setContext("application.dairy.dao", dairyRepo);
 			}
 		};
 		

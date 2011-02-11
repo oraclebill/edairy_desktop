@@ -12,7 +12,7 @@ public abstract class MemberLookupAction implements IActionListener {
 
 	@Override
 	public void callback() {
-		final MemberSearchDialog memberDialog = getMemberSearchDialog();
+		final MemberLookupDialog memberDialog = getMemberSearchDialog();
 		final int retVal = memberDialog.open();
 
 		if (retVal == Window.OK) {
@@ -21,6 +21,6 @@ public abstract class MemberLookupAction implements IActionListener {
 		}
 	}
 
-	protected abstract MemberSearchDialog getMemberSearchDialog();
+	protected abstract MemberLookupDialog getMemberSearchDialog();
 	protected abstract void callback(Membership selectedMember);
 }

@@ -31,7 +31,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.model.util.MemberUtil;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.controllers.BaseDialogController;
-import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
+import com.agritrace.edairy.desktop.common.ui.dialogs.MemberLookupDialog;
 import com.agritrace.edairy.desktop.member.ui.Activator;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
@@ -57,10 +57,10 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 	IActionRidget memberLookupBtn;
 	private boolean enableLookupBtn;
 
-	private final Provider<MemberSearchDialog> memberSearchProvider;
+	private final Provider<MemberLookupDialog> memberSearchProvider;
 
 	@Inject
-	public ViewContainerDialogController(final Provider<MemberSearchDialog> memberSearchProvider) {
+	public ViewContainerDialogController(final Provider<MemberLookupDialog> memberSearchProvider) {
 		this.memberSearchProvider = memberSearchProvider;
 	}
 
@@ -229,7 +229,7 @@ public class ViewContainerDialogController extends BaseDialogController<Farm> im
 	public class MemberLookupAction implements IActionListener {
 		@Override
 		public void callback() {
-			final MemberSearchDialog memberDialog = memberSearchProvider.get();
+			final MemberLookupDialog memberDialog = memberSearchProvider.get();
 			;
 			final int retVal = memberDialog.open();
 

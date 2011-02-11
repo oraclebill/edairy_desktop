@@ -23,7 +23,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource
 import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.persistence.dao.ITransactionRepository;
-import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
+import com.agritrace.edairy.desktop.common.ui.dialogs.MemberLookupDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.agritrace.edairy.desktop.finance.ui.dialogs.AccountTransactionBatchEntryDialog;
@@ -80,7 +80,7 @@ public class AccountTransactionJournalController extends TransactionJournalContr
 
 	@Inject
 	public AccountTransactionJournalController(final ITransactionRepository repo,
-			final Provider<MemberSearchDialog> memberSearchProvider,
+			final Provider<MemberLookupDialog> memberSearchProvider,
 			final Provider<AccountTransactionEditDialog> editDialogProvider,
 			final Provider<AccountTransactionBatchEntryDialog> batchEntryProvider) {
 		super(memberSearchProvider);

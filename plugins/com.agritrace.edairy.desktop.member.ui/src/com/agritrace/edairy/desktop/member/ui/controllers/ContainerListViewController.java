@@ -24,7 +24,7 @@ import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.dao.IFarmRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractPersistenceDelegate;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
-import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
+import com.agritrace.edairy.desktop.common.ui.dialogs.MemberLookupDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.data.ContainerListViewTableNode;
@@ -115,7 +115,7 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 	private Membership selectedMember;
 
 	private final List<ContainerListViewTableNode> tableInput = new ArrayList<ContainerListViewTableNode>();
-	private final Provider<MemberSearchDialog> memberSearchProvider;
+	private final Provider<MemberLookupDialog> memberSearchProvider;
 	private final Provider<ViewContainerDialog> viewContainerProvider;
 
 	final private WritableList availableFarms;
@@ -123,7 +123,7 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 
 	@Inject
 	public ContainerListViewController(final IFarmRepository farmRepository,
-			final Provider<MemberSearchDialog> memberSearchProvider,
+			final Provider<MemberLookupDialog> memberSearchProvider,
 			final Provider<ViewContainerDialog> viewContainerProvider) {
 		this.farmRepository = farmRepository;
 		this.memberSearchProvider = memberSearchProvider;
@@ -232,7 +232,7 @@ public class ContainerListViewController extends BasicDirectoryController<Contai
 	public class MemberLookupAction implements IActionListener {
 		@Override
 		public void callback() {
-			final MemberSearchDialog memberDialog = memberSearchProvider.get();
+			final MemberLookupDialog memberDialog = memberSearchProvider.get();
 			final int retVal = memberDialog.open();
 			if (retVal == Window.OK) {
 				setSelectedMember(memberDialog.getSelectedMember());

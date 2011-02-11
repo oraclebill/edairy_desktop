@@ -29,7 +29,7 @@ import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDetailPanelController;
 import com.agritrace.edairy.desktop.common.ui.controllers.util.BindingHelper;
 import com.agritrace.edairy.desktop.common.ui.dialogs.MemberLookupAction;
-import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
+import com.agritrace.edairy.desktop.common.ui.dialogs.MemberLookupDialog;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -63,11 +63,11 @@ public class AccountTransactionEditPanelController extends AbstractDetailPanelCo
 	private ITextRidget memberName;
 
 	private final IDairyRepository dairyRepo;
-	private final Provider<MemberSearchDialog> memberSearchProvider;
+	private final Provider<MemberLookupDialog> memberSearchProvider;
 
 	@Inject
 	public AccountTransactionEditPanelController(final IDairyRepository dairyRepo,
-			final Provider<MemberSearchDialog> memberSearchProvider) {
+			final Provider<MemberLookupDialog> memberSearchProvider) {
 		this.dairyRepo = dairyRepo;
 		this.memberSearchProvider = memberSearchProvider;
 	}
@@ -129,7 +129,7 @@ public class AccountTransactionEditPanelController extends AbstractDetailPanelCo
 			}
 
 			@Override
-			protected MemberSearchDialog getMemberSearchDialog() {
+			protected MemberLookupDialog getMemberSearchDialog() {
 				return memberSearchProvider.get();
 			}
 		});

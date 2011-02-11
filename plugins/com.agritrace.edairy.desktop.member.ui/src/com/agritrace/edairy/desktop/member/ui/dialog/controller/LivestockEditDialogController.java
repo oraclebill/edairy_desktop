@@ -48,7 +48,7 @@ import com.agritrace.edairy.desktop.common.model.util.MemberUtil;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.controllers.BaseDialogController;
 import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.IProfilePhotoRidget;
-import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
+import com.agritrace.edairy.desktop.common.ui.dialogs.MemberLookupDialog;
 import com.agritrace.edairy.desktop.common.ui.reference.LivestockValues;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
@@ -124,10 +124,10 @@ public class LivestockEditDialogController extends BaseDialogController<Register
 
 	boolean enableLookupBtn = true;
 
-	private final Provider<MemberSearchDialog> memberSearchProvider;
+	private final Provider<MemberLookupDialog> memberSearchProvider;
 
 	@Inject
-	public LivestockEditDialogController(final Provider<MemberSearchDialog> memberSearchProvider) {
+	public LivestockEditDialogController(final Provider<MemberLookupDialog> memberSearchProvider) {
 		this.memberSearchProvider = memberSearchProvider;
 	}
 
@@ -550,7 +550,7 @@ public class LivestockEditDialogController extends BaseDialogController<Register
 	public class MemberLookupAction implements IActionListener {
 		@Override
 		public void callback() {
-			final MemberSearchDialog memberDialog = memberSearchProvider.get();
+			final MemberLookupDialog memberDialog = memberSearchProvider.get();
 			final int retVal = memberDialog.open();
 			if (retVal == Window.OK) {
 				selectedMember = memberDialog.getSelectedMember();

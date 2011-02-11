@@ -5,7 +5,7 @@
  * CalendarSelectionDialog------- Dialog to choose a date
  * CalendarSelectionDialogController ------ Controller for <code>CalendarSelectionDialog</code>
  * FarmSearchDialog -------- Dialog to search a farm
- * MemberSearchDialog ------- Dialog to search a member
+ * MemberLookupDialog ------- Dialog to search a member
  * RecordDialog --------- Common dialog to add/view/edit the record
  * </p>
  */

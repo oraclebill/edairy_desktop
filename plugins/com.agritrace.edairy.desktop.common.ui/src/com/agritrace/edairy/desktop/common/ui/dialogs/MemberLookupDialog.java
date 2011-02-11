@@ -43,7 +43,7 @@ import com.agritrace.edairy.desktop.common.persistence.dao.IMemberRepository;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
-public class MemberSearchDialog extends TitleAreaDialog {
+public class MemberLookupDialog extends TitleAreaDialog {
 
 	private final class MemberViewerFilter extends ViewerFilter {
 		private final CCombo combo;
@@ -179,7 +179,7 @@ public class MemberSearchDialog extends TitleAreaDialog {
 	 *            the parent shell
 	 */
 	@Inject
-	public MemberSearchDialog(@Named("current") Shell shell, final IMemberRepository memberRepo) {
+	public MemberLookupDialog(@Named("current") Shell shell, final IMemberRepository memberRepo) {
 		super(shell);
 		this.memberRepo = memberRepo;
 		memberList = memberRepo.all();

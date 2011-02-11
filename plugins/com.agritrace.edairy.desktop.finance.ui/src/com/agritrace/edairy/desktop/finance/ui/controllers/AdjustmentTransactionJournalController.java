@@ -17,7 +17,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AdjustmentTransaction;
 import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionType;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
-import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
+import com.agritrace.edairy.desktop.common.ui.dialogs.MemberLookupDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.agritrace.edairy.desktop.finance.ui.dialogs.AdjustmentTransactionEditDialog;
@@ -65,7 +65,7 @@ public final class AdjustmentTransactionJournalController extends TransactionJou
 
 	@Inject
 	public AdjustmentTransactionJournalController(final IRepository<AdjustmentTransaction> repo,
-			final Provider<MemberSearchDialog> memberSearchProvider,
+			final Provider<MemberLookupDialog> memberSearchProvider,
 			final Provider<AdjustmentTransactionEditDialog> dialogProvider) {
 		super(memberSearchProvider);
 		this.dialogProvider = dialogProvider;

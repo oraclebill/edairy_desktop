@@ -19,7 +19,7 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
-import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
+import com.agritrace.edairy.desktop.common.ui.dialogs.MemberLookupDialog;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -33,14 +33,14 @@ public class ContainerEditDialogController extends RecordDialogController<Contai
 	// CCombo measureCombo ViewWidgetId.VIEW_CONTAINER_UNIT
 	// Text capacityText ViewWidgetId.VIEW_CONTAINER_COMPACITY
 
-	final private Provider<MemberSearchDialog> memberSearchProvider;
+	final private Provider<MemberLookupDialog> memberSearchProvider;
 	final private IObservableList farmList;
 
 	private ITextRidget memberNameText;
 	private IComboRidget farmCombo;
 
 	@Inject
-	public ContainerEditDialogController(final Provider<MemberSearchDialog> memberSearchProvider) {
+	public ContainerEditDialogController(final Provider<MemberLookupDialog> memberSearchProvider) {
 		super("Milk Container");
 		this.memberSearchProvider = memberSearchProvider;
 		farmList = new WritableList();
@@ -60,7 +60,7 @@ public class ContainerEditDialogController extends RecordDialogController<Contai
 		getRidget(IActionRidget.class, ViewWidgetId.FARM_LIST_SEARCH_BUTTON).addListener(new IActionListener() {
 			@Override
 			public void callback() {
-				final MemberSearchDialog memberDialog = memberSearchProvider.get();
+				final MemberLookupDialog memberDialog = memberSearchProvider.get();
 				if (memberDialog.open() == Window.OK) {
 					updateMember(memberDialog.getSelectedMember());
 				}

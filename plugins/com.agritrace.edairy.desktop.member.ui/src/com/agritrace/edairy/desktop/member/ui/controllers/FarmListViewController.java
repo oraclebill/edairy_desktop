@@ -31,7 +31,7 @@ import com.agritrace.edairy.desktop.common.persistence.dao.IFarmRepository;
 import com.agritrace.edairy.desktop.common.persistence.dao.IMemberRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
-import com.agritrace.edairy.desktop.common.ui.dialogs.MemberSearchDialog;
+import com.agritrace.edairy.desktop.common.ui.dialogs.MemberLookupDialog;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.member.ui.ControllerContextConstant;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
@@ -226,7 +226,7 @@ public class FarmListViewController extends BasicDirectoryController<Farm> {
 	public class MemberLookupAction implements IActionListener {
 		@Override
 		public void callback() {
-			final MemberSearchDialog memberDialog = new MemberSearchDialog(AbstractDirectoryController.getShell(),
+			final MemberLookupDialog memberDialog = new MemberLookupDialog(AbstractDirectoryController.getShell(),
 					memberRepository);
 			final int retVal = memberDialog.open();
 
