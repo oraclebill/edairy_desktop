@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
+import org.eclipse.equinox.log.Logger;
 import org.eclipse.riena.core.Log4r;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.ImageData;
@@ -20,6 +21,8 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public final class ImageDataUtil {
+	private static final Logger LOGGER = Log4r.getLogger(ImageDataUtil.class);
+
 	@Inject
 	private static ImageDataUtil INSTANCE;
 	private final Provider<Session> sessionProvider;
@@ -44,11 +47,10 @@ public final class ImageDataUtil {
 				final ImageEntry entry = (ImageEntry) sessionProvider.get().load("ImageEntry", key);
 				final byte[] data = entry.getImageData();
 				debug_print(key, data);
-				final InputStream stream = new ByteArrayInputStream(
-						entry.getImageData());
+				final InputStream stream = new ByteArrayInputStream(entry.getImageData());
 				ret = new ImageData(stream);
 			} catch (final HibernateException hbe) {
-				log(LogService.LOG_WARNING, hbe.getMessage(), hbe);
+				LOGGER.log(LogService.LOG_WARNING, hbe.getMessage(), hbe);
 			}
 		}
 		return ret;
@@ -65,7 +67,12 @@ public final class ImageDataUtil {
 		final Session session = sessionProvider.get();
 
 		try {
-			final Transaction tx = session.beginTransaction();
+//			Transaction tx = session.getTransaction();
+//			if (!tx.isActive()) {
+//				tx.begin();
+//			} else {
+//				tx = null;
+//			}
 			ImageEntry entry = (ImageEntry) session.get("ImageEntry", key);
 			if (entry == null) {
 				entry = ModelFactory.eINSTANCE.createImageEntry();
@@ -79,11 +86,13 @@ public final class ImageDataUtil {
 			loader.save(baos, data.type);
 			entry.setImageData(baos.toByteArray());
 			entry.setMimeType(decodeMimeType(data.type));
-			tx.commit();
+//			if (tx != null)
+//				tx.commit();
 		} catch (final HibernateException hbe) {
-			log(LogService.LOG_WARNING, "Error saving ImageEntry: " + key, hbe);
+			LOGGER.log(LogService.LOG_WARNING, "Error saving ImageEntry: " + key, hbe);
 		} finally {
 			if (session != null) {
+				LOGGER.log(LogService.LOG_WARNING, "CLEARING SESSION !!!: " + session);
 				session.clear();
 			}
 		}
@@ -130,21 +139,12 @@ public final class ImageDataUtil {
 
 	private static void debug_print(String tag, byte[] array) {
 		final int COUNT = 64;
-		System.err
-				.println(String.format("First %d bytes of %s\n ", COUNT, tag));
+		System.err.println(String.format("First %d bytes of %s\n ", COUNT, tag));
 		for (int i = 0; i < COUNT; i++) {
 			System.err.print(String.format("%02x ", array[i]));
 			if ((i + 1) % 32 == 0) {
 				System.err.print("\n");
 			}
 		}
-	}
-
-	/**
-	 *
-	 */
-	private static void log(int level, String message, Throwable exception) {
-		Log4r.getLogger(PersistenceActivator.getDefault(), ImageDataUtil.class).log(level, message,
-				exception);
 	}
 }

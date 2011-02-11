@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
+import com.agritrace.edairy.desktop.common.persistence.annotations.Transactional;
 import com.agritrace.edairy.desktop.common.persistence.exceptions.AlreadyExistsException;
 import com.agritrace.edairy.desktop.common.persistence.exceptions.NonExistingEntityException;
 import com.google.inject.Provider;
@@ -62,18 +63,19 @@ public abstract class RepositoryUtil<T extends EObject> extends DataStoreManager
 	}
 
 	@Override
+	@Transactional
 	public void save(Object obj) {
 		final Session session = getCurrentSession();
-		final Transaction tx = session.beginTransaction();
-		try {
+//		final Transaction tx = session.beginTransaction();
+//		try {
 			session.persist(obj);
-			tx.commit();
-		}
-		catch(final HibernateException hbe) {
-			tx.rollback();
-		}
-		catch(final RuntimeException re) {
-			tx.rollback();
-		}
+//			tx.commit();
+//		}
+//		catch(final HibernateException hbe) {
+//			tx.rollback();
+//		}
+//		catch(final RuntimeException re) {
+//			tx.rollback();
+//		}
 	}
 }
