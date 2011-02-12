@@ -5,6 +5,16 @@
     <property name="createdBy">Eclipse BIRT Designer Version 2.6.1.v20100902 Build &lt;2.6.1.v20100915-1750></property>
     <text-property name="title">Daily Milk Intake Report</text-property>
     <html-property name="description">Daily Milk Intake Report</html-property>
+    <list-property name="userProperties">
+        <structure>
+            <property name="name">module</property>
+            <property name="type">string</property>
+        </structure>
+        <structure>
+            <property name="name">version</property>
+            <property name="type">integer</property>
+        </structure>
+    </list-property>
     <property name="subject">Dairy Milk Operations</property>
     <property name="units">in</property>
     <list-property name="propertyBindings">

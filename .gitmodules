@@ -1,0 +1,3 @@
+[submodule "reports"]
+	path = reports
+	url = git@github.com:oraclebill/edairy_desktop_reporting.git

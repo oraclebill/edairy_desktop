@@ -11,7 +11,7 @@
     </list-property>
     <method name="initialize"><![CDATA[i = 0;]]></method>
     <property name="theme">SiteReportLib.defaultTheme</property>
-    <text-property name="displayName">Edairy_portrait</text-property>
+    <text-property name="displayName">Route Product Record</text-property>
     <property name="iconFile">/templates/blank_report.gif</property>
     <property name="bidiLayoutOrientation">ltr</property>
     <property name="imageDPI">96</property>

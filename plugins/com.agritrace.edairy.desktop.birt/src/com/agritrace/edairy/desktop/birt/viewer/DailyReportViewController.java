@@ -19,6 +19,8 @@ public class DailyReportViewController extends ReportViewController {
 		// 
 		date = getRidget(IDateTimeRidget.class, "report-parameter-date");
 		date.setDate(Calendar.getInstance().getTime());
+		
+		
 	}
 	
 	protected Map<String, Object> getReportParameters() {

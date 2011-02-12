@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
     <property name="createdBy">Eclipse BIRT Designer Version 2.6.1.v20100902 Build &lt;2.6.1.v20100915-1750></property>
+    <text-property name="title">Membership Register Summary Report</text-property>
     <property name="units">in</property>
     <list-property name="propertyBindings">
         <structure>

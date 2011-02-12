@@ -141,6 +141,8 @@ public class ReportsIndexViewController extends SubModuleController {
 	public void configureRidgets() {
 		List<ReportInfo> reportFileList;
 
+		Object uiControl = getWindowRidget().getUIControl();
+		
 		try {
 			reportFileList = getReports();
 		} catch (IOException ioe) {
@@ -192,7 +194,7 @@ public class ReportsIndexViewController extends SubModuleController {
 
 	@Override
 	public void afterBind() {
-		// TODO Auto-generated method stub
+		Object uiControl = getWindowRidget().getUIControl();
 		super.afterBind();
 	}
 
