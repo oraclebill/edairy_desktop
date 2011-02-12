@@ -13,7 +13,8 @@ Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.6.0",
  com.agritrace.edairy.guice,
  org.eclipse.emf.teneo.hibernate;bundle-version="1.1.2",
  org.hibernate;bundle-version="3.3.2",
- com.agritrace.edairy.desktop.collections.scaledata;bundle-version="1.0.0"
+ com.agritrace.edairy.desktop.collections.scaledata;bundle-version="1.0.0",
+ org.eclipse.riena.tests;bundle-version="2.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Import-Package: com.agritrace.edairy.desktop.dairy.locations.ui,

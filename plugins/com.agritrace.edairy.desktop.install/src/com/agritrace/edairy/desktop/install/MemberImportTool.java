@@ -157,7 +157,7 @@ public class MemberImportTool extends AbstractImportTool {
 
 	@Override
 	protected String[] getExpectedHeaders() {
-		return new String[] { null, "account-id", "membership-id", "default-route", null, null, "given-name",
+		return new String[] { null, "account-name", "membership-name", "default-route", null, null, "given-name",
 				"family-name" };
 	}
 

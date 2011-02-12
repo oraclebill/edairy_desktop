@@ -24,7 +24,7 @@ public class ScaleImportTool extends AbstractImportTool {
 	public static final int SCALE_TOTAL = BASE + 12;  // TODO: confirm.. (was NUM_CANS)
 	public static final int ATTR_COUNT = BASE + 13;
 
-	public static final String[] expectedHeaders = new String[] { null, "account-id", "membership-id", "default-route",
+	public static final String[] expectedHeaders = new String[] { null, "account-name", "membership-name", "default-route",
 			null, null, "given-name", "family-name" };
 
 	static final Entry[] fieldMap = {

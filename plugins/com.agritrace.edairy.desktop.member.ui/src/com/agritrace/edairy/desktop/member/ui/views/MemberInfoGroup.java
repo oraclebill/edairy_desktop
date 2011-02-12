@@ -85,7 +85,7 @@ public class MemberInfoGroup {
 		memberNbr = UIControlsFactory.createText(leftColumn, SWT.BORDER, ViewWidgetId.memberInfo_memberNbr);
 		fieldFactory.applyTo(memberNbr);
 
-		// row 2: title label + id
+		// row 2: title label + name
 		labelFactory.applyTo(UIControlsFactory.createLabel(leftColumn, "Title"));
 		cmbHonorable = UIControlsFactory.createCCombo(leftColumn, ViewWidgetId.memberInfo_honorific);
 		fieldFactory.applyTo(cmbHonorable);

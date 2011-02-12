@@ -40,9 +40,9 @@ public abstract class BaseListView extends ScrolledSubModuleView {
 	 * @param parent
 	 *            the parent composite
 	 * @param viewButtonId
-	 *            the view button id
+	 *            the view button name
 	 * @param addButtonId
-	 *            the add button id
+	 *            the add button name
 	 */
 	protected void createButtonPanel(Composite parent, String viewButtonId, String addButtonId) {
 		final Composite buttonsPanel = UIControlsFactory.createComposite(parent, SWT.NULL);

@@ -68,7 +68,7 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 
 		addTextMap(EmployeeBindingConstants.BIND_ID_EMPLOYEE_NUM, DairyPackage.Literals.EMPLOYEE__EMPLOYEE_NUMBER);
 
-		// customer id
+		// customer name
 		employeeNumber = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_EMPLOYEE_NUM);
 		employeeNumber.bindToModel(EMFObservables.observeValue(editEmployee,
 				DairyPackage.Literals.EMPLOYEE__EMPLOYEE_NUMBER));

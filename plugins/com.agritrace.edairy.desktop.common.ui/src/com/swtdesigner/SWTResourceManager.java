@@ -397,7 +397,7 @@ public class SWTResourceManager {
 	/**
 	 * Returns the system cursor matching the specific ID.
 	 * 
-	 * @param id
+	 * @param name
 	 *            int The ID value for the cursor
 	 * @return Cursor The system cursor matching the specific ID
 	 */

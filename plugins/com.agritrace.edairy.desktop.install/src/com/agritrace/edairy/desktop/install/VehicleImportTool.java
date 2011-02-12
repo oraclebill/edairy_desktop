@@ -70,7 +70,7 @@ public class VehicleImportTool extends AbstractImportTool {
 
 	static final String[] expectedHeaders = new String[] { "log book number", "type", "registration number", "make",
 			"model", "year", "engine number", "chassis number", "insurance number", "insurance exp date",
-			"asset tag id", "damage date ", "damage description", "disposal date", "disposal description",
+			"asset tag name", "damage date ", "damage description", "disposal date", "disposal description",
 			"disposal witness" };
 
 	private Collection<Vehicle> vehicles;

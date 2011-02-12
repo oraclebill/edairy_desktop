@@ -53,7 +53,7 @@ public class EmployeeImportTool extends AbstractImportTool {
 			new Entry(NSSF_NUMBER, ModelPackage.Literals.PERSON__NSSF_NUMBER),
 			new Entry(NHIF_NUMBER, ModelPackage.Literals.PERSON__NHIF_NUMBER), };
 
-	String[] expectedHeaders = { "employee id","given name","middle name","family name","job title","date started","national id","nssf number","nhif number" };
+	String[] expectedHeaders = { "employee name","given name","middle name","family name","job title","date started","national name","nssf number","nhif number" };
 
 	private List<Employee> empList;
 	Map<String, List<String[]>> errors;

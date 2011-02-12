@@ -141,7 +141,7 @@ private ProfilePhotoComposite lblDairyImage;
 		final GridDataFactory fieldGridDataFactory = GridDataFactory.swtDefaults().align(SWT.LEFT, SWT.CENTER)
 				.grab(true, false).hint(140, -1);
 
-		// id field
+		// name field
 		labelGridDataFactory.applyTo(UIControlsFactory.createLabel(nameArea, "ID:"));
 		fieldGridDataFactory.applyTo(txtId = UIControlsFactory.createText(nameArea, SWT.NONE,
 				DairyProfileViewWidgetID.DAIRY_ID));

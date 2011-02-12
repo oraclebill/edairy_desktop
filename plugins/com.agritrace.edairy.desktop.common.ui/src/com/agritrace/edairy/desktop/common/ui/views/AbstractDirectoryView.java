@@ -30,13 +30,13 @@ public abstract class AbstractDirectoryView extends BaseListView {
 	}
 
 	/**
-	 * Binding id of the new button {@value} .
+	 * Binding name of the new button {@value} .
 	 */
 	public static final String BIND_ID_NEW_BUTTON = "list.button.new"; //$NON-NLS-1$
 	public static final String BIND_ID_VIEW_BUTTON = "list.button.view"; //$NON-NLS-1$
 
 	/**
-	 * Binding id of the table control {@value} .
+	 * Binding name of the table control {@value} .
 	 */
 	public static final String BIND_ID_TABLE = "list.table"; //$NON-NLS-1$
 

@@ -50,7 +50,7 @@ public class JournalLineValidator {
 	}
 
 	/**
-	 * Called when there is no can id specified.
+	 * Called when there is no can name specified.
 	 *
 	 * @param journalLine
 	 * @return false to abort the current operation (usually the 'save' of a journal line)
@@ -70,7 +70,7 @@ public class JournalLineValidator {
 	}
 
 	/**
-	 * Called when a can id is not recognized.
+	 * Called when a can name is not recognized.
 	 *
 	 * @param journalLine
 	 * @param canId

@@ -53,17 +53,17 @@ public abstract class AbstractDirectoryController<T extends EObject> extends Sub
 	public static final int ACTION_VIEW = 2;
 
 	/**
-	 * Context id for Action Type
+	 * Context name for Action Type
 	 */
 	public static final String EDITED_ACTION_TYPE = "actionType";
 
 	/**
-	 * Context id for persistence.
+	 * Context name for persistence.
 	 */
 	public static final String PERSISTENCE_DELEGATE = "PERSISTENCE_DELEGATE";
 
 	/**
-	 * Context id for selected object
+	 * Context name for selected object
 	 */
 	public static final String EDITED_OBJECT_ID = "editObject";
 
