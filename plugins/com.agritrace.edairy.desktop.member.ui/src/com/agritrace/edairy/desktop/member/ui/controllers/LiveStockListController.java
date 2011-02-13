@@ -1,7 +1,6 @@
 package com.agritrace.edairy.desktop.member.ui.controllers;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -16,7 +15,6 @@ import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.base.Gender;
-import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
@@ -286,58 +284,58 @@ public class LiveStockListController extends BasicDirectoryController<Registered
 		}
 	}
 
-	private class LiveStockListTableComparator implements Comparator<Object> {
-		int columnIndex;
-
-		LiveStockListTableComparator(int index) {
-			this.columnIndex = index;
-		}
-
-		@Override
-		public int compare(Object o1, Object o2) {
-			if (o1 instanceof Membership && o2 instanceof Membership || o1 instanceof RegisteredAnimal
-					&& o2 instanceof RegisteredAnimal) {
-				switch (columnIndex) {
-				case 0:
-					return ((Membership) o1).getMemberId().compareTo(((Membership) o2).getMemberId());
-				case 1:
-					final Membership node1 = (Membership) o1;
-					final Membership node2 = (Membership) o2;
-					final Person member1 = node1.getFarmer();
-					final Person member2 = node2.getFarmer();
-					if (member1 != null && member2 != null) {
-						final String name1 = member1.getFamilyName() + "," + member1.getGivenName();
-						final String name2 = member2.getFamilyName() + "," + member2.getGivenName();
-						return name1.compareTo(name2);
-					}
-
-					return 0;
-				case 2:
-					final Farm farm1 = ((RegisteredAnimal) o1).getLocation();
-					final Farm farm2 = ((RegisteredAnimal) o2).getLocation();
-					if (farm1 != null && farm2 != null) {
-						final String name1 = farm1.getName();
-						final String name2 = farm2.getName();
-						if (name1 != null && name2 != null) {
-							return name1.compareTo(name2);
-						}
-					}
-
-					return 0;
-				case 3:
-					return 0;
-				case 4:
-					final String name1 = ((RegisteredAnimal) o1).getGivenName();
-					final String name2 = ((RegisteredAnimal) o2).getGivenName();
-					if (name1 != null && name2 != null) {
-						return name1.compareTo(name2);
-					}
-				default:
-					return 0;
-				}
-			}
-			return 0;
-		}
-
-	}
+//	private class LiveStockListTableComparator implements Comparator<Object> {
+//		int columnIndex;
+//
+//		LiveStockListTableComparator(int index) {
+//			this.columnIndex = index;
+//		}
+//
+//		@Override
+//		public int compare(Object o1, Object o2) {
+//			if (o1 instanceof Membership && o2 instanceof Membership || o1 instanceof RegisteredAnimal
+//					&& o2 instanceof RegisteredAnimal) {
+//				switch (columnIndex) {
+//				case 0:
+//					return ((Membership) o1).getMemberId().compareTo(((Membership) o2).getMemberId());
+//				case 1:
+//					final Membership node1 = (Membership) o1;
+//					final Membership node2 = (Membership) o2;
+//					final Person member1 = node1.getFarmer();
+//					final Person member2 = node2.getFarmer();
+//					if (member1 != null && member2 != null) {
+//						final String name1 = member1.getFamilyName() + "," + member1.getGivenName();
+//						final String name2 = member2.getFamilyName() + "," + member2.getGivenName();
+//						return name1.compareTo(name2);
+//					}
+//
+//					return 0;
+//				case 2:
+//					final Farm farm1 = ((RegisteredAnimal) o1).getLocation();
+//					final Farm farm2 = ((RegisteredAnimal) o2).getLocation();
+//					if (farm1 != null && farm2 != null) {
+//						final String name1 = farm1.getName();
+//						final String name2 = farm2.getName();
+//						if (name1 != null && name2 != null) {
+//							return name1.compareTo(name2);
+//						}
+//					}
+//
+//					return 0;
+//				case 3:
+//					return 0;
+//				case 4:
+//					final String name1 = ((RegisteredAnimal) o1).getGivenName();
+//					final String name2 = ((RegisteredAnimal) o2).getGivenName();
+//					if (name1 != null && name2 != null) {
+//						return name1.compareTo(name2);
+//					}
+//				default:
+//					return 0;
+//				}
+//			}
+//			return 0;
+//		}
+//
+//	}
 }

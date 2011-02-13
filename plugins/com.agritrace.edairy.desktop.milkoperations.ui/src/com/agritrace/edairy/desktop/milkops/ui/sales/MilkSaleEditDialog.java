@@ -1,6 +1,5 @@
 package com.agritrace.edairy.desktop.milkops.ui.sales;
 
-import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;

@@ -14,7 +14,6 @@ import org.eclipse.birt.report.engine.api.IReportEngineFactory;
 import org.eclipse.equinox.log.Logger;
 import org.eclipse.riena.core.Log4r;
 import org.eclipse.riena.core.RienaLocations;
-import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.log.LogService;

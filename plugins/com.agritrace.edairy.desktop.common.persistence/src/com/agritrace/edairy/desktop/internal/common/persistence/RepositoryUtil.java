@@ -3,10 +3,7 @@ package com.agritrace.edairy.desktop.internal.common.persistence;
 import java.io.Serializable;
 
 import org.eclipse.emf.ecore.EObject;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
-
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.annotations.Transactional;
 import com.agritrace.edairy.desktop.common.persistence.exceptions.AlreadyExistsException;

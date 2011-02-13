@@ -347,6 +347,7 @@ import com.google.inject.Provider;
 	private final Map<String, DairyLocation> centerMap = new HashMap<String, DairyLocation>();
 	Dairy localDairy;
 
+	@SuppressWarnings("restriction")
 	@Inject
 	public ScaleImportAction(
 			Provider<Session> sessionProvider)

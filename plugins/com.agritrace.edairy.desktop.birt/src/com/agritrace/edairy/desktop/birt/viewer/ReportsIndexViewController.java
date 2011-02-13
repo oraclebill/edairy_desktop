@@ -14,6 +14,7 @@ import org.eclipse.birt.report.engine.api.IReportEngine;
 import org.eclipse.birt.report.engine.api.IReportRunnable;
 import org.eclipse.birt.report.model.api.DesignElementHandle;
 import org.eclipse.core.databinding.observable.list.WritableList;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
@@ -142,7 +143,7 @@ public class ReportsIndexViewController extends SubModuleController {
 		List<ReportInfo> reportFileList;
 
 		Object uiControl = getWindowRidget().getUIControl();
-		
+
 		try {
 			reportFileList = getReports();
 		} catch (IOException ioe) {
@@ -160,32 +161,9 @@ public class ReportsIndexViewController extends SubModuleController {
 		reportList.addDoubleClickListener(new IActionListener() {
 			@Override
 			public void callback() {
-				// create a report-view navigation node under current node
-				// with file as parameter
-				ISubModuleNode currentNode;
-				INavigationNode<?> childNode;
-				Object selectedItem;
-				String reportName;
-				NavigationNodeId childNodeId;
-				ReportInfo reportInfo;
-
-				currentNode = getNavigationNode();
-				selectedItem = reportList.getSelection().get(0);
-				if (selectedItem instanceof ReportInfo) {
-					reportInfo = ((ReportInfo) selectedItem);
-					reportName = reportInfo.getName();
-
-					childNodeId = new NavigationNodeId(NavigationConstants.REPORTS_REPORTSUBMODULE_TYPEID, reportName);
-					childNode = currentNode.findNode(childNodeId);
-					if (childNode != null ) {
-						childNode.dispose();
-					}
-					NodeFactory.createSubModule(childNodeId, reportName, currentNode, getViewIdForReport(reportInfo),
-							DailyReportViewController.class);
-
-					// go to that node
-					currentNode.navigate(childNodeId, new NavigationArgument(selectedItem));
-				}
+				Object selected = reportList.getSelection().get(0);
+				Assert.isLegal(selected instanceof ReportInfo);
+				activateSelectedReportNode((ReportInfo) selected);
 			}
 
 		});
@@ -194,16 +172,45 @@ public class ReportsIndexViewController extends SubModuleController {
 
 	@Override
 	public void afterBind() {
-		Object uiControl = getWindowRidget().getUIControl();
 		super.afterBind();
+	}
+
+	protected void activateSelectedReportNode(ReportInfo selectedItem) {
+		// create a report-view navigation node under current node
+		// with file as parameter
+		ISubModuleNode currentNode;
+		INavigationNode<?> childNode;
+		String reportName;
+		NavigationNodeId childNodeId;
+		ReportInfo reportInfo;
+
+		currentNode = getNavigationNode();
+		reportInfo = ((ReportInfo) selectedItem);
+		reportName = reportInfo.getName();
+
+		childNodeId = new NavigationNodeId(NavigationConstants.REPORTS_REPORTSUBMODULE_TYPEID, reportName);
+		childNode = currentNode.findNode(childNodeId);
+		if (childNode != null) {
+			childNode.dispose();
+		}
+		NodeFactory.createSubModule(childNodeId, reportName, currentNode, getViewIdForReport(reportInfo),
+				DailyReportViewController.class);
+
+		// go to that node
+		currentNode.navigate(childNodeId, new NavigationArgument(selectedItem));
+
 	}
 
 	protected String getViewIdForReport(ReportInfo reportInfo) {
 		String viewId;
-		
+
 		IReportRunnable runnable = reportInfo.getReport();
 		IReportEngine engine = runnable.getReportEngine();
 		IGetParameterDefinitionTask task = engine.createGetParameterDefinitionTask(runnable);
+// Collection paramDefns = task.getParameterDefns(false);
+
+		ReportInspector.inspectReport(runnable);
+
 		if (task.getParameterDefn("month") != null) {
 			viewId = NavigationConstants.REPORTS_MONTHLYVIEWERSUBMODULE_VIEWID;
 		} else if (task.getParameterDefn("date") != null) {

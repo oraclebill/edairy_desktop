@@ -96,6 +96,13 @@
         name="Annual Report View"
         restorable="true">
   </view>
+  <view
+        allowMultiple="true"
+        class="com.agritrace.edairy.desktop.birt.viewer.GenericReportView"
+        id="com.agritrace.edairy.desktop.birt.genericReportViewerView"
+        name="Report View"
+        restorable="true">
+  </view>
 		
 	</extension>
 

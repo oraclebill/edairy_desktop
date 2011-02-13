@@ -110,7 +110,7 @@ public class AnimalHealthRequestViewController extends AbstractDirectoryControll
 	private final MemberLookupAction memberLookupAction = new MemberLookupAction();
 	private IActionRidget memberLookupButton;
 	private ITextRidget memberText;
-	private IRepository<AnimalHealthRequest> myRepo;
+//	private IRepository<AnimalHealthRequest> myRepo;
 
 	private IDateTimeRidget startDateText;
 	private IToggleButtonRidget vertRidget;

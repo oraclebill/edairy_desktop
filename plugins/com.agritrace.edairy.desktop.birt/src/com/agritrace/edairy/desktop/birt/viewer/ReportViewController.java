@@ -2,9 +2,6 @@ package com.agritrace.edairy.desktop.birt.viewer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.birt.report.engine.api.EngineException;
@@ -15,8 +12,6 @@ import org.eclipse.birt.report.engine.api.IRenderOption;
 import org.eclipse.birt.report.engine.api.IReportEngine;
 import org.eclipse.birt.report.engine.api.IReportRunnable;
 import org.eclipse.birt.report.engine.api.IRunAndRenderTask;
-import org.eclipse.core.databinding.observable.list.WritableList;
-import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.equinox.log.Logger;
 import org.eclipse.riena.core.Log4r;
 import org.eclipse.riena.navigation.INavigationNode;
@@ -26,8 +21,6 @@ import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IBrowserRidget;
-import org.eclipse.riena.ui.ridgets.IComboRidget;
-import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.birt.Activator;
@@ -45,6 +38,7 @@ public abstract class ReportViewController extends SubModuleController {
 	// private Random random = new Random();
 
 	private String reportName;
+	private IReportRunnable report;
 
 
 	private IActionRidget runReportAction;
@@ -84,30 +78,25 @@ public abstract class ReportViewController extends SubModuleController {
 	@Override
 	public void afterBind() {
 		super.afterBind();
-		updateAllRidgetsFromModel();
+//		updateAllRidgetsFromModel();
+		initReport();
 	}
 
 	private void doPrint() {
 		browser.setUrl("javascript:print()");
 	}
 
-//	private void updateReport() {
-//		browser.setText("");
-//		try {
-//			runReport();
-//		} catch (final Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-
 	public void runReport() throws EngineException, IOException {
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();		
 
+		IReportRunnable report = getReportRunnable();
+		Map<String, Object> parameters = getReportParameters();
+		
 		// Create task to run and render the header report
-		IRunAndRenderTask task = engine.createRunAndRenderTask( getReportRunnable() );
+		IRunAndRenderTask task = engine.createRunAndRenderTask( report );
 		
 		//  validate report parameters
-		task.setParameterValues( getReportParameters() );
+		task.setParameterValues( parameters );
 		task.validateParameters();
 		
 		// set report render options
@@ -140,21 +129,23 @@ public abstract class ReportViewController extends SubModuleController {
 		browser.setText(outputStream.toString());
 	}
 
-	private IReportRunnable getReportRunnable() {
+	protected IReportRunnable getReportRunnable() {
+		return report;
+	}
+
+	private void initReport() {
 		// get the report from the navigation node
 		INavigationNode<ISubModuleNode> currentNode = getNavigationNode();
 		NavigationArgument argument = currentNode.getNavigationArgument();
 
 		Object argObj = argument.getParameter();
-		IReportRunnable report = null;
 		if (argObj instanceof ReportsIndexViewController.ReportInfo) {
 			report = ((ReportsIndexViewController.ReportInfo) argObj).getReport();
 		} else {
 			throw new RuntimeException("Unable to get report object from context");
-		}
-		return report;
+		}	
 	}
-
+	
 	abstract protected Map<String, Object> getReportParameters();
 //	{
 //		Map<String, Object> map = new HashMap<String, Object>();

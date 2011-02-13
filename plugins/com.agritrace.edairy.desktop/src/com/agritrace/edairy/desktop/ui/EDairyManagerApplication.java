@@ -31,7 +31,6 @@ import com.agritrace.edairy.desktop.dairy.profile.ui.views.DairyProfileView;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.controllers.VehicleLogDirectoryViewController;
 import com.agritrace.edairy.desktop.dairy.vehicles.ui.views.VehicleLogDirectoryView;
 import com.agritrace.edairy.desktop.home.views.DairyHomeView;
-import com.agritrace.edairy.desktop.internal.common.persistence.dao.DairyRepository;
 import com.agritrace.edairy.desktop.member.ui.controllers.ContainerListViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.FarmListViewController;
 import com.agritrace.edairy.desktop.member.ui.controllers.LiveStockListController;

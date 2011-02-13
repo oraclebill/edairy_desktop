@@ -22,9 +22,6 @@ import org.eclipse.swt.widgets.Text;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.dialog.controller.FarmEditDialogController;
-import com.agritrace.edairy.desktop.member.ui.dialog.controller.ViewFarmDialogController;
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 /**
  * 

@@ -39,7 +39,6 @@ import com.agritrace.edairy.desktop.member.ui.data.FarmListViewTableNode;
 import com.agritrace.edairy.desktop.member.ui.dialog.FarmEditDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.controller.FarmEditDialogController;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 @PermissionRequired(UIPermission.VIEW_FARMS)
 public class FarmListViewController extends BasicDirectoryController<Farm> {

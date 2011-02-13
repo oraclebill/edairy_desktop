@@ -1,6 +1,6 @@
 package com.agritrace.edairy.desktop.common.ui.controls.fieldgroup;
 
-class Field<T> {
+public class Field<T> {
 	
 	FieldType type;
 	String name;

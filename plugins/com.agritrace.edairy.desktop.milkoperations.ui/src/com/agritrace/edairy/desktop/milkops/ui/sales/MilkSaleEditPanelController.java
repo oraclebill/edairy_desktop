@@ -1,6 +1,5 @@
 package com.agritrace.edairy.desktop.milkops.ui.sales;
 
-import java.math.RoundingMode;
 import java.util.List;
 
 import org.eclipse.core.databinding.beans.PojoObservables;
@@ -9,7 +8,6 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDecimalTextRidget;
 import org.eclipse.riena.ui.ridgets.ILabelRidget;
-import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ISingleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;

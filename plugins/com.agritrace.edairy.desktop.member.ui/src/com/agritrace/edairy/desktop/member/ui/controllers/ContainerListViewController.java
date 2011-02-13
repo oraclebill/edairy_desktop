@@ -19,7 +19,6 @@ import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingFactory;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
-import com.agritrace.edairy.desktop.common.model.util.MemberUtil;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.dao.IFarmRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractPersistenceDelegate;
@@ -30,7 +29,6 @@ import com.agritrace.edairy.desktop.member.ui.ViewWidgetId;
 import com.agritrace.edairy.desktop.member.ui.data.ContainerListViewTableNode;
 import com.agritrace.edairy.desktop.member.ui.dialog.ViewContainerDialog;
 import com.agritrace.edairy.desktop.member.ui.dialog.controller.ContainerEditDialogController;
-import com.agritrace.edairy.desktop.member.ui.dialog.controller.ViewContainerDialogController;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 

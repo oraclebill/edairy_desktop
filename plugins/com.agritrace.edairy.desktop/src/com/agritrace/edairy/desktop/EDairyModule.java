@@ -40,7 +40,6 @@ import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDirectoryC
 import com.agritrace.edairy.desktop.services.ui.controllers.AnimalHealthRequestViewController;
 import com.agritrace.edairy.desktop.splashHandlers.EdairySplashHandler;
 import com.agritrace.edairy.desktop.system.ui.controllers.RoleDirectoryController;
-import com.agritrace.edairy.desktop.ui.EDairyManagerApplication;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provider;
 import com.google.inject.Provides;

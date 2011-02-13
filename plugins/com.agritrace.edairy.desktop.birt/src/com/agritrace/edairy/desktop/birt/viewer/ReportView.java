@@ -5,16 +5,12 @@ import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 
 import com.agritrace.edairy.desktop.common.ui.views.ScrolledSubModuleView;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 
-public class ReportView extends ScrolledSubModuleView {
+abstract public class ReportView extends ScrolledSubModuleView {
 
 	public static final String MILK_COLLECTION_YEAR = "reports/YearReport.rptdesign";
 	public static final String MILK_COLLECTION_YEAR_REPORT_NAME = "MILK COLLECTION REPORT";
@@ -80,8 +76,9 @@ public class ReportView extends ScrolledSubModuleView {
 	 *  
 	 * @param paramArea2
 	 */
-	protected void setupParameterArea(Composite parent) {
-		// TODO Auto-generated method stub
-		
-	}
+	abstract protected void setupParameterArea(Composite parent);
+//	{
+//		// TODO Auto-generated method stub
+//		
+//	}
 }

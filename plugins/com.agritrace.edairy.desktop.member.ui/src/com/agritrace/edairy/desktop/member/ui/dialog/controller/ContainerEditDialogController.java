@@ -1,7 +1,5 @@
 package com.agritrace.edairy.desktop.member.ui.dialog.controller;
 
-import java.util.ArrayList;
-
 import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.list.WritableList;

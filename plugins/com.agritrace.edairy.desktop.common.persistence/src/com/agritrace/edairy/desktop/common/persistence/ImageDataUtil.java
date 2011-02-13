@@ -11,12 +11,10 @@ import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageLoader;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.common.model.base.ImageEntry;
 import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
-import com.agritrace.edairy.desktop.internal.common.persistence.PersistenceActivator;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 

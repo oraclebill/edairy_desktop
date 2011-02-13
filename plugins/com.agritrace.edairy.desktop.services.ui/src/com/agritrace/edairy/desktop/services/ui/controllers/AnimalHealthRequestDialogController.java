@@ -24,7 +24,6 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.MemberLookupDialog;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.services.ui.dialogs.AnimalHealthRequestDialog;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 /**
  * Dialog controller for Animal Health Request
