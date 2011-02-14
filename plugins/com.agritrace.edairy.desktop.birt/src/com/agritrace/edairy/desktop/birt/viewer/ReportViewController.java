@@ -25,6 +25,7 @@ import org.eclipse.birt.report.engine.api.IRenderTask;
 import org.eclipse.birt.report.engine.api.IReportDocument;
 import org.eclipse.birt.report.engine.api.IReportEngine;
 import org.eclipse.birt.report.engine.api.IReportRunnable;
+import org.eclipse.birt.report.engine.api.IRunAndRenderTask;
 import org.eclipse.birt.report.engine.api.IRunTask;
 import org.eclipse.birt.report.engine.api.PDFRenderOption;
 import org.eclipse.birt.report.model.api.OdaDataSourceHandle;
@@ -142,8 +143,9 @@ public abstract class ReportViewController extends SubModuleController {
 	}
 
 	private void doRunReport() throws Exception {
-		runReport();
-		showReport();
+//		runReport();
+//		showReport();
+		runAndShowReport();
 		printReportAction.setEnabled(true);
 		saveReportAction.setEnabled(true);
 // runReportAction.setEnabled(false);
@@ -169,6 +171,62 @@ public abstract class ReportViewController extends SubModuleController {
 		currentNode.dispose();
 	}
 
+	public void runAndShowReport() throws Exception {
+
+		IReportRunnable report = getReportRunnable();
+		Map<String, Object> parameters = getReportParameters();
+		IRunAndRenderTask runTask = getEngine().createRunAndRenderTask(report);
+
+		try {
+			applyStandardParams(parameters);
+
+			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+			// HTMLRenderContext???
+
+			// set report render options
+			HTMLRenderOption options = new HTMLRenderOption();
+
+			options.setOutputFormat("html");
+			options.setUrlEncoding("utf-8");
+			options.setHtmlPagination(true);
+
+			// set output options - direct to buffer for local html view
+			options.setOutputStream(outputStream);
+			options.setEmbeddable(true);
+			options.setEnableInlineStyle(true);
+			options.setLayoutPreference(IHTMLRenderOption.LAYOUT_PREFERENCE_AUTO);
+			options.setOption(IRenderOption.HTML_PAGINATION, new Boolean(true));
+			options.setImageDirectory("images");
+
+			// ImageHandlerTest
+			options.setImageHandler(new HTMLCompleteImageHandler());
+
+			// set options
+			runTask.setRenderOption(options);
+
+			// validate report parameters
+			runTask.setParameterValues(parameters);
+			runTask.validateParameters();
+			runTask.run();
+
+			if (runTask.getErrors().size() > 0) {
+				String msgs = "\n";
+				for (Object o : runTask.getErrors()) {
+					msgs += o.toString();
+					msgs += "\n\n";
+				}
+				reportDocFile = null;
+				throw new BirtException(msgs);
+			}
+
+			browser.setText(outputStream.toString());
+		} finally {
+			//
+			runTask.close();
+		}
+	}
+
 	public void runReport() throws Exception {
 
 		IReportRunnable report = getReportRunnable();
@@ -178,7 +236,7 @@ public abstract class ReportViewController extends SubModuleController {
 		reportDocFile = null;
 		try {
 			applyStandardParams(parameters);
-//			updateDataSource(report);
+// updateDataSource(report);
 
 			reportDocFile = File.createTempFile("report", ".rptdoc", RienaLocations.getDataArea());
 
@@ -296,7 +354,7 @@ public abstract class ReportViewController extends SubModuleController {
 
 		// database params
 		String dbUrl = getJdbcDriverProperties().get("url");
-		// expect, e.g: 'jdbc\:mysql\://127.0.0.1\:3306/dairymgr'		
+		// expect, e.g: 'jdbc\:mysql\://127.0.0.1\:3306/dairymgr'
 		Pattern urlPattern = Pattern.compile("jdbc\\\\?:mysql\\\\?://([\\w\\.]+)?\\\\?:(\\d+)/(\\w+)");
 		Matcher m = urlPattern.matcher(dbUrl);
 		Assert.isLegal(m.matches());
