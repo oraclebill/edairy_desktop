@@ -1,9 +1,5 @@
 package com.agritrace.edairy.desktop.collection.services;
 
-import java.util.Properties;
-
-import org.hibernate.cfg.Environment;
-
 import com.agritrace.edairy.desktop.internal.common.persistence.HbDataStoreProvider;
 
 public class TestingDataStoreProvider extends HbDataStoreProvider {

@@ -1,10 +1,5 @@
 package com.agritrace.edairy.desktop.common.persistence.test;
 
-import java.io.File;
-import java.util.Properties;
-
-import org.hibernate.cfg.Environment;
-
 import com.agritrace.edairy.desktop.internal.common.persistence.HbDataStoreProvider;
 
 public class HsqlDbDataStoreProvider extends HbDataStoreProvider {

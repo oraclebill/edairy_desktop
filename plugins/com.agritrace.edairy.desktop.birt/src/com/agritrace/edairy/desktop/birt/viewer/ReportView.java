@@ -10,7 +10,6 @@ import org.eclipse.swt.widgets.Composite;
 
 import com.agritrace.edairy.desktop.common.ui.views.ScrolledSubModuleView;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormAttachment;

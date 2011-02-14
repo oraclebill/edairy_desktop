@@ -27,7 +27,6 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: com.agritrace.edairy.desktop.birt,
  com.agritrace.edairy.desktop.birt.controllers,
- com.agritrace.edairy.desktop.birt.data,
  com.agritrace.edairy.desktop.birt.viewer
 Import-Package: com.mysql.jdbc;version="5.1.11",
  com.mysql.jdbc.exceptions;version="5.1.11",
