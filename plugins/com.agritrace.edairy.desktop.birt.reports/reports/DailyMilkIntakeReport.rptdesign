@@ -207,7 +207,7 @@ BirtDateTime.year(endDate) + "-" + BirtDateTime.month(endDate) + "-" + BirtDateT
 , collectionjournalline.dairycontainer_dairycontainer_containerid, collectionjournalline.quantity, collectionjournalline.rejected
 , membership.membernumber, person.givenname
 FROM membership 
-JOIN person  ON membership.farmer_member_personid = person.personid	
+JOIN person  ON membership.farmer = person.personid	
 LEFT JOIN dairylocation ON membership.dairylocation_defaultroute_id = dairylocation.id 
 LEFT JOIN collectionjournalline  ON membership.memberid = collectionjournalline.membership_validatedmember_e_id 
 LEFT JOIN collectiongroup  ON collectiongroup.journalid = collectionjournalline.collectionjournalline_collectionjournal_e_id 
