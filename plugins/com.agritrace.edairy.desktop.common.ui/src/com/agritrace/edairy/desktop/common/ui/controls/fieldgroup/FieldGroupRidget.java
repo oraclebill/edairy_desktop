@@ -31,7 +31,7 @@ import org.eclipse.swt.widgets.Text;
 
 public class FieldGroupRidget extends AbstractCompositeRidget implements IFieldGroupRidget, ICompositeRidget {
 
-	private List<Field<?>> fieldList;
+	private List<Field> fieldList;
 	private Map<String, IRidget> ridgets = new HashMap<String, IRidget>();;
 
 	@Override
@@ -50,7 +50,7 @@ public class FieldGroupRidget extends AbstractCompositeRidget implements IFieldG
 	}
 
 	@Override
-	public void bindToModel(List<Field<?>> observableList) {
+	public void bindToModel(List<Field> observableList) {
 		if (observableList == fieldList)
 			return;
 
@@ -66,7 +66,7 @@ public class FieldGroupRidget extends AbstractCompositeRidget implements IFieldG
 	protected void bindUIControl() {
 	}
 
-	private void bindRidget(IRidget ridget, Field<?> field) {
+	private void bindRidget(IRidget ridget, Field field) {
 		if (ridget instanceof IValueRidget) {
 			IValueRidget valueRidget = (IValueRidget) ridget;
 			valueRidget.bindToModel(field, "value");
@@ -92,7 +92,7 @@ public class FieldGroupRidget extends AbstractCompositeRidget implements IFieldG
 			ridgets.clear();
 			uiControl.reset();
 			if (fieldList != null) {
-				for (Field<?> field : fieldList) {
+				for (Field field : fieldList) {
 					Control control = uiControl.addField(field);
 					IRidget ridget = SwtRidgetFactory.createRidget(control);
 					ridgets.put(field.name, ridget);
@@ -180,12 +180,12 @@ public class FieldGroupRidget extends AbstractCompositeRidget implements IFieldG
 			final IFieldGroupRidget fieldGroupRidget = (IFieldGroupRidget) SwtRidgetFactory.createRidget(fieldGroup);
 
 			// configure
-			final List<Field<?>> model = new ArrayList<Field<?>>();
+			final List<Field> model = new ArrayList<Field>();
 
 			int count = 100;
-			model.add(new Field<String>("id" + ++count, FieldType.TEXT, "Test " + count, "A string"));
-			model.add(new Field<Date>("id" + ++count, FieldType.DATE, "Test " + count, new Date()));
-			model.add(new Field<Integer>("id" + ++count, FieldType.NUMBER, "Test " + count, 112358));
+			model.add(new Field("id" + ++count, FieldType.TEXT, "Test " + count, "A string"));
+			model.add(new Field("id" + ++count, FieldType.DATE, "Test " + count, new Date()));
+			model.add(new Field("id" + ++count, FieldType.NUMBER, "Test " + count, 112358));
 
 			fieldGroupRidget.bindToModel(model);
 			fieldGroupRidget.updateFromModel();
@@ -207,7 +207,7 @@ public class FieldGroupRidget extends AbstractCompositeRidget implements IFieldG
 				@Override
 				public void callback() {
 					String s = "";
-					for (Field<?> f : model) {
+					for (Field f : model) {
 						s += f.name;
 						s += " : ";
 						s += f.value == null ? "(null)" : f.value.toString();

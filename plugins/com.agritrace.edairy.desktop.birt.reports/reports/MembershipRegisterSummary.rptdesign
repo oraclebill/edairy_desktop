@@ -35,6 +35,8 @@
         <scalar-parameter name="vendorlogo" id="1386" extends="SiteReportLib.vendorlogo"/>
         <scalar-parameter name="productlogo" id="1387" extends="SiteReportLib.productlogo"/>
         <scalar-parameter name="fromDate" id="1861">
+            <text-property name="helpText">Start Date</text-property>
+            <text-property name="promptText">Start Date</text-property>
             <property name="valueType">static</property>
             <property name="isRequired">true</property>
             <property name="dataType">string</property>
@@ -51,6 +53,8 @@
             </structure>
         </scalar-parameter>
         <scalar-parameter name="toDate" id="1862">
+            <text-property name="helpText">End Date</text-property>
+            <text-property name="promptText">End Date</text-property>
             <property name="valueType">static</property>
             <property name="isRequired">true</property>
             <property name="dataType">string</property>
@@ -67,6 +71,8 @@
             </structure>
         </scalar-parameter>
         <scalar-parameter name="period" id="2366">
+            <text-property name="helpText">Period</text-property>
+            <text-property name="promptText">Period</text-property>
             <property name="valueType">static</property>
             <property name="dataType">string</property>
             <property name="distinct">true</property>

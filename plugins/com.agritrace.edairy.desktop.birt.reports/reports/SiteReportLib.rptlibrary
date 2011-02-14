@@ -5,6 +5,9 @@
     <property name="theme">defaultTheme</property>
     <parameters>
         <scalar-parameter name="dairyName" id="511">
+            <property name="hidden">true</property>
+            <text-property name="helpText">Dairy Name</text-property>
+            <text-property name="promptText">Dairy Name</text-property>
             <property name="valueType">static</property>
             <property name="dataType">string</property>
             <property name="distinct">true</property>

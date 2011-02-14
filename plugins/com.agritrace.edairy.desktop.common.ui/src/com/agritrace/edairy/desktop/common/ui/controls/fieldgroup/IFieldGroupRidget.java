@@ -7,7 +7,7 @@ import org.eclipse.riena.ui.ridgets.IRidget;
 
 public interface IFieldGroupRidget extends IRidget {
 	
-	public void bindToModel(List<Field<?>> model);
 	public Map<String, ?> getValues();
+	public void bindToModel(List<Field> model);
 	
 }

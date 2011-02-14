@@ -12,7 +12,7 @@ import org.eclipse.birt.report.engine.api.EngineException;
 import org.eclipse.birt.report.engine.api.IGetParameterDefinitionTask;
 import org.eclipse.birt.report.engine.api.IReportEngine;
 import org.eclipse.birt.report.engine.api.IReportRunnable;
-import org.eclipse.birt.report.model.api.DesignElementHandle;
+import org.eclipse.birt.report.model.api.ReportDesignHandle;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.FileLocator;
@@ -34,7 +34,7 @@ import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
 
 public class ReportsIndexViewController extends SubModuleController {
 
-	static class ReportInfo {
+	class ReportInfo {
 
 		private File file;
 		private IReportRunnable report;
@@ -79,17 +79,16 @@ public class ReportsIndexViewController extends SubModuleController {
 			this.file = file;
 			isValid = false;
 			try {
-				report = Activator.getDefault().getReportEngine().openReportDesign(file.getAbsolutePath());
-				DesignElementHandle reportDesign = report.getDesignHandle();
+				report = getReportEngine().openReportDesign(file.getAbsolutePath());
+				ReportDesignHandle reportDesign = (ReportDesignHandle) report.getDesignHandle();
 				setName(reportDesign.getStringProperty("displayName"));
-// setArea(reportDesign.getStringProperty("title"));
 				setArea(file.getParentFile().getName());
 				setDescription(reportDesign.getStringProperty("description"));
+
 				isValid = true;
 			} catch (EngineException e) {
 				description = e.getMessage();
 			}
-
 		}
 
 		public String toString() {
@@ -118,14 +117,15 @@ public class ReportsIndexViewController extends SubModuleController {
 	private static final String[] properties = { "area", "name", "description" };
 	private static final String[] headers = { "Area", "Name", "Description" };
 
-	private static final String REPORT_BUNDLE_NAME = "com.agritrace.edairy.desktop.birt.reports";
+	private static final String REPORT_BUNDLE_NAME = "com.agritrace.edairy.desktop.birt.reports"
+
+	;
+	private IReportEngine engine;
 
 	public ReportsIndexViewController() {
 	}
 
 	private List<ReportInfo> getReports() throws IOException, URISyntaxException {
-		IReportEngine engine = Activator.getDefault().getReportEngine();
-
 		List<ReportInfo> reports = new LinkedList<ReportInfo>();
 		Bundle reportBundle = Platform.getBundle(REPORT_BUNDLE_NAME);
 		URL reportRootURL = FileLocator.find(reportBundle, new Path("/reports"), null);
@@ -136,6 +136,12 @@ public class ReportsIndexViewController extends SubModuleController {
 		}
 
 		return reports;
+	}
+
+	protected IReportEngine getReportEngine() {
+		if (engine == null)
+			engine = Activator.getDefault().getReportEngine();
+		return engine;
 	}
 
 	@Override
@@ -193,8 +199,8 @@ public class ReportsIndexViewController extends SubModuleController {
 		if (childNode != null) {
 			childNode.dispose();
 		}
-		NodeFactory.createSubModule(childNodeId, reportName, currentNode, getViewIdForReport(reportInfo),
-				DailyReportViewController.class);
+		NodeFactory.createSubModule(childNodeId, reportName, currentNode,
+				NavigationConstants.REPORTS_VIEWERSUBMODULE_VIEWID, GenericReportViewController.class);
 
 		// go to that node
 		currentNode.navigate(childNodeId, new NavigationArgument(selectedItem));
@@ -204,20 +210,21 @@ public class ReportsIndexViewController extends SubModuleController {
 	protected String getViewIdForReport(ReportInfo reportInfo) {
 		String viewId;
 
-		IReportRunnable runnable = reportInfo.getReport();
-		IReportEngine engine = runnable.getReportEngine();
-		IGetParameterDefinitionTask task = engine.createGetParameterDefinitionTask(runnable);
-// Collection paramDefns = task.getParameterDefns(false);
-
-		ReportInspector.inspectReport(runnable);
-
-		if (task.getParameterDefn("month") != null) {
-			viewId = NavigationConstants.REPORTS_MONTHLYVIEWERSUBMODULE_VIEWID;
-		} else if (task.getParameterDefn("date") != null) {
-			viewId = NavigationConstants.REPORTS_DAILYVIEWERSUBMODULE_VIEWID;
-		} else {
-			viewId = NavigationConstants.REPORTS_ANNUALVIEWERSUBMODULE_VIEWID;
-		}
+// IReportRunnable runnable = reportInfo.getReport();
+// IReportEngine engine = runnable.getReportEngine();
+// IGetParameterDefinitionTask task = engine.createGetParameterDefinitionTask(runnable);
+// // Collection paramDefns = task.getParameterDefns(false);
+//
+// ReportInspector.inspectReport(runnable);
+//
+// if (task.getParameterDefn("month") != null) {
+// viewId = NavigationConstants.REPORTS_MONTHLYVIEWERSUBMODULE_VIEWID;
+// } else if (task.getParameterDefn("date") != null) {
+// viewId = NavigationConstants.REPORTS_DAILYVIEWERSUBMODULE_VIEWID;
+// } else {
+// viewId = NavigationConstants.REPORTS_ANNUALVIEWERSUBMODULE_VIEWID;
+// }
+		viewId = NavigationConstants.REPORTS_VIEWERSUBMODULE_VIEWID;
 		return viewId;
 	}
 

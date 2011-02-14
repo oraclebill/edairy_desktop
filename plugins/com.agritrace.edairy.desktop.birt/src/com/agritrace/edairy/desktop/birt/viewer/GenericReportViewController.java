@@ -3,12 +3,12 @@ package com.agritrace.edairy.desktop.birt.viewer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.birt.report.engine.api.IGetParameterDefinitionTask;
 import org.eclipse.birt.report.engine.api.IParameterDefn;
-import org.eclipse.birt.report.engine.api.IParameterDefnBase;
 import org.eclipse.birt.report.engine.api.IParameterGroupDefn;
 import org.eclipse.birt.report.engine.api.IReportEngine;
 import org.eclipse.birt.report.engine.api.IReportRunnable;
@@ -21,10 +21,10 @@ import com.agritrace.edairy.desktop.common.ui.controls.fieldgroup.IFieldGroupRid
 
 public class GenericReportViewController extends ReportViewController {
 
-	final private List<Field<?>> fieldModel;
+	final private List<Field> fieldModel;
 
 	public GenericReportViewController() {
-		fieldModel = new ArrayList<Field<?>>();
+		fieldModel = new ArrayList<Field>();
 	}
 
 	@Override
@@ -34,15 +34,11 @@ public class GenericReportViewController extends ReportViewController {
 
 	@Override
 	public void afterBind() {
-		INavigationNode<ISubModuleNode> currentNode = getNavigationNode();
-		String fieldGroupName = (String) currentNode.getContext("field-group-name");
+		super.afterBind();
+		fieldModel.clear();
+		fieldModel.addAll(generateFieldList(getReportParameterDefinitions()));
+
 		IFieldGroupRidget fieldGroup = getRidget(IFieldGroupRidget.class, "parameter-field-group");
-		for (IParameterDefnBase paramDef : getReportParameterDefinitions(fieldGroupName)) {
-			Field<String> fieldGroupField = new Field<String>(paramDef.getName(), FieldType.TEXT,
-					paramDef.getDisplayName());
-			// todo: if field def has value list, set type to combo and add options..
-			fieldModel.add(fieldGroupField);
-		}
 		fieldGroup.bindToModel(fieldModel);
 		fieldGroup.updateFromModel();
 	}
@@ -53,38 +49,64 @@ public class GenericReportViewController extends ReportViewController {
 	@Override
 	protected Map<String, Object> getReportParameters() {
 		Map<String, Object> parameters = new HashMap<String, Object>();
-		for (Field<?> f : fieldModel) {
+		for (Field f : fieldModel) {
 			parameters.put(f.getName(), f.getValue());
 		}
 		return parameters;
 	}
 
-	/**
-	 * Given a named parameter group, get the scalar parameters associated with the group.
-	 * 
-	 * If the named group is not found, return the ungrouped scalar parameters for the report.
-	 * 
-	 * @param name
-	 * @return
-	 */
-	private Collection<IParameterDefn> getReportParameterDefinitions(String name) {
-		Collection<IParameterDefn> parameterList = null;
-		IReportRunnable report = getReportRunnable();
-		IReportEngine engine = report.getReportEngine();
-		IGetParameterDefinitionTask task = engine.createGetParameterDefinitionTask(report);
-		Object groupObj = task.getParameterDefn(name);
-		if (groupObj instanceof IParameterGroupDefn) {
-			parameterList = ((IParameterGroupDefn) groupObj).getContents();
-		} else if (fallback) {
-			parameterList = new ArrayList<IParameterDefn>();
-			for (Object paramDef : task.getParameterDefns(true)) {
-				if (paramDef instanceof IParameterDefn) {
-					parameterList.add((IParameterDefn) paramDef);
-				}
+
+	private List<Field> generateFieldList(Collection<IParameterDefn> paramDefs) {
+		List<Field> fieldList = new ArrayList<Field>();
+		for (IParameterDefn paramDef : paramDefs) {
+
+			String paramName = paramDef.getName();
+			int paramType = paramDef.getParameterType();
+			int dataType = paramDef.getDataType();
+			String displayName = paramDef.getPromptText();
+			String helpText = paramDef.getHelpText();
+
+			Field fieldGroupField;
+			if (paramType == paramDef.LIST_PARAMETER) {
+				// todo: if field def has value list, set type to combo and add options..
+				throw new UnsupportedOperationException();
 			}
+			FieldType fieldType = translateToFieldType(dataType);
+
+			fieldGroupField = new Field(paramName, fieldType, displayName);
+			fieldGroupField.setHelpText(helpText);
+
+			fieldList.add(fieldGroupField);
 		}
-		return parameterList;
+		return fieldList;
 	}
 
-	boolean fallback = false;
+	private FieldType translateToFieldType(int dataType) {
+		FieldType fieldType = null;
+		switch (dataType) {
+		case IParameterDefn.TYPE_BOOLEAN:
+			fieldType = FieldType.BOOLEAN;
+			break;
+		case IParameterDefn.TYPE_DATE:
+			fieldType = FieldType.DATE;
+			break;
+		case IParameterDefn.TYPE_DATE_TIME:
+			fieldType = FieldType.DATETIME;
+			break;
+		case IParameterDefn.TYPE_TIME:
+			fieldType = FieldType.TIME;
+			break;
+		case IParameterDefn.TYPE_DECIMAL:
+		case IParameterDefn.TYPE_INTEGER:
+		case IParameterDefn.TYPE_FLOAT:
+			fieldType = FieldType.NUMBER;
+			break;
+		case IParameterDefn.TYPE_STRING:
+		case IParameterDefn.TYPE_ANY:
+		default:
+			fieldType = FieldType.TEXT;
+			break;
+		}
+		return fieldType;
+	}
 }

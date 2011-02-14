@@ -9,6 +9,8 @@ import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.ContactMet
 import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.ContactMethodsGroupRidget;
 import com.agritrace.edairy.desktop.common.ui.controls.daterange.DateRange;
 import com.agritrace.edairy.desktop.common.ui.controls.daterange.DateRangeRidget;
+import com.agritrace.edairy.desktop.common.ui.controls.fieldgroup.FieldGroup;
+import com.agritrace.edairy.desktop.common.ui.controls.fieldgroup.FieldGroupRidget;
 import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.ProfilePhotoComposite;
 import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.ProfilePhotoRidget;
 
@@ -56,6 +58,7 @@ public class Activator extends DesktopBaseActivator {
 		SwtControlRidgetMapper.getInstance().addMapping(ProfilePhotoComposite.class, ProfilePhotoRidget.class);
 		SwtControlRidgetMapper.getInstance().addMapping(DateRange.class, DateRangeRidget.class);
 		SwtControlRidgetMapper.getInstance().addMapping(ContactMethodsGroup.class, ContactMethodsGroupRidget.class);
+		SwtControlRidgetMapper.getInstance().addMapping(FieldGroup.class, FieldGroupRidget.class);
 	}
 
 	/*

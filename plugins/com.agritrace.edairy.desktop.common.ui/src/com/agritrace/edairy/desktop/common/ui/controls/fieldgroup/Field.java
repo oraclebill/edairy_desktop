@@ -1,25 +1,28 @@
 package com.agritrace.edairy.desktop.common.ui.controls.fieldgroup;
 
-public class Field<T> {
+import org.eclipse.core.runtime.Assert;
+
+public class Field {
 	
 	FieldType type;
 	String name;
 	String label;
-	T value;
-	T[] options;
+	Object value;
+	Object[] options;
 
 	public Field(String name, FieldType type, String label) {
 		this(name, type, label, null);
 	}
 
-	public Field(String name, FieldType type, String label, T initialValue) {
+	public Field(String name, FieldType type, String label, Object initialValue) {
 		this(name, type, label, initialValue, null);
 	}
 	
-	public Field(String name, FieldType type, String label, T initialValue, T[] options) {
+	public Field(String name, FieldType type, String label, Object initialValue, Object[] options) {
+		Assert.isNotNull(name);
 		this.name = name;
 		this.type = type;
-		this.label = label;
+		this.label = label != null ? label : name;
 		this.value = initialValue;
 		this.options = options;
 	}
@@ -48,20 +51,24 @@ public class Field<T> {
 		this.label = label;
 	}
 
-	public T getValue() {
+	public Object getValue() {
 		return value;
 	}
 
-	public void setValue(T value) {
+	public void setValue(Object value) {
 		this.value = value;
 	}
 
-	public T[] getOptions() {
+	public Object[] getOptions() {
 		return options;
 	}
 
-	public void setOptions(T[] options) {
+	public void setOptions(Object[] options) {
 		this.options = options;
+	}
+
+	public void setHelpText(String helpText) {
+		
 	}
 	
 	

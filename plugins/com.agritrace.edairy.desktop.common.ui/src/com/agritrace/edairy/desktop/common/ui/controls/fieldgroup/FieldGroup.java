@@ -12,6 +12,7 @@ import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
@@ -27,7 +28,7 @@ public class FieldGroup extends Composite {
 
 	public FieldGroup(Composite parent, int style) {
 		super(parent, style);
-		setLayout(new GridLayout());
+		setLayout(new RowLayout());
 		boundControls = new LinkedList<Control>();
 		internalControls = new LinkedList<Control>();
 		locked = false;
@@ -35,7 +36,7 @@ public class FieldGroup extends Composite {
 		System.err.println("FieldGroup() parent: " + parent);
 	}
 
-	public void setFields(Field<?>[] fieldList) {
+	public void setFields(Field[] fieldList) {
 		Assert.isLegal(!locked);
 
 		reset();
@@ -55,7 +56,7 @@ public class FieldGroup extends Composite {
 	}
 
 	@SuppressWarnings("deprecation")
-	public Control addField(Field<?> field) {
+	public Control addField(Field field) {
 		Control control;
 
 		if (locked)

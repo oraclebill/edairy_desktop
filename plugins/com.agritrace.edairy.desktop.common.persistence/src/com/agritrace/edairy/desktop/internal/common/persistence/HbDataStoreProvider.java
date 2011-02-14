@@ -27,7 +27,7 @@ public class HbDataStoreProvider implements Provider<HbDataStore>, IDbProperties
 	private static final org.eclipse.equinox.log.Logger LOG = Log4r.getLogger(PersistenceActivator.getDefault(),
 			HbDataStoreProvider.class);
 
-	private static final String PROPERTIES_FILE_NAME = "edairydb.properties";	
+	public static final String PROPERTIES_FILE_NAME = "edairydb.properties";	
 	private static final String DB_NAME_PROPERTY = "edairy.database.name";
 	private static final String DEFAULT_DB_NAME = "dairymgr";
 
@@ -38,6 +38,7 @@ public class HbDataStoreProvider implements Provider<HbDataStore>, IDbProperties
 		try {
 			ret = RienaLocations.getDataArea();
 		} catch (final Exception e) {
+			e.printStackTrace();
 			ret = new File(".");
 			ret = ret.getAbsoluteFile();
 		}
@@ -94,7 +95,7 @@ public class HbDataStoreProvider implements Provider<HbDataStore>, IDbProperties
 		return hbds;
 	}
 
-	protected Properties getDatastoreProperties() {
+	public static Properties getDatastoreProperties() {
 		final Properties props = new Properties();
 		final File propFile = new File(getConfigFileArea(), PROPERTIES_FILE_NAME);
 

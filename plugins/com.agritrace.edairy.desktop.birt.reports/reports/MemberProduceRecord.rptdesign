@@ -30,6 +30,8 @@
         <scalar-parameter name="productlogo" id="1986" extends="SiteReportLib.productlogo"/>
         <scalar-parameter name="vendorlogo" id="1987" extends="SiteReportLib.vendorlogo"/>
         <scalar-parameter name="fromDate" id="1992">
+            <text-property name="helpText">Start Date</text-property>
+            <text-property name="promptText">Start Date</text-property>
             <property name="valueType">static</property>
             <property name="dataType">string</property>
             <property name="distinct">true</property>
@@ -43,6 +45,8 @@
             </structure>
         </scalar-parameter>
         <scalar-parameter name="toDate" id="1993">
+            <text-property name="helpText">End Date</text-property>
+            <text-property name="promptText">End Date</text-property>
             <property name="valueType">static</property>
             <property name="dataType">string</property>
             <property name="distinct">true</property>
@@ -56,6 +60,8 @@
             </structure>
         </scalar-parameter>
         <scalar-parameter name="memberNumber" id="1994">
+            <text-property name="helpText">Member Number</text-property>
+            <text-property name="promptText">Member #</text-property>
             <property name="valueType">dynamic</property>
             <property name="dataSetName">activeMembers</property>
             <expression name="valueExpr" type="javascript">dataSetRow["membernumber"]</expression>

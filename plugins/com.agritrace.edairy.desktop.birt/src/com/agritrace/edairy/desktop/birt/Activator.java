@@ -1,14 +1,10 @@
 package com.agritrace.edairy.desktop.birt;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
 
 import org.eclipse.birt.core.exception.BirtException;
 import org.eclipse.birt.core.framework.Platform;
 import org.eclipse.birt.report.engine.api.EngineConfig;
-import org.eclipse.birt.report.engine.api.EngineConstants;
 import org.eclipse.birt.report.engine.api.IReportEngine;
 import org.eclipse.birt.report.engine.api.IReportEngineFactory;
 import org.eclipse.equinox.log.Logger;
@@ -22,10 +18,10 @@ public class Activator implements BundleActivator {
 	private static final Logger LOGGER = Log4r.getLogger(Activator.class);
 
 	static String PLUGIN_ID = "com.agritrace.edairy.desktop.birt";
-	
-	public static BundleContext context;	
+
+	public static BundleContext context;
 	private static Activator plugin;
-	
+
 	private IReportEngine engine = null;
 
 	static BundleContext getContext() {
@@ -37,42 +33,32 @@ public class Activator implements BundleActivator {
 	}
 
 	public IReportEngine getReportEngine() {
-		return engine;		
+		return engine;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
 	 */
 	@Override
-	@SuppressWarnings("unchecked")
 	public void start(BundleContext bundleContext) throws Exception {
 		Activator.context = bundleContext;
 		plugin = this;
-
+		
 		EngineConfig config = null;
 		IReportEngineFactory factory;
-		Map<String, String> osgiConfig;
-		HashMap<String, Object> context;
 
 		// configure engine and platform; create factory object
 		config = new EngineConfig();
-		config.setLogConfig(null, Level.OFF);
+		config.setLogger(java.util.logging.Logger.getLogger(Activator.class.getName()));
+//		config.setLogConfig(RienaLocations.getDataArea().getAbsolutePath(), Level.WARNING);
+		config.setTempDir(RienaLocations.getDataArea().getAbsolutePath());
 
-		// setup osgi properties
-		osgiConfig = config.getOSGiConfig();
-// osgiConfig.put("osgi.configuration.area", ...);
-		config.setOSGiConfig(osgiConfig);
-
-		// setup birt platform properties
-		context = config.getAppContext();
-		context.put(EngineConstants.APPCONTEXT_CLASSLOADER_KEY, Activator.class.getClassLoader());
-		config.setAppContext(context);
-
-		// setup config
-// config.setEngineHome("");
-
+//		HashMap<String, Object> context = new HashMap<String, Object>();
+//		context.put(EngineConstants.APPCONTEXT_CLASSLOADER_KEY, ReportViewController.class.getClassLoader());
+//		config.setAppContext(context);
+		
 		try {
 			LOGGER.log(LogService.LOG_DEBUG, "Starting BIRT Platform...");
 			Platform.startup(config);

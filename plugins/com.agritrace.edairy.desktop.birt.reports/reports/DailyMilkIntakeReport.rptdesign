@@ -64,6 +64,8 @@ BirtDateTime.year(endDate) + "-" + BirtDateTime.month(endDate) + "-" + BirtDateT
             </structure>
         </scalar-parameter>
         <scalar-parameter name="date" id="1993">
+            <text-property name="helpText">Date</text-property>
+            <text-property name="promptText">Date</text-property>
             <property name="valueType">static</property>
             <property name="dataType">string</property>
             <property name="distinct">true</property>
