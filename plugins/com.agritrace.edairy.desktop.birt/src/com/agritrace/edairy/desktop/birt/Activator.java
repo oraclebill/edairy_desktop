@@ -2,6 +2,7 @@ package com.agritrace.edairy.desktop.birt;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.logging.Level;
 
 import org.eclipse.birt.core.exception.BirtException;
 import org.eclipse.birt.core.framework.Platform;
@@ -15,8 +16,6 @@ import org.eclipse.riena.core.RienaLocations;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.log.LogService;
-
-import com.agritrace.edairy.desktop.birt.viewer.ReportViewController;
 
 public class Activator implements BundleActivator {
 	private static final Logger LOGGER = Log4r.getLogger(Activator.class);
@@ -55,8 +54,8 @@ public class Activator implements BundleActivator {
 
 		// configure engine and platform; create factory object
 		config = new EngineConfig();
-		config.setLogger(java.util.logging.Logger.getLogger(Activator.class.getName()));
-//		config.setLogConfig(RienaLocations.getDataArea().getAbsolutePath(), Level.WARNING);
+//		config.setLogger(java.util.logging.Logger.getLogger(Activator.class.getName()));
+		config.setLogConfig(RienaLocations.getDataArea().getAbsolutePath(), Level.FINE);
 		config.setTempDir(RienaLocations.getDataArea().getAbsolutePath());
 
 		HashMap<String, Object> context = new HashMap<String, Object>();
