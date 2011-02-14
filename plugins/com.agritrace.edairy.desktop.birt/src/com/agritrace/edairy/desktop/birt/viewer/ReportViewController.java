@@ -8,7 +8,10 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import org.eclipse.birt.core.exception.BirtException;
 import org.eclipse.birt.report.engine.api.EngineException;
 import org.eclipse.birt.report.engine.api.HTMLCompleteImageHandler;
 import org.eclipse.birt.report.engine.api.HTMLRenderOption;
@@ -24,7 +27,6 @@ import org.eclipse.birt.report.engine.api.IReportEngine;
 import org.eclipse.birt.report.engine.api.IReportRunnable;
 import org.eclipse.birt.report.engine.api.IRunTask;
 import org.eclipse.birt.report.engine.api.PDFRenderOption;
-import org.eclipse.birt.report.model.api.ElementFactory;
 import org.eclipse.birt.report.model.api.OdaDataSourceHandle;
 import org.eclipse.birt.report.model.api.ReportDesignHandle;
 import org.eclipse.birt.report.model.api.SlotHandle;
@@ -87,7 +89,11 @@ public abstract class ReportViewController extends SubModuleController {
 		runReportAction.addListener(new IActionListener() {
 			@Override
 			public void callback() {
-				doRunReport();
+				try {
+					doRunReport();
+				} catch (Exception e) {
+					MessageDialog.openError(null, "Error(s) running report", e.getMessage());
+				}
 			}
 		});
 
@@ -97,7 +103,11 @@ public abstract class ReportViewController extends SubModuleController {
 		printReportAction.addListener(new IActionListener() {
 			@Override
 			public void callback() {
-				doPrintReport();
+				try {
+					doPrintReport();
+				} catch (Exception e) {
+					MessageDialog.openError(null, "Error(s) printing report", e.getMessage());
+				}
 			}
 		});
 
@@ -107,13 +117,17 @@ public abstract class ReportViewController extends SubModuleController {
 		saveReportAction.addListener(new IActionListener() {
 			@Override
 			public void callback() {
-				doSaveReport();
+				try {
+					doSaveReport();
+				} catch (Exception e) {
+					MessageDialog.openError(null, "Error(s) saving report", e.getMessage());
+				}
 			}
 		});
-		
+
 		// configure close ridgets
-		saveReportAction = getRidget(IActionRidget.class, "report-save-action");
-		saveReportAction.addListener(new IActionListener() {
+		IActionRidget closeReportAction = getRidget(IActionRidget.class, "report-close-action");
+		closeReportAction.addListener(new IActionListener() {
 			@Override
 			public void callback() {
 				doCloseReport();
@@ -127,65 +141,71 @@ public abstract class ReportViewController extends SubModuleController {
 		initReport();
 	}
 
-	private void doRunReport() {
+	private void doRunReport() throws Exception {
 		runReport();
-
+		showReport();
 		printReportAction.setEnabled(true);
 		saveReportAction.setEnabled(true);
-//		runReportAction.setEnabled(false);
+// runReportAction.setEnabled(false);
 	}
 
-	private void doSaveReport() {
+	private void doSaveReport() throws Exception {
 		final Shell shell = Display.getCurrent().getActiveShell();
 		final FileDialog fileDialog = new FileDialog(shell, SWT.SAVE);
 		fileDialog.setFilterExtensions(new String[] { "*.pdf", });
 
-		try {
-			String fName = fileDialog.open();
-			if (fName != null)
-				saveReport(fName);
-		} catch (EngineException e) {
-			e.printStackTrace();
-		}
-
+		String fName = fileDialog.open();
+		if (fName != null)
+			saveReport(fName);
 	}
 
 	private void doPrintReport() {
 		browser.setUrl("javascript:print()");
 	}
 
-
 	private void doCloseReport() {
-		getNavigationNode().dispose();
+		ISubModuleNode currentNode = getNavigationNode();
+		currentNode.getNavigationProcessor().navigateBack(currentNode.getParent());
+		currentNode.dispose();
 	}
 
-	public void runReport() {
+	public void runReport() throws Exception {
 
 		IReportRunnable report = getReportRunnable();
 		Map<String, Object> parameters = getReportParameters();
+		IRunTask runTask = getEngine().createRunTask(report);
 
+		reportDocFile = null;
 		try {
 			applyStandardParams(parameters);
-			updateDataSource(report);
+//			updateDataSource(report);
 
 			reportDocFile = File.createTempFile("report", ".rptdoc", RienaLocations.getDataArea());
 
-			IRunTask runTask = getEngine().createRunTask(report);
 			// validate report parameters
 			runTask.setParameterValues(parameters);
 			runTask.validateParameters();
 			runTask.run(reportDocFile.getAbsolutePath());
-			runTask.close();
 
-			showReport();
+			if (runTask.getErrors().size() > 0) {
+				String msgs = "\n";
+				for (Object o : runTask.getErrors()) {
+					msgs += o.toString();
+					msgs += "\n\n";
+				}
+				reportDocFile = null;
+				throw new BirtException(msgs);
+			}
 
-		} catch (Exception e) {
-			reportDocFile = null;
-			MessageDialog.openError(Display.getCurrent().getActiveShell(), "Error running report", e.getMessage());
+		} finally {
+			if (null != runTask)
+				runTask.close();
 		}
 	}
 
 	private void showReport() throws EngineException, IOException {
+
+		Assert.isLegal(reportDocFile != null);
 
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
@@ -273,6 +293,17 @@ public abstract class ReportViewController extends SubModuleController {
 		}
 		// dairyPhone
 		params.put("dairyPhone", localDairy.getPhoneNumber());
+
+		// database params
+		String dbUrl = getJdbcDriverProperties().get("url");
+		// expect, e.g: 'jdbc\:mysql\://127.0.0.1\:3306/dairymgr'		
+		Pattern urlPattern = Pattern.compile("jdbc\\\\?:mysql\\\\?://([\\w\\.]+)?\\\\?:(\\d+)/(\\w+)");
+		Matcher m = urlPattern.matcher(dbUrl);
+		Assert.isLegal(m.matches());
+		params.put("host", m.group(1));
+		params.put("port", m.group(2));
+		params.put("databaseName", m.group(3));
+
 		// // productLogo
 		// params.put("dairyName", localDairy.getCompanyName());
 		// // vendorLogo
@@ -282,7 +313,7 @@ public abstract class ReportViewController extends SubModuleController {
 	private void updateDataSource(IReportRunnable report) throws SemanticException {
 		// get the report datasource
 		ReportDesignHandle designHandle = (ReportDesignHandle) report.getDesignHandle();
-		ElementFactory elementFactory = designHandle.getElementFactory();
+// ElementFactory elementFactory = designHandle.getElementFactory();
 		SlotHandle datasources = designHandle.getDataSources();
 		Assert.isLegal(datasources.getCount() == 1, "Report must have a single datasource");
 		Object dsObj = datasources.get(0);
@@ -374,7 +405,7 @@ public abstract class ReportViewController extends SubModuleController {
 					returnList.add((IParameterDefn) paramDef);
 				}
 			}
-			
+
 		}
 		return returnList;
 	}

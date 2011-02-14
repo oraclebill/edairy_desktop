@@ -17,6 +17,7 @@ import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ICompositeRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
+import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IValueRidget;
 import org.eclipse.riena.ui.ridgets.swt.SwtRidgetFactory;
 import org.eclipse.riena.ui.ridgets.swt.uibinding.SwtControlRidgetMapper;
@@ -67,6 +68,9 @@ public class FieldGroupRidget extends AbstractCompositeRidget implements IFieldG
 	}
 
 	private void bindRidget(IRidget ridget, Field field) {
+		if (ridget instanceof ITextRidget) {
+			((ITextRidget)ridget).setDirectWriting(true);
+		}
 		if (ridget instanceof IValueRidget) {
 			IValueRidget valueRidget = (IValueRidget) ridget;
 			valueRidget.bindToModel(field, "value");

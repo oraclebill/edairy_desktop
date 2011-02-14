@@ -1,10 +1,12 @@
 package com.agritrace.edairy.desktop.birt;
 
 import java.io.File;
+import java.util.HashMap;
 
 import org.eclipse.birt.core.exception.BirtException;
 import org.eclipse.birt.core.framework.Platform;
 import org.eclipse.birt.report.engine.api.EngineConfig;
+import org.eclipse.birt.report.engine.api.EngineConstants;
 import org.eclipse.birt.report.engine.api.IReportEngine;
 import org.eclipse.birt.report.engine.api.IReportEngineFactory;
 import org.eclipse.equinox.log.Logger;
@@ -13,6 +15,8 @@ import org.eclipse.riena.core.RienaLocations;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.log.LogService;
+
+import com.agritrace.edairy.desktop.birt.viewer.ReportViewController;
 
 public class Activator implements BundleActivator {
 	private static final Logger LOGGER = Log4r.getLogger(Activator.class);
@@ -55,9 +59,9 @@ public class Activator implements BundleActivator {
 //		config.setLogConfig(RienaLocations.getDataArea().getAbsolutePath(), Level.WARNING);
 		config.setTempDir(RienaLocations.getDataArea().getAbsolutePath());
 
-//		HashMap<String, Object> context = new HashMap<String, Object>();
-//		context.put(EngineConstants.APPCONTEXT_CLASSLOADER_KEY, ReportViewController.class.getClassLoader());
-//		config.setAppContext(context);
+		HashMap<String, Object> context = new HashMap<String, Object>();
+		context.put(EngineConstants.APPCONTEXT_CLASSLOADER_KEY, Activator.class.getClassLoader());
+		config.setAppContext(context);
 		
 		try {
 			LOGGER.log(LogService.LOG_DEBUG, "Starting BIRT Platform...");

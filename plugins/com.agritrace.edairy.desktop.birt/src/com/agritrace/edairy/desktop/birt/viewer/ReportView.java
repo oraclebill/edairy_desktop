@@ -73,9 +73,9 @@ abstract public class ReportView extends ScrolledSubModuleView {
 		exportArea.setLayout(new FormLayout());
 		exportArea.setLayoutData(GridDataFactory.fillDefaults().grab(true, false).create());
 
-		Button closeButton = UIControlsFactory.createButton(exportArea, "Print", "report-close-action");
+		Button closeButton = UIControlsFactory.createButton(exportArea, "Close", "report-close-action");
 		FormData fd_closebutton = new FormData();
-		fd_closebutton.right = new FormAttachment(0, 5);
+		fd_closebutton.left = new FormAttachment(0, 5);
 		closeButton.setLayoutData(fd_closebutton);
 
 		Button printButton = UIControlsFactory.createButton(exportArea, "Print", "report-print-action");
