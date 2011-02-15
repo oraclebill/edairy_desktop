@@ -436,22 +436,13 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 		return super.convertToString(eDataType, instanceValue);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public UIPermission createPermissionTFromString(EDataType eDataType, String initialValue) {
 		return (UIPermission)super.createFromString(eDataType, initialValue);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+	// Not automatically generated - do not overwrite!
 	public String convertPermissionTToString(EDataType eDataType, Object instanceValue) {
-		return super.convertToString(eDataType, instanceValue);
+		return instanceValue == null ? null : ((UIPermission) instanceValue).name();
 	}
 
 	/**
