@@ -244,54 +244,6 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	}
 
 
-
-
-	protected void sillyNormalize(Object memberString) {
-
-		final String rawMemberNum = (String) memberString;
-		String prefix = "";
-		String digits = "";
-		String suffix = "";
-		int state = 0;
-		int i = 0;
-		boolean done = false;
-		while (!done) {
-			final char cur = rawMemberNum.charAt(i);
-			switch(state) {
-			case 0: // initial
-				if ( Character.isLetter(cur) ) {
-					prefix = prefix + cur;
-					break;
-				} else if ( Character.isDigit(cur )) {
-					digits = digits + cur;
-					state = 1;
-					break;
-				} else {
-					break;
-				}
-			case 1:
-				if ( Character.isDigit(cur) ) {
-					digits = digits + cur;
-					break;
-				} else {
-					state = 2;
-				}
-			case 2:
-				if ( Character.isDigit(cur) ) {
-					done = true;
-					break;
-				} else if (Character.isLetter(cur)) {
-					suffix = suffix + cur;
-				} else {
-					break;
-				}
-			}
-			if (++i > 15) {
-				done = true;
-			}
-		}
-	}
-
 	@Override
 	public void createCollectionLine() {
 		workingJournalLine = DairyFactory.eINSTANCE.createCollectionJournalLine();
@@ -299,6 +251,8 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 			throw new IllegalArgumentException("No bin list. Call setBinList before binding!");
 			// binList = Collections.EMPTY_LIST;
 		}
+		workingJournalLine.setFlagged(false);
+		
 		binCombo.bindToModel(new WritableList(binList, DairyContainer.class), DairyContainer.class, "getTrackingNumber",
 				PojoObservables.observeValue(workingJournalLine,
 						DairyPackage.Literals.COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER.getName()));

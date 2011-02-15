@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.birt.viewer;
 
+
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
@@ -18,6 +19,8 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.URIUtil;
+import org.eclipse.equinox.log.Logger;
+import org.eclipse.riena.core.Log4r;
 import org.eclipse.riena.navigation.INavigationNode;
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.NavigationArgument;
@@ -26,13 +29,15 @@ import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.osgi.framework.Bundle;
+import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.birt.Activator;
 import com.agritrace.edairy.desktop.birt.navigation.NavigationConstants;
 import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
 
 public class ReportsIndexViewController extends SubModuleController {
-
+	private static final Logger LOGGER = Log4r.getLogger(ReportsIndexViewController.class);
+	
 	class ReportInfo {
 
 		private File file;
@@ -128,7 +133,9 @@ public class ReportsIndexViewController extends SubModuleController {
 		List<ReportInfo> reports = new LinkedList<ReportInfo>();
 		Bundle reportBundle = Platform.getBundle(REPORT_BUNDLE_NAME);
 		URL reportRootURL = FileLocator.find(reportBundle, new Path("/reports"), null);
+		LOGGER.log(LogService.LOG_INFO, "Report directory URL: " + reportRootURL);
 		File reportRoot = URIUtil.toFile(FileLocator.toFileURL(reportRootURL).toURI());
+		LOGGER.log(LogService.LOG_INFO, "Scanning report directory: " + reportRoot);
 		File[] reportEntries = reportRoot.listFiles(new ReportFileFilter());
 		for (File file : reportEntries) {
 			reports.add(new ReportInfo(file));

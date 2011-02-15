@@ -77,7 +77,7 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 	private static final String[] columnPropertyNames = {
 			// "lineNumber",
 			"recordedMember",
-			"validatedMember.member.familyName", "farmContainer.containerId", "quantity", "notRecorded", "rejected", "flagged" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+			"validatedMember.farmer.familyName", "farmContainer.containerId", "quantity", "notRecorded", "rejected", "flagged" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 
 	static IStatus ERROR_STATUS = new Status(Status.ERROR, Activator.PLUGIN_ID, "Invalid membership number");
 
@@ -217,7 +217,7 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 					public void propertyChange(PropertyChangeEvent evt) {
 						log(LogService.LOG_DEBUG, "CollectionLineRidget event: " + evt);
 						final CollectionGroup workingJournalPage = getContextJournalPage();
-						updateJournal(workingJournalPage, (CollectionJournalLine) evt.getNewValue());
+						addCollectionGroupEntry(workingJournalPage, (CollectionJournalLine) evt.getNewValue());
 						journalEntryTable.updateFromModel();
 						totalLabelRidget.updateFromModel();
 						resetJournalEntryLine();
@@ -454,12 +454,13 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 			public IStatus validate(Object value) {
 				final CollectionJournalLine line = (CollectionJournalLine) value;
 				final Container dairyContainer = line.getDairyContainer();
-				final BigDecimal capacity = dairyContainer == null ? BigDecimal.ZERO : BigDecimal.valueOf(line.getDairyContainer().getCapacity());
+				final BigDecimal capacity = dairyContainer == null ? BigDecimal.ZERO : BigDecimal.valueOf(line
+						.getDairyContainer().getCapacity());
 				if (line.getQuantity().compareTo(capacity) > 0) {
 					// We exceed the bin capacity
 					line.setFlagged(true);
-// TODO: add 'warnings/errors' collections to journal entry entity					
-//					line.addWarning("Bin capacity exceeded");
+// TODO: add 'warnings/errors' collections to journal entry entity
+// line.addWarning("Bin capacity exceeded");
 				}
 
 				return ValidationStatus.ok();
@@ -516,8 +517,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 	 * @param journal
 	 * @param line
 	 */
-	protected void updateJournal(CollectionGroup journal, CollectionJournalLine line) {
-		log(LogService.LOG_DEBUG, "updateJournal: " + journal);
+	protected void addCollectionGroupEntry(CollectionGroup journal, CollectionJournalLine line) {
+		log(LogService.LOG_DEBUG, "addCollectionGroupEntry: adding collection " + line + " to group " + journal);
 		journal.getJournalEntries().add(line);
 		BigDecimal sum = new BigDecimal(0);
 		int hasSuspendedLine = 0, hasRejectedLine = 0, hasMPRLine = 0, hasOffRoute = 0;
