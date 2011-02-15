@@ -114,12 +114,27 @@ public class ProfilePhotoRidget extends AbstractCompositeRidget implements IProf
 	@Override
 	public void configureRidgets() {
 		profileImageLabel = getRidget(ILabelRidget.class, "profileImageLabel");
-		final ILinkRidget updateImageLink = getRidget(ILinkRidget.class, "updateImageLink");
+		final ILinkRidget updateImageLink = getRidget(ILinkRidget.class, ProfilePhotoComposite.LINK_BIND_ID);
 
 		if (updateImageLink != null) {
 			updateImageLink.addSelectionListener(new LinkSelected());
 		} else {
-			System.err.println("> Debug: Error! Null link Ridget.");
+			System.err.println("> Debug: Error! Null update link Ridget.");
+		}
+
+		final ILinkRidget deleteImageLink = getRidget(ILinkRidget.class, ProfilePhotoComposite.DELETE_LINK_BIND_ID);
+
+		if (deleteImageLink != null) {
+			deleteImageLink.addSelectionListener(new ISelectionListener() {
+				@Override
+				public void ridgetSelected(SelectionEvent event) {
+					modelObj.setValue(null);
+					updateFromModel();
+					updateDisplay();
+				}
+			});
+		} else {
+			System.err.println("> Debug: Error! Null delete link Ridget.");
 		}
 	}
 

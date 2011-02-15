@@ -21,9 +21,11 @@ import com.swtdesigner.SWTResourceManager;
 public class ProfilePhotoComposite extends Composite implements IComplexComponent {
 
 	public static final String LINK_BIND_ID = "updateImageLink";
+	public static final String DELETE_LINK_BIND_ID = "deleteImageLink";
 	public static final String LABEL_BIND_ID = "profileImageLabel";
 
 	private static final String DEFAULT_LINK_TEXT = "<a>update photo</a>";
+	private static final String DEFAULT_DELETE_LINK_TEXT = "<a>delete photo</a>";
 	private static final int DEFAULT_PHOTO_HEIGHT = 200;
 	private static final int DEFAULT_PHOTO_WIDTH = 150;
 
@@ -31,6 +33,7 @@ public class ProfilePhotoComposite extends Composite implements IComplexComponen
 
 	private Label imageLabel;
 	private Link updateLink;
+	private Link deleteLink;
 
 	public ProfilePhotoComposite(Composite parent, int style) {
 		this(parent, -1, style);
@@ -62,6 +65,10 @@ public class ProfilePhotoComposite extends Composite implements IComplexComponen
 		addUIControl(updateLink = new Link(this, SWT.NONE), LINK_BIND_ID);
 		updateLink.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
 		updateLink.setText(DEFAULT_LINK_TEXT);
+
+		addUIControl(deleteLink = new Link(this, SWT.NONE), DELETE_LINK_BIND_ID);
+		deleteLink.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+		deleteLink.setText(DEFAULT_DELETE_LINK_TEXT);
 	}
 
 	public void setImage(Image image) {
