@@ -456,9 +456,18 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 				final Container dairyContainer = line.getDairyContainer();
 				final BigDecimal capacity = dairyContainer == null ? BigDecimal.ZERO : BigDecimal.valueOf(line
 						.getDairyContainer().getCapacity());
+				boolean allowButFlag = false;
 				if (line.getQuantity().compareTo(capacity) > 0) {
 					// We exceed the bin capacity
-					line.setFlagged(true);
+					allowButFlag = MessageDialog.openConfirm(getShell(), "Data Error",
+					"The amount entered exceeds the bin capacity. If you proceed this entry will be flagged. Proceed?");
+					if (allowButFlag) {
+						line.setFlagged(true);						
+						return ValidationStatus.ok();
+					}
+					else {
+						return ValidationStatus.error("The quantity exceeds bin capacity.");
+					}
 // TODO: add 'warnings/errors' collections to journal entry entity
 // line.addWarning("Bin capacity exceeded");
 				}

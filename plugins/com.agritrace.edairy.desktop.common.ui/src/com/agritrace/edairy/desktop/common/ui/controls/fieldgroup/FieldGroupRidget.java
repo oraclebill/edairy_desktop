@@ -69,7 +69,12 @@ public class FieldGroupRidget extends AbstractCompositeRidget implements IFieldG
 
 	private void bindRidget(IRidget ridget, Field field) {
 		if (ridget instanceof ITextRidget) {
-			((ITextRidget)ridget).setDirectWriting(true);
+			try {
+				((ITextRidget)ridget).setDirectWriting(true);
+			}
+			catch( Exception e) {
+				// some text ridgets don't allow it (e.g. datetime)
+			}
 		}
 		if (ridget instanceof IValueRidget) {
 			IValueRidget valueRidget = (IValueRidget) ridget;

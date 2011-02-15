@@ -156,18 +156,25 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		//
 
 		binCombo = getRidget(IComboRidget.class, ViewWidgetId.binCombo);
-		memberIDRidget = getRidget(ITextRidget.class, ViewWidgetId.memberIdText);
-		memberNameRidget = getRidget(ILabelRidget.class, ViewWidgetId.memberNameText);
-		canText = getRidget(ITextRidget.class, ViewWidgetId.canIdText);
-		quantityText = getRidget(IDecimalTextRidget.class, ViewWidgetId.quantityText);
+		binCombo.setMandatory(true);
 
+		memberNameRidget = getRidget(ILabelRidget.class, ViewWidgetId.memberNameText);
+		
+		canText = getRidget(ITextRidget.class, ViewWidgetId.canIdText);
+		canText.setDirectWriting(true);
+		
 		nprMissingButton = getRidget(IToggleButtonRidget.class, ViewWidgetId.nprMissingCombo);
 		rejectedButton = getRidget(IToggleButtonRidget.class, ViewWidgetId.rejectedCombo);
 
 		qualityButton = getRidget(IToggleButtonRidget.class, "display-quality-controls-button");
 		qualityGroup = getRidget(ICompositeRidget.class, "quality-group");
+		
 		milkfatTxt = getRidget(IDecimalTextRidget.class, "milk-fat-percent-text");
+		milkfatTxt.setDirectWriting(true);
+		
 		alcoholPercentTxt = getRidget(IDecimalTextRidget.class, "alcohol-percent-text");
+		alcoholPercentTxt.setDirectWriting(true);
+		
 		addedWaterButton = getRidget(IToggleButtonRidget.class, "added-water-checkbox");
 
 		addButton = getRidget(IActionRidget.class, ViewWidgetId.addButton);
@@ -181,10 +188,9 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 //		markerViewer.addMarkerType(MandatoryErrorMarker.class);
 //		markerViewer.setVisible(true);
 
-		// bin
-		binCombo.setMandatory(true);
 
 		// member number
+		memberIDRidget = getRidget(ITextRidget.class, ViewWidgetId.memberIdText);
 		memberIDRidget.setMandatory(true);
 		memberIDRidget.setDirectWriting(true);
 		memberIDRidget.setInputToUIControlConverter(new InlineInputFlagConverter(this, String.class, String.class));
@@ -201,7 +207,9 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		});
 
 		// quantity
+		quantityText = getRidget(IDecimalTextRidget.class, ViewWidgetId.quantityText);
 		quantityText.setMandatory(true);
+		quantityText.setDirectWriting(true);
 
 		// rejected
 		rejectedButton.addPropertyChangeListener(new PropertyChangeListener() {
