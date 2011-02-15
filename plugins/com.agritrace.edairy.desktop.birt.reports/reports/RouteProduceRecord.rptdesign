@@ -251,7 +251,7 @@
 , membership.membernumber, person.givenname, collectionsession.code, collectiongroup.referencenumber
 ,dairylocation.name
 FROM membership 
-JOIN person  ON membership.farmer_member_personid = person.personid	
+JOIN person  ON membership.farmer = person.personid	
 LEFT JOIN dairylocation ON membership.dairylocation_defaultroute_id = dairylocation.id 
 LEFT JOIN collectionjournalline  ON membership.memberid = collectionjournalline.membership_validatedmember_e_id 
 LEFT JOIN collectiongroup  ON collectiongroup.journalid = collectionjournalline.collectionjournalline_collectionjournal_e_id 

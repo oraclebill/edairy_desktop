@@ -2,11 +2,13 @@ package com.agritrace.edairy.desktop.birt.viewer;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.birt.report.engine.api.IParameterDefn;
+
 import com.agritrace.edairy.desktop.common.ui.controls.fieldgroup.Field;
 import com.agritrace.edairy.desktop.common.ui.controls.fieldgroup.FieldType;
 import com.agritrace.edairy.desktop.common.ui.controls.fieldgroup.IFieldGroupRidget;
@@ -42,7 +44,20 @@ public class GenericReportViewController extends ReportViewController {
 	protected Map<String, Object> getReportParameters() {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		for (Field f : fieldModel) {
-			parameters.put(f.getName(), f.getValue());
+			// BIRT prefers java.sql.Date for 'DATE' types and java.sql.Time for TIMEs..
+			Object valueObj;
+			if (f.getType() == FieldType.DATE || f.getType() == FieldType.DATETIME) {
+				java.util.Date utilDate = (java.util.Date) f.getValue();
+				valueObj = new java.sql.Date(utilDate.getTime());
+			}
+			else if (f.getType() == FieldType.TIME) {
+				java.util.Date utilDate = (java.util.Date) f.getValue();
+				valueObj = new java.sql.Time(utilDate.getTime());
+			}
+			else {
+				valueObj = f.getValue();
+			}
+			parameters.put(f.getName(), valueObj);
 		}
 		return parameters;
 	}
@@ -67,6 +82,14 @@ public class GenericReportViewController extends ReportViewController {
 
 			fieldGroupField = new Field(paramName, fieldType, displayName);
 			fieldGroupField.setHelpText(helpText);
+
+			// TODO: get default parameter from report definition
+			// default date types to current date
+			if (fieldType == FieldType.DATE ||
+					fieldType == FieldType.TIME ||
+					fieldType == FieldType.DATETIME ) {
+				fieldGroupField.setValue(new Date());
+			}
 
 			fieldList.add(fieldGroupField);
 		}

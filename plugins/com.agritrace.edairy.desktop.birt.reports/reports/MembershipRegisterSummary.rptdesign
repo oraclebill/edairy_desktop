@@ -315,7 +315,7 @@ YEAR(cg.journaldate) AS yearly , MONTH(cg.journaldate) AS monthly
 FROM 
 membership 
 LEFT JOIN dairylocation ON membership.dairylocation_defaultroute_id = dairylocation.id  
-LEFT JOIN person  ON membership.farmer_member_personid = person.personid		      		
+LEFT JOIN person  ON membership.farmer = person.personid		      		
 LEFT JOIN farm  ON person.personid = farm.farm_owner_e_id   
 LEFT JOIN collectionjournalline cjl ON membership.memberid = cjl.membership_validatedmember_e_id 
 LEFT JOIN collectiongroup cg ON cg.journalid = cjl.collectionjournalline_collectionjournal_e_id 
@@ -489,18 +489,18 @@ GROUP BY membership.memberid
         </design:resultColumnDefinitions>
         <design:resultColumnDefinitions>
           <design:attributes>
-            <design:name>farmer_member_personid</design:name>
+            <design:name>farmer</design:name>
             <design:position>9</design:position>
             <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
             <design:precision>20</design:precision>
             <design:scale>0</design:scale>
             <design:nullability>NotNullable</design:nullability>
             <design:uiHints>
-              <design:displayName>farmer_member_personid</design:displayName>
+              <design:displayName>farmer</design:displayName>
             </design:uiHints>
           </design:attributes>
           <design:usageHints>
-            <design:label>farmer_member_personid</design:label>
+            <design:label>farmer</design:label>
             <design:formattingHints>
               <design:displaySize>20</design:displaySize>
             </design:formattingHints>

@@ -2,6 +2,7 @@ package com.agritrace.edairy.desktop.milkops.ui.util;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.riena.ui.swt.CompletionCombo;
+import org.eclipse.riena.ui.swt.CompletionCombo.AutoCompletionMode;
 import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
@@ -32,12 +33,12 @@ public class FieldUtil {
 	public static final int STD_TOP_PADDING = 5;
 
 	private final GridDataFactory comboGDF; // = GridDataFactory.fillDefaults().minSize(STD_FIELD_WIDTH, -1)
-//			.grab(true, false);
+// .grab(true, false);
 	private final GridDataFactory fieldGDF; // = GridDataFactory.fillDefaults().minSize(STD_FIELD_WIDTH, -1)
-//			.grab(true, false).align(SWT.END, SWT.FILL);
+// .grab(true, false).align(SWT.END, SWT.FILL);
 	//
 	private final GridDataFactory labelGDF; // = GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
-//			.hint(MINIMUM_LABEL_WIDTH, -1);
+// .hint(MINIMUM_LABEL_WIDTH, -1);
 
 	public FieldUtil() {
 		this(MINIMUM_LABEL_WIDTH, STD_FIELD_WIDTH);
@@ -84,15 +85,33 @@ public class FieldUtil {
 		return field;
 
 	}
-
+	
 	/**
+	 * @param parent
+	 * @param labelTxt
+	 * @param widgetID
+	 * @return
 	 * @wbp.factory
 	 */
 	public Control addLabeledCompletionComboField(Group parent, String labelTxt, String widgetID) {
+		return addLabeledCompletionComboField(parent, labelTxt, widgetID, false);
+	}
+	
+	/**
+	 * @param parent
+	 * @param labelTxt
+	 * @param widgetID
+	 * @param allowMismatch
+	 * @return
+	 * @wbp.factory
+	 */
+	public Control addLabeledCompletionComboField(Group parent, String labelTxt, String widgetID, boolean allowMismatch) {
 		final Label label = createLabel(parent, labelTxt);
 		labelGDF.applyTo(label);
 
 		final CompletionCombo field = UIControlsFactory.createCompletionCombo(parent, widgetID);
+		if (allowMismatch)
+			field.setAutoCompletionMode(AutoCompletionMode.ALLOW_MISSMATCH);
 		comboGDF.applyTo(field);
 
 		return field;
@@ -140,7 +159,7 @@ public class FieldUtil {
 	}
 
 	/**
-	 *
+	 * 
 	 * @param parent
 	 * @param labelText
 	 * @return
@@ -151,7 +170,7 @@ public class FieldUtil {
 	}
 
 	/**
-	 *
+	 * 
 	 * @param parent
 	 * @param labelText
 	 * @return

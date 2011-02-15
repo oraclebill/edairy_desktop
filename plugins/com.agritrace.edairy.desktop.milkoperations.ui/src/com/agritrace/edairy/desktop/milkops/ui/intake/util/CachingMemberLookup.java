@@ -1,16 +1,17 @@
 package com.agritrace.edairy.desktop.milkops.ui.intake.util;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.util.MemberUtil;
 import com.agritrace.edairy.desktop.common.persistence.dao.IMemberRepository;
+import com.agritrace.edairy.desktop.common.persistence.dao.MemberInfo;
 import com.agritrace.edairy.desktop.milkops.ui.intake.collectionline.IMemberLookup;
 import com.google.inject.Inject;
 
 public class CachingMemberLookup implements IMemberLookup {
-//	private List<Membership> allMembers;
 	private Map<String, Membership> memberCache;
 	private IMemberRepository repo;
 
@@ -37,6 +38,11 @@ public class CachingMemberLookup implements IMemberLookup {
 			member = getMember(MemberUtil.expandMemberNumber(memberNumber), false);
 		}
 		return member;
+	}
+
+	@Override
+	public List<String> findAllMemberNumbers(boolean activeOnly) {
+		return repo.findAllMemberNumbers(activeOnly);
 	}
 
 }

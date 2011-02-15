@@ -44,14 +44,26 @@
         <scalar-parameter name="dairyName" id="1985" extends="SiteReportLib.dairyName"/>
         <scalar-parameter name="productlogo" id="1986" extends="SiteReportLib.productlogo"/>
         <scalar-parameter name="vendorlogo" id="1987" extends="SiteReportLib.vendorlogo"/>
-        <scalar-parameter name="databaseName" id="1988" extends="SiteReportLib.databaseName"/>
+        <scalar-parameter name="databaseName" id="1988" extends="SiteReportLib.databaseName">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">dairymgr</value>
+            </simple-property-list>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
         <scalar-parameter name="port" id="1989" extends="SiteReportLib.port"/>
         <scalar-parameter name="host" id="1990" extends="SiteReportLib.host"/>
         <scalar-parameter name="fromDate" id="1992">
             <property name="hidden">true</property>
             <property name="valueType">static</property>
             <property name="isRequired">false</property>
-            <property name="dataType">string</property>
+            <property name="dataType">date</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
                 <value type="javascript">var startDate = params["date"].value;&#13;
@@ -68,7 +80,7 @@ BirtDateTime.year(endDate) + "-" + BirtDateTime.month(endDate) + "-" + BirtDateT
             <text-property name="helpText">Date</text-property>
             <text-property name="promptText">Date</text-property>
             <property name="valueType">static</property>
-            <property name="dataType">string</property>
+            <property name="dataType">date</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
                 <value type="constant">2010-1-2</value>
