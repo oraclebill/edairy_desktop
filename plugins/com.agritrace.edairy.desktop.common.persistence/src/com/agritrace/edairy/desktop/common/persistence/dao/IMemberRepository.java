@@ -27,4 +27,6 @@ public interface IMemberRepository extends IRepository<Membership> {
 
 	public Membership findByMemberNumber(String memberNumber);
 
+	public List<String> findAllMemberNumbers(boolean activeOnly);
+
 }

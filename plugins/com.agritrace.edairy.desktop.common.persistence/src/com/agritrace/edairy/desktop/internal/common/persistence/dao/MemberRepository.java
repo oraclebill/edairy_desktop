@@ -166,4 +166,14 @@ public class MemberRepository extends RepositoryUtil<Membership> implements IMem
 		return dairyRepo;
 	}
 
+	@Override
+	@Transactional
+	public List<String> findAllMemberNumbers(boolean activeOnly) {
+		Session session = getCurrentSession();
+		Query q = session.createQuery("select memberNumber from Membership where status = 'Active'");
+		q.setReadOnly(true);
+		q.setComment("a read only query - billjones");
+		return q.list();		
+	}
+
 }

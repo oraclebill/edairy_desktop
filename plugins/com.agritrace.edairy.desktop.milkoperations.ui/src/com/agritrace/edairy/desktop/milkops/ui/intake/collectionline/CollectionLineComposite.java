@@ -128,7 +128,7 @@ public class CollectionLineComposite extends Composite implements TraverseListen
 		binWidget = fu.addLabeledCompletionComboField(panel, BIN_LABEL, ViewWidgetId.binCombo);
 		binWidget.addTraverseListener(this);
 
-		memberIdWidget = fu.addLabeledTextField(panel, MEMBER_ID_LABEL, ViewWidgetId.memberIdText);
+		memberIdWidget = fu.addLabeledCompletionComboField(panel, MEMBER_ID_LABEL, ViewWidgetId.memberIdText, true);
 		// memberIdWidget.setSize(70, 19);
 		memberIdWidget.addTraverseListener(this);
 

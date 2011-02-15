@@ -20,11 +20,11 @@ final class InlineInputFlagConverter extends Converter {
 			final String firstChar = text.substring(0, 1);
 			if (firstChar.equalsIgnoreCase("N")) {
 				text = text.substring(1);
-				this.collectionLineRidget.nprMissingButton.setSelected(true);
+				this.collectionLineRidget.setMPRMissing(true);
 				return text;
 			} else if (firstChar.equalsIgnoreCase("R")) {
 				text = text.substring(1);
-				this.collectionLineRidget.rejectedButton.setSelected(true);
+				this.collectionLineRidget.setRejected(true);
 				return text;
 			}
 		}
