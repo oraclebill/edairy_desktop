@@ -9,6 +9,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+
+import com.agritrace.edairy.desktop.common.persistence.FilterParameter;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.annotations.Transactional;
 import com.agritrace.edairy.desktop.common.persistence.exceptions.AlreadyExistsException;
@@ -261,4 +264,41 @@ public class HibernateRepository<T extends EObject> implements IRepository<T> {
 		r.run();
 	}
 
+	@Override
+	public List<?> filter(String entityName,
+			FilterParameter... filterParameterList) {
+		Criteria crit = getCurrentSession().createCriteria(entityName);
+
+		for (FilterParameter p : filterParameterList) {
+			if (p.getParamValue() != null) {
+				switch (p.getType()) {
+				case EQUALS:
+					crit.add(Restrictions.eq(p.getParamName(),
+							p.getParamValue()));
+					break;
+				case LIKE:
+					crit.add(Restrictions.like(p.getParamName(),
+							p.getParamValue()));
+					break;
+				case LESS_THAN:
+					crit.add(Restrictions.le(p.getParamName(),
+							p.getParamValue()));
+					break;
+				case GREATER_THAN:
+					crit.add(Restrictions.ge(p.getParamName(),
+							p.getParamValue()));
+					break;
+				default:
+					throw new IllegalArgumentException("Unrecognized type: "
+							+ p.getType());
+				}
+			}
+		}
+
+		return crit.list();
+	}
+
+	protected Session getCurrentSession() {
+		return sessionProvider.get();
+	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 
+import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
 import com.agritrace.edairy.desktop.common.persistence.exceptions.AlreadyExistsException;
 import com.agritrace.edairy.desktop.common.persistence.exceptions.NonExistingEntityException;
 
@@ -95,5 +96,10 @@ public interface IRepository<T extends EObject> {
 	 */
 	void update(T updateableEntity) throws NonExistingEntityException;
 
-
+	/**
+	 * 
+	 * @param filterParameter
+	 * @return
+	 */
+	List<?> filter(String entityName, FilterParameter... filterParameterList);
 }

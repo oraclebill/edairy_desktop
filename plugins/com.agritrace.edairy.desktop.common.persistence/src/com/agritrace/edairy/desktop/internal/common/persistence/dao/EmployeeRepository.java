@@ -10,6 +10,7 @@ import org.hibernate.criterion.Restrictions;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager;
+import com.agritrace.edairy.desktop.common.persistence.FilterParameter;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.dao.IEmployeeRepository;
 import com.agritrace.edairy.desktop.common.persistence.exceptions.AlreadyExistsException;
@@ -129,5 +130,11 @@ public class EmployeeRepository implements IEmployeeRepository, IRepository<Empl
 		return employeeRepo.find(username, password);
 	}
 
+	@Override
+	public List<?> filter(String entityName,
+			FilterParameter... filterParameterList) {
+		return employeeRepo.filter(entityName, filterParameterList);
+	}
 
+	
 }
