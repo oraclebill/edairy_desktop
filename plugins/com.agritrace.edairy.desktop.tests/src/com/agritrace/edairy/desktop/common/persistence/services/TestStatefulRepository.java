@@ -9,6 +9,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.agritrace.edairy.desktop.common.model.base.Role;
+import com.agritrace.edairy.desktop.common.persistence.FilterParameter;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.test.ManagedMemoryDataStoreProvider;
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
@@ -96,6 +97,12 @@ public class TestStatefulRepository {
 		@Override
 		public Session getSession() {
 			return super.getCurrentSession();
+		}
+
+		@Override
+		public <Q> List<Q> filter(Class<Q> entityClass, FilterParameter... filterParameterList) {
+			// TODO Auto-generated method stub
+			return null;
 		}
 	}
 

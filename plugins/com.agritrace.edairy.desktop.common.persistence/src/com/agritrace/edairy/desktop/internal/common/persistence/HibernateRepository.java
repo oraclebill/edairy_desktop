@@ -19,11 +19,11 @@ import com.agritrace.edairy.desktop.common.persistence.exceptions.NonExistingEnt
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class HibernateRepository<T extends EObject> implements IRepository<T> {
+public class HibernateRepository<T extends EObject>  extends RepositoryUtil<T>  implements IRepository<T>{
 	protected abstract class SessionRunnable<X> implements Runnable {
 		@Override
 		public void run() {
-			run(sessionProvider.get());
+			run(getCurrentSession());
 		}
 
 		abstract public void run(Session session);
@@ -40,15 +40,13 @@ public class HibernateRepository<T extends EObject> implements IRepository<T> {
 
 	}
 
-	private final Provider<Session> sessionProvider;
-
 	private Class<?> classType;
 	private String entityName;
 
 	@Inject
 	protected HibernateRepository(Provider<Session> sessionProvider) {
-		// set the persistence manager
-		this.sessionProvider = sessionProvider;
+		super(sessionProvider);
+		
 
 		if (getClassType() != null) {
 			initEntityName();
@@ -65,7 +63,7 @@ public class HibernateRepository<T extends EObject> implements IRepository<T> {
 
 	@Override
 	public List<T> all() {
-		final Criteria crit = sessionProvider.get().createCriteria(
+		final Criteria crit = getCurrentSession().createCriteria(
 				getClassType());
 		@SuppressWarnings("unchecked")
 		final List<T> result = crit.list();
@@ -74,7 +72,7 @@ public class HibernateRepository<T extends EObject> implements IRepository<T> {
 
 	@Transactional
 	protected List<T> allWithEagerFetch(final String... paths) {
-		final Criteria crit = sessionProvider.get().createCriteria(
+		final Criteria crit = getCurrentSession().createCriteria(
 				getClassType());
 
 		if (paths != null) {
@@ -113,7 +111,7 @@ public class HibernateRepository<T extends EObject> implements IRepository<T> {
 			throw new IllegalArgumentException("key cannot be null");
 		}
 
-		final Session session = sessionProvider.get();
+		final Session session = getCurrentSession();
 
 		if (!session.contains(obj)) {
 			session.load(obj, key);
@@ -136,7 +134,7 @@ public class HibernateRepository<T extends EObject> implements IRepository<T> {
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public <X> X findByKey(Class<X> entityClass, long entityKey) {
-		return (X) sessionProvider.get().get(getEntityName(entityClass),
+		return (X) getCurrentSession().get(getEntityName(entityClass),
 				new Long(entityKey));
 	}
 
@@ -164,7 +162,7 @@ public class HibernateRepository<T extends EObject> implements IRepository<T> {
 		runWithTransaction(new Runnable() {
 			@Override
 			public void run() {
-				final Session session = sessionProvider.get();
+				final Session session = getCurrentSession();
 				if (changedItem instanceof Collection) {
 					for (final Object item : (Collection<?>) changedItem) {
 						session.saveOrUpdate(item);
@@ -181,7 +179,7 @@ public class HibernateRepository<T extends EObject> implements IRepository<T> {
 		runWithTransaction(new Runnable() {
 			@Override
 			public void run() {
-				sessionProvider.get().save(newEntity);
+				getCurrentSession().save(newEntity);
 			}
 		});
 	}
@@ -192,7 +190,7 @@ public class HibernateRepository<T extends EObject> implements IRepository<T> {
 		runWithTransaction(new Runnable() {
 			@Override
 			public void run() {
-				sessionProvider.get().update(getEntityName(), updateableEntity);
+				getCurrentSession().update(getEntityName(), updateableEntity);
 			}
 		});
 	}
@@ -202,7 +200,7 @@ public class HibernateRepository<T extends EObject> implements IRepository<T> {
 	}
 
 	protected Object get(String eName, Serializable key) {
-		return sessionProvider.get().get(eName, key);
+		return getCurrentSession().get(eName, key);
 	}
 
 	/**
@@ -250,7 +248,7 @@ public class HibernateRepository<T extends EObject> implements IRepository<T> {
 	// }
 
 	protected void run(Runnable r) {
-		sessionProvider.get();
+		getCurrentSession();
 
 		try {
 			r.run();
@@ -264,41 +262,4 @@ public class HibernateRepository<T extends EObject> implements IRepository<T> {
 		r.run();
 	}
 
-	@Override
-	public List<?> filter(String entityName,
-			FilterParameter... filterParameterList) {
-		Criteria crit = getCurrentSession().createCriteria(entityName);
-
-		for (FilterParameter p : filterParameterList) {
-			if (p.getParamValue() != null) {
-				switch (p.getType()) {
-				case EQUALS:
-					crit.add(Restrictions.eq(p.getParamName(),
-							p.getParamValue()));
-					break;
-				case LIKE:
-					crit.add(Restrictions.like(p.getParamName(),
-							p.getParamValue()));
-					break;
-				case LESS_THAN:
-					crit.add(Restrictions.le(p.getParamName(),
-							p.getParamValue()));
-					break;
-				case GREATER_THAN:
-					crit.add(Restrictions.ge(p.getParamName(),
-							p.getParamValue()));
-					break;
-				default:
-					throw new IllegalArgumentException("Unrecognized type: "
-							+ p.getType());
-				}
-			}
-		}
-
-		return crit.list();
-	}
-
-	protected Session getCurrentSession() {
-		return sessionProvider.get();
-	}
 }

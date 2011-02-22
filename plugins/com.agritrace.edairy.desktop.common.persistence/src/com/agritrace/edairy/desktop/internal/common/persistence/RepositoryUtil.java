@@ -84,9 +84,19 @@ public abstract class RepositoryUtil<T extends EObject> extends
 	}
 
 	@Override
+	public <Q> List<Q> filter(Class<Q> entityClass,
+			FilterParameter... filterParameterList) {		
+		return filter(getCurrentSession().createCriteria(entityClass), filterParameterList);
+	}
+	
+	@Override
 	public List<?> filter(String entityName,
 			FilterParameter... filterParameterList) {
-		Criteria crit = getCurrentSession().createCriteria(entityName);
+		return filter(getCurrentSession().createCriteria(entityName), filterParameterList);
+	}
+
+	private <Q> List<Q> filter(Criteria crit,
+			FilterParameter... filterParameterList) {
 
 		for (FilterParameter p : filterParameterList) {
 			if (p.getParamValue() != null) {
@@ -116,5 +126,4 @@ public abstract class RepositoryUtil<T extends EObject> extends
 
 		return crit.list();
 	}
-
 }

@@ -102,4 +102,5 @@ public interface IRepository<T extends EObject> {
 	 * @return
 	 */
 	List<?> filter(String entityName, FilterParameter... filterParameterList);
+	<Q> List<Q> filter(Class<Q> entityClass, FilterParameter... filterParameterList);
 }

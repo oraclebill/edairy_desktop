@@ -39,6 +39,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord;
 import com.agritrace.edairy.desktop.common.model.util.MemberUtil;
+import com.agritrace.edairy.desktop.common.persistence.FilterParameter;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.dao.IDairyLocationRepository;
 import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
@@ -360,6 +361,12 @@ import com.google.inject.Provider;
 			@Override
 			public List<CollectionSession> all() {
 				return getCurrentSession().createCriteria("CollectionSession").list();
+			}
+
+			@Override
+			public <Q> List<Q> filter(Class<Q> entityClass, FilterParameter... filterParameterList) {
+				// TODO Auto-generated method stub
+				return null;
 			}			
 		};
 		this.memberRepo = new MemberRepository(sessionProvider, dairyRepo);

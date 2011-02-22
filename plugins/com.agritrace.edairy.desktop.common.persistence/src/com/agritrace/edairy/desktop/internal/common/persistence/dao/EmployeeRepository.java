@@ -32,7 +32,7 @@ public class EmployeeRepository implements IEmployeeRepository, IRepository<Empl
 		protected Class<Employee> getClassType() {
 			return Employee.class;
 		}
-		
+
 		Employee find(final String username, final String password) {
 			if (username == null || password == null) {
 				throw new NullPointerException("Username and password must be non-null");
@@ -45,15 +45,14 @@ public class EmployeeRepository implements IEmployeeRepository, IRepository<Empl
 					final String hash = PrincipalManager.getInstance().hashPassword(password);
 
 					crit.add(Restrictions.eq("username", username));
-					crit.add(Restrictions.or(
-							Restrictions.and(Restrictions.eq("password", password),
-									Restrictions.or(Restrictions.eq("passwordHashed", false), Restrictions.isNull("passwordHashed"))),
-							Restrictions.and(Restrictions.eq("password", hash), Restrictions.eq("passwordHashed", true))
-					));
+					crit.add(Restrictions.or(Restrictions.and(
+							Restrictions.eq("password", password),
+							Restrictions.or(Restrictions.eq("passwordHashed", false),
+									Restrictions.isNull("passwordHashed"))), Restrictions.and(
+							Restrictions.eq("password", hash), Restrictions.eq("passwordHashed", true))));
 
 					@SuppressWarnings("unchecked")
-					final
-					List<Employee> result = crit.list();
+					final List<Employee> result = crit.list();
 					setResult(result);
 				}
 			};
@@ -81,6 +80,7 @@ public class EmployeeRepository implements IEmployeeRepository, IRepository<Empl
 	public void load(EObject toLoad) {
 		employeeRepo.load(toLoad);
 	}
+
 	@Override
 	public void load(EObject toLoad, Serializable key) {
 		employeeRepo.load(toLoad, key);
@@ -91,15 +91,15 @@ public class EmployeeRepository implements IEmployeeRepository, IRepository<Empl
 		employeeRepo.delete(deletableEntity);
 	}
 
-//	@Override
-//	public List<Employee> find(String rawQuery) {
-//		return employeeRepo.find(rawQuery);
-//	}
+// @Override
+// public List<Employee> find(String rawQuery) {
+// return employeeRepo.find(rawQuery);
+// }
 //
-//	@Override
-//	public List<Employee> find(String query, Object[] args) {
-//		return employeeRepo.find(query, args);
-//	}
+// @Override
+// public List<Employee> find(String query, Object[] args) {
+// return employeeRepo.find(query, args);
+// }
 
 	@Override
 	public Employee findByKey(long key) {
@@ -131,10 +131,13 @@ public class EmployeeRepository implements IEmployeeRepository, IRepository<Empl
 	}
 
 	@Override
-	public List<?> filter(String entityName,
-			FilterParameter... filterParameterList) {
+	public List<?> filter(String entityName, FilterParameter... filterParameterList) {
 		return employeeRepo.filter(entityName, filterParameterList);
 	}
 
-	
+	@Override
+	public <Q> List<Q> filter(Class<Q> entityClass, FilterParameter... filterParameterList) {
+		return employeeRepo.filter(entityClass, filterParameterList);
+	}
+
 }

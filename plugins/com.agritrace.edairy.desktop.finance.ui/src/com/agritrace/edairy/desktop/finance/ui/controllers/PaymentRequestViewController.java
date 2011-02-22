@@ -22,6 +22,7 @@ import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
+import com.agritrace.edairy.desktop.common.persistence.FilterParameter;
 import com.agritrace.edairy.desktop.common.persistence.dao.IMilkCollectionRepository;
 import com.google.inject.Inject;
 
@@ -256,6 +257,10 @@ public class PaymentRequestViewController extends SubModuleController {
 	private BigDecimal queryGrossCollections(PaymentPeriod period) {
 		List<CollectionJournalLine> lines = collectionsRepo.findCollections(null, null, null, period.getStartDate(), period.getEndDate(), false, false,
 				false);
+		List<?> lines2 = collectionsRepo.filter("CollectionJournalLine",
+				new FilterParameter(FilterParameter.Type.GREATER_THAN, "", ""),
+				new FilterParameter(FilterParameter.Type.LESS_THAN, "", "")
+		);
 		return BigDecimal.ONE;
 	}
 
