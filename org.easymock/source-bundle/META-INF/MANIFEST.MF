@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-Name: %bundleName
+Bundle-Vendor: %bundleProvider
+Bundle-ManifestVersion: 2
+Bundle-Localization: plugin
+Bundle-SymbolicName: org.easymock.source
+Bundle-Version: 2.4.0.qualifier
+Eclipse-SourceBundle: org.easymock;version="2.4.0.qualifier"
+
