@@ -25,7 +25,7 @@ public class TransactionInterceptor implements MethodInterceptor {
 	public Object invoke(MethodInvocation invocation) throws Throwable {
 		LOGGER.log(LogService.LOG_DEBUG, "TRACE: INVOKE transaction interceptor @ " + this.hashCode());
 		Session session = sessionProvider.get();
-		Transaction tx = session.getTransaction();
+		Transaction tx = session.getTransaction(); 
 		
 		if (tx != null && tx.isActive()) {
 			LOGGER.log(LogService.LOG_DEBUG, "TRACE: PROCEED (with current tx) transaction interceptor @ " + this.hashCode());

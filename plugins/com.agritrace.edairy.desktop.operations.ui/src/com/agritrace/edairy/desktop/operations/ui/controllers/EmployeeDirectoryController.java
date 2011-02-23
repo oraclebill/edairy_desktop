@@ -21,6 +21,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
+import com.agritrace.edairy.desktop.common.persistence.annotations.Transactional;
 import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
@@ -43,7 +44,7 @@ public class EmployeeDirectoryController extends BasicDirectoryController<Employ
 	private final Provider<EmployeeEditDialog> editDialogProvider;
 	private final EmployeeSearchBean searchBean = new EmployeeSearchBean();
 	
-	private class EmployeePersistenceDelegate extends DirectoryPersistenceDelegate<Employee> {		
+	class EmployeePersistenceDelegate extends DirectoryPersistenceDelegate<Employee> {		
 		private final IDairyRepository dairyRepo;
 		public EmployeePersistenceDelegate(AbstractDirectoryController<Employee> controller, IDairyRepository dairyRepo) {
 			super(controller);

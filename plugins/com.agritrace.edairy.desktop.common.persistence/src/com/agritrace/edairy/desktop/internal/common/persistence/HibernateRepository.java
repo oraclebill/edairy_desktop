@@ -86,37 +86,16 @@ public class HibernateRepository<T extends EObject>  extends RepositoryUtil<T>  
 		return result;
 	}
 
-	@Override
-	public void delete(final T deletableEntity)
-			throws NonExistingEntityException {
-		runWithTransaction(new SessionRunnable<Object>() {
-			@Override
-			public void run(Session session) {
-				session.delete(deletableEntity);
-			}
-		});
-	}
-
-	@Override
-	public void load(EObject obj) {
-		final Serializable key = (Serializable) obj.eGet(obj.eClass()
-				.getEIDAttribute());
-		load(obj, key);
-	}
-
-	@Override
-	@Transactional
-	public void load(final EObject obj, final Serializable key) {
-		if (key == null) {
-			throw new IllegalArgumentException("key cannot be null");
-		}
-
-		final Session session = getCurrentSession();
-
-		if (!session.contains(obj)) {
-			session.load(obj, key);
-		}
-	}
+//	@Override
+//	public void delete(final T deletableEntity)
+//			throws NonExistingEntityException {
+//		runWithTransaction(new SessionRunnable<Object>() {
+//			@Override
+//			public void run(Session session) {
+//				session.delete(deletableEntity);
+//			}
+//		});
+//	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -134,6 +113,7 @@ public class HibernateRepository<T extends EObject>  extends RepositoryUtil<T>  
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public <X> X findByKey(Class<X> entityClass, long entityKey) {
+		Thread.dumpStack();
 		return (X) getCurrentSession().get(getEntityName(entityClass),
 				new Long(entityKey));
 	}
@@ -157,43 +137,43 @@ public class HibernateRepository<T extends EObject>  extends RepositoryUtil<T>  
 		update(obj);
 	}
 
-	@Override
-	public void save(final Object changedItem) throws AlreadyExistsException {
-		runWithTransaction(new Runnable() {
-			@Override
-			public void run() {
-				final Session session = getCurrentSession();
-				if (changedItem instanceof Collection) {
-					for (final Object item : (Collection<?>) changedItem) {
-						session.saveOrUpdate(item);
-					}
-				} else {
-					session.saveOrUpdate(changedItem);
-				}
-			}
-		});
-	}
-
-	@Override
-	public void saveNew(final T newEntity) throws AlreadyExistsException {
-		runWithTransaction(new Runnable() {
-			@Override
-			public void run() {
-				getCurrentSession().save(newEntity);
-			}
-		});
-	}
-
-	@Override
-	public void update(final T updateableEntity)
-			throws NonExistingEntityException {
-		runWithTransaction(new Runnable() {
-			@Override
-			public void run() {
-				getCurrentSession().update(getEntityName(), updateableEntity);
-			}
-		});
-	}
+//	@Override
+//	public void save(final Object changedItem) throws AlreadyExistsException {
+//		runWithTransaction(new Runnable() {
+//			@Override
+//			public void run() {
+//				final Session session = getCurrentSession();
+//				if (changedItem instanceof Collection) {
+//					for (final Object item : (Collection<?>) changedItem) {
+//						session.saveOrUpdate(item);
+//					}
+//				} else {
+//					session.saveOrUpdate(changedItem);
+//				}
+//			}
+//		});
+//	}
+//
+//	@Override
+//	public void saveNew(final T newEntity) throws AlreadyExistsException {
+//		runWithTransaction(new Runnable() {
+//			@Override
+//			public void run() {
+//				getCurrentSession().save(newEntity);
+//			}
+//		});
+//	}
+//
+//	@Override
+//	public void update(final T updateableEntity)
+//			throws NonExistingEntityException {
+//		runWithTransaction(new Runnable() {
+//			@Override
+//			public void run() {
+//				getCurrentSession().update(getEntityName(), updateableEntity);
+//			}
+//		});
+//	}
 
 	private void closeSession() {
 		// Currently does nothing!
