@@ -3,6 +3,11 @@ package com.agritrace.edairy.desktop.dairy.profile.ui.controllers;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.equinox.log.Logger;
+import org.eclipse.riena.core.Log4r;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.core.marker.ValidationTime;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
@@ -13,11 +18,13 @@ import org.eclipse.riena.ui.ridgets.listener.IFocusListener;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.riena.ui.ridgets.validation.RequiredField;
+import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.common.model.base.ContactMethod;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
-import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
+import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
+import com.agritrace.edairy.desktop.common.persistence.annotations.Transactional;
 import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.LocationProfileWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controls.IDataChangeListener;
@@ -35,31 +42,10 @@ import com.google.inject.Inject;
  */
 @PermissionRequired(UIPermission.VIEW_DAIRY_PROFILE)
 public class DairyProfileViewController extends SubModuleController {
+	
+	private static final Logger LOGGER = Log4r.getLogger(DairyProfileViewController.class);
+	
 	private class DairyProfileSaveAction implements IFocusListener, ISelectionListener, IDataChangeListener {
-		private void condenseContacts() {
-			// TODO: this is really not safe.. need to lock dairy as well?
-			synchronized (localDairy.getContactMethods()) {
-				final List<ContactMethod> emptyMethods = new LinkedList<ContactMethod>();
-				for (final ContactMethod method : localDairy.getContactMethods()) {
-					if (method.getCmValue() == null || method.getCmValue().trim().length() == 0) {
-						emptyMethods.add(method);
-					}
-				}
-				localDairy.getContactMethods().removeAll(emptyMethods);
-			}
-		}
-
-		private void update() {
-			try {
-				condenseContacts();
-				validateProfile();
-				dairyRepository.updateDairy();
-				updateBindings();
-				// getInfoFlyout().addInfo(new InfoFlyoutData("message", "Dairy profile updated successfully."));
-			} catch (final Exception e) {
-				// getInfoFlyout().addInfo(new InfoFlyoutData("message", "Error updating dairy profile!"));
-			}
-		}
 
 		@Override
 		public void focusGained(FocusEvent event) {
@@ -68,16 +54,19 @@ public class DairyProfileViewController extends SubModuleController {
 
 		@Override
 		public void focusLost(FocusEvent event) {
+			LOGGER.log(LogService.LOG_DEBUG, "TRACE: DairyProfileSaveAction::focusLost");
 			update();
 		}
 
 		@Override
 		public void ridgetSelected(SelectionEvent event) {
+			LOGGER.log(LogService.LOG_DEBUG, "TRACE: DairyProfileSaveAction::ridgetSelected");
 			update();
 		}
 
 		@Override
 		public void dataChanged() {
+			LOGGER.log(LogService.LOG_DEBUG, "TRACE: DairyProfileSaveAction::dataChanged");
 			update();
 		}
 	}
@@ -121,6 +110,7 @@ public class DairyProfileViewController extends SubModuleController {
 	 */
 	@Inject
 	public DairyProfileViewController(final IDairyRepository dairyRepository) {
+		Thread.dumpStack();
 		this.dairyRepository = dairyRepository;
 		localDairy = dairyRepository.getLocalDairy();
 	}
@@ -259,6 +249,35 @@ public class DairyProfileViewController extends SubModuleController {
 
 		locationController.setInputModel(localDairy.getLocation());
 		contactsGroup.bindToModel(localDairy.getContactMethods());
+		
+		System.err.println("ADAPTER COUNT: " + localDairy.eAdapters().size());
+		System.err.println("ADAPTERS : " + localDairy.eAdapters());
+		localDairy.eAdapters().add(new Adapter() {
+			Notifier target;
+			@Override
+			public void notifyChanged(Notification notification) {
+				System.err.println( ">> NOTIFICATION: " + notification);
+			}
+
+			@Override
+			public Notifier getTarget() {
+				System.err.println( ">> getTarget: " + target);
+				return target;
+			}
+
+			@Override
+			public void setTarget(Notifier newTarget) {
+				System.err.println( ">> setTarget: " + newTarget);
+				target = newTarget;
+			}
+
+			@Override
+			public boolean isAdapterForType(Object type) {
+				System.err.println(  ">> IS_ADAPTER_FOR_CHECK: " + type);
+				return true;
+			}
+			
+		});
 	}
 
 	/**
@@ -291,4 +310,31 @@ public class DairyProfileViewController extends SubModuleController {
 		locationController.addDataChangeListener(changeListener);
 		contactsGroup.addDataChangeListener(changeListener);
 	}
+	
+	private void condenseContacts() {
+		// TODO: this is really not safe.. need to lock dairy as well?
+		synchronized (localDairy.getContactMethods()) {
+			final List<ContactMethod> emptyMethods = new LinkedList<ContactMethod>();
+			for (final ContactMethod method : localDairy.getContactMethods()) {
+				if (method.getCmValue() == null || method.getCmValue().trim().length() == 0) {
+					emptyMethods.add(method);
+				}
+			}
+			localDairy.getContactMethods().removeAll(emptyMethods);
+		}
+	}
+
+	@Transactional
+	void update() {
+		LOGGER.log(LogService.LOG_DEBUG, "TRACE: DairyProfileSaveAction::update");
+		try {
+			condenseContacts();
+			validateProfile();
+			dairyRepository.updateDairy();
+			updateBindings();
+		} catch (final Exception e) {
+			LOGGER.log(LogService.LOG_WARNING, "exception updating dairy profile", e);
+		}
+	}
+
 }

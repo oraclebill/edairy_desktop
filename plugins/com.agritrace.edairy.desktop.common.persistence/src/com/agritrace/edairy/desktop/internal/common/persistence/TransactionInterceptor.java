@@ -12,39 +12,40 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class TransactionInterceptor implements MethodInterceptor {
-	private static Logger log = Log4r.getLogger(PersistenceActivator.getDefault(), TransactionInterceptor.class);
+	private static Logger LOGGER = Log4r.getLogger(PersistenceActivator.getDefault(), TransactionInterceptor.class);
 	
 	@Inject
 	private Provider<Session> sessionProvider;
 
 	public TransactionInterceptor() {
-		System.err.println("::::::::::::::: creating transaction interceptor @ " + this.hashCode());
+		LOGGER.log(LogService.LOG_DEBUG, "TRACE: CONSTRUCT transaction interceptor @ " + this.hashCode());
 	}
 	
 	@Override
 	public Object invoke(MethodInvocation invocation) throws Throwable {
+		LOGGER.log(LogService.LOG_DEBUG, "TRACE: INVOKE transaction interceptor @ " + this.hashCode());
 		Session session = sessionProvider.get();
 		Transaction tx = session.getTransaction();
 		
 		if (tx != null && tx.isActive()) {
-			// Already in a larger transaction context
+			LOGGER.log(LogService.LOG_DEBUG, "TRACE: PROCEED (with current tx) transaction interceptor @ " + this.hashCode());
 			return invocation.proceed();
 		}
 		
 		String methodName = invocation.getMethod().getDeclaringClass().getSimpleName() + "." + invocation.getMethod().getName();
-		log.log(LogService.LOG_DEBUG, "Starting new transaction in method " + methodName);
+		LOGGER.log(LogService.LOG_DEBUG, "Starting new transaction in method " + methodName);
 		tx = session.beginTransaction();
-		log.log(LogService.LOG_DEBUG, "TX["+tx+"] started.");
+		LOGGER.log(LogService.LOG_DEBUG, this.hashCode() + " : TX["+tx+"] started.");
 
 		try {
 			Object result = invocation.proceed();
 			tx.commit();
-			log.log(LogService.LOG_DEBUG, "TX["+tx+"] Committed for: " + methodName);
+			LOGGER.log(LogService.LOG_DEBUG, this.hashCode() + " : TX["+tx+"] Committed for: " + methodName);
 			return result;
 		} catch (Throwable e) {
 			tx.rollback();
 			session.clear();
-			log.log(LogService.LOG_DEBUG, "TX["+tx+"] Rolled back in: " + methodName);
+			LOGGER.log(LogService.LOG_DEBUG, this.hashCode() + " : TX["+tx+"] Rolled back in: " + methodName);
 			throw e;
 		}
 	}
