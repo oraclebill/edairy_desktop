@@ -5,7 +5,9 @@ import java.util.Date;
 
 import org.eclipse.core.runtime.Assert;
 
-class PaymentPeriod {
+public class PaymentPeriod {
+	private static final int[] CALENDAR_FIELDS = new int[] { Calendar.DAY_OF_MONTH, Calendar.HOUR, Calendar.MINUTE,
+			Calendar.SECOND, Calendar.MILLISECOND };
 
 	private Frequency periodType = Frequency.MONTHLY;
 	private int periodNum;
@@ -36,8 +38,9 @@ class PaymentPeriod {
 		this.year = year;
 	}
 
-	private static final int[] CALENDAR_FIELDS = new int[] { Calendar.DAY_OF_MONTH, Calendar.HOUR, Calendar.MINUTE,
-			Calendar.SECOND, Calendar.MILLISECOND };
+	public String toString() {
+		return String.format("%1$tb-%1$te-%1$tY - %2$tb-%2$te-%2$tY", getStartDate(), getEndDate());
+	}
 
 	public Date getStartDate() {
 		Calendar cal = Calendar.getInstance();
@@ -84,10 +87,6 @@ class PaymentPeriod {
 			cal.set(field, cal.getActualMaximum(field));
 		}
 		return cal.getTime();
-	}
-
-	public String toString() {
-		return String.format("%1$tb-%1$te-%1$tY - %2$tb-%2$te-%2$tY", getStartDate(), getEndDate());
 	}
 
 }

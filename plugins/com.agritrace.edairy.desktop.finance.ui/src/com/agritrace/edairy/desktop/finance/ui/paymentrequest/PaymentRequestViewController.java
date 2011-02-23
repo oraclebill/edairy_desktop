@@ -69,6 +69,7 @@ public class PaymentRequestViewController extends SubModuleController {
 				if (period != paymentPeriodRidget.getEmptySelectionItem()) {
 					observableGrossCollections.setValue(queryGrossCollections(period));
 				}
+				grossCollectionsRidget.updateFromModel();
 			}
 		});
 

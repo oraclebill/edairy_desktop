@@ -1,6 +1,6 @@
 package com.agritrace.edairy.desktop.finance.ui.paymentrequest;
 
-enum Frequency {
+public enum Frequency {
 	
 	MONTHLY(12, "Monthly"), BIWEEKLY(26, "Bi-Weekly"), WEEKLY(52, "Weekly");
 	

@@ -2,7 +2,7 @@ package com.agritrace.edairy.desktop.finance.ui.paymentrequest;
 
 import java.math.BigDecimal;
 
-class RateEntry {
+public class RateEntry {
 	private BigDecimal rate;
 	private BigDecimal gross;
 

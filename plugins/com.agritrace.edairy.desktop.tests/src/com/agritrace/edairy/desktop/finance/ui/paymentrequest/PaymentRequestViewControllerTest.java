@@ -7,6 +7,7 @@ import static org.easymock.EasyMock.replay;
 
 import java.math.BigDecimal;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -15,7 +16,10 @@ import java.util.List;
 
 import org.eclipse.riena.navigation.ISubModuleNode;
 import org.eclipse.riena.navigation.ui.swt.controllers.AbstractSubModuleControllerTest;
+import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
+import org.eclipse.riena.ui.ridgets.IDecimalTextRidget;
+import org.eclipse.riena.ui.ridgets.ITableRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.junit.Test;
 
@@ -64,21 +68,9 @@ public class PaymentRequestViewControllerTest extends AbstractSubModuleControlle
 
 	@SuppressWarnings("deprecation")
 	public void testCalculateGrossCollectionsWhenPeriodChanges() throws Exception {
-		List<CollectionJournalLine> collections;
-		Date startDate, endDate;
-		DateFormat df = SimpleDateFormat.getDateInstance(DateFormat.SHORT);
-
-		startDate = df.parse("1/1/2011");
-		endDate = df.parse("1/31/2011");
-
-		// setup mock..
-		collections = new ArrayList<CollectionJournalLine>();
-		for (CollectionGroup group : generateTestCollectionGroups(10, startDate, endDate)) {
-			collections.addAll(group.getJournalEntries());
-		}
-
+		List<CollectionJournalLine> collections = generateTestCollections();
 		int count = collections.size();
-		BigDecimal expectedSum = BigDecimal.valueOf(count); // each delivery is 1 kg..
+		BigDecimal expectedSum = BigDecimal.valueOf(count * 12.4); // each delivery is 12.4 kg..
 		
 		mockRepository.filter(isA(Class.class), isA(FilterParameter.class), isA(FilterParameter.class));
 		expectLastCall().andStubReturn(collections);
@@ -91,8 +83,69 @@ public class PaymentRequestViewControllerTest extends AbstractSubModuleControlle
 		periodCombo.setSelection(0);
 		
 		ITextRidget grossCollectionsText = getController().getRidget(ITextRidget.class, PaymentRequestViewController.GROSS_COLLECTIONS_TEXT);
-		assertEquals(expectedSum.toString(), grossCollectionsText.getText());
+		assertEquals(expectedSum.floatValue(), new BigDecimal(grossCollectionsText.getText().replace(",", "")).floatValue());
 	}
+
+	public void testCalculatePayments() throws Exception {
+		
+		PaymentRequestViewController controller = getController();
+		IDecimalTextRidget grossCollectionsText = controller.getRidget(IDecimalTextRidget.class, PaymentRequestViewController.GROSS_COLLECTIONS_TEXT);
+		IDecimalTextRidget paymentRateText = controller.getRidget(IDecimalTextRidget.class, PaymentRequestViewController.PAYMENT_RATE_TEXT);
+		IActionRidget calculateButton = controller.getRidget(IActionRidget.class, PaymentRequestViewController.CALCULATE_BUTTON);
+		ITableRidget rateTable = controller.getRidget(ITableRidget.class, PaymentRequestViewController.RATE_TABLE);
+		
+		BigDecimal testRate = new BigDecimal("23");
+		BigDecimal grossCollections = new BigDecimal("199");
+		
+		// should update model immediately
+		paymentRateText.setText(testRate.toPlainString());
+		grossCollectionsText.setText(grossCollections.toPlainString());
+		
+		// simulate button push
+		calculateButton.fireAction();
+		
+		// validate table is updated
+		assertEquals(5, rateTable.getOptionCount());
+		RateEntry centerEntry = (RateEntry) rateTable.getOption(2);
+		assertEquals( testRate, centerEntry.getRate() );
+		assertEquals( testRate.multiply(grossCollections), centerEntry.getGross() );		
+	}
+	
+	
+	public void testPrintResults() throws Exception {
+		IActionRidget printButton = getController().getRidget(IActionRidget.class, PaymentRequestViewController.CALCULATE_BUTTON);
+		printButton.fireAction();
+		
+		// saveAs dialog appears
+		
+		// user enters save location
+		
+		// user clicks 'OK' button
+		
+		// pdf report file is created 
+		fail("not implemented");
+	}
+
+	/**
+	 * @return
+	 * @throws ParseException
+	 */
+	private List<CollectionJournalLine> generateTestCollections() throws ParseException {
+		List<CollectionJournalLine> collections;
+		Date startDate, endDate;
+		DateFormat df = SimpleDateFormat.getDateInstance(DateFormat.SHORT);
+
+		startDate = df.parse("1/1/2011");
+		endDate = df.parse("1/31/2011");
+
+		// setup mock..
+		collections = new ArrayList<CollectionJournalLine>();
+		for (CollectionGroup group : generateTestCollectionGroups(10, startDate, endDate)) {
+			collections.addAll(group.getJournalEntries());
+		}
+		return collections;
+	}
+	
 	private Dairy createDairy() {
 		Dairy dairy;
 		dairy = DairyFactory.eINSTANCE.createDairy();
