@@ -3,15 +3,17 @@ package com.agritrace.edairy.desktop.finance.ui.controllers;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.observable.value.WritableValue;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.riena.navigation.ui.controllers.SubModuleController;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
@@ -28,12 +30,22 @@ import com.google.inject.Inject;
 
 public class PaymentRequestViewController extends SubModuleController {
 
-	static class PaymentPeriod {
+	public static class PaymentPeriod {
 		enum TYPE {
-			MONTHLY, BIWEEKLY, WEEKLY
+			MONTHLY(12, "Monthly"), BIWEEKLY(26, "Bi-Weekly"), WEEKLY(52, "Weekly");
+			private int frequency;
+			private String prettyName;
+			private TYPE(int frequency, String name) {
+				this.frequency = frequency;
+				this.prettyName = name;
+			}
+			
+			public String toString() {
+				return prettyName;
+			}
 		};
 
-		private TYPE periodType;
+		private TYPE periodType = TYPE.MONTHLY;
 		private int periodNum;
 		private int year;
 
@@ -50,6 +62,7 @@ public class PaymentRequestViewController extends SubModuleController {
 		}
 
 		public void setPeriodNum(int periodNum) {
+			Assert.isLegal(periodNum < periodType.frequency && periodNum >= 0);
 			this.periodNum = periodNum;
 		}
 
@@ -70,10 +83,10 @@ public class PaymentRequestViewController extends SubModuleController {
 			cal.set(Calendar.YEAR, getYear());
 			switch (getPeriodType()) {
 			case WEEKLY:
-				cal.set(Calendar.WEEK_OF_YEAR, getPeriodNum());
+				cal.set(Calendar.WEEK_OF_YEAR, getPeriodNum()-1);
 				break;
 			case BIWEEKLY:
-				cal.set(Calendar.WEEK_OF_YEAR, getPeriodNum() * 2);
+				cal.set(Calendar.WEEK_OF_YEAR, (getPeriodNum()-1) * 2);
 				break;
 			case MONTHLY:
 				cal.set(Calendar.MONTH, getPeriodNum());
@@ -112,11 +125,12 @@ public class PaymentRequestViewController extends SubModuleController {
 		}
 
 		public String toString() {
-			return getYear() + " - " + getPeriodNum() + "(" + getPeriodType() + ")";
+			return String.format("%1$tb-%1$te-%1$tY - %2$tb-%2$te-%2$tY", getStartDate(),  getEndDate());
 		}
+
 	}
 
-	static class RateEntry {
+	public static class RateEntry {
 		private BigDecimal rate;
 		private BigDecimal gross;
 
@@ -195,8 +209,8 @@ public class PaymentRequestViewController extends SubModuleController {
 		paymentRateRidget.bindToModel(observablePaymentRate);
 
 		rateTableRidget = getRidget(ITableRidget.class, RATE_TABLE);
-		rateTableRidget.bindToModel(observablePaymentOptions, RateEntry.class, new String[] { "", "" }, new String[] {
-				"", "" });
+		rateTableRidget.bindToModel(observablePaymentOptions, RateEntry.class, new String[] { "rate", "gross" }, new String[] {
+				"rate", "gross" });
 
 		calculateButtonRidget = getRidget(IActionRidget.class, CALCULATE_BUTTON);
 		calculateButtonRidget.addListener(new IActionListener() {
@@ -226,8 +240,9 @@ public class PaymentRequestViewController extends SubModuleController {
 	protected List<RateEntry> calculatePaymentOptions(BigDecimal rate, BigDecimal gross) {
 		ArrayList<RateEntry> list = new ArrayList<RateEntry>();
 		BigDecimal checkRate;
-		
-		if (rate == null) return list;
+
+		if (rate == null)
+			return list;
 
 		checkRate = rate.multiply(new BigDecimal(0.90d));
 		list.add(new RateEntry(checkRate, checkRate.multiply(gross)));
@@ -252,20 +267,52 @@ public class PaymentRequestViewController extends SubModuleController {
 		super.afterBind();
 		observablePaymentPeriods.clear();
 		observablePaymentPeriods.addAll(getPaymentPeriods());
+//		paymentPeriodRidget.updateFromModel();
+		updateAllRidgetsFromModel();
 	}
 
+	private Map<PaymentPeriod, BigDecimal> cachedSums = new HashMap<PaymentPeriod, BigDecimal>();
+	
 	private BigDecimal queryGrossCollections(PaymentPeriod period) {
-		List<CollectionJournalLine> lines = collectionsRepo.findCollections(null, null, null, period.getStartDate(), period.getEndDate(), false, false,
-				false);
-		List<?> lines2 = collectionsRepo.filter("CollectionJournalLine",
-				new FilterParameter(FilterParameter.Type.GREATER_THAN, "", ""),
-				new FilterParameter(FilterParameter.Type.LESS_THAN, "", "")
-		);
-		return BigDecimal.ONE;
+		if (cachedSums.containsKey(period)) 
+			return cachedSums.get(period);
+		
+		List<CollectionJournalLine> lines = collectionsRepo.findCollections( //
+				null, null, null, period.getStartDate(), period.getEndDate(), false, false, false);
+		List<CollectionJournalLine> lines2 = collectionsRepo.filter(
+				CollectionJournalLine.class,
+				new FilterParameter(FilterParameter.Type.GREATER_THAN, "collectionJournal.journalDate", period
+						.getStartDate()),
+				new FilterParameter(FilterParameter.Type.LESS_THAN, "collectionJournal.journalDate", period
+						.getEndDate()));
+		Assert.isTrue(lines.size() == lines2.size());
+
+		BigDecimal sum = BigDecimal.ZERO;
+		for (CollectionJournalLine line : lines2) {
+			// TODO: filter out invalid records
+			sum = sum.add(line.getQuantity());
+		}
+		cachedSums.put(period, sum);
+		return sum;
 	}
 
 	private List<PaymentPeriod> getPaymentPeriods() {
-		return Collections.EMPTY_LIST;
+		ArrayList<PaymentPeriod> periodList = new ArrayList<PaymentPeriod>();
+		Calendar now = Calendar.getInstance();
+		for (int i = 0; i < 12; i++) {
+			now.add(Calendar.MONTH, -1);
+			int year = now.get(Calendar.YEAR);
+			int month = now.get(Calendar.MONTH);
+			
+			PaymentPeriod period = new PaymentPeriod();
+			period.setPeriodNum(month);
+			period.setYear(year);
+			period.setPeriodType(PaymentPeriod.TYPE.MONTHLY);
+			
+			periodList.add(period);
+		}
+		
+		return periodList;
 	}
 
 }
