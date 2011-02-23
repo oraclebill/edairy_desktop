@@ -52,7 +52,7 @@
       <view
             allowMultiple="true"
             category="com.agritrace.edairy.desktop.finance.ui"
-            class="com.agritrace.edairy.desktop.finance.ui.views.PaymentRequestView"
+            class="com.agritrace.edairy.desktop.finance.ui.paymentrequest.PaymentRequestView"
             id="com.agritrace.edairy.desktop.finance.ui.views.PaymentRequestView"
             name="Generate Payment Request"
             restorable="true">

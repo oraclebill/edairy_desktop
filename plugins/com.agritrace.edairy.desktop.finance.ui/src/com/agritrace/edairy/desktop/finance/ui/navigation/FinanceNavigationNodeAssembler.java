@@ -20,10 +20,10 @@ import com.agritrace.edairy.desktop.common.ui.navigation.NodeFactory;
 import com.agritrace.edairy.desktop.finance.ui.controllers.AccountTransactionJournalController;
 import com.agritrace.edairy.desktop.finance.ui.controllers.AdjustmentTransactionJournalController;
 import com.agritrace.edairy.desktop.finance.ui.controllers.MemberPaymentsViewController;
-import com.agritrace.edairy.desktop.finance.ui.controllers.PaymentRequestViewController;
+import com.agritrace.edairy.desktop.finance.ui.paymentrequest.PaymentRequestView;
+import com.agritrace.edairy.desktop.finance.ui.paymentrequest.PaymentRequestViewController;
 import com.agritrace.edairy.desktop.finance.ui.views.AdjustmentTransactionJournalView;
 import com.agritrace.edairy.desktop.finance.ui.views.MemberPaymentsView;
-import com.agritrace.edairy.desktop.finance.ui.views.PaymentRequestView;
 import com.agritrace.edairy.desktop.finance.ui.views.TransactionJournalView;
 
 public class FinanceNavigationNodeAssembler extends AbstractNavigationAssembler {

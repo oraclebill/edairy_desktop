@@ -20,6 +20,7 @@ Export-Package: com.agritrace.edairy.desktop.finance.ui,
  com.agritrace.edairy.desktop.finance.ui.dialogs,
  com.agritrace.edairy.desktop.finance.ui.dialogs.paymentwizard,
  com.agritrace.edairy.desktop.finance.ui.navigation,
+ com.agritrace.edairy.desktop.finance.ui.paymentrequest,
  com.agritrace.edairy.desktop.finance.ui.views,
  com.agritrace.edairy.desktop.internal.finance.ui;x-internal:=true
 

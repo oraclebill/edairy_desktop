@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.finance.ui.views;
+package com.agritrace.edairy.desktop.finance.ui.paymentrequest;
 
 import org.eclipse.riena.navigation.ui.swt.views.SubModuleView;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
@@ -15,7 +15,6 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.finance.ui.controllers.PaymentRequestViewController;
 
 public class PaymentRequestView extends SubModuleView {
 	

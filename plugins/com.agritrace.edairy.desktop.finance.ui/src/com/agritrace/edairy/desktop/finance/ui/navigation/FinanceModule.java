@@ -8,7 +8,7 @@ import com.agritrace.edairy.desktop.finance.ui.controllers.AccountTransactionJou
 import com.agritrace.edairy.desktop.finance.ui.controllers.AdjustmentTransactionJournalController;
 import com.agritrace.edairy.desktop.finance.ui.controllers.MemberPaymentsViewController;
 import com.agritrace.edairy.desktop.finance.ui.controllers.MilkPriceJournalController;
-import com.agritrace.edairy.desktop.finance.ui.controllers.PaymentRequestViewController;
+import com.agritrace.edairy.desktop.finance.ui.paymentrequest.PaymentRequestViewController;
 import com.google.inject.AbstractModule;
 
 public class FinanceModule extends AbstractModule {

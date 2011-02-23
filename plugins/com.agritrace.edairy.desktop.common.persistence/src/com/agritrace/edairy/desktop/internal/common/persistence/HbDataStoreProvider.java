@@ -233,4 +233,11 @@ public class HbDataStoreProvider implements Provider<HbDataStore>, IDbProperties
 
 		props.store(new FileOutputStream(propFile), "default properties, written on " + new Date());
 	}
+	
+	
+	public static void main(String[] args) {
+//		System.getenv().put("EDAIRY_HBM2DDL_AUTO", "true");
+		HbDataStoreProvider provider = new HbDataStoreProvider();
+		provider.get();
+	}
 }
