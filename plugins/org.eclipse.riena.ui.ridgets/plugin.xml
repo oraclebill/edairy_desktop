@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?eclipse version="3.4"?>
-<plugin>
-   <extension-point id="org.eclipse.riena.ui.ridgets.correspondinglabel.config" name="Corresponding Label Config" schema="schema/org.eclipse.riena.ui.ridgets.correspondinglabel.config.exsd"/>
-   <extension-point id="correspondingLabel" name="Corresponding Label Configuration" schema="schema/correspondingLabel.exsd"/>
-   <extension-point id="org.eclipse.riena.ui.ridgets.labelfinderstrategy" name="Corresponding Label Strategy" schema="schema/org.eclipse.riena.ui.ridgets.correspondinglabel.strategy.exsd"/>
-   <extension-point id="labelFinderStrategy" name="Corresponding Label Strategy" schema="schema/labelFinderStrategy.exsd"/>
-
-</plugin>
