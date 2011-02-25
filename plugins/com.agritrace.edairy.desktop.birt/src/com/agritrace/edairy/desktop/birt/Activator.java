@@ -18,9 +18,10 @@ import org.osgi.framework.BundleContext;
 import org.osgi.service.log.LogService;
 
 public class Activator implements BundleActivator {
+//	public static final String PLUGIN_ID = "com.agritrace.edairy.desktop.birt";
+
 	private static final Logger LOGGER = Log4r.getLogger(Activator.class);
 
-	static String PLUGIN_ID = "com.agritrace.edairy.desktop.birt";
 
 	public static BundleContext context;
 	private static Activator plugin;

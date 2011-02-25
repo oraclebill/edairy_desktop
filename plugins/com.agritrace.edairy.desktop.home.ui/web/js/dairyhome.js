@@ -52,7 +52,7 @@ function genTableData(data) {
 }
 
 function getReportDate() {
-	return ("05/01/2010");
+	return new Date();
 }
 
 $(document).ready(function() {

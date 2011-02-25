@@ -42,7 +42,7 @@ public class PrincipalManager {
 	 * @param raw Password string
 	 * @return Hexadecimal hash
 	 */
-	public String hashPassword(String raw) {
+	public static String hashPassword(String raw) {
 		if (raw == null) {
 			throw new NullPointerException ("Expected non-null password to hash");
 		}
