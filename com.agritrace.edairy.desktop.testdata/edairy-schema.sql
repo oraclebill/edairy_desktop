@@ -197,12 +197,6 @@
         primary key (`dairylocation_functions_id`, `dairylocation_functions_idx`)
     ) type=InnoDB;
 
-    create table `dairylocation_members` (
-        `membership_e_id` bigint not null,
-        `dairylocation_id` bigint,
-        primary key (`membership_e_id`)
-    ) type=InnoDB;
-
     create table `dairylocation` (
         `id` bigint not null auto_increment,
         dtype varchar(255) not null,
@@ -300,6 +294,7 @@
         `applicationdate` datetime not null,
         `effectivedate` datetime,
         `status` varchar(255) not null,
+        `dairylocation_defaultroute_id` bigint,
         farmer bigint not null unique,
         account bigint not null unique,
         `membership_dairy_companyid` bigint,
@@ -810,18 +805,6 @@
         foreign key (`dairylocation_functions_id`) 
         references `dairylocation` (`id`);
 
-    alter table `dairylocation_members` 
-        add index FK80F663627072F8BA (`dairylocation_id`), 
-        add constraint FK80F663627072F8BA 
-        foreign key (`dairylocation_id`) 
-        references `dairylocation` (`id`);
-
-    alter table `dairylocation_members` 
-        add index FK80F66362D1C565F4 (`membership_e_id`), 
-        add constraint FK80F66362D1C565F4 
-        foreign key (`membership_e_id`) 
-        references `membership` (`memberid`);
-
     create index dairylocationdtype on `dairylocation` (dtype);
 
     alter table `dairylocation` 
@@ -913,6 +896,12 @@
         references `dairy` (`dairyid`);
 
     create index membershipdtype on `membership` (dtype);
+
+    alter table `membership` 
+        add index FKB01D87D6806384E3 (`dairylocation_defaultroute_id`), 
+        add constraint FKB01D87D6806384E3 
+        foreign key (`dairylocation_defaultroute_id`) 
+        references `dairylocation` (`id`);
 
     alter table `membership` 
         add index FKB01D87D633F82C36 (`membership_dairy_companyid`), 
