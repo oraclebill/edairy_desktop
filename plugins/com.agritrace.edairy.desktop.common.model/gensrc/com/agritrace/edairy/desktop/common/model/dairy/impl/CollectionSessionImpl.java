@@ -7,16 +7,20 @@
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,6 +33,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionSessionImpl#getCode <em>Code</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionSessionImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionSessionImpl#getTimeOfDay <em>Time Of Day</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionSessionImpl#getDairy <em>Dairy</em>}</li>
  * </ul>
  * </p>
  *
@@ -223,6 +228,91 @@ public class CollectionSessionImpl extends EObjectImpl implements CollectionSess
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Dairy getDairy() {
+		if (eContainerFeatureID() != DairyPackage.COLLECTION_SESSION__DAIRY) return null;
+		return (Dairy)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetDairy(Dairy newDairy, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newDairy, DairyPackage.COLLECTION_SESSION__DAIRY, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDairy(Dairy newDairy) {
+		if (newDairy != eInternalContainer() || (eContainerFeatureID() != DairyPackage.COLLECTION_SESSION__DAIRY && newDairy != null)) {
+			if (EcoreUtil.isAncestor(this, newDairy))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newDairy != null)
+				msgs = ((InternalEObject)newDairy).eInverseAdd(this, DairyPackage.DAIRY__COLLECTION_SESSIONS, Dairy.class, msgs);
+			msgs = basicSetDairy(newDairy, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_SESSION__DAIRY, newDairy, newDairy));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case DairyPackage.COLLECTION_SESSION__DAIRY:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetDairy((Dairy)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case DairyPackage.COLLECTION_SESSION__DAIRY:
+				return basicSetDairy(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case DairyPackage.COLLECTION_SESSION__DAIRY:
+				return eInternalContainer().eInverseRemove(this, DairyPackage.DAIRY__COLLECTION_SESSIONS, Dairy.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -234,6 +324,8 @@ public class CollectionSessionImpl extends EObjectImpl implements CollectionSess
 				return getDescription();
 			case DairyPackage.COLLECTION_SESSION__TIME_OF_DAY:
 				return getTimeOfDay();
+			case DairyPackage.COLLECTION_SESSION__DAIRY:
+				return getDairy();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -257,6 +349,9 @@ public class CollectionSessionImpl extends EObjectImpl implements CollectionSess
 				return;
 			case DairyPackage.COLLECTION_SESSION__TIME_OF_DAY:
 				setTimeOfDay((Date)newValue);
+				return;
+			case DairyPackage.COLLECTION_SESSION__DAIRY:
+				setDairy((Dairy)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -282,6 +377,9 @@ public class CollectionSessionImpl extends EObjectImpl implements CollectionSess
 			case DairyPackage.COLLECTION_SESSION__TIME_OF_DAY:
 				setTimeOfDay(TIME_OF_DAY_EDEFAULT);
 				return;
+			case DairyPackage.COLLECTION_SESSION__DAIRY:
+				setDairy((Dairy)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -302,6 +400,8 @@ public class CollectionSessionImpl extends EObjectImpl implements CollectionSess
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case DairyPackage.COLLECTION_SESSION__TIME_OF_DAY:
 				return TIME_OF_DAY_EDEFAULT == null ? timeOfDay != null : !TIME_OF_DAY_EDEFAULT.equals(timeOfDay);
+			case DairyPackage.COLLECTION_SESSION__DAIRY:
+				return getDairy() != null;
 		}
 		return super.eIsSet(featureID);
 	}

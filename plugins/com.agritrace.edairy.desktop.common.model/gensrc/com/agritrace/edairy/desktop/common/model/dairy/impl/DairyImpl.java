@@ -9,6 +9,7 @@ package com.agritrace.edairy.desktop.common.model.dairy.impl;
 import com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
@@ -40,6 +41,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -70,6 +72,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getDairyBins <em>Dairy Bins</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getPriceHistory <em>Price History</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getVersion <em>Version</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl#getCollectionSessions <em>Collection Sessions</em>}</li>
  * </ul>
  * </p>
  *
@@ -375,6 +378,16 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * @ordered
 	 */
 	protected long version = VERSION_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getCollectionSessions() <em>Collection Sessions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCollectionSessions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<CollectionSession> collectionSessions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -733,6 +746,18 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<CollectionSession> getCollectionSessions() {
+		if (collectionSessions == null) {
+			collectionSessions = new EObjectContainmentWithInverseEList<CollectionSession>(CollectionSession.class, this, DairyPackage.DAIRY__COLLECTION_SESSIONS, DairyPackage.COLLECTION_SESSION__DAIRY);
+		}
+		return collectionSessions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -741,6 +766,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getMemberships()).basicAdd(otherEnd, msgs);
 			case DairyPackage.DAIRY__ANIMAL_HEALTH_REQUESTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAnimalHealthRequests()).basicAdd(otherEnd, msgs);
+			case DairyPackage.DAIRY__COLLECTION_SESSIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getCollectionSessions()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -777,6 +804,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return ((InternalEList<?>)getDairyBins()).basicRemove(otherEnd, msgs);
 			case DairyPackage.DAIRY__PRICE_HISTORY:
 				return ((InternalEList<?>)getPriceHistory()).basicRemove(otherEnd, msgs);
+			case DairyPackage.DAIRY__COLLECTION_SESSIONS:
+				return ((InternalEList<?>)getCollectionSessions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -831,6 +860,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return getPriceHistory();
 			case DairyPackage.DAIRY__VERSION:
 				return getVersion();
+			case DairyPackage.DAIRY__COLLECTION_SESSIONS:
+				return getCollectionSessions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -919,6 +950,10 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 			case DairyPackage.DAIRY__VERSION:
 				setVersion((Long)newValue);
 				return;
+			case DairyPackage.DAIRY__COLLECTION_SESSIONS:
+				getCollectionSessions().clear();
+				getCollectionSessions().addAll((Collection<? extends CollectionSession>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -994,6 +1029,9 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 			case DairyPackage.DAIRY__VERSION:
 				setVersion(VERSION_EDEFAULT);
 				return;
+			case DairyPackage.DAIRY__COLLECTION_SESSIONS:
+				getCollectionSessions().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1048,6 +1086,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return priceHistory != null && !priceHistory.isEmpty();
 			case DairyPackage.DAIRY__VERSION:
 				return version != VERSION_EDEFAULT;
+			case DairyPackage.DAIRY__COLLECTION_SESSIONS:
+				return collectionSessions != null && !collectionSessions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

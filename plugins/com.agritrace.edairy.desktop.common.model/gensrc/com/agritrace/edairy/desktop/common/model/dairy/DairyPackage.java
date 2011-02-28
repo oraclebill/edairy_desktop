@@ -1914,13 +1914,22 @@ public interface DairyPackage extends EPackage {
 	int DAIRY__VERSION = ModelPackage.COMPANY_FEATURE_COUNT + 20;
 
 	/**
+	 * The feature id for the '<em><b>Collection Sessions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY__COLLECTION_SESSIONS = ModelPackage.COMPANY_FEATURE_COUNT + 21;
+
+	/**
 	 * The number of structural features of the '<em>Dairy</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DAIRY_FEATURE_COUNT = ModelPackage.COMPANY_FEATURE_COUNT + 21;
+	int DAIRY_FEATURE_COUNT = ModelPackage.COMPANY_FEATURE_COUNT + 22;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl <em>Membership</em>}' class.
@@ -2760,13 +2769,22 @@ public interface DairyPackage extends EPackage {
 	int COLLECTION_SESSION__TIME_OF_DAY = 3;
 
 	/**
+	 * The feature id for the '<em><b>Dairy</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_SESSION__DAIRY = 4;
+
+	/**
 	 * The number of structural features of the '<em>Collection Session</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_SESSION_FEATURE_COUNT = 4;
+	int COLLECTION_SESSION_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.JournalStatus <em>Journal Status</em>}' enum.
@@ -4488,6 +4506,17 @@ public interface DairyPackage extends EPackage {
 	EAttribute getDairy_Version();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getCollectionSessions <em>Collection Sessions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Collection Sessions</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Dairy#getCollectionSessions()
+	 * @see #getDairy()
+	 * @generated
+	 */
+	EReference getDairy_CollectionSessions();
+
+	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.Membership <em>Membership</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5148,6 +5177,17 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getCollectionSession_TimeOfDay();
+
+	/**
+	 * Returns the meta object for the container reference '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionSession#getDairy <em>Dairy</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Dairy</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionSession#getDairy()
+	 * @see #getCollectionSession()
+	 * @generated
+	 */
+	EReference getCollectionSession_Dairy();
 
 	/**
 	 * Returns the meta object for enum '{@link com.agritrace.edairy.desktop.common.model.dairy.JournalStatus <em>Journal Status</em>}'.
@@ -6476,6 +6516,14 @@ public interface DairyPackage extends EPackage {
 		EAttribute DAIRY__VERSION = eINSTANCE.getDairy_Version();
 
 		/**
+		 * The meta object literal for the '<em><b>Collection Sessions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DAIRY__COLLECTION_SESSIONS = eINSTANCE.getDairy_CollectionSessions();
+
+		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MembershipImpl <em>Membership</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -6980,6 +7028,14 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute COLLECTION_SESSION__TIME_OF_DAY = eINSTANCE.getCollectionSession_TimeOfDay();
+
+		/**
+		 * The meta object literal for the '<em><b>Dairy</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COLLECTION_SESSION__DAIRY = eINSTANCE.getCollectionSession_Dairy();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.JournalStatus <em>Journal Status</em>}' enum.

@@ -43,6 +43,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getDairyBins <em>Dairy Bins</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getPriceHistory <em>Price History</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getVersion <em>Version</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getCollectionSessions <em>Collection Sessions</em>}</li>
  * </ul>
  * </p>
  *
@@ -481,5 +482,23 @@ public interface Dairy extends Company {
 	 * @generated
 	 */
 	void setVersion(long value);
+
+	/**
+	 * Returns the value of the '<em><b>Collection Sessions</b></em>' containment reference list.
+	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.CollectionSession}.
+	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionSession#getDairy <em>Dairy</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Collection Sessions</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Collection Sessions</em>' containment reference list.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_CollectionSessions()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionSession#getDairy
+	 * @model opposite="dairy" containment="true"
+	 * @generated
+	 */
+	EList<CollectionSession> getCollectionSessions();
 
 } // Dairy

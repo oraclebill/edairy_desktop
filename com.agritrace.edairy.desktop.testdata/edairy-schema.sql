@@ -111,6 +111,7 @@
         `code` varchar(60) unique,
         `description` varchar(60),
         `timeofday` datetime,
+        `collectionsession_dairy_companyid` bigint,
         primary key (`id`)
     ) type=InnoDB;
 
@@ -724,6 +725,12 @@
         references `membership` (`memberid`);
 
     create index collectionsessiondtype on `collectionsession` (dtype);
+
+    alter table `collectionsession` 
+        add index FK51F4C6384C9A6698 (`collectionsession_dairy_companyid`), 
+        add constraint FK51F4C6384C9A6698 
+        foreign key (`collectionsession_dairy_companyid`) 
+        references `dairy` (`dairyid`);
 
     create index contactmethoddtype on `contactmethod` (dtype);
 

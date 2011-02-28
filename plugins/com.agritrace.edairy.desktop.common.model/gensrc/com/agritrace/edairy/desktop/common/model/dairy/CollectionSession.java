@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionSession#getCode <em>Code</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionSession#getDescription <em>Description</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionSession#getTimeOfDay <em>Time Of Day</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionSession#getDairy <em>Dairy</em>}</li>
  * </ul>
  * </p>
  *
@@ -133,5 +134,33 @@ public interface CollectionSession extends EObject {
 	 * @generated
 	 */
 	void setTimeOfDay(Date value);
+
+	/**
+	 * Returns the value of the '<em><b>Dairy</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getCollectionSessions <em>Collection Sessions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Dairy</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Dairy</em>' container reference.
+	 * @see #setDairy(Dairy)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionSession_Dairy()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Dairy#getCollectionSessions
+	 * @model opposite="collectionSessions" transient="false"
+	 * @generated
+	 */
+	Dairy getDairy();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionSession#getDairy <em>Dairy</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Dairy</em>' container reference.
+	 * @see #getDairy()
+	 * @generated
+	 */
+	void setDairy(Dairy value);
 
 } // CollectionSession

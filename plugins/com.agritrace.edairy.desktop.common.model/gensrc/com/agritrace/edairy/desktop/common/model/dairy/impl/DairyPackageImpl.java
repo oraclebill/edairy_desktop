@@ -1711,6 +1711,15 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getDairy_CollectionSessions() {
+		return (EReference)dairyEClass.getEStructuralFeatures().get(21);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getMembership() {
 		return membershipEClass;
 	}
@@ -2260,6 +2269,15 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getCollectionSession_Dairy() {
+		return (EReference)collectionSessionEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getJournalStatus() {
 		return journalStatusEEnum;
 	}
@@ -2509,6 +2527,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEReference(dairyEClass, DAIRY__DAIRY_BINS);
 		createEReference(dairyEClass, DAIRY__PRICE_HISTORY);
 		createEAttribute(dairyEClass, DAIRY__VERSION);
+		createEReference(dairyEClass, DAIRY__COLLECTION_SESSIONS);
 
 		membershipEClass = createEClass(MEMBERSHIP);
 		createEAttribute(membershipEClass, MEMBERSHIP__MEMBER_ID);
@@ -2579,6 +2598,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(collectionSessionEClass, COLLECTION_SESSION__CODE);
 		createEAttribute(collectionSessionEClass, COLLECTION_SESSION__DESCRIPTION);
 		createEAttribute(collectionSessionEClass, COLLECTION_SESSION__TIME_OF_DAY);
+		createEReference(collectionSessionEClass, COLLECTION_SESSION__DAIRY);
 
 		// Create enums
 		journalStatusEEnum = createEEnum(JOURNAL_STATUS);
@@ -2803,6 +2823,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEReference(getDairy_DairyBins(), this.getDairyContainer(), null, "dairyBins", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getDairy_PriceHistory(), this.getMemberPayment(), null, "priceHistory", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getDairy_Version(), ecorePackage.getELong(), "version", null, 0, 1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDairy_CollectionSessions(), this.getCollectionSession(), this.getCollectionSession_Dairy(), "collectionSessions", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(membershipEClass, Membership.class, "Membership", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMembership_MemberId(), theModelPackage.getUniqueID(), "memberId", null, 1, 1, Membership.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2876,6 +2897,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getCollectionSession_Code(), ecorePackage.getEString(), "code", null, 0, 1, CollectionSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionSession_Description(), ecorePackage.getEString(), "description", null, 0, 1, CollectionSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionSession_TimeOfDay(), ecorePackage.getEDate(), "timeOfDay", null, 0, 1, CollectionSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCollectionSession_Dairy(), this.getDairy(), this.getDairy_CollectionSessions(), "dairy", null, 0, 1, CollectionSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(journalStatusEEnum, JournalStatus.class, "JournalStatus");

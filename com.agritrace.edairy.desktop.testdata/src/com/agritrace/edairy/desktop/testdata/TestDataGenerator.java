@@ -1,5 +1,6 @@
 package com.agritrace.edairy.desktop.testdata;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -13,6 +14,9 @@ import org.hibernate.Transaction;
 import com.agritrace.edairy.desktop.common.model.base.Gender;
 import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.base.Person;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
@@ -206,6 +210,17 @@ public class TestDataGenerator extends DatabaseSetup {
 	/**
 	 * @param args
 	 */
+	public static void main(String[] args) {
+		BasicConfigurator.configure();
+		Logger.getLogger("org.eclipse.emf.teneo").setLevel(Level.INFO);
+		Logger.getLogger("org.hibernate").setLevel(Level.WARN);
+		TestDataGenerator generator = new TestDataGenerator();
+		generator.run(args);
+	}
+
+	/**
+	 * @param args
+	 */
 	public void run(String[] args) {
 		setArgs(args);
 		run();
@@ -223,15 +238,15 @@ public class TestDataGenerator extends DatabaseSetup {
 		setSession(openSession());
 		Dairy dairy = createDairy("TEST1");
 		updateDairy(dairy);
-		
+
 		populateBaseReferenceData();
-		
+
 		Transaction tx;
-		
+
 		tx = getSession().beginTransaction();
 		generateEmployees(getEmployeeCount());
 		tx.commit();
-		
+
 		tx = getSession().beginTransaction();
 		generateRoutesAndCollectionCenters(getRouteCount(), getCollectionCenterCount());
 		tx.commit();
@@ -269,9 +284,9 @@ public class TestDataGenerator extends DatabaseSetup {
 
 	private void updateDairy(Dairy currentDairy) {
 		System.out.println("Generating Dairy");
-		
+
 		String companyId = currentDairy.getRegistrationNumber();
-		
+
 		currentDairy.setCompanyName("Test company " + companyId);
 		currentDairy.setDescription(companyId);
 		currentDairy.setLegalName(companyId);
@@ -374,15 +389,6 @@ public class TestDataGenerator extends DatabaseSetup {
 		}
 	}
 
-	private void generateCollectionData() {
-		System.out.println("Generating Collection Data...");
-		for (Route route : currentDairy.getRoutes()) {
-			for (DairyLocation center : route.getStops()) {
-//				center.getMembers();
-			}
-		}
-	}
-
 	private void generateRoutesAndCollectionCenters(int routeCount,
 			int totalStops) {
 		System.out.format("Generating %d Routes and %d Collection Centers...\n", routeCount, totalStops);
@@ -404,7 +410,7 @@ public class TestDataGenerator extends DatabaseSetup {
 			createCenterForRoute(route, stopCount);
 		}
 	}
-	
+
 	private Route createRouteVehicleAndDriver(int routeCount) {
 		Vehicle vehicle;
 		Route route;
@@ -414,8 +420,9 @@ public class TestDataGenerator extends DatabaseSetup {
 		currentDairy.getEmployees().add(driver);
 		getSession().persist(driver);
 
-		vehicle = DairyUtil.createVehicle(String.format("VL%s", driver.getEmployeeNumber()), String.format("REG%s", driver.getEmployeeNumber()),
-				1990, "Mitsu", "FUSO", "White", 4495.0d, "TA260283", new Date(0), "TA260283", driver, null, null);
+		vehicle = DairyUtil.createVehicle(String.format("VL%s", driver.getEmployeeNumber()),
+				String.format("REG%s", driver.getEmployeeNumber()), 1990, "Mitsu", "FUSO", "White", 4495.0d,
+				"TA260283", new Date(0), "TA260283", driver, null, null);
 		currentDairy.getVehicles().add(vehicle);
 		getSession().persist(vehicle);
 
@@ -424,7 +431,7 @@ public class TestDataGenerator extends DatabaseSetup {
 		route.setVehicle(vehicle);
 		currentDairy.getRoutes().add(route);
 		getSession().persist(route);
-		
+
 		return route;
 	}
 
@@ -439,18 +446,32 @@ public class TestDataGenerator extends DatabaseSetup {
 		getSession().persist(center);
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		BasicConfigurator.configure();
-		Logger.getLogger("org.eclipse.emf.teneo").setLevel(Level.INFO);
-		Logger.getLogger("org.hibernate").setLevel(Level.WARN);
-		TestDataGenerator generator = new TestDataGenerator();
-		generator.run(args);
+	private void generateCollectionData() {
+		System.out.println("Generating Collection Data...");
+		for (CollectionSession session : currentDairy.getCollectionSessions()) {
+			for (Membership member : currentDairy.getMemberships()) {
+				CollectionJournalLine entry = DairyFactory.eINSTANCE.createCollectionJournalLine();
+			}
+		}
 	}
-	
+
+	private CollectionJournalLine createCollectionEntry(CollectionGroup group,
+			DairyContainer bin,
+			Membership member,
+			BigDecimal amount) {
+		CollectionJournalLine entry = DairyFactory.eINSTANCE.createCollectionJournalLine();
+
+		entry.setCollectionJournal(group);
+		entry.setDairyContainer(bin);
+		entry.setRecordedMember(member.getMemberNumber());
+		entry.setValidatedMember(member);
+		entry.setQuantity(BigDecimal.valueOf(124, 1));
+		entry.setFlagged(false);
+		return entry;
+	}
+
 	private int empCount = 0;
+
 	private Employee createEmployee(String jobFunction) {
 		final Employee emp = DairyFactory.eINSTANCE.createEmployee();
 		++empCount;
@@ -460,7 +481,7 @@ public class TestDataGenerator extends DatabaseSetup {
 		emp.setGivenName(String.format("first:%d", empCount));
 		emp.setMiddleName(String.format("middle:%d", empCount));
 		emp.setFamilyName(String.format("last:%d", empCount));
-		emp.setLocation(DairyUtil.createLocation(null,null,null));
+		emp.setLocation(DairyUtil.createLocation(null, null, null));
 
 		emp.setStartDate(startDate);
 		emp.setJobFunction(jobFunction);
@@ -469,6 +490,5 @@ public class TestDataGenerator extends DatabaseSetup {
 
 		return emp;
 	}
-
 
 }

@@ -358,6 +358,8 @@
         <details key="appinfo" value="@Version"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionSessions" upperBound="-1"
+        eType="#//CollectionSession" containment="true" eOpposite="#//CollectionSession/dairy"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Membership">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="memberId" lowerBound="1"
@@ -525,6 +527,8 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeOfDay" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dairy" eType="#//Dairy"
+        eOpposite="#//Dairy/collectionSessions"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="CollectionGroupType">
     <eLiterals name="ScaleGroup"/>
