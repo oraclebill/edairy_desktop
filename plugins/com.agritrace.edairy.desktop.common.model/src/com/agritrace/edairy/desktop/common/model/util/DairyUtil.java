@@ -532,7 +532,7 @@ public class DairyUtil {
 			location = createLocation(null, null, null);
 		}
 		p.setLocation(location);
-		if (null != contactMethods) {
+		if (null != contactMethods && contactMethods.size() > 0 ) {
 			p.getContactMethods().addAll(contactMethods);
 		}
 	}
