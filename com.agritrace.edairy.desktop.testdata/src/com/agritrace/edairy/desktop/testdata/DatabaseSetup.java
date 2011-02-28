@@ -1,5 +1,7 @@
 package com.agritrace.edairy.desktop.testdata;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.util.Date;
@@ -7,6 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.eclipse.emf.teneo.hibernate.HbHelper;
@@ -43,20 +48,34 @@ public class DatabaseSetup {
 	private String userName = "root";
 	private String password = "";
 	private String schemaFileName = "edairy-schema.sql";
-	private String mappingFileName = "";
-	private Map<String, ?> options = new HashMap<String, Object>();
+//	private String mappingFileName = "";
+//	private Map<String, ?> options = new HashMap<String, Object>();
 	private HbDataStore hbds;
 	private Session session = null;
 
 	/**
-	 * @param session
-	 *            the session to set
+	 * @param args
 	 */
-	protected void setSession(Session session) {
-		if (this.session != null) {
-			this.session.close();
+	public static void main(String[] args) throws Exception {
+//		BasicConfigurator.configure();
+//		Logger.getLogger("org.eclipse.emf.teneo").setLevel(Level.INFO);
+//		Logger.getLogger("org.hibernate").setLevel(Level.WARN);
+		DatabaseSetup setup = new DatabaseSetup();
+		if (args != null && args.length > 0) {
+			setup.setSchemaFileName(args[0]);
+			if (args.length > 1) {
+				setup.setDatabaseName(args[1]);
+			}
 		}
-		this.session = session;
+		setup.generateSchema();
+	}
+	
+	
+	/**
+	 * 
+	 */
+	public DatabaseSetup() {
+		super();
 	}
 
 	/**
@@ -161,6 +180,18 @@ public class DatabaseSetup {
 	}
 
 	/**
+	 * @param session
+	 *            the session to set
+	 */
+	protected void setSession(Session session) {
+		if (this.session != null) {
+			this.session.close();
+		}
+		this.session = session;
+	}
+
+
+	/**
 	 * Get the current session, or create one and return it.
 	 * 
 	 * @return
@@ -171,7 +202,10 @@ public class DatabaseSetup {
 		return getSession();
 	}
 
-	protected void createDatabase() {
+	/**
+	 * 
+	 */
+	public void createDatabase() {
 		System.out.format("Creating database [%s]\n", getDatabaseName());
 		String dbURL = getDatabaseURL();
 		try {
@@ -193,6 +227,30 @@ public class DatabaseSetup {
 		}
 
 	}
+
+	/**
+	 * @throws IOException 
+	 * 
+	 */
+	public void generateSchema() throws IOException {
+		// for teneo, we need to intialize the datastore in order ot properly
+		// init the configuration. So we set an invalid db so init will fail,
+		// but then we can use the config to generate schema...
+				
+		File f = new File(getSchemaFileName());
+		System.out.println("Generating schema to file: " + f.getCanonicalPath());
+		
+		Configuration configuration = generateTeneoHibernateConfig();
+
+		SchemaExport exporter = new SchemaExport(configuration);
+		exporter.setHaltOnError(true);
+		exporter.setOutputFile(f.getCanonicalPath());
+		exporter.setDelimiter(";");
+		exporter.setFormat(true);
+		exporter.execute(true, false, false, true);
+
+	}
+
 
 	/**
 	 * 
@@ -339,22 +397,6 @@ public class DatabaseSetup {
 		return dairy;
 	}
 
-	public void generateSchema() {
-		// for teneo, we need to intialize the datastore in order ot properly
-		// init the configuration. So we set an invalid db so init will fail,
-		// but then we can use the config to generate schema...
-
-		Configuration configuration = generateTeneoHibernateConfig();
-
-		SchemaExport exporter = new SchemaExport(configuration);
-		exporter.setHaltOnError(true);
-		exporter.setOutputFile(getSchemaFileName());
-		exporter.setDelimiter(";");
-		exporter.setFormat(true);
-		exporter.execute(true, true, false, true);
-
-	}
-
 	private Configuration generateTeneoHibernateConfig() {
 		// for teneo, we need to intialize the datastore in order ot properly
 		// init the configuration. So we set an invalid db so init will fail,
@@ -431,8 +473,5 @@ public class DatabaseSetup {
 		props.setProperty(Environment.HBM2DDL_AUTO, "create");
 	}
 
-	public DatabaseSetup() {
-		super();
-	}
 
 }

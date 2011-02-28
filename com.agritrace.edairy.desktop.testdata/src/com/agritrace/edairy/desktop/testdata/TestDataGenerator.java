@@ -378,7 +378,7 @@ public class TestDataGenerator extends DatabaseSetup {
 		System.out.println("Generating Collection Data...");
 		for (Route route : currentDairy.getRoutes()) {
 			for (DairyLocation center : route.getStops()) {
-
+//				center.getMembers();
 			}
 		}
 	}
