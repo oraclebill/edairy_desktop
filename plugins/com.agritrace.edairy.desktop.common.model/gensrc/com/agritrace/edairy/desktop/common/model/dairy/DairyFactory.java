@@ -80,13 +80,13 @@ public interface DairyFactory extends EFactory {
 	CollectionGroup createCollectionGroup();
 
 	/**
-	 * Returns a new object of class '<em>Route</em>'.
+	 * Returns a new object of class '<em>Transport Route</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Route</em>'.
+	 * @return a new object of class '<em>Transport Route</em>'.
 	 * @generated
 	 */
-	Route createRoute();
+	TransportRoute createTransportRoute();
 
 	/**
 	 * Returns a new object of class '<em>Trip</em>'.

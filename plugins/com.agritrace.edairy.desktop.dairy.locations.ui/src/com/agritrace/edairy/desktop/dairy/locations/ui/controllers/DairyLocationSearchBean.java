@@ -6,14 +6,14 @@ import java.util.List;
 import org.eclipse.riena.beans.common.AbstractBean;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
-import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
 
 public class DairyLocationSearchBean extends AbstractBean {
 	private static final String PROP_FUNCTIONS = "functions";
 	private static final String PROP_ROUTE = "route";
 
 	private List<DairyFunction> functionSearchValues;
-	private Route routeSearchValue;
+	private TransportRoute routeSearchValue;
 
 	public DairyLocationSearchBean() {
 		functionSearchValues = new ArrayList<DairyFunction>();
@@ -24,7 +24,7 @@ public class DairyLocationSearchBean extends AbstractBean {
 		return functionSearchValues;
 	}
 
-	public Route getRouteSearchValue() {
+	public TransportRoute getRouteSearchValue() {
 		return routeSearchValue;
 	}
 
@@ -36,7 +36,7 @@ public class DairyLocationSearchBean extends AbstractBean {
 		firePropertyChanged(PROP_FUNCTIONS, oldValue, functionSearchValues);
 	}
 
-	public void setRouteSearchValue(Route routeSearchValue) {
+	public void setRouteSearchValue(TransportRoute routeSearchValue) {
 		final Object oldValue = this.routeSearchValue;
 		this.routeSearchValue = routeSearchValue;
 		firePropertyChanged(PROP_ROUTE, oldValue, routeSearchValue);

@@ -19,7 +19,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 
@@ -247,7 +247,7 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Route> routes;
+	protected EList<TransportRoute> routes;
 
 	/**
 	 * The cached value of the '{@link #getVehicles() <em>Vehicles</em>}' containment reference list.
@@ -581,9 +581,9 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Route> getRoutes() {
+	public EList<TransportRoute> getRoutes() {
 		if (routes == null) {
-			routes = new EObjectContainmentEList<Route>(Route.class, this, DairyPackage.DAIRY__ROUTES);
+			routes = new EObjectContainmentEList<TransportRoute>(TransportRoute.class, this, DairyPackage.DAIRY__ROUTES);
 		}
 		return routes;
 	}
@@ -901,7 +901,7 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return;
 			case DairyPackage.DAIRY__ROUTES:
 				getRoutes().clear();
-				getRoutes().addAll((Collection<? extends Route>)newValue);
+				getRoutes().addAll((Collection<? extends TransportRoute>)newValue);
 				return;
 			case DairyPackage.DAIRY__VEHICLES:
 				getVehicles().clear();

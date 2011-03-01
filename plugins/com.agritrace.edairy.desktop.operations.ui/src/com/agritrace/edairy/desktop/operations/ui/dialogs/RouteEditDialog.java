@@ -10,14 +10,14 @@ import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.operations.ui.ViewConstants;
 import com.agritrace.edairy.desktop.operations.ui.controllers.RouteEditDialogController;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
-public class RouteEditDialog extends RecordDialog<Route> {
+public class RouteEditDialog extends RecordDialog<TransportRoute> {
 	private Text routeDescriptionTxt;
 	private Text routeNameTxt;
 

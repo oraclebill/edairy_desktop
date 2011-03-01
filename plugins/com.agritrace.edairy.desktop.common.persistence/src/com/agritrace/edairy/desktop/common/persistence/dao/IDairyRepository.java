@@ -17,7 +17,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkGrade;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkSale;
-import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
 
@@ -57,9 +57,9 @@ public interface IDairyRepository {
 
 	void updateDairy();
 
-	List<Route> allRoutes();
+	List<TransportRoute> allRoutes();
 
-	void addRoute(Route newRoute);
+	void addRoute(TransportRoute newRoute);
 
 	void updateBranchLocation(DairyLocation changedDairyLocation);
 
@@ -73,15 +73,15 @@ public interface IDairyRepository {
 
 	public List<MilkSale> getMilkSales(Date minDate, Date maxDate, DairyLocation store, Customer customer);
 
-	List<DairyContainer> getBinsByRoute(Route journalRoute);
+	List<DairyContainer> getBinsByRoute(TransportRoute journalRoute);
 
 	Membership findMemberByMemberNo(String memberNumber);
 
 	List<CollectionJournalLine> getMemberCollectionsForSession(CollectionSession session, Membership value);
 
-	Collection<Membership> getMembersForRoute(Route currentRoute);
+	Collection<Membership> getMembersForRoute(TransportRoute currentRoute);
 
-	void deleteRoute(final Route object);
+	void deleteRoute(final TransportRoute object);
 
 	void save();
 

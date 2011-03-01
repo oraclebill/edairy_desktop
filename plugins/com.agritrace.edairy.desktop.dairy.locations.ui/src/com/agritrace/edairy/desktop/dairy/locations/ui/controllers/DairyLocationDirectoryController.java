@@ -17,7 +17,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.persistence.dao.IDairyLocationRepository;
@@ -113,8 +113,8 @@ public class DairyLocationDirectoryController extends BasicDirectoryController<D
 
 		//
 		routeTypeSearchCombo = getRidget(IComboRidget.class, DairyLocationUIConstants.RIDGET_ID_ROUTE);
-		routeTypeSearchCombo.bindToModel(new WritableList(dairyRepo.getLocalDairy().getRoutes(), Route.class),
-				Route.class, "getName", BeansObservables.observeValue(searchBean, "routeSearchValue"));
+		routeTypeSearchCombo.bindToModel(new WritableList(dairyRepo.getLocalDairy().getRoutes(), TransportRoute.class),
+				TransportRoute.class, "getName", BeansObservables.observeValue(searchBean, "routeSearchValue"));
 		routeTypeSearchCombo.updateFromModel();
 
 	}

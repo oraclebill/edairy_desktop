@@ -12,7 +12,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkSale;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
-import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 
 import java.math.BigDecimal;
@@ -104,7 +104,7 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * @generated
 	 * @ordered
 	 */
-	protected Route route;
+	protected TransportRoute route;
 
 	/**
 	 * The cached value of the '{@link #getCustomer() <em>Customer</em>}' reference.
@@ -242,10 +242,10 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Route getRoute() {
+	public TransportRoute getRoute() {
 		if (route != null && route.eIsProxy()) {
 			InternalEObject oldRoute = (InternalEObject)route;
-			route = (Route)eResolveProxy(oldRoute);
+			route = (TransportRoute)eResolveProxy(oldRoute);
 			if (route != oldRoute) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DELIVERY_JOURNAL__ROUTE, oldRoute, route));
@@ -259,7 +259,7 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Route basicGetRoute() {
+	public TransportRoute basicGetRoute() {
 		return route;
 	}
 
@@ -268,8 +268,8 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setRoute(Route newRoute) {
-		Route oldRoute = route;
+	public void setRoute(TransportRoute newRoute) {
+		TransportRoute oldRoute = route;
 		route = newRoute;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL__ROUTE, oldRoute, route));
@@ -525,7 +525,7 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 				setDate((Date)newValue);
 				return;
 			case DairyPackage.DELIVERY_JOURNAL__ROUTE:
-				setRoute((Route)newValue);
+				setRoute((TransportRoute)newValue);
 				return;
 			case DairyPackage.DELIVERY_JOURNAL__CUSTOMER:
 				setCustomer((Customer)newValue);
@@ -565,7 +565,7 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 				setDate(DATE_EDEFAULT);
 				return;
 			case DairyPackage.DELIVERY_JOURNAL__ROUTE:
-				setRoute((Route)null);
+				setRoute((TransportRoute)null);
 				return;
 			case DairyPackage.DELIVERY_JOURNAL__CUSTOMER:
 				setCustomer((Customer)null);

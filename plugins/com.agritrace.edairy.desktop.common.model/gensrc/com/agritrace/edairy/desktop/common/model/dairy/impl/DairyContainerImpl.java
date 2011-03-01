@@ -10,7 +10,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Asset;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 
-import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
 import com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -63,7 +63,7 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 	 * @generated
 	 * @ordered
 	 */
-	protected Route zone;
+	protected TransportRoute zone;
 	/**
 	 * The cached value of the '{@link #getAssetInfo() <em>Asset Info</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -119,10 +119,10 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Route getZone() {
+	public TransportRoute getZone() {
 		if (zone != null && zone.eIsProxy()) {
 			InternalEObject oldZone = (InternalEObject)zone;
-			zone = (Route)eResolveProxy(oldZone);
+			zone = (TransportRoute)eResolveProxy(oldZone);
 			if (zone != oldZone) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DAIRY_CONTAINER__ZONE, oldZone, zone));
@@ -136,7 +136,7 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Route basicGetZone() {
+	public TransportRoute basicGetZone() {
 		return zone;
 	}
 
@@ -145,8 +145,8 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setZone(Route newZone) {
-		Route oldZone = zone;
+	public void setZone(TransportRoute newZone) {
+		TransportRoute oldZone = zone;
 		zone = newZone;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_CONTAINER__ZONE, oldZone, zone));
@@ -240,7 +240,7 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 				setStatus((String)newValue);
 				return;
 			case DairyPackage.DAIRY_CONTAINER__ZONE:
-				setZone((Route)newValue);
+				setZone((TransportRoute)newValue);
 				return;
 			case DairyPackage.DAIRY_CONTAINER__ASSET_INFO:
 				setAssetInfo((Asset)newValue);
@@ -261,7 +261,7 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 				setStatus(STATUS_EDEFAULT);
 				return;
 			case DairyPackage.DAIRY_CONTAINER__ZONE:
-				setZone((Route)null);
+				setZone((TransportRoute)null);
 				return;
 			case DairyPackage.DAIRY_CONTAINER__ASSET_INFO:
 				setAssetInfo((Asset)null);

@@ -1124,14 +1124,14 @@ public interface DairyPackage extends EPackage {
 	int COLLECTION_GROUP_FEATURE_COUNT = 17;
 
 	/**
-	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl <em>Route</em>}' class.
+	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.TransportRouteImpl <em>Transport Route</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getRoute()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.TransportRouteImpl
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getTransportRoute()
 	 * @generated
 	 */
-	int ROUTE = 6;
+	int TRANSPORT_ROUTE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1140,7 +1140,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROUTE__ID = 0;
+	int TRANSPORT_ROUTE__ID = 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1149,7 +1149,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROUTE__NAME = 1;
+	int TRANSPORT_ROUTE__NAME = 1;
 
 	/**
 	 * The feature id for the '<em><b>Stops</b></em>' reference list.
@@ -1158,7 +1158,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROUTE__STOPS = 2;
+	int TRANSPORT_ROUTE__STOPS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -1167,7 +1167,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROUTE__DESCRIPTION = 3;
+	int TRANSPORT_ROUTE__DESCRIPTION = 3;
 
 	/**
 	 * The feature id for the '<em><b>Vehicle</b></em>' reference.
@@ -1176,16 +1176,16 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROUTE__VEHICLE = 4;
+	int TRANSPORT_ROUTE__VEHICLE = 4;
 
 	/**
-	 * The number of structural features of the '<em>Route</em>' class.
+	 * The number of structural features of the '<em>Transport Route</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROUTE_FEATURE_COUNT = 5;
+	int TRANSPORT_ROUTE_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.TripImpl <em>Trip</em>}' class.
@@ -3721,69 +3721,69 @@ public interface DairyPackage extends EPackage {
 	EAttribute getCollectionGroup_Type();
 
 	/**
-	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.Route <em>Route</em>}'.
+	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.TransportRoute <em>Transport Route</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Route</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Route
+	 * @return the meta object for class '<em>Transport Route</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.TransportRoute
 	 * @generated
 	 */
-	EClass getRoute();
+	EClass getTransportRoute();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Route#getId <em>Id</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.TransportRoute#getId <em>Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Route#getId()
-	 * @see #getRoute()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.TransportRoute#getId()
+	 * @see #getTransportRoute()
 	 * @generated
 	 */
-	EAttribute getRoute_Id();
+	EAttribute getTransportRoute_Id();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Route#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.TransportRoute#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Route#getName()
-	 * @see #getRoute()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.TransportRoute#getName()
+	 * @see #getTransportRoute()
 	 * @generated
 	 */
-	EAttribute getRoute_Name();
+	EAttribute getTransportRoute_Name();
 
 	/**
-	 * Returns the meta object for the reference list '{@link com.agritrace.edairy.desktop.common.model.dairy.Route#getStops <em>Stops</em>}'.
+	 * Returns the meta object for the reference list '{@link com.agritrace.edairy.desktop.common.model.dairy.TransportRoute#getStops <em>Stops</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Stops</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Route#getStops()
-	 * @see #getRoute()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.TransportRoute#getStops()
+	 * @see #getTransportRoute()
 	 * @generated
 	 */
-	EReference getRoute_Stops();
+	EReference getTransportRoute_Stops();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.Route#getDescription <em>Description</em>}'.
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.TransportRoute#getDescription <em>Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Route#getDescription()
-	 * @see #getRoute()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.TransportRoute#getDescription()
+	 * @see #getTransportRoute()
 	 * @generated
 	 */
-	EAttribute getRoute_Description();
+	EAttribute getTransportRoute_Description();
 
 	/**
-	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.Route#getVehicle <em>Vehicle</em>}'.
+	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.TransportRoute#getVehicle <em>Vehicle</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Vehicle</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Route#getVehicle()
-	 * @see #getRoute()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.TransportRoute#getVehicle()
+	 * @see #getTransportRoute()
 	 * @generated
 	 */
-	EReference getRoute_Vehicle();
+	EReference getTransportRoute_Vehicle();
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.Trip <em>Trip</em>}'.
@@ -5926,14 +5926,14 @@ public interface DairyPackage extends EPackage {
 		EAttribute COLLECTION_GROUP__TYPE = eINSTANCE.getCollectionGroup_Type();
 
 		/**
-		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl <em>Route</em>}' class.
+		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.TransportRouteImpl <em>Transport Route</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.RouteImpl
-		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getRoute()
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.TransportRouteImpl
+		 * @see com.agritrace.edairy.desktop.common.model.dairy.impl.DairyPackageImpl#getTransportRoute()
 		 * @generated
 		 */
-		EClass ROUTE = eINSTANCE.getRoute();
+		EClass TRANSPORT_ROUTE = eINSTANCE.getTransportRoute();
 
 		/**
 		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
@@ -5941,7 +5941,7 @@ public interface DairyPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ROUTE__ID = eINSTANCE.getRoute_Id();
+		EAttribute TRANSPORT_ROUTE__ID = eINSTANCE.getTransportRoute_Id();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -5949,7 +5949,7 @@ public interface DairyPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ROUTE__NAME = eINSTANCE.getRoute_Name();
+		EAttribute TRANSPORT_ROUTE__NAME = eINSTANCE.getTransportRoute_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Stops</b></em>' reference list feature.
@@ -5957,7 +5957,7 @@ public interface DairyPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ROUTE__STOPS = eINSTANCE.getRoute_Stops();
+		EReference TRANSPORT_ROUTE__STOPS = eINSTANCE.getTransportRoute_Stops();
 
 		/**
 		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
@@ -5965,7 +5965,7 @@ public interface DairyPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ROUTE__DESCRIPTION = eINSTANCE.getRoute_Description();
+		EAttribute TRANSPORT_ROUTE__DESCRIPTION = eINSTANCE.getTransportRoute_Description();
 
 		/**
 		 * The meta object literal for the '<em><b>Vehicle</b></em>' reference feature.
@@ -5973,7 +5973,7 @@ public interface DairyPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ROUTE__VEHICLE = eINSTANCE.getRoute_Vehicle();
+		EReference TRANSPORT_ROUTE__VEHICLE = eINSTANCE.getTransportRoute_Vehicle();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.TripImpl <em>Trip</em>}' class.

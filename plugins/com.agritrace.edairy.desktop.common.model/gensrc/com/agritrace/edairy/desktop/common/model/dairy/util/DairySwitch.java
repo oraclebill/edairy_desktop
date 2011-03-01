@@ -132,9 +132,9 @@ public class DairySwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.ROUTE: {
-				Route route = (Route)theEObject;
-				T result = caseRoute(route);
+			case DairyPackage.TRANSPORT_ROUTE: {
+				TransportRoute transportRoute = (TransportRoute)theEObject;
+				T result = caseTransportRoute(transportRoute);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -330,17 +330,17 @@ public class DairySwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Route</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Transport Route</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Route</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Transport Route</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRoute(Route object) {
+	public T caseTransportRoute(TransportRoute object) {
 		return null;
 	}
 

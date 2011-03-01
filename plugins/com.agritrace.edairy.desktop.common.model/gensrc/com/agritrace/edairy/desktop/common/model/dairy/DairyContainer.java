@@ -63,12 +63,12 @@ public interface DairyContainer extends Container {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Zone</em>' reference.
-	 * @see #setZone(Route)
+	 * @see #setZone(TransportRoute)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairyContainer_Zone()
 	 * @model
 	 * @generated
 	 */
-	Route getZone();
+	TransportRoute getZone();
 
 	/**
 	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.DairyContainer#getZone <em>Zone</em>}' reference.
@@ -78,7 +78,7 @@ public interface DairyContainer extends Container {
 	 * @see #getZone()
 	 * @generated
 	 */
-	void setZone(Route value);
+	void setZone(TransportRoute value);
 
 	/**
 	 * Returns the value of the '<em><b>Asset Info</b></em>' containment reference.

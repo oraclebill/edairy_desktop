@@ -42,7 +42,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
-import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.dao.IDairyLocationRepository;
@@ -227,7 +227,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 			@Override
 			public void ridgetSelected(SelectionEvent event) {
 				final DairyLocation loc = newJournalPage.getCollectionCenter();
-				final Route route = loc.getRoute();
+				final TransportRoute route = loc.getRoute();
 
 				if (route != null && route.getVehicle() != null) {
 					newJournalPage.setVehicle(route.getVehicle());

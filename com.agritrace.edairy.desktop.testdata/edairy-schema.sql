@@ -137,7 +137,7 @@
         `capacity` double precision not null,
         `measuretype` varchar(255),
         `status` varchar(60),
-        `route_zone_id` bigint,
+        `transportroute_zone_id` bigint,
         `tagtype` varchar(60),
         `tagvalue` varchar(60),
         `dateacquired` datetime,
@@ -220,7 +220,7 @@
         opver integer not null,
         `referencenumber` varchar(60) not null,
         `date` datetime not null,
-        `route_route_id` bigint not null,
+        `transportroute_route_id` bigint not null,
         `customer_customer_e_id` bigint not null,
         `employee_driver_personid` bigint,
         `vehicle_vehicle_vehicleid` bigint,
@@ -484,24 +484,6 @@
         primary key (`id`)
     ) type=InnoDB;
 
-    create table `route_stops` (
-        `dairylocation_id` bigint not null,
-        `route_id` bigint,
-        primary key (`dairylocation_id`)
-    ) type=InnoDB;
-
-    create table `route` (
-        `id` bigint not null auto_increment,
-        dtype varchar(255) not null,
-        opver integer not null,
-        `name` varchar(60),
-        `description` varchar(60),
-        `vehicle_vehicle_vehicleid` bigint,
-        `dairy_routes_companyid` bigint,
-        primary key (`id`),
-        unique (`name`)
-    ) type=InnoDB;
-
     create table `supplier_categories` (
         `supplier_categories_companyid` bigint not null,
         elt varchar(255),
@@ -559,6 +541,24 @@
         `signedby` varchar(60),
         `employee_signedoffby_personid` bigint,
         primary key (`transactionid`)
+    ) type=InnoDB;
+
+    create table `transportroute_stops` (
+        `dairylocation_id` bigint not null,
+        `transportroute_id` bigint,
+        primary key (`dairylocation_id`)
+    ) type=InnoDB;
+
+    create table `transportroute` (
+        `id` bigint not null auto_increment,
+        dtype varchar(255) not null,
+        opver integer not null,
+        `name` varchar(60),
+        `description` varchar(60),
+        `vehicle_vehicle_vehicleid` bigint,
+        `dairy_routes_companyid` bigint,
+        primary key (`id`),
+        unique (`name`)
     ) type=InnoDB;
 
     create table `trip_collections` (
@@ -773,10 +773,10 @@
         references `farm` (`farmid`);
 
     alter table `container` 
-        add index FKE7814C8153D360C1 (`route_zone_id`), 
-        add constraint FKE7814C8153D360C1 
-        foreign key (`route_zone_id`) 
-        references `route` (`id`);
+        add index FKE7814C81FC1BFACF (`transportroute_zone_id`), 
+        add constraint FKE7814C81FC1BFACF 
+        foreign key (`transportroute_zone_id`) 
+        references `transportroute` (`id`);
 
     alter table `container` 
         add index FKE7814C8148CF2FF (`dairy_dairybins_companyid`), 
@@ -847,16 +847,16 @@
         references `customer` (`customerid`);
 
     alter table `deliveryjournal` 
+        add index FKCB09F8C3F3761430 (`transportroute_route_id`), 
+        add constraint FKCB09F8C3F3761430 
+        foreign key (`transportroute_route_id`) 
+        references `transportroute` (`id`);
+
+    alter table `deliveryjournal` 
         add index FKCB09F8C336E40088 (`dairy_deliveryjournals_companyid`), 
         add constraint FKCB09F8C336E40088 
         foreign key (`dairy_deliveryjournals_companyid`) 
         references `dairy` (`dairyid`);
-
-    alter table `deliveryjournal` 
-        add index FKCB09F8C366CE7230 (`route_route_id`), 
-        add constraint FKCB09F8C366CE7230 
-        foreign key (`route_route_id`) 
-        references `route` (`id`);
 
     alter table `deliveryjournal` 
         add index FKCB09F8C38E0EB0AD (`vehicle_vehicle_vehicleid`), 
@@ -1088,32 +1088,6 @@
 
     create index roledtype on `role` (dtype);
 
-    alter table `route_stops` 
-        add index FK967B733B7072F8BA (`dairylocation_id`), 
-        add constraint FK967B733B7072F8BA 
-        foreign key (`dairylocation_id`) 
-        references `dairylocation` (`id`);
-
-    alter table `route_stops` 
-        add index FK967B733B50A70FA (`route_id`), 
-        add constraint FK967B733B50A70FA 
-        foreign key (`route_id`) 
-        references `route` (`id`);
-
-    create index routedtype on `route` (dtype);
-
-    alter table `route` 
-        add index FK67AB2498E0EB0AD (`vehicle_vehicle_vehicleid`), 
-        add constraint FK67AB2498E0EB0AD 
-        foreign key (`vehicle_vehicle_vehicleid`) 
-        references `vehicle` (`vehicleid`);
-
-    alter table `route` 
-        add index FK67AB249BB0D2E42 (`dairy_routes_companyid`), 
-        add constraint FK67AB249BB0D2E42 
-        foreign key (`dairy_routes_companyid`) 
-        references `dairy` (`dairyid`);
-
     alter table `supplier_categories` 
         add index FKD5D3CA6FE20A4274 (`supplier_categories_companyid`), 
         add constraint FKD5D3CA6FE20A4274 
@@ -1167,6 +1141,32 @@
         add constraint FK7FA0D2DE4D2E0B24 
         foreign key (`employee_signedoffby_personid`) 
         references `person` (`personid`);
+
+    alter table `transportroute_stops` 
+        add index FK8C7B9872599915BA (`transportroute_id`), 
+        add constraint FK8C7B9872599915BA 
+        foreign key (`transportroute_id`) 
+        references `transportroute` (`id`);
+
+    alter table `transportroute_stops` 
+        add index FK8C7B98727072F8BA (`dairylocation_id`), 
+        add constraint FK8C7B98727072F8BA 
+        foreign key (`dairylocation_id`) 
+        references `dairylocation` (`id`);
+
+    create index transportroutedtype on `transportroute` (dtype);
+
+    alter table `transportroute` 
+        add index FK73F0CCC08E0EB0AD (`vehicle_vehicle_vehicleid`), 
+        add constraint FK73F0CCC08E0EB0AD 
+        foreign key (`vehicle_vehicle_vehicleid`) 
+        references `vehicle` (`vehicleid`);
+
+    alter table `transportroute` 
+        add index FK73F0CCC0BB0D2E42 (`dairy_routes_companyid`), 
+        add constraint FK73F0CCC0BB0D2E42 
+        foreign key (`dairy_routes_companyid`) 
+        references `dairy` (`dairyid`);
 
     alter table `trip_collections` 
         add index FK8084E87BF0EC799F (`trip_tripid`), 

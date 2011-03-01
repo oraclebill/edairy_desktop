@@ -17,7 +17,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkSale;
-import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
@@ -122,13 +122,13 @@ public class MilkSaleLogController extends BasicDirectoryController<MilkSale> {
 		endDateRidget = getRidget(IDateTimeRidget.class, MilkSaleLogFilterPanel.FILTER_END_DATE);
 		endDateRidget.bindToModel(BeansObservables.observeValue(filterBean, MilkSaleLogFilterBean.END_DATE));
 
-		final List<Route> routes = new ArrayList<Route>();
+		final List<TransportRoute> routes = new ArrayList<TransportRoute>();
 		routes.add(null);
 		routes.addAll(dairyRepo.allRoutes());
 
 		routeRidget = getRidget(IComboRidget.class, MilkSaleLogFilterPanel.FILTER_STORE);
 		final IObservableList routeList = Observables.staticObservableList(routes);
-		routeRidget.bindToModel(routeList, Route.class, "getName", BeansObservables.observeValue(filterBean, MilkSaleLogFilterBean.STORE));
+		routeRidget.bindToModel(routeList, TransportRoute.class, "getName", BeansObservables.observeValue(filterBean, MilkSaleLogFilterBean.STORE));
 
 		customerRidget = getRidget(IComboRidget.class, MilkSaleLogFilterPanel.FILTER_CUSTOMER);
 		final IObservableList customerList = Observables.staticObservableList(dairyRepo.allCustomers());

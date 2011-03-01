@@ -37,7 +37,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkGrade;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkSale;
-import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
@@ -110,9 +110,9 @@ public class DairyRepository implements IDairyRepository {
 		}
 
 		class MembersForRoute extends SessionRunnable<Object> {
-			Route route;
+			TransportRoute route;
 
-			public MembersForRoute(Route route) {
+			public MembersForRoute(TransportRoute route) {
 				this.route = route;
 			}
 
@@ -141,7 +141,7 @@ public class DairyRepository implements IDairyRepository {
 			}
 		}
 
-		public List<Membership> membersForRoute(Route defaultRoute) {
+		public List<Membership> membersForRoute(TransportRoute defaultRoute) {
 			final MembersForRoute query = new MembersForRoute(defaultRoute);
 			runWithTransaction(query);
 
@@ -224,12 +224,12 @@ public class DairyRepository implements IDairyRepository {
 		dairyRepository.update(getLocalDairy());
 	}
 
-	public void updateRoute(final Route changedRoute) {
+	public void updateRoute(final TransportRoute changedRoute) {
 		dairyRepository.save(changedRoute);
 	}
 
 	@Override
-	public void addRoute(final Route newRoute) {
+	public void addRoute(final TransportRoute newRoute) {
 		getLocalDairy().getRoutes().add(newRoute);
 		dairyRepository.save(getLocalDairy());
 	}
@@ -257,7 +257,7 @@ public class DairyRepository implements IDairyRepository {
 	}
 
 	@Override
-	public List<Route> allRoutes() {
+	public List<TransportRoute> allRoutes() {
 		return getLocalDairy().getRoutes();
 	}
 
@@ -271,7 +271,7 @@ public class DairyRepository implements IDairyRepository {
 	}
 
 	@Override
-	public void deleteRoute(final Route object) {
+	public void deleteRoute(final TransportRoute object) {
 		if (getLocalDairy().getRoutes().remove(object)) {
 			getSession().delete(object);
 			getSession().flush();
@@ -367,7 +367,7 @@ public class DairyRepository implements IDairyRepository {
 
 
 	@Override
-	public Collection<Membership> getMembersForRoute(Route theRoute) {
+	public Collection<Membership> getMembersForRoute(TransportRoute theRoute) {
 		return dairyRepository.membersForRoute(theRoute);
 	}
 
@@ -473,7 +473,7 @@ public class DairyRepository implements IDairyRepository {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<DairyContainer> getBinsByRoute(Route journalRoute) {
+	public List<DairyContainer> getBinsByRoute(TransportRoute journalRoute) {
 		final Session session = getSession();
 		final Criteria dcCriteria = session.createCriteria("DairyContainer");
 		if (journalRoute != null) {

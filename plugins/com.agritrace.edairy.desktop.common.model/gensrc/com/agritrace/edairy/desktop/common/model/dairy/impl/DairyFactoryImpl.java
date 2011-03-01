@@ -67,7 +67,7 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 			case DairyPackage.EMPLOYEE: return createEmployee();
 			case DairyPackage.DAIRY_LOCATION: return createDairyLocation();
 			case DairyPackage.COLLECTION_GROUP: return createCollectionGroup();
-			case DairyPackage.ROUTE: return createRoute();
+			case DairyPackage.TRANSPORT_ROUTE: return createTransportRoute();
 			case DairyPackage.TRIP: return createTrip();
 			case DairyPackage.DELIVERY_JOURNAL: return createDeliveryJournal();
 			case DairyPackage.MILK_GRADE: return createMilkGrade();
@@ -207,9 +207,9 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Route createRoute() {
-		RouteImpl route = new RouteImpl();
-		return route;
+	public TransportRoute createTransportRoute() {
+		TransportRouteImpl transportRoute = new TransportRouteImpl();
+		return transportRoute;
 	}
 
 	/**

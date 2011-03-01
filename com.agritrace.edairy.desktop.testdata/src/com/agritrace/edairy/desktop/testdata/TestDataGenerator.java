@@ -3,8 +3,10 @@ package com.agritrace.edairy.desktop.testdata;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.BasicConfigurator;
@@ -27,7 +29,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
@@ -399,7 +401,7 @@ public class TestDataGenerator extends DatabaseSetup {
 		Assert.isLegal(centersPerRoute > 0);
 
 		int stopCount = 0;
-		Route route = null;
+		TransportRoute route = null;
 		for (int routeNum = 0; routeNum < routeCount; routeNum++) {
 			System.out.println("\tGenerating Route: " + routeNum);
 			route = createRouteVehicleAndDriver(routeNum);
@@ -414,9 +416,9 @@ public class TestDataGenerator extends DatabaseSetup {
 		}
 	}
 
-	private Route createRouteVehicleAndDriver(int routeCount) {
+	private TransportRoute createRouteVehicleAndDriver(int routeCount) {
 		Vehicle vehicle;
-		Route route;
+		TransportRoute route;
 		Person person;
 		Employee driver;
 		driver = createEmployee("Driver");
@@ -429,7 +431,7 @@ public class TestDataGenerator extends DatabaseSetup {
 		currentDairy.getVehicles().add(vehicle);
 		getSession().persist(vehicle);
 
-		route = DairyFactory.eINSTANCE.createRoute();
+		route = DairyFactory.eINSTANCE.createTransportRoute();
 		route.setName(vehicle.getLogBookNumber());
 		route.setVehicle(vehicle);
 		currentDairy.getRoutes().add(route);
@@ -442,7 +444,7 @@ public class TestDataGenerator extends DatabaseSetup {
 	 * @param route
 	 * @param stopCount
 	 */
-	private void createCenterForRoute(Route route,
+	private void createCenterForRoute(TransportRoute route,
 			int stopCount) {
 		DairyLocation center;
 		String centerCode = String.format("L%04d", stopCount);
@@ -479,22 +481,21 @@ public class TestDataGenerator extends DatabaseSetup {
 		double factor = 1.0d;
 		for (CollectionSession session : currentDairy.getCollectionSessions()) {
 			System.out.println("\tSession " + session);
+			HashMap<TransportRoute, Set<CollectionGroup>> groupMap = new HashMap<TransportRoute, Set<CollectionGroup>>();			
 			for (DairyLocation center : currentDairy.getBranchLocations()) {
 				System.out.println("\t\tCenter " + center);
 				List<Membership> filteredMembers = filterMembersByDefaultRoute(center);
 				CollectionGroup group = createCollectionGroup(center, collectionDate, session);
-				group.setReferenceNumber("" + group.hashCode());
-				group.setDriver(center.getRoute().getVehicle().getDriver());
 				DairyContainer bin = currentDairy.getDairyBins().get(currentBin++ % binCount);
 				System.out.println("\t\tGroup/Bin " + group + ", " + bin);
 				for (Membership member : filteredMembers) {
 					CollectionJournalLine entry = createCollectionEntry(group, bin, member, BigDecimal.ONE);
 				}
 				getSession().persist(group);
-
 			}
 			factor = factor / 2.0d;
 		}
+		
 	}
 
 	private List<Membership> filterMembersByDefaultRoute(DairyLocation center) {
@@ -513,6 +514,7 @@ public class TestDataGenerator extends DatabaseSetup {
 	 * @param session
 	 * @return
 	 */
+	int referenceCounter = 0;
 	private CollectionGroup createCollectionGroup(DairyLocation center,
 			Date collectionDate,
 			CollectionSession session) {
@@ -524,11 +526,9 @@ public class TestDataGenerator extends DatabaseSetup {
 		group.setCollectionCenter(center);
 		group.setSession(session);
 		group.setType(CollectionGroupType.JOURNAL_GROUP);
-
-// group.setDriver(value);
-// group.setDriverTotal(value);
-// group.setReferenceNumber(value);
-
+		group.setVehicle(center.getRoute().getVehicle());
+		group.setDriver(group.getVehicle().getDriver());
+		group.setReferenceNumber(String.format("REF%05d", ++referenceCounter));
 		return group;
 	}
 

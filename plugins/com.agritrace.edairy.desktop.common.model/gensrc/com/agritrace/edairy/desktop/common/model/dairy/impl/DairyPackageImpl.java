@@ -35,7 +35,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.MilkGradeChange;
 import com.agritrace.edairy.desktop.common.model.dairy.Preference;
 import com.agritrace.edairy.desktop.common.model.dairy.PreferenceKey;
 import com.agritrace.edairy.desktop.common.model.dairy.PreferenceType;
-import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
 import com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.Trip;
@@ -116,7 +116,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass routeEClass = null;
+	private EClass transportRouteEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1063,8 +1063,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getRoute() {
-		return routeEClass;
+	public EClass getTransportRoute() {
+		return transportRouteEClass;
 	}
 
 	/**
@@ -1072,8 +1072,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRoute_Id() {
-		return (EAttribute)routeEClass.getEStructuralFeatures().get(0);
+	public EAttribute getTransportRoute_Id() {
+		return (EAttribute)transportRouteEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1081,8 +1081,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRoute_Name() {
-		return (EAttribute)routeEClass.getEStructuralFeatures().get(1);
+	public EAttribute getTransportRoute_Name() {
+		return (EAttribute)transportRouteEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1090,8 +1090,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRoute_Stops() {
-		return (EReference)routeEClass.getEStructuralFeatures().get(2);
+	public EReference getTransportRoute_Stops() {
+		return (EReference)transportRouteEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1099,8 +1099,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRoute_Description() {
-		return (EAttribute)routeEClass.getEStructuralFeatures().get(3);
+	public EAttribute getTransportRoute_Description() {
+		return (EAttribute)transportRouteEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1108,8 +1108,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRoute_Vehicle() {
-		return (EReference)routeEClass.getEStructuralFeatures().get(4);
+	public EReference getTransportRoute_Vehicle() {
+		return (EReference)transportRouteEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -2449,12 +2449,12 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEReference(collectionGroupEClass, COLLECTION_GROUP__COLLECTION_CENTER);
 		createEAttribute(collectionGroupEClass, COLLECTION_GROUP__TYPE);
 
-		routeEClass = createEClass(ROUTE);
-		createEAttribute(routeEClass, ROUTE__ID);
-		createEAttribute(routeEClass, ROUTE__NAME);
-		createEReference(routeEClass, ROUTE__STOPS);
-		createEAttribute(routeEClass, ROUTE__DESCRIPTION);
-		createEReference(routeEClass, ROUTE__VEHICLE);
+		transportRouteEClass = createEClass(TRANSPORT_ROUTE);
+		createEAttribute(transportRouteEClass, TRANSPORT_ROUTE__ID);
+		createEAttribute(transportRouteEClass, TRANSPORT_ROUTE__NAME);
+		createEReference(transportRouteEClass, TRANSPORT_ROUTE__STOPS);
+		createEAttribute(transportRouteEClass, TRANSPORT_ROUTE__DESCRIPTION);
+		createEReference(transportRouteEClass, TRANSPORT_ROUTE__VEHICLE);
 
 		tripEClass = createEClass(TRIP);
 		createEReference(tripEClass, TRIP__COLLECTIONS);
@@ -2716,7 +2716,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getDairyLocation_Name(), ecorePackage.getEString(), "name", null, 1, 1, DairyLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDairyLocation_DateOpened(), ecorePackage.getEDate(), "dateOpened", null, 0, 1, DairyLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDairyLocation_Phone(), ecorePackage.getEString(), "phone", "+254", 0, 1, DairyLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDairyLocation_Route(), this.getRoute(), this.getRoute_Stops(), "route", null, 0, 1, DairyLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDairyLocation_Route(), this.getTransportRoute(), this.getTransportRoute_Stops(), "route", null, 0, 1, DairyLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDairyLocation_Description(), ecorePackage.getEString(), "description", null, 0, 1, DairyLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDairyLocation_Code(), ecorePackage.getEString(), "code", null, 0, 1, DairyLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDairyLocation_Location(), theModelPackage.getLocation(), null, "location", null, 1, 1, DairyLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2742,12 +2742,12 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEReference(getCollectionGroup_CollectionCenter(), this.getDairyLocation(), null, "collectionCenter", null, 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionGroup_Type(), this.getCollectionGroupType(), "type", "ScaleGroup", 1, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(routeEClass, Route.class, "Route", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getRoute_Id(), theModelPackage.getUniqueID(), "Id", null, 1, 1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getRoute_Name(), ecorePackage.getEString(), "name", null, 0, 1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRoute_Stops(), this.getDairyLocation(), this.getDairyLocation_Route(), "stops", null, 0, -1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getRoute_Description(), ecorePackage.getEString(), "description", null, 0, 1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRoute_Vehicle(), this.getVehicle(), null, "vehicle", null, 0, 1, Route.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(transportRouteEClass, TransportRoute.class, "TransportRoute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTransportRoute_Id(), theModelPackage.getUniqueID(), "Id", null, 1, 1, TransportRoute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTransportRoute_Name(), ecorePackage.getEString(), "name", null, 0, 1, TransportRoute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTransportRoute_Stops(), this.getDairyLocation(), this.getDairyLocation_Route(), "stops", null, 0, -1, TransportRoute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTransportRoute_Description(), ecorePackage.getEString(), "description", null, 0, 1, TransportRoute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTransportRoute_Vehicle(), this.getVehicle(), null, "vehicle", null, 0, 1, TransportRoute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tripEClass, Trip.class, "Trip", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTrip_Collections(), this.getCollectionGroup(), null, "collections", null, 1, -1, Trip.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2759,7 +2759,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEClass(deliveryJournalEClass, DeliveryJournal.class, "DeliveryJournal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDeliveryJournal_ReferenceNumber(), ecorePackage.getEString(), "referenceNumber", null, 1, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDeliveryJournal_Date(), ecorePackage.getEDate(), "date", null, 1, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDeliveryJournal_Route(), this.getRoute(), null, "route", null, 1, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDeliveryJournal_Route(), this.getTransportRoute(), null, "route", null, 1, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDeliveryJournal_Customer(), this.getCustomer(), null, "customer", null, 1, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDeliveryJournal_Driver(), this.getEmployee(), null, "driver", null, 0, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDeliveryJournal_Vehicle(), this.getVehicle(), null, "vehicle", null, 0, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2807,7 +2807,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getDairy_FederalPin(), ecorePackage.getEString(), "federalPin", null, 0, 1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDairy_LicenseEffectiveDate(), ecorePackage.getEDate(), "licenseEffectiveDate", null, 0, 1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDairy_LicenseExpirationDate(), ecorePackage.getEDate(), "licenseExpirationDate", null, 0, 1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDairy_Routes(), this.getRoute(), null, "routes", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getDairy_Routes(), this.getTransportRoute(), null, "routes", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getDairy_Vehicles(), this.getVehicle(), null, "vehicles", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getDairy_Employees(), this.getEmployee(), null, "employees", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getDairy_Memberships(), this.getMembership(), this.getMembership_Dairy(), "memberships", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -2852,7 +2852,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 
 		initEClass(dairyContainerEClass, DairyContainer.class, "DairyContainer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDairyContainer_Status(), ecorePackage.getEString(), "status", "IN_CIRCULATION", 0, 1, DairyContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDairyContainer_Zone(), this.getRoute(), null, "zone", null, 0, 1, DairyContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDairyContainer_Zone(), this.getTransportRoute(), null, "zone", null, 0, 1, DairyContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDairyContainer_AssetInfo(), this.getAsset(), null, "assetInfo", null, 0, 1, DairyContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		getDairyContainer_AssetInfo().getEKeys().add(this.getAsset_TagValue());
 
@@ -3009,14 +3009,14 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
-		  (getRoute_Id(), 
+		  (getTransportRoute_Id(), 
 		   source, 
 		   new String[] {
 			 "name", "Id",
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
-		  (getRoute_Name(), 
+		  (getTransportRoute_Name(), 
 		   source, 
 		   new String[] {
 			 "kind", "elementOnly"
@@ -3136,13 +3136,13 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 			 "appinfo", "@Temporal(TemporalType.DATE)"
 		   });			
 		addAnnotation
-		  (getRoute_Id(), 
+		  (getTransportRoute_Id(), 
 		   source, 
 		   new String[] {
 			 "appinfo", "@Id\n@GeneratedValue"
 		   });			
 		addAnnotation
-		  (getRoute_Name(), 
+		  (getTransportRoute_Name(), 
 		   source, 
 		   new String[] {
 			 "appinfo", "@NaturalId"

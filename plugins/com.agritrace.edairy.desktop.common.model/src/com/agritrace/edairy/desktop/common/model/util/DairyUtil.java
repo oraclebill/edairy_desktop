@@ -26,7 +26,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
@@ -141,7 +141,7 @@ public class DairyUtil {
 	}
 
 	public static DairyLocation createDairyLocation(String name, String code, String phone, String description,
-			Date dateOpened, Location location, Route route) {
+			Date dateOpened, Location location, TransportRoute route) {
 		final DairyLocation branch = DairyFactory.eINSTANCE.createDairyLocation();
 
 		branch.setName(name);

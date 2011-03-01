@@ -14,14 +14,14 @@ import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.operations.ui.ViewConstants;
 import com.google.inject.Inject;
 
-public class RouteEditDialogController extends RecordDialogController<Route> {
+public class RouteEditDialogController extends RecordDialogController<TransportRoute> {
 	private final IDairyRepository dairyRepo;
 
 	@Inject
@@ -32,20 +32,20 @@ public class RouteEditDialogController extends RecordDialogController<Route> {
 
 	@Override
 	protected void configureUserRidgets() {
-		addTextMap(ViewConstants.ID_TXT_ROUTE_NAME, DairyPackage.Literals.ROUTE__NAME);
-		addTextMap(ViewConstants.ID_TXT_ROUTE_DESCRIPTION, DairyPackage.Literals.ROUTE__DESCRIPTION);
+		addTextMap(ViewConstants.ID_TXT_ROUTE_NAME, DairyPackage.Literals.TRANSPORT_ROUTE__NAME);
+		addTextMap(ViewConstants.ID_TXT_ROUTE_DESCRIPTION, DairyPackage.Literals.TRANSPORT_ROUTE__DESCRIPTION);
 
 		final Dairy localDairy = dairyRepo.getLocalDairy();
 		final List<Vehicle> vehicles = new ArrayList<Vehicle>();
 		vehicles.add(null);
 		vehicles.addAll(localDairy.getVehicles());
-		addComboMap(ViewConstants.ID_TXT_ROUTE_VEHICLE, vehicles, "getRegistrationNumber", DairyPackage.Literals.ROUTE__VEHICLE);
+		addComboMap(ViewConstants.ID_TXT_ROUTE_VEHICLE, vehicles, "getRegistrationNumber", DairyPackage.Literals.TRANSPORT_ROUTE__VEHICLE);
 
 		final ITextRidget routeName = getRidget(ITextRidget.class, ViewConstants.ID_TXT_ROUTE_NAME);
 		getRidget(IComboRidget.class, ViewConstants.ID_TXT_ROUTE_VEHICLE).addSelectionListener(new ISelectionListener() {
 			@Override
 			public void ridgetSelected(SelectionEvent event) {
-				final Route route = getWorkingCopy();
+				final TransportRoute route = getWorkingCopy();
 				final Vehicle vehicle = route.getVehicle();
 
 				if (vehicle != null && StringUtils.isEmpty(route.getName())) {
@@ -56,7 +56,7 @@ public class RouteEditDialogController extends RecordDialogController<Route> {
 		});
 
 		final IListRidget stopsList = getRidget(IListRidget.class, ViewConstants.ID_LST_ROUTE_STOPS);
-		stopsList.bindToModel(EMFObservables.observeList(this.getWorkingCopy(), DairyPackage.Literals.ROUTE__STOPS),
+		stopsList.bindToModel(EMFObservables.observeList(this.getWorkingCopy(), DairyPackage.Literals.TRANSPORT_ROUTE__STOPS),
 				DairyLocation.class, "name");
 		stopsList.updateFromModel();
 		stopsList.setOutputOnly(true);

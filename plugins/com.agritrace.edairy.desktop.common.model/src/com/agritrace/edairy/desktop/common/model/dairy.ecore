@@ -136,8 +136,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dateOpened" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="phone" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="+254"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="route" eType="#//Route"
-        eOpposite="#//Route/stops"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="route" eType="#//TransportRoute"
+        eOpposite="#//TransportRoute/stops"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
@@ -199,7 +199,7 @@
     <eLiterals name="SUSPENDED" value="3"/>
     <eLiterals name="ARCHIVED" value="4"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Route">
+  <eClassifiers xsi:type="ecore:EClass" name="TransportRoute">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Id" lowerBound="1" eType="ecore:EDataType common.ecore#//UniqueID"
         iD="true">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
@@ -246,7 +246,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="referenceNumber" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="route" lowerBound="1" eType="#//Route"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="route" lowerBound="1" eType="#//TransportRoute"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="customer" lowerBound="1"
         eType="#//Customer"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="driver" eType="#//Employee"/>
@@ -324,7 +324,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="licenseExpirationDate"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="routes" ordered="false"
-        upperBound="-1" eType="#//Route" containment="true"/>
+        upperBound="-1" eType="#//TransportRoute" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="vehicles" ordered="false"
         upperBound="-1" eType="#//Vehicle" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="employees" ordered="false"
@@ -421,7 +421,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="DairyContainer" eSuperTypes="farm.ecore#//Container">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="IN_CIRCULATION"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="zone" eType="#//Route"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="zone" eType="#//TransportRoute"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="assetInfo" eType="#//Asset"
         containment="true" eKeys="#//Asset/tagValue">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">

@@ -24,7 +24,7 @@ import com.agritrace.edairy.desktop.common.model.base.PostalLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
-import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
 import com.agritrace.edairy.desktop.common.persistence.test.ManagedMemoryDataStoreProvider;
 import com.agritrace.edairy.desktop.dairy.locations.ui.DairyLocationUIConstants;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationDirectoryController;
@@ -75,7 +75,7 @@ public class DairyLocationControllerTest extends AbstractSubModuleControllerTest
 						DairyFunction.WAREHOUSE, DairyFunction.STORE_SALES));
 		dairyLocation.setCode("RED");
 
-		final Route route = DairyFactory.eINSTANCE.createRoute();
+		final TransportRoute route = DairyFactory.eINSTANCE.createTransportRoute();
 		route.setName("testroutename");
 		route.setDescription("testroutedesc");
 		// route.setCode("BLUE");
@@ -144,7 +144,7 @@ public class DairyLocationControllerTest extends AbstractSubModuleControllerTest
 
 		final IComboRidget route = getController().getRidget(IComboRidget.class,
 				DairyLocationUIConstants.RIDGET_ID_ROUTE);
-		Assert.assertEquals(dairyLocation.getRoute().getName(), ((Route) route.getSelection()).getName());
+		Assert.assertEquals(dairyLocation.getRoute().getName(), ((TransportRoute) route.getSelection()).getName());
 	}
 
 	public void testAddressTab() {

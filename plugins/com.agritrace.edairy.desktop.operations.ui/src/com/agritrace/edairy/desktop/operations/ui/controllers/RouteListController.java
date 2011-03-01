@@ -11,7 +11,7 @@ import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
@@ -25,7 +25,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 @PermissionRequired(UIPermission.VIEW_ROUTES)
-public class RouteListController extends BasicDirectoryController<Route> {
+public class RouteListController extends BasicDirectoryController<TransportRoute> {
 
 	public static class SearchBean extends AbstractBean {
 		public static final String DESCRIPTION_PROP = "description";
@@ -67,23 +67,23 @@ public class RouteListController extends BasicDirectoryController<Route> {
 	private final SearchBean searchBean = new SearchBean();
 
 	@Inject
-	public RouteListController(final IDairyRepository dairyRepo, final IRepository<Route> repo,
+	public RouteListController(final IDairyRepository dairyRepo, final IRepository<TransportRoute> repo,
 			final Provider<RouteEditDialog> editDialogProvider) {
 		this.dairyRepo = dairyRepo;
 		this.editDialogProvider = editDialogProvider;
 		setRepository(repo);
-		setEClass(DairyPackage.Literals.ROUTE);
+		setEClass(DairyPackage.Literals.TRANSPORT_ROUTE);
 
-		// addTableColumn("Code", DairyPackage.Literals.ROUTE__CODE);
-		addTableColumn("Name", DairyPackage.Literals.ROUTE__NAME);
-		addTableColumn("Vehicle", DairyPackage.Literals.ROUTE__VEHICLE, new ColumnFormatter() {
+		// addTableColumn("Code", DairyPackage.Literals.TRANSPORT_ROUTE__CODE);
+		addTableColumn("Name", DairyPackage.Literals.TRANSPORT_ROUTE__NAME);
+		addTableColumn("Vehicle", DairyPackage.Literals.TRANSPORT_ROUTE__VEHICLE, new ColumnFormatter() {
 			@Override
 			public String getText(Object element) {
-				final Vehicle vehicle = ((Route) element).getVehicle();
+				final Vehicle vehicle = ((TransportRoute) element).getVehicle();
 				return vehicle == null ? "" : vehicle.getRegistrationNumber();
 			}
 		});
-		addTableColumn("Description", DairyPackage.Literals.ROUTE__DESCRIPTION);
+		addTableColumn("Description", DairyPackage.Literals.TRANSPORT_ROUTE__DESCRIPTION);
 	}
 
 	@Override
@@ -111,11 +111,11 @@ public class RouteListController extends BasicDirectoryController<Route> {
 	}
 
 	@Override
-	protected List<Route> getFilteredResult() {
-		final List<Route> allRoutes = getRepository().all();
-		final List<Route> filteredRoutes = new ArrayList<Route>();
+	protected List<TransportRoute> getFilteredResult() {
+		final List<TransportRoute> allRoutes = getRepository().all();
+		final List<TransportRoute> filteredRoutes = new ArrayList<TransportRoute>();
 
-		for (final Route r : allRoutes) {
+		for (final TransportRoute r : allRoutes) {
 			if (MatchUtil.matchContains(searchBean.getName(), r.getName())
 					&& MatchUtil.matchContains(searchBean.getDescription(), r.getDescription())) {
 				filteredRoutes.add(r);
@@ -126,7 +126,7 @@ public class RouteListController extends BasicDirectoryController<Route> {
 	}
 
 	@Override
-	protected RecordDialog<Route> getRecordDialog(Shell shell) {
+	protected RecordDialog<TransportRoute> getRecordDialog(Shell shell) {
 		return editDialogProvider.get();
 	}
 
@@ -136,12 +136,12 @@ public class RouteListController extends BasicDirectoryController<Route> {
 		description.setText("");
 	}
 
-	@Override protected void createEntity(Route newRoute) {
+	@Override protected void createEntity(TransportRoute newRoute) {
 		dairyRepo.addRoute(newRoute);
 	}
 
 	@Override
-	protected void deleteEntity(Route deletableEntity) {
+	protected void deleteEntity(TransportRoute deletableEntity) {
 		if(deletableEntity != null){
 			dairyRepo.deleteRoute(deletableEntity);
 		}

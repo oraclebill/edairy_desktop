@@ -100,12 +100,12 @@ public interface DeliveryJournal extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Route</em>' reference.
-	 * @see #setRoute(Route)
+	 * @see #setRoute(TransportRoute)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDeliveryJournal_Route()
 	 * @model required="true"
 	 * @generated
 	 */
-	Route getRoute();
+	TransportRoute getRoute();
 
 	/**
 	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getRoute <em>Route</em>}' reference.
@@ -115,7 +115,7 @@ public interface DeliveryJournal extends EObject {
 	 * @see #getRoute()
 	 * @generated
 	 */
-	void setRoute(Route value);
+	void setRoute(TransportRoute value);
 
 	/**
 	 * Returns the value of the '<em><b>Customer</b></em>' reference.

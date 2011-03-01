@@ -16,7 +16,7 @@ import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.AddressGroupWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.DirectionGroupController;
@@ -101,8 +101,8 @@ public class DairyDialogController extends RecordDialogController<DairyLocation>
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Route> getRoutes(){
-		return (List<Route>)getContext("routes");
+	public List<TransportRoute> getRoutes(){
+		return (List<TransportRoute>)getContext("routes");
 	}
 
 	private void resetDetailArea() {

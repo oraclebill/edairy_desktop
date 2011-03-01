@@ -262,7 +262,7 @@ public interface Dairy extends Company {
 
 	/**
 	 * Returns the value of the '<em><b>Routes</b></em>' containment reference list.
-	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.Route}.
+	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.TransportRoute}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Routes</em>' containment reference list isn't clear,
@@ -274,7 +274,7 @@ public interface Dairy extends Company {
 	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
-	EList<Route> getRoutes();
+	EList<TransportRoute> getRoutes();
 
 	/**
 	 * Returns the value of the '<em><b>Vehicles</b></em>' containment reference list.

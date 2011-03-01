@@ -12,7 +12,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.Route;
+import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
 
 import java.util.Collection;
 import java.util.Date;
@@ -141,7 +141,7 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * @generated
 	 * @ordered
 	 */
-	protected Route route;
+	protected TransportRoute route;
 
 	/**
 	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
@@ -321,10 +321,10 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Route getRoute() {
+	public TransportRoute getRoute() {
 		if (route != null && route.eIsProxy()) {
 			InternalEObject oldRoute = (InternalEObject)route;
-			route = (Route)eResolveProxy(oldRoute);
+			route = (TransportRoute)eResolveProxy(oldRoute);
 			if (route != oldRoute) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DAIRY_LOCATION__ROUTE, oldRoute, route));
@@ -338,7 +338,7 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Route basicGetRoute() {
+	public TransportRoute basicGetRoute() {
 		return route;
 	}
 
@@ -347,8 +347,8 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetRoute(Route newRoute, NotificationChain msgs) {
-		Route oldRoute = route;
+	public NotificationChain basicSetRoute(TransportRoute newRoute, NotificationChain msgs) {
+		TransportRoute oldRoute = route;
 		route = newRoute;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__ROUTE, oldRoute, newRoute);
@@ -362,13 +362,13 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setRoute(Route newRoute) {
+	public void setRoute(TransportRoute newRoute) {
 		if (newRoute != route) {
 			NotificationChain msgs = null;
 			if (route != null)
-				msgs = ((InternalEObject)route).eInverseRemove(this, DairyPackage.ROUTE__STOPS, Route.class, msgs);
+				msgs = ((InternalEObject)route).eInverseRemove(this, DairyPackage.TRANSPORT_ROUTE__STOPS, TransportRoute.class, msgs);
 			if (newRoute != null)
-				msgs = ((InternalEObject)newRoute).eInverseAdd(this, DairyPackage.ROUTE__STOPS, Route.class, msgs);
+				msgs = ((InternalEObject)newRoute).eInverseAdd(this, DairyPackage.TRANSPORT_ROUTE__STOPS, TransportRoute.class, msgs);
 			msgs = basicSetRoute(newRoute, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -521,8 +521,8 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 		switch (featureID) {
 			case DairyPackage.DAIRY_LOCATION__ROUTE:
 				if (route != null)
-					msgs = ((InternalEObject)route).eInverseRemove(this, DairyPackage.ROUTE__STOPS, Route.class, msgs);
-				return basicSetRoute((Route)otherEnd, msgs);
+					msgs = ((InternalEObject)route).eInverseRemove(this, DairyPackage.TRANSPORT_ROUTE__STOPS, TransportRoute.class, msgs);
+				return basicSetRoute((TransportRoute)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -599,7 +599,7 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 				setPhone((String)newValue);
 				return;
 			case DairyPackage.DAIRY_LOCATION__ROUTE:
-				setRoute((Route)newValue);
+				setRoute((TransportRoute)newValue);
 				return;
 			case DairyPackage.DAIRY_LOCATION__DESCRIPTION:
 				setDescription((String)newValue);
@@ -642,7 +642,7 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 				setPhone(PHONE_EDEFAULT);
 				return;
 			case DairyPackage.DAIRY_LOCATION__ROUTE:
-				setRoute((Route)null);
+				setRoute((TransportRoute)null);
 				return;
 			case DairyPackage.DAIRY_LOCATION__DESCRIPTION:
 				setDescription(DESCRIPTION_EDEFAULT);

@@ -149,7 +149,7 @@ public interface DairyLocation extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Route</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.Route#getStops <em>Stops</em>}'.
+	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.TransportRoute#getStops <em>Stops</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Route</em>' reference isn't clear,
@@ -157,13 +157,13 @@ public interface DairyLocation extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Route</em>' reference.
-	 * @see #setRoute(Route)
+	 * @see #setRoute(TransportRoute)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairyLocation_Route()
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Route#getStops
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.TransportRoute#getStops
 	 * @model opposite="stops"
 	 * @generated
 	 */
-	Route getRoute();
+	TransportRoute getRoute();
 
 	/**
 	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.DairyLocation#getRoute <em>Route</em>}' reference.
@@ -173,7 +173,7 @@ public interface DairyLocation extends EObject {
 	 * @see #getRoute()
 	 * @generated
 	 */
-	void setRoute(Route value);
+	void setRoute(TransportRoute value);
 
 	/**
 	 * Returns the value of the '<em><b>Description</b></em>' attribute.
