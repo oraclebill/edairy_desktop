@@ -3,6 +3,8 @@ package com.agritrace.edairy.desktop.testdata;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.BasicConfigurator;
@@ -15,6 +17,7 @@ import com.agritrace.edairy.desktop.common.model.base.Gender;
 import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
@@ -435,6 +438,10 @@ public class TestDataGenerator extends DatabaseSetup {
 		return route;
 	}
 
+	/**
+	 * @param route
+	 * @param stopCount
+	 */
 	private void createCenterForRoute(Route route,
 			int stopCount) {
 		DairyLocation center;
@@ -446,15 +453,92 @@ public class TestDataGenerator extends DatabaseSetup {
 		getSession().persist(center);
 	}
 
+	/**
+	 * @param collectionDate
+	 */
 	private void generateCollectionData() {
-		System.out.println("Generating Collection Data...");
+		Calendar currentDate, endDate;
+		
+		currentDate = Calendar.getInstance();
+		currentDate.setTime(getStartDate());
+		
+		endDate = Calendar.getInstance();
+		endDate.setTime(getEndDate());
+		
+		for (; currentDate.before(endDate); currentDate.add(Calendar.DAY_OF_YEAR, 1)) {
+			generateCollectionData(currentDate.getTime());
+		}		
+	}
+
+	/**
+	 * @param collectionDate
+	 */
+	private void generateCollectionData(Date collectionDate) {
+		System.out.println("Generating Collection Data for " + collectionDate);
+		int currentBin = 0, binCount = currentDairy.getDairyBins().size() / 3;
+		double factor = 1.0d;
 		for (CollectionSession session : currentDairy.getCollectionSessions()) {
-			for (Membership member : currentDairy.getMemberships()) {
-				CollectionJournalLine entry = DairyFactory.eINSTANCE.createCollectionJournalLine();
+			System.out.println("\tSession " + session);
+			for (DairyLocation center : currentDairy.getBranchLocations()) {
+				System.out.println("\t\tCenter " + center);
+				List<Membership> filteredMembers = filterMembersByDefaultRoute(center);
+				CollectionGroup group = createCollectionGroup(center, collectionDate, session);
+				group.setReferenceNumber("" + group.hashCode());
+				group.setDriver(center.getRoute().getVehicle().getDriver());
+				DairyContainer bin = currentDairy.getDairyBins().get(currentBin++ % binCount);
+				System.out.println("\t\tGroup/Bin " + group + ", " + bin);
+				for (Membership member : filteredMembers) {
+					CollectionJournalLine entry = createCollectionEntry(group, bin, member, BigDecimal.ONE);
+				}
+				getSession().persist(group);
+
 			}
+			factor = factor / 2.0d;
 		}
 	}
 
+	private List<Membership> filterMembersByDefaultRoute(DairyLocation center) {
+		LinkedList<Membership> l = new LinkedList<Membership>();
+		for (Membership m : currentDairy.getMemberships()) {
+			if (m.getDefaultRoute() == center) {
+				l.add(m);
+			}
+		}
+		return l;
+	}
+
+	/**
+	 * @param center
+	 * @param collectionDate
+	 * @param session
+	 * @return
+	 */
+	private CollectionGroup createCollectionGroup(DairyLocation center,
+			Date collectionDate,
+			CollectionSession session) {
+		CollectionGroup group;
+
+		group = DairyFactory.eINSTANCE.createCollectionGroup();
+		group.setJournalId(Long.valueOf(group.hashCode()));
+		group.setJournalDate(collectionDate);
+		group.setCollectionCenter(center);
+		group.setSession(session);
+		group.setType(CollectionGroupType.JOURNAL_GROUP);
+
+// group.setDriver(value);
+// group.setDriverTotal(value);
+// group.setReferenceNumber(value);
+
+		return group;
+	}
+
+	/**
+	 * @param group
+	 * @param bin
+	 * @param member
+	 * @param amount
+	 * @return
+	 */
 	private CollectionJournalLine createCollectionEntry(CollectionGroup group,
 			DairyContainer bin,
 			Membership member,

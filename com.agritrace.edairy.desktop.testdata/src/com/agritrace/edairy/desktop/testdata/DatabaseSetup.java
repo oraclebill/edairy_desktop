@@ -288,13 +288,13 @@ public class DatabaseSetup {
 		cSession = DairyFactory.eINSTANCE.createCollectionSession();
 		cSession.setCode("AM");
 		cSession.setDescription("The first collection session of the day");
-
+		cSession.setDairy(dairy);
 		getSession().persist(cSession);
 
 		cSession = DairyFactory.eINSTANCE.createCollectionSession();
 		cSession.setCode("PM");
 		cSession.setDescription("An additional collection session.");
-
+		cSession.setDairy(dairy);
 		getSession().persist(cSession);
 	}
 
@@ -377,8 +377,8 @@ public class DatabaseSetup {
 		}
 	}
 
+	Dairy dairy;
 	protected Dairy createDairy(String dairyNumber) {
-		Dairy dairy;
 
 		Session session = openSession();
 		Transaction tx = session.beginTransaction();

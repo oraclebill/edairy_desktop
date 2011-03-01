@@ -65,64 +65,68 @@ public class PaymentRequestViewControllerTest extends AbstractSubModuleControlle
 // assertEquals(PaymentPeriod.class, periodCombo.getObservableList().getElementType());
 	}
 
-
 	@SuppressWarnings("deprecation")
 	public void testCalculateGrossCollectionsWhenPeriodChanges() throws Exception {
 		List<CollectionJournalLine> collections = generateTestCollections();
 		int count = collections.size();
 		BigDecimal expectedSum = BigDecimal.valueOf(count * 12.4); // each delivery is 12.4 kg..
-		
+
 		mockRepository.filter(isA(Class.class), isA(FilterParameter.class), isA(FilterParameter.class));
 		expectLastCall().andStubReturn(collections);
-		
+
 		replay(mockRepository);
 
 		// test behaviour
 		IComboRidget periodCombo = getController().getRidget(IComboRidget.class,
 				PaymentRequestViewController.PAYMENT_PERIOD_COMBO);
 		periodCombo.setSelection(0);
-		
-		ITextRidget grossCollectionsText = getController().getRidget(ITextRidget.class, PaymentRequestViewController.GROSS_COLLECTIONS_TEXT);
-		assertEquals(expectedSum.floatValue(), new BigDecimal(grossCollectionsText.getText().replace(",", "")).floatValue());
+
+		ITextRidget grossCollectionsText = getController().getRidget(ITextRidget.class,
+				PaymentRequestViewController.GROSS_COLLECTIONS_TEXT);
+		assertEquals(expectedSum.floatValue(),
+				new BigDecimal(grossCollectionsText.getText().replace(",", "")).floatValue());
 	}
 
 	public void testCalculatePayments() throws Exception {
-		
+
 		PaymentRequestViewController controller = getController();
-		IDecimalTextRidget grossCollectionsText = controller.getRidget(IDecimalTextRidget.class, PaymentRequestViewController.GROSS_COLLECTIONS_TEXT);
-		IDecimalTextRidget paymentRateText = controller.getRidget(IDecimalTextRidget.class, PaymentRequestViewController.PAYMENT_RATE_TEXT);
-		IActionRidget calculateButton = controller.getRidget(IActionRidget.class, PaymentRequestViewController.CALCULATE_BUTTON);
+		IDecimalTextRidget grossCollectionsText = controller.getRidget(IDecimalTextRidget.class,
+				PaymentRequestViewController.GROSS_COLLECTIONS_TEXT);
+		IDecimalTextRidget paymentRateText = controller.getRidget(IDecimalTextRidget.class,
+				PaymentRequestViewController.PAYMENT_RATE_TEXT);
+		IActionRidget calculateButton = controller.getRidget(IActionRidget.class,
+				PaymentRequestViewController.CALCULATE_BUTTON);
 		ITableRidget rateTable = controller.getRidget(ITableRidget.class, PaymentRequestViewController.RATE_TABLE);
-		
+
 		BigDecimal testRate = new BigDecimal("23");
 		BigDecimal grossCollections = new BigDecimal("199");
-		
+
 		// should update model immediately
 		paymentRateText.setText(testRate.toPlainString());
 		grossCollectionsText.setText(grossCollections.toPlainString());
-		
+
 		// simulate button push
 		calculateButton.fireAction();
-		
+
 		// validate table is updated
 		assertEquals(5, rateTable.getOptionCount());
 		RateEntry centerEntry = (RateEntry) rateTable.getOption(2);
-		assertEquals( testRate, centerEntry.getRate() );
-		assertEquals( testRate.multiply(grossCollections), centerEntry.getGross() );		
+		assertEquals(testRate, centerEntry.getRate());
+		assertEquals(testRate.multiply(grossCollections), centerEntry.getGross());
 	}
-	
-	
+
 	public void testPrintResults() throws Exception {
-		IActionRidget printButton = getController().getRidget(IActionRidget.class, PaymentRequestViewController.CALCULATE_BUTTON);
+		IActionRidget printButton = getController().getRidget(IActionRidget.class,
+				PaymentRequestViewController.CALCULATE_BUTTON);
 		printButton.fireAction();
-		
+
 		// saveAs dialog appears
-		
+
 		// user enters save location
-		
+
 		// user clicks 'OK' button
-		
-		// pdf report file is created 
+
+		// pdf report file is created
 		fail("not implemented");
 	}
 
@@ -131,12 +135,16 @@ public class PaymentRequestViewControllerTest extends AbstractSubModuleControlle
 	 * @throws ParseException
 	 */
 	private List<CollectionJournalLine> generateTestCollections() throws ParseException {
-		List<CollectionJournalLine> collections;
 		Date startDate, endDate;
 		DateFormat df = SimpleDateFormat.getDateInstance(DateFormat.SHORT);
-
 		startDate = df.parse("1/1/2011");
 		endDate = df.parse("1/31/2011");
+		return generateTestCollections(startDate, endDate);
+	}
+
+	private List<CollectionJournalLine> generateTestCollections(Date startDate,
+			Date endDate) throws ParseException {
+		List<CollectionJournalLine> collections;
 
 		// setup mock..
 		collections = new ArrayList<CollectionJournalLine>();
@@ -145,14 +153,15 @@ public class PaymentRequestViewControllerTest extends AbstractSubModuleControlle
 		}
 		return collections;
 	}
-	
+
 	private Dairy createDairy() {
 		Dairy dairy;
 		dairy = DairyFactory.eINSTANCE.createDairy();
 		return dairy;
 	}
 
-	private DairyLocation createCollectionCenter(Dairy dairy, String code) {
+	private DairyLocation createCollectionCenter(Dairy dairy,
+			String code) {
 		DairyLocation center;
 
 		center = DairyFactory.eINSTANCE.createDairyLocation();
@@ -169,7 +178,9 @@ public class PaymentRequestViewControllerTest extends AbstractSubModuleControlle
 		return center;
 	}
 
-	private CollectionGroup createCollectionGroup(DairyLocation center, Date collectionDate, CollectionSession session) {
+	private CollectionGroup createCollectionGroup(DairyLocation center,
+			Date collectionDate,
+			CollectionSession session) {
 		CollectionGroup group;
 
 		group = DairyFactory.eINSTANCE.createCollectionGroup();
@@ -186,7 +197,9 @@ public class PaymentRequestViewControllerTest extends AbstractSubModuleControlle
 		return group;
 	}
 
-	private CollectionJournalLine createCollectionEntry(CollectionGroup group, DairyContainer bin, Membership member,
+	private CollectionJournalLine createCollectionEntry(CollectionGroup group,
+			DairyContainer bin,
+			Membership member,
 			BigDecimal amount) {
 		CollectionJournalLine entry = DairyFactory.eINSTANCE.createCollectionJournalLine();
 
@@ -209,12 +222,24 @@ public class PaymentRequestViewControllerTest extends AbstractSubModuleControlle
 		return member;
 	}
 
-	private List<CollectionGroup> generateTestCollectionGroups(int numMembers, Date startDate, Date endDate) {
+	private List<CollectionGroup> generateTestCollectionGroups(int numMembers,
+			Date startDate,
+			Date endDate) {
+		Membership[] members;
+		members = new Membership[numMembers];
+		for (int count = 0; count < numMembers; count++) {
+			members[count] = createMember(String.format("%05d", count));
+		}
+		return generateTestCollectionGroups(members, startDate, endDate);
+	}
+
+	private List<CollectionGroup> generateTestCollectionGroups(Membership[] members,
+			Date startDate,
+			Date endDate) {
 		List<CollectionGroup> groups;
 
 		CollectionSession session;
 		DairyContainer bin;
-		Membership[] members;
 
 		session = DairyFactory.eINSTANCE.createCollectionSession();
 		session.setCode("AM");
@@ -222,11 +247,6 @@ public class PaymentRequestViewControllerTest extends AbstractSubModuleControlle
 		bin = DairyFactory.eINSTANCE.createDairyContainer();
 		bin.setTrackingNumber("B0001");
 		bin.setCapacity(125.0d);
-
-		members = new Membership[numMembers];
-		for (int count = 0; count < numMembers; count++) {
-			members[count] = createMember(String.format("%05d", count));
-		}
 
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(startDate);
