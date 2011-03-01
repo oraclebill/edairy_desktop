@@ -22,7 +22,7 @@ import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
+import com.agritrace.edairy.desktop.common.model.dairy.Bin;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
@@ -42,7 +42,7 @@ public class MilkCreditSaleEditDialogController extends RecordDialogController<D
 	 */
 	public static final class RowRidget extends AbstractCompositeRidget implements IRowRidget {
 		private MilkSale rowData;
-		private static List<DairyContainer> binList = null;
+		private static List<Bin> binList = null;
 
 
 		@Override
@@ -73,7 +73,7 @@ public class MilkCreditSaleEditDialogController extends RecordDialogController<D
 			else if (binId instanceof IComboRidget) {
 				final IComboRidget comboBinId = (IComboRidget) binId;
 				comboBinId.setMandatory(true);
-				comboBinId.bindToModel(new WritableList(binList, DairyContainer.class), DairyContainer.class, "getContainerId",
+				comboBinId.bindToModel(new WritableList(binList, Bin.class), Bin.class, "getContainerId",
 					PojoObservables.observeValue(rowData, "bin"));
 			}
 			binId.updateFromModel();

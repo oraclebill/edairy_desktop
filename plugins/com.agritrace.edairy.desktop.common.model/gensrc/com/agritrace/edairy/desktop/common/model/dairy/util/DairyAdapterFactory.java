@@ -138,8 +138,8 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 				return createAssetAdapter();
 			}
 			@Override
-			public Adapter caseDairyContainer(DairyContainer object) {
-				return createDairyContainerAdapter();
+			public Adapter caseBin(Bin object) {
+				return createBinAdapter();
 			}
 			@Override
 			public Adapter caseSupplier(Supplier object) {
@@ -412,16 +412,16 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.dairy.DairyContainer <em>Container</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.dairy.Bin <em>Bin</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyContainer
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Bin
 	 * @generated
 	 */
-	public Adapter createDairyContainerAdapter() {
+	public Adapter createBinAdapter() {
 		return null;
 	}
 

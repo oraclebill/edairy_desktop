@@ -9,7 +9,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
+import com.agritrace.edairy.desktop.common.model.dairy.Bin;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
@@ -27,7 +27,7 @@ public interface IDairyRepository {
 
 	//List<Dairy> allDairies();
 
-	List<DairyContainer> allDairyContainers();
+	List<Bin> allDairyContainers();
 
 	List<DeliveryJournal> allDeliveries();
 
@@ -73,7 +73,7 @@ public interface IDairyRepository {
 
 	public List<MilkSale> getMilkSales(Date minDate, Date maxDate, DairyLocation store, Customer customer);
 
-	List<DairyContainer> getBinsByRoute(TransportRoute journalRoute);
+	List<Bin> getBinsByRoute(TransportRoute journalRoute);
 
 	Membership findMemberByMemberNo(String memberNumber);
 

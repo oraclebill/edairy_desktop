@@ -129,7 +129,7 @@ public class DairyUtil {
 	public static Container createContainer(ContainerType type, UnitOfMeasure unit, Farm farm, double campacity) {
 		Container container;
 		if(type == ContainerType.BIN) {
-			container = DairyFactory.eINSTANCE.createDairyContainer();
+			container = DairyFactory.eINSTANCE.createBin();
 		} else {
 			container = TrackingFactory.eINSTANCE.createContainer();
 		}

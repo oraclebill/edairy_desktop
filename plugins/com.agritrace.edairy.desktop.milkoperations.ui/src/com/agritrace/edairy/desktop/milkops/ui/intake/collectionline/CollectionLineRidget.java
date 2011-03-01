@@ -37,7 +37,7 @@ import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
+import com.agritrace.edairy.desktop.common.model.dairy.Bin;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
@@ -76,10 +76,10 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 
 	// working memory
 	private CollectionJournalLine workingJournalLine;
-	private List<DairyContainer> binList;
+	private List<Bin> binList;
 	private ICompositeRidget qualityGroup;
 	private final ValidatorCollection validatorCollection;
-	private DairyContainer savedContainer;
+	private Bin savedContainer;
 
 	private IMemberLookup memberInfoProvider;
 	private IValidator routeValidator;
@@ -89,7 +89,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	}
 
 	@Override
-	public void setBinList(List<DairyContainer> binList) {
+	public void setBinList(List<Bin> binList) {
 		this.binList = binList;
 	}
 
@@ -104,7 +104,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	}
 
 	@Override
-	public List<DairyContainer> getBinList() {
+	public List<Bin> getBinList() {
 		return binList;
 	}
 
@@ -265,7 +265,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		}
 		workingJournalLine.setFlagged(false);
 
-		binCombo.bindToModel(new WritableList(binList, DairyContainer.class), DairyContainer.class,
+		binCombo.bindToModel(new WritableList(binList, Bin.class), Bin.class,
 				"getTrackingNumber", PojoObservables.observeValue(workingJournalLine,
 						DairyPackage.Literals.COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER.getName()));
 

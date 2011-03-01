@@ -7,7 +7,7 @@ import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.swt.widgets.Shell;
 
-import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
+import com.agritrace.edairy.desktop.common.model.dairy.Bin;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
@@ -23,17 +23,17 @@ import com.agritrace.edairy.desktop.operations.ui.dialogs.ContainerEditDialog;
 import com.google.inject.Inject;
 
 @PermissionRequired(UIPermission.VIEW_DAIRY_BINS)
-public class ContainersDirectoryViewController extends BasicDirectoryController<DairyContainer> {
+public class ContainersDirectoryViewController extends BasicDirectoryController<Bin> {
 
 	private final ContainerSearchBean searchBean = new ContainerSearchBean();
-	private final IRepository<DairyContainer> containerRepository;
+	private final IRepository<Bin> containerRepository;
 	private final IDairyRepository dairyRepository;
 
 	private ITextRidget trackingText;
 
 	@Inject
-	public ContainersDirectoryViewController(final IDairyRepository dairyRepo, final IRepository<DairyContainer> repo) {
-		setEClass(DairyPackage.Literals.DAIRY_CONTAINER);
+	public ContainersDirectoryViewController(final IDairyRepository dairyRepo, final IRepository<Bin> repo) {
+		setEClass(DairyPackage.Literals.BIN);
 		dairyRepository = dairyRepo;
 		containerRepository = repo;
 		setRepository(containerRepository);
@@ -59,24 +59,24 @@ public class ContainersDirectoryViewController extends BasicDirectoryController<
 	 * @return
 	 */
 	@Override
-	protected DairyContainer createNewModel() {
-		final DairyContainer container = DairyFactory.eINSTANCE.createDairyContainer();
+	protected Bin createNewModel() {
+		final Bin container = DairyFactory.eINSTANCE.createBin();
 		EMFUtil.populate(container);
 		return container;
 	}
 
 	@Override
-	protected void createEntity(DairyContainer newEntity) {
+	protected void createEntity(Bin newEntity) {
 		dairyRepository.getLocalDairy().getDairyBins().add(newEntity);
 		super.createEntity(newEntity);
 	}
 
 	@Override
-	protected List<DairyContainer> getFilteredResult() {
-		final List<DairyContainer> filtered = new ArrayList<DairyContainer>();
-		final List<DairyContainer> allContainers = containerRepository.all();
+	protected List<Bin> getFilteredResult() {
+		final List<Bin> filtered = new ArrayList<Bin>();
+		final List<Bin> allContainers = containerRepository.all();
 		System.err.println("allContainers: " + allContainers);
-		for (final DairyContainer c : allContainers) {
+		for (final Bin c : allContainers) {
 			final String searchedForNumber = searchBean.getTrackingNumber();
 			final String currentNumber = c.getTrackingNumber();
 			if (currentNumber != null) {
@@ -91,7 +91,7 @@ public class ContainersDirectoryViewController extends BasicDirectoryController<
 	}
 
 	@Override
-	protected RecordDialog<DairyContainer> getRecordDialog(Shell shell) {
+	protected RecordDialog<Bin> getRecordDialog(Shell shell) {
 		final ContainerEditDialog dialog = new ContainerEditDialog(shell);
 		dialog.setTitle("Edit Dairy Bin Information");
 		return dialog;
@@ -103,7 +103,7 @@ public class ContainersDirectoryViewController extends BasicDirectoryController<
 	}
 
 	@Override
-	protected void deleteEntity(DairyContainer deletableEntity) {
+	protected void deleteEntity(Bin deletableEntity) {
 		dairyRepository.getLocalDairy().getDairyBins().remove(deletableEntity);
 		super.deleteEntity(deletableEntity);
 		dairyRepository.save(dairyRepository.getLocalDairy());

@@ -87,7 +87,7 @@
         `offroute` bit,
         `farm_from_farmid` bigint,
         `container_farmcontainer_containerid` bigint,
-        `dairycontainer_dairycontainer_containerid` bigint,
+        `bin_dairycontainer_containerid` bigint,
         `collectionjournalline_collectionjournal_e_id` bigint,
         `rejected` bit,
         `rejectionreason` varchar(60),
@@ -208,7 +208,7 @@
         `phone` varchar(60),
         `description` varchar(60),
         `location_location_e_id` bigint not null,
-        `dairycontainer_containers_containerid` bigint,
+        `bin_containers_containerid` bigint,
         `dairy_branchlocations_companyid` bigint,
         primary key (`id`),
         unique (`code`)
@@ -335,7 +335,7 @@
         `linenumber` integer,
         `referencenumber` varchar(60),
         `saledate` datetime not null,
-        `dairycontainer_bin_containerid` bigint,
+        `bin_bin_containerid` bigint,
         `saletype` varchar(255) not null,
         `quantity` decimal(19,2) not null,
         `milkgrade_grade_e_id` bigint not null,
@@ -707,9 +707,9 @@
         references `collectiongroup` (`journalid`);
 
     alter table `collectionjournalline` 
-        add index FK21648E4D40348C8A (`dairycontainer_dairycontainer_containerid`), 
-        add constraint FK21648E4D40348C8A 
-        foreign key (`dairycontainer_dairycontainer_containerid`) 
+        add index FK21648E4D6928B4CA (`bin_dairycontainer_containerid`), 
+        add constraint FK21648E4D6928B4CA 
+        foreign key (`bin_dairycontainer_containerid`) 
         references `container` (`containerid`);
 
     alter table `collectionjournalline` 
@@ -815,16 +815,16 @@
     create index dairylocationdtype on `dairylocation` (dtype);
 
     alter table `dairylocation` 
-        add index FK75A7FB883F53900E (`dairycontainer_containers_containerid`), 
-        add constraint FK75A7FB883F53900E 
-        foreign key (`dairycontainer_containers_containerid`) 
-        references `container` (`containerid`);
-
-    alter table `dairylocation` 
         add index FK75A7FB88258A524A (`location_location_e_id`), 
         add constraint FK75A7FB88258A524A 
         foreign key (`location_location_e_id`) 
         references `location` (`locationid`);
+
+    alter table `dairylocation` 
+        add index FK75A7FB8884FB03CE (`bin_containers_containerid`), 
+        add constraint FK75A7FB8884FB03CE 
+        foreign key (`bin_containers_containerid`) 
+        references `container` (`containerid`);
 
     alter table `dairylocation` 
         add index FK75A7FB88FD6AA1C (`dairy_branchlocations_companyid`), 
@@ -965,9 +965,9 @@
         references `customer` (`customerid`);
 
     alter table `milksale` 
-        add index FKABB35EE2BBE70201 (`dairycontainer_bin_containerid`), 
-        add constraint FKABB35EE2BBE70201 
-        foreign key (`dairycontainer_bin_containerid`) 
+        add index FKABB35EE226BEAFD3 (`bin_bin_containerid`), 
+        add constraint FKABB35EE226BEAFD3 
+        foreign key (`bin_bin_containerid`) 
         references `container` (`containerid`);
 
     alter table `milksale` 

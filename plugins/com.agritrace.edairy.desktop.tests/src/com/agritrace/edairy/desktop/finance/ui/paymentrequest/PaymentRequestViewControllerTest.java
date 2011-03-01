@@ -28,7 +28,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
+import com.agritrace.edairy.desktop.common.model.dairy.Bin;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
@@ -198,7 +198,7 @@ public class PaymentRequestViewControllerTest extends AbstractSubModuleControlle
 	}
 
 	private CollectionJournalLine createCollectionEntry(CollectionGroup group,
-			DairyContainer bin,
+			Bin bin,
 			Membership member,
 			BigDecimal amount) {
 		CollectionJournalLine entry = DairyFactory.eINSTANCE.createCollectionJournalLine();
@@ -239,12 +239,12 @@ public class PaymentRequestViewControllerTest extends AbstractSubModuleControlle
 		List<CollectionGroup> groups;
 
 		CollectionSession session;
-		DairyContainer bin;
+		Bin bin;
 
 		session = DairyFactory.eINSTANCE.createCollectionSession();
 		session.setCode("AM");
 
-		bin = DairyFactory.eINSTANCE.createDairyContainer();
+		bin = DairyFactory.eINSTANCE.createBin();
 		bin.setTrackingNumber("B0001");
 		bin.setCapacity(125.0d);
 

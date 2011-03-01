@@ -426,7 +426,7 @@ public interface Dairy extends Company {
 
 	/**
 	 * Returns the value of the '<em><b>Dairy Bins</b></em>' containment reference list.
-	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.DairyContainer}.
+	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.Bin}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Dairy Bins</em>' containment reference list isn't clear,
@@ -438,7 +438,7 @@ public interface Dairy extends Company {
 	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
-	EList<DairyContainer> getDairyBins();
+	EList<Bin> getDairyBins();
 
 	/**
 	 * Returns the value of the '<em><b>Price History</b></em>' containment reference list.

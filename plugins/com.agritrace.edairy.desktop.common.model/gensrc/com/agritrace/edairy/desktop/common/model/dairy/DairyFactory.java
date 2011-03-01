@@ -161,13 +161,13 @@ public interface DairyFactory extends EFactory {
 	Asset createAsset();
 
 	/**
-	 * Returns a new object of class '<em>Container</em>'.
+	 * Returns a new object of class '<em>Bin</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Container</em>'.
+	 * @return a new object of class '<em>Bin</em>'.
 	 * @generated
 	 */
-	DairyContainer createDairyContainer();
+	Bin createBin();
 
 	/**
 	 * Returns a new object of class '<em>Supplier</em>'.

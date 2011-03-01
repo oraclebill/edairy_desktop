@@ -157,12 +157,12 @@ public interface MilkSale extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Bin</em>' reference.
-	 * @see #setBin(DairyContainer)
+	 * @see #setBin(Bin)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMilkSale_Bin()
 	 * @model
 	 * @generated
 	 */
-	DairyContainer getBin();
+	Bin getBin();
 
 	/**
 	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getBin <em>Bin</em>}' reference.
@@ -172,7 +172,7 @@ public interface MilkSale extends EObject {
 	 * @see #getBin()
 	 * @generated
 	 */
-	void setBin(DairyContainer value);
+	void setBin(Bin value);
 
 	/**
 	 * Returns the value of the '<em><b>Sale Type</b></em>' attribute.

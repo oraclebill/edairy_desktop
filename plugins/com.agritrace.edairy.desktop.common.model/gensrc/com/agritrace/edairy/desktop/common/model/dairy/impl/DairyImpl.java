@@ -12,7 +12,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
+import com.agritrace.edairy.desktop.common.model.dairy.Bin;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
@@ -347,7 +347,7 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<DairyContainer> dairyBins;
+	protected EList<Bin> dairyBins;
 
 	/**
 	 * The cached value of the '{@link #getPriceHistory() <em>Price History</em>}' containment reference list.
@@ -701,9 +701,9 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<DairyContainer> getDairyBins() {
+	public EList<Bin> getDairyBins() {
 		if (dairyBins == null) {
-			dairyBins = new EObjectContainmentEList<DairyContainer>(DairyContainer.class, this, DairyPackage.DAIRY__DAIRY_BINS);
+			dairyBins = new EObjectContainmentEList<Bin>(Bin.class, this, DairyPackage.DAIRY__DAIRY_BINS);
 		}
 		return dairyBins;
 	}
@@ -941,7 +941,7 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return;
 			case DairyPackage.DAIRY__DAIRY_BINS:
 				getDairyBins().clear();
-				getDairyBins().addAll((Collection<? extends DairyContainer>)newValue);
+				getDairyBins().addAll((Collection<? extends Bin>)newValue);
 				return;
 			case DairyPackage.DAIRY__PRICE_HISTORY:
 				getPriceHistory().clear();

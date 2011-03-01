@@ -27,7 +27,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
+import com.agritrace.edairy.desktop.common.model.dairy.Bin;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
@@ -246,7 +246,7 @@ public class DairyRepository implements IDairyRepository {
 	}
 
 	@Override
-	public List<DairyContainer> allDairyContainers() {
+	public List<Bin> allDairyContainers() {
 		return getLocalDairy().getDairyBins();
 	}
 
@@ -473,7 +473,7 @@ public class DairyRepository implements IDairyRepository {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<DairyContainer> getBinsByRoute(TransportRoute journalRoute) {
+	public List<Bin> getBinsByRoute(TransportRoute journalRoute) {
 		final Session session = getSession();
 		final Criteria dcCriteria = session.createCriteria("DairyContainer");
 		if (journalRoute != null) {

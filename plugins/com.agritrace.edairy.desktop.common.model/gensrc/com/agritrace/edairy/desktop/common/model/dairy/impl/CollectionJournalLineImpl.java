@@ -10,7 +10,7 @@ import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
+import com.agritrace.edairy.desktop.common.model.dairy.Bin;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 
@@ -238,7 +238,7 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * @generated
 	 * @ordered
 	 */
-	protected DairyContainer dairyContainer;
+	protected Bin dairyContainer;
 
 	/**
 	 * The default value of the '{@link #isRejected() <em>Rejected</em>}' attribute.
@@ -625,10 +625,10 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DairyContainer getDairyContainer() {
+	public Bin getDairyContainer() {
 		if (dairyContainer != null && dairyContainer.eIsProxy()) {
 			InternalEObject oldDairyContainer = (InternalEObject)dairyContainer;
-			dairyContainer = (DairyContainer)eResolveProxy(oldDairyContainer);
+			dairyContainer = (Bin)eResolveProxy(oldDairyContainer);
 			if (dairyContainer != oldDairyContainer) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER, oldDairyContainer, dairyContainer));
@@ -642,7 +642,7 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DairyContainer basicGetDairyContainer() {
+	public Bin basicGetDairyContainer() {
 		return dairyContainer;
 	}
 
@@ -651,8 +651,8 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDairyContainer(DairyContainer newDairyContainer) {
-		DairyContainer oldDairyContainer = dairyContainer;
+	public void setDairyContainer(Bin newDairyContainer) {
+		Bin oldDairyContainer = dairyContainer;
 		dairyContainer = newDairyContainer;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER, oldDairyContainer, dairyContainer));
@@ -937,7 +937,7 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 				setFarmContainer((Container)newValue);
 				return;
 			case DairyPackage.COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER:
-				setDairyContainer((DairyContainer)newValue);
+				setDairyContainer((Bin)newValue);
 				return;
 			case DairyPackage.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL:
 				setCollectionJournal((CollectionGroup)newValue);
@@ -1000,7 +1000,7 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 				setFarmContainer((Container)null);
 				return;
 			case DairyPackage.COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER:
-				setDairyContainer((DairyContainer)null);
+				setDairyContainer((Bin)null);
 				return;
 			case DairyPackage.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL:
 				setCollectionJournal((CollectionGroup)null);

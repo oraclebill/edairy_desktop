@@ -17,7 +17,7 @@ import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
+import com.agritrace.edairy.desktop.common.model.dairy.Bin;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
@@ -207,7 +207,7 @@ public class MilkSaleEditPanelController extends AbstractDetailPanelController<M
 		return dairyRepo.getLocalDairy().getEmployees();
 	}
 
-	private List<DairyContainer> getBinList() {
+	private List<Bin> getBinList() {
 		return dairyRepo.getLocalDairy().getDairyBins();
 	}
 

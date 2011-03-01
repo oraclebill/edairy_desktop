@@ -281,12 +281,12 @@ public interface DairyLocation extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Containers</em>' reference.
-	 * @see #setContainers(DairyContainer)
+	 * @see #setContainers(Bin)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairyLocation_Containers()
 	 * @model
 	 * @generated
 	 */
-	DairyContainer getContainers();
+	Bin getContainers();
 
 	/**
 	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.DairyLocation#getContainers <em>Containers</em>}' reference.
@@ -296,6 +296,6 @@ public interface DairyLocation extends EObject {
 	 * @see #getContainers()
 	 * @generated
 	 */
-	void setContainers(DairyContainer value);
+	void setContainers(Bin value);
 
 } // DairyLocation

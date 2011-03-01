@@ -188,10 +188,10 @@ public class DairySwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.DAIRY_CONTAINER: {
-				DairyContainer dairyContainer = (DairyContainer)theEObject;
-				T result = caseDairyContainer(dairyContainer);
-				if (result == null) result = caseContainer(dairyContainer);
+			case DairyPackage.BIN: {
+				Bin bin = (Bin)theEObject;
+				T result = caseBin(bin);
+				if (result == null) result = caseContainer(bin);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -465,17 +465,17 @@ public class DairySwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Container</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Bin</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Container</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Bin</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseDairyContainer(DairyContainer object) {
+	public T caseBin(Bin object) {
 		return null;
 	}
 

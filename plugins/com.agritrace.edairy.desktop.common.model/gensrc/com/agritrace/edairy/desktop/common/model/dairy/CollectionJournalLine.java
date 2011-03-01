@@ -321,12 +321,12 @@ public interface CollectionJournalLine extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Dairy Container</em>' reference.
-	 * @see #setDairyContainer(DairyContainer)
+	 * @see #setDairyContainer(Bin)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalLine_DairyContainer()
 	 * @model
 	 * @generated
 	 */
-	DairyContainer getDairyContainer();
+	Bin getDairyContainer();
 
 	/**
 	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getDairyContainer <em>Dairy Container</em>}' reference.
@@ -336,7 +336,7 @@ public interface CollectionJournalLine extends EObject {
 	 * @see #getDairyContainer()
 	 * @generated
 	 */
-	void setDairyContainer(DairyContainer value);
+	void setDairyContainer(Bin value);
 
 	/**
 	 * Returns the value of the '<em><b>Collection Journal</b></em>' container reference.

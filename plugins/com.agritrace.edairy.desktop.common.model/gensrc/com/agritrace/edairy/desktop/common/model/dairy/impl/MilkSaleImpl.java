@@ -7,7 +7,7 @@
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
+import com.agritrace.edairy.desktop.common.model.dairy.Bin;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
@@ -144,7 +144,7 @@ public class MilkSaleImpl extends EObjectImpl implements MilkSale {
 	 * @generated
 	 * @ordered
 	 */
-	protected DairyContainer bin;
+	protected Bin bin;
 
 	/**
 	 * The default value of the '{@link #getSaleType() <em>Sale Type</em>}' attribute.
@@ -444,10 +444,10 @@ public class MilkSaleImpl extends EObjectImpl implements MilkSale {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DairyContainer getBin() {
+	public Bin getBin() {
 		if (bin != null && bin.eIsProxy()) {
 			InternalEObject oldBin = (InternalEObject)bin;
-			bin = (DairyContainer)eResolveProxy(oldBin);
+			bin = (Bin)eResolveProxy(oldBin);
 			if (bin != oldBin) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.MILK_SALE__BIN, oldBin, bin));
@@ -461,7 +461,7 @@ public class MilkSaleImpl extends EObjectImpl implements MilkSale {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DairyContainer basicGetBin() {
+	public Bin basicGetBin() {
 		return bin;
 	}
 
@@ -470,8 +470,8 @@ public class MilkSaleImpl extends EObjectImpl implements MilkSale {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setBin(DairyContainer newBin) {
-		DairyContainer oldBin = bin;
+	public void setBin(Bin newBin) {
+		Bin oldBin = bin;
 		bin = newBin;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MILK_SALE__BIN, oldBin, bin));
@@ -887,7 +887,7 @@ public class MilkSaleImpl extends EObjectImpl implements MilkSale {
 				setSaleDate((Date)newValue);
 				return;
 			case DairyPackage.MILK_SALE__BIN:
-				setBin((DairyContainer)newValue);
+				setBin((Bin)newValue);
 				return;
 			case DairyPackage.MILK_SALE__SALE_TYPE:
 				setSaleType((MilkSaleType)newValue);
@@ -950,7 +950,7 @@ public class MilkSaleImpl extends EObjectImpl implements MilkSale {
 				setSaleDate(SALE_DATE_EDEFAULT);
 				return;
 			case DairyPackage.MILK_SALE__BIN:
-				setBin((DairyContainer)null);
+				setBin((Bin)null);
 				return;
 			case DairyPackage.MILK_SALE__SALE_TYPE:
 				setSaleType(SALE_TYPE_EDEFAULT);

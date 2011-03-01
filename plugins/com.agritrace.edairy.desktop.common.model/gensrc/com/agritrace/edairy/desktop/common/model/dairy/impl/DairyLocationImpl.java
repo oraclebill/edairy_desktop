@@ -8,7 +8,7 @@ package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
 import com.agritrace.edairy.desktop.common.model.base.Location;
 
-import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
+import com.agritrace.edairy.desktop.common.model.dairy.Bin;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
@@ -211,7 +211,7 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * @generated
 	 * @ordered
 	 */
-	protected DairyContainer containers;
+	protected Bin containers;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -478,10 +478,10 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DairyContainer getContainers() {
+	public Bin getContainers() {
 		if (containers != null && containers.eIsProxy()) {
 			InternalEObject oldContainers = (InternalEObject)containers;
-			containers = (DairyContainer)eResolveProxy(oldContainers);
+			containers = (Bin)eResolveProxy(oldContainers);
 			if (containers != oldContainers) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DAIRY_LOCATION__CONTAINERS, oldContainers, containers));
@@ -495,7 +495,7 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DairyContainer basicGetContainers() {
+	public Bin basicGetContainers() {
 		return containers;
 	}
 
@@ -504,8 +504,8 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setContainers(DairyContainer newContainers) {
-		DairyContainer oldContainers = containers;
+	public void setContainers(Bin newContainers) {
+		Bin oldContainers = containers;
 		containers = newContainers;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__CONTAINERS, oldContainers, containers));
@@ -615,7 +615,7 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 				getFunctions().addAll((Collection<? extends DairyFunction>)newValue);
 				return;
 			case DairyPackage.DAIRY_LOCATION__CONTAINERS:
-				setContainers((DairyContainer)newValue);
+				setContainers((Bin)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -657,7 +657,7 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 				getFunctions().clear();
 				return;
 			case DairyPackage.DAIRY_LOCATION__CONTAINERS:
-				setContainers((DairyContainer)null);
+				setContainers((Bin)null);
 				return;
 		}
 		super.eUnset(featureID);

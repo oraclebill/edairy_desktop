@@ -72,7 +72,7 @@
         derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="ecore:EClass farm.ecore#//Farm"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="farmContainer" eType="ecore:EClass farm.ecore#//Container"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dairyContainer" eType="#//DairyContainer"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dairyContainer" eType="#//Bin"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="collectionJournal" eType="#//CollectionGroup"
         eOpposite="#//CollectionGroup/journalEntries"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="rejected" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -151,7 +151,7 @@
         eType="ecore:EClass common.ecore#//Location" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="functions" upperBound="-1"
         eType="#//DairyFunction"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="containers" eType="#//DairyContainer"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containers" eType="#//Bin"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionGroup">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="journalId" lowerBound="1"
@@ -291,7 +291,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="referenceNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="saleDate" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="bin" eType="#//DairyContainer"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bin" eType="#//Bin"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="saleType" lowerBound="1"
         eType="#//MilkSaleType" defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="quantity" lowerBound="1"
@@ -346,7 +346,7 @@
         containment="true" eOpposite="requests.ecore#//AnimalHealthRequest/dairy"
         eKeys="requests.ecore#//AnimalHealthRequest/requestId"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dairyBins" ordered="false"
-        upperBound="-1" eType="#//DairyContainer" containment="true"/>
+        upperBound="-1" eType="#//Bin" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="priceHistory" ordered="false"
         upperBound="-1" eType="#//MemberPayment" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong">
@@ -418,7 +418,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="disposalReason" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="disposalWitness" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DairyContainer" eSuperTypes="farm.ecore#//Container">
+  <eClassifiers xsi:type="ecore:EClass" name="Bin" eSuperTypes="farm.ecore#//Container">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="IN_CIRCULATION"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="zone" eType="#//TransportRoute"/>

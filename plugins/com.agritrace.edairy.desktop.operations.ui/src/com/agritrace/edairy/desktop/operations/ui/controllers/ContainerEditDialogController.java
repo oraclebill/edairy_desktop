@@ -3,15 +3,15 @@ package com.agritrace.edairy.desktop.operations.ui.controllers;
 import org.eclipse.core.databinding.beans.PojoObservables;
 
 import com.agritrace.edairy.desktop.common.model.base.UnitOfMeasure;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
+import com.agritrace.edairy.desktop.common.model.dairy.Bin;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.controls.assetinfo.IAssetInfoRidget;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.ContainerBindingConstants;
 
-public class ContainerEditDialogController extends RecordDialogController<DairyContainer> {
+public class ContainerEditDialogController extends RecordDialogController<Bin> {
 
-	private DairyContainer editContainer = null;
+	private Bin editContainer = null;
 
 	public ContainerEditDialogController() {
 		super("Dairy Milk Container");

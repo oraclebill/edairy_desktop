@@ -7,10 +7,10 @@
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Asset;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
+import com.agritrace.edairy.desktop.common.model.dairy.Bin;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-
 import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
+
 import com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -23,20 +23,20 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Container</b></em>'.
+ * An implementation of the model object '<em><b>Bin</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyContainerImpl#getStatus <em>Status</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyContainerImpl#getZone <em>Zone</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyContainerImpl#getAssetInfo <em>Asset Info</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.BinImpl#getStatus <em>Status</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.BinImpl#getZone <em>Zone</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.BinImpl#getAssetInfo <em>Asset Info</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class DairyContainerImpl extends ContainerImpl implements DairyContainer {
+public class BinImpl extends ContainerImpl implements Bin {
 	/**
 	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -46,6 +46,7 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 	 * @ordered
 	 */
 	protected static final String STATUS_EDEFAULT = "IN_CIRCULATION";
+
 	/**
 	 * The cached value of the '{@link #getStatus() <em>Status</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -55,6 +56,7 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 	 * @ordered
 	 */
 	protected String status = STATUS_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getZone() <em>Zone</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -64,6 +66,7 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 	 * @ordered
 	 */
 	protected TransportRoute zone;
+
 	/**
 	 * The cached value of the '{@link #getAssetInfo() <em>Asset Info</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -79,7 +82,7 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected DairyContainerImpl() {
+	protected BinImpl() {
 		super();
 	}
 
@@ -90,7 +93,7 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return DairyPackage.Literals.DAIRY_CONTAINER;
+		return DairyPackage.Literals.BIN;
 	}
 
 	/**
@@ -111,7 +114,7 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 		String oldStatus = status;
 		status = newStatus;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_CONTAINER__STATUS, oldStatus, status));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.BIN__STATUS, oldStatus, status));
 	}
 
 	/**
@@ -125,7 +128,7 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 			zone = (TransportRoute)eResolveProxy(oldZone);
 			if (zone != oldZone) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DAIRY_CONTAINER__ZONE, oldZone, zone));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.BIN__ZONE, oldZone, zone));
 			}
 		}
 		return zone;
@@ -149,7 +152,7 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 		TransportRoute oldZone = zone;
 		zone = newZone;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_CONTAINER__ZONE, oldZone, zone));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.BIN__ZONE, oldZone, zone));
 	}
 
 	/**
@@ -170,7 +173,7 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 		Asset oldAssetInfo = assetInfo;
 		assetInfo = newAssetInfo;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_CONTAINER__ASSET_INFO, oldAssetInfo, newAssetInfo);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DairyPackage.BIN__ASSET_INFO, oldAssetInfo, newAssetInfo);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -185,14 +188,14 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 		if (newAssetInfo != assetInfo) {
 			NotificationChain msgs = null;
 			if (assetInfo != null)
-				msgs = ((InternalEObject)assetInfo).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DairyPackage.DAIRY_CONTAINER__ASSET_INFO, null, msgs);
+				msgs = ((InternalEObject)assetInfo).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DairyPackage.BIN__ASSET_INFO, null, msgs);
 			if (newAssetInfo != null)
-				msgs = ((InternalEObject)newAssetInfo).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - DairyPackage.DAIRY_CONTAINER__ASSET_INFO, null, msgs);
+				msgs = ((InternalEObject)newAssetInfo).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - DairyPackage.BIN__ASSET_INFO, null, msgs);
 			msgs = basicSetAssetInfo(newAssetInfo, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_CONTAINER__ASSET_INFO, newAssetInfo, newAssetInfo));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.BIN__ASSET_INFO, newAssetInfo, newAssetInfo));
 	}
 
 	/**
@@ -203,7 +206,7 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case DairyPackage.DAIRY_CONTAINER__ASSET_INFO:
+			case DairyPackage.BIN__ASSET_INFO:
 				return basicSetAssetInfo(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -217,12 +220,12 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case DairyPackage.DAIRY_CONTAINER__STATUS:
+			case DairyPackage.BIN__STATUS:
 				return getStatus();
-			case DairyPackage.DAIRY_CONTAINER__ZONE:
+			case DairyPackage.BIN__ZONE:
 				if (resolve) return getZone();
 				return basicGetZone();
-			case DairyPackage.DAIRY_CONTAINER__ASSET_INFO:
+			case DairyPackage.BIN__ASSET_INFO:
 				return getAssetInfo();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -236,13 +239,13 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case DairyPackage.DAIRY_CONTAINER__STATUS:
+			case DairyPackage.BIN__STATUS:
 				setStatus((String)newValue);
 				return;
-			case DairyPackage.DAIRY_CONTAINER__ZONE:
+			case DairyPackage.BIN__ZONE:
 				setZone((TransportRoute)newValue);
 				return;
-			case DairyPackage.DAIRY_CONTAINER__ASSET_INFO:
+			case DairyPackage.BIN__ASSET_INFO:
 				setAssetInfo((Asset)newValue);
 				return;
 		}
@@ -257,13 +260,13 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case DairyPackage.DAIRY_CONTAINER__STATUS:
+			case DairyPackage.BIN__STATUS:
 				setStatus(STATUS_EDEFAULT);
 				return;
-			case DairyPackage.DAIRY_CONTAINER__ZONE:
+			case DairyPackage.BIN__ZONE:
 				setZone((TransportRoute)null);
 				return;
-			case DairyPackage.DAIRY_CONTAINER__ASSET_INFO:
+			case DairyPackage.BIN__ASSET_INFO:
 				setAssetInfo((Asset)null);
 				return;
 		}
@@ -278,11 +281,11 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case DairyPackage.DAIRY_CONTAINER__STATUS:
+			case DairyPackage.BIN__STATUS:
 				return STATUS_EDEFAULT == null ? status != null : !STATUS_EDEFAULT.equals(status);
-			case DairyPackage.DAIRY_CONTAINER__ZONE:
+			case DairyPackage.BIN__ZONE:
 				return zone != null;
-			case DairyPackage.DAIRY_CONTAINER__ASSET_INFO:
+			case DairyPackage.BIN__ASSET_INFO:
 				return assetInfo != null;
 		}
 		return super.eIsSet(featureID);
@@ -304,4 +307,4 @@ public class DairyContainerImpl extends ContainerImpl implements DairyContainer 
 		return result.toString();
 	}
 
-} //DairyContainerImpl
+} //BinImpl

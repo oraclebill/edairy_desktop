@@ -76,7 +76,7 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 			case DairyPackage.DAIRY: return createDairy();
 			case DairyPackage.MEMBERSHIP: return createMembership();
 			case DairyPackage.ASSET: return createAsset();
-			case DairyPackage.DAIRY_CONTAINER: return createDairyContainer();
+			case DairyPackage.BIN: return createBin();
 			case DairyPackage.SUPPLIER: return createSupplier();
 			case DairyPackage.CUSTOMER: return createCustomer();
 			case DairyPackage.MEMBER_PAYMENT: return createMemberPayment();
@@ -297,9 +297,9 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DairyContainer createDairyContainer() {
-		DairyContainerImpl dairyContainer = new DairyContainerImpl();
-		return dairyContainer;
+	public Bin createBin() {
+		BinImpl bin = new BinImpl();
+		return bin;
 	}
 
 	/**

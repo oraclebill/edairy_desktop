@@ -16,13 +16,13 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import com.agritrace.edairy.desktop.common.model.dairy.DairyContainer;
+import com.agritrace.edairy.desktop.common.model.dairy.Bin;
 import com.agritrace.edairy.desktop.common.ui.controls.CompositePanel;
 import com.agritrace.edairy.desktop.common.ui.controls.assetinfo.AssetInfo;
 import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.operations.ui.controllers.ContainerEditDialogController;
 
-public class ContainerEditDialog extends RecordDialog<DairyContainer> {
+public class ContainerEditDialog extends RecordDialog<Bin> {
 
 	public class ContainerLogDetailComposite extends CompositePanel {
 
