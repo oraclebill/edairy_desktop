@@ -204,7 +204,7 @@ public class PaymentRequestViewControllerTest extends AbstractSubModuleControlle
 		CollectionJournalLine entry = DairyFactory.eINSTANCE.createCollectionJournalLine();
 
 		entry.setCollectionJournal(group);
-		entry.setDairyContainer(bin);
+		entry.setBin(bin);
 		entry.setRecordedMember(member.getMemberNumber());
 		entry.setValidatedMember(member);
 		entry.setQuantity(BigDecimal.valueOf(124, 1));

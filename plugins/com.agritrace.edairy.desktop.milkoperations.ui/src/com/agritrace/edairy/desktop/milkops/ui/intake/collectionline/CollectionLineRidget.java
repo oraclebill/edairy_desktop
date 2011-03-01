@@ -267,7 +267,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 
 		binCombo.bindToModel(new WritableList(binList, Bin.class), Bin.class,
 				"getTrackingNumber", PojoObservables.observeValue(workingJournalLine,
-						DairyPackage.Literals.COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER.getName()));
+						DairyPackage.Literals.COLLECTION_JOURNAL_LINE__BIN.getName()));
 
 		canText.bindToModel(EMFObservables.observeValue(workingJournalLine,
 				DairyPackage.Literals.COLLECTION_JOURNAL_LINE__FARM_CONTAINER));
@@ -299,8 +299,8 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		addedWaterButton.bindToModel(workingJournalLine,
 				DairyPackage.Literals.COLLECTION_JOURNAL_LINE__WATER_ADDED.getName());
 
-		if (savedContainer != null && workingJournalLine.getDairyContainer() == null) {
-			workingJournalLine.setDairyContainer(savedContainer);
+		if (savedContainer != null && workingJournalLine.getBin() == null) {
+			workingJournalLine.setBin(savedContainer);
 		}
 		updateAllRidgetsFromModel();
 		enableQualityWidgets(false);
@@ -328,7 +328,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		}
 		for (final EStructuralFeature feature : DairyPackage.Literals.COLLECTION_JOURNAL_LINE
 				.getEAllStructuralFeatures()) {
-			if (saveBin && feature != DairyPackage.Literals.COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER) {
+			if (saveBin && feature != DairyPackage.Literals.COLLECTION_JOURNAL_LINE__BIN) {
 				workingJournalLine.eSet(feature, feature.getDefaultValue());
 			}
 		}
@@ -372,13 +372,13 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		log(LogService.LOG_DEBUG, "handleSaveLine: journal-line: %s, validation result: [%s]\n", workingJournalLine,
 				result);
 		if (result.isOK()) {
-			savedContainer = workingJournalLine.getDairyContainer();
+			savedContainer = workingJournalLine.getBin();
 			firePropertyChange(VALIDATED_VALUE, null, workingJournalLine);
 		} else if (result.matches(IStatus.WARNING | IStatus.INFO)) {
 // markerViewer.setVisible(true);
 			if (displaySuspendMessage(result)) {
 				workingJournalLine.setFlagged(true);
-				savedContainer = workingJournalLine.getDairyContainer();
+				savedContainer = workingJournalLine.getBin();
 				firePropertyChange(VALIDATED_VALUE, null, workingJournalLine);
 			}
 		} else if (result.matches(IStatus.ERROR | IStatus.CANCEL)) {
@@ -469,7 +469,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	}
 
 	private void setJournalLineFocus() {
-		if (workingJournalLine.getDairyContainer() != null) {
+		if (workingJournalLine.getBin() != null) {
 			memberIDRidget.requestFocus();
 		} else {
 			binCombo.requestFocus();

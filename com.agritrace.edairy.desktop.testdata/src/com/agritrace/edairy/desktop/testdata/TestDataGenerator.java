@@ -6,8 +6,10 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -20,13 +22,13 @@ import org.hibernate.Transaction;
 import com.agritrace.edairy.desktop.common.model.base.Gender;
 import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.base.Person;
+import com.agritrace.edairy.desktop.common.model.dairy.Bin;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
-import com.agritrace.edairy.desktop.common.model.dairy.Bin;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
@@ -53,7 +55,7 @@ public class TestDataGenerator extends DatabaseSetup {
 	private String[] args = {};
 
 	private int memberCount = 100;
-	private float collectionsPerMember = 3.0f;
+	private BigDecimal collectionsPerMember = new BigDecimal(3.0f);
 
 	private int employeeCount = 10;
 	private int collectionCenterCount = 4;
@@ -113,7 +115,7 @@ public class TestDataGenerator extends DatabaseSetup {
 	 * @return the collectionsPerMember
 	 */
 	public float getCollectionsPerMember() {
-		return collectionsPerMember;
+		return collectionsPerMember.floatValue();
 	}
 
 	/**
@@ -121,7 +123,7 @@ public class TestDataGenerator extends DatabaseSetup {
 	 *            the collectionsPerMember to set
 	 */
 	public void setCollectionsPerMember(float collectionsPerMember) {
-		this.collectionsPerMember = collectionsPerMember;
+		this.collectionsPerMember = new BigDecimal(collectionsPerMember);
 	}
 
 	/**
@@ -328,19 +330,26 @@ public class TestDataGenerator extends DatabaseSetup {
 		}
 	}
 
+	private int binSequence = 0;
+
 	private void generateDairyBins() {
 		System.out.println("Generating Bins...");
 		Bin container;
 		int routeCount = currentDairy.getRoutes().size();
-		int totalBinCount = (int) Math.floor(collectionsPerMember * memberCount * 2 * 3);
-		for (int i = 0; i < totalBinCount; i++) {
-			container = DairyFactory.eINSTANCE.createBin();
-			container.setTrackingNumber(String.format("T%08d", i));
-			container.setCapacity(100d);
-			container.setStatus("ACTIVE");
-// container.setZone(currentDairy.getRoutes().get(i % routeCount));
-			currentDairy.getDairyBins().add(container);
-			getSession().persist(container);
+		double binCapacity = 125.0d;
+		int totalBinCount = (int) Math.floor((collectionsPerMember.doubleValue() * memberCount) / binCapacity) * 3; // clean,
+// dirty,
+// spare
+		for (TransportRoute route : currentDairy.getRoutes()) {
+			for (int i = 0; i < totalBinCount / currentDairy.getRoutes().size(); i++) {
+				container = DairyFactory.eINSTANCE.createBin();
+				container.setTrackingNumber(String.format("T%08d", ++binSequence));
+				container.setCapacity(binCapacity);
+				container.setStatus("ACTIVE");
+				container.setZone(route);
+				currentDairy.getDairyBins().add(container);
+				getSession().persist(container);
+			}
 		}
 	}
 
@@ -478,46 +487,84 @@ public class TestDataGenerator extends DatabaseSetup {
 	 * @param collectionDate
 	 */
 	private void generateCollectionData(Date collectionDate) {
-		HashMap<TransportRoute, Collection<CollectionGroup>> groupMap;
+		System.out.println("Generating Collection Data for " + collectionDate);
+		Map<TransportRoute, Collection<CollectionGroup>> groupMap;
+		BigDecimal collectionAmount = new BigDecimal(getCollectionsPerMember());
+		for (CollectionSession session : currentDairy.getCollectionSessions()) {
+			System.out.println("\tSession " + session);
+			groupMap = 
+				generateSessionCollections(collectionDate, session, collectionAmount);
+			generateSessionSales(groupMap, session);
+			collectionAmount = collectionAmount.divide(new BigDecimal(3.0d));
+		}
+
+	}
+
+	private void generateSessionSales(Map<TransportRoute, Collection<CollectionGroup>> groupMap,
+			CollectionSession session) {
+		Set<Bin> binSet;
+		
+		binSet = new HashSet<Bin>();
+		for (Collection<CollectionGroup> groups : groupMap.values()) {
+			for (CollectionGroup group : groups) {
+				for (CollectionJournalLine entry : group.getJournalEntries()) {
+					if (!binSet.contains(entry.getBin())) {
+						binSet.add(entry.getBin());
+					}
+				}
+			}
+		}
+	}
+
+	private Map<TransportRoute, Collection<CollectionGroup>> generateSessionCollections(Date collectionDate,
+			CollectionSession session, BigDecimal memberCollectionAmount) {
+		Map<TransportRoute, Collection<CollectionGroup>> groupMap;
 		List<Membership> filteredMembers;
 		List<Bin> binList;
 		Collection<CollectionGroup> collectionSet;
 		CollectionGroup group;
 		Bin bin;
 		CollectionJournalLine entry;
-		int currentBin = 0, binCount = currentDairy.getDairyBins().size() / 3;
-		double factor = 1.0d;
-		
-		System.out.println("Generating Collection Data for " + collectionDate);
-		for (CollectionSession session : currentDairy.getCollectionSessions()) {
-			System.out.println("\tSession " + session);
-			groupMap = new HashMap<TransportRoute, Collection<CollectionGroup>>();
-			for (DairyLocation center : currentDairy.getBranchLocations()) {
-				System.out.println("\t\tCenter " + center);
-				filteredMembers = filterMembersByDefaultRoute(center);
-				group = createCollectionGroup(center, collectionDate, session);
-				collectionSet = groupMap.get(center.getRoute());
-				if (collectionSet == null) {
-					collectionSet = new ArrayList<CollectionGroup>();
-					groupMap.put(center.getRoute(), collectionSet);
-				}
-				collectionSet.add(group);
-//				System.out.println("\t\tGroup " + group );
-				binList = getBinsForCenterAndSession(center, session);
-				for (Membership member : filteredMembers) {
-					bin = currentDairy.getDairyBins().get(currentBin++ % binCount);
-					entry = createCollectionEntry(group, bin, member, BigDecimal.ONE);
-				}
-				getSession().persist(group);
+		groupMap = new HashMap<TransportRoute, Collection<CollectionGroup>>();
+		for (DairyLocation center : currentDairy.getBranchLocations()) {
+			System.out.println("\t\tCenter " + center);
+			filteredMembers = filterMembersByDefaultRoute(center);
+			group = createCollectionGroup(center, collectionDate, session);
+			collectionSet = groupMap.get(center.getRoute());
+			if (collectionSet == null) {
+				collectionSet = new ArrayList<CollectionGroup>();
+				groupMap.put(center.getRoute(), collectionSet);
 			}
-			factor = factor / 2.0d;
+			collectionSet.add(group);
+// System.out.println("\t\tGroup " + group );
+			binList = getBinsForCenterAndSession(center, session);
+			for (Membership member : filteredMembers) {
+				bin = getNextAvailableBin(binList, memberCollectionAmount);
+				entry = createCollectionEntry(group, bin, member, memberCollectionAmount);
+			}
+			getSession().persist(group);
 		}
-
+		return groupMap;
 	}
 
 	private List<Bin> getBinsForCenterAndSession(DairyLocation center,
 			CollectionSession session) {
-		// TODO Auto-generated method stub
+		TransportRoute route = center.getRoute();
+		List<Bin> binList = new LinkedList<Bin>();
+		for (Bin bin : route.getBins()) {
+			if (bin.getQuantity() == 0d && bin.getStatus() == "ACTIVE") {
+				binList.add(bin);
+			}
+		}
+		return binList;
+	}
+
+	private Bin getNextAvailableBin(List<Bin> binList,
+			BigDecimal amount) {
+		for (Bin bin : binList) {
+			if (bin.getQuantity() + amount.doubleValue() < bin.getCapacity())
+				return bin;
+		}
 		return null;
 	}
 
@@ -567,13 +614,15 @@ public class TestDataGenerator extends DatabaseSetup {
 			Bin bin,
 			Membership member,
 			BigDecimal amount) {
-		CollectionJournalLine entry = DairyFactory.eINSTANCE.createCollectionJournalLine();
+		Assert.isLegal((bin.getQuantity() + amount.doubleValue()) <= bin.getCapacity(), "bin capacity exceeded");
 
+		CollectionJournalLine entry = DairyFactory.eINSTANCE.createCollectionJournalLine();
 		entry.setCollectionJournal(group);
-		entry.setDairyContainer(bin);
+		entry.setBin(bin);
 		entry.setRecordedMember(member.getMemberNumber());
 		entry.setValidatedMember(member);
-		entry.setQuantity(BigDecimal.valueOf(124, 1));
+		entry.setQuantity(amount);
+		bin.setQuantity(bin.getQuantity() + amount.doubleValue());
 		entry.setFlagged(false);
 		return entry;
 	}

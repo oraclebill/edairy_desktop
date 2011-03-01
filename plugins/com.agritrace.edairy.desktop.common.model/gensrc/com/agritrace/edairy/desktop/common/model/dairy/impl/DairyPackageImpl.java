@@ -595,7 +595,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCollectionJournalLine_DairyContainer() {
+	public EReference getCollectionJournalLine_Bin() {
 		return (EReference)collectionJournalLineEClass.getEStructuralFeatures().get(10);
 	}
 
@@ -1091,7 +1091,16 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	public EReference getTransportRoute_Stops() {
-		return (EReference)transportRouteEClass.getEStructuralFeatures().get(2);
+		return (EReference)transportRouteEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTransportRoute_Bins() {
+		return (EReference)transportRouteEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -1100,7 +1109,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	public EAttribute getTransportRoute_Description() {
-		return (EAttribute)transportRouteEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)transportRouteEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1109,7 +1118,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	public EReference getTransportRoute_Vehicle() {
-		return (EReference)transportRouteEClass.getEStructuralFeatures().get(4);
+		return (EReference)transportRouteEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1945,6 +1954,15 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getBin_Collections() {
+		return (EReference)binEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSupplier() {
 		return supplierEClass;
 	}
@@ -2392,7 +2410,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(collectionJournalLineEClass, COLLECTION_JOURNAL_LINE__OFF_ROUTE);
 		createEReference(collectionJournalLineEClass, COLLECTION_JOURNAL_LINE__FROM);
 		createEReference(collectionJournalLineEClass, COLLECTION_JOURNAL_LINE__FARM_CONTAINER);
-		createEReference(collectionJournalLineEClass, COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER);
+		createEReference(collectionJournalLineEClass, COLLECTION_JOURNAL_LINE__BIN);
 		createEReference(collectionJournalLineEClass, COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL);
 		createEAttribute(collectionJournalLineEClass, COLLECTION_JOURNAL_LINE__REJECTED);
 		createEAttribute(collectionJournalLineEClass, COLLECTION_JOURNAL_LINE__REJECTION_REASON);
@@ -2452,9 +2470,10 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		transportRouteEClass = createEClass(TRANSPORT_ROUTE);
 		createEAttribute(transportRouteEClass, TRANSPORT_ROUTE__ID);
 		createEAttribute(transportRouteEClass, TRANSPORT_ROUTE__NAME);
-		createEReference(transportRouteEClass, TRANSPORT_ROUTE__STOPS);
 		createEAttribute(transportRouteEClass, TRANSPORT_ROUTE__DESCRIPTION);
 		createEReference(transportRouteEClass, TRANSPORT_ROUTE__VEHICLE);
+		createEReference(transportRouteEClass, TRANSPORT_ROUTE__STOPS);
+		createEReference(transportRouteEClass, TRANSPORT_ROUTE__BINS);
 
 		tripEClass = createEClass(TRIP);
 		createEReference(tripEClass, TRIP__COLLECTIONS);
@@ -2556,6 +2575,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(binEClass, BIN__STATUS);
 		createEReference(binEClass, BIN__ZONE);
 		createEReference(binEClass, BIN__ASSET_INFO);
+		createEReference(binEClass, BIN__COLLECTIONS);
 
 		supplierEClass = createEClass(SUPPLIER);
 		createEAttribute(supplierEClass, SUPPLIER__CATEGORIES);
@@ -2683,7 +2703,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getCollectionJournalLine_OffRoute(), ecorePackage.getEBoolean(), "offRoute", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getCollectionJournalLine_From(), theTrackingPackage.getFarm(), null, "from", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCollectionJournalLine_FarmContainer(), theTrackingPackage.getContainer(), null, "farmContainer", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCollectionJournalLine_DairyContainer(), this.getBin(), null, "dairyContainer", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCollectionJournalLine_Bin(), this.getBin(), this.getBin_Collections(), "bin", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCollectionJournalLine_CollectionJournal(), this.getCollectionGroup(), this.getCollectionGroup_JournalEntries(), "collectionJournal", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionJournalLine_Rejected(), ecorePackage.getEBoolean(), "rejected", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionJournalLine_RejectionReason(), ecorePackage.getEString(), "rejectionReason", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2745,9 +2765,10 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEClass(transportRouteEClass, TransportRoute.class, "TransportRoute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTransportRoute_Id(), theModelPackage.getUniqueID(), "Id", null, 1, 1, TransportRoute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTransportRoute_Name(), ecorePackage.getEString(), "name", null, 0, 1, TransportRoute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTransportRoute_Stops(), this.getDairyLocation(), this.getDairyLocation_Route(), "stops", null, 0, -1, TransportRoute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTransportRoute_Description(), ecorePackage.getEString(), "description", null, 0, 1, TransportRoute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransportRoute_Vehicle(), this.getVehicle(), null, "vehicle", null, 0, 1, TransportRoute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTransportRoute_Stops(), this.getDairyLocation(), this.getDairyLocation_Route(), "stops", null, 0, -1, TransportRoute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTransportRoute_Bins(), this.getBin(), this.getBin_Zone(), "bins", null, 0, -1, TransportRoute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tripEClass, Trip.class, "Trip", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTrip_Collections(), this.getCollectionGroup(), null, "collections", null, 1, -1, Trip.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2852,9 +2873,10 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 
 		initEClass(binEClass, Bin.class, "Bin", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBin_Status(), ecorePackage.getEString(), "status", "IN_CIRCULATION", 0, 1, Bin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBin_Zone(), this.getTransportRoute(), null, "zone", null, 0, 1, Bin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBin_Zone(), this.getTransportRoute(), this.getTransportRoute_Bins(), "zone", null, 0, 1, Bin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBin_AssetInfo(), this.getAsset(), null, "assetInfo", null, 0, 1, Bin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		getBin_AssetInfo().getEKeys().add(this.getAsset_TagValue());
+		initEReference(getBin_Collections(), this.getCollectionJournalLine(), this.getCollectionJournalLine_Bin(), "collections", null, 0, -1, Bin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(supplierEClass, Supplier.class, "Supplier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSupplier_Categories(), ecorePackage.getEString(), "categories", null, 0, -1, Supplier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -50,6 +50,12 @@
         primary key (`accountbalanceid`)
     ) type=InnoDB;
 
+    create table `bin_collections` (
+        `collectionjournalline_e_id` bigint not null,
+        `bin_containerid` bigint,
+        primary key (`collectionjournalline_e_id`)
+    ) type=InnoDB;
+
     create table `collectiongroup` (
         `journalid` bigint not null auto_increment,
         dtype varchar(255) not null,
@@ -87,7 +93,6 @@
         `offroute` bit,
         `farm_from_farmid` bigint,
         `container_farmcontainer_containerid` bigint,
-        `bin_dairycontainer_containerid` bigint,
         `collectionjournalline_collectionjournal_e_id` bigint,
         `rejected` bit,
         `rejectionreason` varchar(60),
@@ -137,7 +142,6 @@
         `capacity` double precision not null,
         `measuretype` varchar(255),
         `status` varchar(60),
-        `transportroute_zone_id` bigint,
         `tagtype` varchar(60),
         `tagvalue` varchar(60),
         `dateacquired` datetime,
@@ -543,6 +547,12 @@
         primary key (`transactionid`)
     ) type=InnoDB;
 
+    create table `transportroute_bins` (
+        `bin_containerid` bigint not null,
+        `transportroute_id` bigint,
+        primary key (`bin_containerid`)
+    ) type=InnoDB;
+
     create table `transportroute_stops` (
         `dairylocation_id` bigint not null,
         `transportroute_id` bigint,
@@ -660,6 +670,18 @@
         foreign key (`balancepoint_account_accountid`) 
         references `account` (`accountid`);
 
+    alter table `bin_collections` 
+        add index FKCFAFAE5DE7B46814 (`collectionjournalline_e_id`), 
+        add constraint FKCFAFAE5DE7B46814 
+        foreign key (`collectionjournalline_e_id`) 
+        references `collectionjournalline` (id);
+
+    alter table `bin_collections` 
+        add index FKCFAFAE5D6D90CB0B (`bin_containerid`), 
+        add constraint FKCFAFAE5D6D90CB0B 
+        foreign key (`bin_containerid`) 
+        references `container` (`containerid`);
+
     create index collectiongroupdtype on `collectiongroup` (dtype);
 
     alter table `collectiongroup` 
@@ -705,12 +727,6 @@
         add constraint FK21648E4DCD250D6E 
         foreign key (`collectionjournalline_collectionjournal_e_id`) 
         references `collectiongroup` (`journalid`);
-
-    alter table `collectionjournalline` 
-        add index FK21648E4D6928B4CA (`bin_dairycontainer_containerid`), 
-        add constraint FK21648E4D6928B4CA 
-        foreign key (`bin_dairycontainer_containerid`) 
-        references `container` (`containerid`);
 
     alter table `collectionjournalline` 
         add index FK21648E4DDF4763D3 (`farm_from_farmid`), 
@@ -771,12 +787,6 @@
         add constraint FKE7814C81E80D409C 
         foreign key (`farm_owner_farmid`) 
         references `farm` (`farmid`);
-
-    alter table `container` 
-        add index FKE7814C81FC1BFACF (`transportroute_zone_id`), 
-        add constraint FKE7814C81FC1BFACF 
-        foreign key (`transportroute_zone_id`) 
-        references `transportroute` (`id`);
 
     alter table `container` 
         add index FKE7814C8148CF2FF (`dairy_dairybins_companyid`), 
@@ -1141,6 +1151,18 @@
         add constraint FK7FA0D2DE4D2E0B24 
         foreign key (`employee_signedoffby_personid`) 
         references `person` (`personid`);
+
+    alter table `transportroute_bins` 
+        add index FKEBBA086B599915BA (`transportroute_id`), 
+        add constraint FKEBBA086B599915BA 
+        foreign key (`transportroute_id`) 
+        references `transportroute` (`id`);
+
+    alter table `transportroute_bins` 
+        add index FKEBBA086B6D90CB0B (`bin_containerid`), 
+        add constraint FKEBBA086B6D90CB0B 
+        foreign key (`bin_containerid`) 
+        references `container` (`containerid`);
 
     alter table `transportroute_stops` 
         add index FK8C7B9872599915BA (`transportroute_id`), 

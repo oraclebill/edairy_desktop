@@ -8,18 +8,23 @@ package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Asset;
 import com.agritrace.edairy.desktop.common.model.dairy.Bin;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
 
 import com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,6 +36,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.BinImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.BinImpl#getZone <em>Zone</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.BinImpl#getAssetInfo <em>Asset Info</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.BinImpl#getCollections <em>Collections</em>}</li>
  * </ul>
  * </p>
  *
@@ -76,6 +82,16 @@ public class BinImpl extends ContainerImpl implements Bin {
 	 * @ordered
 	 */
 	protected Asset assetInfo;
+
+	/**
+	 * The cached value of the '{@link #getCollections() <em>Collections</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCollections()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<CollectionJournalLine> collections;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -148,11 +164,33 @@ public class BinImpl extends ContainerImpl implements Bin {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setZone(TransportRoute newZone) {
+	public NotificationChain basicSetZone(TransportRoute newZone, NotificationChain msgs) {
 		TransportRoute oldZone = zone;
 		zone = newZone;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.BIN__ZONE, oldZone, zone));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DairyPackage.BIN__ZONE, oldZone, newZone);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setZone(TransportRoute newZone) {
+		if (newZone != zone) {
+			NotificationChain msgs = null;
+			if (zone != null)
+				msgs = ((InternalEObject)zone).eInverseRemove(this, DairyPackage.TRANSPORT_ROUTE__BINS, TransportRoute.class, msgs);
+			if (newZone != null)
+				msgs = ((InternalEObject)newZone).eInverseAdd(this, DairyPackage.TRANSPORT_ROUTE__BINS, TransportRoute.class, msgs);
+			msgs = basicSetZone(newZone, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.BIN__ZONE, newZone, newZone));
 	}
 
 	/**
@@ -203,11 +241,46 @@ public class BinImpl extends ContainerImpl implements Bin {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<CollectionJournalLine> getCollections() {
+		if (collections == null) {
+			collections = new EObjectWithInverseResolvingEList<CollectionJournalLine>(CollectionJournalLine.class, this, DairyPackage.BIN__COLLECTIONS, DairyPackage.COLLECTION_JOURNAL_LINE__BIN);
+		}
+		return collections;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case DairyPackage.BIN__ZONE:
+				if (zone != null)
+					msgs = ((InternalEObject)zone).eInverseRemove(this, DairyPackage.TRANSPORT_ROUTE__BINS, TransportRoute.class, msgs);
+				return basicSetZone((TransportRoute)otherEnd, msgs);
+			case DairyPackage.BIN__COLLECTIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getCollections()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case DairyPackage.BIN__ZONE:
+				return basicSetZone(null, msgs);
 			case DairyPackage.BIN__ASSET_INFO:
 				return basicSetAssetInfo(null, msgs);
+			case DairyPackage.BIN__COLLECTIONS:
+				return ((InternalEList<?>)getCollections()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -227,6 +300,8 @@ public class BinImpl extends ContainerImpl implements Bin {
 				return basicGetZone();
 			case DairyPackage.BIN__ASSET_INFO:
 				return getAssetInfo();
+			case DairyPackage.BIN__COLLECTIONS:
+				return getCollections();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -236,6 +311,7 @@ public class BinImpl extends ContainerImpl implements Bin {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -247,6 +323,10 @@ public class BinImpl extends ContainerImpl implements Bin {
 				return;
 			case DairyPackage.BIN__ASSET_INFO:
 				setAssetInfo((Asset)newValue);
+				return;
+			case DairyPackage.BIN__COLLECTIONS:
+				getCollections().clear();
+				getCollections().addAll((Collection<? extends CollectionJournalLine>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -269,6 +349,9 @@ public class BinImpl extends ContainerImpl implements Bin {
 			case DairyPackage.BIN__ASSET_INFO:
 				setAssetInfo((Asset)null);
 				return;
+			case DairyPackage.BIN__COLLECTIONS:
+				getCollections().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -287,6 +370,8 @@ public class BinImpl extends ContainerImpl implements Bin {
 				return zone != null;
 			case DairyPackage.BIN__ASSET_INFO:
 				return assetInfo != null;
+			case DairyPackage.BIN__COLLECTIONS:
+				return collections != null && !collections.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

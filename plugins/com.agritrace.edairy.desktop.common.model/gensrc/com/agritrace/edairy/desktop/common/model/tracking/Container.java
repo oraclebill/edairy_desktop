@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.Container#getOwner <em>Owner</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.Container#getCapacity <em>Capacity</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.Container#getMeasureType <em>Measure Type</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.Container#getQuantity <em>Quantity</em>}</li>
  * </ul>
  * </p>
  *
@@ -167,5 +168,32 @@ public interface Container extends EObject {
 	 * @generated
 	 */
 	void setMeasureType(UnitOfMeasure value);
+
+	/**
+	 * Returns the value of the '<em><b>Quantity</b></em>' attribute.
+	 * The default value is <code>"0"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Quantity</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Quantity</em>' attribute.
+	 * @see #setQuantity(double)
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage#getContainer_Quantity()
+	 * @model default="0" required="true" transient="true"
+	 * @generated
+	 */
+	double getQuantity();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.tracking.Container#getQuantity <em>Quantity</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Quantity</em>' attribute.
+	 * @see #getQuantity()
+	 * @generated
+	 */
+	void setQuantity(double value);
 
 } // Container

@@ -372,13 +372,22 @@ public interface TrackingPackage extends EPackage {
 	int CONTAINER__MEASURE_TYPE = 4;
 
 	/**
+	 * The feature id for the '<em><b>Quantity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTAINER__QUANTITY = 5;
+
+	/**
 	 * The number of structural features of the '<em>Container</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINER_FEATURE_COUNT = 5;
+	int CONTAINER_FEATURE_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl <em>Registered Animal</em>}' class.
@@ -949,6 +958,17 @@ public interface TrackingPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getContainer_MeasureType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.tracking.Container#getQuantity <em>Quantity</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Quantity</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.tracking.Container#getQuantity()
+	 * @see #getContainer()
+	 * @generated
+	 */
+	EAttribute getContainer_Quantity();
 
 	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.tracking.RegisteredAnimal <em>Registered Animal</em>}'.
@@ -1535,6 +1555,14 @@ public interface TrackingPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CONTAINER__MEASURE_TYPE = eINSTANCE.getContainer_MeasureType();
+
+		/**
+		 * The meta object literal for the '<em><b>Quantity</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONTAINER__QUANTITY = eINSTANCE.getContainer_Quantity();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.tracking.impl.RegisteredAnimalImpl <em>Registered Animal</em>}' class.

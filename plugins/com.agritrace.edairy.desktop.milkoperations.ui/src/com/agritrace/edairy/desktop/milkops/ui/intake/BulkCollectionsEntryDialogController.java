@@ -383,7 +383,7 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 			lastLine = page.getJournalEntries().get(lineCount - 1);
 			workingLine = collectionLineRidget.getWorkingCollectionLine();
 			if (workingLine != null) {
-				workingLine.setDairyContainer(lastLine.getDairyContainer());
+				workingLine.setBin(lastLine.getBin());
 			}
 		}
 
@@ -453,9 +453,9 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 			@Override
 			public IStatus validate(Object value) {
 				final CollectionJournalLine line = (CollectionJournalLine) value;
-				final Container dairyContainer = line.getDairyContainer();
+				final Container dairyContainer = line.getBin();
 				final BigDecimal capacity = dairyContainer == null ? BigDecimal.ZERO : BigDecimal.valueOf(line
-						.getDairyContainer().getCapacity());
+						.getBin().getCapacity());
 				boolean allowButFlag = false;
 				if (line.getQuantity().compareTo(capacity) > 0) {
 					// We exceed the bin capacity

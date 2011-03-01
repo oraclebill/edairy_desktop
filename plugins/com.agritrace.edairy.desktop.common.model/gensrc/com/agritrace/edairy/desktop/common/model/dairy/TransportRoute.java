@@ -20,9 +20,10 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.TransportRoute#getId <em>Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.TransportRoute#getName <em>Name</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.TransportRoute#getStops <em>Stops</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.TransportRoute#getDescription <em>Description</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.TransportRoute#getVehicle <em>Vehicle</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.TransportRoute#getStops <em>Stops</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.TransportRoute#getBins <em>Bins</em>}</li>
  * </ul>
  * </p>
  *
@@ -103,6 +104,24 @@ public interface TransportRoute extends EObject {
 	 * @generated
 	 */
 	EList<DairyLocation> getStops();
+
+	/**
+	 * Returns the value of the '<em><b>Bins</b></em>' reference list.
+	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.Bin}.
+	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.Bin#getZone <em>Zone</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Bins</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Bins</em>' reference list.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getTransportRoute_Bins()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Bin#getZone
+	 * @model opposite="zone"
+	 * @generated
+	 */
+	EList<Bin> getBins();
 
 	/**
 	 * Returns the value of the '<em><b>Description</b></em>' attribute.

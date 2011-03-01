@@ -72,7 +72,7 @@
         derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="ecore:EClass farm.ecore#//Farm"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="farmContainer" eType="ecore:EClass farm.ecore#//Container"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dairyContainer" eType="#//Bin"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bin" eType="#//Bin" eOpposite="#//Bin/collections"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="collectionJournal" eType="#//CollectionGroup"
         eOpposite="#//CollectionGroup/journalEntries"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="rejected" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -218,10 +218,12 @@
         <details key="appinfo" value="@NaturalId"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="stops" upperBound="-1"
-        eType="#//DairyLocation" eOpposite="#//DairyLocation/route"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="vehicle" eType="#//Vehicle"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stops" upperBound="-1"
+        eType="#//DairyLocation" eOpposite="#//DairyLocation/route"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bins" upperBound="-1" eType="#//Bin"
+        eOpposite="#//Bin/zone"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Trip">
     <eStructuralFeatures xsi:type="ecore:EReference" name="collections" lowerBound="1"
@@ -421,7 +423,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Bin" eSuperTypes="farm.ecore#//Container">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="IN_CIRCULATION"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="zone" eType="#//TransportRoute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="zone" eType="#//TransportRoute"
+        eOpposite="#//TransportRoute/bins"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="assetInfo" eType="#//Asset"
         containment="true" eKeys="#//Asset/tagValue">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
@@ -432,6 +435,8 @@
         <details key="appinfo" value="@Embedded"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="collections" upperBound="-1"
+        eType="#//CollectionJournalLine" eOpposite="#//CollectionJournalLine/bin"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Supplier" eSuperTypes="common.ecore#//Company">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="categories" upperBound="-1"

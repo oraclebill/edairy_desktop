@@ -149,7 +149,7 @@ import com.google.inject.Provider;
 						// get one fromm
 						// the scale ??
 					}
-					importRecord.setDairyContainer(null); // don't seem to
+					importRecord.setBin(null); // don't seem to
 															// get one fromm
 															// the scale ??
 

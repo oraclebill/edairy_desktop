@@ -319,13 +319,13 @@ public interface DairyPackage extends EPackage {
 	int COLLECTION_JOURNAL_LINE__FARM_CONTAINER = 9;
 
 	/**
-	 * The feature id for the '<em><b>Dairy Container</b></em>' reference.
+	 * The feature id for the '<em><b>Bin</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER = 10;
+	int COLLECTION_JOURNAL_LINE__BIN = 10;
 
 	/**
 	 * The feature id for the '<em><b>Collection Journal</b></em>' container reference.
@@ -491,13 +491,13 @@ public interface DairyPackage extends EPackage {
 	int SCALE_IMPORT_RECORD__FARM_CONTAINER = COLLECTION_JOURNAL_LINE__FARM_CONTAINER;
 
 	/**
-	 * The feature id for the '<em><b>Dairy Container</b></em>' reference.
+	 * The feature id for the '<em><b>Bin</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCALE_IMPORT_RECORD__DAIRY_CONTAINER = COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER;
+	int SCALE_IMPORT_RECORD__BIN = COLLECTION_JOURNAL_LINE__BIN;
 
 	/**
 	 * The feature id for the '<em><b>Collection Journal</b></em>' container reference.
@@ -1152,22 +1152,13 @@ public interface DairyPackage extends EPackage {
 	int TRANSPORT_ROUTE__NAME = 1;
 
 	/**
-	 * The feature id for the '<em><b>Stops</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSPORT_ROUTE__STOPS = 2;
-
-	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSPORT_ROUTE__DESCRIPTION = 3;
+	int TRANSPORT_ROUTE__DESCRIPTION = 2;
 
 	/**
 	 * The feature id for the '<em><b>Vehicle</b></em>' reference.
@@ -1176,7 +1167,25 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSPORT_ROUTE__VEHICLE = 4;
+	int TRANSPORT_ROUTE__VEHICLE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Stops</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSPORT_ROUTE__STOPS = 4;
+
+	/**
+	 * The feature id for the '<em><b>Bins</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSPORT_ROUTE__BINS = 5;
 
 	/**
 	 * The number of structural features of the '<em>Transport Route</em>' class.
@@ -1185,7 +1194,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSPORT_ROUTE_FEATURE_COUNT = 5;
+	int TRANSPORT_ROUTE_FEATURE_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.TripImpl <em>Trip</em>}' class.
@@ -2196,6 +2205,15 @@ public interface DairyPackage extends EPackage {
 	int BIN__MEASURE_TYPE = TrackingPackage.CONTAINER__MEASURE_TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Quantity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BIN__QUANTITY = TrackingPackage.CONTAINER__QUANTITY;
+
+	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2223,13 +2241,22 @@ public interface DairyPackage extends EPackage {
 	int BIN__ASSET_INFO = TrackingPackage.CONTAINER_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Collections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BIN__COLLECTIONS = TrackingPackage.CONTAINER_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Bin</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BIN_FEATURE_COUNT = TrackingPackage.CONTAINER_FEATURE_COUNT + 3;
+	int BIN_FEATURE_COUNT = TrackingPackage.CONTAINER_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.SupplierImpl <em>Supplier</em>}' class.
@@ -3153,15 +3180,15 @@ public interface DairyPackage extends EPackage {
 	EReference getCollectionJournalLine_FarmContainer();
 
 	/**
-	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getDairyContainer <em>Dairy Container</em>}'.
+	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getBin <em>Bin</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Dairy Container</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getDairyContainer()
+	 * @return the meta object for the reference '<em>Bin</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getBin()
 	 * @see #getCollectionJournalLine()
 	 * @generated
 	 */
-	EReference getCollectionJournalLine_DairyContainer();
+	EReference getCollectionJournalLine_Bin();
 
 	/**
 	 * Returns the meta object for the container reference '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getCollectionJournal <em>Collection Journal</em>}'.
@@ -3762,6 +3789,17 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTransportRoute_Stops();
+
+	/**
+	 * Returns the meta object for the reference list '{@link com.agritrace.edairy.desktop.common.model.dairy.TransportRoute#getBins <em>Bins</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Bins</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.TransportRoute#getBins()
+	 * @see #getTransportRoute()
+	 * @generated
+	 */
+	EReference getTransportRoute_Bins();
 
 	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.TransportRoute#getDescription <em>Description</em>}'.
@@ -4789,6 +4827,17 @@ public interface DairyPackage extends EPackage {
 	EReference getBin_AssetInfo();
 
 	/**
+	 * Returns the meta object for the reference list '{@link com.agritrace.edairy.desktop.common.model.dairy.Bin#getCollections <em>Collections</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Collections</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Bin#getCollections()
+	 * @see #getBin()
+	 * @generated
+	 */
+	EReference getBin_Collections();
+
+	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.Supplier <em>Supplier</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5502,12 +5551,12 @@ public interface DairyPackage extends EPackage {
 		EReference COLLECTION_JOURNAL_LINE__FARM_CONTAINER = eINSTANCE.getCollectionJournalLine_FarmContainer();
 
 		/**
-		 * The meta object literal for the '<em><b>Dairy Container</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Bin</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference COLLECTION_JOURNAL_LINE__DAIRY_CONTAINER = eINSTANCE.getCollectionJournalLine_DairyContainer();
+		EReference COLLECTION_JOURNAL_LINE__BIN = eINSTANCE.getCollectionJournalLine_Bin();
 
 		/**
 		 * The meta object literal for the '<em><b>Collection Journal</b></em>' container reference feature.
@@ -5958,6 +6007,14 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRANSPORT_ROUTE__STOPS = eINSTANCE.getTransportRoute_Stops();
+
+		/**
+		 * The meta object literal for the '<em><b>Bins</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRANSPORT_ROUTE__BINS = eINSTANCE.getTransportRoute_Bins();
 
 		/**
 		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
@@ -6728,6 +6785,14 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EReference BIN__ASSET_INFO = eINSTANCE.getBin_AssetInfo();
+
+		/**
+		 * The meta object literal for the '<em><b>Collections</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BIN__COLLECTIONS = eINSTANCE.getBin_Collections();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.SupplierImpl <em>Supplier</em>}' class.

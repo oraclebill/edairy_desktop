@@ -352,6 +352,15 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getContainer_Quantity() {
+		return (EAttribute)containerEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getRegisteredAnimal() {
 		return registeredAnimalEClass;
 	}
@@ -745,6 +754,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 		createEReference(containerEClass, CONTAINER__OWNER);
 		createEAttribute(containerEClass, CONTAINER__CAPACITY);
 		createEAttribute(containerEClass, CONTAINER__MEASURE_TYPE);
+		createEAttribute(containerEClass, CONTAINER__QUANTITY);
 
 		registeredAnimalEClass = createEClass(REGISTERED_ANIMAL);
 		createEAttribute(registeredAnimalEClass, REGISTERED_ANIMAL__REGISTRATION_ID);
@@ -849,6 +859,7 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 		initEReference(getContainer_Owner(), this.getFarm(), null, "owner", null, 0, 1, com.agritrace.edairy.desktop.common.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getContainer_Capacity(), ecorePackage.getEDouble(), "capacity", "25", 1, 1, com.agritrace.edairy.desktop.common.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getContainer_MeasureType(), theModelPackage.getUnitOfMeasure(), "measureType", "KILOGRAM", 0, 1, com.agritrace.edairy.desktop.common.model.tracking.Container.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getContainer_Quantity(), ecorePackage.getEDouble(), "quantity", "0", 1, 1, com.agritrace.edairy.desktop.common.model.tracking.Container.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(registeredAnimalEClass, RegisteredAnimal.class, "RegisteredAnimal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRegisteredAnimal_RegistrationId(), ecorePackage.getELong(), "registrationId", null, 1, 1, RegisteredAnimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -6,6 +6,7 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Bin;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
@@ -36,9 +37,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.TransportRouteImpl#getId <em>Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.TransportRouteImpl#getName <em>Name</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.TransportRouteImpl#getStops <em>Stops</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.TransportRouteImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.TransportRouteImpl#getVehicle <em>Vehicle</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.TransportRouteImpl#getStops <em>Stops</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.TransportRouteImpl#getBins <em>Bins</em>}</li>
  * </ul>
  * </p>
  *
@@ -86,16 +88,6 @@ public class TransportRouteImpl extends EObjectImpl implements TransportRoute {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getStops() <em>Stops</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStops()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<DairyLocation> stops;
-
-	/**
 	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -124,6 +116,26 @@ public class TransportRouteImpl extends EObjectImpl implements TransportRoute {
 	 * @ordered
 	 */
 	protected Vehicle vehicle;
+
+	/**
+	 * The cached value of the '{@link #getStops() <em>Stops</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStops()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<DairyLocation> stops;
+
+	/**
+	 * The cached value of the '{@link #getBins() <em>Bins</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBins()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Bin> bins;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -203,6 +215,18 @@ public class TransportRouteImpl extends EObjectImpl implements TransportRoute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Bin> getBins() {
+		if (bins == null) {
+			bins = new EObjectWithInverseResolvingEList<Bin>(Bin.class, this, DairyPackage.TRANSPORT_ROUTE__BINS, DairyPackage.BIN__ZONE);
+		}
+		return bins;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getDescription() {
 		return description;
 	}
@@ -268,6 +292,8 @@ public class TransportRouteImpl extends EObjectImpl implements TransportRoute {
 		switch (featureID) {
 			case DairyPackage.TRANSPORT_ROUTE__STOPS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getStops()).basicAdd(otherEnd, msgs);
+			case DairyPackage.TRANSPORT_ROUTE__BINS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getBins()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -282,6 +308,8 @@ public class TransportRouteImpl extends EObjectImpl implements TransportRoute {
 		switch (featureID) {
 			case DairyPackage.TRANSPORT_ROUTE__STOPS:
 				return ((InternalEList<?>)getStops()).basicRemove(otherEnd, msgs);
+			case DairyPackage.TRANSPORT_ROUTE__BINS:
+				return ((InternalEList<?>)getBins()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -298,13 +326,15 @@ public class TransportRouteImpl extends EObjectImpl implements TransportRoute {
 				return getId();
 			case DairyPackage.TRANSPORT_ROUTE__NAME:
 				return getName();
-			case DairyPackage.TRANSPORT_ROUTE__STOPS:
-				return getStops();
 			case DairyPackage.TRANSPORT_ROUTE__DESCRIPTION:
 				return getDescription();
 			case DairyPackage.TRANSPORT_ROUTE__VEHICLE:
 				if (resolve) return getVehicle();
 				return basicGetVehicle();
+			case DairyPackage.TRANSPORT_ROUTE__STOPS:
+				return getStops();
+			case DairyPackage.TRANSPORT_ROUTE__BINS:
+				return getBins();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -324,15 +354,19 @@ public class TransportRouteImpl extends EObjectImpl implements TransportRoute {
 			case DairyPackage.TRANSPORT_ROUTE__NAME:
 				setName((String)newValue);
 				return;
-			case DairyPackage.TRANSPORT_ROUTE__STOPS:
-				getStops().clear();
-				getStops().addAll((Collection<? extends DairyLocation>)newValue);
-				return;
 			case DairyPackage.TRANSPORT_ROUTE__DESCRIPTION:
 				setDescription((String)newValue);
 				return;
 			case DairyPackage.TRANSPORT_ROUTE__VEHICLE:
 				setVehicle((Vehicle)newValue);
+				return;
+			case DairyPackage.TRANSPORT_ROUTE__STOPS:
+				getStops().clear();
+				getStops().addAll((Collection<? extends DairyLocation>)newValue);
+				return;
+			case DairyPackage.TRANSPORT_ROUTE__BINS:
+				getBins().clear();
+				getBins().addAll((Collection<? extends Bin>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -352,14 +386,17 @@ public class TransportRouteImpl extends EObjectImpl implements TransportRoute {
 			case DairyPackage.TRANSPORT_ROUTE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case DairyPackage.TRANSPORT_ROUTE__STOPS:
-				getStops().clear();
-				return;
 			case DairyPackage.TRANSPORT_ROUTE__DESCRIPTION:
 				setDescription(DESCRIPTION_EDEFAULT);
 				return;
 			case DairyPackage.TRANSPORT_ROUTE__VEHICLE:
 				setVehicle((Vehicle)null);
+				return;
+			case DairyPackage.TRANSPORT_ROUTE__STOPS:
+				getStops().clear();
+				return;
+			case DairyPackage.TRANSPORT_ROUTE__BINS:
+				getBins().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -377,12 +414,14 @@ public class TransportRouteImpl extends EObjectImpl implements TransportRoute {
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case DairyPackage.TRANSPORT_ROUTE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case DairyPackage.TRANSPORT_ROUTE__STOPS:
-				return stops != null && !stops.isEmpty();
 			case DairyPackage.TRANSPORT_ROUTE__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case DairyPackage.TRANSPORT_ROUTE__VEHICLE:
 				return vehicle != null;
+			case DairyPackage.TRANSPORT_ROUTE__STOPS:
+				return stops != null && !stops.isEmpty();
+			case DairyPackage.TRANSPORT_ROUTE__BINS:
+				return bins != null && !bins.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

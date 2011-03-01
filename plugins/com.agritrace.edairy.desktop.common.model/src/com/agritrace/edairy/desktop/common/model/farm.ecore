@@ -51,6 +51,9 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" defaultValueLiteral="25"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="measureType" eType="ecore:EEnum common.ecore#//UnitOfMeasure"
         defaultValueLiteral="KILOGRAM"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="quantity" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" transient="true"
+        defaultValueLiteral="0"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RegisteredAnimal">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="registrationId" lowerBound="1"

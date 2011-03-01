@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl#getOwner <em>Owner</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl#getCapacity <em>Capacity</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl#getMeasureType <em>Measure Type</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.tracking.impl.ContainerImpl#getQuantity <em>Quantity</em>}</li>
  * </ul>
  * </p>
  *
@@ -127,6 +128,26 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * @ordered
 	 */
 	protected UnitOfMeasure measureType = MEASURE_TYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getQuantity() <em>Quantity</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getQuantity()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final double QUANTITY_EDEFAULT = 0.0;
+
+	/**
+	 * The cached value of the '{@link #getQuantity() <em>Quantity</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getQuantity()
+	 * @generated
+	 * @ordered
+	 */
+	protected double quantity = QUANTITY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -274,6 +295,27 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public double getQuantity() {
+		return quantity;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setQuantity(double newQuantity) {
+		double oldQuantity = quantity;
+		quantity = newQuantity;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackingPackage.CONTAINER__QUANTITY, oldQuantity, quantity));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -288,6 +330,8 @@ public class ContainerImpl extends EObjectImpl implements Container {
 				return getCapacity();
 			case TrackingPackage.CONTAINER__MEASURE_TYPE:
 				return getMeasureType();
+			case TrackingPackage.CONTAINER__QUANTITY:
+				return getQuantity();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -314,6 +358,9 @@ public class ContainerImpl extends EObjectImpl implements Container {
 				return;
 			case TrackingPackage.CONTAINER__MEASURE_TYPE:
 				setMeasureType((UnitOfMeasure)newValue);
+				return;
+			case TrackingPackage.CONTAINER__QUANTITY:
+				setQuantity((Double)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -342,6 +389,9 @@ public class ContainerImpl extends EObjectImpl implements Container {
 			case TrackingPackage.CONTAINER__MEASURE_TYPE:
 				setMeasureType(MEASURE_TYPE_EDEFAULT);
 				return;
+			case TrackingPackage.CONTAINER__QUANTITY:
+				setQuantity(QUANTITY_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -364,6 +414,8 @@ public class ContainerImpl extends EObjectImpl implements Container {
 				return capacity != CAPACITY_EDEFAULT;
 			case TrackingPackage.CONTAINER__MEASURE_TYPE:
 				return measureType != MEASURE_TYPE_EDEFAULT;
+			case TrackingPackage.CONTAINER__QUANTITY:
+				return quantity != QUANTITY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -386,6 +438,8 @@ public class ContainerImpl extends EObjectImpl implements Container {
 		result.append(capacity);
 		result.append(", measureType: ");
 		result.append(measureType);
+		result.append(", quantity: ");
+		result.append(quantity);
 		result.append(')');
 		return result.toString();
 	}

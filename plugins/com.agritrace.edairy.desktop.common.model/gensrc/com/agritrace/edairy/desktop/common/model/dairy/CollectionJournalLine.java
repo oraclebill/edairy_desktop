@@ -33,7 +33,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#isOffRoute <em>Off Route</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getFrom <em>From</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getFarmContainer <em>Farm Container</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getDairyContainer <em>Dairy Container</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getBin <em>Bin</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getCollectionJournal <em>Collection Journal</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#isRejected <em>Rejected</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getRejectionReason <em>Rejection Reason</em>}</li>
@@ -313,30 +313,32 @@ public interface CollectionJournalLine extends EObject {
 	void setFarmContainer(Container value);
 
 	/**
-	 * Returns the value of the '<em><b>Dairy Container</b></em>' reference.
+	 * Returns the value of the '<em><b>Bin</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.Bin#getCollections <em>Collections</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Dairy Container</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Dairy Container</em>' reference.
-	 * @see #setDairyContainer(Bin)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalLine_DairyContainer()
-	 * @model
+	 * @return the value of the '<em>Bin</em>' reference.
+	 * @see #setBin(Bin)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalLine_Bin()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Bin#getCollections
+	 * @model opposite="collections"
 	 * @generated
 	 */
-	Bin getDairyContainer();
+	Bin getBin();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getDairyContainer <em>Dairy Container</em>}' reference.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getBin <em>Bin</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Dairy Container</em>' reference.
-	 * @see #getDairyContainer()
+	 * @param value the new value of the '<em>Bin</em>' reference.
+	 * @see #getBin()
 	 * @generated
 	 */
-	void setDairyContainer(Bin value);
+	void setBin(Bin value);
 
 	/**
 	 * Returns the value of the '<em><b>Collection Journal</b></em>' container reference.
