@@ -5,13 +5,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.eclipse.emf.teneo.hibernate.HbHelper;
@@ -52,6 +47,22 @@ public class DatabaseSetup {
 //	private Map<String, ?> options = new HashMap<String, Object>();
 	private HbDataStore hbds;
 	private Session session = null;
+	/**
+	 * @return the baseGrade
+	 */
+	public MilkGrade getBaseGrade() {
+		return baseGrade;
+	}
+
+
+	/**
+	 * @param baseGrade the baseGrade to set
+	 */
+	public void setBaseGrade(MilkGrade baseGrade) {
+		this.baseGrade = baseGrade;
+	}
+
+	private MilkGrade baseGrade;
 
 	/**
 	 * @param args
@@ -343,7 +354,8 @@ public class DatabaseSetup {
 		grade.setDescription("Standard raw milk grade.");
 		grade.setName("Raw");
 		getSession().persist(grade);
-
+		baseGrade = grade;
+		
 		grade = DairyFactory.eINSTANCE.createMilkGrade();
 		grade.setCode("PIGGERY");
 		grade.setDescription("Raw milk grade that is not fit for human consumption.");

@@ -348,8 +348,9 @@ public class TestDataGenerator extends DatabaseSetup {
 				}
 			}
 		}
-		MilkGrade grade = null;
-		Customer customer = null;
+		
+		MilkGrade grade = getBaseGrade();
+		Customer customer = currentDairy.getCustomers().get(0);
 		double unitPrice = 22.0d;
 		for (Bin bin : binSet) {
 			double quantity = bin.getQuantity();
@@ -364,7 +365,7 @@ public class TestDataGenerator extends DatabaseSetup {
 			sale.setSaleDate(saleDate);
 			sale.setRejected(false);
 			sale.setSaleType(MilkSaleType.CREDIT);
-			sale.setStoreOrRoute(null); // should be the last center from the route? 
+			sale.setStoreOrRoute(currentDairy.getBranchLocations().get(0)); // should be the last center from the route? 
 			sale.setUnitPrice(new BigDecimal(unitPrice));
 			getSession().persist(sale);
 		}
@@ -419,9 +420,7 @@ public class TestDataGenerator extends DatabaseSetup {
 	private Bin getNextAvailableBin(List<Bin> binList,
 			BigDecimal amount) {
 		Assert.isLegal(binList.size() > 0);
-		System.err.println("checking binList: " + binList);		
 		for (Bin bin : binList) {
-			System.err.println("checking bin: " + bin);
 			if (bin.getQuantity() + amount.doubleValue() < bin.getCapacity())
 				return bin;
 		}
