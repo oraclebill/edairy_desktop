@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -21,7 +20,6 @@ import org.hibernate.Transaction;
 
 import com.agritrace.edairy.desktop.common.model.base.Gender;
 import com.agritrace.edairy.desktop.common.model.base.Location;
-import com.agritrace.edairy.desktop.common.model.base.Person;
 import com.agritrace.edairy.desktop.common.model.dairy.Bin;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType;
@@ -33,6 +31,9 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.dairy.MilkGrade;
+import com.agritrace.edairy.desktop.common.model.dairy.MilkSale;
+import com.agritrace.edairy.desktop.common.model.dairy.MilkSaleType;
 import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
@@ -52,168 +53,22 @@ import com.agritrace.edairy.desktop.common.model.util.DairyUtil;
  */
 public class TestDataGenerator extends DatabaseSetup {
 
-	private String[] args = {};
-
-	private int memberCount = 100;
-	private BigDecimal collectionsPerMember = new BigDecimal(3.0f);
-
-	private int employeeCount = 10;
-	private int collectionCenterCount = 4;
-	private int storeCount = 4;
-	private int routeCount = 2;
-
-	private Date startDate = new Date();
-	private Date endDate = new Date();
-
+	private int sequence;
 	private Dairy currentDairy;
+	private TestDataGeneratorConfig config;
 
+	/**
+	 * 
+	 */
 	public TestDataGenerator() {
-		Calendar cal = Calendar.getInstance();
-		endDate = new Date();
-		cal.setTime(endDate);
-		cal.set(Calendar.MILLISECOND, 0);
-		cal.set(Calendar.SECOND, 0);
-		cal.set(Calendar.MINUTE, 0);
-		cal.set(Calendar.HOUR_OF_DAY, 0);
-		endDate = cal.getTime();
-
-		cal.add(Calendar.DAY_OF_YEAR, -30);
-		startDate = cal.getTime();
+		this(new TestDataGeneratorConfig(100, new BigDecimal(3.0f), 10, 4, 4, 2, new Date(), new Date()));
 	}
 
 	/**
-	 * @return the args
+	 * @param config
 	 */
-	public String[] getArgs() {
-		return args;
-	}
-
-	/**
-	 * @param args
-	 *            the args to set
-	 */
-	public void setArgs(String[] args) {
-		this.args = args;
-	}
-
-	/**
-	 * @return the memberCount
-	 */
-	public int getMemberCount() {
-		return memberCount;
-	}
-
-	/**
-	 * @param memberCount
-	 *            the memberCount to set
-	 */
-	public void setMemberCount(int memberCount) {
-		this.memberCount = memberCount;
-	}
-
-	/**
-	 * @return the collectionsPerMember
-	 */
-	public float getCollectionsPerMember() {
-		return collectionsPerMember.floatValue();
-	}
-
-	/**
-	 * @param collectionsPerMember
-	 *            the collectionsPerMember to set
-	 */
-	public void setCollectionsPerMember(float collectionsPerMember) {
-		this.collectionsPerMember = new BigDecimal(collectionsPerMember);
-	}
-
-	/**
-	 * @return the employeeCount
-	 */
-	public int getEmployeeCount() {
-		return employeeCount;
-	}
-
-	/**
-	 * @param employeeCount
-	 *            the employeeCount to set
-	 */
-	public void setEmployeeCount(int employeeCount) {
-		this.employeeCount = employeeCount;
-	}
-
-	/**
-	 * @return the collectionCenterCount
-	 */
-	public int getCollectionCenterCount() {
-		return collectionCenterCount;
-	}
-
-	/**
-	 * @param collectionCenterCount
-	 *            the collectionCenterCount to set
-	 */
-	public void setCollectionCenterCount(int collectionCenterCount) {
-		this.collectionCenterCount = collectionCenterCount;
-	}
-
-	/**
-	 * @return the storeCount
-	 */
-	public int getStoreCount() {
-		return storeCount;
-	}
-
-	/**
-	 * @param storeCount
-	 *            the storeCount to set
-	 */
-	public void setStoreCount(int storeCount) {
-		this.storeCount = storeCount;
-	}
-
-	/**
-	 * @return the routeCount
-	 */
-	public int getRouteCount() {
-		return routeCount;
-	}
-
-	/**
-	 * @param routeCount
-	 *            the routeCount to set
-	 */
-	public void setRouteCount(int routeCount) {
-		this.routeCount = routeCount;
-	}
-
-	/**
-	 * @return the startDate
-	 */
-	public Date getStartDate() {
-		return startDate;
-	}
-
-	/**
-	 * @param startDate
-	 *            the startDate to set
-	 */
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-
-	/**
-	 * @return the endDate
-	 */
-	public Date getEndDate() {
-		return endDate;
-	}
-
-	/**
-	 * @param endDate
-	 *            the endDate to set
-	 */
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
+	public TestDataGenerator(TestDataGeneratorConfig config) {
+		this.config = config;
 	}
 
 	/**
@@ -223,21 +78,12 @@ public class TestDataGenerator extends DatabaseSetup {
 		BasicConfigurator.configure();
 		Logger.getLogger("org.eclipse.emf.teneo").setLevel(Level.INFO);
 		Logger.getLogger("org.hibernate").setLevel(Level.WARN);
-		TestDataGenerator generator = new TestDataGenerator();
-		generator.run(args);
-	}
-
-	/**
-	 * @param args
-	 */
-	public void run(String[] args) {
-		setArgs(args);
-		run();
+		TestDataGeneratorConfig config = new TestDataGeneratorConfig(args);
+		TestDataGenerator generator = new TestDataGenerator(config);
+		generator.run();
 	}
 
 	public void run() {
-
-		processCommandLineArgs();
 
 		createDatabase();
 
@@ -253,11 +99,11 @@ public class TestDataGenerator extends DatabaseSetup {
 		Transaction tx;
 
 		tx = getSession().beginTransaction();
-		generateEmployees(getEmployeeCount());
+		generateEmployees(config.getEmployeeCount());
 		tx.commit();
 
 		tx = getSession().beginTransaction();
-		generateRoutesAndCollectionCenters(getRouteCount(), getCollectionCenterCount());
+		generateRoutesAndCollectionCenters(config.getRouteCount(), config.getCollectionCenterCount());
 		tx.commit();
 
 		tx = getSession().beginTransaction();
@@ -269,7 +115,7 @@ public class TestDataGenerator extends DatabaseSetup {
 		tx.commit();
 
 		tx = getSession().beginTransaction();
-		generateMembers(getMemberCount());
+		generateMembers(config.getMemberCount());
 		tx.commit();
 
 		tx = getSession().beginTransaction();
@@ -277,22 +123,8 @@ public class TestDataGenerator extends DatabaseSetup {
 		tx.commit();
 	}
 
-	/**
-	 * @param args
-	 */
-	protected void processCommandLineArgs() {
-		for (String arg : getArgs()) {
-			String[] split = arg.split("=");
-			try {
-				BeanUtils.setProperty(this, split[0], split[1]);
-			} catch (Exception e) {
-				System.err.println(e.getMessage() + ": Failed to set property: " + split[0] + " to " + split[1]);
-			}
-		}
-	}
-
 	private void updateDairy(Dairy currentDairy) {
-		System.out.println("Generating Dairy");
+		System.err.println("Generating Dairy");
 
 		String companyId = currentDairy.getRegistrationNumber();
 
@@ -313,14 +145,13 @@ public class TestDataGenerator extends DatabaseSetup {
 	}
 
 	private void generateEmployees(int count) {
-		System.out.println("Generating Employees");
+		System.err.println("Generating Employees");
 		// we need one driver per route - they will be created in the dairy
 		// setup..
-		count -= getRouteCount();
+		count -= config.getRouteCount();
 		Assert.isLegal(count >= 0);
-		setEmployeeCount(count);
+		config.setEmployeeCount(count);
 
-		Person person;
 		Employee employee;
 
 		for (int i = 0; i < count; i++) {
@@ -330,20 +161,17 @@ public class TestDataGenerator extends DatabaseSetup {
 		}
 	}
 
-	private int binSequence = 0;
-
 	private void generateDairyBins() {
-		System.out.println("Generating Bins...");
+		System.err.println("Generating Bins...");
 		Bin container;
-		int routeCount = currentDairy.getRoutes().size();
 		double binCapacity = 125.0d;
-		int totalBinCount = (int) Math.floor((collectionsPerMember.doubleValue() * memberCount) / binCapacity) * 3; // clean,
-// dirty,
-// spare
+		int totalBinCount = (int) Math.floor((config.getCollectionsPerMember().doubleValue() * config.getMemberCount())
+				/ binCapacity) * 4; // clean, dirty, spare, spare
+		System.err.println("Total bin count " + totalBinCount);
 		for (TransportRoute route : currentDairy.getRoutes()) {
 			for (int i = 0; i < totalBinCount / currentDairy.getRoutes().size(); i++) {
 				container = DairyFactory.eINSTANCE.createBin();
-				container.setTrackingNumber(String.format("T%08d", ++binSequence));
+				container.setTrackingNumber(String.format("T%08d", ++sequence));
 				container.setCapacity(binCapacity);
 				container.setStatus("ACTIVE");
 				container.setZone(route);
@@ -354,7 +182,7 @@ public class TestDataGenerator extends DatabaseSetup {
 	}
 
 	private void generateCustomers() {
-		System.out.println("Generating Customer...");
+		System.err.println("Generating Customer...");
 		Customer customer;
 		int customerCount = currentDairy.getRoutes().size();
 		for (int i = 0; i < customerCount; i++) {
@@ -372,7 +200,7 @@ public class TestDataGenerator extends DatabaseSetup {
 	}
 
 	private void generateMembers(int memberCount) {
-		System.out.println("Generating Members...");
+		System.err.println("Generating Members...");
 		Location farmLocation;
 		Membership member;
 		Farmer farmer;
@@ -414,11 +242,11 @@ public class TestDataGenerator extends DatabaseSetup {
 		int stopCount = 0;
 		TransportRoute route = null;
 		for (int routeNum = 0; routeNum < routeCount; routeNum++) {
-			System.out.println("\tGenerating Route: " + routeNum);
+			System.err.println("\tGenerating Route: " + routeNum);
 			route = createRouteVehicleAndDriver(routeNum);
 			for (int i = 0; i < centersPerRoute; i++) {
 				stopCount += 1;
-				System.out.println("\t\tGenerating Center: " + stopCount);
+				System.err.println("\t\tGenerating Center: " + stopCount);
 				createCenterForRoute(route, stopCount);
 			}
 		}
@@ -430,7 +258,6 @@ public class TestDataGenerator extends DatabaseSetup {
 	private TransportRoute createRouteVehicleAndDriver(int routeCount) {
 		Vehicle vehicle;
 		TransportRoute route;
-		Person person;
 		Employee driver;
 		driver = createEmployee("Driver");
 		currentDairy.getEmployees().add(driver);
@@ -473,10 +300,10 @@ public class TestDataGenerator extends DatabaseSetup {
 		Calendar currentDate, endDate;
 
 		currentDate = Calendar.getInstance();
-		currentDate.setTime(getStartDate());
+		currentDate.setTime(config.getStartDate());
 
 		endDate = Calendar.getInstance();
-		endDate.setTime(getEndDate());
+		endDate.setTime(config.getEndDate());
 
 		for (; currentDate.before(endDate); currentDate.add(Calendar.DAY_OF_YEAR, 1)) {
 			generateCollectionData(currentDate.getTime());
@@ -487,23 +314,30 @@ public class TestDataGenerator extends DatabaseSetup {
 	 * @param collectionDate
 	 */
 	private void generateCollectionData(Date collectionDate) {
-		System.out.println("Generating Collection Data for " + collectionDate);
+		System.err.println("Generating Collection Data for " + collectionDate);
 		Map<TransportRoute, Collection<CollectionGroup>> groupMap;
-		BigDecimal collectionAmount = new BigDecimal(getCollectionsPerMember());
+		BigDecimal collectionAmount = config.getCollectionsPerMember();
 		for (CollectionSession session : currentDairy.getCollectionSessions()) {
-			System.out.println("\tSession " + session);
-			groupMap = 
-				generateSessionCollections(collectionDate, session, collectionAmount);
-			generateSessionSales(groupMap, session);
-			collectionAmount = collectionAmount.divide(new BigDecimal(3.0d));
+			System.err.println("\tSession Collections " + session);
+			resetBinQuantities();
+			groupMap = generateSessionCollections(collectionDate, session, collectionAmount);
+			System.err.println("\tSession Sales " + session);
+			generateSessionSales(collectionDate, groupMap, session);
+			collectionAmount = collectionAmount.divide(new BigDecimal(2));
 		}
 
 	}
 
-	private void generateSessionSales(Map<TransportRoute, Collection<CollectionGroup>> groupMap,
+	private void resetBinQuantities() {
+		for (Bin bin : currentDairy.getDairyBins()) {
+			bin.setQuantity(0);
+		}
+	}
+
+	private void generateSessionSales(Date saleDate, Map<TransportRoute, Collection<CollectionGroup>> groupMap,
 			CollectionSession session) {
 		Set<Bin> binSet;
-		
+
 		binSet = new HashSet<Bin>();
 		for (Collection<CollectionGroup> groups : groupMap.values()) {
 			for (CollectionGroup group : groups) {
@@ -514,10 +348,31 @@ public class TestDataGenerator extends DatabaseSetup {
 				}
 			}
 		}
+		MilkGrade grade = null;
+		Customer customer = null;
+		double unitPrice = 22.0d;
+		for (Bin bin : binSet) {
+			double quantity = bin.getQuantity();
+			MilkSale sale = DairyFactory.eINSTANCE.createMilkSale();
+			sale.setBin(bin);
+			sale.setContractSale(true);
+			sale.setCustomer(customer);
+			sale.setGrade(grade);
+			sale.setQuantity(new BigDecimal(quantity));
+			sale.setReferenceNumber(String.format("SALE%05d", ++sequence));
+			sale.setSaleAmount(new BigDecimal(unitPrice * quantity));
+			sale.setSaleDate(saleDate);
+			sale.setRejected(false);
+			sale.setSaleType(MilkSaleType.CREDIT);
+			sale.setStoreOrRoute(null); // should be the last center from the route? 
+			sale.setUnitPrice(new BigDecimal(unitPrice));
+			getSession().persist(sale);
+		}
 	}
 
 	private Map<TransportRoute, Collection<CollectionGroup>> generateSessionCollections(Date collectionDate,
-			CollectionSession session, BigDecimal memberCollectionAmount) {
+			CollectionSession session,
+			BigDecimal memberCollectionAmount) {
 		Map<TransportRoute, Collection<CollectionGroup>> groupMap;
 		List<Membership> filteredMembers;
 		List<Bin> binList;
@@ -527,7 +382,7 @@ public class TestDataGenerator extends DatabaseSetup {
 		CollectionJournalLine entry;
 		groupMap = new HashMap<TransportRoute, Collection<CollectionGroup>>();
 		for (DairyLocation center : currentDairy.getBranchLocations()) {
-			System.out.println("\t\tCenter " + center);
+			System.err.println("\t\tCenter " + center);
 			filteredMembers = filterMembersByDefaultRoute(center);
 			group = createCollectionGroup(center, collectionDate, session);
 			collectionSet = groupMap.get(center.getRoute());
@@ -536,8 +391,9 @@ public class TestDataGenerator extends DatabaseSetup {
 				groupMap.put(center.getRoute(), collectionSet);
 			}
 			collectionSet.add(group);
-// System.out.println("\t\tGroup " + group );
-			binList = getBinsForCenterAndSession(center, session);
+// System.err.println("\t\tGroup " + group );
+//			binList = getBinsForCenterAndSession(center, session);
+			binList = center.getRoute().getBins();
 			for (Membership member : filteredMembers) {
 				bin = getNextAvailableBin(binList, memberCollectionAmount);
 				entry = createCollectionEntry(group, bin, member, memberCollectionAmount);
@@ -552,7 +408,8 @@ public class TestDataGenerator extends DatabaseSetup {
 		TransportRoute route = center.getRoute();
 		List<Bin> binList = new LinkedList<Bin>();
 		for (Bin bin : route.getBins()) {
-			if (bin.getQuantity() == 0d && bin.getStatus() == "ACTIVE") {
+			System.err.println("Testing bin : " + bin);			
+			if (bin.getQuantity() < bin.getCapacity()  && bin.getStatus() == "ACTIVE") {
 				binList.add(bin);
 			}
 		}
@@ -561,11 +418,14 @@ public class TestDataGenerator extends DatabaseSetup {
 
 	private Bin getNextAvailableBin(List<Bin> binList,
 			BigDecimal amount) {
+		Assert.isLegal(binList.size() > 0);
+		System.err.println("checking binList: " + binList);		
 		for (Bin bin : binList) {
+			System.err.println("checking bin: " + bin);
 			if (bin.getQuantity() + amount.doubleValue() < bin.getCapacity())
 				return bin;
 		}
-		return null;
+		throw new RuntimeException("Bin not found: " + binList.size());
 	}
 
 	private List<Membership> filterMembersByDefaultRoute(DairyLocation center) {
@@ -577,14 +437,6 @@ public class TestDataGenerator extends DatabaseSetup {
 		}
 		return l;
 	}
-
-	/**
-	 * @param center
-	 * @param collectionDate
-	 * @param session
-	 * @return
-	 */
-	int referenceCounter = 0;
 
 	private CollectionGroup createCollectionGroup(DairyLocation center,
 			Date collectionDate,
@@ -599,7 +451,7 @@ public class TestDataGenerator extends DatabaseSetup {
 		group.setType(CollectionGroupType.JOURNAL_GROUP);
 		group.setVehicle(center.getRoute().getVehicle());
 		group.setDriver(group.getVehicle().getDriver());
-		group.setReferenceNumber(String.format("REF%05d", ++referenceCounter));
+		group.setReferenceNumber(String.format("REF%05d", ++sequence));
 		return group;
 	}
 
@@ -617,33 +469,35 @@ public class TestDataGenerator extends DatabaseSetup {
 		Assert.isLegal((bin.getQuantity() + amount.doubleValue()) <= bin.getCapacity(), "bin capacity exceeded");
 
 		CollectionJournalLine entry = DairyFactory.eINSTANCE.createCollectionJournalLine();
+
 		entry.setCollectionJournal(group);
 		entry.setBin(bin);
 		entry.setRecordedMember(member.getMemberNumber());
 		entry.setValidatedMember(member);
 		entry.setQuantity(amount);
-		bin.setQuantity(bin.getQuantity() + amount.doubleValue());
 		entry.setFlagged(false);
+
+		bin.getCollections().add(entry);
+		bin.setQuantity(bin.getQuantity() + amount.doubleValue());
+
 		return entry;
 	}
 
-	private int empCount = 0;
-
 	private Employee createEmployee(String jobFunction) {
 		final Employee emp = DairyFactory.eINSTANCE.createEmployee();
-		++empCount;
-		emp.setEmployeeNumber(String.format("M%05d", empCount));
+		++sequence;
+		emp.setEmployeeNumber(String.format("M%05d", sequence));
 
 		// copy person fields
-		emp.setGivenName(String.format("first:%d", empCount));
-		emp.setMiddleName(String.format("middle:%d", empCount));
-		emp.setFamilyName(String.format("last:%d", empCount));
+		emp.setGivenName(String.format("first:%d", sequence));
+		emp.setMiddleName(String.format("middle:%d", sequence));
+		emp.setFamilyName(String.format("last:%d", sequence));
 		emp.setLocation(DairyUtil.createLocation(null, null, null));
 
-		emp.setStartDate(startDate);
+		emp.setStartDate(config.getStartDate());
 		emp.setJobFunction(jobFunction);
-		emp.setNssfNumber(String.format("NSSF:%s", empCount));
-		emp.setNationalId(String.format("NATID:%s", empCount));
+		emp.setNssfNumber(String.format("NSSF:%s", sequence));
+		emp.setNationalId(String.format("NATID:%s", sequence));
 
 		return emp;
 	}
