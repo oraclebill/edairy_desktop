@@ -358,15 +358,15 @@ public class EDairyManagerApplication extends SwtApplication implements Applicat
 		// SYSTEM TAB
 		//
 
-		subAppNode = new SubApplicationNode(new NavigationNodeId(SUBAPP_SYSTEM), LABEL_SYSTEM);
-		app.addChild(subAppNode);
-		workarea.registerDefinition(subAppNode, TAB_SYSTEM);
-		moduleGroupNode = new ModuleGroupNode(new NavigationNodeId(MODULE_GROUP_SYSTEM));
-		subAppNode.addChild(moduleGroupNode);
-
-		moduleNode = NodeFactory.createModule(MODULE_SYSTEM, "Security", moduleGroupNode); //$NON-NLS-1$
-		NodeFactory.createSubModule("edm.system.roles", "Roles", moduleNode, RoleDirectoryView.ID,
-				RoleDirectoryController.class);
+		subAppNode = new SubApplicationNode(new NavigationNodeId("com.agritrace.edairy.desktop.system.ui.assembly21"), LABEL_SYSTEM);
+//		app.addChild(subAppNode);
+//		workarea.registerDefinition(subAppNode, TAB_SYSTEM);
+//		moduleGroupNode = new ModuleGroupNode(new NavigationNodeId(MODULE_GROUP_SYSTEM));
+//		subAppNode.addChild(moduleGroupNode);
+//
+//		moduleNode = NodeFactory.createModule(MODULE_SYSTEM, "Security", moduleGroupNode); //$NON-NLS-1$
+//		NodeFactory.createSubModule("edm.system.roles", "Roles", moduleNode, RoleDirectoryView.ID,
+//				RoleDirectoryController.class);
 
 		/*
 		 * app.addSimpleListener(new SimpleNavigationNodeAdapter() {

@@ -373,7 +373,7 @@ public class TestDataGenerator extends DatabaseSetup {
 			sale.setSaleType(MilkSaleType.CREDIT);
 			sale.setStoreOrRoute(currentDairy.getBranchLocations().get(0)); // should be the last center from the route? 
 			sale.setUnitPrice(new BigDecimal(unitPrice));
-//			getSession().persist(sale);
+			getSession().persist(sale);
 		}
 	}
 

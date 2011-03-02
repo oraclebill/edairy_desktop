@@ -475,7 +475,7 @@ public class DairyRepository implements IDairyRepository {
 	@Override
 	public List<Bin> getBinsByRoute(TransportRoute journalRoute) {
 		final Session session = getSession();
-		final Criteria dcCriteria = session.createCriteria("DairyContainer");
+		final Criteria dcCriteria = session.createCriteria("Bin");
 		if (journalRoute != null) {
 			dcCriteria.add(Restrictions.eq("", journalRoute));
 		}

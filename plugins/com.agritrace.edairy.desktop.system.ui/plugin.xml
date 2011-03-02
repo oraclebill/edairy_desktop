@@ -26,5 +26,51 @@
             restorable="true">
       </view>
    </extension>
+    <extension
+          point="org.eclipse.riena.navigation.assemblies2">
+       <assembly2
+             assembler="org.eclipse.riena.navigation.model.GenericNavigationAssembler"
+             id="com.agritrace.edairy.desktop.system.ui.assembly21"
+             name="Security"
+             parentNodeId="application"
+             startOrder="100">
+          <subApplication
+                name="System"
+                nodeId="com.agritrace.edairy.desktop.system.ui.subApplication1"
+                perspectiveId="com.agritrace.edairy.desktop.system">
+             <moduleGroup
+                   nodeId="com.agritrace.edairy.desktop.system.ui.moduleGroup1">
+                <module
+                      closable="false"
+                      name="Roles"
+                      nodeId="com.agritrace.edairy.desktop.system.ui.module1">
+                   <subModule
+                         controller="com.agritrace.edairy.desktop.system.ui.controllers.RoleDirectoryController"
+                         expanded="false"
+                         nodeId="com.agritrace.edairy.desktop.system.ui.subModule1"
+                         selectable="true"
+                         sharedView="false"
+                         viewId="edairy.system.roles.directory"
+                         visible="true">
+                   </subModule>
+                </module>
+                <module
+                      closable="true"
+                      name="Users"
+                      nodeId="com.agritrace.edairy.desktop.system.ui.module2">
+                   <subModule
+                         controller="com.agritrace.edairy.desktop.system.ui.controllers.UserDirectoryController"
+                         expanded="false"
+                         nodeId="com.agritrace.edairy.desktop.system.ui.subModule2"
+                         selectable="true"
+                         sharedView="false"
+                         viewId="edairy.system.users.directory"
+                         visible="true">
+                   </subModule>
+                </module>
+             </moduleGroup>
+          </subApplication>
+       </assembly2>
+    </extension>
 
 </plugin>

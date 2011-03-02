@@ -26,7 +26,7 @@ public class MemberCollectionRecordsWidgetController implements WidgetController
 	private final String[] collectionColumnHeaders = { "Route", "Session", "Date", "Container", "Quantity",
 			"MPR Present", "Quality OK", "Validated" };
 	private final String[] collectionPropertyNames = { "collectionJournal.collectionCenter.code",
-			"collectionJournal.session.code", "collectionJournal.journalDate", "dairyContainer.trackingNumber",
+			"collectionJournal.session.code", "collectionJournal.journalDate", "bin.trackingNumber",
 			"quantity", "notRecorded", "rejected", "flagged" };
 
 	private ITableRidget collectionTable;

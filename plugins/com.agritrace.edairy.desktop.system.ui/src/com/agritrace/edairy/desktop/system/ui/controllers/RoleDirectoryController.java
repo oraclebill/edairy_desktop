@@ -24,19 +24,20 @@ import com.google.inject.Provider;
 public final class RoleDirectoryController extends BasicDirectoryController<Role> {
 	private ITextRidget nameSearch;
 	private ITextRidget permSearch;
-	private final Provider<RoleEditDialog> dialogProvider;
-
+	
+	@Inject
+	Provider<RoleEditDialog> dialogProvider;
+	
 	@Override
 	protected String getFullTitle() {
 		return "Security Roles";
 	}
 
 	@Inject
-	public RoleDirectoryController(final IRepository<Role> repo, final Provider<RoleEditDialog> dialogProvider) {
+	public RoleDirectoryController() {
 		super();
-		this.dialogProvider = dialogProvider;
+//		this.dialogProvider = dialogProvider;
 		setEClass(ModelPackage.Literals.ROLE);
-		setRepository(repo);
 		addTableColumn("ID", ModelPackage.Literals.ROLE__ID);
 		addTableColumn("Name", ModelPackage.Literals.ROLE__NAME);
 		addTableColumn("Description", ModelPackage.Literals.ROLE__DESCRIPTION);
@@ -66,6 +67,16 @@ public final class RoleDirectoryController extends BasicDirectoryController<Role
 				return sb.toString();
 			}
 		});
+	}
+
+	
+	/* (non-Javadoc)
+	 * @see com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController#setRepository(com.agritrace.edairy.desktop.common.persistence.IRepository)
+	 */
+	@Inject
+	public void setRepository(IRepository<Role> myRepo) {
+		// TODO Auto-generated method stub
+		super.setRepository(myRepo);
 	}
 
 	@Override
