@@ -156,7 +156,7 @@ public class DairyHomeView extends ViewPart {
 				if (arguments[index] instanceof String) {
 					String s = (String) arguments[index];
 					try {
-						dateArg = new SimpleDateFormat("MM/dd/yyyy").parse(s);
+						dateArg = new SimpleDateFormat("dd/MM/yyyy").parse(s);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

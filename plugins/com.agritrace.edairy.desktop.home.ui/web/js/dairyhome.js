@@ -59,7 +59,8 @@ $(document).ready(function() {
 	/** build the table * */
 	date = getReportDate();
 	try {
-		data = getIntakeData(date);
+		dateStr = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+		data = getIntakeData(dateStr);
 //		data = getData();  // testing
 	}
 	catch (e) {
@@ -67,7 +68,7 @@ $(document).ready(function() {
 	}
 //	alert("in document ready: " + data);
 	genTableData(data);
-	/** visualize with a line graph * */
+	/** visualize with a line graph **/
 	pieProps = {
 		type : 'pie',
 		parseDirection : 'y',
