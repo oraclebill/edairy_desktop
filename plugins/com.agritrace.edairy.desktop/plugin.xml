@@ -140,5 +140,13 @@
        </property>
     </product>
  </extension>
+ <extension
+       point="org.eclipse.riena.core.logListeners">
+    <logListener
+          listener-class="org.eclipse.riena.core.logging.log4j.Log4jLogListener:/log4j.xml"
+          name="log4j"
+          sync="true">
+    </logListener>
+ </extension>
  
 </plugin>

@@ -28,4 +28,5 @@ Export-Package: com.agritrace.edairy.desktop,
  com.agritrace.edairy.desktop.splashHandlers,
  com.agritrace.edairy.desktop.ui,
  com.agritrace.edairy.desktop.ui.controllers
+Import-Package: org.apache.log4j;version="1.2.13"
 
