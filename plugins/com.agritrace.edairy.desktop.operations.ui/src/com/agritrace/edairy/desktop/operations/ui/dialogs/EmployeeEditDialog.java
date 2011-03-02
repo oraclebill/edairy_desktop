@@ -115,28 +115,6 @@ public class EmployeeEditDialog extends RecordDialog<Employee> {
 		factory.copy().applyTo(licenseNo);
 		addUIControl(licenseNo, EmployeeBindingConstants.BIND_ID_LICENSE_NO);
 
-		UIControlsFactory.createLabel(employeeInfo, "Security Role");
-		final CCombo securityRole = UIControlsFactory.createCCombo(employeeInfo);
-		securityRole.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
-		factory.copy().applyTo(securityRole);
-		addUIControl(securityRole, EmployeeBindingConstants.BIND_ID_SEC_ROLE);
-
-		UIControlsFactory.createLabel(employeeInfo, "User Name");
-		final Text username = UIControlsFactory.createText(employeeInfo);
-		factory.copy().applyTo(username);
-		addUIControl(username, EmployeeBindingConstants.BIND_ID_USERNAME);
-
-		UIControlsFactory.createLabel(employeeInfo, "Password");
-		final Text password = UIControlsFactory.createText(employeeInfo, SWT.SINGLE | SWT.PASSWORD);
-		factory.copy().applyTo(password);
-		addUIControl(password, EmployeeBindingConstants.BIND_ID_PASSWORD);
-
-		final Button localEnabled = UIControlsFactory.createButtonCheck(employeeInfo);
-		localEnabled.setText("Allow local machine authentication");
-		factory.copy().applyTo(localEnabled);
-		addUIControl(localEnabled, EmployeeBindingConstants.BIND_ID_LOCAL_ENABLED);
-		new Label(employeeInfo, SWT.NONE);
-
 		return employeeInfo;
 	}
 

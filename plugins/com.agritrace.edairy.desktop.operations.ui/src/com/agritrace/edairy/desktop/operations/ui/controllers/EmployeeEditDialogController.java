@@ -89,8 +89,6 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 				DairyPackage.Literals.EMPLOYEE__JOB_FUNCTION);
 		addTextMap(EmployeeBindingConstants.BIND_ID_SINCE, DairyPackage.Literals.EMPLOYEE__START_DATE);
 		addTextMap(EmployeeBindingConstants.BIND_ID_OPR_CODE, DairyPackage.Literals.EMPLOYEE__OPERATOR_CODE);
-		addTextMap(EmployeeBindingConstants.BIND_ID_USERNAME, DairyPackage.Literals.EMPLOYEE__SYSTEM_IDENTITY,
-				ModelPackage.Literals.SYSTEM_USER__USERNAME);
 		addTextMap(EmployeeBindingConstants.BIND_ID_LICENSE_NO, DairyPackage.Literals.EMPLOYEE__LICENSE_NO);
 
 		getRidget(IComboRidget.class, EmployeeBindingConstants.BIND_ID_POSITION).addSelectionListener(
@@ -101,20 +99,8 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 					}
 				});
 
-		// Role needs special care
-		final IComboRidget roleRidget = getRidget(IComboRidget.class, EmployeeBindingConstants.BIND_ID_SEC_ROLE);
-		roleRidget.bindToModel(new WritableList(allRoles, Role.class), Role.class, "getName", EMFProperties.value(
-				FeaturePath.fromList(DairyPackage.Literals.EMPLOYEE__SYSTEM_IDENTITY,
-						ModelPackage.Literals.SYSTEM_USER__ROLE)).observe(getWorkingCopy()));
 
 		licenseNo = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_LICENSE_NO);
-		// We pointedly do not display the current password.
-		passwordRidget = getRidget(ITextRidget.class, EmployeeBindingConstants.BIND_ID_PASSWORD);
-
-		final IToggleButtonRidget localEnabled = (IToggleButtonRidget) getRidget(EmployeeBindingConstants.BIND_ID_LOCAL_ENABLED);
-		localEnabled.bindToModel(EMFProperties.value(
-				FeaturePath.fromList(DairyPackage.Literals.EMPLOYEE__SYSTEM_IDENTITY,
-						ModelPackage.Literals.SYSTEM_USER__LOCAL_ENABLED)).observe(getWorkingCopy()));
 
 		// Configure address group
 		final AddressGroupWidgetController addressGroupController = new AddressGroupWidgetController(this);
@@ -170,17 +156,6 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 	@Override
 	public void afterBind() {
 		super.afterBind();
-
-// // bind all
-// for (final IRidget ridget : getRidgets()) {
-// if (ridget instanceof IValueRidget) {
-// ridget.updateFromModel();
-// } else if (ridget instanceof IMarkableRidget) {
-// final IMarkableRidget imr = (IMarkableRidget) ridget;
-// imr.updateFromModel();
-// }
-// }
-
 		updateLicenseNoRidget();
 	}
 
