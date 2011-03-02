@@ -25,6 +25,7 @@ import java.util.Date;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getJobFunction <em>Job Function</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getDepartment <em>Department</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getLicenseNo <em>License No</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getEmployer <em>Employer</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getSystemIdentity <em>System Identity</em>}</li>
  * </ul>
  * </p>
@@ -191,6 +192,34 @@ public interface Employee extends Person {
 	 * @generated
 	 */
 	void setLicenseNo(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Employer</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.Dairy#getEmployees <em>Employees</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Employer</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Employer</em>' container reference.
+	 * @see #setEmployer(Dairy)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getEmployee_Employer()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Dairy#getEmployees
+	 * @model opposite="employees" transient="false"
+	 * @generated
+	 */
+	Dairy getEmployer();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getEmployer <em>Employer</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Employer</em>' container reference.
+	 * @see #getEmployer()
+	 * @generated
+	 */
+	void setEmployer(Dairy value);
 
 	/**
 	 * Returns the value of the '<em><b>System Identity</b></em>' reference.

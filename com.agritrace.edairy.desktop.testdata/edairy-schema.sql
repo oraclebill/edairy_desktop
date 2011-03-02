@@ -397,8 +397,8 @@
         `jobfunction` varchar(60),
         `department` varchar(60),
         `licenseno` varchar(60),
+        `employee_employer_e_id` bigint,
         `dairy_contacts_e_id` bigint,
-        `dairy_employees_companyid` bigint,
         `supplier_contacts_e_id` bigint,
         `customer_contacts_e_id` bigint,
         primary key (`personid`)
@@ -1035,9 +1035,9 @@
         references `location` (`locationid`);
 
     alter table `person` 
-        add index FKC4E39B55BD57D965 (`dairy_employees_companyid`), 
-        add constraint FKC4E39B55BD57D965 
-        foreign key (`dairy_employees_companyid`) 
+        add index FKC4E39B55CAB5891B (`employee_employer_e_id`), 
+        add constraint FKC4E39B55CAB5891B 
+        foreign key (`employee_employer_e_id`) 
         references `dairy` (`dairyid`);
 
     alter table `person` 

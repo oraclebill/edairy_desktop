@@ -20,6 +20,8 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.util.DairyUtil;
+import com.agritrace.edairy.desktop.common.persistence.FilterParameter;
+import com.agritrace.edairy.desktop.common.persistence.FilterParameter.Type;
 import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
 import com.agritrace.edairy.desktop.common.persistence.dao.IFarmRepository;
 import com.agritrace.edairy.desktop.common.persistence.dao.IMemberRepository;
@@ -80,7 +82,7 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 			"Monthly Credit Sales", "Credit Balance" };
 
 	private final String[] memberPropertyNames = { "memberNumber", "farmer.formattedName", "defaultRoute.code",
-			"status.name", "farmer.phoneNumber" }; 
+			"status.name", "farmer.phoneNumber" };
 
 	private ITextRidget searchText;
 	private final Dairy localDairy;
@@ -144,6 +146,14 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 
 	@Override
 	protected List<Membership> getFilteredResult() {
+		IMemberRepository repository = (IMemberRepository) getRepository();
+		String filter = searchText.getText();
+		if (filter != null && filter.equals(DEFAULT_SEARCH_DISPLAY_TXT))
+			filter = "";
+		return repository.filterByName(filter);
+	}
+
+	private Object foo() {
 		final List<Membership> allMembers = localDairy.getMemberships();
 		final List<Membership> results = new ArrayList<Membership>();
 		final long start = System.currentTimeMillis();
@@ -169,11 +179,11 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 	}
 
 	private MemberEditDialogController controller;
-	
+
 	@Override
 	protected RecordDialog<Membership> getRecordDialog(Shell shell) {
 		assert controller != null;
-//		final MemberEditDialogController controller = new MemberEditDialogController(localDairy.getBranchLocations());
+// final MemberEditDialogController controller = new MemberEditDialogController(localDairy.getBranchLocations());
 		return new MemberEditDialog(getShell(), controller);
 	}
 
@@ -191,8 +201,8 @@ public class MemberDirectoryController2 extends BasicDirectoryController<Members
 
 	@Override
 	protected void handleViewItemAction() {
-		controller = new MemberEditDialogController(
-				localDairy.getBranchLocations(), (IMemberRepository)getRepository(), farmRepo, collectionsRepo);
+		controller = new MemberEditDialogController(localDairy.getBranchLocations(),
+				(IMemberRepository) getRepository(), farmRepo, collectionsRepo);
 		super.handleViewItemAction();
 	}
 }

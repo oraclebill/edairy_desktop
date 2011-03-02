@@ -825,13 +825,22 @@ public interface DairyPackage extends EPackage {
 	int EMPLOYEE__LICENSE_NO = ModelPackage.PERSON_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Employer</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPLOYEE__EMPLOYER = ModelPackage.PERSON_FEATURE_COUNT + 6;
+
+	/**
 	 * The feature id for the '<em><b>System Identity</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE__SYSTEM_IDENTITY = ModelPackage.PERSON_FEATURE_COUNT + 6;
+	int EMPLOYEE__SYSTEM_IDENTITY = ModelPackage.PERSON_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of structural features of the '<em>Employee</em>' class.
@@ -840,7 +849,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EMPLOYEE_FEATURE_COUNT = ModelPackage.PERSON_FEATURE_COUNT + 7;
+	int EMPLOYEE_FEATURE_COUNT = ModelPackage.PERSON_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyLocationImpl <em>Location</em>}' class.
@@ -3420,6 +3429,17 @@ public interface DairyPackage extends EPackage {
 	EAttribute getEmployee_LicenseNo();
 
 	/**
+	 * Returns the meta object for the container reference '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getEmployer <em>Employer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Employer</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Employee#getEmployer()
+	 * @see #getEmployee()
+	 * @generated
+	 */
+	EReference getEmployee_Employer();
+
+	/**
 	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getSystemIdentity <em>System Identity</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5729,6 +5749,14 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute EMPLOYEE__LICENSE_NO = eINSTANCE.getEmployee_LicenseNo();
+
+		/**
+		 * The meta object literal for the '<em><b>Employer</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EMPLOYEE__EMPLOYER = eINSTANCE.getEmployee_Employer();
 
 		/**
 		 * The meta object literal for the '<em><b>System Identity</b></em>' reference feature.

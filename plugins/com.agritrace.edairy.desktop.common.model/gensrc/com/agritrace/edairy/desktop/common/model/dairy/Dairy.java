@@ -295,6 +295,7 @@ public interface Dairy extends Company {
 	/**
 	 * Returns the value of the '<em><b>Employees</b></em>' containment reference list.
 	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.Employee}.
+	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.Employee#getEmployer <em>Employer</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Employees</em>' containment reference list isn't clear,
@@ -303,7 +304,8 @@ public interface Dairy extends Company {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Employees</em>' containment reference list.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_Employees()
-	 * @model containment="true" ordered="false"
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.Employee#getEmployer
+	 * @model opposite="employer" containment="true" ordered="false"
 	 * @generated
 	 */
 	EList<Employee> getEmployees();

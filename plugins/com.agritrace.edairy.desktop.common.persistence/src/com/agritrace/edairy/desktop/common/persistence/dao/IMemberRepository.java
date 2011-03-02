@@ -29,4 +29,6 @@ public interface IMemberRepository extends IRepository<Membership> {
 
 	public List<String> findAllMemberNumbers(boolean activeOnly);
 
+	public List<Membership> filterByName(String text);
+
 }

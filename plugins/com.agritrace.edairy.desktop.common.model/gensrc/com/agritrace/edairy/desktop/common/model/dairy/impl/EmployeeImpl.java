@@ -10,6 +10,7 @@ import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.base.SystemUser;
 import com.agritrace.edairy.desktop.common.model.base.impl.PersonImpl;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 
@@ -22,6 +23,7 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,6 +38,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getJobFunction <em>Job Function</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getDepartment <em>Department</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getLicenseNo <em>License No</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getEmployer <em>Employer</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.EmployeeImpl#getSystemIdentity <em>System Identity</em>}</li>
  * </ul>
  * </p>
@@ -323,6 +326,47 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Dairy getEmployer() {
+		if (eContainerFeatureID() != DairyPackage.EMPLOYEE__EMPLOYER) return null;
+		return (Dairy)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetEmployer(Dairy newEmployer, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newEmployer, DairyPackage.EMPLOYEE__EMPLOYER, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEmployer(Dairy newEmployer) {
+		if (newEmployer != eInternalContainer() || (eContainerFeatureID() != DairyPackage.EMPLOYEE__EMPLOYER && newEmployer != null)) {
+			if (EcoreUtil.isAncestor(this, newEmployer))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newEmployer != null)
+				msgs = ((InternalEObject)newEmployer).eInverseAdd(this, DairyPackage.DAIRY__EMPLOYEES, Dairy.class, msgs);
+			msgs = basicSetEmployer(newEmployer, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__EMPLOYER, newEmployer, newEmployer));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public SystemUser getSystemIdentity() {
 		if (systemIdentity != null && systemIdentity.eIsProxy()) {
 			InternalEObject oldSystemIdentity = (InternalEObject)systemIdentity;
@@ -399,6 +443,10 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case DairyPackage.EMPLOYEE__EMPLOYER:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetEmployer((Dairy)otherEnd, msgs);
 			case DairyPackage.EMPLOYEE__SYSTEM_IDENTITY:
 				if (systemIdentity != null)
 					msgs = ((InternalEObject)systemIdentity).eInverseRemove(this, ModelPackage.SYSTEM_USER__RELATED_EMPLOYEE, SystemUser.class, msgs);
@@ -415,10 +463,26 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case DairyPackage.EMPLOYEE__EMPLOYER:
+				return basicSetEmployer(null, msgs);
 			case DairyPackage.EMPLOYEE__SYSTEM_IDENTITY:
 				return basicSetSystemIdentity(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case DairyPackage.EMPLOYEE__EMPLOYER:
+				return eInternalContainer().eInverseRemove(this, DairyPackage.DAIRY__EMPLOYEES, Dairy.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -441,6 +505,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 				return getDepartment();
 			case DairyPackage.EMPLOYEE__LICENSE_NO:
 				return getLicenseNo();
+			case DairyPackage.EMPLOYEE__EMPLOYER:
+				return getEmployer();
 			case DairyPackage.EMPLOYEE__SYSTEM_IDENTITY:
 				if (resolve) return getSystemIdentity();
 				return basicGetSystemIdentity();
@@ -473,6 +539,9 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 				return;
 			case DairyPackage.EMPLOYEE__LICENSE_NO:
 				setLicenseNo((String)newValue);
+				return;
+			case DairyPackage.EMPLOYEE__EMPLOYER:
+				setEmployer((Dairy)newValue);
 				return;
 			case DairyPackage.EMPLOYEE__SYSTEM_IDENTITY:
 				setSystemIdentity((SystemUser)newValue);
@@ -507,6 +576,9 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 			case DairyPackage.EMPLOYEE__LICENSE_NO:
 				setLicenseNo(LICENSE_NO_EDEFAULT);
 				return;
+			case DairyPackage.EMPLOYEE__EMPLOYER:
+				setEmployer((Dairy)null);
+				return;
 			case DairyPackage.EMPLOYEE__SYSTEM_IDENTITY:
 				setSystemIdentity((SystemUser)null);
 				return;
@@ -534,6 +606,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 				return DEPARTMENT_EDEFAULT == null ? department != null : !DEPARTMENT_EDEFAULT.equals(department);
 			case DairyPackage.EMPLOYEE__LICENSE_NO:
 				return LICENSE_NO_EDEFAULT == null ? licenseNo != null : !LICENSE_NO_EDEFAULT.equals(licenseNo);
+			case DairyPackage.EMPLOYEE__EMPLOYER:
+				return getEmployer() != null;
 			case DairyPackage.EMPLOYEE__SYSTEM_IDENTITY:
 				return systemIdentity != null;
 		}

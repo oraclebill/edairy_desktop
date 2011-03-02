@@ -29,7 +29,7 @@ import com.google.inject.Provider;
 public class MemberRepository extends RepositoryUtil<Membership> implements IMemberRepository {
 
 	private IDairyRepository dairyRepo;
-	
+
 	@Inject
 	public MemberRepository(Provider<Session> provider, IDairyRepository dairyRepo) {
 		super(provider);
@@ -44,7 +44,6 @@ public class MemberRepository extends RepositoryUtil<Membership> implements IMem
 		return (Membership) memberQuery.uniqueResult();
 	}
 
-
 	@Transactional
 	@Override
 	public void delete(Membership member) {
@@ -57,11 +56,9 @@ public class MemberRepository extends RepositoryUtil<Membership> implements IMem
 	@Override
 	public List<Membership> all() {
 		final Criteria criteria = getCurrentSession().createCriteria("Membership");
-//		criteria.setFetchMode("transactions", FetchMode.SELECT);
-		criteria.add(
-				Restrictions.eq(DairyPackage.Literals.MEMBERSHIP__DAIRY.getName(), getLocalDairy()));
-		criteria.add(
-				Restrictions.ne(DairyPackage.Literals.MEMBERSHIP__STATUS.getName(), MembershipStatus.DELETED));
+// criteria.setFetchMode("transactions", FetchMode.SELECT);
+		criteria.add(Restrictions.eq(DairyPackage.Literals.MEMBERSHIP__DAIRY.getName(), getLocalDairy()));
+		criteria.add(Restrictions.ne(DairyPackage.Literals.MEMBERSHIP__STATUS.getName(), MembershipStatus.DELETED));
 		return criteria.list();
 	}
 
@@ -97,8 +94,7 @@ public class MemberRepository extends RepositoryUtil<Membership> implements IMem
 
 		Account memberAccount = newEntity.getAccount();
 		if (newEntity.getAccount() == null) {
-			memberAccount = AccountFactory.eINSTANCE
-					.createAccount();
+			memberAccount = AccountFactory.eINSTANCE.createAccount();
 			memberAccount.setMember(newEntity);
 		}
 		memberAccount.setAccountNumber("V" + newEntity.getMemberNumber());
@@ -126,7 +122,10 @@ public class MemberRepository extends RepositoryUtil<Membership> implements IMem
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<AccountTransaction> findAccountTransactions(Account account, Date start, Date end, String refNum,
+	public List<AccountTransaction> findAccountTransactions(Account account,
+			Date start,
+			Date end,
+			String refNum,
 			List<TransactionSource> sources) {
 		final Session session = getCurrentSession();
 		final Criteria criteria = session.createCriteria("AccountTransaction");
@@ -154,7 +153,9 @@ public class MemberRepository extends RepositoryUtil<Membership> implements IMem
 
 	@Transactional
 	@Override
-	public List<AccountTransaction> findAccountTransactions(Account account, Date start, Date end) {
+	public List<AccountTransaction> findAccountTransactions(Account account,
+			Date start,
+			Date end) {
 		return findAccountTransactions(account, start, end, null, null);
 	}
 
@@ -173,7 +174,19 @@ public class MemberRepository extends RepositoryUtil<Membership> implements IMem
 		Query q = session.createQuery("select memberNumber from Membership where status = 'Active'");
 		q.setReadOnly(true);
 		q.setComment("a read only query - billjones");
-		return q.list();		
+		return q.list();
+	}
+
+	@Override
+	@Transactional
+	public List<Membership> filterByName(String text) {
+		Criteria crit = getCurrentSession().createCriteria("Membership").createCriteria("farmer");
+		if (text != null) {
+			crit.add(Restrictions.disjunction().add(Restrictions.ilike("familyName", text))
+					.add(Restrictions.ilike("givenName", text)).add(Restrictions.ilike("middleName", text))
+					.add(Restrictions.ilike("additionalNames", text)));
+		}
+		return crit.list();
 	}
 
 }

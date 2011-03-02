@@ -43,10 +43,11 @@ public class DatabaseSetup {
 	private String userName = "root";
 	private String password = "";
 	private String schemaFileName = "edairy-schema.sql";
-//	private String mappingFileName = "";
-//	private Map<String, ?> options = new HashMap<String, Object>();
+// private String mappingFileName = "";
+// private Map<String, ?> options = new HashMap<String, Object>();
 	private HbDataStore hbds;
 	private Session session = null;
+
 	/**
 	 * @return the baseGrade
 	 */
@@ -54,9 +55,9 @@ public class DatabaseSetup {
 		return baseGrade;
 	}
 
-
 	/**
-	 * @param baseGrade the baseGrade to set
+	 * @param baseGrade
+	 *            the baseGrade to set
 	 */
 	public void setBaseGrade(MilkGrade baseGrade) {
 		this.baseGrade = baseGrade;
@@ -68,9 +69,9 @@ public class DatabaseSetup {
 	 * @param args
 	 */
 	public static void main(String[] args) throws Exception {
-//		BasicConfigurator.configure();
-//		Logger.getLogger("org.eclipse.emf.teneo").setLevel(Level.INFO);
-//		Logger.getLogger("org.hibernate").setLevel(Level.WARN);
+// BasicConfigurator.configure();
+// Logger.getLogger("org.eclipse.emf.teneo").setLevel(Level.INFO);
+// Logger.getLogger("org.hibernate").setLevel(Level.WARN);
 		DatabaseSetup setup = new DatabaseSetup();
 		if (args != null && args.length > 0) {
 			setup.setSchemaFileName(args[0]);
@@ -80,8 +81,7 @@ public class DatabaseSetup {
 		}
 		setup.generateSchema();
 	}
-	
-	
+
 	/**
 	 * 
 	 */
@@ -201,7 +201,6 @@ public class DatabaseSetup {
 		this.session = session;
 	}
 
-
 	/**
 	 * Get the current session, or create one and return it.
 	 * 
@@ -240,17 +239,17 @@ public class DatabaseSetup {
 	}
 
 	/**
-	 * @throws IOException 
+	 * @throws IOException
 	 * 
 	 */
 	public void generateSchema() throws IOException {
 		// for teneo, we need to intialize the datastore in order ot properly
 		// init the configuration. So we set an invalid db so init will fail,
 		// but then we can use the config to generate schema...
-				
+
 		File f = new File(getSchemaFileName());
 		System.out.println("Generating schema to file: " + f.getCanonicalPath());
-		
+
 		Configuration configuration = generateTeneoHibernateConfig();
 
 		SchemaExport exporter = new SchemaExport(configuration);
@@ -261,7 +260,6 @@ public class DatabaseSetup {
 		exporter.execute(true, false, false, true);
 
 	}
-
 
 	/**
 	 * 
@@ -278,38 +276,27 @@ public class DatabaseSetup {
 	/**
 	 * 
 	 */
-	protected void populateBaseReferenceData() {
-		Transaction tx = getSession().beginTransaction();
-		try {
-			populateBaseCollectionSessions();
-			populateBaseSystemUsersAndRoles();
-			populateBaseMilkGrades();
-
-			tx.commit();
-		} catch (Exception e) {
-			tx.rollback();
-		} finally {
-		}
-
+	protected void populateBaseReferenceData(Dairy dairy) {
+		populateBaseCollectionSessions(dairy);
+		populateBaseSystemUsersAndRoles(dairy);
+		populateBaseMilkGrades(dairy);
 	}
 
-	private void populateBaseCollectionSessions() {
+	private void populateBaseCollectionSessions(Dairy dairy) {
 		CollectionSession cSession;
 
 		cSession = DairyFactory.eINSTANCE.createCollectionSession();
 		cSession.setCode("AM");
 		cSession.setDescription("The first collection session of the day");
-		cSession.setDairy(dairy);
-		getSession().persist(cSession);
+		dairy.getCollectionSessions().add(cSession);
 
 		cSession = DairyFactory.eINSTANCE.createCollectionSession();
 		cSession.setCode("PM");
 		cSession.setDescription("An additional collection session.");
-		cSession.setDairy(dairy);
-		getSession().persist(cSession);
+		dairy.getCollectionSessions().add(cSession);
 	}
 
-	private void populateBaseSystemUsersAndRoles() {
+	private void populateBaseSystemUsersAndRoles(Dairy dairy) {
 		SystemUser user;
 		Role role;
 		Permission permission;
@@ -346,7 +333,7 @@ public class DatabaseSetup {
 
 	}
 
-	private void populateBaseMilkGrades() {
+	private void populateBaseMilkGrades(Dairy dairy) {
 		MilkGrade grade;
 
 		grade = DairyFactory.eINSTANCE.createMilkGrade();
@@ -355,7 +342,7 @@ public class DatabaseSetup {
 		grade.setName("Raw");
 		getSession().persist(grade);
 		baseGrade = grade;
-		
+
 		grade = DairyFactory.eINSTANCE.createMilkGrade();
 		grade.setCode("PIGGERY");
 		grade.setDescription("Raw milk grade that is not fit for human consumption.");
@@ -389,11 +376,9 @@ public class DatabaseSetup {
 		}
 	}
 
-	Dairy dairy;
 	protected Dairy createDairy(String dairyNumber) {
+		Dairy dairy;
 
-		Session session = openSession();
-		Transaction tx = session.beginTransaction();
 		dairy = DairyFactory.eINSTANCE.createDairy();
 		dairy.setRegistrationNumber(dairyNumber);
 		dairy.setDescription("");
@@ -402,9 +387,7 @@ public class DatabaseSetup {
 		dairy.setEstablishedDate(new Date());
 		dairy.setLocation(DairyUtil.createLocation(null, null, null));
 
-		session.persist(dairy);
-		session.flush();
-		tx.commit();
+		getSession().persist(dairy);
 
 		return dairy;
 	}
@@ -469,6 +452,7 @@ public class DatabaseSetup {
 		props.setProperty("teneo.naming.default_id_column", "id");
 		props.setProperty("teneo.naming.version_column", "opver");
 		props.setProperty("teneo.naming.set_foreign_key_name", "false");
+		props.setProperty("teneo.mapping.also_map_as_class", "false");
 		props.setProperty("teneo.mapping.disable_econtainer", "true");
 		props.setProperty("teneo.mapping.default_varchar_length", "60");
 		props.setProperty("teneo.mapping.always_map_list_as_bag", "true"); // will
@@ -484,6 +468,5 @@ public class DatabaseSetup {
 		props.setProperty(Environment.GENERATE_STATISTICS, "true");
 		props.setProperty(Environment.HBM2DDL_AUTO, "create");
 	}
-
 
 }
