@@ -110,7 +110,7 @@ public class DairyProfileViewController extends SubModuleController {
 	 */
 	@Inject
 	public DairyProfileViewController(final IDairyRepository dairyRepository) {
-		Thread.dumpStack();
+
 		this.dairyRepository = dairyRepository;
 		localDairy = dairyRepository.getLocalDairy();
 	}

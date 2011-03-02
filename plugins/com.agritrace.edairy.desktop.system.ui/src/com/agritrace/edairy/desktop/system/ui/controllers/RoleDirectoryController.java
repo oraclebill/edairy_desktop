@@ -121,11 +121,18 @@ public final class RoleDirectoryController extends BasicDirectoryController<Role
 		permSearch.setText("");
 		refreshTableContents();
 	}
-	
-//	@Override
-//	public void refreshTableContents() {
-//		// TODO: Figure out a way to implement the dialog safely
-//		refreshTableContentsSafe();
-//	}
 
+	/**
+	 * Handle view item action by ignoring "ADMIN" and "GUEST" roles, which cannot be edited.
+	 * 
+	 * @see com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController#handleViewItemAction()
+	 */
+	@Override
+	protected void handleViewItemAction() {
+		final Role role = getSelectedEObject();
+		if (role == null || role.getName().equals("ADMIN") || role.getName().equals("GUEST")) {
+			return;
+		}
+		super.handleViewItemAction();
+	}
 }

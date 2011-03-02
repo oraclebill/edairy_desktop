@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.equinox.log.Logger;
 import org.eclipse.riena.core.Log4r;
@@ -84,22 +86,22 @@ public abstract class RepositoryUtil<T extends EObject> extends DataStoreManager
 	}
 
 	/**
-	 * @deprecated
 	 */
 	@Override
 	@Transactional
 	public void load(EObject obj) {
-		final Serializable key = (Serializable) obj.eGet(obj.eClass().getEIDAttribute());
+		EStructuralFeature id = obj.eClass().getEIDAttribute();
+		Assert.isLegal(id != null);
+		final Serializable key = (Serializable) obj.eGet(id);
 		load(obj, key);
 	}
 
 	/**
-	 * @deprecated
 	 */
 	@Override
 	@Transactional
-	public void load(EObject obj, Serializable key) {
-		LOGGER.log(LogService.LOG_WARNING, "deprecated 'load' method called", new Exception());
+	public void load(EObject obj,
+			Serializable key) {
 		if (key == null) {
 			throw new IllegalArgumentException("key cannot be null");
 		}
@@ -178,39 +180,42 @@ public abstract class RepositoryUtil<T extends EObject> extends DataStoreManager
 	}
 
 	@Override
-	public <Q> List<Q> filter(Class<Q> entityClass, FilterParameter... filterParameterList) {
+	public <Q> List<Q> filter(Class<Q> entityClass,
+			FilterParameter... filterParameterList) {
 		return filter(getCurrentSession().createCriteria(entityClass), filterParameterList);
 	}
 
 	@Override
-	public List<?> filter(String entityName, FilterParameter... filterParameterList) {
+	public List<?> filter(String entityName,
+			FilterParameter... filterParameterList) {
 		return filter(getCurrentSession().createCriteria(entityName), filterParameterList);
 	}
 
 	@Transactional
-	<Q> List<Q> filter(Criteria crit, FilterParameter... filterParameterList) {
-
-		for (FilterParameter p : filterParameterList) {
-			if (p.getParamValue() != null) {
-				switch (p.getType()) {
-				case EQUALS:
-					crit.add(Restrictions.eq(p.getParamName(), p.getParamValue()));
-					break;
-				case LIKE:
-					crit.add(Restrictions.like(p.getParamName(), p.getParamValue()));
-					break;
-				case LESS_THAN:
-					crit.add(Restrictions.le(p.getParamName(), p.getParamValue()));
-					break;
-				case GREATER_THAN:
-					crit.add(Restrictions.ge(p.getParamName(), p.getParamValue()));
-					break;
-				default:
-					throw new IllegalArgumentException("Unrecognized type: " + p.getType());
+	<Q> List<Q> filter(Criteria crit,
+			FilterParameter... filterParameterList) {
+		if (filterParameterList != null) {
+			for (FilterParameter p : filterParameterList) {
+				if (p.getParamValue() != null) {
+					switch (p.getType()) {
+					case EQUALS:
+						crit.add(Restrictions.eq(p.getParamName(), p.getParamValue()));
+						break;
+					case LIKE:
+						crit.add(Restrictions.like(p.getParamName(), p.getParamValue()));
+						break;
+					case LESS_THAN:
+						crit.add(Restrictions.le(p.getParamName(), p.getParamValue()));
+						break;
+					case GREATER_THAN:
+						crit.add(Restrictions.ge(p.getParamName(), p.getParamValue()));
+						break;
+					default:
+						throw new IllegalArgumentException("Unrecognized type: " + p.getType());
+					}
 				}
 			}
 		}
-
 		return crit.list();
 	}
 }

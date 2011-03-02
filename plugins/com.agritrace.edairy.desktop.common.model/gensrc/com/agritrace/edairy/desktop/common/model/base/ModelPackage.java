@@ -831,13 +831,22 @@ public interface ModelPackage extends EPackage {
 	int SYSTEM_USER__PASSWORD_HASHED = 5;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYSTEM_USER__ID = 6;
+
+	/**
 	 * The number of structural features of the '<em>System User</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SYSTEM_USER_FEATURE_COUNT = 6;
+	int SYSTEM_USER_FEATURE_COUNT = 7;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.RoleImpl <em>Role</em>}' class.
@@ -1825,6 +1834,17 @@ public interface ModelPackage extends EPackage {
 	EAttribute getSystemUser_PasswordHashed();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.base.SystemUser#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.base.SystemUser#getId()
+	 * @see #getSystemUser()
+	 * @generated
+	 */
+	EAttribute getSystemUser_Id();
+
+	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.base.Role <em>Role</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2655,6 +2675,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SYSTEM_USER__PASSWORD_HASHED = eINSTANCE.getSystemUser_PasswordHashed();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SYSTEM_USER__ID = eINSTANCE.getSystemUser_Id();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.base.impl.RoleImpl <em>Role</em>}' class.

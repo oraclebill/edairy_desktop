@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.SystemUser#isLocalEnabled <em>Local Enabled</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.SystemUser#getRole <em>Role</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.SystemUser#isPasswordHashed <em>Password Hashed</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.SystemUser#getId <em>Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -192,5 +193,31 @@ public interface SystemUser extends EObject {
 	 * @generated
 	 */
 	void setPasswordHashed(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Id</em>' attribute.
+	 * @see #setId(Long)
+	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getSystemUser_Id()
+	 * @model id="true" dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID"
+	 * @generated
+	 */
+	Long getId();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.base.SystemUser#getId <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Id</em>' attribute.
+	 * @see #getId()
+	 * @generated
+	 */
+	void setId(Long value);
 
 } // SystemUser

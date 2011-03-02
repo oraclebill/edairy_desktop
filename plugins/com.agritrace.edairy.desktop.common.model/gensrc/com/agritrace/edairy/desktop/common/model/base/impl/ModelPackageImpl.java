@@ -941,6 +941,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getSystemUser_Id() {
+		return (EAttribute)systemUserEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getRole() {
 		return roleEClass;
 	}
@@ -1235,6 +1244,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(systemUserEClass, SYSTEM_USER__LOCAL_ENABLED);
 		createEReference(systemUserEClass, SYSTEM_USER__ROLE);
 		createEAttribute(systemUserEClass, SYSTEM_USER__PASSWORD_HASHED);
+		createEAttribute(systemUserEClass, SYSTEM_USER__ID);
 
 		roleEClass = createEClass(ROLE);
 		createEAttribute(roleEClass, ROLE__ID);
@@ -1386,6 +1396,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getSystemUser_LocalEnabled(), ecorePackage.getEBoolean(), "localEnabled", "true", 0, 1, SystemUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSystemUser_Role(), this.getRole(), null, "role", null, 0, 1, SystemUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSystemUser_PasswordHashed(), ecorePackage.getEBoolean(), "passwordHashed", "false", 1, 1, SystemUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSystemUser_Id(), this.getUniqueID(), "id", null, 0, 1, SystemUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(roleEClass, Role.class, "Role", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRole_Id(), this.getUniqueID(), "id", null, 1, 1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -86,6 +86,7 @@ public class EDairyActivator extends AbstractUIPlugin {
 		});
 		injector.injectMembers(this);
 		super.start(context);
+		context.registerService(Injector.class.getName(), injector, null);
 	}
 
 	/*

@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.SystemUserImpl#isLocalEnabled <em>Local Enabled</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.SystemUserImpl#getRole <em>Role</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.SystemUserImpl#isPasswordHashed <em>Password Hashed</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.base.impl.SystemUserImpl#getId <em>Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -139,6 +140,26 @@ public class SystemUserImpl extends EObjectImpl implements SystemUser {
 	 * @ordered
 	 */
 	protected boolean passwordHashed = PASSWORD_HASHED_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Long ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected Long id = ID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -346,6 +367,27 @@ public class SystemUserImpl extends EObjectImpl implements SystemUser {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setId(Long newId) {
+		Long oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.SYSTEM_USER__ID, oldId, id));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -393,6 +435,8 @@ public class SystemUserImpl extends EObjectImpl implements SystemUser {
 				return basicGetRole();
 			case ModelPackage.SYSTEM_USER__PASSWORD_HASHED:
 				return isPasswordHashed();
+			case ModelPackage.SYSTEM_USER__ID:
+				return getId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -422,6 +466,9 @@ public class SystemUserImpl extends EObjectImpl implements SystemUser {
 				return;
 			case ModelPackage.SYSTEM_USER__PASSWORD_HASHED:
 				setPasswordHashed((Boolean)newValue);
+				return;
+			case ModelPackage.SYSTEM_USER__ID:
+				setId((Long)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -453,6 +500,9 @@ public class SystemUserImpl extends EObjectImpl implements SystemUser {
 			case ModelPackage.SYSTEM_USER__PASSWORD_HASHED:
 				setPasswordHashed(PASSWORD_HASHED_EDEFAULT);
 				return;
+			case ModelPackage.SYSTEM_USER__ID:
+				setId(ID_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -477,6 +527,8 @@ public class SystemUserImpl extends EObjectImpl implements SystemUser {
 				return role != null;
 			case ModelPackage.SYSTEM_USER__PASSWORD_HASHED:
 				return passwordHashed != PASSWORD_HASHED_EDEFAULT;
+			case ModelPackage.SYSTEM_USER__ID:
+				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -499,6 +551,8 @@ public class SystemUserImpl extends EObjectImpl implements SystemUser {
 		result.append(localEnabled);
 		result.append(", passwordHashed: ");
 		result.append(passwordHashed);
+		result.append(", id: ");
+		result.append(id);
 		result.append(')');
 		return result.toString();
 	}
