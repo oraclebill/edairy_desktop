@@ -207,7 +207,7 @@ public class DatabaseSetup {
 	 * 
 	 * @return
 	 */
-	protected Session getOrCreateSession() {
+	public Session getOrCreateSession() {
 		if (getSession() == null)
 			setSession(openSession());
 		return getSession();
@@ -223,7 +223,7 @@ public class DatabaseSetup {
 			DataSource dataSource = createDataSource();			
 			Connection conn = dataSource.getConnection();
 			Statement stmt = conn.createStatement();
-			String statement = String.format("create database if not exists %s;", getDatabaseName());
+			String statement = String.format("create database  %s;", getDatabaseName());
 			System.out.format("Executing sql [%s]\n", statement);
 			stmt.execute(statement);
 		} catch (Exception e) {

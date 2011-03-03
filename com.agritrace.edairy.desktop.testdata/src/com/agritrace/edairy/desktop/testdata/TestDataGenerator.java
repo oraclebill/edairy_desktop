@@ -97,7 +97,7 @@ public class TestDataGenerator extends DatabaseSetup
 		setSession(openSession());
 
 		tx = getSession().beginTransaction();
-		initializeDairy();
+		initializeWorkingDairy();
 		tx.commit();
 
 		tx = getSession().beginTransaction();
@@ -125,11 +125,15 @@ public class TestDataGenerator extends DatabaseSetup
 		tx.commit();
 	}
 
-	public void initializeDairy()
+	public void initializeWorkingDairy()
 	{
 		currentDairy = createDairy("TEST1");
 		updateDairyProfile(currentDairy);
 		populateBaseReferenceData(currentDairy);
+	}
+	
+	public Dairy getWorkingDairy() {
+		return currentDairy;
 	}
 
 	private void updateDairyProfile(Dairy currentDairy)
@@ -479,12 +483,15 @@ public class TestDataGenerator extends DatabaseSetup
 		return l;
 	}
 
-	private CollectionGroup createCollectionGroup(	DairyLocation center,
+	public CollectionGroup createCollectionGroup(	DairyLocation center,
 													Date collectionDate,
 													CollectionSession session)
 	{
+		Assert.isNotNull(center);
+		Assert.isNotNull(collectionDate);
+		Assert.isNotNull(session);
+		
 		CollectionGroup group;
-
 		group = DairyFactory.eINSTANCE.createCollectionGroup();
 		group.setJournalId(Long.valueOf(group.hashCode()));
 		group.setJournalDate(collectionDate);
@@ -504,7 +511,7 @@ public class TestDataGenerator extends DatabaseSetup
 	 * @param amount
 	 * @return
 	 */
-	private CollectionJournalLine createCollectionEntry(CollectionGroup group,
+	public CollectionJournalLine createCollectionEntry(CollectionGroup group,
 														Bin bin,
 														Membership member,
 														BigDecimal amount)
