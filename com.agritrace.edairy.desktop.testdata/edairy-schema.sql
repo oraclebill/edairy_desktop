@@ -93,7 +93,7 @@
         `offroute` bit,
         `farm_from_farmid` bigint,
         `container_farmcontainer_containerid` bigint,
-        `collectionjournalline_collectionjournal_e_id` bigint,
+        `collectionjournalline_group_e_id` bigint,
         `rejected` bit,
         `rejectionreason` varchar(60),
         `milkfatpercentage` decimal(19,2),
@@ -517,7 +517,7 @@
     ) type=InnoDB;
 
     create table `systemuser` (
-        id bigint not null auto_increment,
+        `id` bigint not null auto_increment,
         dtype varchar(255) not null,
         opver integer not null,
         `username` varchar(60) unique,
@@ -526,7 +526,7 @@
         `localenabled` bit,
         `role_role_e_id` bigint,
         `passwordhashed` bit not null,
-        primary key (id)
+        primary key (`id`)
     ) type=InnoDB;
 
     create table `transaction` (
@@ -723,9 +723,9 @@
         references `container` (`containerid`);
 
     alter table `collectionjournalline` 
-        add index FK21648E4DCD250D6E (`collectionjournalline_collectionjournal_e_id`), 
-        add constraint FK21648E4DCD250D6E 
-        foreign key (`collectionjournalline_collectionjournal_e_id`) 
+        add index FK21648E4D42039C88 (`collectionjournalline_group_e_id`), 
+        add constraint FK21648E4D42039C88 
+        foreign key (`collectionjournalline_group_e_id`) 
         references `collectiongroup` (`journalid`);
 
     alter table `collectionjournalline` 

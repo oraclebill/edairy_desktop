@@ -73,7 +73,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="ecore:EClass farm.ecore#//Farm"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="farmContainer" eType="ecore:EClass farm.ecore#//Container"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="bin" eType="#//Bin" eOpposite="#//Bin/collections"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionJournal" eType="#//CollectionGroup"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="group" eType="#//CollectionGroup"
         eOpposite="#//CollectionGroup/journalEntries"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="rejected" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="rejectionReason" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -178,7 +178,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="recordTotal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"
         defaultValueLiteral="0" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="journalEntries" upperBound="-1"
-        eType="#//CollectionJournalLine" containment="true" eOpposite="#//CollectionJournalLine/collectionJournal"/>
+        eType="#//CollectionJournalLine" containment="true" eOpposite="#//CollectionJournalLine/group"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="suspended" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="entryCount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"

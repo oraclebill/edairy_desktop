@@ -56,8 +56,8 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 		cal.setTime(date);
 
 		final String queryText = "SELECT count(*) " + "  FROM CollectionJournalLine l "
-				+ " WHERE l.validatedMember = :member " + "   AND l.collectionJournal.journalDate = :cal "
-				+ "   AND l.collectionJournal.collectionCenter = :center ";
+				+ " WHERE l.validatedMember = :member " + "   AND l.group.journalDate = :cal "
+				+ "   AND l.group.collectionCenter = :center ";
 
 		final Query query = getCurrentSession().createQuery(queryText);
 		query.setEntity("member", member);
@@ -92,7 +92,7 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 	public List<Object[]> collectionsSummary(Date startDate, Date endDate) {
 		final String sqlString = "" +
 				"select journaldate as date, dairylocation.code as route, collectionsession.code as session, sum(quantity) as sum, count(*) as cnt, avg(quantity) as avg, min(quantity) as min, max(quantity) as max  "
-				+ "  from collectiongroup join collectionjournalline on collectionjournalline_collectionjournal_e_id = journalid "
+				+ "  from collectiongroup join collectionjournalline on collectionjournalline_group_e_id = journalid "
 				+ "    join collectionsession on collectionsession.id = collectionsession_session_e_id "
 				+ "    join dairylocation on dairylocation.id = dairylocation_collectioncenter_id "
 				+ "  where journaldate between ? and ? " + " group by 2,3 " + " order by 1,2,3;";
@@ -178,8 +178,8 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 	@Transactional
 	public List<Membership> getMembersWithDeliveriesFor(final int month, final int year) {
 		final String queryString = "SELECT DISTINCT l.validatedMember " + " FROM CollectionJournalLine l "
-				+ " WHERE 1 = 1" + "   AND year(l.collectionJournal.journalDate) = :year "
-				+ "   AND month(l.collectionJournal.journalDate) = :month ";
+				+ " WHERE 1 = 1" + "   AND year(l.group.journalDate) = :year "
+				+ "   AND month(l.group.journalDate) = :month ";
 
 		final Query query = getCurrentSession().createQuery(queryString);
 		query.setInteger("year", year);
@@ -192,8 +192,8 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 	@Transactional
 	public List<Membership> getMembersWithFlaggedDeliveriesFor(final int month, final int year) {
 		final String queryString = "SELECT DISTINCT validatedMember " + " FROM CollectionJournalLine l "
-				+ " WHERE 1 = 1" + "   AND year(l.collectionJournal.journalDate) = :year "
-				+ "   AND month(l.collectionJournal.journalDate) = :month" + "   AND l.flagged = TRUE";
+				+ " WHERE 1 = 1" + "   AND year(l.group.journalDate) = :year "
+				+ "   AND month(l.group.journalDate) = :month" + "   AND l.flagged = TRUE";
 
 		final Query query = getCurrentSession().createQuery(queryString);
 		query.setInteger("year", year);
@@ -208,8 +208,8 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 			final int year) {
 		final String queryString = "FROM CollectionJournalLine l " + "WHERE l.validatedMember = :member "
 				+ "  AND l.rejected = False " + "  AND l.flagged = False "
-				+ "  AND year(l.collectionJournal.journalDate) = :year "
-				+ "  AND month(l.collectionJournal.journalDate) = :month ";
+				+ "  AND year(l.group.journalDate) = :year "
+				+ "  AND month(l.group.journalDate) = :month ";
 
 		final Query query = getCurrentSession().createQuery(queryString);
 		query.setEntity("member", member);
@@ -224,8 +224,8 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 	public BigDecimal getSumOfPayableDeliveries(final Membership member, final int month, final int year) {
 		final String queryString = "SELECT sum(l.quantity) " + "FROM CollectionJournalLine l "
 				+ "WHERE l.validatedMember = :member " + "  AND l.rejected = False " + "  AND l.flagged = False "
-				+ "  AND year(l.collectionJournal.journalDate) = :year "
-				+ "  AND month(l.collectionJournal.journalDate) = :month ";
+				+ "  AND year(l.group.journalDate) = :year "
+				+ "  AND month(l.group.journalDate) = :month ";
 
 		final Query query = getCurrentSession().createQuery(queryString);
 		query.setEntity("member", member);
@@ -243,8 +243,8 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 	public Map<Membership, BigDecimal> getMapOfPayableDeliveries(int paymentMonth, int paymentYear) {
 		final String queryString = "SELECT l.validatedMember, sum(l.quantity) " + "FROM CollectionJournalLine l "
 				+ "WHERE 1 = 1 " + "  AND l.rejected = False " + "  AND l.flagged = False "
-				+ "  AND year(l.collectionJournal.journalDate) = :year "
-				+ "  AND month(l.collectionJournal.journalDate) = :month " + "  GROUP BY l.validatedMember";
+				+ "  AND year(l.group.journalDate) = :year "
+				+ "  AND month(l.group.journalDate) = :month " + "  GROUP BY l.validatedMember";
 
 		final Query query = getCurrentSession().createQuery(queryString);
 		query.setInteger("year", paymentYear);
@@ -276,7 +276,7 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 						" sum(entry.quantity) as sum, min(entry.quantity) as min, " +
 						" max(entry.quantity) as max, avg(entry.quantity) as avg ) "
 				+ "FROM   CollectionJournalLine as entry " +
-						" INNER JOIN entry.collectionJournal as grp " 
+						" INNER JOIN entry.group as grp " 
 				+ "WHERE  grp.journalDate >= :startDate "
 				+ " AND   grp.journalDate < :endDate ";
 		if (startDate == null || endDate == null) {

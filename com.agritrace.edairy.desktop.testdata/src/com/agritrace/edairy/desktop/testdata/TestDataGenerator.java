@@ -477,7 +477,7 @@ public class TestDataGenerator extends DatabaseSetup {
 		CollectionJournalLine entry = DairyFactory.eINSTANCE.createCollectionJournalLine();
 
 		entry.setLineNumber(++sequence);
-		entry.setCollectionJournal(group);
+		entry.setGroup(group);
 		entry.setBin(bin);
 		entry.setRecordedMember(member.getMemberNumber());
 		entry.setValidatedMember(member);

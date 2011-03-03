@@ -216,6 +216,13 @@ public abstract class RepositoryUtil<T extends EObject> extends DataStoreManager
 				}
 			}
 		}
-		return crit.list();
+		List<Q> ret = null;
+		try {
+			ret = crit.list();
+		}
+		catch(Exception e) {
+			LOGGER.log(LogService.LOG_ERROR, "Error executing filter query", e);
+		}
+		return ret;
 	}
 }

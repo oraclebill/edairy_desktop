@@ -128,7 +128,7 @@ import com.google.inject.Provider;
 				// primary data
 				
 				try {
-					importRecord.setCollectionJournal(journalPage);
+					importRecord.setGroup(journalPage);
 					importRecord.setRecordedMember(scaleRecord.getMemberNumber());
 					importRecord.setQuantity(scaleRecord.getValidQuantity());
 					importRecord.setCollectionTime(scaleRecord.getValidDate());

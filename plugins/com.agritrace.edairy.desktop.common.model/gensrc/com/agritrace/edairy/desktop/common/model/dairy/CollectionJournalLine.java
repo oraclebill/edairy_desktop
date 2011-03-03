@@ -34,7 +34,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getFrom <em>From</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getFarmContainer <em>Farm Container</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getBin <em>Bin</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getCollectionJournal <em>Collection Journal</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getGroup <em>Group</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#isRejected <em>Rejected</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getRejectionReason <em>Rejection Reason</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getMilkFatPercentage <em>Milk Fat Percentage</em>}</li>
@@ -341,7 +341,7 @@ public interface CollectionJournalLine extends EObject {
 	void setBin(Bin value);
 
 	/**
-	 * Returns the value of the '<em><b>Collection Journal</b></em>' container reference.
+	 * Returns the value of the '<em><b>Group</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getJournalEntries <em>Journal Entries</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -349,24 +349,24 @@ public interface CollectionJournalLine extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Collection Journal</em>' container reference.
-	 * @see #setCollectionJournal(CollectionGroup)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalLine_CollectionJournal()
+	 * @return the value of the '<em>Group</em>' container reference.
+	 * @see #setGroup(CollectionGroup)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalLine_Group()
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getJournalEntries
 	 * @model opposite="journalEntries" transient="false"
 	 * @generated
 	 */
-	CollectionGroup getCollectionJournal();
+	CollectionGroup getGroup();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getCollectionJournal <em>Collection Journal</em>}' container reference.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getGroup <em>Group</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Collection Journal</em>' container reference.
-	 * @see #getCollectionJournal()
+	 * @param value the new value of the '<em>Group</em>' container reference.
+	 * @see #getGroup()
 	 * @generated
 	 */
-	void setCollectionJournal(CollectionGroup value);
+	void setGroup(CollectionGroup value);
 
 	/**
 	 * Returns the value of the '<em><b>Rejected</b></em>' attribute.

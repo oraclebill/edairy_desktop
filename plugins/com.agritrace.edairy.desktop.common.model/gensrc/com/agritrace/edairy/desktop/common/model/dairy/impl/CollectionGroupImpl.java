@@ -583,7 +583,7 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 */
 	public EList<CollectionJournalLine> getJournalEntries() {
 		if (journalEntries == null) {
-			journalEntries = new EObjectContainmentWithInverseEList<CollectionJournalLine>(CollectionJournalLine.class, this, DairyPackage.COLLECTION_GROUP__JOURNAL_ENTRIES, DairyPackage.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL);
+			journalEntries = new EObjectContainmentWithInverseEList<CollectionJournalLine>(CollectionJournalLine.class, this, DairyPackage.COLLECTION_GROUP__JOURNAL_ENTRIES, DairyPackage.COLLECTION_JOURNAL_LINE__GROUP);
 		}
 		return journalEntries;
 	}

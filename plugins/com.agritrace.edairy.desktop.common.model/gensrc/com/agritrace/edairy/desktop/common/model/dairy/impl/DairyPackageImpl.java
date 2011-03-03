@@ -604,7 +604,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCollectionJournalLine_CollectionJournal() {
+	public EReference getCollectionJournalLine_Group() {
 		return (EReference)collectionJournalLineEClass.getEStructuralFeatures().get(11);
 	}
 
@@ -2420,7 +2420,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEReference(collectionJournalLineEClass, COLLECTION_JOURNAL_LINE__FROM);
 		createEReference(collectionJournalLineEClass, COLLECTION_JOURNAL_LINE__FARM_CONTAINER);
 		createEReference(collectionJournalLineEClass, COLLECTION_JOURNAL_LINE__BIN);
-		createEReference(collectionJournalLineEClass, COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL);
+		createEReference(collectionJournalLineEClass, COLLECTION_JOURNAL_LINE__GROUP);
 		createEAttribute(collectionJournalLineEClass, COLLECTION_JOURNAL_LINE__REJECTED);
 		createEAttribute(collectionJournalLineEClass, COLLECTION_JOURNAL_LINE__REJECTION_REASON);
 		createEAttribute(collectionJournalLineEClass, COLLECTION_JOURNAL_LINE__MILK_FAT_PERCENTAGE);
@@ -2714,7 +2714,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEReference(getCollectionJournalLine_From(), theTrackingPackage.getFarm(), null, "from", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCollectionJournalLine_FarmContainer(), theTrackingPackage.getContainer(), null, "farmContainer", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCollectionJournalLine_Bin(), this.getBin(), this.getBin_Collections(), "bin", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCollectionJournalLine_CollectionJournal(), this.getCollectionGroup(), this.getCollectionGroup_JournalEntries(), "collectionJournal", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCollectionJournalLine_Group(), this.getCollectionGroup(), this.getCollectionGroup_JournalEntries(), "group", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionJournalLine_Rejected(), ecorePackage.getEBoolean(), "rejected", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionJournalLine_RejectionReason(), ecorePackage.getEString(), "rejectionReason", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionJournalLine_MilkFatPercentage(), ecorePackage.getEBigDecimal(), "milkFatPercentage", "0.0", 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2763,7 +2763,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEReference(getCollectionGroup_Vehicle(), this.getVehicle(), null, "vehicle", null, 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionGroup_DriverTotal(), ecorePackage.getEBigDecimal(), "driverTotal", null, 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionGroup_RecordTotal(), ecorePackage.getEBigDecimal(), "recordTotal", "0", 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getCollectionGroup_JournalEntries(), this.getCollectionJournalLine(), this.getCollectionJournalLine_CollectionJournal(), "journalEntries", null, 0, -1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCollectionGroup_JournalEntries(), this.getCollectionJournalLine(), this.getCollectionJournalLine_Group(), "journalEntries", null, 0, -1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionGroup_Suspended(), ecorePackage.getEBoolean(), "suspended", "false", 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionGroup_EntryCount(), ecorePackage.getEInt(), "entryCount", "0", 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionGroup_SuspendedCount(), ecorePackage.getEInt(), "suspendedCount", "0", 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

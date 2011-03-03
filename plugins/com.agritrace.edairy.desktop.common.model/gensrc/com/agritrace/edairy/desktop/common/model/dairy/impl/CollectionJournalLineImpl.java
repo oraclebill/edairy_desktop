@@ -48,7 +48,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalLineImpl#getFrom <em>From</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalLineImpl#getFarmContainer <em>Farm Container</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalLineImpl#getBin <em>Bin</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalLineImpl#getCollectionJournal <em>Collection Journal</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalLineImpl#getGroup <em>Group</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalLineImpl#isRejected <em>Rejected</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalLineImpl#getRejectionReason <em>Rejection Reason</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionJournalLineImpl#getMilkFatPercentage <em>Milk Fat Percentage</em>}</li>
@@ -685,8 +685,8 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CollectionGroup getCollectionJournal() {
-		if (eContainerFeatureID() != DairyPackage.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL) return null;
+	public CollectionGroup getGroup() {
+		if (eContainerFeatureID() != DairyPackage.COLLECTION_JOURNAL_LINE__GROUP) return null;
 		return (CollectionGroup)eContainer();
 	}
 
@@ -695,8 +695,8 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetCollectionJournal(CollectionGroup newCollectionJournal, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newCollectionJournal, DairyPackage.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL, msgs);
+	public NotificationChain basicSetGroup(CollectionGroup newGroup, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newGroup, DairyPackage.COLLECTION_JOURNAL_LINE__GROUP, msgs);
 		return msgs;
 	}
 
@@ -705,20 +705,20 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCollectionJournal(CollectionGroup newCollectionJournal) {
-		if (newCollectionJournal != eInternalContainer() || (eContainerFeatureID() != DairyPackage.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL && newCollectionJournal != null)) {
-			if (EcoreUtil.isAncestor(this, newCollectionJournal))
+	public void setGroup(CollectionGroup newGroup) {
+		if (newGroup != eInternalContainer() || (eContainerFeatureID() != DairyPackage.COLLECTION_JOURNAL_LINE__GROUP && newGroup != null)) {
+			if (EcoreUtil.isAncestor(this, newGroup))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newCollectionJournal != null)
-				msgs = ((InternalEObject)newCollectionJournal).eInverseAdd(this, DairyPackage.COLLECTION_GROUP__JOURNAL_ENTRIES, CollectionGroup.class, msgs);
-			msgs = basicSetCollectionJournal(newCollectionJournal, msgs);
+			if (newGroup != null)
+				msgs = ((InternalEObject)newGroup).eInverseAdd(this, DairyPackage.COLLECTION_GROUP__JOURNAL_ENTRIES, CollectionGroup.class, msgs);
+			msgs = basicSetGroup(newGroup, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL, newCollectionJournal, newCollectionJournal));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__GROUP, newGroup, newGroup));
 	}
 
 	/**
@@ -838,10 +838,10 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 				if (bin != null)
 					msgs = ((InternalEObject)bin).eInverseRemove(this, DairyPackage.BIN__COLLECTIONS, Bin.class, msgs);
 				return basicSetBin((Bin)otherEnd, msgs);
-			case DairyPackage.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL:
+			case DairyPackage.COLLECTION_JOURNAL_LINE__GROUP:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetCollectionJournal((CollectionGroup)otherEnd, msgs);
+				return basicSetGroup((CollectionGroup)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -856,8 +856,8 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 		switch (featureID) {
 			case DairyPackage.COLLECTION_JOURNAL_LINE__BIN:
 				return basicSetBin(null, msgs);
-			case DairyPackage.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL:
-				return basicSetCollectionJournal(null, msgs);
+			case DairyPackage.COLLECTION_JOURNAL_LINE__GROUP:
+				return basicSetGroup(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -870,7 +870,7 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case DairyPackage.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL:
+			case DairyPackage.COLLECTION_JOURNAL_LINE__GROUP:
 				return eInternalContainer().eInverseRemove(this, DairyPackage.COLLECTION_GROUP__JOURNAL_ENTRIES, CollectionGroup.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
@@ -910,8 +910,8 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 			case DairyPackage.COLLECTION_JOURNAL_LINE__BIN:
 				if (resolve) return getBin();
 				return basicGetBin();
-			case DairyPackage.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL:
-				return getCollectionJournal();
+			case DairyPackage.COLLECTION_JOURNAL_LINE__GROUP:
+				return getGroup();
 			case DairyPackage.COLLECTION_JOURNAL_LINE__REJECTED:
 				return isRejected();
 			case DairyPackage.COLLECTION_JOURNAL_LINE__REJECTION_REASON:
@@ -967,8 +967,8 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 			case DairyPackage.COLLECTION_JOURNAL_LINE__BIN:
 				setBin((Bin)newValue);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL:
-				setCollectionJournal((CollectionGroup)newValue);
+			case DairyPackage.COLLECTION_JOURNAL_LINE__GROUP:
+				setGroup((CollectionGroup)newValue);
 				return;
 			case DairyPackage.COLLECTION_JOURNAL_LINE__REJECTED:
 				setRejected((Boolean)newValue);
@@ -1030,8 +1030,8 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 			case DairyPackage.COLLECTION_JOURNAL_LINE__BIN:
 				setBin((Bin)null);
 				return;
-			case DairyPackage.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL:
-				setCollectionJournal((CollectionGroup)null);
+			case DairyPackage.COLLECTION_JOURNAL_LINE__GROUP:
+				setGroup((CollectionGroup)null);
 				return;
 			case DairyPackage.COLLECTION_JOURNAL_LINE__REJECTED:
 				setRejected(REJECTED_EDEFAULT);
@@ -1082,8 +1082,8 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 				return farmContainer != null;
 			case DairyPackage.COLLECTION_JOURNAL_LINE__BIN:
 				return bin != null;
-			case DairyPackage.COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL:
-				return getCollectionJournal() != null;
+			case DairyPackage.COLLECTION_JOURNAL_LINE__GROUP:
+				return getGroup() != null;
 			case DairyPackage.COLLECTION_JOURNAL_LINE__REJECTED:
 				return rejected != REJECTED_EDEFAULT;
 			case DairyPackage.COLLECTION_JOURNAL_LINE__REJECTION_REASON:

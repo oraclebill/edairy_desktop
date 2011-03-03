@@ -328,13 +328,13 @@ public interface DairyPackage extends EPackage {
 	int COLLECTION_JOURNAL_LINE__BIN = 10;
 
 	/**
-	 * The feature id for the '<em><b>Collection Journal</b></em>' container reference.
+	 * The feature id for the '<em><b>Group</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL = 11;
+	int COLLECTION_JOURNAL_LINE__GROUP = 11;
 
 	/**
 	 * The feature id for the '<em><b>Rejected</b></em>' attribute.
@@ -500,13 +500,13 @@ public interface DairyPackage extends EPackage {
 	int SCALE_IMPORT_RECORD__BIN = COLLECTION_JOURNAL_LINE__BIN;
 
 	/**
-	 * The feature id for the '<em><b>Collection Journal</b></em>' container reference.
+	 * The feature id for the '<em><b>Group</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCALE_IMPORT_RECORD__COLLECTION_JOURNAL = COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL;
+	int SCALE_IMPORT_RECORD__GROUP = COLLECTION_JOURNAL_LINE__GROUP;
 
 	/**
 	 * The feature id for the '<em><b>Rejected</b></em>' attribute.
@@ -3200,15 +3200,15 @@ public interface DairyPackage extends EPackage {
 	EReference getCollectionJournalLine_Bin();
 
 	/**
-	 * Returns the meta object for the container reference '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getCollectionJournal <em>Collection Journal</em>}'.
+	 * Returns the meta object for the container reference '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getGroup <em>Group</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Collection Journal</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getCollectionJournal()
+	 * @return the meta object for the container reference '<em>Group</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getGroup()
 	 * @see #getCollectionJournalLine()
 	 * @generated
 	 */
-	EReference getCollectionJournalLine_CollectionJournal();
+	EReference getCollectionJournalLine_Group();
 
 	/**
 	 * Returns the meta object for the attribute '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#isRejected <em>Rejected</em>}'.
@@ -5579,12 +5579,12 @@ public interface DairyPackage extends EPackage {
 		EReference COLLECTION_JOURNAL_LINE__BIN = eINSTANCE.getCollectionJournalLine_Bin();
 
 		/**
-		 * The meta object literal for the '<em><b>Collection Journal</b></em>' container reference feature.
+		 * The meta object literal for the '<em><b>Group</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference COLLECTION_JOURNAL_LINE__COLLECTION_JOURNAL = eINSTANCE.getCollectionJournalLine_CollectionJournal();
+		EReference COLLECTION_JOURNAL_LINE__GROUP = eINSTANCE.getCollectionJournalLine_Group();
 
 		/**
 		 * The meta object literal for the '<em><b>Rejected</b></em>' attribute feature.
