@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.common.persistence.test;
+package com.agritrace.edairy.desktop.internal.common.persistence.dao;
 
 import static org.junit.Assert.fail;
 
@@ -18,6 +18,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.internal.common.persistence.ModelPersistenceBase;
 
 public class DairyRepoPerfTest extends ModelPersistenceBase {
 

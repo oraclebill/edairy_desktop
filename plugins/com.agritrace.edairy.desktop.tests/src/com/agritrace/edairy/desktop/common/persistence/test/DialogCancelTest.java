@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.junit.Test;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
+import com.agritrace.edairy.desktop.internal.common.persistence.ModelPersistenceBase;
 
 public class DialogCancelTest extends ModelPersistenceBase {
 

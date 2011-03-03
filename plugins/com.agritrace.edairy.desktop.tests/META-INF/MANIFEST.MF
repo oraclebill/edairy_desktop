@@ -19,6 +19,8 @@ Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.6.0",
  com.agritrace.edairy.desktop.operations.ui;bundle-version="1.0.0",
  com.csvreader;bundle-version="1.0.0",
  com.agritrace.edairy.desktop.dairy.locations.ui;bundle-version="1.0.0",
- org.apache.commons.collections;bundle-version="3.2.0"
+ org.apache.commons.collections;bundle-version="3.2.0",
+ com.agritrace.edairy.desktop.testdata;bundle-version="1.0.0",
+ org.hsqldb;bundle-version="1.8.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

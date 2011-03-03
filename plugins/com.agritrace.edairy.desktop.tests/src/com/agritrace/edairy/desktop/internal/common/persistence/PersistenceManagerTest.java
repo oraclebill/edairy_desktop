@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.common.persistence.services;
+package com.agritrace.edairy.desktop.internal.common.persistence;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

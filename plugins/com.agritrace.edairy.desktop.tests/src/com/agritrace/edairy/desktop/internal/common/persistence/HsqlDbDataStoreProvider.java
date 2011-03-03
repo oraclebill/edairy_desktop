@@ -1,8 +1,11 @@
-package com.agritrace.edairy.desktop.common.persistence.test;
-
-import com.agritrace.edairy.desktop.internal.common.persistence.HbDataStoreProvider;
-
-public class HsqlDbDataStoreProvider extends HbDataStoreProvider {
+//package com.agritrace.edairy.desktop.internal.common.persistence;
+//
+//import java.io.File;
+//import java.util.Properties;
+//
+//import org.hibernate.cfg.Environment;
+//
+//public class HsqlDbDataStoreProvider extends HbDataStoreProvider {
 //	@Override
 //	public Properties getDatastoreProperties() {
 //		final Properties props = new Properties();
@@ -31,5 +34,5 @@ public class HsqlDbDataStoreProvider extends HbDataStoreProvider {
 //		props.setProperty(Environment.HBM2DDL_AUTO, "update");
 //		return props;
 //	}
-
-}
+//
+//}

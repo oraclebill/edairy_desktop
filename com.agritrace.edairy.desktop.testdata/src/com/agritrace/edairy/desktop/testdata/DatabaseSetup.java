@@ -7,11 +7,12 @@ import java.sql.Statement;
 import java.util.Date;
 import java.util.Properties;
 
+import javax.sql.DataSource;
+
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.eclipse.emf.teneo.hibernate.HbHelper;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
@@ -177,7 +178,7 @@ public class DatabaseSetup {
 	 * 
 	 * @return
 	 */
-	protected Session openSession() {
+	public Session openSession() {
 		return hbds.getSessionFactory().openSession();
 	}
 
@@ -186,7 +187,7 @@ public class DatabaseSetup {
 	 * 
 	 * @return
 	 */
-	protected Session getSession() {
+	public Session getSession() {
 		return session;
 	}
 
@@ -194,7 +195,7 @@ public class DatabaseSetup {
 	 * @param session
 	 *            the session to set
 	 */
-	protected void setSession(Session session) {
+	public void setSession(Session session) {
 		if (this.session != null) {
 			this.session.close();
 		}
@@ -217,25 +218,31 @@ public class DatabaseSetup {
 	 */
 	public void createDatabase() {
 		System.out.format("Creating database [%s]\n", getDatabaseName());
-		String dbURL = getDatabaseURL();
+//		String dbURL = getDatabaseURL();
 		try {
-			MysqlDataSource dataSource = new MysqlDataSource();
-			// dataSource.setUrl(getDatabaseURL());
-			dataSource.setUser(getUserName());
-			dataSource.setPassword(getPassword());
-			dataSource.setPort(getPort());
-			dataSource.setServerName(getHost());
-			// dataSource.setDatabaseName(getDatabaseName());
-
+			DataSource dataSource = createDataSource();			
 			Connection conn = dataSource.getConnection();
 			Statement stmt = conn.createStatement();
 			String statement = String.format("create database if not exists %s;", getDatabaseName());
 			System.out.format("Executing sql [%s]\n", statement);
 			stmt.execute(statement);
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new RuntimeException("Failed to create database", e);
 		}
 
+	}
+
+	protected DataSource createDataSource()
+	{
+		MysqlDataSource dataSource = new MysqlDataSource();
+		// dataSource.setUrl(getDatabaseURL());
+		dataSource.setUser(getUserName());
+		dataSource.setPassword(getPassword());
+		dataSource.setPort(getPort());
+		dataSource.setServerName(getHost());
+		// dataSource.setDatabaseName(getDatabaseName());
+		return dataSource;
 	}
 
 	/**
@@ -429,7 +436,7 @@ public class DatabaseSetup {
 	/**
 	 * @param props
 	 */
-	private void setDatabaseProperties(Properties props) {
+	protected void setDatabaseProperties(Properties props) {
 		props.setProperty(Environment.DIALECT, "org.hibernate.dialect.MySQLInnoDBDialect");
 		props.setProperty(Environment.DRIVER, "com.mysql.jdbc.Driver");
 		props.setProperty(Environment.USER, getUserName());

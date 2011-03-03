@@ -51,11 +51,12 @@ import com.agritrace.edairy.desktop.common.model.util.DairyUtil;
  *         TODO: finish me!!
  * 
  */
-public class TestDataGenerator extends DatabaseSetup {
+public class TestDataGenerator extends DatabaseSetup
+{
 
-	private int sequence;
-	private Dairy currentDairy;
-	private TestDataGeneratorConfig config;
+	private int						sequence;
+	private Dairy					currentDairy;
+	private TestDataGeneratorConfig	config;
 
 	/**
 	 * 
@@ -74,7 +75,8 @@ public class TestDataGenerator extends DatabaseSetup {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		BasicConfigurator.configure();
 		Logger.getLogger("org.eclipse.emf.teneo").setLevel(Level.INFO);
 		Logger.getLogger("org.hibernate").setLevel(Level.WARN);
@@ -83,7 +85,8 @@ public class TestDataGenerator extends DatabaseSetup {
 		generator.run();
 	}
 
-	public void run() {
+	public void run()
+	{
 		Transaction tx;
 
 		createDatabase();
@@ -92,13 +95,11 @@ public class TestDataGenerator extends DatabaseSetup {
 		// generateSchema();
 
 		setSession(openSession());
-		
+
 		tx = getSession().beginTransaction();
-		currentDairy = createDairy("TEST1");
-		updateDairyProfile(currentDairy);
-		populateBaseReferenceData(currentDairy);
+		initializeDairy();
 		tx.commit();
-		
+
 		tx = getSession().beginTransaction();
 		generateEmployees(config.getEmployeeCount());
 		tx.commit();
@@ -106,7 +107,7 @@ public class TestDataGenerator extends DatabaseSetup {
 		tx = getSession().beginTransaction();
 		generateRoutesAndCollectionCenters(config.getRouteCount(), config.getCollectionCenterCount());
 		tx.commit();
-		
+
 		tx = getSession().beginTransaction();
 		generateDairyBins();
 		tx.commit();
@@ -124,7 +125,15 @@ public class TestDataGenerator extends DatabaseSetup {
 		tx.commit();
 	}
 
-	private void updateDairyProfile(Dairy currentDairy) {
+	public void initializeDairy()
+	{
+		currentDairy = createDairy("TEST1");
+		updateDairyProfile(currentDairy);
+		populateBaseReferenceData(currentDairy);
+	}
+
+	private void updateDairyProfile(Dairy currentDairy)
+	{
 		System.err.println("Generating Dairy");
 
 		String companyId = currentDairy.getRegistrationNumber();
@@ -145,7 +154,8 @@ public class TestDataGenerator extends DatabaseSetup {
 		this.currentDairy = currentDairy;
 	}
 
-	private void generateEmployees(int count) {
+	public void generateEmployees(int count)
+	{
 		System.err.println("Generating Employees");
 		// we need one driver per route - they will be created in the dairy
 		// setup..
@@ -157,40 +167,54 @@ public class TestDataGenerator extends DatabaseSetup {
 		for (int i = 0; i < count; i++) {
 			employee = createEmployee("Clerk");
 			currentDairy.getEmployees().add(employee);
-//			getSession().persist(employee);
+// getSession().persist(employee);
 		}
-//		getSession().merge(currentDairy);
+// getSession().merge(currentDairy);
 	}
 
 	/**
 	 * 
 	 */
-	private void generateDairyBins() {
+	private void generateDairyBins()
+	{
 		System.err.println("Generating Bins..." + getSession().contains(currentDairy));
-		Bin container;
 		double binCapacity = 125.0d;
 		int totalBinCount = (int) Math.floor((config.getCollectionsPerMember().doubleValue() * config.getMemberCount())
 				/ binCapacity) * 4; // clean, dirty, spare, spare
 		System.err.println("Total bin count " + totalBinCount);
+		generateDairyBins(totalBinCount, binCapacity);
+	}
+
+	public void generateDairyBins(	int count,
+									double capacity)
+	{
+		Assert.isLegal(getSession().contains(currentDairy));
+		Bin container;
 		for (TransportRoute route : currentDairy.getRoutes()) {
-			for (int i = 0; i < totalBinCount / currentDairy.getRoutes().size(); i++) {
+			for (int i = 0; i < count / currentDairy.getRoutes().size(); i++) {
 				container = DairyFactory.eINSTANCE.createBin();
 				container.setTrackingNumber(String.format("T%08d", ++sequence));
-				container.setCapacity(binCapacity);
+				container.setCapacity(capacity);
 				container.setStatus("ACTIVE");
 				container.setZone(route);
 				System.err.println("Adding bin to dairy: " + container);
 				currentDairy.getDairyBins().add(container);
-//				getSession().persist(container);
+// getSession().persist(container);
 			}
 		}
 	}
 
-	private void generateCustomers() {
+	private void generateCustomers()
+	{
 		System.err.println("Generating Customer...");
-		Customer customer;
 		int customerCount = currentDairy.getRoutes().size();
-		for (int i = 0; i < customerCount; i++) {
+		generateCustomers(customerCount);
+	}
+	
+	public void generateCustomers(int count) {
+		Assert.isLegal(getSession().contains(currentDairy));
+		Customer customer;
+		for (int i = 0; i < count; i++) {
 			customer = DairyFactory.eINSTANCE.createCustomer();
 			customer.setCompanyName("Company " + i);
 			customer.setCustomerNumber("Company " + i);
@@ -200,11 +224,13 @@ public class TestDataGenerator extends DatabaseSetup {
 			customer.setPhoneNumber("123123123");
 			customer.setLocation(DairyUtil.createLocation(null, null, null));
 			currentDairy.getCustomers().add(customer);
-//			getSession().persist(customer);
+// getSession().persist(customer);
 		}
 	}
 
-	private void generateMembers(int memberCount) {
+	public void generateMembers(int memberCount)
+	{
+		Assert.isLegal(getSession().contains(currentDairy));
 		System.err.println("Generating Members...");
 		Location farmLocation;
 		Membership member;
@@ -216,30 +242,27 @@ public class TestDataGenerator extends DatabaseSetup {
 		breed = TrackingFactory.eINSTANCE.createReferenceAnimalType();
 		breed.setBreed("Friesian");
 		breed.setSpecies("Cattle");
-//		getSession().persist(breed);
+		getSession().persist(breed);
 
 		int centerCount = currentDairy.getBranchLocations().size();
 		for (int count = 0; count < memberCount; count++) {
 			farmLocation = DairyUtil.createLocation(null, null, null);
 			farm = DairyUtil.createFarm("Farm " + count, farmLocation);
-//			getSession().persist(farm);
 			animal = DairyUtil.createAnimal(farm, new Date(), "Farm: " + farm.getName() + " - Animal #" + count,
 					Gender.FEMALE, breed, Purpose.DAIRY, RearingMode.ZEROGRAZE);
 			farm.getAnimals().add(animal);
-//			getSession().persist(animal);
 			farmer = DairyUtil.createFarmer("Farmer " + count, "", "Farmer " + count, "1231231234", farm);
-//			getSession().persist(farmer);
 			member = DairyUtil.createMembership(new Date(0), new Date(count * 10000), farmer);
 			member.setMemberNumber(String.format("M%05d", count));
 			member.getAccount().setAccountNumber(member.getMemberNumber());
 			member.setDefaultRoute(currentDairy.getBranchLocations().get(count % centerCount));
 			currentDairy.getMemberships().add(member);
-//			getSession().persist(member);
 		}
 	}
 
-	private void generateRoutesAndCollectionCenters(int routeCount,
-			int totalStops) {
+	public void generateRoutesAndCollectionCenters(int routeCount,
+													int totalStops)
+	{
 		System.out.format("Generating %d Routes and %d Collection Centers...\n", routeCount, totalStops);
 		int centersPerRoute = totalStops / routeCount;
 		Assert.isLegal(centersPerRoute > 0);
@@ -260,25 +283,26 @@ public class TestDataGenerator extends DatabaseSetup {
 		}
 	}
 
-	private TransportRoute createRouteVehicleAndDriver(int routeCount) {
+	private TransportRoute createRouteVehicleAndDriver(int routeCount)
+	{
 		Vehicle vehicle;
 		TransportRoute route;
 		Employee driver;
 		driver = createEmployee("Driver");
 		currentDairy.getEmployees().add(driver);
-//		getSession().persist(driver);
+// getSession().persist(driver);
 
 		vehicle = DairyUtil.createVehicle(String.format("VL%s", driver.getEmployeeNumber()),
 				String.format("REG%s", driver.getEmployeeNumber()), 1990, "Mitsu", "FUSO", "White", 4495.0d,
 				"TA260283", new Date(0), "TA260283", driver, null, null);
 		currentDairy.getVehicles().add(vehicle);
-//		getSession().persist(vehicle);
+// getSession().persist(vehicle);
 
 		route = DairyFactory.eINSTANCE.createTransportRoute();
 		route.setName(vehicle.getLogBookNumber());
 		route.setVehicle(vehicle);
 		currentDairy.getRoutes().add(route);
-//		getSession().persist(route);
+// getSession().persist(route);
 
 		return route;
 	}
@@ -287,21 +311,23 @@ public class TestDataGenerator extends DatabaseSetup {
 	 * @param route
 	 * @param stopCount
 	 */
-	private void createCenterForRoute(TransportRoute route,
-			int stopCount) {
+	private void createCenterForRoute(	TransportRoute route,
+										int stopCount)
+	{
 		DairyLocation center;
 		String centerCode = String.format("L%04d", stopCount);
 		center = DairyUtil.createDairyLocation("Center: " + centerCode, centerCode, "999-999-9999", "Description for "
 				+ centerCode, new Date(10 * 86400 + stopCount * 86400), DairyUtil.createLocation(null, null, null),
 				route);
 		currentDairy.getBranchLocations().add(center);
-//		getSession().persist(center);
+// getSession().persist(center);
 	}
 
 	/**
 	 * @param collectionDate
 	 */
-	private void generateCollectionData() {
+	private void generateCollectionData()
+	{
 		Calendar currentDate, endDate;
 
 		currentDate = Calendar.getInstance();
@@ -318,11 +344,13 @@ public class TestDataGenerator extends DatabaseSetup {
 	/**
 	 * @param collectionDate
 	 */
-	private void generateCollectionData(Date collectionDate) {
+	private void generateCollectionData(Date collectionDate)
+	{
 		System.err.println("Generating Collection Data for " + collectionDate);
 		Map<TransportRoute, Collection<CollectionGroup>> groupMap;
 		BigDecimal collectionAmount = config.getCollectionsPerMember();
-		System.err.println("\tSession Collections " + ((Dairy)getSession().load("Dairy", new Long(1))).getCollectionSessions());
+		System.err.println("\tSession Collections "
+				+ ((Dairy) getSession().load("Dairy", new Long(1))).getCollectionSessions());
 		for (CollectionSession session : currentDairy.getCollectionSessions()) {
 			System.err.println("\tSession Collections " + getSession().load("Dairy", new Long(1)));
 			resetBinQuantities();
@@ -334,14 +362,17 @@ public class TestDataGenerator extends DatabaseSetup {
 
 	}
 
-	private void resetBinQuantities() {
+	private void resetBinQuantities()
+	{
 		for (Bin bin : currentDairy.getDairyBins()) {
 			bin.setQuantity(0);
 		}
 	}
 
-	private void generateSessionSales(Date saleDate, Map<TransportRoute, Collection<CollectionGroup>> groupMap,
-			CollectionSession session) {
+	private void generateSessionSales(	Date saleDate,
+										Map<TransportRoute, Collection<CollectionGroup>> groupMap,
+										CollectionSession session)
+	{
 		Set<Bin> binSet;
 
 		binSet = new HashSet<Bin>();
@@ -354,7 +385,7 @@ public class TestDataGenerator extends DatabaseSetup {
 				}
 			}
 		}
-		
+
 		MilkGrade grade = getBaseGrade();
 		Customer customer = currentDairy.getCustomers().get(0);
 		double unitPrice = 22.0d;
@@ -371,15 +402,16 @@ public class TestDataGenerator extends DatabaseSetup {
 			sale.setSaleDate(saleDate);
 			sale.setRejected(false);
 			sale.setSaleType(MilkSaleType.CREDIT);
-			sale.setStoreOrRoute(currentDairy.getBranchLocations().get(0)); // should be the last center from the route? 
+			sale.setStoreOrRoute(currentDairy.getBranchLocations().get(0)); // should be the last center from the route?
 			sale.setUnitPrice(new BigDecimal(unitPrice));
 			getSession().persist(sale);
 		}
 	}
 
 	private Map<TransportRoute, Collection<CollectionGroup>> generateSessionCollections(Date collectionDate,
-			CollectionSession session,
-			BigDecimal memberCollectionAmount) {
+																						CollectionSession session,
+																						BigDecimal memberCollectionAmount)
+	{
 		Map<TransportRoute, Collection<CollectionGroup>> groupMap;
 		List<Membership> filteredMembers;
 		List<Bin> binList;
@@ -399,7 +431,7 @@ public class TestDataGenerator extends DatabaseSetup {
 			}
 			collectionSet.add(group);
 // System.err.println("\t\tGroup " + group );
-//			binList = getBinsForCenterAndSession(center, session);
+// binList = getBinsForCenterAndSession(center, session);
 			binList = center.getRoute().getBins();
 			System.err.println("Sequence: " + sequence);
 			for (Membership member : filteredMembers) {
@@ -411,13 +443,14 @@ public class TestDataGenerator extends DatabaseSetup {
 		return groupMap;
 	}
 
-	private List<Bin> getBinsForCenterAndSession(DairyLocation center,
-			CollectionSession session) {
+	private List<Bin> getBinsForCenterAndSession(	DairyLocation center,
+													CollectionSession session)
+	{
 		TransportRoute route = center.getRoute();
 		List<Bin> binList = new LinkedList<Bin>();
 		for (Bin bin : route.getBins()) {
-			System.err.println("Testing bin : " + bin);			
-			if (bin.getQuantity() < bin.getCapacity()  && bin.getStatus() == "ACTIVE") {
+			System.err.println("Testing bin : " + bin);
+			if (bin.getQuantity() < bin.getCapacity() && bin.getStatus() == "ACTIVE") {
 				binList.add(bin);
 			}
 		}
@@ -425,7 +458,8 @@ public class TestDataGenerator extends DatabaseSetup {
 	}
 
 	private Bin getNextAvailableBin(List<Bin> binList,
-			BigDecimal amount) {
+									BigDecimal amount)
+	{
 		Assert.isLegal(binList.size() > 0);
 		for (Bin bin : binList) {
 			if (bin.getQuantity() + amount.doubleValue() < bin.getCapacity())
@@ -434,7 +468,8 @@ public class TestDataGenerator extends DatabaseSetup {
 		throw new RuntimeException("Bin not found: " + binList.size());
 	}
 
-	private List<Membership> filterMembersByDefaultRoute(DairyLocation center) {
+	private List<Membership> filterMembersByDefaultRoute(DairyLocation center)
+	{
 		LinkedList<Membership> l = new LinkedList<Membership>();
 		for (Membership m : currentDairy.getMemberships()) {
 			if (m.getDefaultRoute() == center) {
@@ -444,9 +479,10 @@ public class TestDataGenerator extends DatabaseSetup {
 		return l;
 	}
 
-	private CollectionGroup createCollectionGroup(DairyLocation center,
-			Date collectionDate,
-			CollectionSession session) {
+	private CollectionGroup createCollectionGroup(	DairyLocation center,
+													Date collectionDate,
+													CollectionSession session)
+	{
 		CollectionGroup group;
 
 		group = DairyFactory.eINSTANCE.createCollectionGroup();
@@ -469,9 +505,10 @@ public class TestDataGenerator extends DatabaseSetup {
 	 * @return
 	 */
 	private CollectionJournalLine createCollectionEntry(CollectionGroup group,
-			Bin bin,
-			Membership member,
-			BigDecimal amount) {
+														Bin bin,
+														Membership member,
+														BigDecimal amount)
+	{
 		Assert.isLegal((bin.getQuantity() + amount.doubleValue()) <= bin.getCapacity(), "bin capacity exceeded");
 
 		CollectionJournalLine entry = DairyFactory.eINSTANCE.createCollectionJournalLine();
@@ -490,7 +527,8 @@ public class TestDataGenerator extends DatabaseSetup {
 		return entry;
 	}
 
-	private Employee createEmployee(String jobFunction) {
+	private Employee createEmployee(String jobFunction)
+	{
 		final Employee emp = DairyFactory.eINSTANCE.createEmployee();
 		++sequence;
 		emp.setEmployeeNumber(String.format("M%05d", sequence));

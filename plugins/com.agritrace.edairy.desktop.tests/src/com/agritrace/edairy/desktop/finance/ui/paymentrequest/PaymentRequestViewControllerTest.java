@@ -203,7 +203,7 @@ public class PaymentRequestViewControllerTest extends AbstractSubModuleControlle
 			BigDecimal amount) {
 		CollectionJournalLine entry = DairyFactory.eINSTANCE.createCollectionJournalLine();
 
-		entry.setCollectionJournal(group);
+		entry.setGroup(group);
 		entry.setBin(bin);
 		entry.setRecordedMember(member.getMemberNumber());
 		entry.setValidatedMember(member);

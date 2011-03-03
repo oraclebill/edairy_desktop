@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -24,6 +25,9 @@ import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.persistence.FilterParameter;
 import com.agritrace.edairy.desktop.common.persistence.dao.IMilkCollectionRepository;
 import com.google.inject.Inject;
@@ -116,7 +120,8 @@ public class PaymentRequestViewController extends SubModuleController {
 
 		calculateButtonRidget = getRidget(IActionRidget.class, CALCULATE_BUTTON);
 		calculateButtonRidget.addListener(new IActionListener() {
-			@Override public void callback() {
+			@Override
+			public void callback() {
 				BigDecimal rate = (BigDecimal) observablePaymentRate.getValue();
 				BigDecimal gross = (BigDecimal) observableGrossCollections.getValue();
 				observablePaymentOptions.clear();
@@ -172,17 +177,14 @@ public class PaymentRequestViewController extends SubModuleController {
 		updateAllRidgetsFromModel();
 	}
 
-
 	BigDecimal queryGrossCollections(PaymentPeriod period) {
 		if (cachedSums.containsKey(period))
 			return cachedSums.get(period);
-
-		List<CollectionJournalLine> lines2 = collectionsRepo.filter(
-				CollectionJournalLine.class,
-				new FilterParameter(FilterParameter.Type.GREATER_THAN, "group.journalDate", period
-						.getStartDate()),
-				new FilterParameter(FilterParameter.Type.LESS_THAN, "group.journalDate", period
-						.getEndDate()));
+		List<CollectionJournalLine> lines2;
+//		lines2 = collectionsRepo.filter(CollectionJournalLine.class, new FilterParameter(
+//				FilterParameter.Type.GREATER_THAN, "group.journalDate", period.getStartDate()), new FilterParameter(
+//				FilterParameter.Type.LESS_THAN, "group.journalDate", period.getEndDate()));
+		lines2 = collectionsRepo.findCollections(null, null, null, period.getStartDate(), period.getEndDate(), null, null, null);
 
 		BigDecimal sum = BigDecimal.ZERO;
 		for (CollectionJournalLine line : lines2) {

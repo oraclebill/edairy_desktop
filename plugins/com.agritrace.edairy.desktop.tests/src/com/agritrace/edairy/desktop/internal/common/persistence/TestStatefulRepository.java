@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.common.persistence.services;
+package com.agritrace.edairy.desktop.internal.common.persistence;
 
 import java.util.List;
 
@@ -11,7 +11,6 @@ import org.junit.Test;
 import com.agritrace.edairy.desktop.common.model.base.Role;
 import com.agritrace.edairy.desktop.common.persistence.FilterParameter;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
-import com.agritrace.edairy.desktop.common.persistence.test.ManagedMemoryDataStoreProvider;
 import com.agritrace.edairy.desktop.internal.common.persistence.HibernateRepository;
 import com.agritrace.edairy.desktop.internal.common.persistence.RepositoryUtil;
 import com.google.inject.AbstractModule;

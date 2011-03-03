@@ -11,7 +11,7 @@ import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
 import com.agritrace.edairy.desktop.common.model.base.Role;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.dao.ITransactionRepository;
-import com.agritrace.edairy.desktop.common.persistence.test.ManagedMemoryDataStoreProvider;
+import com.agritrace.edairy.desktop.internal.common.persistence.ManagedMemoryDataStoreProvider;
 import com.agritrace.edairy.desktop.internal.common.persistence.dao.AltRoleRepository;
 import com.agritrace.edairy.desktop.internal.common.persistence.dao.AltTransactionRepository;
 import com.google.inject.AbstractModule;

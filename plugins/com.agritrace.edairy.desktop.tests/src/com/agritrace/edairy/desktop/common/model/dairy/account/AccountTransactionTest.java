@@ -1,4 +1,4 @@
-package com.agritrace.edairy.model.tests;
+package com.agritrace.edairy.desktop.common.model.dairy.account;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;

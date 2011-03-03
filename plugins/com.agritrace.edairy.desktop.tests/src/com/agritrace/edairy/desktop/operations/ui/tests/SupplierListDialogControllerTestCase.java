@@ -13,8 +13,8 @@ import org.hibernate.Transaction;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
-import com.agritrace.edairy.desktop.common.persistence.test.ManagedMemoryDataStoreProvider;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
+import com.agritrace.edairy.desktop.internal.common.persistence.ManagedMemoryDataStoreProvider;
 import com.agritrace.edairy.desktop.internal.common.persistence.PersistenceModule;
 import com.agritrace.edairy.desktop.operations.ui.controllers.SupplierDialogController;
 import com.agritrace.edairy.desktop.operations.ui.dialogs.SupplierListDialog;

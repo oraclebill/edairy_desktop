@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.ui.services.tests;
+package com.agritrace.edairy.desktop.services.ui.controllers;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -26,9 +26,9 @@ import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.model.util.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
-import com.agritrace.edairy.desktop.common.persistence.test.ManagedMemoryDataStoreProvider;
 import com.agritrace.edairy.desktop.common.ui.util.DateTimeUtils;
 import com.agritrace.edairy.desktop.common.ui.views.BaseListView;
+import com.agritrace.edairy.desktop.internal.common.persistence.ManagedMemoryDataStoreProvider;
 import com.agritrace.edairy.desktop.internal.common.persistence.PersistenceModule;
 import com.agritrace.edairy.desktop.services.ui.controllers.AnimalHealthRequestViewController;
 import com.agritrace.edairy.desktop.services.ui.views.AnimalHealthRequestView;
@@ -41,7 +41,7 @@ import com.google.inject.Injector;
  * @author Hui(Spark) Wan
  *
  */
-public class ServiceRequestControllerTestCase extends AbstractSubModuleControllerTest<AnimalHealthRequestViewController> {
+public class AnimalHealthRequestViewControllerTestCase extends AbstractSubModuleControllerTest<AnimalHealthRequestViewController> {
 	Injector injector = Guice.createInjector(new PersistenceModule() {
 		@Override protected void bindDataStore() {
 			final ManagedMemoryDataStoreProvider provider = new ManagedMemoryDataStoreProvider();

@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.common.persistence.test;
+package com.agritrace.edairy.desktop.internal.common.persistence;
 
 import java.util.Collection;
 

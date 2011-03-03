@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.common.persistence.services;
+package com.agritrace.edairy.desktop.internal.common.persistence.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -32,7 +32,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
 import com.agritrace.edairy.desktop.common.model.util.DairyUtil;
-import com.agritrace.edairy.desktop.common.persistence.dao.ICollectionJournalLineRepository;
 import com.agritrace.edairy.desktop.internal.common.persistence.PersistenceModule;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -73,11 +72,12 @@ public class MilkCollectionJournalLineQueryTest {
 
 	final Injector injector = Guice.createInjector(new PersistenceModule());
 
-	ICollectionJournalLineRepository repo;
+	MilkCollectionJournalLineRepository repo;
 
 	@Before
 	public void setup() {
-		repo = injector.getInstance(ICollectionJournalLineRepository.class);
+		
+		repo = new MilkCollectionJournalLineRepository(new TestDataSessionProvider());
 	}
 
 	@Test
@@ -266,7 +266,6 @@ public class MilkCollectionJournalLineQueryTest {
 
 				final CollectionGroup group = getCollectionGroup(record.getRouteNumber(), record.getSessionCode(),
 						record.getValidDate());
-				line.setCollectionJournal(group);
 				group.getJournalEntries().add(line);
 				group.setEntryCount(group.getEntryCount() + 1);
 				group.setRecordTotal(group.getRecordTotal().add(line.getQuantity()));
