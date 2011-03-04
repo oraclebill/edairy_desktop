@@ -2,7 +2,7 @@
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
     <property name="author">Bill Jones</property>
     <property name="comments">Comments</property>
-    <property name="createdBy">Eclipse BIRT Designer Version 2.6.1.v20100902 Build &lt;2.6.1.v20100915-1750></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 2.6.2.r262_v20110209 Build &lt;2.6.2.v20110214-1523></property>
     <text-property name="title">Daily Milk Intake Report</text-property>
     <html-property name="description">Daily Milk Intake Report</html-property>
     <list-property name="userProperties">
@@ -17,13 +17,6 @@
     </list-property>
     <property name="subject">Dairy Milk Operations</property>
     <property name="units">in</property>
-    <list-property name="propertyBindings">
-        <structure>
-            <property name="name">odaURL</property>
-            <property name="id">7</property>
-            <expression name="value">"jdbc:mysql://" +params["host"].value + ":" + params["port"].value + "/" + params["databaseName"].value</expression>
-        </structure>
-    </list-property>
     <method name="initialize"><![CDATA[i = 0;]]></method>
     <property name="theme">SiteReportLib.defaultTheme</property>
     <text-property name="displayName">Daily Milk Intake Report</text-property>
@@ -96,12 +89,13 @@ BirtDateTime.year(endDate) + "-" + BirtDateTime.month(endDate) + "-" + BirtDateT
         <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="7"
  extends="CommonReportLib.Data Source">
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
-            <property name="odaURL">jdbc:mysql://localhost:3306/edairy</property>
+            <property name="odaURL">jdbc:mysql://localhost:3306/dairymgr</property>
             <property name="odaUser">root</property>
         </oda-data-source>
     </data-sources>
     <data-sets>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="memberProduceDataset" id="1991">
+            <property name="nullsOrdering">nulls lowest</property>
             <list-property name="parameters">
                 <structure>
                     <property name="name">param_1</property>
@@ -120,109 +114,22 @@ BirtDateTime.year(endDate) + "-" + BirtDateTime.month(endDate) + "-" + BirtDateT
                     <property name="isOutput">false</property>
                 </structure>
             </list-property>
-            <structure name="cachedMetaData">
-                <list-property name="resultSet">
-                    <structure>
-                        <property name="position">1</property>
-                        <property name="name">journaldate</property>
-                        <property name="dataType">date-time</property>
-                    </structure>
-                    <structure>
-                        <property name="position">2</property>
-                        <property name="name">collectionsession_session_e_id</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">3</property>
-                        <property name="name">code</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">4</property>
-                        <property name="name">dairycontainer_dairycontainer_containerid</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">5</property>
-                        <property name="name">quantity</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">6</property>
-                        <property name="name">rejected</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">7</property>
-                        <property name="name">membernumber</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">8</property>
-                        <property name="name">givenname</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                </list-property>
-            </structure>
+            <structure name="cachedMetaData"/>
             <property name="dataSource">Data Source</property>
-            <list-property name="resultSet">
-                <structure>
-                    <property name="position">1</property>
-                    <property name="name">journaldate</property>
-                    <property name="nativeName">journaldate</property>
-                    <property name="dataType">date-time</property>
-                </structure>
-                <structure>
-                    <property name="position">2</property>
-                    <property name="name">collectionsession_session_e_id</property>
-                    <property name="nativeName">collectionsession_session_e_id</property>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="position">3</property>
-                    <property name="name">code</property>
-                    <property name="nativeName">code</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">4</property>
-                    <property name="name">dairycontainer_dairycontainer_containerid</property>
-                    <property name="nativeName">dairycontainer_dairycontainer_containerid</property>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="position">5</property>
-                    <property name="name">quantity</property>
-                    <property name="nativeName">quantity</property>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="position">6</property>
-                    <property name="name">rejected</property>
-                    <property name="nativeName">rejected</property>
-                    <property name="dataType">integer</property>
-                </structure>
-                <structure>
-                    <property name="position">7</property>
-                    <property name="name">membernumber</property>
-                    <property name="nativeName">membernumber</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">8</property>
-                    <property name="name">givenname</property>
-                    <property name="nativeName">givenname</property>
-                    <property name="dataType">string</property>
-                </structure>
-            </list-property>
-            <xml-property name="queryText"><![CDATA[SELECT collectiongroup.journaldate, collectiongroup.collectionsession_session_e_id, dairylocation.code
-, collectionjournalline.dairycontainer_dairycontainer_containerid, collectionjournalline.quantity, collectionjournalline.rejected
-, membership.membernumber, person.givenname
+            <xml-property name="queryText"><![CDATA[SELECT 
+    collectiongroup.journaldate, 
+    collectiongroup.collectionsession_session_e_id, 
+    dairylocation.code, 
+    collectionjournalline.collectionjournalline_group_e_id, 
+    collectionjournalline.quantity, 
+    collectionjournalline.rejected, 
+    membership.membernumber, 
+    person.givenname
 FROM membership 
 JOIN person  ON membership.farmer = person.personid	
 LEFT JOIN dairylocation ON membership.dairylocation_defaultroute_id = dairylocation.id 
 LEFT JOIN collectionjournalline  ON membership.memberid = collectionjournalline.membership_validatedmember_e_id 
-LEFT JOIN collectiongroup  ON collectiongroup.journalid = collectionjournalline.collectionjournalline_collectionjournal_e_id 
+LEFT JOIN collectiongroup  ON collectiongroup.journalid = collectionjournalline.collectionjournalline_group_e_id 
 WHERE collectiongroup.journaldate = DATE (?) || collectiongroup.journaldate = DATE (?) ]]></xml-property>
         </oda-data-set>
     </data-sets>
@@ -264,13 +171,13 @@ WHERE collectiongroup.journaldate = DATE (?) || collectiongroup.journaldate = DA
         <simple-master-page name="Portrait" id="9" extends="CommonReportLib.Portrait">
             <overridden-values>
                 <ref-entry baseId="428" name="Header" id="428"/>
-                <ref-entry baseId="9" id="2158"/>
+                <ref-entry baseId="9" id="2197"/>
                 <ref-entry baseId="10" id="10"/>
                 <ref-entry baseId="494" id="494"/>
                 <ref-entry baseId="11" id="11"/>
                 <ref-entry baseId="12" id="12"/>
                 <ref-entry baseId="13" id="13"/>
-                <ref-entry baseId="2111" name="NewText5" id="2159">
+                <ref-entry baseId="2111" name="NewText5" id="2198">
                     <property name="textAlign">left</property>
                 </ref-entry>
                 <ref-entry baseId="14" id="14"/>
@@ -289,7 +196,7 @@ WHERE collectiongroup.journaldate = DATE (?) || collectiongroup.journaldate = DA
                 <ref-entry baseId="121" name="NewAutoText" id="121"/>
                 <ref-entry baseId="16" id="16"/>
                 <ref-entry baseId="512" id="512"/>
-                <ref-entry baseId="2112" name="NewTextData111" id="2160"/>
+                <ref-entry baseId="2112" name="NewTextData111" id="2199"/>
                 <ref-entry baseId="563" id="563"/>
                 <ref-entry baseId="465" name="NewText" id="465">
                     <property name="content">&lt;VALUE-OF>params["date"].value&lt;/VALUE-OF></property>
