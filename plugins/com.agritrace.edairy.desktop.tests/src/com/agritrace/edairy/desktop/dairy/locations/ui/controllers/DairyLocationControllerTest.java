@@ -25,6 +25,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
+import com.agritrace.edairy.desktop.common.ui.controls.location.MapPanel;
 import com.agritrace.edairy.desktop.dairy.locations.ui.DairyLocationUIConstants;
 import com.agritrace.edairy.desktop.dairy.locations.ui.controllers.DairyLocationDirectoryController;
 import com.agritrace.edairy.desktop.internal.common.persistence.ManagedMemoryDataStoreProvider;
@@ -224,13 +225,13 @@ public class DairyLocationControllerTest extends AbstractSubModuleControllerTest
 
 	public void testMapTab() {
 		final ITextRidget latitude = getController().getRidget(ITextRidget.class,
-				DairyLocationUIConstants.RIDGET_ID_ML_LATITUDE);
+				MapPanel.MAP_LATITUDE);
 		Assert.assertEquals("123.00", latitude.getText());
 		latitude.setText("222.00");
 		Assert.assertEquals("222.00", dairyLocation.getLocation().getMapLocation().getLatitude());
 
 		final ITextRidget longitude = getController().getRidget(ITextRidget.class,
-				DairyLocationUIConstants.RIDGET_ID_ML_LONGITUDE);
+				MapPanel.MAP_LONGITUDE);
 		Assert.assertEquals("-100.00", longitude.getText());
 		longitude.setText("-99.00");
 		Assert.assertEquals("-99.00", dairyLocation.getLocation().getMapLocation().getLongitude());

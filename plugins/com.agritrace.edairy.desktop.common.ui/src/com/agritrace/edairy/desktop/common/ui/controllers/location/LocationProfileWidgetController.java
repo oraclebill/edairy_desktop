@@ -15,13 +15,13 @@ public class LocationProfileWidgetController implements WidgetController<Locatio
 
 	private final DirectionGroupController directionGroup;
 	private Location location;
-	private final MapGroupController mapGroup;
+	private final MapPanelController mapGroup;
 
 	public LocationProfileWidgetController(IRidgetContainer controller) {
 		this.controller = controller;
 		addressGroup = new AddressGroupWidgetController(controller);
 		directionGroup = new DirectionGroupController(controller);
-		mapGroup = new MapGroupController(controller);
+		mapGroup = new MapPanelController(controller);
 		configure();
 	}
 
@@ -62,8 +62,8 @@ public class LocationProfileWidgetController implements WidgetController<Locatio
 			final PostalLocation postalLocation = location.getPostalLocation();
 			addressGroup.setInputModel(postalLocation);
 
-			final MapLocation map = location.getMapLocation();
-			mapGroup.setInputModel(map);
+//			final MapLocation map = location.getMapLocation();
+			mapGroup.setInputModel(location);
 
 			final DescriptiveLocation dLocation = location.getDescriptiveLocation();
 			directionGroup.setInputModel(dLocation);

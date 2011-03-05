@@ -29,7 +29,7 @@ import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController
 import com.agritrace.edairy.desktop.common.ui.controllers.SystemSettingsController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.AddressGroupWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.DirectionGroupController;
-import com.agritrace.edairy.desktop.common.ui.controllers.location.MapGroupController;
+import com.agritrace.edairy.desktop.common.ui.controllers.location.MapPanelController;
 import com.agritrace.edairy.desktop.common.ui.controls.contactmethods.IContactMethodsGroupRidget;
 import com.agritrace.edairy.desktop.common.ui.controls.profilephoto.IProfilePhotoRidget;
 import com.agritrace.edairy.desktop.common.ui.reference.EmployeeReference;
@@ -117,8 +117,8 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		directionController.updateBinding();
 
 		// Configure Map Group
-		final MapGroupController mapController = new MapGroupController(this);
-		mapController.setInputModel(editEmployee.getLocation().getMapLocation());
+		final MapPanelController mapController = new MapPanelController(this);
+		mapController.setInputModel(editEmployee.getLocation());
 		mapController.updateBinding();
 
 		// Configure Communication Group

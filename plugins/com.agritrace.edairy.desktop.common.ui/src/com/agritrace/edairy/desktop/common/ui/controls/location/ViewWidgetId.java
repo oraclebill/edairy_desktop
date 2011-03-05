@@ -9,9 +9,9 @@ public class ViewWidgetId {
 	public static final String ESTATE_TXT = "Estate";
 	// member directions group
 	public static final String LANDMARK_TEXT = "landMarkText";
-	public static final String LATITUDE_TEXT = "latitudeText";
 	public static final String LOCATION_TXT = "Location";
-	public static final String LONGTITUDE_TEXT = "longtitueText";
+//	public static final String LATITUDE_TEXT = "latitudeText";
+//	public static final String LONGTITUDE_TEXT = "longtitueText";
 
 	public static final String PHONE_TEXT = "PHONE";
 

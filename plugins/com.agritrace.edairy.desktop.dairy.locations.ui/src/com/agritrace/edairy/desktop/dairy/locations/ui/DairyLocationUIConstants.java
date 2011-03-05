@@ -8,8 +8,8 @@ public interface DairyLocationUIConstants {
 	public static final String RIDGET_ID_DL_DIRECTIONS = ViewWidgetId.DIRECTIONS_TEXT;
 	public static final String RIDGET_ID_DL_LANDMARK = ViewWidgetId.LANDMARK_TEXT;
 	// map tab
-	public static final String RIDGET_ID_ML_LATITUDE = ViewWidgetId.LATITUDE_TEXT;
-	public static final String RIDGET_ID_ML_LONGITUDE = ViewWidgetId.LONGTITUDE_TEXT;
+//	public static final String RIDGET_ID_ML_LATITUDE = ViewWidgetId.LATITUDE_TEXT;
+//	public static final String RIDGET_ID_ML_LONGITUDE = ViewWidgetId.LONGTITUDE_TEXT;
 	// address tab
 	public static final String RIDGET_ID_PL_ADDRESS = ViewWidgetId.ADDRESS_TXT;
 	public static final String RIDGET_ID_PL_DISTRICT = ViewWidgetId.DISTRICT_TXT;

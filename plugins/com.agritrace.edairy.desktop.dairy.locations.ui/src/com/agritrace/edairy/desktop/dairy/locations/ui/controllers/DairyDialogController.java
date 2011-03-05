@@ -20,7 +20,7 @@ import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.AddressGroupWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.DirectionGroupController;
-import com.agritrace.edairy.desktop.common.ui.controllers.location.MapGroupController;
+import com.agritrace.edairy.desktop.common.ui.controllers.location.MapPanelController;
 import com.agritrace.edairy.desktop.common.ui.validators.PhoneNumberValidatiionRule;
 import com.agritrace.edairy.desktop.dairy.locations.ui.DairyLocationUIConstants;
 
@@ -89,8 +89,8 @@ public class DairyDialogController extends RecordDialogController<DairyLocation>
 		directionController.updateBinding();
 
 		// Configure Map Group
-		final MapGroupController mapController = new MapGroupController(this);
-		mapController.setInputModel(editLocation.getLocation().getMapLocation());
+		final MapPanelController mapController = new MapPanelController(this);
+		mapController.setInputModel(editLocation.getLocation());
 		mapController.updateBinding();
 	}
 	
