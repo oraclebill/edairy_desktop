@@ -25,8 +25,8 @@ public class MapPanelController implements WidgetController<Location> {
 																		IDataChangeListener.class);
 
 	private IRidgetContainer						container;
-	private IDecimalTextRidget						latituteTxt;
-	private IDecimalTextRidget						longtituteTxt;
+	private IDecimalTextRidget						latitude;
+	private IDecimalTextRidget						longitude;
 	private Location								location;
 
 	private IBrowserRidget							browser;
@@ -54,21 +54,21 @@ public class MapPanelController implements WidgetController<Location> {
 			}
 		};
 
-		latituteTxt = container.getRidget(IDecimalTextRidget.class, MapPanel.MAP_LATITUDE);
-		latituteTxt.setPrecision(6);
-		latituteTxt.setSigned(true);
-		latituteTxt.setMarkNegative(false);
-		latituteTxt.addFocusListener(listener);
+		latitude = container.getRidget(IDecimalTextRidget.class, MapPanel.MAP_LATITUDE);
+		latitude.setPrecision(6);
+		latitude.setSigned(true);
+		latitude.setMarkNegative(false);
+		latitude.addFocusListener(listener);
 
-		longtituteTxt = container.getRidget(IDecimalTextRidget.class, MapPanel.MAP_LONGITUDE);
-		longtituteTxt.setPrecision(6);
-		longtituteTxt.setSigned(true);
-		longtituteTxt.setMarkNegative(false);
-		longtituteTxt.addFocusListener(listener);
+		longitude = container.getRidget(IDecimalTextRidget.class, MapPanel.MAP_LONGITUDE);
+		longitude.setPrecision(6);
+		longitude.setSigned(true);
+		longitude.setMarkNegative(false);
+		longitude.addFocusListener(listener);
 
 		final DoubleNumberValidator validator = new DoubleNumberValidator();
-		latituteTxt.addValidationRule(validator, ValidationTime.ON_UI_CONTROL_EDIT);
-		longtituteTxt.addValidationRule(validator, ValidationTime.ON_UI_CONTROL_EDIT);
+		latitude.addValidationRule(validator, ValidationTime.ON_UI_CONTROL_EDIT);
+		longitude.addValidationRule(validator, ValidationTime.ON_UI_CONTROL_EDIT);
 
 		browser = container.getRidget(IBrowserRidget.class, MapPanel.MAP_BROWSER);
 		slider = container.getRidget(ITraverseRidget.class, MapPanel.MAP_ZOOM_SCALE);
@@ -76,13 +76,13 @@ public class MapPanelController implements WidgetController<Location> {
 		slider.setMinimum(4);
 		slider.setValue(11);
 		
-		latituteTxt.addPropertyChangeListener("text", new PropertyChangeListener() {
+		latitude.addPropertyChangeListener("text", new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
 				browser.setUrl(calculateURL());
 			}
 		});
-		longtituteTxt.addPropertyChangeListener("text", new PropertyChangeListener() {
+		longitude.addPropertyChangeListener("text", new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
 				browser.setUrl(calculateURL());
@@ -99,8 +99,8 @@ public class MapPanelController implements WidgetController<Location> {
 
 	private String calculateURL() {
 		String lat, lng, url;
-		lat = latituteTxt.getText();
-		lng = longtituteTxt.getText();
+		lat = latitude.getText();
+		lng = longitude.getText();
 		int scale = slider.getValue();
 		url = String.format("http://maps.google.com/maps/api/staticmap?center=%s,%s&zoom=%d&size=150x150&sensor=false", lat, lng, scale);
 		System.err.println("NEW URL: " + url);
@@ -139,15 +139,15 @@ public class MapPanelController implements WidgetController<Location> {
 				if (location.getMapLocation() == null) {
 					location.setMapLocation(ModelFactory.eINSTANCE.createMapLocation());
 				}
-				latituteTxt.bindToModel(location, "mapLocation.latitude");
-				latituteTxt.setModelToUIControlConverter(NumberToStringConverter.fromDouble(true));
-				latituteTxt.updateFromModel();
-				longtituteTxt.bindToModel(location, "mapLocation.longitude");
-				latituteTxt.setModelToUIControlConverter(NumberToStringConverter.fromDouble(true));
-				longtituteTxt.updateFromModel();
+				latitude.bindToModel(location, "mapLocation.latitude");
+				latitude.setModelToUIControlConverter(NumberToStringConverter.fromDouble(true));
+				latitude.updateFromModel();
+				longitude.bindToModel(location, "mapLocation.longitude");
+				latitude.setModelToUIControlConverter(NumberToStringConverter.fromDouble(true));
+				longitude.updateFromModel();
 			} else {
-				latituteTxt.setText("0");
-				longtituteTxt.setText("0");
+				latitude.setText("0");
+				longitude.setText("0");
 			}
 			browser.setUrl(calculateURL());
 

@@ -17,10 +17,10 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.BaseDialogView;
 
 public abstract class BaseDialogController<T extends EObject> extends AbstractWindowController {
 
-	private IActionRidget okAction;
-	protected IRepository<T> repository;
+	private IActionRidget		okAction;
+	protected IRepository<T>	repository;
 
-	protected T selected;
+	protected T					selected;
 	private IInfoFlyoutRidget	flyoutRidget;
 
 	public BaseDialogController() {
@@ -51,23 +51,25 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 		ContainerValidator validator = new ContainerValidator();
 		Collection<IMarkableRidget> errorRidgets = validator.validateContainer(this);
 		createErrorMessage(errorRidgets);
-		return errorRidgets.isEmpty();		
+		return errorRidgets.isEmpty();
 	}
 
 	private void createErrorMessage(Collection<IMarkableRidget> errorRidgets) {
-		StringBuffer buf = new StringBuffer();
-		buf.append("The following fields have errors: " );
-		for (IMarkableRidget ridget : errorRidgets) {
-			buf.append(ridget.getID());
-			buf.append(" ");
+		if (errorRidgets.size() > 0) {
+			StringBuffer buf = new StringBuffer();
+			buf.append("The following fields have errors: ");
+			for (IMarkableRidget ridget : errorRidgets) {
+				buf.append(ridget.getID());
+				buf.append(" ");
+			}
+			flyoutRidget.addInfo(new InfoFlyoutData(null, buf.toString()));
 		}
-		flyoutRidget.addInfo(new InfoFlyoutData(null, buf.toString()));
 	}
 
 	/**
-	 * Configures the 'Save', 'Cancel' and 'Delete' buttons. Subclasses can
-	 * override the defaults by manipulating the ridget bindings.
-	 *
+	 * Configures the 'Save', 'Cancel' and 'Delete' buttons. Subclasses can override the defaults by manipulating the
+	 * ridget bindings.
+	 * 
 	 */
 	protected void configureButtonsPanel() {
 		if (okAction == null) {
@@ -94,7 +96,8 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 
 		final IActionRidget deleteAction = (IActionRidget) getRidget(DialogConstants.BIND_ID_BUTTON_DELETE);
 		final Object actionType = getContext(AbstractDirectoryController.EDITED_ACTION_TYPE);
-		if(actionType != null && new Integer(actionType.toString()).intValue() == AbstractDirectoryController.ACTION_NEW){
+		if (actionType != null
+				&& new Integer(actionType.toString()).intValue() == AbstractDirectoryController.ACTION_NEW) {
 			deleteAction.setVisible(false);
 
 		}
@@ -104,14 +107,13 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 				handleDeleteAction();
 			}
 		});
-		
-		
-		flyoutRidget = getRidget(IInfoFlyoutRidget.class, BaseDialogView.BIND_ID_INFO_FLYOUT);		
+
+		flyoutRidget = getRidget(IInfoFlyoutRidget.class, BaseDialogView.BIND_ID_INFO_FLYOUT);
 	}
 
 	/**
 	 * Enable /disable the save button.
-	 *
+	 * 
 	 * @param enable
 	 */
 	protected void enableSaveButton(boolean enable) {
@@ -123,8 +125,9 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 
 	/**
 	 * Called when 'Cancel' action is triggered.
+	 * 
 	 * @return true if cancel should succeed.
-	 *
+	 * 
 	 */
 	protected boolean handleCancelAction() {
 		setReturnCode(DialogConstants.ACTION_CANCEL);
@@ -134,7 +137,7 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 
 	/**
 	 * Called when 'Delete' action is triggered.
-	 *
+	 * 
 	 */
 	protected void handleDeleteAction() {
 		setReturnCode(DialogConstants.ACTION_DELETE);
@@ -142,10 +145,9 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 	}
 
 	/**
-	 * Called after validation is successful, when 'Save' or 'Update' action is
-	 * triggered.
-	 *
-	 *
+	 * Called after validation is successful, when 'Save' or 'Update' action is triggered.
+	 * 
+	 * 
 	 */
 	protected void handleSaveAction() {
 		setReturnCode(DialogConstants.ACTION_SAVE);
@@ -156,10 +158,10 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 
 	/**
 	 * Validate is called before the standard page validation processs.
-	 *
-	 * Subclasses should override to provide additional page level validation.
-	 * The default implementation returns 'true'.
-	 *
+	 * 
+	 * Subclasses should override to provide additional page level validation. The default implementation returns
+	 * 'true'.
+	 * 
 	 * @return
 	 */
 	protected boolean validate() {

@@ -1,32 +1,21 @@
 package com.agritrace.edairy.desktop.operations.ui.controllers;
 
-import java.util.List;
-
-import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.emf.databinding.EMFObservables;
-import org.eclipse.emf.databinding.EMFProperties;
-import org.eclipse.emf.databinding.FeaturePath;
 import org.eclipse.jface.preference.IPersistentPreferenceStore;
-import org.eclipse.riena.core.util.StringUtils;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
-import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 
 import com.agritrace.edairy.desktop.common.model.base.Location;
-import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.base.Role;
-import com.agritrace.edairy.desktop.common.model.base.SystemUser;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
-import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager;
 import com.agritrace.edairy.desktop.common.model.util.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
-import com.agritrace.edairy.desktop.common.ui.controllers.SystemSettingsController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.AddressGroupWidgetController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.DirectionGroupController;
 import com.agritrace.edairy.desktop.common.ui.controllers.location.MapPanelController;
@@ -41,20 +30,14 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 	private Employee editEmployee = null;
 
 	private ITextRidget employeeNumber;
-	private ITextRidget passwordRidget;
 	private ITextRidget licenseNo;
 	private IProfilePhotoRidget photoRidget;
 	private IContactMethodsGroupRidget contacts;
-
-	private final IPersistentPreferenceStore preferenceStore;
-	private final IRepository<Role> roleRepo;
 
 	@Inject
 	public EmployeeEditDialogController(@Named("db") final IPersistentPreferenceStore store,
 			final IRepository<Role> roleRepo) {
 		super("Employee");
-		this.preferenceStore = store;
-		this.roleRepo = roleRepo;
 	}
 
 	@Override
@@ -78,8 +61,6 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		if (this.getActionType() == AbstractDirectoryController.ACTION_VIEW) {
 			employeeNumber.updateFromModel();
 		}
-
-		final List<Role> allRoles = roleRepo.all();
 
 		addTextMap(EmployeeBindingConstants.BIND_ID_FAMILY_NAME, ModelPackage.Literals.PERSON__FAMILY_NAME);
 		addTextMap(EmployeeBindingConstants.BIND_ID_GIVEN_NAME, ModelPackage.Literals.PERSON__GIVEN_NAME);
@@ -125,32 +106,6 @@ public class EmployeeEditDialogController extends RecordDialogController<Employe
 		contacts = getRidget(IContactMethodsGroupRidget.class, IContactMethodsGroupRidget.WIDGET_ID);
 		contacts.bindToModel(editEmployee);
 		contacts.updateFromModel();
-	}
-
-	@Override
-	protected void handleSaveAction() {
-		// Password requires special care. We'll only update it if something was entered.
-		final String password = passwordRidget.getText();
-
-		if (!StringUtils.isEmpty(password)) {
-			final Employee employee = getWorkingCopy();
-
-			SystemUser systemUser = employee.getSystemIdentity();
-			if (systemUser == null) {
-				systemUser = ModelFactory.eINSTANCE.createSystemUser();
-				employee.setSystemIdentity(systemUser);
-			}
-			
-			if (preferenceStore.getBoolean(SystemSettingsController.ENCRYPT_PASSWORDS)) {
-				systemUser.setPassword(PrincipalManager.getInstance().hashPassword(password));
-				systemUser.setPasswordHashed(true);
-			} else {
-				systemUser.setPassword(password);
-				systemUser.setPasswordHashed(false);
-			}
-		}
-
-		super.handleSaveAction();
 	}
 
 	@Override
