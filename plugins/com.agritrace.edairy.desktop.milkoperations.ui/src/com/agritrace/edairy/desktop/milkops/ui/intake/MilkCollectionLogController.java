@@ -16,6 +16,7 @@ import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 import org.eclipse.riena.ui.ridgets.swt.ColumnFormatter;
 import org.eclipse.swt.widgets.Shell;
+import org.hibernate.TransactionException;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
@@ -236,7 +237,9 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 			controller.setPersistenceDelegate(new CollectionLogJournalPersister(controller));
 			controller.setContextJournalPage(newPage);
 
-			journalEntryDialog.open();
+			if (Window.OK != journalEntryDialog.open()) {
+				throw new TransactionException("Rollback");
+			}
 		}
 		refreshTableContents();
 	}

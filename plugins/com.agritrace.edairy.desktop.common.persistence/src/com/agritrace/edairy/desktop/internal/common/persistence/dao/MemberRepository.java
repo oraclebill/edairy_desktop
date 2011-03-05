@@ -99,6 +99,10 @@ public class MemberRepository extends RepositoryUtil<Membership> implements IMem
 		}
 		memberAccount.setAccountNumber("V" + newEntity.getMemberNumber());
 
+		Dairy dairy = getLocalDairy();
+		if (!getCurrentSession().contains(dairy)) {
+			load(dairy);
+		}
 		if (!getLocalDairy().getMemberships().contains(newEntity)) {
 			getLocalDairy().getMemberships().add(newEntity);
 		}

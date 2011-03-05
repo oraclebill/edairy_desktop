@@ -6,6 +6,7 @@ import org.eclipse.equinox.log.Logger;
 import org.eclipse.riena.core.Log4r;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.TransactionException;
 import org.osgi.service.log.LogService;
 
 import com.google.inject.Inject;
@@ -37,12 +38,21 @@ public class TransactionInterceptor implements MethodInterceptor {
 		tx = session.beginTransaction();
 		LOGGER.log(LogService.LOG_DEBUG, this.hashCode() + " : TX["+tx+"] started.");
 
+		Object result = null;
 		try {
-			Object result = invocation.proceed();
+			result = invocation.proceed();
 			tx.commit();
 			LOGGER.log(LogService.LOG_DEBUG, this.hashCode() + " : TX["+tx+"] Committed for: " + methodName);
 			return result;
-		} catch (Throwable e) {
+		}
+		catch (TransactionException te) {
+			// this is how we manage rollbacks..
+			tx.rollback();
+			session.close();
+			LOGGER.log(LogService.LOG_DEBUG, this.hashCode() + " : TX["+tx+"] Rolled back by request in: " + methodName);
+			return result;
+		}
+		catch (Throwable e) {
 			tx.rollback();
 			session.clear();
 			LOGGER.log(LogService.LOG_DEBUG, this.hashCode() + " : TX["+tx+"] Rolled back in: " + methodName);
