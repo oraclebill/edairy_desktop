@@ -645,8 +645,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 	 */
 	private boolean doSave() {
 		final boolean doSave = true;
-
-		if (!ContainerValidator.validateContainer(this.journalHeaderRidget).isEmpty()) {
+		ContainerValidator validator = new ContainerValidator();
+		if (!validator.validateContainer(this.journalHeaderRidget).isEmpty()) {
 			return false;
 		}
 

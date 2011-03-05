@@ -1,13 +1,19 @@
 package com.agritrace.edairy.desktop.common.ui.controllers;
 
+import java.util.Collection;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.riena.ui.ridgets.IActionListener;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
+import org.eclipse.riena.ui.ridgets.IInfoFlyoutRidget;
+import org.eclipse.riena.ui.ridgets.IInfoFlyoutRidget.InfoFlyoutData;
+import org.eclipse.riena.ui.ridgets.IMarkableRidget;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.controllers.util.ContainerValidator;
+import com.agritrace.edairy.desktop.common.ui.dialogs.BaseDialogView;
 
 public abstract class BaseDialogController<T extends EObject> extends AbstractWindowController {
 
@@ -15,6 +21,7 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 	protected IRepository<T> repository;
 
 	protected T selected;
+	private IInfoFlyoutRidget	flyoutRidget;
 
 	public BaseDialogController() {
 		super();
@@ -41,7 +48,20 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 		if (!retVal) {
 			return false;
 		}
-		return ContainerValidator.validateContainer(this).isEmpty();
+		ContainerValidator validator = new ContainerValidator();
+		Collection<IMarkableRidget> errorRidgets = validator.validateContainer(this);
+		createErrorMessage(errorRidgets);
+		return errorRidgets.isEmpty();		
+	}
+
+	private void createErrorMessage(Collection<IMarkableRidget> errorRidgets) {
+		StringBuffer buf = new StringBuffer();
+		buf.append("The following fields have errors: " );
+		for (IMarkableRidget ridget : errorRidgets) {
+			buf.append(ridget.getID());
+			buf.append(" ");
+		}
+		flyoutRidget.addInfo(new InfoFlyoutData(null, buf.toString()));
 	}
 
 	/**
@@ -84,6 +104,9 @@ public abstract class BaseDialogController<T extends EObject> extends AbstractWi
 				handleDeleteAction();
 			}
 		});
+		
+		
+		flyoutRidget = getRidget(IInfoFlyoutRidget.class, BaseDialogView.BIND_ID_INFO_FLYOUT);		
 	}
 
 	/**

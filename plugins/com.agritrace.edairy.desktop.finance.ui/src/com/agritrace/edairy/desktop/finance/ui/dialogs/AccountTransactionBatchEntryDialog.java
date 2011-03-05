@@ -123,7 +123,8 @@ public class AccountTransactionBatchEntryDialog extends BaseDialogView {
 
 		@Override
 		public String isValid(IRidgetContainer container) {
-			final Collection<IMarkableRidget> errors = ContainerValidator.validateContainer(container);
+			ContainerValidator validator = new ContainerValidator();
+			final Collection<IMarkableRidget> errors = validator.validateContainer(container);
 
 			return errors.isEmpty() ? null : "There are errors in the form. Please correct them before pressing Apply.";
 		}

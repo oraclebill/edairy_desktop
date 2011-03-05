@@ -7,6 +7,8 @@ import java.util.LinkedList;
 
 import org.eclipse.riena.core.marker.IMarker;
 import org.eclipse.riena.ui.core.marker.ErrorMarker;
+import org.eclipse.riena.ui.ridgets.IInfoFlyoutRidget;
+import org.eclipse.riena.ui.ridgets.IInfoFlyoutRidget.InfoFlyoutData;
 import org.eclipse.riena.ui.ridgets.IMarkableRidget;
 import org.eclipse.riena.ui.ridgets.IRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
@@ -17,12 +19,22 @@ public class ContainerValidator {
 
 	}
 
+	private IInfoFlyoutRidget	statusRidget;
+
+	public ContainerValidator() {
+		this(null);
+	}
+
+	public ContainerValidator(IInfoFlyoutRidget statusRidget) {
+		this.statusRidget = statusRidget;
+	}
+
 	/**
 	 * Validates a ridgetContainer by analyzing error/mandatory markers.
-	 *
+	 * 
 	 * @return a list of invalid ridgets, or null if no errors.
 	 */
-	public static Collection<IMarkableRidget> validateContainer(IRidgetContainer container) {
+	public Collection<IMarkableRidget> validateContainer(IRidgetContainer container) {
 		final Collection<IMarkableRidget> errorRidgets = new LinkedList<IMarkableRidget>();
 		for (final IRidget test : container.getRidgets()) {
 			if (!(test instanceof IMarkableRidget)) {
@@ -35,6 +47,8 @@ public class ContainerValidator {
 			if (mandatoryIsEmpty(markable)) {
 				addSelfRemovingErrorMarker(markable);
 				errorRidgets.add(markable);
+				if (statusRidget != null)
+					statusRidget.addInfo(new InfoFlyoutData(null, markable.getID()));
 			} else {
 				// just in case..
 				clearSelfRemovingErrorMarkers(markable);
@@ -42,12 +56,14 @@ public class ContainerValidator {
 			// any markers not added by me?
 			if (markable.isErrorMarked()) {
 				errorRidgets.add(markable);
+				if (statusRidget != null)
+					statusRidget.addInfo(new InfoFlyoutData(null, markable.getID()));
 			}
 		}
 		return errorRidgets;
 	}
 
-	private static void clearSelfRemovingErrorMarkers(IMarkableRidget markable) {
+	private void clearSelfRemovingErrorMarkers(IMarkableRidget markable) {
 		final Collection<? extends IMarker> markers = markable
 				.getMarkersOfType(ContainerValidator.MandatoryErrorMarker.class);
 		for (final IMarker marker : markers) {
@@ -55,11 +71,11 @@ public class ContainerValidator {
 		}
 	}
 
-	protected static boolean mandatoryIsEmpty(final IMarkableRidget markable) {
+	protected boolean mandatoryIsEmpty(final IMarkableRidget markable) {
 		return markable.isMandatory() && !markable.isDisableMandatoryMarker();
 	}
 
-	private static void addSelfRemovingErrorMarker(final IMarkableRidget markable) {
+	private void addSelfRemovingErrorMarker(final IMarkableRidget markable) {
 		final IMarker errorMarker = new MandatoryErrorMarker();
 		markable.addMarker(errorMarker);
 		markable.addPropertyChangeListener("text", new PropertyChangeListener() {
@@ -69,5 +85,9 @@ public class ContainerValidator {
 				markable.removePropertyChangeListener(this);
 			}
 		});
+	}
+
+	public void addStatusListener() {
+
 	}
 }

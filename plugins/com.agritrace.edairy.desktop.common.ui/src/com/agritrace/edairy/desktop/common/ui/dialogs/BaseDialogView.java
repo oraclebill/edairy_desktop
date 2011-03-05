@@ -4,8 +4,10 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.riena.ui.ridgets.controller.AbstractWindowController;
 import org.eclipse.riena.ui.ridgets.swt.views.AbstractDialogView;
+import org.eclipse.riena.ui.swt.InfoFlyout;
 import org.eclipse.riena.ui.swt.lnf.LnfKeyConstants;
 import org.eclipse.riena.ui.swt.lnf.LnfManager;
+import org.eclipse.riena.ui.swt.utils.SWTBindingPropertyLocator;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -13,32 +15,52 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 
 public abstract class BaseDialogView extends AbstractDialogView {
 
-	public static final int DEFAULT_FIELD_WIDTH = 250;
-	public static final int DEFAULT_LABEL_WIDTH = 90;
+	public static final int		DEFAULT_FIELD_WIDTH		= 250;
+	public static final int		DEFAULT_LABEL_WIDTH		= 90;
+	public static final String	BIND_ID_INFO_FLYOUT	= "message-area-composite";
 
-	private Button cancelButton;
+	private Button				cancelButton;
+	private Button				deleteButton;
+	private Button				saveButton;
+	private Composite			main;
 
-	private Button deleteButton;
-	private Composite main;
-	private Button saveButton;
-
+	/**
+	 * @param parentShell
+	 * @wbp.parser.constructor
+	 */
 	public BaseDialogView(Shell parentShell) {
 		super(parentShell);
 	}
 
+	/**
+	 * @param parentShell
+	 * @param controller
+	 */
 	public BaseDialogView(Shell parentShell, AbstractWindowController controller) {
 		super(parentShell, controller);
 	}
 
 	/**
 	 * Subclasses can control these via ridget bindings.
-	 *
+	 * 
+	 * @param parent
+	 * @return
+	 */
+	protected void createFlyout(Composite parent) {
+		InfoFlyout flyout = new InfoFlyout(parent);
+		addUIControl(flyout, BIND_ID_INFO_FLYOUT);
+	}
+
+	/**
+	 * Subclasses can control these via ridget bindings.
+	 * 
 	 * @param parent
 	 * @return
 	 */
@@ -58,6 +80,7 @@ public abstract class BaseDialogView extends AbstractDialogView {
 		cancelButton = UIControlsFactory.createButton(buttonComposite, "&Cancel");
 		cancelButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false));
 		addUIControl(cancelButton, DialogConstants.BIND_ID_BUTTON_CANCEL);
+
 		return buttonComposite;
 	}
 
@@ -77,18 +100,22 @@ public abstract class BaseDialogView extends AbstractDialogView {
 		buildWorkArea(main);
 
 		// create button panel below work area.
+		Composite buttonPanel = createOkCancelButtons(parent);
 		GridDataFactory.fillDefaults().align(SWT.END, SWT.FILL).span(2, 1).grab(true, false)
-				.applyTo(createOkCancelButtons(parent));
+				.applyTo(buttonPanel);
+		// create message area panel below buttons area.
+		createFlyout(buttonPanel);
 		return main;
 	}
 
-//	protected void handleShellCloseEvent() {
-//		try {
-//			BaseDialogController controller = (BaseDialogController) getController();
-//			controller.handleCancelAction();
-//		}
-//		catch(Exception e) {}
-//	}
+// protected void handleShellCloseEvent() {
+// try {
+// BaseDialogController controller = (BaseDialogController) getController();
+// controller.handleCancelAction();
+// }
+// catch(Exception e) {}
+// }
+
 	protected abstract void buildWorkArea(Composite parent);
 
 	// This is not abstract, so we don't have to bother to override. But if we don't,

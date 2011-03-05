@@ -22,6 +22,9 @@ public abstract class RecordDialog<T extends EObject> extends BaseDialogView
 
 	private T selectedEObject;
 
+	/**
+	 * @wbp.parser.constructor
+	 */
 	public RecordDialog(Shell parentShell) {
 		super(parentShell);
 	}

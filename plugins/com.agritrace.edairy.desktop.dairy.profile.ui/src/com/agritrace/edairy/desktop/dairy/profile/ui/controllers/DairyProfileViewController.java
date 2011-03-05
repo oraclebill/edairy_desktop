@@ -250,34 +250,34 @@ public class DairyProfileViewController extends SubModuleController {
 		locationController.setInputModel(localDairy.getLocation());
 		contactsGroup.bindToModel(localDairy.getContactMethods());
 		
-		System.err.println("ADAPTER COUNT: " + localDairy.eAdapters().size());
-		System.err.println("ADAPTERS : " + localDairy.eAdapters());
-		localDairy.eAdapters().add(new Adapter() {
-			Notifier target;
-			@Override
-			public void notifyChanged(Notification notification) {
-				System.err.println( ">> NOTIFICATION: " + notification);
-			}
-
-			@Override
-			public Notifier getTarget() {
-				System.err.println( ">> getTarget: " + target);
-				return target;
-			}
-
-			@Override
-			public void setTarget(Notifier newTarget) {
-				System.err.println( ">> setTarget: " + newTarget);
-				target = newTarget;
-			}
-
-			@Override
-			public boolean isAdapterForType(Object type) {
-				System.err.println(  ">> IS_ADAPTER_FOR_CHECK: " + type);
-				return true;
-			}
-			
-		});
+//		System.err.println("ADAPTER COUNT: " + localDairy.eAdapters().size());
+//		System.err.println("ADAPTERS : " + localDairy.eAdapters());
+//		localDairy.eAdapters().add(new Adapter() {
+//			Notifier target;
+//			@Override
+//			public void notifyChanged(Notification notification) {
+//				System.err.println( ">> NOTIFICATION: " + notification);
+//			}
+//
+//			@Override
+//			public Notifier getTarget() {
+//				System.err.println( ">> getTarget: " + target);
+//				return target;
+//			}
+//
+//			@Override
+//			public void setTarget(Notifier newTarget) {
+//				System.err.println( ">> setTarget: " + newTarget);
+//				target = newTarget;
+//			}
+//
+//			@Override
+//			public boolean isAdapterForType(Object type) {
+//				System.err.println(  ">> IS_ADAPTER_FOR_CHECK: " + type);
+//				return true;
+//			}
+//			
+//		});
 	}
 
 	/**
