@@ -2250,22 +2250,13 @@ public interface DairyPackage extends EPackage {
 	int BIN__ASSET_INFO = TrackingPackage.CONTAINER_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Collections</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BIN__COLLECTIONS = TrackingPackage.CONTAINER_FEATURE_COUNT + 3;
-
-	/**
 	 * The number of structural features of the '<em>Bin</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BIN_FEATURE_COUNT = TrackingPackage.CONTAINER_FEATURE_COUNT + 4;
+	int BIN_FEATURE_COUNT = TrackingPackage.CONTAINER_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.SupplierImpl <em>Supplier</em>}' class.
@@ -4847,17 +4838,6 @@ public interface DairyPackage extends EPackage {
 	EReference getBin_AssetInfo();
 
 	/**
-	 * Returns the meta object for the reference list '{@link com.agritrace.edairy.desktop.common.model.dairy.Bin#getCollections <em>Collections</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Collections</em>'.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Bin#getCollections()
-	 * @see #getBin()
-	 * @generated
-	 */
-	EReference getBin_Collections();
-
-	/**
 	 * Returns the meta object for class '{@link com.agritrace.edairy.desktop.common.model.dairy.Supplier <em>Supplier</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6813,14 +6793,6 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EReference BIN__ASSET_INFO = eINSTANCE.getBin_AssetInfo();
-
-		/**
-		 * The meta object literal for the '<em><b>Collections</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BIN__COLLECTIONS = eINSTANCE.getBin_Collections();
 
 		/**
 		 * The meta object literal for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.SupplierImpl <em>Supplier</em>}' class.

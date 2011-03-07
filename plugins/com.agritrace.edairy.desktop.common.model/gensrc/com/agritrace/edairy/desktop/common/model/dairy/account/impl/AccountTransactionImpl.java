@@ -194,10 +194,12 @@ public class AccountTransactionImpl extends TransactionImpl implements AccountTr
 	 * @generated
 	 */
 	public DairyLocation getRelatedLocation() {
-		if (relatedLocation != null && relatedLocation.eIsProxy()) {
+		if (relatedLocation != null && relatedLocation.eIsProxy())
+		{
 			InternalEObject oldRelatedLocation = (InternalEObject)relatedLocation;
 			relatedLocation = (DairyLocation)eResolveProxy(oldRelatedLocation);
-			if (relatedLocation != oldRelatedLocation) {
+			if (relatedLocation != oldRelatedLocation)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AccountPackage.ACCOUNT_TRANSACTION__RELATED_LOCATION, oldRelatedLocation, relatedLocation));
 			}
@@ -275,7 +277,8 @@ public class AccountTransactionImpl extends TransactionImpl implements AccountTr
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case AccountPackage.ACCOUNT_TRANSACTION__REFERENCE_NUMBER:
 				return getReferenceNumber();
 			case AccountPackage.ACCOUNT_TRANSACTION__SOURCE:
@@ -298,7 +301,8 @@ public class AccountTransactionImpl extends TransactionImpl implements AccountTr
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case AccountPackage.ACCOUNT_TRANSACTION__REFERENCE_NUMBER:
 				setReferenceNumber((String)newValue);
 				return;
@@ -325,7 +329,8 @@ public class AccountTransactionImpl extends TransactionImpl implements AccountTr
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case AccountPackage.ACCOUNT_TRANSACTION__REFERENCE_NUMBER:
 				setReferenceNumber(REFERENCE_NUMBER_EDEFAULT);
 				return;
@@ -352,7 +357,8 @@ public class AccountTransactionImpl extends TransactionImpl implements AccountTr
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case AccountPackage.ACCOUNT_TRANSACTION__REFERENCE_NUMBER:
 				return REFERENCE_NUMBER_EDEFAULT == null ? referenceNumber != null : !REFERENCE_NUMBER_EDEFAULT.equals(referenceNumber);
 			case AccountPackage.ACCOUNT_TRANSACTION__SOURCE:

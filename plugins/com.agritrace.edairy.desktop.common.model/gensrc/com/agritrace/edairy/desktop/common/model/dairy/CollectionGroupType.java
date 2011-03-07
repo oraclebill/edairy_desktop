@@ -79,7 +79,8 @@ public enum CollectionGroupType implements Enumerator {
 	 * @generated
 	 */
 	private static final CollectionGroupType[] VALUES_ARRAY =
-		new CollectionGroupType[] {
+		new CollectionGroupType[]
+		{
 			SCALE_GROUP,
 			JOURNAL_GROUP,
 		};
@@ -99,9 +100,11 @@ public enum CollectionGroupType implements Enumerator {
 	 * @generated
 	 */
 	public static CollectionGroupType get(String literal) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			CollectionGroupType result = VALUES_ARRAY[i];
-			if (result.toString().equals(literal)) {
+			if (result.toString().equals(literal))
+			{
 				return result;
 			}
 		}
@@ -115,9 +118,11 @@ public enum CollectionGroupType implements Enumerator {
 	 * @generated
 	 */
 	public static CollectionGroupType getByName(String name) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			CollectionGroupType result = VALUES_ARRAY[i];
-			if (result.getName().equals(name)) {
+			if (result.getName().equals(name))
+			{
 				return result;
 			}
 		}
@@ -131,7 +136,8 @@ public enum CollectionGroupType implements Enumerator {
 	 * @generated
 	 */
 	public static CollectionGroupType get(int value) {
-		switch (value) {
+		switch (value)
+		{
 			case SCALE_GROUP_VALUE: return SCALE_GROUP;
 			case JOURNAL_GROUP_VALUE: return JOURNAL_GROUP;
 		}

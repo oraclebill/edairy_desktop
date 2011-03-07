@@ -39,7 +39,8 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public ModelAdapterFactory() {
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = ModelPackage.eINSTANCE;
 		}
 	}
@@ -54,10 +55,12 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 */
 	@Override
 	public boolean isFactoryForType(Object object) {
-		if (object == modelPackage) {
+		if (object == modelPackage)
+		{
 			return true;
 		}
-		if (object instanceof EObject) {
+		if (object instanceof EObject)
+		{
 			return ((EObject)object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
@@ -70,73 +73,91 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	protected ModelSwitch<Adapter> modelSwitch =
-		new ModelSwitch<Adapter>() {
+		new ModelSwitch<Adapter>()
+		{
 			@Override
-			public Adapter caseMapLocation(MapLocation object) {
+			public Adapter caseMapLocation(MapLocation object)
+			{
 				return createMapLocationAdapter();
 			}
 			@Override
-			public Adapter casePostalLocation(PostalLocation object) {
+			public Adapter casePostalLocation(PostalLocation object)
+			{
 				return createPostalLocationAdapter();
 			}
 			@Override
-			public Adapter caseStatutoryLocation(StatutoryLocation object) {
+			public Adapter caseStatutoryLocation(StatutoryLocation object)
+			{
 				return createStatutoryLocationAdapter();
 			}
 			@Override
-			public Adapter caseAudited(Audited object) {
+			public Adapter caseAudited(Audited object)
+			{
 				return createAuditedAdapter();
 			}
 			@Override
-			public Adapter caseVersioned(Versioned object) {
+			public Adapter caseVersioned(Versioned object)
+			{
 				return createVersionedAdapter();
 			}
 			@Override
-			public Adapter caseContactable(Contactable object) {
+			public Adapter caseContactable(Contactable object)
+			{
 				return createContactableAdapter();
 			}
 			@Override
-			public Adapter casePerson(Person object) {
+			public Adapter casePerson(Person object)
+			{
 				return createPersonAdapter();
 			}
 			@Override
-			public Adapter caseCompany(Company object) {
+			public Adapter caseCompany(Company object)
+			{
 				return createCompanyAdapter();
 			}
 			@Override
-			public Adapter caseDescriptiveLocation(DescriptiveLocation object) {
+			public Adapter caseDescriptiveLocation(DescriptiveLocation object)
+			{
 				return createDescriptiveLocationAdapter();
 			}
 			@Override
-			public Adapter caseLocation(Location object) {
+			public Adapter caseLocation(Location object)
+			{
 				return createLocationAdapter();
 			}
 			@Override
-			public Adapter caseContactMethod(ContactMethod object) {
+			public Adapter caseContactMethod(ContactMethod object)
+			{
 				return createContactMethodAdapter();
 			}
 			@Override
-			public Adapter caseImageEntry(ImageEntry object) {
+			public Adapter caseImageEntry(ImageEntry object)
+			{
 				return createImageEntryAdapter();
 			}
 			@Override
-			public Adapter caseSystemUser(SystemUser object) {
+			public Adapter caseSystemUser(SystemUser object)
+			{
 				return createSystemUserAdapter();
 			}
 			@Override
-			public Adapter caseRole(Role object) {
+			public Adapter caseRole(Role object)
+			{
 				return createRoleAdapter();
 			}
 			@Override
-			public Adapter casePermissionNamespace(PermissionNamespace object) {
+			public Adapter casePermissionNamespace(PermissionNamespace object)
+			{
 				return createPermissionNamespaceAdapter();
 			}
 			@Override
-			public Adapter casePermission(Permission object) {
+			public Adapter casePermission(Permission object)
+			{
 				return createPermissionAdapter();
 			}
 			@Override
-			public Adapter defaultCase(EObject object) {
+			public Adapter defaultCase(EObject object)
+			{
 				return createEObjectAdapter();
 			}
 		};

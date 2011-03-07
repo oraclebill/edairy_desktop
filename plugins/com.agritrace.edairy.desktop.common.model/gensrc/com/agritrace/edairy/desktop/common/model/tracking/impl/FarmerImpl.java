@@ -79,7 +79,8 @@ public class FarmerImpl extends PersonImpl implements Farmer {
 	 * @generated
 	 */
 	public EList<Farm> getFarms() {
-		if (farms == null) {
+		if (farms == null)
+		{
 			farms = new EObjectContainmentWithInverseEList<Farm>(Farm.class, this, TrackingPackage.FARMER__FARMS, TrackingPackage.FARM__OWNER);
 		}
 		return farms;
@@ -111,7 +112,8 @@ public class FarmerImpl extends PersonImpl implements Farmer {
 	 * @generated
 	 */
 	public void setMembership(Membership newMembership) {
-		if (newMembership != eInternalContainer() || (eContainerFeatureID() != TrackingPackage.FARMER__MEMBERSHIP && newMembership != null)) {
+		if (newMembership != eInternalContainer() || (eContainerFeatureID() != TrackingPackage.FARMER__MEMBERSHIP && newMembership != null))
+		{
 			if (EcoreUtil.isAncestor(this, newMembership))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -134,7 +136,8 @@ public class FarmerImpl extends PersonImpl implements Farmer {
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case TrackingPackage.FARMER__FARMS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getFarms()).basicAdd(otherEnd, msgs);
 			case TrackingPackage.FARMER__MEMBERSHIP:
@@ -152,7 +155,8 @@ public class FarmerImpl extends PersonImpl implements Farmer {
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case TrackingPackage.FARMER__FARMS:
 				return ((InternalEList<?>)getFarms()).basicRemove(otherEnd, msgs);
 			case TrackingPackage.FARMER__MEMBERSHIP:
@@ -168,7 +172,8 @@ public class FarmerImpl extends PersonImpl implements Farmer {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
+		switch (eContainerFeatureID())
+		{
 			case TrackingPackage.FARMER__MEMBERSHIP:
 				return eInternalContainer().eInverseRemove(this, DairyPackage.MEMBERSHIP__FARMER, Membership.class, msgs);
 		}
@@ -182,7 +187,8 @@ public class FarmerImpl extends PersonImpl implements Farmer {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case TrackingPackage.FARMER__FARMS:
 				return getFarms();
 			case TrackingPackage.FARMER__MEMBERSHIP:
@@ -199,7 +205,8 @@ public class FarmerImpl extends PersonImpl implements Farmer {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case TrackingPackage.FARMER__FARMS:
 				getFarms().clear();
 				getFarms().addAll((Collection<? extends Farm>)newValue);
@@ -218,7 +225,8 @@ public class FarmerImpl extends PersonImpl implements Farmer {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case TrackingPackage.FARMER__FARMS:
 				getFarms().clear();
 				return;
@@ -236,7 +244,8 @@ public class FarmerImpl extends PersonImpl implements Farmer {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case TrackingPackage.FARMER__FARMS:
 				return farms != null && !farms.isEmpty();
 			case TrackingPackage.FARMER__MEMBERSHIP:

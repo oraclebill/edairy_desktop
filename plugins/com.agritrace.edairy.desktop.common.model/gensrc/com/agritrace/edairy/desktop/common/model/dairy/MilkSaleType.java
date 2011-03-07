@@ -79,7 +79,8 @@ public enum MilkSaleType implements Enumerator {
 	 * @generated
 	 */
 	private static final MilkSaleType[] VALUES_ARRAY =
-		new MilkSaleType[] {
+		new MilkSaleType[]
+		{
 			CASH,
 			CREDIT,
 		};
@@ -99,9 +100,11 @@ public enum MilkSaleType implements Enumerator {
 	 * @generated
 	 */
 	public static MilkSaleType get(String literal) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			MilkSaleType result = VALUES_ARRAY[i];
-			if (result.toString().equals(literal)) {
+			if (result.toString().equals(literal))
+			{
 				return result;
 			}
 		}
@@ -115,9 +118,11 @@ public enum MilkSaleType implements Enumerator {
 	 * @generated
 	 */
 	public static MilkSaleType getByName(String name) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			MilkSaleType result = VALUES_ARRAY[i];
-			if (result.getName().equals(name)) {
+			if (result.getName().equals(name))
+			{
 				return result;
 			}
 		}
@@ -131,7 +136,8 @@ public enum MilkSaleType implements Enumerator {
 	 * @generated
 	 */
 	public static MilkSaleType get(int value) {
-		switch (value) {
+		switch (value)
+		{
 			case CASH_VALUE: return CASH;
 			case CREDIT_VALUE: return CREDIT;
 		}

@@ -199,7 +199,8 @@ public class RoleImpl extends EObjectImpl implements Role {
 	 * @generated
 	 */
 	public EList<UIPermission> getPermissions() {
-		if (permissions == null) {
+		if (permissions == null)
+		{
 			permissions = new EDataTypeUniqueEList<UIPermission>(UIPermission.class, this, ModelPackage.ROLE__PERMISSIONS);
 		}
 		return permissions;
@@ -212,7 +213,8 @@ public class RoleImpl extends EObjectImpl implements Role {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.ROLE__ID:
 				return getId();
 			case ModelPackage.ROLE__NAME:
@@ -233,7 +235,8 @@ public class RoleImpl extends EObjectImpl implements Role {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.ROLE__ID:
 				setId((Long)newValue);
 				return;
@@ -258,7 +261,8 @@ public class RoleImpl extends EObjectImpl implements Role {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.ROLE__ID:
 				setId(ID_EDEFAULT);
 				return;
@@ -282,7 +286,8 @@ public class RoleImpl extends EObjectImpl implements Role {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.ROLE__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case ModelPackage.ROLE__NAME:

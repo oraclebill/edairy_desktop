@@ -45,7 +45,8 @@ public class TrackingSwitch<T> {
 	 * @generated
 	 */
 	public TrackingSwitch() {
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = TrackingPackage.eINSTANCE;
 		}
 	}
@@ -69,10 +70,12 @@ public class TrackingSwitch<T> {
 	 * @generated
 	 */
 	protected T doSwitch(EClass theEClass, EObject theEObject) {
-		if (theEClass.eContainer() == modelPackage) {
+		if (theEClass.eContainer() == modelPackage)
+		{
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
-		else {
+		else
+		{
 			List<EClass> eSuperTypes = theEClass.getESuperTypes();
 			return
 				eSuperTypes.isEmpty() ?
@@ -89,14 +92,17 @@ public class TrackingSwitch<T> {
 	 * @generated
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
-		switch (classifierID) {
-			case TrackingPackage.FARM: {
+		switch (classifierID)
+		{
+			case TrackingPackage.FARM:
+			{
 				Farm farm = (Farm)theEObject;
 				T result = caseFarm(farm);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TrackingPackage.FARMER: {
+			case TrackingPackage.FARMER:
+			{
 				Farmer farmer = (Farmer)theEObject;
 				T result = caseFarmer(farmer);
 				if (result == null) result = casePerson(farmer);
@@ -104,25 +110,29 @@ public class TrackingSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TrackingPackage.CONTAINER: {
+			case TrackingPackage.CONTAINER:
+			{
 				Container container = (Container)theEObject;
 				T result = caseContainer(container);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TrackingPackage.REGISTERED_ANIMAL: {
+			case TrackingPackage.REGISTERED_ANIMAL:
+			{
 				RegisteredAnimal registeredAnimal = (RegisteredAnimal)theEObject;
 				T result = caseRegisteredAnimal(registeredAnimal);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TrackingPackage.REFERENCE_ANIMAL_TYPE: {
+			case TrackingPackage.REFERENCE_ANIMAL_TYPE:
+			{
 				ReferenceAnimalType referenceAnimalType = (ReferenceAnimalType)theEObject;
 				T result = caseReferenceAnimalType(referenceAnimalType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TrackingPackage.ANIMAL_IDENTIFIER: {
+			case TrackingPackage.ANIMAL_IDENTIFIER:
+			{
 				AnimalIdentifier animalIdentifier = (AnimalIdentifier)theEObject;
 				T result = caseAnimalIdentifier(animalIdentifier);
 				if (result == null) result = defaultCase(theEObject);

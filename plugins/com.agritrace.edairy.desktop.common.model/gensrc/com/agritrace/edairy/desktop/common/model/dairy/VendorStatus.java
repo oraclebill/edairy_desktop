@@ -154,7 +154,8 @@ public enum VendorStatus implements Enumerator {
 	 * @generated
 	 */
 	private static final VendorStatus[] VALUES_ARRAY =
-		new VendorStatus[] {
+		new VendorStatus[]
+		{
 			PENDING,
 			VALID,
 			INVALID,
@@ -177,9 +178,11 @@ public enum VendorStatus implements Enumerator {
 	 * @generated
 	 */
 	public static VendorStatus get(String literal) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			VendorStatus result = VALUES_ARRAY[i];
-			if (result.toString().equals(literal)) {
+			if (result.toString().equals(literal))
+			{
 				return result;
 			}
 		}
@@ -193,9 +196,11 @@ public enum VendorStatus implements Enumerator {
 	 * @generated
 	 */
 	public static VendorStatus getByName(String name) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			VendorStatus result = VALUES_ARRAY[i];
-			if (result.getName().equals(name)) {
+			if (result.getName().equals(name))
+			{
 				return result;
 			}
 		}
@@ -209,7 +214,8 @@ public enum VendorStatus implements Enumerator {
 	 * @generated
 	 */
 	public static VendorStatus get(int value) {
-		switch (value) {
+		switch (value)
+		{
 			case PENDING_VALUE: return PENDING;
 			case VALID_VALUE: return VALID;
 			case INVALID_VALUE: return INVALID;

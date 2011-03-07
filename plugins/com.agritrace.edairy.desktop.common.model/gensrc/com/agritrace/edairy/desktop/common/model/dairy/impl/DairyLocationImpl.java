@@ -322,10 +322,12 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * @generated
 	 */
 	public TransportRoute getRoute() {
-		if (route != null && route.eIsProxy()) {
+		if (route != null && route.eIsProxy())
+		{
 			InternalEObject oldRoute = (InternalEObject)route;
 			route = (TransportRoute)eResolveProxy(oldRoute);
-			if (route != oldRoute) {
+			if (route != oldRoute)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DAIRY_LOCATION__ROUTE, oldRoute, route));
 			}
@@ -350,7 +352,8 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	public NotificationChain basicSetRoute(TransportRoute newRoute, NotificationChain msgs) {
 		TransportRoute oldRoute = route;
 		route = newRoute;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
+		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__ROUTE, oldRoute, newRoute);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -363,7 +366,8 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * @generated
 	 */
 	public void setRoute(TransportRoute newRoute) {
-		if (newRoute != route) {
+		if (newRoute != route)
+		{
 			NotificationChain msgs = null;
 			if (route != null)
 				msgs = ((InternalEObject)route).eInverseRemove(this, DairyPackage.TRANSPORT_ROUTE__STOPS, TransportRoute.class, msgs);
@@ -435,7 +439,8 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	public NotificationChain basicSetLocation(Location newLocation, NotificationChain msgs) {
 		Location oldLocation = location;
 		location = newLocation;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
+		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DairyPackage.DAIRY_LOCATION__LOCATION, oldLocation, newLocation);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -448,7 +453,8 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * @generated
 	 */
 	public void setLocation(Location newLocation) {
-		if (newLocation != location) {
+		if (newLocation != location)
+		{
 			NotificationChain msgs = null;
 			if (location != null)
 				msgs = ((InternalEObject)location).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DairyPackage.DAIRY_LOCATION__LOCATION, null, msgs);
@@ -467,7 +473,8 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * @generated
 	 */
 	public EList<DairyFunction> getFunctions() {
-		if (functions == null) {
+		if (functions == null)
+		{
 			functions = new EDataTypeUniqueEList<DairyFunction>(DairyFunction.class, this, DairyPackage.DAIRY_LOCATION__FUNCTIONS);
 		}
 		return functions;
@@ -479,10 +486,12 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 * @generated
 	 */
 	public Bin getContainers() {
-		if (containers != null && containers.eIsProxy()) {
+		if (containers != null && containers.eIsProxy())
+		{
 			InternalEObject oldContainers = (InternalEObject)containers;
 			containers = (Bin)eResolveProxy(oldContainers);
-			if (containers != oldContainers) {
+			if (containers != oldContainers)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DAIRY_LOCATION__CONTAINERS, oldContainers, containers));
 			}
@@ -518,7 +527,8 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.DAIRY_LOCATION__ROUTE:
 				if (route != null)
 					msgs = ((InternalEObject)route).eInverseRemove(this, DairyPackage.TRANSPORT_ROUTE__STOPS, TransportRoute.class, msgs);
@@ -534,7 +544,8 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.DAIRY_LOCATION__ROUTE:
 				return basicSetRoute(null, msgs);
 			case DairyPackage.DAIRY_LOCATION__LOCATION:
@@ -550,7 +561,8 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.DAIRY_LOCATION__ID:
 				return getId();
 			case DairyPackage.DAIRY_LOCATION__NAME:
@@ -585,7 +597,8 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.DAIRY_LOCATION__ID:
 				setId((Long)newValue);
 				return;
@@ -628,7 +641,8 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.DAIRY_LOCATION__ID:
 				setId(ID_EDEFAULT);
 				return;
@@ -670,7 +684,8 @@ public class DairyLocationImpl extends EObjectImpl implements DairyLocation {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.DAIRY_LOCATION__ID:
 				return id != ID_EDEFAULT;
 			case DairyPackage.DAIRY_LOCATION__NAME:

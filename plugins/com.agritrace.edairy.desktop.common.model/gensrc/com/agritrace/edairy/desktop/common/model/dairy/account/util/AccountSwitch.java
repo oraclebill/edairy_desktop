@@ -42,7 +42,8 @@ public class AccountSwitch<T> {
 	 * @generated
 	 */
 	public AccountSwitch() {
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = AccountPackage.eINSTANCE;
 		}
 	}
@@ -66,10 +67,12 @@ public class AccountSwitch<T> {
 	 * @generated
 	 */
 	protected T doSwitch(EClass theEClass, EObject theEObject) {
-		if (theEClass.eContainer() == modelPackage) {
+		if (theEClass.eContainer() == modelPackage)
+		{
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
-		else {
+		else
+		{
 			List<EClass> eSuperTypes = theEClass.getESuperTypes();
 			return
 				eSuperTypes.isEmpty() ?
@@ -86,34 +89,40 @@ public class AccountSwitch<T> {
 	 * @generated
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
-		switch (classifierID) {
-			case AccountPackage.ACCOUNT: {
+		switch (classifierID)
+		{
+			case AccountPackage.ACCOUNT:
+			{
 				Account account = (Account)theEObject;
 				T result = caseAccount(account);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case AccountPackage.TRANSACTION: {
+			case AccountPackage.TRANSACTION:
+			{
 				Transaction transaction = (Transaction)theEObject;
 				T result = caseTransaction(transaction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case AccountPackage.ACCOUNT_TRANSACTION: {
+			case AccountPackage.ACCOUNT_TRANSACTION:
+			{
 				AccountTransaction accountTransaction = (AccountTransaction)theEObject;
 				T result = caseAccountTransaction(accountTransaction);
 				if (result == null) result = caseTransaction(accountTransaction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case AccountPackage.ADJUSTMENT_TRANSACTION: {
+			case AccountPackage.ADJUSTMENT_TRANSACTION:
+			{
 				AdjustmentTransaction adjustmentTransaction = (AdjustmentTransaction)theEObject;
 				T result = caseAdjustmentTransaction(adjustmentTransaction);
 				if (result == null) result = caseTransaction(adjustmentTransaction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case AccountPackage.BALANCE_POINT: {
+			case AccountPackage.BALANCE_POINT:
+			{
 				BalancePoint balancePoint = (BalancePoint)theEObject;
 				T result = caseBalancePoint(balancePoint);
 				if (result == null) result = defaultCase(theEObject);

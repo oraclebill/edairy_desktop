@@ -104,7 +104,8 @@ public enum UnitOfMeasure implements Enumerator {
 	 * @generated
 	 */
 	private static final UnitOfMeasure[] VALUES_ARRAY =
-		new UnitOfMeasure[] {
+		new UnitOfMeasure[]
+		{
 			LITRE,
 			KILOGRAM,
 			UNKNOWN,
@@ -125,9 +126,11 @@ public enum UnitOfMeasure implements Enumerator {
 	 * @generated
 	 */
 	public static UnitOfMeasure get(String literal) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			UnitOfMeasure result = VALUES_ARRAY[i];
-			if (result.toString().equals(literal)) {
+			if (result.toString().equals(literal))
+			{
 				return result;
 			}
 		}
@@ -141,9 +144,11 @@ public enum UnitOfMeasure implements Enumerator {
 	 * @generated
 	 */
 	public static UnitOfMeasure getByName(String name) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			UnitOfMeasure result = VALUES_ARRAY[i];
-			if (result.getName().equals(name)) {
+			if (result.getName().equals(name))
+			{
 				return result;
 			}
 		}
@@ -157,7 +162,8 @@ public enum UnitOfMeasure implements Enumerator {
 	 * @generated
 	 */
 	public static UnitOfMeasure get(int value) {
-		switch (value) {
+		switch (value)
+		{
 			case LITRE_VALUE: return LITRE;
 			case KILOGRAM_VALUE: return KILOGRAM;
 			case UNKNOWN_VALUE: return UNKNOWN;

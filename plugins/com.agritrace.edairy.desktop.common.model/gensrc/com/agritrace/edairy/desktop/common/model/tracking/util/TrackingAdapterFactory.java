@@ -42,7 +42,8 @@ public class TrackingAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public TrackingAdapterFactory() {
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = TrackingPackage.eINSTANCE;
 		}
 	}
@@ -57,10 +58,12 @@ public class TrackingAdapterFactory extends AdapterFactoryImpl {
 	 */
 	@Override
 	public boolean isFactoryForType(Object object) {
-		if (object == modelPackage) {
+		if (object == modelPackage)
+		{
 			return true;
 		}
-		if (object instanceof EObject) {
+		if (object instanceof EObject)
+		{
 			return ((EObject)object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
@@ -73,41 +76,51 @@ public class TrackingAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	protected TrackingSwitch<Adapter> modelSwitch =
-		new TrackingSwitch<Adapter>() {
+		new TrackingSwitch<Adapter>()
+		{
 			@Override
-			public Adapter caseFarm(Farm object) {
+			public Adapter caseFarm(Farm object)
+			{
 				return createFarmAdapter();
 			}
 			@Override
-			public Adapter caseFarmer(Farmer object) {
+			public Adapter caseFarmer(Farmer object)
+			{
 				return createFarmerAdapter();
 			}
 			@Override
-			public Adapter caseContainer(Container object) {
+			public Adapter caseContainer(Container object)
+			{
 				return createContainerAdapter();
 			}
 			@Override
-			public Adapter caseRegisteredAnimal(RegisteredAnimal object) {
+			public Adapter caseRegisteredAnimal(RegisteredAnimal object)
+			{
 				return createRegisteredAnimalAdapter();
 			}
 			@Override
-			public Adapter caseReferenceAnimalType(ReferenceAnimalType object) {
+			public Adapter caseReferenceAnimalType(ReferenceAnimalType object)
+			{
 				return createReferenceAnimalTypeAdapter();
 			}
 			@Override
-			public Adapter caseAnimalIdentifier(AnimalIdentifier object) {
+			public Adapter caseAnimalIdentifier(AnimalIdentifier object)
+			{
 				return createAnimalIdentifierAdapter();
 			}
 			@Override
-			public Adapter caseContactable(Contactable object) {
+			public Adapter caseContactable(Contactable object)
+			{
 				return createContactableAdapter();
 			}
 			@Override
-			public Adapter casePerson(Person object) {
+			public Adapter casePerson(Person object)
+			{
 				return createPersonAdapter();
 			}
 			@Override
-			public Adapter defaultCase(EObject object) {
+			public Adapter defaultCase(EObject object)
+			{
 				return createEObjectAdapter();
 			}
 		};

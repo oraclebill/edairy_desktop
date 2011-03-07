@@ -42,7 +42,8 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public ModelSwitch() {
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = ModelPackage.eINSTANCE;
 		}
 	}
@@ -66,10 +67,12 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	protected T doSwitch(EClass theEClass, EObject theEObject) {
-		if (theEClass.eContainer() == modelPackage) {
+		if (theEClass.eContainer() == modelPackage)
+		{
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
-		else {
+		else
+		{
 			List<EClass> eSuperTypes = theEClass.getESuperTypes();
 			return
 				eSuperTypes.isEmpty() ?
@@ -86,100 +89,117 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
-		switch (classifierID) {
-			case ModelPackage.MAP_LOCATION: {
+		switch (classifierID)
+		{
+			case ModelPackage.MAP_LOCATION:
+			{
 				MapLocation mapLocation = (MapLocation)theEObject;
 				T result = caseMapLocation(mapLocation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.POSTAL_LOCATION: {
+			case ModelPackage.POSTAL_LOCATION:
+			{
 				PostalLocation postalLocation = (PostalLocation)theEObject;
 				T result = casePostalLocation(postalLocation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.STATUTORY_LOCATION: {
+			case ModelPackage.STATUTORY_LOCATION:
+			{
 				StatutoryLocation statutoryLocation = (StatutoryLocation)theEObject;
 				T result = caseStatutoryLocation(statutoryLocation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.AUDITED: {
+			case ModelPackage.AUDITED:
+			{
 				Audited audited = (Audited)theEObject;
 				T result = caseAudited(audited);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.VERSIONED: {
+			case ModelPackage.VERSIONED:
+			{
 				Versioned versioned = (Versioned)theEObject;
 				T result = caseVersioned(versioned);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.CONTACTABLE: {
+			case ModelPackage.CONTACTABLE:
+			{
 				Contactable contactable = (Contactable)theEObject;
 				T result = caseContactable(contactable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.PERSON: {
+			case ModelPackage.PERSON:
+			{
 				Person person = (Person)theEObject;
 				T result = casePerson(person);
 				if (result == null) result = caseContactable(person);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.COMPANY: {
+			case ModelPackage.COMPANY:
+			{
 				Company company = (Company)theEObject;
 				T result = caseCompany(company);
 				if (result == null) result = caseContactable(company);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.DESCRIPTIVE_LOCATION: {
+			case ModelPackage.DESCRIPTIVE_LOCATION:
+			{
 				DescriptiveLocation descriptiveLocation = (DescriptiveLocation)theEObject;
 				T result = caseDescriptiveLocation(descriptiveLocation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.LOCATION: {
+			case ModelPackage.LOCATION:
+			{
 				Location location = (Location)theEObject;
 				T result = caseLocation(location);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.CONTACT_METHOD: {
+			case ModelPackage.CONTACT_METHOD:
+			{
 				ContactMethod contactMethod = (ContactMethod)theEObject;
 				T result = caseContactMethod(contactMethod);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.IMAGE_ENTRY: {
+			case ModelPackage.IMAGE_ENTRY:
+			{
 				ImageEntry imageEntry = (ImageEntry)theEObject;
 				T result = caseImageEntry(imageEntry);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.SYSTEM_USER: {
+			case ModelPackage.SYSTEM_USER:
+			{
 				SystemUser systemUser = (SystemUser)theEObject;
 				T result = caseSystemUser(systemUser);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.ROLE: {
+			case ModelPackage.ROLE:
+			{
 				Role role = (Role)theEObject;
 				T result = caseRole(role);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.PERMISSION_NAMESPACE: {
+			case ModelPackage.PERMISSION_NAMESPACE:
+			{
 				PermissionNamespace permissionNamespace = (PermissionNamespace)theEObject;
 				T result = casePermissionNamespace(permissionNamespace);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.PERMISSION: {
+			case ModelPackage.PERMISSION:
+			{
 				Permission permission = (Permission)theEObject;
 				T result = casePermission(permission);
 				if (result == null) result = defaultCase(theEObject);

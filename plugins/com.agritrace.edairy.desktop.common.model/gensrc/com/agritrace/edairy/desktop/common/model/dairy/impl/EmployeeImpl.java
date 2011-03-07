@@ -347,7 +347,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * @generated
 	 */
 	public void setEmployer(Dairy newEmployer) {
-		if (newEmployer != eInternalContainer() || (eContainerFeatureID() != DairyPackage.EMPLOYEE__EMPLOYER && newEmployer != null)) {
+		if (newEmployer != eInternalContainer() || (eContainerFeatureID() != DairyPackage.EMPLOYEE__EMPLOYER && newEmployer != null))
+		{
 			if (EcoreUtil.isAncestor(this, newEmployer))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -368,10 +369,12 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * @generated
 	 */
 	public SystemUser getSystemIdentity() {
-		if (systemIdentity != null && systemIdentity.eIsProxy()) {
+		if (systemIdentity != null && systemIdentity.eIsProxy())
+		{
 			InternalEObject oldSystemIdentity = (InternalEObject)systemIdentity;
 			systemIdentity = (SystemUser)eResolveProxy(oldSystemIdentity);
-			if (systemIdentity != oldSystemIdentity) {
+			if (systemIdentity != oldSystemIdentity)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.EMPLOYEE__SYSTEM_IDENTITY, oldSystemIdentity, systemIdentity));
 			}
@@ -396,7 +399,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	public NotificationChain basicSetSystemIdentity(SystemUser newSystemIdentity, NotificationChain msgs) {
 		SystemUser oldSystemIdentity = systemIdentity;
 		systemIdentity = newSystemIdentity;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
+		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DairyPackage.EMPLOYEE__SYSTEM_IDENTITY, oldSystemIdentity, newSystemIdentity);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -409,7 +413,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 * @generated
 	 */
 	public void setSystemIdentity(SystemUser newSystemIdentity) {
-		if (newSystemIdentity != systemIdentity) {
+		if (newSystemIdentity != systemIdentity)
+		{
 			NotificationChain msgs = null;
 			if (systemIdentity != null)
 				msgs = ((InternalEObject)systemIdentity).eInverseRemove(this, ModelPackage.SYSTEM_USER__RELATED_EMPLOYEE, SystemUser.class, msgs);
@@ -442,7 +447,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.EMPLOYEE__EMPLOYER:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -462,7 +468,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.EMPLOYEE__EMPLOYER:
 				return basicSetEmployer(null, msgs);
 			case DairyPackage.EMPLOYEE__SYSTEM_IDENTITY:
@@ -478,7 +485,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
+		switch (eContainerFeatureID())
+		{
 			case DairyPackage.EMPLOYEE__EMPLOYER:
 				return eInternalContainer().eInverseRemove(this, DairyPackage.DAIRY__EMPLOYEES, Dairy.class, msgs);
 		}
@@ -492,7 +500,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.EMPLOYEE__EMPLOYEE_NUMBER:
 				return getEmployeeNumber();
 			case DairyPackage.EMPLOYEE__OPERATOR_CODE:
@@ -521,7 +530,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.EMPLOYEE__EMPLOYEE_NUMBER:
 				setEmployeeNumber((String)newValue);
 				return;
@@ -557,7 +567,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.EMPLOYEE__EMPLOYEE_NUMBER:
 				setEmployeeNumber(EMPLOYEE_NUMBER_EDEFAULT);
 				return;
@@ -593,7 +604,8 @@ public class EmployeeImpl extends PersonImpl implements Employee {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.EMPLOYEE__EMPLOYEE_NUMBER:
 				return EMPLOYEE_NUMBER_EDEFAULT == null ? employeeNumber != null : !EMPLOYEE_NUMBER_EDEFAULT.equals(employeeNumber);
 			case DairyPackage.EMPLOYEE__OPERATOR_CODE:

@@ -140,7 +140,8 @@ public class ContactMethodImpl extends EObjectImpl implements ContactMethod {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.CONTACT_METHOD__CM_TYPE:
 				return getCmType();
 			case ModelPackage.CONTACT_METHOD__CM_VALUE:
@@ -156,7 +157,8 @@ public class ContactMethodImpl extends EObjectImpl implements ContactMethod {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.CONTACT_METHOD__CM_TYPE:
 				setCmType((ContactMethodType)newValue);
 				return;
@@ -174,7 +176,8 @@ public class ContactMethodImpl extends EObjectImpl implements ContactMethod {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.CONTACT_METHOD__CM_TYPE:
 				setCmType(CM_TYPE_EDEFAULT);
 				return;
@@ -192,7 +195,8 @@ public class ContactMethodImpl extends EObjectImpl implements ContactMethod {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.CONTACT_METHOD__CM_TYPE:
 				return cmType != CM_TYPE_EDEFAULT;
 			case ModelPackage.CONTACT_METHOD__CM_VALUE:

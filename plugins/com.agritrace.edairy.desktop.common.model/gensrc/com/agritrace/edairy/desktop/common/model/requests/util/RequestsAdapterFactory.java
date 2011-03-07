@@ -39,7 +39,8 @@ public class RequestsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public RequestsAdapterFactory() {
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = RequestsPackage.eINSTANCE;
 		}
 	}
@@ -54,10 +55,12 @@ public class RequestsAdapterFactory extends AdapterFactoryImpl {
 	 */
 	@Override
 	public boolean isFactoryForType(Object object) {
-		if (object == modelPackage) {
+		if (object == modelPackage)
+		{
 			return true;
 		}
-		if (object instanceof EObject) {
+		if (object instanceof EObject)
+		{
 			return ((EObject)object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
@@ -70,13 +73,16 @@ public class RequestsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	protected RequestsSwitch<Adapter> modelSwitch =
-		new RequestsSwitch<Adapter>() {
+		new RequestsSwitch<Adapter>()
+		{
 			@Override
-			public Adapter caseAnimalHealthRequest(AnimalHealthRequest object) {
+			public Adapter caseAnimalHealthRequest(AnimalHealthRequest object)
+			{
 				return createAnimalHealthRequestAdapter();
 			}
 			@Override
-			public Adapter defaultCase(EObject object) {
+			public Adapter defaultCase(EObject object)
+			{
 				return createEObjectAdapter();
 			}
 		};

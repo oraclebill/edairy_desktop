@@ -73,7 +73,8 @@ public class ContactableImpl extends EObjectImpl implements Contactable {
 	 * @generated
 	 */
 	public EList<ContactMethod> getContactMethods() {
-		if (contactMethods == null) {
+		if (contactMethods == null)
+		{
 			contactMethods = new EObjectContainmentEList<ContactMethod>(ContactMethod.class, this, ModelPackage.CONTACTABLE__CONTACT_METHODS);
 		}
 		return contactMethods;
@@ -86,7 +87,8 @@ public class ContactableImpl extends EObjectImpl implements Contactable {
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.CONTACTABLE__CONTACT_METHODS:
 				return ((InternalEList<?>)getContactMethods()).basicRemove(otherEnd, msgs);
 		}
@@ -100,7 +102,8 @@ public class ContactableImpl extends EObjectImpl implements Contactable {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.CONTACTABLE__CONTACT_METHODS:
 				return getContactMethods();
 		}
@@ -115,7 +118,8 @@ public class ContactableImpl extends EObjectImpl implements Contactable {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.CONTACTABLE__CONTACT_METHODS:
 				getContactMethods().clear();
 				getContactMethods().addAll((Collection<? extends ContactMethod>)newValue);
@@ -131,7 +135,8 @@ public class ContactableImpl extends EObjectImpl implements Contactable {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.CONTACTABLE__CONTACT_METHODS:
 				getContactMethods().clear();
 				return;
@@ -146,7 +151,8 @@ public class ContactableImpl extends EObjectImpl implements Contactable {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.CONTACTABLE__CONTACT_METHODS:
 				return contactMethods != null && !contactMethods.isEmpty();
 		}

@@ -330,7 +330,7 @@ public class DairyProfileViewController extends SubModuleController {
 		try {
 			condenseContacts();
 			validateProfile();
-			dairyRepository.updateDairy();
+			dairyRepository.save();
 			updateBindings();
 		} catch (final Exception e) {
 			LOGGER.log(LogService.LOG_WARNING, "exception updating dairy profile", e);

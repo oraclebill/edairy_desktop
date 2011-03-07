@@ -179,7 +179,8 @@ public enum TransactionSource implements Enumerator {
 	 * @generated
 	 */
 	private static final TransactionSource[] VALUES_ARRAY =
-		new TransactionSource[] {
+		new TransactionSource[]
+		{
 			STORE_CREDIT,
 			CLINICAL_SERVICES,
 			SHARE_RECOVERY,
@@ -203,9 +204,11 @@ public enum TransactionSource implements Enumerator {
 	 * @generated
 	 */
 	public static TransactionSource get(String literal) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			TransactionSource result = VALUES_ARRAY[i];
-			if (result.toString().equals(literal)) {
+			if (result.toString().equals(literal))
+			{
 				return result;
 			}
 		}
@@ -219,9 +222,11 @@ public enum TransactionSource implements Enumerator {
 	 * @generated
 	 */
 	public static TransactionSource getByName(String name) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			TransactionSource result = VALUES_ARRAY[i];
-			if (result.getName().equals(name)) {
+			if (result.getName().equals(name))
+			{
 				return result;
 			}
 		}
@@ -235,7 +240,8 @@ public enum TransactionSource implements Enumerator {
 	 * @generated
 	 */
 	public static TransactionSource get(int value) {
-		switch (value) {
+		switch (value)
+		{
 			case STORE_CREDIT_VALUE: return STORE_CREDIT;
 			case CLINICAL_SERVICES_VALUE: return CLINICAL_SERVICES;
 			case SHARE_RECOVERY_VALUE: return SHARE_RECOVERY;

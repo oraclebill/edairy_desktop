@@ -582,7 +582,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * @generated
 	 */
 	public EList<TransportRoute> getRoutes() {
-		if (routes == null) {
+		if (routes == null)
+		{
 			routes = new EObjectContainmentEList<TransportRoute>(TransportRoute.class, this, DairyPackage.DAIRY__ROUTES);
 		}
 		return routes;
@@ -594,7 +595,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * @generated
 	 */
 	public EList<Vehicle> getVehicles() {
-		if (vehicles == null) {
+		if (vehicles == null)
+		{
 			vehicles = new EObjectContainmentEList<Vehicle>(Vehicle.class, this, DairyPackage.DAIRY__VEHICLES);
 		}
 		return vehicles;
@@ -606,7 +608,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * @generated
 	 */
 	public EList<Employee> getEmployees() {
-		if (employees == null) {
+		if (employees == null)
+		{
 			employees = new EObjectContainmentWithInverseEList<Employee>(Employee.class, this, DairyPackage.DAIRY__EMPLOYEES, DairyPackage.EMPLOYEE__EMPLOYER);
 		}
 		return employees;
@@ -618,7 +621,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * @generated
 	 */
 	public EList<Membership> getMemberships() {
-		if (memberships == null) {
+		if (memberships == null)
+		{
 			memberships = new EObjectContainmentWithInverseEList<Membership>(Membership.class, this, DairyPackage.DAIRY__MEMBERSHIPS, DairyPackage.MEMBERSHIP__DAIRY);
 		}
 		return memberships;
@@ -630,7 +634,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * @generated
 	 */
 	public EList<DairyLocation> getBranchLocations() {
-		if (branchLocations == null) {
+		if (branchLocations == null)
+		{
 			branchLocations = new EObjectContainmentEList<DairyLocation>(DairyLocation.class, this, DairyPackage.DAIRY__BRANCH_LOCATIONS);
 		}
 		return branchLocations;
@@ -642,7 +647,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * @generated
 	 */
 	public EList<CollectionGroup> getCollectionJournals() {
-		if (collectionJournals == null) {
+		if (collectionJournals == null)
+		{
 			collectionJournals = new EObjectContainmentEList<CollectionGroup>(CollectionGroup.class, this, DairyPackage.DAIRY__COLLECTION_JOURNALS);
 		}
 		return collectionJournals;
@@ -654,7 +660,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * @generated
 	 */
 	public EList<DeliveryJournal> getDeliveryJournals() {
-		if (deliveryJournals == null) {
+		if (deliveryJournals == null)
+		{
 			deliveryJournals = new EObjectContainmentEList<DeliveryJournal>(DeliveryJournal.class, this, DairyPackage.DAIRY__DELIVERY_JOURNALS);
 		}
 		return deliveryJournals;
@@ -666,7 +673,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * @generated
 	 */
 	public EList<Supplier> getSuppliers() {
-		if (suppliers == null) {
+		if (suppliers == null)
+		{
 			suppliers = new EObjectContainmentEList<Supplier>(Supplier.class, this, DairyPackage.DAIRY__SUPPLIERS);
 		}
 		return suppliers;
@@ -678,7 +686,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * @generated
 	 */
 	public EList<Customer> getCustomers() {
-		if (customers == null) {
+		if (customers == null)
+		{
 			customers = new EObjectContainmentEList<Customer>(Customer.class, this, DairyPackage.DAIRY__CUSTOMERS);
 		}
 		return customers;
@@ -690,7 +699,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * @generated
 	 */
 	public EList<AnimalHealthRequest> getAnimalHealthRequests() {
-		if (animalHealthRequests == null) {
+		if (animalHealthRequests == null)
+		{
 			animalHealthRequests = new EObjectContainmentWithInverseEList<AnimalHealthRequest>(AnimalHealthRequest.class, this, DairyPackage.DAIRY__ANIMAL_HEALTH_REQUESTS, RequestsPackage.ANIMAL_HEALTH_REQUEST__DAIRY);
 		}
 		return animalHealthRequests;
@@ -702,7 +712,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * @generated
 	 */
 	public EList<Bin> getDairyBins() {
-		if (dairyBins == null) {
+		if (dairyBins == null)
+		{
 			dairyBins = new EObjectContainmentEList<Bin>(Bin.class, this, DairyPackage.DAIRY__DAIRY_BINS);
 		}
 		return dairyBins;
@@ -714,7 +725,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * @generated
 	 */
 	public EList<MemberPayment> getPriceHistory() {
-		if (priceHistory == null) {
+		if (priceHistory == null)
+		{
 			priceHistory = new EObjectContainmentEList<MemberPayment>(MemberPayment.class, this, DairyPackage.DAIRY__PRICE_HISTORY);
 		}
 		return priceHistory;
@@ -747,7 +759,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * @generated
 	 */
 	public EList<CollectionSession> getCollectionSessions() {
-		if (collectionSessions == null) {
+		if (collectionSessions == null)
+		{
 			collectionSessions = new EObjectContainmentWithInverseEList<CollectionSession>(CollectionSession.class, this, DairyPackage.DAIRY__COLLECTION_SESSIONS, DairyPackage.COLLECTION_SESSION__DAIRY);
 		}
 		return collectionSessions;
@@ -761,7 +774,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.DAIRY__EMPLOYEES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getEmployees()).basicAdd(otherEnd, msgs);
 			case DairyPackage.DAIRY__MEMBERSHIPS:
@@ -781,7 +795,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.DAIRY__ROUTES:
 				return ((InternalEList<?>)getRoutes()).basicRemove(otherEnd, msgs);
 			case DairyPackage.DAIRY__VEHICLES:
@@ -819,7 +834,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.DAIRY__REGISTRATION_NUMBER:
 				return getRegistrationNumber();
 			case DairyPackage.DAIRY__ESTABLISHED_DATE:
@@ -876,7 +892,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.DAIRY__REGISTRATION_NUMBER:
 				setRegistrationNumber((String)newValue);
 				return;
@@ -967,7 +984,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.DAIRY__REGISTRATION_NUMBER:
 				setRegistrationNumber(REGISTRATION_NUMBER_EDEFAULT);
 				return;
@@ -1045,7 +1063,8 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.DAIRY__REGISTRATION_NUMBER:
 				return REGISTRATION_NUMBER_EDEFAULT == null ? registrationNumber != null : !REGISTRATION_NUMBER_EDEFAULT.equals(registrationNumber);
 			case DairyPackage.DAIRY__ESTABLISHED_DATE:

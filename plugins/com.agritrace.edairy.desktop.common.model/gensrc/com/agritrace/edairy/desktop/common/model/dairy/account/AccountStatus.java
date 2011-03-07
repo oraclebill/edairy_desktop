@@ -79,7 +79,8 @@ public enum AccountStatus implements Enumerator {
 	 * @generated
 	 */
 	private static final AccountStatus[] VALUES_ARRAY =
-		new AccountStatus[] {
+		new AccountStatus[]
+		{
 			ACTIVE,
 			INACTIVE,
 		};
@@ -99,9 +100,11 @@ public enum AccountStatus implements Enumerator {
 	 * @generated
 	 */
 	public static AccountStatus get(String literal) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			AccountStatus result = VALUES_ARRAY[i];
-			if (result.toString().equals(literal)) {
+			if (result.toString().equals(literal))
+			{
 				return result;
 			}
 		}
@@ -115,9 +118,11 @@ public enum AccountStatus implements Enumerator {
 	 * @generated
 	 */
 	public static AccountStatus getByName(String name) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			AccountStatus result = VALUES_ARRAY[i];
-			if (result.getName().equals(name)) {
+			if (result.getName().equals(name))
+			{
 				return result;
 			}
 		}
@@ -131,7 +136,8 @@ public enum AccountStatus implements Enumerator {
 	 * @generated
 	 */
 	public static AccountStatus get(int value) {
-		switch (value) {
+		switch (value)
+		{
 			case ACTIVE_VALUE: return ACTIVE;
 		}
 		return null;

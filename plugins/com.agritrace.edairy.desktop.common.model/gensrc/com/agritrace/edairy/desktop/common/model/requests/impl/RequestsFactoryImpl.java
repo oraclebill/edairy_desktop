@@ -31,13 +31,16 @@ public class RequestsFactoryImpl extends EFactoryImpl implements RequestsFactory
 	 * @generated
 	 */
 	public static RequestsFactory init() {
-		try {
+		try
+		{
 			RequestsFactory theRequestsFactory = (RequestsFactory)EPackage.Registry.INSTANCE.getEFactory("http://edairy.agritrace.com/requests/"); 
-			if (theRequestsFactory != null) {
+			if (theRequestsFactory != null)
+			{
 				return theRequestsFactory;
 			}
 		}
-		catch (Exception exception) {
+		catch (Exception exception)
+		{
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new RequestsFactoryImpl();
@@ -60,7 +63,8 @@ public class RequestsFactoryImpl extends EFactoryImpl implements RequestsFactory
 	 */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
+		switch (eClass.getClassifierID())
+		{
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST: return createAnimalHealthRequest();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -74,7 +78,8 @@ public class RequestsFactoryImpl extends EFactoryImpl implements RequestsFactory
 	 */
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
-		switch (eDataType.getClassifierID()) {
+		switch (eDataType.getClassifierID())
+		{
 			case RequestsPackage.REQUEST_TYPE:
 				return createRequestTypeFromString(eDataType, initialValue);
 			default:
@@ -89,7 +94,8 @@ public class RequestsFactoryImpl extends EFactoryImpl implements RequestsFactory
 	 */
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
-		switch (eDataType.getClassifierID()) {
+		switch (eDataType.getClassifierID())
+		{
 			case RequestsPackage.REQUEST_TYPE:
 				return convertRequestTypeToString(eDataType, instanceValue);
 			default:

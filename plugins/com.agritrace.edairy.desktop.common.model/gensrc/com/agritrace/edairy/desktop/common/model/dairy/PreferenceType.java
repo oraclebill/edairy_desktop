@@ -179,7 +179,8 @@ public enum PreferenceType implements Enumerator {
 	 * @generated
 	 */
 	private static final PreferenceType[] VALUES_ARRAY =
-		new PreferenceType[] {
+		new PreferenceType[]
+		{
 			STRING,
 			BOOLEAN,
 			INT,
@@ -203,9 +204,11 @@ public enum PreferenceType implements Enumerator {
 	 * @generated
 	 */
 	public static PreferenceType get(String literal) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			PreferenceType result = VALUES_ARRAY[i];
-			if (result.toString().equals(literal)) {
+			if (result.toString().equals(literal))
+			{
 				return result;
 			}
 		}
@@ -219,9 +222,11 @@ public enum PreferenceType implements Enumerator {
 	 * @generated
 	 */
 	public static PreferenceType getByName(String name) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			PreferenceType result = VALUES_ARRAY[i];
-			if (result.getName().equals(name)) {
+			if (result.getName().equals(name))
+			{
 				return result;
 			}
 		}
@@ -235,7 +240,8 @@ public enum PreferenceType implements Enumerator {
 	 * @generated
 	 */
 	public static PreferenceType get(int value) {
-		switch (value) {
+		switch (value)
+		{
 			case STRING_VALUE: return STRING;
 			case BOOLEAN_VALUE: return BOOLEAN;
 			case INT_VALUE: return INT;

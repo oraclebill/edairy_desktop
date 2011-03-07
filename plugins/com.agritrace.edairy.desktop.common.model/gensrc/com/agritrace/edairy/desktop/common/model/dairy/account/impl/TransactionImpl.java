@@ -190,7 +190,8 @@ public class TransactionImpl extends EObjectImpl implements Transaction {
 	 * @generated
 	 */
 	public void setAccount(Account newAccount) {
-		if (newAccount != eInternalContainer() || (eContainerFeatureID() != AccountPackage.TRANSACTION__ACCOUNT && newAccount != null)) {
+		if (newAccount != eInternalContainer() || (eContainerFeatureID() != AccountPackage.TRANSACTION__ACCOUNT && newAccount != null))
+		{
 			if (EcoreUtil.isAncestor(this, newAccount))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -317,7 +318,8 @@ public class TransactionImpl extends EObjectImpl implements Transaction {
 	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case AccountPackage.TRANSACTION__ACCOUNT:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -333,7 +335,8 @@ public class TransactionImpl extends EObjectImpl implements Transaction {
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case AccountPackage.TRANSACTION__ACCOUNT:
 				return basicSetAccount(null, msgs);
 		}
@@ -347,7 +350,8 @@ public class TransactionImpl extends EObjectImpl implements Transaction {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
+		switch (eContainerFeatureID())
+		{
 			case AccountPackage.TRANSACTION__ACCOUNT:
 				return eInternalContainer().eInverseRemove(this, AccountPackage.ACCOUNT__TRANSACTIONS, Account.class, msgs);
 		}
@@ -361,7 +365,8 @@ public class TransactionImpl extends EObjectImpl implements Transaction {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case AccountPackage.TRANSACTION__ACCOUNT:
 				return getAccount();
 			case AccountPackage.TRANSACTION__TRANSACTION_ID:
@@ -385,7 +390,8 @@ public class TransactionImpl extends EObjectImpl implements Transaction {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case AccountPackage.TRANSACTION__ACCOUNT:
 				setAccount((Account)newValue);
 				return;
@@ -415,7 +421,8 @@ public class TransactionImpl extends EObjectImpl implements Transaction {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case AccountPackage.TRANSACTION__ACCOUNT:
 				setAccount((Account)null);
 				return;
@@ -445,7 +452,8 @@ public class TransactionImpl extends EObjectImpl implements Transaction {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case AccountPackage.TRANSACTION__ACCOUNT:
 				return getAccount() != null;
 			case AccountPackage.TRANSACTION__TRANSACTION_ID:

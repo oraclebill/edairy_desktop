@@ -280,7 +280,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 			final BulkCollectionsEntryDialog journalEntryDialog = new BulkCollectionsEntryDialog(getShell(), controller);
 
 			if (Window.OK != journalEntryDialog.open()) {
-				throw new TransactionException("Rollback");
+				throw new TransactionException("Dialog Rollback");
 			}
 		}
 		refreshTableContents();

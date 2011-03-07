@@ -949,13 +949,15 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 		addAnnotation
 		  (getContainer_TrackingNumber(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
 		  (getRegisteredAnimal_AnimalType(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "animalType",
 			 "kind", "elementOnly"
 		   });	
@@ -972,13 +974,15 @@ public class TrackingPackageImpl extends EPackageImpl implements TrackingPackage
 		addAnnotation
 		  (getContainer_TrackingNumber(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@NaturalId"
 		   });			
 		addAnnotation
 		  (getRegisteredAnimal_AnimalType(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@ManyToOne(cascade=PERSIST)"
 		   });
 	}

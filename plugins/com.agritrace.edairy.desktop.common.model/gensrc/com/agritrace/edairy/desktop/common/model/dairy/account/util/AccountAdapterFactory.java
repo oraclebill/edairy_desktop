@@ -39,7 +39,8 @@ public class AccountAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public AccountAdapterFactory() {
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = AccountPackage.eINSTANCE;
 		}
 	}
@@ -54,10 +55,12 @@ public class AccountAdapterFactory extends AdapterFactoryImpl {
 	 */
 	@Override
 	public boolean isFactoryForType(Object object) {
-		if (object == modelPackage) {
+		if (object == modelPackage)
+		{
 			return true;
 		}
-		if (object instanceof EObject) {
+		if (object instanceof EObject)
+		{
 			return ((EObject)object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
@@ -70,29 +73,36 @@ public class AccountAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	protected AccountSwitch<Adapter> modelSwitch =
-		new AccountSwitch<Adapter>() {
+		new AccountSwitch<Adapter>()
+		{
 			@Override
-			public Adapter caseAccount(Account object) {
+			public Adapter caseAccount(Account object)
+			{
 				return createAccountAdapter();
 			}
 			@Override
-			public Adapter caseTransaction(Transaction object) {
+			public Adapter caseTransaction(Transaction object)
+			{
 				return createTransactionAdapter();
 			}
 			@Override
-			public Adapter caseAccountTransaction(AccountTransaction object) {
+			public Adapter caseAccountTransaction(AccountTransaction object)
+			{
 				return createAccountTransactionAdapter();
 			}
 			@Override
-			public Adapter caseAdjustmentTransaction(AdjustmentTransaction object) {
+			public Adapter caseAdjustmentTransaction(AdjustmentTransaction object)
+			{
 				return createAdjustmentTransactionAdapter();
 			}
 			@Override
-			public Adapter caseBalancePoint(BalancePoint object) {
+			public Adapter caseBalancePoint(BalancePoint object)
+			{
 				return createBalancePointAdapter();
 			}
 			@Override
-			public Adapter defaultCase(EObject object) {
+			public Adapter defaultCase(EObject object)
+			{
 				return createEObjectAdapter();
 			}
 		};

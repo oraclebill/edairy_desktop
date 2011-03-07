@@ -182,7 +182,8 @@ public class CustomerImpl extends CompanyImpl implements Customer {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.CUSTOMER__CUSTOMER_NUMBER:
 				return getCustomerNumber();
 			case DairyPackage.CUSTOMER__CUSTOMER_TYPE:
@@ -200,7 +201,8 @@ public class CustomerImpl extends CompanyImpl implements Customer {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.CUSTOMER__CUSTOMER_NUMBER:
 				setCustomerNumber((String)newValue);
 				return;
@@ -221,7 +223,8 @@ public class CustomerImpl extends CompanyImpl implements Customer {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.CUSTOMER__CUSTOMER_NUMBER:
 				setCustomerNumber(CUSTOMER_NUMBER_EDEFAULT);
 				return;
@@ -242,7 +245,8 @@ public class CustomerImpl extends CompanyImpl implements Customer {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.CUSTOMER__CUSTOMER_NUMBER:
 				return CUSTOMER_NUMBER_EDEFAULT == null ? customerNumber != null : !CUSTOMER_NUMBER_EDEFAULT.equals(customerNumber);
 			case DairyPackage.CUSTOMER__CUSTOMER_TYPE:

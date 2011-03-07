@@ -141,7 +141,8 @@ public class AuditedImpl extends EObjectImpl implements Audited {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.AUDITED__LAST_UPDATED:
 				return getLastUpdated();
 			case ModelPackage.AUDITED__VOID_DATE:
@@ -157,7 +158,8 @@ public class AuditedImpl extends EObjectImpl implements Audited {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.AUDITED__LAST_UPDATED:
 				setLastUpdated((Date)newValue);
 				return;
@@ -175,7 +177,8 @@ public class AuditedImpl extends EObjectImpl implements Audited {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.AUDITED__LAST_UPDATED:
 				setLastUpdated(LAST_UPDATED_EDEFAULT);
 				return;
@@ -193,7 +196,8 @@ public class AuditedImpl extends EObjectImpl implements Audited {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.AUDITED__LAST_UPDATED:
 				return LAST_UPDATED_EDEFAULT == null ? lastUpdated != null : !LAST_UPDATED_EDEFAULT.equals(lastUpdated);
 			case ModelPackage.AUDITED__VOID_DATE:

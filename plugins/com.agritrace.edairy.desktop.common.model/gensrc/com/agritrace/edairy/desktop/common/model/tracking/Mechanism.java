@@ -204,7 +204,8 @@ public enum Mechanism implements Enumerator {
 	 * @generated
 	 */
 	private static final Mechanism[] VALUES_ARRAY =
-		new Mechanism[] {
+		new Mechanism[]
+		{
 			BRAND,
 			BADGE,
 			COLLAR,
@@ -229,9 +230,11 @@ public enum Mechanism implements Enumerator {
 	 * @generated
 	 */
 	public static Mechanism get(String literal) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			Mechanism result = VALUES_ARRAY[i];
-			if (result.toString().equals(literal)) {
+			if (result.toString().equals(literal))
+			{
 				return result;
 			}
 		}
@@ -245,9 +248,11 @@ public enum Mechanism implements Enumerator {
 	 * @generated
 	 */
 	public static Mechanism getByName(String name) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			Mechanism result = VALUES_ARRAY[i];
-			if (result.getName().equals(name)) {
+			if (result.getName().equals(name))
+			{
 				return result;
 			}
 		}
@@ -261,7 +266,8 @@ public enum Mechanism implements Enumerator {
 	 * @generated
 	 */
 	public static Mechanism get(int value) {
-		switch (value) {
+		switch (value)
+		{
 			case BRAND_VALUE: return BRAND;
 			case BADGE_VALUE: return BADGE;
 			case COLLAR_VALUE: return COLLAR;

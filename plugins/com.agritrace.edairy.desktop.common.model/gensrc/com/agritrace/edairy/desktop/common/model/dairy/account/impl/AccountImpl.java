@@ -261,7 +261,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 * @generated
 	 */
 	public void setMember(Membership newMember) {
-		if (newMember != eInternalContainer() || (eContainerFeatureID() != AccountPackage.ACCOUNT__MEMBER && newMember != null)) {
+		if (newMember != eInternalContainer() || (eContainerFeatureID() != AccountPackage.ACCOUNT__MEMBER && newMember != null))
+		{
 			if (EcoreUtil.isAncestor(this, newMember))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -345,7 +346,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 * @generated
 	 */
 	public EList<Transaction> getTransactions() {
-		if (transactions == null) {
+		if (transactions == null)
+		{
 			transactions = new EObjectContainmentWithInverseEList<Transaction>(Transaction.class, this, AccountPackage.ACCOUNT__TRANSACTIONS, AccountPackage.TRANSACTION__ACCOUNT);
 		}
 		return transactions;
@@ -357,7 +359,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 * @generated
 	 */
 	public EList<BalancePoint> getBalances() {
-		if (balances == null) {
+		if (balances == null)
+		{
 			balances = new EObjectContainmentWithInverseEList<BalancePoint>(BalancePoint.class, this, AccountPackage.ACCOUNT__BALANCES, AccountPackage.BALANCE_POINT__ACCOUNT);
 		}
 		return balances;
@@ -371,7 +374,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case AccountPackage.ACCOUNT__MEMBER:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -391,7 +395,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case AccountPackage.ACCOUNT__MEMBER:
 				return basicSetMember(null, msgs);
 			case AccountPackage.ACCOUNT__TRANSACTIONS:
@@ -409,7 +414,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
+		switch (eContainerFeatureID())
+		{
 			case AccountPackage.ACCOUNT__MEMBER:
 				return eInternalContainer().eInverseRemove(this, DairyPackage.MEMBERSHIP__ACCOUNT, Membership.class, msgs);
 		}
@@ -423,7 +429,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case AccountPackage.ACCOUNT__ACCOUNT_ID:
 				return getAccountId();
 			case AccountPackage.ACCOUNT__ACCOUNT_NUMBER:
@@ -452,7 +459,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case AccountPackage.ACCOUNT__ACCOUNT_ID:
 				setAccountId((Long)newValue);
 				return;
@@ -490,7 +498,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case AccountPackage.ACCOUNT__ACCOUNT_ID:
 				setAccountId(ACCOUNT_ID_EDEFAULT);
 				return;
@@ -526,7 +535,8 @@ public class AccountImpl extends EObjectImpl implements Account {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case AccountPackage.ACCOUNT__ACCOUNT_ID:
 				return accountId != ACCOUNT_ID_EDEFAULT;
 			case AccountPackage.ACCOUNT__ACCOUNT_NUMBER:

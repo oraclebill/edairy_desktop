@@ -33,13 +33,16 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * @generated
 	 */
 	public static ModelFactory init() {
-		try {
+		try
+		{
 			ModelFactory theModelFactory = (ModelFactory)EPackage.Registry.INSTANCE.getEFactory("http://com.agritrace.edairy.desktop.common.model/base/"); 
-			if (theModelFactory != null) {
+			if (theModelFactory != null)
+			{
 				return theModelFactory;
 			}
 		}
-		catch (Exception exception) {
+		catch (Exception exception)
+		{
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new ModelFactoryImpl();
@@ -62,7 +65,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
+		switch (eClass.getClassifierID())
+		{
 			case ModelPackage.MAP_LOCATION: return createMapLocation();
 			case ModelPackage.POSTAL_LOCATION: return createPostalLocation();
 			case ModelPackage.STATUTORY_LOCATION: return createStatutoryLocation();
@@ -91,7 +95,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
-		switch (eDataType.getClassifierID()) {
+		switch (eDataType.getClassifierID())
+		{
 			case ModelPackage.GENDER:
 				return createGenderFromString(eDataType, initialValue);
 			case ModelPackage.CONTACT_METHOD_TYPE:
@@ -120,7 +125,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
-		switch (eDataType.getClassifierID()) {
+		switch (eDataType.getClassifierID())
+		{
 			case ModelPackage.GENDER:
 				return convertGenderToString(eDataType, instanceValue);
 			case ModelPackage.CONTACT_METHOD_TYPE:

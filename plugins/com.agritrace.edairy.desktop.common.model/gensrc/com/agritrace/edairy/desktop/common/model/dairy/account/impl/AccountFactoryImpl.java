@@ -31,13 +31,16 @@ public class AccountFactoryImpl extends EFactoryImpl implements AccountFactory {
 	 * @generated
 	 */
 	public static AccountFactory init() {
-		try {
+		try
+		{
 			AccountFactory theAccountFactory = (AccountFactory)EPackage.Registry.INSTANCE.getEFactory("http://com.agritrace.edairy.desktop.common.model/account"); 
-			if (theAccountFactory != null) {
+			if (theAccountFactory != null)
+			{
 				return theAccountFactory;
 			}
 		}
-		catch (Exception exception) {
+		catch (Exception exception)
+		{
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new AccountFactoryImpl();
@@ -60,7 +63,8 @@ public class AccountFactoryImpl extends EFactoryImpl implements AccountFactory {
 	 */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
+		switch (eClass.getClassifierID())
+		{
 			case AccountPackage.ACCOUNT: return createAccount();
 			case AccountPackage.TRANSACTION: return createTransaction();
 			case AccountPackage.ACCOUNT_TRANSACTION: return createAccountTransaction();
@@ -78,7 +82,8 @@ public class AccountFactoryImpl extends EFactoryImpl implements AccountFactory {
 	 */
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
-		switch (eDataType.getClassifierID()) {
+		switch (eDataType.getClassifierID())
+		{
 			case AccountPackage.TRANSACTION_TYPE:
 				return createTransactionTypeFromString(eDataType, initialValue);
 			case AccountPackage.TRANSACTION_SOURCE:
@@ -97,7 +102,8 @@ public class AccountFactoryImpl extends EFactoryImpl implements AccountFactory {
 	 */
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
-		switch (eDataType.getClassifierID()) {
+		switch (eDataType.getClassifierID())
+		{
 			case AccountPackage.TRANSACTION_TYPE:
 				return convertTransactionTypeToString(eDataType, instanceValue);
 			case AccountPackage.TRANSACTION_SOURCE:

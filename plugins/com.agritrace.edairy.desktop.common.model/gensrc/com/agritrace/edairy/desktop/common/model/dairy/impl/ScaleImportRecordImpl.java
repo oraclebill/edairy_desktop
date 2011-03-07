@@ -350,7 +350,8 @@ public class ScaleImportRecordImpl extends CollectionJournalLineImpl implements 
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.SCALE_IMPORT_RECORD__SCALE_SERIAL:
 				return getScaleSerial();
 			case DairyPackage.SCALE_IMPORT_RECORD__COLLECTION_TIME:
@@ -376,7 +377,8 @@ public class ScaleImportRecordImpl extends CollectionJournalLineImpl implements 
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.SCALE_IMPORT_RECORD__SCALE_SERIAL:
 				setScaleSerial((String)newValue);
 				return;
@@ -409,7 +411,8 @@ public class ScaleImportRecordImpl extends CollectionJournalLineImpl implements 
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.SCALE_IMPORT_RECORD__SCALE_SERIAL:
 				setScaleSerial(SCALE_SERIAL_EDEFAULT);
 				return;
@@ -442,7 +445,8 @@ public class ScaleImportRecordImpl extends CollectionJournalLineImpl implements 
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.SCALE_IMPORT_RECORD__SCALE_SERIAL:
 				return SCALE_SERIAL_EDEFAULT == null ? scaleSerial != null : !SCALE_SERIAL_EDEFAULT.equals(scaleSerial);
 			case DairyPackage.SCALE_IMPORT_RECORD__COLLECTION_TIME:

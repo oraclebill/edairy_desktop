@@ -181,7 +181,8 @@ public class ImageEntryImpl extends EObjectImpl implements ImageEntry {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.IMAGE_ENTRY__IMAGE_ID:
 				return getImageId();
 			case ModelPackage.IMAGE_ENTRY__MIME_TYPE:
@@ -199,7 +200,8 @@ public class ImageEntryImpl extends EObjectImpl implements ImageEntry {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.IMAGE_ENTRY__IMAGE_ID:
 				setImageId((String)newValue);
 				return;
@@ -220,7 +222,8 @@ public class ImageEntryImpl extends EObjectImpl implements ImageEntry {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.IMAGE_ENTRY__IMAGE_ID:
 				setImageId(IMAGE_ID_EDEFAULT);
 				return;
@@ -241,7 +244,8 @@ public class ImageEntryImpl extends EObjectImpl implements ImageEntry {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.IMAGE_ENTRY__IMAGE_ID:
 				return IMAGE_ID_EDEFAULT == null ? imageId != null : !IMAGE_ID_EDEFAULT.equals(imageId);
 			case ModelPackage.IMAGE_ENTRY__MIME_TYPE:

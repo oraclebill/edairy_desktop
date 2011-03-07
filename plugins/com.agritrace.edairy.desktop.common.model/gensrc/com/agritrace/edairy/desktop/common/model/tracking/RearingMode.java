@@ -129,7 +129,8 @@ public enum RearingMode implements Enumerator {
 	 * @generated
 	 */
 	private static final RearingMode[] VALUES_ARRAY =
-		new RearingMode[] {
+		new RearingMode[]
+		{
 			GRAZE,
 			ZEROGRAZE,
 			PASTORALHERD,
@@ -151,9 +152,11 @@ public enum RearingMode implements Enumerator {
 	 * @generated
 	 */
 	public static RearingMode get(String literal) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			RearingMode result = VALUES_ARRAY[i];
-			if (result.toString().equals(literal)) {
+			if (result.toString().equals(literal))
+			{
 				return result;
 			}
 		}
@@ -167,9 +170,11 @@ public enum RearingMode implements Enumerator {
 	 * @generated
 	 */
 	public static RearingMode getByName(String name) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			RearingMode result = VALUES_ARRAY[i];
-			if (result.getName().equals(name)) {
+			if (result.getName().equals(name))
+			{
 				return result;
 			}
 		}
@@ -183,7 +188,8 @@ public enum RearingMode implements Enumerator {
 	 * @generated
 	 */
 	public static RearingMode get(int value) {
-		switch (value) {
+		switch (value)
+		{
 			case GRAZE_VALUE: return GRAZE;
 			case ZEROGRAZE_VALUE: return ZEROGRAZE;
 			case PASTORALHERD_VALUE: return PASTORALHERD;

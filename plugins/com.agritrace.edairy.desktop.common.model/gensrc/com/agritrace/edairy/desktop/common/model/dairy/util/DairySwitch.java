@@ -48,7 +48,8 @@ public class DairySwitch<T> {
 	 * @generated
 	 */
 	public DairySwitch() {
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = DairyPackage.eINSTANCE;
 		}
 	}
@@ -72,10 +73,12 @@ public class DairySwitch<T> {
 	 * @generated
 	 */
 	protected T doSwitch(EClass theEClass, EObject theEObject) {
-		if (theEClass.eContainer() == modelPackage) {
+		if (theEClass.eContainer() == modelPackage)
+		{
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
-		else {
+		else
+		{
 			List<EClass> eSuperTypes = theEClass.getESuperTypes();
 			return
 				eSuperTypes.isEmpty() ?
@@ -92,27 +95,32 @@ public class DairySwitch<T> {
 	 * @generated
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
-		switch (classifierID) {
-			case DairyPackage.VEHICLE: {
+		switch (classifierID)
+		{
+			case DairyPackage.VEHICLE:
+			{
 				Vehicle vehicle = (Vehicle)theEObject;
 				T result = caseVehicle(vehicle);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.COLLECTION_JOURNAL_LINE: {
+			case DairyPackage.COLLECTION_JOURNAL_LINE:
+			{
 				CollectionJournalLine collectionJournalLine = (CollectionJournalLine)theEObject;
 				T result = caseCollectionJournalLine(collectionJournalLine);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.SCALE_IMPORT_RECORD: {
+			case DairyPackage.SCALE_IMPORT_RECORD:
+			{
 				ScaleImportRecord scaleImportRecord = (ScaleImportRecord)theEObject;
 				T result = caseScaleImportRecord(scaleImportRecord);
 				if (result == null) result = caseCollectionJournalLine(scaleImportRecord);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.EMPLOYEE: {
+			case DairyPackage.EMPLOYEE:
+			{
 				Employee employee = (Employee)theEObject;
 				T result = caseEmployee(employee);
 				if (result == null) result = casePerson(employee);
@@ -120,55 +128,64 @@ public class DairySwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.DAIRY_LOCATION: {
+			case DairyPackage.DAIRY_LOCATION:
+			{
 				DairyLocation dairyLocation = (DairyLocation)theEObject;
 				T result = caseDairyLocation(dairyLocation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.COLLECTION_GROUP: {
+			case DairyPackage.COLLECTION_GROUP:
+			{
 				CollectionGroup collectionGroup = (CollectionGroup)theEObject;
 				T result = caseCollectionGroup(collectionGroup);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.TRANSPORT_ROUTE: {
+			case DairyPackage.TRANSPORT_ROUTE:
+			{
 				TransportRoute transportRoute = (TransportRoute)theEObject;
 				T result = caseTransportRoute(transportRoute);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.TRIP: {
+			case DairyPackage.TRIP:
+			{
 				Trip trip = (Trip)theEObject;
 				T result = caseTrip(trip);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.DELIVERY_JOURNAL: {
+			case DairyPackage.DELIVERY_JOURNAL:
+			{
 				DeliveryJournal deliveryJournal = (DeliveryJournal)theEObject;
 				T result = caseDeliveryJournal(deliveryJournal);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.MILK_GRADE: {
+			case DairyPackage.MILK_GRADE:
+			{
 				MilkGrade milkGrade = (MilkGrade)theEObject;
 				T result = caseMilkGrade(milkGrade);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.MILK_GRADE_CHANGE: {
+			case DairyPackage.MILK_GRADE_CHANGE:
+			{
 				MilkGradeChange milkGradeChange = (MilkGradeChange)theEObject;
 				T result = caseMilkGradeChange(milkGradeChange);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.MILK_SALE: {
+			case DairyPackage.MILK_SALE:
+			{
 				MilkSale milkSale = (MilkSale)theEObject;
 				T result = caseMilkSale(milkSale);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.DAIRY: {
+			case DairyPackage.DAIRY:
+			{
 				Dairy dairy = (Dairy)theEObject;
 				T result = caseDairy(dairy);
 				if (result == null) result = caseCompany(dairy);
@@ -176,26 +193,30 @@ public class DairySwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.MEMBERSHIP: {
+			case DairyPackage.MEMBERSHIP:
+			{
 				Membership membership = (Membership)theEObject;
 				T result = caseMembership(membership);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.ASSET: {
+			case DairyPackage.ASSET:
+			{
 				Asset asset = (Asset)theEObject;
 				T result = caseAsset(asset);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.BIN: {
+			case DairyPackage.BIN:
+			{
 				Bin bin = (Bin)theEObject;
 				T result = caseBin(bin);
 				if (result == null) result = caseContainer(bin);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.SUPPLIER: {
+			case DairyPackage.SUPPLIER:
+			{
 				Supplier supplier = (Supplier)theEObject;
 				T result = caseSupplier(supplier);
 				if (result == null) result = caseCompany(supplier);
@@ -203,7 +224,8 @@ public class DairySwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.CUSTOMER: {
+			case DairyPackage.CUSTOMER:
+			{
 				Customer customer = (Customer)theEObject;
 				T result = caseCustomer(customer);
 				if (result == null) result = caseCompany(customer);
@@ -211,25 +233,29 @@ public class DairySwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.MEMBER_PAYMENT: {
+			case DairyPackage.MEMBER_PAYMENT:
+			{
 				MemberPayment memberPayment = (MemberPayment)theEObject;
 				T result = caseMemberPayment(memberPayment);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.PREFERENCE: {
+			case DairyPackage.PREFERENCE:
+			{
 				Preference preference = (Preference)theEObject;
 				T result = casePreference(preference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.PREFERENCE_KEY: {
+			case DairyPackage.PREFERENCE_KEY:
+			{
 				PreferenceKey preferenceKey = (PreferenceKey)theEObject;
 				T result = casePreferenceKey(preferenceKey);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.COLLECTION_SESSION: {
+			case DairyPackage.COLLECTION_SESSION:
+			{
 				CollectionSession collectionSession = (CollectionSession)theEObject;
 				T result = caseCollectionSession(collectionSession);
 				if (result == null) result = defaultCase(theEObject);

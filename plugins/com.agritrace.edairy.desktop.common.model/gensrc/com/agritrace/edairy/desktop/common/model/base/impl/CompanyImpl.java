@@ -254,7 +254,8 @@ public class CompanyImpl extends ContactableImpl implements Company {
 	 * @generated
 	 */
 	public EList<Person> getContacts() {
-		if (contacts == null) {
+		if (contacts == null)
+		{
 			contacts = new EObjectContainmentEList<Person>(Person.class, this, ModelPackage.COMPANY__CONTACTS);
 		}
 		return contacts;
@@ -277,7 +278,8 @@ public class CompanyImpl extends ContactableImpl implements Company {
 	public NotificationChain basicSetLocation(Location newLocation, NotificationChain msgs) {
 		Location oldLocation = location;
 		location = newLocation;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
+		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.COMPANY__LOCATION, oldLocation, newLocation);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -290,7 +292,8 @@ public class CompanyImpl extends ContactableImpl implements Company {
 	 * @generated
 	 */
 	public void setLocation(Location newLocation) {
-		if (newLocation != location) {
+		if (newLocation != location)
+		{
 			NotificationChain msgs = null;
 			if (location != null)
 				msgs = ((InternalEObject)location).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.COMPANY__LOCATION, null, msgs);
@@ -394,7 +397,8 @@ public class CompanyImpl extends ContactableImpl implements Company {
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.COMPANY__CONTACTS:
 				return ((InternalEList<?>)getContacts()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPANY__LOCATION:
@@ -410,7 +414,8 @@ public class CompanyImpl extends ContactableImpl implements Company {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.COMPANY__LEGAL_NAME:
 				return getLegalName();
 			case ModelPackage.COMPANY__COMPANY_NAME:
@@ -439,7 +444,8 @@ public class CompanyImpl extends ContactableImpl implements Company {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.COMPANY__LEGAL_NAME:
 				setLegalName((String)newValue);
 				return;
@@ -476,7 +482,8 @@ public class CompanyImpl extends ContactableImpl implements Company {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.COMPANY__LEGAL_NAME:
 				setLegalName(LEGAL_NAME_EDEFAULT);
 				return;
@@ -512,7 +519,8 @@ public class CompanyImpl extends ContactableImpl implements Company {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.COMPANY__LEGAL_NAME:
 				return LEGAL_NAME_EDEFAULT == null ? legalName != null : !LEGAL_NAME_EDEFAULT.equals(legalName);
 			case ModelPackage.COMPANY__COMPANY_NAME:

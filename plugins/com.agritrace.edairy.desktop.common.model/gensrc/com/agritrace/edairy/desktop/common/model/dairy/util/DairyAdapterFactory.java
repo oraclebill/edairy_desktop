@@ -45,7 +45,8 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public DairyAdapterFactory() {
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = DairyPackage.eINSTANCE;
 		}
 	}
@@ -60,10 +61,12 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 	 */
 	@Override
 	public boolean isFactoryForType(Object object) {
-		if (object == modelPackage) {
+		if (object == modelPackage)
+		{
 			return true;
 		}
-		if (object instanceof EObject) {
+		if (object instanceof EObject)
+		{
 			return ((EObject)object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
@@ -76,113 +79,141 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	protected DairySwitch<Adapter> modelSwitch =
-		new DairySwitch<Adapter>() {
+		new DairySwitch<Adapter>()
+		{
 			@Override
-			public Adapter caseVehicle(Vehicle object) {
+			public Adapter caseVehicle(Vehicle object)
+			{
 				return createVehicleAdapter();
 			}
 			@Override
-			public Adapter caseCollectionJournalLine(CollectionJournalLine object) {
+			public Adapter caseCollectionJournalLine(CollectionJournalLine object)
+			{
 				return createCollectionJournalLineAdapter();
 			}
 			@Override
-			public Adapter caseScaleImportRecord(ScaleImportRecord object) {
+			public Adapter caseScaleImportRecord(ScaleImportRecord object)
+			{
 				return createScaleImportRecordAdapter();
 			}
 			@Override
-			public Adapter caseEmployee(Employee object) {
+			public Adapter caseEmployee(Employee object)
+			{
 				return createEmployeeAdapter();
 			}
 			@Override
-			public Adapter caseDairyLocation(DairyLocation object) {
+			public Adapter caseDairyLocation(DairyLocation object)
+			{
 				return createDairyLocationAdapter();
 			}
 			@Override
-			public Adapter caseCollectionGroup(CollectionGroup object) {
+			public Adapter caseCollectionGroup(CollectionGroup object)
+			{
 				return createCollectionGroupAdapter();
 			}
 			@Override
-			public Adapter caseTransportRoute(TransportRoute object) {
+			public Adapter caseTransportRoute(TransportRoute object)
+			{
 				return createTransportRouteAdapter();
 			}
 			@Override
-			public Adapter caseTrip(Trip object) {
+			public Adapter caseTrip(Trip object)
+			{
 				return createTripAdapter();
 			}
 			@Override
-			public Adapter caseDeliveryJournal(DeliveryJournal object) {
+			public Adapter caseDeliveryJournal(DeliveryJournal object)
+			{
 				return createDeliveryJournalAdapter();
 			}
 			@Override
-			public Adapter caseMilkGrade(MilkGrade object) {
+			public Adapter caseMilkGrade(MilkGrade object)
+			{
 				return createMilkGradeAdapter();
 			}
 			@Override
-			public Adapter caseMilkGradeChange(MilkGradeChange object) {
+			public Adapter caseMilkGradeChange(MilkGradeChange object)
+			{
 				return createMilkGradeChangeAdapter();
 			}
 			@Override
-			public Adapter caseMilkSale(MilkSale object) {
+			public Adapter caseMilkSale(MilkSale object)
+			{
 				return createMilkSaleAdapter();
 			}
 			@Override
-			public Adapter caseDairy(Dairy object) {
+			public Adapter caseDairy(Dairy object)
+			{
 				return createDairyAdapter();
 			}
 			@Override
-			public Adapter caseMembership(Membership object) {
+			public Adapter caseMembership(Membership object)
+			{
 				return createMembershipAdapter();
 			}
 			@Override
-			public Adapter caseAsset(Asset object) {
+			public Adapter caseAsset(Asset object)
+			{
 				return createAssetAdapter();
 			}
 			@Override
-			public Adapter caseBin(Bin object) {
+			public Adapter caseBin(Bin object)
+			{
 				return createBinAdapter();
 			}
 			@Override
-			public Adapter caseSupplier(Supplier object) {
+			public Adapter caseSupplier(Supplier object)
+			{
 				return createSupplierAdapter();
 			}
 			@Override
-			public Adapter caseCustomer(Customer object) {
+			public Adapter caseCustomer(Customer object)
+			{
 				return createCustomerAdapter();
 			}
 			@Override
-			public Adapter caseMemberPayment(MemberPayment object) {
+			public Adapter caseMemberPayment(MemberPayment object)
+			{
 				return createMemberPaymentAdapter();
 			}
 			@Override
-			public Adapter casePreference(Preference object) {
+			public Adapter casePreference(Preference object)
+			{
 				return createPreferenceAdapter();
 			}
 			@Override
-			public Adapter casePreferenceKey(PreferenceKey object) {
+			public Adapter casePreferenceKey(PreferenceKey object)
+			{
 				return createPreferenceKeyAdapter();
 			}
 			@Override
-			public Adapter caseCollectionSession(CollectionSession object) {
+			public Adapter caseCollectionSession(CollectionSession object)
+			{
 				return createCollectionSessionAdapter();
 			}
 			@Override
-			public Adapter caseContactable(Contactable object) {
+			public Adapter caseContactable(Contactable object)
+			{
 				return createContactableAdapter();
 			}
 			@Override
-			public Adapter casePerson(Person object) {
+			public Adapter casePerson(Person object)
+			{
 				return createPersonAdapter();
 			}
 			@Override
-			public Adapter caseCompany(Company object) {
+			public Adapter caseCompany(Company object)
+			{
 				return createCompanyAdapter();
 			}
 			@Override
-			public Adapter caseContainer(Container object) {
+			public Adapter caseContainer(Container object)
+			{
 				return createContainerAdapter();
 			}
 			@Override
-			public Adapter defaultCase(EObject object) {
+			public Adapter defaultCase(EObject object)
+			{
 				return createEObjectAdapter();
 			}
 		};

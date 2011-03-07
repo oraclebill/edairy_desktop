@@ -344,10 +344,12 @@ public class MemberPaymentImpl extends EObjectImpl implements MemberPayment {
 	 * @generated
 	 */
 	public Employee getEnteredBy() {
-		if (enteredBy != null && enteredBy.eIsProxy()) {
+		if (enteredBy != null && enteredBy.eIsProxy())
+		{
 			InternalEObject oldEnteredBy = (InternalEObject)enteredBy;
 			enteredBy = (Employee)eResolveProxy(oldEnteredBy);
-			if (enteredBy != oldEnteredBy) {
+			if (enteredBy != oldEnteredBy)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.MEMBER_PAYMENT__ENTERED_BY, oldEnteredBy, enteredBy));
 			}
@@ -404,7 +406,8 @@ public class MemberPaymentImpl extends EObjectImpl implements MemberPayment {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.MEMBER_PAYMENT__ID:
 				return getId();
 			case DairyPackage.MEMBER_PAYMENT__YEAR:
@@ -433,7 +436,8 @@ public class MemberPaymentImpl extends EObjectImpl implements MemberPayment {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.MEMBER_PAYMENT__ID:
 				setId((Long)newValue);
 				return;
@@ -469,7 +473,8 @@ public class MemberPaymentImpl extends EObjectImpl implements MemberPayment {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.MEMBER_PAYMENT__ID:
 				setId(ID_EDEFAULT);
 				return;
@@ -505,7 +510,8 @@ public class MemberPaymentImpl extends EObjectImpl implements MemberPayment {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.MEMBER_PAYMENT__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case DairyPackage.MEMBER_PAYMENT__YEAR:

@@ -97,7 +97,8 @@ public class VersionedImpl extends EObjectImpl implements Versioned {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.VERSIONED__VERSION:
 				return getVersion();
 		}
@@ -111,7 +112,8 @@ public class VersionedImpl extends EObjectImpl implements Versioned {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.VERSIONED__VERSION:
 				setVersion((Long)newValue);
 				return;
@@ -126,7 +128,8 @@ public class VersionedImpl extends EObjectImpl implements Versioned {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.VERSIONED__VERSION:
 				setVersion(VERSION_EDEFAULT);
 				return;
@@ -141,7 +144,8 @@ public class VersionedImpl extends EObjectImpl implements Versioned {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.VERSIONED__VERSION:
 				return version != VERSION_EDEFAULT;
 		}

@@ -224,7 +224,8 @@ public class PreferenceKeyImpl extends EObjectImpl implements PreferenceKey {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.PREFERENCE_KEY__ID:
 				return getId();
 			case DairyPackage.PREFERENCE_KEY__NAME:
@@ -244,7 +245,8 @@ public class PreferenceKeyImpl extends EObjectImpl implements PreferenceKey {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.PREFERENCE_KEY__ID:
 				setId((Long)newValue);
 				return;
@@ -268,7 +270,8 @@ public class PreferenceKeyImpl extends EObjectImpl implements PreferenceKey {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.PREFERENCE_KEY__ID:
 				setId(ID_EDEFAULT);
 				return;
@@ -292,7 +295,8 @@ public class PreferenceKeyImpl extends EObjectImpl implements PreferenceKey {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.PREFERENCE_KEY__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case DairyPackage.PREFERENCE_KEY__NAME:

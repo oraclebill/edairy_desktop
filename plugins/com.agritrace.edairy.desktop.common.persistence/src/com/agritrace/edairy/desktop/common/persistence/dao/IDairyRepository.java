@@ -29,41 +29,33 @@ public interface IDairyRepository {
 
 	List<Bin> allDairyContainers();
 
-	List<DeliveryJournal> allDeliveries();
-
 	List<Vehicle> allVehicles();
 
 	List<Employee> employeesByPosition(String string);
 
-	Dairy getDairyById(Long companyId);
+//	Dairy getDairyById(Long companyId);
 
-	Container getFarmContainerById(String canId);
-
-	CollectionGroup getJournalPageById(Long pageId);
-
-	CollectionGroup getJournalPageById(String pageId);
+//	Container getFarmContainerById(String canId);
 
 	Dairy getLocalDairy();
 
 	List<DairyLocation> getLocalDairyLocations();
 
-	Membership getMembershipById(Object memberId);
-
-	Dairy reloadLocalDairy();
+//	Dairy reloadLocalDairy();
 
 	void save(Object changedItem);
 
-	void saveNewJournalPage(CollectionGroup newJournal);
+//	void saveNewJournalPage(CollectionGroup newJournal);
 
-	void updateDairy();
+//	void updateDairy();
 
 	List<TransportRoute> allRoutes();
 
 	void addRoute(TransportRoute newRoute);
 
-	void updateBranchLocation(DairyLocation changedDairyLocation);
+//	void updateBranchLocation(DairyLocation changedDairyLocation);
 
-	void addBranchLocation(DairyLocation changedDairyLocation);
+//	void addBranchLocation(DairyLocation changedDairyLocation);
 
 	void deleteBranchLocation(DairyLocation oldItem);
 
@@ -73,11 +65,11 @@ public interface IDairyRepository {
 
 	public List<MilkSale> getMilkSales(Date minDate, Date maxDate, DairyLocation store, Customer customer);
 
-	List<Bin> getBinsByRoute(TransportRoute journalRoute);
+//	List<Bin> getBinsByRoute(TransportRoute journalRoute);
 
-	Membership findMemberByMemberNo(String memberNumber);
+//	Membership findMemberByMemberNo(String memberNumber);
 
-	List<CollectionJournalLine> getMemberCollectionsForSession(CollectionSession session, Membership value);
+//	List<CollectionJournalLine> getMemberCollectionsForSession(CollectionSession session, Membership value);
 
 	List<Membership> getMembersForRoute(DairyLocation dairyLocation);
 
@@ -85,9 +77,9 @@ public interface IDairyRepository {
 
 	void save();
 
-	List<CollectionGroup> allCollectionGroups();
+//	List<CollectionGroup> allCollectionGroups();
 
-	List<CollectionGroup> getCollectionGroups(Date startDate, Date endDate);
+//	List<CollectionGroup> getCollectionGroups(Date startDate, Date endDate);
 	
 	List<MilkGrade> getMilkGrades();
 }

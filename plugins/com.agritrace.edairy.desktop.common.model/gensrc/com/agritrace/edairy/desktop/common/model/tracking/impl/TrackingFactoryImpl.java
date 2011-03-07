@@ -31,13 +31,16 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 	 * @generated
 	 */
 	public static TrackingFactory init() {
-		try {
+		try
+		{
 			TrackingFactory theTrackingFactory = (TrackingFactory)EPackage.Registry.INSTANCE.getEFactory("http://com.agritrace.edairy.desktop.common.model/tracking/"); 
-			if (theTrackingFactory != null) {
+			if (theTrackingFactory != null)
+			{
 				return theTrackingFactory;
 			}
 		}
-		catch (Exception exception) {
+		catch (Exception exception)
+		{
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new TrackingFactoryImpl();
@@ -60,7 +63,8 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 	 */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
+		switch (eClass.getClassifierID())
+		{
 			case TrackingPackage.FARM: return createFarm();
 			case TrackingPackage.FARMER: return createFarmer();
 			case TrackingPackage.CONTAINER: return createContainer();
@@ -79,7 +83,8 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 	 */
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
-		switch (eDataType.getClassifierID()) {
+		switch (eDataType.getClassifierID())
+		{
 			case TrackingPackage.ACQUISITION_TYPE:
 				return createAcquisitionTypeFromString(eDataType, initialValue);
 			case TrackingPackage.PURPOSE:
@@ -100,7 +105,8 @@ public class TrackingFactoryImpl extends EFactoryImpl implements TrackingFactory
 	 */
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
-		switch (eDataType.getClassifierID()) {
+		switch (eDataType.getClassifierID())
+		{
 			case TrackingPackage.ACQUISITION_TYPE:
 				return convertAcquisitionTypeToString(eDataType, instanceValue);
 			case TrackingPackage.PURPOSE:

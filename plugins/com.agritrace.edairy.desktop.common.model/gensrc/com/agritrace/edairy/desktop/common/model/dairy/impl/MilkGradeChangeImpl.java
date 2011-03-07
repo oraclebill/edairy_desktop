@@ -155,10 +155,12 @@ public class MilkGradeChangeImpl extends EObjectImpl implements MilkGradeChange 
 	 * @generated
 	 */
 	public MilkGrade getStartingGrade() {
-		if (startingGrade != null && startingGrade.eIsProxy()) {
+		if (startingGrade != null && startingGrade.eIsProxy())
+		{
 			InternalEObject oldStartingGrade = (InternalEObject)startingGrade;
 			startingGrade = (MilkGrade)eResolveProxy(oldStartingGrade);
-			if (startingGrade != oldStartingGrade) {
+			if (startingGrade != oldStartingGrade)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.MILK_GRADE_CHANGE__STARTING_GRADE, oldStartingGrade, startingGrade));
 			}
@@ -193,10 +195,12 @@ public class MilkGradeChangeImpl extends EObjectImpl implements MilkGradeChange 
 	 * @generated
 	 */
 	public MilkGrade getEndingGrade() {
-		if (endingGrade != null && endingGrade.eIsProxy()) {
+		if (endingGrade != null && endingGrade.eIsProxy())
+		{
 			InternalEObject oldEndingGrade = (InternalEObject)endingGrade;
 			endingGrade = (MilkGrade)eResolveProxy(oldEndingGrade);
-			if (endingGrade != oldEndingGrade) {
+			if (endingGrade != oldEndingGrade)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.MILK_GRADE_CHANGE__ENDING_GRADE, oldEndingGrade, endingGrade));
 			}
@@ -231,10 +235,12 @@ public class MilkGradeChangeImpl extends EObjectImpl implements MilkGradeChange 
 	 * @generated
 	 */
 	public Employee getChangedBy() {
-		if (changedBy != null && changedBy.eIsProxy()) {
+		if (changedBy != null && changedBy.eIsProxy())
+		{
 			InternalEObject oldChangedBy = (InternalEObject)changedBy;
 			changedBy = (Employee)eResolveProxy(oldChangedBy);
-			if (changedBy != oldChangedBy) {
+			if (changedBy != oldChangedBy)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.MILK_GRADE_CHANGE__CHANGED_BY, oldChangedBy, changedBy));
 			}
@@ -291,7 +297,8 @@ public class MilkGradeChangeImpl extends EObjectImpl implements MilkGradeChange 
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.MILK_GRADE_CHANGE__DATE:
 				return getDate();
 			case DairyPackage.MILK_GRADE_CHANGE__STARTING_GRADE:
@@ -316,7 +323,8 @@ public class MilkGradeChangeImpl extends EObjectImpl implements MilkGradeChange 
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.MILK_GRADE_CHANGE__DATE:
 				setDate((Date)newValue);
 				return;
@@ -343,7 +351,8 @@ public class MilkGradeChangeImpl extends EObjectImpl implements MilkGradeChange 
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.MILK_GRADE_CHANGE__DATE:
 				setDate(DATE_EDEFAULT);
 				return;
@@ -370,7 +379,8 @@ public class MilkGradeChangeImpl extends EObjectImpl implements MilkGradeChange 
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.MILK_GRADE_CHANGE__DATE:
 				return DATE_EDEFAULT == null ? date != null : !DATE_EDEFAULT.equals(date);
 			case DairyPackage.MILK_GRADE_CHANGE__STARTING_GRADE:

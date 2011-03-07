@@ -79,7 +79,8 @@ public enum ContainerType implements Enumerator {
 	 * @generated
 	 */
 	private static final ContainerType[] VALUES_ARRAY =
-		new ContainerType[] {
+		new ContainerType[]
+		{
 			BIN,
 			CAN,
 		};
@@ -99,9 +100,11 @@ public enum ContainerType implements Enumerator {
 	 * @generated
 	 */
 	public static ContainerType get(String literal) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			ContainerType result = VALUES_ARRAY[i];
-			if (result.toString().equals(literal)) {
+			if (result.toString().equals(literal))
+			{
 				return result;
 			}
 		}
@@ -115,9 +118,11 @@ public enum ContainerType implements Enumerator {
 	 * @generated
 	 */
 	public static ContainerType getByName(String name) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			ContainerType result = VALUES_ARRAY[i];
-			if (result.getName().equals(name)) {
+			if (result.getName().equals(name))
+			{
 				return result;
 			}
 		}
@@ -131,7 +136,8 @@ public enum ContainerType implements Enumerator {
 	 * @generated
 	 */
 	public static ContainerType get(int value) {
-		switch (value) {
+		switch (value)
+		{
 			case BIN_VALUE: return BIN;
 			case CAN_VALUE: return CAN;
 		}

@@ -393,7 +393,8 @@ public class AssetImpl extends EObjectImpl implements Asset {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.ASSET__TAG_TYPE:
 				return getTagType();
 			case DairyPackage.ASSET__TAG_VALUE:
@@ -421,7 +422,8 @@ public class AssetImpl extends EObjectImpl implements Asset {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.ASSET__TAG_TYPE:
 				setTagType((String)newValue);
 				return;
@@ -457,7 +459,8 @@ public class AssetImpl extends EObjectImpl implements Asset {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.ASSET__TAG_TYPE:
 				setTagType(TAG_TYPE_EDEFAULT);
 				return;
@@ -493,7 +496,8 @@ public class AssetImpl extends EObjectImpl implements Asset {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.ASSET__TAG_TYPE:
 				return TAG_TYPE_EDEFAULT == null ? tagType != null : !TAG_TYPE_EDEFAULT.equals(tagType);
 			case DairyPackage.ASSET__TAG_VALUE:

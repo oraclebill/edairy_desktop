@@ -42,7 +42,8 @@ public class RequestsSwitch<T> {
 	 * @generated
 	 */
 	public RequestsSwitch() {
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = RequestsPackage.eINSTANCE;
 		}
 	}
@@ -66,10 +67,12 @@ public class RequestsSwitch<T> {
 	 * @generated
 	 */
 	protected T doSwitch(EClass theEClass, EObject theEObject) {
-		if (theEClass.eContainer() == modelPackage) {
+		if (theEClass.eContainer() == modelPackage)
+		{
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
-		else {
+		else
+		{
 			List<EClass> eSuperTypes = theEClass.getESuperTypes();
 			return
 				eSuperTypes.isEmpty() ?
@@ -86,8 +89,10 @@ public class RequestsSwitch<T> {
 	 * @generated
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
-		switch (classifierID) {
-			case RequestsPackage.ANIMAL_HEALTH_REQUEST: {
+		switch (classifierID)
+		{
+			case RequestsPackage.ANIMAL_HEALTH_REQUEST:
+			{
 				AnimalHealthRequest animalHealthRequest = (AnimalHealthRequest)theEObject;
 				T result = caseAnimalHealthRequest(animalHealthRequest);
 				if (result == null) result = defaultCase(theEObject);

@@ -216,10 +216,12 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 * @generated
 	 */
 	public Farm getOwner() {
-		if (owner != null && owner.eIsProxy()) {
+		if (owner != null && owner.eIsProxy())
+		{
 			InternalEObject oldOwner = (InternalEObject)owner;
 			owner = (Farm)eResolveProxy(oldOwner);
-			if (owner != oldOwner) {
+			if (owner != oldOwner)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TrackingPackage.CONTAINER__OWNER, oldOwner, owner));
 			}
@@ -318,7 +320,8 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case TrackingPackage.CONTAINER__CONTAINER_ID:
 				return getContainerId();
 			case TrackingPackage.CONTAINER__TRACKING_NUMBER:
@@ -343,7 +346,8 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case TrackingPackage.CONTAINER__CONTAINER_ID:
 				setContainerId((Long)newValue);
 				return;
@@ -373,7 +377,8 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case TrackingPackage.CONTAINER__CONTAINER_ID:
 				setContainerId(CONTAINER_ID_EDEFAULT);
 				return;
@@ -403,7 +408,8 @@ public class ContainerImpl extends EObjectImpl implements Container {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case TrackingPackage.CONTAINER__CONTAINER_ID:
 				return CONTAINER_ID_EDEFAULT == null ? containerId != null : !CONTAINER_ID_EDEFAULT.equals(containerId);
 			case TrackingPackage.CONTAINER__TRACKING_NUMBER:

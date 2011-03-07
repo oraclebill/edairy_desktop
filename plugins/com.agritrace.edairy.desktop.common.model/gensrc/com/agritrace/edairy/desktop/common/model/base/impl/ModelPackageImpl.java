@@ -1311,8 +1311,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(mapLocationEClass, MapLocation.class, "MapLocation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getMapLocation_Longitude(), ecorePackage.getEDouble(), "longitude", null, 0, 1, MapLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMapLocation_Latitude(), ecorePackage.getEDouble(), "latitude", null, 0, 1, MapLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMapLocation_Longitude(), ecorePackage.getEDouble(), "longitude", "0.0", 0, 1, MapLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMapLocation_Latitude(), ecorePackage.getEDouble(), "latitude", "0.0", 0, 1, MapLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(postalLocationEClass, PostalLocation.class, "PostalLocation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPostalLocation_Address(), ecorePackage.getEString(), "address", null, 0, 1, PostalLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1468,111 +1468,127 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		addAnnotation
 		  (mapLocationEClass, 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "MapLocation",
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
 		  (postalLocationEClass, 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "PostalLocation",
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
 		  (statutoryLocationEClass, 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "StatutoryLocation",
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
 		  (auditedEClass, 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "Audited",
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
 		  (getAudited_VoidDate(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "kind", "element"
 		   });		
 		addAnnotation
 		  (versionedEClass, 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "Versioned",
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
 		  (contactableEClass, 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "Contactable",
 			 "kind", "elementOnly"
 		   });				
 		addAnnotation
 		  (getPerson_Location(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "location",
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
 		  (getPerson_NationalId(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "nationalId",
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
 		  (companyEClass, 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "Company",
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
 		  (descriptiveLocationEClass, 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "DescriptiveLocation",
 			 "kind", "elementOnly"
 		   });				
 		addAnnotation
 		  (getLocation_PostalLocation(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "postalLocation",
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
 		  (getLocation_MapLocation(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "mapLocation",
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
 		  (getLocation_StatutoryLocation(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "statutoryLocation",
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
 		  (getLocation_DescriptiveLocation(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "descriptiveLocation",
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
 		  (getImageEntry_ImageData(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "imageData",
 			 "kind", "elementOnly"
 		   });					
@@ -1589,115 +1605,134 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		addAnnotation
 		  (mapLocationEClass, 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@Embeddable"
 		   });			
 		addAnnotation
 		  (postalLocationEClass, 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@Embeddable"
 		   });			
 		addAnnotation
 		  (statutoryLocationEClass, 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@Embeddable"
 		   });			
 		addAnnotation
 		  (auditedEClass, 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@Embeddable"
 		   });				
 		addAnnotation
 		  (versionedEClass, 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@MappedSuperclass"
 		   });			
 		addAnnotation
 		  (contactableEClass, 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@MappedSuperclass"
 		   });				
 		addAnnotation
 		  (getPerson_Location(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@OneToOne"
 		   });			
 		addAnnotation
 		  (getPerson_NationalId(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@Column(unique=true)\n"
 		   });			
 		addAnnotation
 		  (companyEClass, 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@MappedSuperclass"
 		   });			
 		addAnnotation
 		  (descriptiveLocationEClass, 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@Embeddable"
 		   });				
 		addAnnotation
 		  (getLocation_PostalLocation(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@Embedded"
 		   });			
 		addAnnotation
 		  (getLocation_MapLocation(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@Embedded"
 		   });			
 		addAnnotation
 		  (getLocation_StatutoryLocation(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@Embedded"
 		   });			
 		addAnnotation
 		  (getLocation_DescriptiveLocation(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@Embedded"
 		   });			
 		addAnnotation
 		  (getImageEntry_ImageData(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@Lob\n@Column(length=1048576)"
 		   });		
 		addAnnotation
 		  (getSystemUser_Username(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@Column(unique=\"true\")"
 		   });		
 		addAnnotation
 		  (getSystemUser_Password(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@Column(length=64)"
 		   });		
 		addAnnotation
 		  (getRole_Name(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@Column(unique=\"true\")"
 		   });		
 		addAnnotation
 		  (getPermissionNamespace_Name(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@Column(unique=\"true\")"
 		   });
 	}

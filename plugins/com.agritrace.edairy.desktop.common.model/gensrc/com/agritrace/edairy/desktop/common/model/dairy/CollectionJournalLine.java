@@ -314,7 +314,6 @@ public interface CollectionJournalLine extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Bin</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.Bin#getCollections <em>Collections</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Dairy Container</em>' reference isn't clear,
@@ -324,8 +323,7 @@ public interface CollectionJournalLine extends EObject {
 	 * @return the value of the '<em>Bin</em>' reference.
 	 * @see #setBin(Bin)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionJournalLine_Bin()
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.Bin#getCollections
-	 * @model opposite="collections"
+	 * @model
 	 * @generated
 	 */
 	Bin getBin();

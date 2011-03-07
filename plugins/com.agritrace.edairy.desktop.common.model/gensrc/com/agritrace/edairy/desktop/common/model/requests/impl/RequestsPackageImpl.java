@@ -390,7 +390,8 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 		addAnnotation
 		  (getAnimalHealthRequest_Dairy(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "dairy",
 			 "kind", "elementOnly"
 		   });	
@@ -407,7 +408,8 @@ public class RequestsPackageImpl extends EPackageImpl implements RequestsPackage
 		addAnnotation
 		  (getAnimalHealthRequest_Dairy(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@ManyToOne(cascade=PERSIST)"
 		   });
 	}

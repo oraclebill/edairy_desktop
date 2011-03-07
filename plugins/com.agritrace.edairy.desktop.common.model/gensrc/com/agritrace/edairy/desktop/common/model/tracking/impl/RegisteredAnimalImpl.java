@@ -674,10 +674,12 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * @generated
 	 */
 	public Farm getLocation() {
-		if (location != null && location.eIsProxy()) {
+		if (location != null && location.eIsProxy())
+		{
 			InternalEObject oldLocation = (InternalEObject)location;
 			location = (Farm)eResolveProxy(oldLocation);
-			if (location != oldLocation) {
+			if (location != oldLocation)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TrackingPackage.REGISTERED_ANIMAL__LOCATION, oldLocation, location));
 			}
@@ -733,10 +735,12 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * @generated
 	 */
 	public ReferenceAnimalType getAnimalType() {
-		if (animalType != null && animalType.eIsProxy()) {
+		if (animalType != null && animalType.eIsProxy())
+		{
 			InternalEObject oldAnimalType = (InternalEObject)animalType;
 			animalType = (ReferenceAnimalType)eResolveProxy(oldAnimalType);
-			if (animalType != oldAnimalType) {
+			if (animalType != oldAnimalType)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TrackingPackage.REGISTERED_ANIMAL__ANIMAL_TYPE, oldAnimalType, animalType));
 			}
@@ -782,7 +786,8 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	public NotificationChain basicSetSireType(ReferenceAnimalType newSireType, NotificationChain msgs) {
 		ReferenceAnimalType oldSireType = sireType;
 		sireType = newSireType;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
+		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TrackingPackage.REGISTERED_ANIMAL__SIRE_TYPE, oldSireType, newSireType);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -795,7 +800,8 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * @generated
 	 */
 	public void setSireType(ReferenceAnimalType newSireType) {
-		if (newSireType != sireType) {
+		if (newSireType != sireType)
+		{
 			NotificationChain msgs = null;
 			if (sireType != null)
 				msgs = ((InternalEObject)sireType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TrackingPackage.REGISTERED_ANIMAL__SIRE_TYPE, null, msgs);
@@ -877,7 +883,8 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * @generated
 	 */
 	public EList<AnimalIdentifier> getIdentifiers() {
-		if (identifiers == null) {
+		if (identifiers == null)
+		{
 			identifiers = new EObjectContainmentEList<AnimalIdentifier>(AnimalIdentifier.class, this, TrackingPackage.REGISTERED_ANIMAL__IDENTIFIERS);
 		}
 		return identifiers;
@@ -931,7 +938,8 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 * @generated
 	 */
 	public EList<String> getPastOwners() {
-		if (pastOwners == null) {
+		if (pastOwners == null)
+		{
 			pastOwners = new EDataTypeUniqueEList<String>(String.class, this, TrackingPackage.REGISTERED_ANIMAL__PAST_OWNERS);
 		}
 		return pastOwners;
@@ -1238,7 +1246,8 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case TrackingPackage.REGISTERED_ANIMAL__SIRE_TYPE:
 				return basicSetSireType(null, msgs);
 			case TrackingPackage.REGISTERED_ANIMAL__IDENTIFIERS:
@@ -1254,7 +1263,8 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case TrackingPackage.REGISTERED_ANIMAL__REGISTRATION_ID:
 				return getRegistrationId();
 			case TrackingPackage.REGISTERED_ANIMAL__GIVEN_NAME:
@@ -1325,7 +1335,8 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case TrackingPackage.REGISTERED_ANIMAL__REGISTRATION_ID:
 				setRegistrationId((Long)newValue);
 				return;
@@ -1423,7 +1434,8 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case TrackingPackage.REGISTERED_ANIMAL__REGISTRATION_ID:
 				setRegistrationId(REGISTRATION_ID_EDEFAULT);
 				return;
@@ -1519,7 +1531,8 @@ public class RegisteredAnimalImpl extends EObjectImpl implements RegisteredAnima
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case TrackingPackage.REGISTERED_ANIMAL__REGISTRATION_ID:
 				return registrationId != REGISTRATION_ID_EDEFAULT;
 			case TrackingPackage.REGISTERED_ANIMAL__GIVEN_NAME:

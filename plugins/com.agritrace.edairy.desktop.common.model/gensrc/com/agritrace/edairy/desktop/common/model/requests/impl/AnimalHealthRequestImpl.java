@@ -303,10 +303,12 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * @generated
 	 */
 	public Membership getRequestingMember() {
-		if (requestingMember != null && requestingMember.eIsProxy()) {
+		if (requestingMember != null && requestingMember.eIsProxy())
+		{
 			InternalEObject oldRequestingMember = (InternalEObject)requestingMember;
 			requestingMember = (Membership)eResolveProxy(oldRequestingMember);
-			if (requestingMember != oldRequestingMember) {
+			if (requestingMember != oldRequestingMember)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RequestsPackage.ANIMAL_HEALTH_REQUEST__REQUESTING_MEMBER, oldRequestingMember, requestingMember));
 			}
@@ -361,7 +363,8 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * @generated
 	 */
 	public void setDairy(Dairy newDairy) {
-		if (newDairy != eInternalContainer() || (eContainerFeatureID() != RequestsPackage.ANIMAL_HEALTH_REQUEST__DAIRY && newDairy != null)) {
+		if (newDairy != eInternalContainer() || (eContainerFeatureID() != RequestsPackage.ANIMAL_HEALTH_REQUEST__DAIRY && newDairy != null))
+		{
 			if (EcoreUtil.isAncestor(this, newDairy))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -445,10 +448,12 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * @generated
 	 */
 	public RegisteredAnimal getReportedAnimal() {
-		if (reportedAnimal != null && reportedAnimal.eIsProxy()) {
+		if (reportedAnimal != null && reportedAnimal.eIsProxy())
+		{
 			InternalEObject oldReportedAnimal = (InternalEObject)reportedAnimal;
 			reportedAnimal = (RegisteredAnimal)eResolveProxy(oldReportedAnimal);
-			if (reportedAnimal != oldReportedAnimal) {
+			if (reportedAnimal != oldReportedAnimal)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RequestsPackage.ANIMAL_HEALTH_REQUEST__REPORTED_ANIMAL, oldReportedAnimal, reportedAnimal));
 			}
@@ -567,10 +572,12 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * @generated
 	 */
 	public Farm getFarm() {
-		if (farm != null && farm.eIsProxy()) {
+		if (farm != null && farm.eIsProxy())
+		{
 			InternalEObject oldFarm = (InternalEObject)farm;
 			farm = (Farm)eResolveProxy(oldFarm);
-			if (farm != oldFarm) {
+			if (farm != oldFarm)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RequestsPackage.ANIMAL_HEALTH_REQUEST__FARM, oldFarm, farm));
 			}
@@ -605,10 +612,12 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 * @generated
 	 */
 	public Supplier getReferredTo() {
-		if (referredTo != null && referredTo.eIsProxy()) {
+		if (referredTo != null && referredTo.eIsProxy())
+		{
 			InternalEObject oldReferredTo = (InternalEObject)referredTo;
 			referredTo = (Supplier)eResolveProxy(oldReferredTo);
-			if (referredTo != oldReferredTo) {
+			if (referredTo != oldReferredTo)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RequestsPackage.ANIMAL_HEALTH_REQUEST__REFERRED_TO, oldReferredTo, referredTo));
 			}
@@ -644,7 +653,8 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__DAIRY:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -660,7 +670,8 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__DAIRY:
 				return basicSetDairy(null, msgs);
 		}
@@ -674,7 +685,8 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
+		switch (eContainerFeatureID())
+		{
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__DAIRY:
 				return eInternalContainer().eInverseRemove(this, DairyPackage.DAIRY__ANIMAL_HEALTH_REQUESTS, Dairy.class, msgs);
 		}
@@ -688,7 +700,8 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__REQUEST_ID:
 				return getRequestId();
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__REQUESTING_MEMBER:
@@ -730,7 +743,8 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__REQUEST_ID:
 				setRequestId((Long)newValue);
 				return;
@@ -781,7 +795,8 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__REQUEST_ID:
 				setRequestId(REQUEST_ID_EDEFAULT);
 				return;
@@ -832,7 +847,8 @@ public class AnimalHealthRequestImpl extends EObjectImpl implements AnimalHealth
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__REQUEST_ID:
 				return REQUEST_ID_EDEFAULT == null ? requestId != null : !REQUEST_ID_EDEFAULT.equals(requestId);
 			case RequestsPackage.ANIMAL_HEALTH_REQUEST__REQUESTING_MEMBER:

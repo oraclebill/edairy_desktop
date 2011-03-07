@@ -181,7 +181,8 @@ public class MilkGradeImpl extends EObjectImpl implements MilkGrade {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.MILK_GRADE__CODE:
 				return getCode();
 			case DairyPackage.MILK_GRADE__NAME:
@@ -199,7 +200,8 @@ public class MilkGradeImpl extends EObjectImpl implements MilkGrade {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.MILK_GRADE__CODE:
 				setCode((String)newValue);
 				return;
@@ -220,7 +222,8 @@ public class MilkGradeImpl extends EObjectImpl implements MilkGrade {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.MILK_GRADE__CODE:
 				setCode(CODE_EDEFAULT);
 				return;
@@ -241,7 +244,8 @@ public class MilkGradeImpl extends EObjectImpl implements MilkGrade {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.MILK_GRADE__CODE:
 				return CODE_EDEFAULT == null ? code != null : !CODE_EDEFAULT.equals(code);
 			case DairyPackage.MILK_GRADE__NAME:

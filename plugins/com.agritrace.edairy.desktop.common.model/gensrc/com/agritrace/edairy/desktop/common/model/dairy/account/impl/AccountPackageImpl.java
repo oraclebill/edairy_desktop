@@ -640,7 +640,8 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 		addAnnotation
 		  (getAccount_AccountNumber(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "kind", "elementOnly"
 		   });	
 	}
@@ -656,7 +657,8 @@ public class AccountPackageImpl extends EPackageImpl implements AccountPackage {
 		addAnnotation
 		  (getAccount_AccountNumber(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@NaturalId"
 		   });
 	}

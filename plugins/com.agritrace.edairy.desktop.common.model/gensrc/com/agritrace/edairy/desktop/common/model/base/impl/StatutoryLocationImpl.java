@@ -97,7 +97,8 @@ public class StatutoryLocationImpl extends EObjectImpl implements StatutoryLocat
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.STATUTORY_LOCATION__LAND_REFERENCE_NUMBER:
 				return getLandReferenceNumber();
 		}
@@ -111,7 +112,8 @@ public class StatutoryLocationImpl extends EObjectImpl implements StatutoryLocat
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.STATUTORY_LOCATION__LAND_REFERENCE_NUMBER:
 				setLandReferenceNumber((String)newValue);
 				return;
@@ -126,7 +128,8 @@ public class StatutoryLocationImpl extends EObjectImpl implements StatutoryLocat
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.STATUTORY_LOCATION__LAND_REFERENCE_NUMBER:
 				setLandReferenceNumber(LAND_REFERENCE_NUMBER_EDEFAULT);
 				return;
@@ -141,7 +144,8 @@ public class StatutoryLocationImpl extends EObjectImpl implements StatutoryLocat
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.STATUTORY_LOCATION__LAND_REFERENCE_NUMBER:
 				return LAND_REFERENCE_NUMBER_EDEFAULT == null ? landReferenceNumber != null : !LAND_REFERENCE_NUMBER_EDEFAULT.equals(landReferenceNumber);
 		}

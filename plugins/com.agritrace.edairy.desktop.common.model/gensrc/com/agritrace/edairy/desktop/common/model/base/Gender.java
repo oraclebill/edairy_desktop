@@ -79,7 +79,8 @@ public enum Gender implements Enumerator {
 	 * @generated
 	 */
 	private static final Gender[] VALUES_ARRAY =
-		new Gender[] {
+		new Gender[]
+		{
 			MALE,
 			FEMALE,
 		};
@@ -99,9 +100,11 @@ public enum Gender implements Enumerator {
 	 * @generated
 	 */
 	public static Gender get(String literal) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			Gender result = VALUES_ARRAY[i];
-			if (result.toString().equals(literal)) {
+			if (result.toString().equals(literal))
+			{
 				return result;
 			}
 		}
@@ -115,9 +118,11 @@ public enum Gender implements Enumerator {
 	 * @generated
 	 */
 	public static Gender getByName(String name) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			Gender result = VALUES_ARRAY[i];
-			if (result.getName().equals(name)) {
+			if (result.getName().equals(name))
+			{
 				return result;
 			}
 		}
@@ -131,7 +136,8 @@ public enum Gender implements Enumerator {
 	 * @generated
 	 */
 	public static Gender get(int value) {
-		switch (value) {
+		switch (value)
+		{
 			case MALE_VALUE: return MALE;
 			case FEMALE_VALUE: return FEMALE;
 		}

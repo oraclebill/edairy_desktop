@@ -130,10 +130,12 @@ public class PreferenceImpl extends EObjectImpl implements Preference {
 	 * @generated
 	 */
 	public PreferenceKey getKey() {
-		if (key != null && key.eIsProxy()) {
+		if (key != null && key.eIsProxy())
+		{
 			InternalEObject oldKey = (InternalEObject)key;
 			key = (PreferenceKey)eResolveProxy(oldKey);
-			if (key != oldKey) {
+			if (key != oldKey)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.PREFERENCE__KEY, oldKey, key));
 			}
@@ -190,7 +192,8 @@ public class PreferenceImpl extends EObjectImpl implements Preference {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.PREFERENCE__ID:
 				return getId();
 			case DairyPackage.PREFERENCE__KEY:
@@ -209,7 +212,8 @@ public class PreferenceImpl extends EObjectImpl implements Preference {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.PREFERENCE__ID:
 				setId((Long)newValue);
 				return;
@@ -230,7 +234,8 @@ public class PreferenceImpl extends EObjectImpl implements Preference {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.PREFERENCE__ID:
 				setId(ID_EDEFAULT);
 				return;
@@ -251,7 +256,8 @@ public class PreferenceImpl extends EObjectImpl implements Preference {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.PREFERENCE__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case DairyPackage.PREFERENCE__KEY:

@@ -249,7 +249,8 @@ public class CollectionSessionImpl extends EObjectImpl implements CollectionSess
 	 * @generated
 	 */
 	public void setDairy(Dairy newDairy) {
-		if (newDairy != eInternalContainer() || (eContainerFeatureID() != DairyPackage.COLLECTION_SESSION__DAIRY && newDairy != null)) {
+		if (newDairy != eInternalContainer() || (eContainerFeatureID() != DairyPackage.COLLECTION_SESSION__DAIRY && newDairy != null))
+		{
 			if (EcoreUtil.isAncestor(this, newDairy))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -271,7 +272,8 @@ public class CollectionSessionImpl extends EObjectImpl implements CollectionSess
 	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.COLLECTION_SESSION__DAIRY:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -287,7 +289,8 @@ public class CollectionSessionImpl extends EObjectImpl implements CollectionSess
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.COLLECTION_SESSION__DAIRY:
 				return basicSetDairy(null, msgs);
 		}
@@ -301,7 +304,8 @@ public class CollectionSessionImpl extends EObjectImpl implements CollectionSess
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
+		switch (eContainerFeatureID())
+		{
 			case DairyPackage.COLLECTION_SESSION__DAIRY:
 				return eInternalContainer().eInverseRemove(this, DairyPackage.DAIRY__COLLECTION_SESSIONS, Dairy.class, msgs);
 		}
@@ -315,7 +319,8 @@ public class CollectionSessionImpl extends EObjectImpl implements CollectionSess
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.COLLECTION_SESSION__ID:
 				return getId();
 			case DairyPackage.COLLECTION_SESSION__CODE:
@@ -337,7 +342,8 @@ public class CollectionSessionImpl extends EObjectImpl implements CollectionSess
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.COLLECTION_SESSION__ID:
 				setId((Long)newValue);
 				return;
@@ -364,7 +370,8 @@ public class CollectionSessionImpl extends EObjectImpl implements CollectionSess
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.COLLECTION_SESSION__ID:
 				setId(ID_EDEFAULT);
 				return;
@@ -391,7 +398,8 @@ public class CollectionSessionImpl extends EObjectImpl implements CollectionSess
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.COLLECTION_SESSION__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case DairyPackage.COLLECTION_SESSION__CODE:

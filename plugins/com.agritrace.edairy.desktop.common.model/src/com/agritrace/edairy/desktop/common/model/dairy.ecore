@@ -72,7 +72,7 @@
         derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="ecore:EClass farm.ecore#//Farm"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="farmContainer" eType="ecore:EClass farm.ecore#//Container"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="bin" eType="#//Bin" eOpposite="#//Bin/collections"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bin" eType="#//Bin"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="group" eType="#//CollectionGroup"
         eOpposite="#//CollectionGroup/journalEntries"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="rejected" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -439,8 +439,6 @@
         <details key="appinfo" value="@Embedded"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="collections" upperBound="-1"
-        eType="#//CollectionJournalLine" eOpposite="#//CollectionJournalLine/bin"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Supplier" eSuperTypes="common.ecore#//Company">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="categories" upperBound="-1"

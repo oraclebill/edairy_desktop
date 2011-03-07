@@ -355,7 +355,7 @@ public interface Dairy extends Company {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Collection Journals</em>' containment reference list.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_CollectionJournals()
-	 * @model containment="true" keys="referenceNumber" ordered="false"
+	 * @model containment="true" keys="referenceNumber" transient="true" ordered="false"
 	 * @generated
 	 */
 	EList<CollectionGroup> getCollectionJournals();
@@ -371,7 +371,7 @@ public interface Dairy extends Company {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Delivery Journals</em>' containment reference list.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDairy_DeliveryJournals()
-	 * @model containment="true" keys="referenceNumber" ordered="false"
+	 * @model containment="true" keys="referenceNumber" transient="true" ordered="false"
 	 * @generated
 	 */
 	EList<DeliveryJournal> getDeliveryJournals();

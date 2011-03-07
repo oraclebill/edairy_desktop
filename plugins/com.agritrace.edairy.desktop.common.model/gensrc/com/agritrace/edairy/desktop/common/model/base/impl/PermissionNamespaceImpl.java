@@ -139,7 +139,8 @@ public class PermissionNamespaceImpl extends EObjectImpl implements PermissionNa
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.PERMISSION_NAMESPACE__ID:
 				return getId();
 			case ModelPackage.PERMISSION_NAMESPACE__NAME:
@@ -155,7 +156,8 @@ public class PermissionNamespaceImpl extends EObjectImpl implements PermissionNa
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.PERMISSION_NAMESPACE__ID:
 				setId((Long)newValue);
 				return;
@@ -173,7 +175,8 @@ public class PermissionNamespaceImpl extends EObjectImpl implements PermissionNa
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.PERMISSION_NAMESPACE__ID:
 				setId(ID_EDEFAULT);
 				return;
@@ -191,7 +194,8 @@ public class PermissionNamespaceImpl extends EObjectImpl implements PermissionNa
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.PERMISSION_NAMESPACE__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case ModelPackage.PERMISSION_NAMESPACE__NAME:

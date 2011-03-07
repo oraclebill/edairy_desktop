@@ -154,7 +154,8 @@ public enum JournalStatus implements Enumerator {
 	 * @generated
 	 */
 	private static final JournalStatus[] VALUES_ARRAY =
-		new JournalStatus[] {
+		new JournalStatus[]
+		{
 			NEW,
 			PENDING,
 			COMPLETE,
@@ -177,9 +178,11 @@ public enum JournalStatus implements Enumerator {
 	 * @generated
 	 */
 	public static JournalStatus get(String literal) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			JournalStatus result = VALUES_ARRAY[i];
-			if (result.toString().equals(literal)) {
+			if (result.toString().equals(literal))
+			{
 				return result;
 			}
 		}
@@ -193,9 +196,11 @@ public enum JournalStatus implements Enumerator {
 	 * @generated
 	 */
 	public static JournalStatus getByName(String name) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			JournalStatus result = VALUES_ARRAY[i];
-			if (result.getName().equals(name)) {
+			if (result.getName().equals(name))
+			{
 				return result;
 			}
 		}
@@ -209,7 +214,8 @@ public enum JournalStatus implements Enumerator {
 	 * @generated
 	 */
 	public static JournalStatus get(int value) {
-		switch (value) {
+		switch (value)
+		{
 			case NEW_VALUE: return NEW;
 			case PENDING_VALUE: return PENDING;
 			case COMPLETE_VALUE: return COMPLETE;

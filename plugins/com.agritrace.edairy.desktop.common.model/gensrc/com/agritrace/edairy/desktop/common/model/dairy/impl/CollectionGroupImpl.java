@@ -464,10 +464,12 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * @generated
 	 */
 	public Employee getDriver() {
-		if (driver != null && driver.eIsProxy()) {
+		if (driver != null && driver.eIsProxy())
+		{
 			InternalEObject oldDriver = (InternalEObject)driver;
 			driver = (Employee)eResolveProxy(oldDriver);
-			if (driver != oldDriver) {
+			if (driver != oldDriver)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_GROUP__DRIVER, oldDriver, driver));
 			}
@@ -502,10 +504,12 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * @generated
 	 */
 	public Vehicle getVehicle() {
-		if (vehicle != null && vehicle.eIsProxy()) {
+		if (vehicle != null && vehicle.eIsProxy())
+		{
 			InternalEObject oldVehicle = (InternalEObject)vehicle;
 			vehicle = (Vehicle)eResolveProxy(oldVehicle);
-			if (vehicle != oldVehicle) {
+			if (vehicle != oldVehicle)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_GROUP__VEHICLE, oldVehicle, vehicle));
 			}
@@ -582,7 +586,8 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * @generated
 	 */
 	public EList<CollectionJournalLine> getJournalEntries() {
-		if (journalEntries == null) {
+		if (journalEntries == null)
+		{
 			journalEntries = new EObjectContainmentWithInverseEList<CollectionJournalLine>(CollectionJournalLine.class, this, DairyPackage.COLLECTION_GROUP__JOURNAL_ENTRIES, DairyPackage.COLLECTION_JOURNAL_LINE__GROUP);
 		}
 		return journalEntries;
@@ -699,10 +704,12 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * @generated
 	 */
 	public CollectionSession getSession() {
-		if (session != null && session.eIsProxy()) {
+		if (session != null && session.eIsProxy())
+		{
 			InternalEObject oldSession = (InternalEObject)session;
 			session = (CollectionSession)eResolveProxy(oldSession);
-			if (session != oldSession) {
+			if (session != oldSession)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_GROUP__SESSION, oldSession, session));
 			}
@@ -737,10 +744,12 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * @generated
 	 */
 	public DairyLocation getCollectionCenter() {
-		if (collectionCenter != null && collectionCenter.eIsProxy()) {
+		if (collectionCenter != null && collectionCenter.eIsProxy())
+		{
 			InternalEObject oldCollectionCenter = (InternalEObject)collectionCenter;
 			collectionCenter = (DairyLocation)eResolveProxy(oldCollectionCenter);
-			if (collectionCenter != oldCollectionCenter) {
+			if (collectionCenter != oldCollectionCenter)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_GROUP__COLLECTION_CENTER, oldCollectionCenter, collectionCenter));
 			}
@@ -798,7 +807,8 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.COLLECTION_GROUP__JOURNAL_ENTRIES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getJournalEntries()).basicAdd(otherEnd, msgs);
 		}
@@ -812,7 +822,8 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.COLLECTION_GROUP__JOURNAL_ENTRIES:
 				return ((InternalEList<?>)getJournalEntries()).basicRemove(otherEnd, msgs);
 		}
@@ -826,7 +837,8 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.COLLECTION_GROUP__JOURNAL_ID:
 				return getJournalId();
 			case DairyPackage.COLLECTION_GROUP__REFERENCE_NUMBER:
@@ -877,7 +889,8 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.COLLECTION_GROUP__JOURNAL_ID:
 				setJournalId((Long)newValue);
 				return;
@@ -941,7 +954,8 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.COLLECTION_GROUP__JOURNAL_ID:
 				setJournalId(JOURNAL_ID_EDEFAULT);
 				return;
@@ -1004,7 +1018,8 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.COLLECTION_GROUP__JOURNAL_ID:
 				return JOURNAL_ID_EDEFAULT == null ? journalId != null : !JOURNAL_ID_EDEFAULT.equals(journalId);
 			case DairyPackage.COLLECTION_GROUP__REFERENCE_NUMBER:

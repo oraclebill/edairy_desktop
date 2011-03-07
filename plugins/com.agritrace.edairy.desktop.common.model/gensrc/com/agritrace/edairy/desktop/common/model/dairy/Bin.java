@@ -20,7 +20,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Bin#getStatus <em>Status</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Bin#getZone <em>Zone</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Bin#getAssetInfo <em>Asset Info</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.Bin#getCollections <em>Collections</em>}</li>
  * </ul>
  * </p>
  *
@@ -111,23 +110,5 @@ public interface Bin extends Container {
 	 * @generated
 	 */
 	void setAssetInfo(Asset value);
-
-	/**
-	 * Returns the value of the '<em><b>Collections</b></em>' reference list.
-	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine}.
-	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getBin <em>Bin</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Collections</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Collections</em>' reference list.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getBin_Collections()
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getBin
-	 * @model opposite="bin"
-	 * @generated
-	 */
-	EList<CollectionJournalLine> getCollections();
 
 } // DairyContainer

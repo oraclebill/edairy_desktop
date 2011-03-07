@@ -139,7 +139,8 @@ public class DescriptiveLocationImpl extends EObjectImpl implements DescriptiveL
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.DESCRIPTIVE_LOCATION__DIRECTIONS:
 				return getDirections();
 			case ModelPackage.DESCRIPTIVE_LOCATION__LANDMARKS:
@@ -155,7 +156,8 @@ public class DescriptiveLocationImpl extends EObjectImpl implements DescriptiveL
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.DESCRIPTIVE_LOCATION__DIRECTIONS:
 				setDirections((String)newValue);
 				return;
@@ -173,7 +175,8 @@ public class DescriptiveLocationImpl extends EObjectImpl implements DescriptiveL
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.DESCRIPTIVE_LOCATION__DIRECTIONS:
 				setDirections(DIRECTIONS_EDEFAULT);
 				return;
@@ -191,7 +194,8 @@ public class DescriptiveLocationImpl extends EObjectImpl implements DescriptiveL
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.DESCRIPTIVE_LOCATION__DIRECTIONS:
 				return DIRECTIONS_EDEFAULT == null ? directions != null : !DIRECTIONS_EDEFAULT.equals(directions);
 			case ModelPackage.DESCRIPTIVE_LOCATION__LANDMARKS:

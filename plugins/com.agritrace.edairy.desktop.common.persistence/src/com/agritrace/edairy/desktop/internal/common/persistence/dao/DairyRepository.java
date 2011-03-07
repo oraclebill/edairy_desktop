@@ -1,9 +1,7 @@
 package com.agritrace.edairy.desktop.internal.common.persistence.dao;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,16 +20,12 @@ import org.hibernate.criterion.Restrictions;
 import org.osgi.service.log.LogService;
 
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
+import com.agritrace.edairy.desktop.common.model.dairy.Bin;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
-import com.agritrace.edairy.desktop.common.model.dairy.Bin;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
@@ -40,9 +34,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.MilkSale;
 import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.dairy.account.Account;
-import com.agritrace.edairy.desktop.common.model.dairy.account.AccountTransaction;
-import com.agritrace.edairy.desktop.common.model.dairy.account.TransactionSource;
-import com.agritrace.edairy.desktop.common.model.tracking.Container;
 import com.agritrace.edairy.desktop.common.model.util.DairyUtil;
 import com.agritrace.edairy.desktop.common.persistence.annotations.Transactional;
 import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
@@ -220,11 +211,6 @@ public class DairyRepository implements IDairyRepository {
 		return dairy;
 	}
 
-	@Override
-	public void updateDairy() {
-		dairyRepository.update(getLocalDairy());
-	}
-
 	public void updateRoute(final TransportRoute changedRoute) {
 		dairyRepository.save(changedRoute);
 	}
@@ -236,12 +222,6 @@ public class DairyRepository implements IDairyRepository {
 	}
 
 	@Override
-	public List<CollectionGroup> allCollectionGroups() {
-		// return collectionsRepository.getMemberships();
-		return getLocalDairy().getCollectionJournals();
-	}
-
-	@Override
 	public List<Customer> allCustomers() {
 		return getLocalDairy().getCustomers();
 	}
@@ -249,12 +229,6 @@ public class DairyRepository implements IDairyRepository {
 	@Override
 	public List<Bin> allDairyContainers() {
 		return getLocalDairy().getDairyBins();
-	}
-
-	@Override
-	public List<DeliveryJournal> allDeliveries() {
-		// return deliveryRepository.getMemberships();
-		return getLocalDairy().getDeliveryJournals();
 	}
 
 	@Override
@@ -297,57 +271,9 @@ public class DairyRepository implements IDairyRepository {
 		return found;
 	}
 
-	// public List<Dairy> find(String rawQuery) {
-	// return dairyRepository.find(rawQuery);
-	// }
-	//
-	// public List<Dairy> find(String query, Object[] args) {
-	// return dairyRepository.find(query, args);
-	// }
-
-	@Override
-	public Dairy getDairyById(Long key) {
-		return dairyRepository.findByKey(key);
-	}
-
-	@Override
-	public Container getFarmContainerById(String canId) {
-		// return binRepository.findByKey(Long.parseLong(canId));
-		Container found = null;
-		for (final Container bin : getLocalDairy().getDairyBins()) {
-			if (bin.getTrackingNumber() != null && bin.getTrackingNumber().equals(canId)) {
-				found = bin;
-				break;
-			}
-		}
-		return found;
-	}
-
-	@Override
-	public CollectionGroup getJournalPageById(Long pageId) {
-		return getJournalPageById(pageId.toString());
-	}
-
-	@Override
-	public CollectionGroup getJournalPageById(String pageId) {
-		CollectionGroup found = null;
-		for (final CollectionGroup page : getLocalDairy().getCollectionJournals()) {
-			if (page.getReferenceNumber().equals(pageId)) {
-				found = page;
-				break;
-			}
-		}
-		return found;
-	}
-
 	@Override
 	public List<DairyLocation> getLocalDairyLocations() {
 		return getLocalDairy().getBranchLocations();
-	}
-
-	@Override
-	public Membership getMembershipById(Object memberId) {
-		return getMembershipById((String) memberId);
 	}
 
 	public Membership getMembershipById(String memberIdString) {
@@ -374,11 +300,6 @@ public class DairyRepository implements IDairyRepository {
 
 
 	@Override
-	public Dairy reloadLocalDairy() {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public void save() {
 		dairyRepository.save(getLocalDairy());
 	}
@@ -386,31 +307,6 @@ public class DairyRepository implements IDairyRepository {
 	@Override
 	public void save(Object changedItem) {
 		dairyRepository.save(changedItem);
-	}
-
-	@Override
-	public void saveNewJournalPage(CollectionGroup newJournal) {
-		// collectionsRepository.saveNew(newJournal);
-		getLocalDairy().getCollectionJournals().add(newJournal);
-		save();
-	}
-
-	@Override
-	public void updateBranchLocation(DairyLocation changedDairyLocation) {
-		if (getLocalDairy().getBranchLocations().contains(changedDairyLocation)) {
-			;
-		} else {
-			getLocalDairy().getBranchLocations().add(changedDairyLocation);
-		}
-		getSession().flush();
-	}
-
-	@Override
-	public void addBranchLocation(DairyLocation changedDairyLocation) {
-		getLocalDairy().getBranchLocations().add(changedDairyLocation);
-		dairyRepository.update(getLocalDairy());
-		// PersistenceManager.getDefault().getSession().persist(changedDairyLocation);
-		// PersistenceManager.getDefault().getSession().flush();
 	}
 
 	@Override
@@ -472,31 +368,6 @@ public class DairyRepository implements IDairyRepository {
 		return djCriteria.list();
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Bin> getBinsByRoute(TransportRoute journalRoute) {
-		final Session session = getSession();
-		final Criteria dcCriteria = session.createCriteria("Bin");
-		if (journalRoute != null) {
-			dcCriteria.add(Restrictions.eq("", journalRoute));
-		}
-		return dcCriteria.list();
-	}
-
-	@Override
-	public Membership findMemberByMemberNo(String searchMemberNumber) {
-		if (searchMemberNumber.length() < 5) {
-			searchMemberNumber = "00000".substring(0, 5 - searchMemberNumber.length()) + searchMemberNumber;
-		}
-		return dairyRepository.memberByNumber(searchMemberNumber);
-	}
-
-
-	@Override
-	public List<CollectionJournalLine> getMemberCollectionsForSession(CollectionSession session, Membership value) {
-		// TODO: implement
-		return null;
-	}
 
 	/**
 	 * Get the current session.
@@ -512,51 +383,6 @@ public class DairyRepository implements IDairyRepository {
 	 */
 	private void log(int level, String message) {
 		Log4r.getLogger(PersistenceActivator.getDefault(), getClass()).log(level, message);
-	}
-
-	@Override
-	public List<CollectionGroup> getCollectionGroups(Date startDate, Date endDate) {
-		// Currently filters from all groups, since the list is preloaded when
-		// loading the dairy. Apparently.
-
-		final List<CollectionGroup> result = new ArrayList<CollectionGroup>();
-
-		for (final CollectionGroup group : allCollectionGroups()) {
-			final Date date = group.getJournalDate();
-
-			if (date.compareTo(startDate) >= 0 && date.compareTo(endDate) < 0) {
-				result.add(group);
-			}
-		}
-
-		return result;
-	}
-
-//	@Override
-	@Transactional
-	public List<AccountTransaction> findAccountTransactions(Account account, Date start, Date end, String refNum, List<TransactionSource> sources) {
-		final Session session = getSession();
-		final Criteria criteria = session.createCriteria("Transaction");
-
-		if (account != null) {
-			criteria.add(Restrictions.eq("account", account));
-		}
-		if (start != null) {
-			criteria.add(Restrictions.ge("transactionDate", start));
-		}
-		if (end != null) {
-			criteria.add(Restrictions.le("transactionDate", end));
-		}
-
-		if (refNum != null) {
-			criteria.add(Restrictions.like("referenceNumber", end));
-		}
-
-		if (sources != null && sources.size() > 0) {
-			criteria.add(Restrictions.in("source", sources));
-		}
-
-		return criteria.list();
 	}
 	
 	@SuppressWarnings("unchecked")

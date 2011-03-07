@@ -139,7 +139,8 @@ public class ReferenceAnimalTypeImpl extends EObjectImpl implements ReferenceAni
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case TrackingPackage.REFERENCE_ANIMAL_TYPE__SPECIES:
 				return getSpecies();
 			case TrackingPackage.REFERENCE_ANIMAL_TYPE__BREED:
@@ -155,7 +156,8 @@ public class ReferenceAnimalTypeImpl extends EObjectImpl implements ReferenceAni
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case TrackingPackage.REFERENCE_ANIMAL_TYPE__SPECIES:
 				setSpecies((String)newValue);
 				return;
@@ -173,7 +175,8 @@ public class ReferenceAnimalTypeImpl extends EObjectImpl implements ReferenceAni
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case TrackingPackage.REFERENCE_ANIMAL_TYPE__SPECIES:
 				setSpecies(SPECIES_EDEFAULT);
 				return;
@@ -191,7 +194,8 @@ public class ReferenceAnimalTypeImpl extends EObjectImpl implements ReferenceAni
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case TrackingPackage.REFERENCE_ANIMAL_TYPE__SPECIES:
 				return SPECIES_EDEFAULT == null ? species != null : !SPECIES_EDEFAULT.equals(species);
 			case TrackingPackage.REFERENCE_ANIMAL_TYPE__BREED:

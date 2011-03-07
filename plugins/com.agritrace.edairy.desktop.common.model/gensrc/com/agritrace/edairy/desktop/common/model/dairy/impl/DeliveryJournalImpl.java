@@ -243,10 +243,12 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * @generated
 	 */
 	public TransportRoute getRoute() {
-		if (route != null && route.eIsProxy()) {
+		if (route != null && route.eIsProxy())
+		{
 			InternalEObject oldRoute = (InternalEObject)route;
 			route = (TransportRoute)eResolveProxy(oldRoute);
-			if (route != oldRoute) {
+			if (route != oldRoute)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DELIVERY_JOURNAL__ROUTE, oldRoute, route));
 			}
@@ -281,10 +283,12 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * @generated
 	 */
 	public Customer getCustomer() {
-		if (customer != null && customer.eIsProxy()) {
+		if (customer != null && customer.eIsProxy())
+		{
 			InternalEObject oldCustomer = (InternalEObject)customer;
 			customer = (Customer)eResolveProxy(oldCustomer);
-			if (customer != oldCustomer) {
+			if (customer != oldCustomer)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DELIVERY_JOURNAL__CUSTOMER, oldCustomer, customer));
 			}
@@ -319,10 +323,12 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * @generated
 	 */
 	public Employee getDriver() {
-		if (driver != null && driver.eIsProxy()) {
+		if (driver != null && driver.eIsProxy())
+		{
 			InternalEObject oldDriver = (InternalEObject)driver;
 			driver = (Employee)eResolveProxy(oldDriver);
-			if (driver != oldDriver) {
+			if (driver != oldDriver)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DELIVERY_JOURNAL__DRIVER, oldDriver, driver));
 			}
@@ -357,10 +363,12 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * @generated
 	 */
 	public Vehicle getVehicle() {
-		if (vehicle != null && vehicle.eIsProxy()) {
+		if (vehicle != null && vehicle.eIsProxy())
+		{
 			InternalEObject oldVehicle = (InternalEObject)vehicle;
 			vehicle = (Vehicle)eResolveProxy(oldVehicle);
-			if (vehicle != oldVehicle) {
+			if (vehicle != oldVehicle)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DELIVERY_JOURNAL__VEHICLE, oldVehicle, vehicle));
 			}
@@ -395,7 +403,8 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * @generated
 	 */
 	public EList<MilkSale> getLines() {
-		if (lines == null) {
+		if (lines == null)
+		{
 			lines = new EObjectContainmentEList<MilkSale>(MilkSale.class, this, DairyPackage.DELIVERY_JOURNAL__LINES);
 		}
 		return lines;
@@ -428,10 +437,12 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * @generated
 	 */
 	public CollectionSession getSession() {
-		if (session != null && session.eIsProxy()) {
+		if (session != null && session.eIsProxy())
+		{
 			InternalEObject oldSession = (InternalEObject)session;
 			session = (CollectionSession)eResolveProxy(oldSession);
-			if (session != oldSession) {
+			if (session != oldSession)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DELIVERY_JOURNAL__SESSION, oldSession, session));
 			}
@@ -467,7 +478,8 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.DELIVERY_JOURNAL__LINES:
 				return ((InternalEList<?>)getLines()).basicRemove(otherEnd, msgs);
 		}
@@ -481,7 +493,8 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.DELIVERY_JOURNAL__REFERENCE_NUMBER:
 				return getReferenceNumber();
 			case DairyPackage.DELIVERY_JOURNAL__DATE:
@@ -517,7 +530,8 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.DELIVERY_JOURNAL__REFERENCE_NUMBER:
 				setReferenceNumber((String)newValue);
 				return;
@@ -557,7 +571,8 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.DELIVERY_JOURNAL__REFERENCE_NUMBER:
 				setReferenceNumber(REFERENCE_NUMBER_EDEFAULT);
 				return;
@@ -596,7 +611,8 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.DELIVERY_JOURNAL__REFERENCE_NUMBER:
 				return REFERENCE_NUMBER_EDEFAULT == null ? referenceNumber != null : !REFERENCE_NUMBER_EDEFAULT.equals(referenceNumber);
 			case DairyPackage.DELIVERY_JOURNAL__DATE:

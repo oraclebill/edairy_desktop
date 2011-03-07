@@ -61,52 +61,57 @@ import com.agritrace.edairy.desktop.milkops.ui.intake.validators.MandatoryFields
 import com.agritrace.edairy.desktop.milkops.ui.intake.validators.MemberLookupValidator;
 import com.google.inject.Inject;
 
-public class BulkCollectionsEntryDialogController extends BaseDialogController<CollectionGroup> {
+public class BulkCollectionsEntryDialogController extends BaseDialogController<CollectionGroup>
+{
 
-	public static final String CONTEXT_JOURNAL_PAGE = "CONTEXT_JOURNAL_PAGE";
-	public static final String CONTEXT_PERSISTENCE_DELEGATE = "CONTEXT_PERSISTENCE_DELEGATE";
+	public static final String				CONTEXT_JOURNAL_PAGE			= "CONTEXT_JOURNAL_PAGE";
+	public static final String				CONTEXT_PERSISTENCE_DELEGATE	= "CONTEXT_PERSISTENCE_DELEGATE";
 
-	private static final String[] columnHeaderNames = {
-			// "Line",
+	private static final String[]			columnHeaderNames				= {
+																			// "Line",
 			"Member ID", "Member Name", "CAN Number", "Quantity", "MPR", "Quality", "Needs Review?" };
 
-	private static final String[] columnPropertyNames = {
+	private static final String[]			columnPropertyNames				= {
 			// "lineNumber",
 			"recordedMember",
-			"validatedMember.farmer.familyName", "farmContainer.containerId", "quantity", "notRecorded", "rejected", "flagged" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+			"validatedMember.farmer.familyName", "farmContainer.containerId", "quantity", "notRecorded", "rejected", "flagged" };	//$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 
-	static IStatus ERROR_STATUS = new Status(Status.ERROR, Activator.PLUGIN_ID, "Invalid membership number");
+	static IStatus							ERROR_STATUS					= new Status(Status.ERROR,
+																					Activator.PLUGIN_ID,
+																					"Invalid membership number");
 
-	static final HashMap<String, String> validatedMemberNames = new HashMap<String, String>();
-	private static final Color RED = PlatformUI.getWorkbench().getDisplay().getSystemColor(SWT.COLOR_RED);
+	static final HashMap<String, String>	validatedMemberNames			= new HashMap<String, String>();
+	private static final Color				RED								= PlatformUI.getWorkbench().getDisplay()
+																					.getSystemColor(SWT.COLOR_RED);
 
-	private Dairy dairy;
-	private final IMemberLookup memberLookup;
-//	private final ICollectionJournalLineRepository lineRepo;
+	private Dairy							dairy;
+	private final IMemberLookup				memberLookup;
+// private final ICollectionJournalLineRepository lineRepo;
 
 	// milk Entry group
-	private ITableRidget journalEntryTable;
+	private ITableRidget					journalEntryTable;
 	// private CollectionGroup workingJournalPage;
-	private IJournalHeaderRidget journalHeaderRidget;
-	private ICollectionLineRidget collectionLineRidget;
-	private ILabelRidget totalLabelRidget;
+	private IJournalHeaderRidget			journalHeaderRidget;
+	private ICollectionLineRidget			collectionLineRidget;
+	private ILabelRidget					totalLabelRidget;
 
-	private IActionRidget saveAndNewRidget;
+	private IActionRidget					saveAndNewRidget;
 
-	private IActionRidget saveAndCloseRidget;
-	private IActionRidget modifyButton;
-	private IActionRidget deleteButton;
-	private IActionRidget clearButton;
+	private IActionRidget					saveAndCloseRidget;
+	private IActionRidget					modifyButton;
+	private IActionRidget					deleteButton;
+	private IActionRidget					clearButton;
 
-	private final ValidatorCollection journalPageValidators;
+	private final ValidatorCollection		journalPageValidators;
 
-	private IActionRidget tableDeleteAction;
+	private IActionRidget					tableDeleteAction;
 
 	/**
 	 *
 	 */
 	@Inject
-	public BulkCollectionsEntryDialogController(Dairy dairy, IMemberLookup memberLookup) {
+	public BulkCollectionsEntryDialogController(Dairy dairy, IMemberLookup memberLookup)
+	{
 		super();
 		this.dairy = dairy;
 		this.memberLookup = memberLookup;
@@ -117,49 +122,56 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 	/**
 	 *
 	 */
-	public void setPersistenceDelegate(JournalPersistenceDelegate persister) {
+	public void setPersistenceDelegate(JournalPersistenceDelegate persister)
+	{
 		setContext(CONTEXT_PERSISTENCE_DELEGATE, persister);
 	}
 
 	/**
 	 *
 	 */
-	public JournalPersistenceDelegate getPersistenceDelegate() {
+	public JournalPersistenceDelegate getPersistenceDelegate()
+	{
 		return (JournalPersistenceDelegate) getContext(CONTEXT_PERSISTENCE_DELEGATE);
 	}
 
 	/**
 	 *
 	 */
-	public void setContextJournalPage(CollectionGroup newPage) {
+	public void setContextJournalPage(CollectionGroup newPage)
+	{
 		setContext(CONTEXT_JOURNAL_PAGE, newPage);
 	}
 
 	/**
 	 *
 	 */
-	public CollectionGroup getContextJournalPage() {
+	public CollectionGroup getContextJournalPage()
+	{
 		return (CollectionGroup) getContext(CONTEXT_JOURNAL_PAGE);
 	}
 
 	/**
 	 *
 	 */
-	public void addJournalValidator(IValidator validator) {
+	public void addJournalValidator(IValidator validator)
+	{
 		journalPageValidators.add(validator);
 	}
 
 	/**
 	 *
 	 */
-	public void removeJournalValidator(IValidator validator) {
+	public void removeJournalValidator(IValidator validator)
+	{
 		journalPageValidators.remove(validator);
 	}
 
 	/**
 	 *
 	 */
-	public IStatus validateJournal(CollectionGroup journal) {
+	public IStatus validateJournal(CollectionGroup journal)
+	{
 		return journalPageValidators.validate(journal);
 	}
 
@@ -167,7 +179,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 	 *
 	 */
 	@Override
-	public void configureRidgets() {
+	public void configureRidgets()
+	{
 		super.configureRidgets();
 
 		getWindowRidget().setTitle("Manual Collection Journal Entry");
@@ -176,8 +189,7 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 
 		journalHeaderRidget = getRidget(IJournalHeaderRidget.class, "journal-header");
 		collectionLineRidget = getRidget(ICollectionLineRidget.class, "journal-entry");
-		
-		
+
 		journalEntryTable = getRidget(ITableRidget.class, ViewWidgetId.milkEntryTable);
 		modifyButton = getRidget(IActionRidget.class, ViewWidgetId.modifyButton);
 		deleteButton = getRidget(IActionRidget.class, ViewWidgetId.deleteButton);
@@ -187,13 +199,21 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 		//
 		saveAndNewRidget = getRidget(IActionRidget.class, DialogConstants.BIND_ID_BUTTON_SAVE);
 		saveAndCloseRidget = getRidget(IActionRidget.class, DialogConstants.BIND_ID_BUTTON_CANCEL);
+		saveAndCloseRidget.addListener(new IActionListener() {
+			@Override
+			public void callback()
+			{
+				setReturnCode(0);
+			}
+		});
 		tableDeleteAction = getRidget(IActionRidget.class, DialogConstants.BIND_ID_BUTTON_DELETE);
 
 		// config stuff..
 
 		final PropertyChangeListener headerValidityListener = new PropertyChangeListener() {
 			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
+			public void propertyChange(PropertyChangeEvent evt)
+			{
 				final boolean isValid = journalHeaderRidget.isHeaderValid();
 				log(LogService.LOG_DEBUG, String.format(" --. got header valid event: %s", evt));
 				collectionLineRidget.setEnabled(isValid);
@@ -210,7 +230,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 		collectionLineRidget.addPropertyChangeListener(ICollectionLineRidget.VALIDATED_VALUE,
 				new PropertyChangeListener() {
 					@Override
-					public void propertyChange(PropertyChangeEvent evt) {
+					public void propertyChange(PropertyChangeEvent evt)
+					{
 						log(LogService.LOG_DEBUG, "CollectionLineRidget event: " + evt);
 						final CollectionGroup workingJournalPage = getContextJournalPage();
 						addCollectionGroupEntry(workingJournalPage, (CollectionJournalLine) evt.getNewValue());
@@ -225,7 +246,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 		saveAndNewRidget.setText("Save and enter new journal");
 		saveAndNewRidget.addListener(new IActionListener() {
 			@Override
-			public void callback() {
+			public void callback()
+			{
 				handleSaveAndNewJournalAction();
 			}
 		});
@@ -233,7 +255,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 		saveAndCloseRidget.setText("Save and quit");
 		saveAndCloseRidget.addListener(new IActionListener() {
 			@Override
-			public void callback() {
+			public void callback()
+			{
 				handleSaveAndCloseWindowAction();
 			}
 		});
@@ -250,14 +273,16 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 	/**
 	 *
 	 */
-	protected void configureJournalEntryTable(final ITableRidget table) {
+	protected void configureJournalEntryTable(final ITableRidget table)
+	{
 		table.setFocusable(false);
 		// table.setColumnFormatter(2, new PersonToFormattedName());
 
 		table.setSelectionType(SelectionType.SINGLE);
 		table.addSelectionListener(new ISelectionListener() {
 			@Override
-			public void ridgetSelected(SelectionEvent event) {
+			public void ridgetSelected(SelectionEvent event)
+			{
 				if (table.getSelection().size() == 0) {
 					enableBottomButtons(false);
 				} else {
@@ -267,7 +292,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 		});
 		table.setColumnFormatter(1, new ColumnFormatter() {
 			@Override
-			public String getText(Object element) {
+			public String getText(Object element)
+			{
 				if (element == null) {
 					return "<missing>";
 				} else {
@@ -276,7 +302,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 			}
 
 			@Override
-			public Color getForeground(Object element) {
+			public Color getForeground(Object element)
+			{
 				if (element == null) {
 					return RED;
 				} else {
@@ -292,7 +319,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 
 		table.addClickListener(new IClickListener() {
 			@Override
-			public void callback(ClickEvent event) {
+			public void callback(ClickEvent event)
+			{
 				if (event.getColumnIndex() == 6) {
 					final CollectionJournalLine line = (CollectionJournalLine) event.getRow();
 
@@ -310,7 +338,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 		modifyButton.setEnabled(false);
 		modifyButton.addListener(new IActionListener() {
 			@Override
-			public void callback() {
+			public void callback()
+			{
 				// MilkCollectionRecord aRecord = (MilkCollectionRecord)
 				// table.getSelection().get(0);
 				// ModifyMilkRecordDialog modifyDialog = new
@@ -327,7 +356,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 
 		deleteButton.addListener(new IActionListener() {
 			@Override
-			public void callback() {
+			public void callback()
+			{
 				if (MessageDialog.openConfirm(getShell(), "Delete Milk Collection Records",
 						"Do you want to delete the selected milk collection records?")) {
 					final List<Object> selectedRecords = journalEntryTable.getSelection();
@@ -344,7 +374,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 
 		clearButton.addListener(new IActionListener() {
 			@Override
-			public void callback() {
+			public void callback()
+			{
 				if (MessageDialog.openConfirm(getShell(), "Delete Milk Collection Records",
 						"Do you want to delete all milk collection records?")) {
 					// records.clear();
@@ -362,7 +393,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 	 *
 	 */
 	@Override
-	public void afterBind() {
+	public void afterBind()
+	{
 		super.afterBind();
 
 		System.out.println("afterBind : " + this);
@@ -389,7 +421,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 		setInitialFocus();
 	}
 
-	private void initValidators() {
+	private void initValidators()
+	{
 		// page relative config
 		//
 		final CollectionGroup workingJournalPage = getContextJournalPage();
@@ -400,7 +433,7 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 		// TODO: RouteMatchValidator
 		// collectionLineRidget.setRouteValidator(new RouteMatchValidator(
 		// workingJournalPage.getRoute()));
-//		final IMemberLookup handler = new CachingMemberLookup(memberRepo);
+// final IMemberLookup handler = new CachingMemberLookup(memberRepo);
 		collectionLineRidget.addValidator(new MemberLookupValidator(memberLookup));
 
 		/*
@@ -414,7 +447,7 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 		collectionLineRidget.setMemberInfoProvider(memberLookup);
 		// }
 
-//		final Dairy dairy = dairyRepo.getLocalDairy();
+// final Dairy dairy = dairyRepo.getLocalDairy();
 		collectionLineRidget.setBinList(dairy.getDairyBins());
 
 		collectionLineRidget.addValidator(new DuplicateDeliveryValidator(workingJournalPage.getJournalEntries(),
@@ -422,7 +455,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 
 		collectionLineRidget.addValidator(new IValidator() {
 			@Override
-			public IStatus validate(Object value) {
+			public IStatus validate(Object value)
+			{
 				final CollectionJournalLine line = (CollectionJournalLine) value;
 				final Membership member = line.getValidatedMember();
 				final DairyLocation center = getContextJournalPage().getCollectionCenter();
@@ -435,10 +469,10 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 				if (date == null) {
 					return ValidationStatus.error("The journal entry has no date assigned");
 				}
-// TODO: TODO: TODO: restore this validation 
-//				if (member != null && lineRepo.countByMemberCenterDate(member, center, date) > 0) {
-//					return ValidationStatus.warning("Another entry for this member, center and date already exists");
-//				}
+// TODO: TODO: TODO: restore this validation
+// if (member != null && lineRepo.countByMemberCenterDate(member, center, date) > 0) {
+// return ValidationStatus.warning("Another entry for this member, center and date already exists");
+// }
 
 				return ValidationStatus.ok();
 			}
@@ -447,21 +481,22 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 		// Quantity exceed check
 		collectionLineRidget.addValidator(new IValidator() {
 			@Override
-			public IStatus validate(Object value) {
+			public IStatus validate(Object value)
+			{
 				final CollectionJournalLine line = (CollectionJournalLine) value;
 				final Container dairyContainer = line.getBin();
-				final BigDecimal capacity = dairyContainer == null ? BigDecimal.ZERO : BigDecimal.valueOf(line
-						.getBin().getCapacity());
+				final BigDecimal capacity = dairyContainer == null ? BigDecimal.ZERO : BigDecimal.valueOf(line.getBin()
+						.getCapacity());
 				boolean allowButFlag = false;
 				if (line.getQuantity().compareTo(capacity) > 0) {
 					// We exceed the bin capacity
-					allowButFlag = MessageDialog.openConfirm(getShell(), "Data Error",
-					"The amount entered exceeds the bin capacity. If you proceed this entry will be flagged. Proceed?");
+					allowButFlag = MessageDialog
+							.openConfirm(getShell(), "Data Error",
+									"The amount entered exceeds the bin capacity. If you proceed this entry will be flagged. Proceed?");
 					if (allowButFlag) {
-						line.setFlagged(true);						
+						line.setFlagged(true);
 						return ValidationStatus.ok();
-					}
-					else {
+					} else {
 						return ValidationStatus.error("The quantity exceeds bin capacity.");
 					}
 // TODO: add 'warnings/errors' collections to journal entry entity
@@ -476,7 +511,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 	/**
 	 *
 	 */
-	protected void bindPageRidgets() {
+	protected void bindPageRidgets()
+	{
 		final CollectionGroup workingJournalPage = getContextJournalPage();
 		journalHeaderRidget.bindToModel(workingJournalPage);
 
@@ -491,7 +527,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 	/**
 	 * Create a new journal line and set it on the collection line edit control
 	 */
-	private void resetJournalEntryLine() {
+	private void resetJournalEntryLine()
+	{
 
 		collectionLineRidget.createCollectionLine();
 	}
@@ -499,7 +536,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 	/**
 	 * Set focus to the appropriate widget based on journal state
 	 */
-	private void setInitialFocus() {
+	private void setInitialFocus()
+	{
 		final CollectionGroup workingJournalPage = getContextJournalPage();
 		if (workingJournalPage != null) {
 			final String refNum = workingJournalPage.getReferenceNumber();
@@ -522,7 +560,9 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 	 * @param journal
 	 * @param line
 	 */
-	protected void addCollectionGroupEntry(CollectionGroup journal, CollectionJournalLine line) {
+	protected void addCollectionGroupEntry(	CollectionGroup journal,
+											CollectionJournalLine line)
+	{
 		log(LogService.LOG_DEBUG, "addCollectionGroupEntry: adding collection " + line + " to group " + journal);
 		journal.getJournalEntries().add(line);
 		BigDecimal sum = new BigDecimal(0);
@@ -558,7 +598,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 	/**
 	 * Called when 'Save and New' is clicked.
 	 */
-	protected void handleSaveAndNewJournalAction() {
+	protected void handleSaveAndNewJournalAction()
+	{
 		if (doSave()) {
 			refreshWorkingJournal();
 		}
@@ -567,7 +608,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 	/**
 	 * Called when 'Save and Close' is clicked.
 	 */
-	protected void handleSaveAndCloseWindowAction() {
+	protected void handleSaveAndCloseWindowAction()
+	{
 		if (isClean(getContextJournalPage())) {
 			getWindowRidget().dispose();
 		} else if (doSave()) {
@@ -583,7 +625,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 	 * 
 	 */
 	@Override
-	protected boolean handleCancelAction() {
+	protected boolean handleCancelAction()
+	{
 		final CollectionGroup workingJournal = getContextJournalPage();
 		if (workingJournal.getJournalEntries().size() > 0 || workingJournal.getDriverTotal() != null) {
 			final boolean ret = MessageDialog.openConfirm(getShell(), "Confirm Cancel",
@@ -596,7 +639,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 		return true;
 	}
 
-	private boolean displaySuspendMessage(final IStatus validationResult) {
+	private boolean displaySuspendMessage(final IStatus validationResult)
+	{
 		boolean ret = false;
 		final StringBuffer message = new StringBuffer();
 		final Formatter formatter = new Formatter(message);
@@ -623,7 +667,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 		return ret;
 	}
 
-	private void displayActuallyPendingNote() {
+	private void displayActuallyPendingNote()
+	{
 		final StringBuffer message = new StringBuffer();
 		final Formatter formatter = new Formatter(message);
 		try {
@@ -639,7 +684,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 	/**
 	 *
 	 */
-	private boolean doSave() {
+	private boolean doSave()
+	{
 		final boolean doSave = true;
 		ContainerValidator validator = new ContainerValidator();
 		if (!validator.validateContainer(this.journalHeaderRidget).isEmpty()) {
@@ -686,7 +732,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 	 * 
 	 * @param validationResult
 	 */
-	protected void displayMessage(final IStatus validationResult) {
+	protected void displayMessage(final IStatus validationResult)
+	{
 		final StringBuffer message = new StringBuffer();
 		final Formatter formatter = new Formatter(message);
 		IStatus[] statusList;
@@ -704,7 +751,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 	/**
 	 *
 	 */
-	private void refreshWorkingJournal() {
+	private void refreshWorkingJournal()
+	{
 		final CollectionGroup oldPage = getContextJournalPage();
 		final CollectionGroup newPage = DairyFactory.eINSTANCE.createCollectionGroup();
 
@@ -727,7 +775,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 	 * 
 	 * @param enable
 	 */
-	private void enableBottomButtons(boolean enable) {
+	private void enableBottomButtons(boolean enable)
+	{
 		modifyButton.setEnabled(enable);
 		deleteButton.setEnabled(enable);
 	}
@@ -735,7 +784,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 	/**
 	 *
 	 */
-	private void updateJournalTotals() {
+	private void updateJournalTotals()
+	{
 		int counter = 0;
 		int suspendedCount = 0;
 		int rejectedCount = 0;
@@ -763,7 +813,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 	/**
 	 *
 	 */
-	protected void updateAllRidgetsFromModel() {
+	protected void updateAllRidgetsFromModel()
+	{
 
 		for (final IRidget ridget : getRidgets()) {
 			try {
@@ -775,7 +826,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 		}
 	}
 
-	private boolean isClean(CollectionGroup page) {
+	private boolean isClean(CollectionGroup page)
+	{
 		return page != null && page.getJournalEntries().size() == 0
 				&& (page.getDriverTotal() == BigDecimal.ZERO || page.getDriverTotal() == null);
 	}
@@ -783,11 +835,14 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 	/**
 	 *
 	 */
-	private void log(int level, String message) {
+	private void log(	int level,
+						String message)
+	{
 		Log4r.getLogger(Activator.getDefault(), getClass()).log(level, message);
 	}
 
-	private Shell getShell() {
+	private Shell getShell()
+	{
 		return AbstractDirectoryController.getShell();
 	}
 

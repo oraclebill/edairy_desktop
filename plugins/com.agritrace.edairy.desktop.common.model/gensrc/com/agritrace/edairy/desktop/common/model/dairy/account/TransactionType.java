@@ -79,7 +79,8 @@ public enum TransactionType implements Enumerator {
 	 * @generated
 	 */
 	private static final TransactionType[] VALUES_ARRAY =
-		new TransactionType[] {
+		new TransactionType[]
+		{
 			CREDIT,
 			DEBIT,
 		};
@@ -99,9 +100,11 @@ public enum TransactionType implements Enumerator {
 	 * @generated
 	 */
 	public static TransactionType get(String literal) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			TransactionType result = VALUES_ARRAY[i];
-			if (result.toString().equals(literal)) {
+			if (result.toString().equals(literal))
+			{
 				return result;
 			}
 		}
@@ -115,9 +118,11 @@ public enum TransactionType implements Enumerator {
 	 * @generated
 	 */
 	public static TransactionType getByName(String name) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			TransactionType result = VALUES_ARRAY[i];
-			if (result.getName().equals(name)) {
+			if (result.getName().equals(name))
+			{
 				return result;
 			}
 		}
@@ -131,7 +136,8 @@ public enum TransactionType implements Enumerator {
 	 * @generated
 	 */
 	public static TransactionType get(int value) {
-		switch (value) {
+		switch (value)
+		{
 			case CREDIT_VALUE: return CREDIT;
 			case DEBIT_VALUE: return DEBIT;
 		}

@@ -43,7 +43,8 @@ public class TrackingXMLProcessor extends XMLProcessor {
 	 */
 	@Override
 	protected Map<String, Resource.Factory> getRegistrations() {
-		if (registrations == null) {
+		if (registrations == null)
+		{
 			super.getRegistrations();
 			registrations.put(XML_EXTENSION, new TrackingResourceFactoryImpl());
 			registrations.put(STAR_EXTENSION, new TrackingResourceFactoryImpl());

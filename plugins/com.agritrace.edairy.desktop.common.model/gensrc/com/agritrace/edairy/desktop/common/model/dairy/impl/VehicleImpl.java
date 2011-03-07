@@ -627,10 +627,12 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * @generated
 	 */
 	public Employee getDriver() {
-		if (driver != null && driver.eIsProxy()) {
+		if (driver != null && driver.eIsProxy())
+		{
 			InternalEObject oldDriver = (InternalEObject)driver;
 			driver = (Employee)eResolveProxy(oldDriver);
-			if (driver != oldDriver) {
+			if (driver != oldDriver)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.VEHICLE__DRIVER, oldDriver, driver));
 			}
@@ -665,10 +667,12 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 * @generated
 	 */
 	public Asset getAssetInfo() {
-		if (assetInfo != null && assetInfo.eIsProxy()) {
+		if (assetInfo != null && assetInfo.eIsProxy())
+		{
 			InternalEObject oldAssetInfo = (InternalEObject)assetInfo;
 			assetInfo = (Asset)eResolveProxy(oldAssetInfo);
-			if (assetInfo != oldAssetInfo) {
+			if (assetInfo != oldAssetInfo)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.VEHICLE__ASSET_INFO, oldAssetInfo, assetInfo));
 			}
@@ -704,7 +708,8 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.VEHICLE__VEHICLE_ID:
 				return getVehicleId();
 			case DairyPackage.VEHICLE__REGISTRATION_NUMBER:
@@ -748,7 +753,8 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.VEHICLE__VEHICLE_ID:
 				setVehicleId((Long)newValue);
 				return;
@@ -805,7 +811,8 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.VEHICLE__VEHICLE_ID:
 				setVehicleId(VEHICLE_ID_EDEFAULT);
 				return;
@@ -862,7 +869,8 @@ public class VehicleImpl extends EObjectImpl implements Vehicle {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.VEHICLE__VEHICLE_ID:
 				return VEHICLE_ID_EDEFAULT == null ? vehicleId != null : !VEHICLE_ID_EDEFAULT.equals(vehicleId);
 			case DairyPackage.VEHICLE__REGISTRATION_NUMBER:

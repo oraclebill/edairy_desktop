@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EObject;
 public interface MapLocation extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Longitude</b></em>' attribute.
+	 * The default value is <code>"0.0"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Longitude</em>' attribute isn't clear,
@@ -38,7 +39,7 @@ public interface MapLocation extends EObject {
 	 * @return the value of the '<em>Longitude</em>' attribute.
 	 * @see #setLongitude(double)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getMapLocation_Longitude()
-	 * @model
+	 * @model default="0.0"
 	 * @generated
 	 */
 	double getLongitude();
@@ -55,6 +56,7 @@ public interface MapLocation extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Latitude</b></em>' attribute.
+	 * The default value is <code>"0.0"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Latitude</em>' attribute isn't clear,
@@ -64,7 +66,7 @@ public interface MapLocation extends EObject {
 	 * @return the value of the '<em>Latitude</em>' attribute.
 	 * @see #setLatitude(double)
 	 * @see com.agritrace.edairy.desktop.common.model.base.ModelPackage#getMapLocation_Latitude()
-	 * @model
+	 * @model default="0.0"
 	 * @generated
 	 */
 	double getLatitude();

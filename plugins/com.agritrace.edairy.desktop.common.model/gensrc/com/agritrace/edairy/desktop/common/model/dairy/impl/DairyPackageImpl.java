@@ -1963,15 +1963,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBin_Collections() {
-		return (EReference)binEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getSupplier() {
 		return supplierEClass;
 	}
@@ -2585,7 +2576,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(binEClass, BIN__STATUS);
 		createEReference(binEClass, BIN__ZONE);
 		createEReference(binEClass, BIN__ASSET_INFO);
-		createEReference(binEClass, BIN__COLLECTIONS);
 
 		supplierEClass = createEClass(SUPPLIER);
 		createEAttribute(supplierEClass, SUPPLIER__CATEGORIES);
@@ -2713,7 +2703,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getCollectionJournalLine_OffRoute(), ecorePackage.getEBoolean(), "offRoute", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getCollectionJournalLine_From(), theTrackingPackage.getFarm(), null, "from", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCollectionJournalLine_FarmContainer(), theTrackingPackage.getContainer(), null, "farmContainer", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCollectionJournalLine_Bin(), this.getBin(), this.getBin_Collections(), "bin", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCollectionJournalLine_Bin(), this.getBin(), null, "bin", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCollectionJournalLine_Group(), this.getCollectionGroup(), this.getCollectionGroup_JournalEntries(), "group", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionJournalLine_Rejected(), ecorePackage.getEBoolean(), "rejected", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionJournalLine_RejectionReason(), ecorePackage.getEString(), "rejectionReason", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2844,9 +2834,9 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEReference(getDairy_Employees(), this.getEmployee(), this.getEmployee_Employer(), "employees", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getDairy_Memberships(), this.getMembership(), this.getMembership_Dairy(), "memberships", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getDairy_BranchLocations(), this.getDairyLocation(), null, "branchLocations", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getDairy_CollectionJournals(), this.getCollectionGroup(), null, "collectionJournals", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getDairy_CollectionJournals(), this.getCollectionGroup(), null, "collectionJournals", null, 0, -1, Dairy.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		getDairy_CollectionJournals().getEKeys().add(this.getCollectionGroup_ReferenceNumber());
-		initEReference(getDairy_DeliveryJournals(), this.getDeliveryJournal(), null, "deliveryJournals", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getDairy_DeliveryJournals(), this.getDeliveryJournal(), null, "deliveryJournals", null, 0, -1, Dairy.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		getDairy_DeliveryJournals().getEKeys().add(this.getDeliveryJournal_ReferenceNumber());
 		initEReference(getDairy_Suppliers(), this.getSupplier(), null, "suppliers", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getDairy_Customers(), this.getCustomer(), null, "customers", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -2887,7 +2877,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEReference(getBin_Zone(), this.getTransportRoute(), this.getTransportRoute_Bins(), "zone", null, 0, 1, Bin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBin_AssetInfo(), this.getAsset(), null, "assetInfo", null, 0, 1, Bin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		getBin_AssetInfo().getEKeys().add(this.getAsset_TagValue());
-		initEReference(getBin_Collections(), this.getCollectionJournalLine(), this.getCollectionJournalLine_Bin(), "collections", null, 0, -1, Bin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(supplierEClass, Supplier.class, "Supplier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSupplier_Categories(), ecorePackage.getEString(), "categories", null, 0, -1, Supplier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2997,122 +2986,140 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		addAnnotation
 		  (getVehicle_RegistrationNumber(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "registrationNumber",
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
 		  (getVehicle_LogBookNumber(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "logBookNumber",
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
 		  (getVehicle_AssetInfo(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "assetInfo",
 			 "kind", "elementOnly"
 		   });				
 		addAnnotation
 		  (getEmployee_EmployeeNumber(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "employeeNumber",
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
 		  (getDairyLocation_Id(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "Id",
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
 		  (getDairyLocation_Code(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
 		  (getCollectionGroup_JournalDate(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
 		  (getTransportRoute_Id(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "Id",
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
 		  (getTransportRoute_Name(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
 		  (getTrip_TripId(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "tripId",
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
 		  (getMilkGrade_Code(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "code",
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
 		  (getDairy_Version(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "version",
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
 		  (getMembership_MemberId(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "memberId",
 			 "kind", "elementOnly"
 		   });		
 		addAnnotation
 		  (getMembership_MemberNumber(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
 		  (assetEClass, 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "Asset",
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
 		  (getBin_AssetInfo(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "assetInfo",
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
 		  (getSupplier_Id(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "id",
 			 "kind", "elementOnly"
 		   });		
 		addAnnotation
 		  (getCustomer_CustomerNumber(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "name", "id",
 			 "kind", "elementOnly"
 		   });		
@@ -3129,103 +3136,120 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		addAnnotation
 		  (getVehicle_RegistrationNumber(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@NaturalId\n"
 		   });			
 		addAnnotation
 		  (getVehicle_LogBookNumber(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@Column(unique=true)\n"
 		   });			
 		addAnnotation
 		  (getVehicle_AssetInfo(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@Embedded"
 		   });				
 		addAnnotation
 		  (getEmployee_EmployeeNumber(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@Column(unique=true)\n"
 		   });			
 		addAnnotation
 		  (getDairyLocation_Id(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@Id\n@GeneratedValue"
 		   });			
 		addAnnotation
 		  (getDairyLocation_Code(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@NaturalId"
 		   });			
 		addAnnotation
 		  (getCollectionGroup_JournalDate(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@Temporal(TemporalType.DATE)"
 		   });			
 		addAnnotation
 		  (getTransportRoute_Id(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@Id\n@GeneratedValue"
 		   });			
 		addAnnotation
 		  (getTransportRoute_Name(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@NaturalId"
 		   });			
 		addAnnotation
 		  (getTrip_TripId(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@Id\n@GeneratedValue"
 		   });			
 		addAnnotation
 		  (getMilkGrade_Code(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@NaturalId\n"
 		   });			
 		addAnnotation
 		  (getDairy_Version(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@Version"
 		   });				
 		addAnnotation
 		  (getMembership_MemberNumber(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@NaturalId"
 		   });			
 		addAnnotation
 		  (assetEClass, 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@Embeddable"
 		   });			
 		addAnnotation
 		  (getBin_AssetInfo(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@Embedded"
 		   });				
 		addAnnotation
 		  (getCustomer_CustomerNumber(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@NaturalId"
 		   });		
 		addAnnotation
 		  (getCollectionSession_Code(), 
 		   source, 
-		   new String[] {
+		   new String[] 
+		   {
 			 "appinfo", "@Column(unique=\"true\")"
 		   });
 	}

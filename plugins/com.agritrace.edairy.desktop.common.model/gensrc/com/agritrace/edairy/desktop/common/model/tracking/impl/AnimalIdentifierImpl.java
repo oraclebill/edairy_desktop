@@ -139,7 +139,8 @@ public class AnimalIdentifierImpl extends EObjectImpl implements AnimalIdentifie
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case TrackingPackage.ANIMAL_IDENTIFIER__ISSUER:
 				return getIssuer();
 			case TrackingPackage.ANIMAL_IDENTIFIER__VALUE:
@@ -155,7 +156,8 @@ public class AnimalIdentifierImpl extends EObjectImpl implements AnimalIdentifie
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case TrackingPackage.ANIMAL_IDENTIFIER__ISSUER:
 				setIssuer((String)newValue);
 				return;
@@ -173,7 +175,8 @@ public class AnimalIdentifierImpl extends EObjectImpl implements AnimalIdentifie
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case TrackingPackage.ANIMAL_IDENTIFIER__ISSUER:
 				setIssuer(ISSUER_EDEFAULT);
 				return;
@@ -191,7 +194,8 @@ public class AnimalIdentifierImpl extends EObjectImpl implements AnimalIdentifie
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case TrackingPackage.ANIMAL_IDENTIFIER__ISSUER:
 				return ISSUER_EDEFAULT == null ? issuer != null : !ISSUER_EDEFAULT.equals(issuer);
 			case TrackingPackage.ANIMAL_IDENTIFIER__VALUE:

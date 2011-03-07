@@ -139,7 +139,8 @@ public class MapLocationImpl extends EObjectImpl implements MapLocation {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.MAP_LOCATION__LONGITUDE:
 				return getLongitude();
 			case ModelPackage.MAP_LOCATION__LATITUDE:
@@ -155,7 +156,8 @@ public class MapLocationImpl extends EObjectImpl implements MapLocation {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.MAP_LOCATION__LONGITUDE:
 				setLongitude((Double)newValue);
 				return;
@@ -173,7 +175,8 @@ public class MapLocationImpl extends EObjectImpl implements MapLocation {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.MAP_LOCATION__LONGITUDE:
 				setLongitude(LONGITUDE_EDEFAULT);
 				return;
@@ -191,7 +194,8 @@ public class MapLocationImpl extends EObjectImpl implements MapLocation {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.MAP_LOCATION__LONGITUDE:
 				return longitude != LONGITUDE_EDEFAULT;
 			case ModelPackage.MAP_LOCATION__LATITUDE:

@@ -179,7 +179,8 @@ public enum Purpose implements Enumerator {
 	 * @generated
 	 */
 	private static final Purpose[] VALUES_ARRAY =
-		new Purpose[] {
+		new Purpose[]
+		{
 			DAIRY,
 			BEEF,
 			BREEDING,
@@ -203,9 +204,11 @@ public enum Purpose implements Enumerator {
 	 * @generated
 	 */
 	public static Purpose get(String literal) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			Purpose result = VALUES_ARRAY[i];
-			if (result.toString().equals(literal)) {
+			if (result.toString().equals(literal))
+			{
 				return result;
 			}
 		}
@@ -219,9 +222,11 @@ public enum Purpose implements Enumerator {
 	 * @generated
 	 */
 	public static Purpose getByName(String name) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			Purpose result = VALUES_ARRAY[i];
-			if (result.getName().equals(name)) {
+			if (result.getName().equals(name))
+			{
 				return result;
 			}
 		}
@@ -235,7 +240,8 @@ public enum Purpose implements Enumerator {
 	 * @generated
 	 */
 	public static Purpose get(int value) {
-		switch (value) {
+		switch (value)
+		{
 			case DAIRY_VALUE: return DAIRY;
 			case BEEF_VALUE: return BEEF;
 			case BREEDING_VALUE: return BREEDING;

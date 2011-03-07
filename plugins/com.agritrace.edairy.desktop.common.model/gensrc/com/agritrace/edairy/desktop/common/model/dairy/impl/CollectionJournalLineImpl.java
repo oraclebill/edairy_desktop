@@ -491,10 +491,12 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * @generated
 	 */
 	public Membership getValidatedMember() {
-		if (validatedMember != null && validatedMember.eIsProxy()) {
+		if (validatedMember != null && validatedMember.eIsProxy())
+		{
 			InternalEObject oldValidatedMember = (InternalEObject)validatedMember;
 			validatedMember = (Membership)eResolveProxy(oldValidatedMember);
-			if (validatedMember != oldValidatedMember) {
+			if (validatedMember != oldValidatedMember)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_JOURNAL_LINE__VALIDATED_MEMBER, oldValidatedMember, validatedMember));
 			}
@@ -550,10 +552,12 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * @generated
 	 */
 	public Farm getFrom() {
-		if (from != null && from.eIsProxy()) {
+		if (from != null && from.eIsProxy())
+		{
 			InternalEObject oldFrom = (InternalEObject)from;
 			from = (Farm)eResolveProxy(oldFrom);
-			if (from != oldFrom) {
+			if (from != oldFrom)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_JOURNAL_LINE__FROM, oldFrom, from));
 			}
@@ -588,10 +592,12 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * @generated
 	 */
 	public Container getFarmContainer() {
-		if (farmContainer != null && farmContainer.eIsProxy()) {
+		if (farmContainer != null && farmContainer.eIsProxy())
+		{
 			InternalEObject oldFarmContainer = (InternalEObject)farmContainer;
 			farmContainer = (Container)eResolveProxy(oldFarmContainer);
-			if (farmContainer != oldFarmContainer) {
+			if (farmContainer != oldFarmContainer)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_JOURNAL_LINE__FARM_CONTAINER, oldFarmContainer, farmContainer));
 			}
@@ -626,10 +632,12 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * @generated
 	 */
 	public Bin getBin() {
-		if (bin != null && bin.eIsProxy()) {
+		if (bin != null && bin.eIsProxy())
+		{
 			InternalEObject oldBin = (InternalEObject)bin;
 			bin = (Bin)eResolveProxy(oldBin);
-			if (bin != oldBin) {
+			if (bin != oldBin)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.COLLECTION_JOURNAL_LINE__BIN, oldBin, bin));
 			}
@@ -651,33 +659,11 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetBin(Bin newBin, NotificationChain msgs) {
+	public void setBin(Bin newBin) {
 		Bin oldBin = bin;
 		bin = newBin;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__BIN, oldBin, newBin);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setBin(Bin newBin) {
-		if (newBin != bin) {
-			NotificationChain msgs = null;
-			if (bin != null)
-				msgs = ((InternalEObject)bin).eInverseRemove(this, DairyPackage.BIN__COLLECTIONS, Bin.class, msgs);
-			if (newBin != null)
-				msgs = ((InternalEObject)newBin).eInverseAdd(this, DairyPackage.BIN__COLLECTIONS, Bin.class, msgs);
-			msgs = basicSetBin(newBin, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__BIN, newBin, newBin));
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_JOURNAL_LINE__BIN, oldBin, bin));
 	}
 
 	/**
@@ -706,7 +692,8 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 * @generated
 	 */
 	public void setGroup(CollectionGroup newGroup) {
-		if (newGroup != eInternalContainer() || (eContainerFeatureID() != DairyPackage.COLLECTION_JOURNAL_LINE__GROUP && newGroup != null)) {
+		if (newGroup != eInternalContainer() || (eContainerFeatureID() != DairyPackage.COLLECTION_JOURNAL_LINE__GROUP && newGroup != null))
+		{
 			if (EcoreUtil.isAncestor(this, newGroup))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -833,11 +820,8 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case DairyPackage.COLLECTION_JOURNAL_LINE__BIN:
-				if (bin != null)
-					msgs = ((InternalEObject)bin).eInverseRemove(this, DairyPackage.BIN__COLLECTIONS, Bin.class, msgs);
-				return basicSetBin((Bin)otherEnd, msgs);
+		switch (featureID)
+		{
 			case DairyPackage.COLLECTION_JOURNAL_LINE__GROUP:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -853,9 +837,8 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case DairyPackage.COLLECTION_JOURNAL_LINE__BIN:
-				return basicSetBin(null, msgs);
+		switch (featureID)
+		{
 			case DairyPackage.COLLECTION_JOURNAL_LINE__GROUP:
 				return basicSetGroup(null, msgs);
 		}
@@ -869,7 +852,8 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
+		switch (eContainerFeatureID())
+		{
 			case DairyPackage.COLLECTION_JOURNAL_LINE__GROUP:
 				return eInternalContainer().eInverseRemove(this, DairyPackage.COLLECTION_GROUP__JOURNAL_ENTRIES, CollectionGroup.class, msgs);
 		}
@@ -883,7 +867,8 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.COLLECTION_JOURNAL_LINE__LINE_NUMBER:
 				return getLineNumber();
 			case DairyPackage.COLLECTION_JOURNAL_LINE__RECORDED_MEMBER:
@@ -933,7 +918,8 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.COLLECTION_JOURNAL_LINE__LINE_NUMBER:
 				setLineNumber((Integer)newValue);
 				return;
@@ -996,7 +982,8 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.COLLECTION_JOURNAL_LINE__LINE_NUMBER:
 				setLineNumber(LINE_NUMBER_EDEFAULT);
 				return;
@@ -1059,7 +1046,8 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.COLLECTION_JOURNAL_LINE__LINE_NUMBER:
 				return lineNumber != LINE_NUMBER_EDEFAULT;
 			case DairyPackage.COLLECTION_JOURNAL_LINE__RECORDED_MEMBER:

@@ -168,7 +168,8 @@ public class BalancePointImpl extends EObjectImpl implements BalancePoint {
 	 * @generated
 	 */
 	public void setAccount(Account newAccount) {
-		if (newAccount != eInternalContainer() || (eContainerFeatureID() != AccountPackage.BALANCE_POINT__ACCOUNT && newAccount != null)) {
+		if (newAccount != eInternalContainer() || (eContainerFeatureID() != AccountPackage.BALANCE_POINT__ACCOUNT && newAccount != null))
+		{
 			if (EcoreUtil.isAncestor(this, newAccount))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -232,7 +233,8 @@ public class BalancePointImpl extends EObjectImpl implements BalancePoint {
 	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case AccountPackage.BALANCE_POINT__ACCOUNT:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -248,7 +250,8 @@ public class BalancePointImpl extends EObjectImpl implements BalancePoint {
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case AccountPackage.BALANCE_POINT__ACCOUNT:
 				return basicSetAccount(null, msgs);
 		}
@@ -262,7 +265,8 @@ public class BalancePointImpl extends EObjectImpl implements BalancePoint {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
+		switch (eContainerFeatureID())
+		{
 			case AccountPackage.BALANCE_POINT__ACCOUNT:
 				return eInternalContainer().eInverseRemove(this, AccountPackage.ACCOUNT__BALANCES, Account.class, msgs);
 		}
@@ -276,7 +280,8 @@ public class BalancePointImpl extends EObjectImpl implements BalancePoint {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case AccountPackage.BALANCE_POINT__ACCOUNT_BALANCE_ID:
 				return getAccountBalanceId();
 			case AccountPackage.BALANCE_POINT__ACCOUNT:
@@ -296,7 +301,8 @@ public class BalancePointImpl extends EObjectImpl implements BalancePoint {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case AccountPackage.BALANCE_POINT__ACCOUNT_BALANCE_ID:
 				setAccountBalanceId((Long)newValue);
 				return;
@@ -320,7 +326,8 @@ public class BalancePointImpl extends EObjectImpl implements BalancePoint {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case AccountPackage.BALANCE_POINT__ACCOUNT_BALANCE_ID:
 				setAccountBalanceId(ACCOUNT_BALANCE_ID_EDEFAULT);
 				return;
@@ -344,7 +351,8 @@ public class BalancePointImpl extends EObjectImpl implements BalancePoint {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case AccountPackage.BALANCE_POINT__ACCOUNT_BALANCE_ID:
 				return accountBalanceId != ACCOUNT_BALANCE_ID_EDEFAULT;
 			case AccountPackage.BALANCE_POINT__ACCOUNT:

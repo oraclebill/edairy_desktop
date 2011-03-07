@@ -151,10 +151,12 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	 * @generated
 	 */
 	public PermissionNamespace getNamespace() {
-		if (namespace != null && namespace.eIsProxy()) {
+		if (namespace != null && namespace.eIsProxy())
+		{
 			InternalEObject oldNamespace = (InternalEObject)namespace;
 			namespace = (PermissionNamespace)eResolveProxy(oldNamespace);
-			if (namespace != oldNamespace) {
+			if (namespace != oldNamespace)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.PERMISSION__NAMESPACE, oldNamespace, namespace));
 			}
@@ -232,7 +234,8 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.PERMISSION__ID:
 				return getId();
 			case ModelPackage.PERMISSION__NAMESPACE:
@@ -253,7 +256,8 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.PERMISSION__ID:
 				setId((Long)newValue);
 				return;
@@ -277,7 +281,8 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.PERMISSION__ID:
 				setId(ID_EDEFAULT);
 				return;
@@ -301,7 +306,8 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.PERMISSION__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case ModelPackage.PERMISSION__NAMESPACE:

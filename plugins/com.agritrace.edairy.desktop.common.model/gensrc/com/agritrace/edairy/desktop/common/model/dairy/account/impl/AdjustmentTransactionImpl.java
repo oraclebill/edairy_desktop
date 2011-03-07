@@ -67,10 +67,12 @@ public class AdjustmentTransactionImpl extends TransactionImpl implements Adjust
 	 * @generated
 	 */
 	public Employee getSignedOffBy() {
-		if (signedOffBy != null && signedOffBy.eIsProxy()) {
+		if (signedOffBy != null && signedOffBy.eIsProxy())
+		{
 			InternalEObject oldSignedOffBy = (InternalEObject)signedOffBy;
 			signedOffBy = (Employee)eResolveProxy(oldSignedOffBy);
-			if (signedOffBy != oldSignedOffBy) {
+			if (signedOffBy != oldSignedOffBy)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AccountPackage.ADJUSTMENT_TRANSACTION__SIGNED_OFF_BY, oldSignedOffBy, signedOffBy));
 			}
@@ -106,7 +108,8 @@ public class AdjustmentTransactionImpl extends TransactionImpl implements Adjust
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case AccountPackage.ADJUSTMENT_TRANSACTION__SIGNED_OFF_BY:
 				if (resolve) return getSignedOffBy();
 				return basicGetSignedOffBy();
@@ -121,7 +124,8 @@ public class AdjustmentTransactionImpl extends TransactionImpl implements Adjust
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case AccountPackage.ADJUSTMENT_TRANSACTION__SIGNED_OFF_BY:
 				setSignedOffBy((Employee)newValue);
 				return;
@@ -136,7 +140,8 @@ public class AdjustmentTransactionImpl extends TransactionImpl implements Adjust
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case AccountPackage.ADJUSTMENT_TRANSACTION__SIGNED_OFF_BY:
 				setSignedOffBy((Employee)null);
 				return;
@@ -151,7 +156,8 @@ public class AdjustmentTransactionImpl extends TransactionImpl implements Adjust
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case AccountPackage.ADJUSTMENT_TRANSACTION__SIGNED_OFF_BY:
 				return signedOffBy != null;
 		}

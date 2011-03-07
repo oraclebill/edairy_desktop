@@ -445,10 +445,12 @@ public class MilkSaleImpl extends EObjectImpl implements MilkSale {
 	 * @generated
 	 */
 	public Bin getBin() {
-		if (bin != null && bin.eIsProxy()) {
+		if (bin != null && bin.eIsProxy())
+		{
 			InternalEObject oldBin = (InternalEObject)bin;
 			bin = (Bin)eResolveProxy(oldBin);
-			if (bin != oldBin) {
+			if (bin != oldBin)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.MILK_SALE__BIN, oldBin, bin));
 			}
@@ -525,10 +527,12 @@ public class MilkSaleImpl extends EObjectImpl implements MilkSale {
 	 * @generated
 	 */
 	public MilkGrade getGrade() {
-		if (grade != null && grade.eIsProxy()) {
+		if (grade != null && grade.eIsProxy())
+		{
 			InternalEObject oldGrade = (InternalEObject)grade;
 			grade = (MilkGrade)eResolveProxy(oldGrade);
-			if (grade != oldGrade) {
+			if (grade != oldGrade)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.MILK_SALE__GRADE, oldGrade, grade));
 			}
@@ -626,10 +630,12 @@ public class MilkSaleImpl extends EObjectImpl implements MilkSale {
 	 * @generated
 	 */
 	public DairyLocation getStoreOrRoute() {
-		if (storeOrRoute != null && storeOrRoute.eIsProxy()) {
+		if (storeOrRoute != null && storeOrRoute.eIsProxy())
+		{
 			InternalEObject oldStoreOrRoute = (InternalEObject)storeOrRoute;
 			storeOrRoute = (DairyLocation)eResolveProxy(oldStoreOrRoute);
-			if (storeOrRoute != oldStoreOrRoute) {
+			if (storeOrRoute != oldStoreOrRoute)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.MILK_SALE__STORE_OR_ROUTE, oldStoreOrRoute, storeOrRoute));
 			}
@@ -664,10 +670,12 @@ public class MilkSaleImpl extends EObjectImpl implements MilkSale {
 	 * @generated
 	 */
 	public Customer getCustomer() {
-		if (customer != null && customer.eIsProxy()) {
+		if (customer != null && customer.eIsProxy())
+		{
 			InternalEObject oldCustomer = (InternalEObject)customer;
 			customer = (Customer)eResolveProxy(oldCustomer);
-			if (customer != oldCustomer) {
+			if (customer != oldCustomer)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.MILK_SALE__CUSTOMER, oldCustomer, customer));
 			}
@@ -702,10 +710,12 @@ public class MilkSaleImpl extends EObjectImpl implements MilkSale {
 	 * @generated
 	 */
 	public Employee getSoldBy() {
-		if (soldBy != null && soldBy.eIsProxy()) {
+		if (soldBy != null && soldBy.eIsProxy())
+		{
 			InternalEObject oldSoldBy = (InternalEObject)soldBy;
 			soldBy = (Employee)eResolveProxy(oldSoldBy);
-			if (soldBy != oldSoldBy) {
+			if (soldBy != oldSoldBy)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.MILK_SALE__SOLD_BY, oldSoldBy, soldBy));
 			}
@@ -782,10 +792,12 @@ public class MilkSaleImpl extends EObjectImpl implements MilkSale {
 	 * @generated
 	 */
 	public Employee getSalesClerk() {
-		if (salesClerk != null && salesClerk.eIsProxy()) {
+		if (salesClerk != null && salesClerk.eIsProxy())
+		{
 			InternalEObject oldSalesClerk = (InternalEObject)salesClerk;
 			salesClerk = (Employee)eResolveProxy(oldSalesClerk);
-			if (salesClerk != oldSalesClerk) {
+			if (salesClerk != oldSalesClerk)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.MILK_SALE__SALES_CLERK, oldSalesClerk, salesClerk));
 			}
@@ -821,7 +833,8 @@ public class MilkSaleImpl extends EObjectImpl implements MilkSale {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.MILK_SALE__ID:
 				return getId();
 			case DairyPackage.MILK_SALE__LINE_NUMBER:
@@ -873,7 +886,8 @@ public class MilkSaleImpl extends EObjectImpl implements MilkSale {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.MILK_SALE__ID:
 				setId((Long)newValue);
 				return;
@@ -936,7 +950,8 @@ public class MilkSaleImpl extends EObjectImpl implements MilkSale {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.MILK_SALE__ID:
 				setId(ID_EDEFAULT);
 				return;
@@ -999,7 +1014,8 @@ public class MilkSaleImpl extends EObjectImpl implements MilkSale {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.MILK_SALE__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case DairyPackage.MILK_SALE__LINE_NUMBER:

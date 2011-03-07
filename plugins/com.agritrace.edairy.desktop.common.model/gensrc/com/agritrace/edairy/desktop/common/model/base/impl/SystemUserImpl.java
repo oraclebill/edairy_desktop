@@ -228,10 +228,12 @@ public class SystemUserImpl extends EObjectImpl implements SystemUser {
 	 * @generated
 	 */
 	public Employee getRelatedEmployee() {
-		if (relatedEmployee != null && relatedEmployee.eIsProxy()) {
+		if (relatedEmployee != null && relatedEmployee.eIsProxy())
+		{
 			InternalEObject oldRelatedEmployee = (InternalEObject)relatedEmployee;
 			relatedEmployee = (Employee)eResolveProxy(oldRelatedEmployee);
-			if (relatedEmployee != oldRelatedEmployee) {
+			if (relatedEmployee != oldRelatedEmployee)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.SYSTEM_USER__RELATED_EMPLOYEE, oldRelatedEmployee, relatedEmployee));
 			}
@@ -256,7 +258,8 @@ public class SystemUserImpl extends EObjectImpl implements SystemUser {
 	public NotificationChain basicSetRelatedEmployee(Employee newRelatedEmployee, NotificationChain msgs) {
 		Employee oldRelatedEmployee = relatedEmployee;
 		relatedEmployee = newRelatedEmployee;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
+		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.SYSTEM_USER__RELATED_EMPLOYEE, oldRelatedEmployee, newRelatedEmployee);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -269,7 +272,8 @@ public class SystemUserImpl extends EObjectImpl implements SystemUser {
 	 * @generated
 	 */
 	public void setRelatedEmployee(Employee newRelatedEmployee) {
-		if (newRelatedEmployee != relatedEmployee) {
+		if (newRelatedEmployee != relatedEmployee)
+		{
 			NotificationChain msgs = null;
 			if (relatedEmployee != null)
 				msgs = ((InternalEObject)relatedEmployee).eInverseRemove(this, DairyPackage.EMPLOYEE__SYSTEM_IDENTITY, Employee.class, msgs);
@@ -309,10 +313,12 @@ public class SystemUserImpl extends EObjectImpl implements SystemUser {
 	 * @generated
 	 */
 	public Role getRole() {
-		if (role != null && role.eIsProxy()) {
+		if (role != null && role.eIsProxy())
+		{
 			InternalEObject oldRole = (InternalEObject)role;
 			role = (Role)eResolveProxy(oldRole);
-			if (role != oldRole) {
+			if (role != oldRole)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.SYSTEM_USER__ROLE, oldRole, role));
 			}
@@ -390,7 +396,8 @@ public class SystemUserImpl extends EObjectImpl implements SystemUser {
 	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.SYSTEM_USER__RELATED_EMPLOYEE:
 				if (relatedEmployee != null)
 					msgs = ((InternalEObject)relatedEmployee).eInverseRemove(this, DairyPackage.EMPLOYEE__SYSTEM_IDENTITY, Employee.class, msgs);
@@ -406,7 +413,8 @@ public class SystemUserImpl extends EObjectImpl implements SystemUser {
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.SYSTEM_USER__RELATED_EMPLOYEE:
 				return basicSetRelatedEmployee(null, msgs);
 		}
@@ -420,7 +428,8 @@ public class SystemUserImpl extends EObjectImpl implements SystemUser {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.SYSTEM_USER__USERNAME:
 				return getUsername();
 			case ModelPackage.SYSTEM_USER__PASSWORD:
@@ -448,7 +457,8 @@ public class SystemUserImpl extends EObjectImpl implements SystemUser {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.SYSTEM_USER__USERNAME:
 				setUsername((String)newValue);
 				return;
@@ -481,7 +491,8 @@ public class SystemUserImpl extends EObjectImpl implements SystemUser {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.SYSTEM_USER__USERNAME:
 				setUsername(USERNAME_EDEFAULT);
 				return;
@@ -514,7 +525,8 @@ public class SystemUserImpl extends EObjectImpl implements SystemUser {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.SYSTEM_USER__USERNAME:
 				return USERNAME_EDEFAULT == null ? username != null : !USERNAME_EDEFAULT.equals(username);
 			case ModelPackage.SYSTEM_USER__PASSWORD:

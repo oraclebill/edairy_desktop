@@ -79,7 +79,8 @@ public enum RequestType implements Enumerator {
 	 * @generated
 	 */
 	private static final RequestType[] VALUES_ARRAY =
-		new RequestType[] {
+		new RequestType[]
+		{
 			CLINICAL,
 			INSEMINATION,
 		};
@@ -99,9 +100,11 @@ public enum RequestType implements Enumerator {
 	 * @generated
 	 */
 	public static RequestType get(String literal) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			RequestType result = VALUES_ARRAY[i];
-			if (result.toString().equals(literal)) {
+			if (result.toString().equals(literal))
+			{
 				return result;
 			}
 		}
@@ -115,9 +118,11 @@ public enum RequestType implements Enumerator {
 	 * @generated
 	 */
 	public static RequestType getByName(String name) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			RequestType result = VALUES_ARRAY[i];
-			if (result.getName().equals(name)) {
+			if (result.getName().equals(name))
+			{
 				return result;
 			}
 		}
@@ -131,7 +136,8 @@ public enum RequestType implements Enumerator {
 	 * @generated
 	 */
 	public static RequestType get(int value) {
-		switch (value) {
+		switch (value)
+		{
 			case CLINICAL_VALUE: return CLINICAL;
 			case INSEMINATION_VALUE: return INSEMINATION;
 		}

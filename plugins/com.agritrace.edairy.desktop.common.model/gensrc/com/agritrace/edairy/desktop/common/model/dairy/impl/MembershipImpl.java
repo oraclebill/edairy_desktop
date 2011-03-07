@@ -354,10 +354,12 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * @generated
 	 */
 	public DairyLocation getDefaultRoute() {
-		if (defaultRoute != null && defaultRoute.eIsProxy()) {
+		if (defaultRoute != null && defaultRoute.eIsProxy())
+		{
 			InternalEObject oldDefaultRoute = (InternalEObject)defaultRoute;
 			defaultRoute = (DairyLocation)eResolveProxy(oldDefaultRoute);
-			if (defaultRoute != oldDefaultRoute) {
+			if (defaultRoute != oldDefaultRoute)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.MEMBERSHIP__DEFAULT_ROUTE, oldDefaultRoute, defaultRoute));
 			}
@@ -403,7 +405,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	public NotificationChain basicSetFarmer(Farmer newFarmer, NotificationChain msgs) {
 		Farmer oldFarmer = farmer;
 		farmer = newFarmer;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
+		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__FARMER, oldFarmer, newFarmer);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -416,7 +419,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * @generated
 	 */
 	public void setFarmer(Farmer newFarmer) {
-		if (newFarmer != farmer) {
+		if (newFarmer != farmer)
+		{
 			NotificationChain msgs = null;
 			if (farmer != null)
 				msgs = ((InternalEObject)farmer).eInverseRemove(this, TrackingPackage.FARMER__MEMBERSHIP, Farmer.class, msgs);
@@ -446,7 +450,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	public NotificationChain basicSetAccount(Account newAccount, NotificationChain msgs) {
 		Account oldAccount = account;
 		account = newAccount;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
+		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DairyPackage.MEMBERSHIP__ACCOUNT, oldAccount, newAccount);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -459,7 +464,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * @generated
 	 */
 	public void setAccount(Account newAccount) {
-		if (newAccount != account) {
+		if (newAccount != account)
+		{
 			NotificationChain msgs = null;
 			if (account != null)
 				msgs = ((InternalEObject)account).eInverseRemove(this, AccountPackage.ACCOUNT__MEMBER, Account.class, msgs);
@@ -498,7 +504,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 * @generated
 	 */
 	public void setDairy(Dairy newDairy) {
-		if (newDairy != eInternalContainer() || (eContainerFeatureID() != DairyPackage.MEMBERSHIP__DAIRY && newDairy != null)) {
+		if (newDairy != eInternalContainer() || (eContainerFeatureID() != DairyPackage.MEMBERSHIP__DAIRY && newDairy != null))
+		{
 			if (EcoreUtil.isAncestor(this, newDairy))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -562,7 +569,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.MEMBERSHIP__FARMER:
 				if (farmer != null)
 					msgs = ((InternalEObject)farmer).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DairyPackage.MEMBERSHIP__FARMER, null, msgs);
@@ -586,7 +594,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.MEMBERSHIP__FARMER:
 				return basicSetFarmer(null, msgs);
 			case DairyPackage.MEMBERSHIP__ACCOUNT:
@@ -604,7 +613,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
+		switch (eContainerFeatureID())
+		{
 			case DairyPackage.MEMBERSHIP__DAIRY:
 				return eInternalContainer().eInverseRemove(this, DairyPackage.DAIRY__MEMBERSHIPS, Dairy.class, msgs);
 		}
@@ -618,7 +628,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.MEMBERSHIP__MEMBER_ID:
 				return getMemberId();
 			case DairyPackage.MEMBERSHIP__MEMBER_NUMBER:
@@ -653,7 +664,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.MEMBERSHIP__MEMBER_ID:
 				setMemberId((Long)newValue);
 				return;
@@ -698,7 +710,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.MEMBERSHIP__MEMBER_ID:
 				setMemberId(MEMBER_ID_EDEFAULT);
 				return;
@@ -743,7 +756,8 @@ public class MembershipImpl extends EObjectImpl implements Membership {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.MEMBERSHIP__MEMBER_ID:
 				return MEMBER_ID_EDEFAULT == null ? memberId != null : !MEMBER_ID_EDEFAULT.equals(memberId);
 			case DairyPackage.MEMBERSHIP__MEMBER_NUMBER:

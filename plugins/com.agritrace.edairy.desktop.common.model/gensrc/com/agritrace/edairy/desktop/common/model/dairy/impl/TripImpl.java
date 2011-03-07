@@ -148,7 +148,8 @@ public class TripImpl extends EObjectImpl implements Trip {
 	 * @generated
 	 */
 	public EList<CollectionGroup> getCollections() {
-		if (collections == null) {
+		if (collections == null)
+		{
 			collections = new EObjectResolvingEList<CollectionGroup>(CollectionGroup.class, this, DairyPackage.TRIP__COLLECTIONS);
 		}
 		return collections;
@@ -160,7 +161,8 @@ public class TripImpl extends EObjectImpl implements Trip {
 	 * @generated
 	 */
 	public EList<DeliveryJournal> getDeliveries() {
-		if (deliveries == null) {
+		if (deliveries == null)
+		{
 			deliveries = new EObjectResolvingEList<DeliveryJournal>(DeliveryJournal.class, this, DairyPackage.TRIP__DELIVERIES);
 		}
 		return deliveries;
@@ -224,7 +226,8 @@ public class TripImpl extends EObjectImpl implements Trip {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.TRIP__COLLECTIONS:
 				return getCollections();
 			case DairyPackage.TRIP__DELIVERIES:
@@ -247,7 +250,8 @@ public class TripImpl extends EObjectImpl implements Trip {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.TRIP__COLLECTIONS:
 				getCollections().clear();
 				getCollections().addAll((Collection<? extends CollectionGroup>)newValue);
@@ -273,7 +277,8 @@ public class TripImpl extends EObjectImpl implements Trip {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.TRIP__COLLECTIONS:
 				getCollections().clear();
 				return;
@@ -297,7 +302,8 @@ public class TripImpl extends EObjectImpl implements Trip {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.TRIP__COLLECTIONS:
 				return collections != null && !collections.isEmpty();
 			case DairyPackage.TRIP__DELIVERIES:

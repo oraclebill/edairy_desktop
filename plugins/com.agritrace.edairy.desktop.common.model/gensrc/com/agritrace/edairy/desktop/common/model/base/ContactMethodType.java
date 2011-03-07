@@ -304,7 +304,8 @@ public enum ContactMethodType implements Enumerator {
 	 * @generated
 	 */
 	private static final ContactMethodType[] VALUES_ARRAY =
-		new ContactMethodType[] {
+		new ContactMethodType[]
+		{
 			EMAIL,
 			SMS,
 			PHONE,
@@ -333,9 +334,11 @@ public enum ContactMethodType implements Enumerator {
 	 * @generated
 	 */
 	public static ContactMethodType get(String literal) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			ContactMethodType result = VALUES_ARRAY[i];
-			if (result.toString().equals(literal)) {
+			if (result.toString().equals(literal))
+			{
 				return result;
 			}
 		}
@@ -349,9 +352,11 @@ public enum ContactMethodType implements Enumerator {
 	 * @generated
 	 */
 	public static ContactMethodType getByName(String name) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			ContactMethodType result = VALUES_ARRAY[i];
-			if (result.getName().equals(name)) {
+			if (result.getName().equals(name))
+			{
 				return result;
 			}
 		}
@@ -365,7 +370,8 @@ public enum ContactMethodType implements Enumerator {
 	 * @generated
 	 */
 	public static ContactMethodType get(int value) {
-		switch (value) {
+		switch (value)
+		{
 			case EMAIL_VALUE: return EMAIL;
 			case SMS_VALUE: return SMS;
 			case PHONE_VALUE: return PHONE;

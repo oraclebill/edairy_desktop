@@ -528,7 +528,7 @@ public class TestDataGenerator extends DatabaseSetup
 		entry.setQuantity(amount);
 		entry.setFlagged(false);
 
-		bin.getCollections().add(entry);
+//		bin.getCollections().add(entry);
 		bin.setQuantity(bin.getQuantity() + amount.doubleValue());
 
 		return entry;

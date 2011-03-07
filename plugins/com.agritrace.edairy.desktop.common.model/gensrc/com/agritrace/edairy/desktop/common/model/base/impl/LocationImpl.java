@@ -136,7 +136,8 @@ public class LocationImpl extends EObjectImpl implements Location {
 	public NotificationChain basicSetPostalLocation(PostalLocation newPostalLocation, NotificationChain msgs) {
 		PostalLocation oldPostalLocation = postalLocation;
 		postalLocation = newPostalLocation;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
+		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__POSTAL_LOCATION, oldPostalLocation, newPostalLocation);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -149,7 +150,8 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * @generated
 	 */
 	public void setPostalLocation(PostalLocation newPostalLocation) {
-		if (newPostalLocation != postalLocation) {
+		if (newPostalLocation != postalLocation)
+		{
 			NotificationChain msgs = null;
 			if (postalLocation != null)
 				msgs = ((InternalEObject)postalLocation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__POSTAL_LOCATION, null, msgs);
@@ -179,7 +181,8 @@ public class LocationImpl extends EObjectImpl implements Location {
 	public NotificationChain basicSetMapLocation(MapLocation newMapLocation, NotificationChain msgs) {
 		MapLocation oldMapLocation = mapLocation;
 		mapLocation = newMapLocation;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
+		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__MAP_LOCATION, oldMapLocation, newMapLocation);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -192,7 +195,8 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * @generated
 	 */
 	public void setMapLocation(MapLocation newMapLocation) {
-		if (newMapLocation != mapLocation) {
+		if (newMapLocation != mapLocation)
+		{
 			NotificationChain msgs = null;
 			if (mapLocation != null)
 				msgs = ((InternalEObject)mapLocation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__MAP_LOCATION, null, msgs);
@@ -222,7 +226,8 @@ public class LocationImpl extends EObjectImpl implements Location {
 	public NotificationChain basicSetStatutoryLocation(StatutoryLocation newStatutoryLocation, NotificationChain msgs) {
 		StatutoryLocation oldStatutoryLocation = statutoryLocation;
 		statutoryLocation = newStatutoryLocation;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
+		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__STATUTORY_LOCATION, oldStatutoryLocation, newStatutoryLocation);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -235,7 +240,8 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * @generated
 	 */
 	public void setStatutoryLocation(StatutoryLocation newStatutoryLocation) {
-		if (newStatutoryLocation != statutoryLocation) {
+		if (newStatutoryLocation != statutoryLocation)
+		{
 			NotificationChain msgs = null;
 			if (statutoryLocation != null)
 				msgs = ((InternalEObject)statutoryLocation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__STATUTORY_LOCATION, null, msgs);
@@ -265,7 +271,8 @@ public class LocationImpl extends EObjectImpl implements Location {
 	public NotificationChain basicSetDescriptiveLocation(DescriptiveLocation newDescriptiveLocation, NotificationChain msgs) {
 		DescriptiveLocation oldDescriptiveLocation = descriptiveLocation;
 		descriptiveLocation = newDescriptiveLocation;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
+		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.LOCATION__DESCRIPTIVE_LOCATION, oldDescriptiveLocation, newDescriptiveLocation);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -278,7 +285,8 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * @generated
 	 */
 	public void setDescriptiveLocation(DescriptiveLocation newDescriptiveLocation) {
-		if (newDescriptiveLocation != descriptiveLocation) {
+		if (newDescriptiveLocation != descriptiveLocation)
+		{
 			NotificationChain msgs = null;
 			if (descriptiveLocation != null)
 				msgs = ((InternalEObject)descriptiveLocation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.LOCATION__DESCRIPTIVE_LOCATION, null, msgs);
@@ -328,7 +336,8 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.LOCATION__POSTAL_LOCATION:
 				return basicSetPostalLocation(null, msgs);
 			case ModelPackage.LOCATION__MAP_LOCATION:
@@ -348,7 +357,8 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.LOCATION__POSTAL_LOCATION:
 				return getPostalLocation();
 			case ModelPackage.LOCATION__MAP_LOCATION:
@@ -370,7 +380,8 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.LOCATION__POSTAL_LOCATION:
 				setPostalLocation((PostalLocation)newValue);
 				return;
@@ -397,7 +408,8 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.LOCATION__POSTAL_LOCATION:
 				setPostalLocation((PostalLocation)null);
 				return;
@@ -424,7 +436,8 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.LOCATION__POSTAL_LOCATION:
 				return postalLocation != null;
 			case ModelPackage.LOCATION__MAP_LOCATION:

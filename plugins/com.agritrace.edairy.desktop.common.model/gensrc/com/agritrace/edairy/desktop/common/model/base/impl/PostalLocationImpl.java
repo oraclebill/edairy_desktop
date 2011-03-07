@@ -475,7 +475,8 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.POSTAL_LOCATION__ADDRESS:
 				return getAddress();
 			case ModelPackage.POSTAL_LOCATION__SECTION:
@@ -507,7 +508,8 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.POSTAL_LOCATION__ADDRESS:
 				setAddress((String)newValue);
 				return;
@@ -549,7 +551,8 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.POSTAL_LOCATION__ADDRESS:
 				setAddress(ADDRESS_EDEFAULT);
 				return;
@@ -591,7 +594,8 @@ public class PostalLocationImpl extends EObjectImpl implements PostalLocation {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.POSTAL_LOCATION__ADDRESS:
 				return ADDRESS_EDEFAULT == null ? address != null : !ADDRESS_EDEFAULT.equals(address);
 			case ModelPackage.POSTAL_LOCATION__SECTION:

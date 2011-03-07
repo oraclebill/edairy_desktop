@@ -528,10 +528,12 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 * @generated
 	 */
 	public Location getLocation() {
-		if (location != null && location.eIsProxy()) {
+		if (location != null && location.eIsProxy())
+		{
 			InternalEObject oldLocation = (InternalEObject)location;
 			location = (Location)eResolveProxy(oldLocation);
-			if (location != oldLocation) {
+			if (location != oldLocation)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.PERSON__LOCATION, oldLocation, location));
 			}
@@ -660,7 +662,8 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.PERSON__PHOTO:
 				return getPhoto();
 			case ModelPackage.PERSON__HONORIFIC:
@@ -701,7 +704,8 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.PERSON__PHOTO:
 				setPhoto((String)newValue);
 				return;
@@ -755,7 +759,8 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.PERSON__PHOTO:
 				setPhoto(PHOTO_EDEFAULT);
 				return;
@@ -809,7 +814,8 @@ public class PersonImpl extends ContactableImpl implements Person {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case ModelPackage.PERSON__PHOTO:
 				return PHOTO_EDEFAULT == null ? photo != null : !PHOTO_EDEFAULT.equals(photo);
 			case ModelPackage.PERSON__HONORIFIC:

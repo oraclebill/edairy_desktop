@@ -204,7 +204,8 @@ public class TransportRouteImpl extends EObjectImpl implements TransportRoute {
 	 * @generated
 	 */
 	public EList<DairyLocation> getStops() {
-		if (stops == null) {
+		if (stops == null)
+		{
 			stops = new EObjectWithInverseResolvingEList<DairyLocation>(DairyLocation.class, this, DairyPackage.TRANSPORT_ROUTE__STOPS, DairyPackage.DAIRY_LOCATION__ROUTE);
 		}
 		return stops;
@@ -216,7 +217,8 @@ public class TransportRouteImpl extends EObjectImpl implements TransportRoute {
 	 * @generated
 	 */
 	public EList<Bin> getBins() {
-		if (bins == null) {
+		if (bins == null)
+		{
 			bins = new EObjectWithInverseResolvingEList<Bin>(Bin.class, this, DairyPackage.TRANSPORT_ROUTE__BINS, DairyPackage.BIN__ZONE);
 		}
 		return bins;
@@ -249,10 +251,12 @@ public class TransportRouteImpl extends EObjectImpl implements TransportRoute {
 	 * @generated
 	 */
 	public Vehicle getVehicle() {
-		if (vehicle != null && vehicle.eIsProxy()) {
+		if (vehicle != null && vehicle.eIsProxy())
+		{
 			InternalEObject oldVehicle = (InternalEObject)vehicle;
 			vehicle = (Vehicle)eResolveProxy(oldVehicle);
-			if (vehicle != oldVehicle) {
+			if (vehicle != oldVehicle)
+			{
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.TRANSPORT_ROUTE__VEHICLE, oldVehicle, vehicle));
 			}
@@ -289,7 +293,8 @@ public class TransportRouteImpl extends EObjectImpl implements TransportRoute {
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.TRANSPORT_ROUTE__STOPS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getStops()).basicAdd(otherEnd, msgs);
 			case DairyPackage.TRANSPORT_ROUTE__BINS:
@@ -305,7 +310,8 @@ public class TransportRouteImpl extends EObjectImpl implements TransportRoute {
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.TRANSPORT_ROUTE__STOPS:
 				return ((InternalEList<?>)getStops()).basicRemove(otherEnd, msgs);
 			case DairyPackage.TRANSPORT_ROUTE__BINS:
@@ -321,7 +327,8 @@ public class TransportRouteImpl extends EObjectImpl implements TransportRoute {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.TRANSPORT_ROUTE__ID:
 				return getId();
 			case DairyPackage.TRANSPORT_ROUTE__NAME:
@@ -347,7 +354,8 @@ public class TransportRouteImpl extends EObjectImpl implements TransportRoute {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.TRANSPORT_ROUTE__ID:
 				setId((Long)newValue);
 				return;
@@ -379,7 +387,8 @@ public class TransportRouteImpl extends EObjectImpl implements TransportRoute {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.TRANSPORT_ROUTE__ID:
 				setId(ID_EDEFAULT);
 				return;
@@ -409,7 +418,8 @@ public class TransportRouteImpl extends EObjectImpl implements TransportRoute {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.TRANSPORT_ROUTE__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case DairyPackage.TRANSPORT_ROUTE__NAME:

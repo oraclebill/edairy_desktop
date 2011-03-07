@@ -31,13 +31,16 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * @generated
 	 */
 	public static DairyFactory init() {
-		try {
+		try
+		{
 			DairyFactory theDairyFactory = (DairyFactory)EPackage.Registry.INSTANCE.getEFactory("http://com.agritrace.edairy.desktop.common.model/dairy/"); 
-			if (theDairyFactory != null) {
+			if (theDairyFactory != null)
+			{
 				return theDairyFactory;
 			}
 		}
-		catch (Exception exception) {
+		catch (Exception exception)
+		{
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new DairyFactoryImpl();
@@ -60,7 +63,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
+		switch (eClass.getClassifierID())
+		{
 			case DairyPackage.VEHICLE: return createVehicle();
 			case DairyPackage.COLLECTION_JOURNAL_LINE: return createCollectionJournalLine();
 			case DairyPackage.SCALE_IMPORT_RECORD: return createScaleImportRecord();
@@ -95,7 +99,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 */
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
-		switch (eDataType.getClassifierID()) {
+		switch (eDataType.getClassifierID())
+		{
 			case DairyPackage.JOURNAL_STATUS:
 				return createJournalStatusFromString(eDataType, initialValue);
 			case DairyPackage.MILK_SALE_TYPE:
@@ -122,7 +127,8 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 */
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
-		switch (eDataType.getClassifierID()) {
+		switch (eDataType.getClassifierID())
+		{
 			case DairyPackage.JOURNAL_STATUS:
 				return convertJournalStatusToString(eDataType, instanceValue);
 			case DairyPackage.MILK_SALE_TYPE:

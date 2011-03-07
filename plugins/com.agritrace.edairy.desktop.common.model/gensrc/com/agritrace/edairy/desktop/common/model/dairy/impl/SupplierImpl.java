@@ -221,7 +221,8 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 	 * @generated
 	 */
 	public EList<String> getCategories() {
-		if (categories == null) {
+		if (categories == null)
+		{
 			categories = new EDataTypeUniqueEList<String>(String.class, this, DairyPackage.SUPPLIER__CATEGORIES);
 		}
 		return categories;
@@ -381,7 +382,8 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.SUPPLIER__CATEGORIES:
 				return getCategories();
 			case DairyPackage.SUPPLIER__ID:
@@ -410,7 +412,8 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.SUPPLIER__CATEGORIES:
 				getCategories().clear();
 				getCategories().addAll((Collection<? extends String>)newValue);
@@ -447,7 +450,8 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.SUPPLIER__CATEGORIES:
 				getCategories().clear();
 				return;
@@ -483,7 +487,8 @@ public class SupplierImpl extends CompanyImpl implements Supplier {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case DairyPackage.SUPPLIER__CATEGORIES:
 				return categories != null && !categories.isEmpty();
 			case DairyPackage.SUPPLIER__ID:

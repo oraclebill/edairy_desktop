@@ -104,7 +104,8 @@ public enum AcquisitionType implements Enumerator {
 	 * @generated
 	 */
 	private static final AcquisitionType[] VALUES_ARRAY =
-		new AcquisitionType[] {
+		new AcquisitionType[]
+		{
 			BIRTH,
 			PURCHASE,
 			OTHER,
@@ -125,9 +126,11 @@ public enum AcquisitionType implements Enumerator {
 	 * @generated
 	 */
 	public static AcquisitionType get(String literal) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			AcquisitionType result = VALUES_ARRAY[i];
-			if (result.toString().equals(literal)) {
+			if (result.toString().equals(literal))
+			{
 				return result;
 			}
 		}
@@ -141,9 +144,11 @@ public enum AcquisitionType implements Enumerator {
 	 * @generated
 	 */
 	public static AcquisitionType getByName(String name) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			AcquisitionType result = VALUES_ARRAY[i];
-			if (result.getName().equals(name)) {
+			if (result.getName().equals(name))
+			{
 				return result;
 			}
 		}
@@ -157,7 +162,8 @@ public enum AcquisitionType implements Enumerator {
 	 * @generated
 	 */
 	public static AcquisitionType get(int value) {
-		switch (value) {
+		switch (value)
+		{
 			case BIRTH_VALUE: return BIRTH;
 			case PURCHASE_VALUE: return PURCHASE;
 			case OTHER_VALUE: return OTHER;

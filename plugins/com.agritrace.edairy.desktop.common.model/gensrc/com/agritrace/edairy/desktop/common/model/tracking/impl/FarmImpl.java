@@ -208,7 +208,8 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 * @generated
 	 */
 	public EList<RegisteredAnimal> getAnimals() {
-		if (animals == null) {
+		if (animals == null)
+		{
 			animals = new EObjectContainmentEList<RegisteredAnimal>(RegisteredAnimal.class, this, TrackingPackage.FARM__ANIMALS);
 		}
 		return animals;
@@ -220,7 +221,8 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 * @generated
 	 */
 	public EList<Container> getCans() {
-		if (cans == null) {
+		if (cans == null)
+		{
 			cans = new EObjectContainmentEList<Container>(Container.class, this, TrackingPackage.FARM__CANS);
 		}
 		return cans;
@@ -243,7 +245,8 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	public NotificationChain basicSetLocation(Location newLocation, NotificationChain msgs) {
 		Location oldLocation = location;
 		location = newLocation;
-		if (eNotificationRequired()) {
+		if (eNotificationRequired())
+		{
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TrackingPackage.FARM__LOCATION, oldLocation, newLocation);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -256,7 +259,8 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 * @generated
 	 */
 	public void setLocation(Location newLocation) {
-		if (newLocation != location) {
+		if (newLocation != location)
+		{
 			NotificationChain msgs = null;
 			if (location != null)
 				msgs = ((InternalEObject)location).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TrackingPackage.FARM__LOCATION, null, msgs);
@@ -295,7 +299,8 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 * @generated
 	 */
 	public void setOwner(Farmer newOwner) {
-		if (newOwner != eInternalContainer() || (eContainerFeatureID() != TrackingPackage.FARM__OWNER && newOwner != null)) {
+		if (newOwner != eInternalContainer() || (eContainerFeatureID() != TrackingPackage.FARM__OWNER && newOwner != null))
+		{
 			if (EcoreUtil.isAncestor(this, newOwner))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -356,7 +361,8 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case TrackingPackage.FARM__OWNER:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -372,7 +378,8 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case TrackingPackage.FARM__ANIMALS:
 				return ((InternalEList<?>)getAnimals()).basicRemove(otherEnd, msgs);
 			case TrackingPackage.FARM__CANS:
@@ -392,7 +399,8 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
+		switch (eContainerFeatureID())
+		{
 			case TrackingPackage.FARM__OWNER:
 				return eInternalContainer().eInverseRemove(this, TrackingPackage.FARMER__FARMS, Farmer.class, msgs);
 		}
@@ -406,7 +414,8 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case TrackingPackage.FARM__FARM_ID:
 				return getFarmId();
 			case TrackingPackage.FARM__NAME:
@@ -433,7 +442,8 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case TrackingPackage.FARM__FARM_ID:
 				setFarmId((Long)newValue);
 				return;
@@ -468,7 +478,8 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case TrackingPackage.FARM__FARM_ID:
 				setFarmId(FARM_ID_EDEFAULT);
 				return;
@@ -501,7 +512,8 @@ public class FarmImpl extends EObjectImpl implements Farm {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
+		switch (featureID)
+		{
 			case TrackingPackage.FARM__FARM_ID:
 				return FARM_ID_EDEFAULT == null ? farmId != null : !FARM_ID_EDEFAULT.equals(farmId);
 			case TrackingPackage.FARM__NAME:

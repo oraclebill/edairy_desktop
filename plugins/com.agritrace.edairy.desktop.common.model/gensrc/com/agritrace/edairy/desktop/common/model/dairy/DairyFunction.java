@@ -154,7 +154,8 @@ public enum DairyFunction implements Enumerator {
 	 * @generated
 	 */
 	private static final DairyFunction[] VALUES_ARRAY =
-		new DairyFunction[] {
+		new DairyFunction[]
+		{
 			MILK_COLLECTION,
 			MILK_STORAGE,
 			STORE_SALES,
@@ -177,9 +178,11 @@ public enum DairyFunction implements Enumerator {
 	 * @generated
 	 */
 	public static DairyFunction get(String literal) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			DairyFunction result = VALUES_ARRAY[i];
-			if (result.toString().equals(literal)) {
+			if (result.toString().equals(literal))
+			{
 				return result;
 			}
 		}
@@ -193,9 +196,11 @@ public enum DairyFunction implements Enumerator {
 	 * @generated
 	 */
 	public static DairyFunction getByName(String name) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i)
+		{
 			DairyFunction result = VALUES_ARRAY[i];
-			if (result.getName().equals(name)) {
+			if (result.getName().equals(name))
+			{
 				return result;
 			}
 		}
@@ -209,7 +214,8 @@ public enum DairyFunction implements Enumerator {
 	 * @generated
 	 */
 	public static DairyFunction get(int value) {
-		switch (value) {
+		switch (value)
+		{
 			case MILK_COLLECTION_VALUE: return MILK_COLLECTION;
 			case MILK_STORAGE_VALUE: return MILK_STORAGE;
 			case STORE_SALES_VALUE: return STORE_SALES;
