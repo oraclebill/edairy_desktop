@@ -61,6 +61,7 @@ public class JournalHeaderComposite extends Composite implements IComplexCompone
 
 	public JournalHeaderComposite(Composite parent, int style) {
 		super(parent, style);
+		setBackground(LnfManager.getLnf().getColor(LnfKeyConstants.SUB_MODULE_BACKGROUND));
 		createHeaderGroup(this);
 		createSubHeaderGroup(this);
 		GridLayoutFactory.fillDefaults().generateLayout(this);

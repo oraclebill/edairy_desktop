@@ -12,6 +12,7 @@ import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.observable.value.IValueChangeListener;
 import org.eclipse.core.databinding.observable.value.ValueChangeEvent;
 import org.eclipse.core.databinding.validation.IValidator;
+import org.eclipse.core.internal.databinding.property.value.SetDelegatingValueObservableMap;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -186,8 +187,9 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		addedWaterButton = getRidget(IToggleButtonRidget.class, "added-water-checkbox");
 
 		addButton = getRidget(IActionRidget.class, ViewWidgetId.addButton);
+		
 		clearButton = getRidget(IActionRidget.class, ViewWidgetId.entryInputClear);
-
+		
 		//
 		// configure ridgets
 		//

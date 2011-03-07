@@ -15,36 +15,42 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-public class FieldUtil {
+public class FieldUtil
+{
 
-	public static final int MINIMUM_LABEL_WIDTH = 70;
-	public static final int STD_BOTTOM_MARGIN = 8;
+	public static final int			MINIMUM_LABEL_WIDTH	= 70;
+	public static final int			STD_BOTTOM_MARGIN	= 8;
 
-	public static final int STD_BOTTOM_PADDING = 5;
-	public static final int STD_FIELD_WIDTH = 70;
-	public static final int STD_LEFT_MARGIN = 12;
-	public static final int STD_LEFT_PADDING = 5;
+	public static final int			STD_BOTTOM_PADDING	= 5;
+	public static final int			STD_FIELD_WIDTH		= 70;
+	public static final int			STD_LEFT_MARGIN		= 12;
+	public static final int			STD_LEFT_PADDING	= 5;
 
-	public static final int STD_RIGHT_MARGIN = 12;
-	public static final int STD_RIGHT_PADDING = 5;
+	public static final int			STD_RIGHT_MARGIN	= 12;
+	public static final int			STD_RIGHT_PADDING	= 5;
 	//
-	public static final int STD_TOP_MARGIN = 12;
+	public static final int			STD_TOP_MARGIN		= 12;
 	//
-	public static final int STD_TOP_PADDING = 5;
+	public static final int			STD_TOP_PADDING		= 5;
 
-	private final GridDataFactory comboGDF; // = GridDataFactory.fillDefaults().minSize(STD_FIELD_WIDTH, -1)
+	private final GridDataFactory	comboGDF;					// =
+// GridDataFactory.fillDefaults().minSize(STD_FIELD_WIDTH, -1)
 // .grab(true, false);
-	private final GridDataFactory fieldGDF; // = GridDataFactory.fillDefaults().minSize(STD_FIELD_WIDTH, -1)
+	private final GridDataFactory	fieldGDF;					// =
+// GridDataFactory.fillDefaults().minSize(STD_FIELD_WIDTH, -1)
 // .grab(true, false).align(SWT.END, SWT.FILL);
-	//
-	private final GridDataFactory labelGDF; // = GridDataFactory.swtDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
+																//
+	private final GridDataFactory	labelGDF;					// = GridDataFactory.swtDefaults().align(SWT.BEGINNING,
+// SWT.BEGINNING)
 // .hint(MINIMUM_LABEL_WIDTH, -1);
 
-	public FieldUtil() {
+	public FieldUtil()
+	{
 		this(MINIMUM_LABEL_WIDTH, STD_FIELD_WIDTH);
 	}
 
-	public FieldUtil(int labelWidth, int fieldWidth) {
+	public FieldUtil(int labelWidth, int fieldWidth)
+	{
 		// SWT.DEFAULT == -1
 		if (labelWidth < 0) {
 			labelWidth = MINIMUM_LABEL_WIDTH;
@@ -62,11 +68,15 @@ public class FieldUtil {
 	/**
 	 * @wbp.factory
 	 */
-	public Control addLabeledBooleanField(Composite parent, String labelTxt, String widgetID) {
+	public Control addLabeledBooleanField(	Composite parent,
+											String labelTxt,
+											String widgetID)
+	{
 		final Label label = createLabel(parent, labelTxt);
 		labelGDF.applyTo(label);
 
-		final Button control = UIControlsFactory.createButtonCheck(parent, "", widgetID);
+		final Button control = new Button(parent, SWT.CHECK);
+		SWTBindingPropertyLocator.getInstance().setBindingProperty(control, widgetID);
 		GridDataFactory.swtDefaults().align(SWT.CENTER, SWT.BEGINNING).applyTo(control);
 
 		return control;
@@ -75,7 +85,10 @@ public class FieldUtil {
 	/**
 	 * @wbp.factory
 	 */
-	public Control addLabeledComboField(Composite parent, String labelTxt, String widgetID) {
+	public Control addLabeledComboField(Composite parent,
+										String labelTxt,
+										String widgetID)
+	{
 		final Label label = createLabel(parent, labelTxt);
 		labelGDF.applyTo(label);
 
@@ -85,7 +98,7 @@ public class FieldUtil {
 		return field;
 
 	}
-	
+
 	/**
 	 * @param parent
 	 * @param labelTxt
@@ -93,10 +106,13 @@ public class FieldUtil {
 	 * @return
 	 * @wbp.factory
 	 */
-	public Control addLabeledCompletionComboField(Group parent, String labelTxt, String widgetID) {
+	public Control addLabeledCompletionComboField(	Group parent,
+													String labelTxt,
+													String widgetID)
+	{
 		return addLabeledCompletionComboField(parent, labelTxt, widgetID, false);
 	}
-	
+
 	/**
 	 * @param parent
 	 * @param labelTxt
@@ -105,7 +121,11 @@ public class FieldUtil {
 	 * @return
 	 * @wbp.factory
 	 */
-	public Control addLabeledCompletionComboField(Group parent, String labelTxt, String widgetID, boolean allowMismatch) {
+	public Control addLabeledCompletionComboField(	Group parent,
+													String labelTxt,
+													String widgetID,
+													boolean allowMismatch)
+	{
 		final Label label = createLabel(parent, labelTxt);
 		labelGDF.applyTo(label);
 
@@ -120,7 +140,10 @@ public class FieldUtil {
 	/**
 	 * @wbp.factory
 	 */
-	public Control addLabeledDateField(Composite parent, String labelTxt, String widgetID) {
+	public Control addLabeledDateField(	Composite parent,
+										String labelTxt,
+										String widgetID)
+	{
 		final Label label = createLabel(parent, labelTxt);
 		labelGDF.applyTo(label);
 
@@ -135,7 +158,10 @@ public class FieldUtil {
 	/**
 	 * @wbp.factory
 	 */
-	public Control addLabeledDecimalTextField(Composite parent, String labelTxt, String widgetID) {
+	public Control addLabeledDecimalTextField(	Composite parent,
+												String labelTxt,
+												String widgetID)
+	{
 		final Label label = createLabel(parent, labelTxt);
 		labelGDF.applyTo(label);
 
@@ -148,7 +174,10 @@ public class FieldUtil {
 	/**
 	 * @wbp.factory
 	 */
-	public Control addLabeledTextField(Composite parent, String labelTxt, String widgetID) {
+	public Control addLabeledTextField(	Composite parent,
+										String labelTxt,
+										String widgetID)
+	{
 		final Label label = createLabel(parent, labelTxt);
 		labelGDF.applyTo(label);
 
@@ -165,7 +194,9 @@ public class FieldUtil {
 	 * @return
 	 * @wbp.factory
 	 */
-	public static Label createLabel(Composite parent, String labelText) {
+	public static Label createLabel(Composite parent,
+									String labelText)
+	{
 		return createLabel(parent, labelText, null);
 	}
 
@@ -176,7 +207,10 @@ public class FieldUtil {
 	 * @return
 	 * @wbp.factory
 	 */
-	private static Label createLabel(Composite parent, String labelText, String bindingId) {
+	private static Label createLabel(	Composite parent,
+										String labelText,
+										String bindingId)
+	{
 		final Label label = new Label(parent, SWT.NONE);
 		label.setText(labelText);
 		if (bindingId != null) {
