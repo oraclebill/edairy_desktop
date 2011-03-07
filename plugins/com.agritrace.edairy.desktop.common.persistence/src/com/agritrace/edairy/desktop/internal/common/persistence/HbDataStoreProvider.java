@@ -143,36 +143,10 @@ public class HbDataStoreProvider implements Provider<HbDataStore>, IDbProperties
 			// the downside is the fk names change every time they are generated, and have
 			// no semantic content
 			props.setProperty("teneo.naming.set_foreign_key_name", "false");
-			
 			props.setProperty("teneo.mapping.disable_econtainer", "true");
 			props.setProperty("teneo.mapping.default_varchar_length", "60");
-			props.setProperty("teneo.mapping.always_map_list_as_bag", "true"); // will
-																				// cause
-																				// hb
-																				// to
-																				// ignore
-																				// index
-																				// columns
-			// if they exist,
-
-			// TODO: improve performance...
-			// props.setProperty("teneo.mapping.set_proxy", "true"); //
-			// classloading issues
-			// props.setProperty("teneo.mapping.fetch_containment_eagerly",
-			// "true"); // counterproductive
-			// props.setProperty("teneo.mapping.map_all_lists_as_idbag",
-			// "true"); // untried
-			// props.setProperty("teneo.mapping.always_map_list_as_bag",
-			// "true"); // untried
-			// props.setProperty("teneo.mapping.map_embeddable_as_embedded",
-			// "true");
-
-			// TODO: extra-lazy
-			// global extra-lazy wont work. contactmethods fouls it up (at
-			// least) probably teneo bug..
-			// props.setProperty("teneo.mapping.fetch_one_to_many_extra_lazy",
-			// "true");
-
+			props.setProperty("teneo.mapping.always_map_list_as_bag", "true"); 
+			
 			// show all sql for debugging
 			testval = System.getenv("EDAIRY_SHOW_SQL");
 			if (testval != null && !testval.isEmpty()) {

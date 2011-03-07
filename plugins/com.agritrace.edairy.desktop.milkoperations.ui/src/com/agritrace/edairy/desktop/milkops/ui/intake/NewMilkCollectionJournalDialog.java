@@ -44,40 +44,54 @@ import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
-import com.agritrace.edairy.desktop.common.persistence.IRepository;
-import com.agritrace.edairy.desktop.common.persistence.dao.IDairyLocationRepository;
-import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
-public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
+public class NewMilkCollectionJournalDialog extends TitleAreaDialog
+{
 
-	private final IDairyRepository dairyRepository;
-//	private final IDairyLocationRepository dairyLocationRepo;
-	private final IRepository<CollectionSession> sessionRepo;
-	private DateTime datePicker;
-	private CCombo driverCombo;
-	private final CollectionGroup newJournalPage;
+	// reference data
+	private List<DairyLocation>		centers;
+	private List<CollectionSession>	sessions;
+	private List<Employee>			drivers;
+	private List<TransportRoute>	routes;
+	private List<Vehicle>			vehicles;
 
-	private CCombo centerCombo;
-	private CCombo sessionCombo;
-	private CCombo vehicleCombo;
-	private List<Employee> drivers;
-	private List<Vehicle> vehicles;
+	private DateTime				datePicker;
+	private CCombo					driverCombo;
+	private final CollectionGroup	newJournalPage;
+
+	private CCombo					centerCombo;
+	private CCombo					sessionCombo;
+	private CCombo					vehicleCombo;
 
 	@Inject
-	public NewMilkCollectionJournalDialog(@Named("current") final Shell parentShell,
-			final IDairyRepository dairyRepository, final IDairyLocationRepository dairyLocationRepo,
-			final IRepository<CollectionSession> sessionRepo) {
+	public NewMilkCollectionJournalDialog(	@Named("current") final Shell shell,
+											final Dairy dairy) {
+		this(shell, dairy.getBranchLocations(), dairy.getCollectionSessions(), createEmployeeList(dairy), dairy.getRoutes(), dairy.getVehicles());
+	}
+
+	@Inject
+	public NewMilkCollectionJournalDialog(	@Named("current") final Shell parentShell,
+											final List<DairyLocation> centers,
+											final List<CollectionSession> sessions,
+											final List<Employee> drivers,
+											final List<TransportRoute> routes,
+											final List<Vehicle> vehicles)
+	{
 		super(parentShell);
-		this.dairyRepository = dairyRepository;
-//		this.dairyLocationRepo = dairyLocationRepo;
-		this.sessionRepo = sessionRepo;
+		this.centers = centers;
+		this.sessions = sessions;
+		this.drivers = drivers;
+		this.routes = routes;
+		this.vehicles = vehicles;
+		
 		newJournalPage = DairyFactory.eINSTANCE.createCollectionGroup();
 		newJournalPage.setType(CollectionGroupType.JOURNAL_GROUP);
 	}
 
-	public CollectionGroup getNewJournalPage() {
+	public CollectionGroup getGroupInfo()
+	{
 		final String refNum = newJournalPage.getReferenceNumber();
 
 		if (refNum == null || refNum.trim().length() == 0) {
@@ -87,8 +101,8 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		return newJournalPage;
 	}
 
-	private void configureRidgets() {
-
+	private void configureRidgets()
+	{
 		// create/configure ridgets
 		final IDateTimeRidget dateTime = (IDateTimeRidget) SwtRidgetFactory.createRidget(datePicker);
 		final IComboRidget center = (IComboRidget) SwtRidgetFactory.createRidget(centerCombo);
@@ -100,13 +114,11 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 
 		final PropertyChangeListener validationListener = new PropertyChangeListener() {
 			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
+			public void propertyChange(PropertyChangeEvent evt)
+			{
 				final boolean isValid =
-					/* newJournalPage.getRoute() != null
-					&& */ newJournalPage.getSession() != null
-					&& newJournalPage.getDriver() != null
-					&& newJournalPage.getJournalDate() != null
-					&& newJournalPage.getVehicle() != null;
+				newJournalPage.getSession() != null && newJournalPage.getDriver() != null
+						&& newJournalPage.getJournalDate() != null && newJournalPage.getVehicle() != null;
 
 				final Button okButton = getButton(IDialogConstants.OK_ID);
 				if (null != okButton) {
@@ -114,24 +126,29 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 				}
 			}
 		};
-		class UpdateListener implements PropertyChangeListener, FocusListener {
+		class UpdateListener implements PropertyChangeListener, FocusListener
+		{
 
 			@Override
-			public void focusGained(FocusEvent e) {
+			public void focusGained(FocusEvent e)
+			{
 			}
 
 			@Override
-			public void focusLost(FocusEvent e) {
+			public void focusLost(FocusEvent e)
+			{
 			}
 
 			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
+			public void propertyChange(PropertyChangeEvent evt)
+			{
 				// todo: remove
 				debugPrintEvent(evt);
 
 			}
 
-			private void debugPrintEvent(PropertyChangeEvent evt) {
+			private void debugPrintEvent(PropertyChangeEvent evt)
+			{
 				final StringBuilder sb = new StringBuilder();
 				final Formatter f = new Formatter(sb, Locale.getDefault());
 				System.err.println(f.format("[%s] %s: new=(%s) old=(%s)", evt.getSource(), evt.getPropertyName(),
@@ -150,7 +167,6 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		center.addPropertyChangeListener(fileNumberUpdateListener);
 		center.addPropertyChangeListener(validationListener);
 
-
 		vehicle.setMandatory(true);
 		vehicle.addPropertyChangeListener(validationListener);
 
@@ -165,35 +181,40 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		dateTime.bindToModel(EMFObservables.observeValue(newJournalPage,
 				DairyPackage.Literals.COLLECTION_GROUP__JOURNAL_DATE));
 
-		final Dairy localDairy = dairyRepository.getLocalDairy();
+// final Dairy dairy = dairyRepository.getLocalDairy();
 
 		try {
-			final List<DairyLocation> centers = localDairy.getBranchLocations();
+// final List<DairyLocation> centers = dairy.getBranchLocations();
 			center.bindToModel(new WritableList(centers, DairyLocation.class), DairyLocation.class, "getCode",
-					PojoObservables.observeValue( newJournalPage,
+					PojoObservables.observeValue(newJournalPage,
 							DairyPackage.Literals.COLLECTION_GROUP__COLLECTION_CENTER.getName()));
-			center.setSelection(localDairy.getRoutes().get(0));
+			center.setSelection(centers.get(0));
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 
 		try {
-			vehicles = new ArrayList<Vehicle>(localDairy.getVehicles());
+			vehicles = new ArrayList<Vehicle>(vehicles);
 
-			vehicle.bindToModel(new WritableList(vehicles, Vehicle.class), Vehicle.class, "getRegistrationNumber",
+			vehicle.bindToModel(
+					new WritableList(vehicles, Vehicle.class),
+					Vehicle.class,
+					"getRegistrationNumber",
 					PojoObservables.observeValue(newJournalPage,
 							DairyPackage.Literals.COLLECTION_GROUP__VEHICLE.getName()));
 
-			vehicle.setSelection(localDairy.getVehicles().get(0));
+			vehicle.setSelection(vehicles.get(0));
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 
 		try {
-			final List<CollectionSession> sessions = sessionRepo.all();
+// final List<CollectionSession> sessions = sessionRepo.all();
 
-			session.bindToModel(new WritableList(sessions, CollectionSession.class),
-					CollectionSession.class, "getCode",
+			session.bindToModel(
+					new WritableList(sessions, CollectionSession.class),
+					CollectionSession.class,
+					"getCode",
 					PojoObservables.observeValue(newJournalPage,
 							DairyPackage.Literals.COLLECTION_GROUP__SESSION.getName()));
 		} catch (final Exception e) {
@@ -201,7 +222,6 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		}
 
 		try {
-			drivers = createEmployeeList(localDairy);
 			driver.bindToModel(
 					new WritableList(drivers, Employee.class),
 					Employee.class,
@@ -225,7 +245,8 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 
 		center.addSelectionListener(new ISelectionListener() {
 			@Override
-			public void ridgetSelected(SelectionEvent event) {
+			public void ridgetSelected(SelectionEvent event)
+			{
 				final DairyLocation loc = newJournalPage.getCollectionCenter();
 				final TransportRoute route = loc.getRoute();
 
@@ -238,7 +259,8 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 
 		vehicle.addSelectionListener(new ISelectionListener() {
 			@Override
-			public void ridgetSelected(SelectionEvent event) {
+			public void ridgetSelected(SelectionEvent event)
+			{
 				final Vehicle vehicle = newJournalPage.getVehicle();
 
 				if (vehicle != null && vehicle.getDriver() != null) {
@@ -249,7 +271,8 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 		});
 	}
 
-	private List<Employee> createEmployeeList(Dairy dairy) {
+	private static List<Employee> createEmployeeList(Dairy dairy)
+	{
 		final List<Employee> driverList = new LinkedList<Employee>();
 		for (final Employee emp : dairy.getEmployees()) {
 			final String job = emp.getJobFunction();
@@ -261,19 +284,21 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 	}
 
 	@Override
-	protected Control createButtonBar(Composite parent) {
+	protected Control createButtonBar(Composite parent)
+	{
 		// TODO Auto-generated method stub
 		return super.createButtonBar(parent);
 	}
 
 	/**
 	 * Creates the buttons for the button bar
-	 *
+	 * 
 	 * @param parent
 	 *            the parent composite
 	 */
 	@Override
-	protected void createButtonsForButtonBar(Composite parent) {
+	protected void createButtonsForButtonBar(Composite parent)
+	{
 		createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, true);
 		final Button okButton = createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL, true);
 		okButton.setEnabled(false);
@@ -281,7 +306,8 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 	}
 
 	@Override
-	protected Control createContents(Composite parent) {
+	protected Control createContents(Composite parent)
+	{
 		final Control contents = super.createContents(parent);
 		configureRidgets();
 		setTitle("Create New Collections Journal File");
@@ -290,13 +316,15 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 	}
 
 	@Override
-	protected void initializeBounds() {
+	protected void initializeBounds()
+	{
 		super.initializeBounds();
 		getShell().setSize(370, getShell().getSize().y);
 	}
 
 	@Override
-	protected Control createDialogArea(Composite parent) {
+	protected Control createDialogArea(Composite parent)
+	{
 		final Composite buffer = (Composite) super.createDialogArea(parent);
 		final Composite workArea = UIControlsFactory.createComposite(buffer);
 		GridLayoutFactory.swtDefaults().numColumns(2).spacing(8, 8).margins(6, 6).generateLayout(workArea);
@@ -350,7 +378,8 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog {
 	}
 
 	@Override
-	protected void configureShell(Shell newShell) {
+	protected void configureShell(Shell newShell)
+	{
 		super.configureShell(newShell);
 		newShell.setText("Milk Collection Journal");
 	}

@@ -47,42 +47,47 @@ import com.agritrace.edairy.desktop.milkops.ui.intake.ViewWidgetId;
 
 public class CollectionLineRidget extends AbstractCompositeRidget implements ICollectionLineRidget {
 
-	public static final String CONFIRM_CLEAR_COLLECTION_LINE = CollectionLineRidget.class.getName() + ".confirmClear";
+	public static final String			CONFIRM_CLEAR_COLLECTION_LINE	= CollectionLineRidget.class.getName()
+																				+ ".confirmClear";
 
-	private static Color SUCCESS_COLOR = AbstractDirectoryController.getDisplay().getSystemColor(SWT.COLOR_DARK_GREEN);
-	private static Color WARNING_COLOR = AbstractDirectoryController.getDisplay().getSystemColor(SWT.COLOR_CYAN);
-	private static Color ERROR_COLOR = AbstractDirectoryController.getDisplay().getSystemColor(SWT.COLOR_RED);
-	private static Color NORMAL_COLOR = AbstractDirectoryController.getDisplay().getSystemColor(SWT.COLOR_BLACK);
+	private static Color				SUCCESS_COLOR					= AbstractDirectoryController.getDisplay()
+																				.getSystemColor(SWT.COLOR_DARK_GREEN);
+	private static Color				WARNING_COLOR					= AbstractDirectoryController.getDisplay()
+																				.getSystemColor(SWT.COLOR_CYAN);
+	private static Color				ERROR_COLOR						= AbstractDirectoryController.getDisplay()
+																				.getSystemColor(SWT.COLOR_RED);
+	private static Color				NORMAL_COLOR					= AbstractDirectoryController.getDisplay()
+																				.getSystemColor(SWT.COLOR_BLACK);
 
-	private IComboRidget binCombo;
-	private ITextRidget canText;
-	private IComboRidget memberIDRidget;
-	private ILabelRidget memberNameRidget;
-	private IToggleButtonRidget nprMissingButton;
-	private IDecimalTextRidget quantityText;
-	private IToggleButtonRidget rejectedButton;
-	private IToggleButtonRidget qualityButton;
-	private ITextRidget milkfatTxt;
-	private ITextRidget alcoholPercentTxt;
-	private IToggleButtonRidget addedWaterButton;
-	private IActionRidget addButton;
-	private IActionRidget clearButton;
+	private IComboRidget				binCombo;
+	private ITextRidget					canText;
+	private IComboRidget				memberIDRidget;
+	private ILabelRidget				memberNameRidget;
+	private IToggleButtonRidget			nprMissingButton;
+	private IDecimalTextRidget			quantityText;
+	private IToggleButtonRidget			rejectedButton;
+	private IToggleButtonRidget			qualityButton;
+	private ITextRidget					milkfatTxt;
+	private ITextRidget					alcoholPercentTxt;
+	private IToggleButtonRidget			addedWaterButton;
+	private IActionRidget				addButton;
+	private IActionRidget				clearButton;
 
 	// preferences
-	boolean validateBin = true;
-	boolean validateMember = true;
-	boolean confirmClear = true;
-	boolean cachedHideState = false;
+	boolean								validateBin						= true;
+	boolean								validateMember					= true;
+	boolean								confirmClear					= true;
+	boolean								cachedHideState					= false;
 
 	// working memory
-	private CollectionJournalLine workingJournalLine;
-	private List<Bin> binList;
-	private ICompositeRidget qualityGroup;
-	private final ValidatorCollection validatorCollection;
-	private Bin savedContainer;
+	private CollectionJournalLine		workingJournalLine;
+	private List<Bin>					binList;
+	private ICompositeRidget			qualityGroup;
+	private final ValidatorCollection	validatorCollection;
+	private Bin							savedContainer;
 
-	private IMemberLookup memberInfoProvider;
-	private IValidator routeValidator;
+	private IMemberLookup				memberInfoProvider;
+	private IValidator					routeValidator;
 
 	public CollectionLineRidget() {
 		validatorCollection = new ValidatorCollection();
@@ -199,11 +204,10 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		memberIDRidget.addPropertyChangeListener("text", new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
-// final String oldVal = normalizeMemberNumber(evt.getOldValue());
-// final String newVal = normalizeMemberNumber(evt.getNewValue());
 				Object oldVal, newVal;
 				oldVal = evt.getOldValue();
 				newVal = evt.getNewValue();
+				getWorkingCollectionLine().setRecordedMember((String)newVal);
 				if (!oldVal.equals(newVal)) {
 					updateValidatedMember((String) newVal);
 					updateMemberNameText();
@@ -265,8 +269,11 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		}
 		workingJournalLine.setFlagged(false);
 
-		binCombo.bindToModel(new WritableList(binList, Bin.class), Bin.class,
-				"getTrackingNumber", PojoObservables.observeValue(workingJournalLine,
+		binCombo.bindToModel(
+				new WritableList(binList, Bin.class),
+				Bin.class,
+				"getTrackingNumber",
+				PojoObservables.observeValue(workingJournalLine,
 						DairyPackage.Literals.COLLECTION_JOURNAL_LINE__BIN.getName()));
 
 		canText.bindToModel(EMFObservables.observeValue(workingJournalLine,
@@ -277,6 +284,7 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		IObservableValue memberNumberObservable = EMFObservables.observeValue(workingJournalLine,
 				DairyPackage.Literals.COLLECTION_JOURNAL_LINE__RECORDED_MEMBER);
 		memberIDRidget.bindToModel(memberIdList, String.class, "toString", memberNumberObservable);
+		
 
 		// memberNameRidget.bindToModel(workingJournalLine,
 		// "validatedMember.member" );
@@ -359,7 +367,8 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	private void handleSaveLine() {
 		IValidationCallback callback = new IValidationCallback() {
 			@Override
-			public void validationRuleChecked(IValidator validationRule, IStatus status) {
+			public void validationRuleChecked(	IValidator validationRule,
+												IStatus status) {
 				System.err.format("Validating %s: %s", validationRule, status);
 			}
 
@@ -390,7 +399,8 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 		displayMessage(validationResult, IStatus.ERROR | IStatus.CANCEL);
 	}
 
-	protected void displayMessage(final IStatus validationResult, int mask) {
+	protected void displayMessage(	final IStatus validationResult,
+									int mask) {
 		final StringBuffer message = new StringBuffer();
 		final Formatter formatter = new Formatter(message);
 		IStatus[] statusList;
@@ -548,7 +558,9 @@ public class CollectionLineRidget extends AbstractCompositeRidget implements ICo
 	/**
 	 *
 	 */
-	private void log(int level, String message, Object... args) {
+	private void log(	int level,
+						String message,
+						Object... args) {
 		Log4r.getLogger(Activator.getDefault(), getClass()).log(level, String.format(message, args));
 	}
 

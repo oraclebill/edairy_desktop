@@ -79,7 +79,7 @@ public interface IDairyRepository {
 
 	List<CollectionJournalLine> getMemberCollectionsForSession(CollectionSession session, Membership value);
 
-	Collection<Membership> getMembersForRoute(TransportRoute currentRoute);
+	List<Membership> getMembersForRoute(DairyLocation dairyLocation);
 
 	void deleteRoute(final TransportRoute object);
 

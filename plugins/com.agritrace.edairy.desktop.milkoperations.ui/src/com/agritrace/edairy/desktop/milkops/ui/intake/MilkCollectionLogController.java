@@ -2,14 +2,17 @@ package com.agritrace.edairy.desktop.milkops.ui.intake;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.jface.window.Window;
 import org.eclipse.riena.core.Log4r;
+import org.eclipse.riena.navigation.ISubApplicationNode;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDateTimeRidget;
@@ -20,12 +23,13 @@ import org.hibernate.TransactionException;
 
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PermissionRequired;
 import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
-import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
 import com.agritrace.edairy.desktop.common.persistence.dao.IMilkCollectionRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.BasicDirectoryController;
@@ -33,35 +37,79 @@ import com.agritrace.edairy.desktop.common.ui.dialogs.RecordDialog;
 import com.agritrace.edairy.desktop.common.ui.views.AbstractDirectoryView;
 import com.agritrace.edairy.desktop.internal.milkops.ui.Activator;
 import com.agritrace.edairy.desktop.milkops.ui.intake.beans.MilkCollectionLogFilterBean;
+import com.agritrace.edairy.desktop.milkops.ui.intake.collectionline.IMemberLookup;
 import com.agritrace.edairy.desktop.milkops.ui.intake.util.JournalPersistenceDelegate;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 @PermissionRequired(UIPermission.VIEW_MILK_COLLECTIONS)
-public class MilkCollectionLogController extends BasicDirectoryController<CollectionGroup> {
+public class MilkCollectionLogController extends BasicDirectoryController<CollectionGroup>
+{
 
-	private final class CollectionLogJournalPersister implements JournalPersistenceDelegate {
-		private CollectionLogJournalPersister(BulkCollectionsEntryDialogController controller) {
+	// TODO: convert to standard persistence delegate
+	public class NullCollectionLogJournalPersister implements JournalPersistenceDelegate
+	{
+
+		@Override
+		public void saveJournal(CollectionGroup journal)
+		{
+
+		}
+
+	}
+
+	public class CollectionsMemberLookup implements IMemberLookup
+	{
+		private final HashMap<String, Membership>	memberHash	= new HashMap<String, Membership>();
+
+		public CollectionsMemberLookup(List<Membership> validMembers)
+		{
+			for (Membership member : validMembers) {
+				memberHash.put(member.getMemberNumber(), member);
+			}
 		}
 
 		@Override
-		public void saveJournal(CollectionGroup journal) {
+		public Membership getMember(String memberNumber)
+		{
+			return memberHash.get(memberNumber);
+		}
+
+		@Override
+		public Collection<String> findAllMemberNumbers(boolean b)
+		{
+			return memberHash.keySet();
+		}
+
+	}
+
+	private final class CollectionLogJournalPersister implements JournalPersistenceDelegate
+	{
+		private CollectionLogJournalPersister(BulkCollectionsEntryDialogController controller)
+		{
+		}
+
+		@Override
+		public void saveJournal(CollectionGroup journal)
+		{
 			dairyRepo.getLocalDairy().getCollectionJournals().add(journal);
-			dairyRepo.save(dairyRepo.getLocalDairy());
+			dairyRepo.save(journal);
+//			dairyRepo.save(dairyRepo.getLocalDairy());
 			MilkCollectionLogController.this.refreshTableContents();
 		}
 	}
 
-	private final class TotalColumnFormatter extends ColumnFormatter {
+	private final class TotalColumnFormatter extends ColumnFormatter
+	{
 		@Override
-		public String getText(Object element) {
+		public String getText(Object element)
+		{
 			if (element instanceof CollectionGroup) {
 				final CollectionGroup page = (CollectionGroup) element;
 				final JournalStatus status = page.getStatus();
 				switch (status) {
 				case NEW:
 				case PENDING:
-					if(page.getRecordTotal() != null){
+					if (page.getRecordTotal() != null) {
 						return String.valueOf(page.getRecordTotal());
 					}
 					return "ERR";
@@ -69,10 +117,9 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 
 					String result = "";
 					if (page.getRecordTotal() != null) {
-						result =  String.valueOf(page.getRecordTotal());
-					}
-					else {
-						result =  "ERR";// means there was an error getting the proper result - see #273
+						result = String.valueOf(page.getRecordTotal());
+					} else {
+						result = "ERR";// means there was an error getting the proper result - see #273
 					}
 					return result;
 				case COMPLETE:
@@ -84,58 +131,52 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 			return super.getText(element);
 		}
 
-//		@Override
-//		public Color getBackground(Object element) {
-//			if (element instanceof CollectionGroup) {
-//				final CollectionGroup page = (CollectionGroup) element;
-//				if (page.getDriverTotal() != page.getRecordTotal()) {
-//					return TABLE_HIGHLIGHT_BACKGROUND;
-//				}
-//			}
-//			return super.getBackground(element);
-//		}
+// @Override
+// public Color getBackground(Object element) {
+// if (element instanceof CollectionGroup) {
+// final CollectionGroup page = (CollectionGroup) element;
+// if (page.getDriverTotal() != page.getRecordTotal()) {
+// return TABLE_HIGHLIGHT_BACKGROUND;
+// }
+// }
+// return super.getBackground(element);
+// }
 	}
 
-	private IDateTimeRidget startDate;
-	private IDateTimeRidget endDate;
-	private IComboRidget collectionCenter;
-	private IComboRidget status;
-	private IComboRidget session;
-	private IToggleButtonRidget suspended;
-	private IToggleButtonRidget mprMissing;
-	private IToggleButtonRidget rejected;
+	private IDateTimeRidget						startDate;
+	private IDateTimeRidget						endDate;
+	private IComboRidget						collectionCenter;
+	private IComboRidget						status;
+	private IComboRidget						session;
+	private IToggleButtonRidget					suspended;
+	private IToggleButtonRidget					mprMissing;
+	private IToggleButtonRidget					rejected;
 
-	private final MilkCollectionLogFilterBean filterBean = new MilkCollectionLogFilterBean();
-	private final IDairyRepository dairyRepo;
-	private final IRepository<CollectionSession> sessionRepo;
-	private final ScaleImportAction scaleImportAction;
-	private final Provider<NewMilkCollectionJournalDialog> newDialogProvider;
-	private final Provider<BulkCollectionsEntryDialog> entryDialogProvider;
-//	private final Color TABLE_HIGHLIGHT_BACKGROUND = PlatformUI.getWorkbench().getDisplay()
-//			.getSystemColor(SWT.COLOR_YELLOW);
-	private final List<DairyLocation> collectionCenters;
+	private final MilkCollectionLogFilterBean	filterBean	= new MilkCollectionLogFilterBean();
+	private final IDairyRepository				dairyRepo;
+	private final ScaleImportAction				scaleImportAction;
+// private final Color TABLE_HIGHLIGHT_BACKGROUND = PlatformUI.getWorkbench().getDisplay()
+// .getSystemColor(SWT.COLOR_YELLOW);
+	private final List<DairyLocation>			collectionCenters;
+	private Dairy								referenceDairy;
 
 	@Inject
-	public MilkCollectionLogController(final IMilkCollectionRepository journalRepo,
-			final IDairyRepository dairyRepo,
-			final IRepository<CollectionSession> sessionRepo,
-			final ScaleImportAction scaleImportAction,
-			final Provider<NewMilkCollectionJournalDialog> newDialogProvider,
-			final Provider<BulkCollectionsEntryDialog> entryDialogProvider) {
+	public MilkCollectionLogController(	final IMilkCollectionRepository journalRepo,
+										final IDairyRepository dairyRepo,
+										final ScaleImportAction scaleImportAction)
+	{
 		setEClass(DairyPackage.Literals.COLLECTION_GROUP);
 		setRepository(journalRepo);
 		this.dairyRepo = dairyRepo;
 		this.scaleImportAction = scaleImportAction;
-		this.sessionRepo = sessionRepo;
-		this.newDialogProvider = newDialogProvider;
-		this.entryDialogProvider = entryDialogProvider;
-//		allJournals = dairyRepo.allCollectionGroups();
+// allJournals = dairyRepo.allCollectionGroups();
 
 		addTableColumn("Date", DairyPackage.Literals.COLLECTION_GROUP__JOURNAL_DATE);
 		addTableColumn("Collection Center", "collectionCenter.code", String.class);
 		addTableColumn("Session", "session.code", String.class);
 		addTableColumn("Status", "status.name", String.class);
-		addTableColumn("Calculated Total", DairyPackage.Literals.COLLECTION_GROUP__RECORD_TOTAL, new TotalColumnFormatter());
+		addTableColumn("Calculated Total", DairyPackage.Literals.COLLECTION_GROUP__RECORD_TOTAL,
+				new TotalColumnFormatter());
 		addTableColumn("Initial Total", DairyPackage.Literals.COLLECTION_GROUP__DRIVER_TOTAL);
 		addTableColumn("# Members", DairyPackage.Literals.COLLECTION_GROUP__ENTRY_COUNT);
 		addTableColumn("# Suspended", DairyPackage.Literals.COLLECTION_GROUP__SUSPENDED_COUNT);
@@ -147,7 +188,8 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	}
 
 	@Override
-	public void afterBind() {
+	public void afterBind()
+	{
 		super.afterBind();
 		getRidget(IActionRidget.class, AbstractDirectoryView.BIND_ID_NEW_BUTTON).setText("Enter Collection Journals");
 		getRidget(IActionRidget.class, "import-file-button").addListener(scaleImportAction);
@@ -155,7 +197,10 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	}
 
 	@Override
-	protected void configureFilterRidgets() {
+	protected void configureFilterRidgets()
+	{
+		referenceDairy = (Dairy) getNavigationNode().getParentOfType(ISubApplicationNode.class).getContext("DAIRY");
+
 		startDate = getRidget(IDateTimeRidget.class, ViewConstants.COLLECTION_FILTER_START_DATE_TEXT);
 		endDate = getRidget(IDateTimeRidget.class, ViewConstants.COLLECTION_FILTER_END_DATE_TEXT);
 		collectionCenter = getRidget(IComboRidget.class, ViewConstants.COLLECTION_FILTER_CENTER_COMBO);
@@ -178,14 +223,11 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		status.bindToModel(new WritableList(statuses, JournalStatus.class), JournalStatus.class, "getName",
 				BeansObservables.observeValue(filterBean, "status"));
 
-
 		final List<CollectionSession> sessions = new ArrayList<CollectionSession>();
 		sessions.add(null); // Do not filter by status
-		sessions.addAll(sessionRepo.all());
-		session.bindToModel(
-				new WritableList(sessions, CollectionSession.class),
-				CollectionSession.class,
-				"getCode",
+		Dairy contextDairy = (Dairy) getNavigationNode().getParentOfType(ISubApplicationNode.class).getContext("DAIRY");
+		sessions.addAll(contextDairy.getCollectionSessions());
+		session.bindToModel(new WritableList(sessions, CollectionSession.class), CollectionSession.class, "getCode",
 				BeansObservables.observeValue(filterBean, "session"));
 
 		mprMissing.bindToModel(filterBean, "mprMissing");
@@ -197,45 +239,45 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 
 	/**
 	 * Checks whether the given journal page matches the given filter conditions.
-	 *
-	 * @param bean Filter conditions
-	 * @param cj Journal page
+	 * 
+	 * @param bean
+	 *            Filter conditions
+	 * @param cj
+	 *            Journal page
 	 * @return Whether the page matches the conditions
 	 */
 
-
 	// TODO: make this a query..
 	@Override
-	protected List<CollectionGroup> getFilteredResult() {
+	protected List<CollectionGroup> getFilteredResult()
+	{
 		IMilkCollectionRepository groupRepo = (IMilkCollectionRepository) getRepository();
-		return groupRepo.findCollectionGroups(
-				filterBean.getCollectionCenter(), 
-				filterBean.getSession(),
-				filterBean.getStartDate(),
-				filterBean.getEndDate(),
-				filterBean.getStatus(),
-				filterBean.isRejected(),
-				filterBean.isMprMissing(),
-				filterBean.isSuspended()
-				);
+		return groupRepo.findCollectionGroups(filterBean.getCollectionCenter(), filterBean.getSession(),
+				filterBean.getStartDate(), filterBean.getEndDate(), filterBean.getStatus(), filterBean.isRejected(),
+				filterBean.isMprMissing(), filterBean.isSuspended());
 	}
 
 	@Override
-	protected RecordDialog<CollectionGroup> getRecordDialog(Shell shell) {
+	protected RecordDialog<CollectionGroup> getRecordDialog(Shell shell)
+	{
 		throw new UnsupportedOperationException("unsupported");
 	}
 
 	@Override
-	protected void handleNewItemAction() {
-		final NewMilkCollectionJournalDialog dialog = newDialogProvider.get();
+	protected void handleNewItemAction()
+	{
+		final NewMilkCollectionJournalDialog dialog = new NewMilkCollectionJournalDialog(getShell(), referenceDairy);
 		final int returnCode = dialog.open();
 		if (Window.OK == returnCode) {
-			final CollectionGroup newPage = dialog.getNewJournalPage();
-			final BulkCollectionsEntryDialog journalEntryDialog = entryDialogProvider.get();
-			final BulkCollectionsEntryDialogController controller = ( BulkCollectionsEntryDialogController)journalEntryDialog.getController();
-
+			final CollectionGroup newPage = dialog.getGroupInfo();
+			IMemberLookup memberLookup = new CollectionsMemberLookup(dairyRepo.getMembersForRoute(newPage
+					.getCollectionCenter()));
+			final BulkCollectionsEntryDialogController controller = new BulkCollectionsEntryDialogController(
+					referenceDairy, memberLookup);
 			controller.setPersistenceDelegate(new CollectionLogJournalPersister(controller));
 			controller.setContextJournalPage(newPage);
+			controller.setContext("DAIRY", getContext("DAIRY"));
+			final BulkCollectionsEntryDialog journalEntryDialog = new BulkCollectionsEntryDialog(getShell(), controller);
 
 			if (Window.OK != journalEntryDialog.open()) {
 				throw new TransactionException("Rollback");
@@ -245,20 +287,26 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 	}
 
 	@Override
-	protected void handleViewItemAction() {
-		if(table != null && table.getSelection().size()>0){
-			final BulkCollectionsEntryDialog journalEntryDialog = entryDialogProvider.get();
-			final BulkCollectionsEntryDialogController controller = (BulkCollectionsEntryDialogController)journalEntryDialog.getController();
+	protected void handleViewItemAction()
+	{
+		if (table != null && table.getSelection().size() > 0) {
 
-			controller.setPersistenceDelegate(new CollectionLogJournalPersister(controller));
+			CollectionGroup selected = (CollectionGroup) table.getSelection().get(0);
+			IMemberLookup memberLookup = new CollectionsMemberLookup(dairyRepo.getMembersForRoute(selected
+					.getCollectionCenter()));
+			final BulkCollectionsEntryDialogController controller = new BulkCollectionsEntryDialogController(
+					referenceDairy, memberLookup);
+			controller.setPersistenceDelegate(new NullCollectionLogJournalPersister());
 			controller.setContextJournalPage((CollectionGroup) table.getSelection().get(0));
+			final BulkCollectionsEntryDialog journalEntryDialog = new BulkCollectionsEntryDialog(getShell(), controller);
 			journalEntryDialog.open();
 		}
 
 	}
 
 	@Override
-	protected void resetFilterConditions() {
+	protected void resetFilterConditions()
+	{
 		Calendar cal = Calendar.getInstance();
 		cal = new GregorianCalendar(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), 1, 0, 0, 0);
 		startDate.setDate(cal.getTime());
@@ -274,12 +322,18 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		refreshTableContents();
 	}
 
-	void log(int level, String message, Throwable t) {
-		final org.eclipse.equinox.log.Logger logger = Log4r.getLogger(Activator.getDefault(), this.getClass().getName());
+	void log(	int level,
+				String message,
+				Throwable t)
+	{
+		final org.eclipse.equinox.log.Logger logger = Log4r
+				.getLogger(Activator.getDefault(), this.getClass().getName());
 		logger.log(level, message, t);
 	}
 
-	void log(int level, String message) {
+	void log(	int level,
+				String message)
+	{
 		log(level, message, null);
 	}
 

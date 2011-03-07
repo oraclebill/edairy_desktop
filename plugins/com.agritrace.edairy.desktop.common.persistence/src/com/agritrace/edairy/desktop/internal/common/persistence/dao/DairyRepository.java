@@ -110,9 +110,9 @@ public class DairyRepository implements IDairyRepository {
 		}
 
 		class MembersForRoute extends SessionRunnable<Object> {
-			TransportRoute route;
+			DairyLocation route;
 
-			public MembersForRoute(TransportRoute route) {
+			public MembersForRoute(DairyLocation route) {
 				this.route = route;
 			}
 
@@ -141,7 +141,8 @@ public class DairyRepository implements IDairyRepository {
 			}
 		}
 
-		public List<Membership> membersForRoute(TransportRoute defaultRoute) {
+		@Transactional
+		public List<Membership> membersForRoute(DairyLocation defaultRoute) {
 			final MembersForRoute query = new MembersForRoute(defaultRoute);
 			runWithTransaction(query);
 
@@ -367,7 +368,7 @@ public class DairyRepository implements IDairyRepository {
 
 
 	@Override
-	public Collection<Membership> getMembersForRoute(TransportRoute theRoute) {
+	public List<Membership> getMembersForRoute(DairyLocation theRoute) {
 		return dairyRepository.membersForRoute(theRoute);
 	}
 

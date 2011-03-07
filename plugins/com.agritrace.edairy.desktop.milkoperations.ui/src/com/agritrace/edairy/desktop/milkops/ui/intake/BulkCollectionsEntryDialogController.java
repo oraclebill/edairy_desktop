@@ -45,9 +45,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager;
 import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
-import com.agritrace.edairy.desktop.common.persistence.dao.ICollectionJournalLineRepository;
-import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
-import com.agritrace.edairy.desktop.common.persistence.dao.IMemberRepository;
 import com.agritrace.edairy.desktop.common.ui.DialogConstants;
 import com.agritrace.edairy.desktop.common.ui.columnformatters.BooleanPropertyColumnFormatter;
 import com.agritrace.edairy.desktop.common.ui.controllers.AbstractDirectoryController;
@@ -58,7 +55,6 @@ import com.agritrace.edairy.desktop.milkops.ui.intake.collectionline.ICollection
 import com.agritrace.edairy.desktop.milkops.ui.intake.collectionline.IMemberLookup;
 import com.agritrace.edairy.desktop.milkops.ui.intake.journalheader.IJournalHeaderRidget;
 import com.agritrace.edairy.desktop.milkops.ui.intake.util.BasicJournalValidator;
-import com.agritrace.edairy.desktop.milkops.ui.intake.util.CachingMemberLookup;
 import com.agritrace.edairy.desktop.milkops.ui.intake.util.JournalPersistenceDelegate;
 import com.agritrace.edairy.desktop.milkops.ui.intake.validators.DuplicateDeliveryValidator;
 import com.agritrace.edairy.desktop.milkops.ui.intake.validators.MandatoryFieldsCheck;
@@ -84,9 +80,9 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 	static final HashMap<String, String> validatedMemberNames = new HashMap<String, String>();
 	private static final Color RED = PlatformUI.getWorkbench().getDisplay().getSystemColor(SWT.COLOR_RED);
 
-	private final IDairyRepository dairyRepo;
-	private final IMemberRepository memberRepo;
-	private final ICollectionJournalLineRepository lineRepo;
+	private Dairy dairy;
+	private final IMemberLookup memberLookup;
+//	private final ICollectionJournalLineRepository lineRepo;
 
 	// milk Entry group
 	private ITableRidget journalEntryTable;
@@ -110,12 +106,10 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 	 *
 	 */
 	@Inject
-	public BulkCollectionsEntryDialogController(final IDairyRepository dairyRepo, IMemberRepository memberRepo,
-			final ICollectionJournalLineRepository lineRepo) {
+	public BulkCollectionsEntryDialogController(Dairy dairy, IMemberLookup memberLookup) {
 		super();
-		this.dairyRepo = dairyRepo;
-		this.lineRepo = lineRepo;
-		this.memberRepo = memberRepo;
+		this.dairy = dairy;
+		this.memberLookup = memberLookup;
 		journalPageValidators = new ValidatorCollection();
 		addJournalValidator(new BasicJournalValidator());
 	}
@@ -182,6 +176,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 
 		journalHeaderRidget = getRidget(IJournalHeaderRidget.class, "journal-header");
 		collectionLineRidget = getRidget(ICollectionLineRidget.class, "journal-entry");
+		
+		
 		journalEntryTable = getRidget(ITableRidget.class, ViewWidgetId.milkEntryTable);
 		modifyButton = getRidget(IActionRidget.class, ViewWidgetId.modifyButton);
 		deleteButton = getRidget(IActionRidget.class, ViewWidgetId.deleteButton);
@@ -404,8 +400,8 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 		// TODO: RouteMatchValidator
 		// collectionLineRidget.setRouteValidator(new RouteMatchValidator(
 		// workingJournalPage.getRoute()));
-		final IMemberLookup handler = new CachingMemberLookup(memberRepo);
-		collectionLineRidget.addValidator(new MemberLookupValidator(handler));
+//		final IMemberLookup handler = new CachingMemberLookup(memberRepo);
+		collectionLineRidget.addValidator(new MemberLookupValidator(memberLookup));
 
 		/*
 		 * if (currentRoute != null) { // collectionLineRidget.setBinList(dairyRepo .getBinsForRoute(currentRoute)); //
@@ -415,10 +411,10 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 		 * 
 		 * } else {
 		 */
-		collectionLineRidget.setMemberInfoProvider(handler);
+		collectionLineRidget.setMemberInfoProvider(memberLookup);
 		// }
 
-		final Dairy dairy = dairyRepo.getLocalDairy();
+//		final Dairy dairy = dairyRepo.getLocalDairy();
 		collectionLineRidget.setBinList(dairy.getDairyBins());
 
 		collectionLineRidget.addValidator(new DuplicateDeliveryValidator(workingJournalPage.getJournalEntries(),
@@ -439,10 +435,10 @@ public class BulkCollectionsEntryDialogController extends BaseDialogController<C
 				if (date == null) {
 					return ValidationStatus.error("The journal entry has no date assigned");
 				}
-
-				if (member != null && lineRepo.countByMemberCenterDate(member, center, date) > 0) {
-					return ValidationStatus.warning("Another entry for this member, center and date already exists");
-				}
+// TODO: TODO: TODO: restore this validation 
+//				if (member != null && lineRepo.countByMemberCenterDate(member, center, date) > 0) {
+//					return ValidationStatus.warning("Another entry for this member, center and date already exists");
+//				}
 
 				return ValidationStatus.ok();
 			}
