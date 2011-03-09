@@ -9,6 +9,7 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.eclipse.emf.teneo.hibernate.HbHelper;
@@ -17,6 +18,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 
+import com.agritrace.edairy.desktop.common.model.base.Location;
 import com.agritrace.edairy.desktop.common.model.base.ModelFactory;
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
 import com.agritrace.edairy.desktop.common.model.base.Permission;
@@ -31,7 +33,6 @@ import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.security.PrincipalManager;
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
-import com.agritrace.edairy.desktop.common.model.util.DairyUtil;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
 public class DatabaseSetup {
@@ -81,7 +82,9 @@ public class DatabaseSetup {
 			}
 		}
 		setup.generateSchema();
+		setup.generateHibernateMapping();
 	}
+
 
 	/**
 	 * 
@@ -267,6 +270,15 @@ public class DatabaseSetup {
 		exporter.execute(true, false, false, true);
 
 	}
+	
+	/**
+	 * 
+	 */
+	public void generateHibernateMapping() throws IOException
+	{
+		
+	}
+
 
 	/**
 	 * 
@@ -294,12 +306,14 @@ public class DatabaseSetup {
 
 		cSession = DairyFactory.eINSTANCE.createCollectionSession();
 		cSession.setCode("AM");
+		cSession.setTimeOfDay(new Date(0,0,0,6,0));
 		cSession.setDescription("The first collection session of the day");
 		dairy.getCollectionSessions().add(cSession);
 
 		cSession = DairyFactory.eINSTANCE.createCollectionSession();
 		cSession.setCode("PM");
 		cSession.setDescription("An additional collection session.");
+		cSession.setTimeOfDay(new Date(0,0,0,13,0));
 		dairy.getCollectionSessions().add(cSession);
 	}
 
@@ -385,15 +399,25 @@ public class DatabaseSetup {
 
 	protected Dairy createDairy(String dairyNumber) {
 		Dairy dairy;
+		Location location;
+		
+		location = ModelFactory.eINSTANCE.createLocation();
+		location.setDescriptiveLocation(null);
+		location.setMapLocation(null);
+		location.setPostalLocation(null);
+		location.setStatutoryLocation(null);
+		getSession().persist(location);
 
 		dairy = DairyFactory.eINSTANCE.createDairy();
 		dairy.setRegistrationNumber(dairyNumber);
-		dairy.setDescription("");
-		dairy.setCompanyName("");
-		dairy.setLegalName("");
-		dairy.setEstablishedDate(new Date());
-		dairy.setLocation(DairyUtil.createLocation(null, null, null));
-
+		dairy.setDescription("<description>");
+		dairy.setCompanyName("<company common name>");
+		dairy.setLegalName("<company legal name>");
+		dairy.setPhoneNumber("+254 0072 0000 0000");
+		dairy.setEstablishedDate(new Date(1,1,1975));
+		
+		dairy.setLocation(location);
+		Assert.isNotNull(dairy.getLocation());
 		getSession().persist(dairy);
 
 		return dairy;
@@ -461,6 +485,7 @@ public class DatabaseSetup {
 		props.setProperty("teneo.naming.set_foreign_key_name", "false");
 		props.setProperty("teneo.mapping.also_map_as_class", "false");
 		props.setProperty("teneo.mapping.disable_econtainer", "true");
+//		props.setProperty("teneo.mapping.cascade_policy_on_non_containment", "ALL");
 		props.setProperty("teneo.mapping.default_varchar_length", "60");
 		props.setProperty("teneo.mapping.always_map_list_as_bag", "true"); // will
 	}

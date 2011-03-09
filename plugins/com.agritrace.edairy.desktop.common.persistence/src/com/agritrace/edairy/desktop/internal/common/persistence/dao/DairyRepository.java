@@ -189,10 +189,12 @@ public class DairyRepository implements IDairyRepository {
 		if (dairy == null) {
 			dairy = DairyFactory.eINSTANCE.createDairy();
 			dairy.setLocation(DairyUtil.createLocation(null, null, null));
-			dairy.setCompanyName("");
-			dairy.setDescription("");
-			dairy.setPhoneNumber("");
-			dairy.setRegistrationNumber("");
+			dairy.setDescription("<enter description>");
+			dairy.setCompanyName("<enter company common name>");
+			dairy.setLegalName("<enter company legal name>");
+			dairy.setPhoneNumber("+254 0072 0000 0000");
+			dairy.setRegistrationNumber("<enter registration number>");
+			dairy.setEstablishedDate(new Date(1,1,1975));
 
 			session.save(dairy);
 		}
@@ -200,10 +202,13 @@ public class DairyRepository implements IDairyRepository {
 		// initialize the instance..
 		Hibernate.initialize(dairy);
 		final List<EReference> persistentCollections = Arrays.asList(DairyPackage.Literals.DAIRY__BRANCH_LOCATIONS,
-				DairyPackage.Literals.DAIRY__CUSTOMERS, DairyPackage.Literals.DAIRY__DAIRY_BINS,
-				DairyPackage.Literals.DAIRY__EMPLOYEES, DairyPackage.Literals.DAIRY__ROUTES,
-				DairyPackage.Literals.DAIRY__COLLECTION_JOURNALS, DairyPackage.Literals.DAIRY__VEHICLES,
-				DairyPackage.Literals.DAIRY__SUPPLIERS, ModelPackage.Literals.CONTACTABLE__CONTACT_METHODS);
+				DairyPackage.Literals.DAIRY__CUSTOMERS, 
+				DairyPackage.Literals.DAIRY__ROUTES,
+				DairyPackage.Literals.DAIRY__VEHICLES,
+				DairyPackage.Literals.DAIRY__BRANCH_LOCATIONS,
+				DairyPackage.Literals.DAIRY__SUPPLIERS, 
+				DairyPackage.Literals.DAIRY__DAIRY_BINS,
+				ModelPackage.Literals.CONTACTABLE__CONTACT_METHODS);
 		for (final EStructuralFeature feature : persistentCollections) {
 			Hibernate.initialize(dairy.eGet(feature));
 		}
