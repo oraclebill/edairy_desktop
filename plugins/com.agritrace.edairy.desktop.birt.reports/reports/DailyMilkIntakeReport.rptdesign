@@ -92,6 +92,7 @@ BirtDateTime.year(endDate) + "-" + BirtDateTime.month(endDate) + "-" + BirtDateT
             <property name="odaURL">jdbc:mysql://localhost:3306/dairymgr</property>
             <property name="odaUser">root</property>
         </oda-data-source>
+        <script-data-source name="MilkIntakeScriptedDataSource" id="2200"/>
     </data-sources>
     <data-sets>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="memberProduceDataset" id="1991">
@@ -132,6 +133,10 @@ LEFT JOIN collectionjournalline  ON membership.memberid = collectionjournalline.
 LEFT JOIN collectiongroup  ON collectiongroup.journalid = collectionjournalline.collectionjournalline_group_e_id 
 WHERE collectiongroup.journaldate = DATE (?) || collectiongroup.journaldate = DATE (?) ]]></xml-property>
         </oda-data-set>
+        <script-data-set name="MilkIntakeScriptedDataSet" id="2201">
+            <structure name="cachedMetaData"/>
+            <property name="dataSource">MilkIntakeScriptedDataSource</property>
+        </script-data-set>
     </data-sets>
     <styles>
         <style name="report" id="4">
@@ -221,12 +226,6 @@ WHERE collectiongroup.journaldate = DATE (?) || collectiongroup.journaldate = DA
                             <text-property name="displayName">code</text-property>
                             <expression name="expression" type="javascript">dataSetRow["code"]</expression>
                             <property name="dataType">string</property>
-                        </structure>
-                        <structure>
-                            <property name="name">dairycontainer_dairycontainer_containerid</property>
-                            <text-property name="displayName">dairycontainer_dairycontainer_containerid</text-property>
-                            <expression name="expression" type="javascript">dataSetRow["dairycontainer_dairycontainer_containerid"]</expression>
-                            <property name="dataType">decimal</property>
                         </structure>
                         <structure>
                             <property name="name">quantity</property>
@@ -326,12 +325,6 @@ WHERE collectiongroup.journaldate = DATE (?) || collectiongroup.journaldate = DA
                     <text-property name="displayName">code</text-property>
                     <expression name="expression" type="javascript">dataSetRow["code"]</expression>
                     <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="name">dairycontainer_dairycontainer_containerid</property>
-                    <text-property name="displayName">dairycontainer_dairycontainer_containerid</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["dairycontainer_dairycontainer_containerid"]</expression>
-                    <property name="dataType">decimal</property>
                 </structure>
                 <structure>
                     <property name="name">quantity</property>

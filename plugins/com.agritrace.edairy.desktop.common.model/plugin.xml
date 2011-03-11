@@ -62,5 +62,12 @@
             class="com.agritrace.edairy.desktop.common.model.requests.RequestsPackage"
             genModel="model/dairy.genmodel"/>
    </extension>
+   <extension
+         point="org.eclipse.emf.ecore.factory_override">
+      <factory
+            class="com.agritrace.edairy.desktop.common.model.base.ExtendedModelFactory"
+            uri="http://com.agritrace.edairy.desktop.common.model.base/">
+      </factory>
+   </extension>
 
 </plugin>

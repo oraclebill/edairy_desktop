@@ -6,10 +6,13 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
+import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Provides;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -83,6 +86,12 @@ public class EDairyActivator extends AbstractUIPlugin {
 				bind(EDairyActivator.class).toInstance(EDairyActivator.this);
 				requestStaticInjection(EDairyActivator.class);
 			}
+			
+			@Provides
+			public Dairy providesLocalDairy(IDairyRepository dairyRepo) {
+			    return dairyRepo.getLocalDairy();
+			}
+			
 		});
 		injector.injectMembers(this);
 		super.start(context);
