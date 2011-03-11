@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 2.6.1.v20100902 Build &lt;2.6.1.v20100915-1750></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 2.6.2.r262_v20110209 Build &lt;2.6.2.v20110214-1523></property>
     <text-property name="title">Daily Milk Rejects Report</text-property>
     <property name="units">in</property>
     <list-property name="propertyBindings">
@@ -75,130 +75,9 @@ BirtDateTime.year(endDate) + "-" + BirtDateTime.month(endDate) + "-" + BirtDateT
         </oda-data-source>
     </data-sources>
     <data-sets>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="memberProduceDataset" id="1991">
-            <list-property name="parameters">
-                <structure>
-                    <property name="name">param_2</property>
-                    <property name="paramName">fromDate</property>
-                    <property name="dataType">string</property>
-                    <property name="position">1</property>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
-                </structure>
-                <structure>
-                    <property name="name">param_3</property>
-                    <property name="paramName">date</property>
-                    <property name="dataType">string</property>
-                    <property name="position">2</property>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
-                </structure>
-            </list-property>
-            <structure name="cachedMetaData">
-                <list-property name="resultSet">
-                    <structure>
-                        <property name="position">1</property>
-                        <property name="name">journaldate</property>
-                        <property name="dataType">date-time</property>
-                    </structure>
-                    <structure>
-                        <property name="position">2</property>
-                        <property name="name">collectionsession_session_e_id</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">3</property>
-                        <property name="name">code</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">4</property>
-                        <property name="name">dairycontainer_dairycontainer_containerid</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">5</property>
-                        <property name="name">quantity</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">6</property>
-                        <property name="name">rejected</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">7</property>
-                        <property name="name">membernumber</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">8</property>
-                        <property name="name">givenname</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                </list-property>
-            </structure>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="MilkIntakeSQLDataSet" id="2216"
+ extends="CommonReportLib.MilkIntakeSQLDataSet">
             <property name="dataSource">Data Source</property>
-            <list-property name="resultSet">
-                <structure>
-                    <property name="position">1</property>
-                    <property name="name">journaldate</property>
-                    <property name="nativeName">journaldate</property>
-                    <property name="dataType">date-time</property>
-                </structure>
-                <structure>
-                    <property name="position">2</property>
-                    <property name="name">collectionsession_session_e_id</property>
-                    <property name="nativeName">collectionsession_session_e_id</property>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="position">3</property>
-                    <property name="name">code</property>
-                    <property name="nativeName">code</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">4</property>
-                    <property name="name">dairycontainer_dairycontainer_containerid</property>
-                    <property name="nativeName">dairycontainer_dairycontainer_containerid</property>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="position">5</property>
-                    <property name="name">quantity</property>
-                    <property name="nativeName">quantity</property>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="position">6</property>
-                    <property name="name">rejected</property>
-                    <property name="nativeName">rejected</property>
-                    <property name="dataType">integer</property>
-                </structure>
-                <structure>
-                    <property name="position">7</property>
-                    <property name="name">membernumber</property>
-                    <property name="nativeName">membernumber</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">8</property>
-                    <property name="name">givenname</property>
-                    <property name="nativeName">givenname</property>
-                    <property name="dataType">string</property>
-                </structure>
-            </list-property>
-            <xml-property name="queryText"><![CDATA[SELECT collectiongroup.journaldate, collectiongroup.collectionsession_session_e_id, dairylocation.code
-, collectionjournalline.dairycontainer_dairycontainer_containerid, collectionjournalline.quantity, collectionjournalline.rejected
-, membership.membernumber, person.givenname
-FROM membership 
-JOIN person  ON membership.farmer = person.personid	
-LEFT JOIN dairylocation ON membership.dairylocation_defaultroute_id = dairylocation.id 
-LEFT JOIN collectionjournalline  ON membership.memberid = collectionjournalline.membership_validatedmember_e_id 
-LEFT JOIN collectiongroup  ON collectiongroup.journalid = collectionjournalline.collectionjournalline_collectionjournal_e_id 
-WHERE  collectionjournalline.rejected = 1 
-and (collectiongroup.journaldate = DATE (?) || collectiongroup.journaldate = DATE (?)) ]]></xml-property>
         </oda-data-set>
     </data-sets>
     <styles>
@@ -239,13 +118,13 @@ and (collectiongroup.journaldate = DATE (?) || collectiongroup.journaldate = DAT
         <simple-master-page name="Portrait" id="9" extends="CommonReportLib.Portrait">
             <overridden-values>
                 <ref-entry baseId="428" name="Header" id="428"/>
-                <ref-entry baseId="9" id="2210"/>
+                <ref-entry baseId="9" id="2213"/>
                 <ref-entry baseId="10" id="10"/>
                 <ref-entry baseId="494" id="494"/>
                 <ref-entry baseId="11" id="11"/>
                 <ref-entry baseId="12" id="12"/>
                 <ref-entry baseId="13" id="13"/>
-                <ref-entry baseId="2111" name="NewText5" id="2211">
+                <ref-entry baseId="2111" name="NewText5" id="2214">
                     <property name="textAlign">left</property>
                 </ref-entry>
                 <ref-entry baseId="14" id="14"/>
@@ -264,7 +143,7 @@ and (collectiongroup.journaldate = DATE (?) || collectiongroup.journaldate = DAT
                 <ref-entry baseId="121" name="NewAutoText" id="121"/>
                 <ref-entry baseId="16" id="16"/>
                 <ref-entry baseId="512" id="512"/>
-                <ref-entry baseId="2112" name="NewTextData111" id="2212"/>
+                <ref-entry baseId="2112" name="NewTextData111" id="2215"/>
                 <ref-entry baseId="563" id="563"/>
                 <ref-entry baseId="465" name="NewText" id="465">
                     <property name="content">&lt;VALUE-OF>params["date"].value&lt;/VALUE-OF></property>
@@ -323,7 +202,7 @@ and (collectiongroup.journaldate = DATE (?) || collectiongroup.journaldate = DAT
     <body>
         <table id="1997">
             <property name="marginTop">10pt</property>
-            <property name="dataSet">memberProduceDataset</property>
+            <property name="dataSet">MilkIntakeSQLDataSet</property>
             <list-property name="boundDataColumns">
                 <structure>
                     <property name="name">journaldate</property>
@@ -372,7 +251,7 @@ and (collectiongroup.journaldate = DATE (?) || collectiongroup.journaldate = DAT
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["quantity"]</expression>
+                            <expression name="value" type="javascript">dataSetRow["quantity"]</expression>
                         </structure>
                     </list-property>
                     <expression name="filterExpr" type="javascript">dataSetRow["collectionsession_session_e_id"] == 1</expression>
@@ -387,7 +266,7 @@ and (collectiongroup.journaldate = DATE (?) || collectiongroup.journaldate = DAT
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["quantity"]</expression>
+                            <expression name="value" type="javascript">dataSetRow["quantity"]</expression>
                         </structure>
                     </list-property>
                     <expression name="filterExpr" type="javascript">dataSetRow["collectionsession_session_e_id"] == 2</expression>
@@ -402,7 +281,7 @@ and (collectiongroup.journaldate = DATE (?) || collectiongroup.journaldate = DAT
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["quantity"]</expression>
+                            <expression name="value" type="javascript">dataSetRow["quantity"]</expression>
                         </structure>
                     </list-property>
                     <expression name="filterExpr" type="javascript">BirtDateTime.diffDay(BirtDateTime.addDay( params["date"].value, 0), BirtDateTime.addDay(row["journaldate"], 0))==0</expression>
@@ -414,7 +293,7 @@ and (collectiongroup.journaldate = DATE (?) || collectiongroup.journaldate = DAT
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["quantity"]</expression>
+                            <expression name="value" type="javascript">dataSetRow["quantity"]</expression>
                         </structure>
                     </list-property>
                     <expression name="filterExpr" type="javascript">dataSetRow["collectionsession_session_e_id"] == 2</expression>
@@ -426,7 +305,7 @@ and (collectiongroup.journaldate = DATE (?) || collectiongroup.journaldate = DAT
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["quantity"]</expression>
+                            <expression name="value" type="javascript">dataSetRow["quantity"]</expression>
                         </structure>
                     </list-property>
                 </structure>
@@ -438,7 +317,7 @@ and (collectiongroup.journaldate = DATE (?) || collectiongroup.journaldate = DAT
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["quantity"]</expression>
+                            <expression name="value" type="javascript">dataSetRow["quantity"]</expression>
                         </structure>
                     </list-property>
                     <expression name="filterExpr" type="javascript">dataSetRow["collectionsession_session_e_id"] == 1</expression>
@@ -450,7 +329,7 @@ and (collectiongroup.journaldate = DATE (?) || collectiongroup.journaldate = DAT
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["quantity"]</expression>
+                            <expression name="value" type="javascript">dataSetRow["quantity"]</expression>
                         </structure>
                     </list-property>
                     <expression name="filterExpr" type="javascript">dataSetRow["collectionsession_session_e_id"] == 1 &amp;&amp; (dataSetRow["rejected"] == null || dataSetRow["rejected"] == 0)</expression>
@@ -462,7 +341,7 @@ and (collectiongroup.journaldate = DATE (?) || collectiongroup.journaldate = DAT
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["quantity"]</expression>
+                            <expression name="value" type="javascript">dataSetRow["quantity"]</expression>
                         </structure>
                     </list-property>
                     <expression name="filterExpr" type="javascript">dataSetRow["collectionsession_session_e_id"] == 2 &amp;&amp; (dataSetRow["rejected"] == null || dataSetRow["rejected"] == 0)</expression>
@@ -474,7 +353,7 @@ and (collectiongroup.journaldate = DATE (?) || collectiongroup.journaldate = DAT
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["quantity"]</expression>
+                            <expression name="value" type="javascript">dataSetRow["quantity"]</expression>
                         </structure>
                     </list-property>
                     <expression name="filterExpr" type="javascript">dataSetRow["rejected"] == null || dataSetRow["rejected"] == 0</expression>
@@ -489,7 +368,7 @@ and (collectiongroup.journaldate = DATE (?) || collectiongroup.journaldate = DAT
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["quantity"]</expression>
+                            <expression name="value" type="javascript">dataSetRow["quantity"]</expression>
                         </structure>
                     </list-property>
                     <expression name="filterExpr" type="javascript">BirtDateTime.diffDay(BirtDateTime.addDay( params["fromDate"].value, 0), BirtDateTime.addDay(row["journaldate"], 0))==0</expression>
@@ -527,7 +406,7 @@ if(row["TotalQtyPrevious"] != null &amp;&amp; row["TotalQty"] != null) {&#13;
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["quantity"]</expression>
+                            <expression name="value" type="javascript">dataSetRow["quantity"]</expression>
                         </structure>
                     </list-property>
                 </structure>
@@ -538,7 +417,7 @@ if(row["TotalQtyPrevious"] != null &amp;&amp; row["TotalQty"] != null) {&#13;
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["quantity"]</expression>
+                            <expression name="value" type="javascript">dataSetRow["quantity"]</expression>
                         </structure>
                     </list-property>
                 </structure>
@@ -549,7 +428,7 @@ if(row["TotalQtyPrevious"] != null &amp;&amp; row["TotalQty"] != null) {&#13;
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["quantity"]</expression>
+                            <expression name="value" type="javascript">dataSetRow["quantity"]</expression>
                         </structure>
                     </list-property>
                     <expression name="filterExpr" type="javascript">BirtDateTime.diffDay(BirtDateTime.addDay( params["fromDate"].value, 0), BirtDateTime.addDay(row["journaldate"], 0))==0</expression>
@@ -567,6 +446,7 @@ if(row["TotalQtyPrevious"] != null &amp;&amp; row["TotalQty"] != null) {&#13;
                     <property name="dataType">string</property>
                 </structure>
             </list-property>
+            <structure name="toc"/>
             <column id="2032">
                 <property name="width">15%</property>
             </column>
@@ -620,7 +500,7 @@ if(row["TotalQtyPrevious"] != null &amp;&amp; row["TotalQty"] != null) {&#13;
                 <property name="groupName">code</property>
                 <property name="interval">none</property>
                 <property name="sortDirection">asc</property>
-                <expression name="keyExpr" type="javascript">row["code"]</expression>
+                <expression name="keyExpr" type="javascript">dataSetRow["code"]</expression>
                 <structure name="toc"/>
                 <property name="repeatHeader">true</property>
                 <property name="hideDetail">false</property>
@@ -629,7 +509,7 @@ if(row["TotalQtyPrevious"] != null &amp;&amp; row["TotalQty"] != null) {&#13;
                 <property name="pageBreakInside">auto</property>
                 <list-property name="sort">
                     <structure>
-                        <expression name="key" type="javascript">row["code"]</expression>
+                        <expression name="key" type="javascript">dataSetRow["code"]</expression>
                         <property name="direction">asc</property>
                         <property name="strength">-1</property>
                     </structure>

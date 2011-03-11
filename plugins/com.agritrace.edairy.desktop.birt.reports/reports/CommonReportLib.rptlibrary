@@ -76,6 +76,98 @@
             <property name="odaUser">root</property>
         </oda-data-source>
     </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="MilkIntakeSQLDataSet" id="2179">
+            <property name="nullsOrdering">nulls lowest</property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">code</property>
+                    <property name="alias">session</property>
+                    <text-property name="displayName">Session</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">code_3</property>
+                    <property name="alias">center</property>
+                    <text-property name="displayName">Center</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">journaldate</property>
+                    <text-property name="displayName">Collection Date</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">quantity</property>
+                    <text-property name="displayName">Quantity</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">collectionDate</property>
+                    <property name="paramName">date</property>
+                    <property name="dataType">date</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">journaldate</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">session</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">center</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">quantity</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">dairyMgrDbDataSource</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">journaldate</property>
+                    <property name="nativeName">journaldate</property>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">code</property>
+                    <property name="nativeName">code</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">code_3</property>
+                    <property name="nativeName">code</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">quantity</property>
+                    <property name="nativeName">quantity</property>
+                    <property name="dataType">float</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select collectiongroup.journaldate, collectionsession.code as session, dairylocation.code as center, collectionjournalline.quantity, collectionjournalline.rejected
+from collectiongroup 
+	join collectionjournalline on collectiongroup.journalid = collectionjournalline.collectionjournalline_group_e_id
+	join collectionsession on collectionsession.id = collectiongroup.collectionsession_session_e_id
+	join dairylocation on dairylocation.id = collectiongroup.dairylocation_collectioncenter_id
+where journaldate = ?]]></xml-property>
+        </oda-data-set>
+    </data-sets>
     <page-setup>
         <simple-master-page name="Portrait" id="3">
             <property name="orientation">portrait</property>
