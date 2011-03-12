@@ -2,7 +2,6 @@ package com.agritrace.edairy.desktop.birt.viewer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -12,31 +11,27 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.eclipse.birt.core.exception.BirtException;
-import org.eclipse.birt.report.engine.api.EngineException;
 import org.eclipse.birt.report.engine.api.HTMLCompleteImageHandler;
 import org.eclipse.birt.report.engine.api.HTMLRenderOption;
-import org.eclipse.birt.report.engine.api.HTMLServerImageHandler;
 import org.eclipse.birt.report.engine.api.IGetParameterDefinitionTask;
 import org.eclipse.birt.report.engine.api.IHTMLRenderOption;
 import org.eclipse.birt.report.engine.api.IParameterDefn;
 import org.eclipse.birt.report.engine.api.IParameterGroupDefn;
 import org.eclipse.birt.report.engine.api.IRenderOption;
-import org.eclipse.birt.report.engine.api.IRenderTask;
-import org.eclipse.birt.report.engine.api.IReportDocument;
 import org.eclipse.birt.report.engine.api.IReportEngine;
 import org.eclipse.birt.report.engine.api.IReportRunnable;
 import org.eclipse.birt.report.engine.api.IRunAndRenderTask;
-import org.eclipse.birt.report.engine.api.IRunTask;
 import org.eclipse.birt.report.engine.api.PDFRenderOption;
+import org.eclipse.birt.report.engine.api.RenderOption;
 import org.eclipse.birt.report.model.api.OdaDataSourceHandle;
 import org.eclipse.birt.report.model.api.ReportDesignHandle;
 import org.eclipse.birt.report.model.api.SlotHandle;
 import org.eclipse.birt.report.model.api.activity.SemanticException;
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.equinox.log.Logger;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.riena.core.Log4r;
-import org.eclipse.riena.core.RienaLocations;
 import org.eclipse.riena.navigation.IApplicationNode;
 import org.eclipse.riena.navigation.INavigationNode;
 import org.eclipse.riena.navigation.ISubModuleNode;
@@ -55,30 +50,33 @@ import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
 import com.agritrace.edairy.desktop.internal.common.persistence.HbDataStoreProvider;
 
-public abstract class ReportViewController extends SubModuleController {
-	private static final Logger LOGGER = Log4r.getLogger(ReportViewController.class);
+public abstract class ReportViewController extends SubModuleController
+{
+	private static final Logger	LOGGER								= Log4r.getLogger(ReportViewController.class);
 
-	public static final String MILK_COLLECTION_YEAR = "reports/YearReport.rptdesign";
-	public static final String MILK_COLLECTION_YEAR_REPORT_NAME = "MILK COLLECTION REPORT";
-	public static final String MEMBER_PAYABLE_YEAR = "reports/YearMemberPayableReport.rptdesign";
-	public static final String MEMBER_PAYABLE_YEAR_REPORT_NAME = "MEMBER PAYABLE REPORT";
+	public static final String	MILK_COLLECTION_YEAR				= "reports/YearReport.rptdesign";
+	public static final String	MILK_COLLECTION_YEAR_REPORT_NAME	= "MILK COLLECTION REPORT";
+	public static final String	MEMBER_PAYABLE_YEAR					= "reports/YearMemberPayableReport.rptdesign";
+	public static final String	MEMBER_PAYABLE_YEAR_REPORT_NAME		= "MEMBER PAYABLE REPORT";
 
-	private IReportRunnable report;
-	private IReportEngine engine;
+	private IReportRunnable		report;
+	private IReportEngine		engine;
 
-	private IActionRidget runReportAction;
-	private IActionRidget printReportAction;
-	private IActionRidget saveReportAction;
-	private IBrowserRidget browser;
+	private IActionRidget		runReportAction;
+	private IActionRidget		printReportAction;
+	private IActionRidget		saveReportAction;
+	private IBrowserRidget		browser;
 
-	private File reportDocFile;
+	private File				reportDocFile;
 
-	public ReportViewController() {
+	public ReportViewController()
+	{
 		engine = null;
 	}
 
 	@Override
-	public void configureRidgets() {
+	public void configureRidgets()
+	{
 		super.configureRidgets();
 
 		//
@@ -89,7 +87,8 @@ public abstract class ReportViewController extends SubModuleController {
 		runReportAction = getRidget(IActionRidget.class, "report-run-action");
 		runReportAction.addListener(new IActionListener() {
 			@Override
-			public void callback() {
+			public void callback()
+			{
 				try {
 					doRunReport();
 				} catch (Exception e) {
@@ -103,7 +102,8 @@ public abstract class ReportViewController extends SubModuleController {
 		printReportAction.setEnabled(false);
 		printReportAction.addListener(new IActionListener() {
 			@Override
-			public void callback() {
+			public void callback()
+			{
 				try {
 					doPrintReport();
 				} catch (Exception e) {
@@ -117,7 +117,8 @@ public abstract class ReportViewController extends SubModuleController {
 		saveReportAction.setEnabled(false);
 		saveReportAction.addListener(new IActionListener() {
 			@Override
-			public void callback() {
+			public void callback()
+			{
 				try {
 					doSaveReport();
 				} catch (Exception e) {
@@ -130,151 +131,57 @@ public abstract class ReportViewController extends SubModuleController {
 		IActionRidget closeReportAction = getRidget(IActionRidget.class, "report-close-action");
 		closeReportAction.addListener(new IActionListener() {
 			@Override
-			public void callback() {
+			public void callback()
+			{
 				doCloseReport();
 			}
 		});
 	}
 
 	@Override
-	public void afterBind() {
+	public void afterBind()
+	{
 		super.afterBind();
 		initReport();
 	}
 
-	private void doRunReport() throws Exception {
-//		runReport();
-//		showReport();
+	private void doRunReport() throws Exception
+	{
+// runReport();
+// showReport();
 		runAndShowReport();
 		printReportAction.setEnabled(true);
 		saveReportAction.setEnabled(true);
 // runReportAction.setEnabled(false);
 	}
 
-	private void doSaveReport() throws Exception {
+	private void doSaveReport() throws Exception
+	{
 		final Shell shell = Display.getCurrent().getActiveShell();
 		final FileDialog fileDialog = new FileDialog(shell, SWT.SAVE);
 		fileDialog.setFilterExtensions(new String[] { "*.pdf", });
 
 		String fName = fileDialog.open();
 		if (fName != null)
-			saveReport(fName);
+			runAndSaveReport(fName);
 	}
 
-	private void doPrintReport() {
+	private void doPrintReport()
+	{
 		browser.setUrl("javascript:print()");
 	}
 
-	private void doCloseReport() {
+	private void doCloseReport()
+	{
 		ISubModuleNode currentNode = getNavigationNode();
 		currentNode.getNavigationProcessor().navigateBack(currentNode.getParent());
 		currentNode.dispose();
 	}
 
-	public void runAndShowReport() throws Exception {
-
-		IReportRunnable report = getReportRunnable();
-		Map<String, Object> parameters = getReportParameters();
-		IRunAndRenderTask runTask = getEngine().createRunAndRenderTask(report);
-
-		try {
-			applyStandardParams(parameters);
-
-			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-
-			// HTMLRenderContext???
-
-			// set report render options
-			HTMLRenderOption options = new HTMLRenderOption();
-
-			options.setOutputFormat("html");
-			options.setUrlEncoding("utf-8");
-			options.setHtmlPagination(true);
-
-			// set output options - direct to buffer for local html view
-			options.setOutputStream(outputStream);
-			options.setEmbeddable(true);
-			options.setEnableInlineStyle(true);
-			options.setLayoutPreference(IHTMLRenderOption.LAYOUT_PREFERENCE_AUTO);
-			options.setOption(IRenderOption.HTML_PAGINATION, new Boolean(true));
-			options.setImageDirectory("images");
-
-			// ImageHandlerTest
-			options.setImageHandler(new HTMLCompleteImageHandler());
-
-			// set options
-			runTask.setRenderOption(options);
-
-			// validate report parameters
-			runTask.setParameterValues(parameters);
-			runTask.validateParameters();
-			runTask.run();
-
-			if (runTask.getErrors().size() > 0) {
-				String msgs = "\n";
-				for (Object o : runTask.getErrors()) {
-					msgs += o.toString();
-					msgs += "\n\n";
-				}
-				reportDocFile = null;
-				throw new BirtException(msgs);
-			}
-
-			browser.setText(outputStream.toString());
-		} finally {
-			//
-			runTask.close();
-		}
-	}
-
-	public void runReport() throws Exception {
-
-		IReportRunnable report = getReportRunnable();
-		Map<String, Object> parameters = getReportParameters();
-		IRunTask runTask = getEngine().createRunTask(report);
-
-		reportDocFile = null;
-		try {
-			applyStandardParams(parameters);
-// updateDataSource(report);
-
-			reportDocFile = File.createTempFile("report", ".rptdoc", RienaLocations.getDataArea());
-
-			// validate report parameters
-			runTask.setParameterValues(parameters);
-			runTask.validateParameters();
-			runTask.run(reportDocFile.getAbsolutePath());
-
-			if (runTask.getErrors().size() > 0) {
-				String msgs = "\n";
-				for (Object o : runTask.getErrors()) {
-					msgs += o.toString();
-					msgs += "\n\n";
-				}
-				reportDocFile = null;
-				throw new BirtException(msgs);
-			}
-
-		} finally {
-			if (null != runTask)
-				runTask.close();
-		}
-	}
-
-	private void showReport() throws EngineException, IOException {
-
-		Assert.isLegal(reportDocFile != null);
-
-		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-
-		IReportDocument rptDoc = engine.openReportDocument(reportDocFile.getAbsolutePath());
-
-		// Create task to run and render the header report
-		IRenderTask task = getEngine().createRenderTask(rptDoc);
-
-		// HTMLRenderContext???
-
+	public void runAndShowReport() throws Exception
+	{
 		// set report render options
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		HTMLRenderOption options = new HTMLRenderOption();
 
 		options.setOutputFormat("html");
@@ -289,43 +196,70 @@ public abstract class ReportViewController extends SubModuleController {
 		options.setOption(IRenderOption.HTML_PAGINATION, new Boolean(true));
 		options.setImageDirectory("images");
 
-		// ImageHandlerTest
+		// ImageHandler
 		options.setImageHandler(new HTMLCompleteImageHandler());
-
-		// set options
-		task.setRenderOption(options);
-
-		// run task
-		task.render();
-
-		//
-		task.close();
+		runReport(options);
 
 		browser.setText(outputStream.toString());
 	}
 
-	private void saveReport(String fileName) throws EngineException {
+	public void runAndSaveReport(String filename) throws Exception
+	{
 
-		IReportDocument rptDoc = engine.openReportDocument(reportDocFile.getAbsolutePath());
-
-		// Create task to run and render the header report
-		IRenderTask task = getEngine().createRenderTask(rptDoc);
-
-		// HTMLRenderContext???
 		final PDFRenderOption options = new PDFRenderOption();
-
-		options.setOutputFileName(fileName);
+		options.setOutputFileName(filename);
 		options.setOption(IRenderOption.HTML_PAGINATION, new Boolean(false));
 		options.setOutputFormat("pdf");
+		options.setEmbededFont(true);
 
-		// ImageHandlerTest
-		options.setImageHandler(new HTMLServerImageHandler());
-		task.setRenderOption(options);
-		task.render();
-		task.close();
+		// ImageHandler
+		options.setImageHandler(new HTMLCompleteImageHandler());
+		runReport(options);
+		if (Platform.getOS().equals(Platform.OS_WIN32) ) {
+			Runtime.getRuntime().exec("start " + filename);
+		} else if (Platform.getOS().equals(Platform.OS_MACOSX) ) {
+			Runtime.getRuntime().exec("open " + filename);
+		} else {
+			MessageDialog.openInformation(null, "Report Saved!", "Your report file has been saved at "+ filename);
+		}
+
 	}
 
-	private void applyStandardParams(Map<String, Object> params) {
+	public void runReport(RenderOption options) throws Exception
+	{
+		IReportRunnable report = getReportRunnable();
+		Map<String, Object> parameters = getReportParameters();
+		IRunAndRenderTask runTask = getEngine().createRunAndRenderTask(report);
+
+		try {
+			// set options
+			runTask.setRenderOption(options);
+
+			// validate report parameters
+			applyStandardParams(parameters);
+			runTask.setParameterValues(parameters);
+			runTask.validateParameters();
+
+			runTask.run();
+
+			if (runTask.getErrors().size() > 0) {
+				String msgs = "\n";
+				for (Object o : runTask.getErrors()) {
+					msgs += o.toString();
+					msgs += "\n\n";
+				}
+				reportDocFile = null;
+				throw new BirtException(msgs);
+			}
+
+		} finally {
+			//
+			runTask.close();
+		}
+	}
+
+	private void applyStandardParams(Map<String, Object> params)
+	{
 		IApplicationNode applicationNode = getNavigationNode().getParentOfType(IApplicationNode.class);
 		IDairyRepository dairyRepo = (IDairyRepository) applicationNode.getContext("application.dairy.dao");
 		Dairy localDairy = dairyRepo.getLocalDairy();
@@ -368,7 +302,8 @@ public abstract class ReportViewController extends SubModuleController {
 		// params.put("dairyName", localDairy.getCompanyName());
 	}
 
-	private void updateDataSource(IReportRunnable report) throws SemanticException {
+	private void updateDataSource(IReportRunnable report) throws SemanticException
+	{
 		// get the report datasource
 		ReportDesignHandle designHandle = (ReportDesignHandle) report.getDesignHandle();
 // ElementFactory elementFactory = designHandle.getElementFactory();
@@ -392,7 +327,8 @@ public abstract class ReportViewController extends SubModuleController {
 			dsHandle.setProperty("odaPassword", connectionProps.get("password"));
 	}
 
-	private Map<String, String> getJdbcDriverProperties() {
+	private Map<String, String> getJdbcDriverProperties()
+	{
 		Properties fullProps = HbDataStoreProvider.getDatastoreProperties();
 		Map<String, String> props = new HashMap<String, String>();
 		props.put("driver_class", fullProps.getProperty("hibernate.connection.driver_class"));
@@ -402,18 +338,21 @@ public abstract class ReportViewController extends SubModuleController {
 		return props;
 	}
 
-	private IReportEngine getEngine() {
+	private IReportEngine getEngine()
+	{
 		if (engine == null) {
 			engine = Activator.getDefault().getReportEngine();
 		}
 		return engine;
 	}
 
-	protected IReportRunnable getReportRunnable() {
+	protected IReportRunnable getReportRunnable()
+	{
 		return report;
 	}
 
-	protected void initReport() {
+	protected void initReport()
+	{
 		// get the report from the navigation node
 		INavigationNode<ISubModuleNode> currentNode = getNavigationNode();
 		NavigationArgument argument = currentNode.getNavigationArgument();
@@ -426,7 +365,8 @@ public abstract class ReportViewController extends SubModuleController {
 		}
 	}
 
-	protected Collection<IParameterDefn> getReportParameterDefinitions() {
+	protected Collection<IParameterDefn> getReportParameterDefinitions()
+	{
 		return getReportParameterDefinitions(null);
 	}
 
@@ -438,7 +378,8 @@ public abstract class ReportViewController extends SubModuleController {
 	 * @param name
 	 * @return
 	 */
-	protected Collection<IParameterDefn> getReportParameterDefinitions(String name) {
+	protected Collection<IParameterDefn> getReportParameterDefinitions(String name)
+	{
 		Collection<IParameterDefn> returnList = null;
 		IReportRunnable report = getReportRunnable();
 		IReportEngine engine = report.getReportEngine();

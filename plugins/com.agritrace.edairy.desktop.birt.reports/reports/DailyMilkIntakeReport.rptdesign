@@ -280,7 +280,7 @@ WHERE collectiongroup.journaldate = DATE (?) || collectiongroup.journaldate = DA
                 <ref-entry baseId="520" name="NewImage1" id="520"/>
                 <ref-entry baseId="450" id="450"/>
                 <ref-entry baseId="468" name="NewText6" id="468">
-                    <property name="content">Member Produce Record</property>
+                    <property name="content">Daily Milk Intake Record</property>
                     <property name="contentType">auto</property>
                 </ref-entry>
                 <ref-entry baseId="552" name="NewGrid3" id="552"/>

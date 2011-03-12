@@ -1692,7 +1692,7 @@ where journaldate in (select max(journaldate) from collectiongroup where journal
   <Rotation/>
 </model:ChartWithAxes>
 ]]></xml-property>
-                        <property name="outputFormat">SVG</property>
+                        <property name="outputFormat">PNG</property>
                         <property name="inheritColumns">false</property>
                         <property name="height">130pt</property>
                         <property name="width">212pt</property>
@@ -2841,7 +2841,7 @@ where journaldate in (select max(journaldate) from collectiongroup where journal
   <Rotation/>
 </model:ChartWithAxes>
 ]]></xml-property>
-                        <property name="outputFormat">SVG</property>
+                        <property name="outputFormat">PNG</property>
                         <property name="inheritColumns">false</property>
                         <property name="height">130pt</property>
                         <property name="width">212pt</property>
@@ -3990,7 +3990,7 @@ where journaldate in (select max(journaldate) from collectiongroup where journal
   <Rotation/>
 </model:ChartWithAxes>
 ]]></xml-property>
-                        <property name="outputFormat">SVG</property>
+                        <property name="outputFormat">PNG</property>
                         <property name="inheritColumns">false</property>
                         <property name="height">130pt</property>
                         <property name="width">212pt</property>
