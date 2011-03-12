@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.observable.Observables;
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.riena.ui.ridgets.IActionRidget;
 import org.eclipse.riena.ui.ridgets.IComboRidget;
 import org.eclipse.riena.ui.ridgets.IDecimalTextRidget;
@@ -11,13 +14,12 @@ import org.eclipse.riena.ui.ridgets.ILabelRidget;
 import org.eclipse.riena.ui.ridgets.IRidgetContainer;
 import org.eclipse.riena.ui.ridgets.ISingleChoiceRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
-import org.eclipse.riena.ui.ridgets.listener.FocusEvent;
-import org.eclipse.riena.ui.ridgets.listener.IFocusListener;
 import org.eclipse.riena.ui.ridgets.listener.ISelectionListener;
 import org.eclipse.riena.ui.ridgets.listener.SelectionEvent;
 
-import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.Bin;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
+import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
@@ -40,23 +42,67 @@ import com.google.inject.Inject;
  * @author oraclebill
  * 
  */
-public class MilkSaleEditPanelController extends AbstractDetailPanelController<MilkSale> {
+public class MilkSaleEditPanelController extends AbstractDetailPanelController<MilkSale>
+{
 
-	private final IDairyRepository dairyRepo;
+	private final class SaleAmountAdapter implements Adapter
+	{
+		Notifier	target;
+
+		@Override
+		public void notifyChanged(Notification notification)
+		{
+			if (notification.getEventType() == Notification.SET) {
+				if (notification.getFeature().equals(DairyPackage.Literals.MILK_SALE__QUANTITY)
+						|| notification.getFeature().equals(DairyPackage.Literals.MILK_SALE__UNIT_PRICE)) {
+					MilkSale sale = (MilkSale) notification.getNotifier();
+					if (sale.getUnitPrice() != null && sale.getQuantity() != null) {
+						sale.setSaleAmount(sale.getUnitPrice().multiply(sale.getQuantity()));
+						getRidgetContainer().getRidget(IDecimalTextRidget.class, BindConstants.ID_SALE_AMOUNT)
+								.updateFromModel();
+					}
+				}
+			}
+		}
+
+		@Override
+		public Notifier getTarget()
+		{
+			return target;
+		}
+
+		@Override
+		public void setTarget(Notifier newTarget)
+		{
+			this.target = newTarget;
+		}
+
+		@Override
+		public boolean isAdapterForType(Object type)
+		{
+			return false;
+		}
+	}
+
+	private final IDairyRepository	dairyRepo;
 
 	@Inject
-	public MilkSaleEditPanelController(final IDairyRepository dairyRepo) {
+	public MilkSaleEditPanelController(final IDairyRepository dairyRepo)
+	{
 		this.dairyRepo = dairyRepo;
 	}
 
 	@Override
-	public void configureAndBind() {
+	public void configureAndBind()
+	{
 		super.configureAndBind();
 		updateWidgetsForSource(getModel().getSaleType());
+		addSaleAmountCalculatingAdapter(getModel());
 	}
 
 	@Override
-	protected void bindRidgets() {
+	protected void bindRidgets()
+	{
 
 		final BindingHelper<MilkSale> mapper = getMapper();
 
@@ -76,13 +122,16 @@ public class MilkSaleEditPanelController extends AbstractDetailPanelController<M
 		getRidget(IComboRidget.class, FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO).addSelectionListener(
 				new ISelectionListener() {
 					@Override
-					public void ridgetSelected(SelectionEvent event) {
+					public void ridgetSelected(SelectionEvent event)
+					{
 						DairyLocation selected = (DairyLocation) event.getNewSelection().get(0);
 						getRidget(ITextRidget.class, FinanceBindingConstants.ID_DAIRY_LOCATION_TEXT).setText(
 								selected.getName());
 					}
 				});
 
+		mapper.addComboMapping(BindConstants.ID_SESSION, getSessionList(), "getCode",
+				DairyPackage.Literals.MILK_SALE__SESSION);
 		mapper.addComboMapping(BindConstants.ID_BIN, getBinList(), "getTrackingNumber",
 				DairyPackage.Literals.MILK_SALE__BIN);
 		mapper.addComboMapping(BindConstants.ID_GRADE, getMilkGradeList(), "getCode",
@@ -101,7 +150,8 @@ public class MilkSaleEditPanelController extends AbstractDetailPanelController<M
 		saleType.updateFromModel();
 		saleType.addSelectionListener(new ISelectionListener() {
 			@Override
-			public void ridgetSelected(SelectionEvent event) {
+			public void ridgetSelected(SelectionEvent event)
+			{
 				updateWidgetsForSource((MilkSaleType) saleType.getSelection());
 			}
 		});
@@ -119,7 +169,9 @@ public class MilkSaleEditPanelController extends AbstractDetailPanelController<M
 	 * @param container
 	 * @param model
 	 */
-	private void configureCustomerLookup(final IRidgetContainer container, final MilkSale model) {
+	private void configureCustomerLookup(	final IRidgetContainer container,
+											final MilkSale model)
+	{
 		// configure member lookup action
 		final IActionRidget memberLookup = container.getRidget(IActionRidget.class,
 				FinanceBindingConstants.ID_LOOKUP_BTN);
@@ -127,7 +179,8 @@ public class MilkSaleEditPanelController extends AbstractDetailPanelController<M
 		memberLookup.addListener( //
 				new CustomerLookupDialog(AbstractDirectoryController.getShell(), dairyRepo.allCustomers()) {
 					@Override
-					protected void callback(Customer selectedCustomer) {
+					protected void callback(Customer selectedCustomer)
+					{
 						final ITextRidget detail = container.getRidget(ITextRidget.class,
 								FinanceBindingConstants.ID_LOOKUP_RESULT_TXT);
 						model.setCustomer(selectedCustomer);
@@ -147,71 +200,73 @@ public class MilkSaleEditPanelController extends AbstractDetailPanelController<M
 	 * 
 	 * @param container
 	 */
-	private void configureSaleAmount(final IRidgetContainer container) {
+	private void configureSaleAmount(final IRidgetContainer container)
+	{
 		final IDecimalTextRidget quantity = container.getRidget(IDecimalTextRidget.class, BindConstants.ID_QUANTITY);
 		final IDecimalTextRidget unitPrice = container.getRidget(IDecimalTextRidget.class,
 				BindConstants.ID_PRICE_PER_KG);
 		final IDecimalTextRidget saleAmount = container.getRidget(IDecimalTextRidget.class,
 				BindConstants.ID_SALE_AMOUNT);
 
-		IFocusListener focusListener = new IFocusListener() {
-			@Override
-			public void focusLost(FocusEvent event) {
-//				final MilkSale model = getModel();
-//				final IRidget ridget = event.getOldFocusOwner();
+// IFocusListener focusListener = new IFocusListener() {
+// @Override
+// public void focusLost(FocusEvent event)
+// {
+// calculateSaleAmount(quantity, unitPrice, saleAmount);
+// }
 //
-//				System.err.println("************** focusLost");
-//				System.err.println("model quantity: " + model.getQuantity());
-//				System.err.println("widget quantity: " + quantity.getText());
-//				System.err.println("model unit price: " + model.getUnitPrice());
-//				System.err.println("widget unit price: " + unitPrice.getText());
-//				System.err.println("model amount: " + model.getSaleAmount());
-//				System.err.println("widget amount: " + saleAmount.getText());
-//				
-//				if (model.getQuantity() != null) {
-//					if (model.getUnitPrice() != null) {
-//						// calculate sale amount from unit price and quantity
-//						if (model.getSaleAmount() == null) {
-//							saleAmount.setText(model.getQuantity().multiply(model.getUnitPrice()).setScale(2, RoundingMode.HALF_DOWN)
-//									.toPlainString());
-//						}
-//					} else if (model.getSaleAmount() != null) {
-//						// calculate unit price from sale amount and quantity
-//						String val = model.getSaleAmount().divide(model.getQuantity(), RoundingMode.HALF_DOWN)
-//								.setScale(2, RoundingMode.HALF_DOWN).toPlainString();
-//						unitPrice.setText(val);
-//					}
-//				}
-//				System.err.println("************** focusLost");
-			}
-
-			@Override
-			public void focusGained(FocusEvent event) {
-				// TODO Auto-generated method stub
-			}
-		};
+// @Override
+// public void focusGained(FocusEvent event)
+// {
+// // TODO Auto-generated method stub
+// }
+// };
 
 		// static properties
+		quantity.setPrecision(2);
+		quantity.setMaxLength(10);
+		quantity.setGrouping(true);
+		quantity.setSigned(false);
+
+		unitPrice.setPrecision(2);
+		unitPrice.setMaxLength(4);
+		unitPrice.setGrouping(true);
+		unitPrice.setSigned(false);
+
+		saleAmount.setPrecision(3);
+		saleAmount.setMaxLength(14);
 		saleAmount.setGrouping(true);
-		saleAmount.setPrecision(2);
 		saleAmount.setSigned(false);
 		// saleAmount.setMandatory(true);
 
 		// dynamic behavior
-		quantity.addFocusListener(focusListener);
-		unitPrice.addFocusListener(focusListener);
-		saleAmount.addFocusListener(focusListener);
+// quantity.addFocusListener(focusListener);
+// unitPrice.addFocusListener(focusListener);
+// saleAmount.addFocusListener(focusListener);
 	}
 
-	private List<Employee> getSalesClerkList() {
+	private void addSaleAmountCalculatingAdapter(MilkSale model)
+	{
+		model.eAdapters().add(new SaleAmountAdapter());
+	}
+
+	private List<Employee> getSalesClerkList()
+	{
 		return dairyRepo.getLocalDairy().getEmployees();
 	}
 
-	private List<Bin> getBinList() {
+	private List<Bin> getBinList()
+	{
 		return dairyRepo.getLocalDairy().getDairyBins();
 	}
 
-	private List<MilkGrade> getMilkGradeList() {
+	private List<CollectionSession> getSessionList()
+	{
+		return dairyRepo.getLocalDairy().getCollectionSessions();
+	}
+
+	private List<MilkGrade> getMilkGradeList()
+	{
 		List<MilkGrade> retVal = dairyRepo.getMilkGrades();
 		return retVal;
 	}
@@ -222,7 +277,8 @@ public class MilkSaleEditPanelController extends AbstractDetailPanelController<M
 	 * If the source is 'CREDIT': - Customer and related fields () are mandatory
 	 * 
 	 */
-	void updateWidgetsForSource(MilkSaleType source) {
+	void updateWidgetsForSource(MilkSaleType source)
+	{
 		final IRidgetContainer container = getRidgetContainer();
 		boolean cashSale = container
 				.getRidget(ISingleChoiceRidget.class, FinanceBindingConstants.ID_TRANSACTION_CHOICE).getSelection() == MilkSaleType.CASH;

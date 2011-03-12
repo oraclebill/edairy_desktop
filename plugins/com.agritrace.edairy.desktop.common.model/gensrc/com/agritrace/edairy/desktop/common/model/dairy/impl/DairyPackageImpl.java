@@ -1414,7 +1414,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMilkSale_Bin() {
+	public EReference getMilkSale_Session()
+	{
 		return (EReference)milkSaleEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -1423,8 +1424,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMilkSale_SaleType() {
-		return (EAttribute)milkSaleEClass.getEStructuralFeatures().get(5);
+	public EReference getMilkSale_Bin() {
+		return (EReference)milkSaleEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -1432,7 +1433,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMilkSale_Quantity() {
+	public EAttribute getMilkSale_SaleType() {
 		return (EAttribute)milkSaleEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -1441,8 +1442,17 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getMilkSale_Quantity() {
+		return (EAttribute)milkSaleEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getMilkSale_Grade() {
-		return (EReference)milkSaleEClass.getEStructuralFeatures().get(7);
+		return (EReference)milkSaleEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -1451,15 +1461,6 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * @generated
 	 */
 	public EAttribute getMilkSale_UnitPrice() {
-		return (EAttribute)milkSaleEClass.getEStructuralFeatures().get(8);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getMilkSale_Description() {
 		return (EAttribute)milkSaleEClass.getEStructuralFeatures().get(9);
 	}
 
@@ -1468,7 +1469,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMilkSale_Rejected() {
+	public EAttribute getMilkSale_Description() {
 		return (EAttribute)milkSaleEClass.getEStructuralFeatures().get(10);
 	}
 
@@ -1477,8 +1478,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMilkSale_StoreOrRoute() {
-		return (EReference)milkSaleEClass.getEStructuralFeatures().get(11);
+	public EAttribute getMilkSale_Rejected() {
+		return (EAttribute)milkSaleEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
@@ -1486,7 +1487,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMilkSale_Customer() {
+	public EReference getMilkSale_StoreOrRoute() {
 		return (EReference)milkSaleEClass.getEStructuralFeatures().get(12);
 	}
 
@@ -1495,7 +1496,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMilkSale_SoldBy() {
+	public EReference getMilkSale_Customer() {
 		return (EReference)milkSaleEClass.getEStructuralFeatures().get(13);
 	}
 
@@ -1504,8 +1505,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMilkSale_SaleAmount() {
-		return (EAttribute)milkSaleEClass.getEStructuralFeatures().get(14);
+	public EReference getMilkSale_SoldBy() {
+		return (EReference)milkSaleEClass.getEStructuralFeatures().get(14);
 	}
 
 	/**
@@ -1513,7 +1514,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMilkSale_ContractSale() {
+	public EAttribute getMilkSale_SaleAmount() {
 		return (EAttribute)milkSaleEClass.getEStructuralFeatures().get(15);
 	}
 
@@ -1522,8 +1523,17 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getMilkSale_ContractSale() {
+		return (EAttribute)milkSaleEClass.getEStructuralFeatures().get(16);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getMilkSale_SalesClerk() {
-		return (EReference)milkSaleEClass.getEStructuralFeatures().get(16);
+		return (EReference)milkSaleEClass.getEStructuralFeatures().get(17);
 	}
 
 	/**
@@ -2511,6 +2521,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(milkSaleEClass, MILK_SALE__LINE_NUMBER);
 		createEAttribute(milkSaleEClass, MILK_SALE__REFERENCE_NUMBER);
 		createEAttribute(milkSaleEClass, MILK_SALE__SALE_DATE);
+		createEReference(milkSaleEClass, MILK_SALE__SESSION);
 		createEReference(milkSaleEClass, MILK_SALE__BIN);
 		createEAttribute(milkSaleEClass, MILK_SALE__SALE_TYPE);
 		createEAttribute(milkSaleEClass, MILK_SALE__QUANTITY);
@@ -2806,6 +2817,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEAttribute(getMilkSale_LineNumber(), ecorePackage.getEInt(), "lineNumber", null, 0, 1, MilkSale.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMilkSale_ReferenceNumber(), ecorePackage.getEString(), "referenceNumber", null, 0, 1, MilkSale.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMilkSale_SaleDate(), ecorePackage.getEDate(), "saleDate", null, 1, 1, MilkSale.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMilkSale_Session(), this.getCollectionSession(), null, "session", null, 1, 1, MilkSale.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMilkSale_Bin(), this.getBin(), null, "bin", null, 0, 1, MilkSale.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMilkSale_SaleType(), this.getMilkSaleType(), "saleType", "", 1, 1, MilkSale.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMilkSale_Quantity(), ecorePackage.getEBigDecimal(), "quantity", null, 1, 1, MilkSale.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

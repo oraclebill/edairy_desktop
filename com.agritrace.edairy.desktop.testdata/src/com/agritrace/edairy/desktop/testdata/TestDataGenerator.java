@@ -408,6 +408,7 @@ public class TestDataGenerator extends DatabaseSetup
 			MilkSale sale = DairyFactory.eINSTANCE.createMilkSale();
 			sale.setBin(bin);
 			sale.setContractSale(true);
+			sale.setSession(session);
 			sale.setCustomer(customer);
 			sale.setGrade(grade);
 			sale.setQuantity(new BigDecimal(quantity));

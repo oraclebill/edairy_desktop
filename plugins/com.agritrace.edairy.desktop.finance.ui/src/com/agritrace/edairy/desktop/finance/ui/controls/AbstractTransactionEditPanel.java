@@ -18,21 +18,25 @@ import org.eclipse.swt.widgets.Text;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.swtdesigner.ResourceManager;
 
-public abstract class AbstractTransactionEditPanel extends Composite {
-	private final Group middlePanel;
+public abstract class AbstractTransactionEditPanel extends Composite
+{
+	private final Group	middlePanel;
 
-	public AbstractTransactionEditPanel(Composite parent, int style) {
+	public AbstractTransactionEditPanel(Composite parent, int style)
+	{
 		super(parent, style);
 		setLayout(new FillLayout());
 		middlePanel = UIControlsFactory.createGroup(this, "", FinanceBindingConstants.ID_TRANSACTION_WRAPPER_FRAME);
 		GridLayoutFactory.fillDefaults().numColumns(3).margins(6, 6).applyTo(middlePanel);
 	}
 
-	protected final Group getContentArea() {
+	protected final Group getContentArea()
+	{
 		return middlePanel;
 	}
 
-	protected final void addChoiceField(String label) {
+	protected final void addChoiceField(String label)
+	{
 		UIControlsFactory.createLabel(middlePanel, label);
 		final ChoiceComposite transactionTypeBox = UIControlsFactory.createChoiceComposite(middlePanel, SWT.NONE,
 				false, FinanceBindingConstants.ID_TRANSACTION_CHOICE);
@@ -40,22 +44,26 @@ public abstract class AbstractTransactionEditPanel extends Composite {
 		GridDataFactory.fillDefaults().grab(true, true).span(2, 1).applyTo(transactionTypeBox);
 	}
 
-	protected final void addDateField(String label) {
+	protected final void addDateField(String label)
+	{
 		UIControlsFactory.createLabel(middlePanel, label);
 		final DateTime transactionDate = UIControlsFactory.createDate(middlePanel, SWT.MEDIUM | SWT.BORDER,
 				FinanceBindingConstants.ID_TRANSACTION_DATE);
 		GridDataFactory.fillDefaults().grab(true, true).span(2, 1).applyTo(transactionDate);
 	}
 
-	protected final void addLookupField(String label) {
+	protected final void addLookupField(String label)
+	{
 		addLookupField(label, null);
 	}
-	
-	protected final void addLookupField(String labelText, String labelId) {
+
+	protected final void addLookupField(String labelText,
+										String labelId)
+	{
 		final Label label = UIControlsFactory.createLabel(middlePanel, labelText);
-		if (null != labelId) 
+		if (null != labelId)
 			SWTBindingPropertyLocator.getInstance().setBindingProperty(label, labelId);
-		
+
 		final Text memberText = UIControlsFactory.createText(middlePanel, SWT.NONE,
 				FinanceBindingConstants.ID_LOOKUP_RESULT_TXT);
 		memberText.setTextLimit(20);
@@ -69,7 +77,8 @@ public abstract class AbstractTransactionEditPanel extends Composite {
 				FinanceBindingConstants.ID_LOOKUP_BTN);
 	}
 
-	protected final void addStoreCombo(String label) {
+	protected final void addStoreCombo(String label)
+	{
 		UIControlsFactory.createLabel(middlePanel, label, FinanceBindingConstants.ID_DAIRY_LOCATION_COMBO_LBL);
 		final Composite locationComposite = UIControlsFactory.createComposite(middlePanel);
 		GridLayoutFactory.fillDefaults().numColumns(3).equalWidth(true).applyTo(locationComposite);
@@ -85,17 +94,24 @@ public abstract class AbstractTransactionEditPanel extends Composite {
 		GridDataFactory.fillDefaults().grab(true, true).span(2, 1).applyTo(locationText);
 	}
 
-	protected final void addAmountField() {
+	protected final void addAmountField()
+	{
 		addAmountField("Amount", FinanceBindingConstants.ID_TRANSACTION_AMOUNT_TEXT);
 	}
 
-	protected final void addAmountField(String label, String bindId) {
+	protected final void addAmountField(String label,
+										String bindId)
+	{
 		addAmountField(label, bindId, null);
 	}
 
-	protected final void addAmountField(String label, String bindId, String labelBindId) {
+	protected final void addAmountField(String label,
+										String bindId,
+										String labelBindId)
+	{
 		UIControlsFactory.createLabel(middlePanel, label);
-		if (null != labelBindId) SWTBindingPropertyLocator.getInstance().setBindingProperty(label, labelBindId);
+		if (null != labelBindId)
+			SWTBindingPropertyLocator.getInstance().setBindingProperty(label, labelBindId);
 
 		final Text amountText = UIControlsFactory.createTextDecimal(middlePanel, bindId);
 		amountText.setTextLimit(20);
@@ -104,29 +120,40 @@ public abstract class AbstractTransactionEditPanel extends Composite {
 		UIControlsFactory.createLabel(middlePanel, "");
 	}
 
-	protected final void addDescriptionField(String label) {
+	protected final void addDescriptionField(String label)
+	{
 		UIControlsFactory.createLabel(middlePanel, label);
 		final Text descriptionText = UIControlsFactory.createTextMulti(middlePanel, false, false,
 				FinanceBindingConstants.ID_TRANSACTION_DESCRIPTION_TEXT);
 		GridDataFactory.fillDefaults().grab(true, true).span(2, 1).hint(SWT.DEFAULT, 74).applyTo(descriptionText);
 	}
 
-	protected final void addSignedField(String label) {
+	protected final void addSignedField(String label)
+	{
 		UIControlsFactory.createLabel(middlePanel, label, FinanceBindingConstants.ID_SIGNED_BY_TEXT_LBL);
 		final Text signedByText = UIControlsFactory.createText(middlePanel, SWT.NONE,
 				FinanceBindingConstants.ID_SIGNED_BY_TEXT);
 		GridDataFactory.fillDefaults().grab(true, true).span(2, 1).applyTo(signedByText);
 	}
 
-	protected void addTextField(final String label, String bindingId) {
+	protected void addTextField(final String label,
+								String bindingId)
+	{
 		addTextField(label, bindingId, 20);
 	}
 
-	protected void addTextField(final String label, String bindingId, int limit) {
+	protected void addTextField(final String label,
+								String bindingId,
+								int limit)
+	{
 		addTextField(label, bindingId, limit, null);
 	}
 
-	protected void addTextField(final String label, String bindingId, int limit, String sampleValue) {
+	protected void addTextField(final String label,
+								String bindingId,
+								int limit,
+								String sampleValue)
+	{
 		UIControlsFactory.createLabel(middlePanel, label);
 		final Text textField = UIControlsFactory.createText(middlePanel, SWT.NONE, bindingId);
 
@@ -143,29 +170,40 @@ public abstract class AbstractTransactionEditPanel extends Composite {
 
 		GridDataFactory.fillDefaults().grab(true, false).span(2, 1).hint(limit, SWT.DEFAULT).applyTo(textField);
 	}
-	
-	protected void addComboField(String label, String comboId, String labelId) {
+
+	protected void addComboField(	String label,
+									String comboId)
+	{
+		addComboField(label, comboId, "label" + comboId);
+	}
+
+	protected void addComboField(	String label,
+									String comboId,
+									String labelId)
+	{
 		Composite parent = middlePanel;
 		UIControlsFactory.createLabel(parent, label);
-		if (null != labelId) SWTBindingPropertyLocator.getInstance().setBindingProperty(label, labelId);
+		if (null != labelId)
+			SWTBindingPropertyLocator.getInstance().setBindingProperty(label, labelId);
 
 		final CCombo combo = UIControlsFactory.createCCombo(parent, comboId);
 		combo.select(0);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(combo);
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(
-				UIControlsFactory.createLabel(parent, "")); // FILLER
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(UIControlsFactory.createLabel(parent, "")); // FILLER
 	}
 
-	protected void addBooleanField(String labelText, String buttonId, String labelId) {
+	protected void addBooleanField(	String labelText,
+									String buttonId,
+									String labelId)
+	{
 		Composite parent = middlePanel;
 		Label label = UIControlsFactory.createLabel(parent, labelText);
-		if (null != labelId) SWTBindingPropertyLocator.getInstance().setBindingProperty(label, labelId);
+		if (null != labelId)
+			SWTBindingPropertyLocator.getInstance().setBindingProperty(label, labelId);
 
-		GridDataFactory.fillDefaults().applyTo(
-				UIControlsFactory.createButtonCheck(parent, "", buttonId));
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(
-				UIControlsFactory.createLabel(parent, "")); // FILLER
+		GridDataFactory.fillDefaults().applyTo(UIControlsFactory.createButtonCheck(parent, "", buttonId));
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(UIControlsFactory.createLabel(parent, "")); // FILLER
 
 	}
-	
+
 }

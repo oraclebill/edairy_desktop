@@ -1526,13 +1526,22 @@ public interface DairyPackage extends EPackage {
 	int MILK_SALE__SALE_DATE = 3;
 
 	/**
+	 * The feature id for the '<em><b>Session</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_SALE__SESSION = 4;
+
+	/**
 	 * The feature id for the '<em><b>Bin</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MILK_SALE__BIN = 4;
+	int MILK_SALE__BIN = 5;
 
 	/**
 	 * The feature id for the '<em><b>Sale Type</b></em>' attribute.
@@ -1541,7 +1550,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MILK_SALE__SALE_TYPE = 5;
+	int MILK_SALE__SALE_TYPE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Quantity</b></em>' attribute.
@@ -1550,7 +1559,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MILK_SALE__QUANTITY = 6;
+	int MILK_SALE__QUANTITY = 7;
 
 	/**
 	 * The feature id for the '<em><b>Grade</b></em>' reference.
@@ -1559,7 +1568,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MILK_SALE__GRADE = 7;
+	int MILK_SALE__GRADE = 8;
 
 	/**
 	 * The feature id for the '<em><b>Unit Price</b></em>' attribute.
@@ -1568,7 +1577,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MILK_SALE__UNIT_PRICE = 8;
+	int MILK_SALE__UNIT_PRICE = 9;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -1577,7 +1586,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MILK_SALE__DESCRIPTION = 9;
+	int MILK_SALE__DESCRIPTION = 10;
 
 	/**
 	 * The feature id for the '<em><b>Rejected</b></em>' attribute.
@@ -1586,7 +1595,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MILK_SALE__REJECTED = 10;
+	int MILK_SALE__REJECTED = 11;
 
 	/**
 	 * The feature id for the '<em><b>Store Or Route</b></em>' reference.
@@ -1595,7 +1604,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MILK_SALE__STORE_OR_ROUTE = 11;
+	int MILK_SALE__STORE_OR_ROUTE = 12;
 
 	/**
 	 * The feature id for the '<em><b>Customer</b></em>' reference.
@@ -1604,7 +1613,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MILK_SALE__CUSTOMER = 12;
+	int MILK_SALE__CUSTOMER = 13;
 
 	/**
 	 * The feature id for the '<em><b>Sold By</b></em>' reference.
@@ -1613,7 +1622,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MILK_SALE__SOLD_BY = 13;
+	int MILK_SALE__SOLD_BY = 14;
 
 	/**
 	 * The feature id for the '<em><b>Sale Amount</b></em>' attribute.
@@ -1622,7 +1631,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MILK_SALE__SALE_AMOUNT = 14;
+	int MILK_SALE__SALE_AMOUNT = 15;
 
 	/**
 	 * The feature id for the '<em><b>Contract Sale</b></em>' attribute.
@@ -1631,7 +1640,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MILK_SALE__CONTRACT_SALE = 15;
+	int MILK_SALE__CONTRACT_SALE = 16;
 
 	/**
 	 * The feature id for the '<em><b>Sales Clerk</b></em>' reference.
@@ -1640,7 +1649,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MILK_SALE__SALES_CLERK = 16;
+	int MILK_SALE__SALES_CLERK = 17;
 
 	/**
 	 * The number of structural features of the '<em>Milk Sale</em>' class.
@@ -1649,7 +1658,7 @@ public interface DairyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MILK_SALE_FEATURE_COUNT = 17;
+	int MILK_SALE_FEATURE_COUNT = 18;
 
 	/**
 	 * The meta object id for the '{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DairyImpl <em>Dairy</em>}' class.
@@ -4171,6 +4180,17 @@ public interface DairyPackage extends EPackage {
 	EAttribute getMilkSale_SaleDate();
 
 	/**
+	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getSession <em>Session</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Session</em>'.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getSession()
+	 * @see #getMilkSale()
+	 * @generated
+	 */
+	EReference getMilkSale_Session();
+
+	/**
 	 * Returns the meta object for the reference '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getBin <em>Bin</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6297,6 +6317,14 @@ public interface DairyPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MILK_SALE__SALE_DATE = eINSTANCE.getMilkSale_SaleDate();
+
+		/**
+		 * The meta object literal for the '<em><b>Session</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MILK_SALE__SESSION = eINSTANCE.getMilkSale_Session();
 
 		/**
 		 * The meta object literal for the '<em><b>Bin</b></em>' reference feature.

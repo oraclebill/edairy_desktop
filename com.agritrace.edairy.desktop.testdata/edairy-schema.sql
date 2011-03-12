@@ -332,6 +332,7 @@
         `linenumber` integer,
         `referencenumber` varchar(60),
         `saledate` datetime not null,
+        `collectionsession_session_e_id` bigint not null,
         `bin_bin_containerid` bigint,
         `saletype` varchar(255) not null,
         `quantity` decimal(19,2) not null,
@@ -972,6 +973,12 @@
         add constraint FKABB35EE24BAD0E26 
         foreign key (`dairylocation_storeorroute_id`) 
         references `dairylocation` (`id`);
+
+    alter table `milksale` 
+        add index FKABB35EE266A3DBDD (`collectionsession_session_e_id`), 
+        add constraint FKABB35EE266A3DBDD 
+        foreign key (`collectionsession_session_e_id`) 
+        references `collectionsession` (`id`);
 
     alter table `milksale` 
         add index FKABB35EE2B6B86E7C (`milkgrade_grade_e_id`), 
