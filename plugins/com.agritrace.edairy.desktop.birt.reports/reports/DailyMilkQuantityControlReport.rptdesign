@@ -158,45 +158,7 @@ BirtDateTime.year(endDate) + "-" + BirtDateTime.month(endDate) + "-" + BirtDateT
                     <property name="isOutput">false</property>
                 </structure>
             </list-property>
-            <structure name="cachedMetaData">
-                <list-property name="resultSet">
-                    <structure>
-                        <property name="position">1</property>
-                        <property name="name">collectionDate</property>
-                        <property name="dataType">date</property>
-                    </structure>
-                    <structure>
-                        <property name="position">2</property>
-                        <property name="name">sessionCode</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">3</property>
-                        <property name="name">centerCode</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">4</property>
-                        <property name="name">name</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">5</property>
-                        <property name="name">collectedqty</property>
-                        <property name="dataType">float</property>
-                    </structure>
-                    <structure>
-                        <property name="position">6</property>
-                        <property name="name">saleqty</property>
-                        <property name="dataType">float</property>
-                    </structure>
-                    <structure>
-                        <property name="position">7</property>
-                        <property name="name">rejectedqty</property>
-                        <property name="dataType">float</property>
-                    </structure>
-                </list-property>
-            </structure>
+
             <property name="dataSource">dairyMgrDbDataSource</property>
             <list-property name="resultSet">
                 <structure>
@@ -445,38 +407,6 @@ group by
                 <ref-entry baseId="512" id="512"/>
                 <ref-entry baseId="2112" name="NewTextData111" id="2112"/>
                 <ref-entry baseId="563" id="563"/>
-                <ref-entry baseId="465" name="NewText" id="465">
-                    <property name="content">&lt;VALUE-OF>params["date"].value&lt;/VALUE-OF></property>
-                    <property name="contentType">html</property>
-                    <property name="textAlign">center</property>
-                    <property name="dataSet">MilkQuantityControlSQLDataSet</property>
-                    <list-property name="boundDataColumns">
-                        <structure>
-                            <property name="name">collectionDate</property>
-                            <text-property name="displayName">collectionDate</text-property>
-                            <expression name="expression" type="javascript">dataSetRow["collectionDate"]</expression>
-                            <property name="dataType">date-time</property>
-                        </structure>
-                        <structure>
-                            <property name="name">code</property>
-                            <text-property name="displayName">code</text-property>
-                            <expression name="expression" type="javascript">dataSetRow["code"]</expression>
-                            <property name="dataType">string</property>
-                        </structure>
-                        <structure>
-                            <property name="name">quantity</property>
-                            <text-property name="displayName">quantity</text-property>
-                            <expression name="expression" type="javascript">dataSetRow["quantity"]</expression>
-                            <property name="dataType">decimal</property>
-                        </structure>
-                        <structure>
-                            <property name="name">rejected</property>
-                            <text-property name="displayName">rejected</text-property>
-                            <expression name="expression" type="javascript">dataSetRow["rejected"]</expression>
-                            <property name="dataType">integer</property>
-                        </structure>
-                    </list-property>
-                </ref-entry>
                 <ref-entry baseId="466" name="NewText3" id="466">
                     <property name="contentType">html</property>
                     <property name="textAlign">left</property>

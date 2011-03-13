@@ -130,7 +130,7 @@ public interface MilkSaleGroup extends EObject
 	 * @return the value of the '<em>Customer</em>' reference.
 	 * @see #setCustomer(Customer)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMilkSaleGroup_Customer()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	Customer getCustomer();
@@ -208,7 +208,7 @@ public interface MilkSaleGroup extends EObject
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Sales</em>' containment reference list.
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMilkSaleGroup_Sales()
-	 * @model containment="true" required="true"
+	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
 	EList<MilkSale> getSales();
