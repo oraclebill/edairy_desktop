@@ -21,18 +21,18 @@ import org.eclipse.riena.ui.ridgets.IRowRidget;
 import org.eclipse.riena.ui.ridgets.ITextRidget;
 import org.eclipse.riena.ui.ridgets.IToggleButtonRidget;
 
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Bin;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkSale;
+import com.agritrace.edairy.desktop.common.model.dairy.MilkSaleGroup;
 import com.agritrace.edairy.desktop.common.persistence.IRepository;
 import com.agritrace.edairy.desktop.common.persistence.dao.IDairyRepository;
 import com.agritrace.edairy.desktop.common.ui.controllers.RecordDialogController;
 import com.google.inject.Inject;
 
-public class MilkCreditSaleEditDialogController extends RecordDialogController<DeliveryJournal> {
+public class MilkCreditSaleEditDialogController extends RecordDialogController<MilkSaleGroup> {
 
 	/**
 	 * Row for a {@link ICompositeTableRidget}.
@@ -50,8 +50,8 @@ public class MilkCreditSaleEditDialogController extends RecordDialogController<D
 			this.rowData = (MilkSale) rowData;
 //			EObject container = this.rowData.eContainer();
 //			Route journalRoute = null;
-//			if (container instanceof DeliveryJournal) {
-//				DeliveryJournal journal = (DeliveryJournal) container;
+//			if (container instanceof MilkSaleGroup) {
+//				MilkSaleGroup journal = (MilkSaleGroup) container;
 //				journalRoute = journal.getRoute();
 //			}
 //			binList = dairyRepo.getBinsByRoute(journalRoute);
@@ -119,8 +119,8 @@ public class MilkCreditSaleEditDialogController extends RecordDialogController<D
 	}
 
 	@Override
-	public DeliveryJournal getWorkingCopy() {
-		final DeliveryJournal working = super.getWorkingCopy();
+	public MilkSaleGroup getWorkingCopy() {
+		final MilkSaleGroup working = super.getWorkingCopy();
 		if (working.getDate() == null) {
 			working.setDate(new Date());
 		}
@@ -130,42 +130,42 @@ public class MilkCreditSaleEditDialogController extends RecordDialogController<D
 	//
 	// @Override
 	// protected EClass getEClass() {
-	// return DairyPackage.Literals.DELIVERY_JOURNAL;
+	// return DairyPackage.Literals.MILK_SALE_GROUP;
 	// }
 
 	@Override
 	protected void configureUserRidgets() {
 		addTextMap(BindConstants.ID_REFERENCE_NUM_TXT,
-				DairyPackage.Literals.DELIVERY_JOURNAL__REFERENCE_NUMBER);
+				DairyPackage.Literals.MILK_SALE_GROUP__REFERENCE_NUMBER);
 
-		addTextMap(BindConstants.ID_DATE_COMBO, DairyPackage.Literals.DELIVERY_JOURNAL__DATE);
+		addTextMap(BindConstants.ID_DATE_COMBO, DairyPackage.Literals.MILK_SALE_GROUP__DATE);
 
 		final List<CollectionSession> sessions = sessionRepo.all();
 		addComboMap(BindConstants.ID_SESSION_COMBO, sessions, "getCode",
-				DairyPackage.Literals.DELIVERY_JOURNAL__SESSION);
+				DairyPackage.Literals.MILK_SALE_GROUP__SESSION);
 
 		addComboMap(BindConstants.ID_ROUTE_COMBO, dairyRepo.allRoutes(), "getName",
-				DairyPackage.Literals.DELIVERY_JOURNAL__ROUTE);
+				DairyPackage.Literals.MILK_SALE_GROUP__ROUTE);
 
 		addComboMap(BindConstants.ID_CUSTOMER_COMBO, dairyRepo.allCustomers(), "getCompanyName",
-				DairyPackage.Literals.DELIVERY_JOURNAL__CUSTOMER);
+				DairyPackage.Literals.MILK_SALE_GROUP__CUSTOMER);
 
 		addComboMap(BindConstants.ID_DRIVER_COMBO, dairyRepo.employeesByPosition("Driver"),
-				"getFamilyName", DairyPackage.Literals.DELIVERY_JOURNAL__DRIVER);
+				"getFamilyName", DairyPackage.Literals.MILK_SALE_GROUP__DRIVER);
 
 		addComboMap(BindConstants.ID_VEHICLE_COMBO, dairyRepo.allVehicles(), "getRegistrationNumber",
-				DairyPackage.Literals.DELIVERY_JOURNAL__VEHICLE);
+				DairyPackage.Literals.MILK_SALE_GROUP__VEHICLE);
 
 		addTextMap(BindConstants.ID_LINE_ITEM_TOTAL_TXT,
-				DairyPackage.Literals.DELIVERY_JOURNAL__TOTAL);
+				DairyPackage.Literals.MILK_SALE_GROUP__TOTAL);
 		// addRidgetFeatureMap(BindConstants.ID_LINE_ITEM_TABLE,
-		// DairyPackage.Literals.DELIVERY_JOURNAL__LINES);
+		// DairyPackage.Literals.MILK_SALE_GROUP__LINES);
 
 		lineItemsRidget = getRidget(ICompositeTableRidget.class, BindConstants.ID_LINE_ITEM_TABLE);
 		lineItemsRidget
 				.bindToModel(
 						BeansObservables.observeList(getWorkingCopy(),
-								DairyPackage.Literals.DELIVERY_JOURNAL__LINES.getName()), MilkSale.class,
+								DairyPackage.Literals.MILK_SALE_GROUP__SALES.getName()), MilkSale.class,
 						RowRidget.class);
 
 		lineItemsRidget.addPropertyChangeListener(null, new PropertyChangeListener() {
@@ -179,7 +179,7 @@ public class MilkCreditSaleEditDialogController extends RecordDialogController<D
 		addBttonRidget.addListener(new IActionListener() {
 			@Override
 			public void callback() {
-				getWorkingCopy().getLines().add(DairyFactory.eINSTANCE.createMilkSale());
+				getWorkingCopy().getSales().add(DairyFactory.eINSTANCE.createMilkSale());
 				lineItemsRidget.updateFromModel();
 			}
 		});

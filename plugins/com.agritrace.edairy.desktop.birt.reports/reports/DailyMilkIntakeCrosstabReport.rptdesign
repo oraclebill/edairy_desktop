@@ -176,7 +176,7 @@ BirtDateTime.year(endDate) + "-" + BirtDateTime.month(endDate) + "-" + BirtDateT
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">journaldate</property>
+                        <property name="name">collectionDate</property>
                         <property name="dataType">date</property>
                     </structure>
                     <structure>
@@ -215,8 +215,8 @@ BirtDateTime.year(endDate) + "-" + BirtDateTime.month(endDate) + "-" + BirtDateT
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">journaldate</property>
-                    <property name="nativeName">journaldate</property>
+                    <property name="name">collectionDate</property>
+                    <property name="nativeName">collectionDate</property>
                     <property name="dataType">date</property>
                 </structure>
                 <structure>
@@ -244,12 +244,12 @@ BirtDateTime.year(endDate) + "-" + BirtDateTime.month(endDate) + "-" + BirtDateT
                     <property name="dataType">integer</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select collectiongroup.journaldate, collectionsession.code as session, dairylocation.code as center, collectionjournalline.quantity, collectionjournalline.rejected
+            <xml-property name="queryText"><![CDATA[select collectiongroup.collectionDate, collectionsession.code as session, dairylocation.code as center, collectionjournalline.quantity, collectionjournalline.rejected
 from collectiongroup 
-	join collectionjournalline on collectiongroup.journalid = collectionjournalline.collectionjournalline_group_e_id
+	join collectionjournalline on collectiongroup.id = collectionjournalline.collectionjournalline_group_e_id
 	join collectionsession on collectionsession.id = collectiongroup.collectionsession_session_e_id
 	join dairylocation on dairylocation.id = collectiongroup.dairylocation_collectioncenter_id
-where journaldate = ?]]></xml-property>
+where collectionDate = ?]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="PrevDayMilkIntakeSQLDataSet" id="2356">
             <property name="nullsOrdering">nulls lowest</property>
@@ -279,7 +279,7 @@ where journaldate = ?]]></xml-property>
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">journaldate</property>
+                        <property name="name">collectionDate</property>
                         <property name="dataType">date</property>
                     </structure>
                     <structure>
@@ -318,8 +318,8 @@ where journaldate = ?]]></xml-property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">journaldate</property>
-                    <property name="nativeName">journaldate</property>
+                    <property name="name">collectionDate</property>
+                    <property name="nativeName">collectionDate</property>
                     <property name="dataType">date</property>
                 </structure>
                 <structure>
@@ -347,12 +347,12 @@ where journaldate = ?]]></xml-property>
                     <property name="dataType">integer</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select collectiongroup.journaldate, collectionsession.code as session, dairylocation.code as center, collectionjournalline.quantity, collectionjournalline.rejected
+            <xml-property name="queryText"><![CDATA[select collectiongroup.collectionDate, collectionsession.code as session, dairylocation.code as center, collectionjournalline.quantity, collectionjournalline.rejected
 from collectiongroup 
-	join collectionjournalline on collectiongroup.journalid = collectionjournalline.collectionjournalline_group_e_id
+	join collectionjournalline on collectiongroup.id = collectionjournalline.collectionjournalline_group_e_id
 	join collectionsession on collectionsession.id = collectiongroup.collectionsession_session_e_id
 	join dairylocation on dairylocation.id = collectiongroup.dairylocation_collectioncenter_id
-where journaldate in (select max(journaldate) from collectiongroup where journaldate < ?)]]></xml-property>
+where collectionDate in (select max(collectionDate) from collectiongroup where collectionDate < ?)]]></xml-property>
         </oda-data-set>
     </data-sets>
     <cubes>
@@ -399,7 +399,7 @@ where journaldate in (select max(journaldate) from collectiongroup where journal
                                             <property name="dataType">date</property>
                                         </structure>
                                     </list-property>
-                                    <property name="columnName">journaldate</property>
+                                    <property name="columnName">collectionDate</property>
                                 </tabular-level>
                             </property>
                         </tabular-hierarchy>
@@ -508,9 +508,9 @@ where journaldate in (select max(journaldate) from collectiongroup where journal
                     <property name="dataSet">MilkIntakeSQLDataSet</property>
                     <list-property name="boundDataColumns">
                         <structure>
-                            <property name="name">journaldate</property>
-                            <text-property name="displayName">journaldate</text-property>
-                            <expression name="expression" type="javascript">dataSetRow["journaldate"]</expression>
+                            <property name="name">collectionDate</property>
+                            <text-property name="displayName">collectionDate</text-property>
+                            <expression name="expression" type="javascript">dataSetRow["collectionDate"]</expression>
                             <property name="dataType">date-time</property>
                         </structure>
                         <structure>

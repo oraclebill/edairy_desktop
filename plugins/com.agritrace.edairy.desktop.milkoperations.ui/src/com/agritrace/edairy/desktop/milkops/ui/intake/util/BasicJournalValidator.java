@@ -19,7 +19,7 @@ public class BasicJournalValidator implements IValidator {
 		if (value instanceof CollectionGroup) {
 			final MultiStatus statusList = new MultiStatus(Activator.class.getName(), 0, "Validation Messages", null);
 			final CollectionGroup journal = (CollectionGroup)value;
-			if (journal.getEntryCount() != journal.getJournalEntries().size()) {
+			if (journal.getEntryCount() != journal.getEntries().size()) {
 				statusList.add(ValidationStatus.cancel("System Error: entry count and number of entries don't match. Please contact support."));
 			}
 			if (journal.getDriverTotal() == null) {

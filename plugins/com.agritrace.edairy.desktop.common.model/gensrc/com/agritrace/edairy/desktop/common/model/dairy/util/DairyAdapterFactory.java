@@ -122,9 +122,9 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 				return createTripAdapter();
 			}
 			@Override
-			public Adapter caseDeliveryJournal(DeliveryJournal object)
+			public Adapter caseMilkSaleGroup(MilkSaleGroup object)
 			{
-				return createDeliveryJournalAdapter();
+				return createMilkSaleGroupAdapter();
 			}
 			@Override
 			public Adapter caseMilkGrade(MilkGrade object)
@@ -345,16 +345,17 @@ public class DairyAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal <em>Delivery Journal</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSaleGroup <em>Milk Sale Group</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.MilkSaleGroup
 	 * @generated
 	 */
-	public Adapter createDeliveryJournalAdapter() {
+	public Adapter createMilkSaleGroupAdapter()
+	{
 		return null;
 	}
 

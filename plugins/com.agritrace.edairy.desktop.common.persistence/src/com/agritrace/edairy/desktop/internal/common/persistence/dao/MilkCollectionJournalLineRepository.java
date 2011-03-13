@@ -56,7 +56,7 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 		cal.setTime(date);
 
 		final String queryText = "SELECT count(*) " + "  FROM CollectionJournalLine l "
-				+ " WHERE l.validatedMember = :member " + "   AND l.group.journalDate = :cal "
+				+ " WHERE l.validatedMember = :member " + "   AND l.group.collectionDate = :cal "
 				+ "   AND l.group.collectionCenter = :center ";
 
 		final Query query = getCurrentSession().createQuery(queryText);
@@ -130,9 +130,9 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 		//
 		// final String queryText = // "SELECT grp " +
 		// "FROM CollectionGroup as grp "
-		// + "          where day(grp.journalDate) = :day"
-		// + "          and  month(grp.journalDate) = :month"
-		// + "          and  year(grp.journalDate) = :year";
+		// + "          where day(grp.collectionDate) = :day"
+		// + "          and  month(grp.collectionDate) = :month"
+		// + "          and  year(grp.collectionDate) = :year";
 		//
 		// // final Query query = getCurrentSession().createQuery(queryText);
 		// // query.setInteger("year", year);
@@ -141,10 +141,10 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 
 		final Criteria query = getCurrentSession().createCriteria("CollectionGroup");
 		if (startDate != null) {
-			query.add(Restrictions.ge("journalDate", startDate.getTime()));
+			query.add(Restrictions.ge("collectionDate", startDate.getTime()));
 		}
 		if (endDate != null) {
-			query.add(Restrictions.le("journalDate", endDate.getTime()));
+			query.add(Restrictions.le("collectionDate", endDate.getTime()));
 		}
 		final List<CollectionGroup> results = query.list();
 
@@ -178,8 +178,8 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 	@Transactional
 	public List<Membership> getMembersWithDeliveriesFor(final int month, final int year) {
 		final String queryString = "SELECT DISTINCT l.validatedMember " + " FROM CollectionJournalLine l "
-				+ " WHERE 1 = 1" + "   AND year(l.group.journalDate) = :year "
-				+ "   AND month(l.group.journalDate) = :month ";
+				+ " WHERE 1 = 1" + "   AND year(l.group.collectionDate) = :year "
+				+ "   AND month(l.group.collectionDate) = :month ";
 
 		final Query query = getCurrentSession().createQuery(queryString);
 		query.setInteger("year", year);
@@ -192,8 +192,8 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 	@Transactional
 	public List<Membership> getMembersWithFlaggedDeliveriesFor(final int month, final int year) {
 		final String queryString = "SELECT DISTINCT validatedMember " + " FROM CollectionJournalLine l "
-				+ " WHERE 1 = 1" + "   AND year(l.group.journalDate) = :year "
-				+ "   AND month(l.group.journalDate) = :month" + "   AND l.flagged = TRUE";
+				+ " WHERE 1 = 1" + "   AND year(l.group.collectionDate) = :year "
+				+ "   AND month(l.group.collectionDate) = :month" + "   AND l.flagged = TRUE";
 
 		final Query query = getCurrentSession().createQuery(queryString);
 		query.setInteger("year", year);
@@ -208,8 +208,8 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 			final int year) {
 		final String queryString = "FROM CollectionJournalLine l " + "WHERE l.validatedMember = :member "
 				+ "  AND l.rejected = False " + "  AND l.flagged = False "
-				+ "  AND year(l.group.journalDate) = :year "
-				+ "  AND month(l.group.journalDate) = :month ";
+				+ "  AND year(l.group.collectionDate) = :year "
+				+ "  AND month(l.group.collectionDate) = :month ";
 
 		final Query query = getCurrentSession().createQuery(queryString);
 		query.setEntity("member", member);
@@ -224,8 +224,8 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 	public BigDecimal getSumOfPayableDeliveries(final Membership member, final int month, final int year) {
 		final String queryString = "SELECT sum(l.quantity) " + "FROM CollectionJournalLine l "
 				+ "WHERE l.validatedMember = :member " + "  AND l.rejected = False " + "  AND l.flagged = False "
-				+ "  AND year(l.group.journalDate) = :year "
-				+ "  AND month(l.group.journalDate) = :month ";
+				+ "  AND year(l.group.collectionDate) = :year "
+				+ "  AND month(l.group.collectionDate) = :month ";
 
 		final Query query = getCurrentSession().createQuery(queryString);
 		query.setEntity("member", member);
@@ -243,8 +243,8 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 	public Map<Membership, BigDecimal> getMapOfPayableDeliveries(int paymentMonth, int paymentYear) {
 		final String queryString = "SELECT l.validatedMember, sum(l.quantity) " + "FROM CollectionJournalLine l "
 				+ "WHERE 1 = 1 " + "  AND l.rejected = False " + "  AND l.flagged = False "
-				+ "  AND year(l.group.journalDate) = :year "
-				+ "  AND month(l.group.journalDate) = :month " + "  GROUP BY l.validatedMember";
+				+ "  AND year(l.group.collectionDate) = :year "
+				+ "  AND month(l.group.collectionDate) = :month " + "  GROUP BY l.validatedMember";
 
 		final Query query = getCurrentSession().createQuery(queryString);
 		query.setInteger("year", paymentYear);
@@ -277,8 +277,8 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 						" max(entry.quantity) as max, avg(entry.quantity) as avg ) "
 				+ "FROM   CollectionJournalLine as entry " +
 						" INNER JOIN entry.group as grp " 
-				+ "WHERE  grp.journalDate >= :startDate "
-				+ " AND   grp.journalDate < :endDate ";
+				+ "WHERE  grp.collectionDate >= :startDate "
+				+ " AND   grp.collectionDate < :endDate ";
 		if (startDate == null || endDate == null) {
 			throw new IllegalArgumentException("start and end date must be specified.");
 		}
@@ -292,7 +292,7 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 		if (session != null) {
 			queryString += " AND grp.session = :session ";
 		}
-		queryString += " GROUP BY year(grp.journalDate), month(grp.journalDate), day(grp.journalDate)";
+		queryString += " GROUP BY year(grp.collectionDate), month(grp.collectionDate), day(grp.collectionDate)";
 		
 		final Query query = getCurrentSession().createQuery(queryString);
 

@@ -3,14 +3,9 @@ package com.agritrace.edairy.desktop.testdata;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
@@ -37,8 +32,10 @@ import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkGrade;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkSale;
+import com.agritrace.edairy.desktop.common.model.dairy.MilkSaleGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkSaleType;
 import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
+import com.agritrace.edairy.desktop.common.model.dairy.Trip;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.tracking.Farm;
 import com.agritrace.edairy.desktop.common.model.tracking.Farmer;
@@ -325,14 +322,8 @@ public class TestDataGenerator extends DatabaseSetup
 		String centerCode = String.format("L%04d", stopCount);
 		Location location = EcoreUtil.copy(getWorkingDairy().getLocation());
 		Assert.isNotNull(location);
-		center = DairyUtil.createDairyLocation(
-				"Center: " + centerCode, 
-				centerCode, 
-				"999-999-9999", 
-				"Description for " + centerCode, 
-				new Date(10 * 86400 + stopCount * 86400), 
-				location, 
-				route);
+		center = DairyUtil.createDairyLocation("Center: " + centerCode, centerCode, "999-999-9999", "Description for "
+				+ centerCode, new Date(10 * 86400 + stopCount * 86400), location, route);
 		route.getStops().add(center);
 		currentDairy.getBranchLocations().add(center);
 	}
@@ -361,16 +352,14 @@ public class TestDataGenerator extends DatabaseSetup
 	private void generateCollectionData(Date collectionDate)
 	{
 		System.err.println("Generating Collection Data for " + collectionDate);
-		Map<TransportRoute, Collection<CollectionGroup>> groupMap;
 		BigDecimal collectionAmount = config.getCollectionsPerMember();
 		System.err.println("\tSession Collections "
 				+ ((Dairy) getSession().load("Dairy", new Long(1))).getCollectionSessions());
 		for (CollectionSession session : currentDairy.getCollectionSessions()) {
 			System.err.println("\tSession Collections " + getSession().load("Dairy", new Long(1)));
 			resetBinQuantities();
-			groupMap = generateSessionCollections(collectionDate, session, collectionAmount);
+			generateCollectionTrips(collectionDate, session, collectionAmount);
 			System.err.println("\tSession Sales " + session);
-			generateSessionSales(collectionDate, groupMap, session);
 			collectionAmount = collectionAmount.divide(new BigDecimal(2));
 		}
 
@@ -383,93 +372,130 @@ public class TestDataGenerator extends DatabaseSetup
 		}
 	}
 
-	private void generateSessionSales(	Date saleDate,
-										Map<TransportRoute, Collection<CollectionGroup>> groupMap,
-										CollectionSession session)
+	/**
+	 * Generate a set of trips, one per session-date. Use memberCollectionAmount as the amount each member contributes
+	 * in AM.
+	 * 
+	 * @param collectionDate
+	 * @param session
+	 * @param memberCollectionAmount
+	 * @return
+	 */
+	private List<Trip> generateCollectionTrips(	Date collectionDate,
+												CollectionSession session,
+												BigDecimal memberCollectionAmount)
 	{
-		Set<Bin> binSet;
+		List<Trip> tripList;
 
-		binSet = new HashSet<Bin>();
-		for (Collection<CollectionGroup> groups : groupMap.values()) {
-			for (CollectionGroup group : groups) {
-				for (CollectionJournalLine entry : group.getJournalEntries()) {
-					if (!binSet.contains(entry.getBin())) {
-						binSet.add(entry.getBin());
-					}
-				}
-			}
+		tripList = new ArrayList<Trip>();
+
+		for (TransportRoute route : currentDairy.getRoutes()) {
+			Trip trip = generateTrip(route, collectionDate, session, memberCollectionAmount);
+			getSession().persist(trip);
+			tripList.add(trip);
 		}
 
-		MilkGrade grade = getBaseGrade();
-		Customer customer = currentDairy.getCustomers().get(0);
-		double unitPrice = 22.0d;
-		for (Bin bin : binSet) {
-			double quantity = bin.getQuantity();
-			MilkSale sale = DairyFactory.eINSTANCE.createMilkSale();
-			sale.setBin(bin);
-			sale.setContractSale(true);
-			sale.setSession(session);
-			sale.setCustomer(customer);
-			sale.setGrade(grade);
-			sale.setQuantity(new BigDecimal(quantity));
-			sale.setReferenceNumber(String.format("SALE%05d", ++sequence));
-			sale.setSaleAmount(new BigDecimal(unitPrice * quantity));
-			sale.setSaleDate(saleDate);
-			sale.setRejected(false);
-			sale.setSaleType(MilkSaleType.CREDIT);
-			sale.setStoreOrRoute(currentDairy.getBranchLocations().get(0)); // should be the last center from the route?
-			sale.setUnitPrice(new BigDecimal(unitPrice));
-			getSession().persist(sale);
-		}
+		return tripList;
 	}
 
-	private Map<TransportRoute, Collection<CollectionGroup>> generateSessionCollections(Date collectionDate,
-																						CollectionSession session,
-																						BigDecimal memberCollectionAmount)
+	/**
+	 * Generate a single trip for a particular route-session-date.
+	 * 
+	 * @param route
+	 * @param collectionDate
+	 * @param session
+	 * @param memberCollectionAmount
+	 * @return
+	 */
+	private Trip generateTrip(	TransportRoute route,
+								Date collectionDate,
+								CollectionSession session,
+								BigDecimal memberCollectionAmount)
 	{
-		Map<TransportRoute, Collection<CollectionGroup>> groupMap;
-		List<Membership> filteredMembers;
 		List<Bin> binList;
-		Collection<CollectionGroup> collectionSet;
+		CollectionGroup group;
+		MilkSaleGroup journal;
+		Trip trip;
+
+		// create the trip
+		trip = DairyFactory.eINSTANCE.createTrip();
+		trip.setStarted(collectionDate);
+		trip.setEnded(collectionDate);
+
+		// add the collections
+		binList = route.getBins();
+		for (DairyLocation center : route.getStops()) {
+			group = generateTripCollectionGroup(center, collectionDate, session, binList, memberCollectionAmount);
+			trip.getCollections().add(group);
+		}
+
+		// add the sales
+		List<Customer> customerList = findCustomersForTransportRoute(route);
+		MilkGrade grade = getBaseGrade();
+		double unitPrice = 22.0d;
+
+		// TODO: be smarter about selecting customers..
+		Customer customer = customerList.get(0);
+
+		journal = createMilkSaleGroup(route, collectionDate, session, customer);
+		for (Bin bin : binList) {
+			double quantity = bin.getQuantity();
+			MilkSale sale = createMilkSale(collectionDate, session, grade, customer, unitPrice, bin, quantity);
+			journal.getSales().add(sale);
+		}
+		trip.getDeliveries().add(journal);
+
+		return trip;
+	}
+
+	private CollectionGroup generateTripCollectionGroup(DairyLocation center,
+														Date collectionDate,
+														CollectionSession session,
+														List<Bin> binList,
+														BigDecimal memberCollectionAmount)
+	{
+		List<Membership> filteredMembers;
 		CollectionGroup group;
 		Bin bin;
-		CollectionJournalLine entry;
-		groupMap = new HashMap<TransportRoute, Collection<CollectionGroup>>();
-		for (DairyLocation center : currentDairy.getBranchLocations()) {
-			System.err.println("\t\tCenter " + center);
-			filteredMembers = filterMembersByDefaultRoute(center);
-			group = createCollectionGroup(center, collectionDate, session);
-			collectionSet = groupMap.get(center.getRoute());
-			if (collectionSet == null) {
-				collectionSet = new ArrayList<CollectionGroup>();
-				groupMap.put(center.getRoute(), collectionSet);
-			}
-			collectionSet.add(group);
-// System.err.println("\t\tGroup " + group );
-// binList = getBinsForCenterAndSession(center, session);
-			binList = center.getRoute().getBins();
-			System.err.println("Sequence: " + sequence);
-			for (Membership member : filteredMembers) {
-				bin = getNextAvailableBin(binList, memberCollectionAmount);
-				createCollectionEntry(group, bin, member, memberCollectionAmount);
-			}
-			getSession().persist(group);
+		group = createCollectionGroup(center, collectionDate, session);
+		filteredMembers = findFarmersForCollectionCenter(center);
+		for (Membership member : filteredMembers) {
+			bin = getNextAvailableBin(binList, memberCollectionAmount);
+			createCollectionEntry(group, bin, member, memberCollectionAmount);
 		}
-		return groupMap;
+		return group;
 	}
 
-	private List<Bin> getBinsForCenterAndSession(	DairyLocation center,
-													CollectionSession session)
+// private List<Bin> findBinsForCenterAndSession( DairyLocation center,
+// CollectionSession session)
+// {
+// TransportRoute route = center.getRoute();
+// List<Bin> binList = new LinkedList<Bin>();
+// for (Bin bin : route.getBins()) {
+// System.err.println("Testing bin : " + bin);
+// if (bin.getQuantity() < bin.getCapacity() && bin.getStatus() == "ACTIVE") {
+// binList.add(bin);
+// }
+// }
+// return binList;
+// }
+
+	private List<Customer> findCustomersForTransportRoute(TransportRoute route)
 	{
-		TransportRoute route = center.getRoute();
-		List<Bin> binList = new LinkedList<Bin>();
-		for (Bin bin : route.getBins()) {
-			System.err.println("Testing bin : " + bin);
-			if (bin.getQuantity() < bin.getCapacity() && bin.getStatus() == "ACTIVE") {
-				binList.add(bin);
+		ArrayList<Customer> customerList = new ArrayList<Customer>();
+		customerList.add(currentDairy.getCustomers().get(0));
+		return customerList;
+	}
+
+	private List<Membership> findFarmersForCollectionCenter(DairyLocation center)
+	{
+		LinkedList<Membership> l = new LinkedList<Membership>();
+		for (Membership m : currentDairy.getMemberships()) {
+			if (m.getDefaultRoute() == center) {
+				l.add(m);
 			}
 		}
-		return binList;
+		return l;
 	}
 
 	private Bin getNextAvailableBin(List<Bin> binList,
@@ -483,17 +509,6 @@ public class TestDataGenerator extends DatabaseSetup
 		throw new RuntimeException("Bin not found: " + binList.size());
 	}
 
-	private List<Membership> filterMembersByDefaultRoute(DairyLocation center)
-	{
-		LinkedList<Membership> l = new LinkedList<Membership>();
-		for (Membership m : currentDairy.getMemberships()) {
-			if (m.getDefaultRoute() == center) {
-				l.add(m);
-			}
-		}
-		return l;
-	}
-
 	public CollectionGroup createCollectionGroup(	DairyLocation center,
 													Date collectionDate,
 													CollectionSession session)
@@ -504,8 +519,8 @@ public class TestDataGenerator extends DatabaseSetup
 
 		CollectionGroup group;
 		group = DairyFactory.eINSTANCE.createCollectionGroup();
-		group.setJournalId(Long.valueOf(group.hashCode()));
-		group.setJournalDate(collectionDate);
+		group.setId(Long.valueOf(group.hashCode()));
+		group.setCollectionDate(collectionDate);
 		group.setCollectionCenter(center);
 		group.setSession(session);
 		group.setType(CollectionGroupType.JOURNAL_GROUP);
@@ -572,6 +587,49 @@ public class TestDataGenerator extends DatabaseSetup
 			emp.setLicenseNo("LICENSE000" + sequence);
 		}
 		return emp;
+	}
+
+	private MilkSale createMilkSale(Date saleDate,
+									CollectionSession session,
+									MilkGrade grade,
+									Customer customer,
+									double unitPrice,
+									Bin bin,
+									double quantity)
+	{
+		MilkSale sale = DairyFactory.eINSTANCE.createMilkSale();
+		sale.setBin(bin);
+		sale.setContractSale(true);
+		sale.setSession(session);
+		sale.setCustomer(customer);
+		sale.setGrade(grade);
+		sale.setQuantity(new BigDecimal(quantity));
+		sale.setReferenceNumber(String.format("SALE%05d", ++sequence));
+		sale.setSaleAmount(new BigDecimal(unitPrice * quantity));
+		sale.setSaleDate(saleDate);
+		sale.setRejected(false);
+		sale.setSaleType(MilkSaleType.CREDIT);
+		sale.setStoreOrRoute(currentDairy.getBranchLocations().get(0)); // should be the last center from the route?
+		sale.setUnitPrice(new BigDecimal(unitPrice));
+		return sale;
+	}
+
+	private MilkSaleGroup createMilkSaleGroup(	TransportRoute route,
+												Date collectionDate,
+												CollectionSession session,
+												Customer customer)
+	{
+		MilkSaleGroup group = DairyFactory.eINSTANCE.createMilkSaleGroup();
+		group.setCustomer(customer);
+		group.setRoute(route);
+		group.setSession(session);
+		group.setDate(collectionDate);
+		group.setVehicle(route.getVehicle());
+		group.setDriver(route.getVehicle().getDriver());
+		group.setReferenceNumber(String.format("%s-%04d%02d%02d-%s[%s-%05d]", route.getName(),
+				collectionDate.getYear(), collectionDate.getMonth(), collectionDate.getDay(), session.getCode(),
+				customer.getCustomerNumber(), ++sequence));
+		return group;
 	}
 
 }

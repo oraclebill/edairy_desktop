@@ -9,9 +9,9 @@ package com.agritrace.edairy.desktop.common.model.dairy.impl;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
-import com.agritrace.edairy.desktop.common.model.dairy.MilkSale;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
+import com.agritrace.edairy.desktop.common.model.dairy.MilkSale;
+import com.agritrace.edairy.desktop.common.model.dairy.MilkSaleGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 
@@ -36,26 +36,28 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Delivery Journal</b></em>'.
+ * An implementation of the model object '<em><b>Milk Sale Group</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalImpl#getReferenceNumber <em>Reference Number</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalImpl#getDate <em>Date</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalImpl#getRoute <em>Route</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalImpl#getCustomer <em>Customer</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalImpl#getDriver <em>Driver</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalImpl#getVehicle <em>Vehicle</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalImpl#getLines <em>Lines</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalImpl#getTotal <em>Total</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.DeliveryJournalImpl#getSession <em>Session</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkSaleGroupImpl#getReferenceNumber <em>Reference Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkSaleGroupImpl#getDate <em>Date</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkSaleGroupImpl#getRoute <em>Route</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkSaleGroupImpl#getCustomer <em>Customer</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkSaleGroupImpl#getDriver <em>Driver</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkSaleGroupImpl#getVehicle <em>Vehicle</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkSaleGroupImpl#getSales <em>Sales</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkSaleGroupImpl#getTotal <em>Total</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkSaleGroupImpl#getSession <em>Session</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkSaleGroupImpl#getId <em>Id</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal {
+public class MilkSaleGroupImpl extends EObjectImpl implements MilkSaleGroup
+{
 	/**
 	 * The default value of the '{@link #getReferenceNumber() <em>Reference Number</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -137,14 +139,14 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	protected Vehicle vehicle;
 
 	/**
-	 * The cached value of the '{@link #getLines() <em>Lines</em>}' containment reference list.
+	 * The cached value of the '{@link #getSales() <em>Sales</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLines()
+	 * @see #getSales()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<MilkSale> lines;
+	protected EList<MilkSale> sales;
 
 	/**
 	 * The default value of the '{@link #getTotal() <em>Total</em>}' attribute.
@@ -177,11 +179,32 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	protected CollectionSession session;
 
 	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Long ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected Long id = ID_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected DeliveryJournalImpl() {
+	protected MilkSaleGroupImpl()
+	{
 		super();
 	}
 
@@ -191,8 +214,9 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * @generated
 	 */
 	@Override
-	protected EClass eStaticClass() {
-		return DairyPackage.Literals.DELIVERY_JOURNAL;
+	protected EClass eStaticClass()
+	{
+		return DairyPackage.Literals.MILK_SALE_GROUP;
 	}
 
 	/**
@@ -200,7 +224,8 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getReferenceNumber() {
+	public String getReferenceNumber()
+	{
 		return referenceNumber;
 	}
 
@@ -209,11 +234,12 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setReferenceNumber(String newReferenceNumber) {
+	public void setReferenceNumber(String newReferenceNumber)
+	{
 		String oldReferenceNumber = referenceNumber;
 		referenceNumber = newReferenceNumber;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL__REFERENCE_NUMBER, oldReferenceNumber, referenceNumber));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MILK_SALE_GROUP__REFERENCE_NUMBER, oldReferenceNumber, referenceNumber));
 	}
 
 	/**
@@ -221,7 +247,8 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Date getDate() {
+	public Date getDate()
+	{
 		return date;
 	}
 
@@ -230,11 +257,12 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDate(Date newDate) {
+	public void setDate(Date newDate)
+	{
 		Date oldDate = date;
 		date = newDate;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL__DATE, oldDate, date));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MILK_SALE_GROUP__DATE, oldDate, date));
 	}
 
 	/**
@@ -242,7 +270,8 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TransportRoute getRoute() {
+	public TransportRoute getRoute()
+	{
 		if (route != null && route.eIsProxy())
 		{
 			InternalEObject oldRoute = (InternalEObject)route;
@@ -250,7 +279,7 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 			if (route != oldRoute)
 			{
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DELIVERY_JOURNAL__ROUTE, oldRoute, route));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.MILK_SALE_GROUP__ROUTE, oldRoute, route));
 			}
 		}
 		return route;
@@ -261,7 +290,8 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TransportRoute basicGetRoute() {
+	public TransportRoute basicGetRoute()
+	{
 		return route;
 	}
 
@@ -270,11 +300,12 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setRoute(TransportRoute newRoute) {
+	public void setRoute(TransportRoute newRoute)
+	{
 		TransportRoute oldRoute = route;
 		route = newRoute;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL__ROUTE, oldRoute, route));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MILK_SALE_GROUP__ROUTE, oldRoute, route));
 	}
 
 	/**
@@ -282,7 +313,8 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Customer getCustomer() {
+	public Customer getCustomer()
+	{
 		if (customer != null && customer.eIsProxy())
 		{
 			InternalEObject oldCustomer = (InternalEObject)customer;
@@ -290,7 +322,7 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 			if (customer != oldCustomer)
 			{
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DELIVERY_JOURNAL__CUSTOMER, oldCustomer, customer));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.MILK_SALE_GROUP__CUSTOMER, oldCustomer, customer));
 			}
 		}
 		return customer;
@@ -301,7 +333,8 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Customer basicGetCustomer() {
+	public Customer basicGetCustomer()
+	{
 		return customer;
 	}
 
@@ -310,11 +343,12 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCustomer(Customer newCustomer) {
+	public void setCustomer(Customer newCustomer)
+	{
 		Customer oldCustomer = customer;
 		customer = newCustomer;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL__CUSTOMER, oldCustomer, customer));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MILK_SALE_GROUP__CUSTOMER, oldCustomer, customer));
 	}
 
 	/**
@@ -322,7 +356,8 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Employee getDriver() {
+	public Employee getDriver()
+	{
 		if (driver != null && driver.eIsProxy())
 		{
 			InternalEObject oldDriver = (InternalEObject)driver;
@@ -330,7 +365,7 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 			if (driver != oldDriver)
 			{
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DELIVERY_JOURNAL__DRIVER, oldDriver, driver));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.MILK_SALE_GROUP__DRIVER, oldDriver, driver));
 			}
 		}
 		return driver;
@@ -341,7 +376,8 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Employee basicGetDriver() {
+	public Employee basicGetDriver()
+	{
 		return driver;
 	}
 
@@ -350,11 +386,12 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDriver(Employee newDriver) {
+	public void setDriver(Employee newDriver)
+	{
 		Employee oldDriver = driver;
 		driver = newDriver;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL__DRIVER, oldDriver, driver));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MILK_SALE_GROUP__DRIVER, oldDriver, driver));
 	}
 
 	/**
@@ -362,7 +399,8 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Vehicle getVehicle() {
+	public Vehicle getVehicle()
+	{
 		if (vehicle != null && vehicle.eIsProxy())
 		{
 			InternalEObject oldVehicle = (InternalEObject)vehicle;
@@ -370,7 +408,7 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 			if (vehicle != oldVehicle)
 			{
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DELIVERY_JOURNAL__VEHICLE, oldVehicle, vehicle));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.MILK_SALE_GROUP__VEHICLE, oldVehicle, vehicle));
 			}
 		}
 		return vehicle;
@@ -381,7 +419,8 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Vehicle basicGetVehicle() {
+	public Vehicle basicGetVehicle()
+	{
 		return vehicle;
 	}
 
@@ -390,11 +429,12 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setVehicle(Vehicle newVehicle) {
+	public void setVehicle(Vehicle newVehicle)
+	{
 		Vehicle oldVehicle = vehicle;
 		vehicle = newVehicle;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL__VEHICLE, oldVehicle, vehicle));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MILK_SALE_GROUP__VEHICLE, oldVehicle, vehicle));
 	}
 
 	/**
@@ -402,12 +442,13 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<MilkSale> getLines() {
-		if (lines == null)
+	public EList<MilkSale> getSales()
+	{
+		if (sales == null)
 		{
-			lines = new EObjectContainmentEList<MilkSale>(MilkSale.class, this, DairyPackage.DELIVERY_JOURNAL__LINES);
+			sales = new EObjectContainmentEList<MilkSale>(MilkSale.class, this, DairyPackage.MILK_SALE_GROUP__SALES);
 		}
-		return lines;
+		return sales;
 	}
 
 	/**
@@ -415,7 +456,8 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BigDecimal getTotal() {
+	public BigDecimal getTotal()
+	{
 		return total;
 	}
 
@@ -424,11 +466,12 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTotal(BigDecimal newTotal) {
+	public void setTotal(BigDecimal newTotal)
+	{
 		BigDecimal oldTotal = total;
 		total = newTotal;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL__TOTAL, oldTotal, total));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MILK_SALE_GROUP__TOTAL, oldTotal, total));
 	}
 
 	/**
@@ -436,7 +479,8 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CollectionSession getSession() {
+	public CollectionSession getSession()
+	{
 		if (session != null && session.eIsProxy())
 		{
 			InternalEObject oldSession = (InternalEObject)session;
@@ -444,7 +488,7 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 			if (session != oldSession)
 			{
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.DELIVERY_JOURNAL__SESSION, oldSession, session));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.MILK_SALE_GROUP__SESSION, oldSession, session));
 			}
 		}
 		return session;
@@ -455,7 +499,8 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CollectionSession basicGetSession() {
+	public CollectionSession basicGetSession()
+	{
 		return session;
 	}
 
@@ -464,11 +509,35 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSession(CollectionSession newSession) {
+	public void setSession(CollectionSession newSession)
+	{
 		CollectionSession oldSession = session;
 		session = newSession;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.DELIVERY_JOURNAL__SESSION, oldSession, session));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MILK_SALE_GROUP__SESSION, oldSession, session));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Long getId()
+	{
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setId(Long newId)
+	{
+		Long oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MILK_SALE_GROUP__ID, oldId, id));
 	}
 
 	/**
@@ -477,11 +546,12 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+	{
 		switch (featureID)
 		{
-			case DairyPackage.DELIVERY_JOURNAL__LINES:
-				return ((InternalEList<?>)getLines()).basicRemove(otherEnd, msgs);
+			case DairyPackage.MILK_SALE_GROUP__SALES:
+				return ((InternalEList<?>)getSales()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -492,32 +562,35 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * @generated
 	 */
 	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+	public Object eGet(int featureID, boolean resolve, boolean coreType)
+	{
 		switch (featureID)
 		{
-			case DairyPackage.DELIVERY_JOURNAL__REFERENCE_NUMBER:
+			case DairyPackage.MILK_SALE_GROUP__REFERENCE_NUMBER:
 				return getReferenceNumber();
-			case DairyPackage.DELIVERY_JOURNAL__DATE:
+			case DairyPackage.MILK_SALE_GROUP__DATE:
 				return getDate();
-			case DairyPackage.DELIVERY_JOURNAL__ROUTE:
+			case DairyPackage.MILK_SALE_GROUP__ROUTE:
 				if (resolve) return getRoute();
 				return basicGetRoute();
-			case DairyPackage.DELIVERY_JOURNAL__CUSTOMER:
+			case DairyPackage.MILK_SALE_GROUP__CUSTOMER:
 				if (resolve) return getCustomer();
 				return basicGetCustomer();
-			case DairyPackage.DELIVERY_JOURNAL__DRIVER:
+			case DairyPackage.MILK_SALE_GROUP__DRIVER:
 				if (resolve) return getDriver();
 				return basicGetDriver();
-			case DairyPackage.DELIVERY_JOURNAL__VEHICLE:
+			case DairyPackage.MILK_SALE_GROUP__VEHICLE:
 				if (resolve) return getVehicle();
 				return basicGetVehicle();
-			case DairyPackage.DELIVERY_JOURNAL__LINES:
-				return getLines();
-			case DairyPackage.DELIVERY_JOURNAL__TOTAL:
+			case DairyPackage.MILK_SALE_GROUP__SALES:
+				return getSales();
+			case DairyPackage.MILK_SALE_GROUP__TOTAL:
 				return getTotal();
-			case DairyPackage.DELIVERY_JOURNAL__SESSION:
+			case DairyPackage.MILK_SALE_GROUP__SESSION:
 				if (resolve) return getSession();
 				return basicGetSession();
+			case DairyPackage.MILK_SALE_GROUP__ID:
+				return getId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -529,36 +602,40 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void eSet(int featureID, Object newValue) {
+	public void eSet(int featureID, Object newValue)
+	{
 		switch (featureID)
 		{
-			case DairyPackage.DELIVERY_JOURNAL__REFERENCE_NUMBER:
+			case DairyPackage.MILK_SALE_GROUP__REFERENCE_NUMBER:
 				setReferenceNumber((String)newValue);
 				return;
-			case DairyPackage.DELIVERY_JOURNAL__DATE:
+			case DairyPackage.MILK_SALE_GROUP__DATE:
 				setDate((Date)newValue);
 				return;
-			case DairyPackage.DELIVERY_JOURNAL__ROUTE:
+			case DairyPackage.MILK_SALE_GROUP__ROUTE:
 				setRoute((TransportRoute)newValue);
 				return;
-			case DairyPackage.DELIVERY_JOURNAL__CUSTOMER:
+			case DairyPackage.MILK_SALE_GROUP__CUSTOMER:
 				setCustomer((Customer)newValue);
 				return;
-			case DairyPackage.DELIVERY_JOURNAL__DRIVER:
+			case DairyPackage.MILK_SALE_GROUP__DRIVER:
 				setDriver((Employee)newValue);
 				return;
-			case DairyPackage.DELIVERY_JOURNAL__VEHICLE:
+			case DairyPackage.MILK_SALE_GROUP__VEHICLE:
 				setVehicle((Vehicle)newValue);
 				return;
-			case DairyPackage.DELIVERY_JOURNAL__LINES:
-				getLines().clear();
-				getLines().addAll((Collection<? extends MilkSale>)newValue);
+			case DairyPackage.MILK_SALE_GROUP__SALES:
+				getSales().clear();
+				getSales().addAll((Collection<? extends MilkSale>)newValue);
 				return;
-			case DairyPackage.DELIVERY_JOURNAL__TOTAL:
+			case DairyPackage.MILK_SALE_GROUP__TOTAL:
 				setTotal((BigDecimal)newValue);
 				return;
-			case DairyPackage.DELIVERY_JOURNAL__SESSION:
+			case DairyPackage.MILK_SALE_GROUP__SESSION:
 				setSession((CollectionSession)newValue);
+				return;
+			case DairyPackage.MILK_SALE_GROUP__ID:
+				setId((Long)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -570,35 +647,39 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * @generated
 	 */
 	@Override
-	public void eUnset(int featureID) {
+	public void eUnset(int featureID)
+	{
 		switch (featureID)
 		{
-			case DairyPackage.DELIVERY_JOURNAL__REFERENCE_NUMBER:
+			case DairyPackage.MILK_SALE_GROUP__REFERENCE_NUMBER:
 				setReferenceNumber(REFERENCE_NUMBER_EDEFAULT);
 				return;
-			case DairyPackage.DELIVERY_JOURNAL__DATE:
+			case DairyPackage.MILK_SALE_GROUP__DATE:
 				setDate(DATE_EDEFAULT);
 				return;
-			case DairyPackage.DELIVERY_JOURNAL__ROUTE:
+			case DairyPackage.MILK_SALE_GROUP__ROUTE:
 				setRoute((TransportRoute)null);
 				return;
-			case DairyPackage.DELIVERY_JOURNAL__CUSTOMER:
+			case DairyPackage.MILK_SALE_GROUP__CUSTOMER:
 				setCustomer((Customer)null);
 				return;
-			case DairyPackage.DELIVERY_JOURNAL__DRIVER:
+			case DairyPackage.MILK_SALE_GROUP__DRIVER:
 				setDriver((Employee)null);
 				return;
-			case DairyPackage.DELIVERY_JOURNAL__VEHICLE:
+			case DairyPackage.MILK_SALE_GROUP__VEHICLE:
 				setVehicle((Vehicle)null);
 				return;
-			case DairyPackage.DELIVERY_JOURNAL__LINES:
-				getLines().clear();
+			case DairyPackage.MILK_SALE_GROUP__SALES:
+				getSales().clear();
 				return;
-			case DairyPackage.DELIVERY_JOURNAL__TOTAL:
+			case DairyPackage.MILK_SALE_GROUP__TOTAL:
 				setTotal(TOTAL_EDEFAULT);
 				return;
-			case DairyPackage.DELIVERY_JOURNAL__SESSION:
+			case DairyPackage.MILK_SALE_GROUP__SESSION:
 				setSession((CollectionSession)null);
+				return;
+			case DairyPackage.MILK_SALE_GROUP__ID:
+				setId(ID_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -610,27 +691,30 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * @generated
 	 */
 	@Override
-	public boolean eIsSet(int featureID) {
+	public boolean eIsSet(int featureID)
+	{
 		switch (featureID)
 		{
-			case DairyPackage.DELIVERY_JOURNAL__REFERENCE_NUMBER:
+			case DairyPackage.MILK_SALE_GROUP__REFERENCE_NUMBER:
 				return REFERENCE_NUMBER_EDEFAULT == null ? referenceNumber != null : !REFERENCE_NUMBER_EDEFAULT.equals(referenceNumber);
-			case DairyPackage.DELIVERY_JOURNAL__DATE:
+			case DairyPackage.MILK_SALE_GROUP__DATE:
 				return DATE_EDEFAULT == null ? date != null : !DATE_EDEFAULT.equals(date);
-			case DairyPackage.DELIVERY_JOURNAL__ROUTE:
+			case DairyPackage.MILK_SALE_GROUP__ROUTE:
 				return route != null;
-			case DairyPackage.DELIVERY_JOURNAL__CUSTOMER:
+			case DairyPackage.MILK_SALE_GROUP__CUSTOMER:
 				return customer != null;
-			case DairyPackage.DELIVERY_JOURNAL__DRIVER:
+			case DairyPackage.MILK_SALE_GROUP__DRIVER:
 				return driver != null;
-			case DairyPackage.DELIVERY_JOURNAL__VEHICLE:
+			case DairyPackage.MILK_SALE_GROUP__VEHICLE:
 				return vehicle != null;
-			case DairyPackage.DELIVERY_JOURNAL__LINES:
-				return lines != null && !lines.isEmpty();
-			case DairyPackage.DELIVERY_JOURNAL__TOTAL:
+			case DairyPackage.MILK_SALE_GROUP__SALES:
+				return sales != null && !sales.isEmpty();
+			case DairyPackage.MILK_SALE_GROUP__TOTAL:
 				return TOTAL_EDEFAULT == null ? total != null : !TOTAL_EDEFAULT.equals(total);
-			case DairyPackage.DELIVERY_JOURNAL__SESSION:
+			case DairyPackage.MILK_SALE_GROUP__SESSION:
 				return session != null;
+			case DairyPackage.MILK_SALE_GROUP__ID:
+				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -641,7 +725,8 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 	 * @generated
 	 */
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
@@ -651,8 +736,10 @@ public class DeliveryJournalImpl extends EObjectImpl implements DeliveryJournal 
 		result.append(date);
 		result.append(", total: ");
 		result.append(total);
+		result.append(", id: ");
+		result.append(id);
 		result.append(')');
 		return result.toString();
 	}
 
-} //DeliveryJournalImpl
+} //MilkSaleGroupImpl

@@ -6,43 +6,36 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
-import com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl;
-
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
-import com.agritrace.edairy.desktop.common.model.dairy.Customer;
-import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
-import com.agritrace.edairy.desktop.common.model.dairy.Bin;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
-import com.agritrace.edairy.desktop.common.model.dairy.Employee;
-import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
-import com.agritrace.edairy.desktop.common.model.dairy.Membership;
-import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
-import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
-import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
-
-import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
-import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
-
 import java.util.Collection;
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import com.agritrace.edairy.desktop.common.model.base.impl.CompanyImpl;
+import com.agritrace.edairy.desktop.common.model.dairy.Bin;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
+import com.agritrace.edairy.desktop.common.model.dairy.Customer;
+import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.Employee;
+import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
+import com.agritrace.edairy.desktop.common.model.dairy.Membership;
+import com.agritrace.edairy.desktop.common.model.dairy.MilkSaleGroup;
+import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
+import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
+import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
+import com.agritrace.edairy.desktop.common.model.requests.AnimalHealthRequest;
+import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -307,7 +300,7 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<DeliveryJournal> deliveryJournals;
+	protected EList<MilkSaleGroup> deliveryJournals;
 
 	/**
 	 * The cached value of the '{@link #getSuppliers() <em>Suppliers</em>}' containment reference list.
@@ -659,10 +652,10 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<DeliveryJournal> getDeliveryJournals() {
+	public EList<MilkSaleGroup> getDeliveryJournals() {
 		if (deliveryJournals == null)
 		{
-			deliveryJournals = new EObjectContainmentEList<DeliveryJournal>(DeliveryJournal.class, this, DairyPackage.DAIRY__DELIVERY_JOURNALS);
+			deliveryJournals = new EObjectContainmentEList<MilkSaleGroup>(MilkSaleGroup.class, this, DairyPackage.DAIRY__DELIVERY_JOURNALS);
 		}
 		return deliveryJournals;
 	}
@@ -944,7 +937,7 @@ public class DairyImpl extends CompanyImpl implements Dairy {
 				return;
 			case DairyPackage.DAIRY__DELIVERY_JOURNALS:
 				getDeliveryJournals().clear();
-				getDeliveryJournals().addAll((Collection<? extends DeliveryJournal>)newValue);
+				getDeliveryJournals().addAll((Collection<? extends MilkSaleGroup>)newValue);
 				return;
 			case DairyPackage.DAIRY__SUPPLIERS:
 				getSuppliers().clear();

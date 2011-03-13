@@ -156,7 +156,7 @@ public class JournalHeaderRidget extends AbstractCompositeRidget implements IJou
 
 	@Override
 	public void bindToModel(CollectionGroup newModel) {
-		dateRidget.bindToModel(newModel, "journalDate");
+		dateRidget.bindToModel(newModel, "collectionDate");
 		centerRidget.bindToModel(newModel, "collectionCenter.code");
 		sessionRidget.bindToModel(newModel, "session.code");
 		vehicleRidget.bindToModel(newModel, "vehicle.registrationNumber");

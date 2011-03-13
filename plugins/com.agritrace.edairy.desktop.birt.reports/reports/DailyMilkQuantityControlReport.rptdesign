@@ -1,0 +1,775 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
+    <property name="author">Bill Jones</property>
+    <property name="comments">Comments</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 2.6.2.r262_v20110209 Build &lt;2.6.2.v20110214-1523></property>
+    <text-property name="title">Daily Milk Intake Report</text-property>
+    <html-property name="description">Daily Milk Intake Crosstab Report</html-property>
+    <list-property name="userProperties">
+        <structure>
+            <property name="name">module</property>
+            <property name="type">string</property>
+        </structure>
+        <structure>
+            <property name="name">version</property>
+            <property name="type">integer</property>
+        </structure>
+        <structure>
+            <property name="name">MilkIntakeDataCube.MilkIntakeSQLDataSet.x</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">MilkIntakeDataCube.MilkIntakeSQLDataSet.y</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+    </list-property>
+    <property name="MilkIntakeDataCube.MilkIntakeSQLDataSet.x">135</property>
+    <property name="MilkIntakeDataCube.MilkIntakeSQLDataSet.y">80</property>
+    <property name="subject">Dairy Milk Operations</property>
+    <property name="units">in</property>
+    <list-property name="propertyBindings">
+        <structure>
+            <property name="name">queryText</property>
+            <property name="id">2204</property>
+        </structure>
+        <structure>
+            <property name="name">queryTimeOut</property>
+            <property name="id">2204</property>
+        </structure>
+    </list-property>
+    <method name="initialize"><![CDATA[i = 0;]]></method>
+    <property name="theme">SiteReportLib.defaultTheme</property>
+    <text-property name="displayName">Daily Milk Intake Crosstab Report</text-property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <list-property name="libraries">
+        <structure>
+            <property name="fileName">CommonReportLib.rptlibrary</property>
+            <property name="namespace">CommonReportLib</property>
+        </structure>
+        <structure>
+            <property name="fileName">SiteReportLib.rptlibrary</property>
+            <property name="namespace">SiteReportLib</property>
+        </structure>
+    </list-property>
+    <parameters>
+        <scalar-parameter name="dairyName" id="1985" extends="SiteReportLib.dairyName"/>
+        <scalar-parameter name="productlogo" id="1986" extends="SiteReportLib.productlogo"/>
+        <scalar-parameter name="vendorlogo" id="1987" extends="SiteReportLib.vendorlogo"/>
+        <scalar-parameter name="databaseName" id="1988" extends="SiteReportLib.databaseName">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">dairymgr</value>
+            </simple-property-list>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="port" id="1989" extends="SiteReportLib.port"/>
+        <scalar-parameter name="host" id="1990" extends="SiteReportLib.host"/>
+        <scalar-parameter name="fromDate" id="1992">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">var startDate = params["date"].value;&#13;
+endDate = BirtDateTime.addDay( startDate, -1 ); // returns Dec 30, 2008&#13;
+BirtDateTime.year(endDate) + "-" + BirtDateTime.month(endDate) + "-" + BirtDateTime.day(endDate)</value>
+            </simple-property-list>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="date" id="1993">
+            <text-property name="helpText">Date</text-property>
+            <text-property name="promptText">Date</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">2011-03-01</value>
+            </simple-property-list>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="MilkIntakeScriptedDataSource" id="2200"/>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="dairyMgrDbDataSource" id="2203">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>disabledMetadataBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>disabledContentBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
+            <property name="odaURL">jdbc:mysql://localhost:3306/dairymgr</property>
+            <property name="odaUser">root</property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="MilkQuantityControlSQLDataSet" id="2204">
+            <property name="nullsOrdering">nulls lowest</property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">collectionDate</property>
+                    <property name="alias">collectionDate</property>
+                </structure>
+                <structure>
+                    <property name="columnName">code</property>
+                    <property name="alias">sessionCode</property>
+                </structure>
+                <structure>
+                    <property name="columnName">code_3</property>
+                    <property name="alias">centerCode</property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">collectionDate</property>
+                    <property name="paramName">date</property>
+                    <property name="dataType">date</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">collectionDate</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">sessionCode</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">centerCode</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">collectedqty</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">saleqty</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">rejectedqty</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">dairyMgrDbDataSource</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">collectionDate</property>
+                    <property name="nativeName">collectionDate</property>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">code</property>
+                    <property name="nativeName">code</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">code_3</property>
+                    <property name="nativeName">code</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">name</property>
+                    <property name="nativeName">name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">collectedqty</property>
+                    <property name="nativeName">collectedqty</property>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">saleqty</property>
+                    <property name="nativeName">saleqty</property>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">rejectedqty</property>
+                    <property name="nativeName">rejectedqty</property>
+                    <property name="dataType">float</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select 
+	collectiongroup.collectionDate as collectiondate, 
+	collectionsession.code as sessioncode, 
+	dairylocation.code as centercode, 
+	dairylocation.name as centername,
+	sum(
+		case collectionjournalline.rejected
+			when 0 then collectionjournalline.quantity
+			when 1 then 0.0
+		end ) as collectedqty, 
+	sum(
+		case milksale.rejected
+			when 0 then milksale.quantity
+			when 1 then 0.0
+		end ) as saleqty,
+	sum( case milksale.rejected
+			when 1 then milksale.quantity
+			when 0 then 0.0
+		end ) as rejectedqty
+from collectiongroup 
+	join collectionjournalline on collectiongroup.id = collectionjournalline.collectionjournalline_group_e_id
+	join collectionsession on collectionsession.id = collectiongroup.collectionsession_session_e_id
+	join dairylocation on dairylocation.id = collectiongroup.dairylocation_collectioncenter_id
+	join milksale on milksale.saledate = collectiongroup.collectionDate
+	     and milksale.dairylocation_storeorroute_id = collectiongroup.dairylocation_collectioncenter_id
+	     and milksale.collectionsession_session_e_id = collectiongroup.collectionsession_session_e_id
+where collectionDate = ?
+group by 
+	collectiondate, sessioncode, centercode, centername]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <cubes>
+        <tabular-cube name="Milk Intake Cube" id="2285">
+            <property name="dimensions">
+                <tabular-dimension name="Route" id="2286">
+                    <property name="defaultHierarchy">NewTabularHierarchy</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy" id="2287">
+                            <property name="levels">
+                                <tabular-level name="centerCode" id="2389">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">centerCode</property>
+                                </tabular-level>
+                                <tabular-level name="name" id="2390">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">name</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+                <tabular-dimension name="Session" id="2289">
+                    <property name="defaultHierarchy">NewTabularHierarchy1</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy1" id="2290">
+                            <property name="levels">
+                                <tabular-level name="session" id="2291">
+                                    <property name="dataType">string</property>
+                                    <property name="levelType">dynamic</property>
+                                    <property name="columnName">collectionDate</property>
+                                    <expression name="displayColumnName" type="javascript">dataSetRow["sessionCode"]</expression>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+                <tabular-dimension name="Date" id="2292">
+                    <property name="isTimeType">true</property>
+                    <property name="defaultHierarchy">NewTabularHierarchy2</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy2" id="2293">
+                            <property name="levels">
+                                <tabular-level name="Day Of Month" id="2294">
+                                    <property name="dataType">integer</property>
+                                    <property name="dateTimeLevelType">day-of-month</property>
+                                    <list-property name="attributes">
+                                        <structure>
+                                            <property name="name">DateTime</property>
+                                            <property name="dataType">date</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="columnName">collectionDate</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+            </property>
+            <property name="measureGroups">
+                <tabular-measure-group name="Gross" id="2295">
+                    <property name="measures">
+                        <tabular-measure name="Collected" id="2296">
+                            <property name="function">sum</property>
+                            <expression name="measureExpression" type="javascript">dataSetRow["collectedqty"]</expression>
+                            <property name="dataType">decimal</property>
+                        </tabular-measure>
+                    </property>
+                </tabular-measure-group>
+                <tabular-measure-group name="Rejections" id="2297">
+                    <property name="measures">
+                        <tabular-measure name="Rejected" id="2298">
+                            <property name="function">sum</property>
+                            <expression name="measureExpression" type="javascript">dataSetRow["rejectedqty"]</expression>
+                            <property name="dataType">decimal</property>
+                        </tabular-measure>
+                    </property>
+                </tabular-measure-group>
+                <tabular-measure-group name="Sales" id="2369">
+                    <property name="measures">
+                        <tabular-measure name="saleqty" id="2370">
+                            <expression name="measureExpression" type="javascript">dataSetRow["saleqty"]</expression>
+                            <property name="dataType">float</property>
+                        </tabular-measure>
+                    </property>
+                </tabular-measure-group>
+                <tabular-measure-group name="Less Rejections" id="2371">
+                    <property name="measures">
+                        <tabular-measure name="lessRejections" id="2372">
+                            <property name="function">sum</property>
+                            <expression name="measureExpression" type="javascript">dataSetRow["collectedqty"] - dataSetRow["rejectedqty"]</expression>
+                            <property name="dataType">float</property>
+                        </tabular-measure>
+                    </property>
+                </tabular-measure-group>
+                <tabular-measure-group name="Difference" id="2374">
+                    <property name="measures">
+                        <tabular-measure name="difference" id="2375">
+                            <property name="function">sum</property>
+                            <expression name="measureExpression" type="javascript">dataSetRow["collectedqty"] - dataSetRow["rejectedqty"] - dataSetRow["saleqty"]</expression>
+                            <property name="dataType">float</property>
+                        </tabular-measure>
+                    </property>
+                </tabular-measure-group>
+            </property>
+            <property name="dataSet">MilkQuantityControlSQLDataSet</property>
+            <property name="autoKey">true</property>
+        </tabular-cube>
+    </cubes>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Portrait" id="9" extends="CommonReportLib.Portrait">
+            <overridden-values>
+                <ref-entry baseId="428" name="Header" id="428"/>
+                <ref-entry baseId="9" id="2253"/>
+                <ref-entry baseId="10" id="10"/>
+                <ref-entry baseId="494" id="494"/>
+                <ref-entry baseId="11" id="11"/>
+                <ref-entry baseId="12" id="12"/>
+                <ref-entry baseId="13" id="13"/>
+                <ref-entry baseId="2111" name="NewText5" id="2111">
+                    <property name="textAlign">left</property>
+                </ref-entry>
+                <ref-entry baseId="14" id="14"/>
+                <ref-entry baseId="515" name="NewText2" id="515">
+                    <property name="content">Daily Milk Intake Report</property>
+                    <property name="contentType">auto</property>
+                </ref-entry>
+                <ref-entry baseId="566" id="566"/>
+                <ref-entry baseId="115" name="NewGrid2" id="115"/>
+                <ref-entry baseId="127" id="127"/>
+                <ref-entry baseId="116" id="116"/>
+                <ref-entry baseId="119" id="119"/>
+                <ref-entry baseId="126" id="126"/>
+                <ref-entry baseId="128" name="NewText1" id="128"/>
+                <ref-entry baseId="120" id="120"/>
+                <ref-entry baseId="121" name="NewAutoText" id="121"/>
+                <ref-entry baseId="16" id="16"/>
+                <ref-entry baseId="512" id="512"/>
+                <ref-entry baseId="2112" name="NewTextData111" id="2112"/>
+                <ref-entry baseId="563" id="563"/>
+                <ref-entry baseId="465" name="NewText" id="465">
+                    <property name="content">&lt;VALUE-OF>params["date"].value&lt;/VALUE-OF></property>
+                    <property name="contentType">html</property>
+                    <property name="textAlign">center</property>
+                    <property name="dataSet">MilkQuantityControlSQLDataSet</property>
+                    <list-property name="boundDataColumns">
+                        <structure>
+                            <property name="name">collectionDate</property>
+                            <text-property name="displayName">collectionDate</text-property>
+                            <expression name="expression" type="javascript">dataSetRow["collectionDate"]</expression>
+                            <property name="dataType">date-time</property>
+                        </structure>
+                        <structure>
+                            <property name="name">code</property>
+                            <text-property name="displayName">code</text-property>
+                            <expression name="expression" type="javascript">dataSetRow["code"]</expression>
+                            <property name="dataType">string</property>
+                        </structure>
+                        <structure>
+                            <property name="name">quantity</property>
+                            <text-property name="displayName">quantity</text-property>
+                            <expression name="expression" type="javascript">dataSetRow["quantity"]</expression>
+                            <property name="dataType">decimal</property>
+                        </structure>
+                        <structure>
+                            <property name="name">rejected</property>
+                            <text-property name="displayName">rejected</text-property>
+                            <expression name="expression" type="javascript">dataSetRow["rejected"]</expression>
+                            <property name="dataType">integer</property>
+                        </structure>
+                    </list-property>
+                </ref-entry>
+                <ref-entry baseId="466" name="NewText3" id="466">
+                    <property name="contentType">html</property>
+                    <property name="textAlign">left</property>
+                </ref-entry>
+                <ref-entry baseId="568" id="568"/>
+                <ref-entry baseId="20" id="20"/>
+                <ref-entry baseId="564" id="564"/>
+                <ref-entry baseId="565" id="565"/>
+                <ref-entry baseId="492" id="492"/>
+                <ref-entry baseId="496" id="496"/>
+                <ref-entry baseId="455" id="455"/>
+                <ref-entry baseId="456" id="456"/>
+                <ref-entry baseId="429" name="Footer" id="429"/>
+                <ref-entry baseId="435" id="435"/>
+                <ref-entry baseId="436" id="436"/>
+                <ref-entry baseId="437" id="437"/>
+                <ref-entry baseId="441" id="441"/>
+                <ref-entry baseId="442" id="442"/>
+                <ref-entry baseId="443" name="NewGrid1" id="443"/>
+                <ref-entry baseId="444" id="444"/>
+                <ref-entry baseId="445" id="445"/>
+                <ref-entry baseId="446" id="446"/>
+                <ref-entry baseId="447" id="447"/>
+                <ref-entry baseId="448" id="448"/>
+                <ref-entry baseId="520" name="NewImage1" id="520"/>
+                <ref-entry baseId="450" id="450"/>
+                <ref-entry baseId="468" name="NewText6" id="468">
+                    <property name="content">Daily Milk Intake Report</property>
+                    <property name="contentType">auto</property>
+                </ref-entry>
+                <ref-entry baseId="552" name="NewGrid3" id="552"/>
+                <ref-entry baseId="553" id="553"/>
+                <ref-entry baseId="554" id="554"/>
+                <ref-entry baseId="555" id="555"/>
+                <ref-entry baseId="556" id="556"/>
+                <ref-entry baseId="476" name="NewGrid21" id="476"/>
+                <ref-entry baseId="477" id="477"/>
+                <ref-entry baseId="478" id="478"/>
+                <ref-entry baseId="481" id="481"/>
+                <ref-entry baseId="482" id="482"/>
+                <ref-entry baseId="483" name="NewText11" id="483"/>
+                <ref-entry baseId="2113" id="2113"/>
+                <ref-entry baseId="485" name="NewAutoText2" id="485"/>
+                <ref-entry baseId="557" id="557"/>
+                <ref-entry baseId="453" name="NewTextData11" id="453"/>
+                <ref-entry baseId="452" id="452"/>
+                <ref-entry baseId="519" name="NewImage" id="519"/>
+            </overridden-values>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="2359">
+            <column id="2360"/>
+            <column id="2361"/>
+            <column id="2362"/>
+            <row id="2363">
+                <cell id="2364"/>
+                <cell id="2365"/>
+                <cell id="2366"/>
+            </row>
+        </grid>
+        <extended-item extensionName="Crosstab" extensionVersion="2.5.0" id="2376">
+            <property name="cube">Milk Intake Cube</property>
+            <property name="measures">
+                <extended-item extensionName="MeasureView" id="2395">
+                    <property name="measure">Collected</property>
+                    <property name="detail">
+                        <extended-item extensionName="AggregationCell" id="2396">
+                            <property name="aggregationOnRow">Route/centerCode</property>
+                            <property name="aggregationOnColumn">Session/session</property>
+                            <property name="content">
+                                <data id="2397">
+                                    <property name="resultSetColumn">Collected_Route/centerCode_Session/session</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="header">
+                        <extended-item extensionName="CrosstabCell" id="2398">
+                            <property name="content">
+                                <label id="2399">
+                                    <text-property name="text">Collected</text-property>
+                                </label>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+                <extended-item extensionName="MeasureView" id="2400">
+                    <property name="measure">Rejected</property>
+                    <property name="detail">
+                        <extended-item extensionName="AggregationCell" id="2401">
+                            <property name="aggregationOnRow">Route/centerCode</property>
+                            <property name="aggregationOnColumn">Session/session</property>
+                            <property name="content">
+                                <data id="2402">
+                                    <property name="resultSetColumn">Rejected_Route/centerCode_Session/session</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="header">
+                        <extended-item extensionName="CrosstabCell" id="2403">
+                            <property name="content">
+                                <label id="2404">
+                                    <text-property name="text">Rejected</text-property>
+                                </label>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+                <extended-item extensionName="MeasureView" id="2405">
+                    <property name="measure">saleqty</property>
+                    <property name="detail">
+                        <extended-item extensionName="AggregationCell" id="2406">
+                            <property name="aggregationOnRow">Route/centerCode</property>
+                            <property name="aggregationOnColumn">Session/session</property>
+                            <property name="content">
+                                <data id="2407">
+                                    <property name="resultSetColumn">saleqty_Route/centerCode_Session/session</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="header">
+                        <extended-item extensionName="CrosstabCell" id="2408">
+                            <property name="content">
+                                <label id="2409">
+                                    <text-property name="text">saleqty</text-property>
+                                </label>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+                <extended-item extensionName="MeasureView" id="2410">
+                    <property name="measure">lessRejections</property>
+                    <property name="detail">
+                        <extended-item extensionName="AggregationCell" id="2411">
+                            <property name="aggregationOnRow">Route/centerCode</property>
+                            <property name="aggregationOnColumn">Session/session</property>
+                            <property name="content">
+                                <data id="2412">
+                                    <property name="resultSetColumn">lessRejections_Route/centerCode_Session/session</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="header">
+                        <extended-item extensionName="CrosstabCell" id="2413">
+                            <property name="content">
+                                <label id="2414">
+                                    <text-property name="text">lessRejections</text-property>
+                                </label>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+                <extended-item extensionName="MeasureView" id="2415">
+                    <property name="measure">difference</property>
+                    <property name="detail">
+                        <extended-item extensionName="AggregationCell" id="2416">
+                            <property name="aggregationOnRow">Route/centerCode</property>
+                            <property name="aggregationOnColumn">Session/session</property>
+                            <property name="content">
+                                <data id="2417">
+                                    <property name="resultSetColumn">difference_Route/centerCode_Session/session</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="header">
+                        <extended-item extensionName="CrosstabCell" id="2418">
+                            <property name="content">
+                                <label id="2419">
+                                    <text-property name="text">difference</text-property>
+                                </label>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="rows">
+                <extended-item extensionName="CrosstabView" id="2378">
+                    <property name="views">
+                        <extended-item extensionName="DimensionView" id="2391">
+                            <property name="dimension">Route</property>
+                            <property name="levels">
+                                <extended-item extensionName="LevelView" name="NewLevel View" id="2392">
+                                    <property name="level">Route/centerCode</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="2393">
+                                            <property name="content">
+                                                <data name="centerCode" id="2394">
+                                                    <property name="resultSetColumn">centerCode</property>
+                                                </data>
+                                            </property>
+                                            <property name="width">2.513888888888889in</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="columns">
+                <extended-item extensionName="CrosstabView" id="2383">
+                    <property name="views">
+                        <extended-item extensionName="DimensionView" id="2384">
+                            <property name="dimension">Session</property>
+                            <property name="levels">
+                                <extended-item extensionName="LevelView" name="NewLevel View1" id="2385">
+                                    <property name="level">Session/session</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="2386">
+                                            <property name="content">
+                                                <data name="session" id="2387">
+                                                    <property name="resultSetColumn">session</property>
+                                                </data>
+                                            </property>
+                                            <property name="width">5.416666666666667in</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="header">
+                <extended-item extensionName="CrosstabCell" id="2377"/>
+            </property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">session</property>
+                    <expression name="expression">dimension["Session"]["session"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">centerCode</property>
+                    <expression name="expression">dimension["Route"]["centerCode"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Collected_Route/centerCode_Session/session</property>
+                    <expression name="expression">measure["Collected"]</expression>
+                    <property name="dataType">decimal</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Route/centerCode</value>
+                        <value>Session/session</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                </structure>
+                <structure>
+                    <property name="name">Rejected_Route/centerCode_Session/session</property>
+                    <expression name="expression">measure["Rejected"]</expression>
+                    <property name="dataType">decimal</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Route/centerCode</value>
+                        <value>Session/session</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                </structure>
+                <structure>
+                    <property name="name">saleqty_Route/centerCode_Session/session</property>
+                    <expression name="expression">measure["saleqty"]</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Route/centerCode</value>
+                        <value>Session/session</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                </structure>
+                <structure>
+                    <property name="name">lessRejections_Route/centerCode_Session/session</property>
+                    <expression name="expression">measure["lessRejections"]</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Route/centerCode</value>
+                        <value>Session/session</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                </structure>
+                <structure>
+                    <property name="name">difference_Route/centerCode_Session/session</property>
+                    <expression name="expression">measure["difference"]</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Route/centerCode</value>
+                        <value>Session/session</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                </structure>
+            </list-property>
+        </extended-item>
+    </body>
+</report>

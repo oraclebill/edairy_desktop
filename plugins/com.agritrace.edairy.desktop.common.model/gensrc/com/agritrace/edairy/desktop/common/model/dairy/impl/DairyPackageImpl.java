@@ -6,25 +6,27 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import com.agritrace.edairy.desktop.common.model.base.ModelPackage;
-
 import com.agritrace.edairy.desktop.common.model.base.impl.ModelPackageImpl;
-
 import com.agritrace.edairy.desktop.common.model.dairy.Asset;
+import com.agritrace.edairy.desktop.common.model.dairy.Bin;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroupType;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine;
 import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
-import com.agritrace.edairy.desktop.common.model.dairy.Bin;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFactory;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyFunction;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
-import com.agritrace.edairy.desktop.common.model.dairy.MilkSale;
-import com.agritrace.edairy.desktop.common.model.dairy.MilkSaleType;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
 import com.agritrace.edairy.desktop.common.model.dairy.JournalStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.MemberPayment;
@@ -32,35 +34,24 @@ import com.agritrace.edairy.desktop.common.model.dairy.Membership;
 import com.agritrace.edairy.desktop.common.model.dairy.MembershipStatus;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkGrade;
 import com.agritrace.edairy.desktop.common.model.dairy.MilkGradeChange;
+import com.agritrace.edairy.desktop.common.model.dairy.MilkSale;
+import com.agritrace.edairy.desktop.common.model.dairy.MilkSaleGroup;
+import com.agritrace.edairy.desktop.common.model.dairy.MilkSaleType;
 import com.agritrace.edairy.desktop.common.model.dairy.Preference;
 import com.agritrace.edairy.desktop.common.model.dairy.PreferenceKey;
 import com.agritrace.edairy.desktop.common.model.dairy.PreferenceType;
-import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
 import com.agritrace.edairy.desktop.common.model.dairy.ScaleImportRecord;
 import com.agritrace.edairy.desktop.common.model.dairy.Supplier;
+import com.agritrace.edairy.desktop.common.model.dairy.TransportRoute;
 import com.agritrace.edairy.desktop.common.model.dairy.Trip;
 import com.agritrace.edairy.desktop.common.model.dairy.Vehicle;
 import com.agritrace.edairy.desktop.common.model.dairy.VendorStatus;
-
 import com.agritrace.edairy.desktop.common.model.dairy.account.AccountPackage;
-
 import com.agritrace.edairy.desktop.common.model.dairy.account.impl.AccountPackageImpl;
-
 import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
-
 import com.agritrace.edairy.desktop.common.model.requests.impl.RequestsPackageImpl;
-
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
-
 import com.agritrace.edairy.desktop.common.model.tracking.impl.TrackingPackageImpl;
-
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-
-import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -130,7 +121,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass deliveryJournalEClass = null;
+	private EClass milkSaleGroupEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -919,7 +910,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCollectionGroup_JournalId() {
+	public EAttribute getCollectionGroup_Id()
+	{
 		return (EAttribute)collectionGroupEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -937,7 +929,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCollectionGroup_JournalDate() {
+	public EAttribute getCollectionGroup_CollectionDate()
+	{
 		return (EAttribute)collectionGroupEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -991,7 +984,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCollectionGroup_JournalEntries() {
+	public EReference getCollectionGroup_Entries()
+	{
 		return (EReference)collectionGroupEClass.getEStructuralFeatures().get(8);
 	}
 
@@ -1189,8 +1183,9 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getDeliveryJournal() {
-		return deliveryJournalEClass;
+	public EClass getMilkSaleGroup()
+	{
+		return milkSaleGroupEClass;
 	}
 
 	/**
@@ -1198,8 +1193,9 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDeliveryJournal_ReferenceNumber() {
-		return (EAttribute)deliveryJournalEClass.getEStructuralFeatures().get(0);
+	public EAttribute getMilkSaleGroup_ReferenceNumber()
+	{
+		return (EAttribute)milkSaleGroupEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1207,8 +1203,9 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDeliveryJournal_Date() {
-		return (EAttribute)deliveryJournalEClass.getEStructuralFeatures().get(1);
+	public EAttribute getMilkSaleGroup_Date()
+	{
+		return (EAttribute)milkSaleGroupEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1216,8 +1213,9 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDeliveryJournal_Route() {
-		return (EReference)deliveryJournalEClass.getEStructuralFeatures().get(2);
+	public EReference getMilkSaleGroup_Route()
+	{
+		return (EReference)milkSaleGroupEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1225,8 +1223,9 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDeliveryJournal_Customer() {
-		return (EReference)deliveryJournalEClass.getEStructuralFeatures().get(3);
+	public EReference getMilkSaleGroup_Customer()
+	{
+		return (EReference)milkSaleGroupEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1234,8 +1233,9 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDeliveryJournal_Driver() {
-		return (EReference)deliveryJournalEClass.getEStructuralFeatures().get(4);
+	public EReference getMilkSaleGroup_Driver()
+	{
+		return (EReference)milkSaleGroupEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1243,8 +1243,9 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDeliveryJournal_Vehicle() {
-		return (EReference)deliveryJournalEClass.getEStructuralFeatures().get(5);
+	public EReference getMilkSaleGroup_Vehicle()
+	{
+		return (EReference)milkSaleGroupEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -1252,8 +1253,9 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDeliveryJournal_Lines() {
-		return (EReference)deliveryJournalEClass.getEStructuralFeatures().get(6);
+	public EReference getMilkSaleGroup_Sales()
+	{
+		return (EReference)milkSaleGroupEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -1261,8 +1263,9 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDeliveryJournal_Total() {
-		return (EAttribute)deliveryJournalEClass.getEStructuralFeatures().get(7);
+	public EAttribute getMilkSaleGroup_Total()
+	{
+		return (EAttribute)milkSaleGroupEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -1270,8 +1273,19 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDeliveryJournal_Session() {
-		return (EReference)deliveryJournalEClass.getEStructuralFeatures().get(8);
+	public EReference getMilkSaleGroup_Session()
+	{
+		return (EReference)milkSaleGroupEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMilkSaleGroup_Id()
+	{
+		return (EAttribute)milkSaleGroupEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -2460,15 +2474,15 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEReference(dairyLocationEClass, DAIRY_LOCATION__CONTAINERS);
 
 		collectionGroupEClass = createEClass(COLLECTION_GROUP);
-		createEAttribute(collectionGroupEClass, COLLECTION_GROUP__JOURNAL_ID);
+		createEAttribute(collectionGroupEClass, COLLECTION_GROUP__ID);
 		createEAttribute(collectionGroupEClass, COLLECTION_GROUP__REFERENCE_NUMBER);
-		createEAttribute(collectionGroupEClass, COLLECTION_GROUP__JOURNAL_DATE);
+		createEAttribute(collectionGroupEClass, COLLECTION_GROUP__COLLECTION_DATE);
 		createEAttribute(collectionGroupEClass, COLLECTION_GROUP__STATUS);
 		createEReference(collectionGroupEClass, COLLECTION_GROUP__DRIVER);
 		createEReference(collectionGroupEClass, COLLECTION_GROUP__VEHICLE);
 		createEAttribute(collectionGroupEClass, COLLECTION_GROUP__DRIVER_TOTAL);
 		createEAttribute(collectionGroupEClass, COLLECTION_GROUP__RECORD_TOTAL);
-		createEReference(collectionGroupEClass, COLLECTION_GROUP__JOURNAL_ENTRIES);
+		createEReference(collectionGroupEClass, COLLECTION_GROUP__ENTRIES);
 		createEAttribute(collectionGroupEClass, COLLECTION_GROUP__SUSPENDED);
 		createEAttribute(collectionGroupEClass, COLLECTION_GROUP__ENTRY_COUNT);
 		createEAttribute(collectionGroupEClass, COLLECTION_GROUP__SUSPENDED_COUNT);
@@ -2493,16 +2507,17 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		createEAttribute(tripEClass, TRIP__ENDED);
 		createEAttribute(tripEClass, TRIP__TRIP_ID);
 
-		deliveryJournalEClass = createEClass(DELIVERY_JOURNAL);
-		createEAttribute(deliveryJournalEClass, DELIVERY_JOURNAL__REFERENCE_NUMBER);
-		createEAttribute(deliveryJournalEClass, DELIVERY_JOURNAL__DATE);
-		createEReference(deliveryJournalEClass, DELIVERY_JOURNAL__ROUTE);
-		createEReference(deliveryJournalEClass, DELIVERY_JOURNAL__CUSTOMER);
-		createEReference(deliveryJournalEClass, DELIVERY_JOURNAL__DRIVER);
-		createEReference(deliveryJournalEClass, DELIVERY_JOURNAL__VEHICLE);
-		createEReference(deliveryJournalEClass, DELIVERY_JOURNAL__LINES);
-		createEAttribute(deliveryJournalEClass, DELIVERY_JOURNAL__TOTAL);
-		createEReference(deliveryJournalEClass, DELIVERY_JOURNAL__SESSION);
+		milkSaleGroupEClass = createEClass(MILK_SALE_GROUP);
+		createEAttribute(milkSaleGroupEClass, MILK_SALE_GROUP__REFERENCE_NUMBER);
+		createEAttribute(milkSaleGroupEClass, MILK_SALE_GROUP__DATE);
+		createEReference(milkSaleGroupEClass, MILK_SALE_GROUP__ROUTE);
+		createEReference(milkSaleGroupEClass, MILK_SALE_GROUP__CUSTOMER);
+		createEReference(milkSaleGroupEClass, MILK_SALE_GROUP__DRIVER);
+		createEReference(milkSaleGroupEClass, MILK_SALE_GROUP__VEHICLE);
+		createEReference(milkSaleGroupEClass, MILK_SALE_GROUP__SALES);
+		createEAttribute(milkSaleGroupEClass, MILK_SALE_GROUP__TOTAL);
+		createEReference(milkSaleGroupEClass, MILK_SALE_GROUP__SESSION);
+		createEAttribute(milkSaleGroupEClass, MILK_SALE_GROUP__ID);
 
 		milkGradeEClass = createEClass(MILK_GRADE);
 		createEAttribute(milkGradeEClass, MILK_GRADE__CODE);
@@ -2715,7 +2730,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEReference(getCollectionJournalLine_From(), theTrackingPackage.getFarm(), null, "from", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCollectionJournalLine_FarmContainer(), theTrackingPackage.getContainer(), null, "farmContainer", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCollectionJournalLine_Bin(), this.getBin(), null, "bin", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCollectionJournalLine_Group(), this.getCollectionGroup(), this.getCollectionGroup_JournalEntries(), "group", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCollectionJournalLine_Group(), this.getCollectionGroup(), this.getCollectionGroup_Entries(), "group", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionJournalLine_Rejected(), ecorePackage.getEBoolean(), "rejected", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionJournalLine_RejectionReason(), ecorePackage.getEString(), "rejectionReason", null, 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionJournalLine_MilkFatPercentage(), ecorePackage.getEBigDecimal(), "milkFatPercentage", "0.0", 0, 1, CollectionJournalLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2756,22 +2771,22 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEReference(getDairyLocation_Containers(), this.getBin(), null, "containers", null, 0, 1, DairyLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(collectionGroupEClass, CollectionGroup.class, "CollectionGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCollectionGroup_JournalId(), theModelPackage.getUniqueID(), "journalId", null, 1, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCollectionGroup_Id(), theModelPackage.getUniqueID(), "id", null, 1, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionGroup_ReferenceNumber(), ecorePackage.getEString(), "referenceNumber", null, 1, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCollectionGroup_JournalDate(), ecorePackage.getEDate(), "journalDate", null, 1, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCollectionGroup_CollectionDate(), ecorePackage.getEDate(), "collectionDate", null, 1, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionGroup_Status(), this.getJournalStatus(), "status", "NEW", 1, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCollectionGroup_Driver(), this.getEmployee(), null, "driver", null, 1, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCollectionGroup_Vehicle(), this.getVehicle(), null, "vehicle", null, 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionGroup_DriverTotal(), ecorePackage.getEBigDecimal(), "driverTotal", null, 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionGroup_RecordTotal(), ecorePackage.getEBigDecimal(), "recordTotal", "0", 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getCollectionGroup_JournalEntries(), this.getCollectionJournalLine(), this.getCollectionJournalLine_Group(), "journalEntries", null, 0, -1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCollectionGroup_Entries(), this.getCollectionJournalLine(), this.getCollectionJournalLine_Group(), "entries", null, 0, -1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionGroup_Suspended(), ecorePackage.getEBoolean(), "suspended", "false", 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionGroup_EntryCount(), ecorePackage.getEInt(), "entryCount", "0", 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionGroup_SuspendedCount(), ecorePackage.getEInt(), "suspendedCount", "0", 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionGroup_RejectedCount(), ecorePackage.getEInt(), "rejectedCount", "0", 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionGroup_JournalNumber(), ecorePackage.getEString(), "journalNumber", "", 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCollectionGroup_Session(), this.getCollectionSession(), null, "session", null, 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCollectionGroup_CollectionCenter(), this.getDairyLocation(), null, "collectionCenter", null, 0, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCollectionGroup_Session(), this.getCollectionSession(), null, "session", null, 1, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCollectionGroup_CollectionCenter(), this.getDairyLocation(), null, "collectionCenter", null, 1, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCollectionGroup_Type(), this.getCollectionGroupType(), "type", "ScaleGroup", 1, 1, CollectionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(transportRouteEClass, TransportRoute.class, "TransportRoute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2783,22 +2798,23 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEReference(getTransportRoute_Bins(), this.getBin(), this.getBin_Zone(), "bins", null, 0, -1, TransportRoute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tripEClass, Trip.class, "Trip", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTrip_Collections(), this.getCollectionGroup(), null, "collections", null, 1, -1, Trip.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTrip_Deliveries(), this.getDeliveryJournal(), null, "deliveries", null, 1, -1, Trip.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTrip_Collections(), this.getCollectionGroup(), null, "collections", null, 1, -1, Trip.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTrip_Deliveries(), this.getMilkSaleGroup(), null, "deliveries", null, 1, -1, Trip.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTrip_Started(), ecorePackage.getEDate(), "started", null, 1, 1, Trip.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTrip_Ended(), ecorePackage.getEDate(), "ended", null, 1, 1, Trip.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTrip_TripId(), ecorePackage.getELong(), "tripId", null, 1, 1, Trip.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTrip_TripId(), ecorePackage.getELong(), "tripId", null, 1, 1, Trip.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(deliveryJournalEClass, DeliveryJournal.class, "DeliveryJournal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDeliveryJournal_ReferenceNumber(), ecorePackage.getEString(), "referenceNumber", null, 1, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDeliveryJournal_Date(), ecorePackage.getEDate(), "date", null, 1, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDeliveryJournal_Route(), this.getTransportRoute(), null, "route", null, 1, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDeliveryJournal_Customer(), this.getCustomer(), null, "customer", null, 1, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDeliveryJournal_Driver(), this.getEmployee(), null, "driver", null, 0, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDeliveryJournal_Vehicle(), this.getVehicle(), null, "vehicle", null, 0, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDeliveryJournal_Lines(), this.getMilkSale(), null, "lines", null, 1, -1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDeliveryJournal_Total(), ecorePackage.getEBigDecimal(), "total", "0.0", 1, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDeliveryJournal_Session(), this.getCollectionSession(), null, "session", null, 0, 1, DeliveryJournal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(milkSaleGroupEClass, MilkSaleGroup.class, "MilkSaleGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMilkSaleGroup_ReferenceNumber(), ecorePackage.getEString(), "referenceNumber", null, 1, 1, MilkSaleGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMilkSaleGroup_Date(), ecorePackage.getEDate(), "date", null, 1, 1, MilkSaleGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMilkSaleGroup_Route(), this.getTransportRoute(), null, "route", null, 1, 1, MilkSaleGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMilkSaleGroup_Customer(), this.getCustomer(), null, "customer", null, 1, 1, MilkSaleGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMilkSaleGroup_Driver(), this.getEmployee(), null, "driver", null, 0, 1, MilkSaleGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMilkSaleGroup_Vehicle(), this.getVehicle(), null, "vehicle", null, 0, 1, MilkSaleGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMilkSaleGroup_Sales(), this.getMilkSale(), null, "sales", null, 1, -1, MilkSaleGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMilkSaleGroup_Total(), ecorePackage.getEBigDecimal(), "total", "0.0", 1, 1, MilkSaleGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMilkSaleGroup_Session(), this.getCollectionSession(), null, "session", null, 1, 1, MilkSaleGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMilkSaleGroup_Id(), theModelPackage.getUniqueID(), "id", null, 1, 1, MilkSaleGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(milkGradeEClass, MilkGrade.class, "MilkGrade", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMilkGrade_Code(), ecorePackage.getEString(), "code", null, 1, 1, MilkGrade.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2848,8 +2864,8 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 		initEReference(getDairy_BranchLocations(), this.getDairyLocation(), null, "branchLocations", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getDairy_CollectionJournals(), this.getCollectionGroup(), null, "collectionJournals", null, 0, -1, Dairy.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		getDairy_CollectionJournals().getEKeys().add(this.getCollectionGroup_ReferenceNumber());
-		initEReference(getDairy_DeliveryJournals(), this.getDeliveryJournal(), null, "deliveryJournals", null, 0, -1, Dairy.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		getDairy_DeliveryJournals().getEKeys().add(this.getDeliveryJournal_ReferenceNumber());
+		initEReference(getDairy_DeliveryJournals(), this.getMilkSaleGroup(), null, "deliveryJournals", null, 0, -1, Dairy.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		getDairy_DeliveryJournals().getEKeys().add(this.getMilkSaleGroup_ReferenceNumber());
 		initEReference(getDairy_Suppliers(), this.getSupplier(), null, "suppliers", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getDairy_Customers(), this.getCustomer(), null, "customers", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getDairy_AnimalHealthRequests(), theRequestsPackage.getAnimalHealthRequest(), theRequestsPackage.getAnimalHealthRequest_Dairy(), "animalHealthRequests", null, 0, -1, Dairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -3043,7 +3059,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 			 "kind", "elementOnly"
 		   });			
 		addAnnotation
-		  (getCollectionGroup_JournalDate(), 
+		  (getCollectionGroup_CollectionDate(), 
 		   source, 
 		   new String[] 
 		   {
@@ -3188,7 +3204,7 @@ public class DairyPackageImpl extends EPackageImpl implements DairyPackage {
 			 "appinfo", "@NaturalId"
 		   });			
 		addAnnotation
-		  (getCollectionGroup_JournalDate(), 
+		  (getCollectionGroup_CollectionDate(), 
 		   source, 
 		   new String[] 
 		   {

@@ -60,11 +60,11 @@ public class MilkCollectionRepository extends RepositoryUtil<CollectionGroup> im
 		}
 
 		if (startDate != null) {
-			criteria.add(Restrictions.ge("journalDate", startDate));
+			criteria.add(Restrictions.ge("collectionDate", startDate));
 		}
 
 		if (endDate != null) {
-			criteria.add(Restrictions.le("journalDate", endDate));
+			criteria.add(Restrictions.le("collectionDate", endDate));
 		}
 
 		if (status != null) {
@@ -91,8 +91,8 @@ public class MilkCollectionRepository extends RepositoryUtil<CollectionGroup> im
 
 		Session session = getCurrentSession();
 		Query query = session.createQuery("select sum(entry.quantity) "
-				+ "from CollectionJournalLine entry join CollectionGroup group" + "where group.journalDate >= ? "
-				+ "and group.journaldate <= ?");
+				+ "from CollectionJournalLine entry join CollectionGroup group" + "where group.collectionDate >= ? "
+				+ "and group.collectionDate <= ?");
 		query.setDate(0, startDate);
 		query.setDate(1, endDate);
 
@@ -143,11 +143,11 @@ public class MilkCollectionRepository extends RepositoryUtil<CollectionGroup> im
 			}
 
 			if (startDate != null) {
-				criteria.add(Restrictions.ge("journalDate", startDate));
+				criteria.add(Restrictions.ge("collectionDate", startDate));
 			}
 
 			if (endDate != null) {
-				criteria.add(Restrictions.le("journalDate", endDate));
+				criteria.add(Restrictions.le("collectionDate", endDate));
 			}
 		}
 

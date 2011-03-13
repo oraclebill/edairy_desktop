@@ -88,7 +88,7 @@ public class ScaleImportViewController extends SubModuleController {
 //			}
 //		});
 		table.bindToModel(
-				new WritableList(importedData.getJournalEntries(), ScaleImportRecord.class),
+				new WritableList(importedData.getEntries(), ScaleImportRecord.class),
 				ScaleImportRecord.class,
 				columnPropertyNames, columnHeaders);
 

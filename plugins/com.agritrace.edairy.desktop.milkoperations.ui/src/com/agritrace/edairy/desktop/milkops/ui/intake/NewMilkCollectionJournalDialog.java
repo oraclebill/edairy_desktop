@@ -118,7 +118,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog
 			{
 				final boolean isValid =
 				newJournalPage.getSession() != null && newJournalPage.getDriver() != null
-						&& newJournalPage.getJournalDate() != null && newJournalPage.getVehicle() != null;
+						&& newJournalPage.getCollectionDate() != null && newJournalPage.getVehicle() != null;
 
 				final Button okButton = getButton(IDialogConstants.OK_ID);
 				if (null != okButton) {
@@ -179,7 +179,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog
 		// bind ridgets
 
 		dateTime.bindToModel(EMFObservables.observeValue(newJournalPage,
-				DairyPackage.Literals.COLLECTION_GROUP__JOURNAL_DATE));
+				DairyPackage.Literals.COLLECTION_GROUP__COLLECTION_DATE));
 
 // final Dairy dairy = dairyRepository.getLocalDairy();
 
@@ -235,7 +235,7 @@ public class NewMilkCollectionJournalDialog extends TitleAreaDialog
 
 		// update initial values
 
-		newJournalPage.setJournalDate(new Date());
+		newJournalPage.setCollectionDate(new Date());
 
 		dateTime.updateFromModel();
 		center.updateFromModel();

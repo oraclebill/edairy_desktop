@@ -362,7 +362,7 @@ public interface Dairy extends Company {
 
 	/**
 	 * Returns the value of the '<em><b>Delivery Journals</b></em>' containment reference list.
-	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal}.
+	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.MilkSaleGroup}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Delivery Journals</em>' containment reference list isn't clear,
@@ -374,7 +374,7 @@ public interface Dairy extends Company {
 	 * @model containment="true" keys="referenceNumber" transient="true" ordered="false"
 	 * @generated
 	 */
-	EList<DeliveryJournal> getDeliveryJournals();
+	EList<MilkSaleGroup> getDeliveryJournals();
 
 	/**
 	 * Returns the value of the '<em><b>Suppliers</b></em>' containment reference list.

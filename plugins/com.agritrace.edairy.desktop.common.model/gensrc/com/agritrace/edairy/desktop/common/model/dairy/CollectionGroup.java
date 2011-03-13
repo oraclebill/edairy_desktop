@@ -22,15 +22,15 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getJournalId <em>Journal Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getId <em>Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getReferenceNumber <em>Reference Number</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getJournalDate <em>Journal Date</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getCollectionDate <em>Collection Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getStatus <em>Status</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getDriver <em>Driver</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getVehicle <em>Vehicle</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getDriverTotal <em>Driver Total</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getRecordTotal <em>Record Total</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getJournalEntries <em>Journal Entries</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getEntries <em>Entries</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#isSuspended <em>Suspended</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getEntryCount <em>Entry Count</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getSuspendedCount <em>Suspended Count</em>}</li>
@@ -48,30 +48,30 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface CollectionGroup extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Journal Id</b></em>' attribute.
+	 * Returns the value of the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Journal Id</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Journal Id</em>' attribute.
-	 * @see #setJournalId(Long)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_JournalId()
+	 * @return the value of the '<em>Id</em>' attribute.
+	 * @see #setId(Long)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_Id()
 	 * @model id="true" dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID" required="true"
 	 * @generated
 	 */
-	Long getJournalId();
+	Long getId();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getJournalId <em>Journal Id</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getId <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Journal Id</em>' attribute.
-	 * @see #getJournalId()
+	 * @param value the new value of the '<em>Id</em>' attribute.
+	 * @see #getId()
 	 * @generated
 	 */
-	void setJournalId(Long value);
+	void setId(Long value);
 
 	/**
 	 * Returns the value of the '<em><b>Reference Number</b></em>' attribute.
@@ -100,32 +100,32 @@ public interface CollectionGroup extends EObject {
 	void setReferenceNumber(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Journal Date</b></em>' attribute.
+	 * Returns the value of the '<em><b>Collection Date</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Journal Date</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Collection Date</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Journal Date</em>' attribute.
-	 * @see #setJournalDate(Date)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_JournalDate()
+	 * @return the value of the '<em>Collection Date</em>' attribute.
+	 * @see #setCollectionDate(Date)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_CollectionDate()
 	 * @model required="true"
 	 *        extendedMetaData="kind='elementOnly'"
 	 *        annotation="teneo.jpa appinfo='@Temporal(TemporalType.DATE)'"
 	 * @generated
 	 */
-	Date getJournalDate();
+	Date getCollectionDate();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getJournalDate <em>Journal Date</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup#getCollectionDate <em>Collection Date</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Journal Date</em>' attribute.
-	 * @see #getJournalDate()
+	 * @param value the new value of the '<em>Collection Date</em>' attribute.
+	 * @see #getCollectionDate()
 	 * @generated
 	 */
-	void setJournalDate(Date value);
+	void setCollectionDate(Date value);
 
 	/**
 	 * Returns the value of the '<em><b>Status</b></em>' attribute.
@@ -263,22 +263,22 @@ public interface CollectionGroup extends EObject {
 	void setRecordTotal(BigDecimal value);
 
 	/**
-	 * Returns the value of the '<em><b>Journal Entries</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Entries</b></em>' containment reference list.
 	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine}.
 	 * It is bidirectional and its opposite is '{@link com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getGroup <em>Group</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Journal Entries</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Entries</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Journal Entries</em>' containment reference list.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_JournalEntries()
+	 * @return the value of the '<em>Entries</em>' containment reference list.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_Entries()
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.CollectionJournalLine#getGroup
 	 * @model opposite="group" containment="true"
 	 * @generated
 	 */
-	EList<CollectionJournalLine> getJournalEntries();
+	EList<CollectionJournalLine> getEntries();
 
 	/**
 	 * Returns the value of the '<em><b>Suspended</b></em>' attribute.
@@ -426,7 +426,7 @@ public interface CollectionGroup extends EObject {
 	 * @return the value of the '<em>Session</em>' reference.
 	 * @see #setSession(CollectionSession)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_Session()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	CollectionSession getSession();
@@ -452,7 +452,7 @@ public interface CollectionGroup extends EObject {
 	 * @return the value of the '<em>Collection Center</em>' reference.
 	 * @see #setCollectionCenter(DairyLocation)
 	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getCollectionGroup_CollectionCenter()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	DairyLocation getCollectionCenter();
