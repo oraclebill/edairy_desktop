@@ -6,24 +6,24 @@
  */
 package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
-import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
-import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
-import com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal;
-import com.agritrace.edairy.desktop.common.model.dairy.Trip;
-
 import java.util.Collection;
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
-
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionGroup;
+import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
+import com.agritrace.edairy.desktop.common.model.dairy.MilkSaleGroup;
+import com.agritrace.edairy.desktop.common.model.dairy.Trip;
 
 /**
  * <!-- begin-user-doc -->
@@ -44,7 +44,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  */
 public class TripImpl extends EObjectImpl implements Trip {
 	/**
-	 * The cached value of the '{@link #getCollections() <em>Collections</em>}' reference list.
+	 * The cached value of the '{@link #getCollections() <em>Collections</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getCollections()
@@ -54,14 +54,14 @@ public class TripImpl extends EObjectImpl implements Trip {
 	protected EList<CollectionGroup> collections;
 
 	/**
-	 * The cached value of the '{@link #getDeliveries() <em>Deliveries</em>}' reference list.
+	 * The cached value of the '{@link #getDeliveries() <em>Deliveries</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getDeliveries()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<DeliveryJournal> deliveries;
+	protected EList<MilkSaleGroup> deliveries;
 
 	/**
 	 * The default value of the '{@link #getStarted() <em>Started</em>}' attribute.
@@ -150,7 +150,7 @@ public class TripImpl extends EObjectImpl implements Trip {
 	public EList<CollectionGroup> getCollections() {
 		if (collections == null)
 		{
-			collections = new EObjectResolvingEList<CollectionGroup>(CollectionGroup.class, this, DairyPackage.TRIP__COLLECTIONS);
+			collections = new EObjectContainmentEList<CollectionGroup>(CollectionGroup.class, this, DairyPackage.TRIP__COLLECTIONS);
 		}
 		return collections;
 	}
@@ -160,10 +160,10 @@ public class TripImpl extends EObjectImpl implements Trip {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<DeliveryJournal> getDeliveries() {
+	public EList<MilkSaleGroup> getDeliveries() {
 		if (deliveries == null)
 		{
-			deliveries = new EObjectResolvingEList<DeliveryJournal>(DeliveryJournal.class, this, DairyPackage.TRIP__DELIVERIES);
+			deliveries = new EObjectContainmentEList<MilkSaleGroup>(MilkSaleGroup.class, this, DairyPackage.TRIP__DELIVERIES);
 		}
 		return deliveries;
 	}
@@ -224,6 +224,37 @@ public class TripImpl extends EObjectImpl implements Trip {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public void setTripId(long newTripId)
+	{
+		long oldTripId = tripId;
+		tripId = newTripId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.TRIP__TRIP_ID, oldTripId, tripId));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+	{
+		switch (featureID)
+		{
+			case DairyPackage.TRIP__COLLECTIONS:
+				return ((InternalEList<?>)getCollections()).basicRemove(otherEnd, msgs);
+			case DairyPackage.TRIP__DELIVERIES:
+				return ((InternalEList<?>)getDeliveries()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
@@ -258,13 +289,16 @@ public class TripImpl extends EObjectImpl implements Trip {
 				return;
 			case DairyPackage.TRIP__DELIVERIES:
 				getDeliveries().clear();
-				getDeliveries().addAll((Collection<? extends DeliveryJournal>)newValue);
+				getDeliveries().addAll((Collection<? extends MilkSaleGroup>)newValue);
 				return;
 			case DairyPackage.TRIP__STARTED:
 				setStarted((Date)newValue);
 				return;
 			case DairyPackage.TRIP__ENDED:
 				setEnded((Date)newValue);
+				return;
+			case DairyPackage.TRIP__TRIP_ID:
+				setTripId((Long)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -290,6 +324,9 @@ public class TripImpl extends EObjectImpl implements Trip {
 				return;
 			case DairyPackage.TRIP__ENDED:
 				setEnded(ENDED_EDEFAULT);
+				return;
+			case DairyPackage.TRIP__TRIP_ID:
+				setTripId(TRIP_ID_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);

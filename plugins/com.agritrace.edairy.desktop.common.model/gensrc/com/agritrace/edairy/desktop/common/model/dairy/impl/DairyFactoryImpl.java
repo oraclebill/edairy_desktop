@@ -73,7 +73,7 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 			case DairyPackage.COLLECTION_GROUP: return createCollectionGroup();
 			case DairyPackage.TRANSPORT_ROUTE: return createTransportRoute();
 			case DairyPackage.TRIP: return createTrip();
-			case DairyPackage.DELIVERY_JOURNAL: return createDeliveryJournal();
+			case DairyPackage.MILK_SALE_GROUP: return createMilkSaleGroup();
 			case DairyPackage.MILK_GRADE: return createMilkGrade();
 			case DairyPackage.MILK_GRADE_CHANGE: return createMilkGradeChange();
 			case DairyPackage.MILK_SALE: return createMilkSale();
@@ -233,9 +233,10 @@ public class DairyFactoryImpl extends EFactoryImpl implements DairyFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DeliveryJournal createDeliveryJournal() {
-		DeliveryJournalImpl deliveryJournal = new DeliveryJournalImpl();
-		return deliveryJournal;
+	public MilkSaleGroup createMilkSaleGroup()
+	{
+		MilkSaleGroupImpl milkSaleGroup = new MilkSaleGroupImpl();
+		return milkSaleGroup;
 	}
 
 	/**

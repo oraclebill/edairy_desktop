@@ -7,7 +7,6 @@
 package com.agritrace.edairy.desktop.common.model.dairy;
 
 import com.agritrace.edairy.desktop.common.model.tracking.Container;
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->

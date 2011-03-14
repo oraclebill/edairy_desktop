@@ -156,10 +156,10 @@ public class DairySwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DairyPackage.DELIVERY_JOURNAL:
+			case DairyPackage.MILK_SALE_GROUP:
 			{
-				DeliveryJournal deliveryJournal = (DeliveryJournal)theEObject;
-				T result = caseDeliveryJournal(deliveryJournal);
+				MilkSaleGroup milkSaleGroup = (MilkSaleGroup)theEObject;
+				T result = caseMilkSaleGroup(milkSaleGroup);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -386,17 +386,18 @@ public class DairySwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Delivery Journal</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Milk Sale Group</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Delivery Journal</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Milk Sale Group</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseDeliveryJournal(DeliveryJournal object) {
+	public T caseMilkSaleGroup(MilkSaleGroup object)
+	{
 		return null;
 	}
 

@@ -98,13 +98,13 @@ public interface DairyFactory extends EFactory {
 	Trip createTrip();
 
 	/**
-	 * Returns a new object of class '<em>Delivery Journal</em>'.
+	 * Returns a new object of class '<em>Milk Sale Group</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Delivery Journal</em>'.
+	 * @return a new object of class '<em>Milk Sale Group</em>'.
 	 * @generated
 	 */
-	DeliveryJournal createDeliveryJournal();
+	MilkSaleGroup createMilkSaleGroup();
 
 	/**
 	 * Returns a new object of class '<em>Milk Grade</em>'.

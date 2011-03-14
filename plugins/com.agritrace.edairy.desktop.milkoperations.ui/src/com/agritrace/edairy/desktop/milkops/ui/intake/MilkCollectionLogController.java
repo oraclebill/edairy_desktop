@@ -171,7 +171,7 @@ public class MilkCollectionLogController extends BasicDirectoryController<Collec
 		this.scaleImportAction = scaleImportAction;
 // allJournals = dairyRepo.allCollectionGroups();
 
-		addTableColumn("Date", DairyPackage.Literals.COLLECTION_GROUP__JOURNAL_DATE);
+		addTableColumn("Date", DairyPackage.Literals.COLLECTION_GROUP__COLLECTION_DATE);
 		addTableColumn("Collection Center", "collectionCenter.code", String.class);
 		addTableColumn("Session", "session.code", String.class);
 		addTableColumn("Status", "status.name", String.class);

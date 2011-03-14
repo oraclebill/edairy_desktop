@@ -182,8 +182,8 @@ public class PaymentRequestViewController extends SubModuleController {
 			return cachedSums.get(period);
 		List<CollectionJournalLine> lines2;
 //		lines2 = collectionsRepo.filter(CollectionJournalLine.class, new FilterParameter(
-//				FilterParameter.Type.GREATER_THAN, "group.journalDate", period.getStartDate()), new FilterParameter(
-//				FilterParameter.Type.LESS_THAN, "group.journalDate", period.getEndDate()));
+//				FilterParameter.Type.GREATER_THAN, "group.collectionDate", period.getStartDate()), new FilterParameter(
+//				FilterParameter.Type.LESS_THAN, "group.collectionDate", period.getEndDate()));
 		lines2 = collectionsRepo.findCollections(null, null, null, period.getStartDate(), period.getEndDate(), null, null, null);
 
 		BigDecimal sum = BigDecimal.ZERO;

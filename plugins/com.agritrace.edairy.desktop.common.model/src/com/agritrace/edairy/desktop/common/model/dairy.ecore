@@ -74,7 +74,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="farmContainer" eType="ecore:EClass farm.ecore#//Container"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="bin" eType="#//Bin"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="group" eType="#//CollectionGroup"
-        eOpposite="#//CollectionGroup/journalEntries"/>
+        eOpposite="#//CollectionGroup/entries"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="rejected" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="rejectionReason" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="milkFatPercentage" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"
@@ -156,11 +156,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="containers" eType="#//Bin"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionGroup">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="journalId" lowerBound="1"
-        eType="ecore:EDataType common.ecore#//UniqueID" iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType common.ecore#//UniqueID"
+        iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="referenceNumber" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="journalDate" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="collectionDate" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
         <details key="kind" value="elementOnly"/>
@@ -177,7 +177,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="driverTotal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="recordTotal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"
         defaultValueLiteral="0" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="journalEntries" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entries" upperBound="-1"
         eType="#//CollectionJournalLine" containment="true" eOpposite="#//CollectionJournalLine/group"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="suspended" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
@@ -189,8 +189,10 @@
         defaultValueLiteral="0"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="journalNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral=""/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="session" eType="#//CollectionSession"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionCenter" eType="#//DairyLocation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="session" lowerBound="1"
+        eType="#//CollectionSession"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionCenter" lowerBound="1"
+        eType="#//DairyLocation"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//CollectionGroupType"
         defaultValueLiteral="ScaleGroup"/>
   </eClassifiers>
@@ -229,14 +231,14 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Trip">
     <eStructuralFeatures xsi:type="ecore:EReference" name="collections" lowerBound="1"
-        upperBound="-1" eType="#//CollectionGroup"/>
+        upperBound="-1" eType="#//CollectionGroup" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="deliveries" lowerBound="1"
-        upperBound="-1" eType="#//DeliveryJournal"/>
+        upperBound="-1" eType="#//MilkSaleGroup" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="started" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ended" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tripId" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong" changeable="false">
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
         <details key="name" value="tripId"/>
         <details key="kind" value="elementOnly"/>
@@ -246,20 +248,22 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DeliveryJournal">
+  <eClassifiers xsi:type="ecore:EClass" name="MilkSaleGroup">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="referenceNumber" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="route" lowerBound="1" eType="#//TransportRoute"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="customer" lowerBound="1"
-        eType="#//Customer"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="customer" eType="#//Customer"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="driver" eType="#//Employee"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="vehicle" eType="#//Vehicle"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="lines" lowerBound="1" upperBound="-1"
-        eType="#//MilkSale" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sales" ordered="false"
+        upperBound="-1" eType="#//MilkSale" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="total" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"
         defaultValueLiteral="0.0"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="session" eType="#//CollectionSession"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="session" lowerBound="1"
+        eType="#//CollectionSession"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType common.ecore#//UniqueID"
+        iD="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="MilkSaleType">
     <eLiterals name="CASH"/>
@@ -295,6 +299,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="referenceNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="saleDate" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="session" lowerBound="1"
+        eType="#//CollectionSession"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="bin" eType="#//Bin"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="saleType" lowerBound="1"
         eType="#//MilkSaleType" defaultValueLiteral=""/>
@@ -341,8 +347,8 @@
         upperBound="-1" eType="#//CollectionGroup" transient="true" containment="true"
         eKeys="#//CollectionGroup/referenceNumber"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="deliveryJournals" ordered="false"
-        upperBound="-1" eType="#//DeliveryJournal" transient="true" containment="true"
-        eKeys="#//DeliveryJournal/referenceNumber"/>
+        upperBound="-1" eType="#//MilkSaleGroup" transient="true" containment="true"
+        eKeys="#//MilkSaleGroup/referenceNumber"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="suppliers" ordered="false"
         upperBound="-1" eType="#//Supplier" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="customers" ordered="false"

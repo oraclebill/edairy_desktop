@@ -42,15 +42,15 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionGroupImpl#getJournalId <em>Journal Id</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionGroupImpl#getId <em>Id</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionGroupImpl#getReferenceNumber <em>Reference Number</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionGroupImpl#getJournalDate <em>Journal Date</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionGroupImpl#getCollectionDate <em>Collection Date</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionGroupImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionGroupImpl#getDriver <em>Driver</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionGroupImpl#getVehicle <em>Vehicle</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionGroupImpl#getDriverTotal <em>Driver Total</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionGroupImpl#getRecordTotal <em>Record Total</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionGroupImpl#getJournalEntries <em>Journal Entries</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionGroupImpl#getEntries <em>Entries</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionGroupImpl#isSuspended <em>Suspended</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionGroupImpl#getEntryCount <em>Entry Count</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.CollectionGroupImpl#getSuspendedCount <em>Suspended Count</em>}</li>
@@ -66,24 +66,24 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup {
 	/**
-	 * The default value of the '{@link #getJournalId() <em>Journal Id</em>}' attribute.
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getJournalId()
+	 * @see #getId()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Long JOURNAL_ID_EDEFAULT = null;
+	protected static final Long ID_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getJournalId() <em>Journal Id</em>}' attribute.
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getJournalId()
+	 * @see #getId()
 	 * @generated
 	 * @ordered
 	 */
-	protected Long journalId = JOURNAL_ID_EDEFAULT;
+	protected Long id = ID_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getReferenceNumber() <em>Reference Number</em>}' attribute.
@@ -106,24 +106,24 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	protected String referenceNumber = REFERENCE_NUMBER_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getJournalDate() <em>Journal Date</em>}' attribute.
+	 * The default value of the '{@link #getCollectionDate() <em>Collection Date</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getJournalDate()
+	 * @see #getCollectionDate()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Date JOURNAL_DATE_EDEFAULT = null;
+	protected static final Date COLLECTION_DATE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getJournalDate() <em>Journal Date</em>}' attribute.
+	 * The cached value of the '{@link #getCollectionDate() <em>Collection Date</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getJournalDate()
+	 * @see #getCollectionDate()
 	 * @generated
 	 * @ordered
 	 */
-	protected Date journalDate = JOURNAL_DATE_EDEFAULT;
+	protected Date collectionDate = COLLECTION_DATE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
@@ -206,14 +206,14 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	protected BigDecimal recordTotal = RECORD_TOTAL_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getJournalEntries() <em>Journal Entries</em>}' containment reference list.
+	 * The cached value of the '{@link #getEntries() <em>Entries</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getJournalEntries()
+	 * @see #getEntries()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<CollectionJournalLine> journalEntries;
+	protected EList<CollectionJournalLine> entries;
 
 	/**
 	 * The default value of the '{@link #isSuspended() <em>Suspended</em>}' attribute.
@@ -379,8 +379,9 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Long getJournalId() {
-		return journalId;
+	public Long getId()
+	{
+		return id;
 	}
 
 	/**
@@ -388,11 +389,12 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setJournalId(Long newJournalId) {
-		Long oldJournalId = journalId;
-		journalId = newJournalId;
+	public void setId(Long newId)
+	{
+		Long oldId = id;
+		id = newId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_GROUP__JOURNAL_ID, oldJournalId, journalId));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_GROUP__ID, oldId, id));
 	}
 
 	/**
@@ -421,8 +423,9 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Date getJournalDate() {
-		return journalDate;
+	public Date getCollectionDate()
+	{
+		return collectionDate;
 	}
 
 	/**
@@ -430,11 +433,12 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setJournalDate(Date newJournalDate) {
-		Date oldJournalDate = journalDate;
-		journalDate = newJournalDate;
+	public void setCollectionDate(Date newCollectionDate)
+	{
+		Date oldCollectionDate = collectionDate;
+		collectionDate = newCollectionDate;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_GROUP__JOURNAL_DATE, oldJournalDate, journalDate));
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.COLLECTION_GROUP__COLLECTION_DATE, oldCollectionDate, collectionDate));
 	}
 
 	/**
@@ -585,12 +589,13 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<CollectionJournalLine> getJournalEntries() {
-		if (journalEntries == null)
+	public EList<CollectionJournalLine> getEntries()
+	{
+		if (entries == null)
 		{
-			journalEntries = new EObjectContainmentWithInverseEList<CollectionJournalLine>(CollectionJournalLine.class, this, DairyPackage.COLLECTION_GROUP__JOURNAL_ENTRIES, DairyPackage.COLLECTION_JOURNAL_LINE__GROUP);
+			entries = new EObjectContainmentWithInverseEList<CollectionJournalLine>(CollectionJournalLine.class, this, DairyPackage.COLLECTION_GROUP__ENTRIES, DairyPackage.COLLECTION_JOURNAL_LINE__GROUP);
 		}
-		return journalEntries;
+		return entries;
 	}
 
 	/**
@@ -809,8 +814,8 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID)
 		{
-			case DairyPackage.COLLECTION_GROUP__JOURNAL_ENTRIES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getJournalEntries()).basicAdd(otherEnd, msgs);
+			case DairyPackage.COLLECTION_GROUP__ENTRIES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getEntries()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -824,8 +829,8 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID)
 		{
-			case DairyPackage.COLLECTION_GROUP__JOURNAL_ENTRIES:
-				return ((InternalEList<?>)getJournalEntries()).basicRemove(otherEnd, msgs);
+			case DairyPackage.COLLECTION_GROUP__ENTRIES:
+				return ((InternalEList<?>)getEntries()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -839,12 +844,12 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
-			case DairyPackage.COLLECTION_GROUP__JOURNAL_ID:
-				return getJournalId();
+			case DairyPackage.COLLECTION_GROUP__ID:
+				return getId();
 			case DairyPackage.COLLECTION_GROUP__REFERENCE_NUMBER:
 				return getReferenceNumber();
-			case DairyPackage.COLLECTION_GROUP__JOURNAL_DATE:
-				return getJournalDate();
+			case DairyPackage.COLLECTION_GROUP__COLLECTION_DATE:
+				return getCollectionDate();
 			case DairyPackage.COLLECTION_GROUP__STATUS:
 				return getStatus();
 			case DairyPackage.COLLECTION_GROUP__DRIVER:
@@ -857,8 +862,8 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 				return getDriverTotal();
 			case DairyPackage.COLLECTION_GROUP__RECORD_TOTAL:
 				return getRecordTotal();
-			case DairyPackage.COLLECTION_GROUP__JOURNAL_ENTRIES:
-				return getJournalEntries();
+			case DairyPackage.COLLECTION_GROUP__ENTRIES:
+				return getEntries();
 			case DairyPackage.COLLECTION_GROUP__SUSPENDED:
 				return isSuspended();
 			case DairyPackage.COLLECTION_GROUP__ENTRY_COUNT:
@@ -891,14 +896,14 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
-			case DairyPackage.COLLECTION_GROUP__JOURNAL_ID:
-				setJournalId((Long)newValue);
+			case DairyPackage.COLLECTION_GROUP__ID:
+				setId((Long)newValue);
 				return;
 			case DairyPackage.COLLECTION_GROUP__REFERENCE_NUMBER:
 				setReferenceNumber((String)newValue);
 				return;
-			case DairyPackage.COLLECTION_GROUP__JOURNAL_DATE:
-				setJournalDate((Date)newValue);
+			case DairyPackage.COLLECTION_GROUP__COLLECTION_DATE:
+				setCollectionDate((Date)newValue);
 				return;
 			case DairyPackage.COLLECTION_GROUP__STATUS:
 				setStatus((JournalStatus)newValue);
@@ -915,9 +920,9 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 			case DairyPackage.COLLECTION_GROUP__RECORD_TOTAL:
 				setRecordTotal((BigDecimal)newValue);
 				return;
-			case DairyPackage.COLLECTION_GROUP__JOURNAL_ENTRIES:
-				getJournalEntries().clear();
-				getJournalEntries().addAll((Collection<? extends CollectionJournalLine>)newValue);
+			case DairyPackage.COLLECTION_GROUP__ENTRIES:
+				getEntries().clear();
+				getEntries().addAll((Collection<? extends CollectionJournalLine>)newValue);
 				return;
 			case DairyPackage.COLLECTION_GROUP__SUSPENDED:
 				setSuspended((Boolean)newValue);
@@ -956,14 +961,14 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
-			case DairyPackage.COLLECTION_GROUP__JOURNAL_ID:
-				setJournalId(JOURNAL_ID_EDEFAULT);
+			case DairyPackage.COLLECTION_GROUP__ID:
+				setId(ID_EDEFAULT);
 				return;
 			case DairyPackage.COLLECTION_GROUP__REFERENCE_NUMBER:
 				setReferenceNumber(REFERENCE_NUMBER_EDEFAULT);
 				return;
-			case DairyPackage.COLLECTION_GROUP__JOURNAL_DATE:
-				setJournalDate(JOURNAL_DATE_EDEFAULT);
+			case DairyPackage.COLLECTION_GROUP__COLLECTION_DATE:
+				setCollectionDate(COLLECTION_DATE_EDEFAULT);
 				return;
 			case DairyPackage.COLLECTION_GROUP__STATUS:
 				setStatus(STATUS_EDEFAULT);
@@ -980,8 +985,8 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 			case DairyPackage.COLLECTION_GROUP__RECORD_TOTAL:
 				setRecordTotal(RECORD_TOTAL_EDEFAULT);
 				return;
-			case DairyPackage.COLLECTION_GROUP__JOURNAL_ENTRIES:
-				getJournalEntries().clear();
+			case DairyPackage.COLLECTION_GROUP__ENTRIES:
+				getEntries().clear();
 				return;
 			case DairyPackage.COLLECTION_GROUP__SUSPENDED:
 				setSuspended(SUSPENDED_EDEFAULT);
@@ -1020,12 +1025,12 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
-			case DairyPackage.COLLECTION_GROUP__JOURNAL_ID:
-				return JOURNAL_ID_EDEFAULT == null ? journalId != null : !JOURNAL_ID_EDEFAULT.equals(journalId);
+			case DairyPackage.COLLECTION_GROUP__ID:
+				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case DairyPackage.COLLECTION_GROUP__REFERENCE_NUMBER:
 				return REFERENCE_NUMBER_EDEFAULT == null ? referenceNumber != null : !REFERENCE_NUMBER_EDEFAULT.equals(referenceNumber);
-			case DairyPackage.COLLECTION_GROUP__JOURNAL_DATE:
-				return JOURNAL_DATE_EDEFAULT == null ? journalDate != null : !JOURNAL_DATE_EDEFAULT.equals(journalDate);
+			case DairyPackage.COLLECTION_GROUP__COLLECTION_DATE:
+				return COLLECTION_DATE_EDEFAULT == null ? collectionDate != null : !COLLECTION_DATE_EDEFAULT.equals(collectionDate);
 			case DairyPackage.COLLECTION_GROUP__STATUS:
 				return status != STATUS_EDEFAULT;
 			case DairyPackage.COLLECTION_GROUP__DRIVER:
@@ -1036,8 +1041,8 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 				return DRIVER_TOTAL_EDEFAULT == null ? driverTotal != null : !DRIVER_TOTAL_EDEFAULT.equals(driverTotal);
 			case DairyPackage.COLLECTION_GROUP__RECORD_TOTAL:
 				return RECORD_TOTAL_EDEFAULT == null ? recordTotal != null : !RECORD_TOTAL_EDEFAULT.equals(recordTotal);
-			case DairyPackage.COLLECTION_GROUP__JOURNAL_ENTRIES:
-				return journalEntries != null && !journalEntries.isEmpty();
+			case DairyPackage.COLLECTION_GROUP__ENTRIES:
+				return entries != null && !entries.isEmpty();
 			case DairyPackage.COLLECTION_GROUP__SUSPENDED:
 				return suspended != SUSPENDED_EDEFAULT;
 			case DairyPackage.COLLECTION_GROUP__ENTRY_COUNT:
@@ -1068,12 +1073,12 @@ public class CollectionGroupImpl extends EObjectImpl implements CollectionGroup 
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (journalId: ");
-		result.append(journalId);
+		result.append(" (id: ");
+		result.append(id);
 		result.append(", referenceNumber: ");
 		result.append(referenceNumber);
-		result.append(", journalDate: ");
-		result.append(journalDate);
+		result.append(", collectionDate: ");
+		result.append(collectionDate);
 		result.append(", status: ");
 		result.append(status);
 		result.append(", driverTotal: ");

@@ -203,6 +203,8 @@ public class DairyRepository implements IDairyRepository {
 		Hibernate.initialize(dairy);
 		final List<EReference> persistentCollections = Arrays.asList(DairyPackage.Literals.DAIRY__BRANCH_LOCATIONS,
 				DairyPackage.Literals.DAIRY__CUSTOMERS, 
+				DairyPackage.Literals.DAIRY__EMPLOYEES, 
+				DairyPackage.Literals.DAIRY__COLLECTION_SESSIONS, 
 				DairyPackage.Literals.DAIRY__ROUTES,
 				DairyPackage.Literals.DAIRY__VEHICLES,
 				DairyPackage.Literals.DAIRY__BRANCH_LOCATIONS,

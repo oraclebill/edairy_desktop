@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getLineNumber <em>Line Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getReferenceNumber <em>Reference Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getSaleDate <em>Sale Date</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getSession <em>Session</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getBin <em>Bin</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getSaleType <em>Sale Type</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getQuantity <em>Quantity</em>}</li>
@@ -147,6 +148,32 @@ public interface MilkSale extends EObject {
 	 * @generated
 	 */
 	void setSaleDate(Date value);
+
+	/**
+	 * Returns the value of the '<em><b>Session</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Session</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Session</em>' reference.
+	 * @see #setSession(CollectionSession)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMilkSale_Session()
+	 * @model required="true"
+	 * @generated
+	 */
+	CollectionSession getSession();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale#getSession <em>Session</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Session</em>' reference.
+	 * @see #getSession()
+	 * @generated
+	 */
+	void setSession(CollectionSession value);
 
 	/**
 	 * Returns the value of the '<em><b>Bin</b></em>' reference.

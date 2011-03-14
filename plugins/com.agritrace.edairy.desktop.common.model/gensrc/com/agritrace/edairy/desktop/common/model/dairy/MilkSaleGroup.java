@@ -16,29 +16,31 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Delivery Journal</b></em>'.
+ * A representation of the model object '<em><b>Milk Sale Group</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getReferenceNumber <em>Reference Number</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getDate <em>Date</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getRoute <em>Route</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getCustomer <em>Customer</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getDriver <em>Driver</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getVehicle <em>Vehicle</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getLines <em>Lines</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getTotal <em>Total</em>}</li>
- *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getSession <em>Session</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSaleGroup#getReferenceNumber <em>Reference Number</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSaleGroup#getDate <em>Date</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSaleGroup#getRoute <em>Route</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSaleGroup#getCustomer <em>Customer</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSaleGroup#getDriver <em>Driver</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSaleGroup#getVehicle <em>Vehicle</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSaleGroup#getSales <em>Sales</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSaleGroup#getTotal <em>Total</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSaleGroup#getSession <em>Session</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSaleGroup#getId <em>Id</em>}</li>
  * </ul>
  * </p>
  *
- * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDeliveryJournal()
+ * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMilkSaleGroup()
  * @model
  * @generated
  */
-public interface DeliveryJournal extends EObject {
+public interface MilkSaleGroup extends EObject
+{
 	/**
 	 * Returns the value of the '<em><b>Reference Number</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -49,14 +51,14 @@ public interface DeliveryJournal extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Reference Number</em>' attribute.
 	 * @see #setReferenceNumber(String)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDeliveryJournal_ReferenceNumber()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMilkSaleGroup_ReferenceNumber()
 	 * @model required="true"
 	 * @generated
 	 */
 	String getReferenceNumber();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getReferenceNumber <em>Reference Number</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSaleGroup#getReferenceNumber <em>Reference Number</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Reference Number</em>' attribute.
@@ -75,14 +77,14 @@ public interface DeliveryJournal extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Date</em>' attribute.
 	 * @see #setDate(Date)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDeliveryJournal_Date()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMilkSaleGroup_Date()
 	 * @model required="true"
 	 * @generated
 	 */
 	Date getDate();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getDate <em>Date</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSaleGroup#getDate <em>Date</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Date</em>' attribute.
@@ -101,14 +103,14 @@ public interface DeliveryJournal extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Route</em>' reference.
 	 * @see #setRoute(TransportRoute)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDeliveryJournal_Route()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMilkSaleGroup_Route()
 	 * @model required="true"
 	 * @generated
 	 */
 	TransportRoute getRoute();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getRoute <em>Route</em>}' reference.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSaleGroup#getRoute <em>Route</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Route</em>' reference.
@@ -127,14 +129,14 @@ public interface DeliveryJournal extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Customer</em>' reference.
 	 * @see #setCustomer(Customer)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDeliveryJournal_Customer()
-	 * @model required="true"
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMilkSaleGroup_Customer()
+	 * @model
 	 * @generated
 	 */
 	Customer getCustomer();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getCustomer <em>Customer</em>}' reference.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSaleGroup#getCustomer <em>Customer</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Customer</em>' reference.
@@ -153,14 +155,14 @@ public interface DeliveryJournal extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Driver</em>' reference.
 	 * @see #setDriver(Employee)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDeliveryJournal_Driver()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMilkSaleGroup_Driver()
 	 * @model
 	 * @generated
 	 */
 	Employee getDriver();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getDriver <em>Driver</em>}' reference.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSaleGroup#getDriver <em>Driver</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Driver</em>' reference.
@@ -179,14 +181,14 @@ public interface DeliveryJournal extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Vehicle</em>' reference.
 	 * @see #setVehicle(Vehicle)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDeliveryJournal_Vehicle()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMilkSaleGroup_Vehicle()
 	 * @model
 	 * @generated
 	 */
 	Vehicle getVehicle();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getVehicle <em>Vehicle</em>}' reference.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSaleGroup#getVehicle <em>Vehicle</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Vehicle</em>' reference.
@@ -196,20 +198,20 @@ public interface DeliveryJournal extends EObject {
 	void setVehicle(Vehicle value);
 
 	/**
-	 * Returns the value of the '<em><b>Lines</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Sales</b></em>' containment reference list.
 	 * The list contents are of type {@link com.agritrace.edairy.desktop.common.model.dairy.MilkSale}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Lines</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Sales</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Lines</em>' containment reference list.
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDeliveryJournal_Lines()
-	 * @model containment="true" required="true"
+	 * @return the value of the '<em>Sales</em>' containment reference list.
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMilkSaleGroup_Sales()
+	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
-	EList<MilkSale> getLines();
+	EList<MilkSale> getSales();
 
 	/**
 	 * Returns the value of the '<em><b>Total</b></em>' attribute.
@@ -222,14 +224,14 @@ public interface DeliveryJournal extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Total</em>' attribute.
 	 * @see #setTotal(BigDecimal)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDeliveryJournal_Total()
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMilkSaleGroup_Total()
 	 * @model default="0.0" required="true"
 	 * @generated
 	 */
 	BigDecimal getTotal();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getTotal <em>Total</em>}' attribute.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSaleGroup#getTotal <em>Total</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Total</em>' attribute.
@@ -248,14 +250,14 @@ public interface DeliveryJournal extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Session</em>' reference.
 	 * @see #setSession(CollectionSession)
-	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getDeliveryJournal_Session()
-	 * @model
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMilkSaleGroup_Session()
+	 * @model required="true"
 	 * @generated
 	 */
 	CollectionSession getSession();
 
 	/**
-	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.DeliveryJournal#getSession <em>Session</em>}' reference.
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSaleGroup#getSession <em>Session</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Session</em>' reference.
@@ -264,4 +266,30 @@ public interface DeliveryJournal extends EObject {
 	 */
 	void setSession(CollectionSession value);
 
-} // DeliveryJournal
+	/**
+	 * Returns the value of the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Id</em>' attribute.
+	 * @see #setId(Long)
+	 * @see com.agritrace.edairy.desktop.common.model.dairy.DairyPackage#getMilkSaleGroup_Id()
+	 * @model id="true" dataType="com.agritrace.edairy.desktop.common.model.base.UniqueID" required="true"
+	 * @generated
+	 */
+	Long getId();
+
+	/**
+	 * Sets the value of the '{@link com.agritrace.edairy.desktop.common.model.dairy.MilkSaleGroup#getId <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Id</em>' attribute.
+	 * @see #getId()
+	 * @generated
+	 */
+	void setId(Long value);
+
+} // MilkSaleGroup

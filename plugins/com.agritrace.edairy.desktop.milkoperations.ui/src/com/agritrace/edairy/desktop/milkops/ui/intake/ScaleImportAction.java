@@ -195,7 +195,7 @@ import com.google.inject.Provider;
 				int i = 0;
 				
 				for (final CollectionGroup page : pageMap.values()) {
-					System.err.printf("  page %d: %s - %d entries\n", ++i, page, page.getJournalEntries().size());
+					System.err.printf("  page %d: %s - %d entries\n", ++i, page, page.getEntries().size());
 					System.err.printf("  page %d: %s\n", i, page);
 					// }
 					dairyRepo.getLocalDairy().getCollectionJournals().add(page);
@@ -229,7 +229,7 @@ import com.google.inject.Provider;
 				msgList.add(
 						++i,
 						String.format("- Driver name: %s, journal date: %tF",
-								MemberUtil.formattedMemberName(page.getDriver()), page.getJournalDate()));
+								MemberUtil.formattedMemberName(page.getDriver()), page.getCollectionDate()));
 			}
 		}
 
@@ -245,10 +245,10 @@ import com.google.inject.Provider;
 		}
 
 		private void setPageJournalDate(CollectionGroup page) {
-			if (page.getJournalDate() == null) {
-				Date lowest = null, highest = null, journalDate = null;
+			if (page.getCollectionDate() == null) {
+				Date lowest = null, highest = null, collectionDate = null;
 
-				for (final CollectionJournalLine line : page.getJournalEntries()) {
+				for (final CollectionJournalLine line : page.getEntries()) {
 					final ScaleImportRecord record = (ScaleImportRecord) line;
 					final Date collectionTime = record.getCollectionTime();
 
@@ -274,14 +274,14 @@ import com.google.inject.Provider;
 						addError("Difference between collection times exceeds threshold: " + milliDiff, page);
 					} else {
 						lowCal.add(Calendar.MILLISECOND, (int) (milliDiff / 2));
-						journalDate = lowCal.getTime();
+						collectionDate = lowCal.getTime();
 					}
 				} else if (lowest == null && highest == null) {
 					throw new IllegalStateException("Unable to find any dates in imported scale records.");
 				} else {
 					throw new IllegalStateException("Unable to find any dates in imported scale records.");
 				}
-				page.setJournalDate(journalDate);
+				page.setCollectionDate(collectionDate);
 			}
 		}
 
@@ -289,7 +289,7 @@ import com.google.inject.Provider;
 			BigDecimal quantity = new BigDecimal(0);
 
 			int numSuspended = 0, numRejected = 0;
-			for (final CollectionJournalLine line : page.getJournalEntries()) {
+			for (final CollectionJournalLine line : page.getEntries()) {
 				quantity = quantity.add(line.getQuantity());
 
 				line.setFlagged(line.getValidatedMember() == null);
@@ -303,7 +303,7 @@ import com.google.inject.Provider;
 			}
 			page.setDriverTotal(quantity);
 			page.setRecordTotal(quantity);
-			page.setEntryCount(page.getJournalEntries().size());
+			page.setEntryCount(page.getEntries().size());
 			page.setRejectedCount(numRejected);
 			page.setSuspendedCount(numSuspended);
 		}
@@ -311,7 +311,7 @@ import com.google.inject.Provider;
 		private void setDriver(CollectionGroup page) {
 			if (page.getDriver() == null) {
 				final LinkedList<String> codes = new LinkedList<String>();
-				for (final CollectionJournalLine line : page.getJournalEntries()) {
+				for (final CollectionJournalLine line : page.getEntries()) {
 					final ScaleImportRecord rec = (ScaleImportRecord) line;
 					final String operatorCode = rec.getOperatorCode();
 					if (operatorCode != null) {
@@ -453,11 +453,11 @@ import com.google.inject.Provider;
 			page = DairyFactory.eINSTANCE.createCollectionGroup();
 			page.setReferenceNumber(key);
 			page.setDriver(getDriverByCode(record.getOperatorCode()));
-			page.setJournalDate(record.getValidDate());
+			page.setCollectionDate(record.getValidDate());
 			page.setSession(sessionMap.get(record.getSessionCode()));
 			page.setCollectionCenter(centerMap.get(centerCode));
 
-			if (page.getDriver() == null || page.getJournalDate() == null || page.getSession() == null
+			if (page.getDriver() == null || page.getCollectionDate() == null || page.getSession() == null
 			/* || page.getRoute() == null */) {
 				// TODO: add suspension reason
 				page.setSuspended(true);

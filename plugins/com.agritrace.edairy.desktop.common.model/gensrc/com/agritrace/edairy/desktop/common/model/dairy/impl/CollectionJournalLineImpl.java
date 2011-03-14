@@ -700,7 +700,7 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newGroup != null)
-				msgs = ((InternalEObject)newGroup).eInverseAdd(this, DairyPackage.COLLECTION_GROUP__JOURNAL_ENTRIES, CollectionGroup.class, msgs);
+				msgs = ((InternalEObject)newGroup).eInverseAdd(this, DairyPackage.COLLECTION_GROUP__ENTRIES, CollectionGroup.class, msgs);
 			msgs = basicSetGroup(newGroup, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -855,7 +855,7 @@ public class CollectionJournalLineImpl extends EObjectImpl implements Collection
 		switch (eContainerFeatureID())
 		{
 			case DairyPackage.COLLECTION_JOURNAL_LINE__GROUP:
-				return eInternalContainer().eInverseRemove(this, DairyPackage.COLLECTION_GROUP__JOURNAL_ENTRIES, CollectionGroup.class, msgs);
+				return eInternalContainer().eInverseRemove(this, DairyPackage.COLLECTION_GROUP__ENTRIES, CollectionGroup.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}

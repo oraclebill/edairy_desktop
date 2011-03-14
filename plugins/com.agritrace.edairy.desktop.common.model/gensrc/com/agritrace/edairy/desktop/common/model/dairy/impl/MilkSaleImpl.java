@@ -8,6 +8,7 @@ package com.agritrace.edairy.desktop.common.model.dairy.impl;
 
 import com.agritrace.edairy.desktop.common.model.dairy.Customer;
 import com.agritrace.edairy.desktop.common.model.dairy.Bin;
+import com.agritrace.edairy.desktop.common.model.dairy.CollectionSession;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyLocation;
 import com.agritrace.edairy.desktop.common.model.dairy.DairyPackage;
 import com.agritrace.edairy.desktop.common.model.dairy.Employee;
@@ -37,6 +38,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkSaleImpl#getLineNumber <em>Line Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkSaleImpl#getReferenceNumber <em>Reference Number</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkSaleImpl#getSaleDate <em>Sale Date</em>}</li>
+ *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkSaleImpl#getSession <em>Session</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkSaleImpl#getBin <em>Bin</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkSaleImpl#getSaleType <em>Sale Type</em>}</li>
  *   <li>{@link com.agritrace.edairy.desktop.common.model.dairy.impl.MilkSaleImpl#getQuantity <em>Quantity</em>}</li>
@@ -135,6 +137,16 @@ public class MilkSaleImpl extends EObjectImpl implements MilkSale {
 	 * @ordered
 	 */
 	protected Date saleDate = SALE_DATE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getSession() <em>Session</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSession()
+	 * @generated
+	 * @ordered
+	 */
+	protected CollectionSession session;
 
 	/**
 	 * The cached value of the '{@link #getBin() <em>Bin</em>}' reference.
@@ -437,6 +449,49 @@ public class MilkSaleImpl extends EObjectImpl implements MilkSale {
 		saleDate = newSaleDate;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MILK_SALE__SALE_DATE, oldSaleDate, saleDate));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CollectionSession getSession()
+	{
+		if (session != null && session.eIsProxy())
+		{
+			InternalEObject oldSession = (InternalEObject)session;
+			session = (CollectionSession)eResolveProxy(oldSession);
+			if (session != oldSession)
+			{
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DairyPackage.MILK_SALE__SESSION, oldSession, session));
+			}
+		}
+		return session;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CollectionSession basicGetSession()
+	{
+		return session;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSession(CollectionSession newSession)
+	{
+		CollectionSession oldSession = session;
+		session = newSession;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DairyPackage.MILK_SALE__SESSION, oldSession, session));
 	}
 
 	/**
@@ -843,6 +898,9 @@ public class MilkSaleImpl extends EObjectImpl implements MilkSale {
 				return getReferenceNumber();
 			case DairyPackage.MILK_SALE__SALE_DATE:
 				return getSaleDate();
+			case DairyPackage.MILK_SALE__SESSION:
+				if (resolve) return getSession();
+				return basicGetSession();
 			case DairyPackage.MILK_SALE__BIN:
 				if (resolve) return getBin();
 				return basicGetBin();
@@ -899,6 +957,9 @@ public class MilkSaleImpl extends EObjectImpl implements MilkSale {
 				return;
 			case DairyPackage.MILK_SALE__SALE_DATE:
 				setSaleDate((Date)newValue);
+				return;
+			case DairyPackage.MILK_SALE__SESSION:
+				setSession((CollectionSession)newValue);
 				return;
 			case DairyPackage.MILK_SALE__BIN:
 				setBin((Bin)newValue);
@@ -964,6 +1025,9 @@ public class MilkSaleImpl extends EObjectImpl implements MilkSale {
 			case DairyPackage.MILK_SALE__SALE_DATE:
 				setSaleDate(SALE_DATE_EDEFAULT);
 				return;
+			case DairyPackage.MILK_SALE__SESSION:
+				setSession((CollectionSession)null);
+				return;
 			case DairyPackage.MILK_SALE__BIN:
 				setBin((Bin)null);
 				return;
@@ -1024,6 +1088,8 @@ public class MilkSaleImpl extends EObjectImpl implements MilkSale {
 				return REFERENCE_NUMBER_EDEFAULT == null ? referenceNumber != null : !REFERENCE_NUMBER_EDEFAULT.equals(referenceNumber);
 			case DairyPackage.MILK_SALE__SALE_DATE:
 				return SALE_DATE_EDEFAULT == null ? saleDate != null : !SALE_DATE_EDEFAULT.equals(saleDate);
+			case DairyPackage.MILK_SALE__SESSION:
+				return session != null;
 			case DairyPackage.MILK_SALE__BIN:
 				return bin != null;
 			case DairyPackage.MILK_SALE__SALE_TYPE:

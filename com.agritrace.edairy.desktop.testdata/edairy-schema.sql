@@ -51,11 +51,11 @@
     ) type=InnoDB;
 
     create table `collectiongroup` (
-        `journalid` bigint not null auto_increment,
+        `id` bigint not null auto_increment,
         dtype varchar(255) not null,
         opver integer not null,
         `referencenumber` varchar(60) not null,
-        `journaldate` date not null,
+        `collectiondate` date not null,
         `status` varchar(255) not null,
         `employee_driver_personid` bigint not null,
         `vehicle_vehicle_vehicleid` bigint,
@@ -66,10 +66,11 @@
         `suspendedcount` integer,
         `rejectedcount` integer,
         `journalnumber` varchar(60),
-        `collectionsession_session_e_id` bigint,
-        `dairylocation_collectioncenter_id` bigint,
+        `collectionsession_session_e_id` bigint not null,
+        `dairylocation_collectioncenter_id` bigint not null,
         `type` varchar(255) not null,
-        primary key (`journalid`)
+        `trip_collections_tripid` bigint,
+        primary key (`id`)
     ) type=InnoDB;
 
     create table `collectionjournalline` (
@@ -212,21 +213,6 @@
         unique (`code`)
     ) type=InnoDB;
 
-    create table `deliveryjournal` (
-        id bigint not null auto_increment,
-        dtype varchar(255) not null,
-        opver integer not null,
-        `referencenumber` varchar(60) not null,
-        `date` datetime not null,
-        `transportroute_route_id` bigint not null,
-        `customer_customer_e_id` bigint not null,
-        `employee_driver_personid` bigint,
-        `vehicle_vehicle_vehicleid` bigint,
-        `total` decimal(19,2) not null,
-        `collectionsession_session_e_id` bigint,
-        primary key (id)
-    ) type=InnoDB;
-
     create table `farm` (
         `farmid` bigint not null auto_increment,
         dtype varchar(255) not null,
@@ -332,6 +318,7 @@
         `linenumber` integer,
         `referencenumber` varchar(60),
         `saledate` datetime not null,
+        `collectionsession_session_e_id` bigint not null,
         `bin_bin_containerid` bigint,
         `saletype` varchar(255) not null,
         `quantity` decimal(19,2) not null,
@@ -345,7 +332,23 @@
         `saleamount` decimal(19,2) not null,
         `contractsale` bit not null,
         `employee_salesclerk_personid` bigint,
-        `deliveryjournal_lines_e_id` bigint,
+        `milksalegroup_sales_e_id` bigint,
+        primary key (`id`)
+    ) type=InnoDB;
+
+    create table `milksalegroup` (
+        `id` bigint not null auto_increment,
+        dtype varchar(255) not null,
+        opver integer not null,
+        `referencenumber` varchar(60) not null,
+        `date` datetime not null,
+        `transportroute_route_id` bigint not null,
+        `customer_customer_e_id` bigint not null,
+        `employee_driver_personid` bigint,
+        `vehicle_vehicle_vehicleid` bigint,
+        `total` decimal(19,2) not null,
+        `collectionsession_session_e_id` bigint not null,
+        `trip_deliveries_tripid` bigint,
         primary key (`id`)
     ) type=InnoDB;
 
@@ -564,16 +567,6 @@
         unique (`name`)
     ) type=InnoDB;
 
-    create table `trip_collections` (
-        `trip_tripid` bigint not null,
-        `collectiongroup_journalid` bigint not null
-    ) type=InnoDB;
-
-    create table `trip_deliveries` (
-        `trip_tripid` bigint not null,
-        `deliveryjournal_e_id` bigint not null
-    ) type=InnoDB;
-
     create table `trip` (
         `tripid` bigint not null auto_increment,
         dtype varchar(255) not null,
@@ -689,6 +682,12 @@
         foreign key (`collectionsession_session_e_id`) 
         references `collectionsession` (`id`);
 
+    alter table `collectiongroup` 
+        add index FK3FA5BAA1AD89889 (`trip_collections_tripid`), 
+        add constraint FK3FA5BAA1AD89889 
+        foreign key (`trip_collections_tripid`) 
+        references `trip` (`tripid`);
+
     create index collectionjournallinedtype on `collectionjournalline` (dtype);
 
     alter table `collectionjournalline` 
@@ -707,7 +706,7 @@
         add index FK21648E4D42039C88 (`collectionjournalline_group_e_id`), 
         add constraint FK21648E4D42039C88 
         foreign key (`collectionjournalline_group_e_id`) 
-        references `collectiongroup` (`journalid`);
+        references `collectiongroup` (`id`);
 
     alter table `collectionjournalline` 
         add index FK21648E4DDF4763D3 (`farm_from_farmid`), 
@@ -823,38 +822,6 @@
         foreign key (`dairy_branchlocations_companyid`) 
         references `dairy` (`dairyid`);
 
-    create index deliveryjournaldtype on `deliveryjournal` (dtype);
-
-    alter table `deliveryjournal` 
-        add index FKCB09F8C3E901D8A4 (`employee_driver_personid`), 
-        add constraint FKCB09F8C3E901D8A4 
-        foreign key (`employee_driver_personid`) 
-        references `person` (`personid`);
-
-    alter table `deliveryjournal` 
-        add index FKCB09F8C315DAE853 (`customer_customer_e_id`), 
-        add constraint FKCB09F8C315DAE853 
-        foreign key (`customer_customer_e_id`) 
-        references `customer` (`customerid`);
-
-    alter table `deliveryjournal` 
-        add index FKCB09F8C3F3761430 (`transportroute_route_id`), 
-        add constraint FKCB09F8C3F3761430 
-        foreign key (`transportroute_route_id`) 
-        references `transportroute` (`id`);
-
-    alter table `deliveryjournal` 
-        add index FKCB09F8C38E0EB0AD (`vehicle_vehicle_vehicleid`), 
-        add constraint FKCB09F8C38E0EB0AD 
-        foreign key (`vehicle_vehicle_vehicleid`) 
-        references `vehicle` (`vehicleid`);
-
-    alter table `deliveryjournal` 
-        add index FKCB09F8C366A3DBDD (`collectionsession_session_e_id`), 
-        add constraint FKCB09F8C366A3DBDD 
-        foreign key (`collectionsession_session_e_id`) 
-        references `collectionsession` (`id`);
-
     create index farmdtype on `farm` (dtype);
 
     alter table `farm` 
@@ -938,12 +905,6 @@
     create index milksaledtype on `milksale` (dtype);
 
     alter table `milksale` 
-        add index FKABB35EE277DAE9F4 (`deliveryjournal_lines_e_id`), 
-        add constraint FKABB35EE277DAE9F4 
-        foreign key (`deliveryjournal_lines_e_id`) 
-        references `deliveryjournal` (id);
-
-    alter table `milksale` 
         add index FKABB35EE215DAE853 (`customer_customer_e_id`), 
         add constraint FKABB35EE215DAE853 
         foreign key (`customer_customer_e_id`) 
@@ -974,10 +935,60 @@
         references `dairylocation` (`id`);
 
     alter table `milksale` 
+        add index FKABB35EE266A3DBDD (`collectionsession_session_e_id`), 
+        add constraint FKABB35EE266A3DBDD 
+        foreign key (`collectionsession_session_e_id`) 
+        references `collectionsession` (`id`);
+
+    alter table `milksale` 
+        add index FKABB35EE2772B8BA7 (`milksalegroup_sales_e_id`), 
+        add constraint FKABB35EE2772B8BA7 
+        foreign key (`milksalegroup_sales_e_id`) 
+        references `milksalegroup` (`id`);
+
+    alter table `milksale` 
         add index FKABB35EE2B6B86E7C (`milkgrade_grade_e_id`), 
         add constraint FKABB35EE2B6B86E7C 
         foreign key (`milkgrade_grade_e_id`) 
         references `milkgrade` (id);
+
+    create index milksalegroupdtype on `milksalegroup` (dtype);
+
+    alter table `milksalegroup` 
+        add index FK9B3F94DD9CCF67F8 (`trip_deliveries_tripid`), 
+        add constraint FK9B3F94DD9CCF67F8 
+        foreign key (`trip_deliveries_tripid`) 
+        references `trip` (`tripid`);
+
+    alter table `milksalegroup` 
+        add index FK9B3F94DDE901D8A4 (`employee_driver_personid`), 
+        add constraint FK9B3F94DDE901D8A4 
+        foreign key (`employee_driver_personid`) 
+        references `person` (`personid`);
+
+    alter table `milksalegroup` 
+        add index FK9B3F94DD15DAE853 (`customer_customer_e_id`), 
+        add constraint FK9B3F94DD15DAE853 
+        foreign key (`customer_customer_e_id`) 
+        references `customer` (`customerid`);
+
+    alter table `milksalegroup` 
+        add index FK9B3F94DDF3761430 (`transportroute_route_id`), 
+        add constraint FK9B3F94DDF3761430 
+        foreign key (`transportroute_route_id`) 
+        references `transportroute` (`id`);
+
+    alter table `milksalegroup` 
+        add index FK9B3F94DD8E0EB0AD (`vehicle_vehicle_vehicleid`), 
+        add constraint FK9B3F94DD8E0EB0AD 
+        foreign key (`vehicle_vehicle_vehicleid`) 
+        references `vehicle` (`vehicleid`);
+
+    alter table `milksalegroup` 
+        add index FK9B3F94DD66A3DBDD (`collectionsession_session_e_id`), 
+        add constraint FK9B3F94DD66A3DBDD 
+        foreign key (`collectionsession_session_e_id`) 
+        references `collectionsession` (`id`);
 
     create index permissiondtype on `permission` (dtype);
 
@@ -1164,30 +1175,6 @@
         add constraint FK73F0CCC0BB0D2E42 
         foreign key (`dairy_routes_companyid`) 
         references `dairy` (`dairyid`);
-
-    alter table `trip_collections` 
-        add index FK8084E87BF0EC799F (`trip_tripid`), 
-        add constraint FK8084E87BF0EC799F 
-        foreign key (`trip_tripid`) 
-        references `trip` (`tripid`);
-
-    alter table `trip_collections` 
-        add index FK8084E87B91C5ECD5 (`collectiongroup_journalid`), 
-        add constraint FK8084E87B91C5ECD5 
-        foreign key (`collectiongroup_journalid`) 
-        references `collectiongroup` (`journalid`);
-
-    alter table `trip_deliveries` 
-        add index FKFEC207ECF0EC799F (`trip_tripid`), 
-        add constraint FKFEC207ECF0EC799F 
-        foreign key (`trip_tripid`) 
-        references `trip` (`tripid`);
-
-    alter table `trip_deliveries` 
-        add index FKFEC207EC297165B4 (`deliveryjournal_e_id`), 
-        add constraint FKFEC207EC297165B4 
-        foreign key (`deliveryjournal_e_id`) 
-        references `deliveryjournal` (id);
 
     create index tripdtype on `trip` (dtype);
 

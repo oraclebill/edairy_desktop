@@ -6,10 +6,11 @@ import org.eclipse.swt.widgets.Group;
 import com.agritrace.edairy.desktop.finance.ui.FinanceBindingConstants;
 import com.agritrace.edairy.desktop.finance.ui.controls.AbstractTransactionEditPanel;
 
-public class MilkSaleEditPanel extends AbstractTransactionEditPanel {
+public class MilkSaleEditPanel extends AbstractTransactionEditPanel
+{
 
-
-	public MilkSaleEditPanel(Composite parent, int style) {
+	public MilkSaleEditPanel(Composite parent, int style)
+	{
 		super(parent, style);
 		final Group middlePanel = getContentArea();
 
@@ -17,7 +18,7 @@ public class MilkSaleEditPanel extends AbstractTransactionEditPanel {
 
 		addTextField("Reference No.", FinanceBindingConstants.ID_REF_NUMBER_TEXT);
 		addDateField("Sale Date");
-		
+		addComboField("Session", BindConstants.ID_SESSION);
 		addStoreCombo("Store/Center");
 
 		addChoiceField("Sale Type");
