@@ -91,11 +91,11 @@ public class MilkCollectionJournalLineRepository extends RepositoryUtil<Collecti
 	@Transactional
 	public List<Object[]> collectionsSummary(Date startDate, Date endDate) {
 		final String sqlString = "" +
-				"select journaldate as date, dairylocation.code as route, collectionsession.code as session, sum(quantity) as sum, count(*) as cnt, avg(quantity) as avg, min(quantity) as min, max(quantity) as max  "
-				+ "  from collectiongroup join collectionjournalline on collectionjournalline_group_e_id = journalid "
+				"select collectiondate as date, dairylocation.code as route, collectionsession.code as session, sum(quantity) as sum, count(*) as cnt, avg(quantity) as avg, min(quantity) as min, max(quantity) as max  "
+				+ "  from collectiongroup join collectionjournalline on collectionjournalline_group_e_id = collectiongroup.id "
 				+ "    join collectionsession on collectionsession.id = collectionsession_session_e_id "
 				+ "    join dairylocation on dairylocation.id = dairylocation_collectioncenter_id "
-				+ "  where journaldate between ? and ? " + " group by 2,3 " + " order by 1,2,3;";
+				+ "  where collectiondate between ? and ? " + " group by 2,3 " + " order by 1,2,3;";
 		return getCurrentSession().createSQLQuery(sqlString).addScalar("date", Hibernate.DATE)
 				.addScalar("route", Hibernate.STRING).addScalar("session", Hibernate.STRING)
 				.addScalar("sum", Hibernate.DOUBLE).setDate(0, startDate).setDate(1, endDate).list();
