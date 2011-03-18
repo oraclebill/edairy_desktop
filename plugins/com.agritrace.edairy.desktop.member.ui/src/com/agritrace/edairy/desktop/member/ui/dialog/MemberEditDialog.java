@@ -42,4 +42,10 @@ public class MemberEditDialog extends RecordDialog<Membership> {
 		tabFolder.getTabComposite().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 	}
 
+	@Override
+	protected void configureShell(Shell newShell) {
+		super.configureShell(newShell);
+		newShell.setSize(800, 800);
+	}
+
 }

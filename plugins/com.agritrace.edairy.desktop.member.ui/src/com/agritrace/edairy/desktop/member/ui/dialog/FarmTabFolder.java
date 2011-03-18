@@ -53,8 +53,6 @@ public class FarmTabFolder {
 		detailGroup.setLayout(groupLayout);
 		detailGroup.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
 
-
-
 		// address tab
 		final LocationTabFolder addressWidget = new LocationTabFolder(
 				detailGroup, SWT.NONE);
