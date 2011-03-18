@@ -109,21 +109,21 @@ public class MilkCollectionRepositoryTest {
 		tx = session.beginTransaction();
 		
 		group = sessionProvider.createCollectionGroup(center, new Date(12, 31, 1999), collectionSession);
-		group.getJournalEntries().add(sessionProvider.createCollectionEntry(group, bin, member0, BigDecimal.ONE));
-		group.getJournalEntries().add(sessionProvider.createCollectionEntry(group, bin, member1, BigDecimal.ONE));
-		group.getJournalEntries().add(sessionProvider.createCollectionEntry(group, bin, member2, BigDecimal.ONE));
+		group.getEntries().add(sessionProvider.createCollectionEntry(group, bin, member0, BigDecimal.ONE));
+		group.getEntries().add(sessionProvider.createCollectionEntry(group, bin, member1, BigDecimal.ONE));
+		group.getEntries().add(sessionProvider.createCollectionEntry(group, bin, member2, BigDecimal.ONE));
 		session.persist(group);
 		
 		group = sessionProvider.createCollectionGroup(center, new Date(1, 1, 2000), collectionSession);
-		group.getJournalEntries().add(sessionProvider.createCollectionEntry(group, bin, member0, BigDecimal.ONE));
-		group.getJournalEntries().add(sessionProvider.createCollectionEntry(group, bin, member1, BigDecimal.ONE));
-		group.getJournalEntries().add(sessionProvider.createCollectionEntry(group, bin, member2, BigDecimal.ONE));
+		group.getEntries().add(sessionProvider.createCollectionEntry(group, bin, member0, BigDecimal.ONE));
+		group.getEntries().add(sessionProvider.createCollectionEntry(group, bin, member1, BigDecimal.ONE));
+		group.getEntries().add(sessionProvider.createCollectionEntry(group, bin, member2, BigDecimal.ONE));
 		session.persist(group);
 		
 		group = sessionProvider.createCollectionGroup(center, new Date(1, 2, 2000), collectionSession);
-		group.getJournalEntries().add(sessionProvider.createCollectionEntry(group, bin, member0, BigDecimal.ONE));
-		group.getJournalEntries().add(sessionProvider.createCollectionEntry(group, bin, member1, BigDecimal.ONE));
-		group.getJournalEntries().add(sessionProvider.createCollectionEntry(group, bin, member2, BigDecimal.ONE));
+		group.getEntries().add(sessionProvider.createCollectionEntry(group, bin, member0, BigDecimal.ONE));
+		group.getEntries().add(sessionProvider.createCollectionEntry(group, bin, member1, BigDecimal.ONE));
+		group.getEntries().add(sessionProvider.createCollectionEntry(group, bin, member2, BigDecimal.ONE));
 		session.persist(group);
 		
 		group = sessionProvider.createCollectionGroup(center, new Date(2, 2, 2000), collectionSession);

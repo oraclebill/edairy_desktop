@@ -266,7 +266,7 @@ public class MilkCollectionJournalLineQueryTest {
 
 				final CollectionGroup group = getCollectionGroup(record.getRouteNumber(), record.getSessionCode(),
 						record.getValidDate());
-				group.getJournalEntries().add(line);
+				group.getEntries().add(line);
 				group.setEntryCount(group.getEntryCount() + 1);
 				group.setRecordTotal(group.getRecordTotal().add(line.getQuantity()));
 			}
@@ -303,7 +303,7 @@ public class MilkCollectionJournalLineQueryTest {
 		if (group == null) {
 			group = DairyFactory.eINSTANCE.createCollectionGroup();
 			group.setReferenceNumber(key);
-			group.setJournalDate(date);
+			group.setCollectionDate(date);
 			group.setStatus(JournalStatus.COMPLETE);
 			group.setDriver(DEFAULT_DRIVER);
 			group.setType(CollectionGroupType.JOURNAL_GROUP);

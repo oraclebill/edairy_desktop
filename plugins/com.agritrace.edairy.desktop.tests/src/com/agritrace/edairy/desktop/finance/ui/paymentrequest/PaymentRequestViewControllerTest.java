@@ -149,7 +149,7 @@ public class PaymentRequestViewControllerTest extends AbstractSubModuleControlle
 		// setup mock..
 		collections = new ArrayList<CollectionJournalLine>();
 		for (CollectionGroup group : generateTestCollectionGroups(10, startDate, endDate)) {
-			collections.addAll(group.getJournalEntries());
+			collections.addAll(group.getEntries());
 		}
 		return collections;
 	}
@@ -184,8 +184,8 @@ public class PaymentRequestViewControllerTest extends AbstractSubModuleControlle
 		CollectionGroup group;
 
 		group = DairyFactory.eINSTANCE.createCollectionGroup();
-		group.setJournalId(Long.valueOf(group.hashCode()));
-		group.setJournalDate(collectionDate);
+		group.setId(Long.valueOf(group.hashCode()));
+		group.setCollectionDate(collectionDate);
 		group.setCollectionCenter(center);
 		group.setSession(session);
 		group.setType(CollectionGroupType.JOURNAL_GROUP);
@@ -258,7 +258,7 @@ public class PaymentRequestViewControllerTest extends AbstractSubModuleControlle
 			CollectionGroup group = createCollectionGroup(null, cal.getTime(), session);
 			for (Membership member : members) {
 				CollectionJournalLine entry = createCollectionEntry(group, bin, member, BigDecimal.ONE);
-				group.getJournalEntries().add(entry);
+				group.getEntries().add(entry);
 			}
 			groups.add(group);
 		}
