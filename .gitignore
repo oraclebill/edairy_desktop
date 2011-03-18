@@ -1,3 +1,5 @@
+export
+*.rptconfig
 External\ Plug-in\ Libraries
 *.xsd
 *.xsd2ecore
