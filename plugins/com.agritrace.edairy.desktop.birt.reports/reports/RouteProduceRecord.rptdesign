@@ -1,12 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 2.6.1.v20100902 Build &lt;2.6.1.v20100915-1750></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 2.6.2.r262_v20110209 Build &lt;2.6.2.v20110214-1523></property>
     <property name="units">in</property>
     <list-property name="propertyBindings">
         <structure>
             <property name="name">odaURL</property>
             <property name="id">7</property>
-            <expression name="value">"jdbc:mysql://" +params["host"].value + ":" + params["port"].value + "/" + params["databaseName"].value</expression>
+        </structure>
+        <structure>
+            <property name="name">odaDriverClass</property>
+            <property name="id">7</property>
+        </structure>
+        <structure>
+            <property name="name">odaUser</property>
+            <property name="id">7</property>
+        </structure>
+        <structure>
+            <property name="name">odaAutoCommit</property>
+            <property name="id">7</property>
+        </structure>
+        <structure>
+            <property name="name">odaIsolationMode</property>
+            <property name="id">7</property>
+        </structure>
+        <structure>
+            <property name="name">odaPassword</property>
+            <property name="id">7</property>
+        </structure>
+        <structure>
+            <property name="name">odaJndiName</property>
+            <property name="id">7</property>
+        </structure>
+        <structure>
+            <property name="name">OdaConnProfileName</property>
+            <property name="id">7</property>
+        </structure>
+        <structure>
+            <property name="name">OdaConnProfileStorePath</property>
+            <property name="id">7</property>
         </structure>
     </list-property>
     <method name="initialize"><![CDATA[i = 0;]]></method>
@@ -86,7 +117,7 @@
         <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="7"
  extends="CommonReportLib.Data Source">
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
-            <property name="odaURL">jdbc:mysql://localhost:3306/edairy</property>
+            <property name="odaURL">jdbc:mysql://localhost:3306/dairymgr</property>
             <property name="odaUser">root</property>
         </oda-data-source>
     </data-sources>
@@ -122,7 +153,7 @@
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">journaldate</property>
+                        <property name="name">collectiondate</property>
                         <property name="dataType">date-time</property>
                     </structure>
                     <structure>
@@ -137,7 +168,7 @@
                     </structure>
                     <structure>
                         <property name="position">4</property>
-                        <property name="name">dairycontainer_dairycontainer_containerid</property>
+                        <property name="name">bin_bin_containerid</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
@@ -181,8 +212,8 @@
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">journaldate</property>
-                    <property name="nativeName">journaldate</property>
+                    <property name="name">collectiondate</property>
+                    <property name="nativeName">collectiondate</property>
                     <property name="dataType">date-time</property>
                 </structure>
                 <structure>
@@ -199,8 +230,8 @@
                 </structure>
                 <structure>
                     <property name="position">4</property>
-                    <property name="name">dairycontainer_dairycontainer_containerid</property>
-                    <property name="nativeName">dairycontainer_dairycontainer_containerid</property>
+                    <property name="name">bin_bin_containerid</property>
+                    <property name="nativeName">bin_bin_containerid</property>
                     <property name="dataType">decimal</property>
                 </structure>
                 <structure>
@@ -246,19 +277,19 @@
                     <property name="dataType">string</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[SELECT collectiongroup.journaldate, collectiongroup.collectionsession_session_e_id, dairylocation.code
-, collectionjournalline.dairycontainer_dairycontainer_containerid, collectionjournalline.quantity, collectionjournalline.rejected
+            <xml-property name="queryText"><![CDATA[SELECT collectiongroup.collectiondate, collectiongroup.collectionsession_session_e_id, dairylocation.code
+, collectionjournalline.bin_bin_containerid, collectionjournalline.quantity, collectionjournalline.rejected
 , membership.membernumber, person.givenname, collectionsession.code, collectiongroup.referencenumber
 ,dairylocation.name
 FROM membership 
 JOIN person  ON membership.farmer = person.personid	
 LEFT JOIN dairylocation ON membership.dairylocation_defaultroute_id = dairylocation.id 
 LEFT JOIN collectionjournalline  ON membership.memberid = collectionjournalline.membership_validatedmember_e_id 
-LEFT JOIN collectiongroup  ON collectiongroup.journalid = collectionjournalline.collectionjournalline_collectionjournal_e_id 
+LEFT JOIN collectiongroup  ON collectiongroup.id = collectionjournalline.collectionjournalline_group_e_id 
 LEFT JOIN  collectionsession ON collectiongroup.collectionsession_session_e_id = collectionsession.id
 WHERE dairylocation.code = ? 
-AND collectiongroup.journaldate > DATE (?) 
-AND collectiongroup.journaldate < DATE (?) ]]></xml-property>
+AND collectiongroup.collectiondate > DATE (?) 
+AND collectiongroup.collectiondate < DATE (?) ]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="routsDateSet" id="2184">
             <list-property name="columnHints">
@@ -393,9 +424,9 @@ from dairylocation]]></xml-property>
                     <property name="dataSet">memberProduceDataset</property>
                     <list-property name="boundDataColumns">
                         <structure>
-                            <property name="name">journaldate</property>
-                            <text-property name="displayName">journaldate</text-property>
-                            <expression name="expression" type="javascript">dataSetRow["journaldate"]</expression>
+                            <property name="name">collectiondate</property>
+                            <text-property name="displayName">collectiondate</text-property>
+                            <expression name="expression" type="javascript">dataSetRow["collectiondate"]</expression>
                             <property name="dataType">date-time</property>
                         </structure>
                         <structure>
@@ -411,9 +442,9 @@ from dairylocation]]></xml-property>
                             <property name="dataType">string</property>
                         </structure>
                         <structure>
-                            <property name="name">dairycontainer_dairycontainer_containerid</property>
-                            <text-property name="displayName">dairycontainer_dairycontainer_containerid</text-property>
-                            <expression name="expression" type="javascript">dataSetRow["dairycontainer_dairycontainer_containerid"]</expression>
+                            <property name="name">bin_bin_containerid</property>
+                            <text-property name="displayName">bin_bin_containerid</text-property>
+                            <expression name="expression" type="javascript">dataSetRow["bin_bin_containerid"]</expression>
                             <property name="dataType">decimal</property>
                         </structure>
                         <structure>
@@ -514,9 +545,9 @@ from dairylocation]]></xml-property>
             <property name="dataSet">memberProduceDataset</property>
             <list-property name="boundDataColumns">
                 <structure>
-                    <property name="name">journaldate</property>
-                    <text-property name="displayName">journaldate</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["journaldate"]</expression>
+                    <property name="name">collectiondate</property>
+                    <text-property name="displayName">collectiondate</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["collectiondate"]</expression>
                     <property name="dataType">date-time</property>
                 </structure>
                 <structure>
@@ -532,9 +563,9 @@ from dairylocation]]></xml-property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="name">dairycontainer_dairycontainer_containerid</property>
-                    <text-property name="displayName">dairycontainer_dairycontainer_containerid</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["dairycontainer_dairycontainer_containerid"]</expression>
+                    <property name="name">bin_bin_containerid</property>
+                    <text-property name="displayName">bin_bin_containerid</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["bin_bin_containerid"]</expression>
                     <property name="dataType">decimal</property>
                 </structure>
                 <structure>
@@ -661,10 +692,10 @@ from dairylocation]]></xml-property>
                 </row>
             </header>
             <group id="2077">
-                <property name="groupName">journaldate</property>
+                <property name="groupName">collectiondate</property>
                 <property name="interval">none</property>
                 <property name="sortDirection">asc</property>
-                <expression name="keyExpr" type="javascript">row["journaldate"]</expression>
+                <expression name="keyExpr" type="javascript">row["collectiondate"]</expression>
                 <structure name="toc"/>
                 <property name="repeatHeader">true</property>
                 <property name="hideDetail">false</property>
@@ -673,7 +704,7 @@ from dairylocation]]></xml-property>
                 <property name="pageBreakInside">auto</property>
                 <list-property name="sort">
                     <structure>
-                        <expression name="key" type="javascript">row["journaldate"]</expression>
+                        <expression name="key" type="javascript">row["collectiondate"]</expression>
                         <property name="direction">asc</property>
                         <property name="strength">-1</property>
                     </structure>
@@ -697,7 +728,7 @@ from dairylocation]]></xml-property>
 }</expression>
                                 </structure>
                             </list-property>
-                            <property name="resultSetColumn">journaldate</property>
+                            <property name="resultSetColumn">collectiondate</property>
                         </data>
                     </cell>
                     <cell id="2163">
@@ -755,7 +786,7 @@ rejectedis</expression>
                                     <expression name="valueExpr" type="javascript">row["Aggregation"] == null || row["Aggregation"] &lt;= 0</expression>
                                 </structure>
                             </list-property>
-                            <property name="resultSetColumn">dairycontainer_dairycontainer_containerid</property>
+                            <property name="resultSetColumn">bin_bin_containerid</property>
                         </data>
                     </cell>
                     <cell id="2167">

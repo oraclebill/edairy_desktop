@@ -136,17 +136,17 @@
             </list-property>
             <structure name="cachedMetaData"/>
             <property name="dataSource">Data Source</property>
-            <xml-property name="queryText"><![CDATA[SELECT collectiongroup.journaldate, collectiongroup.collectionsession_session_e_id, dairylocation.code
-, collectionjournalline.dairycontainer_dairycontainer_containerid, collectionjournalline.quantity, collectionjournalline.rejected
+            <xml-property name="queryText"><![CDATA[SELECT collectiongroup.collectiondate, collectiongroup.collectionsession_session_e_id, dairylocation.code
+, collectionjournalline.bin_bin_containerid, collectionjournalline.quantity, collectionjournalline.rejected
 , membership.membernumber, person.givenname
 FROM membership 
 JOIN person  ON membership.farmer = person.personid	
 LEFT JOIN dairylocation ON membership.dairylocation_defaultroute_id = dairylocation.id 
 LEFT JOIN collectionjournalline  ON membership.memberid = collectionjournalline.membership_validatedmember_e_id 
-LEFT JOIN collectiongroup  ON collectiongroup.journalid = collectionjournalline.collectionjournalline_collectionjournal_e_id 
+LEFT JOIN collectiongroup  ON collectiongroup.id = collectionjournalline.collectionjournalline_group_e_id 
 WHERE membership.memberNumber = ? 
-AND collectiongroup.journaldate >= DATE (?) 
-AND collectiongroup.journaldate <= DATE (?) ]]></xml-property>
+AND collectiongroup.collectiondate >= DATE (?) 
+AND collectiongroup.collectiondate <= DATE (?) ]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="activeMembers" id="2179">
             <property name="nullsOrdering">nulls lowest</property>
@@ -283,9 +283,9 @@ where membership.status = 'Active']]></xml-property>
                     <property name="dataSet">memberProduceDataset</property>
                     <list-property name="boundDataColumns">
                         <structure>
-                            <property name="name">journaldate</property>
-                            <text-property name="displayName">journaldate</text-property>
-                            <expression name="expression" type="javascript">dataSetRow["journaldate"]</expression>
+                            <property name="name">collectiondate</property>
+                            <text-property name="displayName">collectiondate</text-property>
+                            <expression name="expression" type="javascript">dataSetRow["collectiondate"]</expression>
                             <property name="dataType">date-time</property>
                         </structure>
                         <structure>
@@ -301,9 +301,9 @@ where membership.status = 'Active']]></xml-property>
                             <property name="dataType">string</property>
                         </structure>
                         <structure>
-                            <property name="name">dairycontainer_dairycontainer_containerid</property>
-                            <text-property name="displayName">dairycontainer_dairycontainer_containerid</text-property>
-                            <expression name="expression" type="javascript">dataSetRow["dairycontainer_dairycontainer_containerid"]</expression>
+                            <property name="name">bin_bin_containerid</property>
+                            <text-property name="displayName">bin_bin_containerid</text-property>
+                            <expression name="expression" type="javascript">dataSetRow["bin_bin_containerid"]</expression>
                             <property name="dataType">decimal</property>
                         </structure>
                         <structure>
@@ -389,9 +389,9 @@ where membership.status = 'Active']]></xml-property>
             <property name="dataSet">memberProduceDataset</property>
             <list-property name="boundDataColumns">
                 <structure>
-                    <property name="name">journaldate</property>
-                    <text-property name="displayName">journaldate</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["journaldate"]</expression>
+                    <property name="name">collectiondate</property>
+                    <text-property name="displayName">collectiondate</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["collectiondate"]</expression>
                     <property name="dataType">date-time</property>
                 </structure>
                 <structure>
@@ -407,9 +407,9 @@ where membership.status = 'Active']]></xml-property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="name">dairycontainer_dairycontainer_containerid</property>
-                    <text-property name="displayName">dairycontainer_dairycontainer_containerid</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["dairycontainer_dairycontainer_containerid"]</expression>
+                    <property name="name">bin_bin_containerid</property>
+                    <text-property name="displayName">bin_bin_containerid</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["bin_bin_containerid"]</expression>
                     <property name="dataType">decimal</property>
                 </structure>
                 <structure>
@@ -621,10 +621,10 @@ where membership.status = 'Active']]></xml-property>
                 </row>
             </header>
             <group id="2077">
-                <property name="groupName">journaldate</property>
+                <property name="groupName">collectiondate</property>
                 <property name="interval">none</property>
                 <property name="sortDirection">asc</property>
-                <expression name="keyExpr" type="javascript">row["journaldate"]</expression>
+                <expression name="keyExpr" type="javascript">row["collectiondate"]</expression>
                 <structure name="toc"/>
                 <property name="repeatHeader">true</property>
                 <property name="hideDetail">false</property>
@@ -633,7 +633,7 @@ where membership.status = 'Active']]></xml-property>
                 <property name="pageBreakInside">auto</property>
                 <list-property name="sort">
                     <structure>
-                        <expression name="key" type="javascript">row["journaldate"]</expression>
+                        <expression name="key" type="javascript">row["collectiondate"]</expression>
                         <property name="direction">asc</property>
                         <property name="strength">-1</property>
                     </structure>
@@ -671,7 +671,7 @@ where membership.status = 'Active']]></xml-property>
                         <cell id="2103">
                             <data id="2100">
                                 <property name="style">date</property>
-                                <property name="resultSetColumn">journaldate</property>
+                                <property name="resultSetColumn">collectiondate</property>
                             </data>
                         </cell>
                         <cell id="2104">
@@ -702,7 +702,7 @@ where membership.status = 'Active']]></xml-property>
                                 <method name="onRender"><![CDATA[if(row["rejected"] == 1){
 	this.getStyle().textLineThrough = "Line-through"
 }]]></method>
-                                <property name="resultSetColumn">dairycontainer_dairycontainer_containerid</property>
+                                <property name="resultSetColumn">bin_bin_containerid</property>
                             </data>
                         </cell>
                         <cell id="2106">
@@ -758,7 +758,7 @@ rejectedis</expression>
                                 <method name="onRender"><![CDATA[if(row["rejected"] == 1){
 	this.getStyle().textLineThrough = "Line-through"
 }]]></method>
-                                <property name="resultSetColumn">dairycontainer_dairycontainer_containerid</property>
+                                <property name="resultSetColumn">bin_bin_containerid</property>
                             </data>
                         </cell>
                         <cell id="2110">

@@ -7,7 +7,38 @@
         <structure>
             <property name="name">odaURL</property>
             <property name="id">7</property>
-            <expression name="value">"jdbc:mysql://" +params["host"].value + ":" + params["port"].value + "/" + params["databaseName"].value</expression>
+        </structure>
+        <structure>
+            <property name="name">odaDriverClass</property>
+            <property name="id">7</property>
+        </structure>
+        <structure>
+            <property name="name">odaUser</property>
+            <property name="id">7</property>
+        </structure>
+        <structure>
+            <property name="name">odaAutoCommit</property>
+            <property name="id">7</property>
+        </structure>
+        <structure>
+            <property name="name">odaIsolationMode</property>
+            <property name="id">7</property>
+        </structure>
+        <structure>
+            <property name="name">odaPassword</property>
+            <property name="id">7</property>
+        </structure>
+        <structure>
+            <property name="name">odaJndiName</property>
+            <property name="id">7</property>
+        </structure>
+        <structure>
+            <property name="name">OdaConnProfileName</property>
+            <property name="id">7</property>
+        </structure>
+        <structure>
+            <property name="name">OdaConnProfileStorePath</property>
+            <property name="id">7</property>
         </structure>
     </list-property>
     <method name="initialize"><![CDATA[i = 0;]]></method>
@@ -70,14 +101,92 @@ BirtDateTime.year(endDate) + "-" + BirtDateTime.month(endDate) + "-" + BirtDateT
         <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="7"
  extends="CommonReportLib.Data Source">
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
-            <property name="odaURL">jdbc:mysql://localhost:3306/edairy</property>
+            <property name="odaURL">jdbc:mysql://localhost:3306/dairymgr</property>
             <property name="odaUser">root</property>
         </oda-data-source>
     </data-sources>
     <data-sets>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="MilkIntakeSQLDataSet" id="2216"
  extends="CommonReportLib.MilkIntakeSQLDataSet">
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">collectiondate</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">code</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">code_3</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">quantity</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">rejected</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">collectionsession_session_e_id</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
             <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">collectiondate</property>
+                    <property name="nativeName">collectiondate</property>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">code</property>
+                    <property name="nativeName">code</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">code_3</property>
+                    <property name="nativeName">code</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">quantity</property>
+                    <property name="nativeName">quantity</property>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">rejected</property>
+                    <property name="nativeName">rejected</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">collectionsession_session_e_id</property>
+                    <property name="nativeName">collectionsession_session_e_id</property>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select collectiongroup.collectiondate, collectionsession.code as session, dairylocation.code as center, collectionjournalline.quantity, collectionjournalline.rejected, collectiongroup.collectionsession_session_e_id
+from collectiongroup 
+	join collectionjournalline on collectiongroup.id = collectionjournalline.collectionjournalline_group_e_id
+	join collectionsession on collectionsession.id = collectiongroup.collectionsession_session_e_id
+	join dairylocation on dairylocation.id = collectiongroup.dairylocation_collectioncenter_id
+where collectiondate = ?]]></xml-property>
         </oda-data-set>
     </data-sets>
     <styles>
@@ -205,9 +314,9 @@ BirtDateTime.year(endDate) + "-" + BirtDateTime.month(endDate) + "-" + BirtDateT
             <property name="dataSet">MilkIntakeSQLDataSet</property>
             <list-property name="boundDataColumns">
                 <structure>
-                    <property name="name">journaldate</property>
-                    <text-property name="displayName">journaldate</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["journaldate"]</expression>
+                    <property name="name">collectiondate</property>
+                    <text-property name="displayName">collectiondate</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["collectiondate"]</expression>
                     <property name="dataType">date-time</property>
                 </structure>
                 <structure>
@@ -221,12 +330,6 @@ BirtDateTime.year(endDate) + "-" + BirtDateTime.month(endDate) + "-" + BirtDateT
                     <text-property name="displayName">code</text-property>
                     <expression name="expression" type="javascript">dataSetRow["code"]</expression>
                     <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="name">dairycontainer_dairycontainer_containerid</property>
-                    <text-property name="displayName">dairycontainer_dairycontainer_containerid</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["dairycontainer_dairycontainer_containerid"]</expression>
-                    <property name="dataType">decimal</property>
                 </structure>
                 <structure>
                     <property name="name">quantity</property>
@@ -284,7 +387,7 @@ BirtDateTime.year(endDate) + "-" + BirtDateTime.month(endDate) + "-" + BirtDateT
                             <expression name="value" type="javascript">dataSetRow["quantity"]</expression>
                         </structure>
                     </list-property>
-                    <expression name="filterExpr" type="javascript">BirtDateTime.diffDay(BirtDateTime.addDay( params["date"].value, 0), BirtDateTime.addDay(row["journaldate"], 0))==0</expression>
+                    <expression name="filterExpr" type="javascript">BirtDateTime.diffDay(BirtDateTime.addDay( params["date"].value, 0), BirtDateTime.addDay(row["collectiondate"], 0))==0</expression>
                 </structure>
                 <structure>
                     <property name="name">TotalPMQty</property>
@@ -371,7 +474,7 @@ BirtDateTime.year(endDate) + "-" + BirtDateTime.month(endDate) + "-" + BirtDateT
                             <expression name="value" type="javascript">dataSetRow["quantity"]</expression>
                         </structure>
                     </list-property>
-                    <expression name="filterExpr" type="javascript">BirtDateTime.diffDay(BirtDateTime.addDay( params["fromDate"].value, 0), BirtDateTime.addDay(row["journaldate"], 0))==0</expression>
+                    <expression name="filterExpr" type="javascript">BirtDateTime.diffDay(BirtDateTime.addDay( params["fromDate"].value, 0), BirtDateTime.addDay(row["collectiondate"], 0))==0</expression>
                 </structure>
                 <structure>
                     <property name="name">Aggregation_1</property>
@@ -431,19 +534,7 @@ if(row["TotalQtyPrevious"] != null &amp;&amp; row["TotalQty"] != null) {&#13;
                             <expression name="value" type="javascript">dataSetRow["quantity"]</expression>
                         </structure>
                     </list-property>
-                    <expression name="filterExpr" type="javascript">BirtDateTime.diffDay(BirtDateTime.addDay( params["fromDate"].value, 0), BirtDateTime.addDay(row["journaldate"], 0))==0</expression>
-                </structure>
-                <structure>
-                    <property name="name">membernumber</property>
-                    <text-property name="displayName">membernumber</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["membernumber"]</expression>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="name">givenname</property>
-                    <text-property name="displayName">givenname</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["givenname"]</expression>
-                    <property name="dataType">string</property>
+                    <expression name="filterExpr" type="javascript">BirtDateTime.diffDay(BirtDateTime.addDay( params["fromDate"].value, 0), BirtDateTime.addDay(row["collectiondate"], 0))==0</expression>
                 </structure>
             </list-property>
             <structure name="toc"/>
