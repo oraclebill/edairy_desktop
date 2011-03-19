@@ -25,7 +25,7 @@
 			<arg value="-repository"/>
 			<arg value="${repository}"/>
 			<arg value="-destination"/>
-			<arg value="${destination}"/>
+			<arg value="${destination}"/>  
 			<arg value="-profile"/>
 			<arg value="${profile}"/>
 			<arg value="-profileProperties" />
