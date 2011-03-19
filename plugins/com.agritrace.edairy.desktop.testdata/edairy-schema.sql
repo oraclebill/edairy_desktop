@@ -343,7 +343,7 @@
         `referencenumber` varchar(60) not null,
         `date` datetime not null,
         `transportroute_route_id` bigint not null,
-        `customer_customer_e_id` bigint not null,
+        `customer_customer_e_id` bigint,
         `employee_driver_personid` bigint,
         `vehicle_vehicle_vehicleid` bigint,
         `total` decimal(19,2) not null,
