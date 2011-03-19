@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.teneo.hibernate.HbDataStore;
 import org.eclipse.emf.teneo.hibernate.HbHelper;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
@@ -35,25 +36,27 @@ import com.agritrace.edairy.desktop.common.model.requests.RequestsPackage;
 import com.agritrace.edairy.desktop.common.model.tracking.TrackingPackage;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
-public class DatabaseSetup {
+public class DatabaseSetup
+{
 
-	public static final EPackage[] EPACKAGES = { TrackingPackage.eINSTANCE, DairyPackage.eINSTANCE,
+	public static final EPackage[]	EPACKAGES		= { TrackingPackage.eINSTANCE, DairyPackage.eINSTANCE,
 			ModelPackage.eINSTANCE, AccountPackage.eINSTANCE, RequestsPackage.eINSTANCE };
-	private String databaseName = "generated";
-	private String host = "localhost";
-	private int port = 3306;
-	private String userName = "root";
-	private String password = "";
-	private String schemaFileName = "edairy-schema.sql";
+	private String					databaseName	= "generated";
+	private String					host			= "localhost";
+	private int						port			= 3306;
+	private String					userName		= "root";
+	private String					password		= "";
+	private String					schemaFileName	= "edairy-schema.sql";
 // private String mappingFileName = "";
 // private Map<String, ?> options = new HashMap<String, Object>();
-	private HbDataStore hbds;
-	private Session session = null;
+	private HbDataStore				hbds;
+	private Session					session			= null;
 
 	/**
 	 * @return the baseGrade
 	 */
-	public MilkGrade getBaseGrade() {
+	public MilkGrade getBaseGrade()
+	{
 		return baseGrade;
 	}
 
@@ -61,16 +64,18 @@ public class DatabaseSetup {
 	 * @param baseGrade
 	 *            the baseGrade to set
 	 */
-	public void setBaseGrade(MilkGrade baseGrade) {
+	public void setBaseGrade(MilkGrade baseGrade)
+	{
 		this.baseGrade = baseGrade;
 	}
 
-	private MilkGrade baseGrade;
+	private MilkGrade	baseGrade;
 
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception
+	{
 // BasicConfigurator.configure();
 // Logger.getLogger("org.eclipse.emf.teneo").setLevel(Level.INFO);
 // Logger.getLogger("org.hibernate").setLevel(Level.WARN);
@@ -83,20 +88,29 @@ public class DatabaseSetup {
 		}
 		setup.generateSchema();
 		setup.generateHibernateMapping();
+		// 
+		setup.createDatabase();
+		setup.initializeDataStore();
+		Session s = setup.getOrCreateSession();
+		Transaction tx = s.beginTransaction();
+		setup.populateBaseReferenceData(
+				setup.createDairy("<dairynumber>"));
+		tx.commit();
 	}
-
 
 	/**
 	 * 
 	 */
-	public DatabaseSetup() {
+	public DatabaseSetup()
+	{
 		super();
 	}
 
 	/**
 	 * @return the databaseName
 	 */
-	public String getDatabaseName() {
+	public String getDatabaseName()
+	{
 		return databaseName;
 	}
 
@@ -104,14 +118,16 @@ public class DatabaseSetup {
 	 * @param databaseName
 	 *            the databaseName to set
 	 */
-	public void setDatabaseName(String databaseName) {
+	public void setDatabaseName(String databaseName)
+	{
 		this.databaseName = databaseName;
 	}
 
 	/**
 	 * @return the host
 	 */
-	public String getHost() {
+	public String getHost()
+	{
 		return host;
 	}
 
@@ -119,14 +135,16 @@ public class DatabaseSetup {
 	 * @param host
 	 *            the host to set
 	 */
-	public void setHost(String host) {
+	public void setHost(String host)
+	{
 		this.host = host;
 	}
 
 	/**
 	 * @return the port
 	 */
-	public int getPort() {
+	public int getPort()
+	{
 		return port;
 	}
 
@@ -134,14 +152,16 @@ public class DatabaseSetup {
 	 * @param port
 	 *            the port to set
 	 */
-	public void setPort(int port) {
+	public void setPort(int port)
+	{
 		this.port = port;
 	}
 
 	/**
 	 * @return the password
 	 */
-	public String getPassword() {
+	public String getPassword()
+	{
 		return password;
 	}
 
@@ -149,7 +169,8 @@ public class DatabaseSetup {
 	 * @param password
 	 *            the password to set
 	 */
-	public void setPassword(String password) {
+	public void setPassword(String password)
+	{
 		this.password = password;
 	}
 
@@ -157,14 +178,16 @@ public class DatabaseSetup {
 	 * @param userName
 	 *            the userName to set
 	 */
-	public void setUserName(String userName) {
+	public void setUserName(String userName)
+	{
 		this.userName = userName;
 	}
 
 	/**
 	 * @return the schemaFileName
 	 */
-	public String getSchemaFileName() {
+	public String getSchemaFileName()
+	{
 		return schemaFileName;
 	}
 
@@ -172,7 +195,8 @@ public class DatabaseSetup {
 	 * @param schemaFileName
 	 *            the schemaFileName to set
 	 */
-	public void setSchemaFileName(String schemaFileName) {
+	public void setSchemaFileName(String schemaFileName)
+	{
 		this.schemaFileName = schemaFileName;
 	}
 
@@ -181,7 +205,8 @@ public class DatabaseSetup {
 	 * 
 	 * @return
 	 */
-	public Session openSession() {
+	public Session openSession()
+	{
 		return hbds.getSessionFactory().openSession();
 	}
 
@@ -190,7 +215,8 @@ public class DatabaseSetup {
 	 * 
 	 * @return
 	 */
-	public Session getSession() {
+	public Session getSession()
+	{
 		return session;
 	}
 
@@ -198,7 +224,8 @@ public class DatabaseSetup {
 	 * @param session
 	 *            the session to set
 	 */
-	public void setSession(Session session) {
+	public void setSession(Session session)
+	{
 		if (this.session != null) {
 			this.session.close();
 		}
@@ -210,7 +237,8 @@ public class DatabaseSetup {
 	 * 
 	 * @return
 	 */
-	public Session getOrCreateSession() {
+	public Session getOrCreateSession()
+	{
 		if (getSession() == null)
 			setSession(openSession());
 		return getSession();
@@ -219,11 +247,12 @@ public class DatabaseSetup {
 	/**
 	 * 
 	 */
-	public void createDatabase() {
+	public void createDatabase()
+	{
 		System.out.format("Creating database [%s]\n", getDatabaseName());
-//		String dbURL = getDatabaseURL();
+// String dbURL = getDatabaseURL();
 		try {
-			DataSource dataSource = createDataSource();			
+			DataSource dataSource = createDataSource();
 			Connection conn = dataSource.getConnection();
 			Statement stmt = conn.createStatement();
 			String statement = String.format("create database  %s;", getDatabaseName());
@@ -252,7 +281,8 @@ public class DatabaseSetup {
 	 * @throws IOException
 	 * 
 	 */
-	public void generateSchema() throws IOException {
+	public void generateSchema() throws IOException
+	{
 		// for teneo, we need to intialize the datastore in order ot properly
 		// init the configuration. So we set an invalid db so init will fail,
 		// but then we can use the config to generate schema...
@@ -270,21 +300,21 @@ public class DatabaseSetup {
 		exporter.execute(true, false, false, true);
 
 	}
-	
+
 	/**
 	 * 
 	 */
 	public void generateHibernateMapping() throws IOException
 	{
-		
-	}
 
+	}
 
 	/**
 	 * 
 	 * 
 	 */
-	protected void initializeDataStore() {
+	protected void initializeDataStore()
+	{
 		hbds = HbHelper.INSTANCE.createRegisterDataStore(getDatabaseName());
 		hbds.setProperties(getOptions());
 
@@ -295,29 +325,32 @@ public class DatabaseSetup {
 	/**
 	 * 
 	 */
-	protected void populateBaseReferenceData(Dairy dairy) {
+	protected void populateBaseReferenceData(Dairy dairy)
+	{
 		populateBaseCollectionSessions(dairy);
 		populateBaseSystemUsersAndRoles(dairy);
 		populateBaseMilkGrades(dairy);
 	}
 
-	private void populateBaseCollectionSessions(Dairy dairy) {
+	private void populateBaseCollectionSessions(Dairy dairy)
+	{
 		CollectionSession cSession;
 
 		cSession = DairyFactory.eINSTANCE.createCollectionSession();
 		cSession.setCode("AM");
-		cSession.setTimeOfDay(new Date(0,0,0,6,0));
+		cSession.setTimeOfDay(new Date(0, 0, 0, 6, 0));
 		cSession.setDescription("The first collection session of the day");
 		dairy.getCollectionSessions().add(cSession);
 
 		cSession = DairyFactory.eINSTANCE.createCollectionSession();
 		cSession.setCode("PM");
 		cSession.setDescription("An additional collection session.");
-		cSession.setTimeOfDay(new Date(0,0,0,13,0));
+		cSession.setTimeOfDay(new Date(0, 0, 0, 13, 0));
 		dairy.getCollectionSessions().add(cSession);
 	}
 
-	private void populateBaseSystemUsersAndRoles(Dairy dairy) {
+	private void populateBaseSystemUsersAndRoles(Dairy dairy)
+	{
 		SystemUser user;
 		Role role;
 		Permission permission;
@@ -354,7 +387,8 @@ public class DatabaseSetup {
 
 	}
 
-	private void populateBaseMilkGrades(Dairy dairy) {
+	private void populateBaseMilkGrades(Dairy dairy)
+	{
 		MilkGrade grade;
 
 		grade = DairyFactory.eINSTANCE.createMilkGrade();
@@ -397,10 +431,11 @@ public class DatabaseSetup {
 		}
 	}
 
-	protected Dairy createDairy(String dairyNumber) {
+	protected Dairy createDairy(String dairyNumber)
+	{
 		Dairy dairy;
 		Location location;
-		
+
 		location = ModelFactory.eINSTANCE.createLocation();
 		location.setDescriptiveLocation(null);
 		location.setMapLocation(null);
@@ -414,8 +449,8 @@ public class DatabaseSetup {
 		dairy.setCompanyName("<company common name>");
 		dairy.setLegalName("<company legal name>");
 		dairy.setPhoneNumber("+254 0072 0000 0000");
-		dairy.setEstablishedDate(new Date(1,1,1975));
-		
+		dairy.setEstablishedDate(new Date(1, 1, 1975));
+
 		dairy.setLocation(location);
 		Assert.isNotNull(dairy.getLocation());
 		getSession().persist(dairy);
@@ -423,7 +458,8 @@ public class DatabaseSetup {
 		return dairy;
 	}
 
-	private Configuration generateTeneoHibernateConfig() {
+	private Configuration generateTeneoHibernateConfig()
+	{
 		// for teneo, we need to intialize the datastore in order ot properly
 		// init the configuration. So we set an invalid db so init will fail,
 		// but then we can use the config to generate schema...
@@ -447,7 +483,8 @@ public class DatabaseSetup {
 		return configuration;
 	}
 
-	private Properties getOptions() {
+	private Properties getOptions()
+	{
 		Properties props = new Properties();
 
 		setDatabaseProperties(props);
@@ -460,32 +497,36 @@ public class DatabaseSetup {
 	/**
 	 * @param props
 	 */
-	protected void setDatabaseProperties(Properties props) {
+	protected void setDatabaseProperties(Properties props)
+	{
 		props.setProperty(Environment.DIALECT, "org.hibernate.dialect.MySQLInnoDBDialect");
 		props.setProperty(Environment.DRIVER, "com.mysql.jdbc.Driver");
 		props.setProperty(Environment.USER, getUserName());
 		props.setProperty(Environment.URL, getDatabaseURL());
 	}
 
-	private String getUserName() {
+	private String getUserName()
+	{
 		// TODO Auto-generated method stub
 		return userName;
 	}
 
-	private String getDatabaseURL() {
+	private String getDatabaseURL()
+	{
 		return String.format("jdbc:mysql://%s:%d/%s", getHost(), getPort(), getDatabaseName());
 	}
 
 	/**
 	 * @param props
 	 */
-	private void setTeneoProperties(Properties props) {
+	private void setTeneoProperties(Properties props)
+	{
 		props.setProperty("teneo.naming.default_id_column", "id");
 		props.setProperty("teneo.naming.version_column", "opver");
 		props.setProperty("teneo.naming.set_foreign_key_name", "false");
 		props.setProperty("teneo.mapping.also_map_as_class", "false");
 		props.setProperty("teneo.mapping.disable_econtainer", "true");
-//		props.setProperty("teneo.mapping.cascade_policy_on_non_containment", "ALL");
+// props.setProperty("teneo.mapping.cascade_policy_on_non_containment", "ALL");
 		props.setProperty("teneo.mapping.default_varchar_length", "60");
 		props.setProperty("teneo.mapping.always_map_list_as_bag", "true"); // will
 	}
@@ -493,7 +534,8 @@ public class DatabaseSetup {
 	/**
 	 * @param props
 	 */
-	private void setHibernateProperties(Properties props) {
+	private void setHibernateProperties(Properties props)
+	{
 		props.setProperty(Environment.SHOW_SQL, "true");
 // props.setProperty(Environment.FORMAT_SQL, "true");
 // props.setProperty(Environment.USE_SQL_COMMENTS, "true");
