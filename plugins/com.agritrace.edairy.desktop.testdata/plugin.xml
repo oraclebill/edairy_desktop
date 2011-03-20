@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="true"
+            class="com.agritrace.edairy.desktop.install.dbsetup.DatabaseSetupView"
+            id="com.agritrace.edairy.desktop.install.dbsetup.DatabaseSetupView"
+            name="Database Setup"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
+            id="com.agritrace.edairy.desktop.install.dbsetup.perspective1"
+            name="Database Setup">
+         <description>
+            A perspective of perspectives.
+         </description>
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.riena.navigation.assemblies2">
+      <assembly2
+            assembler="org.eclipse.riena.navigation.model.GenericNavigationAssembler"
+            id="com.agritrace.edairy.desktop.install.dbsetup.assembly21"
+            name="dbsetup"
+            parentNodeId="application"
+            startOrder="100">
+         <subApplication
+               nodeId="com.agritrace.edairy.desktop.install.dbsetup.subApplication1"
+               perspectiveId="com.agritrace.edairy.desktop.install.dbsetup.subApplication1">
+            <moduleGroup
+                  nodeId="com.agritrace.edairy.desktop.install.dbsetup.moduleGroup1">
+               <module
+                     closable="true"
+                     nodeId="com.agritrace.edairy.desktop.install.dbsetup.module1">
+                  <subModule
+                        controller="com.agritrace.edairy.desktop.install.dbsetup.DatabaseSetupController"
+                        expanded="false"
+                        nodeId="com.agritrace.edairy.desktop.install.dbsetup.subModule1"
+                        selectable="true"
+                        sharedView="false"
+                        viewId="com.agritrace.edairy.desktop.install.dbsetup.DatabaseSetupView"
+                        visible="true">
+                  </subModule>
+               </module>
+            </moduleGroup>
+         </subApplication>
+      </assembly2>
+   </extension>
+</plugin>

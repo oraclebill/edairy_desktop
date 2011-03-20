@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Testdata
-Bundle-SymbolicName: com.agritrace.edairy.desktop.testdata
+Bundle-SymbolicName: com.agritrace.edairy.desktop.install.dbsetup;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: com.agritrace.edairy.desktop.testdata.Activator
+Bundle-Activator: com.agritrace.edairy.desktop.install.dbsetup.Activator
 Bundle-Vendor: AGRITRACE
 Require-Bundle: org.eclipse.core.runtime,
  com.agritrace.edairy.desktop.common.model;bundle-version="1.0.0",
@@ -13,7 +13,18 @@ Require-Bundle: org.eclipse.core.runtime,
  org.apache.commons.beanutils;bundle-version="1.7.0",
  org.hibernate;bundle-version="3.3.2",
  org.apache.log4j;bundle-version="1.2.16",
- com.mysql.jdbc;bundle-version="5.1.11"
+ com.mysql.jdbc;bundle-version="5.1.11",
+ org.eclipse.riena.ui.common;bundle-version="2.0.0",
+ org.eclipse.riena.ui.core;bundle-version="2.0.0",
+ org.eclipse.riena.ui.ridgets;bundle-version="2.0.0",
+ org.eclipse.riena.ui.ridgets.swt;bundle-version="2.1.0",
+ org.eclipse.riena.ui.swt;bundle-version="2.0.0",
+ org.eclipse.riena.ui.swt.rcp;bundle-version="2.0.0",
+ org.eclipse.riena.ui.workarea;bundle-version="2.0.0",
+ org.eclipse.riena.client.ridgets;bundle-version="2.0.0",
+ org.eclipse.riena.navigation;bundle-version="2.0.0",
+ org.eclipse.riena.navigation.ui;bundle-version="2.0.0",
+ org.eclipse.riena.navigation.ui.swt;bundle-version="2.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Export-Package: com.agritrace.edairy.desktop.testdata
+Export-Package: com.agritrace.edairy.desktop.install.dbsetup

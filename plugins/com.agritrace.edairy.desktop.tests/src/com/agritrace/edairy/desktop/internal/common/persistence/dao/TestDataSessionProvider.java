@@ -6,7 +6,7 @@ import org.apache.derby.jdbc.EmbeddedDataSource40;
 import org.hibernate.Session;
 import org.hibernate.cfg.Environment;
 
-import com.agritrace.edairy.desktop.testdata.TestDataGenerator;
+import com.agritrace.edairy.desktop.install.dbsetup.TestDataGenerator;
 import com.google.inject.Provider;
 
 public class TestDataSessionProvider extends TestDataGenerator implements Provider<Session>
@@ -31,7 +31,7 @@ public class TestDataSessionProvider extends TestDataGenerator implements Provid
 	/**
 	 * (non-Javadoc)
 	 * 
-	 * @see com.agritrace.edairy.desktop.testdata.DatabaseSetup#createDataSource()
+	 * @see com.agritrace.edairy.desktop.install.dbsetup.DatabaseSetup#createDataSource()
 	 */
 	@Override
 	public void createDatabase() {
@@ -53,7 +53,7 @@ public class TestDataSessionProvider extends TestDataGenerator implements Provid
 	/**
 	 * (non-Javadoc)
 	 * 
-	 * @see com.agritrace.edairy.desktop.testdata.DatabaseSetup#setDatabaseProperties(java.util.Properties)
+	 * @see com.agritrace.edairy.desktop.install.dbsetup.DatabaseSetup#setDatabaseProperties(java.util.Properties)
 	 */
 	@Override
 	protected void setDatabaseProperties(Properties props)

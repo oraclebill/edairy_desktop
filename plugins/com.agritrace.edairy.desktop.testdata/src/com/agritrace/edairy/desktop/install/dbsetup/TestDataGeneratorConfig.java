@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.testdata;
+package com.agritrace.edairy.desktop.install.dbsetup;
 
 import java.math.BigDecimal;
 import java.util.Calendar;

@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.testdata;
+package com.agritrace.edairy.desktop.install.dbsetup;
 
 import java.io.File;
 import java.io.IOException;
