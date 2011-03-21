@@ -5,7 +5,7 @@
          point="org.eclipse.ui.views">
       <view
             allowMultiple="true"
-            class="com.agritrace.edairy.desktop.install.dbsetup.DatabaseSetupView"
+            class="com.agritrace.edairy.desktop.install.dbsetup.views.DatabaseSetupView"
             id="com.agritrace.edairy.desktop.install.dbsetup.DatabaseSetupView"
             name="Database Setup"
             restorable="true">
@@ -15,7 +15,7 @@
          point="org.eclipse.ui.perspectives">
       <perspective
             class="org.eclipse.riena.navigation.ui.swt.views.SubApplicationView"
-            id="com.agritrace.edairy.desktop.install.dbsetup.perspective1"
+            id="com.agritrace.edairy.desktop.install.dbsetup.subApplication1"
             name="Database Setup">
          <description>
             A perspective of perspectives.
@@ -39,8 +39,9 @@
                      closable="true"
                      nodeId="com.agritrace.edairy.desktop.install.dbsetup.module1">
                   <subModule
-                        controller="com.agritrace.edairy.desktop.install.dbsetup.DatabaseSetupController"
+                        controller="com.agritrace.edairy.desktop.install.dbsetup.views.DatabaseSetupController"
                         expanded="false"
+                        name="Database Setup / Initialization"
                         nodeId="com.agritrace.edairy.desktop.install.dbsetup.subModule1"
                         selectable="true"
                         sharedView="false"
@@ -51,5 +52,17 @@
             </moduleGroup>
          </subApplication>
       </assembly2>
+   </extension>
+   <extension
+         id="id1"
+         point="org.eclipse.core.runtime.applications">
+      <application
+            cardinality="singleton-global"
+            thread="main"
+            visible="true">
+         <run
+               class="com.agritrace.edairy.desktop.install.dbsetup.Application">
+         </run>
+      </application>
    </extension>
 </plugin>

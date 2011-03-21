@@ -31,7 +31,7 @@ public class TestDataSessionProvider extends TestDataGenerator implements Provid
 	/**
 	 * (non-Javadoc)
 	 * 
-	 * @see com.agritrace.edairy.desktop.install.dbsetup.DatabaseSetup#createDataSource()
+	 * @see com.agritrace.edairy.desktop.install.dbsetup.DatabaseSetupUtil#createDataSource()
 	 */
 	@Override
 	public void createDatabase() {
@@ -53,7 +53,7 @@ public class TestDataSessionProvider extends TestDataGenerator implements Provid
 	/**
 	 * (non-Javadoc)
 	 * 
-	 * @see com.agritrace.edairy.desktop.install.dbsetup.DatabaseSetup#setDatabaseProperties(java.util.Properties)
+	 * @see com.agritrace.edairy.desktop.install.dbsetup.DatabaseSetupUtil#setDatabaseProperties(java.util.Properties)
 	 */
 	@Override
 	protected void setDatabaseProperties(Properties props)

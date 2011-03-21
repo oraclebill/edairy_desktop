@@ -55,7 +55,7 @@ import com.agritrace.edairy.desktop.common.model.util.DairyUtil;
  *         TODO: finish me!!
  * 
  */
-public class TestDataGenerator extends DatabaseSetup
+public class TestDataGenerator extends DatabaseSetupUtil
 {
 
 	private int						sequence;
@@ -135,7 +135,7 @@ public class TestDataGenerator extends DatabaseSetup
 	{
 		currentDairy = createDairy("TEST1");
 		updateDairyProfile(currentDairy);
-		populateBaseReferenceData(currentDairy);
+		createSeedData(currentDairy);
 	}
 
 	public Dairy getWorkingDairy()

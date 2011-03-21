@@ -10,26 +10,26 @@ import com.agritrace.edairy.desktop.common.model.base.impl.ModelFactoryImpl;
 import com.agritrace.edairy.desktop.common.model.dairy.Dairy;
 import com.agritrace.edairy.desktop.common.model.dairy.security.UIPermission;
 import com.agritrace.edairy.desktop.internal.common.model.Activator;
-import com.google.inject.Inject;
-import com.google.inject.Injector;
+//import com.google.inject.Inject;
+//import com.google.inject.Injector;
 
 public class ExtendedModelFactory extends ModelFactoryImpl implements EFactory
 {
-	@Inject
-	Dairy cachedDairy;
-	
-	public ExtendedModelFactory()
-	{
-		super();
-		BundleContext context = Activator.getDefault().getContext();
-		Assert.isNotNull(context);
-		
-		ServiceReference injectorService = context.getServiceReference(Injector.class.getName());
-		Assert.isNotNull(injectorService);
-		
-		Injector injector = (Injector) context.getService(injectorService);
-		injector.injectMembers(this);		
-	}
+//	@Inject
+//	Dairy cachedDairy;
+//	
+//	public ExtendedModelFactory()
+//	{
+//		super();
+//		BundleContext context = Activator.getDefault().getContext();
+//		Assert.isNotNull(context);
+//		
+//		ServiceReference injectorService = context.getServiceReference(Injector.class.getName());
+//		Assert.isNotNull(injectorService);
+//		
+//		Injector injector = (Injector) context.getService(injectorService);
+//		injector.injectMembers(this);		
+//	}
 
 	/*
 	 * (non-Javadoc)

@@ -1,4 +1,4 @@
-package com.agritrace.edairy.desktop.install.dbsetup;
+package com.agritrace.edairy.desktop.install.dbsetup.views;
 
 import org.eclipse.riena.navigation.ui.swt.views.SubModuleView;
 import org.eclipse.riena.ui.swt.utils.UIControlsFactory;
@@ -37,9 +37,9 @@ public class DatabaseSetupView extends SubModuleView
 	 * @param parent
 	 */
 	@Override
-	public void basicCreatePartControl(Composite parent)
+	public void basicCreatePartControl(Composite container)
 	{
-		Composite container = new Composite(parent, SWT.NONE);
+//		Composite container = new Composite(parent, SWT.NONE);
 		container.setLayout(new GridLayout(1, false));
 		
 		Group grpOptions = new Group(container, SWT.NONE);
@@ -50,26 +50,28 @@ public class DatabaseSetupView extends SubModuleView
 		Label lblDairyId = new Label(grpOptions, SWT.NONE);
 		lblDairyId.setText("Registration #");
 		
-		dairyRegistrationTxt = UIControlsFactory.createText(grpOptions);
+		dairyRegistrationTxt = UIControlsFactory.createText(grpOptions, SWT.NONE, "dairy-registration-txt");
 		dairyRegistrationTxt.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		new Label(grpOptions, SWT.NONE);
 		
 		Label lblDairyName = new Label(grpOptions, SWT.NONE);
 		lblDairyName.setText("Licensee Name");
 		
-		dairyLicenseeTxt = UIControlsFactory.createText(grpOptions);
+		dairyLicenseeTxt = UIControlsFactory.createText(grpOptions, SWT.NONE, "dairy-licensee-txt");
 		dairyLicenseeTxt.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		Group grpDatabaseServer = new Group(container, SWT.NONE);
 		grpDatabaseServer.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-		grpDatabaseServer.setLayout(new GridLayout(4, false));
+		GridLayout gl_grpDatabaseServer = new GridLayout(4, false);
+		gl_grpDatabaseServer.marginTop = 5;
+		grpDatabaseServer.setLayout(gl_grpDatabaseServer);
 		grpDatabaseServer.setText("Database Server");
 		
 		Label lblDatabaseName = new Label(grpDatabaseServer, SWT.NONE);
 		lblDatabaseName.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblDatabaseName.setText("Database Name");
 		
-		dbNameTxt = UIControlsFactory.createText(grpDatabaseServer);
+		dbNameTxt = UIControlsFactory.createText(grpDatabaseServer, SWT.NONE, "db-name-text");
 		dbNameTxt.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		new Label(grpDatabaseServer, SWT.NONE);
 		new Label(grpDatabaseServer, SWT.NONE);
@@ -78,37 +80,46 @@ public class DatabaseSetupView extends SubModuleView
 		lblServerName.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblServerName.setText("Server Name");
 		
-		dbServerTxt = UIControlsFactory.createText(grpDatabaseServer);
+		dbServerTxt = UIControlsFactory.createText(grpDatabaseServer, SWT.NONE, "db-server-text");
 		dbServerTxt.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		Label lblServerPort = new Label(grpDatabaseServer, SWT.NONE);
 		lblServerPort.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblServerPort.setText("Port");
 		
-		dbPortTxt = UIControlsFactory.createText(grpDatabaseServer);
+		dbPortTxt = UIControlsFactory.createText(grpDatabaseServer, SWT.NONE, "db-port-text");
 		dbPortTxt.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		
 		Label lblAdminUsername = new Label(grpDatabaseServer, SWT.NONE);
 		lblAdminUsername.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblAdminUsername.setText("Admin Username");
 		
-		dbAdminUserTxt = UIControlsFactory.createText(grpDatabaseServer);
+		dbAdminUserTxt = UIControlsFactory.createText(grpDatabaseServer, SWT.NONE, "db-adminuser-text");
 		dbAdminUserTxt.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		Label lblAdminPassword = new Label(grpDatabaseServer, SWT.NONE);
 		lblAdminPassword.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblAdminPassword.setText("Password");
 		
-		dbAdminPassTxt = UIControlsFactory.createText(grpDatabaseServer);
+		dbAdminPassTxt = UIControlsFactory.createText(grpDatabaseServer, SWT.NONE, "db-adminpassword-text");
 		dbAdminPassTxt.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		Label lblCreateNew = new Label(grpDatabaseServer, SWT.NONE);
 		lblCreateNew.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, true, 1, 1));
 		lblCreateNew.setText("Drop / Create?");
 		
-		Button dbOverwriteExistingBtn = UIControlsFactory.createButtonCheck(grpDatabaseServer);
+		Button dbOverwriteExistingBtn = UIControlsFactory.createButtonCheck(grpDatabaseServer,"db-createnewdb-btn");
 		new Label(grpDatabaseServer, SWT.NONE);
 		new Label(grpDatabaseServer, SWT.NONE);
+
+		
+		Composite composite_1 = new Composite(grpDatabaseServer, SWT.NONE);
+		composite_1.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 4, 1));
+		composite_1.setLayout(new GridLayout(1, false));
+		
+		Button btnTest = new Button(composite_1, SWT.NONE);
+		btnTest.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+		btnTest.setText("Test Server Connection");
 		
 		Group grpSeedData = new Group(container, SWT.NONE);
 		grpSeedData.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
@@ -179,11 +190,11 @@ public class DatabaseSetupView extends SubModuleView
 		new Label(grpGenerateCollectionsData, SWT.NONE);
 		new Label(grpGenerateCollectionsData, SWT.NONE);
 		
-		Composite composite_1 = new Composite(container, SWT.NONE);
-		composite_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-		composite_1.setLayout(new FormLayout());
+		Composite buttonPanel = new Composite(container, SWT.NONE);
+		buttonPanel.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+		buttonPanel.setLayout(new FormLayout()); 
 		
-		Button btnNewButton = UIControlsFactory.createButton(composite_1);
+		Button btnNewButton = UIControlsFactory.createButton(buttonPanel);
 		FormData fd_btnNewButton = new FormData();
 		fd_btnNewButton.left = new FormAttachment(0, 112);
 		fd_btnNewButton.top = new FormAttachment(0);
