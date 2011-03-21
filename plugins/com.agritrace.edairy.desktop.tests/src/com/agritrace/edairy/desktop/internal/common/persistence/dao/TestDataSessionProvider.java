@@ -55,7 +55,6 @@ public class TestDataSessionProvider extends TestDataGenerator implements Provid
 	 * 
 	 * @see com.agritrace.edairy.desktop.install.dbsetup.DatabaseSetupUtil#setDatabaseProperties(java.util.Properties)
 	 */
-	@Override
 	protected void setDatabaseProperties(Properties props)
 	{
 		props.setProperty(Environment.DRIVER, "org.apache.derby.jdbc.EmbeddedDriver");
