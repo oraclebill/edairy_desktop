@@ -4,6 +4,7 @@ package com.agritrace.edairy.desktop.birt.viewer;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.LinkedList;
@@ -134,10 +135,14 @@ public class ReportsIndexViewController extends SubModuleController {
 		Bundle reportBundle = Platform.getBundle(REPORT_BUNDLE_NAME);
 		URL reportRootURL = FileLocator.find(reportBundle, new Path("/reports"), null);
 		LOGGER.log(LogService.LOG_INFO, "Report directory URL: " + reportRootURL);
-		File reportRoot = URIUtil.toFile(FileLocator.toFileURL(reportRootURL).toURI());
+		URL fileURL = FileLocator.toFileURL(reportRootURL);
+		//URI fileURI = fileURL.toURI();
+		//File reportRoot = URIUtil.toFile(fileURI);
+		File reportRoot = new File(fileURL.getPath());
 		LOGGER.log(LogService.LOG_INFO, "Scanning report directory: " + reportRoot);
 		File[] reportEntries = reportRoot.listFiles(new ReportFileFilter());
 		for (File file : reportEntries) {
+			LOGGER.log(LogService.LOG_INFO, "Found Report: " + file);
 			reports.add(new ReportInfo(file));
 		}
 
